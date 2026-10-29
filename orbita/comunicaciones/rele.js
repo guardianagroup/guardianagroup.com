@@ -60,6 +60,7 @@
             case 'invita': { const f = esperas.invita; delete esperas.invita; if (f) f(m); break; }
             case 'busca': { const f = esperas.busca; delete esperas.busca; if (f) f(m); break; }
             case 'codigo-usado': emite('codigo-usado', m.codigo); break;
+            case 'baul': case 'baul-pon': { const k = m.t + ':' + m.id, f = esperas[k]; delete esperas[k]; if (f) f(m); break; }
             default: break;
           }
           return;
@@ -113,10 +114,23 @@
     const invita = (codigo, sobre, sal) => pregunta('invita', { codigo, sobre, sal });
     const busca = (codigo) => pregunta('busca', { codigo });
     const retira = (codigo) => { if (abierto) ws.send(JSON.stringify({ t: 'retira', codigo })); };
+    // El baúl de contactos (28 Oct 2026): un bloque encriptado en el teléfono, por llave de acceso. El relé no lo puede abrir.
+    const espera = (k, enviar) => new Promise((res) => {
+      if (!abierto) return res({ ok: false, por: 'sin relé' });
+      if (esperas[k]) esperas[k]({ ok: false, por: 'sustituida' });
+      esperas[k] = res; try { enviar(); } catch (_) { delete esperas[k]; return res({ ok: false, por: 'sin relé' }); }
+      setTimeout(() => { if (esperas[k] === res) { delete esperas[k]; res({ ok: false, por: 'sin respuesta' }); } }, 12000);
+    });
+    const baulLee = (id) => espera('baul:' + id, () => ws.send(JSON.stringify({ t: 'baul-lee', id })));
+    function baulPon(id, llave, version, datos) {
+      const b = new Uint8Array(69 + datos.length);
+      b[0] = 3; b.set(deHex(id), 1); b.set(llave, 33); new DataView(b.buffer).setUint32(65, version >>> 0); b.set(datos, 69);
+      return espera('baul-pon:' + id, () => ws.send(b));
+    }
     function cierra() { cerrando = true; clearInterval(ping); try { ws && ws.close(); } catch (_) {} }
 
     conecta();
-    return { on, entra, sale, manda, pideIce, cierra, invita, busca, retira, mide, get abierto() { return abierto; }, get atraso() { return ws ? ws.bufferedAmount : 0; }, get region() { return region; }, get llamadas() { return llamadas; }, get ice() { return ice; }, get caduca() { return caduca; }, get url() { return url; }, get latencia() { return latencia; }, get latenciaMin() { return hist.length ? Math.min(...hist) : null; }, get ultimoPong() { return ultimoPong; } };
+    return { on, entra, sale, manda, pideIce, cierra, invita, busca, retira, mide, baulLee, baulPon, get abierto() { return abierto; }, get atraso() { return ws ? ws.bufferedAmount : 0; }, get region() { return region; }, get llamadas() { return llamadas; }, get ice() { return ice; }, get caduca() { return caduca; }, get url() { return url; }, get latencia() { return latencia; }, get latenciaMin() { return hist.length ? Math.min(...hist) : null; }, get ultimoPong() { return ultimoPong; } };
   }
   // Otro servidor de llamadas (dueño, 28 Oct 2026, 14:17: «que las llamadas sean todas buenas, independientemente de si la
   // persona está en Sudamérica, en Europa…»): una conexión corta para medir su tiempo de ida y vuelta y pedirle sus

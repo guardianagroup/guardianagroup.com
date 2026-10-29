@@ -7,7 +7,9 @@ const { WS } = require('../ws');
 const { Rele } = require('../comunicaciones');
 
 const PUERTO = +process.argv[2] || 8794;
-const RELE = new Rele({ turnHost: process.env.TURN_HOST || '', turnSecreto: process.env.TURN_SECRETO || '', turnPuerto: +(process.env.TURN_PUERTO || 3478), region: 'pruebas' });
+// el baúl de contactos, en una carpeta temporal (COM_BAUL_DIR para otra)
+const BAUL_DIR = process.env.COM_BAUL_DIR || require('path').join(require('os').tmpdir(), 'guardiana-baul-pruebas-' + PUERTO);
+const RELE = new Rele({ turnHost: process.env.TURN_HOST || '', turnSecreto: process.env.TURN_SECRETO || '', turnPuerto: +(process.env.TURN_PUERTO || 3478), region: 'pruebas', baulDir: BAUL_DIR });
 const srv = http.createServer((req, res) => {
   if (req.url === '/salud') {
     const cab = { 'content-type': 'application/json', 'cache-control': 'no-store', 'access-control-allow-origin': req.headers.origin || '*' };

@@ -12,8 +12,13 @@
 //   binario → [0x01][32 bytes sala][8 bytes destinatario o ceros = todos][carga]  (del cliente al relé)
 //             [0x02][32 bytes sala][8 bytes remitente][carga]                     (del relé a los demás)
 //   sala: 64 hexadecimales (la página la deriva de la invitación; la clave no viaja); yo: 16 hexadecimales.
+//   Baúl de contactos (28 Oct 2026, baul.js): {t:'baul-lee', id} → {t:'baul', id, ok, version, datos (base64) | null};
+//             [0x03][32 bytes id][32 bytes llave de escritura][4 bytes versión leída][bloque encriptado] → {t:'baul-pon', id, ok, version}.
+//   Es lo único que el relé guarda en disco: un bloque encriptado en el teléfono que no puede abrir.
 'use strict';
 const crypto = require('crypto');
+const { Baul } = require('./baul');
+const BAUL_OPS_MIN = 30;            // lecturas y escrituras del baúl por conexión y minuto
 
 const MAX_MIEMBROS = 8;          // personas por sala (conversaciones pequeñas; nada de canales)
 const MAX_SALAS_CONEXION = 64;   // salas abiertas por una misma conexión
@@ -49,6 +54,7 @@ class Rele {
     this.conexiones = new Set();
     this.coturn = { activo: false, escucha: false, visto: null };
     this.codigos = new Map();     // código → { sobre, sal, de (conexión), creado }
+    this.baul = o.baul === null ? null : (o.baul || new Baul(o.baulDir));
     if (this.turnHost && this.turnSecreto) { this.compruebaCoturn(); const t = setInterval(() => this.compruebaCoturn(), 60 * 1000); if (t.unref) t.unref(); }
     this.vigila = setInterval(() => this.barre(), 30 * 1000);
     if (this.vigila.unref) this.vigila.unref();
@@ -57,7 +63,7 @@ class Rele {
   // Hay llamadas solo si hay secreto y coturn está de verdad activo en este servidor (se comprueba cada minuto)
   get llamadas() { return !!(this.turnHost && this.turnSecreto && this.coturn.activo); }
 
-  estado() { let b = 0; for (const x of this.conexiones) if (x.blindada) b++; return { salas: this.salas.size, conexiones: this.conexiones.size, blindadas: b, codigos: this.codigos.size, llamadas: this.llamadas, coturn: this.coturn }; }
+  estado() { let b = 0; for (const x of this.conexiones) if (x.blindada) b++; return { salas: this.salas.size, conexiones: this.conexiones.size, blindadas: b, codigos: this.codigos.size, baul: this.baul ? this.baul.n : null, llamadas: this.llamadas, coturn: this.coturn }; }
 
   compruebaCoturn() {
     const { execFile } = require('child_process');
@@ -108,6 +114,7 @@ class Rele {
       case 'invita': return this.invita(c, m);
       case 'retira': { const r = this.codigos.get(String(m.codigo)); if (r && r.de === c) this.codigos.delete(String(m.codigo)); return; }
       case 'busca': return this.busca(c, m);
+      case 'baul-lee': return this.baulLee(c, m);
       default: return;
     }
   }
@@ -184,7 +191,30 @@ class Rele {
     c.cupo -= n; return true;
   }
 
+  // el baúl de contactos: pocas operaciones por conexión (se usa al abrir la app y al guardar o quitar un contacto)
+  baulCabe(c) {
+    const ahora = Date.now();
+    if (!c.baulOps || ahora - c.baulOps.desde > 60 * 1000) c.baulOps = { desde: ahora, n: 0 };
+    return ++c.baulOps.n <= BAUL_OPS_MIN;
+  }
+  baulLee(c, m) {
+    const id = String(m.id || '');
+    if (!this.baul) return c.ws.json({ t: 'baul', id, ok: false, por: 'sin baúl' });
+    if (!this.baulCabe(c)) return c.ws.json({ t: 'baul', id, ok: false, por: 'demasiadas' });
+    this.baul.lee(id).then((r) => { try { c.ws.json({ t: 'baul', id, ok: r.ok, por: r.por, version: r.version, datos: r.datos ? r.datos.toString('base64') : null }); } catch (_) {} },
+      () => { try { c.ws.json({ t: 'baul', id, ok: false, por: 'error' }); } catch (_) {} });
+  }
+  baulPon(c, b) {
+    const id = b.length >= 69 ? b.subarray(1, 33).toString('hex') : '';
+    if (!this.baul) return c.ws.json({ t: 'baul-pon', id, ok: false, por: 'sin baúl' });
+    if (b.length < 70) return c.ws.json({ t: 'baul-pon', id, ok: false, por: 'formato' });
+    if (!this.baulCabe(c)) return c.ws.json({ t: 'baul-pon', id, ok: false, por: 'demasiadas' });
+    this.baul.pon(id, Buffer.from(b.subarray(33, 65)), b.readUInt32BE(65), Buffer.from(b.subarray(69))).then((r) => { try { c.ws.json(Object.assign({ t: 'baul-pon', id }, r)); } catch (_) {} },
+      () => { try { c.ws.json({ t: 'baul-pon', id, ok: false, por: 'error' }); } catch (_) {} });
+  }
+
   trama(c, b) {
+    if (Buffer.isBuffer(b) && b.length && b[0] === 0x03) return this.baulPon(c, b);
     if (!Buffer.isBuffer(b) || b.length < 41 || b[0] !== 0x01) return;
     const sala = b.subarray(1, 33).toString('hex');
     if (!c.salas.has(sala)) return c.ws.json({ t: 'error', sala, por: 'no estás en la sala' });
