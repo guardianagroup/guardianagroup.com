@@ -222,8 +222,8 @@
     const mono = (x, n) => { const s = el('span', n ? 'cu-mono cu-agr' : 'cu-mono', n ? grupos(x, n) : String(x || '—')); s.setAttribute('translate', 'no'); return s; };
     // cabecera: marca, título, número y fecha de emisión
     const cab = el('header', 'cu-doc-cab'), marca = el('div', 'cu-marca'), mt = el('div');
-    marca.innerHTML = ESCUDO; const g = el('b', null, 'GUARDIANA'); g.setAttribute('translate', 'no'); mt.append(g, el('span', null, BL ? T('Sesión blindada') + ' · ' + T('Entrega e integridad') : T('Entrega e integridad'))); marca.append(mt);
-    const ti = el('div', 'cu-doc-ti'); ti.append(el('h2', null, T('Comprobante de entrega e integridad')));
+    marca.innerHTML = ESCUDO; const g = el('b', null, 'GUARDIANA'); g.setAttribute('translate', 'no'); mt.append(g, el('span', null, BL ? T('Sesión blindada') + ' · ' + T('Entrega custodiada') : T('Entrega custodiada'))); marca.append(mt);
+    const ti = el('div', 'cu-doc-ti'); ti.append(el('h2', null, T('Comprobante de entrega')));
     const n1 = el('p', 'cu-ref'); n1.append(el('span', null, T('Nº de comprobante')), mono(ref || '—'));
     const n2 = el('p', 'cu-ref'); n2.append(el('span', null, T('Emitido')), el('b', null, fechaHora(reg.emitido)));
     ti.append(n1, n2); cab.append(marca, ti); doc.append(cab);
@@ -231,8 +231,10 @@
     const clase = res.valido ? 'bien' : res.pendiente ? 'aviso' : 'mal';
     const est = el('div', 'cu-estado ' + clase), ico = el('span', 'cu-ico'); ico.innerHTML = res.valido ? ESCUDO : AVISO;
     const tx = el('div');
-    tx.append(el('b', null, res.valido ? T('Firmado por los dos equipos') : res.pendiente ? T('Pendiente de la firma del destinatario') : T('Comprobante no válido')),
-      el('span', null, res.valido ? T('Las dos firmas son válidas y el registro no se ha modificado desde que se firmó.') : res.pendiente ? T('El remitente ya lo ha firmado; falta la firma del equipo del destinatario.') : T('Las firmas no corresponden a este registro: se ha modificado o no procede de estos equipos.')));
+    // lo primero del papel, en palabras de todos los días: si el archivo llegó intacto o no (dueño, 28 Oct 2026, 20:21: «el archivo fue
+    // custodiado y llegó a destino perfectamente, o no… que se entienda bien»); el detalle técnico sigue debajo, como prueba
+    tx.append(el('b', null, res.valido ? T('El archivo llegó a su destino intacto') : res.pendiente ? T('Falta la confirmación del destinatario') : T('Este comprobante no es válido')),
+      el('span', null, res.valido ? T('Viajó custodiado y encriptado de principio a fin, y llegó completo y sin ningún cambio. Lo confirman y firman los dos.') : res.pendiente ? T('El archivo salió custodiado. Cuando el equipo de la otra persona confirme que llegó, este comprobante quedará firmado por los dos.') : T('Ha sido modificado o no procede de estos equipos.')));
     est.append(ico, tx); doc.append(est);
     const seccion = (titulo) => {
       const s = el('section', 'cu-sec'), dl = el('dl', 'cu-datos'); s.append(el('h3', null, titulo), dl); doc.append(s);
@@ -625,7 +627,7 @@
     if (v.estado === 'entregado' && v.coincide != null) fila(v.coincide ? 'gc-ok' : 'gc-alerta', T('Integridad'), v.coincide ? T('La huella SHA-256 coincide en los dos equipos') : T('La huella SHA-256 no coincide'));
     else fila(v.estado === 'fallo' ? 'gc-alerta' : 'gc-ok', T('Integridad'), T('Cada fragmento se autentica al llegar; uno alterado detiene el envío.'));
     if (v.custodia === 'no') fila('gc-info', T('Comprobante de entrega'), T('No disponible: el otro equipo usa una versión anterior de Comunicaciones.'));
-    else if (v.comprobante) fila(v.comprobanteValido ? 'gc-ok' : 'gc-aviso', T('Comprobante de entrega'), v.comprobanteValido ? T('Firmado por los dos equipos') : T('Pendiente de la firma del destinatario'));
+    else if (v.comprobante) fila(v.comprobanteValido ? 'gc-ok' : 'gc-aviso', T('Comprobante de entrega'), v.comprobanteValido ? T('Firmado por los dos: llegó intacto') : T('Pendiente de la firma del destinatario'));
     else if (v.custodia === 'si') fila('gc-info', T('Comprobante de entrega'), T('Se emitirá al llegar el archivo, firmado por los dos equipos.'));
     // en directo (solo hechos reales, el más reciente arriba)
     const ol = q('.vj-eventos ol'), n = String((v.eventos || []).length);
@@ -647,7 +649,7 @@
     if (!hojaComp) {
       hojaComp = el('div', 'gc-hoja cu-hoja'); hojaComp.id = 'h-custodia';
       hojaComp.setAttribute('role', 'dialog'); hojaComp.setAttribute('aria-modal', 'true'); hojaComp.setAttribute('aria-labelledby', 'cu-t');
-      hojaComp.innerHTML = '<div class="cu-caja"><header class="cu-cab"><div><p class="vj-k"><span translate="no">GUARDIANA</span> · <span>Entrega e integridad</span></p><h2 id="cu-t">Comprobante de entrega e integridad</h2></div>'
+      hojaComp.innerHTML = '<div class="cu-caja"><header class="cu-cab"><div><p class="vj-k"><span translate="no">GUARDIANA</span> · <span>Entrega custodiada</span></p><h2 id="cu-t">Comprobante de entrega</h2></div>'
         + '<button type="button" class="vj-x" aria-label="Cerrar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></header>'
         + '<div class="cu-cuerpo"></div>'
         + '<footer class="cu-pie"><a class="boton" id="cu-verificar" href="/orbita/comunicaciones/verificar/" target="_blank" rel="noopener">Verificar en guardianagroup.com</a>'

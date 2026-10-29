@@ -814,7 +814,11 @@
   let viajeCerradoEn = 0, relojViajes = 0;
   // Se abre solo: al elegir el archivo (quien envía) o al llegar el primer fragmento (quien recibe). Nunca encima de otro
   // envío en curso, ni si la persona acaba de cerrarlo; si está abierto en uno ya terminado, pasa al nuevo.
+  // En el teléfono, nunca solo (dueño, 28 Oct 2026, 20:19: «le he enviado a mi mujer una foto y automáticamente mientras enviaba
+  // me aparecía en pantalla… el viaje… quiero que una vez que haya llegado, que salga como opción… pero no quiero que salga
+  // automáticamente»): al llegar, el archivo lleva el botón «Ver el viaje» (y el comprobante, su tarjeta).
   function abreSiToca(v, empieza) {
+    if (esMovil()) return;
     if (!VJ() || v.voz || v.tam < MIN_VIAJE || ACTUAL !== v.conv) return;
     const act = VJ().actual;
     if (act === v) return;
@@ -842,7 +846,7 @@
     v.custodia = v.voz ? 'voz' : j.v === 1 ? 'si' : 'no'; v.tListo = Date.now();
     v.paisSuyo = regionValida(j.region) || v.paisSuyo; const l = latValida(j.lat); if (l != null) v.latSuya.push(l);
     evento(v, T('El equipo del destinatario está listo: empieza el envío.'));
-    if (v.custodia === 'no') evento(v, T('El otro equipo usa una versión anterior de Comunicaciones: el envío sigue, sin comprobante de entrega e integridad.'), 'info');
+    if (v.custodia === 'no') evento(v, T('El otro equipo usa una versión anterior de Comunicaciones: el envío sigue, sin comprobante de entrega.'), 'info');
   }
   function acuseViaje(j, a) {
     const v = VIAJES.get(j.id); if (!v) return;
@@ -864,7 +868,7 @@
     const l = latValida(j.lat); if (l != null) v.latSuya.push(l);
     const suSha = String(j.sha256 || ''); v.coincide = suSha === a.sha256; v.estado = 'entregado';
     evento(v, T('El equipo del destinatario confirma la llegada completa') + ': ' + (+j.trozos || m.archivo.trozos).toLocaleString(LOC()) + ' ' + T('fragmentos autenticados') + '.', 'bien');
-    if (!v.coincide) { evento(v, T('La huella SHA-256 no coincide: no se emite comprobante.'), 'mal'); c.incidencias = (c.incidencias || 0) + 1; await anotaSistema(c, 'La huella SHA-256 del archivo no coincide en los dos equipos: no se emite comprobante.'); pintaRadio(c); return; }
+    if (!v.coincide) { evento(v, T('La huella SHA-256 no coincide: no se emite comprobante.'), 'mal'); c.incidencias = (c.incidencias || 0) + 1; await anotaSistema(c, 'El archivo no llegó idéntico al enviado: no se emite el comprobante de entrega.'); pintaRadio(c); return; }
     evento(v, T('Huella SHA-256 idéntica en los dos equipos') + ': ' + VJ().agrupa(a.sha256, 16) + '…', 'bien');
     const dura = Math.max(0.001, (v.tFin - v.t0) / 1000), rel = v.rele || {}, emitido = new Date().toISOString();
     const suTipo = typeof j.tipoReal === 'string' && /^[A-Z0-9]{2,5}$/.test(j.tipoReal) ? j.tipoReal : null;
@@ -952,7 +956,7 @@
     enviaControl(c, { tipo: 'custodia-firma', id: m.id, firma, firmapq });
     await guardaCustodia(c, m.id, comp, 'firmado');
     if (v) { v.comprobante = comp; v.comprobanteValido = true; v.coincide = true; evento(v, T('Comprobante firmado por tu equipo: firmado por los dos equipos.'), 'bien'); }
-    vigila(c, T('Comprobante de entrega e integridad firmado por los dos equipos') + ': ' + m.archivo.nombre, 'bien');
+    vigila(c, T('Comprobante de entrega firmado por los dos') + ': ' + m.archivo.nombre, 'bien');
   }
   // Quien envía: la firma del destinatario, comprobada con su clave de identidad
   async function firmaCustodia(c, j) {
@@ -968,7 +972,7 @@
     if (B) comp.firmas_pq = Object.assign({}, comp.firmas_pq, { receptor: j.firmapq });
     await guardaCustodia(c, j.id, comp, 'firmado', '');
     if (v) { v.comprobante = comp; v.comprobanteValido = true; evento(v, T('El destinatario ha firmado el comprobante: firmado por los dos equipos.'), 'bien'); }
-    vigila(c, T('Comprobante de entrega e integridad firmado por los dos equipos') + ': ' + ((comp.registro && comp.registro.archivo && comp.registro.archivo.nombre) || ''), 'bien');
+    vigila(c, T('Comprobante de entrega firmado por los dos') + ': ' + ((comp.registro && comp.registro.archivo && comp.registro.archivo.nombre) || ''), 'bien');
   }
   async function rechazoCustodia(c, j) {
     if (!c.cargados) await cargaMensajes(c);
@@ -987,10 +991,10 @@
     const comp = m.custodia || {}, reg = comp.registro || {}, ar = reg.archivo || {}, est = m.estado;
     const d = document.createElement('div'); d.className = 'custodia' + (est === 'pendiente' ? ' pendiente' : est === 'rechazado' ? ' mal' : '');
     const ico = document.createElement('span'); ico.className = 'cu-ico'; ico.innerHTML = VJ() ? (est === 'firmado' ? VJ().ESCUDO : VJ().AVISO) : '';
-    const k = document.createElement('span'); k.className = 'cu-k'; k.textContent = est === 'firmado' ? T('Comprobante de entrega e integridad') : est === 'pendiente' ? T('Comprobante pendiente de firma') : T('Comprobante no emitido');
+    const k = document.createElement('span'); k.className = 'cu-k'; k.textContent = est === 'firmado' ? T('Llegó a su destino intacto') : est === 'pendiente' ? T('Pendiente de confirmar la entrega') : T('Entrega sin confirmar'); // (20:21: «que se entienda bien»)
     const t = document.createElement('span'); t.className = 'cu-t'; t.setAttribute('translate', 'no'); t.textContent = (ar.nombre || '') + ' · ' + tamano(ar.bytes || 0);
     const s = document.createElement('span'); s.className = 'cu-s';
-    s.textContent = est === 'firmado' ? T('Firmado por los dos equipos') + ' · SHA-256 ' + (VJ() ? VJ().agrupa(ar.sha256, 16) : '') + '…' : est === 'pendiente' ? T('Firmado por tu equipo; falta la firma del destinatario.') : T('El destinatario no lo ha firmado: su equipo no ha podido comprobar el registro.');
+    s.textContent = est === 'firmado' ? T('Custodiado de principio a fin y confirmado por los dos.') : est === 'pendiente' ? T('Falta la confirmación del equipo de la otra persona.') : T('El equipo de la otra persona no ha podido confirmar el registro.');
     d.append(ico, k, t, s);
     if (reg.archivo && VJ()) {
       const fila = document.createElement('div'); fila.className = 'fila';
@@ -1140,7 +1144,8 @@
     await BD.borraConv('msg', c.id); await BD.borraConv('arch', c.id); await BD.borra('conv', c.id);
     if (ACTUAL === c.id) { cierraConv(); }
     pintaLista();
-    if (!silencio) aviso(porElla ? T('La otra persona ha terminado la conversación: se ha borrado también aquí.') : T('Conversación terminada y borrada; el otro equipo ha recibido la orden de borrado.'));
+    // si era un contacto, se dice quién y qué hacer para volver a hablar (20:25: «ya no me sale mi mujer»)
+    if (!silencio) aviso(porElla ? (c.contacto ? T('{n} ha borrado la conversación y el contacto. Para volver a hablar, envía una invitación nueva.').replace('{n}', nombreConv(c, true)) : T('La otra persona ha terminado la conversación: se ha borrado también aquí.')) : T('Conversación terminada y borrada; el otro equipo ha recibido la orden de borrado.'));
     if (esInvitado() && c.rol === 'acepta') await finInvitado();
   }
   // Destruir con la otra persona ausente: se borra todo aquí y queda una lápida (sin mensajes) que, en cuanto la otra
@@ -1492,7 +1497,9 @@
       if (/^image\//.test(m.archivo.mime) && m.archivo.tam < 24 * 1024 * 1024) { BD.saca('arch', m.id).then((r) => { if (!r) return; const img = document.createElement('img'); img.className = 'imagen'; img.alt = m.archivo.nombre; img.src = URL.createObjectURL(r.blob); img.style.gridColumn = '1 / -1'; img.addEventListener('click', () => abreArchivo(m, false)); d.prepend(img); }); }
       if (m.dir === 'suya') { const g = document.createElement('button'); g.type = 'button'; g.className = 'boton'; g.textContent = T('Guardar'); g.addEventListener('click', () => abreArchivo(m, true)); fila.append(g); }
     }
-    if (VIAJES.has(m.id) && VJ()) { const b = document.createElement('button'); b.type = 'button'; b.className = 'boton vj-ver'; b.innerHTML = RUTA; b.append(document.createTextNode(T('Ver el viaje'))); b.addEventListener('click', () => { const v = VIAJES.get(m.id); if (v) VJ().abre(v); }); fila.append(b); }
+    // en el teléfono, «Ver el viaje» cuando el archivo ya ha llegado (20:19); en el ordenador, también mientras viaja
+    const llego = m.estado === 'recibido' || m.estado === 'entregado' || m.estado === 'leido';
+    if (VIAJES.has(m.id) && VJ() && (llego || !esMovil())) { const b = document.createElement('button'); b.type = 'button'; b.className = 'boton vj-ver'; b.innerHTML = RUTA; b.append(document.createTextNode(T('Ver el viaje'))); b.addEventListener('click', () => { const v = VIAJES.get(m.id); if (v) VJ().abre(v); }); fila.append(b); }
     if (sePuedeCortar(m)) { const x = document.createElement('button'); x.type = 'button'; x.className = 'boton peligro'; x.textContent = T('Cortar el envío'); x.addEventListener('click', () => { const c = CONVS.get(m.conv); if (c) cortaArchivo(c, m); }); fila.append(x); }
     if (fila.childNodes.length) d.append(fila);
     return d;
@@ -1868,6 +1875,7 @@
       if (!menu.hidden) return cierraMenu();
       $('#cm-discreto').setAttribute('aria-checked', String($('#discreto').getAttribute('aria-pressed') === 'true'));
       $('#cm-avisos').hidden = permisoAvisos() !== 'default';
+      { const k = CONVS.get(ACTUAL), es = !!(k && k.contacto); $('#cm-eliminar').hidden = !es; $('#cm-terminar').hidden = es; }
       menu.hidden = false; mas.setAttribute('aria-expanded', 'true');
       const p = menu.querySelector('button:not([hidden])'); if (p) p.focus({ preventScroll: true });
     });
@@ -1878,6 +1886,10 @@
     $('#cm-discreto').addEventListener('click', () => { dentroMenu = true; try { $('#discreto').click(); } finally { dentroMenu = false; } $('#cm-discreto').setAttribute('aria-checked', String($('#discreto').getAttribute('aria-pressed') === 'true')); });
     $('#cm-avisos').addEventListener('click', () => { cierraMenu(); pideAvisos(); });
     $('#cm-terminar').addEventListener('click', () => { cierraMenu(); $('#terminar').click(); });
+    // un contacto no se termina sin querer: «Eliminar contacto», con una pregunta clara antes (20:25)
+    $('#cm-eliminar').addEventListener('click', () => { cierraMenu(); const c = CONVS.get(ACTUAL); if (!c) return; const t = $('#h-eliminar-t'); if (t) t.textContent = T('¿Eliminar a {n}?').replace('{n}', nombreConv(c, true)); abreHoja('h-eliminar'); });
+    $('#eliminar-no').addEventListener('click', () => cierraHoja('h-eliminar'));
+    $('#eliminar-si').addEventListener('click', async () => { cierraHoja('h-eliminar'); const c = CONVS.get(ACTUAL); if (c) await destruye(c); });
     // «Borrar el chat», en el menú del teléfono: fuera de la barra de escribir, donde estaba a un dedo del micrófono (revisión de
     // diseño, 28 Oct 2026, 19:15); sigue pidiendo confirmación
     { const v = $('#cm-vaciar'); if (v) v.addEventListener('click', () => { cierraMenu(); $('#vaciar').click(); }); }

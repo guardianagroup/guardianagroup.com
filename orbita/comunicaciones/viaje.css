@@ -97,8 +97,8 @@
 .cu-estado.aviso .cu-ico{background:rgba(224,182,106,.14);color:var(--aviso)}
 .cu-estado.mal .cu-ico{background:rgba(224,122,108,.14);color:var(--alerta)}
 .cu-ico svg{width:21px;height:21px}
-.cu-estado>div>b{display:block;font:600 15px/1.35 var(--texto);color:#F4F6F8}
-.cu-estado>div>span{display:block;font:400 12.5px/1.45 var(--texto);color:var(--muted)}
+.cu-estado>div>b{display:block;font:600 17px/1.35 var(--texto);color:#F4F6F8} /* el veredicto, lo primero y grande (20:21) */
+.cu-estado>div>span{display:block;margin-top:3px;font:400 14px/1.45 var(--texto);color:#AEB9C5}
 .cu-datos{display:grid;grid-template-columns:minmax(120px,170px) minmax(0,1fr);gap:0;margin:0;border:1px solid rgba(156,195,228,.12);border-radius:12px;overflow:hidden}
 .cu-datos dt,.cu-datos dd{margin:0;padding:9px 14px;border-bottom:1px solid rgba(30,38,49,.85)}
 .cu-datos dt{font:600 10px/1.6 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:#8FA3B6;background:rgba(12,18,26,.6)}
@@ -120,6 +120,10 @@
 .custodia.mal .cu-ico{background:rgba(224,122,108,.14);color:var(--alerta)}
 .custodia .cu-ico svg{width:18px;height:18px}
 .custodia .cu-k{font:600 10px/1.5 var(--mono);letter-spacing:.2em;text-transform:uppercase;color:var(--accent)}
+/* (dueño, 28 Oct 2026, 20:21: «que se entienda bien») el título de la tarjeta es ya una frase, «Llegó a su destino intacto»: en letra
+   normal, en verde, y no en mayúsculas de máquina de escribir */
+.custodia .cu-k{font:600 15.5px/1.3 var(--texto);letter-spacing:0;text-transform:none;color:#6CCBA5}
+.custodia .cu-s{font-size:13.5px;color:#AEB9C5}
 .custodia.pendiente .cu-k{color:var(--aviso)}
 .custodia.mal .cu-k{color:var(--alerta)}
 .custodia .cu-t{min-width:0;font:500 13.5px/1.4 var(--texto);color:#F4F6F8;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -204,7 +208,7 @@
   #cu-imprime .cu-ico{width:22pt;height:22pt;background:none;color:#2E8B65}
   #cu-imprime .cu-estado.aviso .cu-ico{color:#B7862C}
   #cu-imprime .cu-estado.mal .cu-ico{color:#B5473A}
-  #cu-imprime .cu-estado>div>b{color:#14181D;font-size:10.5pt}
+  #cu-imprime .cu-estado>div>b{color:#14181D;font-size:12pt}
   #cu-imprime .cu-estado>div>span{color:#3A4654;font-size:8.5pt}
   #cu-imprime .cu-sec{gap:4pt;break-inside:avoid}
   #cu-imprime .cu-sec h3{padding-bottom:3pt;border-bottom:.6pt solid #C9D3DD;color:#1F3B57;font-size:7pt;letter-spacing:.18em}

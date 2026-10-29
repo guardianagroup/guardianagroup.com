@@ -1144,3 +1144,6 @@ html.como-app .barra .barra-t{display:block;font-size:12px;letter-spacing:.3em}
 /* el ✓ de «tirar para actualizar», sin la palabra (dueño, 28 Oct 2026, 19:30) */
 .tirar.hecho{margin-left:-20px;padding:0;transform:translateY(var(--tirar-y,-60px))}
 .tirar.hecho span{display:none}
+/* «Ver el viaje» y el comprobante, como opción cuando el archivo ha llegado, nunca solos (dueño, 28 Oct 2026, 20:19): en el
+   teléfono, botones que se tocan bien */
+@media (max-width:760px){#mensajes .gc-archivo .fila .boton.vj-ver,#mensajes .custodia .boton{min-height:44px;padding:0 16px;font-size:14.5px;border-radius:999px}#mensajes .boton.vj-ver svg{width:17px;height:17px}}

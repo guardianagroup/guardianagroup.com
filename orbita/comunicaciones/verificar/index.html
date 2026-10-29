@@ -6,12 +6,12 @@
 <meta name="referrer" content="no-referrer">
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; connect-src 'self'; worker-src 'none'; form-action 'none'; base-uri 'none'">
 <meta name="theme-color" content="#06080C">
-<meta name="description" content="Verifica un comprobante de entrega e integridad de GUARDIANA Comunicaciones: las dos firmas, las huellas de identidad y, si quieres, la huella SHA-256 de tu archivo. Todo se comprueba en tu navegador; nada sale de tu equipo.">
+<meta name="description" content="Verifica un comprobante de entrega de GUARDIANA Comunicaciones: las dos firmas, las huellas de identidad y, si quieres, la huella SHA-256 de tu archivo. Todo se comprueba en tu navegador; nada sale de tu equipo.">
 <title>GUARDIANA · Verificar un comprobante</title>
 <link rel="icon" href="/favicon.ico">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="stylesheet" href="../app.css?v=20261029y">
-<link rel="stylesheet" href="../viaje.css?v=20261028a">
+<link rel="stylesheet" href="../app.css?v=20261029z">
+<link rel="stylesheet" href="../viaje.css?v=20261029a">
 <style>
 body.verificar{height:auto;min-height:100dvh;overflow:visible;display:block}
 .vf{box-sizing:border-box;width:min(760px,100%);margin:0 auto;padding:36px 16px 64px;display:grid;gap:22px}
@@ -66,13 +66,13 @@ body.verificar{height:auto;min-height:100dvh;overflow:visible;display:block}
 <!-- GUARDIANA · Comunicaciones · verificar un comprobante de entrega e integridad (27 Oct 2026). Todo ocurre en el navegador:
      el comprobante y el archivo no se envían a ningún servidor (esta página no tiene a dónde mandarlos: connect-src 'self'). -->
 <header class="barra">
-  <a class="marca" href="/orbita/comunicaciones/" aria-label="Volver a Comunicaciones"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg><span>Comunicaciones</span></a><b class="barra-t">Entrega e integridad</b>
+  <a class="marca" href="/orbita/comunicaciones/" aria-label="Volver a Comunicaciones"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg><span>Comunicaciones</span></a><b class="barra-t">Entrega custodiada</b>
   <span style="margin-left:auto"></span>
   <div class="idiomas" role="group" aria-label="Idioma" translate="no"></div>
 </header>
 <main class="vf">
   <section class="vf-cab">
-    <p class="vj-k">Comprobante de entrega e integridad</p>
+    <p class="vj-k">Comprobante de entrega</p>
     <h1>Verificar un comprobante</h1>
     <p class="t">Comprueba las dos firmas de un comprobante de GUARDIANA Comunicaciones y, si quieres, que tu archivo es exactamente el que se envió. Todo se hace en tu navegador: ni el comprobante ni el archivo salen de tu equipo.</p>
   </section>
@@ -115,10 +115,10 @@ macOS                  shasum -a 256 archivo
 Linux                  sha256sum archivo</pre>
   </section>
 </main>
-<script src="/orbita/static/idioma.js?v=20261029p63"></script>
+<script src="/orbita/static/idioma.js?v=20261029p64"></script>
 <script src="../sha256.js?v=20261027a"></script>
 <script src="../pq-cnsa.js?v=20261027a"></script>
-<script src="../viaje.js?v=20261028b"></script>
+<script src="../viaje.js?v=20261029a"></script>
 <script src="verificar.js?v=20261028b"></script>
 </body>
 </html>

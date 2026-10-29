@@ -174,14 +174,15 @@
     const TONO_URL = {};
     function urlTono(tipo) {
       if (TONO_URL[tipo]) return TONO_URL[tipo];
-      const sr = 16000, dur = tipo === 'saliente' ? 4 : 2.6, n = Math.round(sr * dur), pcm = new Float32Array(n);
+      const sr = 16000, dur = tipo === 'saliente' ? 4 : tipo === 'silencio' ? 0.25 : 2.6, n = Math.round(sr * dur), pcm = new Float32Array(n);
       const pon = (frecs, ini, d, vol) => {
         const i0 = Math.round(ini * sr), i1 = Math.min(n, Math.round((ini + d) * sr));
         for (let i = i0; i < i1; i++) { const t = (i - i0) / sr, env = Math.max(0, Math.min(1, t / 0.015, (d - t) / 0.04)); let v = 0; for (const [f, w] of frecs) v += w * Math.sin(2 * Math.PI * f * t); pcm[i] += v * vol * env; }
       };
       // tono de llamada: 425 Hz durante 1,2 s cada 4 s; timbre: dos notas con un armónico suave, dos veces, cada 2,6 s
       const nota = (f) => [[f, 1], [f * 2, 0.25]];
-      if (tipo === 'saliente') pon([[425, 1]], 0, 1.2, 0.42);
+      if (tipo === 'silencio') { /* nada: un cuarto de segundo de silencio de verdad, para desbloquear el <audio> */ }
+      else if (tipo === 'saliente') pon([[425, 1]], 0, 1.2, 0.42);
       else { pon(nota(880), 0, 0.2, 0.5); pon(nota(660), 0.24, 0.2, 0.5); pon(nota(880), 0.62, 0.2, 0.5); pon(nota(660), 0.86, 0.2, 0.5); }
       const buf = new ArrayBuffer(44 + n * 2), dv = new DataView(buf), txt = (o, x) => { for (let i = 0; i < x.length; i++) dv.setUint8(o + i, x.charCodeAt(i)); };
       txt(0, 'RIFF'); dv.setUint32(4, 36 + n * 2, true); txt(8, 'WAVE'); txt(12, 'fmt '); dv.setUint32(16, 16, true); dv.setUint16(20, 1, true); dv.setUint16(22, 1, true);
@@ -194,7 +195,9 @@
     function desbloqueaTonoEl() {
       if (tonoElListo) return; tonoElListo = true;
       try {
-        tonoEl.src = urlTono('entrante'); tonoEl.muted = true;
+        // con un silencio de verdad (dueño, 28 Oct 2026, 20:24: «cuando actualizo la aplicación, sale como un pitido. Pip, pip, pip,
+        // pip»): antes se desbloqueaba con el propio timbre «en mudo», y el iPhone dejaba oír sus cuatro notas al primer toque
+        tonoEl.src = urlTono('silencio'); tonoEl.muted = true; tonoEl.loop = false;
         const p = tonoEl.play();
         const listo = () => { if (!tonoSuena) tonoEl.pause(); tonoEl.muted = false; for (const g of GESTOS) raiz.document.removeEventListener(g, desbloqueaTonoEl, true); };
         if (p && p.then) p.then(listo).catch(() => { tonoEl.muted = false; tonoElListo = false; }); else listo();
