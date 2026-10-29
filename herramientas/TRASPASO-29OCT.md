@@ -184,3 +184,29 @@ Versiones en main: app.css, app.js y llamada.js `20261030i`; idioma.js `20261029
 ## 11. Decisiones nuevas del dueño (29 Oct, tarde)
 - Normal y blindado gratis; Ultra de pago (11:15). Nada de mandar números por otro canal: la comprobación es el número de la
   llamada (10:14–10:16). No añadir en Comunicaciones lo que no se pueda explicar con datos comprobables.
+
+## 12. Tramo 4 (13:30, publicado en main: 3abfe7cc) — «solo el chat normal, minimalista»
+- Dueño, 12:50–12:59: «el modo blindado en la aplicación pon próximamente y que solamente se puede utilizar el modo normal, que es
+  minimalista todo… el chat normal básico, como lo tiene WhatsApp… ya luego seguiremos con los demás».
+- **Indicadores** en app.js: `BLINDADO_ACTIVO = false`, `ULTRA = false`, `extrasB(c) = BLINDADO_ACTIVO && esB(c)`. Con ellos se apagan
+  en pantalla (sin tocar el protocolo): velo de llegada, modo discreto, tiempo en pantalla, alarma, paquete todo-o-nada, voz e
+  imagen protegidas en la llamada (`o.blindada`), número de seguridad en la llamada (`o.sas` en llamada.js, `pintaSas`), recibos
+  (`recibo()`), viaje del archivo (`abreSiToca`, botón «Ver el viaje»), comprobante de custodia (anuncio `v: 0` y `listoCarga`),
+  sello «Completo y autenticado», «Borrar en los dos». Las sesiones blindadas que ya existan siguen con sus claves.
+- **Hoja de invitar**: `#tipo-blindado` con `aria-disabled` y «Próximamente» (clase `.pronto`); en el ordenador `#nueva-blindada`
+  solo avisa. Para reactivar el blindado: `BLINDADO_ACTIVO = true`, quitar `aria-disabled`/`.pronto` en index.html, y volver a
+  activar las pruebas `blindado.js` y `tipos.js` (hoy se omiten solas si el botón está apagado).
+- **Mismo chat por identidad** (`fundeConContacto(c)`, llamado en `recibePresentacion` cuando `nueva`): en el normal la huella de la
+  otra persona es la de su equipo (YO), igual en todas sus conversaciones; si coincide con una conversación anterior, el chat nuevo
+  hereda alias/contacto/verificada, los registros `msg` y `arch` pasan a su `conv`, y las viejas se quitan (sin «destruir» a nadie).
+  En el blindado no se puede (identidad nueva por sesión, a propósito). Prueba: `mismo-chat.js`.
+- **Vuelta de WhatsApp**: en `visibilitychange` (hidden) se abre el chat de la invitación (`esperaEnChat`); nota «Invitación enviada.
+  En cuanto la otra persona la abra, el chat empieza aquí.» (`li.gc-espera` en `pintaTodos`).
+- **Nota de voz**: `preload='auto'` + `load()` y sin cambiar `navigator.audioSession.type` al reproducir (primer toque en iPhone).
+- **sw.js**: ya no llama a `setAppBadge/clearAppBadge` en el mensaje `cierra` (hacía caer el renderer de Chromium headless en las
+  pruebas: «Target crashed»). La insignia la pone la página.
+- **Guía con invitación en Safari**: `#h-completa` con `.guia-inv` y `#guia-safari` («Seguir en Safari»); `guiaSeguir` en app.js.
+- Idiomas abiertos: `data-idiomas="es en pt ru cs"` (los otros 12 ya traducidos siguen cerrados; dueño 12:17: «deja de publicar más
+  idiomas»). Versiones: app.css q, app.js q, llamada.js q, viaje b, idioma.js p76, sw 29c.
+- Pendiente con el dueño: foto del iPhone «como si quisiera grabar audio» en la llamada; comprobar avisos Android y audio
+  iPhone→iPhone en real; recordarle que su iPhone 16 va en Safari (abrir desde el icono).
