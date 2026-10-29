@@ -119,6 +119,22 @@ class Avisos {
     return n;
   }
 
+  // a una sola suscripción (la de quien tiene la app en segundo plano), con el mismo silencio entre avisos
+  avisaA(sala, id, tipo) {
+    if (!esHex(sala, 64) || !id) return 0;
+    const c = this.porSala.get(sala); if (!c) return 0;
+    tipo = tipo === 'llamada' ? 'llamada' : 'mensaje';
+    for (const endpoint of c) {
+      const s = this.subs.get(endpoint); if (!s || s.id !== id) continue;
+      const k = endpoint + '|' + sala + '|' + tipo, ahora = Date.now();
+      if (this.ultimos.get(k) && ahora - this.ultimos.get(k) < SILENCIO_MS) return 0;
+      this.ultimos.set(k, ahora);
+      this.envia(s, JSON.stringify({ tipo, sala, t: ahora }), 900, 'normal').catch(() => {});
+      return 1;
+    }
+    return 0;
+  }
+
   // ---------- Web Push: VAPID (RFC 8292) y cifrado aes128gcm (RFC 8291) ----------
   firma(audiencia) {
     const cab = b64u(JSON.stringify({ typ: 'JWT', alg: 'ES256' }));

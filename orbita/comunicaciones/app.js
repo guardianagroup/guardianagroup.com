@@ -213,6 +213,12 @@
     } catch (_) {}
   }
   document.addEventListener('fullscreenchange', () => { if (document.fullscreenElement) fijaVertical(); });
+  // la app en segundo plano (dueño, 29 Oct 2026, 14:38: «quiero que se vean por fuera… en el escritorio»): el teléfono congela la
+  // página pero deja la conexión viva un rato, y lo que llegaba entonces no se avisaba. Se le dice al relé «fuera» al ocultarse y
+  // «dentro» al volver: mientras esté fuera, cada mensaje que llegue se avisa también en el teléfono (Web Push) y en el icono.
+  document.addEventListener('visibilitychange', () => { if (R) R.presencia(document.visibilityState !== 'visible'); });
+  addEventListener('pagehide', () => { if (R) R.presencia(true); });
+  addEventListener('pageshow', () => { if (R) R.presencia(document.visibilityState !== 'visible'); });
   // en el móvil, una conversación nueva borra las anteriores… salvo los contactos guardados (dueño, 28 Oct 2026, 17:33)
   async function borraAnteriores(salvo) { for (const x of [...CONVS.values()]) if (x.id !== salvo && !x.contacto) { try { await destruye(x, true); } catch (_) {} } }
   // opc.sinPantalla: la invitación que sale del inicio del teléfono en un solo toque (dueño, 28 Oct 2026, 19:17: «desde la
@@ -1280,7 +1286,7 @@
       nombre: () => { const c = convLl(); return (c && (c.alias || c.nombre)) || (c && vivas().length > 1 ? nombreConv(c, true) : ''); },
       inicial: () => { const c = convLl(); return inicial(c && (c.alias || c.nombre)); },
     });
-    const llama = (video) => { if (LL.ocupado) { aviso(T('Ya tienes una llamada en curso.')); return; } const c = CONVS.get(ACTUAL); if (c && c.huella && !enLinea(c) && R.abierto) { despiertaLlamada(c, video); return; } LLAMADA_CONV = ACTUAL; LL.llamar(video); };
+    const llama = (video) => { if (LL.ocupado) { aviso(T('Ya tienes una llamada en curso.')); return; } const c = CONVS.get(ACTUAL); if (c && c.huella && !enLinea(c) && R.abierto) { despiertaLlamada(c, video); return; } if (c && c.suFuera) despierta(c, 'llamada', true); LLAMADA_CONV = ACTUAL; LL.llamar(video); };
     $('#llamar').addEventListener('click', () => llama(false));
     if (SOLO_VIDEO) $('#llamar').hidden = true;
     // videollamada (dueño, 28 Oct 2026): la misma llamada, con imagen
@@ -1393,6 +1399,8 @@
     // arriba: «Desconectado» hasta que la conversación con la otra persona está establecida; entonces «Conectado» (dueño, 20:21)
     R.on('abierto', () => { pintaBarra(); });
     R.on('hola', () => { for (const c of CONVS.values()) pintaCabecera(c); pintaBarra(); sincronizaAvisos(); });
+    // la otra persona se va a segundo plano o vuelve (el relé lo cuenta): con «fuera», la llamada también la avisa el teléfono
+    R.on('presencia', (m) => { const c = m && CONVS.get(m.sala); if (!c) return; c.suFuera = m.fuera === 1; });
     R.on('despierta', (m) => { ultimoDespierta = m; if (m && m.tipo === 'llamada' && (m.avisados | 0) === 0) aviso(T('La otra persona no tiene los avisos activados: solo le llegará con GUARDIANA abierta.')); });
     R.on('avisos', (m) => { ultimoAvisos = m; });
     R.on('cerrado', () => { quietoTodas(4000); pintaBarra(); for (const c of CONVS.values()) { c.miembros.clear(); c.sesion = null; c.salaSabida = false; pintaCabecera(c); } pintaLista(); });
@@ -2211,7 +2219,7 @@
   // la tira para pedir el permiso: solo en el ordenador, con la conversación ya establecida, y una sola vez
   function pintaAvisos(c) {
     const b = $('#cavisos'); if (!b) return;
-    let no = false; try { no = localStorage.getItem('gcom-avisos') === 'no'; } catch (_) {}
+    let no = false; try { no = /^no/.test(localStorage.getItem('gcom-avisos') || ''); } catch (_) {}
     b.hidden = true; // dueño, 28 Oct 2026, 15:10: fuera la tira de la campanita; los avisos se activan desde «⋯» → «Activar avisos»
     void no; void c;
   }
@@ -2271,8 +2279,8 @@
     if (sp) sp.textContent = !puede ? T('Avisos con la app cerrada') : perm === 'granted' ? T('Avisos con la app cerrada: activados') : perm === 'denied' ? T('Avisos con la app cerrada: sin permiso') : T('Activar avisos con la app cerrada');
   }
   // despertar a la otra persona cuando no está conectada: una vez por minuto y conversación como mucho (el relé también limita)
-  function despierta(c, tipo) {
-    if (!c || !c.huella || !R || !R.abierto || enLinea(c)) return false;
+  function despierta(c, tipo, aunque) { // aunque: también con la otra persona conectada pero con la app en segundo plano (14:38)
+    if (!c || !c.huella || !R || !R.abierto || (enLinea(c) && !aunque)) return false;
     const ahora = Date.now(); if (tipo === 'mensaje' && c.despertadoEn && ahora - c.despertadoEn < 60000) return false;
     c.despertadoEn = ahora; return R.despiertaA(c.id, tipo);
   }
@@ -2291,7 +2299,9 @@
   let avisosPreguntado = false;
   function preguntaAvisos() {
     if (avisosPreguntado || !puedePush() || permisoAvisos() !== 'default') return; let no = ''; try { no = localStorage.getItem('gcom-avisos') || ''; } catch (_) {}
-    if (no === 'no' || !vivas().some((c) => c.huella)) return;
+    // «Ahora no» vale 6 horas: después se vuelve a ofrecer (dueño, 14:38: los avisos tienen que verse fuera de la app)
+    if (/^no/.test(no) && Date.now() - (+no.slice(3) || 0) < 6 * 3600 * 1000) return;
+    if (!vivas().some((c) => c.huella)) return;
     if (document.querySelector('.gc-hoja.gc-abierta') || document.body.classList.contains('en-llamada')) return;
     avisosPreguntado = true; abreHoja('h-avisos');
   }
@@ -2423,7 +2433,7 @@
     $('#cm-discreto').addEventListener('click', () => { dentroMenu = true; try { $('#discreto').click(); } finally { dentroMenu = false; } $('#cm-discreto').setAttribute('aria-checked', String($('#discreto').getAttribute('aria-pressed') === 'true')); });
     $('#cm-avisos').addEventListener('click', async () => { cierraMenu(); if (puedePush() && permisoAvisos() === 'granted') { const ok = await suscribeAvisos(true); aviso(ok ? T('Avisos activados en este equipo: te llegarán mensajes y llamadas con la app cerrada.') : T('Avisos activados en este navegador; con la app cerrada aún no: vuelve a intentarlo con conexión.')); return; } if (permisoAvisos() === 'denied') { aviso(T('El permiso de avisos está bloqueado: actívalo en los ajustes del teléfono para GUARDIANA y vuelve aquí.')); return; } activaAvisos(); });
     $('#avisos-si').addEventListener('click', async () => { cierraHoja('h-avisos'); await activaAvisos(); });
-    $('#avisos-no').addEventListener('click', () => { cierraHoja('h-avisos'); try { localStorage.setItem('gcom-avisos', 'no'); } catch (_) {} });
+    $('#avisos-no').addEventListener('click', () => { cierraHoja('h-avisos'); try { localStorage.setItem('gcom-avisos', 'no:' + Date.now()); } catch (_) {} });
     $('#cm-terminar').addEventListener('click', () => { cierraMenu(); $('#terminar').click(); });
     // un contacto no se termina sin querer: «Eliminar contacto», con una pregunta clara antes (20:25)
     $('#cm-eliminar').addEventListener('click', () => { cierraMenu(); const c = CONVS.get(ACTUAL); if (!c) return; const t = $('#h-eliminar-t'); if (t) t.textContent = T('¿Eliminar a {n}?').replace('{n}', nombreConv(c, true)); abreHoja('h-eliminar'); });
@@ -2538,7 +2548,7 @@
       x.checked = pref(k);
       x.addEventListener('change', () => { try { localStorage.setItem('gcom-' + k, x.checked ? '1' : '0'); } catch (_) {} const c = CONVS.get(ACTUAL); if (k === 'escribe' && !x.checked && c) muestraEscribe(c, ''); });
     }
-    $('#cavisos-no').addEventListener('click', () => { try { localStorage.setItem('gcom-avisos', 'no'); } catch (_) {} pintaAvisos(CONVS.get(ACTUAL)); });
+    $('#cavisos-no').addEventListener('click', () => { try { localStorage.setItem('gcom-avisos', 'no:' + Date.now()); } catch (_) {} pintaAvisos(CONVS.get(ACTUAL)); });
     // «leído» al desplazarse hasta el mensaje y al pasar la llamada a pequeño o terminarla
     let leidoT = null; $('#mensajes').addEventListener('scroll', () => { clearTimeout(leidoT); leidoT = setTimeout(() => { const c = CONVS.get(ACTUAL); if (c) marcaLeidos(c); }, 250); }, { passive: true });
     try { new MutationObserver(() => { const c = CONVS.get(ACTUAL); if (c) setTimeout(() => marcaLeidos(c), 80); }).observe($('#llamada'), { attributes: true, attributeFilter: ['class'] }); } catch (_) {}

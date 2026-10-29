@@ -19,6 +19,7 @@
     const salas = new Map(); // sala → { yo, b } (b: sala de una sesión blindada)
     let ice = [], caduca = 0, region = '', llamadas = false, ultimoPong = 0, pingEn = 0, latencia = null, avisos = ''; const hist = [];
     const esperas = {}; // respuestas pendientes (invita, busca)
+    let fueraAhora = false; // la app en segundo plano (presencia)
 
     // 27 Oct 2026, 21:25: las dos personas de una conversación tienen que estar en el mismo relé (los relés no se enlazan
     // entre sí: la sala y el código de invitación viven en uno solo). Con el relé de Miami ya en marcha, elegir «el más
@@ -40,6 +41,7 @@
         abierto = true; intentos = 0;
         ws.send(JSON.stringify({ t: 'hola' }));
         for (const [sala, x] of salas) ws.send(JSON.stringify({ t: 'entra', sala, yo: x.yo, b: x.b || undefined }));
+        if (fueraAhora) { try { ws.send(JSON.stringify({ t: 'presencia', fuera: 1 })); } catch (_) {} }
         clearInterval(ping); pingEn = 0; ping = setInterval(mide, 10000); setTimeout(mide, 300);
         emite('abierto', { url });
       };
@@ -63,6 +65,7 @@
             // avisos fuera de la app (29 Oct 2026)
             case 'avisos': emite('avisos', m); break;
             case 'despierta': emite('despierta', m); break;
+            case 'presencia': emite('presencia', m); break;
             default: break;
           }
           return;
@@ -120,10 +123,12 @@
     const suscribe = (sub, salas, quitar) => { if (!abierto || !sub) return false; try { ws.send(JSON.stringify({ t: 'avisos', sub: { endpoint: sub.endpoint, keys: sub.keys }, salas: salas || [], quitar: quitar ? 1 : undefined })); return true; } catch (_) { return false; } };
     // «despierta» a quien no está en la sala: un aviso en su teléfono de mensaje o de llamada
     const despiertaA = (sala, tipo) => { if (!abierto) return false; try { ws.send(JSON.stringify({ t: 'despierta', sala, tipo })); return true; } catch (_) { return false; } };
+    // la app en segundo plano o de vuelta (29 Oct 2026, 14:38): lo que llegue mientras está fuera se avisa también en el teléfono
+    const presencia = (fuera) => { fueraAhora = !!fuera; if (!abierto) return false; try { ws.send(JSON.stringify({ t: 'presencia', fuera: fuera ? 1 : 0 })); return true; } catch (_) { return false; } };
     function cierra() { cerrando = true; clearInterval(ping); try { ws && ws.close(); } catch (_) {} }
 
     conecta();
-    return { on, entra, sale, manda, pideIce, cierra, invita, busca, retira, mide, suscribe, despiertaA, get avisos() { return avisos; }, get abierto() { return abierto; }, get atraso() { return ws ? ws.bufferedAmount : 0; }, get region() { return region; }, get llamadas() { return llamadas; }, get ice() { return ice; }, get caduca() { return caduca; }, get url() { return url; }, get latencia() { return latencia; }, get latenciaMin() { return hist.length ? Math.min(...hist) : null; }, get ultimoPong() { return ultimoPong; } };
+    return { on, entra, sale, manda, pideIce, cierra, invita, busca, retira, mide, suscribe, despiertaA, presencia, get avisos() { return avisos; }, get abierto() { return abierto; }, get atraso() { return ws ? ws.bufferedAmount : 0; }, get region() { return region; }, get llamadas() { return llamadas; }, get ice() { return ice; }, get caduca() { return caduca; }, get url() { return url; }, get latencia() { return latencia; }, get latenciaMin() { return hist.length ? Math.min(...hist) : null; }, get ultimoPong() { return ultimoPong; } };
   }
   // Otro servidor de llamadas (dueño, 28 Oct 2026, 14:17: «que las llamadas sean todas buenas, independientemente de si la
   // persona está en Sudamérica, en Europa…»): una conexión corta para medir su tiempo de ida y vuelta y pedirle sus

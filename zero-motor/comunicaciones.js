@@ -114,6 +114,9 @@ class Rele {
       // avisos fuera de la app (29 Oct 2026): la suscripción del navegador con sus salas, y «despierta» a quien no está
       case 'avisos': return this.suscribe(c, m);
       case 'despierta': return this.despierta(c, m);
+      // la app en segundo plano (29 Oct 2026, 14:38): el teléfono deja la conexión viva un rato pero congela la página; lo que
+      // llegue entonces se avisa fuera (Web Push), y los demás miembros saben que está «fuera»
+      case 'presencia': return this.presencia(c, m);
       default: return;
     }
   }
@@ -240,6 +243,18 @@ class Rele {
     if (!a.ws.abierto) return;
     if (a.ws.atraso > ATASCO) { try { de.ws.json({ t: 'atasco', sala, quien: id }); } catch (_) {} return; }
     try { a.ws.send(salida); } catch (_) {}
+    // con la app en segundo plano, además, el aviso al teléfono (el relé no sabe qué es: «mensaje nuevo»; las llamadas las avisa quien llama)
+    if (a.fuera && this.avisos && a.avisoId) { try { this.avisos.avisaA(sala, a.avisoId, 'mensaje'); } catch (_) {} }
+  }
+  presencia(c, m) {
+    const fuera = m.fuera === 1;
+    if (c.fuera === fuera) return;
+    c.fuera = fuera;
+    for (const sala of c.salas) {
+      const s = this.salas.get(sala); if (!s) continue;
+      const yo = c.yo.get(sala);
+      for (const [id, otro] of s) if (id !== yo && otro !== c) { try { otro.ws.json({ t: 'presencia', sala, quien: yo, fuera: fuera ? 1 : 0 }); } catch (_) {} }
+    }
   }
 
   barre() {
