@@ -767,7 +767,7 @@ body.invitado-fin #app,body.invitado-fin .barra{display:none!important}
    globo más pequeño; «Aceptar» arriba y «No, gracias» debajo, a lo ancho */
 .gc-compositor:not(.con-texto):not(.grabando-ya) #enviar{display:none}
 .gc-compositor.con-texto #vaciar,.gc-compositor.grabando-ya #vaciar{display:none}
-@media (max-width:760px){.barra .multas-b{display:none}#inicio{--g-red:120px}.paso.aceptar .fila{flex-direction:column-reverse;align-items:stretch;width:100%;max-width:340px}.paso.aceptar .boton{width:100%;min-height:52px}.enlace-espera .fila{flex-direction:column;align-items:stretch;width:100%;max-width:340px;gap:10px}.enlace-espera .boton{width:100%;min-height:52px}}
+@media (max-width:760px){.barra .multas-b{display:none}#inicio{--g-red:min(60vw,236px)}.paso.aceptar .fila{flex-direction:column-reverse;align-items:stretch;width:100%;max-width:340px}.paso.aceptar .boton{width:100%;min-height:52px}.enlace-espera .fila{flex-direction:column;align-items:stretch;width:100%;max-width:340px;gap:10px}.enlace-espera .boton{width:100%;min-height:52px}}
 /* En el móvil, una sola conversación y sin volver a ninguna anterior (dueño, 28 Oct 2026, 16:01: «ahí hay un botón que me dice
    volver a tus conversaciones… no se puede volver a ver ninguna conversación»): sin «Tus conversaciones», sin la lista y sin «‹»
    en la conversación; para salir, «⋯» → «Terminar». La espera de la invitación, sin el globo */
