@@ -3411,6 +3411,11 @@
 "Modo día":"Дневной режим",
 "Modo noche":"Ночной режим",
 "Fondo claro y letras oscuras en toda la app.":"Светлый фон и тёмный текст во всём приложении."
+,
+"No se pudo cambiar de cámara.":"Не удалось переключить камеру."
+,
+"Encriptación de grado gubernamental para mensajes, llamadas y archivos":"Шифрование государственного уровня для сообщений, звонков и файлов",
+"El chat blindado llegará próximamente. De momento, el chat fuerte.":"Защищённый чат скоро появится. Пока — сильный чат."
 },
 "p":{
 "intento":"Настойчивее всех сегодня: {1}, {2} {2?раз|раз}.",

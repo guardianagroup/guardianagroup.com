@@ -1297,14 +1297,14 @@ body.en-conv .barra .porque-b{display:none}
 .ajustes-b:hover{background:rgba(156,195,228,.12)}
 body.en-conv .barra .ajustes-b{display:none}
 .ajustes{display:grid;gap:8px;margin:4px 0 14px}
-.ajuste{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;gap:12px;min-height:60px;padding:10px 14px;border-radius:14px;border:1px solid var(--line);background:rgba(156,195,228,.05);transition:background .15s}
+.ajuste{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;gap:12px;min-height:76px;padding:10px 14px;border-radius:14px;border:1px solid var(--line);background:rgba(156,195,228,.05);transition:background .15s} /* alto fijo: el texto de debajo cambia y la fila no se mueve (dueño, 29 Oct 2026, 17:43) */
 .ajuste:hover{background:rgba(156,195,228,.1)}
 .ajuste:focus-visible{outline:2px solid #F4F6F8;outline-offset:2px}
 .ajuste-ic{flex:none;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:rgba(156,195,228,.12);color:var(--accent)}
 .ajuste-ic svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
 .ajuste-txt{display:grid;gap:2px;min-width:0;text-align:left}
 .ajuste-txt b{font:600 15.5px/1.25 var(--texto);color:var(--fg)}
-.ajuste-txt small{font:400 13px/1.35 var(--texto);color:var(--muted)}
+.ajuste-txt small{font:400 13px/1.35 var(--texto);color:var(--muted);display:block;min-height:2.7em}
 .ajuste .interruptor-mini{margin-left:auto;width:42px;height:24px;border-radius:999px;background:var(--line);position:relative;flex:none;transition:background .2s}
 .ajuste .interruptor-mini::after{content:'';position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:var(--muted);transition:transform .2s,background .2s}
 .ajuste[aria-checked="true"] .interruptor-mini{background:var(--accent)}

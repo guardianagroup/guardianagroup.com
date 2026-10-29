@@ -1576,6 +1576,8 @@
     "Invitar a chat": ["Invite to chat", "Convidar para o chat"],
     "Invitar": ["Invite", "Convidar"],
     "Encriptación de categoría gubernamental para mensajes, llamadas y archivos": ["Government-grade encryption for messages, calls and files", "Criptografia de categoria governamental para mensagens, chamadas e arquivos"],
+    // dueño, 29 Oct 2026, 17:47: «grado gubernamental»
+    "Encriptación de grado gubernamental para mensajes, llamadas y archivos": ["Government-grade encryption for messages, calls and files", "Criptografia de grau governamental para mensagens, chamadas e arquivos"],
     "Criptografía postcuántica. Sin cuentas, sin instalar nada. Lo que digas aquí no lo puede leer nadie más, ni nosotros.": ["Post-quantum cryptography. No accounts, nothing to install. What you say here cannot be read by anyone else, not even us.", "Criptografia pós-quântica. Sem contas, sem instalar nada. O que você disser aqui ninguém mais pode ler, nem nós."],
     // blindado (dueño, 29 Oct 2026, 10:08–10:16): velado, tiempo en pantalla, número de la llamada, alarma, «todo o nada»
     "Abierto fuera de GUARDIANA y borrado aquí.": ["Opened outside GUARDIANA and deleted here.", "Aberto fora do GUARDIANA e apagado aqui."],
@@ -3341,6 +3343,7 @@
     "Este chat se ha abierto en otro sitio (otra pestaña o la app): sigue allí.": ["This chat has been opened somewhere else (another tab or the app): carry on there.", "Este chat foi aberto em outro lugar (outra aba ou o app): continue lá."],
     "El chat blindado llegará próximamente. Mientras, «Crear invitación».": ["The armored chat is coming soon. Meanwhile, use “Create invitation”.", "O chat blindado chega em breve. Enquanto isso, «Criar convite»."],
     "El chat blindado llegará próximamente. De momento, el chat normal.": ["The armored chat is coming soon. For now, the normal chat.", "O chat blindado chega em breve. Por enquanto, o chat normal."],
+    "El chat blindado llegará próximamente. De momento, el chat fuerte.": ["The armored chat is coming soon. For now, the strong chat.", "O chat blindado chega em breve. Por enquanto, o chat forte."],
     "Próximamente": ["Coming soon", "Em breve"],
     "Sesión blindada · próximamente": ["Armored session · coming soon", "Sessão blindada · em breve"],
     "Algoritmos de la suite CNSA 2.0 y claves que se renuevan cada 5 minutos. Mientras llega, usa «Crear invitación».": ["CNSA 2.0 suite algorithms and keys renewed every 5 minutes. Until it arrives, use “Create invitation”.", "Algoritmos da suíte CNSA 2.0 e chaves renovadas a cada 5 minutos. Enquanto não chega, use «Criar convite»."],
@@ -3364,6 +3367,7 @@
     "Invitación enviada · esperando": ["Invitation sent · waiting", "Convite enviado · aguardando"],
     "Girar la cámara": ["Flip camera", "Virar a câmera"],
     "Girar": ["Flip", "Virar"],
+    "No se pudo cambiar de cámara.": ["Could not switch camera.", "Não deu para trocar de câmera."],
     "Sonando…": ["Ringing…", "Chamando…"],
     "Chats": ["Chats", "Chats"],
     "Mis chats": ["My chats", "Meus chats"],

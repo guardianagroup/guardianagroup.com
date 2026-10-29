@@ -206,24 +206,42 @@
     // como el de un vídeo), que suena con el volumen del teléfono. Se prepara con el primer toque en la página (el iPhone lo
     // exige) y, si aun así no deja, suena el de antes.
     const TONO_URL = {};
+    // Timbres (dueño, 29 Oct 2026, 17:42: «los pitidos cuando estoy recibiendo una llamada no me gustan, no los veo profesionales»):
+    // a 44,1 kHz, con timbre de campana (parciales ligeramente inarmónicos que se apagan a distinta velocidad), de marimba (golpe de
+    // mazo y armónicos) o el doble timbre clásico de teléfono (dos tonos que baten y el badajo), y un poco de eco de sala. El que
+    // suena lo elige TIMBRE. El tono de llamada (saliente) sigue siendo el 425 Hz de la red, limpio.
+    const TIMBRE = 'clasico'; // el doble timbre clásico de teléfono: elegido por el dueño (29 Oct 2026, 17:46)
     function urlTono(tipo) {
       if (TONO_URL[tipo]) return TONO_URL[tipo];
-      const sr = 16000, dur = tipo === 'saliente' ? 4 : tipo === 'silencio' ? 0.25 : 2.6, n = Math.round(sr * dur), pcm = new Float32Array(n);
+      const sr = 44100, dur = tipo === 'saliente' ? 4 : tipo === 'silencio' ? 0.25 : TIMBRE === 'clasico' ? 3 : 3.6, n = Math.round(sr * dur), pcm = new Float32Array(n);
+      const N = { C5: 523.25, D5: 587.33, E5: 659.25, G5: 783.99, A5: 880, C6: 1046.5, E6: 1318.5 };
       const pon = (frecs, ini, d, vol) => {
         const i0 = Math.round(ini * sr), i1 = Math.min(n, Math.round((ini + d) * sr));
         for (let i = i0; i < i1; i++) { const t = (i - i0) / sr, env = Math.max(0, Math.min(1, t / 0.015, (d - t) / 0.04)); let v = 0; for (const [f, w] of frecs) v += w * Math.sin(2 * Math.PI * f * t); pcm[i] += v * vol * env; }
       };
-      // Tonos de calidad (dueño, 29 Oct 2026, 10:02: «que no parezcan el típico sonido de niño… tiene que ser de calidad»).
-      // Tono de llamada: el 425 Hz de la red telefónica, 1,2 s cada 4 s, con un armónico suave y ataque sin clic. Timbre: dos
-      // notas de madera (como una marimba: fundamental con armónicos que se apagan antes y cola de 0,8 s), F#5 y D5, dos veces
-      // cada 2,6 s; grave, cálido y reconocible, sin pitidos.
-      const madera = (f, ini, d, vol) => {
+      const campana = (f, ini, d, vol) => {
+        const i0 = Math.round(ini * sr), i1 = Math.min(n, Math.round((ini + d) * sr)), P = [[1, 1, 2.2], [2, 0.45, 3.5], [2.42, 0.22, 5], [3, 0.18, 6], [4.2, 0.08, 9], [0.5, 0.12, 2]];
+        for (let i = i0; i < i1; i++) { const t = (i - i0) / sr; let v = 0; for (const [k, w, c] of P) v += w * Math.exp(-t * c) * Math.sin(2 * Math.PI * f * k * t + 0.3 * k); pcm[i] += v * vol * Math.min(1, t / 0.003); }
+      };
+      const marimba = (f, ini, d, vol) => {
         const i0 = Math.round(ini * sr), i1 = Math.min(n, Math.round((ini + d) * sr));
-        for (let i = i0; i < i1; i++) { const t = (i - i0) / sr, env = Math.min(1, t / 0.008) * Math.exp(-t * 4.2) * Math.min(1, (d - t) / 0.05); const v = Math.sin(2 * Math.PI * f * t) + 0.35 * Math.exp(-t * 7) * Math.sin(2 * Math.PI * f * 2 * t + 0.3) + 0.12 * Math.exp(-t * 11) * Math.sin(2 * Math.PI * f * 3.01 * t); pcm[i] += v * vol * env; }
+        for (let i = i0; i < i1; i++) { const t = (i - i0) / sr; let v = Math.exp(-t * 5.5) * Math.sin(2 * Math.PI * f * t) + 0.5 * Math.exp(-t * 9) * Math.sin(2 * Math.PI * f * 4 * t) + 0.25 * Math.exp(-t * 14) * Math.sin(2 * Math.PI * f * 10 * t); v += (Math.random() * 2 - 1) * Math.exp(-t * 220) * 0.08; pcm[i] += v * vol * Math.min(1, t / 0.004); }
+      };
+      const timbre = (ini, d) => {
+        const i0 = Math.round(ini * sr), i1 = Math.min(n, Math.round((ini + d) * sr));
+        for (let i = i0; i < i1; i++) { const t = (i - i0) / sr; const v = (0.5 * Math.sin(2 * Math.PI * 1200 * t) + 0.45 * Math.sin(2 * Math.PI * 1545 * t) + 0.15 * Math.sin(2 * Math.PI * 2400 * t)) * (1 + 0.6 * Math.sin(2 * Math.PI * 22 * t)) / 1.6; pcm[i] += v * 0.55 * Math.min(1, t / 0.01, (d - t) / 0.05); }
       };
       if (tipo === 'silencio') { /* nada: un cuarto de segundo de silencio de verdad, para desbloquear el <audio> */ }
-      else if (tipo === 'saliente') pon([[425, 1], [850, 0.12]], 0, 1.2, 0.4);
-      else { madera(740, 0, 0.8, 0.6); madera(587, 0.42, 0.8, 0.6); madera(740, 1.1, 0.8, 0.55); madera(587, 1.52, 0.95, 0.55); }
+      else if (tipo === 'saliente') pon([[425, 1], [850, 0.1]], 0, 1.2, 0.4);
+      else if (TIMBRE === 'campana') { [['E5', 0], ['G5', 0.19], ['C6', 0.38], ['G5', 0.57], ['E5', 0.95], ['G5', 1.14], ['C6', 1.33], ['E6', 1.52]].forEach(([k, ini], i) => campana(N[k], ini, 1.6, i < 4 ? 0.55 : 0.6)); }
+      else if (TIMBRE === 'clasico') { timbre(0, 0.4); timbre(0.6, 0.4); }
+      else { for (const [k, ini, v] of [['C5', 0, 0.9], ['E5', 0.22, 0.9], ['G5', 0.44, 0.95], ['E5', 0.66, 0.8], ['C5', 0.88, 0.85], ['G5', 1.1, 0.9], ['A5', 1.54, 0.95], ['G5', 1.76, 0.9], ['E5', 1.98, 0.85], ['C5', 2.2, 0.9]]) marimba(N[k], ini, 1.2, v * 0.7); }
+      if (tipo !== 'silencio' && tipo !== 'saliente') {
+        // eco de sala (cuatro repeticiones cortas que se apagan) y un límite suave para que no sature
+        const eco = Float32Array.from(pcm);
+        for (const [dd, g] of [[0.071, 0.28], [0.113, 0.18], [0.197, 0.12], [0.331, 0.07]]) { const k = Math.round(dd * sr); for (let i = k; i < n; i++) pcm[i] += g * eco[i - k]; }
+        for (let i = 0; i < n; i++) pcm[i] = Math.tanh(pcm[i] * 1.1) * 0.85;
+      }
       const buf = new ArrayBuffer(44 + n * 2), dv = new DataView(buf), txt = (o, x) => { for (let i = 0; i < x.length; i++) dv.setUint8(o + i, x.charCodeAt(i)); };
       txt(0, 'RIFF'); dv.setUint32(4, 36 + n * 2, true); txt(8, 'WAVE'); txt(12, 'fmt '); dv.setUint32(16, 16, true); dv.setUint16(20, 1, true); dv.setUint16(22, 1, true);
       dv.setUint32(24, sr, true); dv.setUint32(28, sr * 2, true); dv.setUint16(32, 2, true); dv.setUint16(34, 16, true); txt(36, 'data'); dv.setUint32(40, n * 2, true);
@@ -232,6 +250,8 @@
     }
     const tonoEl = document.createElement('audio'); tonoEl.loop = true; tonoEl.preload = 'auto'; tonoEl.setAttribute('playsinline', ''); tonoEl.setAttribute('aria-hidden', 'true');
     let tonoElListo = false;
+    // los timbres se preparan con calma al arrancar (unos 100–300 ms en un teléfono): así la primera llamada suena al instante
+    setTimeout(() => { try { urlTono('entrante'); urlTono('saliente'); } catch (_) {} }, 3500);
     function desbloqueaTonoEl() {
       if (tonoElListo) return; tonoElListo = true;
       try {
@@ -1060,10 +1080,15 @@
       const quiero = mirando === 'user' ? 'environment' : 'user';
       const pide = async (cara) => { try { return await navigator.mediaDevices.getUserMedia({ video: Object.assign({}, VIDEO, { facingMode: { exact: cara } }) }); } catch (_) { return navigator.mediaDevices.getUserMedia({ video: Object.assign({}, VIDEO, { facingMode: cara }) }); } };
       const viejo = cam.getVideoTracks()[0], encendida = !viejo || viejo.enabled;
-      try { if (viejo) viejo.stop(); } catch (_) {}
+      // primero se pide la otra cámara y solo entonces se para la actual: si la nueva no llega, se sigue con la de antes (antes se
+      // paraba primero y, si fallaban las dos peticiones, la otra persona se quedaba viendo negro; revisión, 29 Oct 2026). Algunos
+      // teléfonos no dan la segunda cámara mientras la primera está abierta: entonces se para la actual y se vuelve a pedir.
       let s = null, cara = quiero;
-      try { s = await pide(quiero); } catch (_) { try { s = await pide(mirando); cara = mirando; } catch (e) { s = null; } }
+      try { s = await pide(quiero); } catch (_) { s = null; }
+      if (!s) { try { if (viejo) viejo.stop(); } catch (_) {} try { s = await pide(quiero); } catch (_) { try { s = await pide(mirando); cara = mirando; } catch (e) { s = null; } } }
+      else { try { if (viejo) viejo.stop(); } catch (_) {} }
       const nueva = s && s.getVideoTracks()[0];
+      if (!nueva && estado !== 'libre' && viejo && viejo.readyState === 'ended') { o.aviso && o.aviso(t('No se pudo cambiar de cámara.')); o.manda({ acto: 'camara', id: idLlamada, on: false }); }
       if (nueva && estado !== 'libre') {
         nueva.enabled = encendida; try { nueva.contentHint = 'motion'; } catch (_) {}
         cam = new MediaStream([nueva]); mirando = cara;

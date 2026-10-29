@@ -5,17 +5,17 @@
    «mensaje» o «llamada» y en qué sala; el contenido llega por el canal encriptado cuando se abre la app. No guarda nada, no
    intercepta ninguna petición y no manda nada a ningún sitio. */
 'use strict';
-const VERSION = 'gcom-sw-2026-10-29e';
+const VERSION = 'gcom-sw-2026-10-29f';
 self.addEventListener('install', () => { self.skipWaiting(); });
 self.addEventListener('activate', (e) => { e.waitUntil(self.clients.claim()); });
 
 // los textos, en el idioma del equipo (los mismos cinco que la app); sin nombres ni contenido
 const TEXTOS = {
-  es: { mensaje: 'Mensaje nuevo', mensajeCuerpo: 'GUARDIANA · toca para leerlo (va encriptado hasta que abras la app).', llamada: 'Te están llamando', llamadaCuerpo: 'GUARDIANA · toca para contestar.' },
-  en: { mensaje: 'New message', mensajeCuerpo: 'GUARDIANA · tap to read it (encrypted until you open the app).', llamada: 'Incoming call', llamadaCuerpo: 'GUARDIANA · tap to answer.' },
-  pt: { mensaje: 'Mensagem nova', mensajeCuerpo: 'GUARDIANA · toque para ler (vai criptografada até você abrir o app).', llamada: 'Estão ligando para você', llamadaCuerpo: 'GUARDIANA · toque para atender.' },
-  ru: { mensaje: 'Новое сообщение', mensajeCuerpo: 'GUARDIANA · нажмите, чтобы прочитать (зашифровано, пока вы не откроете приложение).', llamada: 'Вам звонят', llamadaCuerpo: 'GUARDIANA · нажмите, чтобы ответить.' },
-  cs: { mensaje: 'Nová zpráva', mensajeCuerpo: 'GUARDIANA · klepněte pro přečtení (šifrováno, dokud aplikaci neotevřete).', llamada: 'Někdo vám volá', llamadaCuerpo: 'GUARDIANA · klepněte pro přijetí.' },
+  es: { mensaje: 'Mensaje nuevo', mensajeCuerpo: 'GUARDIANA · toca para leerlo (va encriptado hasta que abras la app).', llamada: 'Te están llamando', llamadaCuerpo: 'GUARDIANA · toca para contestar.', fin: 'Llamada perdida', finCuerpo: 'GUARDIANA · toca para devolver la llamada.' },
+  en: { mensaje: 'New message', mensajeCuerpo: 'GUARDIANA · tap to read it (encrypted until you open the app).', llamada: 'Incoming call', llamadaCuerpo: 'GUARDIANA · tap to answer.', fin: 'Missed call', finCuerpo: 'GUARDIANA · tap to call back.' },
+  pt: { mensaje: 'Mensagem nova', mensajeCuerpo: 'GUARDIANA · toque para ler (vai criptografada até você abrir o app).', llamada: 'Estão ligando para você', llamadaCuerpo: 'GUARDIANA · toque para atender.', fin: 'Chamada perdida', finCuerpo: 'GUARDIANA · toque para retornar a chamada.' },
+  ru: { mensaje: 'Новое сообщение', mensajeCuerpo: 'GUARDIANA · нажмите, чтобы прочитать (зашифровано, пока вы не откроете приложение).', llamada: 'Вам звонят', llamadaCuerpo: 'GUARDIANA · нажмите, чтобы ответить.', fin: 'Пропущенный звонок', finCuerpo: 'GUARDIANA · нажмите, чтобы перезвонить.' },
+  cs: { mensaje: 'Nová zpráva', mensajeCuerpo: 'GUARDIANA · klepněte pro přečtení (šifrováno, dokud aplikaci neotevřete).', llamada: 'Někdo vám volá', llamadaCuerpo: 'GUARDIANA · klepněte pro přijetí.', fin: 'Zmeškaný hovor', finCuerpo: 'GUARDIANA · klepněte pro zavolání zpět.' },
   de: { mensaje: 'Neue Nachricht', mensajeCuerpo: 'GUARDIANA · zum Lesen antippen (verschlüsselt, bis du die App öffnest).', llamada: 'Eingehender Anruf', llamadaCuerpo: 'GUARDIANA · zum Annehmen antippen.' },
   fr: { mensaje: 'Nouveau message', mensajeCuerpo: 'GUARDIANA · touchez pour le lire (chiffré jusqu’à l’ouverture de l’app).', llamada: 'Appel entrant', llamadaCuerpo: 'GUARDIANA · touchez pour répondre.' },
   it: { mensaje: 'Nuovo messaggio', mensajeCuerpo: 'GUARDIANA · tocca per leggerlo (cifrato finché non apri l’app).', llamada: 'Chiamata in arrivo', llamadaCuerpo: 'GUARDIANA · tocca per rispondere.' },
@@ -39,14 +39,22 @@ const TEXTOS = {
   vi: { mensaje: 'Tin nhắn mới', mensajeCuerpo: 'GUARDIANA · chạm để đọc (được mã hóa cho đến khi bạn mở ứng dụng).', llamada: 'Cuộc gọi đến', llamadaCuerpo: 'GUARDIANA · chạm để trả lời.' },
   hi: { mensaje: 'नया संदेश', mensajeCuerpo: 'GUARDIANA · पढ़ने के लिए टैप करें (ऐप खोलने तक एन्क्रिप्टेड)।', llamada: 'इनकमिंग कॉल', llamadaCuerpo: 'GUARDIANA · जवाब देने के लिए टैप करें।' },
 };
-const textos = () => { let l = 'en'; try { l = String((self.navigator && self.navigator.language) || 'en').slice(0, 2).toLowerCase(); } catch (_) {} return TEXTOS[l] || TEXTOS.en; };
+const textos = () => { let l = 'en'; try { l = String((self.navigator && self.navigator.language) || 'en').slice(0, 2).toLowerCase(); } catch (_) {} const t = TEXTOS[l] || TEXTOS.en; return t.fin ? t : Object.assign({}, t, { fin: TEXTOS.en.fin, finCuerpo: TEXTOS.en.finCuerpo }); };
 const salaOk = (s) => typeof s === 'string' && /^[0-9a-f]{64}$/.test(s);
 
 self.addEventListener('push', (e) => {
   let d = {}; try { d = e.data ? e.data.json() : {}; } catch (_) { d = {}; }
-  const tipo = d.tipo === 'llamada' ? 'llamada' : 'mensaje', sala = salaOk(d.sala) ? d.sala : '';
+  const tipo = d.tipo === 'llamada' ? 'llamada' : d.tipo === 'fin' ? 'fin' : 'mensaje', sala = salaOk(d.sala) ? d.sala : '';
   const t = textos();
   e.waitUntil((async () => {
+    // «fin»: quien llamaba se cansó de esperar o canceló; el aviso «Te están llamando» se retira y en su lugar, «Llamada perdida»
+    if (tipo === 'fin') {
+      try { const ns = await self.registration.getNotifications({ tag: 'gcom-llamada-' + sala.slice(0, 16) }); for (const n of ns) n.close(); } catch (_) {}
+      await self.registration.showNotification(t.fin, { body: t.finCuerpo, icon: '/icon-192.png?v=2', badge: '/icon-192.png?v=2', tag: 'gcom-perdida-' + sala.slice(0, 16), vibrate: [120], timestamp: Number(d.t) || Date.now(), data: { sala, tipo: 'fin' } });
+      const cs0 = await self.clients.matchAll({ type: 'window', includeUncontrolled: true });
+      if (!cs0.some((c) => c.visibilityState === 'visible')) await insignia();
+      return;
+    }
     // Siempre se enseña un aviso (iPhone: si el push no acaba en un aviso, el sistema pone uno genérico «Notificación»; 29 Oct 2026,
     // 15:32). Con la app a la vista, la página lo retira en cuanto lee el mensaje (mensaje «cierra»).
     const cs = await self.clients.matchAll({ type: 'window', includeUncontrolled: true });

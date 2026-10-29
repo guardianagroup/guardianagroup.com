@@ -3411,6 +3411,11 @@
 "Modo día":"Denní režim",
 "Modo noche":"Noční režim",
 "Fondo claro y letras oscuras en toda la app.":"Světlé pozadí a tmavé písmo v celé aplikaci."
+,
+"No se pudo cambiar de cámara.":"Nepodařilo se přepnout kameru."
+,
+"Encriptación de grado gubernamental para mensajes, llamadas y archivos":"Šifrování státní kategorie pro zprávy, hovory a soubory",
+"El chat blindado llegará próximamente. De momento, el chat fuerte.":"Pancéřovaný chat přijde brzy. Zatím silný chat."
 },
 "p":{
 "intento":"Nejvíc se dnes snažila: {1}, {2}{2?krát|krát}.",

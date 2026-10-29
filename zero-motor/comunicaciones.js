@@ -186,7 +186,7 @@ class Rele {
   // quien escribe o llama a una sala donde no está la otra persona pide que se le avise; como mucho uno cada 10 s por conexión
   despierta(c, m) {
     if (!this.avisos) return;
-    const sala = String(m.sala || ''), tipo = m.tipo === 'llamada' ? 'llamada' : 'mensaje';
+    const sala = String(m.sala || ''), tipo = m.tipo === 'llamada' ? 'llamada' : m.tipo === 'fin' ? 'fin' : 'mensaje';
     if (!esHex(sala, 64) || !c.salas.has(sala)) return;
     const ahora = Date.now();
     if (c.despertoEn && ahora - c.despertoEn < 10 * 1000 && c.despertoTipo === tipo) return;

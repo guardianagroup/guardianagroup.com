@@ -539,6 +539,7 @@
     enviaControl(c, { tipo: 'ok' });
     if (YO.nombre) enviaControl(c, { tipo: 'nombre', nombre: YO.nombre });
     if (c.verificada) enviaControl(c, { tipo: 'verificada', si: 1, n: await hNumero(c) });
+    if (LL && LL.ocupado && (LLAMADA_CONV || ACTUAL) === c.id) LL.volvio(); // también en el blindado (revisión, 29 Oct 2026)
     enviaCola(c);
     reenviaCustodias(c);
     if (ACTUAL === c.id && document.visibilityState === 'visible') marcaLeidos(c);
@@ -1240,6 +1241,9 @@
   const convLl = () => CONVS.get(LLAMADA_CONV || ACTUAL);
   async function anotaLlamada(info) {
     const c = convLl(); LLAMADA_CONV = null; if (!c || !info) return;
+    // se avisó al teléfono de la otra persona («Te están llamando») y la llamada acabó sin contestar: ese aviso pasa a «Llamada perdida»
+    if (info.saliente && info.por !== 'fin' && c.avisoLlamadaEn && Date.now() - c.avisoLlamadaEn < 3 * 60 * 1000 && R && R.abierto) { try { R.despiertaA(c.id, 'fin'); } catch (_) {} }
+    c.avisoLlamadaEn = 0;
     const l = { por: info.por, duracion: info.duracion || 0, video: !!info.video, voz: !!info.voz, yoColgue: !!info.yoColgue };
     const m = { id: uuid(), conv: c.id, t: Date.now(), dir: info.mia ? 'mia' : 'suya', estado: 'ok', tipo: 'llamada', texto: resumenLlamada({ dir: info.mia ? 'mia' : 'suya', llamada: l }).titulo, llamada: l };
     await guardaMensaje(c, m); c.mensajes.push(m); pintaMensaje(c, m);
@@ -1325,7 +1329,7 @@
       nombre: () => { const c = convLl(); return (c && (c.alias || c.nombre)) || (c && vivas().length > 1 ? nombreConv(c, true) : ''); },
       inicial: () => { const c = convLl(); return inicial(c && (c.alias || c.nombre)); },
     });
-    const llama = (video) => { if (LL.ocupado) { aviso(T('Ya tienes una llamada en curso.')); return; } const c = CONVS.get(ACTUAL); if (c && c.huella && !enLinea(c) && R.abierto) { despiertaLlamada(c, video); return; } if (c && c.suFuera) despierta(c, 'llamada', true); LLAMADA_CONV = ACTUAL; LL.llamar(video); };
+    const llama = (video) => { if (LL.ocupado) { aviso(T('Ya tienes una llamada en curso.')); return; } const c = CONVS.get(ACTUAL); if (c && c.huella && !enLinea(c) && R.abierto) { despiertaLlamada(c, video); return; } if (c && c.suFuera && puedeLlamar()) despierta(c, 'llamada', true); LLAMADA_CONV = ACTUAL; LL.llamar(video); };
     $('#llamar').addEventListener('click', () => llama(false));
     if (SOLO_VIDEO) $('#llamar').hidden = true;
     // videollamada (dueño, 28 Oct 2026): la misma llamada, con imagen
@@ -1335,7 +1339,10 @@
   // ---------- destruir ----------
   // «Borrar el chat» (dueño, 15:13): todo lo de la conversación, aquí y en el otro equipo; la conversación sigue abierta. Con la
   // otra persona sin conectar, se borra aquí y la orden sale en cuanto se conecte (como «Terminar»).
+  // los reproductores de las notas de voz de una conversación, sueltos (pausar, liberar el blob y olvidar): si no, crecían hasta recargar
+  function sueltaVoces(c) { for (const m of (c && c.mensajes) || []) { const el = VOZ_CACHE.get(m.id); if (!el) continue; try { const au = el.querySelector('audio'); if (au) { au.pause(); URL.revokeObjectURL(au.src); } } catch (_) {} VOZ_CACHE.delete(m.id); } }
   async function vaciaLocal(c, porElla) {
+    sueltaVoces(c);
     for (const m of c.mensajes || []) { try { VIAJES.delete(m.id); } catch (_) {} }
     c.mensajes = []; c.cola = []; c.ultimoTexto = null; c.noLeidos = 0; c.perdida = false;
     await BD.borraConv('msg', c.id); await BD.borraConv('arch', c.id); await guardaConv(c);
@@ -1408,7 +1415,7 @@
   }
   async function destruyeLocal(c, porElla, silencio) {
     if (c.estado === 'destruida') return;
-    c.estado = 'destruida';
+    c.estado = 'destruida'; sueltaVoces(c);
     if (LL && LL.ocupado && (LLAMADA_CONV || ACTUAL) === c.id) LL.colgar();
     if (esB(c)) borraClavesB(c);
     R.sale(c.id); CONVS.delete(c.id);
@@ -2326,8 +2333,14 @@
   const SW_URL = '/orbita/comunicaciones/sw.js';
   let swReg = null, avisosFirma = '', avisosSync = null, ultimoAvisos = null, ultimoDespierta = null;
   const puedePush = () => { try { return 'serviceWorker' in navigator && 'PushManager' in window && 'Notification' in window && window.isSecureContext && (!/iPhone|iPad|iPod/.test(navigator.userAgent || '') || comoApp()); } catch (_) { return false; } };
-  async function registraSW() {
-    if (!('serviceWorker' in navigator)) return null;
+  let swProm = null;
+  function registraSW() {
+    if (!('serviceWorker' in navigator)) return Promise.resolve(null);
+    if (swProm) return swProm; // una sola vez: si no, el oyente de mensajes se añadía dos veces (revisión, 29 Oct 2026)
+    swProm = registraSW0().catch(() => null);
+    return swProm;
+  }
+  async function registraSW0() {
     try {
       swReg = await navigator.serviceWorker.register(SW_URL, { scope: '/orbita/comunicaciones/' });
       navigator.serviceWorker.addEventListener('message', (e) => {
@@ -2402,7 +2415,7 @@
   function despierta(c, tipo, aunque) { // aunque: también con la otra persona conectada pero con la app en segundo plano (14:38)
     if (!c || !c.huella || !R || !R.abierto || (enLinea(c) && !aunque)) return false;
     const ahora = Date.now(); if (tipo === 'mensaje' && c.despertadoEn && ahora - c.despertadoEn < 60000) return false;
-    c.despertadoEn = ahora; return R.despiertaA(c.id, tipo);
+    c.despertadoEn = ahora; const ok = R.despiertaA(c.id, tipo); if (ok && tipo === 'llamada') c.avisoLlamadaEn = ahora; return ok;
   }
   // llamar a quien no está conectado: se le avisa y la llamada empieza en cuanto abra GUARDIANA (hasta 45 s)
   function despiertaLlamada(c, video) {
@@ -2411,7 +2424,7 @@
     const hasta = Date.now() + 45000; clearInterval(c.esperaLlamada);
     c.esperaLlamada = setInterval(() => {
       if (ACTUAL !== c.id || c.estado === 'destruida') { clearInterval(c.esperaLlamada); return; }
-      if (Date.now() > hasta) { clearInterval(c.esperaLlamada); aviso(T('La otra persona no ha abierto GUARDIANA: inténtalo más tarde.')); return; }
+      if (Date.now() > hasta) { clearInterval(c.esperaLlamada); aviso(T('La otra persona no ha abierto GUARDIANA: inténtalo más tarde.')); if (c.avisoLlamadaEn && R.abierto) { try { R.despiertaA(c.id, 'fin'); } catch (_) {} c.avisoLlamadaEn = 0; } return; }
       if (enLinea(c) && puedeLlamar() && !LL.ocupado) { clearInterval(c.esperaLlamada); LLAMADA_CONV = c.id; LL.llamar(video); }
     }, 700);
   }
@@ -2757,8 +2770,7 @@
     campoCod.addEventListener('input', (e) => { const d = e.target.value.replace(/\D/g, '').slice(0, 9); e.target.value = d.replace(/(\d{3})(?=\d)/g, '$1-'); try { e.target.setSelectionRange(e.target.value.length, e.target.value.length); } catch (_) {} $('#unir-mal').hidden = true; if (d.length === 9) $('#unir-ok').click(); });
     $('#unir-ok').addEventListener('click', async () => {
       const b = $('#unir-ok'); if (b.disabled) return; b.disabled = true; campoCod.readOnly = true; $('#unir-mal').hidden = true; $('#unir-espera').hidden = false;
-      const r = await aceptaCodigo($('#unir-codigo').value);
-      b.disabled = false; campoCod.readOnly = false; $('#unir-espera').hidden = true;
+      let r = 'no vale'; try { r = await aceptaCodigo($('#unir-codigo').value); } catch (_) { r = 'no vale'; } finally { b.disabled = false; campoCod.readOnly = false; $('#unir-espera').hidden = true; }
       if (r === 'ok') { $('#paso-entrar').hidden = true; $('#paso-inicio').hidden = false; return; }
       $('#unir-mal').textContent = r === 'demasiados intentos' ? T('Demasiados intentos: espera un minuto.') : r === 'sin relé' || r === 'sin respuesta' ? T('Sin conexión con el relé: espera un momento.') : T('Código erróneo o caducado.');
       $('#unir-mal').hidden = false; campoCod.focus(); try { campoCod.setSelectionRange(campoCod.value.length, campoCod.value.length); } catch (_) {}
@@ -3050,7 +3062,7 @@
       nuevaBlindadaConCopia();
     }
     $('#tipo-normal').addEventListener('click', () => { tipoInv = 'normal'; pintaTipo(); });
-    $('#tipo-blindado').addEventListener('click', () => { if (!BLINDADO_ACTIVO) { aviso(T('El chat blindado llegará próximamente. De momento, el chat normal.')); return; } if (!C.B.hayBlindada()) { aviso(T('Este navegador no puede abrir una sesión blindada: hace falta uno actual.')); return; } tipoInv = 'blindada'; pintaTipo(); });
+    $('#tipo-blindado').addEventListener('click', () => { if (!BLINDADO_ACTIVO) { aviso(T('El chat blindado llegará próximamente. De momento, el chat fuerte.')); return; } if (!C.B.hayBlindada()) { aviso(T('Este navegador no puede abrir una sesión blindada: hace falta uno actual.')); return; } tipoInv = 'blindada'; pintaTipo(); });
     // «Otras apps»: el menú de compartir del teléfono, dentro del mismo toque (la invitación se crea a la vez)
     function invitaConMenu(modo) {
       const semilla = semillaLista || C.nuevaSemilla(); semillaLista = null; setTimeout(preparaSemilla, 0);

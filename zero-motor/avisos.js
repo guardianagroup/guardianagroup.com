@@ -107,14 +107,15 @@ class Avisos {
   avisa(sala, excepto, tipo) {
     if (!esHex(sala, 64)) return { avisados: 0, silenciados: 0 };
     const c = this.porSala.get(sala); if (!c) return { avisados: 0, silenciados: 0 };
-    tipo = tipo === 'llamada' ? 'llamada' : 'mensaje';
+    tipo = tipo === 'llamada' ? 'llamada' : tipo === 'fin' ? 'fin' : 'mensaje';
     let n = 0, sil = 0;
     for (const endpoint of c) {
       const s = this.subs.get(endpoint); if (!s || (excepto && s.id === excepto)) continue;
       const k = endpoint + '|' + sala + '|' + tipo, ahora = Date.now();
       if (this.ultimos.get(k) && ahora - this.ultimos.get(k) < SILENCIO_MS) { sil++; continue; }
       this.ultimos.set(k, ahora); n++;
-      this.envia(s, JSON.stringify({ tipo, sala, t: ahora }), tipo === 'llamada' ? 40 : 900, tipo === 'llamada' ? 'high' : 'normal', sala).catch(() => {});
+      // «fin» va con el mismo topic que «llamada»: si el aviso de la llamada aún no había llegado al teléfono, lo sustituye
+      this.envia(s, JSON.stringify({ tipo, sala, t: ahora }), tipo === 'llamada' ? 40 : tipo === 'fin' ? 120 : 900, tipo === 'llamada' ? 'high' : 'normal', sala, tipo === 'fin' ? 'llamada' : tipo).catch(() => {});
     }
     return { avisados: n, silenciados: sil };
   }
@@ -158,12 +159,12 @@ class Avisos {
     const rs = Buffer.alloc(4); rs.writeUInt32BE(4096);
     return Buffer.concat([sal, rs, Buffer.from([asPub.length]), asPub, cifrado]);
   }
-  envia(s, texto, ttl, urgencia, sala) {
+  envia(s, texto, ttl, urgencia, sala, tipoTema) {
     return new Promise((res) => {
       let u; try { u = new URL(s.endpoint); } catch (_) { return res(false); }
       let cuerpo; try { cuerpo = this.cifra(s, texto); } catch (e) { return res(false); }
       // un «topic» por sala y tipo: con el teléfono sin cobertura, el aviso de un chat no borra el de otro (antes todos eran «gcom»)
-      const tema = sala ? 'gcom-' + (texto.indexOf('"llamada"') > 0 ? 'l' : 'm') + '-' + String(sala).slice(0, 16) : 'gcom';
+      const tema = sala ? 'gcom-' + (tipoTema === 'llamada' ? 'l' : 'm') + '-' + String(sala).slice(0, 16) : 'gcom';
       const cab = {
         'content-type': 'application/octet-stream', 'content-encoding': 'aes128gcm', 'content-length': cuerpo.length,
         ttl: String(ttl || 60), urgency: urgencia || 'normal', topic: tema,
