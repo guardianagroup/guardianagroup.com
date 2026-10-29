@@ -3340,6 +3340,8 @@
     "Gratis · próximamente": ["Free · coming soon", "Grátis · em breve"],
     "Chat fuerte": ["Strong chat", "Chat forte"],
     "Fuerte": ["Strong", "Forte"],
+    "envío": ["sent", "envio"],
+    "recibo": ["received", "recebo"],
     "Invitación a GUARDIANA": ["Invitation to GUARDIANA", "Convite para o GUARDIANA"],
     "Para lo delicado. Todo lo del fuerte y, además: identidad nueva en cada conversación, claves que se renuevan cada 5 minutos, pantalla velada, mosaico y voz grave en las videollamadas, y autodestrucción ante un ataque.": ["For sensitive matters. Everything in the strong chat plus: a new identity in every conversation, keys renewed every 5 minutes, a veiled screen, mosaic and deep voice in video calls, and self-destruction under attack.", "Para o delicado. Tudo do forte e, além disso: identidade nova em cada conversa, chaves renovadas a cada 5 minutos, tela velada, mosaico e voz grave nas videochamadas, e autodestruição diante de um ataque."],
     "Hoy está disponible el chat Fuerte. Blindado y Ultra están en preparación: lo que figura aquí es lo previsto y se irá activando por tramos. Fuerte y Blindado son gratis.": ["The Strong chat is available today. Shielded and Ultra are in preparation: what appears here is what is planned and will be switched on in stages. Strong and Shielded are free.", "Hoje está disponível o chat Forte. Blindado e Ultra estão em preparação: o que aparece aqui é o previsto e será ativado por etapas. Forte e Blindado são grátis."],

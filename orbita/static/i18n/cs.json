@@ -3342,7 +3342,9 @@
 "Fuerte":"Silný",
 "Invitación a GUARDIANA":"Pozvánka do GUARDIANA",
 "Para lo delicado. Todo lo del fuerte y, además: identidad nueva en cada conversación, claves que se renuevan cada 5 minutos, pantalla velada, mosaico y voz grave en las videollamadas, y autodestrucción ante un ataque.":"Pro citlivé věci. Vše ze silného chatu a navíc: nová identita v každé konverzaci, klíče obnovované každých 5 minut, zahalená obrazovka, mozaika a hluboký hlas ve videohovorech a sebezničení při útoku.",
-"Hoy está disponible el chat Fuerte. Blindado y Ultra están en preparación: lo que figura aquí es lo previsto y se irá activando por tramos. Fuerte y Blindado son gratis.":"Dnes je k dispozici Silný chat. Pancéřovaný a Ultra se připravují: zde uvedené je plán a bude se zapínat po etapách. Silný a Pancéřovaný jsou zdarma."
+"Hoy está disponible el chat Fuerte. Blindado y Ultra están en preparación: lo que figura aquí es lo previsto y se irá activando por tramos. Fuerte y Blindado son gratis.":"Dnes je k dispozici Silný chat. Pancéřovaný a Ultra se připravují: zde uvedené je plán a bude se zapínat po etapách. Silný a Pancéřovaný jsou zdarma.",
+"envío":"odesílám",
+"recibo":"přijímám"
 },
 "p":{
 "intento":"Nejvíc se dnes snažila: {1}, {2}{2?krát|krát}.",

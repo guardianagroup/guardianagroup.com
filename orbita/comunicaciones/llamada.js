@@ -772,6 +772,8 @@
     // al volver la red o cambiar de wifi a datos, la ruta se renegocia enseguida
     addEventListener('online', () => { if (estado === 'hablando') reconecta('fallo'); });
     try { if (navigator.connection && navigator.connection.addEventListener) navigator.connection.addEventListener('change', () => { if (estado === 'hablando' && pc && pc.connectionState !== 'connected') reconecta('fallo'); }); } catch (_) {}
+    // «H.264 42e01f», «VP8»… a partir de la entrada codec de las estadísticas
+    const codecCorto = (c) => { if (!c || !c.mimeType) return ''; const m = String(c.mimeType).replace(/^video\//i, '').toUpperCase().replace('H264', 'H.264'); const pl = /profile-level-id=([0-9a-f]{6})/i.exec(c.sdpFmtpLine || ''); return m + (pl ? ' ' + pl[1].toLowerCase() : ''); };
     // calidad estimada cada 2 s (ida y vuelta y pérdidas del audio que llega)
     function mideCalidad() {
       clearInterval(sondeo);
@@ -782,8 +784,8 @@
           const st = await pc.getStats(), diag = {};
           st.forEach((r) => {
             if (r.type === 'candidate-pair' && r.nominated && r.state === 'succeeded') { diag.salidaBps = r.availableOutgoingBitrate; const lc = st.get(r.localCandidateId); if (lc) diag.ruta = (lc.candidateType || '') + '/' + (lc.relayProtocol || lc.protocol || ''); }
-            if (r.type === 'outbound-rtp' && r.kind === 'video') { diag.envia = (r.frameWidth || 0) + 'x' + (r.frameHeight || 0) + '@' + Math.round(r.framesPerSecond || 0); diag.limite = r.qualityLimitationReason; diag.codec = (st.get(r.codecId) || {}).mimeType; }
-            if (r.type === 'inbound-rtp' && r.kind === 'video') diag.recibe = (r.frameWidth || 0) + 'x' + (r.frameHeight || 0) + '@' + Math.round(r.framesPerSecond || 0);
+            if (r.type === 'outbound-rtp' && r.kind === 'video') { diag.envia = (r.frameWidth || 0) + 'x' + (r.frameHeight || 0) + '@' + Math.round(r.framesPerSecond || 0); diag.limite = r.qualityLimitationReason; diag.codec = codecCorto(st.get(r.codecId)); }
+            if (r.type === 'inbound-rtp' && r.kind === 'video') { diag.recibe = (r.frameWidth || 0) + 'x' + (r.frameHeight || 0) + '@' + Math.round(r.framesPerSecond || 0); diag.codecRecibe = codecCorto(st.get(r.codecId)); diag.llegan = r.framesDecoded || 0; }
           });
           diag.luz = Math.round(ganancia * 100) / 100; diag.modo = modoImagen();
           calidad.dataset.diag = JSON.stringify(diag);
@@ -796,7 +798,8 @@
           // agencia, ronda 74: en la pantalla, solo «Conexión: excelente» con un punto de color; los milisegundos, la resolución y
           // las imágenes por segundo, al tocarlo (o al pasar el ratón), para quien quiera verlos
           const serv = o.servidor ? o.servidor() : '';
-          const largo = t('Calidad estimada') + ': ' + nivel + (rtt != null ? ' · ' + rtt + ' ms' : '') + (video && vw && suCamara ? ' · ' + t('imagen') + ' ' + vw + '×' + vh + (fps ? ' · ' + Math.round(fps) + ' fps' : '') : '') + (serv ? ' · ' + t('servidor de llamadas') + ': ' + serv : '');
+          // con imagen, al tocar el indicador se ve también qué formato va y viene (dueño, 29 Oct 2026, 13:09 y 14:13: del iPhone al Android, imagen en negro)
+          const largo = t('Calidad estimada') + ': ' + nivel + (rtt != null ? ' · ' + rtt + ' ms' : '') + (video && vw && suCamara ? ' · ' + t('imagen') + ' ' + vw + '×' + vh + (fps ? ' · ' + Math.round(fps) + ' fps' : '') : '') + (video ? ' · ' + t('envío') + ' ' + (diag.envia || '–') + (diag.codec ? ' ' + diag.codec : '') + ' · ' + t('recibo') + ' ' + (diag.recibe || '–') + (diag.codecRecibe ? ' ' + diag.codecRecibe : '') : '') + (serv ? ' · ' + t('servidor de llamadas') + ': ' + serv : '');
           calidad.dataset.nivel = p < 0.01 && (rtt == null || rtt < 250) ? 'alta' : p < 0.05 ? 'media' : 'baja';
           const corto = t('Conexión') + ': ' + nivel;
           calidad.dataset.largo = largo; calidad.dataset.corto = corto; calidad.title = largo;
