@@ -270,6 +270,7 @@
       caja.classList.toggle('con-video', veoSuyo);
       if (veoSuyo && !antes) despierta(); else if (!veoSuyo) { caja.classList.remove('reposo'); clearTimeout(reposo); }
       caja.classList.toggle('solo-mia', !veoSuyo && veoMio);
+      pintaBotonTam(); // al llegar su imagen, sale «Pantalla completa»
       const b = $('#ll-camara'); if (b) { const on = camaraOn(); b.setAttribute('aria-pressed', String(!on)); b.setAttribute('aria-label', on ? t('Apagar la cámara') : t('Encender la cámara')); }
     }
     function pintaImagenes() {
@@ -782,7 +783,9 @@
     const botonTam = () => { let b = $('#ll-tam'); if (!b) { const c = lienzoVid(); if (!c) return null; b = document.createElement('button'); b.type = 'button'; b.id = 'll-tam'; b.className = 'mi-tam-boton'; b.hidden = true; b.addEventListener('click', (e) => { e.stopPropagation(); partidaPorDefecto = false; alternaDividida(); }); c.append(b); } return b; };
     function pintaBotonTam() {
       const b = botonTam(); if (!b) return; const vl = vidLocal();
-      b.hidden = !visible() || !vl;
+      // mientras suena no hay imagen de la otra persona: «Pantalla completa» no sale hasta que llega (dueño, 28 Oct 2026, 20:28:
+      // «Corrige ese fallo»: quedaba en la raya del medio, encima del nombre)
+      b.hidden = !visible() || !vl || caja.classList.contains('solo-mia');
       if (b.hidden) return;
       // En el teléfono, con la pantalla partida, el botón lleva su nombre y va en la raya del medio, a la derecha: «Pantalla
       // completa» deja a la otra persona a toda la pantalla y a ti en pequeño, como WhatsApp o FaceTime; tocando tu imagen pequeña
