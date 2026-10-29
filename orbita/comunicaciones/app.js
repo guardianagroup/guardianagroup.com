@@ -2891,10 +2891,10 @@
     $('#invitar-no').addEventListener('click', () => cierraHoja('h-invitar'));
     $('#invitar-wa').addEventListener('click', async () => {
       const b = $('#invitar-wa'); if (b.getAttribute('aria-busy') === 'true') return;
-      // iPhone y iPad (dueño, 29 Oct 2026, 12:10–12:11: «nos quedamos en WhatsApp… sería mejor que volviera automáticamente»): ninguna
-      // app puede traer de vuelta a la persona; lo único que no la saca de GUARDIANA es la hoja de compartir del propio teléfono,
-      // donde WhatsApp sale el primero y, al enviar, la hoja se cierra sola. En Android, WhatsApp directo y el botón «atrás».
-      if (esIOS && navigator.share) { cierraHoja('h-invitar'); invitaConMenu(tipoInv); return; }
+      // iPhone: WhatsApp entero (whatsapp://send), también aquí. A las 12:10 se probó la hoja de compartir del teléfono para no salir
+      // de GUARDIANA, pero con ella WhatsApp deja el mensaje en cola hasta que se abre (dueño, 28 Oct 20:52 y 29 Oct 14:29: «hasta que
+      // no ha entrado ella a WhatsApp no me ha llegado»). Con la app entera sale al momento; para volver, el «◀ GUARDIANA» de arriba
+      // a la izquierda del iPhone (o el «atrás» de Android), y el chat ya está esperando (12:50).
       b.setAttribute('aria-busy', 'true');
       try {
         const modo = tipoInv;

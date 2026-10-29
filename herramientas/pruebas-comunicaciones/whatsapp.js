@@ -29,7 +29,8 @@ const sale = (P) => P.evaluate(() => { Object.defineProperty(document, 'visibili
 const vuelve = (P) => P.evaluate(() => { Object.defineProperty(document, 'visibilityState', { configurable: true, get: () => 'visible' }); document.dispatchEvent(new Event('visibilitychange')); });
 (async () => {
   const browser = await chromium.launch({ args: ['--use-fake-ui-for-media-stream', '--use-fake-device-for-media-stream', '--autoplay-policy=no-user-gesture-required'] });
-  // 0. iPhone (dueño, 29 Oct 2026, 12:10–12:11): «WhatsApp» usa la hoja de compartir del teléfono (no se sale de GUARDIANA)
+  // 0. iPhone: «WhatsApp» abre la app entera con la invitación escrita (29 Oct 2026, 14:29: con la hoja de compartir del teléfono, el
+  // mensaje se quedaba en cola «hasta que no ha entrado ella a WhatsApp»); se vuelve con el «◀ GUARDIANA» del iPhone
   const I = await telefono(browser, IPHONE);
   await I.goto(URL0); await espera(1800);
   await I.click('#nueva-blindada'); await espera(500);
@@ -39,8 +40,9 @@ const vuelve = (P) => P.evaluate(() => { Object.defineProperty(document, 'visibi
   await I.click('#invitar-no'); await espera(400);
   comprueba(!(await visible(I, '#h-invitar')), '«Cancelar» cierra la hoja');
   await I.click('#nueva-blindada'); await espera(400); await I.click('#invitar-wa'); await espera(900);
-  comprueba(await I.evaluate(() => window.__compartidos.length === 1) && I.__wa.length === 0, 'iPhone: «WhatsApp» abre la hoja de compartir del teléfono (sin salir de GUARDIANA)');
-  comprueba(!(await visible(I, '#h-invitar')), 'iPhone: la hoja de invitar se cierra');
+  comprueba(await I.evaluate(() => window.__compartidos.length === 0) && I.__wa.length === 1 && /^whatsapp:\/\/send\?text=/.test(I.__wa[0]), 'iPhone: «WhatsApp» abre la app entera con la invitación escrita (sale al momento)');
+  await sale(I); await espera(300); comprueba(!(await visible(I, '#h-invitar')), 'iPhone: al irse a WhatsApp, la hoja de invitar se cierra'); await vuelve(I); await espera(400);
+  comprueba(await visible(I, '#texto'), 'iPhone: al volver, ya dentro del chat esperando');
 
   // 1–3. Android: «WhatsApp» abre la app entera con la invitación ya escrita; al volver, el inicio con la invitación esperando
   const A = await telefono(browser, ANDROID);
