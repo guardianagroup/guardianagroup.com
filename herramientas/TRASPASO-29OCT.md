@@ -298,3 +298,14 @@ Versiones en main: app.css, app.js y llamada.js `20261030i`; idioma.js `20261029
 - Pruebas nuevas/al día: iphone.js; contactos, recarga (puntito), llamando, altavoz, instalar, viaje-movil (omitida sin Ultra) usan
   `#ios-safari` por `evaluate`. altavoz.js ya fallaba antes (setSinkId no real en Chromium sin cabeza).
 - Versiones: app.js 31d, app.css 31e, rele.js 31b, llamada.js 31d, arranque.js 30l, sw.js e, idioma.js p84; relé: `marca` en el saludo.
+
+## 17. Tramo 9 (17:40–17:55, main dc78946b) — timbre clásico, «Llamada perdida», detalles
+- **Timbre** (llamada.js `urlTono`): `TIMBRE='clasico'` (dueño 17:46, de tres muestras: campana, marimba, clásico; las otras dos siguen en el
+  código por si cambia de idea); 44,1 kHz, eco de sala y `tanh`; se preparan al arrancar (`setTimeout` 3,5 s). Saliente: 425 Hz.
+- **«Llamada perdida» en el teléfono**: `despierta(c,'llamada')` anota `c.avisoLlamadaEn`; en `anotaLlamada` (saliente sin `fin`) y al agotar
+  `despiertaLlamada`, `R.despiertaA(sala,'fin')`; relé: tipo `fin` (ttl 120, mismo topic `gcom-l-…` que la llamada); sw.js f: cierra
+  `gcom-llamada-<sala16>` y enseña «Llamada perdida · toca para devolver la llamada» (tag `gcom-perdida-…`).
+- Ajustes: filas de 76 px y `small` con `min-height:2.7em` (17:43). «Grado gubernamental» (17:47; clave nueva en idioma.js, ru y cs; los demás
+  JSON no se tocan: no están abiertos). «De momento, el chat fuerte» (17:48).
+- Revisión: 7, 12, 13, 19, 20, 23 hechos; queda 24 (enviaControl async).
+- Versiones: app.js 31e, app.css 31f, llamada.js 31e, sw.js f, idioma.js p85.
