@@ -229,3 +229,22 @@ Versiones en main: app.css, app.js y llamada.js `20261030i`; idioma.js `20261029
   El marco de espejo y el escudo de las filas, solo con `extrasB`. Al tocar «Conexión» en la llamada se ve «envío WxH@fps CÓDEC ·
   recibo …» (codecCorto en llamada.js) para diagnosticar el negro iPhone → Android. Si con H.264 42e01f sigue en negro, el siguiente
   paso es VP8 primero entre teléfonos (`pesos` en prefiereCodecs).
+
+## 14. Tramo 6 (14:30–15:05, main 35f2ddb1 y 07ba01b9) — avisos en segundo plano, eliminar chats, espera en el chat
+- **Presencia** (relé y página): la página manda `{t:'presencia', fuera:1|0}` al ocultarse/volver (visibilitychange, pagehide,
+  pageshow, y al reconectar). En el relé, `c.fuera`: cada trama entregada a una conexión «fuera» dispara `avisos.avisaA(sala, avisoId,
+  'mensaje')` (Web Push a esa suscripción, silencio 20 s). Los demás miembros reciben `{t:'presencia', sala, quien, fuera}` →
+  `c.suFuera` en app.js; `llama()` despierta con push a quien está fuera (`despierta(c,'llamada',true)`). «Ahora no» de los avisos
+  dura 6 h (`gcom-avisos = 'no:<t>'`).
+- **Eliminar chats**: `pideEliminar(c)` (hoja `#h-eliminar`, «¿Eliminar el chat con …?»), «Editar»/«Listo» en Contactos
+  (`editaContactos`, botón `.contacto-quita`), mantener pulsado 550 ms una fila, y «⋯ → Eliminar chat» (`#cm-eliminar` siempre;
+  `#cm-terminar` oculto). Hace `destruye(c, true)`: se borra en los dos teléfonos.
+- **Espera de quien invita**: `esperaEnChat` ya no exige `c.compartido` (tras recargar o con el menú de compartir fallido, nunca la
+  pantalla «Invitar · Compartir enlace»). Nota `li.gc-espera` arriba con «Volver a enviar» (`reenvia(c)` → hoja `#h-invitar` con
+  `reenvioId`: WhatsApp u «Otras apps» con el mismo enlace). Las invitaciones enviadas que esperan salen en Contactos.
+- **Última pantalla**: `gcom-ultima` en localStorage al ocultarse; al arrancar en los 15 min siguientes se vuelve al chat o a
+  Contactos (también lo mira arranque.js para no enseñar el inicio entretanto).
+- **iPhone en Safari con invitación**: sin la guía delante (dueño 14:31); `gcomGuiaInvitacion` queda sin usar. Idea pendiente para
+  proponer: «traspaso» del chat de Safari a la app (semilla nueva S2 por el canal cifrado + start_url / código de 9 cifras).
+- Actualización sola: `miraVersion` cada 3 min con la app a la vista, a los 20 s de abrir y al volver (si pasaron 15 s).
+- Pruebas: `eliminar.js` (nueva). Versiones: app.js y, app.css u, arranque.js k, rele.js n, idioma.js p80.
