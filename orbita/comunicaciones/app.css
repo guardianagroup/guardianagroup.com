@@ -1294,7 +1294,7 @@ body.en-conv .barra .porque-b{display:none}
 .porque-entrada{margin:6px 0 22px;font:400 19px/1.5 var(--texto);color:#E1E7ED}
 .porque-bloque{margin:0 0 18px;padding:18px 18px 16px;border-radius:18px;border:1px solid rgba(156,195,228,.16);background:rgba(12,18,26,.82)}
 .porque-k{margin:0 0 8px;font:600 12.5px/1 var(--mono);letter-spacing:.24em;text-transform:uppercase;color:#9CC3E4}
-.porque-cifra{margin:0 0 8px;font:600 34px/1.05 var(--mono);letter-spacing:-.01em;color:#F0C77F}
+.porque-cifra{margin:0 0 8px;font:600 34px/1.05 var(--mono);letter-spacing:-.01em;color:#F0C77F;direction:ltr;unicode-bidi:isolate} /* la cifra siempre de izquierda a derecha, también en árabe y hebreo */
 .porque-dato{margin:0 0 12px;font:400 18px/1.55 var(--texto);color:#E8ECF1}
 .porque-por{margin:0;padding-top:12px;border-top:1px solid rgba(156,195,228,.14);font:400 18px/1.55 var(--texto);color:#E1E7ED}
 .porque-por b{color:#9CC3E4;font-weight:600}
