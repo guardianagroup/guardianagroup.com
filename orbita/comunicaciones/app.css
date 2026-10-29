@@ -1461,3 +1461,21 @@ body.con-visor{overflow:hidden}
 .como-modo-b{border-color:rgba(156,195,228,.34);background:linear-gradient(180deg,rgba(156,195,228,.10),rgba(12,18,26,.8))}
 .como-modo-b b::before{content:'';display:inline-block;width:9px;height:9px;border-radius:50%;background:#9CC3E4;margin:0 8px 1px 0;box-shadow:0 0 10px rgba(156,195,228,.7)}
 @media (min-width:761px){.como-modos{grid-template-columns:1fr 1fr;gap:12px}}
+/* «Frente a las demás» (dueño, 29 Oct 2026, 11:13): el cuadro comparativo dentro de «¿Por qué?», legible en el teléfono: cada
+   criterio es una fila con su nombre y, debajo, cuatro celdas (WhatsApp, Signal, Telegram, GUARDIANA); la de GUARDIANA, resaltada */
+.comp{margin:26px 0 8px}
+.comp-intro{margin:0 0 14px;font:400 18px/1.55 var(--texto);color:#E1E7ED}
+.comp-cab{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:0 0 8px}
+.comp-cab span{font:600 11px/1.2 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:#9fb3c4;text-align:center;padding:6px 2px;border-bottom:1px solid rgba(156,195,228,.16)}
+.comp-cab span.comp-g{color:#9CC3E4;border-bottom-color:rgba(156,195,228,.6)}
+.comp-fila{margin:0 0 10px;padding:12px 12px 10px;border-radius:14px;border:1px solid rgba(156,195,228,.14);background:rgba(12,18,26,.7)}
+.comp-c{display:block;margin:0 0 8px;font:600 15.5px/1.3 var(--texto);color:#F4F6F8}
+.comp-celdas{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.comp-v{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:3px;min-height:52px;padding:7px 4px 6px;border-radius:10px;background:rgba(255,255,255,.03);text-align:center}
+.comp-v i{font-style:normal;font:700 18px/1 var(--texto)}
+.comp-v small{font:400 11.5px/1.25 var(--texto);color:#b9c6d2}
+.comp-v.si i{color:#8FD9B5}.comp-v.no i{color:#E9998D}.comp-v.medio i{color:#F0C77F}
+.comp-v.comp-g{background:rgba(156,195,228,.12);border:1px solid rgba(156,195,228,.35)}
+.comp-v.comp-g small{color:#dbe9f4}
+.comp-nota{margin:10px 0 0;font:400 13px/1.45 var(--texto);color:#9fb3c4}
+@media (min-width:761px){.comp-fila{display:grid;grid-template-columns:minmax(0,1.3fr) repeat(4,minmax(0,1fr));gap:8px;align-items:center;padding:10px 14px}.comp-c{margin:0;padding-right:8px}.comp-celdas{display:contents}.comp-cab{grid-template-columns:minmax(0,1.3fr) repeat(4,minmax(0,1fr));gap:8px;padding:0 14px}.comp-cab span:first-child{text-align:left}}
