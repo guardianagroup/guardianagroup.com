@@ -36,7 +36,8 @@ async function guarda(p, nombre) {
   const browser = await chromium.launch({ args: ['--use-fake-ui-for-media-stream', '--use-fake-device-for-media-stream', '--autoplay-policy=no-user-gesture-required'] });
   const A = await telefono(browser, 'A'), B = await telefono(browser, 'B');
   await A.goto(URL0); await B.goto(URL0); await espera(1500);
-  comprueba(!(await A.$('#pegar-inv')), 'app: sin «Pegar invitación»');
+  // iPhone: la invitación llega por WhatsApp y Safari no la puede pasar a la app; se pega aquí (dueño, 29 Oct 2026, 16:05)
+  comprueba(await visible(A, '#pegar-inv'), 'iPhone: el inicio tiene «Tengo una invitación»');
   // B entra pegando el enlace en la app (como haría la esposa)
   const enlace = await conecta(A, B);
   comprueba(!(await A.$('#enlace-whatsapp')) && !(await A.$('#enlace-copiar-2')), 'invitación: sin botones de más');
@@ -52,7 +53,10 @@ async function guarda(p, nombre) {
   await A.click('#cvolver'); await espera(600);
   comprueba(await visible(A, '#contactos') && !(await visible(A, '#conv')), '«‹» lleva a los contactos');
   const fila = await A.evaluate(() => [...document.querySelectorAll('#contactos-filas .contacto')].map((li) => li.textContent.trim()));
-  comprueba(fila.length === 1 && /Mi mujer/.test(fila[0]) && /En línea/.test(fila[0]), 'la fila: «Mi mujer» · En línea (' + fila.join(' | ') + ')');
+  // dueño, 29 Oct 2026, 16:01: ni «conectado» ni «desconectado»; un puntito verde o rojo
+  const punto = await A.evaluate(() => { const a = document.querySelector('#contactos-filas .contacto-av'); return a ? (a.classList.contains('en-linea') ? 'verde' : a.classList.contains('no-linea') ? 'rojo' : 'nada') : 'sin fila'; });
+  comprueba(fila.length === 1 && /Mi mujer/.test(fila[0]) && !/En línea|No conectado/.test(fila[0]), 'la fila: «Mi mujer», sin las palabras «En línea»/«No conectado» (' + fila.join(' | ') + ')');
+  comprueba(punto === 'verde', 'la fila: puntito verde al estar conectada (' + punto + ')');
   await foto(A, '04-A-contactos');
   // llamar desde la lista
   // (28 Oct, 21:50, se quitó la llamada de voz; el 29 Oct vuelve: «la llamada normal sí que funciona» (12:54), con los dos botones)

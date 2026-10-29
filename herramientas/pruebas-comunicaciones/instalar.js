@@ -36,7 +36,8 @@ async function invitacion(browser) {
   await A.click('#nueva-blindada'); if (await A.$('#h-invitar.gc-abierta')) await A.click('#invitar-otra'); await espera(900);
   return String((await A.evaluate(() => window.__compartidos[0])).url);
 }
-async function acepta(P, url) { await P.goto(url); await espera(1500); await P.click('#aceptar-si'); }
+// iPhone en Safari (dueño, 29 Oct 2026, 16:05): el enlace lleva primero a la pantalla del iPhone; aquí se sigue en Safari
+async function acepta(P, url) { await P.goto(url); await espera(1500); if (await P.$('#paso-ios:not([hidden]) #ios-safari')) { await P.click('#ios-safari'); await espera(900); } await P.click('#aceptar-si'); }
 (async () => {
   const browser = await chromium.launch({ args: ['--use-fake-ui-for-media-stream', '--use-fake-device-for-media-stream'] });
 

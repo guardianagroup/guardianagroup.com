@@ -305,8 +305,26 @@
   function muestraAceptar(ver) {
     if (ver) { verContactos = false; $('#inicio').classList.remove('ver-contactos'); $('#contactos').hidden = true; }
     $('#paso-aceptar').hidden = !ver; $('#inicio').classList.toggle('con-invitacion', ver); document.body.classList.toggle('aceptando', ver);
-    if (ver) { for (const id of ['paso-inicio', 'paso-codigo', 'paso-enlace', 'paso-entrar']) { const e = $('#' + id); if (e) e.hidden = true; } $('#inicio').hidden = false; $('#conv').hidden = true; }
+    if (ver) { for (const id of ['paso-inicio', 'paso-codigo', 'paso-enlace', 'paso-entrar', 'paso-ios']) { const e = $('#' + id); if (e) e.hidden = true; } $('#inicio').hidden = false; $('#conv').hidden = true; }
     else $('#paso-inicio').hidden = false;
+  }
+  // iPhone en Safari con una invitación (dueño, 29 Oct 2026, 16:05 y 16:11: «en la aplicación no le aparecen y le aparece una
+  // página abierta en Safari… le aparece duplicado»). En el iPhone, Safari y la app de la pantalla de inicio guardan cada uno sus
+  // cosas por separado, y Safari no puede avisar con la app cerrada: aceptar aquí dejaría el chat y los avisos fuera de la app.
+  // Así que aquí no se acepta: o se añade la app con la invitación dentro, o se copia y se pega en la app ya instalada.
+  let invitacionIOS = null;
+  function muestraIOS(ver, enlace) {
+    const p = $('#paso-ios'); if (!p) return;
+    if (ver) { invitacionIOS = enlace || invitacionIOS; verContactos = false; $('#inicio').classList.remove('ver-contactos'); $('#contactos').hidden = true; $('#ios-paso1').hidden = false; $('#ios-paso2').hidden = true; }
+    p.hidden = !ver; $('#inicio').classList.toggle('con-invitacion', ver); document.body.classList.toggle('aceptando', ver);
+    if (ver) { for (const id of ['paso-inicio', 'paso-codigo', 'paso-enlace', 'paso-entrar', 'paso-aceptar']) { const e = $('#' + id); if (e) e.hidden = true; } $('#inicio').hidden = false; $('#conv').hidden = true; }
+    else $('#paso-inicio').hidden = false;
+  }
+  async function aceptaEnlaceYa(enlace) {
+    const ok = await preguntaInvitacion(enlace || '');
+    try { history.replaceState(null, '', location.pathname + location.search); } catch (_) {}
+    if (!ok) aviso(T('Ese enlace no es una invitación de GUARDIANA.'));
+    return ok;
   }
   // enlaces: «#b=» abre una sesión blindada; «#i=» (antiguos, ya no se muestran) sigue abriendo su conversación normal
   async function aceptaInvitacion(enlace) {
@@ -660,7 +678,9 @@
         const carga = m.tipo === 'texto' ? { tipo: 'texto', id: m.id, t: m.t, texto: m.texto } : m.tipo === 'archivo' ? { tipo: 'archivo', id: m.id, t: m.t, nombre: m.archivo.nombre, tam: m.archivo.tam, mime: m.archivo.mime, clave: m.archivo.clave, trozos: m.archivo.trozos, v: ULTRA ? 1 : 0, region: MI_PAIS || undefined, voz: m.archivo.voz ? 1 : undefined, vida: m.archivo.vida, dur: m.archivo.dur, paq: m.archivo.paq } : null;
         if (!carga) { c.cola.shift(); continue; }
         const vj = m.tipo === 'archivo' && VIAJES.get(m.id), sesU = c.sesion; // la clave del archivo viaja en esta sesión
-        const b = await sella(c, carga); if (!b || !R.manda(c.id, c.suId, b)) break;
+        // el cuarto argumento: esta trama sí merece aviso en el teléfono de la otra persona (un mensaje o un archivo), al revés
+        // que los acuses, el «leído» o el «escribiendo…» (dueño, 29 Oct 2026, 16:07: «todo al momento, tiene que estar en orden»)
+        const b = await sella(c, carga); if (!b || !R.manda(c.id, c.suId, b, true)) break;
         if (vj && sesU) { vj.pq = !!sesU.pq; vj.sid = sesU.sid; vj.sesionDesde = sesU.desde; vj.tAnuncio = Date.now(); }
         if (vj) evento(vj, T('Anuncio enviado al destinatario, encriptado de extremo a extremo; se espera su confirmación.')); // antes de cualquier espera: va antes que la respuesta
         c.cola.shift(); m.estado = 'enviado'; await guardaMensaje(c, m); pintaEstado(m);
@@ -771,6 +791,17 @@
     // sin «confirmaciones de lectura» se apunta aquí como leído, pero no se envía (y al reactivarlas no se mandan las antiguas)
     if (ids.length && (!pref('leido') || enviaControl(c, { tipo: 'leido', ids }))) { for (const m of c.mensajes) if (ids.includes(m.id)) { m.estado = 'leido'; await guardaMensaje(c, m); } }
     if (c.noLeidos) { c.noLeidos = 0; await guardaConv(c); pintaLista(); }
+    retiraAvisos(c.id); pintaInsignia();
+  }
+  // El número del icono de la app = los mensajes sin leer, ni uno más (dueño, 29 Oct 2026, 16:07: «cuando ya las he visto, tienen
+  // que desaparecer… todo al momento»). Antes lo llevaban por su cuenta la página (los llegados con la app fuera) y el service
+  // worker (los avisos sin tocar), y se quedaba un número viejo tras leerlos.
+  const sinLeer = () => { let n = 0; for (const c of vivas()) n += (c.noLeidos || 0); return n; };
+  function pintaInsignia() {
+    try {
+      const n = sinLeer();
+      if (navigator.setAppBadge) { if (n) navigator.setAppBadge(n).catch(() => {}); else if (navigator.clearAppBadge) navigator.clearAppBadge().catch(() => {}); }
+    } catch (_) {}
   }
 
   // ---------- archivos ----------
@@ -808,6 +839,8 @@
     enviaCola(c); if (!enLinea(c)) despierta(c, 'mensaje');
   }
   async function falla(c, m, texto) {
+    // el envío que falla suelta el archivo: si no, c.archivos se quedaba ocupado para siempre y la app ya no se actualizaba sola
+    try { if (c.archivos) c.archivos.delete(m.id); } catch (_) {}
     m.estado = 'fallo'; await guardaMensaje(c, m); pintaMensaje(c, m, true); if (texto) aviso(texto);
     const v = VIAJES.get(m.id); if (v && v.estado !== 'entregado' && v.estado !== 'fallo') { v.estado = 'fallo'; v.tFin = Date.now(); evento(v, T('Envío interrumpido.') + (texto ? ' ' + texto : ''), 'mal'); }
   }
@@ -1409,12 +1442,16 @@
     R.on('hola', () => { for (const c of CONVS.values()) pintaCabecera(c); pintaBarra(); avisosFirma = ''; sincronizaAvisos(); });
     // la otra persona se va a segundo plano o vuelve (el relé lo cuenta): con «fuera», la llamada también la avisa el teléfono
     R.on('presencia', (m) => { const c = m && CONVS.get(m.sala); if (!c || (c.suId && m.quien !== c.suId)) return; c.suFuera = m.fuera === 1; c.quietoHasta = 0; pintaCabecera(c); pintaLista(); pintaContactos(); });
-    R.on('despierta', (m) => { ultimoDespierta = m; if (m && m.tipo === 'llamada' && (m.avisados | 0) === 0) aviso(T('La otra persona no tiene los avisos activados: solo le llegará con GUARDIANA abierta.')); });
+    // «no tiene los avisos activados» solo si de verdad no hay ninguna suscripción: si el relé calla por los 20 s entre avisos
+    // iguales (segunda llamada seguida), silenciados > 0 y no se dice nada
+    R.on('despierta', (m) => { ultimoDespierta = m; if (m && m.tipo === 'llamada' && (m.avisados | 0) === 0 && (m.silenciados | 0) === 0) aviso(T('La otra persona no tiene los avisos activados: solo le llegará con GUARDIANA abierta.')); });
     R.on('avisos', (m) => { ultimoAvisos = m; });
-    R.on('cerrado', () => { quietoTodas(4000); pintaBarra(); for (const c of CONVS.values()) { c.miembros.clear(); c.sesion = null; c.salaSabida = false; pintaCabecera(c); } pintaLista(); });
+    // al perder la conexión se olvida también si la otra persona estaba «fuera»: al volver, el relé solo reenvía la presencia de
+    // quien sigue fuera, y sin esto se quedaba «No conectado» para siempre (revisión, 29 Oct 2026)
+    R.on('cerrado', () => { quietoTodas(4000); pintaBarra(); for (const c of CONVS.values()) { c.miembros.clear(); c.sesion = null; c.salaSabida = false; c.suFuera = false; for (const [id, a] of c.archivos || []) { if (a && a.envio) { const m = c.mensajes.find((x) => x.id === id); if (m) falla(c, m, T('Se perdió la conexión.')); } } if (c.archivos) c.archivos.clear(); pintaCabecera(c); } pintaLista(); });
     setInterval(() => { if (R.abierto && R.caduca && R.caduca * 1000 - Date.now() < 2 * 3600 * 1000) R.pideIce(); }, 10 * 60 * 1000);
     // con la otra persona en la sala, el tiempo de acordar las claves, quieta; sin ella (y si no se acaba de ir), «No conectado» ya
-    R.on('sala', (sala, miembros) => { const c = CONVS.get(sala); if (!c) return; c.miembros = new Set(miembros); c.sesion = null; c.salaSabida = true; if (c.suId && miembros.includes(c.suId)) quietoConv(c, 6000); if (miembros.length && (!c.suId || miembros.includes(c.suId))) enCola(c, () => presentaX(c, null, true)); pintaCabecera(c); pintaLista(); pintaContactos(); });
+    R.on('sala', (sala, miembros) => { const c = CONVS.get(sala); if (!c) return; c.miembros = new Set(miembros); c.sesion = null; c.salaSabida = true; c.suFuera = false; if (c.suId && miembros.includes(c.suId)) quietoConv(c, 6000); if (miembros.length && (!c.suId || miembros.includes(c.suId))) enCola(c, () => presentaX(c, null, true)); pintaCabecera(c); pintaLista(); pintaContactos(); });
     R.on('llega', (sala, quien) => { const c = CONVS.get(sala); if (!c) return; c.miembros.add(quien); if (!c.suId || c.suId === quien) c.suFuera = false; if (!c.suId || c.suId === quien) { c.sesion = null; if (c.huella) quietoConv(c, 6000); enCola(c, () => presentaX(c, null, true)); } pintaCabecera(c); pintaLista();
       // la invitación que salió por WhatsApp: el chat se abre cuando la otra persona entra, si no se está en otra conversación
       if (c.compartido && !c.huella && c.rol === 'invita' && (!ACTUAL || !CONVS.has(ACTUAL)) && !document.body.classList.contains('en-llamada')) abreConv(c.id); });
@@ -1476,7 +1513,7 @@
     return esB(c) ? T('Sesión blindada') : T('Encriptada de extremo a extremo');
   }
   async function pintaLista() {
-    sincronizaAvisos();
+    sincronizaAvisos(); pintaInsignia();
     const xs = vivas().sort((a, b) => (b.ultimo || b.creado || 0) - (a.ultimo || a.creado || 0));
     const app = $('#app'), lista = $('#lista'), ul = $('#lista-filas');
     app.classList.toggle('con-lista', xs.length > 0); if (lista) lista.hidden = !xs.length;
@@ -1489,7 +1526,7 @@
         const li = document.createElement('li');
         const b = document.createElement('button'); b.type = 'button'; b.className = 'fila-conv' + (c.id === ACTUAL ? ' actual' : '') + (extrasB(c) ? ' blindada' : '') + (c.noLeidos ? ' nueva' : '') + (c.perdida && !c.noLeidos ? ' perdida' : '');
         b.dataset.id = c.id; if (c.id === ACTUAL) b.setAttribute('aria-current', 'true');
-        const av = document.createElement('span'); av.className = 'fila-av' + (pareceEnLinea(c) ? ' en-linea' : ''); av.setAttribute('aria-hidden', 'true');
+        const av = document.createElement('span'); av.className = 'fila-av' + (!c.huella ? '' : pareceEnLinea(c) ? ' en-linea' : ' no-linea'); av.setAttribute('aria-hidden', 'true');
         if (extrasB(c)) av.innerHTML = '<svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6z"/></svg>'; else av.textContent = inicial(nombreConv(c, true));
         const tx = document.createElement('span'); tx.className = 'fila-txt';
         const nb = document.createElement('b'); nb.textContent = nombreConv(c, true); nb.translate = false;
@@ -1546,10 +1583,11 @@
       const nombre = nombreConv(c, true), vivo = pareceEnLinea(c);
       const li = document.createElement('li'); li.className = 'contacto' + (c.noLeidos ? ' nueva' : '');
       const ab = document.createElement('button'); ab.type = 'button'; ab.className = 'contacto-abre'; ab.dataset.id = c.id;
-      const av = document.createElement('span'); av.className = 'contacto-av' + (vivo ? ' en-linea' : ''); av.textContent = inicial(nombre); av.setAttribute('aria-hidden', 'true');
+      const av = document.createElement('span'); av.className = 'contacto-av' + (!c.huella ? '' : vivo ? ' en-linea' : ' no-linea'); av.textContent = inicial(nombre); av.setAttribute('aria-hidden', 'true');
       const tx = document.createElement('span'); tx.className = 'contacto-txt';
       const nb = document.createElement('b'); nb.textContent = nombre; nb.translate = false;
-      const es = document.createElement('small'); es.textContent = !c.huella ? T('Invitación enviada · esperando') : c.noLeidos ? T('{n} mensajes nuevos').replace('{n}', c.noLeidos) : (c.contacto ? '' : T('Sin guardar') + ' · ') + (vivo ? T('En línea') : T('No conectado'));
+      // sin «En línea»/«No conectado» escrito: eso ya lo dice el puntito del avatar (dueño, 29 Oct 2026, 16:01)
+      const es = document.createElement('small'); es.textContent = !c.huella ? T('Invitación enviada · esperando') : c.noLeidos ? (c.noLeidos === 1 ? T('Mensaje nuevo') : T('{n} mensajes nuevos').replace('{n}', c.noLeidos)) : c.contacto ? '' : T('Sin guardar');
       tx.append(nb, es); ab.append(av, tx);
       if (c.noLeidos) { const n = document.createElement('i'); n.className = 'contacto-n'; n.textContent = c.noLeidos > 99 ? '99+' : String(c.noLeidos); ab.append(n); }
       li.append(ab);
@@ -1598,7 +1636,12 @@
   const esperaEnChat = (c) => !!(c && esMovil() && porEnlace(c) && c.rol === 'invita' && !c.huella);
   // en cuanto hay una conversación establecida y se está en ella, la pregunta (una vez por sesión, y «Ahora no» se recuerda)
   function avisosCuandoToque() { setTimeout(preguntaAvisos, 1500); }
-  function retiraAvisos(sala) { try { if (swReg && navigator.serviceWorker.controller) navigator.serviceWorker.controller.postMessage({ t: 'cierra', sala }); } catch (_) {} try { if (navigator.clearAppBadge && !nuevos) navigator.clearAppBadge().catch(() => {}); } catch (_) {} }
+  // los avisos de ese chat, retirados de la bandeja (y el número del icono, recalculado). El primer arranque tras instalar el
+  // service worker aún no tiene «controller»: entonces vale el registro activo (revisión, 29 Oct 2026)
+  function retiraAvisos(sala) {
+    try { const sw = navigator.serviceWorker && (navigator.serviceWorker.controller || (swReg && swReg.active)); if (sw) sw.postMessage({ t: 'cierra', sala }); } catch (_) {}
+    try { pintaInsignia(); } catch (_) {}
+  }
   async function abreConv(id) {
     retiraAvisos(id); avisosCuandoToque();
     const c = CONVS.get(id); if (!c) return;
@@ -1651,9 +1694,14 @@
     }
     // en el teléfono, debajo del nombre, como WhatsApp: «En línea» o «No conectado», sin jerga ni el ámbar de «pendiente de
     // verificar», que parecía un error (revisión de diseño, 28 Oct 2026, 19:15). La seguridad y la verificación siguen en «⋯».
-    if (movil && c.huella && !(c.ocupada && !c.huella)) {
-      txt = !R.abierto ? T('Sin conexión') : !c.miembros.has(c.suId) || c.suFuera ? T('No conectado') : !c.sesion || !c.sesion.confirmada ? T('Conectando…') : T('En línea');
+    // en el teléfono ya no se escribe «En línea» ni «No conectado»: un puntito verde o rojo al lado del nombre (dueño, 16:01)
+    const pt = $('#cpunto');
+    if (pt) {
+      const hay = !!(movil && c.huella && !(c.ocupada && !c.huella));
+      pt.hidden = !hay;
+      if (hay) pt.className = 'gc-punto' + (pareceEnLinea(c) ? ' en' : '');
     }
+    if (movil && c.huella && !(c.ocupada && !c.huella)) txt = '';
     // quieta (tras recargar, un corte de un momento o la otra persona recargando): lo mismo que se veía; recién abierta, lo de antes
     // de recargar; y si no hay nada, la línea vacía, que guarda su sitio (app.css) y no mueve el nombre
     if (quieta) txt = c.lineaVista !== undefined ? c.lineaVista : lineasPrevias[c.id] ? lineasPrevias[c.id].txt : '';
@@ -2057,6 +2105,7 @@
   let sueltaAudioT = null;
   function avisaSonido() {
     if (document.visibilityState !== 'visible') return;
+    if (!pref('sonido')) return; // Ajustes › Sonido (dueño, 29 Oct 2026, 16:02)
     try {
       ctxAudio = ctxAudio || new (window.AudioContext || window.webkitAudioContext)();
       if (ctxAudio.state === 'suspended') ctxAudio.resume().catch(() => {});
@@ -2207,7 +2256,7 @@
     document.title = base;
     // el título alterna para que la pestaña y el botón de la barra de tareas «salten» (Gemini, ronda 74)
     if ((nuevos || llamada) && fuera()) { const alt = llamada ? '📞 ' + llamada : '💬 ' + (nuevos === 1 ? T('Mensaje nuevo') : T('{n} mensajes nuevos').replace('{n}', nuevos)); parpadeo = setInterval(() => { fase = !fase; document.title = fase ? alt : base; }, llamada ? 700 : 1000); }
-    try { if (navigator.setAppBadge) { if (nuevos) navigator.setAppBadge(nuevos).catch(() => {}); else navigator.clearAppBadge().catch(() => {}); } } catch (_) {}
+    pintaInsignia();
     const l = document.querySelector('link[rel="icon"]'); if (!l) return;
     if (iconoOriginal === null) iconoOriginal = l.getAttribute('href');
     if (!nuevos && !llamada) { if (l.getAttribute('href') !== iconoOriginal) l.setAttribute('href', iconoOriginal); return; }
@@ -2220,8 +2269,12 @@
     if (permisoAvisos() !== 'granted') return false;
     try {
       if (avisoSis) avisoSis.close();
-      const cuerpo = que === 'perdida' ? (video ? T('Videollamada perdida.') : T('Llamada perdida.')) : nuevos === 1 ? T('Tienes un mensaje nuevo.') : T('Tienes {n} mensajes nuevos.').replace('{n}', nuevos);
-      avisoSistema('GUARDIANA', { body: cuerpo, tag: 'gcom-nuevo', icon: '/icon-192.png?v=2', silent: true }).then((n) => { avisoSis = n; }); // silent y renotify no pueden ir juntos: el anterior ya se cerró arriba
+      const n0 = que === 'perdida' ? 0 : (c && c.noLeidos) || nuevos;
+      const cuerpo = que === 'perdida' ? (video ? T('Videollamada perdida.') : T('Llamada perdida.')) : n0 === 1 ? T('Tienes un mensaje nuevo.') : T('Tienes {n} mensajes nuevos.').replace('{n}', n0);
+      // la misma etiqueta que usa sw.js para el aviso de ese chat: si el relé manda además el aviso del teléfono, uno sustituye al
+      // otro y no salen dos por el mismo mensaje (revisión, 29 Oct 2026)
+      const etiq = que === 'perdida' || !c ? 'gcom-nuevo' : 'gcom-mensaje-' + String(c.id).slice(0, 16);
+      avisoSistema('GUARDIANA', { body: cuerpo, tag: etiq, icon: '/icon-192.png?v=2', silent: true, data: { sala: c ? c.id : '', tipo: 'mensaje' } }).then((n) => { avisoSis = n; }); // silent y renotify no pueden ir juntos: el anterior ya se cerró arriba
       return true;
     } catch (_) { return false; }
   }
@@ -2245,7 +2298,7 @@
     if (avisoLlam) { try { if (avisoLlam.close) avisoLlam.close(); } catch (_) {} avisoLlam = null; }
     if (tituloLlamada) { tituloLlamada = false; pintaTitulo(); }
   }
-  function vuelve() { if (fuera()) return; if (nuevos || parpadeo) { nuevos = 0; pintaTitulo(); } if (avisoSis) { try { avisoSis.close(); } catch (_) {} avisoSis = null; } const c = CONVS.get(ACTUAL); if (c) marcaLeidos(c); }
+  function vuelve() { if (fuera()) return; if (nuevos || parpadeo) { nuevos = 0; pintaTitulo(); } if (avisoSis) { try { avisoSis.close(); } catch (_) {} avisoSis = null; } const c = CONVS.get(ACTUAL); if (c) { marcaLeidos(c); retiraAvisos(c.id); } pintaInsignia(); }
   document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') { const c = CONVS.get(ACTUAL); if (c) marcaLeidos(c); } vuelve(); });
   addEventListener('focus', vuelve);
   // la tira para pedir el permiso: solo en el ordenador, con la conversación ya establecida, y una sola vez
@@ -2309,6 +2362,26 @@
     aviso(ok ? T('Listo: te avisaremos de mensajes y llamadas aunque GUARDIANA esté cerrada.') : T('Avisos activados en este navegador; con la app cerrada aún no: vuelve a intentarlo con conexión.'));
     pintaAvisosMenu(); return ok;
   }
+  // ---------- Ajustes (idea de Nathalie, por el dueño, 29 Oct 2026, 16:02: «activar o desactivar las notificaciones… en ajustes»)
+  // Lo justo y claro: avisos, sonido, pantalla de inicio y versión. Nada que se pueda romper sin querer.
+  function pintaAjustes() {
+    const av = $('#aj-avisos'); if (!av) return;
+    const puede = puedePush(), perm = permisoAvisos();
+    let quiere = true; try { quiere = localStorage.getItem('gcom-avisos') !== 'off'; } catch (_) {}
+    const on = puede && perm === 'granted' && quiere;
+    av.setAttribute('aria-checked', String(on));
+    av.classList.toggle('mal', !!(puede && perm === 'denied'));
+    const est = $('#aj-avisos-est');
+    if (est) est.textContent = !puede
+      ? (/iPhone|iPad|iPod/.test(navigator.userAgent || '') && !comoApp() ? T('En el iPhone hay que añadir GUARDIANA a la pantalla de inicio: desde Safari no se puede avisar.') : T('Este navegador no admite avisos con la app cerrada.'))
+      : perm === 'denied' ? T('El teléfono los tiene bloqueados: Ajustes › Notificaciones › GUARDIANA.')
+      : on ? T('Activadas: te avisamos de mensajes y llamadas aunque GUARDIANA esté cerrada.')
+      : T('Desactivadas: solo te enterarás con GUARDIANA abierta.');
+    const so = $('#aj-sonido'); if (so) so.setAttribute('aria-checked', String(pref('sonido')));
+    const an = $('#aj-anadir'); if (an) an.hidden = comoApp();
+    pintaAvisosMenu();
+  }
+  function abreAjustes() { pintaAjustes(); abreHoja('h-ajustes'); }
   function pintaAvisosMenu() {
     const b = $('#cm-avisos'); if (!b) return; const sp = b.querySelector('span');
     const puede = puedePush(), perm = permisoAvisos();
@@ -2336,6 +2409,7 @@
   let avisosPreguntado = false;
   function preguntaAvisos() {
     if (avisosPreguntado || !puedePush() || permisoAvisos() !== 'default') return; let no = ''; try { no = localStorage.getItem('gcom-avisos') || ''; } catch (_) {}
+    if (no === 'off') return; // los apagó en Ajustes: no se vuelve a preguntar
     // «Ahora no» vale 6 horas: después se vuelve a ofrecer (dueño, 14:38: los avisos tienen que verse fuera de la app)
     if (/^no/.test(no) && Date.now() - (+no.slice(3) || 0) < 6 * 3600 * 1000) return;
     if (!vivas().some((c) => c.huella)) return;
@@ -2497,6 +2571,20 @@
     $('#cm-completa').hidden = !esMovil() || comoApp();
     $('#cm-completa').addEventListener('click', () => { cierraMenu(); if (puedeCompleta()) pantallaCompleta(); else abreGuia(); });
     $('#completa-ok').addEventListener('click', () => cierraHoja('h-completa'));
+    // ---- Ajustes (dueño, 29 Oct 2026, 16:02) ----
+    for (const id of ['#ajustes-btn', '#cm-ajustes']) { const b = $(id); if (b) b.addEventListener('click', () => { cierraMenu(); abreAjustes(); }); }
+    { const b = $('#ajustes-ok'); if (b) b.addEventListener('click', () => cierraHoja('h-ajustes')); }
+    { const b = $('#aj-avisos'); if (b) b.addEventListener('click', async () => {
+      const puede = puedePush(), perm = permisoAvisos();
+      let quiere = true; try { quiere = localStorage.getItem('gcom-avisos') !== 'off'; } catch (_) {}
+      if (puede && perm === 'granted' && quiere) { try { localStorage.setItem('gcom-avisos', 'off'); } catch (_) {} await quitaAvisos(); pintaAjustes(); aviso(T('Avisos desactivados.')); return; }
+      try { localStorage.removeItem('gcom-avisos'); } catch (_) {}
+      if (perm === 'granted') { await suscribeAvisos(true); pintaAjustes(); aviso(T('Avisos activados.')); return; }
+      await activaAvisos(); pintaAjustes();
+    }); }
+    { const b = $('#aj-sonido'); if (b) b.addEventListener('click', () => { try { localStorage.setItem('gcom-sonido', pref('sonido') ? '0' : '1'); } catch (_) {} pintaAjustes(); if (pref('sonido')) avisaSonido(); }); }
+    { const b = $('#aj-anadir'); if (b) b.addEventListener('click', () => { cierraHoja('h-ajustes'); if (avisoInstalar) instala(); else abreGuia(); }); }
+    { const b = $('#aj-version'); if (b) b.addEventListener('click', async () => { const e = $('#aj-version-est'); if (e) e.textContent = T('Comprobando…'); const hay = await miraVersion(true); if (e) e.textContent = hay ? T('Hay una versión nueva: se instala ahora.') : T('Ya tienes la última versión.'); }); }
     // «Añadir a la pantalla de inicio»: en Android, la ventana del propio sistema; en el iPhone, los pasos (no deja hacerlo desde la web)
     let avisoInstalar = avisoInstalarTemprano;
     // La guía con los mismos botones que verá cada persona (dueño, 28 Oct 2026, 17:02): qué teléfono, qué navegador y qué
@@ -2547,7 +2635,9 @@
       try {
         const l = document.querySelector('link[rel="manifest"]');
         if (l && !l.dataset.original) l.dataset.original = l.getAttribute('href');
-        const man = { name: 'GUARDIANA', short_name: 'GUARDIANA', id: '/orbita/comunicaciones/', start_url: '/orbita/comunicaciones/?app=1#' + hash.replace(/^#/, ''), scope: '/orbita/comunicaciones/', display: 'fullscreen', display_override: ['fullscreen', 'standalone'], orientation: 'portrait', background_color: '#06080C', theme_color: '#06080C', lang: 'es', dir: 'ltr', icons: [{ src: '/icon-192.png?v=2', sizes: '192x192', type: 'image/png', purpose: 'any' }, { src: '/icon-512.png?v=2', sizes: '512x512', type: 'image/png', purpose: 'any' }, { src: '/icon-maskable-192.png?v=2', sizes: '192x192', type: 'image/png', purpose: 'maskable' }, { src: '/icon-maskable-512.png?v=2', sizes: '512x512', type: 'image/png', purpose: 'maskable' }] };
+        // la invitación va en la dirección de inicio de la app, en la consulta («?inv=i=…», que el arranque pasa al fragmento) y
+        // también en el fragmento: unos iPhone guardan una y otros el otro, y así la app nace con la conversación dentro
+        const man = { name: 'GUARDIANA', short_name: 'GUARDIANA', id: '/orbita/comunicaciones/', start_url: '/orbita/comunicaciones/?app=1&inv=' + hash.replace(/^#/, '') + '#' + hash.replace(/^#/, ''), scope: '/orbita/comunicaciones/', display: 'fullscreen', display_override: ['fullscreen', 'standalone'], orientation: 'portrait', background_color: '#06080C', theme_color: '#06080C', lang: 'es', dir: 'ltr', icons: [{ src: '/icon-192.png?v=2', sizes: '192x192', type: 'image/png', purpose: 'any' }, { src: '/icon-512.png?v=2', sizes: '512x512', type: 'image/png', purpose: 'any' }, { src: '/icon-maskable-192.png?v=2', sizes: '192x192', type: 'image/png', purpose: 'maskable' }, { src: '/icon-maskable-512.png?v=2', sizes: '512x512', type: 'image/png', purpose: 'maskable' }] };
         if (l) l.setAttribute('href', 'data:application/manifest+json,' + encodeURIComponent(JSON.stringify(man)));
       } catch (_) {}
       guiaSeguir = () => { guiaSeguir = null; const h = $('#h-completa'); cierraHoja('h-completa'); h.classList.remove('con-invitacion'); $('#completa-ok').hidden = false; seguir(); };
@@ -2562,6 +2652,27 @@
     addEventListener('appinstalled', () => { avisoInstalar = null; pintaAnadir(); if (guiaAbierta()) cierraHoja('h-completa'); cierraHoja('h-instalar'); });
     // en Android, un toque: la ventana del sistema; si todavía no la da (o en el iPhone), la guía
     $('#anadir-app').addEventListener('click', () => { if (avisoInstalar) instala(); else abreGuia(); });
+    // ---- iPhone: la invitación, dentro de la app (dueño, 29 Oct 2026, 16:05–16:11) ----
+    const trozoInv = (e) => { const m = String(e || '').match(/#[ib]=[A-Za-z0-9_-]{43}/); return m ? m[0] : ''; };
+    { const b = $('#ios-anadir'); if (b) b.addEventListener('click', () => { const h = trozoInv(invitacionIOS); if (!h || !window.gcomGuiaInvitacion) { aceptaEnlaceYa(invitacionIOS); muestraIOS(false); return; } window.gcomGuiaInvitacion(h, () => { muestraIOS(false); aceptaEnlaceYa(invitacionIOS); }); }); }
+    { const b = $('#ios-tengo'); if (b) b.addEventListener('click', async () => {
+      const u = invitacionIOS || '';
+      let ok = false;
+      try { await navigator.clipboard.writeText(u); ok = true; } catch (_) {}
+      if (!ok) { try { const i = document.createElement('input'); i.value = u; i.setAttribute('readonly', ''); i.style.cssText = 'position:fixed;opacity:0'; document.body.appendChild(i); i.select(); i.setSelectionRange(0, 99999); ok = document.execCommand('copy'); i.remove(); } catch (_) {} }
+      $('#ios-paso1').hidden = true; $('#ios-paso2').hidden = false;
+      if (!ok) aviso(T('No se pudo copiar: mantén pulsado el enlace del mensaje y elige «Copiar».'));
+    }); }
+    for (const id of ['#ios-safari', '#ios-safari-2']) { const b = $(id); if (b) b.addEventListener('click', () => { const u = invitacionIOS; muestraIOS(false); aceptaEnlaceYa(u); }); }
+    // la invitación copiada se pega aquí, dentro de la app (en el iPhone es la única forma de pasarla de Safari a la app)
+    { const b = $('#pegar-inv'); if (b) { b.hidden = !esIOS;
+      b.addEventListener('click', async () => {
+        let t = ''; try { t = await navigator.clipboard.readText(); } catch (_) { t = ''; }
+        if (!trozoInv(t)) { aviso(T('No hay ninguna invitación copiada. Copia el enlace que te han enviado y vuelve a tocar aquí.')); return; }
+        const ok = await aceptaInvitacion(t);
+        if (!ok) aviso(T('Ese enlace no es una invitación de GUARDIANA.'));
+      });
+    } }
     // en el ordenador, el botón del inicio dice lo que hace (29 Oct 2026, 07:44: «la versión de escritorio para el PC también»)
     if (!esIOS && !esAndroid) { const s = $('#anadir-app span'); if (s) s.textContent = T('Instalar en este ordenador'); }
     // Tras aceptar una invitación, una sola pregunta: «¿Añadir GUARDIANA a tu pantalla de inicio?» (29 Oct 2026, 07:44). En Android
@@ -3042,18 +3153,21 @@
   const firmaVersiones = (xs) => xs.map((u) => (String(u).match(/([\w.-]+\.(?:js|css))\?v=([\w-]+)/) || []).slice(1).join('=')).filter(Boolean).sort().join(',');
   const firmaCargada = () => firmaVersiones([...document.querySelectorAll('script[src*="?v="],link[href*="?v="]')].map((e) => e.getAttribute('src') || e.getAttribute('href')));
   let firmaInicial = null, versionNueva = false, versionT = null, versionMirada = 0;
-  async function miraVersion() {
-    if (versionNueva || !navigator.onLine) return;
+  // «aMano»: desde Ajustes › Buscar actualizaciones (devuelve si hay una nueva y, si la hay, recarga aunque haya una hoja abierta)
+  async function miraVersion(aMano) {
+    if (versionNueva) { if (aMano) actualizaYa(); return !!versionNueva; }
+    if (!navigator.onLine) return false;
     versionMirada = Date.now();
     try {
       const r = await fetch(location.pathname + '?version=' + Date.now(), { cache: 'no-store', credentials: 'same-origin' });
-      if (!r.ok) return;
+      if (!r.ok) return false;
       const f = firmaVersiones([...(await r.text()).matchAll(/(?:src|href)="([^"]*\?v=[^"]*)"/g)].map((m) => m[1]));
-      if (!f || !firmaInicial || f === firmaInicial) return;
+      if (!f || !firmaInicial || f === firmaInicial) return false;
       // nunca en bucle: si ya se recargó hace poco por esta misma versión y no llegó (una copia vieja por el camino), se espera
-      try { const x = JSON.parse(sessionStorage.getItem('gcom-act') || 'null'); if (x && x.f === f && Date.now() - x.t < 5 * 60 * 1000) return; } catch (_) {}
-      versionNueva = f; actualizaCuandoPueda();
-    } catch (_) {}
+      try { const x = JSON.parse(sessionStorage.getItem('gcom-act') || 'null'); if (x && x.f === f && Date.now() - x.t < 5 * 60 * 1000) return false; } catch (_) {}
+      versionNueva = f; if (aMano) actualizaYa(); else actualizaCuandoPueda();
+      return true;
+    } catch (_) { return false; }
   }
   const buenMomento = () => {
     if (document.visibilityState !== 'visible') return false;
@@ -3066,9 +3180,15 @@
   function actualizaCuandoPueda() {
     clearTimeout(versionT);
     if (!buenMomento()) { versionT = setTimeout(actualizaCuandoPueda, 20000); return; }
+    actualizaYa();
+  }
+  // pedida por la persona (Ajustes): sin esperar a que no haya ninguna hoja abierta, pero nunca en mitad de una llamada o un envío
+  function actualizaYa() {
+    clearTimeout(versionT);
+    if ((LL && LL.ocupado) || [...CONVS.values()].some((c) => c.archivos && c.archivos.size)) { versionT = setTimeout(actualizaCuandoPueda, 20000); return; }
     guardaPantalla();
     try { sessionStorage.setItem('gcom-act', JSON.stringify({ f: versionNueva, t: Date.now() })); } catch (_) {}
-    location.reload();
+    setTimeout(() => location.reload(), 600);
   }
   function vigilaVersion() {
     firmaInicial = firmaCargada();
@@ -3106,10 +3226,12 @@
     const iosSafari = /iPhone|iPad|iPod/.test(navigator.userAgent || '') || (/Macintosh/.test(navigator.userAgent || '') && navigator.maxTouchPoints > 1);
     // (dueño, 29 Oct 2026, 14:31: «¿Qué significa [Seguir en Safari]?… hazlo automático, que no pregunte a nadie»): la invitación se
     // abre directamente, sin la guía delante; la guía de la pantalla de inicio sigue en su botón de siempre
-    if (false && /#[ib]=/.test(location.hash) && iosSafari && !comoApp() && window.gcomGuiaInvitacion) {
-      const enlace = location.href, hash = location.hash;
+    // (29 Oct 2026, 16:05–16:11: «a mi mujer… en la aplicación no le aparecen y le aparece una página abierta en Safari… le
+    // aparece duplicado»): en el iPhone, Safari y la app guardan por separado y Safari no avisa con la app cerrada. Con una
+    // invitación en Safari no se acepta aquí: se elige añadir la app (la invitación entra dentro) o copiarla y pegarla en la app.
+    if (/#[ib]=/.test(location.hash) && iosSafari && !comoApp()) {
       revela();
-      window.gcomGuiaInvitacion(hash, async () => { const ok = await preguntaInvitacion(enlace); history.replaceState(null, '', location.pathname + location.search); if (!ok) aviso(T('Ese enlace no es una invitación de GUARDIANA.')); });
+      muestraIOS(true, location.href);
     }
     else if (/#[ib]=/.test(location.hash)) { const ok = await preguntaInvitacion(location.href); history.replaceState(null, '', location.pathname + location.search); if (!ok) aviso(T('Ese enlace no es una invitación de GUARDIANA.')); }
     else {

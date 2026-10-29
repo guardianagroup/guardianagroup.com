@@ -188,8 +188,8 @@ class Rele {
     const ahora = Date.now();
     if (c.despertoEn && ahora - c.despertoEn < 10 * 1000 && c.despertoTipo === tipo) return;
     c.despertoEn = ahora; c.despertoTipo = tipo;
-    const n = this.avisos.avisa(sala, c.avisoId || null, tipo);
-    c.ws.json({ t: 'despierta', sala, tipo, avisados: n });
+    const r = this.avisos.avisa(sala, c.avisoId || null, tipo);
+    c.ws.json({ t: 'despierta', sala, tipo, avisados: r.avisados, silenciados: r.silenciados });
   }
 
   otros(sala, yo) { const s = this.salas.get(sala); return s ? [...s.keys()].filter((k) => k !== yo) : []; }
@@ -222,8 +222,12 @@ class Rele {
     c.cupo -= n; return true;
   }
 
+  // 0x01: una trama cualquiera. 0x11: una trama que merece aviso en el teléfono (dueño, 29 Oct 2026, 16:07: «todo al momento, tiene
+  // que estar en orden»). Antes se avisaba por cualquier trama entregada, y el acuse, el «leído» o el «escribiendo…» de la otra
+  // persona llegaban como «Mensaje nuevo». La página marca solo los mensajes y los anuncios de archivo; el relé sigue sin ver nada.
   trama(c, b) {
-    if (!Buffer.isBuffer(b) || b.length < 41 || b[0] !== 0x01) return;
+    if (!Buffer.isBuffer(b) || b.length < 41 || (b[0] !== 0x01 && b[0] !== 0x11)) return;
+    const avisa = b[0] === 0x11;
     const sala = b.subarray(1, 33).toString('hex');
     if (!c.salas.has(sala)) return c.ws.json({ t: 'error', sala, por: 'no estás en la sala' });
     if (!this.cabe(c, b.length)) return c.ws.json({ t: 'lento', sala });
@@ -235,23 +239,24 @@ class Rele {
     salida[0] = 0x02; b.copy(salida, 1, 1, 33); Buffer.from(yo, 'hex').copy(salida, 33); b.copy(salida, 41, 41);
     c.bytes += b.length;
     if (todos) {
-      for (const [id, otro] of s) if (id !== yo) this.entrega(c, otro, sala, id, salida);
+      for (const [id, otro] of s) if (id !== yo) this.entrega(c, otro, sala, id, salida, avisa);
     } else {
       const id = para.toString('hex');
       const otro = s.get(id);
       if (!otro || id === yo) return c.ws.json({ t: 'ausente', sala, quien: id });
-      this.entrega(c, otro, sala, id, salida);
+      this.entrega(c, otro, sala, id, salida, avisa);
     }
   }
 
-  entrega(de, a, sala, id, salida) {
+  entrega(de, a, sala, id, salida, avisa) {
     if (!a.ws.abierto) return;
     if (a.ws.atraso > ATASCO) { try { de.ws.json({ t: 'atasco', sala, quien: id }); } catch (_) {} return; }
     try { a.ws.send(salida); } catch (_) {}
     // Con la app en segundo plano (presencia «fuera») o dormida (el teléfono congela la página y deja de hacer ping: más de 25 s sin
-    // señal), además, el aviso al teléfono (el relé no sabe qué es: «mensaje nuevo»; las llamadas las avisa quien llama). Va a todas las
-    // suscripciones de la sala menos la de quien manda: así no depende de que esta conexión haya vuelto a presentar la suya.
-    if (this.avisos && (a.fuera || Date.now() - a.vivo > 25 * 1000)) { try { this.avisos.avisa(sala, de.avisoId || null, 'mensaje'); } catch (_) {} }
+    // señal), además, el aviso al teléfono, y solo si la trama lo merece (0x11: un mensaje o un archivo; el relé no sabe cuál de los
+    // dos: «mensaje nuevo»). Va a todas las suscripciones de la sala menos la de quien manda: así no depende de que esta conexión
+    // haya vuelto a presentar la suya.
+    if (avisa && this.avisos && (a.fuera || Date.now() - a.vivo > 25 * 1000)) { try { this.avisos.avisa(sala, de.avisoId || null, 'mensaje'); } catch (_) {} }
   }
   presencia(c, m) {
     const fuera = m.fuera === 1;

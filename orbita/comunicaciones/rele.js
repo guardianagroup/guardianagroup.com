@@ -19,7 +19,10 @@
     const salas = new Map(); // sala → { yo, b } (b: sala de una sesión blindada)
     let ice = [], caduca = 0, region = '', llamadas = false, ultimoPong = 0, pingEn = 0, latencia = null, avisos = ''; const hist = [];
     const esperas = {}; // respuestas pendientes (invita, busca)
-    let fueraAhora = false; // la app en segundo plano (presencia)
+    // la app en segundo plano (presencia): si la página nace oculta (el teléfono la abre en segundo plano), ya cuenta como fuera
+    let fueraAhora = typeof document !== 'undefined' && document.visibilityState !== 'visible';
+    let subUlt = null, salasUlt = []; // la última suscripción de avisos, para reenviarla nada más abrir (si no, el relé no sabe
+    // todavía que esta conexión es la de este teléfono y un aviso suyo podría volver a él mismo)
 
     // 27 Oct 2026, 21:25: las dos personas de una conversación tienen que estar en el mismo relé (los relés no se enlazan
     // entre sí: la sala y el código de invitación viven en uno solo). Con el relé de Miami ya en marcha, elegir «el más
@@ -41,6 +44,7 @@
         abierto = true; intentos = 0;
         ws.send(JSON.stringify({ t: 'hola' }));
         for (const [sala, x] of salas) ws.send(JSON.stringify({ t: 'entra', sala, yo: x.yo, b: x.b || undefined }));
+        if (subUlt) { try { ws.send(JSON.stringify({ t: 'avisos', sub: subUlt, salas: salasUlt })); } catch (_) {} }
         if (fueraAhora) { try { ws.send(JSON.stringify({ t: 'presencia', fuera: 1 })); } catch (_) {} }
         clearInterval(ping); pingEn = 0; ping = setInterval(mide, 10000); setTimeout(mide, 300);
         emite('abierto', { url });
@@ -107,11 +111,13 @@
     }
     function entra(sala, yo, opc) { const b = opc && opc.b ? 1 : 0; salas.set(sala, { yo, b }); if (abierto) ws.send(JSON.stringify({ t: 'entra', sala, yo, b: b || undefined })); }
     function sale(sala) { salas.delete(sala); if (abierto) ws.send(JSON.stringify({ t: 'sale', sala })); }
-    function manda(sala, para, carga) {
+    // avisa: esta trama es un mensaje o un archivo y merece aviso en el teléfono de la otra persona si la tiene cerrada (0x11).
+    // Las demás (acuses, «leído», «escribiendo…», presentaciones, señalización de llamada) van como siempre (0x01) y no avisan.
+    function manda(sala, para, carga, avisa) {
       if (!abierto) return false;
       const c = carga instanceof Uint8Array ? carga : new Uint8Array(carga);
       const b = new Uint8Array(41 + c.length);
-      b[0] = 1; b.set(deHex(sala), 1); if (para) b.set(deHex(para), 33); b.set(c, 41);
+      b[0] = avisa ? 0x11 : 1; b.set(deHex(sala), 1); if (para) b.set(deHex(para), 33); b.set(c, 41);
       try { ws.send(b); return true; } catch (_) { return false; }
     }
     function pideIce() { if (abierto) ws.send(JSON.stringify({ t: 'ice' })); }
@@ -120,7 +126,13 @@
     const busca = (codigo) => pregunta('busca', { codigo });
     const retira = (codigo) => { if (abierto) ws.send(JSON.stringify({ t: 'retira', codigo })); };
     // la suscripción del navegador (endpoint y claves públicas) con las salas en las que avisar; quitar=1 la borra del relé
-    const suscribe = (sub, salas, quitar) => { if (!abierto || !sub) return false; try { ws.send(JSON.stringify({ t: 'avisos', sub: { endpoint: sub.endpoint, keys: sub.keys }, salas: salas || [], quitar: quitar ? 1 : undefined })); return true; } catch (_) { return false; } };
+    const suscribe = (sub, salas, quitar) => {
+      if (!sub) return false;
+      const s = { endpoint: sub.endpoint, keys: sub.keys };
+      if (quitar) { subUlt = null; salasUlt = []; } else { subUlt = s; salasUlt = salas || []; }
+      if (!abierto) return false;
+      try { ws.send(JSON.stringify({ t: 'avisos', sub: s, salas: salas || [], quitar: quitar ? 1 : undefined })); return true; } catch (_) { return false; }
+    };
     // «despierta» a quien no está en la sala: un aviso en su teléfono de mensaje o de llamada
     const despiertaA = (sala, tipo) => { if (!abierto) return false; try { ws.send(JSON.stringify({ t: 'despierta', sala, tipo })); return true; } catch (_) { return false; } };
     // la app en segundo plano o de vuelta (29 Oct 2026, 14:38): lo que llegue mientras está fuera se avisa también en el teléfono

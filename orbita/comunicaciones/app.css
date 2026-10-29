@@ -639,7 +639,11 @@ svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-l
 .fila-av{position:relative;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:#142231;color:var(--accent);font:600 16px/1 var(--texto)}
 .fila-conv.blindada .fila-av{background:rgba(156,195,228,.16)}
 .fila-av svg{width:18px;height:18px}
-.fila-av.en-linea::after{content:'';position:absolute;right:0;bottom:1px;width:10px;height:10px;border-radius:50%;background:#5CC98A;box-shadow:0 0 0 2px #080B10}
+/* dueño, 29 Oct 2026, 16:01: verde conectada, rojo no conectada, sin palabras */
+.fila-av.en-linea::after,.fila-av.no-linea::after{content:'';position:absolute;right:0;bottom:1px;width:10px;height:10px;border-radius:50%;background:#5CC98A;box-shadow:0 0 0 2px #080B10}
+.fila-av.no-linea::after{background:#E0705F}
+.gc-punto{display:inline-block;width:9px;height:9px;border-radius:50%;background:#E0705F;margin-left:8px;vertical-align:middle;flex:none}
+.gc-punto.en{background:#5CC98A}
 .fila-txt{display:grid;gap:3px;min-width:0}
 .fila-txt b{font:600 14.5px/1.25 var(--texto);color:var(--fg);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .fila-txt small{font:400 12.5px/1.3 var(--texto);color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -971,7 +975,8 @@ html.aparece .barra,html.aparece #app{animation:gcom-aparece .16s ease-out both}
 .contacto-abre:active{background:rgba(156,195,228,.08)}
 .contacto-abre:focus-visible{outline:2px solid #F4F6F8;outline-offset:2px}
 .contacto-av{position:relative;width:46px;height:46px;flex:none;border-radius:50%;display:grid;place-items:center;background:#142231;color:#9CC3E4;font:600 18px/1 var(--texto)}
-.contacto-av.en-linea::after{content:'';position:absolute;right:0;bottom:1px;width:11px;height:11px;border-radius:50%;background:#6CCBA5;box-shadow:0 0 0 2.5px #0C1118}
+.contacto-av.en-linea::after,.contacto-av.no-linea::after{content:'';position:absolute;right:0;bottom:1px;width:11px;height:11px;border-radius:50%;background:#6CCBA5;box-shadow:0 0 0 2.5px #0C1118}
+.contacto-av.no-linea::after{background:#E0705F}
 .contacto-txt{display:grid;gap:2px;min-width:0}
 .contacto-txt b{font:600 16.5px/1.25 var(--texto);color:#F4F6F8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .contacto-txt small{font:400 13px/1.3 var(--texto);color:var(--muted)}
@@ -1107,7 +1112,7 @@ html.aparece .barra,html.aparece #app{animation:gcom-aparece .16s ease-out both}
   .contacto+.contacto{border-top:1px solid rgba(156,195,228,.09)}
   .contacto-abre{gap:14px;padding:10px 6px 10px 4px}
   .contacto-av{width:52px;height:52px;font-size:20px}
-  .contacto-av.en-linea::after{width:13px;height:13px;right:1px;bottom:1px;box-shadow:0 0 0 3px #0C1118}
+  .contacto-av.en-linea::after,.contacto-av.no-linea::after{width:13px;height:13px;right:1px;bottom:1px;box-shadow:0 0 0 3px #0C1118}
   .contacto-txt b{font-size:18px}
   .contacto-txt small{font-size:15px}
   .contacto-b{width:46px;height:46px}
@@ -1122,6 +1127,8 @@ html.aparece .barra,html.aparece #app{animation:gcom-aparece .16s ease-out both}
   .conv .gc-cabecera .gc-avatar{width:40px;height:40px}
   .conv .gc-nombre{font:600 17px/1.25 var(--texto)}
   .conv .gc-confianza{font:400 13.5px/1.3 var(--texto);color:#AEB9C5;-webkit-line-clamp:1;min-height:1.3em} /* vacía, guarda su sitio: el nombre no se mueve */
+  /* con el chat ya establecido no hay palabra (solo el puntito): la línea se recoge y el nombre queda centrado (dueño, 16:01) */
+  .conv .gc-confianza:empty{display:none}
   .conv .gc-confianza.en-linea{color:#6CCBA5}
   .conv .gc-cabecera .gc-llamar-boton,.conv .gc-cabecera .gc-mas-boton{width:44px;height:44px}
   body:not(.modo-invitado) .conv .gc-cabecera #cvolver{width:44px;margin-left:-8px}
@@ -1284,6 +1291,29 @@ html.aparece .barra,html.aparece #app{animation:gcom-aparece .16s ease-out both}
 .porque-b:focus-visible{outline:2px solid rgba(156,195,228,.55);outline-offset:2px}
 .porque-b:active{transform:scale(.97)}
 body.en-conv .barra .porque-b{display:none}
+/* Ajustes (dueño, 29 Oct 2026, 16:02): el engranaje de la barra y la lista de la hoja */
+.ajustes-b{all:unset;box-sizing:border-box;cursor:pointer;flex:none;display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:999px;border:1px solid rgba(156,195,228,.34);color:#DCEAF5;transition:background .15s}
+.ajustes-b svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round}
+.ajustes-b:hover{background:rgba(156,195,228,.12)}
+body.en-conv .barra .ajustes-b{display:none}
+.ajustes{display:grid;gap:8px;margin:4px 0 14px}
+.ajuste{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;gap:12px;min-height:60px;padding:10px 14px;border-radius:14px;border:1px solid var(--line);background:rgba(156,195,228,.05);transition:background .15s}
+.ajuste:hover{background:rgba(156,195,228,.1)}
+.ajuste:focus-visible{outline:2px solid #F4F6F8;outline-offset:2px}
+.ajuste-ic{flex:none;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:rgba(156,195,228,.12);color:var(--accent)}
+.ajuste-ic svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.ajuste-txt{display:grid;gap:2px;min-width:0;text-align:left}
+.ajuste-txt b{font:600 15.5px/1.25 var(--texto);color:var(--fg)}
+.ajuste-txt small{font:400 13px/1.35 var(--texto);color:var(--muted)}
+.ajuste .interruptor-mini{margin-left:auto;width:42px;height:24px;border-radius:999px;background:var(--line);position:relative;flex:none;transition:background .2s}
+.ajuste .interruptor-mini::after{content:'';position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:var(--muted);transition:transform .2s,background .2s}
+.ajuste[aria-checked="true"] .interruptor-mini{background:var(--accent)}
+.ajuste[aria-checked="true"] .interruptor-mini::after{transform:translateX(18px);background:#06080C}
+.ajuste.mal .ajuste-txt small{color:#F09A8E}
+/* iPhone: la invitación va dentro de la app (dueño, 16:05–16:11) */
+#paso-ios .ios-op{margin:14px 0 6px;width:100%;max-width:420px}
+#paso-ios .ios-pasos{margin:14px auto 6px;max-width:400px;text-align:left}
+#paso-ios h2{text-wrap:balance}
 @media (max-width:420px){.porque-b{padding:0 13px;font-size:13px}}
 .porque{position:fixed;inset:0;z-index:9000;background:#06080C;color:#F4F6F8;overflow:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;padding:calc(10px + env(safe-area-inset-top)) 0 calc(24px + env(safe-area-inset-bottom))}
 .porque[hidden]{display:none}
@@ -1352,7 +1382,7 @@ img,video,canvas,svg{-webkit-touch-callout:none;-webkit-user-drag:none}
   html.con-teclado .gc-cabecera .gc-quien{display:flex;flex-wrap:wrap;align-items:baseline;column-gap:8px;row-gap:0}
   html.con-teclado .gc-cabecera .gc-confianza{display:block;min-height:0;font-size:12.5px}
   html.con-teclado .gc-cabecera .gc-nombre{font-size:15px}
-  html.con-teclado .gc-compositor{padding-top:6px;padding-bottom:6px}
+  html.con-teclado .gc-compositor{padding-top:6px;padding-bottom:10px} /* el botón, despegado del teclado */
   html.con-teclado .gira{display:none}
 }
 

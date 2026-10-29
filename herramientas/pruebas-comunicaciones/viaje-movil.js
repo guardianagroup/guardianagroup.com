@@ -24,13 +24,17 @@ const viajeAbierto = (p) => p.evaluate(() => !!(window.GuardianaViaje && Guardia
   const browser = await chromium.launch();
   const A = await telefono(browser), B = await telefono(browser);
   await A.goto(URL0); await B.goto(URL0); await espera(1800);
+  // 29 Oct 2026, 15:29 (dueño): el chat fuerte es mínimo y «Ver el viaje» es cosa de Ultra; esta prueba vuelve con Ultra
+  if (await A.evaluate(() => { const b = document.querySelector('#tipo-blindado'); return !!b && b.getAttribute('aria-disabled') === 'true'; })) { console.log('El viaje del archivo es de Ultra, hoy apagado: prueba omitida (se retoma con Ultra).'); await browser.close(); process.exit(0); }
   await A.click('#nueva-blindada'); if (await A.$('#h-invitar.gc-abierta')) await A.click('#invitar-otra'); await espera(900);
   const url = String((await A.evaluate(() => window.__compartidos[0])).url).replace('https://guardianagroup.com', 'http://127.0.0.1:8080');
-  await B.goto(url); await espera(1500); await B.click('#aceptar-si'); await espera(5000);
+  await B.goto(url); await espera(1500); if (await B.$('#paso-ios:not([hidden]) #ios-safari')) { await B.click('#ios-safari'); await espera(900); } await B.click('#aceptar-si'); await espera(5000);
   comprueba(await A.evaluate(() => !document.querySelector('#conv').hidden), 'los dos en el chat');
   // enviar un archivo de 2 MB (el viaje antes se abría solo a partir de 1 MB)
   await A.setInputFiles('#archivo', archivo); await espera(600);
-  await A.click('#envio-si'); await espera(700);
+  // (29 Oct 2026, 15:29, dueño: «cuando se envía una foto, se envía directa»: ya no hay hoja de «¿Enviar archivo?» en el chat fuerte)
+  if (await A.$('#envio-si:visible')) { await A.click('#envio-si'); }
+  await espera(700);
   comprueba(!(await viajeAbierto(A)), 'al enviar, el viaje no se abre solo (quien envía)');
   let nada = true; for (let i = 0; i < 20; i++) { if (await viajeAbierto(B)) { nada = false; break; } await espera(250); }
   comprueba(nada, 'al recibir, el viaje no se abre solo (quien recibe)');

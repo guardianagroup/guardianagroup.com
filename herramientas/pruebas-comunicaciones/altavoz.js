@@ -54,7 +54,7 @@ const estadoSalida = (P) => P.evaluate(() => {
   await A.goto(URL0); await B.goto(URL0); await espera(1800);
   await A.click('#nueva-blindada'); if (await A.$('#h-invitar.gc-abierta')) await A.click('#invitar-otra'); await espera(900);
   const url = String((await A.evaluate(() => window.__compartidos[0])).url).replace('https://guardianagroup.com', 'http://127.0.0.1:8080');
-  await B.goto(url); await espera(1500); await B.click('#aceptar-si'); await espera(5000);
+  await B.goto(url); await espera(1500); if (await B.$('#paso-ios:not([hidden]) #ios-safari')) { await B.click('#ios-safari'); await espera(900); } await B.click('#aceptar-si'); await espera(5000);
   await A.click('#ccontacto-si'); await A.fill('#nombre-conv', 'Nathalie'); await A.click('#nombre-guardar'); await espera(500);
 
   // 1. llamada de voz, con el toque de «Llamar»: auricular desde el principio, las dos por la misma salida
@@ -115,7 +115,7 @@ const estadoSalida = (P) => P.evaluate(() => {
   await C.click('#nueva-blindada'); if (await C.$('#h-invitar.gc-abierta')) await C.click('#invitar-otra'); await espera(900);
   const url2 = String((await C.evaluate(() => window.__compartidos[0])).url).replace('https://guardianagroup.com', 'http://127.0.0.1:8080');
   const D = await telefono(browser);
-  await D.goto(url2); await espera(1500); await D.click('#aceptar-si'); await espera(5000);
+  await D.goto(url2); await espera(1500); if (await D.$('#paso-ios:not([hidden]) #ios-safari')) { await D.click('#ios-safari'); await espera(900); } await D.click('#aceptar-si'); await espera(5000);
   await C.click('#ccontacto-si'); await C.fill('#nombre-conv', 'D'); await C.click('#nombre-guardar'); await espera(500);
   await C.evaluate(() => { window.__sink.sinGesto = true; });
   await C.click('#llamar'); await espera(1500);

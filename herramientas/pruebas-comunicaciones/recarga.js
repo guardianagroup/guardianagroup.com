@@ -39,6 +39,8 @@ function grabadora() {
         nombre: !tapado && ve(q('#cnombre')) ? q('#cnombre').textContent : null,
         nombreCaja: !tapado ? caja(q('#cnombre')) : null,
         linea: !tapado && ve(q('#cconfianza')) ? q('#cconfianza').textContent : null,
+        // el estado de la otra persona ya no es una palabra, es un puntito (dueño, 29 Oct 2026, 16:01)
+        punto: !tapado && q('#cpunto') && !q('#cpunto').hidden ? (q('#cpunto').classList.contains('en') ? 'verde' : 'rojo') : null,
         lineaCaja: !tapado ? caja(q('#cconfianza')) : null,
         mensajesCaja: !tapado ? caja(q('#mensajes')) : null,
         check: !!(q('.tirar') && q('.tirar').classList.contains('ver')),
@@ -72,12 +74,13 @@ function analiza(marcos, nombre) {
   const vistos = marcos.filter((m) => !m.error && !m.tapado);
   const releTextos = [...new Set(vistos.map((m) => m.rele).filter(Boolean))];
   const lineas = [...new Set(vistos.map((m) => m.linea).filter((x) => x !== null))];
+  const puntos = [...new Set(vistos.map((m) => m.punto).filter((x) => x !== null))];
   const titulos = [...new Set(vistos.map((m) => m.titulo).filter(Boolean))];
   const pantallas = []; for (const m of vistos) { const p = m.conv ? 'chat' : m.contactos ? 'contactos' : m.inicio ? 'inicio' : 'nada'; if (pantallas[pantallas.length - 1] !== p) pantallas.push(p); }
   const barras = []; for (const m of vistos) { const b = m.barra ? 'barra' : 'sin barra'; if (barras[barras.length - 1] !== b) barras.push(b); }
   const nombreTops = [...new Set(vistos.map((m) => m.nombreCaja && m.nombreCaja[1]).filter((x) => x !== null && x !== undefined))];
   const mensajesTops = [...new Set(vistos.map((m) => m.mensajesCaja && m.mensajesCaja[1]).filter((x) => x !== null && x !== undefined))];
-  const r = { marcos: marcos.length, tapados: marcos.filter((m) => m.tapado).length, releTextos, lineas, titulos, pantallas, barras, nombreTops, mensajesTops, volver: vistos.some((m) => m.volver), check: vistos.some((m) => m.check) };
+  const r = { marcos: marcos.length, tapados: marcos.filter((m) => m.tapado).length, releTextos, lineas, puntos, titulos, pantallas, barras, nombreTops, mensajesTops, volver: vistos.some((m) => m.volver), check: vistos.some((m) => m.check) };
   fs.writeFileSync(path.join(OUT, nombre + '.json'), JSON.stringify(marcos, null, 1));
   return r;
 }
@@ -93,7 +96,7 @@ function analiza(marcos, nombre) {
   await B.goto(url); await espera(1500); await B.click('#aceptar-si'); await espera(5000);
   await A.tap('#texto'); await A.fill('#texto', 'Hola'); await A.click('#enviar'); await espera(800);
   await A.evaluate(() => document.activeElement && document.activeElement.blur()); await espera(600);
-  comprueba(await A.evaluate(() => document.querySelector('#cconfianza').textContent) === 'En línea', 'antes: los dos en el chat, «En línea»');
+  comprueba(await A.evaluate(() => { const p = document.querySelector('#cpunto'); return !!p && !p.hidden && p.classList.contains('en'); }), 'antes: los dos en el chat, puntito verde');
 
   // 1. tirar para actualizar dentro del chat
   await conRetraso(A);
@@ -105,7 +108,7 @@ function analiza(marcos, nombre) {
   comprueba(!r1.releTextos.length, 'arriba nunca sale «Desconectado» (ni «Conectado»)', r1.releTextos);
   comprueba(r1.pantallas.join() === 'chat', 'vuelve al chat sin pasar por el inicio', r1.pantallas);
   comprueba(r1.barras.join() === 'sin barra', 'en el chat, la barra de arriba no aparece y desaparece', r1.barras);
-  comprueba(r1.lineas.join() === 'En línea', 'la línea de debajo del nombre no pasa por «Sin conexión», «No conectado» ni «Conectando…»', r1.lineas);
+  comprueba(r1.puntos.join() === 'verde' && !r1.lineas.length, 'el puntito no parpadea a rojo al recargar, y sin palabras debajo del nombre', [r1.puntos, r1.lineas]);
   comprueba(r1.nombreTops.length <= 1 && r1.mensajesTops.length <= 1, 'el nombre y los mensajes no se mueven', [r1.nombreTops, r1.mensajesTops]);
   await A.screenshot({ path: path.join(OUT, '1-chat.png') });
 
@@ -126,7 +129,7 @@ function analiza(marcos, nombre) {
   console.log(JSON.stringify(r2));
   comprueba(!r2.releTextos.length, 'con contacto: arriba nunca sale «Desconectado»', r2.releTextos);
   comprueba(r2.pantallas.join() === 'chat', 'con contacto: vuelve al chat sin pasar por el inicio', r2.pantallas);
-  comprueba(r2.lineas.join() === 'En línea', 'con contacto: la línea no pasa por estados intermedios', r2.lineas);
+  comprueba(r2.puntos.join() === 'verde' && !r2.lineas.length, 'con contacto: el puntito sigue verde todo el rato', [r2.puntos, r2.lineas]);
   comprueba(r2.nombreTops.length <= 1, 'con contacto: el nombre no se mueve', r2.nombreTops);
 
   // 3. en el inicio: tirar para actualizar no enseña «Desconectado» ni cambia el título de arriba
