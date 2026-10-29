@@ -22,9 +22,23 @@
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=2">
 <meta name="description" content="GUARDIANA Comunicaciones, para particulares y profesionales con clientes: chat, llamadas y envío de datos y documentación sensible, encriptados de extremo a extremo entre dos navegadores, con un código de 9 cifras o, en la sesión blindada, con un enlace. Los servidores no guardan mensajes ni archivos.">
 <title>GUARDIANA</title>
+<!-- la tarjeta que ven WhatsApp, iMessage y los demás al compartir el enlace o el marcador de la app (dueño, 29 Oct 2026, 10:00) -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="GUARDIANA">
+<meta property="og:title" content="GUARDIANA · Comunicaciones">
+<meta property="og:description" content="Encriptación de categoría gubernamental para mensajes, llamadas y archivos. Criptografía postcuántica. Sin cuentas, sin instalar nada.">
+<meta property="og:url" content="https://guardianagroup.com/orbita/comunicaciones/">
+<meta property="og:image" content="https://guardianagroup.com/orbita/comunicaciones/og-comunicaciones.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="GUARDIANA · Comunicaciones: encriptación de categoría gubernamental para mensajes, llamadas y archivos">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="GUARDIANA · Comunicaciones">
+<meta name="twitter:image" content="https://guardianagroup.com/orbita/comunicaciones/og-comunicaciones.jpg">
+<link rel="canonical" href="https://guardianagroup.com/orbita/comunicaciones/">
 <link rel="icon" href="/favicon.ico">
 <link rel="stylesheet" href="componentes.css?v=20261028m">
-<link rel="stylesheet" href="app.css?v=20261030l">
+<link rel="stylesheet" href="app.css?v=20261030m">
 <link rel="stylesheet" href="viaje.css?v=20261029a">
 <!-- antes de pintar: como app desde el primer fotograma y, al volver a un chat tras recargar, sin enseñar el inicio entretanto -->
 <script src="arranque.js?v=20261030j"></script>
@@ -41,19 +55,20 @@
   <a class="marca" href="/orbita/" id="volver" aria-label="Volver al inicio"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg><span>Inicio</span></a>
   <!-- en la web, «Comunicaciones»; instalada, el candado y «GUARDIANA» desde el primer fotograma (antes se cambiaba con JavaScript y
        arriba se veía un salto; dueño, 29 Oct 2026, 08:38) -->
-  <b class="barra-t"><span class="barra-web">Comunicaciones</span><span class="barra-app" translate="no"><svg class="barra-logo" viewBox="0 0 100 100" aria-hidden="true"><defs><mask id="barra-logo-g"><rect width="100" height="100" fill="#fff"/><path d="M63 58.29 V55.07 Q63 54 58.71 54 H44.15 Q37 54 37 61.15 V72.85 Q37 80 44.15 80 H58.71 Q63 80 63 75.71 V67 H51" fill="none" stroke="#000" stroke-width="7.5"/></mask></defs><path d="M31 44 V31 A19 19 0 0 1 69 31 V44" fill="none" stroke="#E8ECF1" stroke-width="9"/><rect x="17" y="42" width="66" height="50" rx="13" fill="#9CC3E4" mask="url(#barra-logo-g)"/></svg><span class="barra-nombre"><span>GUARDIANA</span><small>Tus datos, bajo tu control</small></span></span></b>
+  <b class="barra-t"><span class="barra-web">Comunicaciones</span><span class="barra-app"><svg class="barra-logo" viewBox="0 0 100 100" aria-hidden="true"><defs><mask id="barra-logo-g"><rect width="100" height="100" fill="#fff"/><path d="M63 58.29 V55.07 Q63 54 58.71 54 H44.15 Q37 54 37 61.15 V72.85 Q37 80 44.15 80 H58.71 Q63 80 63 75.71 V67 H51" fill="none" stroke="#000" stroke-width="7.5"/></mask></defs><path d="M31 44 V31 A19 19 0 0 1 69 31 V44" fill="none" stroke="#E8ECF1" stroke-width="9"/><rect x="17" y="42" width="66" height="50" rx="13" fill="#9CC3E4" mask="url(#barra-logo-g)"/></svg><span class="barra-nombre"><span translate="no">GUARDIANA</span><small>Tus datos, bajo tu control</small></span></span></b>
   <!-- oculto hasta que hay una conversación que vigilar: en la página recién cargada salía «Desconectado» un momento -->
   <span class="rele" id="rele" hidden><i></i><span id="reletxt"></span></span>
   <a class="multas-b" href="/orbita/multas/?desde=comunicaciones">Multas</a><!-- dueño, 14:02: arriba a la derecha, su propia página -->
   <!-- «Por qué» (dueño, 29 Oct 2026, 09:25): a la izquierda del idioma, la explicación de por qué GUARDIANA es así, con los datos -->
-  <button type="button" class="porque-b" id="porque-btn" aria-haspopup="dialog" aria-controls="porque"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.6 9.3a2.5 2.5 0 1 1 3.6 2.3c-.8.4-1.2 1-1.2 1.9M12 17h.01"/></svg><span>¿Por qué?</span></button>
+  <!-- dueño, 10:04: en el teléfono se quedaba en un «?» que se leía como «ayuda»; ahora la palabra, siempre visible -->
+  <button type="button" class="porque-b" id="porque-btn" aria-haspopup="dialog" aria-controls="porque"><span>¿Por qué?</span></button>
   <div class="idiomas" role="group" aria-label="Idioma" translate="no"></div>
 </header>
 
 <!-- «Por qué GUARDIANA es así» (dueño, 29 Oct 2026, 09:25–09:26): cada decisión, con el dato real que la explica, en «¿Sabías que…?».
      Los datos son los de la ronda 57 de la agencia (orbita/datos/sabias-comunicaciones.json): cada uno confirmado por dos voces y dos
      fuentes públicas; las fuentes, en terminos.html §6. Sin cifras inventadas y sin prometer protección absoluta. -->
-<section class="porque" id="porque" role="dialog" aria-modal="true" aria-labelledby="porque-t" hidden>
+<section class="porque" id="porque" role="dialog" aria-modal="true" aria-labelledby="porque-t" tabindex="-1" hidden>
   <div class="porque-cab"><button type="button" class="contactos-atras" id="porque-atras" aria-label="Cerrar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button><h2 class="contactos-t" id="porque-t">Por qué GUARDIANA es así</h2></div>
   <div class="porque-cuerpo">
     <p class="porque-entrada">Cada decisión de esta aplicación responde a algo que ocurre todos los días. Estos son los datos, y lo que hacemos por cada uno de ellos.</p>
@@ -128,7 +143,8 @@
     <p class="pq-k">Encriptación postcuántica híbrida</p><!-- ronda 55 -->
     <!-- dueño, 29 Oct 2026, 09:50: la opción 3 unida a la criptografía postcuántica y algo de la 4. «Categoría gubernamental»: los
          algoritmos son los de la suite CNSA 2.0 (ML-KEM, ML-DSA, AES-256, P-384); nunca «conforme» ni «certificada» -->
-    <h1>Encriptación de categoría gubernamental, en tu navegador</h1>
+    <!-- dueño, 29 Oct 2026, 10:09–10:12: sin «en tu navegador» (confunde con ZERO); «mensajes, llamadas y archivos» -->
+    <h1>Encriptación de categoría gubernamental para mensajes, llamadas y archivos</h1>
     <p class="lema">Criptografía postcuántica. Sin cuentas, sin instalar nada. Lo que digas aquí no lo puede leer nadie más: ni nosotros.</p>
     <p class="t">Para particulares y profesionales: chatea y envía datos y documentación sensible, encriptados de PC a PC. Al terminar, la conversación se borra en los dos equipos.</p>
     <!-- dueño, 27 Oct 2026, 21:01: dejar claro, a la vista, para quién es: particulares, profesionales con clientes y documentación sensible -->
@@ -704,17 +720,17 @@
 
 <!-- En el ordenador, en el chat blindado: la pantalla se tapa con la tecla de captura o si la ventana pierde el foco (29 Oct 2026, 08:02) -->
 <div class="captura-velo" id="captura-velo" role="alert" hidden><div><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><b>Modo blindado</b><span>No se puede capturar</span></div></div>
-<script src="/orbita/static/idioma.js?v=20261029p71"></script>
+<script src="/orbita/static/idioma.js?v=20261029p72"></script>
 <script src="pq-mlkem.js?v=20261027a"></script>
 <script src="pq-cnsa.js?v=20261027a"></script>
 <script src="qrhaz.js?v=20261027a"></script>
 <script src="cripto.js?v=20261027b"></script>
 <script src="/orbita/static/red-nucleo.js?v=20261027b"></script>
-<script src="rele.js?v=20261028o"></script>
+<script src="rele.js?v=20261030m"></script>
 <script src="sha256.js?v=20261027a"></script>
 <script src="viaje-datos.js?v=20261027a"></script>
 <script src="viaje.js?v=20261029a"></script>
 <script src="llamada.js?v=20261030l"></script>
-<script src="app.js?v=20261030l"></script>
+<script src="app.js?v=20261030m"></script>
 </body>
 </html>

@@ -14,6 +14,7 @@
 //   sala: 64 hexadecimales (la página la deriva de la invitación; la clave no viaja); yo: 16 hexadecimales.
 'use strict';
 const crypto = require('crypto');
+const { Avisos } = require('./avisos');
 
 const MAX_MIEMBROS = 8;          // personas por sala (conversaciones pequeñas; nada de canales)
 const MAX_SALAS_CONEXION = 64;   // salas abiertas por una misma conexión
@@ -49,6 +50,8 @@ class Rele {
     this.conexiones = new Set();
     this.coturn = { activo: false, escucha: false, visto: null };
     this.codigos = new Map();     // código → { sobre, sal, de (conexión), creado }
+    // avisos fuera de la app (29 Oct 2026): Web Push, sin contenido; ver avisos.js
+    this.avisos = o.avisos === null ? null : (o.avisos || new Avisos({ dir: o.avisosDir, remitente: o.remitente }));
     if (this.turnHost && this.turnSecreto) { this.compruebaCoturn(); const t = setInterval(() => this.compruebaCoturn(), 60 * 1000); if (t.unref) t.unref(); }
     this.vigila = setInterval(() => this.barre(), 30 * 1000);
     if (this.vigila.unref) this.vigila.unref();
@@ -57,7 +60,7 @@ class Rele {
   // Hay llamadas solo si hay secreto y coturn está de verdad activo en este servidor (se comprueba cada minuto)
   get llamadas() { return !!(this.turnHost && this.turnSecreto && this.coturn.activo); }
 
-  estado() { let b = 0; for (const x of this.conexiones) if (x.blindada) b++; return { salas: this.salas.size, conexiones: this.conexiones.size, blindadas: b, codigos: this.codigos.size, llamadas: this.llamadas, coturn: this.coturn }; }
+  estado() { let b = 0; for (const x of this.conexiones) if (x.blindada) b++; return { salas: this.salas.size, conexiones: this.conexiones.size, blindadas: b, codigos: this.codigos.size, llamadas: this.llamadas, coturn: this.coturn, avisos: this.avisos ? this.avisos.estado() : null }; }
 
   compruebaCoturn() {
     const { execFile } = require('child_process');
@@ -98,7 +101,7 @@ class Rele {
     switch (m.t) {
       case 'hola': {
         const t = this.ice();
-        c.ws.json({ t: 'hola', v: 1, region: this.region, llamadas: this.llamadas, ice: t.ice, caduca: t.caduca });
+        c.ws.json({ t: 'hola', v: 1, region: this.region, llamadas: this.llamadas, ice: t.ice, caduca: t.caduca, avisos: this.avisos ? this.avisos.clavePublica : '' });
         return;
       }
       case 'ice': { const t = this.ice(); c.ws.json({ t: 'ice', ice: t.ice, caduca: t.caduca }); return; }
@@ -108,6 +111,9 @@ class Rele {
       case 'invita': return this.invita(c, m);
       case 'retira': { const r = this.codigos.get(String(m.codigo)); if (r && r.de === c) this.codigos.delete(String(m.codigo)); return; }
       case 'busca': return this.busca(c, m);
+      // avisos fuera de la app (29 Oct 2026): la suscripción del navegador con sus salas, y «despierta» a quien no está
+      case 'avisos': return this.suscribe(c, m);
+      case 'despierta': return this.despierta(c, m);
       default: return;
     }
   }
@@ -152,6 +158,30 @@ class Rele {
     this.codigos.delete(codigo); // una sola vez: quien lo busca primero se lo lleva
     c.ws.json({ t: 'busca', ok: true, sobre: r.sobre, sal: r.sal });
     try { r.de.ws.json({ t: 'codigo-usado', codigo }); } catch (_) {}
+  }
+
+  suscribe(c, m) {
+    if (!this.avisos) return c.ws.json({ t: 'avisos', ok: false, por: 'sin avisos' });
+    const sub = m && m.sub && typeof m.sub === 'object' ? m.sub : null;
+    if (!sub) { if (c.avisoId) { c.avisoId = null; } return c.ws.json({ t: 'avisos', ok: false, por: 'formato' }); }
+    if (m.quitar === 1) { this.avisos.quita(String(sub.endpoint || '')); c.avisoId = null; return c.ws.json({ t: 'avisos', ok: true, quitado: true }); }
+    // solo salas en las que esta conexión está (o estará): las que manda la página, hasta 64
+    const salas = Array.isArray(m.salas) ? m.salas.filter((x) => esHex(x, 64)).slice(0, 64) : [];
+    const id = this.avisos.pon(String(sub.endpoint || ''), (sub.keys || {}).p256dh, (sub.keys || {}).auth, salas);
+    if (!id) return c.ws.json({ t: 'avisos', ok: false, por: 'formato' });
+    c.avisoId = id;
+    c.ws.json({ t: 'avisos', ok: true, id, salas: salas.length });
+  }
+  // quien escribe o llama a una sala donde no está la otra persona pide que se le avise; como mucho uno cada 10 s por conexión
+  despierta(c, m) {
+    if (!this.avisos) return;
+    const sala = String(m.sala || ''), tipo = m.tipo === 'llamada' ? 'llamada' : 'mensaje';
+    if (!esHex(sala, 64) || !c.salas.has(sala)) return;
+    const ahora = Date.now();
+    if (c.despertoEn && ahora - c.despertoEn < 10 * 1000 && c.despertoTipo === tipo) return;
+    c.despertoEn = ahora; c.despertoTipo = tipo;
+    const n = this.avisos.avisa(sala, c.avisoId || null, tipo);
+    c.ws.json({ t: 'despierta', sala, tipo, avisados: n });
   }
 
   otros(sala, yo) { const s = this.salas.get(sala); return s ? [...s.keys()].filter((k) => k !== yo) : []; }

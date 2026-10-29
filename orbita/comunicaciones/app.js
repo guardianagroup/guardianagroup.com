@@ -1975,7 +1975,7 @@
     }
     // «Por qué» (dueño, 29 Oct 2026, 09:25): encima de todo, se cierra con «‹», con Esc o con el atrás del navegador
     { const pq = $('#porque'), pb = $('#porque-btn');
-      const abrePorque = () => { if (!pq || !pq.hidden) return; pq.hidden = false; pq.scrollTop = 0; try { history.pushState(Object.assign({}, history.state || {}, { porque: 1 }), ''); } catch (_) {} setTimeout(() => { const x = $('#porque-atras'); if (x) x.focus({ preventScroll: true }); }, 30); };
+      const abrePorque = () => { if (!pq || !pq.hidden) return; pq.hidden = false; pq.scrollTop = 0; try { history.pushState(Object.assign({}, history.state || {}, { porque: 1 }), ''); } catch (_) {} setTimeout(() => { try { pq.focus({ preventScroll: true }); } catch (_) {} }, 30); };
       const cierraPorque = (desdeHistoria) => { if (!pq || pq.hidden) return; pq.hidden = true; if (pb) pb.focus({ preventScroll: true }); if (!desdeHistoria && history.state && history.state.porque) { try { history.back(); } catch (_) {} } };
       if (pb) pb.addEventListener('click', abrePorque);
       const cp = $('#como-porque'); if (cp) cp.addEventListener('click', abrePorque);
@@ -2098,14 +2098,14 @@
     // conversación sigue allí: en Android y en el ordenador, la app y el navegador comparten lo guardado. En el iPhone aún no: allí
     // la app guarda aparte y la conversación no pasaría (cuando lleguen los contactos con Face ID). Si dice «Ahora no», no se repite.
     const yaPreguntado = () => { try { return localStorage.getItem('gcom-instalar') === 'no'; } catch (_) { return false; } };
-    function preguntaInstalar(intento) {
-      if (comoApp() || esIOS || yaPreguntado()) return;
+    function preguntaInstalar(intento, forzar) {
+      if (comoApp() || esIOS || (yaPreguntado() && !forzar)) return;
       if (!avisoInstalar) {
         // el navegador puede tardar unos segundos en ofrecer la instalación; en el ordenador, sin ella no se pregunta
-        if ((intento || 0) < 4) { setTimeout(() => preguntaInstalar((intento || 0) + 1), 2000); return; }
+        if ((intento || 0) < 4) { setTimeout(() => preguntaInstalar((intento || 0) + 1, forzar), 2000); return; }
         if (!esAndroid) return;
       }
-      if (document.querySelector('.gc-hoja.gc-abierta') || (LL && LL.ocupado)) { if ((intento || 0) < 30) setTimeout(() => preguntaInstalar((intento || 0) + 1), 2000); return; }
+      if (document.querySelector('.gc-hoja.gc-abierta') || (LL && LL.ocupado)) { if ((intento || 0) < 30) setTimeout(() => preguntaInstalar((intento || 0) + 1, forzar), 2000); return; }
       abreHoja('h-instalar');
     }
     $('#instalar-si').addEventListener('click', () => { cierraHoja('h-instalar'); if (avisoInstalar) instala(); else abreGuia(); });
@@ -2116,6 +2116,9 @@
     pintaAnadir();
     // enlace para mandar: guardianagroup.com/orbita/comunicaciones/?instalar abre directamente la guía
     if (new URLSearchParams(location.search).has('instalar') && !comoApp()) setTimeout(abreGuia, 600);
+    // el marcador de la app compartido desde el iPhone o Android («Compartir marcador»: llega con ?app=1) abierto en un navegador:
+    // lo primero, añadirla a la pantalla de inicio, sin buscar nada (dueño, 29 Oct 2026, 10:00: «automatiza todo»)
+    if (new URLSearchParams(location.search).get('app') === '1' && !comoApp() && (esIOS || esAndroid)) setTimeout(() => { if (esIOS) abreGuia(); else preguntaInstalar(0, true); }, 900);
     // en Android, la pantalla completa entra sola con el primer toque importante: crear, aceptar, llamar o contestar
     for (const id of ['#nueva-blindada', '#aceptar-si', '#llamar', '#videollamar', '#ll-contestar']) { const b = $(id); if (b) b.addEventListener('click', () => { if (esMovil() && puedeCompleta()) pantallaCompleta(); }, { capture: true }); }
     // tocar el nombre o el candado abre la seguridad de la conversación, como en las aplicaciones de mensajería

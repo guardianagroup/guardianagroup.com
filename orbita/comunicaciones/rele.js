@@ -17,7 +17,7 @@
     const emite = (t, ...a) => { for (const f of esc[t] || []) { try { f(...a); } catch (e) { console.error(e); } } };
     let ws = null, url = null, abierto = false, intentos = 0, ping = null, cerrando = false;
     const salas = new Map(); // sala → { yo, b } (b: sala de una sesión blindada)
-    let ice = [], caduca = 0, region = '', llamadas = false, ultimoPong = 0, pingEn = 0, latencia = null; const hist = [];
+    let ice = [], caduca = 0, region = '', llamadas = false, ultimoPong = 0, pingEn = 0, latencia = null, avisos = ''; const hist = [];
     const esperas = {}; // respuestas pendientes (invita, busca)
 
     // 27 Oct 2026, 21:25: las dos personas de una conversación tienen que estar en el mismo relé (los relés no se enlazan
@@ -47,7 +47,7 @@
         if (typeof e.data === 'string') {
           let m; try { m = JSON.parse(e.data); } catch (_) { return; }
           switch (m.t) {
-            case 'hola': region = m.region || ''; llamadas = !!m.llamadas; ice = m.ice || []; caduca = m.caduca || 0; emite('hola', { region, llamadas, ice }); break;
+            case 'hola': region = m.region || ''; llamadas = !!m.llamadas; ice = m.ice || []; caduca = m.caduca || 0; avisos = typeof m.avisos === 'string' ? m.avisos : ''; emite('hola', { region, llamadas, ice, avisos }); break;
             case 'ice': ice = m.ice || []; caduca = m.caduca || 0; emite('ice', ice); break;
             case 'sala': emite('sala', m.sala, m.miembros || []); break;
             case 'llega': emite('llega', m.sala, m.quien); break;
@@ -60,6 +60,9 @@
             case 'invita': { const f = esperas.invita; delete esperas.invita; if (f) f(m); break; }
             case 'busca': { const f = esperas.busca; delete esperas.busca; if (f) f(m); break; }
             case 'codigo-usado': emite('codigo-usado', m.codigo); break;
+            // avisos fuera de la app (29 Oct 2026)
+            case 'avisos': emite('avisos', m); break;
+            case 'despierta': emite('despierta', m); break;
             default: break;
           }
           return;
@@ -113,10 +116,14 @@
     const invita = (codigo, sobre, sal) => pregunta('invita', { codigo, sobre, sal });
     const busca = (codigo) => pregunta('busca', { codigo });
     const retira = (codigo) => { if (abierto) ws.send(JSON.stringify({ t: 'retira', codigo })); };
+    // la suscripción del navegador (endpoint y claves públicas) con las salas en las que avisar; quitar=1 la borra del relé
+    const suscribe = (sub, salas, quitar) => { if (!abierto || !sub) return false; try { ws.send(JSON.stringify({ t: 'avisos', sub: { endpoint: sub.endpoint, keys: sub.keys }, salas: salas || [], quitar: quitar ? 1 : undefined })); return true; } catch (_) { return false; } };
+    // «despierta» a quien no está en la sala: un aviso en su teléfono de mensaje o de llamada
+    const despiertaA = (sala, tipo) => { if (!abierto) return false; try { ws.send(JSON.stringify({ t: 'despierta', sala, tipo })); return true; } catch (_) { return false; } };
     function cierra() { cerrando = true; clearInterval(ping); try { ws && ws.close(); } catch (_) {} }
 
     conecta();
-    return { on, entra, sale, manda, pideIce, cierra, invita, busca, retira, mide, get abierto() { return abierto; }, get atraso() { return ws ? ws.bufferedAmount : 0; }, get region() { return region; }, get llamadas() { return llamadas; }, get ice() { return ice; }, get caduca() { return caduca; }, get url() { return url; }, get latencia() { return latencia; }, get latenciaMin() { return hist.length ? Math.min(...hist) : null; }, get ultimoPong() { return ultimoPong; } };
+    return { on, entra, sale, manda, pideIce, cierra, invita, busca, retira, mide, suscribe, despiertaA, get avisos() { return avisos; }, get abierto() { return abierto; }, get atraso() { return ws ? ws.bufferedAmount : 0; }, get region() { return region; }, get llamadas() { return llamadas; }, get ice() { return ice; }, get caduca() { return caduca; }, get url() { return url; }, get latencia() { return latencia; }, get latenciaMin() { return hist.length ? Math.min(...hist) : null; }, get ultimoPong() { return ultimoPong; } };
   }
   // Otro servidor de llamadas (dueño, 28 Oct 2026, 14:17: «que las llamadas sean todas buenas, independientemente de si la
   // persona está en Sudamérica, en Europa…»): una conexión corta para medir su tiempo de ida y vuelta y pedirle sus
