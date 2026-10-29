@@ -23,7 +23,7 @@
 <title>GUARDIANA</title>
 <link rel="icon" href="/favicon.ico">
 <link rel="stylesheet" href="componentes.css?v=20261028m">
-<link rel="stylesheet" href="app.css?v=20261029u">
+<link rel="stylesheet" href="app.css?v=20261029v">
 <link rel="stylesheet" href="viaje.css?v=20261028a">
 </head>
 <body>
@@ -104,16 +104,19 @@
       <!-- dueño, 28 Oct 2026, 15:31–15:32: el enlace ya copiado al abrir esta página; en el móvil, solo «Compartir»; y al compartir,
            la pantalla entera dice que se espera a la otra persona, con «Volver a compartir» -->
       <div class="enlace-vista" id="enlace-vista">
+      <!-- En el teléfono, como la espera: el candado, un título corto, una frase, el botón grande y «Cancelar» discreto (dueño, 28 Oct
+           2026, 19:03: «ahí también se ve todo apiñado, rediseña todo y más minimalista») -->
+      <div class="espera-anillos quieto enlace-icono" aria-hidden="true"><span></span><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></div>
       <p class="pq-k">Sesión blindada</p>
-      <h2>Invitación blindada</h2>
+      <h2><span class="solo-pc">Invitación blindada</span><span class="solo-movil">Invita a una persona</span></h2>
       <!-- 28 Oct 2026 (dueño): de PC a PC, el QR estorba; primero el enlace y el QR plegado, por si alguien entra con el móvil -->
-      <p class="t">Comparte el enlace con la otra persona. No lo abras tú: es su llave para entrar.</p>
+      <p class="t"><span class="solo-pc">Comparte el enlace con la otra persona. No lo abras tú: es su llave para entrar.</span><span class="solo-movil">Envíale el enlace; no lo abras tú. La conversación se abre sola cuando entre.</span></p>
       <p class="t enlace-copiado" id="enlace-copiado" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"/></svg><span>Enlace copiado</span></p>
       <div class="enlace-fila"><input class="campo" id="enlace-b" readonly translate="no" spellcheck="false" aria-label="Enlace de la invitación"><button type="button" class="boton principal" id="enlace-copiar">Copiar enlace</button><button type="button" class="boton" id="enlace-compartir" hidden>Compartir enlace</button></div>
       <details class="qr-plegado"><summary>Mostrar el código QR (para abrirlo con un móvil)</summary><div class="qr" id="enlace-qr" role="img" aria-label="Código QR de la invitación"></div></details>
       <p class="t estado" id="enlace-estado" role="status">Esperando a que la otra persona abra el enlace…</p>
       <p class="t nota">Opcional: podéis comparar el número de seguridad dentro del chat.</p>
-      <div class="fila centro"><button type="button" class="boton" id="enlace-cancelar">Cancelar la invitación</button></div>
+      <div class="fila centro"><button type="button" class="boton" id="enlace-cancelar"><span class="solo-pc">Cancelar la invitación</span><span class="solo-movil">Cancelar</span></button></div>
       </div>
       <div class="enlace-espera" id="enlace-espera" hidden>
         <div class="espera-anillos" aria-hidden="true"><span></span><span></span><span></span><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></div>
@@ -544,7 +547,7 @@
 <input type="file" id="archivo" multiple hidden>
 <div class="aviso" id="aviso" role="status" aria-live="polite" hidden></div>
 
-<script src="/orbita/static/idioma.js?v=20261029p60"></script>
+<script src="/orbita/static/idioma.js?v=20261029p61"></script>
 <script src="pq-mlkem.js?v=20261027a"></script>
 <script src="pq-cnsa.js?v=20261027a"></script>
 <script src="qrhaz.js?v=20261027a"></script>
