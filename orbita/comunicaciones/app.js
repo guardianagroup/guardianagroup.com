@@ -729,12 +729,17 @@
   // lo permite (Chrome, Edge: «Guardar en…») o lo junta en memoria hasta MAX_MEMORIA (los demás). Quien manda espera a
   // «archivo-listo» y luego avanza con ventana (acuses cada 4 trozos) sin pasarse del cupo del relé.
   const MAX_MEMORIA = 300 * 1024 * 1024;
+  // Tope por archivo (dueño, 29 Oct 2026, 09:52: «como el de WhatsApp, Signal, Telegram, o un poquito más»): 4 GB en el chat normal y
+  // en el blindado, el doble que WhatsApp y Telegram. La versión Ultra, de pago, subirá el tope (hasta 1 TB por archivo).
+  const MAX_ARCHIVO = 4 * 1024 * 1024 * 1024;
+  const fmtGB = (b) => (b / (1024 * 1024 * 1024)).toLocaleString(LOC(), { maximumFractionDigits: 0 }) + ' GB';
   const conDisco = () => typeof window.showSaveFilePicker === 'function';
   const fidDe = (id) => C.deHex(id.replace(/-/g, '').slice(0, 32).padEnd(32, '0'));
   async function enviaArchivos(c, archivos, opc) {
     const voz = !!(opc && opc.voz);
     for (const f of archivos) {
       if (!f || !f.size) continue;
+      if (f.size > MAX_ARCHIVO) { aviso(T('«{n}» pasa del tope de {g} por archivo.').replace('{n}', (f.name || T('archivo')).slice(0, 40)).replace('{g}', fmtGB(MAX_ARCHIVO))); continue; }
       const clave = C.azar(32), trozos = Math.ceil(f.size / TROZO) || 1;
       const m = { id: uuid(), conv: c.id, t: Date.now(), dir: 'mia', estado: 'pendiente', tipo: 'archivo', archivo: { nombre: (f.name || 'archivo').slice(0, 180), tam: f.size, mime: f.type || 'application/octet-stream', clave: C.b64u(clave), trozos, progreso: 0, voz: voz || undefined } };
       c.archivos.set(m.id, { envio: true, f, clave: await C.aes(clave), ack: 0, trozos, listo: false, enviados: 0 });
@@ -2153,6 +2158,10 @@
     if (como) como.addEventListener('click', () => { const pro = $('#pro'); if (!pro) return; const abre = pro.hidden; pro.hidden = !abre; como.setAttribute('aria-expanded', String(abre)); if (abre) setTimeout(() => pro.scrollIntoView({ behavior: 'smooth', block: 'start' }), 30); });
     $('#unir').addEventListener('click', () => { $('#unir-mal').hidden = true; $('#unir-espera').hidden = true; $('#unir-codigo').value = ''; $('#paso-inicio').hidden = true; $('#paso-entrar').hidden = false; setTimeout(() => $('#unir-codigo').focus(), 50); });
     $('#unir-cerrar').addEventListener('click', () => { $('#paso-entrar').hidden = true; $('#paso-inicio').hidden = false; });
+    // el «‹» de cada sección hace lo mismo que su «Cancelar» (29 Oct 2026, 09:49)
+    { const e = $('#entrar-atras'); if (e) e.addEventListener('click', () => $('#unir-cerrar').click()); }
+    { const e = $('#enlace-atras'); if (e) e.addEventListener('click', () => $('#enlace-cancelar').click()); }
+    { const e = $('#codigo-atras'); if (e) e.addEventListener('click', async () => { const c = CONVS.get(ACTUAL); if (c && !c.huella) await destruye(c, true); else cierraConv(); }); }
     // Campo del código: solo cifras, nueve como mucho (lo que pase de nueve no entra), guiones automáticos y sin selección azul
     const campoCod = $('#unir-codigo');
     campoCod.addEventListener('beforeinput', (e) => {

@@ -3187,7 +3187,11 @@
 "GUARDIANA se usa en vertical.":"GUARDIANA используется вертикально.",
 "Es lo principal para tu privacidad: lo que no te pedimos no se puede robar, filtrar ni vender. Tu número no circula, nadie te encuentra por él y en ningún sitio queda escrito quién eres ni con quién hablas.":"Это главное для вашей приватности: то, чего мы не просим, нельзя украсть, слить или продать. Ваш номер не гуляет по сети, никто не найдёт вас по нему, и нигде не записано, кто вы и с кем говорите.",
 "Una aplicación instalada pide permisos y puede hacer cosas que no debería; ya ha pasado con versiones falsas de aplicaciones conocidas que llevaban dentro un programa espía. Una web no puede: solo ve lo que tú le das mientras está abierta, y al cerrarla no queda nada funcionando.":"Установленное приложение запрашивает разрешения и может делать то, чего не должно; так уже бывало с поддельными версиями известных приложений, внутри которых была шпионская программа. Веб-страница так не может: она видит только то, что вы ей даёте, пока она открыта, а после закрытия ничего не остаётся работать.",
-"Ver los datos: ¿por qué es así?":"Смотреть факты: почему так?"
+"Ver los datos: ¿por qué es así?":"Смотреть факты: почему так?",
+"Invitar":"Пригласить",
+"«{n}» pasa del tope de {g} por archivo.":"«{n}» превышает лимит {g} на файл.",
+"Encriptación de categoría gubernamental, en tu navegador":"Шифрование государственного уровня — в вашем браузере",
+"Criptografía postcuántica. Sin cuentas, sin instalar nada. Lo que digas aquí no lo puede leer nadie más: ni nosotros.":"Постквантовая криптография. Без аккаунтов, без установки. То, что вы здесь скажете, не сможет прочитать никто другой: даже мы."
 },
 "p":{
 "intento":"Настойчивее всех сегодня: {1}, {2} {2?раз|раз}.",

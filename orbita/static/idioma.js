@@ -1574,6 +1574,11 @@
     "Invita a una persona": ["Invite someone", "Convide uma pessoa"],
     // revisión de diseño e «Invitar a chat» en un toque (dueño, 28 Oct 2026, 19:15–19:30)
     "Invitar a chat": ["Invite to chat", "Convidar para o chat"],
+    "Invitar": ["Invite", "Convidar"],
+    "Encriptación de categoría gubernamental, en tu navegador": ["Government-grade encryption, in your browser", "Criptografia de categoria governamental, no seu navegador"],
+    "Criptografía postcuántica. Sin cuentas, sin instalar nada. Lo que digas aquí no lo puede leer nadie más: ni nosotros.": ["Post-quantum cryptography. No accounts, nothing to install. What you say here cannot be read by anyone else: not even us.", "Criptografia pós-quântica. Sem contas, sem instalar nada. O que você disser aqui ninguém mais pode ler: nem nós."],
+    "«{n}» pasa del tope de {g} por archivo.": ["“{n}” is over the {g} limit per file.", "«{n}» passa do limite de {g} por arquivo."],
+    "archivo": ["file", "arquivo"],
     // «Invitar a chat» en el iPhone: WhatsApp entero u otra app (dueño, 28 Oct 2026, 20:56)
     "Otras apps": ["Other apps", "Outros apps"],
     "No se pudo abrir WhatsApp.": ["WhatsApp could not be opened.", "Não foi possível abrir o WhatsApp."],

@@ -3187,7 +3187,11 @@
 "Videollamada encriptada":"Šifrovaný videohovor",
 "Las firmas de identidad siguen siendo clásicas. Si la otra persona usa una versión anterior, te lo decimos y no seguimos sin tu permiso.":"Podpisy identity zůstávají klasické. Pokud druhá osoba používá starší verzi, řekneme vám to a bez vašeho svolení nepokračujeme.",
 "El otro equipo usa una versión anterior de Comunicaciones: el envío sigue, sin comprobante de entrega.":"Druhé zařízení používá starší verzi Comunicaciones: odesílání pokračuje, ale bez dokladu o doručení.",
-"En la sesión blindada, cada equipo firma el comprobante de entrega dos veces: con ECDSA P-384 y con ML-DSA-87, una firma postcuántica. Las dos se comprueban en esta web, sin enviar nada.":"V pancéřované relaci podepisuje každé zařízení doklad o doručení dvakrát: ECDSA P-384 a ML-DSA-87, postkvantovým podpisem. Oba se ověřují na tomto webu, aniž by se cokoli odesílalo."
+"En la sesión blindada, cada equipo firma el comprobante de entrega dos veces: con ECDSA P-384 y con ML-DSA-87, una firma postcuántica. Las dos se comprueban en esta web, sin enviar nada.":"V pancéřované relaci podepisuje každé zařízení doklad o doručení dvakrát: ECDSA P-384 a ML-DSA-87, postkvantovým podpisem. Oba se ověřují na tomto webu, aniž by se cokoli odesílalo.",
+"Invitar":"Pozvat",
+"«{n}» pasa del tope de {g} por archivo.":"„{n}“ překračuje limit {g} na soubor.",
+"Encriptación de categoría gubernamental, en tu navegador":"Šifrování státní kategorie, ve vašem prohlížeči",
+"Criptografía postcuántica. Sin cuentas, sin instalar nada. Lo que digas aquí no lo puede leer nadie más: ni nosotros.":"Postkvantová kryptografie. Bez účtů, bez instalace. Co tady řeknete, nemůže číst nikdo jiný: ani my."
 },
 "p":{
 "intento":"Nejvíc se dnes snažila: {1}, {2}{2?krát|krát}.",

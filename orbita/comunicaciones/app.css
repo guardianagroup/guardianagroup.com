@@ -1309,4 +1309,25 @@ img,video,canvas,svg{-webkit-touch-callout:none;-webkit-user-drag:none}
   .gira svg{width:44px;height:44px;fill:none;stroke:#9CC3E4;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
   .gira b{font:600 20px/1.2 var(--texto)}.gira span{font:400 15px/1.4 var(--texto);color:#9fb3c4}
 }
+/* el mismo «‹» en todas las secciones (29 Oct 2026, 09:49): arriba a la izquierda, con el nombre de la sección */
+.seccion-cab{width:100%;max-width:440px;margin:0 auto 6px;text-align:left}
+.paso .seccion-cab,.enlace-vista .seccion-cab{justify-content:flex-start}
+@media (min-width:761px){.inicio{position:relative}.paso .seccion-cab,.enlace-vista .seccion-cab{position:absolute;left:14px;top:12px;width:auto;margin:0}}
+@media (max-width:760px){.enlace-vista .seccion-cab{position:absolute;left:12px;right:12px;top:calc(10px + env(safe-area-inset-top))}.enlace-vista{position:relative}}
+.contactos-atras:active{background:rgba(156,195,228,.14)}
+.contactos-atras:focus-visible{outline:2px solid #9CC3E4;outline-offset:2px}
+/* el lema bajo el título (29 Oct 2026, 09:50) */
+#inicio>.lema{margin:-4px 0 10px;max-width:520px;font:400 16px/1.5 var(--texto);color:#B9C6D2}
+@media (max-width:760px){#inicio>.lema{display:block;margin:0 0 18px;font-size:15.5px;line-height:1.5;color:#A9BCCB}}
+/* orden y aire en el inicio del teléfono (dueño, 29 Oct 2026, 09:52: «que no haya apiñamientos»): todo cabe sin desplazar;
+   «¿Por qué?» va pegado al idioma, a la derecha */
+@media (max-width:760px){
+  .barra .rele[hidden]~.porque-b{margin-left:auto}
+  .barra .rele[hidden]~.idiomas{margin-left:0}
+  .inicio .red-nucleo{width:min(22vh,200px);height:min(22vh,200px);margin-bottom:0}
+  #inicio>h1{font-size:23px;margin:4px 0 10px}
+  #inicio>.lema{margin:0 0 14px;font-size:15px}
+  #paso-inicio{gap:12px}
+}
+@media (max-width:760px) and (max-height:700px){.inicio .red-nucleo{width:min(18vh,150px);height:min(18vh,150px)}#inicio>h1{font-size:21px}}
 
