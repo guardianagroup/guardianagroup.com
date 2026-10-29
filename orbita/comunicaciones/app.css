@@ -1,9 +1,12 @@
 /* GUARDIANA · Comunicaciones · la página de PC y móvil (26 Oct 2026). Los componentes del comité (componentes.css)
    ponen las burbujas, el compositor, las hojas y la llamada; esto pone la página alrededor: la barra, la lista de
    conversaciones a la izquierda y la charla a la derecha; en el móvil, una u otra. Paleta de GUARDIANA. */
-@font-face{font-family:'IBM Plex Sans';font-weight:400;font-display:swap;src:url(/fonts/IBMPlexSans-400-latin.woff2) format('woff2')}
-@font-face{font-family:'IBM Plex Sans';font-weight:500;font-display:swap;src:url(/fonts/IBMPlexSans-500-latin.woff2) format('woff2')}
-@font-face{font-family:'IBM Plex Sans';font-weight:600;font-display:swap;src:url(/fonts/IBMPlexSans-600-latin.woff2) format('woff2')}
+/* IBM Plex Sans es una fuente variable (100–700): un solo archivo por alfabeto, no tres (los 400/500/600 eran el mismo archivo
+   descargado tres veces). Latín extendido para el checo y cirílico para el ruso (29 Oct 2026: hasta hoy el ruso salía con la
+   letra del sistema y las č ř ž ů ě del checo cambiaban de letra a mitad de palabra). */
+@font-face{font-family:'IBM Plex Sans';font-weight:100 700;font-display:swap;src:url(/fonts/IBMPlexSans-400-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'IBM Plex Sans';font-weight:100 700;font-display:swap;src:url(/fonts/IBMPlexSans-400-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'IBM Plex Sans';font-weight:100 700;font-display:swap;src:url(/fonts/IBMPlexSans-cyrillic.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
 @font-face{font-family:'IBM Plex Mono';font-weight:400;font-display:swap;src:url(/fonts/IBMPlexMono-400-latin.woff2) format('woff2')}
 @font-face{font-family:'IBM Plex Mono';font-weight:500;font-display:swap;src:url(/fonts/IBMPlexMono-500-latin.woff2) format('woff2')}
 :root{--bg:#06080C;--fg:#E8ECF1;--muted:#A9B3BE;--muted-2:#6F7B88;--card:#0C1118;--line:#1E2631;--campo:#10161E;--accent:#9CC3E4;--accent-fg:#06080C;--accent-suave:#142231;--ok:#6CCBA5;--aviso:#E0B66A;--alerta:#E07A6C;--texto:'IBM Plex Sans',system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;--mono:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;color-scheme:dark}
@@ -1349,3 +1352,80 @@ img,video,canvas,svg{-webkit-touch-callout:none;-webkit-user-drag:none}
   html.con-teclado .gira{display:none}
 }
 
+
+/* ---------- blindado: velado, tiempo en pantalla, alarma, número de la llamada (dueño, 29 Oct 2026, 10:08–10:16) ---------- */
+/* lo que llega velado: lo que es, su tamaño y dos botones; nada del contenido */
+.gc-burbuja.gc-velada{min-width:min(78vw,300px)}
+.gc-velo-caja{display:grid;grid-template-columns:38px 1fr;gap:4px 12px;align-items:center;padding:4px 2px 2px}
+.gc-velo-icono{width:38px;height:38px;border-radius:12px;display:inline-flex;align-items:center;justify-content:center;background:rgba(156,195,228,.10);border:1px solid rgba(156,195,228,.22);color:#9CC3E4}
+.gc-velo-icono svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.gc-velo-texto{display:flex;flex-direction:column;gap:2px;min-width:0}
+.gc-velo-texto b{font:600 14.5px/1.25 var(--texto);color:#F4F6F8}
+.gc-velo-texto small{font:400 12.5px/1.3 var(--texto);color:var(--muted)}
+.gc-velo-botones{grid-column:1/-1;display:flex;gap:8px;margin-top:8px}
+.gc-velo-botones .boton{flex:1;min-height:40px;padding:0 12px;font-size:14px}
+/* el mensaje descartado sin mostrarlo: lo ve quien lo envió, en vez de los tics */
+.gc-ticks.gc-descartado{width:auto;height:auto;font:500 11px/1 var(--texto);color:var(--muted);letter-spacing:.02em}
+/* archivo con tiempo */
+.gc-archivo .sello.vida{color:#9CC3E4}
+.gc-archivo.caducado b,.gc-archivo.caducado small{color:var(--muted-2)}
+.gc-archivo.caducado .sello.vida{color:var(--muted)}
+.gc-archivo .boton.borrar-dos{color:var(--muted);border-color:var(--line)}
+.gc-archivo .boton.borrar-dos:hover{color:var(--alerta);border-color:rgba(224,122,108,.5);background:rgba(224,122,108,.08)}
+/* «Tiempo en pantalla» en «Revisa antes de enviar» */
+.envio-tiempo{display:flex;flex-direction:column;gap:8px;margin:2px 0 14px}
+.envio-tiempo[hidden]{display:none}
+.envio-tiempo-t{font:600 11.5px/1 var(--texto);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.envio-tiempo-botones{display:flex;flex-wrap:wrap;gap:6px}
+.envio-tiempo-botones button{appearance:none;min-height:36px;padding:0 14px;border-radius:999px;border:1px solid rgba(156,195,228,.28);background:rgba(10,14,20,.72);color:#dbe9f4;font:500 13.5px/1 var(--texto);cursor:pointer;touch-action:manipulation;transition:background-color .15s,color .15s,border-color .15s}
+.envio-tiempo-botones button:hover{background:rgba(156,195,228,.12);border-color:rgba(156,195,228,.5);color:#F4F6F8}
+.envio-tiempo-botones button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-fg);font-weight:600}
+.envio-tiempo-botones button:focus-visible{outline:2px solid #F4F6F8;outline-offset:1px}
+.envio-tiempo-nota{font:400 12.5px/1.4 var(--texto);color:var(--muted)}
+/* el visor con tiempo: a pantalla completa, nada más alrededor */
+.visor{position:fixed;inset:0;z-index:9000;background:#000;color:#F4F6F8;display:flex;flex-direction:column}
+.visor[hidden]{display:none}
+.visor-cab{display:flex;align-items:center;gap:12px;padding:calc(10px + env(safe-area-inset-top)) calc(12px + env(safe-area-inset-right)) 10px calc(16px + env(safe-area-inset-left));background:rgba(6,8,12,.85);border-bottom:1px solid rgba(156,195,228,.14)}
+.visor-nombre{flex:1;min-width:0;font:500 14px/1.3 var(--texto);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.visor-cuenta{font:600 15px/1 var(--mono);color:#9CC3E4;letter-spacing:.04em;padding:7px 11px;border-radius:999px;border:1px solid rgba(156,195,228,.35);background:rgba(156,195,228,.10);min-width:52px;text-align:center}
+.visor-cuenta[hidden]{display:none}
+.visor-cerrar{all:unset;cursor:pointer;width:40px;height:40px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;border:1px solid rgba(156,195,228,.35);color:#F4F6F8;background:rgba(10,14,20,.72)}
+.visor-cerrar svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round}
+.visor-cerrar:focus-visible{outline:2px solid #F4F6F8;outline-offset:2px}
+.visor-cuerpo{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;padding:8px}
+.visor-cuerpo img,.visor-cuerpo video{max-width:100%;max-height:100%;object-fit:contain;border-radius:8px;-webkit-user-drag:none;-webkit-touch-callout:none;user-select:none}
+.visor-cuerpo audio{width:min(92vw,420px)}
+.visor-cuerpo iframe{width:100%;height:100%;border:0;background:#fff;border-radius:8px}
+.visor-pie{margin:0;padding:10px 16px calc(12px + env(safe-area-inset-bottom));text-align:center;font:400 12.5px/1.3 var(--texto);color:var(--muted);background:rgba(6,8,12,.85)}
+body.con-visor{overflow:hidden}
+/* la alarma: solemne, sin alarmismo */
+.alarma{position:fixed;inset:0;z-index:9999;background:#06080C;display:flex;align-items:center;justify-content:center;padding:24px calc(20px + env(safe-area-inset-right)) calc(20px + env(safe-area-inset-bottom)) calc(20px + env(safe-area-inset-left))}
+.alarma[hidden]{display:none}
+.alarma-caja{max-width:440px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:12px;padding:30px 24px 26px;border-radius:22px;border:1px solid rgba(224,122,108,.35);background:linear-gradient(180deg,rgba(224,122,108,.07),rgba(12,17,24,.9))}
+.alarma-caja>svg{width:52px;height:52px;fill:none;stroke:var(--alerta);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;margin-bottom:2px}
+.alarma-caja h2{margin:0;font:600 24px/1.2 var(--texto);color:#F4F6F8;text-wrap:balance}
+.alarma-caja p{margin:0;font:400 15.5px/1.5 var(--texto);color:#dbe9f4}
+.alarma-caja .alarma-nota{font-size:13.5px;color:var(--muted)}
+.alarma-caja .boton{margin-top:8px;min-width:180px}
+/* el número de seguridad de la llamada: grande y centrado; la píldora, arriba, mientras dura la llamada */
+.ll-sas{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:12;width:min(88vw,360px);box-sizing:border-box;display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px;padding:20px 20px 18px;border-radius:22px;border:1px solid rgba(156,195,228,.35);background:rgba(8,12,18,.94);box-shadow:0 30px 80px -30px rgba(0,0,0,.9)}
+.ll-sas[hidden]{display:none}
+.ll-sas-t{font:600 11.5px/1 var(--texto);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.ll-sas-num{display:block;font:700 64px/1 var(--mono);letter-spacing:.08em;color:#F4F6F8;font-variant-numeric:tabular-nums;margin:4px 0 2px;text-shadow:0 0 40px rgba(156,195,228,.25)}
+.ll-sas-texto{margin:0;font:400 14px/1.45 var(--texto);color:#dbe9f4;text-wrap:balance}
+.ll-sas-botones{display:flex;gap:8px;width:100%;margin-top:8px}
+.ll-sas-botones .boton{flex:1;min-height:44px;font-size:15px}
+.ll-sas-mini{all:unset;cursor:pointer;position:absolute;left:50%;top:calc(52px + env(safe-area-inset-top));transform:translateX(-50%);z-index:11;padding:7px 14px;border-radius:999px;border:1px solid rgba(156,195,228,.4);background:rgba(8,12,18,.86);color:#F4F6F8;font:600 15px/1 var(--mono);letter-spacing:.06em;font-variant-numeric:tabular-nums}
+.ll-sas-mini[hidden]{display:none}
+.ll-sas-mini.bien{color:#8FD9B5;border-color:rgba(108,203,165,.45)}
+.ll-sas-mini.mal{color:var(--alerta);border-color:rgba(224,122,108,.5)}
+.ll-sas-mini:focus-visible{outline:2px solid #F4F6F8;outline-offset:2px}
+.gc-llamada.mini .ll-sas,.gc-llamada.mini .ll-sas-mini{display:none}
+/* con el número en grande, el centro (nombre, tiempo, aviso) se aparta para no mezclarse con él */
+.gc-llamada.sas-grande:not(.mini):not(.con-video) .gc-llamada-centro{opacity:0;pointer-events:none}
+/* en la videollamada, arriba y más compacto: no tapa la raya del medio ni el botón de cambiar la vista */
+.gc-llamada.con-video .ll-sas{top:calc(58px + env(safe-area-inset-top));transform:translateX(-50%);padding:14px 16px 14px;gap:6px}
+.gc-llamada.con-video .ll-sas-num{font-size:46px;margin:2px 0 0}
+.gc-llamada.con-video .ll-sas-texto{font-size:13px}
+.gc-llamada.con-video .ll-sas-botones .boton{min-height:40px;font-size:14px}
+@media (max-width:760px){.ll-sas{width:min(90vw,340px);padding:18px 16px 16px}.ll-sas-num{font-size:58px}}

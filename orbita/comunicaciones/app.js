@@ -109,7 +109,7 @@
   function convNueva(sala, semilla, rol, modo) {
     return { id: sala, semilla, rol, modo: modo === 'blindada' ? 'blindada' : 'normal', suVerificada: false, estado: 'invitacion', nombre: '', firmaPub: null, acuerdoPub: null, huella: null, verificada: false, creado: Date.now(), ultimo: Date.now(), ultimoTexto: null, noLeidos: 0 };
   }
-  const guardable = (c) => ({ id: c.id, tumba: c.tumba, vaciarPendiente: c.vaciarPendiente || undefined, semilla: c.semilla, rol: c.rol, estado: c.estado, nombre: c.nombre, firmaPub: c.firmaPub, acuerdoPub: c.acuerdoPub, huella: c.huella, verificada: c.verificada, creado: c.creado, ultimo: c.ultimo, ultimoTexto: c.ultimoTexto, noLeidos: c.noLeidos, enlace: !!c.enlace || undefined, pqVisto: !!c.pqVisto, clasicaAceptada: !!c.clasicaAceptada, modo: c.modo || 'normal', suVerificada: !!c.suVerificada, dsaPub: c.dsaPub || null, idB: c.idB || null, alias: c.alias || '', num: c.num || 0, contacto: !!c.contacto, sinContacto: !!c.sinContacto });
+  const guardable = (c) => ({ id: c.id, tumba: c.tumba, vaciarPendiente: c.vaciarPendiente || undefined, borrarPendientes: c.borrarPendientes && c.borrarPendientes.length ? c.borrarPendientes : undefined, semilla: c.semilla, rol: c.rol, estado: c.estado, nombre: c.nombre, firmaPub: c.firmaPub, acuerdoPub: c.acuerdoPub, huella: c.huella, verificada: c.verificada, creado: c.creado, ultimo: c.ultimo, ultimoTexto: c.ultimoTexto, noLeidos: c.noLeidos, enlace: !!c.enlace || undefined, pqVisto: !!c.pqVisto, clasicaAceptada: !!c.clasicaAceptada, modo: c.modo || 'normal', suVerificada: !!c.suVerificada, dsaPub: c.dsaPub || null, idB: c.idB || null, alias: c.alias || '', num: c.num || 0, contacto: !!c.contacto, sinContacto: !!c.sinContacto });
   const guardaConv = (c) => BD.pon('conv', guardable(c));
   async function preparaConv(c) {
     if (esB(c)) await preparaIdentidadB(c);
@@ -607,14 +607,18 @@
     enviaCola(c);
   }
   // «Borrar el chat» pendiente: sale en cuanto la sesión con la otra persona está lista (si no se pudo mandar, se queda pendiente)
-  function mandaVaciar(c) { if (c && c.vaciarPendiente && enLinea(c) && enviaControl(c, { tipo: 'vaciar' })) { c.vaciarPendiente = false; guardaConv(c); } }
+  function mandaVaciar(c) {
+    if (c && c.vaciarPendiente && enLinea(c) && enviaControl(c, { tipo: 'vaciar' })) { c.vaciarPendiente = false; guardaConv(c); }
+    // «Borrar en los dos» con la otra persona ausente: la orden sale en cuanto se conecta
+    if (c && c.borrarPendientes && c.borrarPendientes.length && enLinea(c)) { const ids = c.borrarPendientes; c.borrarPendientes = []; for (const id of ids) if (!enviaControl(c, { tipo: 'borra', id })) c.borrarPendientes.push(id); guardaConv(c); }
+  }
   async function enviaCola(c) {
     mandaVaciar(c);
     if (c.enviando) return; c.enviando = true;
     try {
       while (c.cola.length && enLinea(c) && puedeEnviar(c)) {
         const m = c.cola[0];
-        const carga = m.tipo === 'texto' ? { tipo: 'texto', id: m.id, t: m.t, texto: m.texto } : m.tipo === 'archivo' ? { tipo: 'archivo', id: m.id, t: m.t, nombre: m.archivo.nombre, tam: m.archivo.tam, mime: m.archivo.mime, clave: m.archivo.clave, trozos: m.archivo.trozos, v: 1, region: MI_PAIS || undefined, voz: m.archivo.voz ? 1 : undefined } : null;
+        const carga = m.tipo === 'texto' ? { tipo: 'texto', id: m.id, t: m.t, texto: m.texto } : m.tipo === 'archivo' ? { tipo: 'archivo', id: m.id, t: m.t, nombre: m.archivo.nombre, tam: m.archivo.tam, mime: m.archivo.mime, clave: m.archivo.clave, trozos: m.archivo.trozos, v: 1, region: MI_PAIS || undefined, voz: m.archivo.voz ? 1 : undefined, vida: m.archivo.vida, paq: m.archivo.paq } : null;
         if (!carga) { c.cola.shift(); continue; }
         const vj = m.tipo === 'archivo' && VIAJES.get(m.id), sesU = c.sesion; // la clave del archivo viaja en esta sesión
         const b = await sella(c, carga); if (!b || !R.manda(c.id, c.suId, b)) break;
@@ -631,14 +635,14 @@
     const ses = c.sesiones.get(sid);
     if (!ses) { if (!c.clasicaPendiente) R.manda(c.id, de, new Uint8Array([4])); return; } // no conozco esa sesión: que se presente otra vez (salvo con la sesión sin capa postcuántica parada: no se vuelve a negociar en bucle)
     let j;
-    try { const k = await ses.recibo.para(n); j = JSON.parse(C.td.decode(await C.abre(k, n, b.subarray(13), C.cat(b.subarray(0, 13), ses.hash)))); } catch (e) { if (!/repetido|saltados/.test(e.message)) { c.incidencias = (c.incidencias || 0) + 1; await anotaSistema(c, 'Un mensaje no superó la comprobación de integridad y se ha descartado.'); vigila(c, T('Un mensaje no superó la autenticación: descartado.'), 'mal'); pintaRadio(c); } return; }
+    try { const k = await ses.recibo.para(n); j = JSON.parse(C.td.decode(await C.abre(k, n, b.subarray(13), C.cat(b.subarray(0, 13), ses.hash)))); } catch (e) { if (!/repetido|saltados/.test(e.message)) { c.incidencias = (c.incidencias || 0) + 1; await anotaSistema(c, 'Un mensaje no superó la comprobación de integridad y se ha descartado.'); vigila(c, T('Un mensaje no superó la autenticación: descartado.'), 'mal'); pintaRadio(c); await alarmaSiToca(c); } return; }
     if (c.suId !== de) return;
     c.ultimaVerificacion = Date.now();
     if (!ses.confirmada) { ses.confirmada = true; if (c.sesion === ses) pintaCabecera(c); vigila(c, T('Confirmación de clave recibida: la otra persona tiene la misma clave.'), 'bien'); } // la otra persona tiene la misma clave: sesión confirmada
     switch (j.tipo) {
       case 'texto': {
         if (c.mensajes.some((x) => x.id === j.id)) { enviaControl(c, { tipo: 'ack', ids: [j.id] }); return; }
-        const m = { id: String(j.id).slice(0, 64), conv: c.id, t: Math.min(Date.now(), +j.t || Date.now()), dir: 'suya', estado: 'recibido', tipo: 'texto', texto: String(j.texto || '').slice(0, 20000) };
+        const m = { id: String(j.id).slice(0, 64), conv: c.id, t: Math.min(Date.now(), +j.t || Date.now()), dir: 'suya', estado: 'recibido', tipo: 'texto', texto: String(j.texto || '').slice(0, 20000), velado: esB(c) || undefined };
         await guardaMensaje(c, m); c.mensajes.push(m); pintaMensaje(c, m); actualizaUltimo(c, m, true); vigila(c, T('Mensaje recibido: superó la verificación criptográfica.'), 'ok'); pintaRadio(c);
         enviaControl(c, { tipo: 'ack', ids: [m.id] });
         const aLaVista = ACTUAL === c.id && document.visibilityState === 'visible';
@@ -664,7 +668,7 @@
       case 'custodia-firma': return firmaCustodia(c, j);
       case 'custodia-no': return rechazoCustodia(c, j);
       case 'archivo-fin': { const a = c.archivos.get(j.id); const m = c.mensajes.find((x) => x.id === j.id); const v = VIAJES.get(j.id); if (a) c.archivos.delete(j.id); if (m) { m.estado = j.ok ? 'entregado' : 'fallo'; m.archivo.progreso = j.ok ? 1 : m.archivo.progreso; await guardaMensaje(c, m); pintaMensaje(c, m, true); vigila(c, (j.ok ? T('Archivo entregado') : T('Archivo no completado')) + ': ' + m.archivo.nombre + (j.ok ? ' · ' + T('acuse del otro equipo: completo y autenticado.') : ''), j.ok ? 'bien' : 'mal'); pintaRadio(c); if (j.ok && v && v.custodia === 'si' && j.v === 1 && a && a.sha256) await entregaViaje(c, m, a, v, j); else { if (v) finViaje(v, j.ok, j); if (j.ok) await recibo(c, m, +j.seg || 0, +j.trozos || m.archivo.trozos, true); } } return; }
-      case 'archivo-cancel': { const a = c.archivos.get(j.id); if (a) { a.cancelado = true; if (a.escritor) { try { await a.escritor.abort(); } catch (_) {} } c.archivos.delete(j.id); } const m = c.mensajes.find((x) => x.id === j.id); const vc = VIAJES.get(j.id); if (vc && vc.estado !== 'entregado') { vc.estado = 'fallo'; vc.tFin = Date.now(); evento(vc, j.por === 'integridad' ? T('El otro equipo ha detenido el envío: un fragmento no superó la autenticación.') : j.por === 'persona' ? T('La otra persona ha cortado el envío.') : T('El otro equipo ha cancelado el envío.'), 'mal'); } if (m && m.estado !== 'recibido') { m.estado = 'fallo'; if (j.por === 'persona') m.archivo.motivo = T('cortado por la otra persona'); if (j.por === 'integridad') { m.archivo.motivo = T('cortado en el otro lado: datos alterados'); c.incidencias = (c.incidencias || 0) + 1; await anotaSistema(c, 'La otra persona cortó un envío porque no superó la comprobación de integridad.'); } await guardaMensaje(c, m); pintaMensaje(c, m, true); pintaRadio(c); } return; }
+      case 'archivo-cancel': { const a = c.archivos.get(j.id); if (a) { a.cancelado = true; clearTimeout(a.esperaTrailer); if (a.escritor) { try { await a.escritor.abort(); } catch (_) {} } a.partes = null; if (a.pendientes) a.pendientes.clear(); c.archivos.delete(j.id); } const m = c.mensajes.find((x) => x.id === j.id); const vc = VIAJES.get(j.id); if (vc && vc.estado !== 'entregado') { vc.estado = 'fallo'; vc.tFin = Date.now(); evento(vc, j.por === 'integridad' ? T('El otro equipo ha detenido el envío: un fragmento no superó la autenticación.') : j.por === 'persona' ? T('La otra persona ha cortado el envío.') : T('El otro equipo ha cancelado el envío.'), 'mal'); } if (m && m.estado !== 'recibido') { m.estado = 'fallo'; if (j.por === 'persona') m.archivo.motivo = T('cortado por la otra persona'); if (j.por === 'integridad') { m.archivo.motivo = T('cortado en el otro lado: datos alterados'); c.incidencias = (c.incidencias || 0) + 1; await anotaSistema(c, 'La otra persona cortó un envío porque no superó la comprobación de integridad.'); } if (j.por === 'piezas') m.archivo.motivo = T('al otro equipo no le llegaron todas las piezas'); await guardaMensaje(c, m); pintaMensaje(c, m, true); pintaRadio(c); if (j.por === 'integridad') await alarmaSiToca(c); } return; }
       // llamadas (dueño, 27 Oct 2026, 23:05). Con varias conversaciones: una llamada de otra conversación también suena; si ya
       // hay una llamada en curso con otra, se le dice «ocupado» sin decir nada más (agencia, ronda 74, bloque J)
       case 'llamada': {
@@ -679,11 +683,19 @@
       }
       case 'vaciar': return vaciaLocal(c, true);
       case 'destruir': return destruyeLocal(c, true);
+      // blindado (dueño, 29 Oct 2026, 10:08–10:14): lo que llega se muestra solo si la persona quiere; fotos y documentos con
+      // tiempo; «borrar en los dos»; alarma de ataque; y la pieza final del paquete «todo o nada» de un archivo
+      case 'descartado': { const m = c.mensajes.find((x) => x.id === j.id && x.dir === 'mia'); if (m) { m.estado = 'descartado'; await guardaMensaje(c, m); pintaEstado(m); if (m.tipo === 'archivo') pintaMensaje(c, m, true); } return; }
+      case 'visto': { const m = c.mensajes.find((x) => x.id === j.id && x.dir === 'mia' && x.tipo === 'archivo'); if (m && !m.archivo.vistoBorrado) { m.archivo.vistoBorrado = true; await guardaMensaje(c, m); pintaMensaje(c, m, true); vigila(c, T('Visto y borrado en el otro equipo') + ': ' + m.archivo.nombre, 'ok'); } return; }
+      case 'borra': return borraLocal(c, j.id, true);
+      case 'paquete': { const a = c.archivos.get(String(j.id || '')); const m = c.mensajes.find((x) => x.id === j.id && x.dir === 'suya' && x.tipo === 'archivo'); if (!a || a.envio || !a.paq || !m || typeof j.t !== 'string') return; try { a.trailer = C.deB64u(j.t); } catch (_) { return; } if (a.trailer.length !== 32) { a.trailer = null; return; } if (a.tengo === a.trozos) await completaRecepcion(c, m, a); return; }
+      case 'alarma': { if (!esB(c)) return; await destruyeLocal(c, true, true); muestraAlarma(j.por === 'numero' ? 'numero' : j.por === 'integridad' ? 'integridad' : 'otro', true); return; }
       default: return;
     }
   }
   async function guardaMensaje(c, m) {
     const cuerpo = m.tipo === 'texto' ? { tipo: 'texto', texto: m.texto } : m.tipo === 'archivo' ? { tipo: 'archivo', archivo: m.archivo } : m.tipo === 'custodia' ? { tipo: 'custodia', custodia: m.custodia, texto: m.texto } : { tipo: m.tipo, texto: m.texto, llamada: m.llamada };
+    if (m.velado) cuerpo.velado = 1;
     const s = await guardaSellado(cuerpo);
     await BD.pon('msg', { id: m.id, conv: c.id, t: m.t, dir: m.dir, estado: m.estado, iv: s.iv, datos: s.datos });
   }
@@ -691,7 +703,7 @@
     if (c.cargados) return;
     const xs = (await BD.porConv('msg', c.id)).sort((a, b) => a.t - b.t);
     c.mensajes = [];
-    for (const x of xs) { const cu = await leeSellado(x); if (!cu) continue; const m = { id: x.id, conv: c.id, t: x.t, dir: x.dir, estado: x.estado, tipo: cu.tipo, texto: cu.texto, archivo: cu.archivo, llamada: cu.llamada, custodia: cu.custodia }; if (m.dir === 'mia' && m.estado === 'pendiente') c.cola.push(m); if (m.tipo === 'archivo' && m.dir === 'mia' && m.estado !== 'entregado' && m.estado !== 'leido' && m.archivo && (m.archivo.progreso || 0) < 1) { m.estado = 'fallo'; c.cola = c.cola.filter((q) => q !== m); } if (m.tipo === 'archivo' && m.dir === 'suya' && m.estado === 'recibiendo') m.estado = 'fallo'; c.mensajes.push(m); }
+    for (const x of xs) { const cu = await leeSellado(x); if (!cu) continue; const m = { id: x.id, conv: c.id, t: x.t, dir: x.dir, estado: x.estado, tipo: cu.tipo, texto: cu.texto, archivo: cu.archivo, llamada: cu.llamada, custodia: cu.custodia, velado: cu.velado ? true : undefined }; if (m.dir === 'mia' && m.estado === 'pendiente') c.cola.push(m); if (m.tipo === 'archivo' && m.dir === 'mia' && m.estado !== 'entregado' && m.estado !== 'leido' && m.archivo && (m.archivo.progreso || 0) < 1) { m.estado = 'fallo'; c.cola = c.cola.filter((q) => q !== m); } if (m.tipo === 'archivo' && m.dir === 'suya' && m.estado === 'recibiendo') m.estado = 'fallo'; c.mensajes.push(m); }
     c.cargados = true;
   }
   async function anotaSistema(c, texto) {
@@ -716,7 +728,7 @@
   const pref = (k) => { try { return localStorage.getItem('gcom-' + k) !== '0'; } catch (_) { return true; } };
   async function marcaLeidos(c) {
     if (!c || ACTUAL !== c.id || !seVeElChat()) return;
-    const ids = c.mensajes.filter((m) => m.dir === 'suya' && m.estado === 'recibido' && enPantalla(m.id)).map((m) => m.id);
+    const ids = c.mensajes.filter((m) => m.dir === 'suya' && m.estado === 'recibido' && !m.velado && enPantalla(m.id)).map((m) => m.id);
     // sin «confirmaciones de lectura» se apunta aquí como leído, pero no se envía (y al reactivarlas no se mandan las antiguas)
     if (ids.length && (!pref('leido') || enviaControl(c, { tipo: 'leido', ids }))) { for (const m of c.mensajes) if (ids.includes(m.id)) { m.estado = 'leido'; await guardaMensaje(c, m); } }
     if (c.noLeidos) { c.noLeidos = 0; await guardaConv(c); pintaLista(); }
@@ -740,9 +752,14 @@
     for (const f of archivos) {
       if (!f || !f.size) continue;
       if (f.size > MAX_ARCHIVO) { aviso(T('«{n}» pasa del tope de {g} por archivo.').replace('{n}', (f.name || T('archivo')).slice(0, 40)).replace('{g}', fmtGB(MAX_ARCHIVO))); continue; }
+      if (opc && opc.vida && f.size > MAX_MEMORIA) { aviso(T('Con tiempo en pantalla, como mucho 300 MB por archivo: «{n}» se envía sin tiempo.').replace('{n}', (f.name || T('archivo')).slice(0, 40))); opc = Object.assign({}, opc, { vida: undefined }); }
       const clave = C.azar(32), trozos = Math.ceil(f.size / TROZO) || 1;
-      const m = { id: uuid(), conv: c.id, t: Date.now(), dir: 'mia', estado: 'pendiente', tipo: 'archivo', archivo: { nombre: (f.name || 'archivo').slice(0, 180), tam: f.size, mime: f.type || 'application/octet-stream', clave: C.b64u(clave), trozos, progreso: 0, voz: voz || undefined } };
-      c.archivos.set(m.id, { envio: true, f, clave: await C.aes(clave), ack: 0, trozos, listo: false, enviados: 0 });
+      // tiempo en pantalla (dueño, 29 Oct 2026, 10:08): «una» vez, o tantos segundos desde que se abre; después se borra en el otro equipo
+      const vida = opc && opc.vida && !voz ? opc.vida : undefined;
+      // blindado: paquete «todo o nada» (dueño, 10:11): sin todas las piezas no se descifra ni un byte (ver mandaArchivo)
+      const paq = esB(c) && f.size <= MAX_PAQUETE ? C.azar(32) : null;
+      const m = { id: uuid(), conv: c.id, t: Date.now(), dir: 'mia', estado: 'pendiente', tipo: 'archivo', archivo: { nombre: (f.name || 'archivo').slice(0, 180), tam: f.size, mime: f.type || 'application/octet-stream', clave: C.b64u(clave), trozos, progreso: 0, voz: voz || undefined, vida, paq: paq ? 1 : undefined } };
+      c.archivos.set(m.id, { envio: true, f, clave: await C.aes(clave), ack: 0, trozos, listo: false, enviados: 0, paq, paqClave: paq ? await claveCtr(paq) : null });
       if (f.size <= MAX_MEMORIA && /^(image|audio)\//.test(m.archivo.mime)) await BD.pon('arch', { id: m.id, conv: c.id, blob: f, nombre: m.archivo.nombre, mime: m.archivo.mime, tam: f.size });
       const v = viajeNuevo(c, m, 'envia'); v.voz = voz;
       evento(v, T('Archivo preparado') + ': ' + trozos.toLocaleString(LOC()) + ' ' + T('fragmentos de 192 KB, cada uno encriptado y autenticado por separado (AES-256-GCM).'));
@@ -771,7 +788,10 @@
       if (huella) huella.pon(claro); // la huella del archivo entero, en orden: la misma que calcula el equipo del destinatario
       const cab = new Uint8Array(21); cab[0] = 3; cab.set(fid, 1); new DataView(cab.buffer).setUint32(17, i);
       // blindada: el último trozo sale completo (192 KB), así el relé no ve el tamaño exacto del archivo
-      const carga = esB(c) && claro.length < TROZO ? (() => { const x = new Uint8Array(TROZO); x.set(claro); return x; })() : claro;
+      let carga = esB(c) && claro.length < TROZO ? (() => { const x = new Uint8Array(TROZO); x.set(claro); return x; })() : claro;
+      // paquete «todo o nada»: la capa interior (AES-CTR con una clave de un solo uso) y la huella de todo lo que sale; la clave
+      // viaja al final, mezclada con esa huella: sin TODAS las piezas no se recupera y no se descifra ni un byte (Rivest, 1997)
+      if (a.paqClave) { carga = await ctr(a.paqClave, i, carga); if (!a.hPaq) a.hPaq = GuardianaSHA256.crea(); a.hPaq.pon(carga); }
       const ct = await C.sella(a.clave, i, carga, cab);
       if (!R.manda(c.id, c.suId, C.cat(cab, ct))) return falla(c, m, T('Se perdió la conexión.'));
       a.enviados += claro.length;
@@ -779,6 +799,7 @@
       m.archivo.progreso = (i + 1) / a.trozos; pintaProgreso(m);
     }
     if (huella) a.sha256 = C.hex(huella.cierra());
+    if (a.paqClave && a.hPaq) { const h = a.hPaq.cierra(), tr = new Uint8Array(32); for (let k = 0; k < 32; k++) tr[k] = a.paq[k] ^ h[k]; enviaControl(c, { tipo: 'paquete', id: m.id, t: C.b64u(tr) }); if (v) evento(v, T('Pieza final del paquete «todo o nada» enviada: solo con todas las piezas se puede abrir.')); }
     if (v) v.tUltimo = Date.now();
     if (v) evento(v, T('Último fragmento enviado: se espera la confirmación del destinatario.'));
   }
@@ -787,8 +808,9 @@
     const tam = +j.tam || 0, trozos = +j.trozos || 0;
     if (!tam || trozos !== (Math.ceil(tam / TROZO) || 1) || !j.clave) { enviaControl(c, { tipo: 'archivo-cancel', id: j.id }); return; }
     const voz = j.voz === 1, custodia = j.v === 1 && !voz;
-    const m = { id: String(j.id).slice(0, 64), conv: c.id, t: Math.min(Date.now(), +j.t || Date.now()), dir: 'suya', estado: 'recibiendo', tipo: 'archivo', archivo: { nombre: limpiaNombre(j.nombre), tam, mime: String(j.mime || 'application/octet-stream').slice(0, 100), trozos, progreso: 0, aDisco: tam > MAX_MEMORIA || (conDisco() && tam > 32 * 1024 * 1024), custodia: custodia ? 1 : undefined } };
-    const a = { envio: false, clave: await C.aes(C.deB64u(j.clave)), partes: null, escritor: null, siguiente: 0, tengo: 0, trozos, m, pendientes: new Map(), huella: window.GuardianaSHA256 ? GuardianaSHA256.crea() : null, hPtr: 0 };
+    const vida = j.vida === 'una' ? 'una' : [30, 60, 300].includes(+j.vida) ? +j.vida : undefined, paq = esB(c) && j.paq === 1;
+    const m = { id: String(j.id).slice(0, 64), conv: c.id, t: Math.min(Date.now(), +j.t || Date.now()), dir: 'suya', estado: 'recibiendo', tipo: 'archivo', archivo: { nombre: limpiaNombre(j.nombre), tam, mime: String(j.mime || 'application/octet-stream').slice(0, 100), trozos, progreso: 0, aDisco: tam > MAX_MEMORIA || (conDisco() && tam > 32 * 1024 * 1024 && !vida), custodia: custodia ? 1 : undefined, vida, paq: paq ? 1 : undefined }, velado: esB(c) && !voz ? true : undefined };
+    const a = { envio: false, clave: await C.aes(C.deB64u(j.clave)), partes: null, escritor: null, siguiente: 0, tengo: 0, trozos, m, pendientes: new Map(), huella: window.GuardianaSHA256 ? GuardianaSHA256.crea() : null, hPtr: 0, paq, hPaq: paq ? GuardianaSHA256.crea() : null, trailer: null };
     c.archivos.set(m.id, a);
     const v = viajeNuevo(c, m, 'recibe'); v.voz = voz; v.custodia = voz ? 'voz' : custodia ? 'si' : 'no'; v.paisSuyo = regionValida(j.region); v.pq = !!(ses && ses.pq); v.sid = ses ? ses.sid : ''; v.sesionDesde = ses ? ses.desde : null;
     evento(v, T('Anuncio del archivo recibido, encriptado de extremo a extremo') + ': ' + trozos.toLocaleString(LOC()) + ' ' + T('fragmentos') + '.');
@@ -805,7 +827,7 @@
     const a = c.archivos.get(m.id); if (!a || a.listo) return;
     try {
       const h = await window.showSaveFilePicker({ suggestedName: m.archivo.nombre });
-      a.escritor = await h.createWritable(); a.listo = true; a.nombreDisco = h.name;
+      a.escritor = await h.createWritable(); a.listo = true; a.nombreDisco = h.name; a.handle = h;
       const v = VIAJES.get(m.id); if (v) v.eligeDestino = false;
       enviaControl(c, listoCarga(m.id, v)); if (v) evento(v, T('Destino elegido en tu disco: aviso enviado al remitente.'));
       m.archivo.enDisco = true; pintaMensaje(c, m, true);
@@ -818,57 +840,99 @@
     const a = m && c.archivos.get(m.id); if (!a || a.envio || !a.listo || i >= a.trozos) return;
     let claro; try { claro = await C.abre(a.clave, i, b.subarray(21), b.subarray(0, 21)); } catch (_) { return incidencia(c, m, a, 'Un trozo del archivo no superó la comprobación de integridad: envío cortado.'); }
     const esperado = i < a.trozos - 1 ? TROZO : m.archivo.tam - (a.trozos - 1) * TROZO;
-    if (esB(c) && claro.length === TROZO && esperado < TROZO) claro = claro.subarray(0, esperado); // el relleno del último trozo
-    if (claro.length !== esperado) return incidencia(c, m, a, 'Un trozo del archivo no coincide con lo anunciado: envío cortado.');
+    // paquete «todo o nada»: lo que llega aún está cerrado con la clave de un solo uso (se abre al final, con todas las piezas);
+    // hasta entonces cada pieza mide 192 KB, también la última
+    if (a.paq) { if (claro.length !== TROZO) return incidencia(c, m, a, 'Un trozo del archivo no coincide con lo anunciado: envío cortado.'); }
+    else {
+      if (esB(c) && claro.length === TROZO && esperado < TROZO) claro = claro.subarray(0, esperado); // el relleno del último trozo
+      if (claro.length !== esperado) return incidencia(c, m, a, 'Un trozo del archivo no coincide con lo anunciado: envío cortado.');
+    }
     const v = VIAJES.get(m.id);
-    if (v && i === 0 && !v.tipoReal) v.tipoReal = VJ().tipoPorContenido(claro);
+    if (v && i === 0 && !v.tipoReal && !a.paq) v.tipoReal = VJ().tipoPorContenido(claro);
     if (!a.t0) { a.t0 = Date.now(); if (v) { v.estado = 'viaje'; v.t0 = a.t0; VJ() && VJ().muestra(v, 0); evento(v, T('Primer fragmento recibido y autenticado en tu equipo.')); vigilaViajes(); abreSiToca(v, true); } }
     c.ultimaVerificacion = Date.now();
+    const huellaDe = a.paq ? a.hPaq : a.huella; // con paquete, la huella del archivo en claro se calcula al abrirlo
     if (a.partes) {
       if (a.partes[i]) return; a.partes[i] = claro; a.tengo++;
       // la huella, en orden: los fragmentos llegan en orden y, si no, esperan a los anteriores
-      if (a.huella) while (a.hPtr < a.trozos && a.partes[a.hPtr]) { a.huella.pon(a.partes[a.hPtr]); a.hPtr++; }
+      if (huellaDe) while (a.hPtr < a.trozos && a.partes[a.hPtr]) { huellaDe.pon(a.partes[a.hPtr]); a.hPtr++; }
     }
     else {
       // al disco, en orden: lo que llega adelantado espera en memoria (como mucho la ventana)
       if (i < a.siguiente || a.pendientes.has(i)) return;
       a.pendientes.set(i, claro);
-      while (a.pendientes.has(a.siguiente)) { const x = a.pendientes.get(a.siguiente); a.pendientes.delete(a.siguiente); if (a.huella) a.huella.pon(x); try { await a.escritor.write(x); } catch (_) { c.archivos.delete(m.id); enviaControl(c, { tipo: 'archivo-cancel', id: m.id }); return falla(c, m, T('No se pudo escribir el archivo en el disco.')); } a.siguiente++; a.tengo++; a.hPtr++; }
+      while (a.pendientes.has(a.siguiente)) { const x = a.pendientes.get(a.siguiente); a.pendientes.delete(a.siguiente); if (huellaDe) huellaDe.pon(x); try { await a.escritor.write(x); } catch (_) { c.archivos.delete(m.id); enviaControl(c, { tipo: 'archivo-cancel', id: m.id }); return falla(c, m, T('No se pudo escribir el archivo en el disco.')); } a.siguiente++; a.tengo++; a.hPtr++; }
     }
     m.archivo.progreso = a.tengo / a.trozos; pintaProgreso(m);
     if (v) { v.verificados = a.tengo; v.confirmados = a.tengo === a.trozos ? v.tam : Math.min(v.tam, a.tengo * TROZO); VJ() && VJ().muestra(v, v.confirmados); hito(v, T('Recibido y autenticado en tu equipo')); }
     if (a.tengo % 4 === 0 || a.tengo === a.trozos) enviaControl(c, { tipo: 'archivo-ack', id: m.id, hasta: a.tengo, lat: v && VJ() ? VJ().minima(v.latMia) : undefined });
     if (a.tengo === a.trozos) {
-      c.archivos.delete(m.id);
-      let ok = true;
-      if (a.partes) { const blob = new Blob(a.partes, { type: m.archivo.mime }); ok = blob.size === m.archivo.tam; if (ok) await BD.pon('arch', { id: m.id, conv: c.id, blob, nombre: m.archivo.nombre, mime: m.archivo.mime, tam: blob.size }); }
-      else { try { await a.escritor.close(); } catch (_) { ok = false; } }
-      m.estado = ok ? 'recibido' : 'fallo'; m.archivo.progreso = 1;
-      const seg = Math.max(0.1, (Date.now() - (a.t0 || Date.now())) / 1000);
-      vigila(c, ok ? T('Archivo recibido') + ': ' + m.archivo.nombre + ' · ' + a.trozos + ' ' + T('trozos autenticados, completo.') : T('Archivo incompleto: ') + m.archivo.nombre, ok ? 'bien' : 'mal');
-      // lo que este equipo ha medido: entra en el comprobante y se comprueba antes de firmarlo (se guarda con el mensaje)
-      const sha = ok && a.huella && a.hPtr === a.trozos ? C.hex(a.huella.cierra()) : null;
-      const obs = sha ? { sha256: sha, llegada: new Date().toISOString(), primero: iso(a.t0), anuncio: v ? iso(v.tCreado) : null, lat: v && VJ() ? VJ().estad(v.latMia) : null, verificada: !!c.verificada, nombre: YO.nombre || '', region: MI_PAIS || '', version: VERSION_APP, tipo: (v && v.tipoReal) || null, mutua: esB(c) ? !!(c.verificada && c.suVerificada) : undefined, pq: !!(v && v.pq), sid: (v && v.sid) || '', rele: v && v.rele ? v.rele.host || '' : '', rele_region: R.region || '' } : null;
-      if (obs && m.archivo.custodia) m.archivo.obs = obs;
-      await guardaMensaje(c, m); pintaMensaje(c, m, true); pintaRadio(c);
-      const fin = { tipo: 'archivo-fin', id: m.id, ok, seg: Math.round(seg * 10) / 10, trozos: a.trozos };
-      if (obs) Object.assign(fin, { v: 1, sha256: obs.sha256, llegada: obs.llegada, primero: obs.primero, anuncio: obs.anuncio, lat: obs.lat, verificada: obs.verificada, nombre: obs.nombre, region: obs.region || undefined, version: obs.version, tipoReal: obs.tipo, mutua: obs.mutua }); // «tipo» es el del mensaje: el del archivo va en «tipoReal»
-      enviaControl(c, fin);
-      if (v) { finViaje(v, ok); if (ok) { v.coincide = undefined; evento(v, T('Último fragmento autenticado: archivo completo.'), 'bien'); if (sha) evento(v, T('Huella SHA-256 calculada en tu equipo') + ': ' + VJ().agrupa(sha, 16) + '…'); } }
-      // con comprobante, la tarjeta firmada sustituye al recibo; si no llega en 30 s, queda el recibo de siempre
-      if (ok && !(m.archivo.custodia && obs)) await recibo(c, m, seg, a.trozos, false);
-      else if (ok) setTimeout(() => { if (!c.mensajes.some((x) => x.id === 'cu-' + m.id) && c.estado !== 'destruida') recibo(c, m, seg, a.trozos, false); }, 30000);
-      if (ok && !(ACTUAL === c.id && document.visibilityState === 'visible')) avisaSonido();
+      if (a.paq && !a.trailer) {
+        // todas las piezas, pero aún sin la pieza final: si no llega en un minuto, no se abre nada y los restos se borran
+        if (v) evento(v, T('Todas las piezas recibidas: se espera la pieza final del paquete «todo o nada».'));
+        a.esperaTrailer = setTimeout(() => { if (c.archivos.get(m.id) === a && !a.trailer) incidencia(c, m, a, 'No llegó la pieza final del paquete: no se puede abrir y se ha borrado todo lo recibido.'); }, 60000);
+        return;
+      }
+      await completaRecepcion(c, m, a);
     }
+  }
+  // AES-CTR para la capa «todo o nada» de los archivos blindados: cada pieza empieza en su propio bloque (192 KB = 12 288 bloques)
+  const MAX_PAQUETE = 4 * 1024 * 1024 * 1024;
+  const claveCtr = (raw) => crypto.subtle.importKey('raw', raw, 'AES-CTR', false, ['encrypt', 'decrypt']);
+  async function ctr(k, i, datos) { const cnt = new Uint8Array(16); new DataView(cnt.buffer).setBigUint64(8, BigInt(i) * 12288n); return new Uint8Array(await crypto.subtle.encrypt({ name: 'AES-CTR', counter: cnt, length: 64 }, k, datos)); }
+  // Abre el paquete «todo o nada» (solo con todas las piezas y la pieza final): recupera la clave de un solo uso con la huella
+  // de todo lo recibido y descifra pieza a pieza; en memoria, en su sitio; en el disco, una segunda pasada sobre el archivo.
+  async function abrePaquete(c, m, a) {
+    const h = a.hPaq.cierra(), raw = new Uint8Array(32); for (let k = 0; k < 32; k++) raw[k] = a.trailer[k] ^ h[k];
+    const k = await claveCtr(raw), ultimo = m.archivo.tam - (a.trozos - 1) * TROZO;
+    const v = VIAJES.get(m.id);
+    if (a.partes) {
+      for (let i = 0; i < a.trozos; i++) { let x = await ctr(k, i, a.partes[i]); if (i === a.trozos - 1) x = x.subarray(0, ultimo); a.partes[i] = x; if (a.huella) a.huella.pon(x); if (i === 0 && v && !v.tipoReal) v.tipoReal = VJ().tipoPorContenido(x); }
+      return true;
+    }
+    try {
+      await a.escritor.close(); a.escritor = null;
+      const f = await a.handle.getFile(), w = await a.handle.createWritable({ keepExistingData: true });
+      for (let i = 0; i < a.trozos; i++) { let x = await ctr(k, i, new Uint8Array(await f.slice(i * TROZO, (i + 1) * TROZO).arrayBuffer())); if (i === a.trozos - 1) x = x.subarray(0, ultimo); if (a.huella) a.huella.pon(x); if (i === 0 && v && !v.tipoReal) v.tipoReal = VJ().tipoPorContenido(x); await w.write({ type: 'write', position: i * TROZO, data: x }); }
+      await w.truncate(m.archivo.tam); await w.close();
+      return true;
+    } catch (_) { return false; }
+  }
+  async function completaRecepcion(c, m, a) {
+    if (c.archivos.get(m.id) !== a) return; clearTimeout(a.esperaTrailer);
+    c.archivos.delete(m.id);
+    let ok = true;
+    const v = VIAJES.get(m.id);
+    if (a.paq) { ok = await abrePaquete(c, m, a); if (ok) a.hPtr = a.trozos; if (v) evento(v, ok ? T('Paquete «todo o nada» abierto con todas las piezas: archivo completo.') : T('No se pudo abrir el paquete: se ha borrado lo recibido.'), ok ? 'bien' : 'mal'); }
+    if (a.partes) { if (ok) { const blob = new Blob(a.partes, { type: m.archivo.mime }); ok = blob.size === m.archivo.tam; if (ok) await BD.pon('arch', { id: m.id, conv: c.id, blob, nombre: m.archivo.nombre, mime: m.archivo.mime, tam: blob.size }); } a.partes = null; }
+    else if (a.escritor) { try { await a.escritor.close(); } catch (_) { ok = false; } }
+    m.estado = ok ? 'recibido' : 'fallo'; m.archivo.progreso = 1;
+    const seg = Math.max(0.1, (Date.now() - (a.t0 || Date.now())) / 1000);
+    vigila(c, ok ? T('Archivo recibido') + ': ' + m.archivo.nombre + ' · ' + a.trozos + ' ' + T('trozos autenticados, completo.') : T('Archivo incompleto: ') + m.archivo.nombre, ok ? 'bien' : 'mal');
+    // lo que este equipo ha medido: entra en el comprobante y se comprueba antes de firmarlo (se guarda con el mensaje)
+    const sha = ok && a.huella && a.hPtr === a.trozos ? C.hex(a.huella.cierra()) : null;
+    const obs = sha ? { sha256: sha, llegada: new Date().toISOString(), primero: iso(a.t0), anuncio: v ? iso(v.tCreado) : null, lat: v && VJ() ? VJ().estad(v.latMia) : null, verificada: !!c.verificada, nombre: YO.nombre || '', region: MI_PAIS || '', version: VERSION_APP, tipo: (v && v.tipoReal) || null, mutua: esB(c) ? !!(c.verificada && c.suVerificada) : undefined, pq: !!(v && v.pq), sid: (v && v.sid) || '', rele: v && v.rele ? v.rele.host || '' : '', rele_region: R.region || '' } : null;
+    if (obs && m.archivo.custodia) m.archivo.obs = obs;
+    await guardaMensaje(c, m); pintaMensaje(c, m, true); pintaRadio(c);
+    const fin = { tipo: 'archivo-fin', id: m.id, ok, seg: Math.round(seg * 10) / 10, trozos: a.trozos };
+    if (obs) Object.assign(fin, { v: 1, sha256: obs.sha256, llegada: obs.llegada, primero: obs.primero, anuncio: obs.anuncio, lat: obs.lat, verificada: obs.verificada, nombre: obs.nombre, region: obs.region || undefined, version: obs.version, tipoReal: obs.tipo, mutua: obs.mutua }); // «tipo» es el del mensaje: el del archivo va en «tipoReal»
+    enviaControl(c, fin);
+    if (v) { finViaje(v, ok); if (ok) { v.coincide = undefined; evento(v, T('Último fragmento autenticado: archivo completo.'), 'bien'); if (sha) evento(v, T('Huella SHA-256 calculada en tu equipo') + ': ' + VJ().agrupa(sha, 16) + '…'); } }
+    // con comprobante, la tarjeta firmada sustituye al recibo; si no llega en 30 s, queda el recibo de siempre
+    if (ok && !(m.archivo.custodia && obs)) await recibo(c, m, seg, a.trozos, false);
+    else if (ok) setTimeout(() => { if (!c.mensajes.some((x) => x.id === 'cu-' + m.id) && c.estado !== 'destruida') recibo(c, m, seg, a.trozos, false); }, 30000);
+    if (ok && !(ACTUAL === c.id && document.visibilityState === 'visible')) avisaSonido();
   }
   // Manipulación detectada (ronda del dueño, 26 Oct 20:03): se corta el envío al instante, queda marcado en coral y anotado.
   async function incidencia(c, m, a, texto) {
-    c.incidencias = (c.incidencias || 0) + 1;
-    if (a) { a.cancelado = true; if (a.escritor) { try { await a.escritor.abort(); } catch (_) {} } c.archivos.delete(m.id); }
-    enviaControl(c, { tipo: 'archivo-cancel', id: m.id, por: 'integridad' });
-    m.estado = 'fallo'; m.archivo.motivo = T('detenido: no superó la autenticación'); await guardaMensaje(c, m); pintaMensaje(c, m, true);
+    const piezas = /pieza final/.test(texto); // sin la pieza final no hay manipulación demostrada: no cuenta para la alarma
+    if (!piezas) c.incidencias = (c.incidencias || 0) + 1;
+    if (a) { a.cancelado = true; clearTimeout(a.esperaTrailer); if (a.escritor) { try { await a.escritor.abort(); } catch (_) {} } a.partes = null; if (a.pendientes) a.pendientes.clear(); c.archivos.delete(m.id); } // los restos, fuera
+    enviaControl(c, { tipo: 'archivo-cancel', id: m.id, por: piezas ? 'piezas' : 'integridad' });
+    m.estado = 'fallo'; m.archivo.motivo = piezas ? T('incompleto: borrado') : T('detenido: no superó la autenticación'); await guardaMensaje(c, m); pintaMensaje(c, m, true);
     const v = VIAJES.get(m.id); if (v) { v.estado = 'fallo'; v.tFin = Date.now(); evento(v, T(texto), 'mal'); }
     await anotaSistema(c, texto); aviso(T(texto)); vigila(c, T(texto), 'mal'); pintaRadio(c);
+    if (!piezas) await alarmaSiToca(c);
   }
   // Recibo de entrega (dueño, 26 Oct 20:25): aparece solo en el chat cuando el archivo ha llegado entero al otro equipo.
   const segundos = (x) => (x < 60 ? x.toLocaleString(LOC(), { maximumFractionDigits: 1 }) + ' s' : Math.floor(x / 60) + ' min ' + Math.round(x % 60) + ' s');
@@ -1170,6 +1234,8 @@
   };
   const servidorLlamada = () => (iceUsado === 'am' ? T('Miami (Estados Unidos)') : iceUsado === 'eu' ? T('Núremberg (Alemania)') : '');
   const puedeLlamar = () => { const c = CONVS.get(ACTUAL); return !!(c && enLinea(c) && c.sesion && c.sesion.confirmada && puedeEnviar(c)); };
+  // solo en local (pruebas): simular un mensaje manipulado y ver la alarma sin tocar el relé
+  if (LOCAL) window.gcomPrueba = { incidencia: async (id) => { const c = CONVS.get(id || ACTUAL); if (!c) return; c.incidencias = (c.incidencias || 0) + 1; await anotaSistema(c, 'Un mensaje no superó la comprobación de integridad y se ha descartado.'); vigila(c, T('Un mensaje no superó la autenticación: descartado.'), 'mal'); return alarmaSiToca(c); }, conv: () => CONVS.get(ACTUAL) };
   function arrancaLlamadas() {
     if (!window.GuardianaLlamada || !window.RTCPeerConnection) { for (const id of ['#llamar', '#videollamar']) { const b = $(id); if (b) b.hidden = true; } return; }
     if (!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia)) { const b = $('#videollamar'); if (b) b.hidden = true; }
@@ -1177,6 +1243,10 @@
       ice: iceCercano, servidor: servidorLlamada, puede: puedeLlamar, t: T, aviso, suena: avisaSonido, fin: anotaLlamada, estado: avisaLlamada,
       blindada: () => { const c = convLl(); return !!(c && esB(c)); }, // las opciones de imagen, solo en la sesión blindada
       manda: (m) => { const c = convLl(); if (c) enviaControl(c, Object.assign({ tipo: 'llamada' }, m)); },
+      // el número grande de la llamada (dueño, 29 Oct 2026, 10:16): si los dos ven el mismo, nadie está en medio; «Coinciden» deja
+      // la conversación como verificada; «No coinciden» cuelga y, en el blindado, destruye la conversación en los dos equipos
+      sasOk: async () => { const c = convLl(); if (c && !c.verificada) await marcaVerificada(c, true); },
+      sasMal: async () => { const c = convLl(); if (!c) return; if (esB(c)) await alarma(c, 'numero'); else { await anotaSistema(c, 'El número de seguridad de la llamada no coincidía: llamada cortada. No envíes nada por aquí.'); vigila(c, T('El número de seguridad de la llamada no coincidía: llamada cortada. No envíes nada por aquí.'), 'mal'); aviso(T('El número no coincidía: llamada cortada. No envíes nada por aquí.')); } },
       // el nombre que la otra persona se puso o el que le pusiste tú; sin ninguno, «Llamada encriptada» o «Videollamada encriptada»
       nombre: () => { const c = convLl(); return (c && (c.alias || c.nombre)) || (c && vivas().length > 1 ? nombreConv(c, true) : ''); },
       inicial: () => { const c = convLl(); return inicial(c && (c.alias || c.nombre)); },
@@ -1263,7 +1333,9 @@
     setInterval(() => { if (R.abierto && R.caduca && R.caduca * 1000 - Date.now() < 2 * 3600 * 1000) R.pideIce(); }, 10 * 60 * 1000);
     // con la otra persona en la sala, el tiempo de acordar las claves, quieta; sin ella (y si no se acaba de ir), «No conectado» ya
     R.on('sala', (sala, miembros) => { const c = CONVS.get(sala); if (!c) return; c.miembros = new Set(miembros); c.sesion = null; c.salaSabida = true; if (c.suId && miembros.includes(c.suId)) quietoConv(c, 6000); if (miembros.length && (!c.suId || miembros.includes(c.suId))) enCola(c, () => presentaX(c, null, true)); pintaCabecera(c); pintaLista(); pintaContactos(); });
-    R.on('llega', (sala, quien) => { const c = CONVS.get(sala); if (!c) return; c.miembros.add(quien); if (!c.suId || c.suId === quien) { c.sesion = null; if (c.huella) quietoConv(c, 6000); enCola(c, () => presentaX(c, null, true)); } pintaCabecera(c); pintaLista(); });
+    R.on('llega', (sala, quien) => { const c = CONVS.get(sala); if (!c) return; c.miembros.add(quien); if (!c.suId || c.suId === quien) { c.sesion = null; if (c.huella) quietoConv(c, 6000); enCola(c, () => presentaX(c, null, true)); } pintaCabecera(c); pintaLista();
+      // la invitación que salió por WhatsApp: el chat se abre cuando la otra persona entra, si no se está en otra conversación
+      if (c.compartido && !c.huella && c.rol === 'invita' && (!ACTUAL || !CONVS.has(ACTUAL)) && !document.body.classList.contains('en-llamada')) abreConv(c.id); });
     // si la otra persona se va, puede que solo esté recargando: unos segundos sin cambiar nada
     R.on('sale', (sala, quien) => { const c = CONVS.get(sala); if (!c) return; c.miembros.delete(quien); if (c.suId === quien) { c.sesion = null; quietoConv(c, 6000); vigila(c, T('La otra persona se ha desconectado.'), 'info'); if (LL && LL.ocupado && ACTUAL === c.id) LL.recibe({ acto: 'colgar' }); } pintaCabecera(c); pintaLista(); });
     R.on('sustituido', (sala) => { const c = CONVS.get(sala); if (c) { c.miembros.clear(); c.sesion = null; } aviso(T('Esta conversación se ha abierto en otra pestaña: sigue allí.')); });
@@ -1572,6 +1644,9 @@
     if (m.tipo === 'custodia') { li.className = 'gc-centro'; li.append(tarjetaCustodia(m)); if (!sinScroll && abajo) ul.scrollTop = ul.scrollHeight; return; }
     if (m.dir === 'sistema') { li.className = 'gc-nota-sistema'; li.textContent = T(m.texto); if (!sinScroll && abajo) ul.scrollTop = ul.scrollHeight; return; }
     const bur = document.createElement('div'); bur.className = 'gc-burbuja ' + (m.dir === 'mia' ? 'gc-mia' : 'gc-suya') + (li.classList.contains('gc-sigue') ? ' gc-sigue' : '');
+    // blindado (dueño, 29 Oct 2026, 10:08: «cuando llega el mensaje, que tú puedas aceptarlo o no… en el blindado no [directo]»):
+    // lo que llega va velado, con lo que es y su tamaño; «Mostrar» lo abre y «Descartar» lo borra sin abrirlo (y la otra persona lo sabe)
+    if (m.velado && m.dir === 'suya') { bur.classList.add('gc-velada'); bur.append(burbujaVelada(c, m)); const meta = document.createElement('span'); meta.className = 'gc-meta'; const tm = document.createElement('time'); tm.textContent = hora(m.t); meta.append(tm); bur.append(meta); li.append(bur); if (!sinScroll && abajo) ul.scrollTop = ul.scrollHeight; return; }
     if (m.tipo === 'texto') { const s = document.createElement('span'); s.className = 'gc-texto'; s.append(...enlaza(m.texto)); bur.append(s);
       // la ubicación, con su botón «Abrir en el mapa»
       const u = /^📍 [^:]+: (-?\d{1,2}\.\d{2,6}), (-?\d{1,3}\.\d{2,6}) \(([^)]*)\)\n(https:\/\/www\.openstreetmap\.org\/\S+)$/.exec(m.texto || '');
@@ -1592,11 +1667,13 @@
     tk.classList.toggle('gc-pendiente', m.estado === 'pendiente');
     tk.classList.toggle('gc-leido', m.estado === 'leido');
     tk.classList.toggle('gc-fallo', m.estado === 'fallo');
-    tk.innerHTML = m.estado === 'pendiente' ? RELOJ : m.estado === 'enviado' ? TICK1 : m.estado === 'fallo' ? '' : TICK2;
+    tk.classList.toggle('gc-descartado', m.estado === 'descartado');
+    tk.innerHTML = m.estado === 'pendiente' ? RELOJ : m.estado === 'enviado' ? TICK1 : m.estado === 'fallo' || m.estado === 'descartado' ? '' : TICK2;
     tk.style.color = ''; tk.style.opacity = '';
-    tk.title = m.estado === 'pendiente' ? T('Pendiente: saldrá cuando la otra persona entre') : m.estado === 'enviado' ? T('Enviado') : m.estado === 'entregado' ? T('Entregado') : m.estado === 'leido' ? T('Leído') : m.estado === 'fallo' ? T('No se pudo enviar') : '';
+    tk.title = m.estado === 'pendiente' ? T('Pendiente: saldrá cuando la otra persona entre') : m.estado === 'enviado' ? T('Enviado') : m.estado === 'entregado' ? T('Entregado') : m.estado === 'leido' ? T('Leído') : m.estado === 'fallo' ? T('No se pudo enviar') : m.estado === 'descartado' ? T('Descartado por la otra persona sin mostrarlo') : '';
     tk.setAttribute('aria-label', tk.title);
     if (m.estado === 'fallo') tk.textContent = '!';
+    if (m.estado === 'descartado') tk.textContent = T('descartado');
   }
   function pintaProgreso(m) { const li = $('#mensajes [data-id="' + m.id + '"]'); if (!li) return; if (!li.querySelector('.gc-progreso')) { const c = CONVS.get(m.conv); if (c) pintaMensaje(c, m, true); return; } const i = li.querySelector('.gc-progreso i'); if (i) i.style.width = Math.round((m.archivo.progreso || 0) * 100) + '%'; const s = li.querySelector('.gc-archivo small'); if (s) s.textContent = tamano(m.archivo.tam) + (m.archivo.progreso < 1 ? ' · ' + Math.round(m.archivo.progreso * 100) + ' %' : ''); }
   const tamano = (n) => n < 1024 ? n + ' B' : n < 1048576 ? (n / 1024).toFixed(0) + ' KB' : (n / 1048576).toFixed(1) + ' MB';
@@ -1610,11 +1687,14 @@
     d.append(ic, b, s);
     const enCurso = m.estado !== 'fallo' && pr < 1 && m.estado !== 'pendiente';
     if (enCurso) { const p = document.createElement('span'); p.className = 'gc-progreso'; const i = document.createElement('i'); i.style.width = Math.round(pr * 100) + '%'; p.append(i); d.append(p); }
-    if (m.estado === 'recibido' || m.estado === 'entregado' || m.estado === 'leido') { const se = document.createElement('span'); se.className = 'sello'; se.textContent = '✓ ' + T('Completo y autenticado: encriptado de extremo a extremo'); d.append(se); }
+    const conVida = !!m.archivo.vida, temporalVivo = conVida && m.dir === 'suya' && m.estado === 'recibido' && !m.archivo.caducado;
+    if (conVida) { const se = document.createElement('span'); se.className = 'sello vida'; se.textContent = (m.archivo.caducado ? '✓ ' + T('Visto y borrado') : m.archivo.vistoBorrado ? '✓ ' + T('Visto y borrado en el otro equipo') : m.archivo.vida === 'una' ? '⏱ ' + T('Se ve una vez y se borra') : '⏱ ' + T('Se ve {s} y se borra').replace('{s}', m.archivo.vida >= 60 ? (m.archivo.vida / 60) + ' min' : m.archivo.vida + ' s')); d.append(se); if (m.archivo.caducado || m.archivo.vistoBorrado) d.classList.add('caducado'); }
+    else if (m.estado === 'recibido' || m.estado === 'entregado' || m.estado === 'leido') { const se = document.createElement('span'); se.className = 'sello'; se.textContent = '✓ ' + T('Completo y autenticado: encriptado de extremo a extremo') + (m.archivo.paq ? ' · ' + T('paquete «todo o nada»') : ''); d.append(se); }
     else if (m.estado === 'fallo' && /alterados/.test(m.archivo.motivo || '')) { const se = document.createElement('span'); se.className = 'sello mal'; se.textContent = '✕ ' + T('Detenido: no superó la autenticación'); d.append(se); }
     const fila = document.createElement('div'); fila.className = 'fila';
     if (m.dir === 'suya' && m.estado === 'recibiendo' && m.archivo.aDisco && !m.archivo.enDisco) { const g = document.createElement('button'); g.type = 'button'; g.className = 'boton principal'; g.textContent = T('Guardar en…'); g.addEventListener('click', () => { const c = CONVS.get(m.conv); if (c) eligeDestino(c, m); }); fila.append(g); }
-    if ((m.dir === 'suya' && m.estado === 'recibido' && !m.archivo.enDisco) || (m.dir === 'mia' && /^(image|audio)\//.test(m.archivo.mime))) {
+    if (temporalVivo) { const g = document.createElement('button'); g.type = 'button'; g.className = 'boton principal'; g.textContent = T('Ver'); g.addEventListener('click', () => { const c = CONVS.get(m.conv); if (c) veTemporal(c, m); }); fila.append(g); }
+    else if (!conVida && ((m.dir === 'suya' && m.estado === 'recibido' && !m.archivo.enDisco) || (m.dir === 'mia' && /^(image|audio)\//.test(m.archivo.mime)))) {
       if (/^audio\//.test(m.archivo.mime)) { BD.saca('arch', m.id).then((r) => { if (!r) return; const au = document.createElement('audio'); au.controls = true; au.preload = 'metadata'; au.src = URL.createObjectURL(r.blob); au.style.gridColumn = '1 / -1'; d.prepend(au); }); }
       if (/^image\//.test(m.archivo.mime) && m.archivo.tam < 24 * 1024 * 1024) { BD.saca('arch', m.id).then((r) => { if (!r) return; const img = document.createElement('img'); img.className = 'imagen'; img.alt = m.archivo.nombre; img.src = URL.createObjectURL(r.blob); img.style.gridColumn = '1 / -1'; img.addEventListener('click', () => abreArchivo(m, false)); d.prepend(img); }); }
       if (m.dir === 'suya') { const g = document.createElement('button'); g.type = 'button'; g.className = 'boton'; g.textContent = T('Guardar'); g.addEventListener('click', () => abreArchivo(m, true)); fila.append(g); }
@@ -1623,8 +1703,108 @@
     const llego = m.estado === 'recibido' || m.estado === 'entregado' || m.estado === 'leido';
     if (VIAJES.has(m.id) && VJ() && (llego || !esMovil())) { const b = document.createElement('button'); b.type = 'button'; b.className = 'boton vj-ver'; b.innerHTML = RUTA; b.append(document.createTextNode(T('Ver el viaje'))); b.addEventListener('click', () => { const v = VIAJES.get(m.id); if (v) VJ().abre(v); }); fila.append(b); }
     if (sePuedeCortar(m)) { const x = document.createElement('button'); x.type = 'button'; x.className = 'boton peligro'; x.textContent = T('Cortar el envío'); x.addEventListener('click', () => { const c = CONVS.get(m.conv); if (c) cortaArchivo(c, m); }); fila.append(x); }
+    // quien lo envió puede borrarlo en los dos equipos (dueño, 29 Oct 2026, 10:08: «que la persona también lo pueda borrar si quiere»)
+    if (m.dir === 'mia' && !m.archivo.voz && !sePuedeCortar(m) && !m.archivo.vistoBorrado && m.estado !== 'fallo' && m.estado !== 'descartado') { const x = document.createElement('button'); x.type = 'button'; x.className = 'boton borrar-dos'; x.textContent = T('Borrar en los dos'); x.addEventListener('click', () => { const c = CONVS.get(m.conv); if (c) borraEnLosDos(c, m); }); fila.append(x); }
     if (fila.childNodes.length) d.append(fila);
     return d;
+  }
+  // ---------- blindado: velado, tiempo en pantalla, borrar en los dos, alarma ----------
+  const tipoArchivo = (m) => m.archivo.voz ? T('Nota de voz') : /^image\//.test(m.archivo.mime) ? T('Foto') : /^video\//.test(m.archivo.mime) ? T('Vídeo') : /^audio\//.test(m.archivo.mime) ? T('Audio') : T('Documento');
+  function burbujaVelada(c, m) {
+    const d = document.createElement('div'); d.className = 'gc-velo-caja';
+    const ic = document.createElement('span'); ic.className = 'gc-velo-icono'; ic.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3l18 18M10.6 10.6a2 2 0 0 0 2.8 2.8M9.9 5.1A10.4 10.4 0 0 1 12 4.9c5 0 8.6 4.1 9.6 7.1-.4 1.1-1.1 2.3-2.1 3.3M6.6 6.6C4.4 8 2.9 10.1 2.4 12c1 3 4.6 7.1 9.6 7.1 1.5 0 2.9-.4 4.1-1"/></svg>';
+    const tx = document.createElement('div'); tx.className = 'gc-velo-texto';
+    const b = document.createElement('b'); b.textContent = m.tipo === 'texto' ? T('Mensaje nuevo') : tipoArchivo(m);
+    const sm = document.createElement('small'); sm.textContent = m.tipo === 'texto' ? T('Velado hasta que lo muestres') : tamano(m.archivo.tam) + (m.estado === 'recibiendo' ? ' · ' + Math.round((m.archivo.progreso || 0) * 100) + ' %' : m.estado === 'fallo' ? ' · ' + (m.archivo.motivo || T('no se completó')) : m.archivo.vida ? ' · ' + (m.archivo.vida === 'una' ? T('se ve una vez') : T('se ve {s}').replace('{s}', m.archivo.vida >= 60 ? (m.archivo.vida / 60) + ' min' : m.archivo.vida + ' s')) : '');
+    tx.append(b, sm); d.append(ic, tx);
+    const fila = document.createElement('div'); fila.className = 'gc-velo-botones';
+    const si = document.createElement('button'); si.type = 'button'; si.className = 'boton principal'; si.textContent = T('Mostrar'); si.addEventListener('click', () => muestraVelado(c, m));
+    const no = document.createElement('button'); no.type = 'button'; no.className = 'boton'; no.textContent = T('Descartar'); no.addEventListener('click', () => descarta(c, m));
+    fila.append(si, no); d.append(fila);
+    return d;
+  }
+  async function muestraVelado(c, m) {
+    if (!m.velado) return; m.velado = false; await guardaMensaje(c, m); pintaMensaje(c, m, true);
+    if (m.tipo === 'texto') marcaLeidos(c);
+  }
+  // Descartar sin mostrar: se borra aquí (y lo que estuviera llegando, se corta) y la otra persona ve «descartado» en su mensaje
+  async function descarta(c, m) {
+    if (m.tipo === 'archivo' && sePuedeCortar(m)) await cortaArchivo(c, m);
+    enviaControl(c, { tipo: 'descartado', id: m.id });
+    await borraLocal(c, m.id, false);
+  }
+  async function borraLocal(c, id, porElla) {
+    const m = c.mensajes.find((x) => x.id === id); if (!m) return;
+    if (m.tipo === 'archivo' && c.archivos.has(m.id)) { const a = c.archivos.get(m.id); a.cancelado = true; clearTimeout(a.esperaTrailer); if (a.escritor) { try { await a.escritor.abort(); } catch (_) {} } a.partes = null; c.archivos.delete(m.id); }
+    try { VIAJES.delete(m.id); } catch (_) {}
+    c.mensajes = c.mensajes.filter((x) => x !== m); c.cola = (c.cola || []).filter((x) => x !== m);
+    try { await BD.borra('msg', m.id); await BD.borra('arch', m.id); } catch (_) {}
+    if (visorDe === m.id) cierraVisor(true);
+    const li = ACTUAL === c.id && $('#mensajes [data-id="' + m.id + '"]'); if (li) li.remove();
+    if (porElla) { await anotaSistema(c, m.tipo === 'archivo' ? 'La otra persona ha borrado un archivo en los dos equipos.' : 'La otra persona ha borrado un mensaje en los dos equipos.'); }
+    const u = c.mensajes.filter((x) => x.dir !== 'sistema').pop(); if (u) { c.ultimo = u.t; c.ultimoTexto = await guardaSellado({ texto: u.tipo === 'texto' ? u.texto : u.tipo === 'archivo' ? '📎 ' + u.archivo.nombre : u.texto || '' }); } else { c.ultimoTexto = null; }
+    await guardaConv(c); pintaLista();
+  }
+  async function borraEnLosDos(c, m) {
+    if (!enviaControl(c, { tipo: 'borra', id: m.id })) { aviso(T('La otra persona no está conectada ahora: se borra aquí; en su equipo, cuando entre.')); c.borrarPendientes = (c.borrarPendientes || []).concat(m.id).slice(-64); await guardaConv(c); }
+    await borraLocal(c, m.id, false);
+  }
+  // Ver con tiempo (dueño, 29 Oct 2026, 10:08): se abre dentro de GUARDIANA, con la cuenta atrás; al cerrarse o al acabar el
+  // tiempo, se borra de este equipo y la otra persona recibe «visto y borrado». Lo que no se puede ver dentro (otros documentos)
+  // se abre fuera una sola vez y se borra aquí; allí no se puede borrar.
+  let visorDe = null, visorT = null, visorUrl = null, visorFin = null;
+  async function veTemporal(c, m) {
+    const r = await BD.saca('arch', m.id); if (!r) { m.archivo.caducado = true; await guardaMensaje(c, m); pintaMensaje(c, m, true); return aviso(T('Este archivo ya no está en este navegador.')); }
+    const mime = m.archivo.mime || '', dentro = /^(image|video|audio)\//.test(mime) || mime === 'application/pdf';
+    if (!dentro) { abreArchivo(m, false); await caducaTemporal(c, m); aviso(T('Abierto fuera de GUARDIANA y borrado aquí.')); return; }
+    const vis = $('#visor'), cuerpo = $('#visor-cuerpo'); cuerpo.textContent = '';
+    visorUrl = URL.createObjectURL(r.blob); visorDe = m.id;
+    let el;
+    if (/^image\//.test(mime)) { el = document.createElement('img'); el.alt = ''; el.src = visorUrl; }
+    else if (/^video\//.test(mime)) { el = document.createElement('video'); el.src = visorUrl; el.controls = true; el.autoplay = true; el.playsInline = true; el.setAttribute('controlsList', 'nodownload'); }
+    else if (/^audio\//.test(mime)) { el = document.createElement('audio'); el.src = visorUrl; el.controls = true; el.autoplay = true; el.setAttribute('controlsList', 'nodownload'); }
+    else { el = document.createElement('iframe'); el.src = visorUrl + '#toolbar=0'; el.title = m.archivo.nombre; }
+    el.addEventListener('contextmenu', (e) => e.preventDefault());
+    cuerpo.append(el);
+    $('#visor-nombre').textContent = m.archivo.nombre;
+    const seg = m.archivo.vida === 'una' ? 0 : +m.archivo.vida;
+    const cuenta = $('#visor-cuenta'); cuenta.hidden = !seg;
+    vis.hidden = false; document.body.classList.add('con-visor');
+    visorFin = () => caducaTemporal(c, m);
+    if (seg) { let q = seg; const pon = () => { cuenta.textContent = q >= 60 ? Math.floor(q / 60) + ':' + String(q % 60).padStart(2, '0') : q + ' s'; }; pon(); visorT = setInterval(() => { q--; pon(); if (q <= 0) cierraVisor(false); }, 1000); }
+    else cuenta.textContent = '';
+  }
+  async function cierraVisor(sinCaducar) {
+    const vis = $('#visor'); if (!vis || vis.hidden) return;
+    clearInterval(visorT); visorT = null; vis.hidden = true; document.body.classList.remove('con-visor');
+    const cuerpo = $('#visor-cuerpo'); for (const x of cuerpo.querySelectorAll('video, audio')) { try { x.pause(); x.src = ''; } catch (_) {} } cuerpo.textContent = '';
+    if (visorUrl) { try { URL.revokeObjectURL(visorUrl); } catch (_) {} visorUrl = null; }
+    const f = visorFin; visorFin = null; visorDe = null;
+    if (!sinCaducar && f) await f();
+  }
+  async function caducaTemporal(c, m) {
+    if (m.archivo.caducado) return;
+    try { await BD.borra('arch', m.id); } catch (_) {}
+    m.archivo.caducado = true; await guardaMensaje(c, m); pintaMensaje(c, m, true);
+    enviaControl(c, { tipo: 'visto', id: m.id });
+  }
+  // Alarma de ataque (dueño, 29 Oct 2026, 10:10: «en caso de detectar un ataque, la información se destruye… automáticamente»):
+  // solo en el blindado. Salta con el segundo mensaje o trozo manipulado de la conversación, con «No coinciden» en el número de la
+  // llamada, o cuando el otro equipo la da. Destruye claves, mensajes y archivos en los dos equipos y lo dice en pantalla.
+  const ALARMA_INCIDENCIAS = 2;
+  async function alarmaSiToca(c) { if (esB(c) && (c.incidencias || 0) >= ALARMA_INCIDENCIAS) { await alarma(c, 'integridad'); return true; } return false; }
+  async function alarma(c, por) {
+    if (!esB(c) || c.estado === 'destruida' || c.alarmada) return; c.alarmada = true;
+    if (c.codigo) R.retira(c.codigo);
+    if (enviaControl(c, { tipo: 'alarma', por })) { await new Promise((r) => setTimeout(r, 300)); await destruyeLocal(c, false, true); }
+    else await destruye(c, true); // con la otra persona ausente: se borra aquí y la orden de borrado le llega en cuanto entre
+    muestraAlarma(por, false);
+  }
+  function muestraAlarma(por, porElla) {
+    const a = $('#alarma'); if (!a) return;
+    $('#alarma-por').textContent = por === 'numero' ? T('El número de seguridad de la llamada no coincidía en los dos equipos: alguien podía estar en medio.') : por === 'integridad' ? T('Llegaron mensajes o piezas manipulados: alguien intentó alterar o colarse en la conversación.') : T('El otro equipo detectó un ataque.');
+    $('#alarma-donde').textContent = porElla ? T('El otro equipo dio la alarma. Esta conversación se ha destruido aquí también: claves, mensajes y archivos.') : T('Para que nada pueda ser robado, esta conversación se ha destruido en los dos equipos: claves, mensajes y archivos.');
+    a.hidden = false; try { $('#alarma-ok').focus(); } catch (_) {}
   }
   // Cortar un archivo a medias (dueño, 28 Oct 2026: «por si alguien quiere cortar, que lo pueda cortar»): desde los dos
   // lados, mientras se envía, se recibe o espera. El otro equipo recibe la orden al momento y deja de llegar nada.
@@ -2343,6 +2523,8 @@
         lista.append(li);
       }
       porEnviar = { conv: c.id, fs, urls };
+      for (const x of document.querySelectorAll('#envio-tiempo button')) x.setAttribute('aria-pressed', String(!x.dataset.vida));
+      { const et = $('#envio-tiempo'); if (et) et.hidden = fs.every((f) => f.size > MAX_MEMORIA); }
       if (VJ() && VJ().abierto()) VJ().cierra(); // la hoja del viaje quedaría encima y taparía «Enviar»
       $('#h-envio').classList.toggle('discreta', discreto);
       abreHoja('h-envio');
@@ -2351,8 +2533,13 @@
     $('#envio-si').addEventListener('click', () => {
       const p = porEnviar; cierraHoja('h-envio'); if (!p) return;
       const fs = p.fs; sueltaEnvio();
-      const c = CONVS.get(p.conv); if (c && c.id === ACTUAL) enviaArchivos(c, fs);
+      const el = $('#envio-tiempo [aria-pressed="true"]'), vida = el && el.dataset.vida ? (el.dataset.vida === 'una' ? 'una' : +el.dataset.vida) : undefined;
+      const c = CONVS.get(p.conv); if (c && c.id === ACTUAL) enviaArchivos(c, fs, { vida: vida || undefined });
     });
+    // tiempo en pantalla (dueño, 29 Oct 2026, 10:08): sin límite, una vez, 30 s, 1 min, 5 min; de entrada, sin límite
+    for (const b of document.querySelectorAll('#envio-tiempo button')) b.addEventListener('click', () => { for (const x of document.querySelectorAll('#envio-tiempo button')) x.setAttribute('aria-pressed', String(x === b)); });
+    $('#visor-cerrar').addEventListener('click', () => cierraVisor(false));
+    $('#alarma-ok').addEventListener('click', () => { $('#alarma').hidden = true; });
     $('#envio-no').addEventListener('click', () => { cierraHoja('h-envio'); sueltaEnvio(); });
     // «Tapar»: un mosaico de bloques grandes donde pasa el dedo (no se puede deshacer en la foto que se envía)
     let taparIdx = -1, taparImg = null, taparOrig = null, taparMos = null, dibuja = null;
@@ -2484,12 +2671,14 @@
         setTimeout(() => { if (esperaWa === e && !e.fuera && document.visibilityState === 'visible') { esperaWa = null; aviso(T('No se pudo abrir WhatsApp.')); } }, 6000);
       } finally { b.removeAttribute('aria-busy'); }
     });
-    // se fue a WhatsApp: fuera la hoja y, al volver, ya en el chat, esperando a la otra persona (21:51)
+    // se fue a WhatsApp: fuera la hoja. Al volver, el inicio tal cual (dueño, 29 Oct 2026, 10:38: desde WhatsApp «si vuelvo atrás, ya se
+    // me abría el chat… no se tiene que poder abrir»; antes, 28 Oct 21:51, se abría el chat): la invitación queda en la lista como
+    // «Invitación enviada» y el chat se abre solo cuando la otra persona entra (ver R.on('llega'))
     document.addEventListener('visibilitychange', () => {
       const e = esperaWa; if (!e) return;
       if (document.visibilityState === 'hidden') {
         e.fuera = true; cierraHoja('h-invitar');
-        const c = CONVS.get(e.id); if (c) { c.compartido = true; if (!c.huella && (!ACTUAL || ACTUAL === c.id)) abreConv(c.id); }
+        const c = CONVS.get(e.id); if (c) { c.compartido = true; pintaLista(); }
         return;
       }
       if (e.fuera) esperaWa = null;

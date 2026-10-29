@@ -56,8 +56,10 @@ const vuelve = (P) => P.evaluate(() => { Object.defineProperty(document, 'visibi
   await sale(A); await espera(300);
   comprueba(!(await visible(A, '#h-invitar')), 'al irse a WhatsApp, la hoja se cierra');
   await vuelve(A); await espera(400);
-  const cab = await A.evaluate(() => document.querySelector('#cconfianza').textContent);
-  comprueba(await visible(A, '#texto') && /Invitación enviada/.test(cab), 'al volver: ya en el chat, «Invitación enviada» (21:51)', cab);
+  // 29 Oct 2026, 10:38 (dueño): al volver de WhatsApp NO se abre el chat (desde WhatsApp no se sabe si se envió o se canceló): el
+  // inicio tal cual, con la invitación en la lista como «Invitación enviada»; el chat se abre cuando la otra persona entra
+  const fila = await A.evaluate(() => { const f = document.querySelector('#lista-filas .fila-conv small'); return f ? f.textContent : ''; });
+  comprueba(!(await visible(A, '#texto')) && /Invitación enviada|esperando a la otra persona/.test(fila), 'al volver: el inicio, sin abrir el chat; la invitación en la lista, esperando (10:38)', fila);
   await A.screenshot({ path: path.join(OUT, '2-vuelta.png') });
 
   // 3. la otra persona abre el enlace que le llegó por WhatsApp: el chat se abre en los dos

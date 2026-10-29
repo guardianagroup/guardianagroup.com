@@ -61,6 +61,14 @@
     let inicioYo = false; // quién llamó: el resumen del chat va a mi lado o al suyo (dueño, 28 Oct 2026, 13:29)
     let pantallaEncendida = null; // Wake Lock: la pantalla no se apaga mientras dura la llamada (agencia, ronda 74)
     let cam = null, video = false, suCamara = true, remotoV = null; // videollamada: mi cámara, si la llamada es con imagen, si la otra persona tiene la cámara encendida y su imagen
+    // El número de seguridad de la llamada (dueño, 29 Oct 2026, 10:16: «un número grande en el medio de la pantalla… el otro tiene
+    // que ver el mismo número»). Es el esquema de ZRTP (Zimmermann; RFC 6189): cada llamada estrena un acuerdo de claves P-256 con
+    // compromiso previo (quien llama manda primero la huella de su clave y la revela cuando ya tiene la de la otra persona), y el
+    // número sale de ese secreto compartido más las huellas DTLS de los dos equipos. Quien esté en medio no puede fabricar el
+    // mismo número en las dos pantallas (una entre diez mil por llamada), y la comparación la hacen las dos personas con su voz y
+    // su cara: no hay que mandar nada por ningún sitio.
+    let sas = null; // { clave, pub, compromiso, suCompromiso, suPub, numero, estado: 'pendiente' | 'coinciden' | 'no' | 'roto' }
+    let sasPlegadoT = null;
     // la voz y la imagen empiezan siempre naturales: se cambian en la llamada con «Voz grave» y «Mosaico» (29 Oct 2026, 07:51)
     let imagen = 'natural'; try { localStorage.removeItem('gcom-imagen'); } catch (_) {}
     let proc = null; // la imagen procesada (lienzo): protegida, o aclarada si hay poca luz
@@ -698,7 +706,7 @@
       pc.onicecandidate = (e) => { if (e.candidate) o.manda({ acto: 'ice', id: idLlamada, cand: e.candidate.toJSON() }); };
       pc.onconnectionstatechange = () => {
         if (!pc) return;
-        if (pc.connectionState === 'connected') { paraTono(); refuerzaRuta(); recuperada(); if (estado !== 'hablando') { estado = 'hablando'; iniciada = Date.now(); di(''); avisaSalida(); clearInterval(reloj); reloj = setInterval(() => { tiempo.textContent = mmss(Date.now() - iniciada); }, 500); mideCalidad(); topeAudio(); if (video) topeVideo(); pinta(); suenaRemoto(); } }
+        if (pc.connectionState === 'connected') { paraTono(); refuerzaRuta(); recuperada(); if (estado !== 'hablando') { estado = 'hablando'; iniciada = Date.now(); di(''); avisaSalida(); clearInterval(reloj); reloj = setInterval(() => { tiempo.textContent = mmss(Date.now() - iniciada); }, 500); mideCalidad(); topeAudio(); if (video) topeVideo(); pinta(); suenaRemoto(); sasCalcula(); pintaSas(); } }
         else if (pc.connectionState === 'failed') { di(t('Conexión interrumpida, intentando recuperarla…'), true); reconecta('fallo'); }
         else if (pc.connectionState === 'disconnected') { di(t('Conexión interrumpida, intentando recuperarla…'), true); reconecta('corte'); }
       };
@@ -773,6 +781,50 @@
       let p; try { p = ar.play(); } catch (_) { return; }
       if (p && p.then) p.then(() => { if (paso.textContent === TOCA()) di(''); }).catch(() => { if (estado === 'hablando' || estado === 'conectando') di(TOCA(), true); });
     }
+    const b64u = (b) => btoa(String.fromCharCode(...new Uint8Array(b))).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+    const deB64u = (t) => { const x = atob(String(t).replace(/-/g, '+').replace(/_/g, '/')); const u = new Uint8Array(x.length); for (let i = 0; i < x.length; i++) u[i] = x.charCodeAt(i); return u; };
+    const sha256 = async (b) => new Uint8Array(await crypto.subtle.digest('SHA-256', b));
+    const huellaDtls = (sdp) => { const m = /a=fingerprint:sha-256 ([0-9A-Fa-f:]+)/.exec(sdp || ''); return m ? m[1].toUpperCase() : ''; };
+    async function sasNuevo() {
+      try {
+        const k = await crypto.subtle.generateKey({ name: 'ECDH', namedCurve: 'P-256' }, false, ['deriveBits']);
+        const pub = new Uint8Array(await crypto.subtle.exportKey('raw', k.publicKey));
+        sas = { clave: k, pub, compromiso: await sha256(pub), suCompromiso: null, suPub: null, numero: '', estado: 'pendiente' };
+      } catch (_) { sas = null; }
+    }
+    // el número: 4 cifras de SHA-256(secreto compartido ‖ compromiso ‖ huella DTLS de quien llama ‖ huella DTLS de quien contesta)
+    async function sasCalcula() {
+      if (!sas || sas.numero || !sas.suPub || !pc || !pc.localDescription || !pc.remoteDescription) return;
+      try {
+        const suya = await crypto.subtle.importKey('raw', sas.suPub, { name: 'ECDH', namedCurve: 'P-256' }, false, []);
+        const secreto = new Uint8Array(await crypto.subtle.deriveBits({ name: 'ECDH', public: suya }, sas.clave.privateKey, 256));
+        const fl = huellaDtls(pc.localDescription.sdp), fr = huellaDtls(pc.remoteDescription.sdp);
+        const comp = inicioYo ? sas.compromiso : sas.suCompromiso;
+        const texto = new TextEncoder().encode('GUARDIANA SAS v1\0' + (inicioYo ? fl + '\0' + fr : fr + '\0' + fl));
+        const todo = new Uint8Array(16 + secreto.length + comp.length + texto.length); todo.set(new TextEncoder().encode('GUARDIANA SAS v1'), 0); todo.set(secreto, 16); todo.set(comp, 16 + secreto.length); todo.set(texto, 16 + secreto.length + comp.length);
+        const h = await sha256(todo), n = ((h[0] << 24 | h[1] << 16 | h[2] << 8 | h[3]) >>> 0) % 10000;
+        sas.numero = String(n).padStart(4, '0');
+      } catch (_) { sas.estado = 'roto'; }
+      pintaSas();
+    }
+    function pintaSas() {
+      const caja2 = $('#ll-sas'), mini = $('#ll-sas-mini'); if (!caja2 || !mini) return;
+      const hay = !!(sas && (sas.numero || sas.estado === 'roto') && estado === 'hablando');
+      const grande = hay && sas.estado === 'pendiente' && !caja.classList.contains('sas-plegado');
+      caja2.hidden = !grande; mini.hidden = !(hay && !grande); caja.classList.toggle('sas-grande', grande);
+      if (!hay) { caja.classList.remove('sas-plegado'); clearTimeout(sasPlegadoT); return; }
+      const num = sas.numero ? sas.numero.slice(0, 2) + ' ' + sas.numero.slice(2) : '— —';
+      $('#ll-sas-num').textContent = num; $('#ll-sas-num').setAttribute('aria-label', t('Número de seguridad') + ': ' + num);
+      $('#ll-sas-texto').textContent = sas.estado === 'roto' ? t('No se pudo calcular el número de seguridad de esta llamada: no hables de nada delicado y vuelve a llamar.') : t('La otra persona debe ver este mismo número en su pantalla. Decidlo en voz alta: si no coincide, hay alguien en medio.');
+      $('#ll-sas-si').hidden = sas.estado === 'roto';
+      mini.textContent = (sas.estado === 'coinciden' ? '✓ ' : sas.estado === 'roto' ? '! ' : '') + num;
+      mini.classList.toggle('bien', sas.estado === 'coinciden'); mini.classList.toggle('mal', sas.estado === 'roto');
+      mini.setAttribute('aria-label', t('Número de seguridad') + ': ' + num + (sas.estado === 'coinciden' ? ' · ' + t('coinciden') : ''));
+      // en grande 40 s; si nadie toca, se pliega a la píldora de arriba (se vuelve a abrir tocándola)
+      clearTimeout(sasPlegadoT); if (grande) sasPlegadoT = setTimeout(() => { caja.classList.add('sas-plegado'); pintaSas(); }, 40000);
+    }
+    function sasCoinciden() { if (!sas || sas.estado !== 'pendiente') return; sas.estado = 'coinciden'; caja.classList.add('sas-plegado'); pintaSas(); if (o.sasOk) { try { o.sasOk(); } catch (_) {} } }
+    function sasNoCoinciden() { if (!sas || sas.estado !== 'pendiente') return; sas.estado = 'no'; pintaSas(); const f = o.sasMal; colgar(); if (f) { try { f(); } catch (_) {} } }
     async function llamar(conVideo) {
       if (ocupado()) return;
       if (!o.puede()) { o.aviso && o.aviso(t('Para llamar, la otra persona tiene que estar conectada y la sesión, verificada.')); return; }
@@ -788,7 +840,8 @@
       agregaPistas(); if (video) prefiereCodecs(EQUIPO);
       di(t('Llamando…'));
       const of = await pc.createOffer(); await pc.setLocalDescription({ type: of.type, sdp: altaFidelidad(of.sdp) });
-      o.manda({ acto: 'oferta', id: idLlamada, sdp: pc.localDescription.sdp, video: video ? 1 : undefined, equipo: EQUIPO });
+      await sasNuevo();
+      o.manda({ acto: 'oferta', id: idLlamada, sdp: pc.localDescription.sdp, video: video ? 1 : undefined, equipo: EQUIPO, sas: sas ? b64u(sas.compromiso) : undefined });
       if (estado === 'saliente') { tono('saliente'); esperaRespuesta(true); }
       pinta();
     }
@@ -798,12 +851,17 @@
         if (typeof m.sdp !== 'string' || m.sdp.length > 20000) return;
         if (ocupado()) { if (m.id !== idLlamada) o.manda({ acto: 'ocupado', id: m.id }); return; }
         ofertaEntrante = m; idLlamada = String(m.id || '').slice(0, 16); estado = 'entrante'; inicioYo = false; colgoYo = false; tiempo.textContent = '00:00'; calidad.textContent = ''; calidad.classList.remove('ver');
+        sas = null; await sasNuevo(); if (sas) { try { sas.suCompromiso = typeof m.sas === 'string' && m.sas.length < 64 ? deB64u(m.sas) : null; } catch (_) { sas.suCompromiso = null; } if (!sas.suCompromiso || sas.suCompromiso.length !== 32) sas = null; }
         video = m.video === 1 || /\nm=video /.test(m.sdp); suCamara = true; remotoV = null;
         di(video ? t('Videollamada entrante') : t('Llamada entrante')); pinta(); tono('entrante'); esperaRespuesta(false);
         return;
       }
       if (m.id && idLlamada && m.id !== idLlamada) return;
-      if (m.acto === 'respuesta' && pc && typeof m.sdp === 'string') { paraTono(); clearTimeout(sinRespuesta); await pc.setRemoteDescription({ type: 'answer', sdp: m.sdp }); for (const c of pendientes) { try { await pc.addIceCandidate(c); } catch (_) {} } pendientes = []; di(t('Conectando…')); if (video) topeVideo(); return; }
+      if (m.acto === 'respuesta' && pc && typeof m.sdp === 'string') { paraTono(); clearTimeout(sinRespuesta); await pc.setRemoteDescription({ type: 'answer', sdp: m.sdp }); for (const c of pendientes) { try { await pc.addIceCandidate(c); } catch (_) {} } pendientes = []; di(t('Conectando…')); if (video) topeVideo();
+        if (sas && inicioYo) { try { sas.suPub = typeof m.sas === 'string' && m.sas.length < 120 ? deB64u(m.sas) : null; } catch (_) { sas.suPub = null; } if (sas.suPub && sas.suPub.length === 65) { o.manda({ acto: 'sas', id: idLlamada, p: b64u(sas.pub) }); sasCalcula(); } else { sas.estado = 'roto'; pintaSas(); } }
+        return; }
+      // la clave revelada de quien llama: tiene que ser la del compromiso de la oferta; si no, la comprobación queda rota
+      if (m.acto === 'sas' && sas && !inicioYo) { let p = null; try { p = typeof m.p === 'string' && m.p.length < 120 ? deB64u(m.p) : null; } catch (_) {} if (p && p.length === 65) { const h = await sha256(p); if (sas.suCompromiso && h.length === 32 && h.every((x, i) => x === sas.suCompromiso[i])) { sas.suPub = p; sasCalcula(); return; } } sas.estado = 'roto'; pintaSas(); return; }
       if (m.acto === 'camara') { suCamara = !!m.on; pintaVideo(); return; }
       // reinicio de la ruta en mitad de la llamada (ver reconecta)
       if (m.acto === 'reinicia') { if (pc && estado === 'hablando' && inicioYo) { reiniciando = true; try { pc.restartIce(); } catch (_) { reiniciando = false; } } return; }
@@ -829,7 +887,7 @@
       if (video) prefiereCodecs(EQUIPO === 'compatible' || m.equipo === 'compatible' ? 'compatible' : 'escritorio');
       for (const c of pendientes) { try { await pc.addIceCandidate(c); } catch (_) {} } pendientes = [];
       const an = await pc.createAnswer(); await pc.setLocalDescription({ type: an.type, sdp: altaFidelidad(an.sdp) });
-      o.manda({ acto: 'respuesta', id: idLlamada, sdp: pc.localDescription.sdp });
+      o.manda({ acto: 'respuesta', id: idLlamada, sdp: pc.localDescription.sdp, sas: sas ? b64u(sas.pub) : undefined });
       if (video) { topeVideo(); if (!cam) o.manda({ acto: 'camara', id: idLlamada, on: false }); }
       pinta();
       di(t('Conectando…'));
@@ -850,6 +908,7 @@
       $('#a-remoto').srcObject = null; $('#v-remoto').srcObject = null; $('#v-local').srcObject = null; remotoV = null; suCamara = true; video = false;
       const bc = $('#ll-camara'); if (bc) bc.setAttribute('aria-pressed', 'false');
       pendientes = []; ofertaEntrante = null; iniciada = 0; partidaPorDefecto = true;
+      sas = null; caja.classList.remove('sas-plegado', 'sas-grande'); clearTimeout(sasPlegadoT); pintaSas();
       voz = 'natural'; imagen = 'natural'; // la próxima llamada empieza con la voz y la imagen naturales mudasRemotas = [];
       const silencio = $('#ll-silenciar'); if (silencio) silencio.setAttribute('aria-pressed', 'false');
       if (por === 'fin') di(t('Llamada terminada'));
@@ -864,6 +923,7 @@
       if (o.fin && era !== 'libre') o.fin({ por, duracion: dur, mia: inicioYo, yoColgue: colgoYo, saliente: era === 'saliente' || (era === 'hablando' && colgoYo), voz: voz !== 'natural', video: conImagen });
     }
     $('#ll-colgar').addEventListener('click', colgar);
+    { const si = $('#ll-sas-si'), no = $('#ll-sas-no'), mini = $('#ll-sas-mini'); if (si) si.addEventListener('click', sasCoinciden); if (no) no.addEventListener('click', sasNoCoinciden); if (mini) mini.addEventListener('click', () => { if (sas && sas.estado === 'pendiente') { caja.classList.remove('sas-plegado'); pintaSas(); } }); }
     $('#ll-rechazar').addEventListener('click', colgar);
     $('#ll-contestar').addEventListener('click', () => { contestar().catch(() => termina('fallo')); });
     $('#ll-silenciar').addEventListener('click', (e) => { const b = e.currentTarget; const on = b.getAttribute('aria-pressed') !== 'true'; b.setAttribute('aria-pressed', String(on)); for (const s of [envio, mic]) if (s) s.getAudioTracks().forEach((x) => { x.enabled = !on; }); });
