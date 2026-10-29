@@ -1122,6 +1122,18 @@ html.como-app .barra .barra-t{display:block;font-size:12px;letter-spacing:.3em}
   .gc-hoja-titulo{font-size:19px}
   .gc-hoja-caja .boton{min-height:52px;font-size:16.5px;border-radius:14px}
 }
+/* «Invitar a chat» en el iPhone: «WhatsApp» u «Otra app», con el mismo aspecto que el menú del clip (dueño, 28 Oct 2026, 20:56:
+   las invitaciones por WhatsApp llegaban 5 minutos tarde) */
+.hoja-invitar .gc-hoja-caja.caja{width:calc(100% - 16px);box-sizing:border-box;margin:0 8px calc(8px + env(safe-area-inset-bottom));padding:8px;gap:2px;border-radius:22px;border:1px solid rgba(156,195,228,.16);background:#111821}
+.hoja-invitar .gc-asa{display:none}
+.inv-op{display:flex;align-items:center;gap:14px;width:100%;min-height:60px;padding:8px 12px;border:0;border-radius:14px;background:transparent;color:#F4F6F8;text-align:left;cursor:pointer;font:500 17px/1.2 var(--texto)}
+.inv-op:active,.inv-op:focus-visible{background:rgba(156,195,228,.10);outline:none}
+.inv-op[aria-busy="true"]{opacity:.6}
+.inv-op b{font-weight:500}
+.inv-op svg{flex:none;width:22px;height:22px;padding:10px;box-sizing:content-box;border-radius:13px;fill:none;stroke:#fff;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;background:#556273}
+#invitar-wa svg{background:#25D366}
+.inv-cancelar{display:flex;align-items:center;justify-content:center;margin-top:6px;min-height:56px;border:0;border-radius:16px;background:#1A2230;color:#9CC3E4;font:600 17px/1 var(--texto);cursor:pointer}
+.inv-cancelar:active{background:#222C3A}
 /* -- la llamada en el teléfono -- */
 @media (max-width:760px){
   .gc-llamada{padding-left:max(16px,env(safe-area-inset-left));padding-right:max(16px,env(safe-area-inset-right))}

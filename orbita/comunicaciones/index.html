@@ -23,7 +23,7 @@
 <title>GUARDIANA</title>
 <link rel="icon" href="/favicon.ico">
 <link rel="stylesheet" href="componentes.css?v=20261028m">
-<link rel="stylesheet" href="app.css?v=20261030a">
+<link rel="stylesheet" href="app.css?v=20261030c">
 <link rel="stylesheet" href="viaje.css?v=20261029a">
 </head>
 <body>
@@ -390,6 +390,16 @@
     <div class="fila"><button type="button" class="boton" id="nueva-no">Cancelar</button><button type="button" class="boton principal" id="nueva-si">Empezar</button></div>
   </div>
 </div>
+<!-- «Invitar a chat» en el iPhone (dueño, 28 Oct 2026, 20:56: «si yo no abro WhatsApp, tarda como 5 minutos… esto hay que
+     arreglarlo»): la ventanita de compartir del iPhone deja el mensaje en cola hasta que WhatsApp despierta. «WhatsApp» abre la app
+     entera con la invitación ya escrita, y el mensaje sale al momento; «Otra app», el menú de compartir de siempre. -->
+<div class="gc-hoja hoja-invitar" id="h-invitar" role="dialog" aria-modal="true" aria-label="Invitar a chat">
+  <div class="gc-hoja-caja caja">
+    <button type="button" class="inv-op" id="invitar-wa"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.5 4.5h13a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-7.5l-4.5 3.5v-3.5h-1a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2z"/></svg><b translate="no">WhatsApp</b></button>
+    <button type="button" class="inv-op" id="invitar-otra"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5v11M8.2 7.2 12 3.5l3.8 3.7"/><path d="M8 10.5H6v10h12v-10h-2"/></svg><b>Otra app</b></button>
+    <button type="button" class="inv-cancelar" id="invitar-no">Cancelar</button>
+  </div>
+</div>
 <!-- La guía para añadir GUARDIANA a la pantalla de inicio, con los mismos botones que verá cada persona (dueño, 28 Oct 2026,
      17:02: «una guía… lo más profesional posible… los mismos botones que se va a encontrar la persona en el iPhone o en el
      Android»; 17:06: «en vez de poner comunicaciones… guardiana»). Una sola hoja: la abren «Añadir a la pantalla de inicio»,
@@ -561,7 +571,7 @@
 <input type="file" id="archivo" multiple hidden>
 <div class="aviso" id="aviso" role="status" aria-live="polite" hidden></div>
 
-<script src="/orbita/static/idioma.js?v=20261029p64"></script>
+<script src="/orbita/static/idioma.js?v=20261029p65"></script>
 <script src="pq-mlkem.js?v=20261027a"></script>
 <script src="pq-cnsa.js?v=20261027a"></script>
 <script src="qrhaz.js?v=20261027a"></script>
@@ -572,6 +582,6 @@
 <script src="viaje-datos.js?v=20261027a"></script>
 <script src="viaje.js?v=20261029a"></script>
 <script src="llamada.js?v=20261030b"></script>
-<script src="app.js?v=20261029z"></script>
+<script src="app.js?v=20261030c"></script>
 </body>
 </html>

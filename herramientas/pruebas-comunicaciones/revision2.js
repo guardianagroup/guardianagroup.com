@@ -33,15 +33,15 @@ const visible = (p, sel) => p.evaluate((s) => { const e = document.querySelector
   await A.click('.idiomas .idioma-actual'); await espera(350); await foto(A, '01b-idiomas');
   const anchoMenu = await A.evaluate(() => document.querySelector('.idioma-menu').getBoundingClientRect().width);
   comprueba(anchoMenu < 280, 'el menú de idiomas es compacto (' + Math.round(anchoMenu) + ' px)');
-  await A.mouse.click(200, 600); await espera(300);
+  await A.mouse.click(200, 160); await espera(300); // fuera del menú (antes, en (200, 600), caía en «Invitar a chat»)
   // cancelar el menú de compartir: no queda nada a medias
   await A.evaluate(() => { window.__cancelaCompartir = true; });
-  await A.click('#nueva-blindada'); await espera(1500);
+  await A.click('#nueva-blindada'); if (await A.$('#h-invitar.gc-abierta')) await A.click('#invitar-otra'); await espera(1500);
   comprueba(!(await visible(A, '#paso-enlace')), 'al cancelar compartir, sigue el inicio (sin segunda pantalla)');
   comprueba(await A.evaluate(() => !document.querySelector('#inicio').hidden), 'al cancelar, el inicio a la vista');
   // invitar de verdad
   await A.evaluate(() => { window.__cancelaCompartir = false; });
-  await A.click('#nueva-blindada'); await espera(900);
+  await A.click('#nueva-blindada'); if (await A.$('#h-invitar.gc-abierta')) await A.click('#invitar-otra'); await espera(900);
   await foto(A, '02-tras-compartir');
   comprueba(!(await visible(A, '#paso-enlace')), 'tras compartir, sin pantalla de espera');
   const avisoTxt = await A.evaluate(() => { const a = document.querySelector('#aviso'); return a && !a.hidden ? a.textContent : ''; });

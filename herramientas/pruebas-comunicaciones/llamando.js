@@ -22,7 +22,7 @@ async function telefono(browser, alto) {
   // Safari con sus barras: la parte visible es más baja (como en la captura del dueño)
   const A = await telefono(browser, 660), B = await telefono(browser);
   await A.goto(URL0); await B.goto(URL0); await espera(1800);
-  await A.click('#nueva-blindada'); await espera(900);
+  await A.click('#nueva-blindada'); if (await A.$('#h-invitar.gc-abierta')) await A.click('#invitar-otra'); await espera(900);
   const url = String((await A.evaluate(() => window.__compartidos[0])).url).replace('https://guardianagroup.com', 'http://127.0.0.1:8080');
   await B.goto(url); await espera(1500); await B.click('#aceptar-si'); await espera(5000);
   await A.click('#ccontacto-si'); await A.fill('#nombre-conv', 'Nathalie ❤️'); await A.click('#nombre-guardar'); await espera(500);

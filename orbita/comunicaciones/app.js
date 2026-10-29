@@ -2199,9 +2199,9 @@
     // En el móvil, una sola conversación: crear otra borra la anterior (en los dos equipos), con una pregunta antes si ya había
     // una conversación de verdad (dueño, 28 Oct 2026, 15:58: «en el móvil estas sesiones antiguas no tienen que aparecer para
     // nada… siempre lo nuevo; lo anterior se borra todo»)
-    $('#nueva-blindada').addEventListener('click', () => { if (esMovil() && vivas().some((x) => x.huella && !x.contacto)) { abreHoja('h-nueva'); return; } nuevaBlindadaConCopia(); });
+    $('#nueva-blindada').addEventListener('click', () => { if (esMovil() && vivas().some((x) => x.huella && !x.contacto)) { abreHoja('h-nueva'); return; } invitar(); });
     $('#nueva-no').addEventListener('click', () => cierraHoja('h-nueva'));
-    $('#nueva-si').addEventListener('click', () => { cierraHoja('h-nueva'); nuevaBlindadaConCopia(); });
+    $('#nueva-si').addEventListener('click', () => { cierraHoja('h-nueva'); invitar(); });
     // En el móvil, un solo toque: «Crear y compartir invitación» abre ya el menú de compartir del teléfono (dueño, 28 Oct 2026, 16:40:
     // «me lleva otra vez a darle otra vez a compartir enlace… mejor un solo botón… de un solo viaje»). El enlace sale de una semilla
     // preparada de antemano, así el menú se abre dentro del mismo toque (los teléfonos no lo dejan abrir después); la invitación se
@@ -2234,6 +2234,41 @@
       try { if (window.ClipboardItem && navigator.clipboard && navigator.clipboard.write) navigator.clipboard.write([new ClipboardItem({ 'text/plain': listo.then((c) => { if (!c) throw new Error('sin enlace'); return new Blob([enlaceB(c)], { type: 'text/plain' }); }) })]).then(() => listo.then((c) => { if (c) { c.copiado = true; if (ACTUAL === c.id) muestraEnlace(c); } })).catch(() => {}); } catch (_) {}
       creaInvitacionB().then((c) => dale(c || null)).catch(() => dale(null));
     }
+    // «Invitar a chat» en el iPhone (dueño, 28 Oct 2026, 20:52–20:56: «las invitaciones llegan como 5 minutos tarde… si yo, que le he
+    // enviado el enlace, entro a WhatsApp, llega al momento. Esto hay que arreglarlo»). Desde el menú de compartir del iPhone, WhatsApp
+    // solo abre su ventanita, que deja el mensaje en cola hasta que la app despierta. Así que primero: «WhatsApp», que abre la app
+    // entera con la invitación ya escrita (se elige a la persona, se envía y sale al momento), u «Otra app», el menú de siempre.
+    // Los mismos toques que antes. En Android y en el ordenador, como siempre (allí compartir ya abre WhatsApp entero).
+    const IPHONE = /iPhone|iPod/.test(navigator.userAgent);
+    function invitar() {
+      if (IPHONE && esMovil() && navigator.share && C.B.hayBlindada()) { abreHoja('h-invitar'); return; }
+      nuevaBlindadaConCopia();
+    }
+    let invWa = null, esperaWa = null; // la invitación que ya salió hacia WhatsApp (si se toca otra vez, la misma) y si se fue a WhatsApp
+    $('#invitar-otra').addEventListener('click', () => { cierraHoja('h-invitar'); nuevaBlindadaConCopia(); });
+    $('#invitar-no').addEventListener('click', () => cierraHoja('h-invitar'));
+    $('#invitar-wa').addEventListener('click', async () => {
+      const b = $('#invitar-wa'); if (b.getAttribute('aria-busy') === 'true') return;
+      b.setAttribute('aria-busy', 'true');
+      try {
+        let c = invWa ? CONVS.get(invWa) : null; if (c && (c.huella || !esB(c))) c = null;
+        // primero la invitación (unas décimas): al abrirse WhatsApp el iPhone duerme esta app, y la otra persona la puede abrir al momento
+        if (!c) { const semilla = semillaLista || C.nuevaSemilla(); semillaLista = null; setTimeout(preparaSemilla, 0); c = await creaInvitacionB(semilla, { sinPantalla: true }); }
+        if (!c) return;
+        invWa = c.id; esperaWa = { id: c.id, fuera: false };
+        location.href = 'whatsapp://send?text=' + encodeURIComponent(T('Invitación a una sesión blindada de GUARDIANA Comunicaciones') + '\n' + enlaceB(c));
+        const e = esperaWa;
+        setTimeout(() => { if (esperaWa === e && !e.fuera && document.visibilityState === 'visible') { esperaWa = null; aviso(T('No se pudo abrir WhatsApp.')); } }, 6000);
+      } finally { b.removeAttribute('aria-busy'); }
+    });
+    // se fue a WhatsApp: fuera la hoja; al volver, «Invitación enviada» en el inicio, y el chat se abre cuando la otra persona entra
+    document.addEventListener('visibilitychange', () => {
+      const e = esperaWa; if (!e) return;
+      if (document.visibilityState === 'hidden') { e.fuera = true; cierraHoja('h-invitar'); const c = CONVS.get(e.id); if (c) c.compartido = true; return; }
+      if (!e.fuera) return;
+      esperaWa = null;
+      const c = CONVS.get(e.id); if (c && !c.huella && !ACTUAL) aviso(T('Invitación enviada'));
+    });
     $('#vaciar').addEventListener('click', () => { const c = CONVS.get(ACTUAL); if (!c) return; $('#vaciar-nota').hidden = false; abreHoja('h-vaciar'); });
     $('#vaciar-no').addEventListener('click', () => cierraHoja('h-vaciar'));
     $('#vaciar-si').addEventListener('click', async () => { cierraHoja('h-vaciar'); await vacia(CONVS.get(ACTUAL)); });

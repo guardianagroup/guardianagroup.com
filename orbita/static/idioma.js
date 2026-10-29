@@ -1570,6 +1570,9 @@
     "Invita a una persona": ["Invite someone", "Convide uma pessoa"],
     // revisión de diseño e «Invitar a chat» en un toque (dueño, 28 Oct 2026, 19:15–19:30)
     "Invitar a chat": ["Invite to chat", "Convidar para o chat"],
+    // «Invitar a chat» en el iPhone: WhatsApp entero u otra app (dueño, 28 Oct 2026, 20:56)
+    "Otra app": ["Other app", "Outro app"],
+    "No se pudo abrir WhatsApp.": ["WhatsApp could not be opened.", "Não foi possível abrir o WhatsApp."],
     "Mensajes y llamadas encriptados": ["Encrypted messages and calls", "Mensagens e chamadas criptografadas"],
     "Mensajes y llamadas encriptados de extremo a extremo.": ["Messages and calls are end-to-end encrypted.", "Mensagens e chamadas criptografadas de ponta a ponta."],
     "La otra persona ha abierto tu invitación.": ["The other person has opened your invitation.", "A outra pessoa abriu o seu convite."],

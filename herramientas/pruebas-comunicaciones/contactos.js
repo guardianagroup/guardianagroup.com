@@ -22,7 +22,7 @@ async function telefono(browser, nombre) {
 const foto = (p, n) => p.screenshot({ path: path.join(OUT, n + '.png') });
 const visible = (p, s) => p.evaluate((s) => { const e = document.querySelector(s); if (!e) return false; const r = e.getBoundingClientRect(); return getComputedStyle(e).display !== 'none' && r.width > 0 && r.height > 0; }, s);
 async function conecta(A, B) {
-  await A.click('#nueva-blindada'); await espera(2500);
+  await A.click('#nueva-blindada'); if (await A.$('#h-invitar.gc-abierta')) await A.click('#invitar-otra'); await espera(2500);
   const enlace = await A.evaluate(() => document.querySelector('#enlace-b').value);
   return enlace.replace('https://guardianagroup.com', 'http://127.0.0.1:8080');
 }
@@ -67,7 +67,7 @@ async function guarda(p, nombre) {
   await A.reload(); await espera(3500);
   comprueba(await visible(A, '#contactos') && !(await visible(A, '#conv')), 'al abrir la app: arranca en los contactos');
   // una invitación nueva no borra el contacto (ni pregunta)
-  await A.click('#nueva-blindada'); await espera(2000);
+  await A.click('#nueva-blindada'); if (await A.$('#h-invitar.gc-abierta')) await A.click('#invitar-otra'); await espera(2000);
   comprueba(!(await visible(A, '#h-nueva .gc-hoja-caja')), 'invitación nueva sin la pregunta de borrar');
   const n = await A.evaluate(() => [...window.GuardianaCom.convs.values()].filter((c) => c.contacto).length);
   comprueba(n === 1, 'el contacto sigue guardado tras una invitación nueva');

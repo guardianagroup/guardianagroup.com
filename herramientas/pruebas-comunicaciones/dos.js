@@ -47,7 +47,7 @@ const caja = (p, sel) => p.evaluate((s) => { const e = document.querySelector(s)
   const bs = await caja(A, '#nueva-blindada svg'), bb = await caja(A, '#nueva-blindada b'), bt = await caja(A, '#nueva-blindada');
   comprueba(Math.abs((bs.y + bs.h / 2) - (bb.y + bb.h / 2)) < 2 && Math.abs((bt.y + bt.h / 2) - (bb.y + bb.h / 2)) < 2, 'inicio: icono y texto del botón centrados (svg ' + (bs.y + bs.h / 2).toFixed(1) + ', texto ' + (bb.y + bb.h / 2).toFixed(1) + ', botón ' + (bt.y + bt.h / 2).toFixed(1) + ')');
   // invitación blindada (en el móvil, un solo botón)
-  await A.click('#nueva-blindada'); await espera(2500);
+  await A.click('#nueva-blindada'); if (await A.$('#h-invitar.gc-abierta')) await A.click('#invitar-otra'); await espera(2500);
   await foto(A, '02-A-invitacion');
   const enlace = await A.evaluate(() => { const i = document.querySelector('#enlace-b'); return i && i.value; });
   if (!enlace) { console.log('sin enlace'); await browser.close(); return; }
