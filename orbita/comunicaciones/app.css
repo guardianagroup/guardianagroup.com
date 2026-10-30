@@ -982,8 +982,18 @@ html.aparece .barra,html.aparece #app{animation:gcom-aparece .16s ease-out both}
   .gc-llamada .videos .mi-asa{display:none!important}
   /* las imágenes en vertical llenan su sitio, como FaceTime, sin franjas negras */
   .gc-llamada:not(.mini) .videos #v-remoto.vertical{object-fit:cover}
-  /* (18:18: «la imagen, ¿puede verse más ancha?, para aprovechar toda la pantalla») partida, las dos mitades llenas siempre */
-  .gc-llamada.dividida:not(.mini) .videos #v-remoto,.gc-llamada.dividida:not(.mini) .videos #v-local{object-fit:cover}
+}
+/* (18:18: «la imagen, ¿puede verse más ancha?, para aprovechar toda la pantalla») partida, las dos mitades llenas siempre; también
+   en el PC (30 Oct 2026, 09:02: «está cortada arriba y abajo… toda la pantalla del PC»: cada mitad salía con franjas negras) */
+.gc-llamada.dividida:not(.mini) .videos #v-remoto,.gc-llamada.dividida:not(.mini) .videos #v-local{object-fit:cover}
+/* «Pantalla completa» en la videollamada del PC: el icono cambia a «salir» cuando está puesta */
+#ll-completa .sale,#ll-completa[aria-pressed="true"] .entra{display:none}
+#ll-completa[aria-pressed="true"] .sale{display:inline}
+/* en el PC, los botones de la llamada en columnas iguales: con «Pantalla completa» (más largo) los huecos ya no salían desiguales */
+@media (hover:hover) and (pointer:fine){
+  .gc-llamada:not(.mini) .gc-llamada-botones{display:grid;grid-auto-flow:column;grid-auto-columns:108px;justify-content:center;align-items:start;column-gap:0}
+  .gc-llamada:not(.mini) .gc-llamada-boton{min-width:0;text-align:center}
+  .gc-llamada:not(.mini) .gc-llamada-boton>span{max-width:100%;overflow-wrap:break-word}
 }
 
 /* ==== Contactos (dueño, 28 Oct 2026, 17:29–17:33: «una llamada directa sin tener que quedar la invitación… que uno guarde el

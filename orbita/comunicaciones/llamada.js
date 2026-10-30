@@ -103,6 +103,8 @@
       caja.setAttribute('aria-label', video ? t('Videollamada') : t('Llamada de voz'));
       $('#ll-camara-caja').hidden = !(video && cam);
       { const g = $('#ll-girar-caja'); if (g) g.hidden = !(video && cam && TEL_UA && camaraOn()); }
+      // «Pantalla completa», solo en el ordenador y con imagen (dueño, 30 Oct 2026, 09:02: «toda la pantalla del PC»)
+      { const f = $('#ll-completa-caja'); if (f) f.hidden = !(video && completaPC()); }
       $('#ll-imagenes').hidden = !(video && blindada());
       // 29 Oct 2026, 07:51 (dueño): «La opción… mosaico y… la voz, en el chat normal no quiero que esté. Solamente… en el blindado dos
       // opciones… la voz en modo grave y el mosaico… dos botones… muy profesionales cuando se abra… Antes no quiero que se vean»:
@@ -167,6 +169,17 @@
     }
     // La llamada en pequeño (dueño, 28 Oct 2026: «seguir en llamada y que aparezca el chat»): una tarjeta en una esquina
     // con la imagen, el tiempo y los botones, y el chat libre debajo para escribir y mandar archivos.
+    // Pantalla completa en el ordenador (dueño, 30 Oct 2026, 09:02): la pide el botón de la llamada; se sale con el mismo botón
+    // o con Esc, y al colgar, si la pidió la llamada
+    var completaPorLlamada = false; // (var y function: se usan desde «pinta», que puede correr antes de llegar aquí)
+    function completaPC() { try { return !!(document.fullscreenEnabled && document.documentElement.requestFullscreen) && !!(raiz.matchMedia && raiz.matchMedia('(hover: hover) and (pointer: fine)').matches); } catch (_) { return false; } }
+    function alternaCompleta() {
+      try {
+        if (document.fullscreenElement) { completaPorLlamada = false; document.exitFullscreen().catch(() => {}); }
+        else { completaPorLlamada = true; document.documentElement.requestFullscreen({ navigationUI: 'hide' }).catch(() => { completaPorLlamada = false; }); }
+      } catch (_) {}
+    }
+    function sueltaCompleta() { if (completaPorLlamada && document.fullscreenElement) { try { document.exitFullscreen().catch(() => {}); } catch (_) {} } completaPorLlamada = false; }
     function pequena(si) {
       caja.classList.toggle('mini', !!si);
       caja.setAttribute('aria-modal', si ? 'false' : 'true');
@@ -1022,7 +1035,7 @@
     function termina(por, espera) {
       if (estado === 'libre' || estado === 'cerrando') return;
       const dur = iniciada ? Date.now() - iniciada : 0, era = estado, conImagen = video;
-      paraTono(); clearTimeout(sinRespuesta); clearTimeout(ausenteT); ausenteT = null; ultimaOferta = null; sueltaWake();
+      paraTono(); clearTimeout(sinRespuesta); clearTimeout(ausenteT); ausenteT = null; ultimaOferta = null; sueltaWake(); sueltaCompleta();
       clearInterval(reloj); reloj = null; clearInterval(sondeo); sondeo = null;
       reiniciando = false; clearTimeout(reinicioT); reinicioT = null; clearTimeout(reinicioFin); reinicioFin = null;
       if (pc) { try { pc.close(); } catch (_) {} pc = null; }
@@ -1111,6 +1124,10 @@
     { const b = $('#ll-girar'); if (b) b.addEventListener('click', () => { giraCamara(); }); }
     $('#ll-camara').addEventListener('click', () => { if (!cam) return; const on = !camaraOn(); cam.getVideoTracks().forEach((x) => { x.enabled = on; }); o.manda({ acto: 'camara', id: idLlamada, on }); pintaVideo(); });
     $('#ll-mini').addEventListener('click', () => pequena(true));
+    { const b = $('#ll-completa'); if (b) {
+      b.addEventListener('click', () => alternaCompleta());
+      document.addEventListener('fullscreenchange', () => { b.setAttribute('aria-pressed', document.fullscreenElement ? 'true' : 'false'); });
+    } }
     $('#ll-volver').addEventListener('click', () => pequena(false));
     $('#ll-videos').addEventListener('click', () => { if (caja.classList.contains('mini')) pequena(false); });
     addEventListener('beforeunload', () => { if (estado !== 'libre') { try { o.manda({ acto: 'colgar', id: idLlamada }); } catch (_) {} } });

@@ -3586,8 +3586,13 @@
     // «Borrar el chat», en el menú del teléfono: fuera de la barra de escribir, donde estaba a un dedo del micrófono (revisión de
     // diseño, 28 Oct 2026, 19:15); sigue pidiendo confirmación
     { const v = $('#cm-vaciar'); if (v) v.addEventListener('click', () => { cierraMenu(); $('#vaciar').click(); }); }
-    $('#cm-completa').hidden = !esMovil() || comoApp();
-    $('#cm-completa').addEventListener('click', () => { cierraMenu(); if (puedeCompleta()) pantallaCompleta(); else abreGuia(); });
+    // en el PC también (30 Oct 2026, 09:02: «toda la pantalla del PC»): pone y quita la pantalla completa; Esc también la quita
+    $('#cm-completa').hidden = comoApp() || (!esMovil() && !puedeCompleta());
+    $('#cm-completa').addEventListener('click', () => {
+      cierraMenu();
+      if (!esMovil()) { try { if (document.fullscreenElement) document.exitFullscreen().catch(() => {}); else document.documentElement.requestFullscreen({ navigationUI: 'hide' }).catch(() => {}); } catch (_) {} return; }
+      if (puedeCompleta()) pantallaCompleta(); else abreGuia();
+    });
     $('#completa-ok').addEventListener('click', () => cierraHoja('h-completa'));
     // ---- llevar el chat de Safari a la app (dueño, 19:02) ----
     { const b = $('#anadir-ok'); if (b) b.addEventListener('click', () => cierraHoja('h-anadir')); }
