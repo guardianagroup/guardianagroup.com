@@ -1737,11 +1737,11 @@
     // La raya del medio de la pantalla partida, en el ordenador (dueño, 30 Oct 2026, 11:33: «esa línea… quiero que se pueda tocar y
     // arrastrar a izquierda o a derecha… el botón de cambiar vista, quiero que esté en otro lado»): se arrastra para repartir la
     // pantalla entre las dos imágenes y tocarla no cambia nada; «Cambiar vista» va abajo, con los demás botones. Lo que te toca a ti
-    // (entre el 15 y el 85 %) se recuerda en este navegador. Se agarra por su posición (como el asa), así no la tapa nada.
+    // (entre el 30 y el 70 %; 11:47: «se mueve demasiado… la imagen pequeña se ve demasiado pequeña») se recuerda en este navegador. Se agarra por su posición (como el asa), así no la tapa nada.
     var arrRaya = null; // var: miImagen() puede correr antes de llegar aquí
     function ponParte(m) {
       if (!FINO.matches || !Number.isFinite(m)) { caja.style.removeProperty('--mi-p'); return; }
-      caja.style.setProperty('--mi-p', String(Math.round(Math.max(0.15, Math.min(0.85, m)) * 1000) / 1000));
+      caja.style.setProperty('--mi-p', String(Math.round(Math.max(0.3, Math.min(0.7, m)) * 1000) / 1000));
     }
     function raya() {
       let r = $('#ll-raya'); if (r) return r;

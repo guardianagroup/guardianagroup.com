@@ -53,9 +53,9 @@ const partida = (P) => P.evaluate(() => document.querySelector('#llamada').class
   await P.mouse.down(); await P.mouse.up(); await espera(500);
   const l1 = await caja(P, '#v-local');
   comprueba(await partida(P) && l1 && Math.abs(l1.w - l0.w) < 2, '2. un clic en la raya no cambia nada', { antes: l0 && l0.w, despues: l1 && l1.w });
-  // 3. arrastrar la raya hasta el 30 %: la otra persona, el 30 %; tú, el 70 %
+  // 3. arrastrar la raya hasta el 10 %: no pasa del 30 % (11:47: «se mueve demasiado»); la otra persona, el 30 %; tú, el 70 %
   await P.mouse.move(W / 2, 420); await P.mouse.down();
-  for (let i = 1; i <= 10; i++) { await P.mouse.move(W / 2 - (W * 0.2) * i / 10, 420); await espera(20); }
+  for (let i = 1; i <= 10; i++) { await P.mouse.move(W / 2 - (W * 0.4) * i / 10, 420); await espera(20); } // hasta el 10 %: se queda en el 30 % (11:47)
   await P.mouse.up(); await espera(500);
   const rem = await caja(P, '#v-remoto'), loc = await caja(P, '#v-local'), r1 = await caja(P, '#ll-raya');
   comprueba(rem && loc && Math.abs(rem.w - W * 0.3) <= 6 && Math.abs(loc.w - W * 0.7) <= 6 && Math.abs(loc.x - W * 0.3) <= 6, '3. arrastrar la raya reparte la pantalla (30 / 70)', { remoto: rem, local: loc });
