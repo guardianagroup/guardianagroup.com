@@ -17,15 +17,22 @@
   // leer): normalmente el de siempre; en Safari del iPhone, uno propio cuya dirección de inicio lleva la llave del traspaso
   // («#t=…», solo en el fragmento: nunca llega a ningún servidor). Esa llave se crea la primera vez que Safari abre una invitación y
   // se guarda en Safari; la app que se añade a la pantalla de inicio arranca con ella y recoge el chat (app.js, «traspaso»).
+  // En el ordenador, la app que se instala es GUARDIANA entera (dueño, 29 Oct 2026, 19:52: «cuando lo abro me lleva directo a
+  // comunicaciones y tendría que abrirme la página web entera… todo»): el manifiesto de la web, que abre NÚCLEO (ZERO, Órbita y
+  // Comunicaciones). En el móvil, la app es el chat. Y el chat temporal del navegador del móvil (19:46): pasados 10 minutos sin
+  // usarlo, la llave del traspaso ya no vale (app.js borra el chat al arrancar); una invitación nueva trae una llave nueva.
   try {
     var ios = /iPhone|iPad|iPod/.test(navigator.userAgent) || (/Macintosh/.test(navigator.userAgent) && navigator.maxTouchPoints > 1);
-    var l = document.createElement('link'); l.rel = 'manifest'; l.href = '/orbita/comunicaciones/comunicaciones.webmanifest';
+    var android = /Android/i.test(navigator.userAgent);
+    var l = document.createElement('link'); l.rel = 'manifest'; l.href = (ios || android) ? '/orbita/comunicaciones/comunicaciones.webmanifest' : '/manifest.webmanifest';
     if (ios && !app) {
       var t = null; try { t = localStorage.getItem('gcom-traspaso'); } catch (e) {}
+      try { var uso = +localStorage.getItem('gcom-temporal-uso') || 0; if (uso && Date.now() - uso > 10 * 60 * 1000) { t = null; localStorage.removeItem('gcom-traspaso'); } } catch (e) {}
       if (!/^[A-Za-z0-9_-]{43}$/.test(t || '') && /^#i=[A-Za-z0-9_-]{43}$/.test(location.hash)) {
         var b = new Uint8Array(32); crypto.getRandomValues(b); var x = ''; for (var k = 0; k < b.length; k++) x += String.fromCharCode(b[k]);
         t = btoa(x).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
         try { localStorage.setItem('gcom-traspaso', t); } catch (e) {}
+        window.gcomTraspasoNueva = true; // la de esta invitación (app.js no la borra al limpiar un chat temporal viejo)
       }
       if (/^[A-Za-z0-9_-]{43}$/.test(t || '')) {
         var O = location.origin, base = O + '/orbita/comunicaciones/';

@@ -119,9 +119,9 @@
   }
   async function yoId(sala, c) { return C.hex(await C.sha256(C.te.encode('GUARDIANA miembro\n' + sala + '\n' + C.hex(c ? miHuella(c) : YO.huella)))).slice(0, 16); }
   function convNueva(sala, semilla, rol, modo) {
-    return { id: sala, semilla, rol, modo: modo === 'blindada' ? 'blindada' : 'normal', suVerificada: false, estado: 'invitacion', nombre: '', firmaPub: null, acuerdoPub: null, huella: null, verificada: false, creado: Date.now(), ultimo: Date.now(), ultimoTexto: null, noLeidos: 0 };
+    return { id: sala, semilla, rol, modo: modo === 'blindada' ? 'blindada' : 'normal', suVerificada: false, estado: 'invitacion', nombre: '', firmaPub: null, acuerdoPub: null, huella: null, verificada: false, creado: Date.now(), ultimo: Date.now(), ultimoTexto: null, noLeidos: 0, temporal: enTemporal() || undefined };
   }
-  const guardable = (c) => ({ id: c.id, tumba: c.tumba, vaciarPendiente: c.vaciarPendiente || undefined, borrarPendientes: c.borrarPendientes && c.borrarPendientes.length ? c.borrarPendientes : undefined, semilla: c.semilla, rol: c.rol, estado: c.estado, nombre: c.nombre, firmaPub: c.firmaPub, acuerdoPub: c.acuerdoPub, huella: c.huella, verificada: c.verificada, creado: c.creado, ultimo: c.ultimo, ultimoTexto: c.ultimoTexto, noLeidos: c.noLeidos, enlace: !!c.enlace || undefined, pqVisto: !!c.pqVisto, clasicaAceptada: !!c.clasicaAceptada, modo: c.modo || 'normal', suVerificada: !!c.suVerificada, dsaPub: c.dsaPub || null, idB: c.idB || null, alias: c.alias || '', num: c.num || 0, contacto: !!c.contacto, sinContacto: !!c.sinContacto, traspasoDe: c.traspasoDe || undefined, traspasoApp: !!c.traspasoApp || undefined });
+  const guardable = (c) => ({ id: c.id, tumba: c.tumba, vaciarPendiente: c.vaciarPendiente || undefined, borrarPendientes: c.borrarPendientes && c.borrarPendientes.length ? c.borrarPendientes : undefined, semilla: c.semilla, rol: c.rol, estado: c.estado, nombre: c.nombre, firmaPub: c.firmaPub, acuerdoPub: c.acuerdoPub, huella: c.huella, verificada: c.verificada, creado: c.creado, ultimo: c.ultimo, ultimoTexto: c.ultimoTexto, noLeidos: c.noLeidos, enlace: !!c.enlace || undefined, pqVisto: !!c.pqVisto, clasicaAceptada: !!c.clasicaAceptada, modo: c.modo || 'normal', suVerificada: !!c.suVerificada, dsaPub: c.dsaPub || null, idB: c.idB || null, alias: c.alias || '', num: c.num || 0, contacto: !!c.contacto, sinContacto: !!c.sinContacto, traspasoDe: c.traspasoDe || undefined, traspasoApp: !!c.traspasoApp || undefined, temporal: !!c.temporal || undefined, dijeTemporal: !!c.dijeTemporal || undefined, suTemporal: c.suTemporal || undefined });
   const guardaConv = (c) => BD.pon('conv', guardable(c));
   async function preparaConv(c) {
     if (esB(c)) await preparaIdentidadB(c);
@@ -305,19 +305,18 @@
   function muestraAceptar(ver) {
     if (ver) { verContactos = false; $('#inicio').classList.remove('ver-contactos'); $('#contactos').hidden = true; }
     $('#paso-aceptar').hidden = !ver; $('#inicio').classList.toggle('con-invitacion', ver); document.body.classList.toggle('aceptando', ver);
-    if (ver) { for (const id of ['paso-inicio', 'paso-codigo', 'paso-enlace', 'paso-entrar', 'paso-ios']) { const e = $('#' + id); if (e) e.hidden = true; } $('#inicio').hidden = false; $('#conv').hidden = true; }
+    if (ver) { for (const id of ['paso-inicio', 'paso-codigo', 'paso-enlace', 'paso-entrar', 'paso-descargar']) { const e = $('#' + id); if (e) e.hidden = true; } $('#inicio').hidden = false; $('#conv').hidden = true; }
     else $('#paso-inicio').hidden = false;
   }
-  // iPhone en Safari con una invitación (dueño, 29 Oct 2026, 16:05 y 16:11: «en la aplicación no le aparecen y le aparece una
-  // página abierta en Safari… le aparece duplicado»). En el iPhone, Safari y la app de la pantalla de inicio guardan cada uno sus
-  // cosas por separado, y Safari no puede avisar con la app cerrada: aceptar aquí dejaría el chat y los avisos fuera de la app.
-  // Así que aquí no se acepta: o se añade la app con la invitación dentro, o se copia y se pega en la app ya instalada.
-  let invitacionIOS = null;
-  function muestraIOS(ver, enlace) {
-    const p = $('#paso-ios'); if (!p) return;
-    if (ver) { invitacionIOS = enlace || invitacionIOS; verContactos = false; $('#inicio').classList.remove('ver-contactos'); $('#contactos').hidden = true; }
-    p.hidden = !ver; $('#inicio').classList.toggle('con-invitacion', ver); document.body.classList.toggle('aceptando', ver);
-    if (ver) { for (const id of ['paso-inicio', 'paso-codigo', 'paso-enlace', 'paso-entrar', 'paso-aceptar']) { const e = $('#' + id); if (e) e.hidden = true; } $('#inicio').hidden = false; $('#conv').hidden = true; }
+  // «Descargar GUARDIANA» en el iPhone (dueño, 29 Oct 2026, 19:36: «desde la página web… tiene que haber otro botón… descargar
+  // guardiana… para que pueda instalar la app en el móvil»; «si no le llega el chat, no tiene opción»): una pantalla sola, con la
+  // misma guía que en el chat (19:22–19:29): la flecha amarilla sobre Compartir, arriba a la derecha, y los tres pasos.
+  function muestraDescargar(ver) {
+    const p = $('#paso-descargar'); if (!p) return;
+    if (ver) { if (ACTUAL) cierraConv(); verContactos = false; $('#inicio').classList.remove('ver-contactos'); $('#contactos').hidden = true; for (const h of document.querySelectorAll('.gc-hoja.gc-abierta')) cierraHoja(h.id); }
+    for (const k of ['nav-safari26', 'nav-safari', 'nav-chrome', 'nav-otro']) p.classList.remove(k); p.classList.add('nav-' + navegadorIOS());
+    p.hidden = !ver; $('#inicio').classList.toggle('con-invitacion', ver); document.body.classList.toggle('aceptando', ver); document.body.classList.toggle('descargando', ver);
+    if (ver) { for (const id of ['paso-inicio', 'paso-codigo', 'paso-enlace', 'paso-entrar', 'paso-aceptar', 'paso-traspasado']) { const e = $('#' + id); if (e) e.hidden = true; } $('#inicio').hidden = false; $('#conv').hidden = true; }
     else $('#paso-inicio').hidden = false;
   }
   async function aceptaEnlaceYa(enlace) {
@@ -449,6 +448,7 @@
     enviaControl(c, { tipo: 'ok' });
     if (YO.nombre) enviaControl(c, { tipo: 'nombre', nombre: YO.nombre });
     mandaTraspaso(c);
+    avisaTemporal(c);
     if (LL && LL.ocupado && (LLAMADA_CONV || ACTUAL) === c.id) LL.volvio(); // la otra persona ha vuelto: si se la estaba llamando, otra vez
     enviaCola(c);
     reenviaCustodias(c);
@@ -701,6 +701,7 @@
     if (c.suId !== de) return;
     c.ultimaVerificacion = Date.now();
     if (!ses.confirmada) { ses.confirmada = true; if (c.sesion === ses) pintaCabecera(c); vigila(c, T('Confirmación de clave recibida: la otra persona tiene la misma clave.'), 'bien'); } // la otra persona tiene la misma clave: sesión confirmada
+    if (j.tipo === 'texto' || j.tipo === 'archivo' || j.tipo === 'llamada') { marcaUso(true); c.suVistoT = Date.now(); } // el chat temporal se está usando
     switch (j.tipo) {
       case 'texto': {
         if (c.mensajes.some((x) => x.id === j.id)) { enviaControl(c, { tipo: 'ack', ids: [j.id] }); return; }
@@ -723,6 +724,9 @@
       case 'verificada': return recibeVerificada(c, j);
       case 'traspaso': return recibeTraspaso(c, j);
       case 'traspasado': return chatTraspasado(c);
+      // la otra persona está en el navegador del móvil, sin GUARDIANA añadida: su chat es temporal (dueño, 29 Oct 2026, 19:46)
+      case 'temporal': return recibeTemporal(c, true);
+      case 'guardado': return recibeTemporal(c, false);
       case 'nombre': { const n = String(j.nombre || '').trim().slice(0, 40); if (!c.nombreFijado && n && n !== c.nombre) { c.nombre = n; await guardaConv(c); pintaLista(); pintaCabecera(c); } return; }
       case 'archivo': return recibeAnuncioArchivo(c, j, ses);
       case 'archivo-ack': { const a = c.archivos.get(j.id); if (a && a.envio) { a.ack = Math.max(a.ack, +j.hasta || 0); a.sigue && a.sigue(); acuseViaje(j, a); } return; }
@@ -746,7 +750,7 @@
         return;
       }
       case 'vaciar': return vaciaLocal(c, true);
-      case 'destruir': return destruyeLocal(c, true);
+      case 'destruir': { if (c.suTemporal) { const n = nombreConv(c, true); await destruyeLocal(c, true, true); aviso(T('El chat temporal con {n} ha terminado y se ha borrado.').replace('{n}', n)); return; } return destruyeLocal(c, true); }
       // blindado (dueño, 29 Oct 2026, 10:08–10:14): lo que llega se muestra solo si la persona quiere; fotos y documentos con
       // tiempo; «borrar en los dos»; alarma de ataque; y la pieza final del paquete «todo o nada» de un archivo
       case 'descartado': { const m = c.mensajes.find((x) => x.id === j.id && x.dir === 'mia'); if (m) { m.estado = 'descartado'; await guardaMensaje(c, m); pintaEstado(m); if (m.tipo === 'archivo') pintaMensaje(c, m, true); } return; }
@@ -1316,6 +1320,7 @@
   const servidorLlamada = () => (iceUsado === 'am' ? T('Miami (Estados Unidos)') : iceUsado === 'eu' ? T('Núremberg (Alemania)') : '');
   const puedeLlamar = () => { const c = CONVS.get(ACTUAL); return !!(c && enLinea(c) && c.sesion && c.sesion.confirmada && puedeEnviar(c)); };
   // solo en local (pruebas): simular un mensaje manipulado y ver la alarma sin tocar el relé
+  if (LOCAL) window.gcomPruebaTemporal = { estado: () => ({ en: enTemporal(), uso: ultimoUso(), convs: [...CONVS.values()].filter((c) => c.estado !== 'destruida').map((c) => ({ id: c.id, temporal: temporalConv(c), su: c.suTemporal || 0, dije: !!c.dijeTemporal })) }), envejece: (ms) => { try { localStorage.setItem('gcom-temporal-uso', String(Date.now() - ms)); } catch (_) {} usoT = 0; }, caduca: (op) => caducaChatTemporal(op), envejeceSuyos: (ms) => { for (const c of CONVS.values()) if (c.suTemporal) { c.suVistoT = Date.now() - ms; c.ultimo = Date.now() - ms; c.suTemporal = Date.now() - ms; } }, caducaSuyos: () => caducaSuyos(true) };
   if (LOCAL) window.gcomPrueba = { traspaso: () => ({ llave: llaveTraspaso(), conv: traspasoConvId(), ocultas: [...CONVS.values()].filter((c) => c.traspasoDe && !c.huella).length, total: CONVS.size, vivas: vivas().length, nombres: vivas().map((c) => nombreConv(c, true)) }), avisos: () => ({ firma: avisosFirma, ultimo: ultimoAvisos, despierta: ultimoDespierta, sw: !!swReg, puede: puedePush(), permiso: permisoAvisos() }), activa: () => activaAvisos(), incidencia: async (id) => { const c = CONVS.get(id || ACTUAL); if (!c) return; c.incidencias = (c.incidencias || 0) + 1; await anotaSistema(c, 'Un mensaje no superó la comprobación de integridad y se ha descartado.'); vigila(c, T('Un mensaje no superó la autenticación: descartado.'), 'mal'); return alarmaSiToca(c); }, conv: () => CONVS.get(ACTUAL), corta: () => R.corta(), llamada: () => (LL ? LL.estado : ''), enlace: () => { const c = CONVS.get(ACTUAL); return c && c.semilla ? enlaceB(c) : null; }, cuantas: () => [...CONVS.values()].filter((x) => x.estado !== 'destruida' && x.estado !== 'destruida_pendiente').length };
   function arrancaLlamadas() {
     if (!window.GuardianaLlamada || !window.RTCPeerConnection) { for (const id of ['#llamar', '#videollamar']) { const b = $(id); if (b) b.hidden = true; } return; }
@@ -1392,6 +1397,105 @@
   const iosSafari = () => { try { return (/iPhone|iPad|iPod/.test(navigator.userAgent || '') || (/Macintosh/.test(navigator.userAgent || '') && navigator.maxTouchPoints > 1)) && !comoApp(); } catch (_) { return false; } };
   const llaveTraspaso = () => { const t = window.gcomTraspaso || (() => { try { return localStorage.getItem('gcom-traspaso'); } catch (_) { return null; } })(); return /^[A-Za-z0-9_-]{43}$/.test(t || '') ? t : null; };
   function traspasoConvId() { try { return localStorage.getItem('gcom-traspaso-conv') || ''; } catch (_) { return ''; } }
+  // ---------- chat temporal (dueño, 29 Oct 2026, 19:46: «…dejar la opción de que la persona pueda chatear y que… no quiera
+  // agregarlo a la pantalla de inicio de su móvil… será solamente ese chat… y luego desaparecerá… No se quedará guardado ni nada…
+  // si no lo utiliza en los siguientes 10 minutos, que desaparezca. O la persona también lo desaparece… lo quita y fuera») ----
+  // En el navegador del móvil (en el iPhone, siempre: Safari y la app guardan aparte; en Android, mientras GUARDIANA no está
+  // instalada) el chat es temporal: se borra solo a los 10 minutos sin usarlo (sin tocar la pantalla, sin mensajes ni llamadas)
+  // o antes con «Borrar». A la otra persona se le dice, y en su lado también se borra cuando quien estaba en el navegador lleva
+  // 10 minutos fuera. Quien añade la app se lleva el chat (traspaso) y ya no caduca. El ordenador no cambia (dueño, 19:48).
+  const TEMPORAL_MS = 10 * 60 * 1000;
+  const UA_T = navigator.userAgent || '';
+  const iosUA = /iPhone|iPad|iPod/.test(UA_T) || (/Macintosh/.test(UA_T) && navigator.maxTouchPoints > 1);
+  const androidUA = /Android/i.test(UA_T);
+  const appAndroidVista = () => { try { return localStorage.getItem('gcom-app-instalada') === '1'; } catch (_) { return false; } };
+  function enTemporal() { try { return !comoApp() && (iosUA || (androidUA && !appAndroidVista())); } catch (_) { return false; } }
+  const temporalConv = (c) => !!c && !esB(c) && !c.traspasoApp && !(c.traspasoDe && !c.huella) && !comoApp() && (iosUA || (androidUA && !!c.temporal && !appAndroidVista()));
+  let usoT = 0;
+  const arranqueT = Date.now();
+  function marcaUso(ya) {
+    const a = Date.now(); if (!ya && a - usoT < 5000) return; usoT = a;
+    if (!enTemporal() || ![...CONVS.values()].some((c) => c.estado !== 'destruida' && temporalConv(c))) return;
+    try { localStorage.setItem('gcom-temporal-uso', String(a)); } catch (_) {}
+  }
+  const ultimoUso = () => { let v = 0; try { v = +localStorage.getItem('gcom-temporal-uso') || 0; } catch (_) {} return Math.max(v, usoT); };
+  // aquí, en el navegador: pasados los 10 minutos (o con «Borrar»), el chat se borra en los dos lados
+  let caducando = false;
+  async function caducaChatTemporal(op) {
+    op = op || {};
+    if (caducando) return false;
+    const cs = [...CONVS.values()].filter((c) => c.estado !== 'destruida' && c.estado !== 'destruida_pendiente' && temporalConv(c));
+    if (!cs.length) return false;
+    if (!op.ya) {
+      const u = ultimoUso();
+      if (!u) { marcaUso(true); return false; } // chats de antes de esto: los 10 minutos empiezan ahora
+      if (Date.now() - u < TEMPORAL_MS) return false;
+      if (LL && LL.ocupado) return false; // nunca en mitad de una llamada
+    }
+    caducando = true;
+    try {
+      let hubo = false;
+      for (const c of cs) { try { if (enLinea(c)) { enviaControl(c, { tipo: 'destruir' }); hubo = true; } } catch (_) {} }
+      if (hubo) await new Promise((r) => setTimeout(r, 300));
+      const nombres = cs.map((c) => nombreConv(c, true));
+      for (const c of cs) { try { await destruyeLocal(c, false, true); } catch (_) {} }
+      // (la llave recién creada para la invitación que se está abriendo se queda: es la de su chat)
+      const nueva = !!(op.silencio && window.gcomTraspasoNueva); window.gcomTraspasoNueva = false;
+      try { for (const k of ['gcom-traspaso-conv', 'gcom-temporal-uso', 'gcom-ultima'].concat(nueva ? [] : ['gcom-traspaso'])) localStorage.removeItem(k); } catch (_) {}
+      if (!nueva) window.gcomTraspaso = null; usoT = 0;
+      pintaTiraAnadir();
+      if (!op.silencio) {
+        if (vivas().length) aviso(T('Chat temporal borrado: {n}.').replace('{n}', nombres.join(', ')));
+        else muestraFinTemporal(op.ya ? 'mano' : 'tiempo');
+      }
+      return true;
+    } finally { caducando = false; }
+  }
+  function muestraFinTemporal(por) {
+    try { sessionStorage.removeItem('gcom-fin'); sessionStorage.removeItem('gcom-invitado'); } catch (_) {}
+    const f = $('#fin-invitado'); if (!f) return;
+    f.classList.add('temporal'); f.dataset.por = por === 'mano' ? 'mano' : 'tiempo';
+    muestraFin();
+  }
+  // a la otra persona: «mi chat es temporal» en cada sesión; y si después se guarda (Android, al instalarla), «guardado»
+  function avisaTemporal(c) {
+    if (!c || esB(c) || !c.huella) return;
+    if (temporalConv(c)) { if (!c.dijeTemporal) { c.dijeTemporal = true; guardaConv(c); marcaUso(true); anotaSistema(c, 'Chat temporal: si no añades GUARDIANA a tu pantalla de inicio, se borra a los 10 minutos sin usarlo.'); } enviaControl(c, { tipo: 'temporal', min: 10 }); }
+    else if (c.dijeTemporal) { c.dijeTemporal = false; guardaConv(c); enviaControl(c, { tipo: 'guardado' }); }
+    if (ACTUAL === c.id) pintaTiraAnadir();
+  }
+  // en el lado de quien invitó (con la app): lo que dice la otra persona de su chat
+  async function recibeTemporal(c, es) {
+    if (!c || esB(c)) return;
+    if (es) {
+      if (c.suTemporal) return;
+      c.suTemporal = Date.now(); c.suVistoT = Date.now(); await guardaConv(c);
+      await anotaSistema(c, 'Chat temporal: la otra persona lo tiene abierto en el navegador del móvil, sin GUARDIANA. Si no la añade a su pantalla de inicio, este chat se borrará a los 10 minutos sin usarlo.');
+    } else {
+      if (!c.suTemporal) return;
+      c.suTemporal = 0; await guardaConv(c);
+      await anotaSistema(c, 'La otra persona ya tiene GUARDIANA: este chat se queda guardado.');
+    }
+  }
+  // y en ese lado también se borra cuando la otra persona lleva 10 minutos fuera (cerró el navegador y no volvió)
+  function caducaSuyos(forzar) {
+    if (!R || !R.abierto || (!forzar && Date.now() - arranqueT < 60000)) return;
+    for (const c of [...CONVS.values()]) {
+      if (!c.suTemporal || c.estado === 'destruida' || c.estado === 'destruida_pendiente') continue;
+      if (enLinea(c) && !c.suFuera) { c.suVistoT = Date.now(); continue; }
+      if (Date.now() - Math.max(c.suVistoT || 0, c.ultimo || 0, c.suTemporal || 0) < TEMPORAL_MS) continue;
+      if (LL && LL.ocupado && (LLAMADA_CONV || ACTUAL) === c.id) continue;
+      const n = nombreConv(c, true);
+      destruyeLocal(c, true, true).then(() => aviso(T('El chat temporal con {n} se ha borrado: no añadió GUARDIANA a su teléfono.').replace('{n}', n))).catch(() => {});
+    }
+  }
+  // Android: con GUARDIANA instalada, los chats de este navegador se quedan (la app y Chrome guardan juntos)
+  function appAndroidLista() {
+    if (!androidUA || appAndroidVista()) return;
+    try { localStorage.setItem('gcom-app-instalada', '1'); } catch (_) {}
+    for (const c of CONVS.values()) { if (c.temporal) { c.temporal = false; guardaConv(c); } if (c.dijeTemporal && enLinea(c)) avisaTemporal(c); }
+    pintaTiraAnadir();
+  }
   function mandaTraspaso(c) {
     if (!c || esB(c) || !c.huella || !iosSafari()) return;
     const t = llaveTraspaso(); if (!t) return;
@@ -1436,16 +1540,18 @@
       const u = n.mensajes.filter((x) => x.dir !== 'sistema').pop(); if (u) { n.ultimo = Math.max(n.ultimo || 0, u.t || 0); n.ultimoTexto = await guardaSellado({ texto: u.tipo === 'texto' ? u.texto : u.tipo === 'archivo' ? '📎 ' + u.archivo.nombre : u.texto || '' }); }
       void viejos;
       await guardaConv(n);
+      if (o.suTemporal) await anotaSistema(n, 'La otra persona ya tiene GUARDIANA: este chat se queda guardado.');
       if (abrirAqui) await abreConv(n.id); else if (ACTUAL === n.id) { pintaCabecera(n); pintaTodos(n); }
       pintaLista(); pintaContactos();
     } catch (e) { console.warn('fundir traspaso', e); }
   }
   // en Safari: la otra persona ya habla con la app; esta copia se borra y se dice dónde está el chat
   async function chatTraspasado(c) {
-    try { localStorage.removeItem('gcom-traspaso-conv'); } catch (_) {}
+    // la llave ya cumplió: un icono que se añada después nace limpio (y la próxima invitación trae una llave nueva)
+    try { for (const k of ['gcom-traspaso-conv', 'gcom-traspaso', 'gcom-temporal-uso']) localStorage.removeItem(k); } catch (_) {}
     try { await destruyeLocal(c, false, true); } catch (_) {}
-    abreAnadir(false);
-    const p = $('#paso-traspasado'); if (p) { for (const id of ['paso-inicio', 'paso-codigo', 'paso-enlace', 'paso-entrar', 'paso-aceptar', 'paso-ios']) { const e = $('#' + id); if (e) e.hidden = true; } p.hidden = false; $('#inicio').hidden = false; $('#inicio').classList.add('con-invitacion'); document.body.classList.add('aceptando'); $('#conv').hidden = true; }
+    abreAnadir(false); pintaTiraAnadir();
+    const p = $('#paso-traspasado'); if (p) { for (const id of ['paso-inicio', 'paso-codigo', 'paso-enlace', 'paso-entrar', 'paso-aceptar', 'paso-descargar']) { const e = $('#' + id); if (e) e.hidden = true; } p.hidden = false; $('#inicio').hidden = false; $('#inicio').classList.add('con-invitacion'); document.body.classList.add('aceptando'); $('#conv').hidden = true; }
   }
   // el botón azul «Añadir a pantalla de inicio», abajo, encima de donde se escribe (dueño, 19:14); al tocarlo se despliega la guía fácil
   // y lo primero que se ve en el chat es la guía desplegada (dueño, 19:22: «una vez que se ha abierto el chat… lo primero que ve ahí es
@@ -1456,10 +1562,20 @@
     pintaTiraAnadir();
     if (!anadirMostrado && ACTUAL && ACTUAL === traspasoConvId()) { anadirMostrado = true; abreAnadir(true); }
   }
+  // la barra azul, fina, justo encima de donde se escribe, solo con el chat ya empezado (dueño, 20:08: «no quiero que aparezca [la guía]
+  // por ninguna parte hasta que el chat no ha empezado… justo encima de la barra donde se escribe… en azul… muy minimalista y muy fino»).
+  // Se quita sola: en el iPhone, al abrir la app el chat se muda y Safari se despide; en Android, el sistema avisa al instalarla y el
+  // chat ya está dentro (Chrome y la app guardan juntos). En Android, el botón abre la instalación del sistema; en el iPhone, la guía.
   function pintaTiraAnadir() {
     const t = $('#tira-anadir'); if (!t) return;
-    const ver = !!(iosSafari() && llaveTraspaso() && ACTUAL && ACTUAL === traspasoConvId());
-    t.hidden = !ver;
+    const c = ACTUAL ? CONVS.get(ACTUAL) : null;
+    const muda = !!(c && iosSafari() && llaveTraspaso() && ACTUAL === traspasoConvId());
+    const temporal = !!(c && c.huella && temporalConv(c));
+    const boton = muda || (temporal && androidUA);
+    t.hidden = !(muda || temporal);
+    const b = $('#tira-anadir-b'); if (b) b.hidden = !boton;
+    if (!muda) abreAnadir(false);
+    t.classList.toggle('en-android', !!(boton && !muda));
     for (const k of ['nav-safari26', 'nav-safari', 'nav-chrome', 'nav-otro']) t.classList.remove(k);
     t.classList.add('nav-' + navegadorIOS());
   }
@@ -1467,7 +1583,9 @@
   // Safari de iOS 26, en las rayitas de abajo). Safari anterior: abajo en el centro. Los demás: texto, sin flecha.
   // (dueño, 19:29: «vamos a dejar solamente para las versiones modernas… quita la de la barrita de abajo»): una sola guía para todos,
   // la de Compartir arriba a la derecha, como en su iPhone 16
-  function navegadorIOS() { return 'chrome'; }
+  // (20:12: el iPhone de Nathalie, ya con iOS 27.2, sigue con el botón en la barra de abajo: vuelven las dos guías, la de Safari y la
+  // de Chrome)
+  function navegadorIOS() { return navegadorIOSDetalle(); }
   function navegadorIOSDetalle() {
     const ua = navigator.userAgent || '';
     if (/CriOS\//.test(ua)) return 'chrome';
@@ -1477,6 +1595,7 @@
   }
   function abreAnadir(abrir) {
     const t = $('#tira-anadir'), g = $('#anadir-guia'), b = $('#tira-anadir-b'); if (!t || !g) return;
+    if (t.classList.contains('en-android') && abrir !== false) return; // en Android no hay guía: el botón instala
     const ver = typeof abrir === 'boolean' ? abrir : g.hidden;
     g.hidden = !ver; t.classList.toggle('abierta', ver); if (b) b.setAttribute('aria-expanded', String(ver));
     if (ver) { const l = $('#mensajes'); if (l) l.scrollTop = l.scrollHeight; }
@@ -1490,7 +1609,7 @@
       await preparaConv(c); await guardaConv(c);
       pintaLista(); await abreConv(c.id);
       // lo primero en la app: los avisos (dueño, 19:04: un solo botón, «Activar avisos», y el «Permitir» del iPhone)
-      setTimeout(() => { if (puedePush() && permisoAvisos() === 'default') { avisosPreguntado = true; abreHoja('h-avisos'); } }, 1200);
+      armaAvisosAlToque();
       return true;
     } catch (e) { console.warn('entrar traspaso', e); return false; }
   }
@@ -1539,10 +1658,12 @@
     R.sale(c.id); CONVS.delete(c.id);
     await BD.borraConv('msg', c.id); await BD.borraConv('arch', c.id); await BD.borra('conv', c.id);
     if (ACTUAL === c.id) { cierraConv(); }
+    // la sala oculta que esperaba a su app (traspaso) se va con ella: sin chat que mudar, ya no espera a nadie
+    for (const x of [...CONVS.values()]) if (x.traspasoDe === c.id && x !== c) { try { await destruyeLocal(x, false, true); } catch (_) {} }
     pintaLista();
     // si era un contacto, se dice quién y qué hacer para volver a hablar (20:25: «ya no me sale mi mujer»)
     if (!silencio) aviso(porElla ? (c.contacto ? T('{n} ha borrado la conversación y el contacto. Para volver a hablar, envía una invitación nueva.').replace('{n}', nombreConv(c, true)) : T('La otra persona ha terminado la conversación: se ha borrado también aquí.')) : T('Conversación terminada y borrada; el otro equipo ha recibido la orden de borrado.'));
-    if (esInvitado() && c.rol === 'acepta') await finInvitado();
+    if (esInvitado() && c.rol === 'acepta' && !caducando) await finInvitado(); // (el chat temporal tiene su propia despedida)
   }
   // Destruir con la otra persona ausente: se borra todo aquí y queda una lápida (sin mensajes) que, en cuanto la otra
   // persona entre, le manda «destruir» y desaparece.
@@ -2548,7 +2669,24 @@
   }
   // una vez, en el teléfono instalado o en el ordenador, con la primera conversación establecida: ¿avisos con la app cerrada?
   let avisosPreguntado = false;
+  // los avisos, activados de entrada (dueño, 29 Oct 2026, 20:11: «pon que las notificaciones estén activadas por defecto»). El teléfono
+  // exige el «Permitir» de la persona (Apple y Google no dejan otra cosa), así que en la app se pide en su primer toque, sin pantallas
+  // por medio: un solo «Permitir». Si lo rechaza, en Ajustes (la tuerca) se ve cómo darlo después.
+  let avisosAlToque = false;
+  function armaAvisosAlToque() {
+    if (avisosAlToque || !comoApp()) return; avisosAlToque = true;
+    const f = (e) => {
+      let no = ''; try { no = localStorage.getItem('gcom-avisos') || ''; } catch (_) {}
+      if (!puedePush() || permisoAvisos() !== 'default' || no === 'off') { document.removeEventListener('click', f, true); return; }
+      if (e.target && e.target.closest && e.target.closest('#h-avisos, #cavisos, #avisos-no, #cavisos-no, #aj-avisos')) return; // sus botones hacen lo suyo
+      document.removeEventListener('click', f, true);
+      avisosPreguntado = true; try { cierraHoja('h-avisos'); } catch (_) {}
+      activaAvisos().then(() => { try { pintaAjustes(); } catch (_) {} });
+    };
+    document.addEventListener('click', f, true);
+  }
   function preguntaAvisos() {
+    if (avisosAlToque && permisoAvisos() === 'default') return; // en la app, el primer toque ya lo pide
     if (avisosPreguntado || !puedePush() || permisoAvisos() !== 'default') return; let no = ''; try { no = localStorage.getItem('gcom-avisos') || ''; } catch (_) {}
     if (no === 'off') return; // los apagó en Ajustes: no se vuelve a preguntar
     // «Ahora no» vale 6 horas: después se vuelve a ofrecer (dueño, 14:38: los avisos tienen que verse fuera de la app)
@@ -2713,7 +2851,17 @@
     $('#cm-completa').addEventListener('click', () => { cierraMenu(); if (puedeCompleta()) pantallaCompleta(); else abreGuia(); });
     $('#completa-ok').addEventListener('click', () => cierraHoja('h-completa'));
     // ---- llevar el chat de Safari a la app (dueño, 19:02) ----
-    { const b = $('#tira-anadir-b'); if (b) b.addEventListener('click', () => abreAnadir()); }
+    { const b = $('#tira-anadir-b'); if (b) b.addEventListener('click', () => { const t = $('#tira-anadir'); if (t && t.classList.contains('en-android')) { if (avisoInstalar) instala(); else abreGuia(); } else abreAnadir(); }); }
+    // al acabar un chat temporal: descargar GUARDIANA (en el iPhone, la guía; en Android, la instalación), desde una página limpia
+    { const b = $('#fin-descargar'); if (b) b.addEventListener('click', () => { location.replace(location.pathname + '?instalar'); }); }
+    // «Descargar GUARDIANA» en el iPhone: «Ahora no» vuelve al inicio
+    { const b = $('#desc-cerrar'); if (b) b.addEventListener('click', () => muestraDescargar(false)); }
+    // el uso del chat temporal: cualquier toque o tecla (y los mensajes y llamadas, al llegar)
+    for (const ev of ['pointerdown', 'keydown']) document.addEventListener(ev, () => marcaUso(), { capture: true, passive: true });
+    // al volver a la página (Safari en segundo plano, otra app): si pasaron los 10 minutos, se borra antes de enseñar nada
+    document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') caducaChatTemporal(); });
+    addEventListener('pageshow', (e) => { if (e.persisted) caducaChatTemporal(); });
+    setInterval(() => { caducaChatTemporal(); caducaSuyos(); }, 30000);
     // ---- Ajustes (dueño, 29 Oct 2026, 16:02) ----
     for (const id of ['#ajustes-btn', '#cm-ajustes']) { const b = $(id); if (b) b.addEventListener('click', () => { cierraMenu(); abreAjustes(); }); }
     { const b = $('#ajustes-ok'); if (b) b.addEventListener('click', () => cierraHoja('h-ajustes')); }
@@ -2765,6 +2913,8 @@
     }
     let guiaSeguir = null; // con una invitación en Safari: lo que hace «Seguir en Safari» (se recuerda por si la guía se cierra y se vuelve a abrir)
     function abreGuia() {
+      // en el iPhone, una sola guía (19:29): en un chat que se muda, la del chat; si no, la pantalla de «Descargar GUARDIANA»
+      if (esIOS && !comoApp() && !guiaSeguir) { const t = $('#tira-anadir'), b = $('#tira-anadir-b'); if (t && !t.hidden && b && !b.hidden && !t.classList.contains('en-android')) abreAnadir(true); else muestraDescargar(true); return; }
       pintaGuia(); const h = $('#h-completa'), inv = !!guiaSeguir && /#[ib]=/.test(location.hash) && !comoApp();
       // con la invitación: solo los pasos, sin «Seguir en Safari» ni «Entendido» (dueño, 29 Oct 2026, 14:31 y 17:04: «tiene que ser de
       // una vez… que no se vea en Safari»); se puede cerrar tocando fuera, y detrás queda la pantalla que la vuelve a abrir
@@ -2795,24 +2945,32 @@
     const pintaAnadir = () => { const b = $('#anadir-app'); if (b) b.hidden = comoApp() || !(avisoInstalar || esIOS || esAndroid); };
     const guiaAbierta = () => { const h = $('#h-completa'); return !!h && h.classList.contains('gc-abierta'); };
     addEventListener('beforeinstallprompt', (e) => { e.preventDefault(); avisoInstalar = e; pintaAnadir(); if (guiaAbierta()) pintaGuia(); });
-    addEventListener('appinstalled', () => { avisoInstalar = null; pintaAnadir(); if (guiaAbierta()) cierraHoja('h-completa'); cierraHoja('h-instalar'); });
+    addEventListener('appinstalled', () => {
+      avisoInstalar = null; pintaAnadir(); if (guiaAbierta()) cierraHoja('h-completa'); cierraHoja('h-instalar');
+      try { localStorage.setItem('guardiana-app', 'instalada'); } catch (_) {}
+      // Android: los chats de aquí ya están en la app (guardan juntos) y dejan de ser temporales
+      if (esAndroid) { appAndroidLista(); aviso(T('Listo: GUARDIANA ya está en tu pantalla de inicio. Tus chats se quedan guardados.')); return; }
+      // en el ordenador (dueño, 19:41: «ha salido ahí como una captura de pantalla y se ha eliminado todo»): Chrome se lleva esta
+      // pestaña a su propia ventana, sin barras; allí, lo primero, que ya está instalada y dónde está el icono
+      if (!esIOS) setTimeout(() => { pintaInstalada(); abreHoja('h-instalada'); }, 500);
+    });
+    // dónde queda el icono en cada ordenador (Chrome y Edge lo ponen en el escritorio de Windows y en el menú Inicio; en el Mac, en
+    // Aplicaciones y en el Launchpad)
+    function pintaInstalada() {
+      const h = $('#h-instalada'); if (!h) return;
+      const so = /Windows/.test(UA) ? 'win' : /Macintosh/.test(UA) ? 'mac' : 'otro';
+      h.querySelectorAll('[data-so]').forEach((el) => { el.hidden = el.dataset.so !== so; });
+    }
+    { const b = $('#instalada-ok'); if (b) b.addEventListener('click', () => cierraHoja('h-instalada')); }
     // en Android, un toque: la ventana del sistema; si todavía no la da (o en el iPhone), la guía
     $('#anadir-app').addEventListener('click', () => { if (avisoInstalar) instala(); else abreGuia(); });
     // ---- iPhone: la invitación, dentro de la app (dueño, 29 Oct 2026, 16:05–16:11) ----
     const trozoInv = (e) => { const m = String(e || '').match(/#[ib]=[A-Za-z0-9_-]{43}/); return m ? m[0] : ''; };
-    // «Ya tengo GUARDIANA»: la invitación al portapapeles; en la app, «Abrir invitación» la pega y abre el chat allí
-    { const b = $('#ios-tengo'); if (b) b.addEventListener('click', async () => {
-      const u = invitacionIOS || location.href; let ok = false;
-      try { await navigator.clipboard.writeText(u); ok = true; } catch (_) {}
-      if (!ok) { try { const i = document.createElement('input'); i.value = u; i.setAttribute('readonly', ''); i.style.cssText = 'position:fixed;opacity:0'; document.body.appendChild(i); i.select(); i.setSelectionRange(0, 99999); ok = document.execCommand('copy'); i.remove(); } catch (_) {} }
-      b.hidden = true; $('#ios-copiada').hidden = false;
-      if (!ok) aviso(T('No se pudo copiar: mantén pulsado el enlace del mensaje y elige «Copiar».'));
-    }); }
     for (const b of document.querySelectorAll('.pegar-inv')) { b.hidden = !(esIOS && comoApp());
       b.addEventListener('click', async () => {
         let t = ''; try { t = await navigator.clipboard.readText(); } catch (_) { t = ''; }
         { const mt = t.match(/#t=([A-Za-z0-9_-]{43})/); if (mt) { await entraTraspaso(mt[1]); return; } }
-        if (!/#[ib]=[A-Za-z0-9_-]{43}/.test(t)) { aviso(T('No hay ninguna invitación copiada. En Safari, pulsa «Ya tengo GUARDIANA» y vuelve aquí.')); return; }
+        if (!/#[ib]=[A-Za-z0-9_-]{43}/.test(t)) { aviso(T('No hay ninguna invitación copiada. Mantén pulsado el enlace de la invitación, elige «Copiar» y vuelve aquí.')); return; }
         const ok = await preguntaInvitacion(t);
         if (!ok) aviso(T('Ese enlace no es una invitación de GUARDIANA.'));
       });
@@ -3361,6 +3519,12 @@
     avisoInterno();
     setTimeout(eligeServidorLlamadas, 4000); setInterval(eligeServidorLlamadas, 3600 * 1000);
     await cargaConvs();
+    // el chat temporal del navegador del móvil (dueño, 19:46): si pasaron los 10 minutos sin usarlo, se borra antes de enseñar nada
+    // (con una invitación nueva en la dirección, en silencio: se abre la nueva)
+    try { await caducaChatTemporal({ silencio: /#[ibt]=/.test(location.hash) }); } catch (_) {}
+    // la app abierta: en Android, sus chats ya no son temporales; en el ordenador, la portada sabe que ya está instalada
+    if (comoApp()) { if (androidUA) appAndroidLista(); else if (!iosUA) { try { localStorage.setItem('guardiana-app', 'instalada'); } catch (_) {} } }
+    armaAvisosAlToque();
     // (antes, 15:58, en el móvil solo quedaba la conversación más reciente y las demás se destruían al arrancar: eso mandaba
     // «destruir» al otro equipo y le borraba la conversación y el contacto guardado; dueño, 29 Oct 2026, 12:17: «cuando guardamos un
     // contacto tampoco se está guardando». Ya no se destruye nada al arrancar: las conversaciones se quedan hasta que alguien las termina.)
@@ -3377,7 +3541,9 @@
     // invitación en Safari no se acepta aquí: se elige añadir la app (la invitación entra dentro) o copiarla y pegarla en la app.
     // (19:02–19:04: «primero un chat y después añadir a pantalla de inicio… el mínimo de pasos»): en Safari del iPhone, la invitación
     // normal se acepta sola, sin «¿Aceptas?»; el chat se muda a la app después (ver «traspaso»)
-    if (/#i=/.test(location.hash) && iosSafari && !comoApp()) { const ok = await aceptaInvitacion(location.href); history.replaceState(null, '', location.pathname + location.search); if (!ok) aviso(T('Ese enlace no es una invitación de GUARDIANA.')); }
+    // (20:02–20:14: «se invita únicamente al chat… luego ya la persona lo añade a inicio»; «si se le envía a una persona Android…»): igual
+    // en Android y también dentro de la app del móvil: la invitación abre el chat, sin preguntar. El ordenador sigue igual (19:48).
+    if (/#i=/.test(location.hash) && (iosSafari || androidUA)) { const ok = await aceptaInvitacion(location.href); history.replaceState(null, '', location.pathname + location.search); if (!ok) aviso(T('Ese enlace no es una invitación de GUARDIANA.')); }
     // la app recién añadida con la llave del traspaso: entra en la sala que la espera y abre el chat
     else if (/#t=[A-Za-z0-9_-]{43}/.test(location.hash) && comoApp()) { const t = location.hash.match(/#t=([A-Za-z0-9_-]{43})/)[1]; history.replaceState(null, '', location.pathname + '?app=1'); await entraTraspaso(t); }
     else if (/#t=/.test(location.hash)) { history.replaceState(null, '', location.pathname); }

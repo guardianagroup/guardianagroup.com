@@ -8,7 +8,7 @@
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; manifest-src 'self' blob: data:; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob:; media-src blob:; connect-src 'self' https://motor.guardianagroup.com wss://motor.guardianagroup.com https://motor-am.guardianagroup.com wss://motor-am.guardianagroup.com http://127.0.0.1:* ws://127.0.0.1:* http://localhost:* ws://localhost:*; worker-src 'self'; form-action 'none'; base-uri 'none'">
 <meta name="theme-color" content="#06080C">
 <!-- a pantalla completa, como una app, si se añade a la pantalla de inicio (dueño, 28 Oct 2026, 16:03: «que solo se vea lo nuestro») -->
-<script src="arranque.js?v=20261031a"></script>
+<script src="arranque.js?v=20261031b"></script>
 <!-- el manifiesto lo pone arranque.js: con una invitación en el iPhone, uno propio con la invitación dentro (dueño, 29 Oct 2026, 18:01) -->
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -39,7 +39,7 @@
 <link rel="canonical" href="https://guardianagroup.com/orbita/comunicaciones/">
 <link rel="icon" href="/favicon.ico">
 <link rel="stylesheet" href="componentes.css?v=20261028m">
-<link rel="stylesheet" href="app.css?v=20261031f">
+<link rel="stylesheet" href="app.css?v=20261031g">
 <link rel="stylesheet" href="viaje.css?v=20261029b">
 <!-- antes de pintar: como app desde el primer fotograma y, al volver a un chat tras recargar, sin enseñar el inicio entretanto -->
 </head>
@@ -50,7 +50,7 @@
      cifrados que no puede leer. -->
 <!-- Final del invitado (dueño, 28 Oct 2026, 15:50: «no quiero que se pueda volver a la web… que se destruya y no quede ningún tipo
      de rastro… eso el invitado; el que ha creado el chat, sí») -->
-<div class="fin-invitado" id="fin-invitado" hidden role="status"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><h2>Conversación terminada</h2><p>Se han borrado los datos de esta conversación en este equipo.</p><p class="suave">Lo que se haya descargado fuera de GUARDIANA puede seguir en el dispositivo. Ya puedes cerrar esta pestaña.</p></div>
+<div class="fin-invitado" id="fin-invitado" hidden role="status"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><h2 class="fin-n">Conversación terminada</h2><p class="fin-n">Se han borrado los datos de esta conversación en este equipo.</p><p class="suave fin-n">Lo que se haya descargado fuera de GUARDIANA puede seguir en el dispositivo. Ya puedes cerrar esta pestaña.</p><!-- el chat temporal del navegador del móvil (dueño, 29 Oct 2026, 19:46) --><h2 class="fin-t">Chat borrado</h2><p class="fin-t por-tiempo">Pasaron 10 minutos sin usarlo y se ha borrado de este teléfono.</p><p class="fin-t por-mano">Se ha borrado de este teléfono.</p><p class="suave fin-t">Para volver a hablar, pide una invitación nueva. Para que tus chats no se borren, descarga GUARDIANA.</p><button type="button" class="boton principal fin-t" id="fin-descargar">Descargar GUARDIANA</button></div>
 <header class="barra" id="barra">
   <a class="marca" href="/orbita/" id="volver" aria-label="Volver al inicio"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg><span>Inicio</span></a>
   <!-- en la web, «Comunicaciones»; instalada, el candado y «GUARDIANA» desde el primer fotograma (antes se cambiaba con JavaScript y
@@ -311,20 +311,19 @@
     <div class="paso aceptar" id="paso-traspasado" hidden>
       <div class="espera-anillos quieto" aria-hidden="true"><span></span><svg viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7"/></svg></div>
       <h2>Tu chat ya está en la app</h2>
-      <p class="t">Ábrela desde tu pantalla de inicio: el icono de GUARDIANA. Ya puedes cerrar Safari.</p>
+      <p class="t">Ábrela desde tu pantalla de inicio: el icono de GUARDIANA. Ya puedes cerrar esta página.</p>
     </div>
-    <div class="paso aceptar" id="paso-ios" hidden>
-      <!-- Ronda 72 de la agencia (29 Oct 2026, 18:15–18:40; dueño, 18:01: «simplifícalo todo… el mínimo de pasos»): una sola pantalla
-           con los tres pasos a la vista, sin botones que elegir; la invitación viaja dentro del icono (manifiesto de arranque.js). Debajo,
-           para quien ya tiene la app, «Ya tengo GUARDIANA» (copia la invitación; en la app, «Abrir invitación»). -->
-      <h2>Te han invitado a GUARDIANA</h2>
-      <ol class="guia-pasos guia-facil ios-pasos">
-        <li><span class="g-icono"><svg viewBox="0 0 24 24"><path d="M12 14.5V3.5M8.2 7.2 12 3.5l3.8 3.7"/><path d="M8.5 10H7a1.6 1.6 0 0 0-1.6 1.6v7.8A1.6 1.6 0 0 0 7 21h10a1.6 1.6 0 0 0 1.6-1.6v-7.8A1.6 1.6 0 0 0 17 10h-1.5"/></svg></span><div class="g-txt">Pulsa <b>Compartir</b><small class="g-alt">Si no lo ves, está en los tres puntos ⋯</small></div></li>
-        <li><span class="g-icono"><svg viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="4.5"/><path d="M12 8v8M8 12h8"/></svg></span><div class="g-txt"><span data-es-es="Pulsa «Añadir a pantalla de inicio»">Pulsa «Agregar a Inicio»</span><small class="g-alt"><span data-es-es="Y después, «Añadir»">Y después, «Agregar»</span></small></div></li>
-        <li class="fin"><span class="g-icono g-icono-app"><img src="/apple-touch-icon.png?v=2" alt="" width="66" height="66"></span><div class="g-txt">Abre <b>GUARDIANA</b><small class="g-alt">El chat ya está dentro.</small></div></li>
+    <!-- «Descargar GUARDIANA» desde la web (dueño, 29 Oct 2026, 19:36: «para que pueda instalar la app en el móvil… si no le llega el
+         chat, no tiene opción»). En el iPhone, la misma guía que en el chat (19:22–19:29): la flecha amarilla sobre Compartir, arriba a
+         la derecha; deslizar hasta «Añadir a pantalla de inicio»; abrir GUARDIANA. (Aquí estaba la pantalla de la invitación de la ronda
+         72, que ya no se usa: la invitación abre el chat directamente y el chat se muda a la app.) -->
+    <div class="paso aceptar descargar" id="paso-descargar" hidden>
+      <div class="desc-cab"><img src="/apple-touch-icon.png?v=2" alt="" width="68" height="68"><h2>Descarga GUARDIANA</h2><p class="t">Chat, llamadas y videollamadas encriptados.</p></div>
+      <ol class="anadir-pasos desc-pasos">
+        <li><span class="ap-ic"><svg viewBox="0 0 24 24"><path d="M12 14.5V3.5M8.2 7.2 12 3.5l3.8 3.7"/><path d="M8.5 10H7a1.6 1.6 0 0 0-1.6 1.6v7.8A1.6 1.6 0 0 0 7 21h10a1.6 1.6 0 0 0 1.6-1.6v-7.8A1.6 1.6 0 0 0 17 10h-1.5"/></svg></span><span>Pulsa <b>Compartir</b></span></li>
+        <li><span class="ap-ic"><svg viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="4.5"/><path d="M12 8v8M8 12h8"/></svg></span><span>Pulsa <b>Añadir a pantalla de inicio</b></span></li>
       </ol>
-      <div class="ios-otra"><button type="button" class="boton" id="ios-tengo">Ya tengo GUARDIANA</button></div>
-      <p class="t ios-ayuda ios-ok" id="ios-copiada" hidden>Invitación copiada. Abre GUARDIANA y pulsa «Abrir invitación».</p>
+      <div class="fila centro"><button type="button" class="boton" id="desc-cerrar">Ahora no</button></div>
     </div>
 
     <div class="paso" id="paso-entrar" hidden>
@@ -534,14 +533,14 @@
          botón de Safari (iOS 26: las rayitas, a la izquierda de la dirección; antes: Compartir, en el centro). El chat se pasa solo a la app. -->
     <div class="tira-anadir" id="tira-anadir" hidden>
       <div class="anadir-guia" id="anadir-guia" hidden>
-        <!-- una sola guía, la de los iPhone modernos: Compartir arriba a la derecha (dueño, 19:29) -->
+        <!-- dos pasos, con los dos símbolos del iPhone (dueño, 29 Oct 2026, 20:07: «súper simplificada… uno, el botón de compartir,
+             dos, añadir a pantalla de inicio… con ese símbolo igualito en el iPhone»); la flecha amarilla, sobre Compartir (19:25–19:29).
+             Solo esos dos pasos en todos los navegadores, sin flechas (20:26–20:27: «ya la persona lo buscará en su teléfono donde está»;
+             «las flechas amarillas también quítalas»). -->
         <ol class="anadir-pasos">
-          <li class="p-chrome"><span class="ap-ic"><svg viewBox="0 0 24 24"><path d="M12 14.5V3.5M8.2 7.2 12 3.5l3.8 3.7"/><path d="M8.5 10H7a1.6 1.6 0 0 0-1.6 1.6v7.8A1.6 1.6 0 0 0 7 21h10a1.6 1.6 0 0 0 1.6-1.6v-7.8A1.6 1.6 0 0 0 17 10h-1.5"/></svg></span><span>Pulsa <b>Compartir</b>, arriba a la derecha<small>Donde salta la flecha amarilla</small></span></li>
-          <li><span class="ap-ic"><svg viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="4.5"/><path d="M12 8v8M8 12h8"/></svg></span><span>Desliza hacia abajo y pulsa <b>«Añadir a pantalla de inicio»</b><small><span data-es-es="Y después, «Añadir»">Y después, «Agregar»</span></small></span></li>
-          <li><span class="ap-ic ap-app"><img src="/apple-touch-icon.png?v=2" alt="" width="40" height="40"></span><span>Abre <b>GUARDIANA</b><small>Tu chat ya estará dentro.</small></span></li>
+          <li><span class="ap-ic"><svg viewBox="0 0 24 24"><path d="M12 14.5V3.5M8.2 7.2 12 3.5l3.8 3.7"/><path d="M8.5 10H7a1.6 1.6 0 0 0-1.6 1.6v7.8A1.6 1.6 0 0 0 7 21h10a1.6 1.6 0 0 0 1.6-1.6v-7.8A1.6 1.6 0 0 0 17 10h-1.5"/></svg></span><span>Pulsa <b>Compartir</b></span></li>
+          <li><span class="ap-ic"><svg viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="4.5"/><path d="M12 8v8M8 12h8"/></svg></span><span>Pulsa <b>Añadir a pantalla de inicio</b></span></li>
         </ol>
-        <!-- dueño, 19:25: el botón amarillo parpadeando y, pegado, «Pulsa Compartir» con su dibujo (el cuadrado con la flecha) -->
-        <div class="flecha-salta" aria-hidden="true"><span class="fs-bola"><svg viewBox="0 0 24 24"><path d="M12 3v16M5.5 12.5 12 19l6.5-6.5"/></svg></span><span class="fs-txt"><span class="fs-compartir">Pulsa <svg viewBox="0 0 24 24"><path d="M12 14.5V3.5M8.2 7.2 12 3.5l3.8 3.7"/><path d="M8.5 10H7a1.6 1.6 0 0 0-1.6 1.6v7.8A1.6 1.6 0 0 0 7 21h10a1.6 1.6 0 0 0 1.6-1.6v-7.8A1.6 1.6 0 0 0 17 10h-1.5"/></svg></span></span></div>
       </div>
       <button type="button" class="boton principal" id="tira-anadir-b" aria-expanded="false" aria-controls="anadir-guia"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="4.5"/><path d="M12 8v8M8 12h8"/></svg><span>Añadir a pantalla de inicio</span><i class="anadir-flecha" aria-hidden="true">⌃</i></button>
     </div>
@@ -662,6 +661,18 @@
       <li data-p="pcno"><span class="g-icono"><svg viewBox="0 0 24 24"><rect x="6.5" y="2.5" width="11" height="19" rx="2.4"/><path d="M12 7.5v6.5M9.3 11.4 12 14l2.7-2.6"/></svg></span><div class="g-txt">En Chrome o Edge, haz clic en el icono de instalar, a la derecha de la dirección</div></li>
     </ol>
     <div class="fila"><button type="button" class="boton principal" id="completa-ok"><span data-p="ios26 ios ipad crios26 crios otro26 otro app appand androidmenu androidotro pcno mac">Entendido</span><span data-p="android pc">Ahora no</span></button><button type="button" class="boton principal" id="guia-instalar" data-p="android pc">Instalar</button><button type="button" class="boton" id="guia-safari" hidden>Seguir en Safari</button></div>
+  </div>
+</div>
+<!-- Recién instalada en el ordenador (dueño, 29 Oct 2026, 19:41: «ha salido ahí como una captura de pantalla y se ha eliminado
+     todo»): Chrome se lleva la pestaña a su propia ventana, sin barras; aquí se dice que ya está y dónde queda el icono. Y es GUARDIANA
+     entera (19:52: «tendría que abrirme la página web entera… todo»): al abrirla, NÚCLEO, con ZERO, Órbita y Comunicaciones. -->
+<div class="gc-hoja" id="h-instalada" role="dialog" aria-modal="true" aria-labelledby="h-instalada-t">
+  <div class="gc-hoja-caja caja instalada">
+    <div class="gc-asa"></div>
+    <div class="instalada-cab"><img src="/apple-touch-icon.png?v=2" alt="" width="56" height="56"><span class="instalada-ok" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7"/></svg></span></div>
+    <h2 class="gc-hoja-titulo" id="h-instalada-t">GUARDIANA ya está en tu ordenador</h2>
+    <p class="t"><span data-so="win">Tienes el icono en el escritorio y en el menú Inicio.</span><span data-so="mac">La tienes en Aplicaciones y en el Launchpad.</span><span data-so="otro">La tienes entre tus aplicaciones.</span> Se abre en su propia ventana, con todo GUARDIANA: ZERO, Órbita y Comunicaciones.</p>
+    <div class="fila"><button type="button" class="boton principal" id="instalada-ok">Entendido</button></div>
   </div>
 </div>
 <!-- Ajustes (idea de Nathalie, por el dueño, 29 Oct 2026, 16:02: «activar o desactivar las notificaciones… con un botón en pantalla…
@@ -894,7 +905,7 @@
 
 <!-- En el ordenador, en el chat blindado: la pantalla se tapa con la tecla de captura o si la ventana pierde el foco (29 Oct 2026, 08:02) -->
 <div class="captura-velo" id="captura-velo" role="alert" hidden><div><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><b>Modo blindado</b><span>No se puede capturar</span></div></div>
-<script src="/orbita/static/idioma.js?v=20261029p85"></script>
+<script src="/orbita/static/idioma.js?v=20261029p86"></script>
 <script src="pq-mlkem.js?v=20261027a"></script>
 <script src="pq-cnsa.js?v=20261027a"></script>
 <script src="qrhaz.js?v=20261027a"></script>
@@ -905,6 +916,6 @@
 <script src="viaje-datos.js?v=20261027a"></script>
 <script src="viaje.js?v=20261029b"></script>
 <script src="llamada.js?v=20261031e"></script>
-<script src="app.js?v=20261031e"></script>
+<script src="app.js?v=20261031f"></script>
 </body>
 </html>

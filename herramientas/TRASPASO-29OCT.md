@@ -309,3 +309,35 @@ Versiones en main: app.css, app.js y llamada.js `20261030i`; idioma.js `20261029
   JSON no se tocan: no están abiertos). «De momento, el chat fuerte» (17:48).
 - Revisión: 7, 12, 13, 19, 20, 23 hechos; queda 24 (enviaControl async).
 - Versiones: app.js 31e, app.css 31f, llamada.js 31e, sw.js f, idioma.js p85.
+
+## 18. Tramo 10 (17:55–20:30) — el chat se muda de Safari a la app, chat temporal, «Descargar GUARDIANA», GUARDIANA entera en el PC
+- **Ronda 72 de la agencia** (herramientas/agencia-rondas/ronda72/): en el iPhone no hay «un paso» sin App Store. Hallazgo clave: la política
+  `manifest-src 'self'` bloqueaba el manifiesto propio (blob:) y Safari usaba el de siempre → `manifest-src 'self' blob: data:` y el
+  manifiesto lo crea `arranque.js` antes de que Safari lea ninguno (WebKit lee el primero y no lo relee). La semilla, solo en el fragmento.
+- **Traspaso** (app.js, bloque «traspaso de Safari a la app»; dueño 18:56–19:04 y 20:02: «se invita únicamente al chat… luego ya la persona
+  lo añade a inicio»): la invitación abre el chat en Safari sin «¿Aceptas?»; Safari guarda una llave de 32 bytes (`gcom-traspaso`) que va
+  en la `start_url` del manifiesto (`?app=1#t=…`) y se la manda por el canal encriptado a quien invitó, que abre una sala oculta; la app
+  añadida arranca con `#t=`, entra en esa sala y quien invitó funde los dos chats (`fundeTraspaso`: nombre, contacto, todo lo hablado);
+  Safari recibe `traspasado` y enseña «Tu chat ya está en la app». Prueba: traspaso.js.
+- **La barra azul** (dueño 19:13–20:12): solo con el chat ya empezado, fina (44 px), justo encima de donde se escribe; la guía, desplegable,
+  con los símbolos del iPhone: Safari (iOS 26–27) «el botón de abajo» → Compartir → «Añadir a pantalla de inicio», flecha amarilla abajo a
+  la derecha; Chrome del iPhone: Compartir → «Añadir…», flecha arriba a la derecha (`navegadorIOSDetalle`). Pendiente: las capturas del
+  Safari de Nathalie (iOS 27.2) para dibujar el botón igualito. Fuera «Ya tengo GUARDIANA» (dueño 20:05).
+- **Chat temporal** (dueño 19:46): en el navegador del móvil (iPhone siempre; Android mientras no está instalada) se borra a los 10 minutos
+  sin usarlo (toques, mensajes, llamadas; `gcom-temporal-uso`) en los dos lados (`destruir`); quien invitó recibe `temporal`/`guardado` y lo
+  borra él también si la otra persona lleva 10 minutos fuera (`caducaSuyos`). Despedida «Chat borrado» con «Descargar GUARDIANA». Línea
+  dentro del chat; para borrar a mano, «Eliminar» del menú. OJO: ya existía `caducaTemporal(c, m)` (archivos del blindado): la del chat se
+  llama `caducaChatTemporal`. Prueba: temporal.js.
+- **Android** (dueño 20:14): igual que el iPhone: el enlace abre el chat sin preguntar (también dentro de la app del móvil) y la barra azul
+  instala con un toque; al instalar (`appinstalled`) los chats dejan de ser temporales (`gcom-app-instalada`). El ordenador sigue con
+  «¿Aceptas?» y los 9 números (19:48). Prueba: instalar.js al día.
+- **Avisos por defecto** (dueño 20:11): en la app, el primer toque pide el permiso (`armaAvisosAlToque`): un solo «Permitir».
+- **«Descargar GUARDIANA»** (dueño 19:36): en la portada (cabecera, junto a «Entrar» y en el cierre). Móvil → `/orbita/comunicaciones/?instalar`
+  (iPhone: pantalla `#paso-descargar` con la guía de su navegador; Android: «Instalar» del sistema). Ordenador → la ventana de instalar
+  del navegador aquí mismo, o cómo hacerlo (Chrome/Edge, Safari del Mac, otros); ya instalada, dónde está el icono. Prueba: descargar.js.
+- **PC = GUARDIANA entera** (dueño 19:41–19:52): en el ordenador, Comunicaciones, la portada y NÚCLEO enlazan `/manifest.webmanifest`
+  (abre NÚCLEO, alcance `/`); en el móvil, el de Comunicaciones. Tras instalar, «GUARDIANA ya está en tu ordenador» (`#h-instalada`).
+  El dueño tiene instalada la app vieja (solo Comunicaciones): desinstalarla (⋮ › Desinstalar) e instalar la nueva desde la portada.
+- **Siguiente (tarea #80)**: programa instalable para PC a partir de «Guardiana ZERO», misma interfaz que la web, cuadro comparativo en la
+  web; sin firmar de momento, luego Certum a nombre de GUARDIANA GROUP. Pasar por la agencia antes.
+- Versiones: app.js 31f, app.css 31g, arranque.js 31b, idioma.js p86 (ru y cs al día).

@@ -1616,9 +1616,9 @@ body.con-visor{overflow:hidden}
 #paso-ios .ios-ayuda{max-width:340px;margin:14px auto 0;text-wrap:balance}
 #paso-ios .ios-ok{color:#9CC3E4;font-weight:600}
 /* Llevar el chat de Safari a la app (dueño, 29 Oct 2026, 18:56–19:14): abajo, encima de donde se escribe, con la guía desplegable */
-.tira-anadir{padding:8px 12px 2px;display:flex;flex-direction:column;align-items:stretch;gap:8px}
+.tira-anadir{padding:6px 10px 0;display:flex;flex-direction:column;align-items:stretch;gap:6px}
 .tira-anadir[hidden]{display:none}
-.tira-anadir>.boton{min-height:50px;display:flex;align-items:center;justify-content:center;gap:10px;font-size:16.5px;border-radius:14px}
+.tira-anadir>.boton{min-height:44px;display:flex;align-items:center;justify-content:center;gap:9px;font-size:16px;border-radius:12px;padding-block:0} /* fina (dueño, 20:08: «muy minimalista y muy fino para que no estorbe») */
 .tira-anadir>.boton svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round}
 .tira-anadir .anadir-flecha{font-style:normal;font-size:15px;transition:transform .2s;margin-left:2px}
 .tira-anadir.abierta .anadir-flecha{transform:rotate(180deg)}
@@ -1629,26 +1629,33 @@ body.con-visor{overflow:hidden}
 .anadir-pasos>li::before{content:counter(ap);width:24px;height:24px;border-radius:50%;background:#9CC3E4;color:#06080C;display:grid;place-items:center;font:700 13px/1 var(--texto)}
 .anadir-pasos>li b{font-weight:600}
 .anadir-pasos small{display:block;font-size:13px;color:var(--muted);margin-top:2px}
-.ap-ic{width:44px;height:44px;border-radius:12px;background:#2C2C2E;display:grid;place-items:center;box-shadow:0 0 0 2px rgba(156,195,228,.8)}
+.ap-ic{width:44px;height:44px;border-radius:12px;background:#2C2C2E;display:grid;place-items:center}
 .ap-ic svg{width:24px;height:24px;fill:none;stroke:#fff;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
 .ap-app{background:none;overflow:hidden;box-shadow:none}.ap-app img{width:44px;height:44px;border-radius:12px;display:block}
 .anadir-pasos>li.p-safari26,.anadir-pasos>li.p-safari,.anadir-pasos>li.p-chrome,.anadir-pasos>li.p-otro{display:none}
-.tira-anadir.nav-safari26 li.p-safari26,.tira-anadir.nav-safari li.p-safari,.tira-anadir.nav-chrome li.p-chrome,.tira-anadir.nav-otro li.p-otro{display:grid}
-/* la flecha: parpadea y salta sobre el botón del navegador, con «Pulsa [dibujo]» pegado (dueño, 19:18–19:25) */
-.flecha-salta{position:fixed;left:50%;bottom:calc(4px + env(safe-area-inset-bottom));transform:translateX(-27px);display:flex;flex-direction:row;align-items:center;gap:8px;z-index:30;pointer-events:none} /* abajo: la bola sobre el botón y «Pulsa…» a su derecha, sin tapar nada */
-.fs-bola{width:54px;height:54px;border-radius:50%;background:#FFD60A;color:#06080C;display:grid;place-items:center;box-shadow:0 0 0 0 rgba(255,214,10,.7),0 6px 18px rgba(0,0,0,.5);animation:flechaSalta 1s ease-in-out infinite,flechaLuz 1s ease-in-out infinite}
-.fs-bola svg{width:30px;height:30px;fill:none;stroke:currentColor;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
-.fs-txt{background:#FFD60A;color:#06080C;border-radius:12px;padding:6px 12px;font:700 16px/1 var(--texto);white-space:nowrap;box-shadow:0 4px 14px rgba(0,0,0,.45);animation:flechaLuz 1s ease-in-out infinite}
-.fs-txt>span{display:inline-flex;align-items:center;gap:6px}
-.fs-txt svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
-.fs-rayitas{display:none!important}
-.tira-anadir.nav-safari26 .fs-rayitas{display:inline-flex!important}.tira-anadir.nav-safari26 .fs-compartir{display:none}
-.tira-anadir.nav-safari26 .flecha-salta{left:31%}
-.tira-anadir.nav-chrome .flecha-salta{left:auto;right:calc(6px + env(safe-area-inset-right));transform:none;bottom:auto;top:calc(4px + env(safe-area-inset-top));flex-direction:column;align-items:flex-end}
-.tira-anadir.nav-chrome .fs-bola{animation-name:flechaSube,flechaLuz;margin-right:4px}
-.tira-anadir.nav-chrome .fs-bola svg{transform:rotate(180deg)}
-.tira-anadir.nav-otro .flecha-salta{display:none}
-@keyframes flechaSalta{0%,100%{transform:translateY(0)}50%{transform:translateY(10px)}}
-@keyframes flechaSube{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-@keyframes flechaLuz{0%,100%{opacity:1}50%{opacity:.45}}
-@media (prefers-reduced-motion:reduce){.fs-bola,.fs-txt{animation:none}}
+.nav-safari26 .anadir-pasos>li.p-safari26,.nav-safari .anadir-pasos>li.p-safari,.nav-chrome .anadir-pasos>li.p-chrome,.nav-otro .anadir-pasos>li.p-otro{display:grid}
+/* (sin flechas amarillas: dueño, 29 Oct 2026, 20:27: «las flechas amarillas también quítalas, la persona ya lo buscará») */
+/* «Descargar GUARDIANA» desde la web (dueño, 29 Oct 2026, 19:36): en el iPhone, una pantalla sola con la guía del chat */
+.paso.descargar{gap:16px;padding-top:22px}
+.desc-cab{display:flex;flex-direction:column;align-items:center;gap:8px}
+.desc-cab img{width:68px;height:68px;border-radius:16px;box-shadow:0 10px 30px -12px rgba(156,195,228,.55)}
+.desc-cab h2{margin:4px 0 0!important}
+.desc-cab .t{margin:0;max-width:330px;color:var(--muted);font-size:15px;line-height:1.4}
+.desc-pasos{width:100%;max-width:400px;text-align:left;background:#0E141C;border:1px solid rgba(156,195,228,.25);border-radius:16px;padding:14px 14px 12px;gap:14px}
+.desc-pasos>li{font-size:17px}
+body.descargando #pro,body.descargando .como-plegable{display:none!important}
+.tira-anadir.en-android>.boton .anadir-flecha{display:none}
+/* el chat temporal, borrado: la misma despedida, con «Descargar GUARDIANA» */
+.fin-invitado .fin-t{display:none}
+.fin-invitado.temporal .fin-n{display:none}
+.fin-invitado.temporal .fin-t{display:block}
+.fin-invitado.temporal[data-por="mano"] .por-tiempo,.fin-invitado.temporal[data-por="tiempo"] .por-mano{display:none}
+.fin-invitado #fin-descargar{margin-top:14px;min-height:52px;padding:0 26px;font-size:16.5px}
+/* recién instalada en el ordenador (dueño, 19:41) */
+.caja.instalada{text-align:center;display:flex;flex-direction:column;align-items:center;gap:10px}
+.instalada-cab{position:relative;width:56px;height:56px;margin-top:6px}
+.instalada-cab img{width:56px;height:56px;border-radius:14px}
+.instalada-ok{position:absolute;right:-8px;bottom:-6px;width:26px;height:26px;border-radius:50%;background:#5CC98A;display:grid;place-items:center;box-shadow:0 0 0 3px #0B1016}
+.instalada-ok svg{width:16px;height:16px;fill:none;stroke:#06080C;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+.caja.instalada .t{max-width:380px;margin:0;line-height:1.45}
+.caja.instalada .fila{justify-content:center;margin-top:6px}

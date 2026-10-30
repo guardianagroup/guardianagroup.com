@@ -27,7 +27,14 @@
   if (m === 'nuevo') sessionStorage.setItem('guardiana-m2', '1'); else if (m === 'antes') sessionStorage.removeItem('guardiana-m2');
   const app = q.get('app') === '1' || matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
   if (app) sessionStorage.setItem('guardiana-m2', '1');
-  if (sessionStorage.getItem('guardiana-m2') !== '1') return;
+  // 29 Oct 2026, 19:52 (owner): on a computer the installed app is the whole of GUARDIANA, so every computer can install it
+  // from here too (Chrome and Edge show their install icon); phones install Comunicaciones (the chat) instead
+  const movil = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent) || (/Macintosh/.test(navigator.userAgent) && navigator.maxTouchPoints > 1);
+  if (app && !movil) { try { localStorage.setItem('guardiana-app', 'instalada'); } catch (_) {} }
+  if (sessionStorage.getItem('guardiana-m2') !== '1') {
+    if (!movil) { const l = document.createElement('link'); l.rel = 'manifest'; l.href = '/manifest.webmanifest'; document.head.appendChild(l); }
+    return;
+  }
   // the new layout only on phones and tablets (a computer's window keeps its own)
   if (matchMedia('(max-width: 760px), (max-width: 1400px) and (pointer: coarse)').matches) document.body.classList.add('m2');
   // what makes the site installable: the manifest, the colour of the browser's bar, the name on the home screen
@@ -190,7 +197,7 @@
   </div>
 </section>
 
-<script src="static/idioma.js?v=20261029p85"></script>
+<script src="static/idioma.js?v=20261029p86"></script>
 <script src="static/descargas.js?v=20261025k"></script>
 <script src="static/orbita-secciones.js?v=20261025k"></script>
 <script src="static/orbita.js?v=20261028a"></script>

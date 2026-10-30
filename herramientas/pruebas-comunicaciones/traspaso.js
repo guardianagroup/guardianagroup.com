@@ -2,7 +2,7 @@
 // 18:56–19:04: «primero un chat y después… añadir a pantalla de inicio… que automáticamente el chat de fuera pase a la aplicación…
 // para que la persona no se pierda»). Comprueba: la invitación se acepta sola en Safari (sin «¿Aceptas?»); el manifiesto de Safari
 // lleva la llave del traspaso solo en el fragmento; Safari se la manda a quien invitó, que abre una sala oculta; la guía con la
-// flecha sale sola; la app que se añade arranca con «#t=», entra en esa sala y el chat se funde en uno (mismo nombre, todo lo
+// guía sale sola, sin flechas; la app que se añade arranca con «#t=», entra en esa sala y el chat se funde en uno (mismo nombre, todo lo
 // hablado); Safari se despide; los mensajes nuevos llegan a la app.
 // Usage: node traspaso.js <outdir>
 'use strict';
@@ -61,10 +61,10 @@ async function telefono(browser, nombre, app) {
   comprueba(pos.b <= pos.c + 1 && pos.c - pos.b < 30, 'Safari: el botón está justo encima de donde se escribe', pos);
   comprueba(await hasta(S, () => !document.querySelector('#anadir-guia').hidden, 4000), 'Safari: lo primero que se ve en el chat es la guía, ya desplegada (dueño, 19:22)');
   await foto(S, '90-safari-chat-guia');
-  comprueba(await visible(S, '#tira-anadir .flecha-salta'), 'Safari: la flecha amarilla, saltando');
-  const fl = await S.evaluate(() => { const r = document.querySelector('#tira-anadir .fs-bola').getBoundingClientRect(); return { x: Math.round(r.left + r.width / 2), y: Math.round(r.top), w: innerWidth }; });
-  comprueba(fl.y < 80 && fl.x > fl.w / 2, 'la flecha, arriba a la derecha, sobre Compartir (una sola guía, la moderna; dueño, 19:29)', fl);
-  comprueba(await S.evaluate(() => [...document.querySelectorAll('#anadir-guia li')].filter((l) => getComputedStyle(l).display !== 'none').length === 3), 'tres pasos (Compartir, deslizar y «Añadir a pantalla de inicio», abrir GUARDIANA)');
+  comprueba(!(await S.$('.flecha-salta')), 'sin flechas amarillas (dueño, 20:27: «la persona ya lo buscará»)');
+  comprueba(await S.evaluate(() => [...document.querySelectorAll('#anadir-guia li')].filter((l) => getComputedStyle(l).display !== 'none').length === 2), 'dos pasos, con los símbolos del iPhone: Compartir y «Añadir a pantalla de inicio» (dueño, 20:07 y 20:26)');
+  comprueba(await S.evaluate(() => [...document.querySelectorAll('#mensajes .sistema, #mensajes [class*=sistema]')].some((e) => /Chat temporal/.test(e.textContent)) || /Chat temporal/.test(document.querySelector('#mensajes').textContent)), 'Safari: dentro del chat, una línea: «Chat temporal… se borra a los 10 minutos sin usarlo» (19:46)');
+  comprueba(await hasta(A, () => /Chat temporal: la otra persona/.test(document.querySelector('#mensajes').textContent), 6000), 'Fran: en su chat, que el de la otra persona es temporal');
   await S.click('#tira-anadir-b'); await espera(300);
   comprueba(await S.evaluate(() => document.querySelector('#anadir-guia').hidden), 'Safari: un toque y se recoge (para chatear)');
   await foto(S, '91-safari-boton');
@@ -77,6 +77,8 @@ async function telefono(browser, nombre, app) {
   comprueba(await hasta(A, () => window.gcomPrueba.traspaso().ocultas === 0 && window.gcomPrueba.traspaso().vivas === 1, 8000), 'Fran: los dos chats se funden en uno', await A.evaluate(() => window.gcomPrueba.traspaso()));
   comprueba(await A.evaluate(() => window.gcomPrueba.traspaso().nombres.join() === 'Nathalie'), 'Fran: sigue llamándose «Nathalie»', await A.evaluate(() => window.gcomPrueba.traspaso().nombres));
   comprueba(await A.evaluate(() => /me lees/.test(document.querySelector('#mensajes').textContent)), 'Fran: lo hablado antes sigue en el chat');
+  comprueba(await A.evaluate(() => /ya tiene GUARDIANA: este chat se queda guardado/.test(document.querySelector('#mensajes').textContent)), 'Fran: «La otra persona ya tiene GUARDIANA: este chat se queda guardado»');
+  comprueba(await A.evaluate(() => !window.gcomPrueba.conv().suTemporal), 'Fran: el chat ya no es temporal');
   comprueba(await hasta(S, () => !document.querySelector('#paso-traspasado').hidden, 8000), 'Safari: «Tu chat ya está en la app»');
   await foto(S, '93-safari-traspasado');
   await A.fill('#texto', 'Ahora ya en la app 😊'); await A.click('#enviar');
@@ -99,9 +101,7 @@ async function telefono(browser, nombre, app) {
     const vio = await hasta(C, () => { const t = document.querySelector('#tira-anadir'); return !!t && !t.hidden; }, 14000);
     if (!vio) console.log('Chrome:', JSON.stringify(await C.evaluate(() => { const c = window.gcomPrueba.conv(); return { conv: !!c, huella: !!(c && c.huella), sesion: !!(c && c.sesion), t: window.gcomPrueba.traspaso(), href: location.href, actual: !!c }; })));
     await hasta(C, () => !document.querySelector('#anadir-guia').hidden, 4000);
-    const f = await C.evaluate(() => { const r = document.querySelector('#tira-anadir .fs-bola').getBoundingClientRect(); return { x: Math.round(r.left + r.width / 2), y: Math.round(r.top), w: innerWidth }; });
-    comprueba(f.y < 80 && f.x > f.w / 2, 'Chrome: la flecha, arriba a la derecha, sobre Compartir', f);
-    comprueba(await C.evaluate(() => [...document.querySelectorAll('#anadir-guia li')].filter((l) => getComputedStyle(l).display !== 'none').length === 3), 'Chrome: tres pasos (Compartir arriba, Añadir a pantalla de inicio, abrir GUARDIANA)');
+    comprueba(await C.evaluate(() => [...document.querySelectorAll('#anadir-guia li')].filter((l) => getComputedStyle(l).display !== 'none').length === 2), 'Chrome: dos pasos (Compartir, Añadir a pantalla de inicio)');
     await foto(C, '94-chrome-guia');
   }
 
