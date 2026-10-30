@@ -42,12 +42,12 @@ async function telefono(browser, nombre, app) {
   const App = await telefono(browser, 'App', true);     // …y la misma persona, ya en su app
 
   // (el paso por Safari y el traspaso a la app están en traspaso.js; aquí, dos iPhone con la app, ya conectados)
-  await A.goto(URL0 + '?app=1'); await espera(1600);
+  await A.goto(URL0 + '?app=1&numero=0'); await espera(1600);
   await A.click('#nueva-blindada'); await espera(400);
   if (await A.$('#h-invitar.gc-abierta')) await A.click('#invitar-otra');
   await espera(1800);
   const enlace = (await A.evaluate(() => window.gcomPrueba.enlace())).replace('https://guardianagroup.com', 'http://127.0.0.1:8080');
-  await App.goto(enlace.replace('/orbita/comunicaciones/', '/orbita/comunicaciones/?app=1')); await espera(2200);
+  await App.goto(enlace.replace('/orbita/comunicaciones/', '/orbita/comunicaciones/?app=1&numero=0')); await espera(2200);
   if (await App.$('#aceptar-si:visible')) await App.click('#aceptar-si');
   comprueba(await hasta(A, () => { const c = window.gcomPrueba.conv(); return !!(c && c.huella && c.sesion); }, 14000), 'los dos conectados');
   void Saf; const A2 = A;

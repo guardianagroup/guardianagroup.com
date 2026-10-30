@@ -4,9 +4,9 @@ const espera = (ms) => new Promise((r) => setTimeout(r, ms));
 (async () => {
   const b = await chromium.launch();
   const ctx = await b.newContext({ viewport: { width: 393, height: 793 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true, locale: 'es-ES', userAgent: 'Mozilla/5.0 (iPhone; CPU iPhone OS 18_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.6 Mobile/15E148 Safari/604.1' });
-  await ctx.addInitScript(() => { Object.defineProperty(navigator, 'standalone', { get: () => true }); });
+  await ctx.addInitScript(() => { Object.defineProperty(navigator, 'standalone', { get: () => true }); sessionStorage.setItem('gcom-sin-numero', '1'); });
   const p = await ctx.newPage(); let fallos = 0; p.on('pageerror', (e) => { console.log('pageerror', String(e)); fallos++; });
-  await p.goto('http://127.0.0.1:8080/orbita/comunicaciones/?app=1'); await espera(1500);
+  await p.goto('http://127.0.0.1:8080/orbita/comunicaciones/?app=1&numero=0'); await espera(1500);
   const cdp = await ctx.newCDPSession(p);
   const tira = async (desde, hasta, pasos, foto) => {
     await cdp.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [{ x: 196, y: desde }] });

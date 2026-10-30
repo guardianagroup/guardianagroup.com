@@ -121,7 +121,7 @@
   function convNueva(sala, semilla, rol, modo) {
     return { id: sala, semilla, rol, modo: modo === 'blindada' ? 'blindada' : 'normal', suVerificada: false, estado: 'invitacion', nombre: '', firmaPub: null, acuerdoPub: null, huella: null, verificada: false, creado: Date.now(), ultimo: Date.now(), ultimoTexto: null, noLeidos: 0, temporal: enTemporal() || undefined };
   }
-  const guardable = (c) => ({ id: c.id, tumba: c.tumba, vaciarPendiente: c.vaciarPendiente || undefined, borrarPendientes: c.borrarPendientes && c.borrarPendientes.length ? c.borrarPendientes : undefined, semilla: c.semilla, rol: c.rol, estado: c.estado, nombre: c.nombre, firmaPub: c.firmaPub, acuerdoPub: c.acuerdoPub, huella: c.huella, verificada: c.verificada, creado: c.creado, ultimo: c.ultimo, ultimoTexto: c.ultimoTexto, noLeidos: c.noLeidos, enlace: !!c.enlace || undefined, pqVisto: !!c.pqVisto, clasicaAceptada: !!c.clasicaAceptada, modo: c.modo || 'normal', suVerificada: !!c.suVerificada, dsaPub: c.dsaPub || null, idB: c.idB || null, alias: c.alias || '', num: c.num || 0, contacto: !!c.contacto, sinContacto: !!c.sinContacto, traspasoDe: c.traspasoDe || undefined, traspasoApp: !!c.traspasoApp || undefined, temporal: !!c.temporal || undefined, dijeTemporal: !!c.dijeTemporal || undefined, suTemporal: c.suTemporal || undefined });
+  const guardable = (c) => ({ id: c.id, tumba: c.tumba, vaciarPendiente: c.vaciarPendiente || undefined, borrarPendientes: c.borrarPendientes && c.borrarPendientes.length ? c.borrarPendientes : undefined, semilla: c.semilla, rol: c.rol, estado: c.estado, nombre: c.nombre, firmaPub: c.firmaPub, acuerdoPub: c.acuerdoPub, huella: c.huella, verificada: c.verificada, creado: c.creado, ultimo: c.ultimo, ultimoTexto: c.ultimoTexto, noLeidos: c.noLeidos, enlace: !!c.enlace || undefined, pqVisto: !!c.pqVisto, clasicaAceptada: !!c.clasicaAceptada, modo: c.modo || 'normal', suVerificada: !!c.suVerificada, dsaPub: c.dsaPub || null, idB: c.idB || null, alias: c.alias || '', num: c.num || 0, contacto: !!c.contacto, sinContacto: !!c.sinContacto, traspasoDe: c.traspasoDe || undefined, traspasoApp: !!c.traspasoApp || undefined, temporal: !!c.temporal || undefined, dijeTemporal: !!c.dijeTemporal || undefined, suTemporal: c.suTemporal || undefined, numero: c.numero || undefined, huellaEsperada: c.huellaEsperada || undefined });
   const guardaConv = (c) => BD.pon('conv', guardable(c));
   async function preparaConv(c) {
     if (esB(c)) await preparaIdentidadB(c);
@@ -139,7 +139,7 @@
     let n = Math.max(0, ...xs.map((x) => x.num || 0));
     for (const x of xs) {
       if (x.estado === 'destruida_pendiente' && Date.now() - (x.tumba || x.creado || 0) > 24 * 3600 * 1000) { await BD.borra('conv', x.id); continue; }
-      if (x.estado !== 'destruida_pendiente' && !x.huella && !(x.rol === 'invita' && (x.modo === 'blindada' || x.enlace))) { await BD.borraConv('msg', x.id); await BD.borraConv('arch', x.id); await BD.borra('conv', x.id); continue; }
+      if (x.estado !== 'destruida_pendiente' && !x.huella && !x.numero && !(x.rol === 'invita' && (x.modo === 'blindada' || x.enlace))) { await BD.borraConv('msg', x.id); await BD.borraConv('arch', x.id); await BD.borra('conv', x.id); continue; }
       if (!x.num && x.estado !== 'destruida_pendiente') { x.num = ++n; await BD.pon('conv', x); }
       await preparaConv(x);
       if (x.estado !== 'destruida_pendiente') await cargaMensajes(x);
@@ -382,7 +382,9 @@
       if ((kemEk && (resp || kemEk.length !== C.KEM_EK)) || (kemCt && (!resp || kemCt.length !== C.KEM_CT)) || ((kemEk || kemCt) && !sig3)) return;
       const huella = await C.huella(firmaPub, acuerdoPub);
       if (C.hex(huella) === C.hex(YO.huella)) return; // yo mismo desde otra pestaña
-      if (c.huella && C.hex(c.huella) !== C.hex(huella)) { R.manda(c.id, de, new Uint8Array([5])); c.intrusos = (c.intrusos || 0) + 1; vigila(c, T('Intento de entrada con otra identidad: rechazado; la conversación sigue intacta.'), 'mal'); if (!c.intrusoAvisado) { c.intrusoAvisado = true; await anotaSistema(c, 'Alguien con otra identidad intentó entrar en esta conversación: rechazado.'); } pintaRadio(c); return; } // la invitación ya es de otra persona
+      // un chat por Número GUARDIANA solo admite la identidad con la que esa persona dio de alta su número (ronda 73)
+      const ajena = c.huellaEsperada && !c.huella && C.hex(huella) !== c.huellaEsperada;
+      if (ajena || (c.huella && C.hex(c.huella) !== C.hex(huella))) { R.manda(c.id, de, new Uint8Array([5])); c.intrusos = (c.intrusos || 0) + 1; vigila(c, T('Intento de entrada con otra identidad: rechazado; la conversación sigue intacta.'), 'mal'); if (!c.intrusoAvisado) { c.intrusoAvisado = true; await anotaSistema(c, 'Alguien con otra identidad intentó entrar en esta conversación: rechazado.'); } pintaRadio(c); return; } // la invitación ya es de otra persona
       // una época nunca se acepta dos veces (repetición)
       c.epocasVistas = c.epocasVistas || new Set(); const eh = C.hex(epoca); if (c.epocasVistas.has(eh)) return; c.epocasVistas.add(eh); if (c.epocasVistas.size > 64) c.epocasVistas.delete(c.epocasVistas.values().next().value);
       const efMia = resp && c.efs ? c.efs.get(C.hex(resp)) : null;
@@ -1231,9 +1233,15 @@
     return d;
   }
   const RUTA = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="18" r="2.2"/><circle cx="19" cy="6" r="2.2"/><path d="M7 17c5-1 3-8 8-9.5" stroke-dasharray="2.4 2.6"/></svg>';
+  // Solo se abren en una pestaña los tipos que no pueden llevar código (auditoría, 29 Oct 2026, hallazgo 4): un «blob:» hereda el
+  // origen de esta página, y un archivo HTML o SVG de un contacto malicioso correría como guardianagroup.com. Lo demás se guarda,
+  // y con el tipo genérico, para que el navegador no lo interprete.
+  const mimeAbrible = (t) => /^(image\/(?!svg)|video\/|audio\/)[\w.+-]+$/i.test(String(t || '')) || t === 'application/pdf' || t === 'text/plain';
   async function abreArchivo(m, guardar) {
     const r = await BD.saca('arch', m.id); if (!r) return aviso(m.archivo.enDisco ? T('Ese archivo se guardó directamente en tu disco, en la carpeta que elegiste.') : T('Este archivo ya no está en este navegador.'));
-    const u = URL.createObjectURL(r.blob);
+    const abrible = mimeAbrible(r.mime || r.blob.type);
+    if (!abrible) guardar = true;
+    const u = URL.createObjectURL(abrible ? r.blob : new Blob([r.blob], { type: 'application/octet-stream' }));
     const a = document.createElement('a'); a.href = u; if (guardar) a.download = r.nombre; else { a.target = '_blank'; a.rel = 'noopener'; }
     document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(u), 60000);
   }
@@ -1662,7 +1670,7 @@
     R.on('abierto', () => { pintaBarra(); });
     // en cada conexión nueva con el relé, la suscripción de avisos se presenta otra vez (el relé la guarda por conexión; 15:40: «emisor y
     // receptor tienen que estar coordinados»)
-    R.on('hola', () => { for (const c of CONVS.values()) pintaCabecera(c); pintaBarra(); avisosFirma = ''; sincronizaAvisos(); });
+    R.on('hola', () => { for (const c of CONVS.values()) pintaCabecera(c); pintaBarra(); avisosFirma = ''; sincronizaAvisos(); alHolaNumero().catch((e) => console.warn('número', e)); });
     // la otra persona se va a segundo plano o vuelve (el relé lo cuenta): con «fuera», la llamada también la avisa el teléfono
     R.on('presencia', (m) => { const c = m && CONVS.get(m.sala); if (!c || (c.suId && m.quien !== c.suId)) return; c.suFuera = m.fuera === 1; c.quietoHasta = 0; pintaCabecera(c); pintaLista(); pintaContactos(); });
     // «no tiene los avisos activados» solo si de verdad no hay ninguna suscripción: si el relé calla por los 20 s entre avisos
@@ -1713,7 +1721,8 @@
   // Antes (dueño, 26 Oct 20:04) había una sola: crear o aceptar otra borraba la anterior. Ahora cada conversación vive por su
   // cuenta (su sala, sus claves, su historial) y una nueva no toca las demás. En el ordenador, la lista va a la izquierda; en
   // el móvil es una pantalla propia y «‹» vuelve a ella. Sin vista previa del texto: el nombre, la hora y lo que hay de nuevo.
-  const MAX_CONVS = 8;
+  // con el Número GUARDIANA cada contacto es un chat que se queda (29 Oct 2026): hasta 48 (el relé admite 64 salas por conexión)
+  const MAX_CONVS = 48;
   let quiereNueva = false; // la persona pulsó «Nueva»: se queda en el inicio aunque haya conversaciones
   const vivas = () => [...CONVS.values()].filter((c) => c.estado !== 'destruida_pendiente' && c.estado !== 'destruida' && !(c.traspasoDe && !c.huella));
   const siguienteNum = () => 1 + Math.max(0, ...[...CONVS.values()].map((c) => c.num || 0));
@@ -1721,6 +1730,7 @@
     if (!c) return '';
     if (c.alias) return c.alias;
     if (c.nombre) return c.nombre;
+    if (c.numero) return C.N.numeroBonito(c.numero);
     // en el teléfono, «Chat blindado» o «Chat» (29 Oct 2026, 07:49: «chat normal o blindado»), sin número: allí hay uno a la vez
     if (esMovil()) return esB(c) ? T('Chat blindado') : T('Chat');
     const base = esB(c) ? T('Sesión blindada') : corto ? T('Conversación') : T('Conversación encriptada');
@@ -1791,16 +1801,19 @@
     const sec = $('#contactos'), ul = $('#contactos-filas'); if (!sec || !ul) return;
     // los contactos y, debajo, la conversación empezada que aún no se guardó (si no, al volver no habría cómo llegar a ella)
     // y las invitaciones enviadas desde aquí que aún esperan (14:33: tras cerrar la app no había cómo volver a ellas)
-    const xs = esMovil() ? contactos().concat(vivas().filter((x) => x.huella && !x.contacto), vivas().filter((x) => !x.huella && x.rol === 'invita' && porEnlace(x))) : [];
+    const xs = esMovil() ? contactos().concat(vivas().filter((x) => (x.huella && !x.contacto) || (!x.huella && x.numero)), vivas().filter((x) => !x.huella && x.rol === 'invita' && porEnlace(x))) : [];
+    // los números añadidos que aún esperan a que la otra persona añada el tuyo (Número GUARDIANA), al final
+    const pendientes = esMovil() ? CITAS.slice().sort((a, b) => (b.creado || 0) - (a.creado || 0)) : [];
+    const total = xs.length + pendientes.length;
     const ver = esMovil() && verContactos;
     sec.hidden = !ver;
     $('#inicio').classList.toggle('ver-contactos', ver);
-    $('#inicio').classList.toggle('con-contactos', xs.length > 0);
-    document.body.classList.toggle('con-contactos', xs.length > 0);
-    const vacio = $('#contactos-vacio'); if (vacio) vacio.hidden = xs.length > 0;
-    if (!xs.length) editaContactos = false;
-    const ed = $('#contactos-editar'); if (ed) { ed.hidden = !xs.length; ed.textContent = editaContactos ? T('Listo') : T('Editar'); ed.setAttribute('aria-pressed', String(editaContactos)); }
-    ul.hidden = !xs.length;
+    $('#inicio').classList.toggle('con-contactos', total > 0);
+    document.body.classList.toggle('con-contactos', total > 0);
+    const vacio = $('#contactos-vacio'); if (vacio) { vacio.hidden = total > 0; const sp = vacio.querySelector('span'); if (sp) sp.textContent = usaNumero() ? T('Toca «Llamar» y escribe el Número GUARDIANA de la otra persona; cuando también añada el tuyo, su chat saldrá aquí.') : T('Cuando invites a alguien y te conteste, su chat saldrá aquí.'); }
+    if (!total) editaContactos = false;
+    const ed = $('#contactos-editar'); if (ed) { ed.hidden = !total; ed.textContent = editaContactos ? T('Listo') : T('Editar'); ed.setAttribute('aria-pressed', String(editaContactos)); }
+    ul.hidden = !total;
     ul.textContent = '';
     for (const c of xs) {
       const nombre = nombreConv(c, true), vivo = pareceEnLinea(c);
@@ -1810,7 +1823,7 @@
       const tx = document.createElement('span'); tx.className = 'contacto-txt';
       const nb = document.createElement('b'); nb.textContent = nombre; nb.translate = false;
       // sin «En línea»/«No conectado» escrito: eso ya lo dice el puntito del avatar (dueño, 29 Oct 2026, 16:01)
-      const es = document.createElement('small'); es.textContent = !c.huella ? T('Invitación enviada · esperando') : c.noLeidos ? (c.noLeidos === 1 ? T('Mensaje nuevo') : T('{n} mensajes nuevos').replace('{n}', c.noLeidos)) : c.contacto ? '' : T('Sin guardar');
+      const es = document.createElement('small'); es.textContent = !c.huella ? (c.numero ? T('Conectando…') : T('Invitación enviada · esperando')) : c.noLeidos ? (c.noLeidos === 1 ? T('Mensaje nuevo') : T('{n} mensajes nuevos').replace('{n}', c.noLeidos)) : c.contacto ? '' : T('Sin guardar');
       tx.append(nb, es); ab.append(av, tx);
       if (c.noLeidos) { const n = document.createElement('i'); n.className = 'contacto-n'; n.textContent = c.noLeidos > 99 ? '99+' : String(c.noLeidos); ab.append(n); }
       li.append(ab);
@@ -1820,6 +1833,18 @@
         const b = document.createElement('button'); b.type = 'button'; b.className = 'contacto-b'; b.dataset.id = c.id; b.dataset.acto = acto; b.innerHTML = svg;
         b.setAttribute('aria-label', etq.replace('{n}', nombre)); b.title = etq.replace('{n}', nombre); li.append(b);
       }
+      ul.append(li);
+    }
+    for (const p of pendientes) {
+      const nombre = p.nombre || C.N.numeroBonito(p.n);
+      const li = document.createElement('li'); li.className = 'contacto pendiente' + (p.estado === 'caducada' ? ' caducada' : '');
+      const ab = document.createElement('button'); ab.type = 'button'; ab.className = 'contacto-abre'; ab.dataset.cita = p.T;
+      const av = document.createElement('span'); av.className = 'contacto-av'; av.textContent = p.nombre ? inicial(p.nombre) : '#'; av.setAttribute('aria-hidden', 'true');
+      const tx = document.createElement('span'); tx.className = 'contacto-txt';
+      const nb = document.createElement('b'); nb.textContent = nombre; nb.translate = false;
+      const es = document.createElement('small'); es.textContent = p.estado === 'caducada' ? T('Sin respuesta · toca para volver a añadirlo') : T('Esperando a que añada tu número');
+      tx.append(nb, es); ab.append(av, tx); li.append(ab);
+      if (editaContactos) { const q = document.createElement('button'); q.type = 'button'; q.className = 'contacto-quita'; q.dataset.cita = p.T; q.dataset.acto = 'quita'; q.textContent = T('Quitar'); q.setAttribute('aria-label', T('Quitar el número de {n}').replace('{n}', nombre)); li.append(q); }
       ul.append(li);
     }
   }
@@ -1847,6 +1872,248 @@
     paraEscribe(); guardaBorrador();
     quiereNueva = true; cierraConv(); document.body.classList.remove('ver-lista'); pintaLista();
   }
+
+  // ---------- Número GUARDIANA (dueño, 29 Oct 2026, 20:56–21:55; agencia, ronda 73: Astra y una voz independiente) ----------
+  // Cada teléfono con la app tiene su número: 12 cifras creadas aquí (11 al azar y una de control) o elegidas por la persona (21:54).
+  // Al relé solo le llega su huella. Para hablar, los dos añaden el número del otro (21:40: «no quiero que ninguna persona pueda
+  // escribir un número al azar y que se pueda comunicar con alguien»): «Llamar» abre un teclado; si el número es de un contacto, le
+  // llama; si no, deja una cita cerrada en el relé y, cuando la otra persona añade el tuyo, el chat se abre solo en los dos teléfonos.
+  // Escribir un número al azar no le llega a nadie. En el ordenador sigue la invitación con código (19:48: «el PC seguirá igual»).
+  let MI_NUM = null, CITAS = [], NUM_PROPUESTO = '', NUM_MARCADO = '', NUM_NUEVO = '';
+  const casando = new Set();
+  const QS0 = new URLSearchParams(location.search);
+  const releConNumeros = () => !!((R && R.conNumeros) || (() => { try { return localStorage.getItem('gcom-numeros') === '1'; } catch (_) { return false; } })());
+  // en el teléfono, con la app instalada y un relé que lo entienda. En las pruebas locales, «?numero=0» deja el inicio de antes
+  // (con «Invitar a chat») durante toda la pestaña: las pruebas de las invitaciones siguen valiendo tal cual
+  const sinNumeroPrueba = () => { if (!LOCAL) return false; try { if (QS0.get('numero') === '0') sessionStorage.setItem('gcom-sin-numero', '1'); return sessionStorage.getItem('gcom-sin-numero') === '1'; } catch (_) { return false; } };
+  const usaNumero = () => esMovil() && comoApp() && !sinNumeroPrueba() && (!!MI_NUM || releConNumeros());
+  const bonito = (n) => C.N.numeroBonito(n);
+  async function cargaNumero() {
+    try { const r = await BD.saca('yo', 'numero'); MI_NUM = r ? await leeSellado(r) : null; } catch (_) { MI_NUM = null; }
+    try { const r = await BD.saca('yo', 'citas'); const xs = r ? await leeSellado(r) : null; CITAS = Array.isArray(xs) ? xs : []; } catch (_) { CITAS = []; }
+  }
+  const guardaNumero = async () => { if (MI_NUM) await BD.pon('yo', Object.assign({ id: 'numero' }, await guardaSellado(MI_NUM))); };
+  const guardaCitas = async () => BD.pon('yo', Object.assign({ id: 'citas' }, await guardaSellado(CITAS)));
+  // presenta (o da de alta) el número en esta conexión: firma el reto del relé con la identidad de esta app
+  async function presentaNumero(n, idn, alta) {
+    if (!R || !R.abierto || !R.reto) return { ok: false, por: 'sin relé' };
+    const f = C.b64u(YO.firmaPub), a = C.b64u(YO.acuerdoPub);
+    const sig = C.b64u(await C.firma(YO, C.N.datosYo(R.reto, idn, f, a)));
+    return R.num({ idn, f, a, sig, alta: alta ? 1 : undefined });
+  }
+  // patrones que cualquiera probaría primero (agencia: «rechazar patrones especialmente triviales»)
+  function numeroTrivial(once) {
+    const d = [...once].map(Number); if (new Set(d).size <= 2) return true;
+    let sube = 0, baja = 0; for (let i = 1; i < d.length; i++) { if ((d[i] - d[i - 1] + 10) % 10 === 1) sube++; if ((d[i - 1] - d[i] + 10) % 10 === 1) baja++; }
+    return sube >= 8 || baja >= 8;
+  }
+  // «Usar este número»: con conexión (el relé tiene que confirmar que nadie lo tiene); el azar, si coincide, prueba otro
+  async function creaNumero(n, elegido) {
+    if (!C.N.numeroValido(n)) return 'formato';
+    if (!R || !R.abierto || !R.reto) return 'sin relé';
+    for (let intento = 0; intento < 4; intento++) {
+      const idn = await C.N.idnDe(n);
+      const r = await presentaNumero(n, idn, true);
+      if (r.ok) { MI_NUM = { n, idn, alta: true, buzon: r.buzon || '', elegido: !!elegido, creado: Date.now() }; await guardaNumero(); try { localStorage.setItem('gcom-numeros', '1'); } catch (_) {} sincronizaAvisos(); return 'ok'; }
+      if (r.por !== 'ocupado' || elegido) return r.por || 'error';
+      n = C.N.nuevoNumero(); NUM_PROPUESTO = n;
+    }
+    return 'ocupado';
+  }
+  // en cada conexión nueva: el número se presenta (sin eso, el relé no sabe de quién son las citas) y se miran las citas
+  async function alHolaNumero() {
+    if (R.conNumeros) { try { localStorage.setItem('gcom-numeros', '1'); } catch (_) {} }
+    pintaNumero();
+    if (!MI_NUM || !R.conNumeros) return;
+    let r = await presentaNumero(MI_NUM.n, MI_NUM.idn, false);
+    if (!r.ok && r.por === 'no') r = await presentaNumero(MI_NUM.n, MI_NUM.idn, true); // el relé lo perdió: se vuelve a dar de alta
+    if (!r.ok) { console.warn('número', r.por); return; }
+    if (r.buzon && r.buzon !== MI_NUM.buzon) { MI_NUM.buzon = r.buzon; await guardaNumero(); sincronizaAvisos(); }
+    await revisaCitas();
+  }
+  // lo que deja cada uno en la cita: su número, sus dos claves y un valor al azar, firmado y cerrado con la clave de los dos números
+  async function sobreDe(p, clave) {
+    const f = C.b64u(YO.firmaPub), a = C.b64u(YO.acuerdoPub), t = Date.now();
+    const sig = C.b64u(await C.firma(YO, C.N.datosCita(p.T, MI_NUM.n, f, a, p.r, t)));
+    return C.N.cierraSobre(clave, p.T, { v: 1, n: MI_NUM.n, f, a, r: p.r, t, sig });
+  }
+  async function mandaCita(p) { const { clave } = await C.N.citaDe(MI_NUM.n, p.n); return R.cita(p.T, await sobreDe(p, clave)); }
+  async function anadeNumero(n, nombre) {
+    if (!R || !R.abierto) { aviso(T('Sin conexión: espera un momento.')); return null; }
+    const cita = await C.N.citaDe(MI_NUM.n, n);
+    const p = { n, nombre: String(nombre || '').trim().slice(0, 40), T: cita.T, idn: await C.N.idnDe(n), r: C.b64u(C.azar(32)), creado: Date.now(), estado: 'espera', enviada: false };
+    CITAS = CITAS.filter((x) => x.n !== n).concat(p); await guardaCitas();
+    const res = await R.cita(p.T, await sobreDe(p, cita.clave));
+    if (!res.ok) {
+      if (res.por === 'sin relé' || res.por === 'sin respuesta') { pintaContactos(); return p; } // sale al volver la conexión
+      CITAS = CITAS.filter((x) => x !== p); await guardaCitas();
+      aviso(/demasiadas/.test(res.por || '') ? T('Has añadido muchos números en poco tiempo: espera un rato.') : T('No se pudo añadir: inténtalo otra vez.'));
+      return null;
+    }
+    p.enviada = true; await guardaCitas();
+    if (res.otros) { const c = await casaCita(p, res.otros); if (c) return c; }
+    pintaContactos(); return p;
+  }
+  // la otra mitad: tiene que ser del número que se escribió (la huella), con las claves de su alta, y firmada con ellas
+  async function casaCita(p, otros) {
+    if (!p || casando.has(p.T)) return null; casando.add(p.T);
+    try {
+      const { clave } = await C.N.citaDe(MI_NUM.n, p.n);
+      for (const o of otros || []) {
+        if (!o || o.i !== p.idn) continue;
+        const j = await C.N.abreSobre(clave, p.T, o.s); if (!j || j.v !== 1) continue;
+        if (j.n !== p.n || j.f !== o.f || j.a !== o.a || typeof j.r !== 'string' || typeof j.sig !== 'string' || !Number.isFinite(j.t)) continue;
+        let fp, ap, rr, sig; try { fp = C.deB64u(o.f); ap = C.deB64u(o.a); rr = C.deB64u(j.r); sig = C.deB64u(j.sig); } catch (_) { continue; }
+        if (fp.length !== 65 || ap.length !== 65 || rr.length !== 32) continue;
+        if (!(await C.verifica(fp, sig, C.N.datosCita(p.T, j.n, j.f, j.a, j.r, j.t)))) continue;
+        const semilla = await C.N.semillaNumeros(YO, ap, MI_NUM.idn, o.i, C.deB64u(p.r), rr);
+        const d = await C.deSemilla(semilla);
+        let c = CONVS.get(d.sala);
+        if (!c) {
+          c = convNueva(d.sala, semilla, 'acepta'); c.num = siguienteNum(); c.temporal = undefined;
+          c.numero = p.n; c.alias = p.nombre || ''; c.contacto = true; c.sinContacto = false;
+          c.huellaEsperada = C.hex(await C.huella(fp, ap)); // solo esa identidad podrá entrar en la sala
+          await preparaConv(c); await guardaConv(c);
+        }
+        CITAS = CITAS.filter((x) => x.T !== p.T); await guardaCitas();
+        R.citaFin(p.T);
+        pintaLista(); pintaContactos(); sincronizaAvisos();
+        const quien = nombreConv(c, true);
+        if (!ACTUAL && !(LL && LL.ocupado)) { verContactos = false; pintaMarcar(false); cierraHoja('h-num'); abreConv(c.id); aviso(T('Ya podéis hablar con {n}.').replace('{n}', quien)); }
+        else aviso(T('{n} también te ha añadido: ya podéis hablar.').replace('{n}', quien));
+        return c;
+      }
+      return null;
+    } finally { casando.delete(p.T); }
+  }
+  async function revisaCitas() {
+    if (!MI_NUM || !R || !R.abierto || !CITAS.length) return;
+    for (const p of CITAS.filter((x) => !x.enviada && x.estado === 'espera')) { const r = await mandaCita(p); if (r.ok) { p.enviada = true; await guardaCitas(); if (r.otros) await casaCita(p, r.otros); } }
+    const ts = CITAS.filter((x) => x.enviada && x.estado === 'espera').map((x) => x.T);
+    if (!ts.length) return;
+    const r = await R.citas(ts); if (!r.ok) return;
+    for (const l of r.listas || []) { const p = CITAS.find((x) => x.T === l.T); if (p) await casaCita(p, l.otros); }
+    let cambio = false;
+    for (const T0 of r.perdidas || []) { const p = CITAS.find((x) => x.T === T0); if (p && p.estado === 'espera') { p.estado = 'caducada'; cambio = true; } }
+    if (cambio) { await guardaCitas(); pintaContactos(); }
+  }
+  async function quitaCita(p) { CITAS = CITAS.filter((x) => x.T !== p.T); await guardaCitas(); if (R && R.abierto) R.citaFin(p.T, true); pintaContactos(); }
+  async function compartirNumero() {
+    if (!MI_NUM) return;
+    const txt = T('Mi Número GUARDIANA es {n}. Añádelo en GUARDIANA con «Llamar» para que podamos hablar. Si aún no la tienes: {u}').replace('{n}', bonito(MI_NUM.n)).replace('{u}', 'https://guardianagroup.com/');
+    if (navigator.share) { try { await navigator.share({ text: txt }); return; } catch (e) { if (e && e.name === 'AbortError') return; } }
+    try { await navigator.clipboard.writeText(txt); aviso(T('Copiado: pégalo donde quieras enviarlo.')); } catch (_) { aviso(bonito(MI_NUM.n)); }
+  }
+  // ---------- pantalla del número ----------
+  function pintaNumero() {
+    const ver = usaNumero(), caja = $('#mi-numero'); if (!caja) return;
+    document.body.classList.toggle('con-numero', ver);
+    caja.hidden = !ver; $('#llamar-num').hidden = !ver || !MI_NUM;
+    if (!ver) return;
+    $('#mi-numero-nuevo').hidden = !!MI_NUM; $('#mi-numero-hecho').hidden = !MI_NUM;
+    if (MI_NUM) { $('#mi-numero-n').textContent = bonito(MI_NUM.n); return; }
+    if (!NUM_PROPUESTO) NUM_PROPUESTO = C.N.nuevoNumero();
+    const elige = !$('#num-elige').hidden;
+    $('#num-propuesto').textContent = elige ? numeroElegido().bonito : bonito(NUM_PROPUESTO);
+  }
+  // lo que se escribe en «Elegir el mío»: 11 cifras y la de control añadida
+  function numeroElegido() {
+    const d = String($('#num-elige-in').value || '').replace(/\D/g, '').slice(0, 11);
+    return { once: d, n: d.length === 11 ? C.N.conControl(d) : '', bonito: bonito((d + '···········').slice(0, 11) + (d.length === 11 ? String(C.N.damm(d)) : '·')) };
+  }
+  const errorNumero = (txt) => { const e = $('#num-error'); e.textContent = txt || ''; e.hidden = !txt; };
+  // el teclado de «Llamar»
+  let verMarcar = false;
+  function pintaMarcar(ver) {
+    if (ver !== undefined) { verMarcar = !!ver && esMovil(); if (verMarcar) { NUM_MARCADO = ''; verContactos = false; pintaComo(false); } }
+    const sec = $('#marcar'); if (!sec) return;
+    sec.hidden = !verMarcar; $('#inicio').classList.toggle('ver-marcar', verMarcar);
+    if (verMarcar) $('#inicio').classList.remove('ver-contactos');
+    const n = NUM_MARCADO, ok = n.length === 12 && C.N.numeroValido(n);
+    $('#marcar-n').textContent = bonito(n);
+    const ayuda = $('#marcar-ayuda');
+    ayuda.textContent = n.length < 12 ? T('Escribe el Número GUARDIANA de la otra persona.') : ok ? (MI_NUM && n === MI_NUM.n ? T('Ese es tu propio número.') : T('Número correcto.')) : T('Ese número no es correcto: revisa las cifras.');
+    ayuda.classList.toggle('mal', n.length === 12 && (!ok || (MI_NUM && n === MI_NUM.n))); ayuda.classList.toggle('bien', ok && !(MI_NUM && n === MI_NUM.n));
+    $('#marcar-llamar').disabled = !ok || !!(MI_NUM && n === MI_NUM.n);
+    $('#marcar-borra').disabled = !n.length;
+  }
+  // «Llamar» con un número bien escrito: un contacto se llama; uno pendiente enseña la espera; uno nuevo pide su nombre
+  function marcaNumero(n) {
+    if (!C.N.numeroValido(n) || !MI_NUM || n === MI_NUM.n) return;
+    const c = vivas().find((x) => x.numero === n);
+    if (c) { pintaMarcar(false); if (c.huella) llamaContacto(c, false); else abreConv(c.id); return; }
+    const p = CITAS.find((x) => x.n === n);
+    if (p) { muestraEspera(p); return; }
+    NUM_NUEVO = n; $('#num-nuevo-n').textContent = bonito(n); $('#num-nombre').value = ''; delete $('#num-anadir').dataset.avisado;
+    $('#num-paso-nombre').hidden = false; $('#num-paso-espera').hidden = true;
+    abreHoja('h-num'); setTimeout(() => { try { $('#num-nombre').focus(); } catch (_) {} }, 250);
+  }
+  function muestraEspera(p) {
+    const quien = p.nombre || bonito(p.n);
+    $('#num-espera-t').textContent = p.estado === 'caducada' ? T('Sin respuesta') : T('Esperando a {n}').replace('{n}', quien);
+    $('#num-espera-txt').textContent = p.estado === 'caducada' ? T('Pasaron 30 días sin que {n} añadiera tu número. Puedes volver a añadirlo.').replace('{n}', quien) : T('Cuando {n} añada también tu número, el chat se abrirá solo en los dos teléfonos.').replace('{n}', quien);
+    $('#num-espera-mio').textContent = MI_NUM ? bonito(MI_NUM.n) : '';
+    $('#num-espera-ok').textContent = p.estado === 'caducada' ? T('Volver a añadir') : T('Entendido');
+    $('#num-espera-ok').dataset.t = p.T;
+    $('#num-espera-quita').dataset.t = p.T;
+    $('#num-paso-nombre').hidden = true; $('#num-paso-espera').hidden = false;
+    abreHoja('h-num');
+  }
+  function eventosNumero() {
+    if (!$('#mi-numero')) return;
+    $('#num-otro').addEventListener('click', () => { NUM_PROPUESTO = C.N.nuevoNumero(); $('#num-elige').hidden = true; $('#num-elegir').setAttribute('aria-expanded', 'false'); errorNumero(''); pintaNumero(); });
+    $('#num-elegir').addEventListener('click', () => { const ver = $('#num-elige').hidden; $('#num-elige').hidden = !ver; $('#num-elegir').setAttribute('aria-expanded', String(ver)); errorNumero(''); pintaNumero(); if (ver) setTimeout(() => { try { $('#num-elige-in').focus(); } catch (_) {} }, 50); });
+    $('#num-elige-in').addEventListener('input', () => { const e = $('#num-elige-in'), d = e.value.replace(/\D/g, '').slice(0, 11); e.value = bonito(d); errorNumero(''); pintaNumero(); });
+    $('#num-usar').addEventListener('click', async () => {
+      const b = $('#num-usar'); if (b.disabled) return;
+      let n = NUM_PROPUESTO, elegido = false;
+      if (!$('#num-elige').hidden) {
+        const x = numeroElegido(); if (x.once.length !== 11) { errorNumero(T('Escribe las 11 cifras.')); return; }
+        if (numeroTrivial(x.once)) { errorNumero(T('Ese número es demasiado fácil de adivinar: elige otro.')); return; }
+        n = x.n; elegido = true;
+      }
+      b.disabled = true; errorNumero('');
+      const r = await creaNumero(n, elegido); b.disabled = false;
+      if (r === 'ok') { pintaNumero(); pintaContactos(); aviso(T('Listo: este es tu Número GUARDIANA.')); return; }
+      errorNumero(r === 'ocupado' ? T('Ese número no está disponible: prueba otro.') : r === 'sin relé' || r === 'sin respuesta' ? T('Sin conexión: conéctate para crear tu número.') : r === 'espera' ? T('Demasiados intentos: espera un minuto.') : T('No se pudo crear el número: inténtalo otra vez.'));
+    });
+    $('#mi-numero-n').addEventListener('click', async () => { if (!MI_NUM) return; try { await navigator.clipboard.writeText(MI_NUM.n); aviso(T('Número copiado.')); } catch (_) { aviso(bonito(MI_NUM.n)); } });
+    $('#num-compartir').addEventListener('click', compartirNumero);
+    $('#llamar-num').addEventListener('click', () => { pintaMarcar(true); const i = $('#inicio'); if (i) i.scrollTop = 0; });
+    $('#marcar-atras').addEventListener('click', () => pintaMarcar(false));
+    $('#teclado').addEventListener('click', (e) => { const b = e.target.closest('button[data-d]'); if (!b || NUM_MARCADO.length >= 12) return; NUM_MARCADO += b.dataset.d; pintaMarcar(); });
+    $('#marcar-borra').addEventListener('click', () => { NUM_MARCADO = NUM_MARCADO.slice(0, -1); pintaMarcar(); });
+    $('#marcar-pegar').addEventListener('click', async () => { let t = ''; try { t = await navigator.clipboard.readText(); } catch (_) {} const d = String(t || '').replace(/\D/g, ''); if (d.length !== 12) { aviso(T('No hay un Número GUARDIANA copiado.')); return; } NUM_MARCADO = d; pintaMarcar(); });
+    // también con el teclado físico (ordenador, tableta)
+    addEventListener('keydown', (e) => { if (!verMarcar || e.target.closest('input, textarea')) return; if (/^\d$/.test(e.key) && NUM_MARCADO.length < 12) { NUM_MARCADO += e.key; pintaMarcar(); } else if (e.key === 'Backspace') { NUM_MARCADO = NUM_MARCADO.slice(0, -1); pintaMarcar(); } else if (e.key === 'Enter' && !$('#marcar-llamar').disabled) marcaNumero(NUM_MARCADO); });
+    $('#marcar-llamar').addEventListener('click', () => marcaNumero(NUM_MARCADO));
+    $('#marcar-invitar').addEventListener('click', () => { pintaMarcar(false); const b = $('#nueva-blindada'); if (b) b.click(); });
+    $('#num-cancelar').addEventListener('click', () => cierraHoja('h-num'));
+    $('#num-anadir').addEventListener('click', async () => {
+      const b = $('#num-anadir'); if (b.disabled || !NUM_NUEVO) return;
+      // «guarda mi nuevo número» es una estafa conocida (voz independiente, ronda 73): con el nombre de un chat que ya existe, se avisa
+      // una vez; el segundo toque añade igual
+      const nombre = $('#num-nombre').value.trim().toLowerCase();
+      const repetido = nombre && vivas().some((x) => x.huella && nombreConv(x, true).trim().toLowerCase() === nombre);
+      if (repetido && b.dataset.avisado !== nombre) { b.dataset.avisado = nombre; aviso(T('Ya tienes un chat con ese nombre. Si te dijeron «guarda mi nuevo número», llama antes a su número de siempre. Toca «Añadir» otra vez para añadirlo igual.')); return; }
+      b.disabled = true;
+      try {
+        const x = await anadeNumero(NUM_NUEVO, $('#num-nombre').value);
+        if (!x) return;
+        if (x.T) muestraEspera(x); else cierraHoja('h-num'); // con pareja ya, el chat se ha abierto
+      } finally { b.disabled = false; }
+    });
+    $('#num-nombre').addEventListener('keydown', (e) => { if (e.key === 'Enter') $('#num-anadir').click(); });
+    $('#num-espera-compartir').addEventListener('click', compartirNumero);
+    $('#num-espera-ok').addEventListener('click', async () => {
+      const p = CITAS.find((x) => x.T === $('#num-espera-ok').dataset.t);
+      cierraHoja('h-num'); pintaMarcar(false);
+      if (p && p.estado === 'caducada') { await quitaCita(p); const y = await anadeNumero(p.n, p.nombre); if (y && y.T) muestraEspera(y); }
+    });
+    $('#num-espera-quita').addEventListener('click', async () => { const p = CITAS.find((x) => x.T === $('#num-espera-quita').dataset.t); cierraHoja('h-num'); if (p) { await quitaCita(p); aviso(T('Número quitado.')); } });
+    R.on('cita-lista', async (m) => { const p = m && CITAS.find((x) => x.T === m.T); if (p) await casaCita(p, m.otros); });
+  }
+  if (LOCAL) window.gcomPruebaNumero = { mio: () => (MI_NUM ? MI_NUM.n : ''), citas: () => CITAS.map((p) => ({ n: p.n, estado: p.estado, enviada: p.enviada })), usa: () => usaNumero(), nuevo: () => C.N.nuevoNumero(), revisa: () => revisaCitas() };
 
 
   // ---------- pantalla: conversación ----------
@@ -2206,7 +2473,7 @@
   let visorDe = null, visorT = null, visorUrl = null, visorFin = null;
   async function veTemporal(c, m) {
     const r = await BD.saca('arch', m.id); if (!r) { m.archivo.caducado = true; await guardaMensaje(c, m); pintaMensaje(c, m, true); return aviso(T('Este archivo ya no está en este navegador.')); }
-    const mime = m.archivo.mime || '', dentro = /^(image|video|audio)\//.test(mime) || mime === 'application/pdf';
+    const mime = m.archivo.mime || '', dentro = mimeAbrible(mime) && mime !== 'text/plain';
     if (!dentro) { abreArchivo(m, false); await caducaTemporal(c, m); aviso(T('Abierto fuera de GUARDIANA y borrado aquí.')); return; }
     const vis = $('#visor'), cuerpo = $('#visor-cuerpo'); cuerpo.textContent = '';
     visorUrl = URL.createObjectURL(r.blob); visorDe = m.id;
@@ -2583,6 +2850,8 @@
         const d = e.data || {};
         // solo un chat vivo: un aviso viejo de un chat ya eliminado no lo resucita vacío (revisión, 29 Oct 2026)
         if (d.t === 'abre' && d.sala && vivas().some((x) => x.id === d.sala) && ACTUAL !== d.sala) abreConv(d.sala);
+        // Número GUARDIANA: alguien a quien añadiste también te ha añadido; se miran las citas (el chat se abre solo)
+        if ((d.t === 'abre' || d.t === 'aviso') && d.tipo === 'contacto') revisaCitas().catch(() => {});
         // el aviso de un push que llega con ese chat a la vista: se retira enseguida (el mensaje se lee aquí)
         if (d.t === 'aviso' && d.sala && d.tipo === 'mensaje' && ACTUAL === d.sala && document.visibilityState === 'visible') setTimeout(() => retiraAvisos(d.sala), 1200);
       });
@@ -2590,7 +2859,8 @@
     } catch (_) { return null; }
   }
   const claveServidor = () => { try { return R && R.avisos ? C.deB64u(R.avisos) : null; } catch (_) { return null; } };
-  const salasAvisos = () => vivas().filter((c) => c.huella && /^[0-9a-f]{64}$/.test(c.id)).map((c) => c.id).sort();
+  // el «buzón» del Número GUARDIANA va primero: por él llega «alguien que añadiste también te ha añadido» con la app cerrada
+  const salasAvisos = () => (MI_NUM && /^[0-9a-f]{64}$/.test(MI_NUM.buzon || '') ? [MI_NUM.buzon] : []).concat(vivas().filter((c) => c.huella && /^[0-9a-f]{64}$/.test(c.id)).map((c) => c.id).sort()).slice(0, 64);
   const igualesBytes = (a, b) => !!(a && b && a.length === b.length && a.every((x, i) => x === b[i]));
   async function suscripcionActual() { try { const reg = swReg || (await navigator.serviceWorker.ready); return await reg.pushManager.getSubscription(); } catch (_) { return null; } }
   // suscribe este equipo en el relé (o renueva sus salas); devuelve si pudo
@@ -2769,7 +3039,10 @@
     $('#como-atras').addEventListener('click', () => { pintaComo(false); });
     $('#contactos-atras').addEventListener('click', () => { verContactos = false; editaContactos = false; pintaContactos(); });
     // el inicio con los contactos: la fila abre el chat; los botones llaman o videollaman
-    $('#contactos-filas').addEventListener('click', (e) => {
+    $('#contactos-filas').addEventListener('click', async (e) => {
+      // un número que aún espera (Número GUARDIANA): su ventanita de espera, o quitarlo en «Editar»
+      const pc = e.target.closest('button[data-cita]');
+      if (pc) { const p = CITAS.find((x) => x.T === pc.dataset.cita); if (!p) return; if (pc.dataset.acto === 'quita') { await quitaCita(p); return; } muestraEspera(p); return; }
       const b = e.target.closest('button[data-id]'); if (!b) return;
       const c = CONVS.get(b.dataset.id); if (!c) return;
       if (b.dataset.acto === 'quita') { pideEliminar(c); return; }
@@ -3575,12 +3848,15 @@
     quietoArranque();
     await BD.abre();
     await cargaIdentidad();
+    await cargaNumero();
     arrancaRele();
     eventos();
+    eventosNumero();
     arrancaLlamadas();
     avisoInterno();
     setTimeout(eligeServidorLlamadas, 4000); setInterval(eligeServidorLlamadas, 3600 * 1000);
     await cargaConvs();
+    pintaNumero();
     // el chat temporal del navegador del móvil (dueño, 19:46): si pasaron los 10 minutos sin usarlo, se borra antes de enseñar nada
     // (con una invitación nueva en la dirección, en silencio: se abre la nueva)
     try { await caducaChatTemporal({ silencio: /#[ibt]=/.test(location.hash) }); } catch (_) {}

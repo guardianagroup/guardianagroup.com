@@ -12,7 +12,7 @@ const fs = require('fs');
 
 const OUT = process.argv[2] || path.join(__dirname, 'capturas');
 fs.mkdirSync(OUT, { recursive: true });
-const URL0 = 'http://127.0.0.1:8080/orbita/comunicaciones/?app=1';
+const URL0 = 'http://127.0.0.1:8080/orbita/comunicaciones/?app=1&numero=0';
 const UA = 'Mozilla/5.0 (Linux; Android 15; Pixel 8) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Mobile Safari/537.36';
 const PC = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36';
 const espera = (ms) => new Promise((r) => setTimeout(r, ms));

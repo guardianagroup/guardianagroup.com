@@ -35,7 +35,7 @@ async function telefono(browser, nombre, app) {
   const S = await telefono(browser, 'Safari', false);    // Nathalie, abriendo el enlace en Safari
   const N = await telefono(browser, 'App', true);        // Nathalie, en la app que acaba de añadir
 
-  await A.goto(URL0 + '?app=1'); await espera(1600);
+  await A.goto(URL0 + '?app=1&numero=0'); await espera(1600);
   await A.click('#nueva-blindada'); await espera(400);
   if (await A.$('#h-invitar.gc-abierta')) await A.click('#invitar-otra');
   await espera(1800);
@@ -90,7 +90,7 @@ async function telefono(browser, nombre, app) {
   {
     const ctx = await browser.newContext({ viewport: { width: 393, height: 793 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true, userAgent: 'Mozilla/5.0 (iPhone; CPU iPhone OS 18_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/141.0.7390.96 Mobile/15E148 Safari/604.1', locale: 'es-ES' });
     const A2 = await telefono(browser, 'Otro', true);
-    await A2.goto(URL0 + '?app=1'); await espera(1500);
+    await A2.goto(URL0 + '?app=1&numero=0'); await espera(1500);
     await A2.evaluate(() => document.querySelector('#nueva-blindada').click()); await espera(400);
     if (await A2.$('#h-invitar.gc-abierta')) await A2.evaluate(() => document.querySelector('#invitar-otra').click());
     await espera(1800);

@@ -3,9 +3,11 @@
    Solo hace una cosa: recibir el aviso cifrado (Web Push, RFC 8030/8291) que manda el relé cuando alguien escribe o llama a una
    sala en la que este equipo no está conectado, y enseñarlo como aviso del sistema. El aviso no trae ningún mensaje: solo dice
    «mensaje» o «llamada» y en qué sala; el contenido llega por el canal encriptado cuando se abre la app. No guarda nada, no
-   intercepta ninguna petición y no manda nada a ningún sitio. */
+   intercepta ninguna petición y no manda nada a ningún sitio.
+   Número GUARDIANA (29 Oct 2026): «contacto» llega al buzón de tu número cuando alguien a quien añadiste también te ha añadido;
+   no dice quién: la app lo sabe al abrirse. */
 'use strict';
-const VERSION = 'gcom-sw-2026-10-29f';
+const VERSION = 'gcom-sw-2026-10-29g';
 self.addEventListener('install', () => { self.skipWaiting(); });
 self.addEventListener('activate', (e) => { e.waitUntil(self.clients.claim()); });
 
@@ -39,14 +41,30 @@ const TEXTOS = {
   vi: { mensaje: 'Tin nhắn mới', mensajeCuerpo: 'GUARDIANA · chạm để đọc (được mã hóa cho đến khi bạn mở ứng dụng).', llamada: 'Cuộc gọi đến', llamadaCuerpo: 'GUARDIANA · chạm để trả lời.' },
   hi: { mensaje: 'नया संदेश', mensajeCuerpo: 'GUARDIANA · पढ़ने के लिए टैप करें (ऐप खोलने तक एन्क्रिप्टेड)।', llamada: 'इनकमिंग कॉल', llamadaCuerpo: 'GUARDIANA · जवाब देने के लिए टैप करें।' },
 };
-const textos = () => { let l = 'en'; try { l = String((self.navigator && self.navigator.language) || 'en').slice(0, 2).toLowerCase(); } catch (_) {} const t = TEXTOS[l] || TEXTOS.en; return t.fin ? t : Object.assign({}, t, { fin: TEXTOS.en.fin, finCuerpo: TEXTOS.en.finCuerpo }); };
+// «contacto» (Número GUARDIANA): en los idiomas de la app; en los demás, en inglés
+const CONTACTO = {
+  es: ['Nuevo contacto', 'GUARDIANA · alguien que añadiste también ha añadido tu número: toca para hablar.'],
+  en: ['New contact', 'GUARDIANA · someone you added has added your number too: tap to talk.'],
+  pt: ['Novo contato', 'GUARDIANA · alguém que você adicionou também adicionou seu número: toque para falar.'],
+  ru: ['Новый контакт', 'GUARDIANA · человек, которого вы добавили, тоже добавил ваш номер: нажмите, чтобы поговорить.'],
+  cs: ['Nový kontakt', 'GUARDIANA · někdo, koho jste přidali, si také přidal vaše číslo: klepněte a mluvte.'],
+};
+const textos = () => { let l = 'en'; try { l = String((self.navigator && self.navigator.language) || 'en').slice(0, 2).toLowerCase(); } catch (_) {} const t = TEXTOS[l] || TEXTOS.en; const k = CONTACTO[l] || CONTACTO.en; return Object.assign({}, t.fin ? t : Object.assign({}, t, { fin: TEXTOS.en.fin, finCuerpo: TEXTOS.en.finCuerpo }), { contacto: k[0], contactoCuerpo: k[1] }); };
 const salaOk = (s) => typeof s === 'string' && /^[0-9a-f]{64}$/.test(s);
 
 self.addEventListener('push', (e) => {
   let d = {}; try { d = e.data ? e.data.json() : {}; } catch (_) { d = {}; }
-  const tipo = d.tipo === 'llamada' ? 'llamada' : d.tipo === 'fin' ? 'fin' : 'mensaje', sala = salaOk(d.sala) ? d.sala : '';
+  const tipo = d.tipo === 'llamada' ? 'llamada' : d.tipo === 'fin' ? 'fin' : d.tipo === 'contacto' ? 'contacto' : 'mensaje', sala = salaOk(d.sala) ? d.sala : '';
   const t = textos();
   e.waitUntil((async () => {
+    // «contacto»: alguien a quien añadiste también te ha añadido; al tocarlo, la app se abre y abre el chat
+    if (tipo === 'contacto') {
+      const cs1 = await self.clients.matchAll({ type: 'window', includeUncontrolled: true });
+      for (const c of cs1) { try { c.postMessage({ t: 'aviso', tipo: 'contacto' }); } catch (_) {} }
+      await self.registration.showNotification(t.contacto, { body: t.contactoCuerpo, icon: '/icon-192.png?v=2', badge: '/icon-192.png?v=2', tag: 'gcom-contacto', renotify: true, vibrate: [120, 80, 120], timestamp: Number(d.t) || Date.now(), data: { sala: '', tipo: 'contacto' } });
+      if (!cs1.some((c) => c.visibilityState === 'visible')) await insignia();
+      return;
+    }
     // «fin»: quien llamaba se cansó de esperar o canceló; el aviso «Te están llamando» se retira y en su lugar, «Llamada perdida»
     if (tipo === 'fin') {
       try { const ns = await self.registration.getNotifications({ tag: 'gcom-llamada-' + sala.slice(0, 16) }); for (const n of ns) n.close(); } catch (_) {}
@@ -81,7 +99,7 @@ async function insignia() {
 // al tocar el aviso: la app, en esa conversación (si ya está abierta, se trae al frente)
 self.addEventListener('notificationclick', (e) => {
   e.notification.close();
-  const d = e.notification.data || {}, sala = salaOk(d.sala) ? d.sala : '', tipo = d.tipo === 'llamada' ? 'llamada' : 'mensaje';
+  const d = e.notification.data || {}, sala = salaOk(d.sala) ? d.sala : '', tipo = d.tipo === 'llamada' ? 'llamada' : d.tipo === 'contacto' ? 'contacto' : 'mensaje';
   const url = '/orbita/comunicaciones/?desde=aviso' + (sala ? '&sala=' + sala : '') + '&tipo=' + tipo;
   e.waitUntil((async () => {
     const cs = await self.clients.matchAll({ type: 'window', includeUncontrolled: true });

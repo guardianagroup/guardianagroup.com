@@ -47,8 +47,11 @@ class WS extends EventEmitter {
       if (op === 8) { this.cierra(); return; }
       if (op === 9) { this.manda(carga, 10); continue; }
       if (op === 10) continue;
-      if (op === 0) { this.trozos.push(carga); if (!fin) continue; carga = Buffer.concat(this.trozos); this.trozos = []; }
-      else if (!fin) { this.opTrozo = op; this.trozos = [carga]; continue; }
+      // un mensaje troceado tampoco pasa de 1 MB en total, y del cliente al relé todo va enmascarado (RFC 6455 §5.1): sin eso, se corta
+      // (auditoría, 29 Oct 2026, hallazgo 11)
+      if (!mask) { this.cierra(); return; }
+      if (op === 0) { this.trozos.push(carga); this.trozosBytes = (this.trozosBytes || 0) + carga.length; if (this.trozosBytes > 1048576) { this.cierra(); return; } if (!fin) continue; carga = Buffer.concat(this.trozos); this.trozos = []; this.trozosBytes = 0; }
+      else if (!fin) { this.opTrozo = op; this.trozos = [carga]; this.trozosBytes = carga.length; continue; }
       const opReal = op === 0 ? this.opTrozo : op;
       this.emit('message', opReal === 1 ? carga.toString('utf8') : carga, opReal === 2);
     }

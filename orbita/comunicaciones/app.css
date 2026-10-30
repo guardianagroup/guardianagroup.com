@@ -1691,3 +1691,70 @@ body.descargando #pro,body.descargando .como-plegable{display:none!important}
 .caja.anadir .anadir-pasos{background:#0E141C;border:1px solid rgba(156,195,228,.25);border-radius:16px;padding:12px 12px 10px;gap:12px}
 .caja.anadir .anadir-pasos>li{font-size:17px}
 .caja.anadir .fila{justify-content:center;margin:0}
+/* ---------- Número GUARDIANA (dueño, 29 Oct 2026, 20:56–21:55; agencia, ronda 73) ----------
+   En la app del teléfono: tu número arriba, «Llamar» con su teclado y los números que esperan en «Mis chats».
+   «Invitar a chat» deja el inicio (21:42) y queda dentro de «Llamar», para quien aún no tiene GUARDIANA. */
+.mi-numero{width:100%;box-sizing:border-box;margin:0;padding:18px 18px 16px;border-radius:20px;border:1px solid rgba(156,195,228,.24);background:rgba(12,17,24,.88);text-align:center}
+.mi-numero[hidden]{display:none}
+.mi-numero-nuevo,.mi-numero-hecho{display:grid;gap:9px;justify-items:center}
+.mi-numero-nuevo[hidden],.mi-numero-hecho[hidden]{display:none}
+.mi-numero-hola{font:600 20px/1.25 var(--texto);color:#F4F6F8}
+.mi-numero-t{font:600 11.5px/1.3 var(--mono);letter-spacing:.2em;text-transform:uppercase;color:#9CC3E4}
+.mi-numero-n{appearance:none;border:0;background:none;padding:2px 4px;margin:0;font:600 29px/1.15 var(--mono);letter-spacing:.05em;color:#F4F6F8;font-variant-numeric:tabular-nums;white-space:nowrap;cursor:pointer;-webkit-tap-highlight-color:transparent}
+output.mi-numero-n{cursor:default}
+.mi-numero-ops{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.mi-numero-op{appearance:none;min-height:40px;border:1px solid rgba(156,195,228,.38);background:transparent;color:#9CC3E4;border-radius:999px;padding:8px 15px;font:500 15px/1 var(--texto);cursor:pointer}
+.mi-numero-op[aria-expanded="true"]{background:rgba(156,195,228,.16)}
+.mi-numero-op:active{background:rgba(156,195,228,.22)}
+.mi-numero-elige{display:grid;gap:7px;width:100%;text-align:left}
+.mi-numero-elige[hidden]{display:none}
+.mi-numero-elige label{font:400 14.5px/1.45 var(--texto);color:#C9D4DE}
+.mi-numero-elige .campo{width:100%;box-sizing:border-box;font:600 20px/1.2 var(--mono);letter-spacing:.06em;text-align:center}
+.mi-numero-elige small{font:400 13.5px/1.4 var(--texto);color:#E8C77A}
+.mi-numero-error{font:500 14.5px/1.4 var(--texto);color:#F2A7A0}
+.mi-numero-error[hidden]{display:none}
+.mi-numero-usar{width:100%;min-height:52px;font-size:17px}
+.mi-numero-nota{font:400 13.5px/1.45 var(--texto);color:#a9bccb;text-wrap:balance}
+.mi-numero-compartir{appearance:none;display:inline-flex;align-items:center;gap:8px;min-height:42px;border:1px solid rgba(156,195,228,.38);background:transparent;color:#9CC3E4;border-radius:999px;padding:9px 16px;font:500 15.5px/1 var(--texto);cursor:pointer}
+.mi-numero-compartir svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.mi-numero-compartir:active{background:rgba(156,195,228,.16)}
+#llamar-num[hidden]{display:none}
+@media (max-width:760px){
+  #paso-inicio #llamar-num{display:flex;align-items:center;justify-content:center;gap:10px;box-sizing:border-box;width:100%;min-height:62px;height:62px;margin-top:0;padding:0 20px;border-radius:16px;border:1px solid #9CC3E4;background:#9CC3E4;color:#06080C}
+  #paso-inicio #llamar-num[hidden]{display:none}
+  #paso-inicio #llamar-num b{font-size:17.5px;line-height:1.2;font-weight:600;color:inherit}
+  #paso-inicio #llamar-num svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  #paso-inicio #llamar-num:active{background:#8AB4DA}
+  body.con-numero #paso-inicio #nueva-blindada{display:none!important}
+  body.con-numero #inicio>h1,body.con-numero #inicio>.lema,body.con-numero #inicio>.pq-k{display:none}
+  body.con-numero .inicio .red-nucleo{width:min(13vh,112px);height:min(13vh,112px)}
+}
+/* el teclado de «Llamar»: su pantalla, con «‹», como «Mis chats» */
+#inicio.ver-marcar>:not(#marcar){display:none!important}
+#inicio:not(.ver-marcar)>#marcar{display:none}
+@media (max-width:760px){#inicio.ver-marcar::before,#inicio.ver-marcar::after{display:none}#inicio.ver-marcar{padding-top:12px;justify-content:flex-start}}
+.marcar{display:grid;gap:10px;justify-items:center}
+.marcar[hidden]{display:none}
+.marcar .contactos-cab{justify-self:stretch}
+.marcar-n{display:block;min-height:44px;font:600 31px/1.35 var(--mono);letter-spacing:.05em;color:#F4F6F8;text-align:center;font-variant-numeric:tabular-nums;white-space:nowrap}
+.marcar-ayuda{min-height:21px;font:400 15px/1.4 var(--texto);color:#a9bccb;text-align:center;text-wrap:balance}
+.marcar-ayuda.mal{color:#F2A7A0}
+.marcar-ayuda.bien{color:#9FD8B0}
+.teclado{display:grid;grid-template-columns:repeat(3,74px);gap:14px 28px;justify-content:center;margin:6px 0 6px}
+.teclado button{appearance:none;width:74px;height:74px;border-radius:50%;border:0;background:rgba(156,195,228,.12);color:#F4F6F8;font:500 30px/1 var(--texto);cursor:pointer;touch-action:manipulation;display:grid;place-items:center;-webkit-tap-highlight-color:transparent;padding:0}
+.teclado button:active{background:rgba(156,195,228,.32)}
+.teclado .tecla-sec{background:transparent;color:#9CC3E4;font-size:15.5px;font-weight:500}
+.teclado .tecla-sec svg{width:28px;height:28px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.teclado .tecla-sec:disabled{opacity:.3}
+.marcar-llamar{display:inline-flex;align-items:center;justify-content:center;gap:10px;width:min(100%,300px);min-height:58px;border-radius:999px;font-size:18px}
+.marcar-llamar svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.marcar-llamar:disabled{opacity:.38}
+.marcar-invitar{appearance:none;border:0;background:none;color:#9CC3E4;font:400 14.5px/1.4 var(--texto);text-decoration:underline;text-underline-offset:3px;padding:10px;cursor:pointer}
+@media (max-height:700px){.teclado{grid-template-columns:repeat(3,64px);gap:10px 24px}.teclado button{width:64px;height:64px;font-size:26px}.marcar-n{font-size:27px}}
+/* la ventanita del número nuevo y de la espera */
+.num-hoja .num-paso{display:grid;gap:10px}
+.num-hoja .num-paso[hidden]{display:none}
+.num-hoja-n{margin:2px 0;text-align:center;font:600 26px/1.25 var(--mono);letter-spacing:.05em;color:#F4F6F8;white-space:nowrap}
+.num-quitar{appearance:none;justify-self:center;border:0;background:none;color:#F2A7A0;font:400 14.5px/1.4 var(--texto);padding:8px;cursor:pointer}
+.contacto.pendiente .contacto-av{background:rgba(156,195,228,.06);color:#9CC3E4;border:1px dashed rgba(156,195,228,.45)}
+.contacto.caducada small{color:#E8C77A}

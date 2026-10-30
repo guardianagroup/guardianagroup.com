@@ -39,7 +39,7 @@
 <link rel="canonical" href="https://guardianagroup.com/orbita/comunicaciones/">
 <link rel="icon" href="/favicon.ico">
 <link rel="stylesheet" href="componentes.css?v=20261028m">
-<link rel="stylesheet" href="app.css?v=20261031h">
+<link rel="stylesheet" href="app.css?v=20261031i">
 <link rel="stylesheet" href="viaje.css?v=20261029b">
 <!-- antes de pintar: como app desde el primer fotograma y, al volver a un chat tras recargar, sin enseñar el inicio entretanto -->
 </head>
@@ -169,6 +169,21 @@
       <!-- iPhone (dueño, 18:03): también aquí, porque al abrir la app se vuelve a «Mis chats» o al último chat -->
       <button type="button" class="anadir-app pegar-inv" id="pegar-inv-2" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><span>Abrir invitación</span></button>
     </section>
+    <!-- «Llamar» (dueño, 29 Oct 2026, 21:42: «cuando le des al botón de llamar, aparezca para poder marcar el número»): un teclado
+         como el del teléfono. Si el número es de un contacto, le llama; si no, lo añade y espera a que la otra persona añada el tuyo -->
+    <section class="contactos marcar" id="marcar" aria-labelledby="marcar-t" hidden>
+      <div class="contactos-cab"><button type="button" class="contactos-atras" id="marcar-atras" aria-label="Volver"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button><h2 class="contactos-t" id="marcar-t">Llamar</h2></div>
+      <output class="marcar-n" id="marcar-n" translate="no" aria-live="polite"></output>
+      <small class="marcar-ayuda" id="marcar-ayuda">Escribe el Número GUARDIANA de la otra persona.</small>
+      <div class="teclado" id="teclado" role="group" aria-label="Teclado">
+        <button type="button" data-d="1">1</button><button type="button" data-d="2">2</button><button type="button" data-d="3">3</button>
+        <button type="button" data-d="4">4</button><button type="button" data-d="5">5</button><button type="button" data-d="6">6</button>
+        <button type="button" data-d="7">7</button><button type="button" data-d="8">8</button><button type="button" data-d="9">9</button>
+        <button type="button" class="tecla-sec" id="marcar-pegar">Pegar</button><button type="button" data-d="0">0</button><button type="button" class="tecla-sec" id="marcar-borra" aria-label="Borrar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5h11a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H9l-6-7z"/><path d="M12 9l6 6M18 9l-6 6"/></svg></button>
+      </div>
+      <button type="button" class="boton principal marcar-llamar" id="marcar-llamar" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg><span>Llamar</span></button>
+      <button type="button" class="marcar-invitar" id="marcar-invitar">¿No tiene GUARDIANA? Invítale con un enlace</button>
+    </section>
     <!-- «¿Cómo funciona?» en el móvil (dueño, 29 Oct 2026, 08:24 y 08:41): para quien lo lee por primera vez y se queda tranquilo.
          Solo lo que hace el código hoy; sin prometer protección absoluta -->
     <section class="contactos como-pantalla" id="como" aria-labelledby="como-t" hidden>
@@ -235,6 +250,31 @@
       </div>
     </section>
     <div class="grandes" id="paso-inicio">
+      <!-- Número GUARDIANA (dueño, 29 Oct 2026, 20:56–21:55; agencia, ronda 73): en la app del teléfono, tu número y «Llamar», que
+           abre un teclado (21:42: «ya no pondrá invitar al chat… llamar»). Nadie puede escribirte por saber tu número: solo hablan
+           los que se han añadido los dos. El número se crea aquí; al servidor solo le llega una huella -->
+      <div class="mi-numero" id="mi-numero" hidden>
+        <div class="mi-numero-nuevo" id="mi-numero-nuevo">
+          <b class="mi-numero-hola">Bienvenido a GUARDIANA</b>
+          <span class="mi-numero-t">Este será tu Número GUARDIANA:</span>
+          <output class="mi-numero-n" id="num-propuesto" translate="no">··· ··· ··· ···</output>
+          <div class="mi-numero-ops"><button type="button" class="mi-numero-op" id="num-otro">Otro número</button><button type="button" class="mi-numero-op" id="num-elegir" aria-expanded="false" aria-controls="num-elige">Elegir el mío</button></div>
+          <div class="mi-numero-elige" id="num-elige" hidden>
+            <label for="num-elige-in">Escribe 11 cifras; la última la ponemos nosotros para evitar errores al marcar.</label>
+            <input class="campo" id="num-elige-in" inputmode="numeric" autocomplete="off" maxlength="15" spellcheck="false" placeholder="000 000 000 00">
+            <small>No uses tu teléfono ni tu fecha de nacimiento: se adivinan fácil.</small>
+          </div>
+          <small class="mi-numero-error" id="num-error" role="alert" hidden></small>
+          <button type="button" class="boton principal mi-numero-usar" id="num-usar">Usar este número</button>
+          <small class="mi-numero-nota">No es un número de teléfono. Para hablar, los dos tenéis que añadir el número del otro.</small>
+        </div>
+        <div class="mi-numero-hecho" id="mi-numero-hecho" hidden>
+          <span class="mi-numero-t">Tu Número GUARDIANA</span>
+          <button type="button" class="mi-numero-n" id="mi-numero-n" translate="no" title="Copiar">··· ··· ··· ···</button>
+          <button type="button" class="mi-numero-compartir" id="num-compartir"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12"/><path d="M8 7l4-4 4 4"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></svg><span>Compartir mi número</span></button>
+        </div>
+      </div>
+      <button type="button" class="grande principal llamar-num" id="llamar-num" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg><b>Llamar</b></button>
       <button type="button" class="grande principal" id="nueva"><b>Crear invitación</b><small>Te sale un código de 9 cifras para dárselo a la otra persona</small></button>
       <button type="button" class="grande" id="unir"><b>Tengo un código</b><small>Escribe las 9 cifras que te han enviado</small></button>
       <!-- dueño, 27 Oct 2026, 22:01–23:12: la blindada, «de la máxima»; algoritmos de la suite CNSA 2.0 -->
@@ -726,6 +766,29 @@
     <div class="fila"><button type="button" class="boton" id="vaciar-no">Cancelar</button><button type="button" class="boton peligro" id="vaciar-si">Borrar el chat</button></div>
   </div>
 </div>
+<!-- Un número nuevo (Número GUARDIANA, 29 Oct 2026): su nombre (solo para ti) y, si la otra persona aún no ha añadido el tuyo, la
+     espera: «el chat se abrirá solo»; mientras, tu número para pasárselo -->
+<div class="gc-hoja" id="h-num" role="dialog" aria-modal="true" aria-labelledby="h-num-t">
+  <div class="gc-hoja-caja caja num-hoja">
+    <div class="gc-asa"></div>
+    <div class="num-paso" id="num-paso-nombre">
+      <h2 class="gc-hoja-titulo" id="h-num-t">Nuevo contacto</h2>
+      <p class="num-hoja-n" id="num-nuevo-n" translate="no"></p>
+      <label class="t" for="num-nombre">¿Cómo se llama? Solo lo ves tú.</label>
+      <input class="campo" id="num-nombre" maxlength="40" autocomplete="off" spellcheck="false" placeholder="Por ejemplo: Laura">
+      <div class="fila"><button type="button" class="boton" id="num-cancelar">Cancelar</button><button type="button" class="boton principal" id="num-anadir">Añadir</button></div>
+    </div>
+    <div class="num-paso" id="num-paso-espera" hidden>
+      <h2 class="gc-hoja-titulo" id="num-espera-t">Añadido</h2>
+      <p class="t" id="num-espera-txt">Cuando también añada tu número, el chat se abrirá solo en los dos teléfonos.</p>
+      <p class="t num-espera-pasa">Si aún no lo tiene, pásale tu número:</p>
+      <p class="num-hoja-n" id="num-espera-mio" translate="no"></p>
+      <div class="fila"><button type="button" class="boton" id="num-espera-compartir">Compartir mi número</button><button type="button" class="boton principal" id="num-espera-ok">Entendido</button></div>
+      <button type="button" class="num-quitar" id="num-espera-quita">Quitar este número</button>
+    </div>
+  </div>
+</div>
+
 <div class="gc-hoja" id="h-nombre" role="dialog" aria-modal="true" aria-labelledby="h-nombre-t">
   <div class="gc-hoja-caja caja">
     <div class="gc-asa"></div>
@@ -908,17 +971,17 @@
 
 <!-- En el ordenador, en el chat blindado: la pantalla se tapa con la tecla de captura o si la ventana pierde el foco (29 Oct 2026, 08:02) -->
 <div class="captura-velo" id="captura-velo" role="alert" hidden><div><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><b>Modo blindado</b><span>No se puede capturar</span></div></div>
-<script src="/orbita/static/idioma.js?v=20261029p87"></script>
+<script src="/orbita/static/idioma.js?v=20261029p88"></script>
 <script src="pq-mlkem.js?v=20261027a"></script>
 <script src="pq-cnsa.js?v=20261027a"></script>
 <script src="qrhaz.js?v=20261027a"></script>
-<script src="cripto.js?v=20261027b"></script>
+<script src="cripto.js?v=20261031a"></script>
 <script src="/orbita/static/red-nucleo.js?v=20261027b"></script>
-<script src="rele.js?v=20261031b"></script>
+<script src="rele.js?v=20261031c"></script>
 <script src="sha256.js?v=20261027a"></script>
 <script src="viaje-datos.js?v=20261027a"></script>
 <script src="viaje.js?v=20261029b"></script>
 <script src="llamada.js?v=20261031e"></script>
-<script src="app.js?v=20261031g"></script>
+<script src="app.js?v=20261031h"></script>
 </body>
 </html>

@@ -18,6 +18,6 @@ const srv = http.createServer((req, res) => {
 srv.on('upgrade', (req, socket) => {
   if (!req.url.startsWith('/com')) return socket.destroy();
   const ws = WS.acepta(req, socket);
-  if (ws) RELE.acepta(ws);
+  if (ws) RELE.acepta(ws, req.socket.remoteAddress || '');
 });
 srv.listen(PUERTO, '127.0.0.1', () => console.log('relé de pruebas en ws://127.0.0.1:' + PUERTO + '/com'));

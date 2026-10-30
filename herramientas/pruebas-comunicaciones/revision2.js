@@ -6,7 +6,7 @@ const path = require('path');
 const fs = require('fs');
 const OUT = process.argv[2] || path.join(__dirname, 'revision2');
 fs.mkdirSync(OUT, { recursive: true });
-const URL0 = 'http://127.0.0.1:8080/orbita/comunicaciones/?app=1';
+const URL0 = 'http://127.0.0.1:8080/orbita/comunicaciones/?app=1&numero=0';
 const UA = 'Mozilla/5.0 (iPhone; CPU iPhone OS 26_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.1 Mobile/15E148 Safari/604.1';
 const espera = (ms) => new Promise((r) => setTimeout(r, ms));
 const fallos = [];

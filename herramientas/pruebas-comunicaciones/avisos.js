@@ -9,7 +9,7 @@ const fs = require('fs');
 
 const OUT = process.argv[2] || path.join(__dirname, 'capturas');
 fs.mkdirSync(OUT, { recursive: true });
-const URL0 = 'http://127.0.0.1:8080/orbita/comunicaciones/?app=1';
+const URL0 = 'http://127.0.0.1:8080/orbita/comunicaciones/?app=1&numero=0';
 const UA = 'Mozilla/5.0 (Linux; Android 15; Pixel 8) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Mobile Safari/537.36';
 const espera = (ms) => new Promise((r) => setTimeout(r, ms));
 const fallos = [];
@@ -68,7 +68,7 @@ const foto = async (p, n) => { await p.screenshot({ path: path.join(OUT, n + '.p
   await foto(A.p, '31-A-avisando');
   // B vuelve «desde el aviso»: la conversación se abre sola y la llamada de A entra
   const B2 = { p: await B.ctx.newPage() };
-  await B2.p.goto('http://127.0.0.1:8080/orbita/comunicaciones/?app=1&desde=aviso&sala=' + salaB + '&tipo=llamada'); await espera(2500);
+  await B2.p.goto('http://127.0.0.1:8080/orbita/comunicaciones/?app=1&numero=0&desde=aviso&sala=' + salaB + '&tipo=llamada'); await espera(2500);
   comprueba(await hasta(B2.p, () => !document.querySelector('#conv').hidden, 6000), 'B: al volver desde el aviso, se abre esa conversación');
   comprueba(await hasta(B2.p, () => !document.querySelector('#ll-entrante').hidden, 20000), 'B: la llamada de A entra sola al conectarse');
   await foto(B2.p, '32-B-llamada-entra');

@@ -14,7 +14,7 @@ import hashlib, os
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CARPETAS = ['orbita/comunicaciones']
-SUELTOS = ['orbita/static/idioma.js', 'obras.js']
+SUELTOS = ['orbita/static/idioma.js', 'orbita/static/red-nucleo.js', 'obras.js']
 EXT = ('.js', '.css', '.html', '.json', '.svg', '.woff2')
 SALIDA = 'orbita/comunicaciones/huellas.txt'
 

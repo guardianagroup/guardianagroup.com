@@ -1143,7 +1143,7 @@ async function main() {
     if (/^\/google(\?|$)/.test(req.url)) {
       // Caja oficial de Google (Programmable Search Element) para la página de ZERO, servida desde el dominio del motor para que
       // el código de Google no corra en la página de ZERO. Solo se deja enmarcar desde las páginas de GUARDIANA.
-      let html = ''; try { html = fs.readFileSync(path.join(__dirname, 'publico', 'google.html'), 'utf8'); } catch (_) {}
+      let html = ''; try { html = fs.readFileSync(path.join(__dirname, 'publico', 'google.plantilla'), 'utf8'); } catch (_) {}
       if (!html) { res.writeHead(404); return res.end(); }
       res.writeHead(200, { 'content-type': 'text/html; charset=utf-8', 'cache-control': 'no-cache', 'x-content-type-options': 'nosniff',
         'content-security-policy': "frame-ancestors https://guardianagroup.com https://www.guardianagroup.com http://127.0.0.1:* http://localhost:*" });
@@ -1161,7 +1161,8 @@ async function main() {
     if (req.url.startsWith('/com')) {
       if (!origenPermitido(req)) { console.log('relé: origen rechazado', req.headers.origin || '(ninguno)'); return socket.destroy(); }
       const ws = WS.acepta(req, socket);
-      if (ws) RELE.acepta(ws);
+      // la dirección real la pone el proxy TLS; el relé solo la usa, resumida y en memoria, para los límites del número
+      if (ws) RELE.acepta(ws, String(req.headers['x-forwarded-for'] || '').split(',')[0].trim() || req.socket.remoteAddress || '');
       return;
     }
     if (!req.url.startsWith('/sesion')) return socket.destroy();

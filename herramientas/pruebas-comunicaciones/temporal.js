@@ -31,7 +31,7 @@ async function telefono(browser, nombre, ua, app) {
 }
 async function invita(browser, nombre) {
   const A = await telefono(browser, nombre, IPHONE, true);
-  await A.goto(URL0 + '?app=1'); await espera(1500);
+  await A.goto(URL0 + '?app=1&numero=0'); await espera(1500);
   await A.evaluate(() => document.querySelector('#nueva-blindada').click()); await espera(400);
   if (await A.$('#h-invitar.gc-abierta')) await A.evaluate(() => document.querySelector('#invitar-otra').click());
   await espera(1500);

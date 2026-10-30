@@ -287,7 +287,52 @@
   const RELLENO = 1024;
   function rellena(bytes) { const n = Math.ceil((bytes.length + 1) / RELLENO) * RELLENO; const o = new Uint8Array(n).fill(0x20); o.set(bytes, 0); return o; }
 
+  // ---------- Número GUARDIANA (29 Oct 2026; dueño, 20:56–21:55; agencia, ronda 73) ----------
+  // 12 cifras: 11 al azar y una de control Damm, que detecta cualquier cifra cambiada y cualquier par de cifras vecinas
+  // intercambiado. El número no sale del teléfono: al relé va su huella (idn, PBKDF2 de 300.000 vueltas) y, para hablar con
+  // alguien, una «cita» que sale de los dos números (sin los dos no se puede calcular) con un sobre cerrado con otra clave
+  // que también sale de los dos. Ver zero-motor/numeros.js.
+  const DAMM = [[0, 3, 1, 7, 5, 9, 8, 6, 4, 2], [7, 0, 9, 2, 1, 5, 4, 8, 6, 3], [4, 2, 0, 6, 8, 7, 1, 3, 5, 9], [1, 7, 5, 0, 9, 8, 3, 4, 2, 6], [6, 1, 2, 3, 0, 4, 5, 9, 7, 8], [3, 6, 7, 4, 2, 0, 9, 5, 8, 1], [5, 8, 6, 9, 7, 2, 0, 1, 3, 4], [8, 9, 4, 5, 3, 6, 2, 0, 1, 7], [9, 4, 3, 8, 6, 1, 7, 2, 0, 5], [2, 5, 8, 1, 4, 3, 6, 7, 9, 0]];
+  const damm = (s) => { let i = 0; for (const ch of String(s)) i = DAMM[i][ch.charCodeAt(0) - 48]; return i; };
+  const numeroValido = (s) => /^\d{12}$/.test(String(s)) && damm(s) === 0;
+  const conControl = (once) => String(once) + String(damm(once));
+  const nuevoNumero = () => { let s = ''; while (s.length < 11) { for (const x of azar(16)) { if (x < 250 && s.length < 11) s += String(x % 10); } } return conControl(s); };
+  const numeroBonito = (s) => String(s || '').replace(/(\d{3})(?=\d)/g, '$1 ');
+  async function pbkdf2(texto, sal, vueltas, bits) {
+    const k = await sub.importKey('raw', te.encode(texto), 'PBKDF2', false, ['deriveBits']);
+    return new Uint8Array(await sub.deriveBits({ name: 'PBKDF2', hash: 'SHA-256', salt: te.encode(sal), iterations: vueltas }, k, bits));
+  }
+  const idnDe = async (n) => hex(await pbkdf2(String(n), 'GUARDIANA número v1', 300000, 256));
+  // la cita de dos números (la misma desde los dos lados): T, que ve el relé, y la clave del sobre, que no ve
+  async function citaDe(a, b) {
+    a = String(a); b = String(b);
+    const p = await pbkdf2(a < b ? a + ':' + b : b + ':' + a, 'GUARDIANA cita v1', 100000, 512);
+    const T = hex(await sha256(cat(te.encode('GUARDIANA cita T v1\n'), p)));
+    const k = await hkdf(p, null, 'GUARDIANA cita clave v1', 32); p.fill(0);
+    const clave = await aes(k); k.fill(0);
+    return { T, clave };
+  }
+  const buzonDe = async (idn) => hex(await sha256(te.encode('GUARDIANA buzón v1\n' + idn)));
+  const ADC = (T) => te.encode('GUARDIANA cita v1\n' + T);
+  async function cierraSobre(clave, T, obj) { const iv = azar(12); const ct = new Uint8Array(await sub.encrypt({ name: 'AES-GCM', iv, additionalData: ADC(T) }, clave, te.encode(JSON.stringify(obj)))); return b64u(cat(iv, ct)); }
+  async function abreSobre(clave, T, s) { try { const b = deB64u(s); if (b.length < 29) return null; return JSON.parse(td.decode(await sub.decrypt({ name: 'AES-GCM', iv: b.subarray(0, 12), additionalData: ADC(T) }, clave, b.subarray(12)))); } catch (_) { return null; } }
+  // lo que firma cada uno en su sobre: la cita, su número, sus dos claves, su valor al azar y la hora
+  const datosCita = (T, n, f, a, r, t) => te.encode('GUARDIANA cita firma v1\n' + T + '\n' + n + '\n' + f + '\n' + a + '\n' + r + '\n' + t);
+  // lo que firma la app al presentar su número en una conexión (el reto lo pone el relé)
+  const datosYo = (reto, idn, f, a) => te.encode('GUARDIANA yo v1\n' + reto + '\n' + idn + '\n' + f + '\n' + a);
+  // La semilla de la conversación entre dos números (agencia, ronda 73: «ECDH estático solo para proteger un intercambio firmado
+  // de valores aleatorios nuevos; vinculen la derivación a ambas identidades»): el acuerdo entre las dos identidades (solo lo
+  // pueden calcular ellas) con los dos valores al azar de los sobres y las dos huellas. Cada emparejamiento, una semilla distinta.
+  async function semillaNumeros(yo, suAcuerdoPub, miIdn, suIdn, miR, suR) {
+    const s = await dh(yo.acuerdo.privateKey, suAcuerdoPub);
+    const [i1, i2, r1, r2] = miIdn < suIdn ? [miIdn, suIdn, u8(miR), u8(suR)] : [suIdn, miIdn, u8(suR), u8(miR)];
+    const sal = await sha256(cat(te.encode('GUARDIANA semilla número v1\n'), r1, r2));
+    const semilla = await hkdf(s, sal, 'GUARDIANA semilla número v1\n' + i1 + '\n' + i2, 32);
+    s.fill(0); return semilla;
+  }
+  const N = { damm, numeroValido, conControl, nuevoNumero, numeroBonito, idnDe, citaDe, buzonDe, cierraSobre, abreSobre, datosCita, datosYo, semillaNumeros };
+
   const B = { sha384, hkdf384, hmac384, hayBlindada, creaIdentidad: creaIdentidadB, abreDsa: abreDsaB, huella: huellaB, numeroSeguridad: numeroSeguridadB, firma: firmaB, verifica: verificaB, firmaPQ, verificaPQ, deSemilla: deSemillaB, efimera: efimeraB, kemPar: kemParB, kemEncapsula: kemEncapsulaB, kemAbre: kemAbreB, datosInicia: datosIniciaB, datosResponde: datosRespondeB, sesion: sesionB, cadena: cadenaB, rellena, RELLENO, EK: B_EK, DK: B_DK, CT: B_CT, DSA_PUB: B_DSA_PUB, DSA_FIRMA: B_DSA_FIRMA, EC: B_EC, CTX: B_CTX };
 
-  raiz.GuardianaCripto = { te, td, u8, cat, b64u, deB64u, hex, deHex, azar, sha256, hkdf, hmac, aes, sella, abre, nonce, creaIdentidad, huella, numeroSeguridad, firma, verifica, deSemilla, nuevaSemilla, efimera, sesion, cadena, claveDeCodigo, nuevoCodigo, hayPQ, kemPar, kemEncapsula, kemAbre, datosInicia, datosResponde, KEM_EK, KEM_DK, KEM_CT, B };
+  raiz.GuardianaCripto = { te, td, u8, cat, b64u, deB64u, hex, deHex, azar, sha256, hkdf, hmac, aes, sella, abre, nonce, creaIdentidad, huella, numeroSeguridad, firma, verifica, deSemilla, nuevaSemilla, efimera, sesion, cadena, claveDeCodigo, nuevoCodigo, hayPQ, kemPar, kemEncapsula, kemAbre, datosInicia, datosResponde, KEM_EK, KEM_DK, KEM_CT, B, N };
 })(typeof window !== 'undefined' ? window : globalThis);

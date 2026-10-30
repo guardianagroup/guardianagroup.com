@@ -12,9 +12,12 @@
 //   binario → [0x01][32 bytes sala][8 bytes destinatario o ceros = todos][carga]  (del cliente al relé)
 //             [0x02][32 bytes sala][8 bytes remitente][carga]                     (del relé a los demás)
 //   sala: 64 hexadecimales (la página la deriva de la invitación; la clave no viaja); yo: 16 hexadecimales.
+//   Número GUARDIANA (29 Oct 2026, ver numeros.js): {t:'num', idn, f, a, sig, alta} · {t:'cita', T, s} · {t:'citas', ts} ·
+//   {t:'cita-fin', T, cancela}; con «q», la respuesta lleva la misma «q». Aviso del relé: {t:'cita-lista', T, otros}.
 'use strict';
 const crypto = require('crypto');
 const { Avisos } = require('./avisos');
+const { Numeros } = require('./numeros');
 
 const MAX_MIEMBROS = 8;          // personas por sala (conversaciones pequeñas; nada de canales)
 const MAX_SALAS_CONEXION = 64;   // salas abiertas por una misma conexión
@@ -38,6 +41,7 @@ const BUSQUEDAS_MIN = 6;            // intentos de búsqueda por conexión y min
 const MAX_CODIGOS = 50000;
 
 const esHex = (s, n) => typeof s === 'string' && s.length === n && /^[0-9a-f]+$/.test(s);
+const qDe = (m) => (Number.isInteger(m.q) && m.q > 0 && m.q < 1e9 ? m.q : undefined); // número de la pregunta, para casar la respuesta
 
 class Rele {
   constructor(o) {
@@ -52,6 +56,8 @@ class Rele {
     this.codigos = new Map();     // código → { sobre, sal, de (conexión), creado }
     // avisos fuera de la app (29 Oct 2026): Web Push, sin contenido; ver avisos.js
     this.avisos = o.avisos === null ? null : (o.avisos || new Avisos({ dir: o.avisosDir, remitente: o.remitente }));
+    // el directorio del Número GUARDIANA (29 Oct 2026): huellas y claves públicas, nunca los números; ver numeros.js
+    this.numeros = o.numeros === null ? null : (o.numeros || new Numeros({ dir: o.numerosDir }));
     if (this.turnHost && this.turnSecreto) { this.compruebaCoturn(); const t = setInterval(() => this.compruebaCoturn(), 60 * 1000); if (t.unref) t.unref(); }
     this.vigila = setInterval(() => this.barre(), 30 * 1000);
     if (this.vigila.unref) this.vigila.unref();
@@ -60,7 +66,7 @@ class Rele {
   // Hay llamadas solo si hay secreto y coturn está de verdad activo en este servidor (se comprueba cada minuto)
   get llamadas() { return !!(this.turnHost && this.turnSecreto && this.coturn.activo); }
 
-  estado() { let b = 0; for (const x of this.conexiones) if (x.blindada) b++; return { salas: this.salas.size, conexiones: this.conexiones.size, blindadas: b, codigos: this.codigos.size, llamadas: this.llamadas, coturn: this.coturn, avisos: this.avisos ? this.avisos.estado() : null }; }
+  estado() { let b = 0; for (const x of this.conexiones) if (x.blindada) b++; return { salas: this.salas.size, conexiones: this.conexiones.size, blindadas: b, codigos: this.codigos.size, llamadas: this.llamadas, coturn: this.coturn, avisos: this.avisos ? this.avisos.estado() : null, numeros: this.numeros ? this.numeros.estado() : null }; }
 
   compruebaCoturn() {
     const { execFile } = require('child_process');
@@ -86,16 +92,17 @@ class Rele {
     return { ice: [{ urls: ['turn:' + h + '?transport=udp', 'turn:' + h + '?transport=tcp'], username, credential }], caduca };
   }
 
-  acepta(ws) {
+  // ip: solo para los límites de abuso del número, resumida con una clave de este arranque (numeros.js); no se guarda
+  acepta(ws, ip) {
     if (this.conexiones.size >= MAX_CONEXIONES) { ws.cierra(); return; }
-    const c = { ws, salas: new Set(), yo: new Map(), cupo: RAFAGA, ultimo: Date.now(), vivo: Date.now(), bytes: 0 };
+    const c = { ws, salas: new Set(), yo: new Map(), cupo: RAFAGA, ultimo: Date.now(), vivo: Date.now(), bytes: 0, reto: crypto.randomBytes(16).toString('hex'), ipk: this.numeros ? this.numeros.resumeIp(ip) : '' };
     this.conexiones.add(c);
     ws.on('message', (m, bin) => { c.vivo = Date.now(); if (bin) this.trama(c, m); else this.texto(c, m); });
     ws.on('close', () => this.despide(c));
   }
 
   texto(c, s) {
-    if (typeof s !== 'string' || s.length > 4096) return;
+    if (typeof s !== 'string' || s.length > 8192) return; // 8 KB: la lista de citas pendientes cabe (hasta 100)
     let m; try { m = JSON.parse(s); } catch (_) { return; }
     if (!m || typeof m !== 'object') return;
     switch (m.t) {
@@ -104,7 +111,8 @@ class Rele {
         c.marca = m.marca === 1; // esta página marca las tramas que merecen aviso; una anterior, no (y entonces se avisa como antes)
         // «marca»: este relé entiende las tramas marcadas (0x11, las que merecen aviso). Sin esto, la página no las usa: un relé
         // anterior las descartaría y el mensaje se perdería mientras los servidores se actualizan (29 Oct 2026)
-        c.ws.json({ t: 'hola', v: 1, marca: 1, region: this.region, llamadas: this.llamadas, ice: t.ice, caduca: t.caduca, avisos: this.avisos ? this.avisos.clavePublica : '' });
+        // «reto»: lo que firma la app al presentar su Número GUARDIANA en esta conexión (una firma vieja no sirve en otra)
+        c.ws.json({ t: 'hola', v: 1, marca: 1, region: this.region, llamadas: this.llamadas, ice: t.ice, caduca: t.caduca, avisos: this.avisos ? this.avisos.clavePublica : '', reto: c.reto, num: this.numeros ? 1 : 0 });
         return;
       }
       case 'ice': { const t = this.ice(); c.ws.json({ t: 'ice', ice: t.ice, caduca: t.caduca }); return; }
@@ -120,6 +128,11 @@ class Rele {
       // la app en segundo plano (29 Oct 2026, 14:38): el teléfono deja la conexión viva un rato pero congela la página; lo que
       // llegue entonces se avisa fuera (Web Push), y los demás miembros saben que está «fuera»
       case 'presencia': return this.presencia(c, m);
+      // Número GUARDIANA (29 Oct 2026): alta o presentación del número, citas («he añadido este número») y su final
+      case 'num': return this.num(c, m);
+      case 'cita': return this.cita(c, m);
+      case 'citas': return this.citas(c, m);
+      case 'cita-fin': return this.citaFin(c, m);
       default: return;
     }
   }
@@ -176,8 +189,8 @@ class Rele {
     const sub = m && m.sub && typeof m.sub === 'object' ? m.sub : null;
     if (!sub) { if (c.avisoId) { c.avisoId = null; } return c.ws.json({ t: 'avisos', ok: false, por: 'formato' }); }
     if (m.quitar === 1) { this.avisos.quita(String(sub.endpoint || '')); c.avisoId = null; return c.ws.json({ t: 'avisos', ok: true, quitado: true }); }
-    // solo salas en las que esta conexión está (o estará): las que manda la página, hasta 64
-    const salas = Array.isArray(m.salas) ? m.salas.filter((x) => esHex(x, 64)).slice(0, 64) : [];
+    // solo salas en las que esta conexión está (o estará): las que manda la página, hasta 64; el buzón de un número, solo su dueño
+    const salas = Array.isArray(m.salas) ? m.salas.filter((x) => esHex(x, 64) && (!this.numeros || this.numeros.salaPermitida(c, x))).slice(0, 64) : [];
     const id = this.avisos.pon(String(sub.endpoint || ''), (sub.keys || {}).p256dh, (sub.keys || {}).auth, salas);
     if (!id) return c.ws.json({ t: 'avisos', ok: false, por: 'formato' });
     c.avisoId = id;
@@ -193,6 +206,37 @@ class Rele {
     c.despertoEn = ahora; c.despertoTipo = tipo;
     const r = this.avisos.avisa(sala, c.avisoId || null, tipo);
     c.ws.json({ t: 'despierta', sala, tipo, avisados: r.avisados, silenciados: r.silenciados });
+  }
+
+  // ---------- Número GUARDIANA ----------
+  num(c, m) {
+    const q = qDe(m);
+    if (!this.numeros) return c.ws.json({ t: 'num', q, ok: false, por: 'sin números' });
+    c.ws.json(Object.assign({ t: 'num', q }, this.numeros.num(c, m)));
+  }
+  cita(c, m) {
+    const q = qDe(m);
+    if (!this.numeros) return c.ws.json({ t: 'cita', q, ok: false, por: 'sin números' });
+    const x = this.numeros.cita(c, m);
+    c.ws.json(Object.assign({ t: 'cita', q }, x.r));
+    for (const idn of x.casadas || []) this.avisaCita(idn, x.T, x.e);
+  }
+  // a quien estaba esperando: la otra mitad en sus conexiones abiertas y, si ninguna está a la vista, un aviso en su teléfono
+  // (Web Push a su «buzón», que solo dice «contacto»)
+  avisaCita(idn, T, e) {
+    const otros = this.numeros.otros(e, idn); let dentro = false;
+    for (const v of this.numeros.vivas(idn)) { try { v.ws.json({ t: 'cita-lista', T, otros }); } catch (_) {} if (!v.fuera && Date.now() - v.vivo < 25 * 1000) dentro = true; }
+    if (!dentro && this.avisos) { try { this.avisos.avisa(this.numeros.buzon(idn), null, 'contacto'); } catch (_) {} }
+  }
+  citas(c, m) {
+    const q = qDe(m);
+    if (!this.numeros) return c.ws.json({ t: 'citas', q, ok: false, por: 'sin números' });
+    c.ws.json(Object.assign({ t: 'citas', q }, this.numeros.citasDe(c, m)));
+  }
+  citaFin(c, m) {
+    const q = qDe(m);
+    if (!this.numeros) return c.ws.json({ t: 'cita-fin', q, ok: false, por: 'sin números' });
+    c.ws.json(Object.assign({ t: 'cita-fin', q }, this.numeros.citaFin(c, m)));
   }
 
   otros(sala, yo) { const s = this.salas.get(sala); return s ? [...s.keys()].filter((k) => k !== yo) : []; }
@@ -214,6 +258,7 @@ class Rele {
     this.conexiones.delete(c);
     for (const sala of [...c.salas]) this.sale(c, sala, false);
     for (const [k, r] of this.codigos) if (r.de === c) this.codigos.delete(k); // sin la conexión de quien invita, el código no sirve
+    if (this.numeros) this.numeros.sale(c);
   }
 
   // Cupo de bytes por conexión (cubo de fichas): quien pasa del ritmo ve descartadas sus tramas y recibe «lento»

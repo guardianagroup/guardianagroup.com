@@ -232,7 +232,8 @@
     if (!e.data) return;
     // the real route of the visitor's data, hop by hop, measured by the GUARDIANA program that hosts Órbita
     // (owner, 22 Oct 2026): {tipo:'orbita-ruta', ruta:{destino:{nombre,ip,lat,lon}, saltos:[{n,ip,nombre,lat,lon,ms,red,cc}]}}
-    if (e.data.tipo === 'orbita-ruta' && (e.source === window.parent || e.source === marco.contentWindow) && window.OrbitaConexion) { window.OrbitaConexion.ruta(e.data.ruta); return; }
+    // solo desde este mismo origen (el programa GUARDIANA que enmarca Órbita) o desde el marco de ZERO (auditoría, 29 Oct 2026)
+    if (e.data.tipo === 'orbita-ruta' && e.origin === location.origin && (e.source === window.parent || e.source === marco.contentWindow) && window.OrbitaConexion) { window.OrbitaConexion.ruta(e.data.ruta); return; }
     if (e.source !== marco.contentWindow) return;
     if (e.data.tipo === 'orbita-volver' && dentro) atras();
     // «Verme en Órbita» from inside ZERO: back to the planet with the visitor's own card open (owner, 22 Oct 2026)

@@ -362,3 +362,44 @@ Versiones en main: app.css, app.js y llamada.js `20261030i`; idioma.js `20261029
   pantallas antes de construir. Llamadas telefónicas normales pasando por GUARDIANA (21:20): explicado que no hay extremo a extremo
   sin app en los dos lados; posible solo como centralita (nos oiría el servidor) → no ahora.
 - Versiones: app.js 31g, app.css 31h, idioma.js p87 (ru y cs al día).
+
+## 20. Tramo 12 (21:37–23:00) — Número GUARDIANA, dos fallos de los avisos, auditoría de la web
+- **Decidido (dueño 21:03, 21:32–21:55; agencia ronda 73, Astra + voz independiente; notas en `agencia-rondas/ronda73/notas.md`):**
+  cada app del teléfono tiene un **Número GUARDIANA** (12 cifras: 11 al azar + control Damm; se puede elegir, un nivel más abajo,
+  con aviso), creado en el teléfono; al relé solo va la huella `idn = PBKDF2(número, «GUARDIANA número v1», 300k)` con las dos
+  claves públicas, firmando el reto de la conexión. **«Añadirse los dos» (M):** «Llamar» abre un teclado; un número nuevo pide el
+  nombre y deja una «cita» `T = PBKDF2(min:max, «GUARDIANA cita v1»)` con un sobre (AES-GCM con clave de los dos números: claves
+  públicas, valor al azar, firma); cuando el otro deja la suya, el relé entrega a cada uno la mitad del otro con las claves de su
+  alta; la app comprueba huella (= número escrito), claves y firma, deriva la semilla (ECDH entre identidades + los dos valores al
+  azar + huellas), crea la conv con `numero`, `alias`, `contacto` y `huellaEsperada` (en `recibePresentacion` solo entra esa
+  identidad) y entra en la sala: el chat se abre solo en los dos. Escribir un número al azar no produce nada (misma respuesta
+  exista o no). Avisos: sala «buzón» = HMAC(secreto del servidor, idn), solo su dueño se suscribe; push «contacto» (sw.js) sin
+  decir quién; la app revisa sus citas pendientes (`citas`) al abrir/conectar. Caducidad 30 días; límites 10/h y 30/día por
+  identidad, 100 pendientes, altas 5/min por conexión y 30/h por IP resumida (memoria).
+- **Archivos:** `zero-motor/numeros.js` (nuevo; JSON `numeros.json` y `citas.json` en `datos-com/numeros`, secreto del buzón ahí),
+  `comunicaciones.js` (`num`, `cita`, `citas`, `cita-fin`, `cita-lista`, reto en `hola`, `acepta(ws, ip)`), `avisos.js` (`tema` por
+  suscripción, tipo «contacto»), `servidor.js`/`pruebas/rele.js` (pasan la IP), `cripto.js` (`C.N`: Damm, idn, cita, sobres,
+  semilla), `rele.js` (preguntas con `q`), `app.js` (bloque «Número GUARDIANA»: `MI_NUM`, `CITAS`, `pintaNumero`, `pintaMarcar`,
+  `anadeNumero`, `casaCita`, `revisaCitas`, `eventosNumero`), `index.html` (`#mi-numero`, `#llamar-num`, `#marcar`, `#h-num`),
+  `app.css`, `sw.js` (contacto), idioma.js + ru/cs (54 textos). En el teléfono con la app, «Invitar a chat» sale del inicio y queda
+  como enlace dentro de «Llamar» («¿No tiene GUARDIANA? Invítale con un enlace»). PC igual que antes (19:48). Pruebas: `numero.js`
+  (nueva, 28 comprobaciones) y `zero-motor/pruebas/numeros.js`; las demás pruebas del móvil llevan `numero=0` /
+  `sessionStorage gcom-sin-numero` para seguir probando las invitaciones con el inicio de antes.
+- **Dos fallos de avisos (voz independiente):** el `topic` de Web Push llevaba 16 caracteres de la sala (Apple/Google podían ver
+  qué suscripciones comparten chat) → HMAC por suscripción; el buzón del número era calculable por quien supiera el número →
+  secreto del servidor + solo el dueño. Las dos voces piden para después: clave de cuenta + hoja de rescate (recuperar el número,
+  PC con QR), mudanza a sala/PSK nuevos en el primer encuentro ML-KEM, transparencia de claves, anclaje del código.
+- **Dueño 21:47/22:22:** la frase «la web es más difícil de espiar que una app» no es cierta tal cual (las dos voces): explicarlo
+  con honestidad en «¿Cómo funciona?» y la web, junto con la vía PC a PC (#85). 21:50: Normal fuerte / Blindada mejor / Ultra
+  máxima (#87). 22:03–22:10: Threema (Suiza), Session (Suiza) y SimpleX (Reino Unido) ya van sin teléfono y con código abierto:
+  nada de «los primeros». 22:13–22:18: comparativa + podio en PDF (#88), verificaciones públicas (#89), Ultra con nodos de
+  operadores independientes y relleno constante (#67, «hagamos eso»).
+- **Auditoría de la web (dueño 21:51; informe de 14 hallazgos, fuera del repositorio público hasta que esté todo corregido; el dueño
+  tiene copia):** hechos ya en este tramo: «Ver con
+  tiempo»/abrir archivos solo con tipos sin código (`mimeAbrible`; el resto se guarda como octet-stream), CSP en chat/, obras,
+  privacidad-extension y tabla.html, `google.html` → `google.plantilla` (Pages ya no lo sirve como HTML), tope de fragmentos y
+  máscara obligatoria en `ws.js`, origen comprobado en `orbita.js`, `red-nucleo.js` en huellas. Pendiente y propuesto al dueño
+  (#86): proteger `main` + desplegar solo versiones firmadas, separar ZERO del relé,
+  Comunicaciones en origen propio o CSP con hashes en todas las páginas, DNSSEC/CAA/verificación de Pages/HSTS (Porkbun y GitHub),
+  workflows por SHA, systemd estricto.
+- Versiones: app.js 31h, app.css 31i, cripto.js 31a, rele.js 31c, sw.js 29g, orbita.js 31a, idioma.js p88.

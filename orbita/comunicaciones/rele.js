@@ -19,6 +19,8 @@
     const salas = new Map(); // sala → { yo, b } (b: sala de una sesión blindada)
     let ice = [], caduca = 0, region = '', llamadas = false, ultimoPong = 0, pingEn = 0, latencia = null, avisos = '', marca = false; const hist = [];
     const esperas = {}; // respuestas pendientes (invita, busca)
+    // Número GUARDIANA (29 Oct 2026): preguntas con número («q») para casar cada respuesta; el reto de esta conexión lo firma la app
+    const esperasQ = new Map(); let qn = 0, reto = '', conNumeros = false;
     // la app en segundo plano (presencia): si la página nace oculta (el teléfono la abre en segundo plano), ya cuenta como fuera
     let fueraAhora = typeof document !== 'undefined' && document.visibilityState !== 'visible';
     let subUlt = null, salasUlt = []; // la última suscripción de avisos, para reenviarla nada más abrir (si no, el relé no sabe
@@ -54,7 +56,7 @@
         if (typeof e.data === 'string') {
           let m; try { m = JSON.parse(e.data); } catch (_) { return; }
           switch (m.t) {
-            case 'hola': region = m.region || ''; llamadas = !!m.llamadas; ice = m.ice || []; caduca = m.caduca || 0; avisos = typeof m.avisos === 'string' ? m.avisos : ''; marca = m.marca === 1; emite('hola', { region, llamadas, ice, avisos }); break;
+            case 'hola': region = m.region || ''; llamadas = !!m.llamadas; ice = m.ice || []; caduca = m.caduca || 0; avisos = typeof m.avisos === 'string' ? m.avisos : ''; marca = m.marca === 1; reto = /^[0-9a-f]{32}$/.test(m.reto || '') ? m.reto : ''; conNumeros = m.num === 1; emite('hola', { region, llamadas, ice, avisos, reto, num: conNumeros }); break;
             case 'ice': ice = m.ice || []; caduca = m.caduca || 0; emite('ice', ice); break;
             case 'sala': emite('sala', m.sala, m.miembros || []); break;
             case 'llega': emite('llega', m.sala, m.quien); break;
@@ -71,6 +73,9 @@
             case 'avisos': emite('avisos', m); break;
             case 'despierta': emite('despierta', m); break;
             case 'presencia': emite('presencia', m); break;
+            // Número GUARDIANA: respuestas a preguntas con número, y la otra mitad de una cita que acaba de llegar
+            case 'num': case 'cita': case 'citas': case 'cita-fin': { const f = m.q && esperasQ.get(m.q); if (f) { esperasQ.delete(m.q); f(m); } break; }
+            case 'cita-lista': emite('cita-lista', m); break;
             default: break;
           }
           return;
@@ -80,7 +85,7 @@
         const sala = hex(b.subarray(1, 33)), de = hex(b.subarray(33, 41));
         emite('trama', sala, de, b.subarray(41));
       };
-      ws.onclose = () => { const estaba = abierto; abierto = false; marca = false; clearInterval(ping); ws = null; if (estaba) emite('cerrado'); reintenta(); };
+      ws.onclose = () => { const estaba = abierto; abierto = false; marca = false; reto = ''; clearInterval(ping); ws = null; for (const [q, f] of esperasQ) { esperasQ.delete(q); try { f({ ok: false, por: 'sin relé' }); } catch (_) {} } if (estaba) emite('cerrado'); reintenta(); };
       ws.onerror = () => {};
     }
     function reintenta() {
@@ -139,12 +144,23 @@
     const despiertaA = (sala, tipo) => { if (!abierto) return false; try { ws.send(JSON.stringify({ t: 'despierta', sala, tipo })); return true; } catch (_) { return false; } };
     // la app en segundo plano o de vuelta (29 Oct 2026, 14:38): lo que llegue mientras está fuera se avisa también en el teléfono
     const presencia = (fuera) => { fueraAhora = !!fuera; if (!abierto) return false; try { ws.send(JSON.stringify({ t: 'presencia', fuera: fuera ? 1 : 0 })); return true; } catch (_) { return false; } };
+    // Número GUARDIANA: alta o presentación del número, citas y su final (ver zero-motor/numeros.js)
+    const pideQ = (t, m, ms) => new Promise((res) => {
+      if (!abierto || !ws) return res({ ok: false, por: 'sin relé' });
+      const q = ++qn; esperasQ.set(q, res);
+      try { ws.send(JSON.stringify(Object.assign({}, m, { t, q }))); } catch (_) { esperasQ.delete(q); return res({ ok: false, por: 'sin relé' }); }
+      setTimeout(() => { if (esperasQ.get(q) === res) { esperasQ.delete(q); res({ ok: false, por: 'sin respuesta' }); } }, ms || 12000);
+    });
+    const num = (m) => pideQ('num', m);
+    const cita = (T, s) => pideQ('cita', { T, s });
+    const citas = (ts) => pideQ('citas', { ts });
+    const citaFin = (T, cancela) => pideQ('cita-fin', { T, cancela: cancela ? 1 : undefined });
     function cierra() { cerrando = true; clearInterval(ping); try { ws && ws.close(); } catch (_) {} }
 
     conecta();
     // para las pruebas: un corte de la conexión como los del teléfono (se vuelve a conectar sola)
     const corta = () => { try { if (ws) ws.close(); } catch (_) {} };
-    return { on, entra, sale, manda, pideIce, cierra, invita, busca, retira, mide, suscribe, despiertaA, presencia, corta, get avisos() { return avisos; }, get abierto() { return abierto; }, get atraso() { return ws ? ws.bufferedAmount : 0; }, get region() { return region; }, get llamadas() { return llamadas; }, get ice() { return ice; }, get caduca() { return caduca; }, get url() { return url; }, get latencia() { return latencia; }, get latenciaMin() { return hist.length ? Math.min(...hist) : null; }, get ultimoPong() { return ultimoPong; } };
+    return { on, entra, sale, manda, pideIce, cierra, invita, busca, retira, mide, suscribe, despiertaA, presencia, corta, num, cita, citas, citaFin, get reto() { return reto; }, get conNumeros() { return conNumeros; }, get avisos() { return avisos; }, get abierto() { return abierto; }, get atraso() { return ws ? ws.bufferedAmount : 0; }, get region() { return region; }, get llamadas() { return llamadas; }, get ice() { return ice; }, get caduca() { return caduca; }, get url() { return url; }, get latencia() { return latencia; }, get latenciaMin() { return hist.length ? Math.min(...hist) : null; }, get ultimoPong() { return ultimoPong; } };
   }
   // Otro servidor de llamadas (dueño, 28 Oct 2026, 14:17: «que las llamadas sean todas buenas, independientemente de si la
   // persona está en Sudamérica, en Europa…»): una conexión corta para medir su tiempo de ida y vuelta y pedirle sus

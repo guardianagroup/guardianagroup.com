@@ -35,6 +35,10 @@ class Avisos {
     this.guardando = null; this.pendienteGuardar = false;
     try { fs.mkdirSync(this.dir, { recursive: true, mode: 0o700 }); } catch (e) { console.error('avisos: sin carpeta', this.dir, e.message); }
     this.claves = this.cargaClaves();
+    // el «topic» de cada aviso (RFC 8030: lo ve el servicio de push de Apple, Google o Mozilla) se deriva por suscripción con este
+    // secreto: dos teléfonos que comparten un chat ya no llevan la misma etiqueta, y el servicio de push no puede emparejarlos
+    // (voz independiente, ronda 73, 29 Oct 2026). Antes era «gcom-m-» + 16 caracteres de la sala
+    this.secretoTema = this.cargaSecretoTema();
     this.carga();
     this.barredor = setInterval(() => this.barre(), 6 * 3600 * 1000); if (this.barredor.unref) this.barredor.unref();
   }
@@ -50,6 +54,15 @@ class Avisos {
     return j;
   }
   get clavePublica() { return this.claves ? this.claves.publica : ''; }
+  cargaSecretoTema() {
+    const f = path.join(this.dir, 'secreto-tema');
+    try { const h = fs.readFileSync(f, 'utf8').trim(); if (/^[0-9a-f]{64}$/.test(h)) return Buffer.from(h, 'hex'); } catch (_) {}
+    const b = crypto.randomBytes(32);
+    try { fs.writeFileSync(f, b.toString('hex'), { mode: 0o600 }); } catch (e) { console.error('avisos: no se pudo guardar el secreto de los temas', e.message); }
+    return b;
+  }
+  // un tema distinto por suscripción, sala y tipo (32 caracteres URL-safe, el máximo del RFC 8030)
+  tema(s, sala, tipoTema) { return b64u(crypto.createHmac('sha256', this.secretoTema).update(s.endpoint + '\n' + (sala || '') + '\n' + (tipoTema || '')).digest()).slice(0, 32); }
 
   // ---------- suscripciones ----------
   carga() {
@@ -107,7 +120,8 @@ class Avisos {
   avisa(sala, excepto, tipo) {
     if (!esHex(sala, 64)) return { avisados: 0, silenciados: 0 };
     const c = this.porSala.get(sala); if (!c) return { avisados: 0, silenciados: 0 };
-    tipo = tipo === 'llamada' ? 'llamada' : tipo === 'fin' ? 'fin' : 'mensaje';
+    // «contacto» (29 Oct 2026): alguien a quien añadiste por su Número GUARDIANA también te ha añadido (al «buzón» de tu número)
+    tipo = tipo === 'llamada' ? 'llamada' : tipo === 'fin' ? 'fin' : tipo === 'contacto' ? 'contacto' : 'mensaje';
     let n = 0, sil = 0;
     for (const endpoint of c) {
       const s = this.subs.get(endpoint); if (!s || (excepto && s.id === excepto)) continue;
@@ -115,7 +129,7 @@ class Avisos {
       if (this.ultimos.get(k) && ahora - this.ultimos.get(k) < SILENCIO_MS) { sil++; continue; }
       this.ultimos.set(k, ahora); n++;
       // «fin» va con el mismo topic que «llamada»: si el aviso de la llamada aún no había llegado al teléfono, lo sustituye
-      this.envia(s, JSON.stringify({ tipo, sala, t: ahora }), tipo === 'llamada' ? 40 : tipo === 'fin' ? 120 : 900, tipo === 'llamada' ? 'high' : 'normal', sala, tipo === 'fin' ? 'llamada' : tipo).catch(() => {});
+      this.envia(s, JSON.stringify({ tipo, sala, t: ahora }), tipo === 'llamada' ? 40 : tipo === 'fin' ? 120 : tipo === 'contacto' ? 2 * 24 * 3600 : 900, tipo === 'llamada' ? 'high' : 'normal', sala, tipo === 'fin' ? 'llamada' : tipo).catch(() => {});
     }
     return { avisados: n, silenciados: sil };
   }
@@ -163,8 +177,9 @@ class Avisos {
     return new Promise((res) => {
       let u; try { u = new URL(s.endpoint); } catch (_) { return res(false); }
       let cuerpo; try { cuerpo = this.cifra(s, texto); } catch (e) { return res(false); }
-      // un «topic» por sala y tipo: con el teléfono sin cobertura, el aviso de un chat no borra el de otro (antes todos eran «gcom»)
-      const tema = sala ? 'gcom-' + (tipoTema === 'llamada' ? 'l' : 'm') + '-' + String(sala).slice(0, 16) : 'gcom';
+      // un «topic» por suscripción, sala y tipo: con el teléfono sin cobertura, el aviso de un chat no borra el de otro, y el
+      // servicio de push no ve dos teléfonos con la misma etiqueta
+      const tema = this.tema(s, sala, tipoTema);
       const cab = {
         'content-type': 'application/octet-stream', 'content-encoding': 'aes128gcm', 'content-length': cuerpo.length,
         ttl: String(ttl || 60), urgency: urgencia || 'normal', topic: tema,

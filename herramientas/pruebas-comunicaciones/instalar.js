@@ -20,7 +20,7 @@ async function equipo(browser, ua, o) {
   const ctx = await browser.newContext({ viewport: movil ? { width: 393, height: 793 } : { width: 1280, height: 800 }, deviceScaleFactor: 2, isMobile: movil, hasTouch: movil, userAgent: ua, locale: 'es-CO', permissions: ['microphone', 'camera'] });
   await ctx.addInitScript((o) => {
     window.__compartidos = []; navigator.share = (d) => { window.__compartidos.push(d); return new Promise((r) => setTimeout(r, 300)); };
-    if (o.app) { try { Object.defineProperty(navigator, 'standalone', { get: () => true }); } catch (_) {} }
+    if (o.app) { try { Object.defineProperty(navigator, 'standalone', { get: () => true }); sessionStorage.setItem('gcom-sin-numero', '1'); } catch (_) {} }
     // el aviso del navegador «se puede instalar», como lo da Chrome, y si se llamó a prompt()
     window.__instalar = 0;
     if (o.aviso) addEventListener('load', () => setTimeout(() => { const e = new Event('beforeinstallprompt', { cancelable: true }); e.prompt = () => { window.__instalar++; return Promise.resolve(); }; e.userChoice = Promise.resolve({ outcome: 'accepted' }); dispatchEvent(e); }, 300));

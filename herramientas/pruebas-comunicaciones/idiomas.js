@@ -25,7 +25,7 @@ const LOCALES = { ar: 'ar-SA', bg: 'bg-BG', bn: 'bn-BD', cs: 'cs-CZ', da: 'da-DK
   const browser = await chromium.launch();
   for (const code of codigos) {
     const ctx = await browser.newContext({ viewport: { width: 393, height: 793 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true, userAgent: UA, locale: LOCALES[code] || code });
-    await ctx.addInitScript(() => { try { Object.defineProperty(navigator, 'standalone', { get: () => true }); } catch (_) {} });
+    await ctx.addInitScript(() => { try { Object.defineProperty(navigator, 'standalone', { get: () => true }); sessionStorage.setItem('gcom-sin-numero', '1'); } catch (_) {} });
     const p = await ctx.newPage(); const errores = [];
     p.on('pageerror', (e) => errores.push(String(e).slice(0, 120)));
     await p.goto('http://127.0.0.1:8080/orbita/comunicaciones/'); await espera(2200);
