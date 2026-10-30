@@ -3,7 +3,7 @@
 // Un PC (P) y dos teléfonos (A y C). P llama a A y añade a C. En P:
 //   1. Las dos personas, mitad y mitad, con una raya en medio que se arrastra (y tocarla no cambia la vista).
 //   2. «Cambiar vista» también en grupo: tú en una columna más (tres columnas, dos rayas) y vuelta a pequeño.
-//   3. Tu imagen pequeña se agranda desde su esquina (hasta el 30 % del ancho), no solo se mueve.
+//   3. Tu imagen pequeña: sin la flecha de cambiar el tamaño (13:43, «borra ese símbolo»); se mueve con el ratón.
 'use strict';
 const { chromium } = require('playwright');
 const path = require('path');
@@ -100,7 +100,8 @@ const salas = (X) => X.evaluate(() => [...GuardianaCom.convs.keys()]);
   for (let i = 1; i <= 10; i++) { await P.mouse.move(esq.x - 200 * i / 10, esq.y - 150 * i / 10); await espera(20); }
   await P.mouse.up(); await espera(500);
   const b = await caja(P, '#v-local');
-  comprueba(cursor && b.w > a.w + 60 && b.w <= W * 0.3 + 2, '3. tu imagen pequeña se agranda desde su esquina', { antes: a, despues: b });
+  // 13:43 (dueño, con la foto de la flecha doble): «borra ese símbolo»: en el PC, sin flecha de cambiar el tamaño; la imagen solo se mueve
+  comprueba(!cursor && Math.abs(b.w - a.w) < 2 && (b.x !== a.x || b.y !== a.y), '3. sin flecha de cambiar el tamaño: tu imagen pequeña solo se mueve', { antes: a, despues: b });
   await P.mouse.move(esq.x - 400, esq.y - 300); await P.mouse.down(); await P.mouse.up(); await espera(300);
   await P.mouse.move(400, 300); await espera(300);
   await P.screenshot({ path: path.join(OUT, '3-grupo-mi-imagen.png') });

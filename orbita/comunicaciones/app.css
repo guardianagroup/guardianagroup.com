@@ -2121,3 +2121,15 @@ body.con-pestanas #marcar .marcar-llamar span{position:absolute;width:1px;height
 }
 .gc-llamada.tres-yo-col #ll-vista .parte{display:none}
 .gc-llamada.tres-yo-col #ll-vista .peq{display:inline}
+
+/* «Encriptada de extremo a extremo» en el PC (dueño, 30 Oct 2026, 13:43, con la foto: «me sale todo, el candado, la palabra, todo
+   en azul… ponlo más profesional»): dos cápsulas de cristal oscuro con línea de acero; el texto en blanco roto y solo el candado en
+   acero; sin mano al pasar el ratón (en el PC no abre nada). En el teléfono, un toque sigue enseñando el detalle técnico. */
+@media (max-width:760px){.gc-llamada-arriba .gc-llamada-cifrado{cursor:pointer}}
+@media (min-width:761px){
+  .gc-llamada:not(.mini) .gc-llamada-arriba .gc-llamada-cifrado{flex:0 0 auto;display:inline-flex;align-items:center;gap:8px;padding:7px 14px 7px 11px;border-radius:999px;border:1px solid rgba(156,195,228,.24);background:rgba(8,12,18,.66);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);font:500 12.5px/1.2 var(--texto);letter-spacing:.01em;color:#E8ECF1;text-shadow:none;cursor:default}
+  .gc-llamada:not(.mini) .gc-llamada-arriba .gc-llamada-cifrado span{color:#E8ECF1}
+  .gc-llamada:not(.mini) .gc-llamada-arriba .gc-llamada-cifrado svg{width:14px;height:14px;flex:none;color:#9CC3E4;stroke:currentColor;fill:none;stroke-width:1.8}
+  .gc-llamada:not(.mini) .gc-llamada-arriba #ll-calidad{display:inline-flex;align-items:center;padding:7px 14px 7px 12px;border-radius:999px;border:1px solid rgba(156,195,228,.16);background:rgba(8,12,18,.66);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);font:500 12.5px/1.2 var(--texto);color:#C9D5E0;text-shadow:none}
+  .gc-llamada:not(.mini) .gc-llamada-arriba #ll-calidad:empty{display:none}
+}
