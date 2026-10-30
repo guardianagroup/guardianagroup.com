@@ -332,15 +332,103 @@ EOF
 
 paso "Caddy: https://$DOMINIO → 127.0.0.1:$PUERTO"
 if [ -z "${ZERO_SIN_PROXY:-}" ]; then
-  cat > /etc/caddy/Caddyfile <<EOF
-$DOMINIO {
+  # otros nombres que sirve este mismo servidor (p. ej. el de un puente que solo reenvía bytes: ver puente-ru.sh), uno por línea
+  ALIAS=$(grep -Eo '^[a-z0-9.-]+$' /etc/guardiana/alias 2>/dev/null | grep -vx "$DOMINIO" | tr '\n' ' ' | sed 's/ *$//' || true)
+  SITIOS="$DOMINIO"; for a in $ALIAS; do SITIOS="$SITIOS, $a"; done
+  # la configuración de siempre: Caddy directo en el 443
+  caddy_directo() {
+    cat > /etc/caddy/Caddyfile <<EOF
+$SITIOS {
 	encode zstd gzip
 	header -Server
 	reverse_proxy 127.0.0.1:$PUERTO
 }
 EOF
-  systemctl enable -q caddy
-  systemctl restart caddy
+  }
+  # 30 Oct 2026 (agencia, ronda 77; dueño, 10:30): el 443 compartido con el relé de llamadas, para las redes que solo dejan salir
+  # la web (hoteles, empresas, algunos países). nginx no abre el TLS: mira si el saludo trae ALPN. El TURN-TLS de los navegadores
+  # no lo trae (comprobado con Chromium); la web, el WebSocket y la validación del certificado, sí.
+  puerta_443() {
+    printf '#!/bin/sh\nexit 101\n' > /usr/sbin/policy-rc.d; chmod 755 /usr/sbin/policy-rc.d
+    DEBIAN_FRONTEND=noninteractive apt-get install -y -q nginx libnginx-mod-stream > /var/log/guardiana-nginx-instalacion.log 2>&1; local r=$?
+    rm -f /usr/sbin/policy-rc.d
+    [ $r -eq 0 ] || return 1
+    rm -f /etc/nginx/sites-enabled/default
+    cat > /etc/nginx/nginx.conf <<'EOF'
+# GUARDIANA · el 443 compartido (zero-motor/instalar.sh). Solo reparte bytes; no abre el TLS ni guarda registros.
+user www-data;
+worker_processes auto;
+pid /run/nginx.pid;
+include /etc/nginx/modules-enabled/*.conf;
+error_log /var/log/nginx/error.log crit;
+events { worker_connections 8192; }
+stream {
+	access_log off;
+	# sin ALPN: el TURN-TLS del navegador → coturn; con ALPN: la web, el WebSocket y el certificado → Caddy
+	map $ssl_preread_alpn_protocols $guardiana_destino {
+		""      127.0.0.1:9101;
+		default 127.0.0.1:8443;
+	}
+	server {
+		listen 443;
+		ssl_preread on;
+		proxy_pass $guardiana_destino;
+		proxy_protocol on;
+		proxy_timeout 1h;
+	}
+	# hacia coturn sin la cabecera PROXY (coturn no la entiende)
+	server {
+		listen 127.0.0.1:9101 proxy_protocol;
+		proxy_pass 127.0.0.1:5349;
+		proxy_timeout 1h;
+	}
+}
+EOF
+    nginx -t -q 2>/dev/null || return 1
+    cat > /etc/caddy/Caddyfile <<EOF
+{
+	https_port 8443
+	auto_https disable_redirects
+	servers :8443 {
+		listener_wrappers {
+			proxy_protocol {
+				timeout 5s
+				allow 127.0.0.1/32
+			}
+			tls
+		}
+	}
+}
+$SITIOS {
+	encode zstd gzip
+	header -Server
+	reverse_proxy 127.0.0.1:$PUERTO
+}
+http://$(echo "$SITIOS" | sed 's/, /, http:\/\//g') {
+	redir https://{host}{uri} 308
+}
+EOF
+    caddy validate --config /etc/caddy/Caddyfile --adapter caddyfile >/dev/null 2>&1 || return 1
+    systemctl enable -q caddy; systemctl restart caddy || return 1
+    systemctl enable -q nginx; systemctl restart nginx || return 1
+    # la web tiene que seguir respondiendo por el 443 (hasta 90 s si el certificado se está sacando)
+    for i in $(seq 1 45); do
+      if curl -fsS -k --max-time 5 --resolve "$DOMINIO:443:127.0.0.1" "https://$DOMINIO/salud" >/dev/null 2>&1; then return 0; fi
+      sleep 2
+    done
+    return 1
+  }
+  if [ -z "${ZERO_SIN_443:-}" ] && puerta_443; then
+    touch /etc/guardiana/turn443
+    echo "  443 compartido: web y relé de mensajes → Caddy; llamadas por TLS → coturn"
+  else
+    rojo "  443 compartido: no se pudo montar; queda la configuración de siempre (Caddy directo en el 443)"
+    rm -f /etc/guardiana/turn443
+    systemctl stop nginx 2>/dev/null || true; systemctl disable -q nginx 2>/dev/null || true
+    caddy_directo
+    systemctl enable -q caddy
+    systemctl restart caddy
+  fi
 fi
 
 paso "Tor (para ULTRA)"
