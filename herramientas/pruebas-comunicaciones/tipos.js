@@ -62,7 +62,7 @@ async function videollamada(A, B) {
   comprueba(/#i=[A-Za-z0-9_-]{43}$/.test(dn.url) && dn.text === 'Invitación a un chat de GUARDIANA', 'normal: el enlace «#i=» y «Invitación a un chat de GUARDIANA»', [dn.text]);
   let ea = await estado(A);
   comprueba(ea.nombre === 'Chat' && !ea.blindada && /Invitación enviada/.test(ea.linea), 'normal: quien invita, ya en «Chat», esperando', ea);
-  await B.goto(dn.url.replace('https://guardianagroup.com', 'http://127.0.0.1:8080')); await espera(1500); await B.click('#aceptar-si'); await espera(5000);
+  await B.goto(dn.url.replace('https://guardianagroup.com', 'http://127.0.0.1:8080')); await espera(1500); if (await B.$('#aceptar-si:visible')) await B.click('#aceptar-si'); await espera(5000);
   ea = await estado(A); const eb = await estado(B);
   comprueba(!ea.blindada && !ea.discreta && !eb.blindada && !eb.discreta, 'normal: sin marco ni velo en los dos', [ea, eb]);
   for (const [p, t] of [[A, 'Hola'], [B, '¿Qué tal?']]) { await p.tap('#texto'); await p.fill('#texto', t); await p.click('#enviar'); await espera(700); }
@@ -79,7 +79,7 @@ async function videollamada(A, B) {
   await C.goto(URL0); await espera(1500);
   const db = await invita(C, true);
   comprueba(/#b=[A-Za-z0-9_-]{43}$/.test(db.url) && db.text === 'Invitación a un chat blindado de GUARDIANA', 'blindado: el enlace «#b=» y «Invitación a un chat blindado de GUARDIANA»', [db.text]);
-  await D.goto(db.url.replace('https://guardianagroup.com', 'http://127.0.0.1:8080')); await espera(1500); await D.click('#aceptar-si'); await espera(6000);
+  await D.goto(db.url.replace('https://guardianagroup.com', 'http://127.0.0.1:8080')); await espera(1500); if (await D.$('#aceptar-si:visible')) await D.click('#aceptar-si'); await espera(6000);
   const ec = await estado(C), ed = await estado(D);
   comprueba(ec.nombre === 'Chat blindado' && ec.blindada && ec.discreta && ec.velado && ed.blindada && ed.discreta, 'blindado: «Chat blindado», marco de espejo y velo en los dos', [ec, ed]);
   await C.tap('#texto'); await C.fill('#texto', 'Secreto'); await espera(200);
@@ -111,7 +111,7 @@ async function videollamada(A, B) {
   const E = await equipo(browser, PC), F = await equipo(browser);
   await F.goto(URL0); await espera(1500);
   const de = await invita(F, true);
-  await E.goto(de.url.replace('https://guardianagroup.com', 'http://127.0.0.1:8080')); await espera(1500); await E.click('#aceptar-si'); await espera(6000);
+  await E.goto(de.url.replace('https://guardianagroup.com', 'http://127.0.0.1:8080')); await espera(1500); if (await E.$('#aceptar-si:visible')) await E.click('#aceptar-si'); await espera(6000);
   await E.keyboard.press('PrintScreen'); await espera(200);
   comprueba(await visible(E, '#captura-velo'), 'ordenador: con la tecla de captura, «Modo blindado · No se puede capturar»');
   await E.screenshot({ path: path.join(OUT, '7-pc-captura.png') });

@@ -26,7 +26,7 @@ const caja = (p, s) => p.evaluate((s) => { const e = document.querySelector(s); 
   await A.goto(URL0); await espera(1500);
   await A.click('#nueva-blindada'); if (await A.$('#h-invitar.gc-abierta')) await A.click('#invitar-otra'); await espera(900);
   const url = String((await A.evaluate(() => window.__compartidos[0])).url);
-  await B.goto(url); await espera(1500); await B.click('#aceptar-si'); await espera(5000);
+  await B.goto(url); await espera(1500); if (await B.$('#aceptar-si:visible')) await B.click('#aceptar-si'); await espera(5000);
   // el teclado: la página se queda con la mitad de alto (como en revision2.js)
   await A.tap('#texto'); await A.setViewportSize({ width: 393, height: 793 - 336 }); await espera(700);
   const mic = await caja(A, '#grabar');

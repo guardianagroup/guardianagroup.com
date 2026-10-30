@@ -51,7 +51,7 @@ const visible = (p, sel) => p.evaluate((s) => { const e = document.querySelector
   const enlace = String(datos.url).replace('https://guardianagroup.com', 'http://127.0.0.1:8080');
   comprueba(/#[ib]=/.test(enlace), 'se compartió el enlace');
   await B.goto(enlace); await espera(1500); await foto(B, '04-aceptar');
-  await B.click('#aceptar-si'); await espera(5000);
+  if (await B.$('#aceptar-si:visible')) await B.click('#aceptar-si'); await espera(5000);
   comprueba(await A.evaluate(() => !document.querySelector('#conv').hidden), 'el chat se abrió solo al entrar la otra persona');
   for (const [p, t] of [[A, 'Hola, ¿qué tal?'], [B, 'Muy bien, ¿y tú?'], [A, 'Te mando el contrato ahora'], [B, 'Perfecto, gracias']]) { await p.tap('#texto'); await p.fill('#texto', t); await p.click('#enviar'); await espera(600); }
   await A.evaluate(() => document.activeElement && document.activeElement.blur()); await espera(500);

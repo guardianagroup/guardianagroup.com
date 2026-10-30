@@ -42,8 +42,12 @@ async function guarda(p, nombre) {
   const enlace = await conecta(A, B);
   comprueba(!(await A.$('#enlace-whatsapp')) && !(await A.$('#enlace-copiar-2')), 'invitación: sin botones de más');
   await foto(A, '01-A-invitacion');
-  await B.goto(enlace); await espera(1500); await B.click('#aceptar-si'); await espera(5000);
-  comprueba(await visible(B, '#conv') && await visible(A, '#conv'), 'abriendo el enlace y aceptando, los dos dentro del chat');
+  await B.goto(enlace); await espera(1500);
+  // (dueño, 29 Oct 2026, 20:02–20:14: «se invita únicamente al chat»): en la app del móvil, el enlace abre el chat sin «¿Aceptas?»
+  comprueba(!(await visible(B, '#aceptar-si')), 'en la app del móvil, el enlace abre el chat directamente, sin «¿Aceptas?»');
+  if (await visible(B, '#aceptar-si')) await B.click('#aceptar-si');
+  await espera(5000);
+  comprueba(await visible(B, '#conv') && await visible(A, '#conv'), 'abriendo el enlace, los dos dentro del chat');
   comprueba(!(await B.evaluate(() => document.body.classList.contains('modo-invitado'))), 'en la app nadie queda como invitado');
   await foto(A, '02-A-chat');
   await guarda(A, 'Mi mujer'); await guarda(B, 'Mi marido');

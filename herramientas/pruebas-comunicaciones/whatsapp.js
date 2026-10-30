@@ -76,7 +76,7 @@ const vuelve = (P) => P.evaluate(() => { Object.defineProperty(document, 'visibi
   // 3. la otra persona abre el enlace que le llegó por WhatsApp: el chat se abre en los dos
   const B = await telefono(browser, IPHONE);
   await B.goto(texto.split('\n')[1].replace('https://guardianagroup.com', 'http://127.0.0.1:8080')); await espera(1500);
-  await B.click('#aceptar-si'); await espera(5000);
+  if (await B.$('#aceptar-si:visible')) await B.click('#aceptar-si'); await espera(5000);
   const chatA = await visible(A, '#texto'), chatB = await visible(B, '#texto');
   comprueba(chatA && chatB, 'con el enlace de WhatsApp, el chat se abre en los dos', [chatA, chatB]);
   await A.screenshot({ path: path.join(OUT, '3-chat.png') });

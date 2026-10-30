@@ -93,7 +93,7 @@ function analiza(marcos, nombre) {
   await A.click('#nueva-blindada'); await espera(400);
   await A.click('#invitar-otra'); await espera(1200);
   const url = String((await A.evaluate(() => window.__compartidos[window.__compartidos.length - 1])).url).replace('https://guardianagroup.com', 'http://127.0.0.1:8080');
-  await B.goto(url); await espera(1500); await B.click('#aceptar-si'); await espera(5000);
+  await B.goto(url); await espera(1500); if (await B.$('#aceptar-si:visible')) await B.click('#aceptar-si'); await espera(5000);
   await A.tap('#texto'); await A.fill('#texto', 'Hola'); await A.click('#enviar'); await espera(800);
   await A.evaluate(() => document.activeElement && document.activeElement.blur()); await espera(600);
   comprueba(await A.evaluate(() => { const p = document.querySelector('#cpunto'); return !!p && !p.hidden && p.classList.contains('en'); }), 'antes: los dos en el chat, puntito verde');
