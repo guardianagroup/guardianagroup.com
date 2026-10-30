@@ -39,7 +39,7 @@
 <link rel="canonical" href="https://guardianagroup.com/orbita/comunicaciones/">
 <link rel="icon" href="/favicon.ico">
 <link rel="stylesheet" href="componentes.css?v=20261028m">
-<link rel="stylesheet" href="app.css?v=20261031k">
+<link rel="stylesheet" href="app.css?v=20261031m">
 <link rel="stylesheet" href="viaje.css?v=20261029b">
 <!-- antes de pintar: como app desde el primer fotograma y, al volver a un chat tras recargar, sin enseñar el inicio entretanto -->
 </head>
@@ -188,13 +188,13 @@
          como el del teléfono. Si el número es de un contacto, le llama; si no, lo añade y espera a que la otra persona añada el tuyo -->
     <section class="contactos marcar" id="marcar" aria-labelledby="marcar-t" hidden>
       <div class="contactos-cab"><button type="button" class="contactos-atras" id="marcar-atras" aria-label="Volver"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button><h2 class="contactos-t" id="marcar-t">Llamar</h2></div>
-      <input class="marcar-n" id="marcar-n" translate="no" inputmode="none" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Mantén pulsado aquí para pegar" aria-label="Número GUARDIANA de la otra persona">
+      <input class="marcar-n" id="marcar-n" translate="no" inputmode="none" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" aria-label="Número GUARDIANA de la otra persona">
       <small class="marcar-ayuda" id="marcar-ayuda">Escribe o pega el Número GUARDIANA de la otra persona.</small>
       <div class="teclado" id="teclado" role="group" aria-label="Teclado">
         <button type="button" data-d="1">1</button><button type="button" data-d="2">2</button><button type="button" data-d="3">3</button>
         <button type="button" data-d="4">4</button><button type="button" data-d="5">5</button><button type="button" data-d="6">6</button>
         <button type="button" data-d="7">7</button><button type="button" data-d="8">8</button><button type="button" data-d="9">9</button>
-        <button type="button" class="tecla-sec" id="marcar-pegar">Pegar</button><button type="button" data-d="0">0</button><button type="button" class="tecla-sec" id="marcar-borra" aria-label="Borrar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5h11a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H9l-6-7z"/><path d="M12 9l6 6M18 9l-6 6"/></svg></button>
+        <span class="tecla-vacia" aria-hidden="true"></span><button type="button" data-d="0">0</button><button type="button" class="tecla-sec" id="marcar-borra" aria-label="Borrar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5h11a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H9l-6-7z"/><path d="M12 9l6 6M18 9l-6 6"/></svg></button>
       </div>
       <button type="button" class="boton principal marcar-llamar" id="marcar-llamar" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg><span>Llamar</span></button>
     </section>
@@ -741,23 +741,6 @@
 </div>
 <!-- Guía de instalación con capturas (dueño, 29 Oct 2026, 23:04–23:05: «cada palabra… con un circulito rojo… para la persona que
      tenga problemas»): las tres pantallas del iPhone con el toque marcado; Android, cuando lleguen sus capturas -->
-<!-- Compartir el número (dueño, 29 Oct 2026, 23:13): desde la hoja de compartir del iPhone, WhatsApp guarda el mensaje y no lo
-     envía hasta que se abre WhatsApp. «WhatsApp» abre la propia app con el texto escrito: se elige a la persona y se envía allí.
-     Por correo sale al momento sin salir de GUARDIANA (dueño, 23:20: «creo que es una buena idea»): va primero -->
-<div class="gc-hoja" id="h-compartir" role="dialog" aria-modal="true" aria-labelledby="h-compartir-t">
-  <div class="gc-hoja-caja caja">
-    <div class="gc-asa"></div>
-    <h2 class="gc-hoja-titulo" id="h-compartir-t">Compartir mi número</h2>
-    <p class="t">Lo más seguro es dárselo en persona o de viva voz; por escrito también vale.</p>
-    <div class="compartir-opciones">
-      <button type="button" class="boton principal" id="comp-otras"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 6.5l8.5 6.5 8.5-6.5"/></svg><span>Correo, Mensajes y más</span></button>
-      <button type="button" class="boton" id="comp-whatsapp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l1.3-3.9A8 8 0 1 1 8 19z"/><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5l1.2-1.4-2-1-.9.8a4 4 0 0 1-2.2-2.2l.8-.9-1-2z"/></svg><span>WhatsApp</span></button>
-      <button type="button" class="boton" id="comp-copiar">Copiar</button>
-    </div>
-    <p class="t sutil">Por correo o Mensajes sale al momento y sigues en GUARDIANA. Con WhatsApp se abre la propia app con el mensaje escrito: eliges a la persona y tocas enviar.</p>
-    <div class="fila"><button type="button" class="boton" id="comp-cerrar">Cancelar</button></div>
-  </div>
-</div>
 <div class="gc-hoja" id="h-guia" role="dialog" aria-modal="true" aria-labelledby="h-guia-t">
   <div class="gc-hoja-caja caja guia-caja">
     <div class="gc-asa"></div>
@@ -1048,7 +1031,7 @@
 
 <!-- En el ordenador, en el chat blindado: la pantalla se tapa con la tecla de captura o si la ventana pierde el foco (29 Oct 2026, 08:02) -->
 <div class="captura-velo" id="captura-velo" role="alert" hidden><div><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><b>Modo blindado</b><span>No se puede capturar</span></div></div>
-<script src="/orbita/static/idioma.js?v=20261029p91"></script>
+<script src="/orbita/static/idioma.js?v=20261029p92"></script>
 <script src="pq-mlkem.js?v=20261027a"></script>
 <script src="pq-cnsa.js?v=20261027a"></script>
 <script src="qrhaz.js?v=20261027a"></script>
@@ -1058,7 +1041,7 @@
 <script src="sha256.js?v=20261027a"></script>
 <script src="viaje-datos.js?v=20261027a"></script>
 <script src="viaje.js?v=20261029b"></script>
-<script src="llamada.js?v=20261031e"></script>
-<script src="app.js?v=20261031i"></script>
+<script src="llamada.js?v=20261031f"></script>
+<script src="app.js?v=20261031k"></script>
 </body>
 </html>

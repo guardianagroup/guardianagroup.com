@@ -1931,6 +1931,7 @@
     "Correo, Mensajes y más": ["Email, Messages and more", "E-mail, Mensagens e mais"],
     "Por correo o Mensajes sale al momento y sigues en GUARDIANA. Con WhatsApp se abre la propia app con el mensaje escrito: eliges a la persona y tocas enviar.": ["By email or Messages it goes out at once and you stay in GUARDIANA. With WhatsApp, the app opens with the message already written: choose the person and tap send.", "Por e-mail ou Mensagens sai logo e continua no GUARDIANA. Com o WhatsApp abre-se a própria app com a mensagem escrita: escolha a pessoa e toque em enviar."],
     "Mi Número GUARDIANA": ["My GUARDIANA Number", "O meu Número GUARDIANA"],
+    "No se ha enviado.": ["Not sent.", "Não foi enviada."],
     "Guía de instalación con capturas": ["Installation guide with screenshots", "Guia de instalação com capturas"],
     "Paso a paso con capturas, para iPhone y Android.": ["Step by step with screenshots, for iPhone and Android.", "Passo a passo com capturas, para iPhone e Android."],
     "La tienes en el menú Inicio y anclada en la barra de tareas. Para ponerla en el escritorio: abre Inicio, escribe GUARDIANA y arrastra el resultado al escritorio.": ["It is in the Start menu and pinned to the taskbar. To put it on the desktop: open Start, type GUARDIANA and drag the result onto the desktop.", "Está no menu Iniciar e fixada na barra de tarefas. Para colocá-la na área de trabalho: abra Iniciar, digite GUARDIANA e arraste o resultado para a área de trabalho."],

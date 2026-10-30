@@ -23,6 +23,8 @@ const hasta = async (p, fn, ms) => { const t0 = Date.now(); while (Date.now() - 
 async function equipo(browser, nombre, ua) {
   const movil = ua !== PC;
   const ctx = await browser.newContext({ viewport: movil ? { width: 393, height: 793 } : { width: 1100, height: 760 }, deviceScaleFactor: movil ? 2 : 1, isMobile: movil, hasTouch: movil, userAgent: ua, locale: 'es-ES', permissions: ['microphone'] });
+  // el Número GUARDIANA, apagado en esta prueba (invitaciones; 29 Oct 2026, 23:07: en el móvil sin la app, el inicio es «Añadir a la pantalla de inicio»)
+  await ctx.addInitScript(() => { try { sessionStorage.setItem('gcom-sin-numero', '1'); } catch (_) {} });
   await ctx.addInitScript(() => { try { Object.defineProperty(navigator, 'standalone', { get: () => true }); } catch (_) {} });
   const p = await ctx.newPage();
   p.on('pageerror', (e) => { console.log('[' + nombre + '] pageerror: ' + String(e.stack || e).split('\n').slice(0, 3).join(' | ').slice(0, 300)); fallos.push('pageerror ' + nombre); });

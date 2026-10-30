@@ -16,6 +16,8 @@ const comprueba = (ok, txt, extra) => { console.log((ok ? 'OK   ' : 'FALLO') + '
 async function equipo(browser, ua) {
   const pc = ua === PC;
   const ctx = await browser.newContext({ viewport: pc ? { width: 1280, height: 800 } : { width: 393, height: 793 }, deviceScaleFactor: 2, isMobile: !pc, hasTouch: !pc, userAgent: ua || UA, locale: 'es-CO', permissions: ['microphone', 'camera'] });
+  // el Número GUARDIANA, apagado en esta prueba (invitaciones; 29 Oct 2026, 23:07: en el móvil sin la app, el inicio es «Añadir a la pantalla de inicio»)
+  await ctx.addInitScript(() => { try { sessionStorage.setItem('gcom-sin-numero', '1'); } catch (_) {} });
   await ctx.addInitScript(() => { window.__compartidos = []; navigator.share = (d) => { window.__compartidos.push(d); return new Promise((r) => setTimeout(r, 300)); }; try { Object.defineProperty(navigator, 'standalone', { get: () => true }); } catch (_) {} });
   const p = await ctx.newPage(); p.on('pageerror', (e) => { console.log('pageerror', String(e).slice(0, 200)); fallos.push('pageerror'); });
   return p;

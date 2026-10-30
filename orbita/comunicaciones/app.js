@@ -810,6 +810,8 @@
   function pintaInsignia() {
     try {
       const n = sinLeer();
+      // y en el inicio de la app, «Mis chats» con el número (dueño, 29 Oct 2026, 23:41: «si es una, dos, tres, que aparezca con el número»)
+      { const b = $('#ver-contactos'); if (b) { let i = b.querySelector('.mis-n'); if (!i) { i = document.createElement('i'); i.className = 'mis-n'; b.append(i); } i.textContent = n > 99 ? '99+' : String(n); i.hidden = !n; b.setAttribute('aria-label', n ? T('Mis chats') + ' · ' + (n === 1 ? T('Mensaje nuevo') : T('{n} mensajes nuevos').replace('{n}', n)) : T('Mis chats')); } }
       if (navigator.setAppBadge) { if (n) navigator.setAppBadge(n).catch(() => {}); else if (navigator.clearAppBadge) navigator.clearAppBadge().catch(() => {}); }
     } catch (_) {}
   }
@@ -1853,6 +1855,9 @@
     if (!LL) return;
     if (LL.ocupado) { aviso(T('Ya tienes una llamada en curso.')); return; }
     abreConv(c.id);
+    // si no está conectada, igual que el botón del chat: se le avisa en su teléfono y la llamada empieza en cuanto abra GUARDIANA
+    // (dueño, 29 Oct 2026, 23:22: «he probado de llamarme con mi mujer y no llama»; desde «Llamar» solo salía un aviso)
+    if (!enLinea(c) && c.huella && R && R.abierto) { despiertaLlamada(c, video); return; }
     if (!enLinea(c) || !(c.sesion && c.sesion.confirmada)) { aviso(T('{n} no tiene GUARDIANA abierta ahora: cuando la abra, podréis hablar.').replace('{n}', nombreConv(c, true))); return; }
     LLAMADA_CONV = c.id; LL.llamar(video);
   }
@@ -1999,9 +2004,13 @@
   }
   async function quitaCita(p) { CITAS = CITAS.filter((x) => x.T !== p.T); await guardaCitas(); if (R && R.abierto) R.citaFin(p.T, true); pintaContactos(); }
   const textoNumero = () => T('Mi Número GUARDIANA:') + '\n' + bonito(MI_NUM.n) + '\n\n' + T('Cópialo y pégalo en GUARDIANA, en «Llamar». Si aún no la tienes: {u}').replace('{u}', 'https://guardianagroup.com/');
-  // «Compartir mi número» abre una hoja: WhatsApp (la propia app, con el texto escrito), otras apps (la hoja del sistema) o copiar.
-  // Desde la hoja del sistema, WhatsApp en el iPhone deja el mensaje en cola hasta que se abre WhatsApp (dueño, 29 Oct 2026, 23:13)
-  function compartirNumero() { if (!MI_NUM) return; abreHoja('h-compartir'); }
+  // «Compartir mi número»: directamente la hoja de compartir del teléfono (correo, Mensajes, WhatsApp…), sin pantallas por medio
+  // (dueño, 29 Oct 2026, 23:33: «cuando la persona le dé a compartir, ya aparezca por defecto la pantalla del iPhone»)
+  async function compartirNumero() {
+    if (!MI_NUM) return;
+    if (navigator.share) { try { await navigator.share({ title: T('Mi Número GUARDIANA'), text: textoNumero() }); return; } catch (e) { if (e && e.name === 'AbortError') return; } }
+    copiaNumero();
+  }
   async function copiaNumero() { const txt = textoNumero(); try { await navigator.clipboard.writeText(txt); aviso(T('Copiado: pégalo donde quieras enviarlo.')); } catch (_) { aviso(bonito(MI_NUM.n)); } }
   // ---------- pantalla del número ----------
   function pintaNumero() {
@@ -2094,29 +2103,13 @@
     });
     $('#mi-numero-n').addEventListener('click', async () => { if (!MI_NUM) return; try { await navigator.clipboard.writeText(MI_NUM.n); aviso(T('Número copiado.')); } catch (_) { aviso(bonito(MI_NUM.n)); } });
     $('#num-compartir').addEventListener('click', compartirNumero);
-    { const h = $('#h-compartir');
-      if (h) {
-        $('#comp-whatsapp').addEventListener('click', () => { if (!MI_NUM) return; cierraHoja('h-compartir');
-          // el esquema whatsapp:// pasa el texto de app a app, en el propio teléfono: no sale a ningún servidor por el camino
-          const a = document.createElement('a'); a.href = 'whatsapp://send?text=' + encodeURIComponent(textoNumero()); a.rel = 'noopener'; document.body.appendChild(a); a.click(); a.remove(); });
-        $('#comp-otras').addEventListener('click', async () => { if (!MI_NUM) return; cierraHoja('h-compartir');
-          if (navigator.share) { try { await navigator.share({ title: T('Mi Número GUARDIANA'), text: textoNumero() }); return; } catch (e) { if (e && e.name === 'AbortError') return; } }
-          copiaNumero(); });
-        $('#comp-copiar').addEventListener('click', () => { if (!MI_NUM) return; cierraHoja('h-compartir'); copiaNumero(); });
-        $('#comp-cerrar').addEventListener('click', () => cierraHoja('h-compartir'));
-      }
-    }
     $('#llamar-num').addEventListener('click', () => { pintaMarcar(true); const i = $('#inicio'); if (i) i.scrollTop = 0; });
     $('#marcar-atras').addEventListener('click', () => pintaMarcar(false));
     $('#teclado').addEventListener('click', (e) => { const b = e.target.closest('button[data-d]'); if (!b || NUM_MARCADO.length >= 12) return; NUM_MARCADO += b.dataset.d; pintaMarcar(); });
     $('#marcar-borra').addEventListener('click', () => { NUM_MARCADO = NUM_MARCADO.slice(0, -1); pintaMarcar(); });
-    // Pegar (dueño, 29 Oct 2026, 23:16: «se tiene que poder pegar… simplifícalo»): la tecla «Pegar» o mantener pulsada la barra del
-    // número. Vale el mensaje entero de WhatsApp: se saca el número. Si está bien, se pasa directo a «¿Cómo se llama?».
-    $('#marcar-pegar').addEventListener('click', async () => {
-      let t = ''; try { t = await navigator.clipboard.readText(); } catch (_) { t = ''; }
-      if (!t) { aviso(T('Mantén pulsada la barra del número y elige «Pegar».')); try { $('#marcar-n').focus(); } catch (_) {} return; }
-      pegaEnMarcar(t);
-    });
+    // Pegar (dueño, 29 Oct 2026, 23:16: «se tiene que poder pegar… simplifícalo»): manteniendo pulsada la barra del número (23:30:
+    // fuera la tecla «Pegar» y la frase de dentro de la barra). Vale el mensaje entero de WhatsApp o del correo: se saca el número
+    // y, si está bien, se pasa directo a «¿Cómo se llama?».
     { const c = $('#marcar-n');
       c.addEventListener('paste', (e) => { e.preventDefault(); let t = ''; try { t = (e.clipboardData || window.clipboardData).getData('text'); } catch (_) {} pegaEnMarcar(t); });
       // con un teclado físico (ordenador, tableta): cifras y borrar; lo demás no entra
@@ -2369,9 +2362,11 @@
     s.textContent = tamano(m.archivo.tam) + (m.estado === 'fallo' ? ' · ' + (m.archivo.motivo || T('no se completó')) : pr < 1 && (m.estado === 'recibiendo' || m.estado === 'enviado') ? ' · ' + Math.round(pr * 100) + ' %' : m.estado === 'pendiente' ? ' · ' + T('pendiente') : m.archivo.enDisco ? ' · ' + T('guardado en tu disco') : '');
     // la nota de voz es solo su reproductor (dueño, 29 Oct 2026, 12:03): sin nombre de archivo, tamaño ni botones de archivo
     if (!m.archivo.voz && /^audio\//.test(m.archivo.mime || '') && /^(Nota de voz|nota-de-voz|Voice note|Голосов|Hlasov)/i.test(m.archivo.nombre || '')) m.archivo.voz = 1;
-    if (m.archivo.voz && (m.estado === 'recibido' || m.estado === 'entregado' || m.estado === 'leido' || m.estado === 'enviado' || m.estado === 'descartado')) { b.hidden = true; s.hidden = true; ic.hidden = true; }
+    // también mientras sale o espera («pendiente»): solo el reproductor (dueño, 29 Oct 2026, 23:39: «ahí quiero que solamente se vea el
+    // audio»); el reloj junto a la hora ya dice que aún no ha llegado. Si falla, se ve el motivo
+    if (m.archivo.voz) { b.hidden = true; ic.hidden = true; if (m.estado === 'fallo') s.textContent = T('No se ha enviado.'); else s.hidden = true; }
     d.append(ic, b, s);
-    const enCurso = m.estado !== 'fallo' && pr < 1 && m.estado !== 'pendiente';
+    const enCurso = m.estado !== 'fallo' && pr < 1 && m.estado !== 'pendiente' && !m.archivo.voz;
     if (enCurso) { const p = document.createElement('span'); p.className = 'gc-progreso'; const i = document.createElement('i'); i.style.width = Math.round(pr * 100) + '%'; p.append(i); d.append(p); }
     const recibido = m.dir === 'suya' && (m.estado === 'recibido' || m.estado === 'leido'); // (29 Oct 2026, 15:24: al leerla, la nota de voz recibida salía como archivo)
     const conVida = !!m.archivo.vida, temporalVivo = conVida && recibido && !m.archivo.caducado;
@@ -2408,7 +2403,7 @@
     const d = document.createElement('div'); d.className = 'gc-voz'; d.style.gridColumn = '1 / -1';
     const au = document.createElement('audio'); au.preload = 'auto'; au.src = URL.createObjectURL(blob); au.setAttribute('aria-hidden', 'true'); try { au.load(); } catch (_) {} // cargada desde el principio: en el iPhone, el primer toque ya suena (dueño, 29 Oct 2026, 12:41 y 12:51)
     const b = document.createElement('button'); b.type = 'button'; b.className = 'gc-voz-play'; b.setAttribute('aria-label', T('Reproducir'));
-    const PLAY = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg>', PAUSA = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.5 5.5h3.5v13H7.5zM13 5.5h3.5v13H13z"/></svg>';
+    const PLAY = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg>', PAUSA = '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6.5" y="5" width="3.6" height="14" rx="1.2"/><rect x="13.9" y="5" width="3.6" height="14" rx="1.2"/></svg>'; // dos barras verticales bien separadas (dueño, 29 Oct 2026, 23:43: «aparece un cuadrado»)
     b.innerHTML = PLAY;
     const barra = document.createElement('div'); barra.className = 'gc-voz-barra'; barra.setAttribute('role', 'slider'); barra.setAttribute('aria-label', T('Posición')); barra.tabIndex = 0;
     const prog = document.createElement('i'); prog.className = 'gc-voz-prog'; const punto = document.createElement('b'); punto.className = 'gc-voz-punto'; barra.append(prog, punto);
@@ -2420,6 +2415,7 @@
     // recalcular la página en cada fotograma)
     let pos = 0, leida = 0, leidaEn = 0, ultimoTxt = '';
     const posicion = (ahora) => {
+      if (!au.getAttribute('src')) return pos; // suelta (ver «soltar» abajo): se queda donde iba
       const ct = au.currentTime;
       if (ct !== leida) { leida = ct; leidaEn = ahora; pos = Math.abs(ct - pos) > 0.35 ? ct : pos + (ct - pos) * 0.5; }
       else if (!au.paused && !au.ended) pos = Math.max(pos, leida + (ahora - leidaEn) / 1000 * (au.playbackRate || 1));
@@ -2453,11 +2449,17 @@
     au.addEventListener('loadedmetadata', () => { if (au.duration === Infinity && au.paused) { ajustando = true; try { au.currentTime = 1e101; } catch (_) { ajustando = false; } } pinta(); });
     au.addEventListener('durationchange', () => { if (ajustando && Number.isFinite(au.duration)) { ajustando = false; try { au.currentTime = 0; } catch (_) {} } pinta(); });
     au.addEventListener('play', () => { if (vozSonando && vozSonando !== au) { try { vozSonando.pause(); } catch (_) {} } vozSonando = au; sesionMedios(); b.innerHTML = PAUSA; b.setAttribute('aria-label', T('Pausa')); d.classList.add('sonando'); cancelAnimationFrame(raf); raf = requestAnimationFrame(bucle); });
-    au.addEventListener('pause', para); au.addEventListener('ended', termina);
+    // Soltar la nota parada (dueño, 29 Oct 2026, 23:31: «una notificación rara… como un audio de 4 segundos, está mal»): en el iPhone,
+    // lo último que sonó se queda en la pantalla bloqueada con ▶ y ±10 s. Parada más de un segundo, la nota se suelta (sin fuente,
+    // así no queda nada que enseñar) y, al tocar ▶, se vuelve a poner y sigue donde iba.
+    const urlNota = au.src; let sueltaT = null, volverA = 0;
+    const suelta = () => { clearTimeout(sueltaT); sueltaT = setTimeout(() => { if (!au.paused || !au.getAttribute('src')) return; volverA = au.currentTime || 0; dur = total() || dur; pos = leida = volverA; try { au.removeAttribute('src'); au.load(); } catch (_) {} }, 1200); };
+    const recoge = () => { clearTimeout(sueltaT); if (au.getAttribute('src')) return; au.src = urlNota; const v = volverA; if (v > 0) au.addEventListener('loadedmetadata', () => { try { au.currentTime = v; } catch (_) {} }, { once: true }); };
+    au.addEventListener('pause', () => { para(); suelta(); }); au.addEventListener('ended', () => { termina(); suelta(); });
     au.addEventListener('error', () => { t.textContent = T('No se puede reproducir'); b.disabled = true; });
-    b.addEventListener('click', () => { if (au.paused) { const p = au.play(); if (p && p.catch) p.catch(() => {}); } else au.pause(); }); // sin tocar la sesión de audio del iPhone al reproducir: cambiarla justo antes de play() dejaba el primer toque sin sonido
+    b.addEventListener('click', () => { if (au.paused) { recoge(); const p = au.play(); if (p && p.catch) p.catch(() => {}); } else au.pause(); }); // sin tocar la sesión de audio del iPhone al reproducir: cambiarla justo antes de play() dejaba el primer toque sin sonido
     // tocar o arrastrar en la barra: saltar a ese punto
-    const salta = (e) => { const r = barra.getBoundingClientRect(); const f = Math.max(0, Math.min(1, (e.clientX - r.left) / r.width)); const tot = total(); if (tot) { try { au.currentTime = f * tot; } catch (_) {} pos = leida = f * tot; leidaEn = performance.now(); } pinta(); };
+    const salta = (e) => { const r = barra.getBoundingClientRect(); const f = Math.max(0, Math.min(1, (e.clientX - r.left) / r.width)); const tot = total(); if (tot) { if (au.getAttribute('src')) { try { au.currentTime = f * tot; } catch (_) {} } else volverA = f * tot; pos = leida = f * tot; leidaEn = performance.now(); } pinta(); };
     let arrastra = false;
     barra.addEventListener('pointerdown', (e) => { arrastra = true; try { barra.setPointerCapture(e.pointerId); } catch (_) {} salta(e); e.preventDefault(); });
     barra.addEventListener('pointermove', (e) => { if (arrastra) salta(e); });
@@ -2668,6 +2670,10 @@
   let sueltaAudioT = null;
   function avisaSonido() {
     if (document.visibilityState !== 'visible') return;
+    // en plena llamada, sin «toc»: en el iPhone, el último sonido que empieza decide por dónde suena toda la página y el «toc» pedía
+    // el altavoz, así que un mensaje durante la llamada la pasaba al altavoz (dueño, 29 Oct 2026, 23:25: «momentos que me iba en
+    // altavoz, momentos sin altavoz»). El mensaje se ve igual en el chat.
+    if (LL && LL.ocupado) return;
     if (!pref('sonido')) return; // Ajustes › Sonido (dueño, 29 Oct 2026, 16:02)
     try {
       ctxAudio = ctxAudio || new (window.AudioContext || window.webkitAudioContext)();
@@ -2945,11 +2951,14 @@
     av.setAttribute('aria-checked', String(on));
     av.classList.toggle('mal', !!(puede && perm === 'denied'));
     const est = $('#aj-avisos-est');
-    if (est) est.textContent = !puede
+    const tOn = T('Activadas: te avisamos de mensajes y llamadas aunque GUARDIANA esté cerrada.'), tOff = T('Desactivadas: solo te enterarás con GUARDIANA abierta.');
+    const texto = !puede
       ? (/iPhone|iPad|iPod/.test(navigator.userAgent || '') && !comoApp() ? T('En el iPhone hay que añadir GUARDIANA a la pantalla de inicio: desde Safari no se puede avisar.') : T('Este navegador no admite avisos con la app cerrada.'))
       : perm === 'denied' ? T('El teléfono los tiene bloqueados: Ajustes › Notificaciones › GUARDIANA.')
-      : on ? T('Activadas: te avisamos de mensajes y llamadas aunque GUARDIANA esté cerrada.')
-      : T('Desactivadas: solo te enterarás con GUARDIANA abierta.');
+      : on ? tOn : tOff;
+    // la fila no cambia de tamaño al activar y desactivar (dueño, 29 Oct 2026, 23:37): los dos textos, invisibles, en la misma
+    // casilla que el que se ve; la fila mide siempre lo del más largo, en cualquier idioma y ancho de pantalla
+    if (est) { est.textContent = ''; const v = document.createElement('span'); v.textContent = texto; est.append(v); for (const x of [tOn, tOff]) { const m = document.createElement('span'); m.className = 'medida'; m.setAttribute('aria-hidden', 'true'); m.textContent = x; est.append(m); } }
     const so = $('#aj-sonido'); if (so) so.setAttribute('aria-checked', String(pref('sonido')));
     const an = $('#aj-anadir'); if (an) an.hidden = comoApp();
     pintaAvisosMenu();
@@ -3190,9 +3199,12 @@
     { const b = $('#aj-sonido'); if (b) b.addEventListener('click', () => { try { localStorage.setItem('gcom-sonido', pref('sonido') ? '0' : '1'); } catch (_) {} pintaAjustes(); if (pref('sonido')) avisaSonido(); }); }
     { const b = $('#aj-anadir'); if (b) b.addEventListener('click', () => { cierraHoja('h-ajustes'); if (avisoInstalar) instala(); else abreGuia(); }); }
     // la guía de instalación con capturas (dueño, 29 Oct 2026, 23:04): desde Ajustes, «¿Cómo funciona?», la hoja de añadir y la pantalla de descarga
-    { const abreGuiaCapturas = (pestana) => { for (const h of document.querySelectorAll('.gc-hoja.gc-abierta')) cierraHoja(h.id); const and = pestana ? pestana === 'android' : androidUA; $('#guia-tab-iphone').classList.toggle('activa', !and); $('#guia-tab-android').classList.toggle('activa', and); $('#guia-tab-iphone').setAttribute('aria-selected', String(!and)); $('#guia-tab-android').setAttribute('aria-selected', String(and)); $('#guia-iphone').hidden = and; $('#guia-android').hidden = !and; abreHoja('h-guia'); const c = $('#h-guia .gc-hoja-caja'); if (c) c.scrollTop = 0; };
+    // las pestañas solo cambian lo que se ve, sin cerrar la guía (dueño, 29 Oct 2026, 23:37: «cuando toco Android, la pantalla se
+    // desaparece y vuelve atrás»: antes, cada pestaña cerraba todas las hojas, también la propia guía, y la volvía a abrir)
+    { const pestanaGuia = (and) => { $('#guia-tab-iphone').classList.toggle('activa', !and); $('#guia-tab-android').classList.toggle('activa', and); $('#guia-tab-iphone').setAttribute('aria-selected', String(!and)); $('#guia-tab-android').setAttribute('aria-selected', String(and)); $('#guia-iphone').hidden = and; $('#guia-android').hidden = !and; const c = $('#h-guia .gc-hoja-caja'); if (c) c.scrollTop = 0; };
+      const abreGuiaCapturas = (pestana) => { for (const h of document.querySelectorAll('.gc-hoja.gc-abierta')) if (h.id !== 'h-guia') cierraHoja(h.id); pestanaGuia(pestana ? pestana === 'android' : androidUA); abreHoja('h-guia'); };
       for (const id of ['aj-guia', 'como-guia', 'anadir-guia', 'desc-guia']) { const b = $('#' + id); if (b) b.addEventListener('click', () => abreGuiaCapturas()); }
-      $('#guia-tab-iphone').addEventListener('click', () => abreGuiaCapturas('iphone')); $('#guia-tab-android').addEventListener('click', () => abreGuiaCapturas('android'));
+      $('#guia-tab-iphone').addEventListener('click', (e) => { e.stopPropagation(); pestanaGuia(false); }); $('#guia-tab-android').addEventListener('click', (e) => { e.stopPropagation(); pestanaGuia(true); });
       $('#guia-ok').addEventListener('click', () => cierraHoja('h-guia')); }
     { const b = $('#aj-version'); if (b) b.addEventListener('click', async () => { const e = $('#aj-version-est'); if (e) e.textContent = T('Comprobando…'); const hay = await miraVersion(true); if (e) e.textContent = hay ? T('Hay una versión nueva: se instala ahora.') : T('Ya tienes la última versión.'); }); }
     // «Añadir a la pantalla de inicio»: en Android, la ventana del propio sistema; en el iPhone, los pasos (no deja hacerlo desde la web)

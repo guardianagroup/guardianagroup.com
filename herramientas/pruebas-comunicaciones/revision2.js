@@ -13,6 +13,8 @@ const fallos = [];
 const comprueba = (ok, txt) => { console.log((ok ? 'OK   ' : 'FALLO') + ' ' + txt); if (!ok) fallos.push(txt); };
 async function telefono(browser, app = true) {
   const ctx = await browser.newContext({ viewport: { width: 393, height: 793 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true, userAgent: UA, locale: 'es-CO', permissions: ['microphone', 'camera'] });
+  // el Número GUARDIANA, apagado en esta prueba (invitaciones; 29 Oct 2026, 23:07: en el móvil sin la app, el inicio es «Añadir a la pantalla de inicio»)
+  await ctx.addInitScript(() => { try { sessionStorage.setItem('gcom-sin-numero', '1'); } catch (_) {} });
   await ctx.addInitScript((app) => {
     if (app) { try { Object.defineProperty(navigator, 'standalone', { get: () => true }); } catch (_) {} }
     window.__compartidos = []; window.__cancelaCompartir = false;

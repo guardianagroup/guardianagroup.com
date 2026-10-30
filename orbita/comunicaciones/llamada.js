@@ -280,6 +280,11 @@
     function tono(tipo) {
       paraTono();
       tonoSuena = true;
+      // el tono de llamada (saliente), con el audio del navegador y no con un <audio>: en el iPhone, el <audio> de 4 s se quedaba en
+      // la pantalla bloqueada como «GUARDIANA 0:00 / −0:04» con ▶ y ±10 s (dueño, 29 Oct 2026, 23:31: «una notificación rara… como
+      // un audio de 4 segundos»), y además, al arrancar el último, se llevaba la llamada al altavoz. Con la llamada en marcha, la
+      // sesión de audio ya está en «play-and-record»: suena aunque el teléfono esté en silencio. Al parar, el contexto se duerme.
+      if (tipo === 'saliente') { tonoWeb(tipo); return; }
       let p = null;
       try { tonoEl.src = urlTono(tipo); tonoEl.muted = false; tonoEl.loop = true; p = tonoEl.play(); } catch (_) { p = Promise.reject(); }
       try { if (navigator.mediaSession && raiz.MediaMetadata) { navigator.mediaSession.metadata = new MediaMetadata({ title: tipo === 'saliente' ? t('Llamando…') : t('Llamada entrante'), artist: 'GUARDIANA' }); for (const a of ['play', 'pause', 'seekbackward', 'seekforward', 'seekto', 'previoustrack', 'nexttrack']) { try { navigator.mediaSession.setActionHandler(a, null); } catch (_) {} } } } catch (_) {}
@@ -512,11 +517,16 @@
       b.setAttribute('aria-pressed', String(!!altavoz));
       b.setAttribute('aria-label', altavoz ? t('Quitar el altavoz') : t('Poner el altavoz'));
     }
-    // se conectan o se quitan unos auriculares en plena llamada: se vuelve a mirar
+    // se conectan o se quitan unos auriculares en plena llamada: se vuelve a mirar. Al conectarlos ya no se vuelve a «la de siempre»
+    // (dueño, 29 Oct 2026, 23:25: «momentos que me iba en altavoz, momentos sin altavoz; ella ha puesto el auricular, lo ha quitado»):
+    // con el auricular elegido, el iPhone pasa solo a los auriculares y, al quitarlos, vuelve al auricular, como una llamada normal.
+    // Antes se ponía «la de siempre» (el altavoz) al conectarlos y, al quitarlos, la llamada se quedaba en altavoz: cambiar la salida
+    // exige un toque y en ese momento no lo hay. Ahora la salida elegida se queda y, al quitarlos, se lee de nuevo por dónde va.
     if (navigator.mediaDevices && navigator.mediaDevices.addEventListener) navigator.mediaDevices.addEventListener('devicechange', async () => {
       if (estado === 'libre' || estado === 'cerrando' || !mic) return;
       const habia = !!salidas; await buscaSalidas();
-      if (salidas) { preparaRuta(); aplicaSalida(); } else if (habia) restableceSalida();
+      if (salidas) { if (!habia) altavoz = suenaAltavoz(); preparaRuta(); aplicaSalida(); }
+      else if (habia) { pintaAltavoz(); quitaRuta(); }
     });
     // Micrófono → cambio de voz (AudioWorklet) → lo que se envía. Sin AudioWorklet, la voz va tal cual y se dice.
     // Cámara y micrófono en un solo permiso (en el iPhone, pedirlos por separado puede dejar mudo el primero); si la cámara

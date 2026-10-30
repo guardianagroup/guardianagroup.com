@@ -7,7 +7,7 @@
    Número GUARDIANA (29 Oct 2026): «contacto» llega al buzón de tu número cuando alguien a quien añadiste también te ha añadido;
    no dice quién: la app lo sabe al abrirse. */
 'use strict';
-const VERSION = 'gcom-sw-2026-10-29g';
+const VERSION = 'gcom-sw-2026-10-29h';
 self.addEventListener('install', () => { self.skipWaiting(); });
 self.addEventListener('activate', (e) => { e.waitUntil(self.clients.claim()); });
 
@@ -41,6 +41,9 @@ const TEXTOS = {
   vi: { mensaje: 'Tin nhắn mới', mensajeCuerpo: 'GUARDIANA · chạm để đọc (được mã hóa cho đến khi bạn mở ứng dụng).', llamada: 'Cuộc gọi đến', llamadaCuerpo: 'GUARDIANA · chạm để trả lời.' },
   hi: { mensaje: 'नया संदेश', mensajeCuerpo: 'GUARDIANA · पढ़ने के लिए टैप करें (ऐप खोलने तक एन्क्रिप्टेड)।', llamada: 'इनकमिंग कॉल', llamadaCuerpo: 'GUARDIANA · जवाब देने के लिए टैप करें।' },
 };
+// varios mensajes de la misma conversación: el aviso dice cuántos (dueño, 29 Oct 2026, 23:41: «si es una, dos, tres, que aparezca
+// con el número»); en los idiomas de la app y, en los demás, en inglés
+const MENSAJES = { es: '{n} mensajes nuevos', en: '{n} new messages', pt: '{n} mensagens novas', ru: 'Новых сообщений: {n}', cs: 'Nové zprávy: {n}' };
 // «contacto» (Número GUARDIANA): en los idiomas de la app; en los demás, en inglés
 const CONTACTO = {
   es: ['Nuevo contacto', 'GUARDIANA · alguien que añadiste también ha añadido tu número: toca para hablar.'],
@@ -81,11 +84,16 @@ self.addEventListener('push', (e) => {
     const aLaVista = cs.some((c) => c.visibilityState === 'visible');
     const op = {
       body: tipo === 'llamada' ? t.llamadaCuerpo : t.mensajeCuerpo, icon: '/icon-192.png?v=2', badge: '/icon-192.png?v=2',
-      tag: 'gcom-' + tipo + '-' + sala.slice(0, 16), renotify: tipo === 'llamada', requireInteraction: tipo === 'llamada',
+      tag: 'gcom-' + tipo + '-' + sala.slice(0, 16), renotify: true, requireInteraction: tipo === 'llamada',
       vibrate: tipo === 'llamada' ? [400, 200, 400, 200, 400] : [120], timestamp: Number(d.t) || Date.now(),
       data: { sala, tipo },
     };
-    await self.registration.showNotification(tipo === 'llamada' ? t.llamada : t.mensaje, op);
+    // el aviso de esa conversación se sustituye por uno que cuenta: 1, 2, 3… (cada uno vuelve a sonar)
+    let n = 1;
+    if (tipo === 'mensaje') { try { for (const x of await self.registration.getNotifications({ tag: op.tag })) n = Math.max(n, (((x.data || {}).n) | 0) + 1); } catch (_) {} op.data.n = n; }
+    let l = 'en'; try { l = String((self.navigator && self.navigator.language) || 'en').slice(0, 2).toLowerCase(); } catch (_) {}
+    const titulo = tipo === 'llamada' ? t.llamada : n > 1 ? (MENSAJES[l] || MENSAJES.en).replace('{n}', n) : t.mensaje;
+    await self.registration.showNotification(titulo, op);
     if (!aLaVista) await insignia();
   })());
 });
@@ -93,7 +101,7 @@ self.addEventListener('push', (e) => {
 // Solo con la app cerrada: abierta, lo lleva la página, que sabe cuáles se han leído (dueño, 16:07: «cuando ya las he visto, tienen
 // que desaparecer… todo al momento»).
 async function insignia() {
-  try { if (!(self.navigator && self.navigator.setAppBadge)) return; const ns = await self.registration.getNotifications(); if (ns.length) await self.navigator.setAppBadge(ns.length); else if (self.navigator.clearAppBadge) await self.navigator.clearAppBadge(); } catch (_) {}
+  try { if (!(self.navigator && self.navigator.setAppBadge)) return; const ns = await self.registration.getNotifications(); let k = 0; for (const x of ns) k += Math.max(1, ((x.data || {}).n) | 0); if (k) await self.navigator.setAppBadge(k); else if (self.navigator.clearAppBadge) await self.navigator.clearAppBadge(); } catch (_) {}
 }
 
 // al tocar el aviso: la app, en esa conversación (si ya está abierta, se trae al frente)

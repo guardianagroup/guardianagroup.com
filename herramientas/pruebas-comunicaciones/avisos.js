@@ -18,6 +18,8 @@ const hasta = async (p, fn, ms) => { const t0 = Date.now(); while (Date.now() - 
 
 async function telefono(browser, nombre, n) {
   const ctx = await browser.newContext({ viewport: { width: 393, height: 793 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true, userAgent: UA, locale: 'es-ES', permissions: ['notifications', 'microphone', 'camera'] });
+  // el Número GUARDIANA, apagado en esta prueba (invitaciones; 29 Oct 2026, 23:07: en el móvil sin la app, el inicio es «Añadir a la pantalla de inicio»)
+  await ctx.addInitScript(() => { try { sessionStorage.setItem('gcom-sin-numero', '1'); } catch (_) {} });
   await ctx.addInitScript((n) => {
     try { Object.defineProperty(navigator, 'standalone', { get: () => true }); } catch (_) {}
     // el permiso de avisos, concedido (Chromium sin cabeza lo da por denegado aunque se conceda)

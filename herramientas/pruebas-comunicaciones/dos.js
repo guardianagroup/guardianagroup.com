@@ -16,6 +16,8 @@ const comprueba = (cond, txt) => { console.log((cond ? 'OK   ' : 'FALLO') + ' ' 
 
 async function telefono(browser, nombre) {
   const ctx = await browser.newContext({ viewport: { width: 393, height: 793 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true, userAgent: UA, locale: 'es-ES', permissions: ['microphone', 'camera'] });
+  // el Número GUARDIANA, apagado en esta prueba (invitaciones; 29 Oct 2026, 23:07: en el móvil sin la app, el inicio es «Añadir a la pantalla de inicio»)
+  await ctx.addInitScript(() => { try { sessionStorage.setItem('gcom-sin-numero', '1'); } catch (_) {} });
   await ctx.addInitScript(() => {
     try { Object.defineProperty(navigator, 'standalone', { get: () => true }); } catch (_) {}
     // qué pista de audio sale hacia la otra persona
