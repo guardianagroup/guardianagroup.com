@@ -3601,7 +3601,8 @@
 "No hay nadie más a quien añadir.":"沒有其他可以加入的人了。",
 "Avisando a {n}: entra en la llamada en cuanto abra GUARDIANA.":"正在通知 {n}：對方一開啟 GUARDIANA 就會加入通話。",
 "Cada persona oye y ve a las otras dos. Tu equipo une las dos llamadas; cada una va encriptada de extremo a extremo.":"每個人都能聽到並看到另外兩人。你的裝置把兩通電話連接在一起；每一通都經過端對端加密。",
-"Tu red está limitando la conexión con GUARDIANA: los mensajes llegan, pero las fotos y las llamadas pueden fallar. Prueba con otra red (wifi o datos) o con una VPN.":"你的網路正在限制與 GUARDIANA 的連線：訊息可以送達，但照片和通話可能失敗。請換一個網路（Wi-Fi 或行動數據）或使用 VPN。"
+"Tu red está limitando la conexión con GUARDIANA: los mensajes llegan, pero las fotos y las llamadas pueden fallar. Prueba con otra red (wifi o datos) o con una VPN.":"你的網路正在限制與 GUARDIANA 的連線：訊息可以送達，但照片和通話可能失敗。請換一個網路（Wi-Fi 或行動數據）或使用 VPN。",
+"Llamada en grupo · {n} personas":"群組通話 · {n} 人"
 },
 "p":{
 "intento":"今天嘗試最多的：{1}，{2} {2?次|次}。",

@@ -856,7 +856,7 @@
       case 'llamada': {
         if (!LL) return;
         // llamada a tres: lo que manda la tercera persona va a su tramo de la llamada
-        if (LL.terceroSala && LL.terceroSala === c.id) { await LL.recibeTercero(c.id, j); return; }
+        if (LL.esTramo && LL.esTramo(c.id)) { await LL.recibeTercero(c.id, j); return; }
         if (j.acto === 'oferta') {
           if (LL.ocupado && LLAMADA_CONV && LLAMADA_CONV !== c.id) { enviaControl(c, { tipo: 'llamada', acto: 'ocupado', id: j.id }); return; }
           if (!LL.ocupado) LLAMADA_CONV = c.id;
@@ -1500,7 +1500,8 @@
       sasOk: async () => { const c = convLl(); if (c && !c.verificada) await marcaVerificada(c, true); },
       sasMal: async () => { const c = convLl(); if (!c) return; if (esB(c)) await alarma(c, 'numero'); else { await anotaSistema(c, 'El número de seguridad de la llamada no coincidía: llamada cortada. No envíes nada por aquí.'); vigila(c, T('El número de seguridad de la llamada no coincidía: llamada cortada. No envíes nada por aquí.'), 'mal'); aviso(T('El número no coincidía: llamada cortada. No envíes nada por aquí.')); } },
       // el nombre que la otra persona se puso o el que le pusiste tú; sin ninguno, «Llamada encriptada» o «Videollamada encriptada»
-      nombre: () => { const c = convLl(); return (c && (c.alias || c.nombre)) || (c && vivas().length > 1 ? nombreConv(c, true) : ''); },
+      // sin nombre, «Videollamada encriptada» (dueño, 30 Oct 2026, 11:04: «lo de conversación 2… hacerlo más profesional»)
+      nombre: () => { const c = convLl(); return (c && (c.alias || c.nombre)) || ''; },
       inicial: () => { const c = convLl(); return inicial(c && (c.alias || c.nombre)); },
       // llamada a tres: mensajes a la conversación del tercero, la llamada que pasa a otra conversación, el apunte en el chat del
       // tercero y la hoja para elegir a quién añadir
@@ -1508,6 +1509,8 @@
       cambia: (sala) => { LLAMADA_CONV = sala; pintaLista(); },
       finA: (sala, info) => { const antes = LLAMADA_CONV; LLAMADA_CONV = sala; anotaLlamada(info); LLAMADA_CONV = antes; },
       eligeTercero: () => abreAnadir(),
+      // el nombre que la otra persona de la llamada se puso a sí misma (lo que se dice a los demás del grupo)
+      nombrePropio: () => nombrePropio(convLl()),
     });
     const llama = (video) => { if (LL.ocupado) { aviso(T('Ya tienes una llamada en curso.')); return; } const c = CONVS.get(ACTUAL); if (c && c.huella && !enLinea(c) && R.abierto) { despiertaLlamada(c, video); return; } if (c && c.suFuera && puedeLlamar()) despierta(c, 'llamada', true); LLAMADA_CONV = ACTUAL; LL.llamar(video); };
     $('#llamar').addEventListener('click', () => llama(false));
@@ -2577,7 +2580,7 @@
   function abreAnadir() {
     if (!LL || LL.estado !== 'hablando') return;
     const enLl = convLl();
-    const otros = vivas().filter((x) => x.id !== (enLl && enLl.id) && x.huella && !esB(x)).sort((a, b) => (enLinea(b) ? 1 : 0) - (enLinea(a) ? 1 : 0) || (b.ultimo || 0) - (a.ultimo || 0));
+    const otros = vivas().filter((x) => x.id !== (enLl && enLl.id) && x.huella && !esB(x) && !(LL.esTramo && LL.esTramo(x.id))).sort((a, b) => (enLinea(b) ? 1 : 0) - (enLinea(a) ? 1 : 0) || (b.ultimo || 0) - (a.ultimo || 0));
     if (!otros.length) { aviso(T('No hay nadie más a quien añadir.')); return; }
     const ul = $('#tercero-lista'); ul.textContent = '';
     for (const x of otros) {

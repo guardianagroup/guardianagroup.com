@@ -3601,7 +3601,8 @@
 "No hay nadie más a quien añadir.":"Er is niemand anders om toe te voegen.",
 "Avisando a {n}: entra en la llamada en cuanto abra GUARDIANA.":"{n} wordt gewaarschuwd: doet mee aan het gesprek zodra die GUARDIANA opent.",
 "Cada persona oye y ve a las otras dos. Tu equipo une las dos llamadas; cada una va encriptada de extremo a extremo.":"Iedereen hoort en ziet de andere twee. Jouw apparaat verbindt de twee gesprekken; elk is end-to-end versleuteld.",
-"Tu red está limitando la conexión con GUARDIANA: los mensajes llegan, pero las fotos y las llamadas pueden fallar. Prueba con otra red (wifi o datos) o con una VPN.":"Je netwerk beperkt de verbinding met GUARDIANA: berichten komen aan, maar foto’s en oproepen kunnen mislukken. Probeer een ander netwerk (wifi of mobiele data) of een VPN."
+"Tu red está limitando la conexión con GUARDIANA: los mensajes llegan, pero las fotos y las llamadas pueden fallar. Prueba con otra red (wifi o datos) o con una VPN.":"Je netwerk beperkt de verbinding met GUARDIANA: berichten komen aan, maar foto’s en oproepen kunnen mislukken. Probeer een ander netwerk (wifi of mobiele data) of een VPN.",
+"Llamada en grupo · {n} personas":"Groepsgesprek · {n} personen"
 },
 "p":{
 "intento":"Probeerde het vandaag het vaakst: {1}, {2} {2?keer|keer}.",

@@ -92,9 +92,9 @@ async function seAnaden(X, numX, Y, numY, nomY, nomX) {
   await hasta(async () => await A.evaluate(() => document.querySelector('#llamada').classList.contains('tres')), 20000);
   await espera(3000);
   // 3. los tres se ven
-  comprueba(await imagenes(A, '#v-remoto') && await imagenes(A, '#v-tercero'), '3. A ve a B y a C');
-  comprueba(await imagenes(B, '#v-remoto') && await imagenes(B, '#v-tercero'), '3. B ve a A y a C (la imagen de C llega por A)');
-  comprueba(await imagenes(C, '#v-remoto') && await imagenes(C, '#v-tercero'), '3. C ve a A y a B (la imagen de B llega por A)');
+  comprueba(await imagenes(A, '#v-remoto') && await imagenes(A, '.ll-tile'), '3. A ve a B y a C');
+  comprueba(await imagenes(B, '#v-remoto') && await imagenes(B, '.ll-tile'), '3. B ve a A y a C (la imagen de C llega por A)');
+  comprueba(await imagenes(C, '#v-remoto') && await imagenes(C, '.ll-tile'), '3. C ve a A y a B (la imagen de B llega por A)');
   for (const [k, P] of [['A', A], ['B', B], ['C', C]]) comprueba(await P.evaluate(() => document.querySelector('#llamada').classList.contains('tres')), '3. ' + k + ': pantalla a tres');
   const nB = ((await B.textContent('#ll-nombre')) || '').trim();
   comprueba(/·/.test(nB), '3. B ve los dos nombres arriba: «' + nB + '»');
@@ -102,12 +102,12 @@ async function seAnaden(X, numX, Y, numY, nomY, nomX) {
   const foco = (P) => P.evaluate(() => document.querySelector('#llamada').dataset.foco || '');
   const grande = (P, s) => P.evaluate((s) => { const v = document.querySelector(s), r = v.getBoundingClientRect(); return r.width >= innerWidth - 2 && r.height >= innerHeight - 2; }, s);
   await B.evaluate(() => document.querySelector('#v-remoto').click()); await espera(500);
-  comprueba(await foco(B) === 'remoto' && await grande(B, '#v-remoto'), '3b. B toca a A: A en grande');
+  comprueba(await foco(B) === 'p:cam' && await grande(B, '#v-remoto'), '3b. B toca a A: A en grande');
   await foto(B, '03b-B-A-grande');
-  await B.evaluate(() => document.querySelector('#v-tercero').click()); await espera(500);
-  comprueba(await foco(B) === 'tercero' && await grande(B, '#v-tercero'), '3b. B toca la pequeña: C en grande');
-  await B.evaluate(() => document.querySelector('#v-tercero').click()); await espera(500);
-  comprueba(await foco(B) === '' && !(await grande(B, '#v-tercero')), '3b. B toca la grande: otra vez partida');
+  await B.evaluate(() => document.querySelector('.ll-tile').click()); await espera(500);
+  comprueba(/^p:/.test(await foco(B)) && await foco(B) !== 'p:cam' && await grande(B, '.ll-tile'), '3b. B toca la pequeña: C en grande');
+  await B.evaluate(() => document.querySelector('.ll-tile').click()); await espera(500);
+  comprueba(await foco(B) === '' && !(await grande(B, '.ll-tile')), '3b. B toca la grande: otra vez partida');
   // 4. los tres se oyen: A en silencio, B oye a C y C oye a B
   const estMz = await A.evaluate(() => GuardianaCom.llamada.mezclaEstado);
   comprueba(estMz === 'running', '4. la mezcla de voces de A está sonando (' + estMz + ')');
@@ -116,7 +116,7 @@ async function seAnaden(X, numX, Y, numY, nomY, nomX) {
   const nivB = await nivel(B, '#a-remoto'), nivC = await nivel(C, '#a-remoto');
   comprueba(nivB > 0.003, '4. con A en silencio, B oye a C (nivel ' + nivB.toFixed(4) + '; con A hablando, ' + antesB.toFixed(4) + ')');
   comprueba(nivC > 0.003, '4. con A en silencio, C oye a B (nivel ' + nivC.toFixed(4) + ')');
-  const nivA3 = await nivel(A, '#a-tercero');
+  const nivA3 = await nivel(A, 'body > audio[aria-hidden="true"]');
   comprueba(nivA3 > 0.003, '4. A oye a C (nivel ' + nivA3.toFixed(4) + ')');
   await A.evaluate(() => document.querySelector('#ll-silenciar').click()); await espera(500);
   // 5. C cuelga

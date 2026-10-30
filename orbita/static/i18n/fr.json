@@ -3601,7 +3601,8 @@
 "No hay nadie más a quien añadir.":"Il n’y a personne d’autre à ajouter.",
 "Avisando a {n}: entra en la llamada en cuanto abra GUARDIANA.":"On prévient {n} : cette personne rejoint l’appel dès qu’elle ouvre GUARDIANA.",
 "Cada persona oye y ve a las otras dos. Tu equipo une las dos llamadas; cada una va encriptada de extremo a extremo.":"Chaque personne entend et voit les deux autres. Votre appareil relie les deux appels ; chacun est chiffré de bout en bout.",
-"Tu red está limitando la conexión con GUARDIANA: los mensajes llegan, pero las fotos y las llamadas pueden fallar. Prueba con otra red (wifi o datos) o con una VPN.":"Votre réseau limite la connexion à GUARDIANA : les messages passent, mais les photos et les appels peuvent échouer. Essayez un autre réseau (Wi-Fi ou données mobiles) ou un VPN."
+"Tu red está limitando la conexión con GUARDIANA: los mensajes llegan, pero las fotos y las llamadas pueden fallar. Prueba con otra red (wifi o datos) o con una VPN.":"Votre réseau limite la connexion à GUARDIANA : les messages passent, mais les photos et les appels peuvent échouer. Essayez un autre réseau (Wi-Fi ou données mobiles) ou un VPN.",
+"Llamada en grupo · {n} personas":"Appel de groupe · {n} personnes"
 },
 "p":{
 "intento":"Celle qui a le plus insisté aujourd'hui : {1}, {2} {2?fois|fois}.",

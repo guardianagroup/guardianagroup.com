@@ -3601,7 +3601,8 @@
 "No hay nadie más a quien añadir.":"Ei ole ketään muuta lisättävää.",
 "Avisando a {n}: entra en la llamada en cuanto abra GUARDIANA.":"Ilmoitetaan: {n} liittyy puheluun heti, kun avaa GUARDIANAn.",
 "Cada persona oye y ve a las otras dos. Tu equipo une las dos llamadas; cada una va encriptada de extremo a extremo.":"Jokainen kuulee ja näkee kaksi muuta. Laitteesi yhdistää kaksi puhelua; kumpikin on päästä päähän salattu.",
-"Tu red está limitando la conexión con GUARDIANA: los mensajes llegan, pero las fotos y las llamadas pueden fallar. Prueba con otra red (wifi o datos) o con una VPN.":"Verkkosi rajoittaa yhteyttä GUARDIANAan: viestit menevät perille, mutta kuvat ja puhelut voivat epäonnistua. Kokeile toista verkkoa (wifi tai mobiilidata) tai VPN:ää."
+"Tu red está limitando la conexión con GUARDIANA: los mensajes llegan, pero las fotos y las llamadas pueden fallar. Prueba con otra red (wifi o datos) o con una VPN.":"Verkkosi rajoittaa yhteyttä GUARDIANAan: viestit menevät perille, mutta kuvat ja puhelut voivat epäonnistua. Kokeile toista verkkoa (wifi tai mobiilidata) tai VPN:ää.",
+"Llamada en grupo · {n} personas":"Ryhmäpuhelu · {n} henkilöä"
 },
 "p":{
 "intento":"Eniten yrittänyt tänään: {1}, {2} {2?kerta|kertaa}.",

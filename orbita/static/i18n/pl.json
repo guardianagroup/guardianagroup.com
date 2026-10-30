@@ -3601,7 +3601,8 @@
 "No hay nadie más a quien añadir.":"Nie ma nikogo więcej do dodania.",
 "Avisando a {n}: entra en la llamada en cuanto abra GUARDIANA.":"Powiadamianie: {n} dołączy do rozmowy, gdy tylko otworzy GUARDIANA.",
 "Cada persona oye y ve a las otras dos. Tu equipo une las dos llamadas; cada una va encriptada de extremo a extremo.":"Każda osoba słyszy i widzi pozostałe dwie. Twoje urządzenie łączy obie rozmowy; każda jest szyfrowana end-to-end.",
-"Tu red está limitando la conexión con GUARDIANA: los mensajes llegan, pero las fotos y las llamadas pueden fallar. Prueba con otra red (wifi o datos) o con una VPN.":"Twoja sieć ogranicza połączenie z GUARDIANA: wiadomości docierają, ale zdjęcia i połączenia mogą nie działać. Spróbuj innej sieci (Wi-Fi lub dane komórkowe) albo VPN."
+"Tu red está limitando la conexión con GUARDIANA: los mensajes llegan, pero las fotos y las llamadas pueden fallar. Prueba con otra red (wifi o datos) o con una VPN.":"Twoja sieć ogranicza połączenie z GUARDIANA: wiadomości docierają, ale zdjęcia i połączenia mogą nie działać. Spróbuj innej sieci (Wi-Fi lub dane komórkowe) albo VPN.",
+"Llamada en grupo · {n} personas":"Rozmowa grupowa · uczestników: {n}"
 },
 "p":{
 "intento":"Najwięcej prób dziś: {1}, {2} {2?raz|razy}.",

@@ -3601,7 +3601,8 @@
 "No hay nadie más a quien añadir.":"더 추가할 사람이 없어요.",
 "Avisando a {n}: entra en la llamada en cuanto abra GUARDIANA.":"{n} 님에게 알리는 중이에요. GUARDIANA를 열면 바로 통화에 참여해요.",
 "Cada persona oye y ve a las otras dos. Tu equipo une las dos llamadas; cada una va encriptada de extremo a extremo.":"모두 나머지 두 사람의 목소리를 듣고 모습을 볼 수 있어요. 내 기기가 두 통화를 연결하며, 각 통화는 종단 간 암호화돼요.",
-"Tu red está limitando la conexión con GUARDIANA: los mensajes llegan, pero las fotos y las llamadas pueden fallar. Prueba con otra red (wifi o datos) o con una VPN.":"사용 중인 네트워크가 GUARDIANA 연결을 제한하고 있어요. 메시지는 전달되지만 사진과 통화는 실패할 수 있어요. 다른 네트워크(Wi-Fi 또는 모바일 데이터)나 VPN을 사용해 보세요."
+"Tu red está limitando la conexión con GUARDIANA: los mensajes llegan, pero las fotos y las llamadas pueden fallar. Prueba con otra red (wifi o datos) o con una VPN.":"사용 중인 네트워크가 GUARDIANA 연결을 제한하고 있어요. 메시지는 전달되지만 사진과 통화는 실패할 수 있어요. 다른 네트워크(Wi-Fi 또는 모바일 데이터)나 VPN을 사용해 보세요.",
+"Llamada en grupo · {n} personas":"그룹 통화 · {n}명"
 },
 "p":{
 "intento":"오늘 가장 많이 시도한 곳: {1}, {2}{2?회|회}.",

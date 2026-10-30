@@ -2064,3 +2064,21 @@ body.con-pestanas #marcar .marcar-llamar span{position:absolute;width:1px;height
 @media (min-width:761px){.gc-burbuja-voz{min-width:300px}}
 .gc-burbuja-voz .gc-voz{width:100%}
 .gc-voz-onda{overflow:hidden}
+
+/* Llamada en grupo (hasta 4): una imagen por persona; el sitio de cada una lo pone llamada.js («colocaTiles») */
+.gc-llamada .videos .ll-tile{display:block;position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#000;cursor:pointer}
+.gc-llamada:not(.tres) .videos .ll-tile,.gc-llamada.mini .videos .ll-tile{display:none}
+.gc-llamada.tres:not(.mini) .videos::after{display:none!important}
+.gc-llamada.tres:not(.mini) .videos #v-remoto{cursor:pointer}
+
+/* Acabados de la videollamada en el PC (dueño, 30 Oct 2026, 10:59–11:04) */
+/* «Conexión: excelente», en el centro de verdad (antes se iba a la derecha por lo que ocupaba el aviso de la izquierda) */
+@media (min-width:761px){.gc-llamada-arriba{position:relative}.gc-llamada:not(.mini) .gc-llamada-arriba #ll-calidad{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);white-space:nowrap;margin:0}}
+/* en el PC, sin iconos sueltos sobre la imagen: «Vista» va con los demás botones (y tu imagen se sigue moviendo con el ratón) */
+@media (hover:hover) and (pointer:fine){.gc-llamada .mi-tam-boton,.gc-llamada .videos .mi-asa{display:none!important}}
+#ll-vista .peq,.gc-llamada.dividida #ll-vista .parte{display:none}
+.gc-llamada.dividida #ll-vista .peq{display:inline}
+/* en pequeño, sobre el chat: sin «Pantalla completa» ni «Vista» («Ampliar» ya está a la derecha) y se mueve con el ratón */
+.gc-llamada.mini #ll-completa-caja,.gc-llamada.mini #ll-vista-caja{display:none!important}
+.gc-llamada.mini.mini-movida{inset:var(--mini-y) auto auto var(--mini-x)!important}
+@media (hover:hover) and (pointer:fine){.gc-llamada.mini{cursor:grab}.gc-llamada.mini.mini-arrastrando{cursor:grabbing}.gc-llamada.mini.mini-arrastrando *{pointer-events:none}}

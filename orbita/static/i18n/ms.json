@@ -3601,7 +3601,8 @@
 "No hay nadie más a quien añadir.":"Tiada orang lain untuk ditambah.",
 "Avisando a {n}: entra en la llamada en cuanto abra GUARDIANA.":"Memaklumkan {n}: dia akan menyertai panggilan sebaik sahaja membuka GUARDIANA.",
 "Cada persona oye y ve a las otras dos. Tu equipo une las dos llamadas; cada una va encriptada de extremo a extremo.":"Setiap orang mendengar dan melihat dua orang yang lain. Peranti anda menyambungkan kedua-dua panggilan; setiap satu disulitkan hujung ke hujung.",
-"Tu red está limitando la conexión con GUARDIANA: los mensajes llegan, pero las fotos y las llamadas pueden fallar. Prueba con otra red (wifi o datos) o con una VPN.":"Rangkaian anda mengehadkan sambungan ke GUARDIANA: mesej sampai, tetapi foto dan panggilan mungkin gagal. Cuba rangkaian lain (Wi-Fi atau data mudah alih) atau VPN."
+"Tu red está limitando la conexión con GUARDIANA: los mensajes llegan, pero las fotos y las llamadas pueden fallar. Prueba con otra red (wifi o datos) o con una VPN.":"Rangkaian anda mengehadkan sambungan ke GUARDIANA: mesej sampai, tetapi foto dan panggilan mungkin gagal. Cuba rangkaian lain (Wi-Fi atau data mudah alih) atau VPN.",
+"Llamada en grupo · {n} personas":"Panggilan berkumpulan · {n} orang"
 },
 "p":{
 "intento":"Paling banyak mencuba hari ini: {1}, {2} {2?kali|kali}.",

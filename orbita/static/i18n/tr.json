@@ -3601,7 +3601,8 @@
 "No hay nadie más a quien añadir.":"Eklenecek başka kimse yok.",
 "Avisando a {n}: entra en la llamada en cuanto abra GUARDIANA.":"{n} bilgilendiriliyor: GUARDIANA'yı açar açmaz aramaya katılacak.",
 "Cada persona oye y ve a las otras dos. Tu equipo une las dos llamadas; cada una va encriptada de extremo a extremo.":"Herkes diğer iki kişiyi duyar ve görür. Cihazınız iki aramayı birleştirir; her biri uçtan uca şifrelidir.",
-"Tu red está limitando la conexión con GUARDIANA: los mensajes llegan, pero las fotos y las llamadas pueden fallar. Prueba con otra red (wifi o datos) o con una VPN.":"Ağınız GUARDIANA bağlantısını sınırlıyor: mesajlar ulaşıyor, ancak fotoğraflar ve aramalar başarısız olabilir. Başka bir ağ (Wi-Fi veya mobil veri) ya da bir VPN deneyin."
+"Tu red está limitando la conexión con GUARDIANA: los mensajes llegan, pero las fotos y las llamadas pueden fallar. Prueba con otra red (wifi o datos) o con una VPN.":"Ağınız GUARDIANA bağlantısını sınırlıyor: mesajlar ulaşıyor, ancak fotoğraflar ve aramalar başarısız olabilir. Başka bir ağ (Wi-Fi veya mobil veri) ya da bir VPN deneyin.",
+"Llamada en grupo · {n} personas":"Grup araması · {n} kişi"
 },
 "p":{
 "intento":"Bugün en çok deneyen: {1}, {2} {2?kez|kez}.",

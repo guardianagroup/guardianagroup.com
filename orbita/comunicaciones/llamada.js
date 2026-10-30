@@ -81,11 +81,13 @@
     let luz = !COMPATIBLE; try { const v = localStorage.getItem('gcom-luz'); if (v !== null) luz = v !== '0'; } catch (_) {}
     let ganancia = 1, medidor = null, vCam = null, ajustes = false;
     let voz = 'natural'; try { localStorage.removeItem('gcom-voz'); } catch (_) {}
-    // Llamada a tres (ver «Llamada a tres» más abajo): la versión que entiende este equipo, si la otra persona también la entiende,
-    // la tercera persona cuando este equipo hace de puente, la mezcla de voces del puente, la tercera persona cuando la trae el
-    // otro (la ve quien no es puente) y la voz que llega de la otra persona (para mezclarla)
+    // Llamada en grupo: la versión que entiende este equipo, si la otra persona también la entiende, la mezcla de voces y la voz que
+    // llega de la otra persona (para mezclarla)
     const TRES = 1;
-    let suTres = false, tercero = null, mezcla = null, visto = null, vozSuya = null;
+    let suTres = false, mezcla = null, vozSuya = null;
+    // la llamada en grupo (ver «Llamada en grupo» más abajo): los tramos que añadí yo y el estado de grupo del tramo principal
+    let patas = [], PR = null;
+    const MAX_GRUPO = 4;
     let alEstadoPc = null, alIcePc = null, alNegociarPc = null; // los manejadores de la conexión principal (también para la ascendida)
     const ocupado = () => estado !== 'libre';
     // dueño, 28 Oct 2026, 10:28: las opciones de imagen (Difuminada, Mosaico y «Mejorar la luz») solo en la sesión
@@ -105,21 +107,25 @@
       // dueño, 28 Oct 2026, 12:49 («que sea profesional… como hacen las otras aplicaciones»): el nombre que la otra persona se puso
       // y, si no se puso ninguno, «Llamada encriptada» o «Videollamada encriptada» (antes, «La otra persona»)
       { const base = o.nombre() || (video ? t('Videollamada encriptada') : t('Llamada encriptada'));
-        const n3 = tercero && tercero.estado === 'hablando' ? tercero.nombre : visto ? visto.nombre : null;
-        $('#ll-nombre').textContent = n3 === null ? base : (o.nombre() || n3) ? (o.nombre() || t('Persona invitada')) + ' · ' + (n3 || t('Persona invitada')) : t('Llamada a tres'); }
-      // «Añadir» (llamada a tres): con la llamada en marcha, si el equipo de la otra persona la entiende; mientras suena el tercero,
-      // el mismo botón cancela
+        // al sonar, si llaman desde un grupo, también cuántos son ya (para saber que se entra en una llamada en grupo)
+        const tot = estado === 'hablando' ? totalGrupo() : estado === 'entrante' && PR ? 1 + Math.max(1, PR.n | 0) : 0;
+        const g = t('Llamada en grupo · {n} personas').replace('{n}', tot);
+        $('#ll-nombre').textContent = tot > 2 ? (estado === 'entrante' ? base + ' · ' + g : g) : base; }
+      // «Añadir» (llamada en grupo, hasta 4; cualquiera de la llamada): mientras suena la persona añadida, el mismo botón cancela
       { const ad = $('#ll-anadir-caja'), b = $('#ll-anadir');
-        const llamandoT = !!(tercero && tercero.estado === 'saliente');
-        if (ad) ad.hidden = !(estado === 'hablando' && suTres && !visto && !blindada() && !!o.eligeTercero && (!tercero || llamandoT));
+        const llamandoT = patas.some((L) => L.estado === 'saliente');
+        if (ad) ad.hidden = !(estado === 'hablando' && !blindada() && !!o.eligeTercero && (llamandoT || puedeAnadir()));
         if (b) { b.classList.toggle('cancela', llamandoT); b.setAttribute('aria-label', llamandoT ? t('Cancelar') : t('Añadir a la llamada')); const sp = $('#ll-anadir-caja > span'); if (sp) sp.textContent = llamandoT ? t('Cancelar') : t('Añadir'); } }
-      pintaTercero();
+      pintaGrupo();
       $('#ll-avatar').textContent = o.inicial();
       caja.setAttribute('aria-label', video ? t('Videollamada') : t('Llamada de voz'));
       $('#ll-camara-caja').hidden = !(video && cam);
       { const g = $('#ll-girar-caja'); if (g) g.hidden = !(video && cam && TEL_UA && camaraOn()); }
       // «Pantalla completa», solo en el ordenador y con imagen (dueño, 30 Oct 2026, 09:02: «toda la pantalla del PC»)
       { const f = $('#ll-completa-caja'); if (f) f.hidden = !(video && completaPC()); }
+      // «Vista» (dueño, 30 Oct 2026, 11:04: el simbolito sobre la imagen «se hace muy raro… cámbialo de sitio… más profesional»):
+      // en el ordenador, partir la pantalla o dejarte en pequeño se hace con un botón con su nombre, abajo con los demás
+      { const v = $('#ll-vista-caja'), fino = !!(raiz.matchMedia && raiz.matchMedia('(hover: hover) and (pointer: fine)').matches); if (v) v.hidden = !(fino && video && cam && remotoV && suCamara && estado === 'hablando' && !caja.classList.contains('tres')); }
       $('#ll-imagenes').hidden = !(video && blindada());
       // 29 Oct 2026, 07:51 (dueño): «La opción… mosaico y… la voz, en el chat normal no quiero que esté. Solamente… en el blindado dos
       // opciones… la voz en modo grave y el mosaico… dos botones… muy profesionales cuando se abra… Antes no quiero que se vean»:
@@ -197,6 +203,7 @@
     function sueltaCompleta() { if (completaPorLlamada && document.fullscreenElement) { try { document.exitFullscreen().catch(() => {}); } catch (_) {} } completaPorLlamada = false; }
     function pequena(si) {
       caja.classList.toggle('mini', !!si);
+      if (si) recolocaMini(); else caja.classList.remove('mini-movida');
       caja.setAttribute('aria-modal', si ? 'false' : 'true');
       fondo();
       // en el ordenador, listo para escribir; en el teléfono no se abre el teclado solo (se toca el campo, como en cualquier app)
@@ -361,7 +368,7 @@
     let reposo = null;
     function despierta() {
       // cualquier toque vuelve a arrancar el sonido y la imagen que llegan (el iPhone a veces los deja parados)
-      if (estado === 'hablando') { suenaRemoto(); if (remotoV) reproduce($('#v-remoto')); if (ctx && ctx.state !== 'running' && ctx.state !== 'closed') ctx.resume().catch(() => {}); if (mezcla && mezcla.ctx.state !== 'running' && mezcla.ctx.state !== 'closed') mezcla.ctx.resume().catch(() => {}); { const a3 = $('#a-tercero'); if (a3 && a3.srcObject && a3.paused) reproduce(a3); } }
+      if (estado === 'hablando') { suenaRemoto(); if (remotoV) reproduce($('#v-remoto')); if (ctx && ctx.state !== 'running' && ctx.state !== 'closed') ctx.resume().catch(() => {}); if (mezcla && mezcla.ctx.state !== 'running' && mezcla.ctx.state !== 'closed') mezcla.ctx.resume().catch(() => {}); for (const L of patas) if (L.el && L.el.srcObject && L.el.paused) reproduce(L.el); }
       caja.classList.remove('reposo'); clearTimeout(reposo);
       reposo = setTimeout(() => {
         const foco = document.activeElement && caja.contains(document.activeElement) && document.activeElement.matches(':focus-visible');
@@ -371,7 +378,7 @@
     for (const ev of ['pointermove', 'pointerdown', 'keydown', 'touchstart']) caja.addEventListener(ev, despierta, { passive: true });
     function pintaVideo() {
       const veoSuyo = !!(video && remotoV && suCamara), veoMio = !!(video && camaraOn());
-      $('#ll-videos').hidden = !(veoSuyo || veoMio);
+      $('#ll-videos').hidden = !(veoSuyo || veoMio || TILES.size > 0);
       $('#v-remoto').hidden = !veoSuyo; $('#v-local').hidden = !veoMio;
       const antes = caja.classList.contains('con-video');
       caja.classList.toggle('con-video', veoSuyo);
@@ -709,7 +716,7 @@
       const salida = pistaImagen(); if (!salida) return;
       const s = pc && pc.getSenders().find((x) => x.track && x.track.kind === 'video');
       if (s && s.track !== salida) { try { await s.replaceTrack(salida); } catch (_) {} }
-      if (tercero && tercero.pc) { const s3 = emisorImagen(tercero.pc, tercero.trHaciaC); if (s3 && s3.track !== salida) { try { await s3.replaceTrack(salida); } catch (_) {} } }
+      for (const L of patas) if (L.miCam && L.miCam.track !== salida) { try { await L.miCam.replaceTrack(salida); } catch (_) {} }
       if (modoImagen() === 'cruda' && proc) { const viejo = proc; proc = null; setTimeout(() => viejo.parar(), 400); }
       const vl = $('#v-local'); if (!vl.srcObject || vl.srcObject.getVideoTracks()[0] !== salida) { vl.srcObject = new MediaStream([salida]); reproduce(vl); } // te ves como te ve la otra persona
     }
@@ -816,10 +823,10 @@
         // llamada a tres: una segunda imagen que llega por la misma llamada es la de la tercera persona (la trae el puente)
         if (e.track.kind === 'video') {
           const vids = pc ? pc.getTransceivers().filter((x) => x.receiver && x.receiver.track && x.receiver.track.kind === 'video') : [];
-          if (vids.length > 1 && e.transceiver && vids[0] !== e.transceiver) { visto = visto || { nombre: '', camara: true }; visto.video = e.track; e.track.onunmute = () => { pintaTercero(); }; pinta(); return; }
+          if (vids.length > 1 && e.transceiver && vids[0] !== e.transceiver) { const K = tramoPrincipal(), avisa = () => { pintaGrupo(); reenviaImagenes(); }; K.videos.set(e.transceiver.mid || ('v' + K.videos.size), { pista: e.track }); e.track.onunmute = avisa; e.track.onmute = avisa; e.track.onended = avisa; avisa(); return; }
         }
         if (e.track.kind === 'audio' && !remoto.getAudioTracks().length) vozSuya = e.track;
-        if (e.track.kind === 'video') { remotoV = new MediaStream([e.track]); const vr = $('#v-remoto'); vr.srcObject = remotoV; reproduce(vr); e.track.onunmute = () => { reproduce(vr); pintaVideo(); }; pintaVideo(); return; }
+        if (e.track.kind === 'video') { remotoV = new MediaStream([e.track]); setTimeout(() => reenviaImagenes(), 0); const vr = $('#v-remoto'); vr.srcObject = remotoV; reproduce(vr); e.track.onunmute = () => { reproduce(vr); pintaVideo(); }; pintaVideo(); return; }
         if (remoto.getAudioTracks().length) mudasRemotas.push(e.track); // la primera es su voz; las demás, su pista muda
         remoto.addTrack(e.track); const ar = $('#a-remoto'); if (ar.srcObject !== remoto) ar.srcObject = remoto; suenaRemoto();
         if (salidas) aplicaSalida();
@@ -964,7 +971,7 @@
       video = !!conVideo && !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia); suCamara = true; remotoV = null;
       efectosPorDefecto();
       desbloquea();
-      estado = 'saliente'; inicioYo = true; idLlamada = Math.random().toString(36).slice(2, 10); colgoYo = false; tiempo.textContent = '00:00'; calidad.textContent = ''; calidad.classList.remove('ver'); pinta();
+      PR = null; patas = []; estado = 'saliente'; inicioYo = true; idLlamada = Math.random().toString(36).slice(2, 10); colgoYo = false; tiempo.textContent = '00:00'; calidad.textContent = ''; calidad.classList.remove('ver'); pinta();
       di(video ? t('Pidiendo la cámara y el micrófono…') : t('Pidiendo el micrófono…'));
       if (video) await salidaDeSiempre(); else await auricularPrevio(); // la salida, antes de que arranque el audio de la llamada
       try { await medios(video); } catch (_) { di(t('Sin permiso para el micrófono.'), true); return termina('sin-medios', 1800); }
@@ -1005,7 +1012,8 @@
         if (estado === 'cerrando') { estado = 'libre'; idLlamada = null; caja.classList.remove('gc-saliendo'); }
         if (ocupado()) { if (m.id !== idLlamada) o.manda({ acto: 'ocupado', id: m.id }); return; }
         // llamada a tres: ¿entiende la otra persona la llamada a tres? ¿Llama desde una llamada a tres (es el puente)?
-        suTres = (m.tres | 0) >= 1; visto = m.puente === 1 ? { nombre: String(m.con || '').slice(0, 40), camara: true } : null;
+        // llamada en grupo: ¿la entiende la otra persona? Si llama desde un grupo, cuántos son ya
+        PR = null; patas = []; suTres = (m.tres | 0) >= 1; tramoPrincipal().n = Math.max(1, Math.min(8, (m.n | 0) || 1));
         ofertaEntrante = m; idLlamada = String(m.id || '').slice(0, 16); estado = 'entrante'; inicioYo = false; colgoYo = false; tiempo.textContent = '00:00'; calidad.textContent = ''; calidad.classList.remove('ver');
         sas = null; await sasNuevo(); if (sas) { try { sas.suCompromiso = typeof m.sas === 'string' && m.sas.length < 64 ? deB64u(m.sas) : null; } catch (_) { sas.suCompromiso = null; } if (!sas.suCompromiso || sas.suCompromiso.length !== 32) sas = null; }
         video = m.video === 1 || /\nm=video /.test(m.sdp); suCamara = true; remotoV = null;
@@ -1020,12 +1028,9 @@
         return; }
       // la clave revelada de quien llama: tiene que ser la del compromiso de la oferta; si no, la comprobación queda rota
       if (m.acto === 'sas' && sas && !inicioYo) { let p = null; try { p = typeof m.p === 'string' && m.p.length < 120 ? deB64u(m.p) : null; } catch (_) {} if (p && p.length === 65) { const h = await sha256(p); if (sas.suCompromiso && h.length === 32 && h.every((x, i) => x === sas.suCompromiso[i])) { sas.suPub = p; sasCalcula(); return; } } sas.estado = 'roto'; pintaSas(); return; }
-      if (m.acto === 'camara') { suCamara = !!m.on; pintaVideo(); if (tercero && tercero.estado === 'hablando') mandaT({ acto: 'tres-camara', id: tercero.id, on: !!m.on }); return; }
-      // llamada a tres, en quien no es puente: quién se ha unido o ha salido, su cámara, y la renegociación que trae su imagen
-      if (m.acto === 'tres') { if (!pc || tercero) return; if (m.on) { visto = Object.assign(visto || { camara: true }, { nombre: String(m.nombre || (visto && visto.nombre) || '').slice(0, 40) }); const x = t('{n} se ha unido a la llamada.').replace('{n}', visto.nombre || t('Persona invitada')); di(x); setTimeout(() => { if (paso.textContent === x) di(''); }, 5000); } else if (visto) { const x = t('{n} ha salido de la llamada.').replace('{n}', visto.nombre || t('Persona invitada')); visto = null; const v3 = $('#v-tercero'); if (v3) v3.srcObject = null; di(x); setTimeout(() => { if (paso.textContent === x) di(''); }, 5000); } pinta(); return; }
-      if (m.acto === 'tres-camara') { if (visto) { visto.camara = !!m.on; pintaTercero(); } return; }
-      if (m.acto === 'tres-oferta' && pc && typeof m.sdp === 'string' && m.sdp.length <= 40000) { try { await pc.setRemoteDescription({ type: 'offer', sdp: m.sdp }); const an = await pc.createAnswer(); await pc.setLocalDescription({ type: an.type, sdp: altaFidelidad(an.sdp) }); o.manda({ acto: 'tres-respuesta', id: idLlamada, sdp: pc.localDescription.sdp }); if (video) topeVideo(); topeAudio(); } catch (_) {} return; }
-      if (m.acto === 'tres-respuesta' && pc && typeof m.sdp === 'string' && m.sdp.length <= 40000) { try { await pc.setRemoteDescription({ type: 'answer', sdp: m.sdp }); if (video) topeVideo(); } catch (_) {} return; }
+      if (m.acto === 'camara') { suCamara = !!m.on; pintaVideo(); reenviaImagenes(); return; }
+      // llamada en grupo: ofertas para una imagen más, quién es cada imagen y cuántos somos
+      if (/^tres/.test(m.acto)) { if (pc) await recibeGrupo(tramoPrincipal(), m); return; }
       // reinicio de la ruta en mitad de la llamada (ver reconecta)
       if (m.acto === 'reinicia') { if (pc && estado === 'hablando' && inicioYo) { reiniciando = true; try { pc.restartIce(); } catch (_) { reiniciando = false; } } return; }
       if (m.acto === 'reoferta' && pc && typeof m.sdp === 'string' && m.sdp.length <= 40000 && !inicioYo) { try { await pc.setRemoteDescription({ type: 'offer', sdp: m.sdp }); const an = await pc.createAnswer(); await pc.setLocalDescription({ type: an.type, sdp: altaFidelidad(an.sdp) }); o.manda({ acto: 'rerespuesta', id: idLlamada, sdp: pc.localDescription.sdp }); if (video) topeVideo(); topeAudio(); } catch (_) {} return; }
@@ -1059,236 +1064,376 @@
       pinta();
       di(t('Conectando…'));
     }
-    // ---------- Llamada a tres (dueño, 30 Oct 2026, 08:33: «que podamos hablar los tres a la vez»; 09:16: «es muy importante») ----------
-    // Quien añade a la tercera persona hace de puente: su equipo mantiene dos llamadas, una con cada persona, y a cada una le manda
-    // su voz junto con la de la otra (mezcladas aquí) y, además de su imagen, la de la otra. Cada tramo es una llamada normal:
-    // encriptada de extremo a extremo (DTLS-SRTP), por el relé y con la oferta dentro del canal encriptado de su conversación. Las
-    // otras dos personas no necesitan conocerse ni tener una conversación entre ellas, y nadie ve la dirección IP de nadie. Si una de
-    // ellas cuelga, la llamada sigue entre las otras dos; si cuelga el puente, termina para todos. A cada una se le dice solo el
-    // nombre que la otra se puso a sí misma (nunca el nombre con el que la guarda el puente).
-    function nombreTercero() { return (tercero ? tercero.nombre : visto ? visto.nombre : '') || t('Persona invitada'); }
-    function mandaT(m) { if (tercero && o.mandaA) o.mandaA(tercero.sala, m); }
+    // ---------- Llamada en grupo, hasta 4 (dueño, 30 Oct 2026: 08:33 «que podamos hablar los tres a la vez»; 10:43 «podíamos ser
+    // cuatro… cualquier participante… pueda añadir… a otra persona»; 10:53 «haz… lo de la llamada 4») ----------
+    // Quien añade a alguien lo une con una llamada nueva (un «tramo»), así que la llamada es un árbol de tramos. Cada equipo manda
+    // por cada tramo su voz mezclada con la que le llega por los demás tramos y, además de su imagen, las imágenes que le llegan
+    // por los demás. Cada tramo es una llamada normal: encriptada de extremo a extremo (DTLS-SRTP), por el relé y con la oferta
+    // dentro del canal encriptado de su conversación; nadie necesita conocer a los demás ni ver su IP. Si alguien cuelga, siguen
+    // los demás; quien estaba unido solo a través de esa persona se queda fuera. A cada uno se le dice solo el nombre que los
+    // demás se pusieron a sí mismos (nunca el nombre con el que los guarda quien los añadió).
+    // (funciones con nombre, no flechas: «pinta» las usa y puede correr antes de llegar aquí)
+    function tramoPrincipal() { if (!PR) PR = { principal: true, clave: 'p', videos: new Map(), quien: null, reenvios: new Map(), dest: null, n: 1, nEnviado: 0, quienEnviado: '', renegPendiente: false }; return PR; }
+    function tpc(L) { return L.principal ? pc : L.pc; }
+    function tid(L) { return L.principal ? idLlamada : L.id; }
+    function tmanda(L, m) { if (L.principal) o.manda(m); else if (o.mandaA) o.mandaA(L.sala, m); }
+    function tvoz(L) { return L.principal ? vozSuya : L.voz; }
+    function tcam(L) { return L.principal ? ((remotoV && remotoV.getVideoTracks()[0]) || null) : L.cam; }
+    function tcamOn(L) { return L.principal ? suCamara : L.camOn !== false; }
+    function tsabe(L) { return L.principal ? suTres : !!L.sabe; }
+    function tnombre(L) { return (L.principal ? o.nombre() : L.nombre) || t('Persona invitada'); }
+    function tcompartido(L) { return String((L.principal ? (o.nombrePropio ? o.nombrePropio() : '') : L.compartido) || '').slice(0, 40); }
+    function teducado(L) { return L.principal ? !inicioYo : false; } // en un choque de ofertas, cede quien contestó la llamada de ese tramo
+    // los tramos en marcha (el principal y los añadidos que ya hablan); con «todos», también los que están sonando
+    function tramos(todos) { const r = []; if (pc && (estado === 'hablando' || todos)) r.push(tramoPrincipal()); for (const L of patas) if (L.estado === 'hablando' || todos) r.push(L); return r; }
+    function totalGrupo() { return 1 + tramos().reduce((s, L) => s + Math.max(1, L.n | 0), 0); }
+    function enGrupo() { return estado === 'hablando' && totalGrupo() > 2; }
+    function puedeAnadir() { return estado === 'hablando' && !!pc && !blindada() && !!o.eligeTercero && !patas.some((L) => L.estado === 'saliente') && totalGrupo() < MAX_GRUPO; }
     function vozMia() { return (envio && envio.getAudioTracks()[0]) || null; }
     function emisorVoz(p) { return p && p.getSenders().find((x) => x.track && x.track.kind === 'audio' && x.track !== muda); }
-    function emisorImagen(p, salvo) { return p && p.getSenders().find((x) => x.track && x.track.kind === 'video' && !(salvo && x === salvo.sender)); }
-    // (funciones con nombre, no flechas: «pinta» las usa y puede correr antes de llegar aquí)
+    function emisorCam(L) {
+      const p = tpc(L); if (!p) return null; if (L.miCam) return L.miCam;
+      const otros = new Set([...L.reenvios.values()].map((r) => r.tr.sender));
+      return p.getSenders().find((x) => x.track && x.track.kind === 'video' && !otros.has(x)) || null;
+    }
+    // ---- la mezcla de voces: por cada tramo, mi voz y las de los demás tramos (nunca la suya) ----
     function mezclaCrea() {
       if (mezcla) return mezcla;
       const AC = raiz.AudioContext || raiz.webkitAudioContext; if (!AC) return null;
       let c = null; try { c = new AC({ latencyHint: 'interactive', sampleRate: 48000 }); } catch (_) { try { c = new AC({ latencyHint: 'interactive' }); } catch (_) { return null; } }
       c.onstatechange = () => { if (mezcla && mezcla.ctx === c && c.state !== 'running' && c.state !== 'closed' && estado !== 'libre') c.resume().catch(() => {}); };
       if (c.state !== 'running') c.resume().catch(() => {});
-      // aB: lo que oye la otra persona (mi voz y la del tercero); aC: lo que oye el tercero (mi voz y la de la otra persona)
-      mezcla = { ctx: c, aB: c.createMediaStreamDestination(), aC: c.createMediaStreamDestination(), fuentes: new Map() };
+      mezcla = { ctx: c, nodos: new Map() };
       return mezcla;
     }
-    function mezclaUne(clave, pista, destinos) {
-      if (!mezcla) return;
-      const v = mezcla.fuentes.get(clave);
-      if (v && v.pista === pista) return;
-      if (v) { try { v.nodo.disconnect(); } catch (_) {} mezcla.fuentes.delete(clave); }
-      if (!pista) return;
-      try { const n = mezcla.ctx.createMediaStreamSource(new MediaStream([pista])); for (const d of destinos) n.connect(d); mezcla.fuentes.set(clave, { pista, nodo: n }); } catch (_) {}
-    }
+    function destDe(L) { if (!mezcla) return null; if (!L.dest) L.dest = mezcla.ctx.createMediaStreamDestination(); return L.dest; }
     function mezclaAlDia() {
-      if (!mezcla) return;
-      mezclaUne('yo', vozMia(), [mezcla.aB, mezcla.aC]);
-      mezclaUne('suya', vozSuya, [mezcla.aC]);
-      mezclaUne('tercero', tercero && tercero.vozRemota, [mezcla.aB]);
+      const ts = tramos(true).filter((L) => tpc(L));
+      if (ts.length < 2) {
+        // un solo tramo: mi voz tal cual, sin pasar por la mezcla
+        for (const L of ts) { const s = emisorVoz(tpc(L)), yo = vozMia(); if (s && yo && s.track !== yo) s.replaceTrack(yo).catch(() => {}); }
+        mezclaFin(); return;
+      }
+      const mz = mezclaCrea(); if (!mz) return;
+      if (mz.ctx.state !== 'running') mz.ctx.resume().catch(() => {});
+      const fuentes = [{ pista: vozMia(), de: null }];
+      for (const L of ts) { const v = tvoz(L); if (v) fuentes.push({ pista: v, de: L }); }
+      const vivas = new Set();
+      for (const f of fuentes) {
+        if (!f.pista) continue; vivas.add(f.pista);
+        let n = mz.nodos.get(f.pista);
+        if (!n) { try { n = mz.ctx.createMediaStreamSource(new MediaStream([f.pista])); mz.nodos.set(f.pista, n); } catch (_) { continue; } }
+        try { n.disconnect(); } catch (_) {}
+        for (const L of ts) if (L !== f.de) { const d = destDe(L); if (d) { try { n.connect(d); } catch (_) {} } }
+      }
+      for (const [p, n] of mz.nodos) if (!vivas.has(p)) { try { n.disconnect(); } catch (_) {} mz.nodos.delete(p); }
+      for (const L of ts) { const s = emisorVoz(tpc(L)), d = destDe(L), a = d && d.stream.getAudioTracks()[0]; if (s && a && s.track !== a) s.replaceTrack(a).catch(() => {}); }
     }
     function mezclaFin() {
-      const m = mezcla; mezcla = null; if (!m) return;
-      for (const v of m.fuentes.values()) { try { v.nodo.disconnect(); } catch (_) {} }
-      try { m.aB.stream.getTracks().forEach((x) => x.stop()); m.aC.stream.getTracks().forEach((x) => x.stop()); } catch (_) {}
+      const m = mezcla; mezcla = null; if (PR) PR.dest = null; for (const L of patas) L.dest = null;
+      if (!m) return;
+      for (const n of m.nodos.values()) { try { n.disconnect(); } catch (_) {} }
       try { m.ctx.close(); } catch (_) {}
     }
-    // una oferta nueva por una conexión ya en marcha (para mandar una imagen más); si está a mitad de otra negociación, espera
-    async function renegocia(p, manda, id, intento) {
+    // ---- las imágenes: cada tramo recibe las de los demás tramos (la cámara de su persona y las que esa persona reenvía) ----
+    const activa = (L, mid) => !L.quien || Object.prototype.hasOwnProperty.call(L.quien, mid);
+    function limpiaQuien(q) { const r = {}; let n = 0; for (const [k, v] of Object.entries(q || {})) { if (n >= 8 || !/^[\w-]{1,8}$/.test(k)) continue; r[k] = String(v || '').slice(0, 40); n++; } return r; }
+    function fuentesImagen(K) {
+      const out = [];
+      const c = tcam(K); if (c && c.readyState === 'live' && tcamOn(K)) out.push({ clave: K.clave + ':cam', pista: c, nombre: tcompartido(K) });
+      for (const [mid, v] of K.videos) if (v.pista && v.pista.readyState === 'live' && activa(K, mid)) out.push({ clave: K.clave + ':' + mid, pista: v.pista, nombre: (K.quien && K.quien[mid]) || '' });
+      return out;
+    }
+    function quienDe(L) { const q = {}; for (const r of L.reenvios.values()) if (r.tr.mid && r.tr.sender.track) q[r.tr.mid] = String(r.nombre || '').slice(0, 40); return q; }
+    function mandaQuien(L) { const q = quienDe(L), s = JSON.stringify(q); if (L.quienEnviado === s) return; L.quienEnviado = s; tmanda(L, { acto: 'tres-quien', id: tid(L), quien: q }); }
+    // una oferta nueva por un tramo ya en marcha (para mandar una imagen más); si está a mitad de otra negociación, espera
+    async function renegocia(L, intento) {
+      const p = tpc(L); if (!p || p.signalingState === 'closed') return;
+      L.renegPendiente = true;
+      if (p.signalingState !== 'stable') { if ((intento | 0) < 30) setTimeout(() => renegocia(L, (intento | 0) + 1), 300); return; }
       try {
-        if (p.signalingState === 'closed') return;
-        if (p.signalingState !== 'stable') { if ((intento | 0) < 20) setTimeout(() => renegocia(p, manda, id, (intento | 0) + 1), 300); return; }
-        const of = await p.createOffer(); await p.setLocalDescription({ type: of.type, sdp: altaFidelidad(of.sdp) });
-        manda({ acto: 'tres-oferta', id, sdp: p.localDescription.sdp });
+        const of = await p.createOffer();
+        if (p.signalingState !== 'stable') { if ((intento | 0) < 30) setTimeout(() => renegocia(L, (intento | 0) + 1), 300); return; }
+        await p.setLocalDescription({ type: of.type, sdp: altaFidelidad(of.sdp) });
+        const q = quienDe(L); L.quienEnviado = JSON.stringify(q);
+        tmanda(L, { acto: 'tres-oferta', id: tid(L), sdp: p.localDescription.sdp, quien: q });
       } catch (_) {}
     }
-    // cada imagen, a quien no la tiene: la del tercero a la otra persona y la de la otra persona al tercero (si sus equipos lo entienden)
     function reenviaImagenes() {
-      if (!tercero || tercero.estado !== 'hablando' || !video || !pc) return;
-      const t3 = tercero;
-      if (suTres && t3.videoRemoto) {
-        if (!t3.trHaciaB) { try { t3.trHaciaB = pc.addTransceiver(t3.videoRemoto, { direction: 'sendonly', streams: [new MediaStream([t3.videoRemoto])] }); prefiereCodecs('compatible', true, pc, t3.trHaciaB); renegocia(pc, (m) => o.manda(m), idLlamada); } catch (_) {} }
-        else if (t3.trHaciaB.sender.track !== t3.videoRemoto) t3.trHaciaB.sender.replaceTrack(t3.videoRemoto).catch(() => {});
-      }
-      const suya = remotoV && remotoV.getVideoTracks()[0];
-      if (t3.suTres && suya && t3.pc) {
-        if (!t3.trHaciaC) { try { t3.trHaciaC = t3.pc.addTransceiver(suya, { direction: 'sendonly', streams: [new MediaStream([suya])] }); prefiereCodecs('compatible', true, t3.pc, t3.trHaciaC); renegocia(t3.pc, mandaT, t3.id); } catch (_) {} }
-        else if (t3.trHaciaC.sender.track !== suya) t3.trHaciaC.sender.replaceTrack(suya).catch(() => {});
+      if (!video) return;
+      const ts = tramos();
+      for (const L of ts) {
+        const p = tpc(L); if (!p || !tsabe(L)) continue;
+        const quiero = new Map(); for (const K of ts) if (K !== L) for (const f of fuentesImagen(K)) quiero.set(f.clave, f);
+        let nuevo = false;
+        for (const [clave, f] of quiero) {
+          const r = L.reenvios.get(clave);
+          if (r) { if (r.tr.sender.track !== f.pista) r.tr.sender.replaceTrack(f.pista).catch(() => {}); r.nombre = f.nombre; continue; }
+          // primero, un hueco libre (una imagen que ya no se manda); si no hay, uno nuevo (y una oferta nueva)
+          const libre = [...L.reenvios.entries()].find(([k, x]) => !quiero.has(k));
+          if (libre) { L.reenvios.delete(libre[0]); libre[1].tr.sender.replaceTrack(f.pista).catch(() => {}); libre[1].nombre = f.nombre; L.reenvios.set(clave, libre[1]); continue; }
+          try {
+            // reenviada: a la mitad de resolución y con un tope de caudal (cada imagen reenviada se vuelve a codificar en este equipo;
+            // en un teléfono, tres a 1080p lo calentarían y le quitarían fluidez a todas)
+            const tr = p.addTransceiver(f.pista, { direction: 'sendonly', streams: [new MediaStream([f.pista])], sendEncodings: [{ maxBitrate: 1500000, scaleResolutionDownBy: 2, maxFramerate: 30 }] });
+            prefiereCodecs('compatible', true, p, tr); L.reenvios.set(clave, { tr, nombre: f.nombre }); nuevo = true;
+          } catch (_) {}
+        }
+        for (const [clave, r] of L.reenvios) if (!quiero.has(clave) && r.tr.sender.track) r.tr.sender.replaceTrack(null).catch(() => {});
+        if (nuevo) renegocia(L); else mandaQuien(L);
       }
     }
-    function pintaTercero() {
-      const v3 = $('#v-tercero'), n3 = $('#ll-tercero-n'), n1 = $('#ll-remoto-n');
-      let pista = null, conCam = true;
-      if (tercero) { pista = tercero.estado === 'hablando' ? tercero.videoRemoto : null; conCam = tercero.suCamara !== false; }
-      else if (visto) { pista = visto.video || null; conCam = visto.camara !== false; }
-      const ve = !!(video && pista && pista.readyState === 'live' && !pista.muted && conCam && estado !== 'libre' && estado !== 'cerrando');
-      if (v3) { if (ve && (!v3.srcObject || v3.srcObject.getVideoTracks()[0] !== pista)) { v3.srcObject = new MediaStream([pista]); reproduce(v3); } v3.hidden = !ve; }
-      // la vista a tres (dueño, 30 Oct 2026, 10:38–10:45: «nadie… puede cambiar la vista… fijas»): al empezar, las dos personas a
-      // pantalla partida; al acabar, la vista de una llamada normal
-      const antes3 = caja.classList.contains('tres');
-      caja.classList.toggle('tres', ve);
-      if (ve !== antes3) { if (ve) caja.dataset.foco = ''; else delete caja.dataset.foco; if (video) raiz.requestAnimationFrame(() => miImagen()); }
-      caja.classList.toggle('a-tres', !!((tercero && tercero.estado === 'hablando') || visto));
-      if (n3) { n3.textContent = nombreTercero(); n3.hidden = !ve; }
-      if (n1) { n1.textContent = o.nombre() || t('Persona invitada'); n1.hidden = !ve; }
+    // ---- cuántos somos: cada tramo dice cuántas personas hay detrás de él ----
+    function mandaCuentas() {
+      const ts = tramos();
+      for (const L of ts) {
+        if (!tsabe(L)) continue;
+        const n = 1 + ts.filter((K) => K !== L).reduce((s, K) => s + Math.max(1, K.n | 0), 0);
+        if (L.nEnviado !== n) { L.nEnviado = n; tmanda(L, { acto: 'tres-n', id: tid(L), n }); }
+      }
     }
-    // el puente: llamar al tercero (la app elige a quién y le pasa su nombre, el que el tercero se puso y el de la otra persona)
+    // ---- la pantalla: una imagen por persona; tocando una, en grande; tocando la grande, otra vez todas ----
+    const TILES = new Map(); // clave → { v: <video>, n: nombre }
+    function vistas() {
+      const r = [];
+      for (const K of tramos()) {
+        const c = tcam(K);
+        if (c && c.readyState === 'live' && tcamOn(K) && (!K.principal || remotoV)) r.push({ clave: K.clave + ':cam', pista: c, nombre: tnombre(K), principal: !!K.principal });
+        for (const [mid, v] of K.videos) if (v.pista && v.pista.readyState === 'live' && !v.pista.muted && activa(K, mid)) r.push({ clave: K.clave + ':' + mid, pista: v.pista, nombre: (K.quien && K.quien[mid]) || t('Persona invitada') });
+      }
+      return r;
+    }
+    function quitaTiles() { for (const el of TILES.values()) { try { el.v.srcObject = null; el.v.remove(); el.n.remove(); } catch (_) {} } TILES.clear(); }
+    function pintaGrupo() {
+      const cont = $('#ll-videos'); if (!cont) return;
+      const lista = (video && estado !== 'libre' && estado !== 'cerrando') ? vistas() : [];
+      const quiero = new Set(lista.filter((x) => !x.principal).map((x) => x.clave));
+      for (const [k, el] of TILES) if (!quiero.has(k)) { try { el.v.srcObject = null; el.v.remove(); el.n.remove(); } catch (_) {} TILES.delete(k); }
+      for (const x of lista) {
+        if (x.principal) { const n1 = $('#ll-remoto-n'); if (n1) n1.textContent = x.nombre; continue; }
+        let el = TILES.get(x.clave);
+        if (!el) {
+          const v = document.createElement('video'); v.className = 'll-tile'; v.autoplay = true; v.playsInline = true; v.muted = true; v.setAttribute('playsinline', ''); v.setAttribute('muted', '');
+          const clave = x.clave; v.addEventListener('click', () => tocaVista(clave));
+          const n = document.createElement('span'); n.className = 'll-tile-n'; n.setAttribute('translate', 'no');
+          const vl = $('#v-local'); if (vl && vl.parentNode === cont) cont.insertBefore(v, vl); else cont.append(v);
+          cont.append(n); el = { v, n }; TILES.set(x.clave, el);
+        }
+        if (!el.v.srcObject || el.v.srcObject.getVideoTracks()[0] !== x.pista) { el.v.srcObject = new MediaStream([x.pista]); reproduce(el.v); }
+        el.n.textContent = x.nombre;
+      }
+      const grupo = lista.length >= 2;
+      const antes = caja.classList.contains('tres');
+      caja.classList.toggle('tres', grupo);
+      caja.classList.toggle('a-tres', enGrupo());
+      if (grupo !== antes) { if (grupo) caja.dataset.foco = ''; else delete caja.dataset.foco; if (video) raiz.requestAnimationFrame(() => miImagen()); }
+      if (grupo && caja.dataset.foco && !lista.some((x) => x.clave === caja.dataset.foco)) caja.dataset.foco = '';
+      const vs = $('#ll-videos'); if (vs && TILES.size) vs.hidden = false;
+      colocaTiles(lista);
+    }
+    const PROPS = ['position', 'left', 'top', 'right', 'bottom', 'width', 'height', 'max-width', 'aspect-ratio', 'border', 'border-radius', 'object-fit', 'z-index', 'box-shadow', 'transform'];
+    function colocaTiles(lista) {
+      const grupo = caja.classList.contains('tres') && !caja.classList.contains('mini');
+      const els = lista.map((x) => (x.principal ? { x, v: $('#v-remoto'), n: $('#ll-remoto-n') } : { x, v: TILES.get(x.clave).v, n: TILES.get(x.clave).n })).filter((e) => e.v);
+      const limpia = (el) => { for (const p of PROPS) el.style.removeProperty(p); };
+      const pon = (el, ob) => { for (const [k, v] of Object.entries(ob)) el.style.setProperty(k, v, 'important'); };
+      const nombre = (n, ob) => { if (!n) return; n.hidden = false; for (const k of ['left', 'top', 'bottom', 'max-width']) n.style.removeProperty(k); for (const [k, v] of Object.entries(ob)) n.style.setProperty(k, v, 'important'); };
+      { const v1 = $('#v-remoto'); if (v1 && !els.some((e) => e.v === v1)) limpia(v1); const n1 = $('#ll-remoto-n'); if (n1 && !els.some((e) => e.n === n1)) n1.hidden = true; }
+      if (!grupo) { for (const e of els) { limpia(e.v); if (e.n) e.n.hidden = true; } return; }
+      const cont = $('#ll-videos'), W = cont.clientWidth || innerWidth, H = cont.clientHeight || innerHeight, horiz = W >= H, n = els.length, foco = caja.dataset.foco || '';
+      let k = 0;
+      els.forEach((e, i) => {
+        limpia(e.v);
+        const base = { position: 'absolute', right: 'auto', bottom: 'auto', 'max-width': 'none', 'object-fit': 'cover', transform: 'none', border: '0', 'border-radius': '0', 'aspect-ratio': 'auto', 'z-index': '0' };
+        if (foco && e.x.clave === foco) {
+          pon(e.v, Object.assign(base, { left: '0', top: '0', width: '100%', height: '100%' }));
+          nombre(e.n, { left: '16px', top: 'auto', bottom: 'calc(140px + env(safe-area-inset-bottom, 0px))', 'max-width': 'calc(100% - 200px)' });
+        } else if (foco) {
+          pon(e.v, Object.assign(base, { left: '16px', top: 'calc(env(safe-area-inset-top, 0px) + ' + (116 + k * 172) + 'px)', width: '120px', height: '160px', border: '1px solid rgba(218,236,250,.22)', 'border-radius': '12px', 'z-index': '2', 'box-shadow': '0 8px 24px -10px rgba(0,0,0,.7)' }));
+          k++; if (e.n) e.n.hidden = true;
+        } else {
+          const f = 100 / n;
+          pon(e.v, Object.assign(base, horiz ? { left: (f * i) + '%', top: '0', width: f + '%', height: '100%' } : { left: '0', top: (f * i) + '%', width: '100%', height: f + '%' }));
+          nombre(e.n, horiz ? { left: 'calc(' + (f * i) + '% + 16px)', top: 'auto', bottom: 'calc(140px + env(safe-area-inset-bottom, 0px))', 'max-width': 'calc(' + f + '% - 32px)' }
+            : { left: '12px', bottom: 'auto', top: 'min(calc(' + (f * (i + 1)) + '% - 44px), calc(100% - 190px - env(safe-area-inset-bottom, 0px)))', 'max-width': 'calc(100% - 24px)' });
+        }
+      });
+      // la raya entre imágenes solo cuando son dos (con tres no cae en la mitad)
+      caja.classList.toggle('tres-n3', n >= 3);
+    }
+    function tocaVista(clave) {
+      if (!caja.classList.contains('tres') || caja.classList.contains('mini')) return;
+      const f = caja.dataset.foco || '';
+      caja.dataset.foco = f === clave ? '' : clave;
+      colocaTiles(video ? vistas() : []);
+    }
+    { const v1 = $('#v-remoto'); if (v1) v1.addEventListener('click', () => tocaVista('p:cam')); }
+    addEventListener('resize', () => { if (caja.classList.contains('tres')) colocaTiles(video ? vistas() : []); }, { passive: true });
+    // ---- añadir a alguien (cualquiera de la llamada): un tramo nuevo con esa persona ----
     async function anade(sala, d) {
       d = d || {};
-      if (estado !== 'hablando' || tercero || visto || !suTres || blindada() || !pc || !sala) return false;
+      if (!puedeAnadir() || !sala || patas.some((L) => L.sala === String(sala))) return false;
       const ice = o.ice() || [];
       if (!ice.length && !LOCAL) { o.aviso && o.aviso(t('El servicio de llamadas no está disponible ahora mismo.')); return false; }
       const mz = mezclaCrea(); if (!mz) return false;
       if (mz.ctx.state !== 'running') mz.ctx.resume().catch(() => {});
       const id = Math.random().toString(36).slice(2, 10);
-      const t3 = tercero = { sala: String(sala), nombre: String(d.nombre || '').slice(0, 40), compartido: String(d.suNombre || '').slice(0, 40), id, pc: null, estado: 'saliente', pendientes: [], vozRemota: null, videoRemoto: null, suCamara: true, suTres: false, trHaciaB: null, trHaciaC: null, sinRespuesta: null, inicio: 0, corte: null };
+      const L = { sala: String(sala), clave: 'x' + id, nombre: String(d.nombre || '').slice(0, 40), compartido: String(d.suNombre || '').slice(0, 40), id, pc: null, estado: 'saliente', pendientes: [], voz: null, cam: null, camOn: true, sabe: false, videos: new Map(), quien: null, reenvios: new Map(), dest: null, n: 1, nEnviado: 0, quienEnviado: '', renegPendiente: false, el: null, miCam: null, sinRespuesta: null, inicio: 0, corte: null };
+      patas.push(L);
       const tieneTurn = ice.some((s) => [].concat(s.urls).some((u) => /^turns?:/.test(u)));
-      const p = t3.pc = new RTCPeerConnection({ iceServers: ice, iceTransportPolicy: (tieneTurn || !LOCAL) ? 'relay' : 'all', bundlePolicy: 'max-bundle', rtcpMuxPolicy: 'require' });
-      cableaTercero(p, id);
+      const p = L.pc = new RTCPeerConnection({ iceServers: ice, iceTransportPolicy: (tieneTurn || !LOCAL) ? 'relay' : 'all', bundlePolicy: 'max-bundle', rtcpMuxPolicy: 'require' });
+      cablea(L);
       mezclaAlDia();
-      const voz3 = mz.aC.stream.getAudioTracks()[0];
-      const es = video ? emisorImagen(pc) : null, pi = es && es.track ? es.track : null;
-      const flujo = new MediaStream([voz3].concat(pi ? [pi] : []));
-      flujo.getTracks().forEach((x) => p.addTrack(x, flujo));
+      const d3 = destDe(L), voz3 = d3 && d3.stream.getAudioTracks()[0];
+      const es = video ? emisorCam(tramoPrincipal()) : null, pi = es && es.track ? es.track : null;
+      const flujo = new MediaStream([voz3 || vozMia()].concat(pi ? [pi] : []).filter(Boolean));
+      flujo.getTracks().forEach((x) => { const s = p.addTrack(x, flujo); if (x.kind === 'video') L.miCam = s; });
       if (video && !pi) { try { p.addTransceiver('video', { direction: 'recvonly' }); } catch (_) {} }
       if (video) prefiereCodecs('compatible', true, p);
-      di(t('Llamando a {n}…').replace('{n}', t3.nombre || t('Persona invitada')));
+      di(t('Llamando a {n}…').replace('{n}', L.nombre || t('Persona invitada')));
       pinta();
       try {
         const of = await p.createOffer(); await p.setLocalDescription({ type: of.type, sdp: altaFidelidad(of.sdp) });
-        if (tercero !== t3) return false;
-        mandaT({ acto: 'oferta', id, sdp: p.localDescription.sdp, video: video ? 1 : undefined, equipo: 'compatible', plat: PLAT, tres: TRES, puente: 1, con: String(d.nombreOtro || '').slice(0, 40) || undefined });
-      } catch (_) { quitaTercero('fallo'); return false; }
-      t3.sinRespuesta = setTimeout(() => { if (tercero === t3 && t3.estado === 'saliente') { mandaT({ acto: 'colgar', id }); quitaTercero('sin-respuesta'); } }, SIN_RESPUESTA_MS);
+        if (!patas.includes(L)) return false;
+        tmanda(L, { acto: 'oferta', id, sdp: p.localDescription.sdp, video: video ? 1 : undefined, equipo: 'compatible', plat: PLAT, tres: TRES, puente: 1, n: totalGrupo() });
+      } catch (_) { quitaPata(L, 'fallo'); return false; }
+      L.sinRespuesta = setTimeout(() => { if (patas.includes(L) && L.estado === 'saliente') { tmanda(L, { acto: 'colgar', id }); quitaPata(L, 'sin-respuesta'); } }, SIN_RESPUESTA_MS);
       return true;
     }
-    function cableaTercero(p, id) {
+    function cablea(L) {
+      const p = L.pc, id = L.id;
       p.ontrack = (e) => {
-        if (pc === p || !tercero || tercero.pc !== p) return;
+        // ya es el tramo principal (la otra persona colgó y este pasó a principal): las imágenes nuevas, al principal
+        const K = pc === p ? tramoPrincipal() : (patas.includes(L) ? L : null); if (!K) return;
         if (e.track.kind === 'video') {
           const vids = p.getTransceivers().filter((x) => x.receiver && x.receiver.track && x.receiver.track.kind === 'video');
-          if (vids[0] !== e.transceiver) return;
-          tercero.videoRemoto = e.track; e.track.onunmute = () => { pintaTercero(); reenviaImagenes(); }; pintaTercero(); reenviaImagenes(); return;
+          const avisa = () => { pintaGrupo(); reenviaImagenes(); };
+          if (vids[0] === e.transceiver) { if (!K.principal) { K.cam = e.track; e.track.onunmute = avisa; e.track.onmute = avisa; e.track.onended = avisa; avisa(); } return; }
+          K.videos.set(e.transceiver.mid || ('v' + K.videos.size), { pista: e.track }); e.track.onunmute = avisa; e.track.onmute = avisa; e.track.onended = avisa; avisa(); return;
         }
-        if (!tercero.vozRemota) { tercero.vozRemota = e.track; const a = $('#a-tercero'); if (a) { a.srcObject = new MediaStream([e.track]); reproduce(a); } mezclaAlDia(); }
+        if (!K.principal && !K.voz) {
+          K.voz = e.track;
+          const a = document.createElement('audio'); a.autoplay = true; a.setAttribute('aria-hidden', 'true'); a.style.display = 'none'; document.body.append(a);
+          a.srcObject = new MediaStream([e.track]); K.el = a; reproduce(a);
+          try { const ar = $('#a-remoto'); if (ar && ar.sinkId && typeof a.setSinkId === 'function') a.setSinkId(ar.sinkId).catch(() => {}); } catch (_) {}
+          mezclaAlDia();
+        }
       };
-      p.onicecandidate = (e) => { if (!e.candidate) return; const m = { acto: 'ice', id: pc === p ? idLlamada : id, cand: e.candidate.toJSON() }; if (pc === p) o.manda(m); else if (tercero && tercero.pc === p) mandaT(m); };
+      p.onicecandidate = (e) => { if (!e.candidate) return; const m = { acto: 'ice', id: pc === p ? idLlamada : id, cand: e.candidate.toJSON() }; if (pc === p) o.manda(m); else if (patas.includes(L)) tmanda(L, m); };
       p.onconnectionstatechange = () => {
         if (pc === p) { if (alEstadoPc) alEstadoPc(); return; }
-        if (!tercero || tercero.pc !== p) return;
+        if (!patas.includes(L)) return;
         const st = p.connectionState;
-        if (st === 'connected') { clearTimeout(tercero.corte); tercero.corte = null; terceroDentro(); }
-        else if (st === 'failed') { mandaT({ acto: 'colgar', id }); quitaTercero('fallo'); }
-        else if (st === 'disconnected' && tercero.estado === 'hablando' && !tercero.corte) {
-          // un corte corto: se renegocia la ruta (el puente hizo la oferta); si en 25 s no vuelve, el tercero sale
-          const t3 = tercero;
-          t3.corte = setTimeout(async () => { if (tercero !== t3 || p.connectionState === 'connected') return; try { const of = await p.createOffer({ iceRestart: true }); await p.setLocalDescription({ type: of.type, sdp: altaFidelidad(of.sdp) }); mandaT({ acto: 'reoferta', id, sdp: p.localDescription.sdp }); } catch (_) {} t3.corte = setTimeout(() => { if (tercero === t3 && p.connectionState !== 'connected') { mandaT({ acto: 'colgar', id }); quitaTercero('fallo'); } }, 25000); }, 2500);
+        if (st === 'connected') { clearTimeout(L.corte); L.corte = null; dentro(L); }
+        else if (st === 'failed') { tmanda(L, { acto: 'colgar', id }); quitaPata(L, 'fallo'); }
+        else if (st === 'disconnected' && L.estado === 'hablando' && !L.corte) {
+          // un corte corto: se renegocia la ruta (quien añadió hizo la oferta); si en 25 s no vuelve, esa persona sale
+          L.corte = setTimeout(async () => { if (!patas.includes(L) || p.connectionState === 'connected') return; try { const of = await p.createOffer({ iceRestart: true }); await p.setLocalDescription({ type: of.type, sdp: altaFidelidad(of.sdp) }); tmanda(L, { acto: 'reoferta', id, sdp: p.localDescription.sdp }); } catch (_) {} L.corte = setTimeout(() => { if (patas.includes(L) && p.connectionState !== 'connected') { tmanda(L, { acto: 'colgar', id }); quitaPata(L, 'fallo'); } }, 25000); }, 2500);
         }
       };
     }
-    function terceroDentro() {
-      const t3 = tercero; if (!t3 || t3.estado === 'hablando') return;
-      t3.estado = 'hablando'; t3.inicio = Date.now(); clearTimeout(t3.sinRespuesta);
-      // a la otra persona: quién se ha unido, y desde ahora mi voz junto con la del tercero
-      o.manda({ acto: 'tres', id: idLlamada, on: 1, nombre: t3.compartido || undefined });
+    function dentro(L) {
+      if (!L || L.estado === 'hablando') return;
+      L.estado = 'hablando'; L.inicio = Date.now(); clearTimeout(L.sinRespuesta);
       mezclaAlDia();
       if (mezcla && mezcla.ctx.state !== 'running') mezcla.ctx.resume().catch(() => {});
-      const s = emisorVoz(pc), a = mezcla && mezcla.aB.stream.getAudioTracks()[0];
-      if (s && a && s.track !== a) s.replaceTrack(a).catch(() => {});
-      if (!camaraOn() && video) mandaT({ acto: 'camara', id: t3.id, on: false });
-      if (video && !suCamara) mandaT({ acto: 'tres-camara', id: t3.id, on: false });
-      const x = t('{n} se ha unido a la llamada.').replace('{n}', t3.nombre || t('Persona invitada')); di(x); setTimeout(() => { if (paso.textContent === x) di(''); }, 5000);
-      reenviaImagenes(); pinta();
+      if (video && !camaraOn()) tmanda(L, { acto: 'camara', id: L.id, on: false });
+      const x = t('{n} se ha unido a la llamada.').replace('{n}', L.nombre || t('Persona invitada')); di(x); setTimeout(() => { if (paso.textContent === x) di(''); }, 5000);
+      mandaCuentas(); reenviaImagenes(); pinta();
     }
-    // el tercero sale (colgó, no contestó, estaba ocupado, falló) o lo quito yo; «final»: termina toda la llamada
-    function quitaTercero(por, final) {
-      const t3 = tercero; if (!t3) return; tercero = null;
-      clearTimeout(t3.sinRespuesta); clearTimeout(t3.corte);
-      try { t3.pc.close(); } catch (_) {}
-      const a = $('#a-tercero'); if (a) a.srcObject = null;
-      const v3 = $('#v-tercero'); if (v3) v3.srcObject = null;
-      if (!final && pc) {
-        // a la otra persona, otra vez solo mi voz, y fuera la imagen del tercero
-        const s = emisorVoz(pc), yo = vozMia(); if (s && yo && s.track !== yo) s.replaceTrack(yo).catch(() => {});
-        if (t3.trHaciaB) { try { t3.trHaciaB.sender.replaceTrack(null); } catch (_) {} }
-        if (t3.estado === 'hablando') o.manda({ acto: 'tres', id: idLlamada, on: 0 });
+    // una persona añadida por mí sale (colgó, no contestó, estaba ocupada, falló) o la quito yo; «final»: termina toda la llamada
+    function quitaPata(L, por, final) {
+      const i = patas.indexOf(L); if (i < 0) return; patas.splice(i, 1);
+      clearTimeout(L.sinRespuesta); clearTimeout(L.corte);
+      try { L.pc.close(); } catch (_) {}
+      if (L.el) { try { L.el.srcObject = null; L.el.remove(); } catch (_) {} }
+      if (!final) {
+        mezclaAlDia(); reenviaImagenes(); mandaCuentas();
+        if (estado === 'hablando') {
+          const n = L.nombre || t('Persona invitada');
+          const txt = L.estado === 'hablando' ? t('{n} ha salido de la llamada.') : por === 'ocupado' ? t('{n} está en otra llamada.') : por === 'yo' ? '' : por === 'fallo' ? t('No se pudo mantener la conexión.') : t('{n} no ha contestado.');
+          if (txt) { const x = txt.replace('{n}', n); di(x, por === 'fallo'); setTimeout(() => { if (paso.textContent === x) di(''); }, 5000); } else di('');
+        }
       }
-      mezclaFin();
-      if (!final && estado === 'hablando') {
-        const n = t3.nombre || t('Persona invitada');
-        const txt = t3.estado === 'hablando' ? t('{n} ha salido de la llamada.') : por === 'ocupado' ? t('{n} está en otra llamada.') : por === 'yo' ? '' : por === 'fallo' ? t('No se pudo mantener la conexión.') : t('{n} no ha contestado.');
-        if (txt) { const x = txt.replace('{n}', n); di(x, por === 'fallo'); setTimeout(() => { if (paso.textContent === x) di(''); }, 5000); } else di('');
-      }
-      // en el chat con el tercero queda la llamada, como cualquier otra
-      if (o.finA) o.finA(t3.sala, t3.estado === 'hablando' ? { por: 'fin', duracion: t3.inicio ? Date.now() - t3.inicio : 0, mia: true, yoColgue: por === 'yo', saliente: false, voz: false, video } : { por: por === 'ocupado' ? 'ocupado' : por === 'yo' ? 'cancelada' : 'rechazada', duracion: 0, mia: true, yoColgue: por === 'yo', saliente: true, voz: false, video });
+      // en el chat con esa persona queda la llamada, como cualquier otra
+      if (o.finA) o.finA(L.sala, L.estado === 'hablando' ? { por: 'fin', duracion: L.inicio ? Date.now() - L.inicio : 0, mia: true, yoColgue: por === 'yo', saliente: false, voz: false, video } : { por: por === 'ocupado' ? 'ocupado' : por === 'yo' ? 'cancelada' : 'rechazada', duracion: 0, mia: true, yoColgue: por === 'yo', saliente: true, voz: false, video });
       pinta();
     }
-    // la otra persona colgó (o se cortó) con el tercero dentro: la llamada sigue con el tercero, que pasa a ser la llamada principal
+    // la persona de mi tramo principal colgó (o se cortó) con otras dentro: la llamada sigue; la primera añadida pasa a principal
     function asciende() {
-      const t3 = tercero; tercero = null;
-      clearTimeout(t3.sinRespuesta); clearTimeout(t3.corte);
-      const nB = o.nombre() || t('Persona invitada');
+      const P1 = patas.find((L) => L.estado === 'hablando'); if (!P1) return;
+      patas.splice(patas.indexOf(P1), 1);
+      clearTimeout(P1.sinRespuesta); clearTimeout(P1.corte);
+      const nB = tnombre(tramoPrincipal());
       // la llamada con la otra persona queda en su chat
       if (o.fin) o.fin({ por: 'fin', duracion: iniciada ? Date.now() - iniciada : 0, mia: inicioYo, yoColgue: false, saliente: false, voz: voz !== 'natural', video });
-      if (o.cambia) o.cambia(t3.sala);
+      if (o.cambia) o.cambia(P1.sala);
       try { pc.close(); } catch (_) {}
       reiniciando = false; clearTimeout(reinicioT); reinicioT = null; clearTimeout(reinicioFin); reinicioFin = null;
-      pc = t3.pc; idLlamada = t3.id; inicioYo = true; suTres = t3.suTres; mudasRemotas = []; pendientes = [];
+      pc = P1.pc; idLlamada = P1.id; inicioYo = true; suTres = P1.sabe; mudasRemotas = []; pendientes = [];
       pc.oniceconnectionstatechange = alIcePc; pc.onnegotiationneeded = alNegociarPc;
-      vozSuya = t3.vozRemota;
-      const ar = $('#a-remoto'); ar.srcObject = t3.vozRemota ? new MediaStream([t3.vozRemota]) : null; suenaRemoto(); if (salidas) aplicaSalida();
-      const a3 = $('#a-tercero'); if (a3) a3.srcObject = null;
-      remotoV = t3.videoRemoto ? new MediaStream([t3.videoRemoto]) : null; suCamara = t3.suCamara !== false;
+      vozSuya = P1.voz;
+      const ar = $('#a-remoto'); ar.srcObject = P1.voz ? new MediaStream([P1.voz]) : null; suenaRemoto(); if (salidas) aplicaSalida();
+      if (P1.el) { try { P1.el.srcObject = null; P1.el.remove(); } catch (_) {} }
+      remotoV = P1.cam ? new MediaStream([P1.cam]) : null; suCamara = P1.camOn !== false;
       const vr = $('#v-remoto'); vr.srcObject = remotoV; if (remotoV) reproduce(vr);
-      const v3 = $('#v-tercero'); if (v3) v3.srcObject = null;
-      const s = emisorVoz(pc), yo = vozMia(); if (s && yo && s.track !== yo) s.replaceTrack(yo).catch(() => {});
-      if (t3.trHaciaC) { try { t3.trHaciaC.sender.replaceTrack(null); } catch (_) {} }
-      if (t3.suTres) o.manda({ acto: 'tres', id: idLlamada, on: 0 });
-      mezclaFin();
+      PR = { principal: true, clave: 'p', videos: P1.videos, quien: P1.quien, reenvios: P1.reenvios, dest: P1.dest, n: P1.n, nEnviado: P1.nEnviado, quienEnviado: P1.quienEnviado, renegPendiente: false, miCam: P1.miCam };
+      quitaTiles();
+      mezclaAlDia(); reenviaImagenes(); mandaCuentas();
       const x = t('{n} ha salido de la llamada.').replace('{n}', nB); di(x); setTimeout(() => { if (paso.textContent === x) di(''); }, 5000);
       pintaVideo(); pinta(); topeAudio(); if (video) topeVideo();
     }
-    // el puente recibe lo que manda el tercero por su conversación
+    // lo que llega de cualquier tramo sobre el grupo: ofertas para una imagen más, quién es cada imagen y cuántos somos
+    async function recibeGrupo(L, m) {
+      const p = tpc(L); if (!p) return;
+      if (m.acto === 'tres-oferta' && typeof m.sdp === 'string' && m.sdp.length <= 60000) {
+        if (m.quien && typeof m.quien === 'object') L.quien = limpiaQuien(m.quien);
+        try {
+          if (p.signalingState !== 'stable') { if (!teducado(L)) return; await p.setLocalDescription({ type: 'rollback' }); }
+          await p.setRemoteDescription({ type: 'offer', sdp: m.sdp }); const an = await p.createAnswer(); await p.setLocalDescription({ type: an.type, sdp: altaFidelidad(an.sdp) });
+          tmanda(L, { acto: 'tres-respuesta', id: tid(L), sdp: p.localDescription.sdp });
+          if (L.principal) { if (video) topeVideo(); topeAudio(); }
+          if (L.renegPendiente) { L.renegPendiente = false; setTimeout(() => renegocia(L), 250); }
+        } catch (_) {}
+        pintaGrupo(); reenviaImagenes(); return;
+      }
+      if (m.acto === 'tres-respuesta' && typeof m.sdp === 'string' && m.sdp.length <= 60000) {
+        if (p.signalingState === 'have-local-offer') { try { await p.setRemoteDescription({ type: 'answer', sdp: m.sdp }); L.renegPendiente = false; if (L.principal && video) topeVideo(); } catch (_) {} }
+        mandaQuien(L); return;
+      }
+      if (m.acto === 'tres-quien' && m.quien && typeof m.quien === 'object') { L.quien = limpiaQuien(m.quien); pintaGrupo(); reenviaImagenes(); return; }
+      if (m.acto === 'tres-n') { L.n = Math.max(1, Math.min(8, m.n | 0)); mandaCuentas(); pinta(); return; }
+      // un puente de la versión anterior avisa de que el tercero sale
+      if (m.acto === 'tres' && !m.on) { L.quien = {}; L.n = 1; pinta(); }
+    }
+    // lo que manda una persona añadida por mí, por su conversación
     async function recibeTercero(sala, m) {
-      if (!m || !m.acto || !tercero || String(sala) !== tercero.sala) return false;
+      const L = patas.find((x) => x.sala === String(sala));
+      if (!m || !m.acto || !L) return false;
       if (m.acto === 'oferta') { if (o.mandaA) o.mandaA(sala, { acto: 'ocupado', id: m.id }); return true; }
-      if (m.id !== tercero.id) return true;
-      const t3 = tercero, p = t3.pc;
-      if (m.acto === 'sonando') { if (t3.estado === 'saliente') di(t('Llamando a {n}…').replace('{n}', t3.nombre || t('Persona invitada')) + ' · ' + t('Sonando…')); return true; }
+      if (m.id !== L.id) return true;
+      const p = L.pc;
+      if (/^tres/.test(m.acto)) { await recibeGrupo(L, m); return true; }
+      if (m.acto === 'sonando') { if (L.estado === 'saliente') di(t('Llamando a {n}…').replace('{n}', L.nombre || t('Persona invitada')) + ' · ' + t('Sonando…')); return true; }
       if (m.acto === 'respuesta') {
-        if (typeof m.sdp !== 'string' || m.sdp.length > 40000) return true;
-        t3.suTres = (m.tres | 0) >= 1;
-        try { await p.setRemoteDescription({ type: 'answer', sdp: m.sdp }); for (const c of t3.pendientes) { try { await p.addIceCandidate(c); } catch (_) {} } t3.pendientes = []; } catch (_) { mandaT({ acto: 'colgar', id: t3.id }); quitaTercero('fallo'); }
+        if (typeof m.sdp !== 'string' || m.sdp.length > 60000) return true;
+        L.sabe = (m.tres | 0) >= 1;
+        try { await p.setRemoteDescription({ type: 'answer', sdp: m.sdp }); for (const c of L.pendientes) { try { await p.addIceCandidate(c); } catch (_) {} } L.pendientes = []; } catch (_) { tmanda(L, { acto: 'colgar', id: L.id }); quitaPata(L, 'fallo'); }
         return true;
       }
-      if (m.acto === 'ice' && m.cand && typeof m.cand === 'object') { if (p.remoteDescription) { try { await p.addIceCandidate(m.cand); } catch (_) {} } else if (t3.pendientes.length < 64) t3.pendientes.push(m.cand); return true; }
-      if ((m.acto === 'tres-respuesta' || m.acto === 'rerespuesta') && typeof m.sdp === 'string' && m.sdp.length <= 40000) { try { await p.setRemoteDescription({ type: 'answer', sdp: m.sdp }); } catch (_) {} return true; }
-      if (m.acto === 'reinicia') { try { const of = await p.createOffer({ iceRestart: true }); await p.setLocalDescription({ type: of.type, sdp: altaFidelidad(of.sdp) }); mandaT({ acto: 'reoferta', id: t3.id, sdp: p.localDescription.sdp }); } catch (_) {} return true; }
-      if (m.acto === 'camara') { t3.suCamara = !!m.on; pintaTercero(); if (t3.estado === 'hablando') o.manda({ acto: 'tres-camara', id: idLlamada, on: !!m.on }); return true; }
-      if (m.acto === 'colgar') { quitaTercero('colgo'); return true; }
-      if (m.acto === 'ocupado') { quitaTercero('ocupado'); return true; }
+      if (m.acto === 'ice' && m.cand && typeof m.cand === 'object') { if (p.remoteDescription) { try { await p.addIceCandidate(m.cand); } catch (_) {} } else if (L.pendientes.length < 64) L.pendientes.push(m.cand); return true; }
+      if (m.acto === 'rerespuesta' && typeof m.sdp === 'string' && m.sdp.length <= 60000) { try { await p.setRemoteDescription({ type: 'answer', sdp: m.sdp }); } catch (_) {} return true; }
+      if (m.acto === 'reinicia') { try { const of = await p.createOffer({ iceRestart: true }); await p.setLocalDescription({ type: of.type, sdp: altaFidelidad(of.sdp) }); tmanda(L, { acto: 'reoferta', id: L.id, sdp: p.localDescription.sdp }); } catch (_) {} return true; }
+      if (m.acto === 'camara') { L.camOn = !!m.on; pintaGrupo(); reenviaImagenes(); return true; }
+      if (m.acto === 'colgar') { quitaPata(L, 'colgo'); return true; }
+      if (m.acto === 'ocupado') { quitaPata(L, 'ocupado'); return true; }
       return true;
     }
-    // tocar a una persona: se ve en grande y la otra en pequeño; tocar la pequeña: se cambian; tocar la grande: otra vez partida
-    function tocaVista(cual) {
-      if (!caja.classList.contains('tres') || caja.classList.contains('mini')) return;
-      const f = caja.dataset.foco || '';
-      caja.dataset.foco = f === cual ? '' : cual;
-    }
-    { const v1 = $('#v-remoto'), v3 = $('#v-tercero'); if (v1) v1.addEventListener('click', () => tocaVista('remoto')); if (v3) v3.addEventListener('click', () => tocaVista('tercero')); }
     function botonAnadir() {
-      if (tercero && tercero.estado === 'saliente') { mandaT({ acto: 'colgar', id: tercero.id }); quitaTercero('yo'); return; }
+      const sonando = patas.find((L) => L.estado === 'saliente');
+      if (sonando) { tmanda(sonando, { acto: 'colgar', id: sonando.id }); quitaPata(sonando, 'yo'); return; }
       // el audio de la mezcla se arranca aquí, dentro del toque: el navegador (sobre todo el iPhone) deja parado un contexto de
-      // audio creado fuera de un gesto, y entonces las dos personas oirían silencio (prueba tres.js, 30 Oct 2026)
+      // audio creado fuera de un gesto, y entonces los demás oirían silencio (prueba tres.js, 30 Oct 2026)
       const mz = mezclaCrea(); if (mz && mz.ctx.state !== 'running') mz.ctx.resume().catch(() => {});
       if (o.eligeTercero) o.eligeTercero();
     }
@@ -1297,9 +1442,9 @@
     function colgar() { if (estado === 'libre' || estado === 'cerrando') return; colgoYo = true; o.manda({ acto: 'colgar', id: idLlamada }); termina(estado === 'hablando' ? 'fin' : estado === 'entrante' ? 'rechazada' : 'cancelada'); }
     function termina(por, espera) {
       if (estado === 'libre' || estado === 'cerrando') return;
-      if (tercero && tercero.estado === 'hablando' && !colgoYo && (por === 'fin' || por === 'fallo')) { asciende(); return; }
-      if (tercero) { mandaT({ acto: 'colgar', id: tercero.id }); quitaTercero('yo', true); }
-      visto = null; suTres = false; vozSuya = null; mezclaFin(); { const v3 = $('#v-tercero'); if (v3) v3.srcObject = null; }
+      if (patas.some((L) => L.estado === 'hablando') && !colgoYo && (por === 'fin' || por === 'fallo')) { asciende(); return; }
+      for (const L of patas.slice()) { tmanda(L, { acto: 'colgar', id: L.id }); quitaPata(L, 'yo', true); }
+      suTres = false; vozSuya = null; mezclaFin(); PR = null; quitaTiles();
       const dur = iniciada ? Date.now() - iniciada : 0, era = estado, conImagen = video;
       paraTono(); clearTimeout(sinRespuesta); clearTimeout(ausenteT); ausenteT = null; ultimaOferta = null; sueltaWake(); sueltaCompleta();
       clearInterval(reloj); reloj = null; clearInterval(sondeo); sondeo = null;
@@ -1331,6 +1476,7 @@
       if (o.fin && era !== 'libre') o.fin({ por, duracion: dur, mia: inicioYo, yoColgue: colgoYo, saliente: era === 'saliente' || (era === 'hablando' && colgoYo), voz: voz !== 'natural', video: conImagen });
     }
     $('#ll-colgar').addEventListener('click', colgar);
+    { const b = $('#ll-vista'); if (b) b.addEventListener('click', () => { alternaDividida(); pinta(); }); }
     { const b = $('#ll-anadir'); if (b) b.addEventListener('click', botonAnadir); }
     { const si = $('#ll-sas-si'), no = $('#ll-sas-no'), mini = $('#ll-sas-mini'); if (si) si.addEventListener('click', sasCoinciden); if (no) no.addEventListener('click', sasNoCoinciden); if (mini) mini.addEventListener('click', () => { if (sas && sas.estado === 'pendiente') { caja.classList.remove('sas-plegado'); pintaSas(); } }); }
     $('#ll-rechazar').addEventListener('click', colgar);
@@ -1389,14 +1535,51 @@
       girando = false; pinta();
     }
     { const b = $('#ll-girar'); if (b) b.addEventListener('click', () => { giraCamara(); }); }
-    $('#ll-camara').addEventListener('click', () => { if (!cam) return; const on = !camaraOn(); cam.getVideoTracks().forEach((x) => { x.enabled = on; }); o.manda({ acto: 'camara', id: idLlamada, on }); if (tercero) mandaT({ acto: 'camara', id: tercero.id, on }); pintaVideo(); });
+    $('#ll-camara').addEventListener('click', () => { if (!cam) return; const on = !camaraOn(); cam.getVideoTracks().forEach((x) => { x.enabled = on; }); o.manda({ acto: 'camara', id: idLlamada, on }); for (const L of patas) tmanda(L, { acto: 'camara', id: L.id, on }); pintaVideo(); });
     $('#ll-mini').addEventListener('click', () => pequena(true));
     { const b = $('#ll-completa'); if (b) {
       b.addEventListener('click', () => alternaCompleta());
       document.addEventListener('fullscreenchange', () => { b.setAttribute('aria-pressed', document.fullscreenElement ? 'true' : 'false'); });
     } }
     $('#ll-volver').addEventListener('click', () => pequena(false));
-    $('#ll-videos').addEventListener('click', () => { if (caja.classList.contains('mini')) pequena(false); });
+    $('#ll-videos').addEventListener('click', () => { if (sinClicMini) return; if (caja.classList.contains('mini')) pequena(false); });
+    // En pequeño, sobre el chat, la llamada se lleva a cualquier sitio con el ratón (dueño, 30 Oct 2026, 10:59: «esa pantalla la quiero
+    // poder mover porque me está tapando unas zonas»). Se recuerda dónde se dejó (en proporción a la ventana).
+    var arrMini = null, sinClicMini = false; // (var: «pequena» puede correr antes de llegar aquí)
+    const MINI_POS = 'gcom-mini-pos';
+    const finoAhora = () => !!(raiz.matchMedia && raiz.matchMedia('(hover: hover) and (pointer: fine)').matches);
+    function ponMini(x, y) {
+      const W = caja.offsetWidth || 340, H = caja.offsetHeight || 240;
+      x = Math.max(8, Math.min(innerWidth - W - 8, x)); y = Math.max(8, Math.min(innerHeight - H - 8, y));
+      caja.style.setProperty('--mini-x', Math.round(x) + 'px'); caja.style.setProperty('--mini-y', Math.round(y) + 'px'); caja.classList.add('mini-movida');
+    }
+    function recolocaMini() {
+      if (!caja.classList.contains('mini') || !finoAhora()) { caja.classList.remove('mini-movida'); return; }
+      let p = null; try { p = JSON.parse(localStorage.getItem(MINI_POS) || 'null'); } catch (_) {}
+      if (p && Number.isFinite(p.fx) && Number.isFinite(p.fy)) ponMini(p.fx * innerWidth, p.fy * innerHeight); else caja.classList.remove('mini-movida');
+    }
+    caja.addEventListener('pointerdown', (e) => {
+      if (!caja.classList.contains('mini') || !finoAhora() || e.button > 0 || e.target.closest('button, a, input, label')) return;
+      const r = caja.getBoundingClientRect();
+      arrMini = { id: e.pointerId, dx: e.clientX - r.left, dy: e.clientY - r.top, x0: e.clientX, y0: e.clientY, movido: false };
+      try { caja.setPointerCapture(e.pointerId); } catch (_) {}
+    });
+    caja.addEventListener('pointermove', (e) => {
+      if (!arrMini || e.pointerId !== arrMini.id) return;
+      if (!arrMini.movido && Math.hypot(e.clientX - arrMini.x0, e.clientY - arrMini.y0) < 5) return;
+      arrMini.movido = true; caja.classList.add('mini-arrastrando');
+      ponMini(e.clientX - arrMini.dx, e.clientY - arrMini.dy);
+    });
+    const sueltaMini = (e) => {
+      if (!arrMini || e.pointerId !== arrMini.id) return;
+      const a = arrMini; arrMini = null; caja.classList.remove('mini-arrastrando');
+      try { caja.releasePointerCapture(e.pointerId); } catch (_) {}
+      if (!a.movido) return;
+      sinClicMini = true; setTimeout(() => { sinClicMini = false; }, 350);
+      const r = caja.getBoundingClientRect(); try { localStorage.setItem(MINI_POS, JSON.stringify({ fx: r.left / innerWidth, fy: r.top / innerHeight })); } catch (_) {}
+    };
+    caja.addEventListener('pointerup', sueltaMini); caja.addEventListener('pointercancel', sueltaMini);
+    addEventListener('resize', () => recolocaMini(), { passive: true });
     addEventListener('beforeunload', () => { if (estado !== 'libre') { try { o.manda({ acto: 'colgar', id: idLlamada }); } catch (_) {} } });
     pintaVoces(); pintaImagenes();
     // Zoom y ventanas pequeñas (dueño, 28 Oct 2026, 12:22–12:24: «que no se vuelva todo loco… que no cambien las cosas de
@@ -1563,6 +1746,7 @@
       guardaSitio(); ponDividida(lado); guardaMi({ div: lado }); colocaAsa();
     }
     caja.addEventListener('pointerdown', (e) => {
+      if (caja.classList.contains('mini')) return;
       if (e.button > 0 || e.target.closest('button, a, input, label, .ll-ajustes')) return;
       // en el teléfono no hay asa (se mueve con el dedo; el tamaño, con el botón de la pantalla partida)
       const p = enLienzo(e), enAsa = FINO.matches && sobreAsa(p);
@@ -1617,7 +1801,7 @@
     if (FINO.addEventListener) FINO.addEventListener('change', escala);
     escala();
     { const vlx = vidLocal(); if (vlx) { vlx.addEventListener('loadedmetadata', () => miImagen()); vlx.addEventListener('resize', () => colocaAsa()); } }
-    return { llamar, recibe, colgar, eligeVoz, seFue, volvio, anade, recibeTercero, get terceroSala() { return tercero ? tercero.sala : null; }, get aTres() { return !!(tercero || visto); }, get mezclaEstado() { return mezcla ? mezcla.ctx.state : null; }, get estado() { return estado; }, get ocupado() { return ocupado(); }, get voz() { return voz; }, get cambioActivo() { return !!nodo; }, get video() { return video; }, get imagen() { return imagen; } };
+    return { llamar, recibe, colgar, eligeVoz, seFue, volvio, anade, recibeTercero, esTramo: (sala) => patas.some((L) => L.sala === String(sala)), get terceroSala() { return patas[0] ? patas[0].sala : null; }, get aTres() { return enGrupo(); }, get total() { return estado === 'hablando' ? totalGrupo() : 0; }, get puedeAnadir() { return puedeAnadir(); }, get mezclaEstado() { return mezcla ? mezcla.ctx.state : null; }, get depura() { const r = (L) => ({ clave: L.clave, n: L.n, estado: L.estado || 'principal', sabe: tsabe(L), cam: !!tcam(L), camOn: tcamOn(L), videos: [...L.videos].map(([k, v]) => k + (v.pista ? ':' + v.pista.readyState + (v.pista.muted ? ':muda' : '') : '')), quien: L.quien, reenvios: [...L.reenvios].map(([k, x]) => k + '→' + x.tr.mid + (x.tr.sender.track ? '' : ':vacio')), sig: tpc(L) ? tpc(L).signalingState : '' }); return { tramos: tramos(true).map(r), tiles: [...TILES.keys()] }; }, get estado() { return estado; }, get ocupado() { return ocupado(); }, get voz() { return voz; }, get cambioActivo() { return !!nodo; }, get video() { return video; }, get imagen() { return imagen; } };
   }
   raiz.GuardianaLlamada = { crea, VOCES };
 })(typeof window !== 'undefined' ? window : globalThis);

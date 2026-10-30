@@ -39,7 +39,7 @@
 <link rel="canonical" href="https://guardianagroup.com/orbita/comunicaciones/">
 <link rel="icon" href="/favicon.ico">
 <link rel="stylesheet" href="componentes.css?v=20261028m">
-<link rel="stylesheet" href="app.css?v=20261031z">
+<link rel="stylesheet" href="app.css?v=20261101b">
 <link rel="stylesheet" href="diseno.css?v=20261031a">
 <link rel="stylesheet" href="viaje.css?v=20261029b">
 <!-- antes de pintar: como app desde el primer fotograma y, al volver a un chat tras recargar, sin enseñar el inicio entretanto -->
@@ -929,7 +929,7 @@
 
 <!-- Llamada de voz: encriptada de extremo a extremo (DTLS-SRTP), por el relé; el cambio de voz se hace en este equipo -->
 <div class="gc-llamada" id="llamada" role="dialog" aria-modal="true" aria-label="Llamada de voz">
-  <div class="gc-llamada-arriba"><span class="gc-llamada-cifrado"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><span>Encriptada de extremo a extremo<span class="solo-pc"> · por el relé de GUARDIANA</span></span></span><span class="gc-llamada-estado" id="ll-calidad"></span><button type="button" class="ll-mini-b" id="ll-mini" aria-label="Ver el chat"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v10H8l-4 4z"/></svg><span>Ver el chat</span></button></div>
+  <div class="gc-llamada-arriba"><span class="gc-llamada-cifrado"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><span>Encriptada de extremo a extremo</span></span><span class="gc-llamada-estado" id="ll-calidad"></span><button type="button" class="ll-mini-b" id="ll-mini" aria-label="Ver el chat"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v10H8l-4 4z"/></svg><span>Ver el chat</span></button></div>
   <!-- Videollamada (dueño, 28 Oct 2026: «máxima calidad de imagen»): la imagen de la otra persona de fondo y la tuya en una esquina -->
   <div class="videos" id="ll-videos" hidden><video id="v-remoto" autoplay playsinline muted></video><video id="v-tercero" autoplay playsinline muted hidden></video><video id="v-local" autoplay playsinline muted></video><span class="ll-tile-n" id="ll-remoto-n" translate="no" hidden></span><span class="ll-tile-n ll-tile-n3" id="ll-tercero-n" translate="no" hidden></span></div>
   <!-- El número de seguridad de la llamada (dueño, 29 Oct 2026, 10:16): grande, en las dos pantallas; la comparación la hacen las dos
@@ -989,6 +989,7 @@
     <div class="gc-llamada-boton ll-efecto" id="ll-grave-caja" hidden><button type="button" id="ll-grave" aria-pressed="false" aria-label="Voz grave"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h1.5M6.5 8.5v7M10 6v12M13.5 9v6M17 10.5v3"/><path d="M19.5 15.5l1.5 1.5 1.5-1.5M21 9.5V17"/></svg></button><span>Voz grave</span></div>
     <div class="gc-llamada-boton ll-efecto" id="ll-mosaico-caja" hidden><button type="button" id="ll-mosaico" aria-pressed="false" aria-label="Mosaico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2.5"/><path d="M9.3 4v16M14.7 4v16M4 9.3h16M4 14.7h16"/></svg></button><span>Mosaico</span></div>
     <div class="gc-llamada-boton" id="ll-anadir-caja" hidden><button type="button" id="ll-anadir" aria-label="Añadir a la llamada"><svg viewBox="0 0 24 24" aria-hidden="true"><g class="mas"><circle cx="9.5" cy="8" r="3.6"/><path d="M3 20c.6-3.7 3.3-6.1 6.5-6.1s5.9 2.4 6.5 6.1M18.5 7.5v6M15.5 10.5h6"/></g><path class="x" d="M6.5 6.5l11 11M17.5 6.5l-11 11"/></svg></button><span>Añadir</span></div>
+    <div class="gc-llamada-boton" id="ll-vista-caja" hidden><button type="button" id="ll-vista" aria-label="Vista"><svg viewBox="0 0 24 24" aria-hidden="true"><g class="parte"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M12 5v14"/></g><g class="peq"><rect x="3" y="5" width="18" height="14" rx="2.5"/><rect x="12.5" y="11.5" width="6" height="5" rx="1.2"/></g></svg></button><span>Vista</span></div>
     <div class="gc-llamada-boton" id="ll-completa-caja" hidden><button type="button" id="ll-completa" aria-pressed="false" aria-label="Pantalla completa"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="entra" d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/><path class="sale" d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5"/></svg></button><span>Pantalla completa</span></div>
     <div class="gc-llamada-boton gc-colgar"><button type="button" id="ll-colgar" aria-label="Colgar"><svg viewBox="0 0 24 24"><path d="M3 12c5-5 13-5 18 0l-2.5 2.5-3-1.5v-2.5a9 9 0 0 0-7 0V13l-3 1.5z"/></svg></button><span>Colgar</span></div>
     <div class="gc-llamada-boton ll-volver"><button type="button" id="ll-volver" aria-label="Volver a la llamada"><svg viewBox="0 0 24 24"><path d="M4 9V4h5M20 15v5h-5M4 4l6 6M20 20l-6-6"/></svg></button><span>Ampliar</span></div>
@@ -1102,7 +1103,7 @@
 
 <!-- En el ordenador, en el chat blindado: la pantalla se tapa con la tecla de captura o si la ventana pierde el foco (29 Oct 2026, 08:02) -->
 <div class="captura-velo" id="captura-velo" role="alert" hidden><div><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><b>Modo blindado</b><span>No se puede capturar</span></div></div>
-<script src="/orbita/static/idioma.js?v=20261030q03"></script>
+<script src="/orbita/static/idioma.js?v=20261030q04"></script>
 <script src="pq-mlkem.js?v=20261027a"></script>
 <script src="pq-cnsa.js?v=20261027a"></script>
 <script src="qrhaz.js?v=20261027a"></script>
@@ -1112,7 +1113,7 @@
 <script src="sha256.js?v=20261027a"></script>
 <script src="viaje-datos.js?v=20261031a"></script>
 <script src="viaje.js?v=20261029b"></script>
-<script src="llamada.js?v=20261031j"></script>
-<script src="app.js?v=20261031y"></script>
+<script src="llamada.js?v=20261101b"></script>
+<script src="app.js?v=20261101b"></script>
 </body>
 </html>
