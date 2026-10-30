@@ -125,7 +125,7 @@
       { const f = $('#ll-completa-caja'); if (f) f.hidden = !(video && completaPC()); }
       // «Vista» (dueño, 30 Oct 2026, 11:04: el simbolito sobre la imagen «se hace muy raro… cámbialo de sitio… más profesional»):
       // en el ordenador, partir la pantalla o dejarte en pequeño se hace con un botón con su nombre, abajo con los demás
-      { const v = $('#ll-vista-caja'), fino = !!(raiz.matchMedia && raiz.matchMedia('(hover: hover) and (pointer: fine)').matches); if (v) v.hidden = !(fino && video && cam && remotoV && suCamara && estado === 'hablando' && !caja.classList.contains('tres')); }
+      { const v = $('#ll-vista-caja'), fino = !!(raiz.matchMedia && raiz.matchMedia('(hover: hover) and (pointer: fine)').matches); if (v) v.hidden = !(fino && video && cam && estado === 'hablando' && (caja.classList.contains('tres') || (remotoV && suCamara))); }
       $('#ll-imagenes').hidden = !(video && blindada());
       // 29 Oct 2026, 07:51 (dueño): «La opción… mosaico y… la voz, en el chat normal no quiero que esté. Solamente… en el blindado dos
       // opciones… la voz en modo grave y el mosaico… dos botones… muy profesionales cuando se abra… Antes no quiero que se vean»:
@@ -1195,6 +1195,9 @@
     }
     // ---- la pantalla: una imagen por persona; tocando una, en grande; tocando la grande, otra vez todas ----
     const TILES = new Map(); // clave → { v: <video>, n: nombre }
+    // el reparto de la pantalla en grupo (en el PC, las rayas entre imágenes se arrastran): la parte de cada columna, de izquierda
+    // a derecha; vuelve a partes iguales cuando cambia el número de columnas
+    var grupoFr = null, rayaHace = 0, yoEnColumna = false;
     function vistas() {
       const r = [];
       for (const K of tramos()) {
@@ -1227,7 +1230,7 @@
       const antes = caja.classList.contains('tres');
       caja.classList.toggle('tres', grupo);
       caja.classList.toggle('a-tres', enGrupo());
-      if (grupo !== antes) { if (grupo) caja.dataset.foco = ''; else delete caja.dataset.foco; if (video) raiz.requestAnimationFrame(() => miImagen()); }
+      if (grupo !== antes) { grupoFr = null; if (grupo) caja.dataset.foco = ''; else { delete caja.dataset.foco; caja.classList.remove('tres-yo'); } if (video) raiz.requestAnimationFrame(() => miImagen()); }
       if (grupo && caja.dataset.foco && !lista.some((x) => x.clave === caja.dataset.foco)) caja.dataset.foco = '';
       const vs = $('#ll-videos'); if (vs && TILES.size) vs.hidden = false;
       colocaTiles(lista);
@@ -1240,8 +1243,17 @@
       const pon = (el, ob) => { for (const [k, v] of Object.entries(ob)) el.style.setProperty(k, v, 'important'); };
       const nombre = (n, ob) => { if (!n) return; n.hidden = false; for (const k of ['left', 'top', 'bottom', 'max-width']) n.style.removeProperty(k); for (const [k, v] of Object.entries(ob)) n.style.setProperty(k, v, 'important'); };
       { const v1 = $('#v-remoto'); if (v1 && !els.some((e) => e.v === v1)) limpia(v1); const n1 = $('#ll-remoto-n'); if (n1 && !els.some((e) => e.n === n1)) n1.hidden = true; }
-      if (!grupo) { for (const e of els) { limpia(e.v); if (e.n) e.n.hidden = true; } return; }
-      const cont = $('#ll-videos'), W = cont.clientWidth || innerWidth, H = cont.clientHeight || innerHeight, horiz = W >= H, n = els.length, foco = caja.dataset.foco || '';
+      const vl0 = $('#v-local');
+      if (yoEnColumna && vl0) { limpia(vl0); yoEnColumna = false; }
+      if (!grupo) { for (const e of els) { limpia(e.v); if (e.n) e.n.hidden = true; } pintaRayasGrupo([]); return; }
+      const cont = $('#ll-videos'), W = cont.clientWidth || innerWidth, H = cont.clientHeight || innerHeight, horiz = W >= H, foco = caja.dataset.foco || '';
+      // en el ordenador, «Cambiar vista» te pone a ti en una columna más (a la derecha), con tu imagen como la de los demás
+      const yo = !foco && horiz && FINO.matches && caja.classList.contains('tres-yo') && vl0 && video && cam;
+      if (yo) els.push({ x: { clave: 'yo' }, v: vl0, n: null, yo: true });
+      const n = els.length;
+      const reparto = !foco && horiz && FINO.matches;
+      if (reparto && (!grupoFr || grupoFr.length !== n)) grupoFr = Array.from({ length: n }, () => 1 / n);
+      let acc = 0;
       let k = 0;
       els.forEach((e, i) => {
         limpia(e.v);
@@ -1252,6 +1264,12 @@
         } else if (foco) {
           pon(e.v, Object.assign(base, { left: '16px', top: 'calc(env(safe-area-inset-top, 0px) + ' + (116 + k * 172) + 'px)', width: '120px', height: '160px', border: '1px solid rgba(218,236,250,.22)', 'border-radius': '12px', 'z-index': '2', 'box-shadow': '0 8px 24px -10px rgba(0,0,0,.7)' }));
           k++; if (e.n) e.n.hidden = true;
+        } else if (reparto) {
+          // en el PC, cada columna con su parte (las rayas de en medio se arrastran)
+          const izq = acc * 100, f = grupoFr[i] * 100; acc += grupoFr[i];
+          if (e.yo) { yoEnColumna = true; Object.assign(base, { transform: 'scaleX(-1)' }); }
+          pon(e.v, Object.assign(base, { left: izq + '%', top: '0', width: f + '%', height: '100%' }));
+          nombre(e.n, { left: 'calc(' + izq + '% + 16px)', top: 'auto', bottom: 'calc(140px + env(safe-area-inset-bottom, 0px))', 'max-width': 'calc(' + f + '% - 32px)' });
         } else {
           const f = 100 / n;
           pon(e.v, Object.assign(base, horiz ? { left: (f * i) + '%', top: '0', width: f + '%', height: '100%' } : { left: '0', top: (f * i) + '%', width: '100%', height: f + '%' }));
@@ -1259,11 +1277,26 @@
             : { left: '12px', bottom: 'auto', top: 'min(calc(' + (f * (i + 1)) + '% - 44px), calc(100% - 190px - env(safe-area-inset-bottom, 0px)))', 'max-width': 'calc(100% - 24px)' });
         }
       });
+      caja.classList.toggle('tres-yo-col', !!yoEnColumna);
+      pintaRayasGrupo(reparto ? grupoFr : []);
       // la raya entre imágenes solo cuando son dos (con tres no cae en la mitad)
       caja.classList.toggle('tres-n3', n >= 3);
     }
+    // las rayas entre columnas (solo se ven; se agarran por su posición, como la de dos: así no tapan nada)
+    function pintaRayasGrupo(fr) {
+      const cont = $('#ll-videos'); if (!cont) return;
+      const quiero = Math.max(0, fr.length - 1), hay = [...cont.querySelectorAll('.ll-graya')];
+      for (let i = quiero; i < hay.length; i++) hay[i].remove();
+      let acc = 0;
+      for (let i = 0; i < quiero; i++) {
+        acc += fr[i];
+        let r = hay[i]; if (!r) { r = document.createElement('span'); r.className = 'll-graya'; r.setAttribute('aria-hidden', 'true'); r.append(document.createElement('span')); cont.append(r); }
+        r.style.left = (acc * 100) + '%';
+      }
+    }
     function tocaVista(clave) {
       if (!caja.classList.contains('tres') || caja.classList.contains('mini')) return;
+      if (Date.now() - rayaHace < 400) return; // el clic que deja soltar una raya no cambia la vista
       const f = caja.dataset.foco || '';
       caja.dataset.foco = f === clave ? '' : clave;
       colocaTiles(video ? vistas() : []);
@@ -1477,7 +1510,8 @@
       if (o.fin && era !== 'libre') o.fin({ por, duracion: dur, mia: inicioYo, yoColgue: colgoYo, saliente: era === 'saliente' || (era === 'hablando' && colgoYo), voz: voz !== 'natural', video: conImagen });
     }
     $('#ll-colgar').addEventListener('click', colgar);
-    { const b = $('#ll-vista'); if (b) b.addEventListener('click', () => { alternaDividida(); pinta(); }); }
+    // en grupo, «Cambiar vista» te pone en una columna más (con tu imagen como la de los demás) o te deja en pequeño (12:10)
+    { const b = $('#ll-vista'); if (b) b.addEventListener('click', () => { if (caja.classList.contains('tres')) { caja.classList.toggle('tres-yo'); grupoFr = null; colocaTiles(video ? vistas() : []); } else alternaDividida(); pinta(); }); }
     { const b = $('#ll-anadir'); if (b) b.addEventListener('click', botonAnadir); }
     { const si = $('#ll-sas-si'), no = $('#ll-sas-no'), mini = $('#ll-sas-mini'); if (si) si.addEventListener('click', sasCoinciden); if (no) no.addEventListener('click', sasNoCoinciden); if (mini) mini.addEventListener('click', () => { if (sas && sas.estado === 'pendiente') { caja.classList.remove('sas-plegado'); pintaSas(); } }); }
     $('#ll-rechazar').addEventListener('click', colgar);
@@ -1689,7 +1723,7 @@
     // ancho entre un mínimo y la mitad de la pantalla (sin salirse por arriba ni por abajo)
     function limitaAncho(w, CW, CH, vl) {
       const asp = (vl.offsetWidth && vl.offsetHeight) ? vl.offsetWidth / vl.offsetHeight : (FINO.matches ? 16 / 9 : 3 / 4);
-      const min = Math.min(FINO.matches ? 120 : 84, CW / 3), max = Math.max(min, Math.min(CW / 2, (CH - 2 * MARGEN) * asp));
+      const min = Math.min(FINO.matches ? 120 : 84, CW / 3), max = Math.max(min, Math.min(caja.classList.contains('tres') ? CW * 0.3 : CW / 2, (CH - 2 * MARGEN) * asp));
       return Math.max(min, Math.min(max, w));
     }
     // el asa, en la esquina de tu imagen que mira al centro de la pantalla
@@ -1713,8 +1747,8 @@
     // dónde cae el puntero, en las medidas de la llamada (con la llamada reducida, se deshace la escala)
     const enLienzo = (e) => ({ x: e.clientX / escalaYa, y: e.clientY / escalaYa });
     const visible = () => { const vl = vidLocal(); return !!(vl && video && !caja.classList.contains('mini') && vl.offsetWidth && cam && !$('#ll-videos').hidden); };
-    const sobreMiImagen = (p) => { if (!visible()) return false; const vl = vidLocal(); return p.x >= vl.offsetLeft && p.x <= vl.offsetLeft + vl.offsetWidth && p.y >= vl.offsetTop && p.y <= vl.offsetTop + vl.offsetHeight; };
-    const sobreAsa = (p) => { if (!visible() || (FINO.matches && caja.classList.contains('dividida'))) return false; const cs = getComputedStyle(caja); const x = parseFloat(cs.getPropertyValue('--asa-x')) + 11, y = parseFloat(cs.getPropertyValue('--asa-y')) + 11; return Number.isFinite(x) && Math.hypot(p.x - x, p.y - y) <= 18; };
+    const sobreMiImagen = (p) => { if (!visible() || caja.classList.contains('tres-yo-col')) return false; const vl = vidLocal(); return p.x >= vl.offsetLeft && p.x <= vl.offsetLeft + vl.offsetWidth && p.y >= vl.offsetTop && p.y <= vl.offsetTop + vl.offsetHeight; };
+    const sobreAsa = (p) => { if (!visible() || caja.classList.contains('tres-yo-col') || (FINO.matches && caja.classList.contains('dividida'))) return false; const cs = getComputedStyle(caja); const x = parseFloat(cs.getPropertyValue('--asa-x')) + 11, y = parseFloat(cs.getPropertyValue('--asa-y')) + 11; return Number.isFinite(x) && Math.hypot(p.x - x, p.y - y) <= 18; };
     // de la pantalla dividida a la imagen flotante del mismo tamaño (para seguir agrandando o achicando desde ahí)
     function sueltaDividida() {
       partidaPorDefecto = false;
@@ -1749,22 +1783,41 @@
       r = document.createElement('span'); r.id = 'll-raya'; r.className = 'll-raya'; r.setAttribute('aria-hidden', 'true'); r.append(document.createElement('span'));
       c.append(r); return r;
     }
+    // devuelve qué raya hay bajo el puntero: { g: -1 } la de la pantalla partida de dos; { g: i } la i-ésima del grupo
     function sobreRaya(e) {
-      if (!FINO.matches || !caja.classList.contains('dividida') || caja.classList.contains('tres') || caja.classList.contains('mini') || !visible()) return false;
-      const izq = caja.classList.contains('lado-izq'); if (!izq && !caja.classList.contains('lado-der')) return false;
-      const b = lienzoVid().getBoundingClientRect(); if (!b.width) return false;
+      if (!FINO.matches || caja.classList.contains('mini')) return null;
+      const c = lienzoVid(); if (!c || c.hidden) return null;
+      const b = c.getBoundingClientRect(); if (!b.width || e.clientY < b.top || e.clientY > b.bottom) return null;
+      if (caja.classList.contains('tres')) {
+        if (caja.dataset.foco || !grupoFr || grupoFr.length < 2 || b.width < b.height) return null;
+        let acc = 0;
+        for (let i = 0; i < grupoFr.length - 1; i++) { acc += grupoFr[i]; if (Math.abs(e.clientX - (b.left + acc * b.width)) <= 10) return { g: i }; }
+        return null;
+      }
+      if (!caja.classList.contains('dividida') || !visible()) return null;
+      const izq = caja.classList.contains('lado-izq'); if (!izq && !caja.classList.contains('lado-der')) return null;
       let m = parseFloat(caja.style.getPropertyValue('--mi-p')); if (!Number.isFinite(m)) m = 0.5;
       const x = b.left + (izq ? m : 1 - m) * b.width;
-      return Math.abs(e.clientX - x) <= 10 && e.clientY >= b.top && e.clientY <= b.bottom;
+      return Math.abs(e.clientX - x) <= 10 ? { g: -1 } : null;
     }
     function mueveRaya(e) {
       const b = lienzoVid().getBoundingClientRect(); if (!b.width) return;
       const x = (e.clientX - b.left) / b.width;
+      if (arrRaya && arrRaya.g >= 0 && grupoFr && grupoFr.length > arrRaya.g + 1) {
+        // en grupo, la raya reparte entre sus dos vecinas; ninguna baja del 30 % (dos columnas) o del 20 % (tres o más)
+        const g = arrRaya.g, min = grupoFr.length === 2 ? 0.3 : 0.2;
+        let izq = 0; for (let i = 0; i < g; i++) izq += grupoFr[i];
+        const der = izq + grupoFr[g] + grupoFr[g + 1], p = Math.max(izq + min, Math.min(der - min, x));
+        grupoFr[g] = p - izq; grupoFr[g + 1] = der - p;
+        colocaTiles(video ? vistas() : []); return;
+      }
       ponParte(caja.classList.contains('lado-izq') ? x : 1 - x);
     }
     function sueltaRaya(e) {
-      arrRaya = null; caja.classList.remove('raya-moviendo');
+      const g = arrRaya ? arrRaya.g : -1;
+      arrRaya = null; caja.classList.remove('raya-moviendo'); rayaHace = Date.now();
       try { caja.releasePointerCapture(e.pointerId); } catch (_) {}
+      if (g >= 0) return;
       const m = parseFloat(caja.style.getPropertyValue('--mi-p')); if (Number.isFinite(m)) guardaMi({ p: m });
     }
     function alternaDividida() {
@@ -1782,7 +1835,9 @@
     caja.addEventListener('pointerdown', (e) => {
       if (caja.classList.contains('mini')) return;
       if (e.button > 0 || e.target.closest('button, a, input, label, .ll-ajustes')) return;
-      if (sobreRaya(e)) { arrRaya = { id: e.pointerId }; caja.classList.add('raya-moviendo'); try { caja.setPointerCapture(e.pointerId); } catch (_) {} e.preventDefault(); return; }
+      { const sr = sobreRaya(e); if (sr) { arrRaya = { id: e.pointerId, g: sr.g }; caja.classList.add('raya-moviendo'); try { caja.setPointerCapture(e.pointerId); } catch (_) {} e.preventDefault(); return; } }
+      // en grupo, contigo en una columna, tu imagen no se mueve ni cambia de tamaño
+      if (caja.classList.contains('tres-yo-col')) return;
       // en el teléfono no hay asa (se mueve con el dedo; el tamaño, con el botón de la pantalla partida)
       const p = enLienzo(e), enAsa = FINO.matches && sobreAsa(p);
       if (!enAsa && !sobreMiImagen(p)) return;
@@ -1800,7 +1855,7 @@
     caja.addEventListener('pointermove', (e) => {
       const p = enLienzo(e);
       if (arrRaya && e.pointerId === arrRaya.id) { mueveRaya(e); return; }
-      if (e.pointerType === 'mouse' && !arrastre) caja.classList.toggle('sobre-raya', sobreRaya(e));
+      if (e.pointerType === 'mouse' && !arrastre) caja.classList.toggle('sobre-raya', !!sobreRaya(e));
       if (!arrastre || e.pointerId !== arrastre.id) { if (e.pointerType === 'mouse') { const a = sobreAsa(p); caja.classList.toggle('mi-tam', a); caja.classList.toggle('mi-agarre', !a && sobreMiImagen(p) && !caja.classList.contains('dividida')); } return; }
       if (!arrastre.movido && Math.hypot(p.x - arrastre.x0, p.y - arrastre.y0) < 4) return;
       arrastre.movido = true; ultimoToque = 0; caja.classList.add('arrastrando', 'movida');

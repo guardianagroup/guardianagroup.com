@@ -2108,3 +2108,16 @@ body.con-pestanas #marcar .marcar-llamar span{position:absolute;width:1px;height
   .gc-llamada.solo-mia.dividida.lado-der:not(.mini) .gc-llamada-centro{left:0;width:calc((1 - var(--mi-p,.5)) * 100%)}
   .gc-llamada.solo-mia.dividida.lado-izq:not(.mini) .gc-llamada-centro{left:calc(var(--mi-p,.5) * 100%);width:calc((1 - var(--mi-p,.5)) * 100%)}
 }
+
+/* Llamada en grupo en el PC (dueño, 30 Oct 2026, 12:10): las rayas entre imágenes se arrastran (llamada.js, «pintaRayasGrupo»);
+   tu imagen pequeña se agranda desde su esquina (hasta el 30 % del ancho); «Cambiar vista» te pone en una columna más. */
+.gc-llamada .videos .ll-graya{display:none}
+@media (hover:hover) and (pointer:fine){
+  .gc-llamada.tres:not(.mini):not([data-foco^="p"]):not([data-foco*=":"]) .videos .ll-graya{display:block;position:absolute;top:0;bottom:0;width:20px;margin-left:-10px;z-index:2;pointer-events:none}
+  .gc-llamada .videos .ll-graya::before{content:'';position:absolute;left:9px;top:0;bottom:0;width:2px;background:rgba(156,195,228,.35);transition:background .15s ease}
+  .gc-llamada.sobre-raya .videos .ll-graya::before,.gc-llamada.raya-moviendo .videos .ll-graya::before{background:rgba(156,195,228,.85)}
+  .gc-llamada .videos .ll-graya>span{position:absolute;left:50%;top:50%;width:6px;height:48px;margin:-24px 0 0 -3px;border-radius:3px;background:rgba(232,238,244,.8);box-shadow:0 0 0 1px rgba(10,14,20,.45),0 2px 8px rgba(0,0,0,.35)}
+  .gc-llamada.tres.con-tam:not(.mini):not(.tres-yo-col) .videos #v-local{width:min(var(--mi-w),30%)!important;max-width:none!important}
+}
+.gc-llamada.tres-yo-col #ll-vista .parte{display:none}
+.gc-llamada.tres-yo-col #ll-vista .peq{display:inline}
