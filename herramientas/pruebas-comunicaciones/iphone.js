@@ -64,7 +64,7 @@ async function telefono(browser, nombre, app) {
   // 5. Ajustes: se abre y el sonido se apaga y se enciende
   await App.click('#cvolver').catch(() => {});
   await espera(500);
-  await App.click('#ajustes-btn'); await espera(600);
+  await App.click((await App.$('#tab-ajustes:visible')) ? '#tab-ajustes' : '#ajustes-btn'); await espera(600); // con pestañas, Ajustes es una pestaña
   comprueba(await App.evaluate(() => document.querySelector('#h-ajustes').classList.contains('gc-abierta')), 'Ajustes: se abre desde el engranaje');
   comprueba(await visible(App, '#aj-avisos') && await visible(App, '#aj-sonido'), 'Ajustes: notificaciones y sonido');
   await foto(App, '84-ajustes');

@@ -81,8 +81,8 @@ async function guarda(p, nombre) {
   comprueba(await visible(A, '#conv') && !(await visible(A, '#nueva-blindada')), 'tras cerrarse y abrirse al momento: el mismo chat');
   await A.click('#cvolver'); await espera(500);
   if (await visible(A, '#contactos')) { await A.click('#contactos-atras'); await espera(400); }
-  comprueba(await visible(A, '#nueva-blindada') && await visible(A, '#ver-contactos') && !(await visible(A, '#contactos')) && !(await visible(A, '#conv')), 'el inicio con «Invitar a chat» y «Contactos»');
-  await A.click('#ver-contactos'); await espera(400);
+  comprueba(await visible(A, '#nueva-blindada') && await visible(A, '#ver-contactos-inicio') && !(await visible(A, '#contactos')) && !(await visible(A, '#conv')), 'el inicio con «Invitar a chat» y «Contactos»');
+  await A.click('#ver-contactos-inicio'); await espera(400);
   const fila2 = await A.evaluate(() => [...document.querySelectorAll('#contactos-filas .contacto')].map((li) => li.textContent.trim()));
   comprueba(await visible(A, '#contactos') && fila2.length === 1 && /Mi mujer/.test(fila2[0]) && !(await visible(A, '#nueva-blindada')), '«Contactos»: la lista, sin los botones del inicio');
   await foto(A, '05b-A-contactos');

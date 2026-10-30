@@ -29,17 +29,21 @@ contextual, cita de respuesta, onda de voz, columna lateral (PC), panel de infor
 `cripto.js`, `rele.js`, `sw.js`, la lógica de `llamada.js`, el buzón cifrado, el Número GUARDIANA y las citas, los
 archivos por trozos y el reenvío. Toda la seguridad y todo el transporte quedan como están.
 
-## 4. Identidad visual (decidida)
+## 4. Identidad visual (decidida: propuesta B · «Sello», elegida por el dueño a las 01:05 entre tres)
 - Color (modo oscuro, sobrio): fondo #06080C · barra #0A0D12 · superficie #0C1118 · capa elevada #161C25 ·
-  raya rgba(255,255,255,.09) · texto #F4F6F8 · secundario #A3AEBA · terciario #6F7B88 · acento #9CC3E4 (pulsado
-  #84AFD6) · burbuja propia #24405A · ajena #1A2129 · leído #62C6FF · en línea #5CC98A · alerta #E07A6C. Veinticinco
-  fichas en total; nada fuera de ellas. El acento es lo único que se toca; verde = en línea/verificado; rojo = error,
-  borrar, colgar, perdida.
+  raya rgba(255,255,255,.09) · hilo rgba(156,195,228,.22) · texto #F4F6F8 · secundario #A3AEBA · terciario #6F7B88 ·
+  acento #9CC3E4 (pulsado #84AFD6) · burbuja propia #1E3A58 · ajena #0F141B con hilo · leído = acento · en línea #5CC98A ·
+  alerta #E07A6C. Veintiséis fichas en total; nada fuera de ellas. El acento es lo único que se toca; verde = en
+  línea/verificado; rojo = error, borrar, colgar, perdida.
 - Tipografía: IBM Plex Sans (servida desde el sitio), doce tamaños: 30/36 título, 17/22 nombres y botones, 17/23
   mensaje (15/21 en PC), 15/20 segunda línea, 13/16 citas y notas, 12/16 fecha, 11/13 hora. Plex Mono solo para cifras.
-- Forma: rejilla de 4 px; margen 16; radios 12 (botones, listas), 18 (burbujas), 20 (hojas); sin bordes de 1 px (rayas
-  de 0,5); dos sombras en toda la app; sin brillos de color; iconos de un solo juego, trazo 1,75 a 24 px.
+- Forma: rejilla de 4 px; margen 16; radios 10 (botones, campos, listas), 12 (burbujas, sin cola; 4 en las esquinas que
+  se tocan dentro de un grupo), 20 (hojas); sin bordes de 1 px (rayas de 0,5); una sombra en toda la app (hojas); sin
+  brillos de color; iconos de un solo juego, trazo 1,75 a 24 px. Lo que da carácter: el hilo fino en las burbujas
+  ajenas, las esquinas moderadas y la quietud; nada de cola ni de colorines.
 - Botones: uno relleno por pantalla; lo secundario, texto en acento sin caja; nada por debajo de 44 px al tacto.
+- Las tres propuestas enseñadas (A · Tinta, B · Sello, C · Lámina) están en las capturas enviadas al dueño el 30 Oct a
+  las 00:58; las fichas de A y C no se usan.
 
 ## 5. Navegación
 Móvil: barra de pestañas abajo, **Chats · Llamar · Ajustes** (aprobada por el dueño, 00:34).
@@ -63,9 +67,12 @@ Grupos, reacciones, incorporar participantes a una llamada, gestión de disposit
 buscador dentro de los mensajes. Se diseñan como propuestas y no se enseñan al cliente hasta que existan.
 
 ## 7. Fases (cada una: pruebas en TODO BIEN → captura → publicación)
-1. Fichas y capa visual (`diseno.css`): burbujas agrupadas con cola, hora y ✓ dentro, ✓✓ azul, compositor sin círculos,
-   botones sin borde, hojas y Ajustes como lista. Sin cambios de lógica.
-2. Navegación: pestañas Chats · Llamar · Ajustes; «Chats» con buscador y «+»; PC en columnas.
+1. HECHA (30 Oct). Fichas y capa visual (`diseno.css`, «Sello»): burbujas agrupadas sin cola, hora y ✓ dentro, ✓✓ en
+   acento al leer, compositor sin círculos, botones sin borde, hojas y Ajustes como lista, lista de chats a todo el ancho.
+   Sin cambios de lógica.
+2. HECHA (30 Oct), salvo las columnas del PC. Pestañas Chats · Llamar · Ajustes; «Chats» con buscador y «+»; en Ajustes,
+   «¿Cómo funciona?» y «¿Por qué?». El PC sigue con su lista a la izquierda y el chat al centro con las mismas fichas; la
+   tercera columna (información) va con la fase 5.
 3. Chat: cabecera con avatar, menú al mantener pulsado, deslizar para responder, citas (campo cifrado `cita`), fecha
    fija, «↓ nuevos».
 4. Notas de voz con onda real y 1× / 1,5× / 2×; fotos con hueco reservado, vista previa y visor; documentos.

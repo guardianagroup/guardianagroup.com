@@ -1,0 +1,121 @@
+/* GUARDIANA · Comunicaciones · diseño «Sello» (agencia, ronda 76; dueño, 30 Oct 2026: «un chat espectacular, a la altura de Apple…
+   que no parezca botonería», «somos una app de privacidad, no de ocio», 01:05: elige la propuesta B · Sello).
+   Se carga después de app.css y solo cambia lo visual: fichas de color y medida, burbujas agrupadas de esquinas moderadas y sin cola,
+   un hilo fino en las ajenas, la hora y las ✓ dentro, compositor sin círculos, botones sin borde ni brillo, listas agrupadas.
+   Solo se animan transform y opacity. Las mismas fichas valen para el móvil y el PC: cambia la disposición, no el diseño. */
+:root{
+  --g-fondo:#06080C; --g-barra:#0A0D12; --g-capa:#0C1118; --g-capa-2:#161C25; --g-raya:rgba(255,255,255,.09); --g-hilo:rgba(156,195,228,.22);
+  --g-texto:#F4F6F8; --g-texto-2:#A3AEBA; --g-texto-3:#6F7B88; --g-acento:#9CC3E4; --g-acento-pulsado:#84AFD6; --g-acento-tinte:rgba(156,195,228,.14);
+  --g-mia:#1E3A58; --g-mia-pulsada:#27496C; --g-suya:#0F141B; --g-suya-pulsada:#171E27; --g-meta-mia:rgba(235,242,248,.62); --g-meta-suya:#8D98A4;
+  --g-leido:#9CC3E4; --g-ok:#5CC98A; --g-alerta:#E07A6C;
+  --g-radio:10px; --g-radio-burbuja:12px; --g-radio-hoja:20px;
+  --g-ios:cubic-bezier(.32,.72,0,1); --g-sale:cubic-bezier(.2,.8,.2,1); --g-muelle:cubic-bezier(.34,1.56,.64,1); --g-entra:cubic-bezier(.4,0,1,1);
+  --g-sombra-flota:0 12px 32px rgba(0,0,0,.55),0 0 0 .5px rgba(255,255,255,.08);
+}
+
+/* ---------- Burbujas: esquinas moderadas, sin cola, hilo fino en las ajenas; grupos; la hora y las ✓ dentro ---------- */
+.gc-mensajes{padding-left:12px;padding-right:12px}
+.gc-mensajes>li{margin-top:8px}
+.gc-mensajes>li.gc-sigue{margin-top:2px}
+.gc-burbuja{border:0!important;box-shadow:none;border-radius:var(--g-radio-burbuja)!important}
+.gc-burbuja.gc-mia{background:var(--g-mia)}
+.gc-burbuja.gc-suya{background:var(--g-suya);box-shadow:inset 0 0 0 .5px var(--g-hilo)}
+@media (max-width:760px){
+  .gc-burbuja{font-size:17px;line-height:23px;letter-spacing:-.01em;padding:6px 12px 7px}
+  .gc-mensajes .gc-burbuja{max-width:80%}
+}
+/* en un grupo, las esquinas que se tocan van más cerradas */
+.gc-mensajes>li:has(+ li.gc-sigue)>.gc-burbuja.gc-mia{border-bottom-right-radius:4px!important}
+.gc-mensajes>li:has(+ li.gc-sigue)>.gc-burbuja.gc-suya{border-bottom-left-radius:4px!important}
+.gc-mensajes>li.gc-sigue>.gc-burbuja.gc-mia{border-top-right-radius:4px!important}
+.gc-mensajes>li.gc-sigue>.gc-burbuja.gc-suya{border-top-left-radius:4px!important}
+/* la hora y las ✓ en la línea del texto cuando caben: un hueco invisible al final del texto; si no caben, bajan solas */
+.gc-burbuja:has(>.gc-texto){padding-bottom:7px}
+.gc-burbuja:has(>.gc-texto)::after{display:none}
+.gc-burbuja:has(>.gc-texto)>.gc-meta{position:absolute;right:10px;bottom:5px;float:none;margin:0}
+.gc-burbuja.gc-mia>.gc-texto::after{content:"";display:inline-block;width:64px;height:1px}
+.gc-burbuja.gc-suya>.gc-texto::after{content:"";display:inline-block;width:42px;height:1px}
+.gc-meta{font:400 11px/13px var(--texto);font-variant-numeric:tabular-nums;letter-spacing:.01em;gap:3px}
+.gc-mia .gc-meta{color:var(--g-meta-mia)}
+.gc-suya .gc-meta{color:var(--g-meta-suya)}
+/* ✓: gris al enviar y al llegar; en el color de la marca al leer */
+.gc-ticks{color:var(--g-meta-mia)}
+.gc-ticks.gc-leido{color:var(--g-leido)}
+.gc-ticks svg{fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.gc-ticks.gc-leido svg{stroke-width:1.8}
+/* al aparecer: la enviada sube; la recibida, un fundido corto (el historial al abrir, sin animar) */
+@keyframes gEnvia{from{opacity:.4;transform:translateY(16px) scale(.94)}to{opacity:1;transform:none}}
+@keyframes gLlega{from{opacity:0;transform:translateY(8px) scale(.98)}to{opacity:1;transform:none}}
+.gc-mensajes>li.g-nueva>.gc-burbuja.gc-mia{animation:gEnvia .26s var(--g-ios) both;transform-origin:100% 100%}
+.gc-mensajes>li.g-nueva>.gc-burbuja.gc-suya{animation:gLlega .22s var(--g-sale) both;transform-origin:0 100%}
+/* fecha: una línea discreta que se queda arriba al desplazar */
+.gc-fecha{border:0!important;background:rgba(6,8,12,.86);color:var(--g-texto-3);font:500 12px/16px var(--texto);letter-spacing:0;padding:3px 10px;border-radius:8px;position:sticky;top:6px;z-index:3}
+.gc-linea-llamada{border:0!important;background:var(--g-capa)}
+/* tarjetas de llamada: sin círculos de fondo; el glifo y su flecha, nada más */
+.gc-llam-ico,.gc-llam-otra{background:transparent!important}
+.gc-llam-ico svg.flecha{border:0;background:transparent}
+.gc-llam-otra{color:var(--g-acento)}
+.gc-llam-otra:active{opacity:.45}
+
+/* ---------- Compositor: glifos sin círculo, campo de esquinas moderadas, «Enviar» en el hueco del micrófono ---------- */
+.gc-compositor{background:var(--g-barra);border-top:.5px solid var(--g-raya);gap:4px;align-items:flex-end}
+.gc-compositor .gc-redondo{color:var(--g-acento);background:transparent;transition:transform .09s var(--g-sale),opacity .09s}
+.gc-compositor .gc-redondo:active{opacity:.45}
+.gc-compositor .gc-redondo svg{width:24px;height:24px;stroke-width:1.75}
+.gc-campo{min-height:38px!important;padding:8px 14px!important;border-radius:var(--g-radio)!important;border:.5px solid var(--g-raya)!important;background:var(--g-capa)!important;font-size:16px!important;line-height:20px!important;margin:3px 0}
+.gc-campo::placeholder{color:var(--g-texto-3)}
+.gc-compositor #enviar,.gc-compositor #grabar{width:44px;height:44px}
+.gc-compositor #enviar{background:transparent!important;box-shadow:none!important;position:relative;color:#06080C}
+.gc-compositor #enviar::before{content:"";position:absolute;inset:5px;border-radius:var(--g-radio);background:var(--g-acento);transition:transform .16s var(--g-muelle)}
+.gc-compositor #enviar svg{position:relative;width:18px;height:18px;fill:currentColor;stroke:none}
+.gc-compositor #enviar:active::before{transform:scale(.9)}
+#grabar.pulsando{box-shadow:0 0 0 6px rgba(156,195,228,.16)!important}
+
+/* ---------- Botones: uno relleno por pantalla; lo demás, texto en acento; sin bordes ni brillos; esquinas moderadas ---------- */
+.boton:not(.principal):not(.peligro):not(.borrar-dos):not(.vj-ver):not(.terminar):not(.guia-boton){border:0!important;background:transparent!important;color:var(--g-acento)!important;box-shadow:none!important;font-weight:600}
+.boton,.grande{border-radius:var(--g-radio)!important}
+.boton.principal{border:0!important;box-shadow:none!important}
+.boton.principal:active{background:var(--g-acento-pulsado)!important}
+.grande{box-shadow:none!important;border-color:var(--g-raya)!important;background:var(--g-capa)!important}
+.grande.principal{border-color:var(--g-acento)!important;background:var(--g-acento)!important}
+@media (hover:none){.grande:hover{transform:none!important}}
+.gc-hoja-caja.caja{border:0!important;box-shadow:var(--g-sombra-flota)}
+/* en el PC, «Terminar» deja la cabecera: sigue en el menú «⋯» (como en el móvil); sin botones gigantes ni rojos a la vista */
+.conv .gc-cabecera #terminar{display:none}
+.mi-numero-op{border-radius:var(--g-radio)!important}
+.marcar-llamar,.mi-numero-usar{border-radius:var(--g-radio)!important}
+/* Ajustes como lista agrupada: filas sin borde sobre una capa, raya fina entre ellas */
+.ajustes{gap:0!important}
+.ajuste{border:0!important;border-radius:0!important;background:var(--g-capa)!important;min-height:56px!important;position:relative}
+.ajuste:first-child{border-radius:var(--g-radio) var(--g-radio) 0 0!important}
+.ajuste:last-child{border-radius:0 0 var(--g-radio) var(--g-radio)!important}
+.ajuste:only-child{border-radius:var(--g-radio)!important}
+.ajuste+.ajuste::before{content:"";position:absolute;left:60px;right:0;top:0;height:.5px;background:var(--g-raya)}
+.ajuste:active{background:var(--g-capa-2)!important}
+.ajuste[hidden]{display:none!important}
+
+/* ---------- Chats: lista a todo el ancho, sin tarjeta; fila de 72 px; acciones como glifos ---------- */
+.contactos-filas{border:0!important;background:transparent!important;padding:0!important;border-radius:0!important;gap:0!important}
+.contacto{min-height:72px;padding-right:0;position:relative}
+.contacto+.contacto{border-top:0!important}
+.contacto+.contacto::before{content:"";position:absolute;left:66px;right:0;top:0;height:.5px;background:var(--g-raya)}
+.contacto-abre{padding:8px 4px 8px 2px;border-radius:0}
+.contacto-abre:active{background:rgba(255,255,255,.05)}
+.contacto-av{width:50px;height:50px;background:var(--g-capa-2);color:var(--g-acento);font:600 19px/1 var(--texto)}
+.contacto-av.en-linea::after,.contacto-av.no-linea::after{background:var(--g-ok);box-shadow:0 0 0 2.5px var(--g-fondo)}
+.contacto-txt b{font:600 17px/22px var(--texto);letter-spacing:-.01em;color:var(--g-texto)}
+.contacto-txt small{font:400 15px/20px var(--texto);color:var(--g-texto-2)}
+.contacto-b{background:transparent!important;color:var(--g-acento);width:40px;height:44px}
+.contacto-b:active{opacity:.45}
+.contacto-n{background:var(--g-acento);color:#06080C}
+.contactos-vacio{border:0!important;background:transparent!important}
+
+/* ---------- Tu Número: una superficie sin borde; la etiqueta, en letra normal ---------- */
+.mi-numero{border:0!important;background:var(--g-capa)!important;border-radius:var(--g-radio-hoja)!important}
+.mi-numero-t{font:400 13px/16px var(--texto)!important;letter-spacing:0!important;text-transform:none!important;color:var(--g-texto-2)!important}
+.mi-numero-compartir{border:0!important;background:transparent!important;color:var(--g-acento)!important;font-weight:600}
+.mi-numero-compartir:active{opacity:.45!important;background:transparent!important}
+#marcar-n{border:0!important;background:var(--g-capa)!important;border-radius:var(--g-radio)!important}
+.teclado button{background:var(--g-capa-2)}
+.teclado button:active{background:#232B37}
+@media (prefers-reduced-motion:reduce){.gc-mensajes>li.g-nueva>.gc-burbuja{animation:none}}

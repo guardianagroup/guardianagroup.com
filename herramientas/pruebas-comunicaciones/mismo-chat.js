@@ -90,7 +90,7 @@ async function invita(A) {
   await foto(A, '61-A-mismo-chat'); await foto(B, '62-B-mismo-chat');
   // Contactos: una sola fila
   await B.click('#cvolver'); await espera(600);
-  if (!(await B.$('#contactos-filas')) || !(await B.$('#contactos-filas:visible'))) if (await B.$('#ver-contactos:visible')) { await B.click('#ver-contactos'); await espera(600); }
+  if (!(await B.$('#contactos-filas')) || !(await B.$('#contactos-filas:visible'))) if (await B.$('#ver-contactos-inicio:visible')) { await B.click('#ver-contactos-inicio'); await espera(600); }
   const filas = await B.evaluate(() => document.querySelectorAll('#contactos-filas button[data-id]:not([data-acto])').length);
   comprueba(filas === 1, 'B: en Contactos hay una sola fila (' + filas + ')');
   await foto(B, '63-B-contactos');

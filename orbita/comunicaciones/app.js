@@ -909,7 +909,7 @@
     try {
       const n = sinLeer();
       // y en el inicio de la app, «Mis chats» con el número (dueño, 29 Oct 2026, 23:41: «si es una, dos, tres, que aparezca con el número»)
-      { const b = $('#ver-contactos'); if (b) { let i = b.querySelector('.mis-n'); if (!i) { i = document.createElement('i'); i.className = 'mis-n'; b.append(i); } i.textContent = n > 99 ? '99+' : String(n); i.hidden = !n; b.setAttribute('aria-label', n ? T('Mis chats') + ' · ' + (n === 1 ? T('Mensaje nuevo') : T('{n} mensajes nuevos').replace('{n}', n)) : T('Mis chats')); } }
+      for (const b of [$('#ver-contactos'), $('#ver-contactos-inicio')].filter(Boolean)) { let i = b.querySelector('.mis-n'); if (!i) { i = document.createElement('i'); i.className = 'mis-n'; b.append(i); } i.textContent = n > 99 ? '99+' : String(n); i.hidden = !n; b.setAttribute('aria-label', n ? T('Mis chats') + ' · ' + (n === 1 ? T('Mensaje nuevo') : T('{n} mensajes nuevos').replace('{n}', n)) : T('Mis chats')); }
       if (navigator.setAppBadge) { if (n) navigator.setAppBadge(n).catch(() => {}); else if (navigator.clearAppBadge) navigator.clearAppBadge().catch(() => {}); }
     } catch (_) {}
   }
@@ -1935,6 +1935,27 @@
     verComo = !!ver && esMovil();
     const sec = $('#como'); if (sec) sec.hidden = !verComo;
     const i = $('#inicio'); if (i) { i.classList.toggle('ver-como', verComo); i.scrollTop = 0; }
+    pintaPestanas();
+  }
+  // ---------- Pestañas Chats · Llamar · Ajustes (agencia, ronda 76; dueño, 30 Oct 2026, 00:34) ----------
+  // En el teléfono, con la app añadida y el Número GUARDIANA ya creado, el inicio son los chats y abajo van las tres pestañas. El
+  // número y el teclado viven en «Llamar»; «¿Cómo funciona?» y «¿Por qué?», en Ajustes. En Safari sin la app, en el ordenador y antes
+  // de tener número, todo sigue como estaba. Los identificadores de siempre (#ver-contactos, #llamar-num) ahora son las pestañas.
+  const modoPestanas = () => esMovil() && usaNumero() && !!MI_NUM && !sinNumeroPrueba();
+  function pintaPestanas() {
+    const nav = $('#pestanas'); if (!nav) return;
+    const modo = modoPestanas();
+    document.body.classList.toggle('con-pestanas', modo);
+    nav.hidden = !modo || !!ACTUAL || document.body.classList.contains('aceptando');
+    const mn = $('#mi-numero'), mk = $('#marcar');
+    if (modo && mn && mk && mn.parentNode !== mk) mk.insertBefore(mn, $('#marcar-n')); // el número, dentro de «Llamar»
+    for (const id of ['chats-nuevo', 'buscar-chats', 'aj-como', 'aj-porque']) { const e = $('#' + id); if (e) e.hidden = !modo; }
+    if (!modo) return;
+    if (!ACTUAL && !verMarcar && !verComo && !verContactos && !document.body.classList.contains('aceptando')) { verContactos = true; pintaContactos(); }
+    const ajustes = $('#h-ajustes') && $('#h-ajustes').classList.contains('gc-abierta');
+    const activa = ajustes ? 'tab-ajustes' : verMarcar ? 'llamar-num' : 'ver-contactos';
+    for (const b of nav.querySelectorAll('.pestana')) { const on = b.id === activa; b.classList.toggle('activa', on); if (on) b.setAttribute('aria-current', 'page'); else b.removeAttribute('aria-current'); }
+    const t = $('#contactos-t'); if (t) t.textContent = T('Chats');
   }
   function pintaContactos() {
     const sec = $('#contactos'), ul = $('#contactos-filas'); if (!sec || !ul) return;
@@ -1947,6 +1968,7 @@
     const ver = esMovil() && verContactos;
     sec.hidden = !ver;
     $('#inicio').classList.toggle('ver-contactos', ver);
+    pintaPestanas();
     $('#inicio').classList.toggle('con-contactos', total > 0);
     document.body.classList.toggle('con-contactos', total > 0);
     const vacio = $('#contactos-vacio'); if (vacio) { vacio.hidden = total > 0; const sp = vacio.querySelector('span'); if (sp) sp.textContent = usaNumero() ? T('Toca «Llamar» y escribe el Número GUARDIANA de la otra persona; cuando también añada el tuyo, su chat saldrá aquí.') : T('Cuando invites a alguien y te conteste, su chat saldrá aquí.'); }
@@ -2000,7 +2022,7 @@
   }
   // del chat al inicio (con contactos, en el teléfono, «‹» vuelve a ellos sin terminar nada)
   // del chat de alguien con quien ya se habló, «‹» vuelve a los contactos; de una invitación aún sin abrir, al inicio
-  function alInicio() { const c = CONVS.get(ACTUAL); paraEscribe(); guardaBorrador(); quiereNueva = true; verContactos = !!(c && c.huella); cierraConv(); pintaContactos(); }
+  function alInicio() { const c = CONVS.get(ACTUAL); paraEscribe(); guardaBorrador(); quiereNueva = true; verContactos = modoPestanas() || !!(c && c.huella); cierraConv(); pintaContactos(); }
   // el borrador de cada conversación se queda en la suya al cambiar de una a otra
   function guardaBorrador() { const c = CONVS.get(ACTUAL), ta = $('#texto'); if (c && ta) c.borrador = ta.value; }
   function ponBorrador(c) {
@@ -2153,6 +2175,7 @@
   function pintaNumero() {
     const ver = usaNumero(), caja = $('#mi-numero'); if (!caja) return;
     document.body.classList.toggle('con-numero', ver);
+    pintaPestanas();
     // en el navegador del móvil (sin la app), el botón principal es «Añadir a la pantalla de inicio»: el número y «Llamar» viven en
     // la app (dueño, 29 Oct 2026, 23:07: «me sigue apareciendo invitar a chat… esa es la que debe ser llamar»)
     { const sinApp = esMovil() && !comoApp() && !sinNumeroPrueba() && releConNumeros(); document.body.classList.toggle('movil-sin-app', sinApp);
@@ -2179,6 +2202,7 @@
     const sec = $('#marcar'); if (!sec) return;
     sec.hidden = !verMarcar; $('#inicio').classList.toggle('ver-marcar', verMarcar);
     if (verMarcar) $('#inicio').classList.remove('ver-contactos');
+    if (ver !== undefined) pintaPestanas();
     const n = NUM_MARCADO, ok = n.length === 12 && C.N.numeroValido(n);
     { const c = $('#marcar-n'); const v = bonito(n); if (c.value !== v) c.value = v; }
     const ayuda = $('#marcar-ayuda');
@@ -2235,7 +2259,7 @@
       }
       b.disabled = true; errorNumero('');
       const r = await creaNumero(n, elegido); b.disabled = false;
-      if (r === 'ok') { pintaNumero(); pintaContactos(); aviso(T('Listo: este es tu Número GUARDIANA.')); return; }
+      if (r === 'ok') { pintaNumero(); pintaContactos(); if (modoPestanas()) pintaMarcar(true); aviso(T('Listo: este es tu Número GUARDIANA.')); return; }
       errorNumero(r === 'ocupado' ? T('Ese número no está disponible: prueba otro.') : r === 'sin relé' || r === 'sin respuesta' ? T('Sin conexión: conéctate para crear tu número.') : r === 'espera' ? T('Demasiados intentos: espera un minuto.') : T('No se pudo crear el número: inténtalo otra vez.'));
     });
     $('#mi-numero-n').addEventListener('click', async () => { if (!MI_NUM) return; try { await navigator.clipboard.writeText(MI_NUM.n); aviso(T('Número copiado.')); } catch (_) { aviso(bonito(MI_NUM.n)); } });
@@ -2332,8 +2356,9 @@
     pintaEspera(c);
     marcaLeidos(c);
     if (matchMedia('(min-width: 761px)').matches) $('#texto').focus();
+    pintaPestanas();
   }
-  function cierraConv() { $('#inicio').classList.remove('con-invitacion'); document.body.classList.remove('esperando-enlace'); ACTUAL = null; if (window.pintaBarra) pintaBarra(); $('#conv').hidden = true; $('#inicio').hidden = false; $('#app').classList.remove('en-conv'); document.body.classList.remove('en-conv'); $('#paso-inicio').hidden = false; $('#paso-codigo').hidden = true; $('#paso-entrar').hidden = true; $('#paso-enlace').hidden = true; }
+  function cierraConv() { $('#inicio').classList.remove('con-invitacion'); document.body.classList.remove('esperando-enlace'); ACTUAL = null; if (window.pintaBarra) pintaBarra(); $('#conv').hidden = true; $('#inicio').hidden = false; $('#app').classList.remove('en-conv'); document.body.classList.remove('en-conv'); $('#paso-inicio').hidden = false; $('#paso-codigo').hidden = true; $('#paso-entrar').hidden = true; $('#paso-enlace').hidden = true;  pintaPestanas(); }
   function pintaCabecera(c) {
     pintaEspera(c);
     if (window.pintaBarra) pintaBarra();
@@ -2765,8 +2790,8 @@
   }
 
   // ---------- hojas ----------
-  const abreHoja = (id) => { $('#' + id).classList.add('gc-abierta'); };
-  const cierraHoja = (id) => { $('#' + id).classList.remove('gc-abierta'); const c = CONVS.get(ACTUAL); if (c) setTimeout(() => marcaLeidos(c), 60); };
+  const abreHoja = (id) => { $('#' + id).classList.add('gc-abierta'); if (id === 'h-ajustes') pintaPestanas(); };
+  const cierraHoja = (id) => { $('#' + id).classList.remove('gc-abierta'); if (id === 'h-ajustes') pintaPestanas(); const c = CONVS.get(ACTUAL); if (c) setTimeout(() => marcaLeidos(c), 60); };
   function pintaCodigo(c) {
     const e = $('#codigo'); e.textContent = codigoBonito(c.codigo); e.className = 'codigo' + (c.codigoUsado ? ' usado' : (c.codigo && Date.now() > c.codigoCaduca ? ' caducado' : ''));
     const caducado = c.codigo && Date.now() > c.codigoCaduca;
@@ -3213,7 +3238,13 @@
     const verLista = () => { paraEscribe(); guardaBorrador(); document.body.classList.add('ver-lista'); pintaLista(); };
     $('#cvolver').addEventListener('click', () => { if (esMovil()) { alInicio(); return; } verLista(); });
     // «Contactos» en el inicio y «‹» para volver (29 Oct 2026, 07:37)
-    $('#ver-contactos').addEventListener('click', () => { verContactos = true; pintaContactos(); const i = $('#inicio'); if (i) i.scrollTop = 0; });
+    for (const id of ['ver-contactos', 'ver-contactos-inicio']) { const b = $('#' + id); if (b) b.addEventListener('click', () => { if (verMarcar) pintaMarcar(false); pintaComo(false); verContactos = true; pintaContactos(); const i = $('#inicio'); if (i) i.scrollTop = 0; }); }
+    { const b = $('#tab-ajustes'); if (b) b.addEventListener('click', () => { abreAjustes(); pintaPestanas(); }); }
+    { const b = $('#chats-nuevo'); if (b) b.addEventListener('click', () => { pintaMarcar(true); const i = $('#inicio'); if (i) i.scrollTop = 0; }); }
+    { const b = $('#aj-como'); if (b) b.addEventListener('click', () => { cierraHoja('h-ajustes'); pintaMarcar(false); pintaComo(true); }); }
+    { const b = $('#aj-porque'); if (b) b.addEventListener('click', () => { cierraHoja('h-ajustes'); const pb = $('#porque-btn'); if (pb) pb.click(); }); }
+    // el buscador de chats: filtra por nombre, al momento
+    { const q = $('#buscar-chats'); if (q) q.addEventListener('input', () => { const t = q.value.trim().toLocaleLowerCase(); for (const li of document.querySelectorAll('#contactos-filas .contacto')) { const b = li.querySelector('b'); li.hidden = !!t && !(b && b.textContent.toLocaleLowerCase().includes(t)); } }); }
     // «¿Cómo funciona?» (dueño, 29 Oct 2026, 08:24): su pantalla en el móvil, con «‹»
     $('#ver-como').addEventListener('click', () => { pintaComo(true); });
     // el logotipo de arriba lleva al inicio desde Contactos, «¿Cómo funciona?» o «¿Por qué?» (dueño, 29 Oct 2026, 09:29); en el

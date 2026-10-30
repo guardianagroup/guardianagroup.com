@@ -74,7 +74,7 @@ async function conecta(A, B, nombreA, nombreB) {
   await conecta(A, B, 'Mamá', 'Francis');
   comprueba(await A.evaluate(() => window.gcomPrueba.cuantas() === 1) && await B.evaluate(() => window.gcomPrueba.cuantas() === 1), 'los dos con un chat');
   await B.click('#cvolver'); await espera(600);
-  if (!(await B.$('#contactos:not([hidden])'))) { await B.click('#ver-contactos'); await espera(500); }
+  if (!(await B.$('#contactos:not([hidden])'))) { await B.click('#ver-contactos-inicio'); await espera(500); }
   comprueba(await B.evaluate(() => !document.querySelector('#contactos-editar').hidden), 'Contactos: «Editar» arriba');
   await B.click('#contactos-editar'); await espera(300);
   await foto(B, '71-B-editar');
@@ -90,7 +90,7 @@ async function conecta(A, B, nombreA, nombreB) {
   await A.goto(URL0); await B.goto(URL0); await espera(1500);
   await conecta(A, B, 'Mamá', 'Francis');
   await B.click('#cvolver'); await espera(600);
-  if (!(await B.$('#contactos:not([hidden])'))) { await B.click('#ver-contactos'); await espera(500); }
+  if (!(await B.$('#contactos:not([hidden])'))) { await B.click('#ver-contactos-inicio'); await espera(500); }
   const r = await B.evaluate(() => { const b = document.querySelector('#contactos-filas .contacto-abre').getBoundingClientRect(); return { x: b.x + b.width / 2, y: b.y + b.height / 2 }; });
   await B.mouse.move(r.x, r.y); await B.mouse.down(); await espera(750); await B.mouse.up(); await espera(300);
   comprueba(await B.evaluate(() => document.querySelector('#h-eliminar').classList.contains('gc-abierta')) && await B.evaluate(() => document.querySelector('#conv').hidden), 'mantener pulsado: «¿Eliminar el chat?» (sin abrir el chat)');

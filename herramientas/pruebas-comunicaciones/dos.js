@@ -51,7 +51,7 @@ const caja = (p, sel) => p.evaluate((s) => { const e = document.querySelector(s)
   const id = await caja(A, '.idiomas'); comprueba(id.vis && id.x > 250, 'app: el idioma arriba a la derecha');
   const bar = await caja(A, '.barra'); comprueba(id.y >= bar.y && id.b <= bar.b + 0.5, 'app: el idioma cabe dentro de la barra');
   // 29 Oct 2026, 07:36–07:37: «Invitar a chat» sin el escudo y, debajo, «Contactos»
-  const bs = await caja(A, '#nueva-blindada svg'), bb = await caja(A, '#nueva-blindada b'), bt = await caja(A, '#nueva-blindada'), bc = await caja(A, '#ver-contactos');
+  const bs = await caja(A, '#nueva-blindada svg'), bb = await caja(A, '#nueva-blindada b'), bt = await caja(A, '#nueva-blindada'), bc = await caja(A, '#ver-contactos-inicio');
   comprueba(!bs.vis && Math.abs((bt.y + bt.h / 2) - (bb.y + bb.h / 2)) < 2 && Math.abs((bt.x + bt.w / 2) - (bb.x + bb.w / 2)) < 2, 'inicio: «Invitar a chat» sin escudo, con el texto centrado');
   comprueba(bc.vis && bc.y >= bt.b && bc.w === bt.w, 'inicio: «Contactos» debajo, del mismo ancho');
   // invitación blindada (en el móvil, un solo botón)

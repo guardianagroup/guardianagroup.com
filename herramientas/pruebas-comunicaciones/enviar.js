@@ -19,7 +19,7 @@ async function telefono(browser) {
   const p = await ctx.newPage(); p.on('pageerror', (e) => { console.log('pageerror', String(e).slice(0, 200)); fallos.push('pageerror'); });
   return p;
 }
-const caja = (p, s) => p.evaluate((s) => { const e = document.querySelector(s); if (!e) return null; const r = e.getBoundingClientRect(), cs = getComputedStyle(e); return { x: Math.round(r.x), y: Math.round(r.y), w: Math.round(r.width), h: Math.round(r.height), vis: cs.display !== 'none' && r.width > 0, fondo: cs.backgroundColor, tr: cs.transform }; }, s);
+const caja = (p, s) => p.evaluate((s) => { const e = document.querySelector(s); if (!e) return null; const r = e.getBoundingClientRect(), cs = getComputedStyle(e); return { x: Math.round(r.x), y: Math.round(r.y), w: Math.round(r.width), h: Math.round(r.height), vis: cs.display !== 'none' && r.width > 0, fondo: cs.backgroundColor !== 'rgba(0, 0, 0, 0)' ? cs.backgroundColor : getComputedStyle(e, '::before').backgroundColor, tr: cs.transform }; }, s); // con el diseño «Sello», el color de «Enviar» va en su ::before
 (async () => {
   const browser = await chromium.launch({ args: ['--use-fake-ui-for-media-stream', '--use-fake-device-for-media-stream'] });
   const A = await telefono(browser), B = await telefono(browser);

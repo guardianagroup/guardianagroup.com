@@ -85,7 +85,7 @@ const marca = async (p, n) => { for (const d of n) await p.click('#teclado butto
   const filas = await A.evaluate(() => [...document.querySelectorAll('#contactos-filas .contacto')].map((li) => li.textContent.trim().replace(/\s+/g, ' ')));
   comprueba(filas.length === 2 && filas.some((f) => /Mi mujer.*Esperando/.test(f)) && filas.some((f) => /Nadie.*Esperando/.test(f)), 'en «Mis chats», los dos números esperando (' + filas.join(' | ') + ')');
   await foto(A, '07-A-mis-chats');
-  await A.click('#contactos-atras'); await espera(300);
+  if (await visible(A, '#contactos-atras')) { await A.click('#contactos-atras'); await espera(300); } // con pestañas, «Chats» ya es el inicio
   // B añade a A: el chat se abre solo en los dos
   await B.click('#llamar-num'); await espera(300); await marca(B, numA); await B.click('#marcar-llamar'); await espera(400);
   await B.fill('#num-nombre', 'Mi marido'); await B.click('#num-anadir'); await espera(6000);
@@ -113,7 +113,7 @@ const marca = async (p, n) => { for (const d of n) await p.click('#teclado butto
   comprueba(await A.evaluate(() => { const c = [...GuardianaCom.convs.values()].find((x) => x.numero); return !!(c && c.sesion && c.sesion.confirmada); }), 'tras recargar, la sesión se vuelve a acordar');
   await A.click('#cvolver'); await espera(400);
   await foto(A, '09-A-mis-chats-con-chat');
-  await A.click('#contactos-atras'); await espera(300);
+  if (await visible(A, '#contactos-atras')) { await A.click('#contactos-atras'); await espera(300); }
   await foto(A, '10-A-inicio');
   await browser.close();
   console.log(fallos.length ? 'FALLOS: ' + fallos.length + '\n - ' + fallos.join('\n - ') : 'TODO BIEN');
