@@ -69,16 +69,18 @@ async function conecta(A, B, nombreA, nombreB) {
   await A.click('#eliminar-si'); await espera(800);
   comprueba(await A.evaluate(() => window.gcomPrueba.cuantas() === 0), 'la invitación pendiente se elimina');
 
-  // 2. con un contacto: «Editar» → «Eliminar» → se borra aquí y en el otro teléfono
+  // 2. con un contacto: deslizar → «Eliminar» → se borra aquí y en el otro teléfono
   await A.goto(URL0); await espera(1500);
   await conecta(A, B, 'Mamá', 'Francis');
   comprueba(await A.evaluate(() => window.gcomPrueba.cuantas() === 1) && await B.evaluate(() => window.gcomPrueba.cuantas() === 1), 'los dos con un chat');
   await B.click('#cvolver'); await espera(600);
   if (!(await B.$('#contactos:not([hidden])'))) { await B.click('#ver-contactos-inicio'); await espera(500); }
-  comprueba(await B.evaluate(() => !document.querySelector('#contactos-editar').hidden), 'Contactos: «Editar» arriba');
-  await B.click('#contactos-editar'); await espera(300);
-  await foto(B, '71-B-editar');
-  comprueba(await B.evaluate(() => document.querySelectorAll('#contactos-filas .contacto-quita').length === 1 && document.querySelector('#contactos-editar').textContent === 'Listo'), 'en «Editar», cada fila con «Eliminar» y arriba «Listo»');
+  // sin «Editar» (dueño, 30 Oct 2026, 08:13): deslizar el chat a la izquierda → «Eliminar»
+  comprueba(await B.evaluate(() => !document.querySelector('#contactos-editar') || document.querySelector('#contactos-editar').hidden), 'Contactos: sin «Editar»');
+  await B.evaluate(() => { const el = document.querySelector('#contactos-filas .contacto-abre'), r = el.getBoundingClientRect(), y = r.y + r.height / 2, x = r.x + r.width * 0.7; const ev = (t, xx) => el.dispatchEvent(new PointerEvent(t, { bubbles: true, cancelable: true, pointerId: 5, pointerType: 'touch', isPrimary: true, clientX: xx, clientY: y, buttons: t === 'pointerup' ? 0 : 1 })); ev('pointerdown', x); for (let i = 1; i <= 8; i++) ev('pointermove', x - 150 * i / 8); ev('pointerup', x - 150); });
+  await espera(450);
+  await foto(B, '71-B-deslizar');
+  comprueba(await B.evaluate(() => document.querySelectorAll('#contactos-filas .contacto-quita').length === 1 && document.querySelector('#contactos-filas .contacto').classList.contains('abierta')), 'deslizar a la izquierda: asoma «Eliminar»');
   await B.click('#contactos-filas .contacto-quita'); await espera(300);
   comprueba(await B.evaluate(() => /Francis/.test(document.querySelector('#h-eliminar-t').textContent)), 'pregunta con el nombre: «¿Eliminar el chat con Francis?»', await B.evaluate(() => document.querySelector('#h-eliminar-t').textContent));
   await foto(B, '72-B-pregunta');

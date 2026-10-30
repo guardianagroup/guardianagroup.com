@@ -80,7 +80,7 @@ async function dedo(p, desde, pasos, ms, soltar) {
   await cdp.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
   comprueba(await hasta(A, () => !document.querySelector('.gc-compositor').classList.contains('grabando-ya'), 3000), 'soltar: termina la grabación');
   comprueba(await hasta(A, () => document.querySelectorAll('.gc-mia .gc-voz').length === 1, 10000), 'soltar: la nota se envía');
-  comprueba(await hasta(A, () => { const t = document.querySelector('.gc-mia .gc-voz .gc-voz-t'); return !!t && /^0:00 \/ 0:0[2-4]$/.test(t.textContent); }, 8000), 'la nota dura lo grabado (' + (await A.evaluate(() => { const t = document.querySelector('.gc-mia .gc-voz .gc-voz-t'); return t ? t.textContent : ''; })) + ')');
+  comprueba(await hasta(A, () => { const t = document.querySelector('.gc-mia .gc-voz .gc-voz-t'); return !!t && /^0:0[2-4]$/.test(t.textContent); }, 8000), 'la nota dura lo grabado (' + (await A.evaluate(() => { const t = document.querySelector('.gc-mia .gc-voz .gc-voz-t'); return t ? t.textContent : ''; })) + ')');
 
   // 3. deslizar a la izquierda cancela
   await dedo(A, mic, [[-130, 0, 300]], 300);
@@ -108,18 +108,18 @@ async function dedo(p, desde, pasos, ms, soltar) {
   // 5. el reproductor: la caja tipo WhatsApp; al acabar, 0:00 y «play»
   comprueba(await hasta(B, () => document.querySelectorAll('.gc-suya .gc-voz').length === 2, 10000), 'B: recibe las dos notas');
   await espera(1500);
-  const caja = await B.evaluate(() => { const bur = document.querySelector('.gc-suya.gc-burbuja-voz'); if (!bur) return null; const r = (s) => bur.querySelector(s).getBoundingClientRect(); const b = bur.getBoundingClientRect(), play = r('.gc-voz-play'), barra = r('.gc-voz-barra'), t = r('.gc-voz-t'), meta = r('.gc-meta'); return { playCentrado: Math.abs((play.top + play.bottom) / 2 - (b.top + b.bottom) / 2) < 4, barraDerechaDePlay: barra.left > play.right, tiempoAbajoIzq: t.top >= barra.bottom - 2 && t.left >= barra.left - 1, horaAbajoDer: meta.right <= b.right && meta.top >= barra.bottom - 2 && meta.left > t.left, margen: Math.round(b.right - meta.right) }; });
-  comprueba(caja && caja.playCentrado && caja.barraDerechaDePlay && caja.tiempoAbajoIzq && caja.horaAbajoDer, 'B: la caja de la nota, como en WhatsApp: play centrado, tiempo abajo a la izquierda, hora a la derecha', caja);
+  const caja = await B.evaluate(() => { const bur = document.querySelector('.gc-suya.gc-burbuja-voz'); if (!bur) return null; const r = (s) => bur.querySelector(s).getBoundingClientRect(); const b = bur.getBoundingClientRect(), play = r('.gc-voz-play'), barra = r('.gc-voz-barra'), t = r('.gc-voz-t'), meta = r('.gc-meta'); return { playCentrado: Math.abs((play.top + play.bottom) / 2 - (barra.top + barra.bottom) / 2) <= 1, /* el centro del ▶ con el de la onda (dueño, 30 Oct 2026, 07:58) */ barraDerechaDePlay: barra.left > play.right, tiempoAbajoIzq: t.top >= barra.bottom - 2 && t.left >= barra.left - 1, horaAbajoDer: meta.right <= b.right && meta.top >= barra.bottom - 2 && meta.left > t.left, margen: Math.round(b.right - meta.right) }; });
+  comprueba(caja && caja.playCentrado && caja.barraDerechaDePlay && caja.tiempoAbajoIzq && caja.horaAbajoDer, 'B: la caja de la nota, como en WhatsApp: la onda en el centro del ▶, tiempo abajo a la izquierda, hora a la derecha', caja);
   await B.click('.gc-suya .gc-voz-play'); await espera(900);
-  const s1 = await B.evaluate(() => { const d = document.querySelector('.gc-suya .gc-voz'); return { sonando: d.classList.contains('sonando'), tr: d.querySelector('.gc-voz-prog').style.transform, punto: d.querySelector('.gc-voz-punto').style.transform }; });
-  comprueba(s1.sonando && /scaleX\(0\.[1-9]/.test(s1.tr) && /translateX\([1-9]/.test(s1.punto), 'B: al reproducir, la barra y la bolita avanzan (con transform, suave)', s1);
+  const s1 = await B.evaluate(() => { const d = document.querySelector('.gc-suya .gc-voz'); return { sonando: d.classList.contains('sonando'), oidas: d.querySelectorAll('.gc-voz-onda i.oida').length, punto: d.querySelector('.gc-voz-punto').style.transform }; });
+  comprueba(s1.sonando && s1.oidas > 2 && /translateX\([1-9]/.test(s1.punto), 'B: al reproducir, la barra y la bolita avanzan (con transform, suave)', s1);
   await foto(B, '52-B-sonando');
-  comprueba(await hasta(B, () => { const d = document.querySelector('.gc-suya .gc-voz'); return !d.classList.contains('sonando') && d.querySelector('.gc-voz-t').textContent.startsWith('0:00') && d.querySelector('.gc-voz-prog').style.transform === 'scaleX(0)' && /Reproducir/.test(d.querySelector('.gc-voz-play').getAttribute('aria-label')); }, 9000), 'B: al acabar, vuelve a 0:00, la bolita al principio y el botón «play» otra vez (20:54)');
+  comprueba(await hasta(B, () => { const d = document.querySelector('.gc-suya .gc-voz'); return !d.classList.contains('sonando') && /^0:0[2-4]$/.test(d.querySelector('.gc-voz-t').textContent) && !d.querySelector('.gc-voz-onda i.oida') && /Reproducir/.test(d.querySelector('.gc-voz-play').getAttribute('aria-label')); }, 9000), 'B: al acabar, vuelve a 0:00, la bolita al principio y el botón «play» otra vez (20:54)');
   await foto(B, '53-B-acabada');
   // parada muda al final (el iPhone a veces no avisa de «ended»): se vigila y se vuelve al principio igual
   await B.evaluate(() => { const d = document.querySelector('.gc-suya .gc-voz'); const au = d.querySelector('audio'); au.addEventListener('ended', (e) => e.stopImmediatePropagation(), true); });
   await B.click('.gc-suya .gc-voz-play');
-  comprueba(await hasta(B, () => { const d = document.querySelector('.gc-suya .gc-voz'); return !d.classList.contains('sonando') && d.querySelector('.gc-voz-t').textContent.startsWith('0:00'); }, 9000), 'B: aunque el navegador no avise del final, vuelve al principio con «play»');
+  comprueba(await hasta(B, () => { const d = document.querySelector('.gc-suya .gc-voz'); return !d.classList.contains('sonando') && !d.querySelector('.gc-voz-onda i.oida'); }, 9000), 'B: aunque el navegador no avise del final, vuelve al principio con «play»');
 
   // 6. con ratón (ordenador): un clic empieza (fija), «Enviar» la manda
   const P = await equipo(browser, 'PC', PC);

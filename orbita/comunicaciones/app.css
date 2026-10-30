@@ -1893,3 +1893,109 @@ body.con-pestanas #marcar .mi-numero-n{font-size:26px}
 .conv .gc-cabecera .gc-avatar.con-inicial{position:relative;background:var(--g-capa-2,#161C25)!important;color:var(--g-acento,#9CC3E4)!important;font:600 17px/1 var(--texto);box-shadow:none!important}
 .conv .gc-cabecera .gc-avatar.con-inicial svg{position:absolute;right:-3px;bottom:-3px;width:16px!important;height:16px!important;padding:2px;border-radius:50%;background:var(--g-fondo,#06080C);color:var(--g-acento,#9CC3E4);box-sizing:border-box}
 .gc-av-ini[hidden]{display:none}
+
+/* ---------- Fotos con hueco reservado y visor; notas de voz con onda y velocidad (agencia, ronda 76, fase 4) ---------- */
+.gc-foto{position:relative;display:block;max-width:100%;border-radius:10px;overflow:hidden;background:var(--g-capa-2,#161C25);margin:2px 0 8px}
+.gc-foto img.imagen{display:block;width:100%;height:100%;object-fit:contain;margin:0;border-radius:0;max-width:none;max-height:none;background:#000;opacity:0;transition:opacity .2s}
+.gc-foto.lista img.imagen{opacity:1}
+.gc-foto.sin-medida{width:auto;height:auto;background:transparent}
+.gc-foto.sin-medida img.imagen{width:auto;height:auto;max-width:min(100%,280px);max-height:320px;border-radius:10px}
+.gc-foto-espera::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 30%,rgba(255,255,255,.05) 50%,transparent 70%);animation:gFotoEspera 1.4s linear infinite}
+@keyframes gFotoEspera{from{transform:translateX(-60%)}to{transform:translateX(60%)}}
+.visor.sin-tiempo .visor-pie{display:none}
+.gc-voz-barra::before{display:none}
+.gc-voz-onda{position:absolute;left:0;right:0;top:0;height:28px;display:flex;align-items:center;gap:2px}
+.gc-voz-onda i{flex:1;min-width:1px;height:3px;border-radius:2px;background:rgba(156,195,228,.3)}
+.gc-voz-onda i.oida{background:var(--g-acento,#9CC3E4)}
+.gc-mia .gc-voz-onda i{background:rgba(244,246,248,.3)}
+.gc-mia .gc-voz-onda i.oida{background:#F4F6F8}
+.gc-voz-t{min-width:34px}
+.gc-voz-vel{all:unset;cursor:pointer;flex:none;min-width:26px;height:22px;padding:0 6px;border-radius:11px;background:rgba(255,255,255,.08);color:var(--g-texto-2,#A3AEBA);font:600 11.5px/22px var(--texto);text-align:center;font-variant-numeric:tabular-nums;-webkit-tap-highlight-color:transparent}
+.gc-voz-vel:active{opacity:.6}
+.gc-voz-vel.activa{background:var(--g-acento,#9CC3E4);color:#06080C}
+.gc-mia .gc-voz-vel{background:rgba(244,246,248,.14);color:#DBE9F4}
+.gc-mia .gc-voz-vel.activa{background:#F4F6F8;color:#0C1118}
+@media (max-width:760px){.gc-archivo-voz .gc-voz{width:min(72vw,300px)}}
+
+/* La nota de voz, como en WhatsApp: el círculo de ▶ y la onda en la misma fila, con el centro de la onda en el centro exacto del
+   círculo (dueño, 30 Oct 2026, 07:58); la duración debajo de la onda; la velocidad a la derecha; la hora, abajo a la derecha */
+.gc-burbuja-voz .gc-voz{grid-template-columns:40px minmax(0,1fr) auto;grid-template-rows:40px 16px;column-gap:10px;align-items:center}
+.gc-burbuja-voz .gc-voz-play{grid-column:1;grid-row:1;align-self:center}
+.gc-burbuja-voz .gc-voz-barra{grid-column:2;grid-row:1;align-self:center;height:28px}
+.gc-burbuja-voz .gc-voz-vel{grid-column:3;grid-row:1;align-self:center}
+.gc-burbuja-voz .gc-voz-t{grid-column:2/4;grid-row:2;align-self:start;padding-right:72px}
+/* la flechita del menú en el PC: solo con ratón, al pasar por la burbuja */
+.gc-mas-msg{display:none}
+@media (hover:hover) and (pointer:fine){
+  .gc-mas-msg{position:absolute;top:3px;right:3px;z-index:2;width:24px;height:22px;padding:0;border:0;border-radius:6px;cursor:pointer;place-items:center;color:var(--g-texto-2,#A3AEBA);background:inherit;box-shadow:-6px 0 8px -2px rgba(0,0,0,.18)}
+  .gc-mia .gc-mas-msg{background:var(--g-mia,#1E3A58);color:var(--g-meta-mia,rgba(235,242,248,.62))}
+  .gc-suya .gc-mas-msg{background:var(--g-suya,#0F141B)}
+  .gc-mas-msg svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .gc-mensajes>li:hover .gc-mas-msg,.gc-mas-msg:focus-visible,.gc-mensajes>li.gc-elegida .gc-mas-msg{display:grid}
+  .gc-mas-msg:hover{color:var(--g-texto,#F4F6F8)}
+}
+/* la foto en su burbuja, sola, con la hora debajo a la derecha */
+.gc-archivo.gc-archivo-foto{display:block;min-width:0;padding:0}
+.gc-burbuja:has(.gc-archivo-foto){padding:4px!important}
+.gc-burbuja:has(.gc-archivo-foto) .gc-foto{margin:0}
+.gc-burbuja:has(.gc-archivo-foto)>.gc-meta{margin-right:6px}
+/* sin nada más debajo, la hora va sobre la esquina de la foto, en una pastilla oscura */
+.gc-burbuja:has(.gc-archivo-foto):not(:has(.sello,.fila))::after{display:none}
+.gc-burbuja:has(.gc-archivo-foto):not(:has(.sello,.fila))>.gc-meta{position:absolute;right:10px;bottom:10px;float:none;margin:0;padding:2px 7px;border-radius:9px;background:rgba(6,8,12,.58);color:#F4F6F8}
+.gc-burbuja:has(.gc-archivo-foto):not(:has(.sello,.fila))>.gc-meta .gc-ticks:not(.gc-leido){color:#F4F6F8}
+/* «Llamar» sin título arriba: la pestaña ya lo dice (dueño, 30 Oct 2026, 08:04: «quita la palabra llamar de ahí arriba») */
+body.con-pestanas #marcar .contactos-cab{display:none}
+/* el teclado de «Llamar», a la medida del alto que queda (--k la pone ajustaTeclado) */
+body.con-pestanas #marcar .teclado{grid-template-columns:repeat(3,var(--k,74px));gap:calc(var(--k,74px) * .19) calc(var(--k,74px) * .38);margin:2px 0}
+body.con-pestanas #marcar .teclado button,body.con-pestanas #marcar .teclado .tecla-vacia{width:var(--k,74px);height:var(--k,74px)}
+body.con-pestanas #marcar .teclado button:not(.tecla-sec){font-size:calc(var(--k,74px) * .41)}
+/* guardar la foto: el símbolo de descarga dentro de la foto, abajo a la izquierda, y la hora a la derecha, sin chocar (dueño, 08:07) */
+.gc-foto-bajar{position:absolute;left:8px;bottom:8px;z-index:2;width:34px;height:34px;padding:0;border:0;border-radius:50%;display:grid;place-items:center;background:rgba(6,8,12,.58);color:#F4F6F8;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:transform .12s}
+.gc-foto-bajar:active{transform:scale(.9)}
+.gc-foto-bajar svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+/* ================= Dueño, 30 Oct 2026, 08:12–08:24: acabados ================= */
+/* el idioma, arriba a la derecha en el móvil (08:12) */
+@media (max-width:760px){body.con-pestanas .barra .idiomas,body.movil-sin-app .barra .idiomas{margin-left:auto!important}}
+/* pestañas: las tres a partes iguales de lado a lado, y centradas en alto en la barra (08:24); la raya del iPhone queda debajo */
+.pestanas{padding:0 env(safe-area-inset-right,0px) 0 env(safe-area-inset-left,0px)!important;height:calc(52px + env(safe-area-inset-bottom,0px) * .72)!important;align-items:center!important}
+.pestana{flex:1 1 0;min-width:0;height:100%;padding:0!important;justify-content:center;gap:4px}
+/* la barra de escribir del PC: el dibujo de cada icono con su centro a la misma altura (08:17); el clip y la papelera dibujan
+   un poco más abajo que el micrófono */
+.gc-compositor #adjuntar svg{transform:translateY(-1px)}
+.gc-compositor #vaciar svg{transform:translateY(-.8px)}
+/* deslizar un chat a la izquierda: asoma «Eliminar» */
+.contactos-filas .contacto{overflow:hidden;touch-action:pan-y;--dx:0px}
+.contactos-filas .contacto>:not(.contacto-quita){transform:translateX(var(--dx));transition:transform .26s var(--g-ios,cubic-bezier(.32,.72,0,1))}
+.contactos-filas .contacto[style*="transition: none"]>:not(.contacto-quita){transition:none}
+.contactos-filas .contacto-quita{all:unset;box-sizing:border-box;position:absolute;top:0;bottom:0;right:0;width:92px;display:grid;place-items:center;background:#D9584A;color:#fff;font:600 15px/1 var(--texto);cursor:pointer;transform:translateX(calc(100% + var(--dx)));transition:transform .26s var(--g-ios,cubic-bezier(.32,.72,0,1));-webkit-tap-highlight-color:transparent}
+.contactos-filas .contacto[style*="transition: none"]>.contacto-quita{transition:none}
+.contactos-filas .contacto-quita:active{background:#C24C3F}
+.contactos-filas .contacto+.contacto::before{z-index:1}
+#contactos-editar{display:none!important}
+
+/* ---------- «Llamar», como el teclado de un teléfono de primera (08:21: «se debe entender mejor… al máximo nivel») ----------
+   arriba, tu número en una fila con «compartir»; el número que marcas, grande y limpio, centrado; el teclado; y el botón verde
+   redondo de llamar bajo el 0. Sin cajas vacías ni títulos de más. */
+body.con-pestanas #marcar{gap:8px}
+body.con-pestanas #marcar .mi-numero{margin:0!important;padding:10px 10px 10px 16px!important;border-radius:16px!important;width:100%}
+body.con-pestanas #marcar .mi-numero-hecho:not([hidden]){display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-rows:auto auto;column-gap:12px;row-gap:1px;align-items:center;text-align:left}
+body.con-pestanas #marcar .mi-numero-t{display:block!important;grid-column:1;grid-row:1;justify-self:start;text-align:left!important;margin:0!important;font:400 12.5px/16px var(--texto)!important;color:var(--g-texto-3,#6F7B88)!important}
+body.con-pestanas #marcar .mi-numero-n{grid-column:1;grid-row:2;justify-self:start;margin:0;padding:0;border:0;background:none;font:600 19px/24px var(--mono)!important;letter-spacing:.03em;color:var(--g-texto,#F4F6F8);cursor:pointer}
+body.con-pestanas #marcar .mi-numero-compartir{grid-column:2;grid-row:1/3;width:44px;height:44px;min-height:0;padding:0!important;margin:0;border-radius:50%!important;display:grid!important;place-items:center;background:var(--g-acento-tinte,rgba(156,195,228,.14))!important;color:var(--g-acento,#9CC3E4)!important}
+body.con-pestanas #marcar .mi-numero-compartir:active{opacity:.6!important;background:var(--g-acento-tinte,rgba(156,195,228,.14))!important}
+body.con-pestanas #marcar .mi-numero-compartir svg{width:20px;height:20px;margin:0;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+body.con-pestanas #marcar .mi-numero-compartir span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+/* el número que marcas: sin caja, grande, centrado exacto (el espacio entre letras del final se compensa al principio) */
+body.con-pestanas #marcar .marcar-n{width:100%;height:58px;min-height:58px;margin:4px 0 0;padding:0!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;font:500 31px/58px var(--mono)!important;letter-spacing:.04em!important;text-indent:.04em;text-align:center;color:var(--g-texto,#F4F6F8)}
+body.con-pestanas #marcar .marcar-ayuda{min-height:18px;margin-top:-6px;font-size:13.5px;line-height:18px}
+/* el teclado: dígitos finos, superficie sobria, se aclara al pulsar */
+body.con-pestanas #marcar .teclado button:not(.tecla-sec){font-weight:400!important;background:var(--g-capa-2,#161C25);transition:background .12s}
+body.con-pestanas #marcar .teclado button:not(.tecla-sec):active{background:#2A3442}
+body.con-pestanas #marcar .teclado .tecla-sec:disabled{visibility:hidden}
+/* llamar: el botón verde redondo, bajo el 0 */
+body.con-pestanas #marcar .marcar-llamar{width:72px!important;height:72px;min-height:72px!important;padding:0!important;margin:2px 0 0;border:0!important;border-radius:50%!important;display:grid!important;place-items:center;background:#30B567!important;color:#FFFFFF!important;box-shadow:none!important;transition:transform .12s,opacity .15s}
+body.con-pestanas #marcar .marcar-llamar:not(:disabled):active{transform:scale(.94);background:#289A57!important}
+body.con-pestanas #marcar .marcar-llamar:disabled{opacity:.32}
+body.con-pestanas #marcar .marcar-llamar svg{width:30px!important;height:30px!important;fill:currentColor!important;stroke:none!important}
+body.con-pestanas #marcar .marcar-llamar span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}

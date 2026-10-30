@@ -31,8 +31,26 @@ separadas por rayas). Recomendación de la agencia: B, por ser la que mejor casa
 - Pruebas adaptadas: con pestañas no hay flecha atrás en Chats ni engranaje arriba (numero.js, iphone.js); el botón grande
   del inicio sin número se llama `#ver-contactos-inicio` (contactos, eliminar, voz, dos, mismo-chat).
 
-## Fases 3 a 6 (plan.md)
-- Mantener pulsado (Responder · Reenviar · Información · Borrar; sin «Copiar», por la regla del 28 Oct 15:17) y deslizar para
-  responder con cita.
-- Notas de voz con onda real y velocidad 1× / 1,5× / 2×; fotos con hueco reservado y vista previa.
-- Hojas con salida animada y arrastre para cerrar.
+## Fase 3 (hecha, 2288b9e2)
+- Mantener pulsado un mensaje (o clic derecho / la flechita al pasar el ratón en el PC): Responder · Reenviar · Guardar ·
+  Información · Borrar; sin «Copiar» (regla del 28 Oct, 15:17). Deslizar a la derecha responde. La cita va cifrada dentro del
+  mensaje («cita»: id, de, texto). «↓ nuevos» con el número. La inicial del nombre en el avatar de la cabecera.
+
+## Fase 4 y acabados del dueño (30 Oct, 07:57–08:24)
+- Notas de voz: onda real (44 barras guardadas con el mensaje), 1× · 1,5× · 2×, la onda en el centro exacto del ▶, ‖ al instante.
+- Fotos: medidas en el anuncio (w, h) y hueco reservado; la foto sola, hora en la esquina, descarga abajo a la izquierda; visor.
+- «Llamar»: sin título, tu número en una fila con compartir, el número marcado sin caja y centrado (medido en píxeles), botón
+  verde redondo; el teclado se ajusta al alto (ajustaTeclado, teclas de 52 a 78 px).
+- Chats sin «Editar»: mantener pulsado o deslizar a la izquierda → «Eliminar» / «Quitar».
+- Idioma a la derecha; pestañas a tercios y centradas en alto; en el PC, los iconos de la barra de escribir alineados por su dibujo.
+- Diferencia móvil / PC (dueño, 07:57): el mismo aspecto; cambia el manejo (pestañas y gestos en el móvil; columnas, ratón,
+  Intro y Esc en el PC).
+
+## Avisos al teléfono (dueño, 08:27: «máxima precisión y detalle»)
+- Teléfono congelado sin decir «fuera»: si un texto no tiene acuse a los 4 s, se avisa igual (vigilaAcuse).
+- El aviso dice el nombre que tú le pusiste (leído en tu teléfono; el servidor no lo sabe): «Fran · 3 mensajes nuevos».
+- Prueba: avisos-precision.js (en el chat, en la lista, en segundo plano, congelado, cerrada; el texto del aviso).
+
+## Pendiente
+- Fase 5: información del chat en una hoja; estados vacíos, de error y de conexión. Fase 6: auditoría a 393/430/768/1.100/1.440.
+- Grupos (chat y llamadas de tres o más): propuesta; el dueño la pidió para probar con su hijo y un amigo (08:33).

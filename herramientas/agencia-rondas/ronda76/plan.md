@@ -73,8 +73,8 @@ buscador dentro de los mensajes. Se diseñan como propuestas y no se enseñan al
 2. HECHA (30 Oct), salvo las columnas del PC. Pestañas Chats · Llamar · Ajustes; «Chats» con buscador y «+»; en Ajustes,
    «¿Cómo funciona?» y «¿Por qué?». El PC sigue con su lista a la izquierda y el chat al centro con las mismas fichas; la
    tercera columna (información) va con la fase 5.
-3. Chat: cabecera con avatar, menú al mantener pulsado, deslizar para responder, citas (campo cifrado `cita`), fecha
+3. HECHA (30 Oct). Chat: cabecera con avatar, menú al mantener pulsado, deslizar para responder, citas (campo cifrado `cita`), fecha
    fija, «↓ nuevos».
-4. Notas de voz con onda real y 1× / 1,5× / 2×; fotos con hueco reservado, vista previa y visor; documentos.
+4. HECHA (30 Oct), salvo documentos. Notas de voz con onda real y 1× / 1,5× / 2×; fotos con hueco reservado, vista previa y visor; documentos.
 5. Información del chat en una hoja; estados vacíos, de error y de conexión unificados.
 6. Auditoría: capturas a 393, 430, 768, 1.100 y 1.440 px; 60 fps en un iPhone 13; contraste AA; teclado y accesibilidad.

@@ -28,7 +28,7 @@ async function telefono(browser, nombre) {
 const foto = async (p, n) => { await p.screenshot({ path: path.join(OUT, n + '.png') }); };
 // en el blindado el chat va borroso (modo discreto): la captura, con el dedo puesto
 const fotoDestapada = async (p, n) => { await p.mouse.move(196, 300); await p.mouse.down(); await espera(250); await foto(p, n); await p.mouse.up(); await espera(200); };
-const estadoVoz = (p, sel) => p.evaluate((s) => { const d = document.querySelector(s); if (!d) return null; const au = d.querySelector('audio'); return { t: d.querySelector('.gc-voz-t').textContent, w: (Math.round(parseFloat((d.querySelector('.gc-voz-prog').style.transform.match(/scaleX\(([\d.]+)\)/) || [])[1] || 0) * 1000) / 10) + '%', sonando: d.classList.contains('sonando'), paused: au.paused, cur: au.currentTime, dur: au.duration }; }, sel);
+const estadoVoz = (p, sel) => p.evaluate((s) => { const d = document.querySelector(s); if (!d) return null; const au = d.querySelector('audio'); return { t: d.querySelector('.gc-voz-t').textContent, w: (Math.round(d.querySelectorAll('.gc-voz-onda i.oida').length / Math.max(1, d.querySelectorAll('.gc-voz-onda i').length) * 1000) / 10) + '%', sonando: d.classList.contains('sonando'), paused: au.paused, cur: au.currentTime, dur: au.duration }; }, sel);
 
 (async () => {
   const browser = await chromium.launch({ args: ['--use-fake-ui-for-media-stream', '--use-fake-device-for-media-stream', '--autoplay-policy=no-user-gesture-required'] });
@@ -43,12 +43,12 @@ const estadoVoz = (p, sel) => p.evaluate((s) => { const d = document.querySelect
   // A graba 3 segundos y envía (con ratón, un clic deja la grabación fija y «Enviar» la manda; 29 Oct 2026, 20:51)
   await A.click('#grabar'); await espera(3200); await A.click('#enviar');
   comprueba(await hasta(A, () => !!document.querySelector('.gc-mia .gc-voz'), 8000), 'A: la nota de voz enviada tiene el reproductor propio');
-  comprueba(await hasta(A, () => { const t = document.querySelector('.gc-mia .gc-voz .gc-voz-t'); return !!t && /^0:00 \/ 0:0[2-4]$/.test(t.textContent); }, 8000), 'A: el tiempo total es el de la grabación (' + (await A.evaluate(() => { const t = document.querySelector('.gc-mia .gc-voz .gc-voz-t'); return t && t.textContent; })) + ')');
+  comprueba(await hasta(A, () => { const t = document.querySelector('.gc-mia .gc-voz .gc-voz-t'); return !!t && /^0:0[2-4]$/.test(t.textContent); }, 8000), 'A: el tiempo total es el de la grabación (' + (await A.evaluate(() => { const t = document.querySelector('.gc-mia .gc-voz .gc-voz-t'); return t && t.textContent; })) + ')');
   // B la recibe velada (blindado) → Mostrar
   comprueba(await hasta(B, () => !!document.querySelector('.gc-velada') || !!document.querySelector('.gc-suya .gc-voz'), 8000), 'B: la nota llega');
   if (await B.$('.gc-velada')) { await B.evaluate(() => document.querySelector('.gc-velada .gc-velo-botones .boton.principal').click()); await espera(800); }
   comprueba(await hasta(B, () => !!document.querySelector('.gc-suya .gc-voz'), 8000), 'B: reproductor propio en la nota recibida');
-  comprueba(await hasta(B, () => { const t = document.querySelector('.gc-suya .gc-voz .gc-voz-t'); return !!t && /^0:00 \/ 0:0[2-4]$/.test(t.textContent); }, 8000), 'B: duración conocida sin esperar al navegador (' + (await B.evaluate(() => { const t = document.querySelector('.gc-suya .gc-voz .gc-voz-t'); return t && t.textContent; })) + ')');
+  comprueba(await hasta(B, () => { const t = document.querySelector('.gc-suya .gc-voz .gc-voz-t'); return !!t && /^0:0[2-4]$/.test(t.textContent); }, 8000), 'B: duración conocida sin esperar al navegador (' + (await B.evaluate(() => { const t = document.querySelector('.gc-suya .gc-voz .gc-voz-t'); return t && t.textContent; })) + ')');
   await espera(1500); // la tarjeta se vuelve a pintar al cambiar de estado (entregado, leído): se espera a que se asiente
   // B reproduce: la barra avanza y el tiempo corre; al acabar vuelve a 0:00
   await B.click('.gc-suya .gc-voz-play'); await espera(1200);
@@ -59,7 +59,7 @@ const estadoVoz = (p, sel) => p.evaluate((s) => { const d = document.querySelect
   await B.mouse.click(r.x + r.w * 0.2, r.y + r.h / 2); await espera(300);
   const b2 = await estadoVoz(B, '.gc-suya .gc-voz');
   comprueba(b2 && parseFloat(b2.w) < 45, 'B: tocar la barra salta a ese punto (' + (b2 && b2.w) + ')');
-  comprueba(await hasta(B, () => { const d = document.querySelector('.gc-suya .gc-voz'); return !d.classList.contains('sonando') && d.querySelector('.gc-voz-t').textContent.startsWith('0:00'); }, 8000), 'B: al terminar, vuelve al principio');
+  comprueba(await hasta(B, () => { const d = document.querySelector('.gc-suya .gc-voz'); return !d.classList.contains('sonando') && !d.querySelector('.gc-voz-onda i.oida') && /^0:0[2-4]$/.test(d.querySelector('.gc-voz-t').textContent); }, 8000), 'B: al terminar, vuelve al principio (la onda sin colorear y la duración)');
   await B.click('.gc-suya .gc-voz-play'); await espera(700); await fotoDestapada(B, '40-B-voz-sonando'); await B.click('.gc-suya .gc-voz-play');
   // A se oye a sí misma: su propia nota también se reproduce
   await A.click('.gc-mia .gc-voz-play'); await espera(900);
