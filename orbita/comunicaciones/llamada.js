@@ -1673,6 +1673,7 @@
       girando = false; pinta();
     }
     { const b = $('#ll-girar'); if (b) b.addEventListener('click', () => { giraCamara(); }); }
+    { const b = $('#ll-vista-tel'); if (b) b.addEventListener('click', () => { if (caja.classList.contains('tres') || o.sencilla) return; alternaDividida(); pintaBotonTam(); }); }
     $('#ll-camara').addEventListener('click', () => { if (!cam) return; const on = !camaraOn(); cam.getVideoTracks().forEach((x) => { x.enabled = on; }); o.manda({ acto: 'camara', id: idLlamada, on }); for (const L of patas) tmanda(L, { acto: 'camara', id: L.id, on }); pintaVideo(); });
     $('#ll-mini').addEventListener('click', () => pequena(true));
     { const b = $('#ll-completa'); if (b) {
@@ -1767,6 +1768,15 @@
       // mientras suena no hay imagen de la otra persona: «Pantalla completa» no sale hasta que llega (dueño, 28 Oct 2026, 20:28:
       // «Corrige ese fallo»: quedaba en la raya del medio, encima del nombre)
       b.hidden = !visible() || !vl || caja.classList.contains('solo-mia');
+      // en el teléfono, el cambio de vista va arriba, junto a «Ver el chat», como en otras apps de videollamada (dueño, 30 Oct 2026,
+      // 16:03, con la foto: «no le gusta ahí el botón de pantalla completa… mira como hacen los demás»): nada encima de la imagen
+      { const vt = $('#ll-vista-tel');
+        if (vt) {
+          const ver = !FINO.matches && !b.hidden && !o.sencilla && !caja.classList.contains('tres');
+          vt.hidden = !ver;
+          if (ver) { const div = caja.classList.contains('dividida'), txt = div ? t('Pantalla completa') : t('Pantalla dividida'), modo = div ? 'c' : 'p'; if (vt.dataset.modo !== modo) { vt.dataset.modo = modo; vt.innerHTML = div ? SVG_COMPLETA : SVG_PARTIR; } vt.setAttribute('aria-label', txt); vt.title = txt; }
+        }
+        if (!FINO.matches) { b.hidden = true; return; } }
       if (b.hidden) return;
       // En el teléfono, con la pantalla partida, el botón lleva su nombre y va en la raya del medio, a la derecha: «Pantalla
       // completa» deja a la otra persona a toda la pantalla y a ti en pequeño, como WhatsApp o FaceTime; tocando tu imagen pequeña

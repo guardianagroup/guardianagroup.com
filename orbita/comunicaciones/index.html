@@ -39,7 +39,7 @@
 <link rel="canonical" href="https://guardianagroup.com/orbita/comunicaciones/">
 <link rel="icon" href="/favicon.ico">
 <link rel="stylesheet" href="componentes.css?v=20261028m">
-<link rel="stylesheet" href="app.css?v=20261101m">
+<link rel="stylesheet" href="app.css?v=20261101n">
 <link rel="stylesheet" href="diseno.css?v=20261031a">
 <link rel="stylesheet" href="viaje.css?v=20261029b">
 <!-- antes de pintar: como app desde el primer fotograma y, al volver a un chat tras recargar, sin enseñar el inicio entretanto -->
@@ -945,7 +945,7 @@
 
 <!-- Llamada de voz: encriptada de extremo a extremo (DTLS-SRTP), por el relé; el cambio de voz se hace en este equipo -->
 <div class="gc-llamada" id="llamada" role="dialog" aria-modal="true" aria-label="Llamada de voz">
-  <div class="gc-llamada-arriba"><span class="gc-llamada-cifrado"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><span>Encriptada de extremo a extremo</span></span><span class="gc-llamada-estado" id="ll-calidad"></span><button type="button" class="ll-mini-b" id="ll-mini" aria-label="Ver el chat"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v10H8l-4 4z"/></svg><span>Ver el chat</span></button></div>
+  <div class="gc-llamada-arriba"><span class="gc-llamada-cifrado"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><span>Encriptada de extremo a extremo</span></span><span class="gc-llamada-estado" id="ll-calidad"></span><button type="button" class="ll-mini-b ll-vista-tel" id="ll-vista-tel" aria-label="Pantalla completa" hidden></button><button type="button" class="ll-mini-b" id="ll-mini" aria-label="Ver el chat"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v10H8l-4 4z"/></svg><span>Ver el chat</span></button></div>
   <!-- Videollamada (dueño, 28 Oct 2026: «máxima calidad de imagen»): la imagen de la otra persona de fondo y la tuya en una esquina -->
   <div class="videos" id="ll-videos" hidden><video id="v-remoto" autoplay playsinline muted></video><video id="v-tercero" autoplay playsinline muted hidden></video><video id="v-local" autoplay playsinline muted></video><span class="ll-tile-n" id="ll-remoto-n" translate="no" hidden></span><span class="ll-tile-n ll-tile-n3" id="ll-tercero-n" translate="no" hidden></span></div>
   <!-- El número de seguridad de la llamada (dueño, 29 Oct 2026, 10:16): grande, en las dos pantallas; la comparación la hacen las dos
@@ -1149,7 +1149,7 @@
 <script src="sha256.js?v=20261027a"></script>
 <script src="viaje-datos.js?v=20261031a"></script>
 <script src="viaje.js?v=20261029b"></script>
-<script src="llamada.js?v=20261101m"></script>
+<script src="llamada.js?v=20261101n"></script>
 <script src="app.js?v=20261101m"></script>
 </body>
 </html>

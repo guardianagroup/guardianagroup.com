@@ -102,7 +102,8 @@ async function seAnaden(X, numX, Y, numY, nomY, nomX) {
   // 4. con A, B y C en silencio, A y C oyen a D
   for (const P of [A, B, C]) await silencia(P);
   await espera(1500);
-  const nA = await nivel(A, '#a-remoto'), nC = await nivel(C, '#a-remoto');
+  // (con la capa post-cuántica, la voz de dos saltos tarda un momento más en llegar la primera vez: se espera hasta 8 s)
+  let nA = 0, nC = 0; for (let i = 0; i < 5 && !(nA > 0.003 && nC > 0.003); i++) { if (!(nA > 0.003)) nA = await nivel(A, '#a-remoto'); if (!(nC > 0.003)) nC = await nivel(C, '#a-remoto'); }
   comprueba(nA > 0.003, '4. A oye a D a través de B (nivel ' + nA.toFixed(4) + ')');
   comprueba(nC > 0.003, '4. C oye a D a través de B y de A (nivel ' + nC.toFixed(4) + ')');
   for (const P of [A, B, C]) await P.evaluate(() => document.querySelector('#ll-silenciar').click());

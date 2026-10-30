@@ -134,9 +134,11 @@ const caja = (p, sel) => p.evaluate((s) => { const e = document.querySelector(s)
     }
     const ajuste = await A.evaluate(() => [getComputedStyle(document.querySelector('#v-remoto')).objectFit, getComputedStyle(document.querySelector('#v-local')).objectFit]);
     comprueba(ajuste[0] === 'cover' && ajuste[1] === 'cover', 'video: partida, las dos mitades llenas (' + ajuste.join(', ') + ')');
-    const tb = await caja(A, '#ll-tam'); const txt = await A.evaluate(() => { const b = document.querySelector('#ll-tam'); return b && b.textContent; });
-    comprueba(tb && tb.vis && /Pantalla completa/.test(txt), 'video: botón «Pantalla completa» a la vista (' + JSON.stringify(tb) + ')');
-    await A.click('#ll-tam'); await espera(800);
+    // (dueño, 30 Oct 2026, 16:03: nada encima de la imagen) «Pantalla completa», arriba junto a «Ver el chat»
+    const tb = await caja(A, '#ll-vista-tel'); const txt = await A.evaluate(() => { const b = document.querySelector('#ll-vista-tel'); return b && b.getAttribute('aria-label'); });
+    comprueba(tb && tb.vis && /Pantalla completa/.test(txt) && tb.y < 120, 'video: botón «Pantalla completa» arriba (' + JSON.stringify(tb) + ')');
+    comprueba(!(await caja(A, '#ll-tam') || {}).vis, 'video: ningún botón encima de la imagen');
+    await A.click('#ll-vista-tel'); await espera(800);
     comprueba(!/dividida/.test(await A.evaluate(() => document.querySelector('#llamada').className)), 'video: con el botón, como FaceTime');
     await foto(A, '13-A-video-facetime');
     const vl = await caja(A, '#v-local');

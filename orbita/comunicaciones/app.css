@@ -2202,3 +2202,11 @@ body.modo-llevar{background:#06080C}
 .gc-llamada-cifrado .ll-pq::before{content:'·';margin:0 7px 0 2px;color:rgba(156,195,228,.55);letter-spacing:0}
 .gc-llamada-cifrado .ll-pq[hidden]{display:none}
 @media (max-width:760px){.gc-llamada.con-video:not(.mini) .gc-llamada-nombre{max-width:calc(100vw - 64px);white-space:normal;text-align:center;overflow:visible;text-overflow:clip}}
+
+/* En el teléfono, «Pantalla completa / partida» arriba, junto a «Ver el chat» (16:03): ningún botón encima de la imagen */
+.ll-vista-tel[hidden]{display:none!important}
+@media (hover:hover) and (pointer:fine){.ll-vista-tel{display:none!important}}
+.gc-llamada-arriba .ll-vista-tel{min-width:44px;min-height:44px;padding:0;justify-content:center;margin-left:auto}
+.gc-llamada-arriba .ll-vista-tel svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.gc-llamada-arriba .ll-vista-tel:not([hidden]) + .ll-mini-b{margin-left:8px}
+.gc-llamada:not(.mini) .gc-llamada-arriba{position:relative;z-index:25}
