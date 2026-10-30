@@ -1758,3 +1758,10 @@ output.mi-numero-n{cursor:default}
 .num-quitar{appearance:none;justify-self:center;border:0;background:none;color:#F2A7A0;font:400 14.5px/1.4 var(--texto);padding:8px;cursor:pointer}
 .contacto.pendiente .contacto-av{background:rgba(156,195,228,.06);color:#9CC3E4;border:1px dashed rgba(156,195,228,.45)}
 .contacto.caducada small{color:#E8C77A}
+/* «Añadir a la pantalla de inicio», un botón como los tres de arriba (dueño, 29 Oct 2026, 23:00: «ponle un botón a la última frase
+   de todas»): mismo ancho, alto, letra y bordes que «¿Cómo funciona?», justo debajo */
+@media (max-width:760px){
+  #inicio>#anadir-app:not([hidden]){display:flex;align-items:center;justify-content:center;gap:10px;box-sizing:border-box;width:100%;max-width:400px;min-height:62px;height:62px;margin:12px auto 0;padding:0 20px;border-radius:16px;border:1px solid rgba(156,195,228,.38);background:rgba(12,18,26,.82);color:#E8ECF1;font:600 17.5px/1.2 var(--texto)}
+  #inicio>#anadir-app svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  #inicio>#anadir-app:active{background:rgba(156,195,228,.12)}
+}
