@@ -3602,7 +3602,8 @@
 "Avisando a {n}: entra en la llamada en cuanto abra GUARDIANA.":"Stiamo avvisando {n}: entra nella chiamata appena apre GUARDIANA.",
 "Cada persona oye y ve a las otras dos. Tu equipo une las dos llamadas; cada una va encriptada de extremo a extremo.":"Ogni persona sente e vede le altre due. Il tuo dispositivo unisce le due chiamate; ognuna è crittografata end-to-end.",
 "Tu red está limitando la conexión con GUARDIANA: los mensajes llegan, pero las fotos y las llamadas pueden fallar. Prueba con otra red (wifi o datos) o con una VPN.":"La tua rete sta limitando la connessione a GUARDIANA: i messaggi arrivano, ma foto e chiamate possono non funzionare. Prova un’altra rete (Wi-Fi o dati mobili) o una VPN.",
-"Llamada en grupo · {n} personas":"Chiamata di gruppo · {n} persone"
+"Llamada en grupo · {n} personas":"Chiamata di gruppo · {n} persone",
+"Cambiar vista":"Cambia vista"
 },
 "p":{
 "intento":"Quella che ci ha provato di più oggi: {1}, {2} {2?volta|volte}.",

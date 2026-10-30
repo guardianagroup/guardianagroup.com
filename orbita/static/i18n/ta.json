@@ -3602,7 +3602,8 @@
 "Avisando a {n}: entra en la llamada en cuanto abra GUARDIANA.":"{n}-க்குத் தெரிவிக்கப்படுகிறது: GUARDIANA-வைத் திறந்ததும் அழைப்பில் இணைவார்.",
 "Cada persona oye y ve a las otras dos. Tu equipo une las dos llamadas; cada una va encriptada de extremo a extremo.":"ஒவ்வொருவரும் மற்ற இருவரையும் கேட்கவும் பார்க்கவும் முடியும். உங்கள் சாதனம் இரண்டு அழைப்புகளையும் இணைக்கிறது; ஒவ்வொன்றும் முனையிலிருந்து முனை வரை மறையாக்கப்பட்டுள்ளது.",
 "Tu red está limitando la conexión con GUARDIANA: los mensajes llegan, pero las fotos y las llamadas pueden fallar. Prueba con otra red (wifi o datos) o con una VPN.":"உங்கள் நெட்வொர்க் GUARDIANA இணைப்பைக் கட்டுப்படுத்துகிறது: செய்திகள் வந்து சேர்கின்றன, ஆனால் படங்களும் அழைப்புகளும் தோல்வியடையலாம். வேறு நெட்வொர்க்கை (Wi-Fi அல்லது மொபைல் டேட்டா) அல்லது VPN-ஐ முயற்சிக்கவும்.",
-"Llamada en grupo · {n} personas":"குழு அழைப்பு · {n} பேர்"
+"Llamada en grupo · {n} personas":"குழு அழைப்பு · {n} பேர்",
+"Cambiar vista":"காட்சியை மாற்று"
 },
 "p":{
 "intento":"இன்று அதிகம் முயன்றது: {1}, {2} {2?முறை|முறை}.",

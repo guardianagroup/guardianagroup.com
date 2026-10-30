@@ -3602,7 +3602,8 @@
 "Avisando a {n}: entra en la llamada en cuanto abra GUARDIANA.":"Уведомляем {n}: подключение к звонку начнётся, как только откроется GUARDIANA.",
 "Cada persona oye y ve a las otras dos. Tu equipo une las dos llamadas; cada una va encriptada de extremo a extremo.":"Каждый слышит и видит двух других. Ваше устройство соединяет два звонка; каждый из них защищён сквозным шифрованием.",
 "Tu red está limitando la conexión con GUARDIANA: los mensajes llegan, pero las fotos y las llamadas pueden fallar. Prueba con otra red (wifi o datos) o con una VPN.":"Ваша сеть ограничивает соединение с GUARDIANA: сообщения доходят, но фото и звонки могут не работать. Попробуйте другую сеть (Wi-Fi или мобильный интернет) или VPN.",
-"Llamada en grupo · {n} personas":"Групповой звонок · участников: {n}"
+"Llamada en grupo · {n} personas":"Групповой звонок · участников: {n}",
+"Cambiar vista":"Сменить вид"
 },
 "p":{
 "intento":"Настойчивее всех сегодня: {1}, {2} {2?раз|раз}.",

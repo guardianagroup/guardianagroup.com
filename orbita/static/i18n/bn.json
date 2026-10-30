@@ -3602,7 +3602,8 @@
 "Avisando a {n}: entra en la llamada en cuanto abra GUARDIANA.":"{n}-কে জানানো হচ্ছে: তিনি GUARDIANA খোলা মাত্রই কলে যোগ দেবেন।",
 "Cada persona oye y ve a las otras dos. Tu equipo une las dos llamadas; cada una va encriptada de extremo a extremo.":"প্রত্যেকে অন্য দুজনকে শুনতে ও দেখতে পান। আপনার ডিভাইস দুটি কলকে যুক্ত করে; প্রতিটি কল এন্ড-টু-এন্ড এনক্রিপ্টেড।",
 "Tu red está limitando la conexión con GUARDIANA: los mensajes llegan, pero las fotos y las llamadas pueden fallar. Prueba con otra red (wifi o datos) o con una VPN.":"আপনার নেটওয়ার্ক GUARDIANA-এর সংযোগ সীমিত করছে: বার্তা পৌঁছাচ্ছে, কিন্তু ছবি ও কল ব্যর্থ হতে পারে। অন্য নেটওয়ার্ক (ওয়াই-ফাই বা মোবাইল ডেটা) বা একটি VPN ব্যবহার করে দেখুন।",
-"Llamada en grupo · {n} personas":"গ্রুপ কল · {n} জন"
+"Llamada en grupo · {n} personas":"গ্রুপ কল · {n} জন",
+"Cambiar vista":"ভিউ বদলান"
 },
 "p":{
 "intento":"আজ সবচেয়ে বেশি চেষ্টা: {1}, {2} {2?বার|বার}।",

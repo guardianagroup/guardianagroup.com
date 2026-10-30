@@ -1675,6 +1675,7 @@
       else if (partidaPorDefecto && video && cam && CW) ponDividida(CW >= CH ? 'der' : 'abajo');
       else if (mi.div && CW) { const hz = CW >= CH, mapa = hz ? { arriba: 'izq', abajo: 'der' } : { izq: 'arriba', der: 'abajo' }; ponDividida(mapa[mi.div] || mi.div); }
       else ponDividida(null);
+      raya(); ponParte(leeMi().p);
       // tamaño elegido (proporción del ancho), con su mínimo y su máximo
       if (Number.isFinite(mi.w) && CW) { caja.style.setProperty('--mi-w', Math.round(limitaAncho(mi.w * CW, CW, CH, vl)) + 'px'); caja.classList.add('con-tam'); }
       else caja.classList.remove('con-tam');
@@ -1713,7 +1714,7 @@
     const enLienzo = (e) => ({ x: e.clientX / escalaYa, y: e.clientY / escalaYa });
     const visible = () => { const vl = vidLocal(); return !!(vl && video && !caja.classList.contains('mini') && vl.offsetWidth && cam && !$('#ll-videos').hidden); };
     const sobreMiImagen = (p) => { if (!visible()) return false; const vl = vidLocal(); return p.x >= vl.offsetLeft && p.x <= vl.offsetLeft + vl.offsetWidth && p.y >= vl.offsetTop && p.y <= vl.offsetTop + vl.offsetHeight; };
-    const sobreAsa = (p) => { if (!visible()) return false; const cs = getComputedStyle(caja); const x = parseFloat(cs.getPropertyValue('--asa-x')) + 11, y = parseFloat(cs.getPropertyValue('--asa-y')) + 11; return Number.isFinite(x) && Math.hypot(p.x - x, p.y - y) <= 18; };
+    const sobreAsa = (p) => { if (!visible() || (FINO.matches && caja.classList.contains('dividida'))) return false; const cs = getComputedStyle(caja); const x = parseFloat(cs.getPropertyValue('--asa-x')) + 11, y = parseFloat(cs.getPropertyValue('--asa-y')) + 11; return Number.isFinite(x) && Math.hypot(p.x - x, p.y - y) <= 18; };
     // de la pantalla dividida a la imagen flotante del mismo tamaño (para seguir agrandando o achicando desde ahí)
     function sueltaDividida() {
       partidaPorDefecto = false;
@@ -1733,6 +1734,39 @@
       const r5 = (v) => Math.round(v * 1e5) / 1e5;
       guardaMi({ div: null, w: caja.classList.contains('con-tam') ? r5(W / CW) : null, x: r5((vl.offsetLeft - MARGEN) / Math.max(1, CW - W - 2 * MARGEN)), y: r5((vl.offsetTop - MARGEN) / Math.max(1, CH - H - 2 * MARGEN)) });
     }
+    // La raya del medio de la pantalla partida, en el ordenador (dueño, 30 Oct 2026, 11:33: «esa línea… quiero que se pueda tocar y
+    // arrastrar a izquierda o a derecha… el botón de cambiar vista, quiero que esté en otro lado»): se arrastra para repartir la
+    // pantalla entre las dos imágenes y tocarla no cambia nada; «Cambiar vista» va abajo, con los demás botones. Lo que te toca a ti
+    // (entre el 15 y el 85 %) se recuerda en este navegador. Se agarra por su posición (como el asa), así no la tapa nada.
+    var arrRaya = null; // var: miImagen() puede correr antes de llegar aquí
+    function ponParte(m) {
+      if (!FINO.matches || !Number.isFinite(m)) { caja.style.removeProperty('--mi-p'); return; }
+      caja.style.setProperty('--mi-p', String(Math.round(Math.max(0.15, Math.min(0.85, m)) * 1000) / 1000));
+    }
+    function raya() {
+      let r = $('#ll-raya'); if (r) return r;
+      const c = lienzoVid(); if (!c) return null;
+      r = document.createElement('span'); r.id = 'll-raya'; r.className = 'll-raya'; r.setAttribute('aria-hidden', 'true'); r.append(document.createElement('span'));
+      c.append(r); return r;
+    }
+    function sobreRaya(e) {
+      if (!FINO.matches || !caja.classList.contains('dividida') || caja.classList.contains('tres') || caja.classList.contains('mini') || !visible()) return false;
+      const izq = caja.classList.contains('lado-izq'); if (!izq && !caja.classList.contains('lado-der')) return false;
+      const b = lienzoVid().getBoundingClientRect(); if (!b.width) return false;
+      let m = parseFloat(caja.style.getPropertyValue('--mi-p')); if (!Number.isFinite(m)) m = 0.5;
+      const x = b.left + (izq ? m : 1 - m) * b.width;
+      return Math.abs(e.clientX - x) <= 10 && e.clientY >= b.top && e.clientY <= b.bottom;
+    }
+    function mueveRaya(e) {
+      const b = lienzoVid().getBoundingClientRect(); if (!b.width) return;
+      const x = (e.clientX - b.left) / b.width;
+      ponParte(caja.classList.contains('lado-izq') ? x : 1 - x);
+    }
+    function sueltaRaya(e) {
+      arrRaya = null; caja.classList.remove('raya-moviendo');
+      try { caja.releasePointerCapture(e.pointerId); } catch (_) {}
+      const m = parseFloat(caja.style.getPropertyValue('--mi-p')); if (Number.isFinite(m)) guardaMi({ p: m });
+    }
     function alternaDividida() {
       partidaPorDefecto = false;
       const vl = vidLocal(), cont = lienzoVid(); if (!vl || !cont) return;
@@ -1748,6 +1782,7 @@
     caja.addEventListener('pointerdown', (e) => {
       if (caja.classList.contains('mini')) return;
       if (e.button > 0 || e.target.closest('button, a, input, label, .ll-ajustes')) return;
+      if (sobreRaya(e)) { arrRaya = { id: e.pointerId }; caja.classList.add('raya-moviendo'); try { caja.setPointerCapture(e.pointerId); } catch (_) {} e.preventDefault(); return; }
       // en el teléfono no hay asa (se mueve con el dedo; el tamaño, con el botón de la pantalla partida)
       const p = enLienzo(e), enAsa = FINO.matches && sobreAsa(p);
       if (!enAsa && !sobreMiImagen(p)) return;
@@ -1764,6 +1799,8 @@
     });
     caja.addEventListener('pointermove', (e) => {
       const p = enLienzo(e);
+      if (arrRaya && e.pointerId === arrRaya.id) { mueveRaya(e); return; }
+      if (e.pointerType === 'mouse' && !arrastre) caja.classList.toggle('sobre-raya', sobreRaya(e));
       if (!arrastre || e.pointerId !== arrastre.id) { if (e.pointerType === 'mouse') { const a = sobreAsa(p); caja.classList.toggle('mi-tam', a); caja.classList.toggle('mi-agarre', !a && sobreMiImagen(p) && !caja.classList.contains('dividida')); } return; }
       if (!arrastre.movido && Math.hypot(p.x - arrastre.x0, p.y - arrastre.y0) < 4) return;
       arrastre.movido = true; ultimoToque = 0; caja.classList.add('arrastrando', 'movida');
@@ -1785,6 +1822,7 @@
       colocaAsa();
     });
     const suelta = (e) => {
+      if (arrRaya && e.pointerId === arrRaya.id) { sueltaRaya(e); return; }
       if (!arrastre || e.pointerId !== arrastre.id) return;
       const a = arrastre; arrastre = null; caja.classList.remove('arrastrando');
       try { caja.releasePointerCapture(e.pointerId); } catch (_) {}

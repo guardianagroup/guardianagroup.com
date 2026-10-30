@@ -2073,7 +2073,8 @@ body.con-pestanas #marcar .marcar-llamar span{position:absolute;width:1px;height
 
 /* Acabados de la videollamada en el PC (dueño, 30 Oct 2026, 10:59–11:04) */
 /* «Conexión: excelente», en el centro de verdad (antes se iba a la derecha por lo que ocupaba el aviso de la izquierda) */
-@media (min-width:761px){.gc-llamada-arriba{position:relative}.gc-llamada:not(.mini) .gc-llamada-arriba #ll-calidad{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);white-space:nowrap;margin:0}}
+/* 11:34: «Conexión: excelente», a la izquierda, junto a «Encriptada de extremo a extremo» (antes, en el centro) */
+@media (min-width:761px){.gc-llamada:not(.mini) .gc-llamada-arriba{justify-content:flex-start;gap:18px}.gc-llamada:not(.mini) .gc-llamada-arriba #ll-calidad{white-space:nowrap;margin:0}.gc-llamada:not(.mini) .gc-llamada-arriba .ll-mini-b{margin-left:auto}}
 /* en el PC, sin iconos sueltos sobre la imagen: «Vista» va con los demás botones (y tu imagen se sigue moviendo con el ratón) */
 @media (hover:hover) and (pointer:fine){.gc-llamada .mi-tam-boton,.gc-llamada .videos .mi-asa{display:none!important}}
 #ll-vista .peq,.gc-llamada.dividida #ll-vista .parte{display:none}
@@ -2082,3 +2083,28 @@ body.con-pestanas #marcar .marcar-llamar span{position:absolute;width:1px;height
 .gc-llamada.mini #ll-completa-caja,.gc-llamada.mini #ll-vista-caja{display:none!important}
 .gc-llamada.mini.mini-movida{inset:var(--mini-y) auto auto var(--mini-x)!important}
 @media (hover:hover) and (pointer:fine){.gc-llamada.mini{cursor:grab}.gc-llamada.mini.mini-arrastrando{cursor:grabbing}.gc-llamada.mini.mini-arrastrando *{pointer-events:none}}
+
+/* La raya del medio de la pantalla partida, en el ordenador (dueño, 30 Oct 2026, 11:33): se arrastra a izquierda o a derecha para
+   repartir la pantalla («--mi-p», lo que te toca a ti, lo pone llamada.js); tocarla no cambia nada. «Cambiar vista», abajo. */
+.gc-llamada .videos .ll-raya{display:none}
+@media (hover:hover) and (pointer:fine){
+  .gc-llamada.dividida.lado-der:not(.mini) .videos #v-remoto{left:0;width:calc((1 - var(--mi-p,.5)) * 100%)}
+  .gc-llamada.dividida.lado-der:not(.mini) .videos #v-local{left:calc((1 - var(--mi-p,.5)) * 100%);width:calc(var(--mi-p,.5) * 100%)}
+  .gc-llamada.dividida.lado-izq:not(.mini) .videos #v-local{left:0;width:calc(var(--mi-p,.5) * 100%)}
+  .gc-llamada.dividida.lado-izq:not(.mini) .videos #v-remoto{left:calc(var(--mi-p,.5) * 100%);width:calc((1 - var(--mi-p,.5)) * 100%)}
+  .gc-llamada.dividida.lado-der:not(.mini) .videos::after{left:calc((1 - var(--mi-p,.5)) * 100%)}
+  .gc-llamada.dividida.lado-izq:not(.mini) .videos::after{left:calc(var(--mi-p,.5) * 100%)}
+  .gc-llamada.dividida.lado-der:not(.mini):not(.tres) .videos .ll-raya,.gc-llamada.dividida.lado-izq:not(.mini):not(.tres) .videos .ll-raya{display:block;position:absolute;top:0;bottom:0;width:20px;margin-left:-10px;z-index:2;pointer-events:none}
+  .gc-llamada.dividida.lado-der .videos .ll-raya{left:calc((1 - var(--mi-p,.5)) * 100%)}
+  .gc-llamada.dividida.lado-izq .videos .ll-raya{left:calc(var(--mi-p,.5) * 100%)}
+  .gc-llamada .videos .ll-raya::before{content:'';position:absolute;left:9px;top:0;bottom:0;width:2px;background:transparent;transition:background .15s ease}
+  .gc-llamada.sobre-raya .videos .ll-raya::before,.gc-llamada.raya-moviendo .videos .ll-raya::before{background:rgba(156,195,228,.85)}
+  .gc-llamada .videos .ll-raya>span{position:absolute;left:50%;top:50%;width:6px;height:48px;margin:-24px 0 0 -3px;border-radius:3px;background:rgba(232,238,244,.8);box-shadow:0 0 0 1px rgba(10,14,20,.45),0 2px 8px rgba(0,0,0,.35)}
+  .gc-llamada.sobre-raya,.gc-llamada.raya-moviendo,.gc-llamada.raya-moviendo *{cursor:col-resize!important}
+  .gc-llamada.raya-moviendo{user-select:none;-webkit-user-select:none}
+  /* el panel de ajustes, y lo de quien no tiene cámara, en el centro de su parte */
+  .gc-llamada.con-video.dividida.lado-der .ll-ajustes{left:calc((1 - var(--mi-p,.5)) * 50%);width:min(600px,calc((1 - var(--mi-p,.5)) * 100% - 32px))}
+  .gc-llamada.con-video.dividida.lado-izq .ll-ajustes{left:calc((1 + var(--mi-p,.5)) * 50%);width:min(600px,calc((1 - var(--mi-p,.5)) * 100% - 32px))}
+  .gc-llamada.solo-mia.dividida.lado-der:not(.mini) .gc-llamada-centro{left:0;width:calc((1 - var(--mi-p,.5)) * 100%)}
+  .gc-llamada.solo-mia.dividida.lado-izq:not(.mini) .gc-llamada-centro{left:calc(var(--mi-p,.5) * 100%);width:calc((1 - var(--mi-p,.5)) * 100%)}
+}

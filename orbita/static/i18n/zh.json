@@ -3602,7 +3602,8 @@
 "Avisando a {n}: entra en la llamada en cuanto abra GUARDIANA.":"正在通知 {n}：对方一打开 GUARDIANA 就会加入通话。",
 "Cada persona oye y ve a las otras dos. Tu equipo une las dos llamadas; cada una va encriptada de extremo a extremo.":"每个人都能听到并看到另外两人。你的设备把两通电话连接在一起；每一通都经过端到端加密。",
 "Tu red está limitando la conexión con GUARDIANA: los mensajes llegan, pero las fotos y las llamadas pueden fallar. Prueba con otra red (wifi o datos) o con una VPN.":"你的网络正在限制与 GUARDIANA 的连接：消息可以送达，但照片和通话可能失败。请换一个网络（Wi-Fi 或移动数据）或使用 VPN。",
-"Llamada en grupo · {n} personas":"群组通话 · {n} 人"
+"Llamada en grupo · {n} personas":"群组通话 · {n} 人",
+"Cambiar vista":"切换视图"
 },
 "p":{
 "intento":"今天尝试最多的：{1}，{2} {2?次|次}。",
