@@ -3634,7 +3634,18 @@
 "Videollamada encriptada post-cuántica":"Videochiamata cifrata post-quantistica",
 "Llamada encriptada post-cuántica":"Chiamata cifrata post-quantistica",
 "Post-cuántica":"Post-quantistica",
-"No se puede descifrar el sonido o la imagen de la otra persona.":"Impossibile decifrare l’audio o l’immagine di chi è dall’altra parte."
+"No se puede descifrar el sonido o la imagen de la otra persona.":"Impossibile decifrare l’audio o l’immagine di chi è dall’altra parte.",
+"Vigía de este ordenador":"Sentinella di questo computer",
+"Con el programa GUARDIANA para Windows: si otro programa usa tu micrófono, tu cámara o tu pantalla durante una llamada, la llamada se pone en pausa.":"Con il programma GUARDIANA per Windows: se un altro programma usa il tuo microfono, la tua fotocamera o il tuo schermo durante una chiamata, la chiamata viene messa in pausa.",
+"Llamada en pausa":"Chiamata in pausa",
+"Tu micrófono y tu cámara están parados. Cierra ese programa para seguir.":"Il tuo microfono e la tua fotocamera sono fermi. Chiudi quel programma per continuare.",
+"Seguir con la llamada":"Riprendi la chiamata",
+"Ya no se detecta nada. Puedes seguir con la llamada.":"Non viene più rilevato nulla. Puoi riprendere la chiamata.",
+"La otra persona ha puesto la llamada en pausa.":"L’altra persona ha messo la chiamata in pausa.",
+"Comprobando el programa GUARDIANA…":"Verifica del programma GUARDIANA…",
+"No se encuentra el programa GUARDIANA en este ordenador. Descárgalo desde la página «Programa para Windows».":"Il programma GUARDIANA non è stato trovato su questo computer. Scaricalo dalla pagina «Programma per Windows».",
+"El Vigía solo funciona en Windows.":"La Sentinella funziona solo su Windows.",
+"Activado: el programa GUARDIANA vigila este ordenador durante tus llamadas.":"Attiva: il programma GUARDIANA sorveglia questo computer durante le tue chiamate."
 },
 "p":{
 "intento":"Quella che ci ha provato di più oggi: {1}, {2} {2?volta|volte}.",

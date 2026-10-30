@@ -3634,7 +3634,18 @@
 "Videollamada encriptada post-cuántica":"Postkwantowo szyfrowana rozmowa wideo",
 "Llamada encriptada post-cuántica":"Postkwantowo szyfrowane połączenie",
 "Post-cuántica":"Postkwantowa",
-"No se puede descifrar el sonido o la imagen de la otra persona.":"Nie da się odszyfrować dźwięku ani obrazu drugiej osoby."
+"No se puede descifrar el sonido o la imagen de la otra persona.":"Nie da się odszyfrować dźwięku ani obrazu drugiej osoby.",
+"Vigía de este ordenador":"Strażnik tego komputera",
+"Con el programa GUARDIANA para Windows: si otro programa usa tu micrófono, tu cámara o tu pantalla durante una llamada, la llamada se pone en pausa.":"Z programem GUARDIANA dla Windows: jeśli podczas połączenia inny program użyje twojego mikrofonu, kamery lub ekranu, połączenie zostanie wstrzymane.",
+"Llamada en pausa":"Połączenie wstrzymane",
+"Tu micrófono y tu cámara están parados. Cierra ese programa para seguir.":"Twój mikrofon i kamera zostały zatrzymane. Zamknij ten program, aby kontynuować.",
+"Seguir con la llamada":"Wznów połączenie",
+"Ya no se detecta nada. Puedes seguir con la llamada.":"Nic już nie jest wykrywane. Możesz wznowić połączenie.",
+"La otra persona ha puesto la llamada en pausa.":"Druga osoba wstrzymała połączenie.",
+"Comprobando el programa GUARDIANA…":"Sprawdzanie programu GUARDIANA…",
+"No se encuentra el programa GUARDIANA en este ordenador. Descárgalo desde la página «Programa para Windows».":"Nie znaleziono programu GUARDIANA na tym komputerze. Pobierz go ze strony „Program dla Windows”.",
+"El Vigía solo funciona en Windows.":"Strażnik działa tylko w Windows.",
+"Activado: el programa GUARDIANA vigila este ordenador durante tus llamadas.":"Włączony: program GUARDIANA pilnuje tego komputera podczas twoich połączeń."
 },
 "p":{
 "intento":"Najwięcej prób dziś: {1}, {2} {2?raz|razy}.",

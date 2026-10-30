@@ -3634,7 +3634,18 @@
 "Videollamada encriptada post-cuántica":"Kvanttikestävä salattu videopuhelu",
 "Llamada encriptada post-cuántica":"Kvanttikestävä salattu puhelu",
 "Post-cuántica":"Kvanttikestävä",
-"No se puede descifrar el sonido o la imagen de la otra persona.":"Toisen osapuolen äänen tai kuvan salausta ei voi purkaa."
+"No se puede descifrar el sonido o la imagen de la otra persona.":"Toisen osapuolen äänen tai kuvan salausta ei voi purkaa.",
+"Vigía de este ordenador":"Tämän tietokoneen vartija",
+"Con el programa GUARDIANA para Windows: si otro programa usa tu micrófono, tu cámara o tu pantalla durante una llamada, la llamada se pone en pausa.":"Windowsille tarkoitetun GUARDIANA-ohjelman avulla: jos jokin muu ohjelma käyttää mikrofoniasi, kameraasi tai näyttöäsi puhelun aikana, puhelu asetetaan tauolle.",
+"Llamada en pausa":"Puhelu on tauolla",
+"Tu micrófono y tu cámara están parados. Cierra ese programa para seguir.":"Mikrofonisi ja kamerasi on pysäytetty. Sulje se ohjelma jatkaaksesi.",
+"Seguir con la llamada":"Jatka puhelua",
+"Ya no se detecta nada. Puedes seguir con la llamada.":"Mitään ei enää havaita. Voit jatkaa puhelua.",
+"La otra persona ha puesto la llamada en pausa.":"Toinen osapuoli asetti puhelun tauolle.",
+"Comprobando el programa GUARDIANA…":"Tarkistetaan GUARDIANA-ohjelmaa…",
+"No se encuentra el programa GUARDIANA en este ordenador. Descárgalo desde la página «Programa para Windows».":"GUARDIANA-ohjelmaa ei löydy tästä tietokoneesta. Lataa se sivulta ”Ohjelma Windowsille”.",
+"El Vigía solo funciona en Windows.":"Vartija toimii vain Windowsissa.",
+"Activado: el programa GUARDIANA vigila este ordenador durante tus llamadas.":"Käytössä: GUARDIANA-ohjelma valvoo tätä tietokonetta puheluidesi aikana."
 },
 "p":{
 "intento":"Eniten yrittänyt tänään: {1}, {2} {2?kerta|kertaa}.",

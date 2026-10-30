@@ -3634,7 +3634,18 @@
 "Videollamada encriptada post-cuántica":"போஸ்ட்-குவாண்டம் மறையாக்கம் செய்யப்பட்ட வீடியோ அழைப்பு",
 "Llamada encriptada post-cuántica":"போஸ்ட்-குவாண்டம் மறையாக்கம் செய்யப்பட்ட அழைப்பு",
 "Post-cuántica":"போஸ்ட்-குவாண்டம்",
-"No se puede descifrar el sonido o la imagen de la otra persona.":"மற்றவரின் ஒலியையோ படத்தையோ மறைவிலக்க முடியாது."
+"No se puede descifrar el sonido o la imagen de la otra persona.":"மற்றவரின் ஒலியையோ படத்தையோ மறைவிலக்க முடியாது.",
+"Vigía de este ordenador":"இந்தக் கணினியின் காவலர்",
+"Con el programa GUARDIANA para Windows: si otro programa usa tu micrófono, tu cámara o tu pantalla durante una llamada, la llamada se pone en pausa.":"Windows-க்கான GUARDIANA நிரலுடன்: அழைப்பின்போது வேறொரு நிரல் உங்கள் மைக்ரோஃபோன், கேமரா அல்லது திரையைப் பயன்படுத்தினால், அழைப்பு இடைநிறுத்தப்படும்.",
+"Llamada en pausa":"அழைப்பு இடைநிறுத்தப்பட்டது",
+"Tu micrófono y tu cámara están parados. Cierra ese programa para seguir.":"உங்கள் மைக்ரோஃபோனும் கேமராவும் நிறுத்தப்பட்டுள்ளன. தொடர, அந்த நிரலை மூடுங்கள்.",
+"Seguir con la llamada":"அழைப்பைத் தொடரவும்",
+"Ya no se detecta nada. Puedes seguir con la llamada.":"இப்போது எதுவும் கண்டறியப்படவில்லை. நீங்கள் அழைப்பைத் தொடரலாம்.",
+"La otra persona ha puesto la llamada en pausa.":"மற்றவர் அழைப்பை இடைநிறுத்தியுள்ளார்.",
+"Comprobando el programa GUARDIANA…":"GUARDIANA நிரலைச் சரிபார்க்கிறது…",
+"No se encuentra el programa GUARDIANA en este ordenador. Descárgalo desde la página «Programa para Windows».":"இந்தக் கணினியில் GUARDIANA நிரல் கண்டறியப்படவில்லை. «Windows-க்கான நிரல்» பக்கத்திலிருந்து அதைப் பதிவிறக்குங்கள்.",
+"El Vigía solo funciona en Windows.":"காவலர் Windows-இல் மட்டுமே செயல்படும்.",
+"Activado: el programa GUARDIANA vigila este ordenador durante tus llamadas.":"இயக்கத்தில்: உங்கள் அழைப்புகளின்போது GUARDIANA நிரல் இந்தக் கணினியைக் கண்காணிக்கிறது."
 },
 "p":{
 "intento":"இன்று அதிகம் முயன்றது: {1}, {2} {2?முறை|முறை}.",

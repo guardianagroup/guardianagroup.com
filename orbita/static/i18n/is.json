@@ -3634,7 +3634,18 @@
 "Videollamada encriptada post-cuántica":"Skammtaþolið dulkóðað myndsímtal",
 "Llamada encriptada post-cuántica":"Skammtaþolið dulkóðað símtal",
 "Post-cuántica":"Skammtaþolið",
-"No se puede descifrar el sonido o la imagen de la otra persona.":"Ekki er hægt að afkóða hljóð eða mynd hins aðilans."
+"No se puede descifrar el sonido o la imagen de la otra persona.":"Ekki er hægt að afkóða hljóð eða mynd hins aðilans.",
+"Vigía de este ordenador":"Vörður þessarar tölvu",
+"Con el programa GUARDIANA para Windows: si otro programa usa tu micrófono, tu cámara o tu pantalla durante una llamada, la llamada se pone en pausa.":"Með forritinu GUARDIANA fyrir Windows: ef annað forrit notar hljóðnemann, myndavélina eða skjáinn þinn meðan á símtali stendur er gert hlé á símtalinu.",
+"Llamada en pausa":"Hlé á símtali",
+"Tu micrófono y tu cámara están parados. Cierra ese programa para seguir.":"Hljóðneminn og myndavélin þín hafa verið stöðvuð. Lokaðu því forriti til að halda áfram.",
+"Seguir con la llamada":"Halda símtalinu áfram",
+"Ya no se detecta nada. Puedes seguir con la llamada.":"Ekkert greinist lengur. Þú getur haldið símtalinu áfram.",
+"La otra persona ha puesto la llamada en pausa.":"Hinn aðilinn hefur gert hlé á símtalinu.",
+"Comprobando el programa GUARDIANA…":"Athuga forritið GUARDIANA…",
+"No se encuentra el programa GUARDIANA en este ordenador. Descárgalo desde la página «Programa para Windows».":"Forritið GUARDIANA fannst ekki á þessari tölvu. Sæktu það á síðunni „Forrit fyrir Windows“.",
+"El Vigía solo funciona en Windows.":"Vörðurinn virkar aðeins í Windows.",
+"Activado: el programa GUARDIANA vigila este ordenador durante tus llamadas.":"Virkur: forritið GUARDIANA vaktar þessa tölvu meðan á símtölum þínum stendur."
 },
 "p":{
 "intento":"Sá sem reyndi mest í dag: {1}, {2} {2?sinni|sinnum}.",

@@ -3634,7 +3634,18 @@
 "Videollamada encriptada post-cuántica":"ポスト量子暗号化されたビデオ通話",
 "Llamada encriptada post-cuántica":"ポスト量子暗号化された通話",
 "Post-cuántica":"ポスト量子",
-"No se puede descifrar el sonido o la imagen de la otra persona.":"相手の音声または映像を復号できません。"
+"No se puede descifrar el sonido o la imagen de la otra persona.":"相手の音声または映像を復号できません。",
+"Vigía de este ordenador":"このパソコンの見張り番",
+"Con el programa GUARDIANA para Windows: si otro programa usa tu micrófono, tu cámara o tu pantalla durante una llamada, la llamada se pone en pausa.":"Windows 用 GUARDIANA プログラムと連携：通話中にほかのプログラムがマイク、カメラ、画面を使うと、通話が一時停止します。",
+"Llamada en pausa":"通話一時停止中",
+"Tu micrófono y tu cámara están parados. Cierra ese programa para seguir.":"マイクとカメラは停止しています。続けるには、そのプログラムを閉じてください。",
+"Seguir con la llamada":"通話を再開",
+"Ya no se detecta nada. Puedes seguir con la llamada.":"何も検出されなくなりました。通話を再開できます。",
+"La otra persona ha puesto la llamada en pausa.":"相手が通話を一時停止しました。",
+"Comprobando el programa GUARDIANA…":"GUARDIANA プログラムを確認中…",
+"No se encuentra el programa GUARDIANA en este ordenador. Descárgalo desde la página «Programa para Windows».":"このパソコンに GUARDIANA プログラムが見つかりません。「Windows 用プログラム」のページからダウンロードしてください。",
+"El Vigía solo funciona en Windows.":"見張り番は Windows でのみ使えます。",
+"Activado: el programa GUARDIANA vigila este ordenador durante tus llamadas.":"オン：通話中は GUARDIANA プログラムがこのパソコンを見張ります。"
 },
 "p":{
 "intento":"今日最も多く試みたのは {1}、{2} {2?回|回}。",

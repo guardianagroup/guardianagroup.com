@@ -3634,7 +3634,18 @@
 "Videollamada encriptada post-cuántica":"مكالمة فيديو مشفّرة ما بعد الكمومية",
 "Llamada encriptada post-cuántica":"مكالمة مشفّرة ما بعد الكمومية",
 "Post-cuántica":"ما بعد الكمومية",
-"No se puede descifrar el sonido o la imagen de la otra persona.":"لا يمكن فك تشفير صوت الطرف الآخر أو صورته."
+"No se puede descifrar el sonido o la imagen de la otra persona.":"لا يمكن فك تشفير صوت الطرف الآخر أو صورته.",
+"Vigía de este ordenador":"حارس هذا الحاسوب",
+"Con el programa GUARDIANA para Windows: si otro programa usa tu micrófono, tu cámara o tu pantalla durante una llamada, la llamada se pone en pausa.":"مع برنامج GUARDIANA لنظام Windows: إذا استخدم برنامج آخر الميكروفون أو الكاميرا أو الشاشة لديك أثناء مكالمة، تُوقَف المكالمة مؤقتًا.",
+"Llamada en pausa":"المكالمة متوقفة مؤقتًا",
+"Tu micrófono y tu cámara están parados. Cierra ese programa para seguir.":"تم إيقاف الميكروفون والكاميرا لديك. أغلق ذلك البرنامج للمتابعة.",
+"Seguir con la llamada":"متابعة المكالمة",
+"Ya no se detecta nada. Puedes seguir con la llamada.":"لم يعد يُرصد أي شيء. يمكنك متابعة المكالمة.",
+"La otra persona ha puesto la llamada en pausa.":"أوقف الطرف الآخر المكالمة مؤقتًا.",
+"Comprobando el programa GUARDIANA…":"جارٍ التحقق من برنامج GUARDIANA…",
+"No se encuentra el programa GUARDIANA en este ordenador. Descárgalo desde la página «Programa para Windows».":"لم يُعثر على برنامج GUARDIANA على هذا الحاسوب. نزّله من صفحة «برنامج لنظام Windows».",
+"El Vigía solo funciona en Windows.":"لا يعمل الحارس إلا في Windows.",
+"Activado: el programa GUARDIANA vigila este ordenador durante tus llamadas.":"مفعّل: يراقب برنامج GUARDIANA هذا الحاسوب أثناء مكالماتك."
 },
 "p":{
 "intento":"الأكثر محاولةً اليوم: {1}، {2} {2?مرة|مرات}.",

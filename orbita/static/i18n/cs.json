@@ -3634,7 +3634,18 @@
 "Videollamada encriptada post-cuántica":"Postkvantově šifrovaný videohovor",
 "Llamada encriptada post-cuántica":"Postkvantově šifrovaný hovor",
 "Post-cuántica":"Postkvantová",
-"No se puede descifrar el sonido o la imagen de la otra persona.":"Zvuk nebo obraz druhé osoby nelze dešifrovat."
+"No se puede descifrar el sonido o la imagen de la otra persona.":"Zvuk nebo obraz druhé osoby nelze dešifrovat.",
+"Vigía de este ordenador":"Strážce tohoto počítače",
+"Con el programa GUARDIANA para Windows: si otro programa usa tu micrófono, tu cámara o tu pantalla durante una llamada, la llamada se pone en pausa.":"S programem GUARDIANA pro Windows: pokud během hovoru jiný program použije váš mikrofon, kameru nebo obrazovku, hovor se pozastaví.",
+"Llamada en pausa":"Hovor pozastaven",
+"Tu micrófono y tu cámara están parados. Cierra ese programa para seguir.":"Váš mikrofon a kamera jsou zastavené. Chcete-li pokračovat, zavřete ten program.",
+"Seguir con la llamada":"Pokračovat v hovoru",
+"Ya no se detecta nada. Puedes seguir con la llamada.":"Už se nic nezjišťuje. V hovoru můžete pokračovat.",
+"La otra persona ha puesto la llamada en pausa.":"Druhá osoba hovor pozastavila.",
+"Comprobando el programa GUARDIANA…":"Kontroluje se program GUARDIANA…",
+"No se encuentra el programa GUARDIANA en este ordenador. Descárgalo desde la página «Programa para Windows».":"Program GUARDIANA se v tomto počítači nenašel. Stáhněte si ho ze stránky „Program pro Windows“.",
+"El Vigía solo funciona en Windows.":"Strážce funguje jen ve Windows.",
+"Activado: el programa GUARDIANA vigila este ordenador durante tus llamadas.":"Zapnuto: program GUARDIANA během vašich hovorů hlídá tento počítač."
 },
 "p":{
 "intento":"Nejvíc se dnes snažila: {1}, {2}{2?krát|krát}.",

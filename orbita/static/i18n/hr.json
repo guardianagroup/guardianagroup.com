@@ -3634,7 +3634,18 @@
 "Videollamada encriptada post-cuántica":"Postkvantno šifrirani videopoziv",
 "Llamada encriptada post-cuántica":"Postkvantno šifrirani poziv",
 "Post-cuántica":"Postkvantno",
-"No se puede descifrar el sonido o la imagen de la otra persona.":"Zvuk ili slika druge osobe ne mogu se dešifrirati."
+"No se puede descifrar el sonido o la imagen de la otra persona.":"Zvuk ili slika druge osobe ne mogu se dešifrirati.",
+"Vigía de este ordenador":"Čuvar ovog računala",
+"Con el programa GUARDIANA para Windows: si otro programa usa tu micrófono, tu cámara o tu pantalla durante una llamada, la llamada se pone en pausa.":"S programom GUARDIANA za Windows: ako neki drugi program tijekom poziva koristi vaš mikrofon, kameru ili zaslon, poziv se pauzira.",
+"Llamada en pausa":"Poziv je pauziran",
+"Tu micrófono y tu cámara están parados. Cierra ese programa para seguir.":"Vaš mikrofon i kamera zaustavljeni su. Zatvorite taj program da biste nastavili.",
+"Seguir con la llamada":"Nastavi poziv",
+"Ya no se detecta nada. Puedes seguir con la llamada.":"Više se ništa ne otkriva. Možete nastaviti poziv.",
+"La otra persona ha puesto la llamada en pausa.":"Druga osoba pauzirala je poziv.",
+"Comprobando el programa GUARDIANA…":"Provjera programa GUARDIANA…",
+"No se encuentra el programa GUARDIANA en este ordenador. Descárgalo desde la página «Programa para Windows».":"Program GUARDIANA nije pronađen na ovom računalu. Preuzmite ga sa stranice „Program za Windows”.",
+"El Vigía solo funciona en Windows.":"Čuvar radi samo u Windowsima.",
+"Activado: el programa GUARDIANA vigila este ordenador durante tus llamadas.":"Uključen: program GUARDIANA nadzire ovo računalo tijekom vaših poziva."
 },
 "p":{
 "intento":"Najupornija danas: {1}, {2} {2?put|puta}.",

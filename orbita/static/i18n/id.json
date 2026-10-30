@@ -3634,7 +3634,18 @@
 "Videollamada encriptada post-cuántica":"Panggilan video terenkripsi pascakuantum",
 "Llamada encriptada post-cuántica":"Panggilan terenkripsi pascakuantum",
 "Post-cuántica":"Pascakuantum",
-"No se puede descifrar el sonido o la imagen de la otra persona.":"Suara atau gambar lawan bicara tidak dapat didekripsi."
+"No se puede descifrar el sonido o la imagen de la otra persona.":"Suara atau gambar lawan bicara tidak dapat didekripsi.",
+"Vigía de este ordenador":"Penjaga komputer ini",
+"Con el programa GUARDIANA para Windows: si otro programa usa tu micrófono, tu cámara o tu pantalla durante una llamada, la llamada se pone en pausa.":"Dengan program GUARDIANA untuk Windows: jika program lain menggunakan mikrofon, kamera, atau layar Anda selama panggilan, panggilan akan dijeda.",
+"Llamada en pausa":"Panggilan dijeda",
+"Tu micrófono y tu cámara están parados. Cierra ese programa para seguir.":"Mikrofon dan kamera Anda dihentikan. Tutup program tersebut untuk melanjutkan.",
+"Seguir con la llamada":"Lanjutkan panggilan",
+"Ya no se detecta nada. Puedes seguir con la llamada.":"Tidak ada lagi yang terdeteksi. Anda dapat melanjutkan panggilan.",
+"La otra persona ha puesto la llamada en pausa.":"Lawan bicara menjeda panggilan.",
+"Comprobando el programa GUARDIANA…":"Memeriksa program GUARDIANA…",
+"No se encuentra el programa GUARDIANA en este ordenador. Descárgalo desde la página «Programa para Windows».":"Program GUARDIANA tidak ditemukan di komputer ini. Unduh dari halaman “Program untuk Windows”.",
+"El Vigía solo funciona en Windows.":"Penjaga hanya berfungsi di Windows.",
+"Activado: el programa GUARDIANA vigila este ordenador durante tus llamadas.":"Aktif: program GUARDIANA mengawasi komputer ini selama panggilan Anda."
 },
 "p":{
 "intento":"Paling gigih mencoba hari ini: {1}, {2} {2?kali|kali}.",

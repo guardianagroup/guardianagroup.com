@@ -3634,7 +3634,18 @@
 "Videollamada encriptada post-cuántica":"Cuộc gọi video được mã hóa hậu lượng tử",
 "Llamada encriptada post-cuántica":"Cuộc gọi được mã hóa hậu lượng tử",
 "Post-cuántica":"Hậu lượng tử",
-"No se puede descifrar el sonido o la imagen de la otra persona.":"Không thể giải mã âm thanh hoặc hình ảnh của người kia."
+"No se puede descifrar el sonido o la imagen de la otra persona.":"Không thể giải mã âm thanh hoặc hình ảnh của người kia.",
+"Vigía de este ordenador":"Lính canh của máy tính này",
+"Con el programa GUARDIANA para Windows: si otro programa usa tu micrófono, tu cámara o tu pantalla durante una llamada, la llamada se pone en pausa.":"Với chương trình GUARDIANA cho Windows: nếu một chương trình khác dùng micrô, camera hoặc màn hình của bạn trong cuộc gọi, cuộc gọi sẽ được tạm dừng.",
+"Llamada en pausa":"Cuộc gọi đang tạm dừng",
+"Tu micrófono y tu cámara están parados. Cierra ese programa para seguir.":"Micrô và camera của bạn đã bị dừng. Hãy đóng chương trình đó để tiếp tục.",
+"Seguir con la llamada":"Tiếp tục cuộc gọi",
+"Ya no se detecta nada. Puedes seguir con la llamada.":"Không còn phát hiện gì nữa. Bạn có thể tiếp tục cuộc gọi.",
+"La otra persona ha puesto la llamada en pausa.":"Người kia đã tạm dừng cuộc gọi.",
+"Comprobando el programa GUARDIANA…":"Đang kiểm tra chương trình GUARDIANA…",
+"No se encuentra el programa GUARDIANA en este ordenador. Descárgalo desde la página «Programa para Windows».":"Không tìm thấy chương trình GUARDIANA trên máy tính này. Hãy tải xuống từ trang “Chương trình cho Windows”.",
+"El Vigía solo funciona en Windows.":"Lính canh chỉ hoạt động trên Windows.",
+"Activado: el programa GUARDIANA vigila este ordenador durante tus llamadas.":"Đã bật: chương trình GUARDIANA canh chừng máy tính này trong các cuộc gọi của bạn."
 },
 "p":{
 "intento":"Cố gắng nhiều nhất hôm nay: {1}, {2} {2?lần|lần}.",

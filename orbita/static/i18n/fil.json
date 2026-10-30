@@ -3634,7 +3634,18 @@
 "Videollamada encriptada post-cuántica":"Post-quantum na naka-encrypt na video call",
 "Llamada encriptada post-cuántica":"Post-quantum na naka-encrypt na tawag",
 "Post-cuántica":"Post-quantum",
-"No se puede descifrar el sonido o la imagen de la otra persona.":"Hindi ma-decrypt ang tunog o larawan ng kausap mo."
+"No se puede descifrar el sonido o la imagen de la otra persona.":"Hindi ma-decrypt ang tunog o larawan ng kausap mo.",
+"Vigía de este ordenador":"Bantay ng computer na ito",
+"Con el programa GUARDIANA para Windows: si otro programa usa tu micrófono, tu cámara o tu pantalla durante una llamada, la llamada se pone en pausa.":"Gamit ang programang GUARDIANA para sa Windows: kapag may ibang program na gumamit ng mikropono, kamera o screen mo habang may tawag, ipo-pause ang tawag.",
+"Llamada en pausa":"Naka-pause ang tawag",
+"Tu micrófono y tu cámara están parados. Cierra ese programa para seguir.":"Nakahinto ang mikropono at kamera mo. Isara ang program na iyon para makapagpatuloy.",
+"Seguir con la llamada":"Ituloy ang tawag",
+"Ya no se detecta nada. Puedes seguir con la llamada.":"Wala nang natutukoy. Puwede mo nang ituloy ang tawag.",
+"La otra persona ha puesto la llamada en pausa.":"In-pause ng kausap mo ang tawag.",
+"Comprobando el programa GUARDIANA…":"Sinusuri ang programang GUARDIANA…",
+"No se encuentra el programa GUARDIANA en este ordenador. Descárgalo desde la página «Programa para Windows».":"Hindi makita ang programang GUARDIANA sa computer na ito. I-download ito mula sa pahinang “Program para sa Windows”.",
+"El Vigía solo funciona en Windows.":"Gumagana lang ang Bantay sa Windows.",
+"Activado: el programa GUARDIANA vigila este ordenador durante tus llamadas.":"Naka-on: binabantayan ng programang GUARDIANA ang computer na ito habang may tawag ka."
 },
 "p":{
 "intento":"Pinakamadalas sumubok ngayon: {1}, {2} {2?beses|beses}.",

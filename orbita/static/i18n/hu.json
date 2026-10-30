@@ -3634,7 +3634,18 @@
 "Videollamada encriptada post-cuántica":"Posztkvantum titkosított videohívás",
 "Llamada encriptada post-cuántica":"Posztkvantum titkosított hívás",
 "Post-cuántica":"Posztkvantum",
-"No se puede descifrar el sonido o la imagen de la otra persona.":"A másik fél hangja vagy képe nem fejthető vissza."
+"No se puede descifrar el sonido o la imagen de la otra persona.":"A másik fél hangja vagy képe nem fejthető vissza.",
+"Vigía de este ordenador":"Őrszem ezen a számítógépen",
+"Con el programa GUARDIANA para Windows: si otro programa usa tu micrófono, tu cámara o tu pantalla durante una llamada, la llamada se pone en pausa.":"A Windowsra készült GUARDIANA programmal: ha hívás közben egy másik program használja a mikrofonodat, a kamerádat vagy a képernyődet, a hívás szünetel.",
+"Llamada en pausa":"A hívás szünetel",
+"Tu micrófono y tu cámara están parados. Cierra ese programa para seguir.":"A mikrofonod és a kamerád le van állítva. A folytatáshoz zárd be azt a programot.",
+"Seguir con la llamada":"Hívás folytatása",
+"Ya no se detecta nada. Puedes seguir con la llamada.":"Már semmi sem észlelhető. Folytathatod a hívást.",
+"La otra persona ha puesto la llamada en pausa.":"A másik fél szüneteltette a hívást.",
+"Comprobando el programa GUARDIANA…":"A GUARDIANA program ellenőrzése…",
+"No se encuentra el programa GUARDIANA en este ordenador. Descárgalo desde la página «Programa para Windows».":"A GUARDIANA program nem található ezen a számítógépen. Töltsd le a „Program Windowsra” oldalról.",
+"El Vigía solo funciona en Windows.":"Az Őrszem csak Windowson működik.",
+"Activado: el programa GUARDIANA vigila este ordenador durante tus llamadas.":"Bekapcsolva: a GUARDIANA program figyeli ezt a számítógépet a hívásaid alatt."
 },
 "p":{
 "intento":"Ma a legtöbbször próbálkozott: {1}, {2} {2?alkalommal|alkalommal}.",

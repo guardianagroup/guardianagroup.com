@@ -3634,7 +3634,18 @@
 "Videollamada encriptada post-cuántica":"Postkvantekrypteret videoopkald",
 "Llamada encriptada post-cuántica":"Postkvantekrypteret opkald",
 "Post-cuántica":"Postkvante",
-"No se puede descifrar el sonido o la imagen de la otra persona.":"Lyd eller billede fra den anden person kan ikke dekrypteres."
+"No se puede descifrar el sonido o la imagen de la otra persona.":"Lyd eller billede fra den anden person kan ikke dekrypteres.",
+"Vigía de este ordenador":"Vagt for denne computer",
+"Con el programa GUARDIANA para Windows: si otro programa usa tu micrófono, tu cámara o tu pantalla durante una llamada, la llamada se pone en pausa.":"Med programmet GUARDIANA til Windows: Hvis et andet program bruger din mikrofon, dit kamera eller din skærm under et opkald, sættes opkaldet på pause.",
+"Llamada en pausa":"Opkaldet er sat på pause",
+"Tu micrófono y tu cámara están parados. Cierra ese programa para seguir.":"Din mikrofon og dit kamera er stoppet. Luk det program for at fortsætte.",
+"Seguir con la llamada":"Fortsæt opkaldet",
+"Ya no se detecta nada. Puedes seguir con la llamada.":"Der registreres ikke længere noget. Du kan fortsætte opkaldet.",
+"La otra persona ha puesto la llamada en pausa.":"Den anden person har sat opkaldet på pause.",
+"Comprobando el programa GUARDIANA…":"Kontrollerer programmet GUARDIANA…",
+"No se encuentra el programa GUARDIANA en este ordenador. Descárgalo desde la página «Programa para Windows».":"Programmet GUARDIANA blev ikke fundet på denne computer. Download det fra siden »Program til Windows«.",
+"El Vigía solo funciona en Windows.":"Vagten virker kun i Windows.",
+"Activado: el programa GUARDIANA vigila este ordenador durante tus llamadas.":"Slået til: Programmet GUARDIANA holder øje med denne computer under dine opkald."
 },
 "p":{
 "intento":"Den, der prøvede mest i dag: {1}, {2} {2?gang|gange}.",

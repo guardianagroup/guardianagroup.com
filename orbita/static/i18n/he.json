@@ -3634,7 +3634,18 @@
 "Videollamada encriptada post-cuántica":"שיחת וידאו מוצפנת פוסט-קוונטית",
 "Llamada encriptada post-cuántica":"שיחה מוצפנת פוסט-קוונטית",
 "Post-cuántica":"פוסט-קוונטית",
-"No se puede descifrar el sonido o la imagen de la otra persona.":"לא ניתן לפענח את הקול או התמונה של הצד השני."
+"No se puede descifrar el sonido o la imagen de la otra persona.":"לא ניתן לפענח את הקול או התמונה של הצד השני.",
+"Vigía de este ordenador":"השומר של המחשב הזה",
+"Con el programa GUARDIANA para Windows: si otro programa usa tu micrófono, tu cámara o tu pantalla durante una llamada, la llamada se pone en pausa.":"עם תוכנת GUARDIANA ל־Windows: אם תוכנה אחרת משתמשת במיקרופון, במצלמה או במסך שלכם במהלך שיחה, השיחה מושהית.",
+"Llamada en pausa":"השיחה מושהית",
+"Tu micrófono y tu cámara están parados. Cierra ese programa para seguir.":"המיקרופון והמצלמה שלכם נעצרו. סגרו את התוכנה הזו כדי להמשיך.",
+"Seguir con la llamada":"המשך השיחה",
+"Ya no se detecta nada. Puedes seguir con la llamada.":"כבר לא מזוהה שום דבר. אפשר להמשיך בשיחה.",
+"La otra persona ha puesto la llamada en pausa.":"הצד השני השהה את השיחה.",
+"Comprobando el programa GUARDIANA…":"בדיקת תוכנת GUARDIANA…",
+"No se encuentra el programa GUARDIANA en este ordenador. Descárgalo desde la página «Programa para Windows».":"תוכנת GUARDIANA לא נמצאה במחשב הזה. הורידו אותה מהעמוד \"תוכנה ל־Windows\".",
+"El Vigía solo funciona en Windows.":"השומר פועל רק ב־Windows.",
+"Activado: el programa GUARDIANA vigila este ordenador durante tus llamadas.":"פעיל: תוכנת GUARDIANA משגיחה על המחשב הזה במהלך השיחות שלכם."
 },
 "p":{
 "intento":"ניסתה הכי הרבה היום: {1}, {2} {2?פעם|פעמים}.",

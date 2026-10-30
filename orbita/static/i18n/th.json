@@ -3634,7 +3634,18 @@
 "Videollamada encriptada post-cuántica":"วิดีโอคอลที่เข้ารหัสแบบหลังควอนตัม",
 "Llamada encriptada post-cuántica":"การโทรที่เข้ารหัสแบบหลังควอนตัม",
 "Post-cuántica":"หลังควอนตัม",
-"No se puede descifrar el sonido o la imagen de la otra persona.":"ไม่สามารถถอดรหัสเสียงหรือภาพของอีกฝ่ายได้"
+"No se puede descifrar el sonido o la imagen de la otra persona.":"ไม่สามารถถอดรหัสเสียงหรือภาพของอีกฝ่ายได้",
+"Vigía de este ordenador":"ผู้เฝ้าระวังของคอมพิวเตอร์เครื่องนี้",
+"Con el programa GUARDIANA para Windows: si otro programa usa tu micrófono, tu cámara o tu pantalla durante una llamada, la llamada se pone en pausa.":"ใช้ร่วมกับโปรแกรม GUARDIANA สำหรับ Windows: หากโปรแกรมอื่นใช้ไมโครโฟน กล้อง หรือหน้าจอของคุณระหว่างการโทร การโทรจะถูกหยุดชั่วคราว",
+"Llamada en pausa":"การโทรถูกหยุดชั่วคราว",
+"Tu micrófono y tu cámara están parados. Cierra ese programa para seguir.":"ไมโครโฟนและกล้องของคุณถูกหยุดไว้ ปิดโปรแกรมนั้นเพื่อโทรต่อ",
+"Seguir con la llamada":"โทรต่อ",
+"Ya no se detecta nada. Puedes seguir con la llamada.":"ไม่พบสิ่งใดแล้ว คุณโทรต่อได้",
+"La otra persona ha puesto la llamada en pausa.":"อีกฝ่ายหยุดการโทรไว้ชั่วคราว",
+"Comprobando el programa GUARDIANA…":"กำลังตรวจสอบโปรแกรม GUARDIANA…",
+"No se encuentra el programa GUARDIANA en este ordenador. Descárgalo desde la página «Programa para Windows».":"ไม่พบโปรแกรม GUARDIANA บนคอมพิวเตอร์เครื่องนี้ ดาวน์โหลดได้จากหน้า «โปรแกรมสำหรับ Windows»",
+"El Vigía solo funciona en Windows.":"ผู้เฝ้าระวังใช้ได้เฉพาะใน Windows",
+"Activado: el programa GUARDIANA vigila este ordenador durante tus llamadas.":"เปิดอยู่: โปรแกรม GUARDIANA เฝ้าระวังคอมพิวเตอร์เครื่องนี้ระหว่างการโทรของคุณ"
 },
 "p":{
 "intento":"พยายามมากที่สุดวันนี้: {1}, {2} {2?ครั้ง|ครั้ง}",

@@ -3634,7 +3634,18 @@
 "Videollamada encriptada post-cuántica":"Apel video criptat postcuantic",
 "Llamada encriptada post-cuántica":"Apel criptat postcuantic",
 "Post-cuántica":"Postcuantică",
-"No se puede descifrar el sonido o la imagen de la otra persona.":"Sunetul sau imaginea celeilalte persoane nu pot fi decriptate."
+"No se puede descifrar el sonido o la imagen de la otra persona.":"Sunetul sau imaginea celeilalte persoane nu pot fi decriptate.",
+"Vigía de este ordenador":"Santinela acestui computer",
+"Con el programa GUARDIANA para Windows: si otro programa usa tu micrófono, tu cámara o tu pantalla durante una llamada, la llamada se pone en pausa.":"Cu programul GUARDIANA pentru Windows: dacă un alt program îți folosește microfonul, camera sau ecranul în timpul unui apel, apelul este pus pe pauză.",
+"Llamada en pausa":"Apel pus pe pauză",
+"Tu micrófono y tu cámara están parados. Cierra ese programa para seguir.":"Microfonul tău și camera ta sunt oprite. Închide acel program ca să continui.",
+"Seguir con la llamada":"Continuă apelul",
+"Ya no se detecta nada. Puedes seguir con la llamada.":"Nu se mai detectează nimic. Poți continua apelul.",
+"La otra persona ha puesto la llamada en pausa.":"Cealaltă persoană a pus apelul pe pauză.",
+"Comprobando el programa GUARDIANA…":"Se verifică programul GUARDIANA…",
+"No se encuentra el programa GUARDIANA en este ordenador. Descárgalo desde la página «Programa para Windows».":"Programul GUARDIANA nu a fost găsit pe acest computer. Descarcă-l de pe pagina „Program pentru Windows”.",
+"El Vigía solo funciona en Windows.":"Santinela funcționează doar în Windows.",
+"Activado: el programa GUARDIANA vigila este ordenador durante tus llamadas.":"Activată: programul GUARDIANA veghează asupra acestui computer în timpul apelurilor tale."
 },
 "p":{
 "intento":"Cea care a încercat cel mai mult azi: {1}, {2} {2?dată|ori}.",

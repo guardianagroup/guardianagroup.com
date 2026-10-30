@@ -3634,7 +3634,18 @@
 "Videollamada encriptada post-cuántica":"पोस्ट-क्वांटम एन्क्रिप्टेड वीडियो कॉल",
 "Llamada encriptada post-cuántica":"पोस्ट-क्वांटम एन्क्रिप्टेड कॉल",
 "Post-cuántica":"पोस्ट-क्वांटम",
-"No se puede descifrar el sonido o la imagen de la otra persona.":"दूसरे व्यक्ति की आवाज़ या तस्वीर डिक्रिप्ट नहीं की जा सकती।"
+"No se puede descifrar el sonido o la imagen de la otra persona.":"दूसरे व्यक्ति की आवाज़ या तस्वीर डिक्रिप्ट नहीं की जा सकती।",
+"Vigía de este ordenador":"इस कंप्यूटर का प्रहरी",
+"Con el programa GUARDIANA para Windows: si otro programa usa tu micrófono, tu cámara o tu pantalla durante una llamada, la llamada se pone en pausa.":"Windows के लिए GUARDIANA प्रोग्राम के साथ: अगर कॉल के दौरान कोई दूसरा प्रोग्राम आपके माइक्रोफ़ोन, कैमरे या स्क्रीन का इस्तेमाल करता है, तो कॉल रोक दी जाती है।",
+"Llamada en pausa":"कॉल रुकी हुई है",
+"Tu micrófono y tu cámara están parados. Cierra ese programa para seguir.":"आपका माइक्रोफ़ोन और कैमरा रोक दिए गए हैं। जारी रखने के लिए वह प्रोग्राम बंद करें।",
+"Seguir con la llamada":"कॉल जारी रखें",
+"Ya no se detecta nada. Puedes seguir con la llamada.":"अब कुछ भी पकड़ में नहीं आ रहा है। आप कॉल जारी रख सकते हैं।",
+"La otra persona ha puesto la llamada en pausa.":"दूसरे व्यक्ति ने कॉल रोक दी है।",
+"Comprobando el programa GUARDIANA…":"GUARDIANA प्रोग्राम की जाँच हो रही है…",
+"No se encuentra el programa GUARDIANA en este ordenador. Descárgalo desde la página «Programa para Windows».":"इस कंप्यूटर पर GUARDIANA प्रोग्राम नहीं मिला। इसे “Windows के लिए प्रोग्राम” पेज से डाउनलोड करें।",
+"El Vigía solo funciona en Windows.":"प्रहरी सिर्फ़ Windows पर काम करता है।",
+"Activado: el programa GUARDIANA vigila este ordenador durante tus llamadas.":"चालू: आपकी कॉल के दौरान GUARDIANA प्रोग्राम इस कंप्यूटर पर नज़र रखता है।"
 },
 "p":{
 "intento":"आज सबसे ज़्यादा कोशिश: {1}, {2} {2?बार|बार}।",

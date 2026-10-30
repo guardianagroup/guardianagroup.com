@@ -3634,7 +3634,18 @@
 "Videollamada encriptada post-cuántica":"Post-Quanten-verschlüsselter Videoanruf",
 "Llamada encriptada post-cuántica":"Post-Quanten-verschlüsselter Anruf",
 "Post-cuántica":"Post-Quanten",
-"No se puede descifrar el sonido o la imagen de la otra persona.":"Ton oder Bild der anderen Person lässt sich nicht entschlüsseln."
+"No se puede descifrar el sonido o la imagen de la otra persona.":"Ton oder Bild der anderen Person lässt sich nicht entschlüsseln.",
+"Vigía de este ordenador":"Wächter für diesen Computer",
+"Con el programa GUARDIANA para Windows: si otro programa usa tu micrófono, tu cámara o tu pantalla durante una llamada, la llamada se pone en pausa.":"Mit dem Programm GUARDIANA für Windows: Wenn ein anderes Programm während eines Anrufs dein Mikrofon, deine Kamera oder deinen Bildschirm nutzt, wird der Anruf pausiert.",
+"Llamada en pausa":"Anruf pausiert",
+"Tu micrófono y tu cámara están parados. Cierra ese programa para seguir.":"Dein Mikrofon und deine Kamera wurden angehalten. Schließe dieses Programm, um fortzufahren.",
+"Seguir con la llamada":"Anruf fortsetzen",
+"Ya no se detecta nada. Puedes seguir con la llamada.":"Es wird nichts mehr erkannt. Du kannst den Anruf fortsetzen.",
+"La otra persona ha puesto la llamada en pausa.":"Die andere Person hat den Anruf pausiert.",
+"Comprobando el programa GUARDIANA…":"Programm GUARDIANA wird geprüft…",
+"No se encuentra el programa GUARDIANA en este ordenador. Descárgalo desde la página «Programa para Windows».":"Das Programm GUARDIANA wurde auf diesem Computer nicht gefunden. Lade es über die Seite „Programm für Windows“ herunter.",
+"El Vigía solo funciona en Windows.":"Der Wächter funktioniert nur unter Windows.",
+"Activado: el programa GUARDIANA vigila este ordenador durante tus llamadas.":"Aktiviert: Das Programm GUARDIANA überwacht diesen Computer während deiner Anrufe."
 },
 "p":{
 "intento":"Hat es heute am häufigsten versucht: {1}, {2} {2?Mal|Mal}.",

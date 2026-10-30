@@ -3634,7 +3634,18 @@
 "Videollamada encriptada post-cuántica":"Видеозвонок с постквантовым шифрованием",
 "Llamada encriptada post-cuántica":"Звонок с постквантовым шифрованием",
 "Post-cuántica":"Постквантовое",
-"No se puede descifrar el sonido o la imagen de la otra persona.":"Не удаётся расшифровать звук или изображение собеседника."
+"No se puede descifrar el sonido o la imagen de la otra persona.":"Не удаётся расшифровать звук или изображение собеседника.",
+"Vigía de este ordenador":"Страж этого компьютера",
+"Con el programa GUARDIANA para Windows: si otro programa usa tu micrófono, tu cámara o tu pantalla durante una llamada, la llamada se pone en pausa.":"С программой GUARDIANA для Windows: если во время звонка другая программа использует ваш микрофон, камеру или экран, звонок ставится на паузу.",
+"Llamada en pausa":"Звонок на паузе",
+"Tu micrófono y tu cámara están parados. Cierra ese programa para seguir.":"Ваши микрофон и камера остановлены. Закройте эту программу, чтобы продолжить.",
+"Seguir con la llamada":"Продолжить звонок",
+"Ya no se detecta nada. Puedes seguir con la llamada.":"Больше ничего не обнаруживается. Вы можете продолжить звонок.",
+"La otra persona ha puesto la llamada en pausa.":"Собеседник поставил звонок на паузу.",
+"Comprobando el programa GUARDIANA…":"Проверка программы GUARDIANA…",
+"No se encuentra el programa GUARDIANA en este ordenador. Descárgalo desde la página «Programa para Windows».":"Программа GUARDIANA не найдена на этом компьютере. Скачайте её на странице «Программа для Windows».",
+"El Vigía solo funciona en Windows.":"Страж работает только в Windows.",
+"Activado: el programa GUARDIANA vigila este ordenador durante tus llamadas.":"Включён: программа GUARDIANA следит за этим компьютером во время ваших звонков."
 },
 "p":{
 "intento":"Настойчивее всех сегодня: {1}, {2} {2?раз|раз}.",

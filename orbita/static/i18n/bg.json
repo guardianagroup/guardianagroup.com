@@ -3634,7 +3634,18 @@
 "Videollamada encriptada post-cuántica":"Постквантово криптирано видеообаждане",
 "Llamada encriptada post-cuántica":"Постквантово криптирано обаждане",
 "Post-cuántica":"Постквантово",
-"No se puede descifrar el sonido o la imagen de la otra persona.":"Звукът или образът на другия човек не може да се дешифрира."
+"No se puede descifrar el sonido o la imagen de la otra persona.":"Звукът или образът на другия човек не може да се дешифрира.",
+"Vigía de este ordenador":"Пазач на този компютър",
+"Con el programa GUARDIANA para Windows: si otro programa usa tu micrófono, tu cámara o tu pantalla durante una llamada, la llamada se pone en pausa.":"С програмата GUARDIANA за Windows: ако по време на обаждане друга програма използва вашия микрофон, камера или екран, обаждането се поставя на пауза.",
+"Llamada en pausa":"Обаждането е на пауза",
+"Tu micrófono y tu cámara están parados. Cierra ese programa para seguir.":"Микрофонът и камерата ви са спрени. Затворете тази програма, за да продължите.",
+"Seguir con la llamada":"Продължаване на обаждането",
+"Ya no se detecta nada. Puedes seguir con la llamada.":"Вече не се открива нищо. Можете да продължите обаждането.",
+"La otra persona ha puesto la llamada en pausa.":"Другият човек постави обаждането на пауза.",
+"Comprobando el programa GUARDIANA…":"Проверка на програмата GUARDIANA…",
+"No se encuentra el programa GUARDIANA en este ordenador. Descárgalo desde la página «Programa para Windows».":"Програмата GUARDIANA не е открита на този компютър. Изтеглете я от страницата „Програма за Windows“.",
+"El Vigía solo funciona en Windows.":"Пазачът работи само в Windows.",
+"Activado: el programa GUARDIANA vigila este ordenador durante tus llamadas.":"Включен: програмата GUARDIANA наблюдава този компютър по време на вашите обаждания."
 },
 "p":{
 "intento":"Най-настойчивата днес: {1}, {2} {2?път|пъти}.",

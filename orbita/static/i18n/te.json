@@ -3634,7 +3634,18 @@
 "Videollamada encriptada post-cuántica":"పోస్ట్-క్వాంటమ్ ఎన్‌క్రిప్ట్ చేయబడిన వీడియో కాల్",
 "Llamada encriptada post-cuántica":"పోస్ట్-క్వాంటమ్ ఎన్‌క్రిప్ట్ చేయబడిన కాల్",
 "Post-cuántica":"పోస్ట్-క్వాంటమ్",
-"No se puede descifrar el sonido o la imagen de la otra persona.":"అవతలి వ్యక్తి శబ్దం లేదా చిత్రాన్ని డీక్రిప్ట్ చేయడం సాధ్యం కాదు."
+"No se puede descifrar el sonido o la imagen de la otra persona.":"అవతలి వ్యక్తి శబ్దం లేదా చిత్రాన్ని డీక్రిప్ట్ చేయడం సాధ్యం కాదు.",
+"Vigía de este ordenador":"ఈ కంప్యూటర్ కాపలాదారు",
+"Con el programa GUARDIANA para Windows: si otro programa usa tu micrófono, tu cámara o tu pantalla durante una llamada, la llamada se pone en pausa.":"Windows కోసం GUARDIANA ప్రోగ్రామ్‌తో: కాల్ సమయంలో వేరే ప్రోగ్రామ్ మీ మైక్రోఫోన్, కెమెరా లేదా స్క్రీన్‌ను ఉపయోగిస్తే, కాల్ పాజ్ అవుతుంది.",
+"Llamada en pausa":"కాల్ పాజ్‌లో ఉంది",
+"Tu micrófono y tu cámara están parados. Cierra ese programa para seguir.":"మీ మైక్రోఫోన్, కెమెరా ఆపివేయబడ్డాయి. కొనసాగించడానికి ఆ ప్రోగ్రామ్‌ను మూసివేయండి.",
+"Seguir con la llamada":"కాల్‌ను కొనసాగించండి",
+"Ya no se detecta nada. Puedes seguir con la llamada.":"ఇప్పుడు ఏదీ గుర్తించబడటం లేదు. మీరు కాల్‌ను కొనసాగించవచ్చు.",
+"La otra persona ha puesto la llamada en pausa.":"అవతలి వ్యక్తి కాల్‌ను పాజ్ చేశారు.",
+"Comprobando el programa GUARDIANA…":"GUARDIANA ప్రోగ్రామ్‌ను తనిఖీ చేస్తోంది…",
+"No se encuentra el programa GUARDIANA en este ordenador. Descárgalo desde la página «Programa para Windows».":"ఈ కంప్యూటర్‌లో GUARDIANA ప్రోగ్రామ్ కనిపించలేదు. «Windows కోసం ప్రోగ్రామ్» పేజీ నుండి దాన్ని డౌన్‌లోడ్ చేయండి.",
+"El Vigía solo funciona en Windows.":"కాపలాదారు Windows‌లో మాత్రమే పనిచేస్తుంది.",
+"Activado: el programa GUARDIANA vigila este ordenador durante tus llamadas.":"ఆన్: మీ కాల్‌ల సమయంలో GUARDIANA ప్రోగ్రామ్ ఈ కంప్యూటర్‌ను కాపలా కాస్తుంది."
 },
 "p":{
 "intento":"ఈరోజు ఎక్కువగా ప్రయత్నించింది: {1}, {2} {2?సారి|సార్లు}.",

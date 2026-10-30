@@ -3634,7 +3634,18 @@
 "Videollamada encriptada post-cuántica":"後量子加密視訊通話",
 "Llamada encriptada post-cuántica":"後量子加密通話",
 "Post-cuántica":"後量子",
-"No se puede descifrar el sonido o la imagen de la otra persona.":"無法解密對方的聲音或影像。"
+"No se puede descifrar el sonido o la imagen de la otra persona.":"無法解密對方的聲音或影像。",
+"Vigía de este ordenador":"這台電腦的哨兵",
+"Con el programa GUARDIANA para Windows: si otro programa usa tu micrófono, tu cámara o tu pantalla durante una llamada, la llamada se pone en pausa.":"搭配 Windows 版 GUARDIANA 程式使用：通話期間，如果其他程式使用你的麥克風、相機或螢幕，通話會暫停。",
+"Llamada en pausa":"通話已暫停",
+"Tu micrófono y tu cámara están parados. Cierra ese programa para seguir.":"你的麥克風和相機已停止。關閉該程式即可繼續。",
+"Seguir con la llamada":"繼續通話",
+"Ya no se detecta nada. Puedes seguir con la llamada.":"已不再偵測到任何情況。你可以繼續通話。",
+"La otra persona ha puesto la llamada en pausa.":"對方已暫停通話。",
+"Comprobando el programa GUARDIANA…":"正在檢查 GUARDIANA 程式…",
+"No se encuentra el programa GUARDIANA en este ordenador. Descárgalo desde la página «Programa para Windows».":"這台電腦上找不到 GUARDIANA 程式。請從「Windows 版程式」頁面下載。",
+"El Vigía solo funciona en Windows.":"哨兵僅支援 Windows。",
+"Activado: el programa GUARDIANA vigila este ordenador durante tus llamadas.":"已開啟：通話期間，GUARDIANA 程式會監控這台電腦。"
 },
 "p":{
 "intento":"今天嘗試最多的：{1}，{2} {2?次|次}。",

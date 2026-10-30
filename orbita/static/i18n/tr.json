@@ -3634,7 +3634,18 @@
 "Videollamada encriptada post-cuántica":"Kuantum sonrası şifreli görüntülü arama",
 "Llamada encriptada post-cuántica":"Kuantum sonrası şifreli arama",
 "Post-cuántica":"Kuantum sonrası",
-"No se puede descifrar el sonido o la imagen de la otra persona.":"Karşı tarafın sesinin veya görüntüsünün şifresi çözülemiyor."
+"No se puede descifrar el sonido o la imagen de la otra persona.":"Karşı tarafın sesinin veya görüntüsünün şifresi çözülemiyor.",
+"Vigía de este ordenador":"Bu bilgisayar için Nöbetçi",
+"Con el programa GUARDIANA para Windows: si otro programa usa tu micrófono, tu cámara o tu pantalla durante una llamada, la llamada se pone en pausa.":"Windows için GUARDIANA programıyla: bir arama sırasında başka bir program mikrofonunuzu, kameranızı veya ekranınızı kullanırsa arama duraklatılır.",
+"Llamada en pausa":"Arama duraklatıldı",
+"Tu micrófono y tu cámara están parados. Cierra ese programa para seguir.":"Mikrofonunuz ve kameranız durduruldu. Devam etmek için o programı kapatın.",
+"Seguir con la llamada":"Aramaya devam et",
+"Ya no se detecta nada. Puedes seguir con la llamada.":"Artık hiçbir şey algılanmıyor. Aramaya devam edebilirsiniz.",
+"La otra persona ha puesto la llamada en pausa.":"Karşı taraf aramayı duraklattı.",
+"Comprobando el programa GUARDIANA…":"GUARDIANA programı kontrol ediliyor…",
+"No se encuentra el programa GUARDIANA en este ordenador. Descárgalo desde la página «Programa para Windows».":"GUARDIANA programı bu bilgisayarda bulunamadı. “Windows için program” sayfasından indirin.",
+"El Vigía solo funciona en Windows.":"Nöbetçi yalnızca Windows'ta çalışır.",
+"Activado: el programa GUARDIANA vigila este ordenador durante tus llamadas.":"Açık: GUARDIANA programı, aramalarınız sırasında bu bilgisayarı gözetler."
 },
 "p":{
 "intento":"Bugün en çok deneyen: {1}, {2} {2?kez|kez}.",

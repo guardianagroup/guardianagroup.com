@@ -3634,7 +3634,18 @@
 "Videollamada encriptada post-cuántica":"تماس تصویری رمزگذاری‌شدهٔ پساکوانتومی",
 "Llamada encriptada post-cuántica":"تماس رمزگذاری‌شدهٔ پساکوانتومی",
 "Post-cuántica":"پساکوانتومی",
-"No se puede descifrar el sonido o la imagen de la otra persona.":"رمزگشایی صدا یا تصویر طرف مقابل ممکن نیست."
+"No se puede descifrar el sonido o la imagen de la otra persona.":"رمزگشایی صدا یا تصویر طرف مقابل ممکن نیست.",
+"Vigía de este ordenador":"نگهبان این رایانه",
+"Con el programa GUARDIANA para Windows: si otro programa usa tu micrófono, tu cámara o tu pantalla durante una llamada, la llamada se pone en pausa.":"با برنامهٔ GUARDIANA برای Windows: اگر در طول تماس برنامهٔ دیگری از میکروفون، دوربین یا صفحه‌نمایش شما استفاده کند، تماس در حالت مکث قرار می‌گیرد.",
+"Llamada en pausa":"تماس در حالت مکث",
+"Tu micrófono y tu cámara están parados. Cierra ese programa para seguir.":"میکروفون و دوربین شما متوقف شده‌اند. برای ادامه، آن برنامه را ببندید.",
+"Seguir con la llamada":"ادامهٔ تماس",
+"Ya no se detecta nada. Puedes seguir con la llamada.":"دیگر چیزی شناسایی نمی‌شود. می‌توانید تماس را ادامه دهید.",
+"La otra persona ha puesto la llamada en pausa.":"طرف مقابل تماس را در حالت مکث قرار داد.",
+"Comprobando el programa GUARDIANA…":"در حال بررسی برنامهٔ GUARDIANA…",
+"No se encuentra el programa GUARDIANA en este ordenador. Descárgalo desde la página «Programa para Windows».":"برنامهٔ GUARDIANA روی این رایانه پیدا نشد. آن را از صفحهٔ «برنامه برای Windows» دانلود کنید.",
+"El Vigía solo funciona en Windows.":"نگهبان فقط در Windows کار می‌کند.",
+"Activado: el programa GUARDIANA vigila este ordenador durante tus llamadas.":"فعال: برنامهٔ GUARDIANA در طول تماس‌های شما بر این رایانه نظارت می‌کند."
 },
 "p":{
 "intento":"بیشترین تلاش امروز: {1}، {2} {2?بار|بار}.",

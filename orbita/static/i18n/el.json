@@ -3634,7 +3634,18 @@
 "Videollamada encriptada post-cuántica":"Μετακβαντική κρυπτογραφημένη βιντεοκλήση",
 "Llamada encriptada post-cuántica":"Μετακβαντική κρυπτογραφημένη κλήση",
 "Post-cuántica":"Μετακβαντική",
-"No se puede descifrar el sonido o la imagen de la otra persona.":"Δεν είναι δυνατή η αποκρυπτογράφηση του ήχου ή της εικόνας του άλλου ατόμου."
+"No se puede descifrar el sonido o la imagen de la otra persona.":"Δεν είναι δυνατή η αποκρυπτογράφηση του ήχου ή της εικόνας του άλλου ατόμου.",
+"Vigía de este ordenador":"Φρουρός αυτού του υπολογιστή",
+"Con el programa GUARDIANA para Windows: si otro programa usa tu micrófono, tu cámara o tu pantalla durante una llamada, la llamada se pone en pausa.":"Με το πρόγραμμα GUARDIANA για Windows: αν κάποιο άλλο πρόγραμμα χρησιμοποιεί το μικρόφωνο, την κάμερα ή την οθόνη σας κατά τη διάρκεια μιας κλήσης, η κλήση τίθεται σε παύση.",
+"Llamada en pausa":"Κλήση σε παύση",
+"Tu micrófono y tu cámara están parados. Cierra ese programa para seguir.":"Το μικρόφωνο και η κάμερά σας έχουν σταματήσει. Κλείστε αυτό το πρόγραμμα για να συνεχίσετε.",
+"Seguir con la llamada":"Συνέχιση της κλήσης",
+"Ya no se detecta nada. Puedes seguir con la llamada.":"Δεν εντοπίζεται πλέον τίποτα. Μπορείτε να συνεχίσετε την κλήση.",
+"La otra persona ha puesto la llamada en pausa.":"Το άλλο άτομο έθεσε την κλήση σε παύση.",
+"Comprobando el programa GUARDIANA…":"Έλεγχος του προγράμματος GUARDIANA…",
+"No se encuentra el programa GUARDIANA en este ordenador. Descárgalo desde la página «Programa para Windows».":"Το πρόγραμμα GUARDIANA δεν βρέθηκε σε αυτόν τον υπολογιστή. Κατεβάστε το από τη σελίδα «Πρόγραμμα για Windows».",
+"El Vigía solo funciona en Windows.":"Ο Φρουρός λειτουργεί μόνο στα Windows.",
+"Activado: el programa GUARDIANA vigila este ordenador durante tus llamadas.":"Ενεργός: το πρόγραμμα GUARDIANA επιτηρεί αυτόν τον υπολογιστή κατά τις κλήσεις σας."
 },
 "p":{
 "intento":"Η πιο επίμονη σήμερα: {1}, {2} {2?φορά|φορές}.",

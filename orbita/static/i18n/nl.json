@@ -3634,7 +3634,18 @@
 "Videollamada encriptada post-cuántica":"Post-kwantum versleuteld videogesprek",
 "Llamada encriptada post-cuántica":"Post-kwantum versleutelde oproep",
 "Post-cuántica":"Post-kwantum",
-"No se puede descifrar el sonido o la imagen de la otra persona.":"Het geluid of beeld van de andere persoon kan niet worden ontsleuteld."
+"No se puede descifrar el sonido o la imagen de la otra persona.":"Het geluid of beeld van de andere persoon kan niet worden ontsleuteld.",
+"Vigía de este ordenador":"Wachter van deze computer",
+"Con el programa GUARDIANA para Windows: si otro programa usa tu micrófono, tu cámara o tu pantalla durante una llamada, la llamada se pone en pausa.":"Met het GUARDIANA-programma voor Windows: als een ander programma tijdens een oproep je microfoon, je camera of je scherm gebruikt, wordt de oproep gepauzeerd.",
+"Llamada en pausa":"Oproep gepauzeerd",
+"Tu micrófono y tu cámara están parados. Cierra ese programa para seguir.":"Je microfoon en je camera zijn gestopt. Sluit dat programma om verder te gaan.",
+"Seguir con la llamada":"Oproep hervatten",
+"Ya no se detecta nada. Puedes seguir con la llamada.":"Er wordt niets meer gedetecteerd. Je kunt de oproep hervatten.",
+"La otra persona ha puesto la llamada en pausa.":"De andere persoon heeft de oproep gepauzeerd.",
+"Comprobando el programa GUARDIANA…":"GUARDIANA-programma controleren…",
+"No se encuentra el programa GUARDIANA en este ordenador. Descárgalo desde la página «Programa para Windows».":"Het GUARDIANA-programma is niet gevonden op deze computer. Download het via de pagina “Programma voor Windows”.",
+"El Vigía solo funciona en Windows.":"De Wachter werkt alleen in Windows.",
+"Activado: el programa GUARDIANA vigila este ordenador durante tus llamadas.":"Aan: het GUARDIANA-programma bewaakt deze computer tijdens je oproepen."
 },
 "p":{
 "intento":"Probeerde het vandaag het vaakst: {1}, {2} {2?keer|keer}.",

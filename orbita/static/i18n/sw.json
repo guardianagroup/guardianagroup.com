@@ -3634,7 +3634,18 @@
 "Videollamada encriptada post-cuántica":"Simu ya video iliyosimbwa fiche ya baada ya kwantum",
 "Llamada encriptada post-cuántica":"Simu iliyosimbwa fiche ya baada ya kwantum",
 "Post-cuántica":"Baada ya kwantum",
-"No se puede descifrar el sonido o la imagen de la otra persona.":"Sauti au picha ya mtu mwingine haiwezi kufumbuliwa."
+"No se puede descifrar el sonido o la imagen de la otra persona.":"Sauti au picha ya mtu mwingine haiwezi kufumbuliwa.",
+"Vigía de este ordenador":"Mlinzi wa kompyuta hii",
+"Con el programa GUARDIANA para Windows: si otro programa usa tu micrófono, tu cámara o tu pantalla durante una llamada, la llamada se pone en pausa.":"Ukiwa na programu ya GUARDIANA ya Windows: programu nyingine ikitumia maikrofoni, kamera au skrini yako wakati wa simu, simu husitishwa kwa muda.",
+"Llamada en pausa":"Simu imesitishwa",
+"Tu micrófono y tu cámara están parados. Cierra ese programa para seguir.":"Maikrofoni na kamera yako zimesimamishwa. Funga programu hiyo ili uendelee.",
+"Seguir con la llamada":"Endelea na simu",
+"Ya no se detecta nada. Puedes seguir con la llamada.":"Hakuna kinachogunduliwa tena. Unaweza kuendelea na simu.",
+"La otra persona ha puesto la llamada en pausa.":"Mtu mwingine amesitisha simu kwa muda.",
+"Comprobando el programa GUARDIANA…":"Inakagua programu ya GUARDIANA…",
+"No se encuentra el programa GUARDIANA en este ordenador. Descárgalo desde la página «Programa para Windows».":"Programu ya GUARDIANA haipatikani kwenye kompyuta hii. Ipakue kutoka ukurasa wa «Programu ya Windows».",
+"El Vigía solo funciona en Windows.":"Mlinzi hufanya kazi kwenye Windows pekee.",
+"Activado: el programa GUARDIANA vigila este ordenador durante tus llamadas.":"Imewashwa: programu ya GUARDIANA inafuatilia kompyuta hii wakati wa simu zako."
 },
 "p":{
 "intento":"Iliyojaribu zaidi leo: {1}, {2?mara|mara} {2}.",
