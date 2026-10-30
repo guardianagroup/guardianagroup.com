@@ -39,9 +39,11 @@ const imagenes = async (p, sel) => {
 // cuánto suena lo que llega por un elemento de audio (media de la señal en 1,2 s)
 const nivel = (p, sel) => p.evaluate(async (s) => {
   const el = document.querySelector(s); if (!el || !el.srcObject || !el.srcObject.getAudioTracks().length) return 0;
-  const c = new AudioContext(); const src = c.createMediaStreamSource(el.srcObject); const an = c.createAnalyser(); an.fftSize = 2048; src.connect(an);
-  const buf = new Float32Array(an.fftSize); let max = 0; const fin = Date.now() + 1200;
-  while (Date.now() < fin) { await new Promise((r) => setTimeout(r, 60)); an.getFloatTimeDomainData(buf); let s2 = 0; for (const x of buf) s2 += x * x; max = Math.max(max, Math.sqrt(s2 / buf.length)); }
+  // cada pista por separado: un MediaStream con varias pistas de audio solo da a WebAudio una de ellas (la de id menor), que
+  // puede ser la pista muda; se mide cada una y se queda la que suena
+  const c = new AudioContext(); const ans = el.srcObject.getAudioTracks().map((p) => { const an = c.createAnalyser(); an.fftSize = 2048; c.createMediaStreamSource(new MediaStream([p])).connect(an); return an; });
+  const buf = new Float32Array(2048); let max = 0; const fin = Date.now() + 1200;
+  while (Date.now() < fin) { await new Promise((r) => setTimeout(r, 60)); for (const an of ans) { an.getFloatTimeDomainData(buf); let s2 = 0; for (const x of buf) s2 += x * x; max = Math.max(max, Math.sqrt(s2 / buf.length)); } }
   try { c.close(); } catch (_) {} return max;
 }, sel);
 const salaDe = (p, nombre) => p.evaluate((n) => { for (const c of GuardianaCom.convs.values()) if ((c.alias || c.nombre) === n) return c.id; return null; }, nombre);
@@ -97,7 +99,18 @@ async function seAnaden(X, numX, Y, numY, nomY, nomX) {
   const nB = ((await B.textContent('#ll-nombre')) || '').trim();
   comprueba(/·/.test(nB), '3. B ve los dos nombres arriba: «' + nB + '»');
   await foto(A, '03-A-tres'); await foto(B, '03-B-tres'); await foto(C, '03-C-tres');
+  const foco = (P) => P.evaluate(() => document.querySelector('#llamada').dataset.foco || '');
+  const grande = (P, s) => P.evaluate((s) => { const v = document.querySelector(s), r = v.getBoundingClientRect(); return r.width >= innerWidth - 2 && r.height >= innerHeight - 2; }, s);
+  await B.evaluate(() => document.querySelector('#v-remoto').click()); await espera(500);
+  comprueba(await foco(B) === 'remoto' && await grande(B, '#v-remoto'), '3b. B toca a A: A en grande');
+  await foto(B, '03b-B-A-grande');
+  await B.evaluate(() => document.querySelector('#v-tercero').click()); await espera(500);
+  comprueba(await foco(B) === 'tercero' && await grande(B, '#v-tercero'), '3b. B toca la pequeña: C en grande');
+  await B.evaluate(() => document.querySelector('#v-tercero').click()); await espera(500);
+  comprueba(await foco(B) === '' && !(await grande(B, '#v-tercero')), '3b. B toca la grande: otra vez partida');
   // 4. los tres se oyen: A en silencio, B oye a C y C oye a B
+  const estMz = await A.evaluate(() => GuardianaCom.llamada.mezclaEstado);
+  comprueba(estMz === 'running', '4. la mezcla de voces de A está sonando (' + estMz + ')');
   const antesB = await nivel(B, '#a-remoto');
   await A.evaluate(() => document.querySelector('#ll-silenciar').click()); await espera(1500);
   const nivB = await nivel(B, '#a-remoto'), nivC = await nivel(C, '#a-remoto');

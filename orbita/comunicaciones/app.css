@@ -2047,3 +2047,14 @@ body.con-pestanas #marcar .marcar-llamar span{position:absolute;width:1px;height
 .num-elige-ver{position:absolute;inset:0;display:flex;align-items:center;box-sizing:border-box;padding-left:max(12px,calc((100% - 15 * (1ch + .06em)) / 2));border:1px solid transparent;font:600 20px/1.2 var(--mono);letter-spacing:.06em;white-space:pre;pointer-events:none;color:#F4F6F8;overflow:hidden}
 .num-elige-ver .ne-falta{color:#3A4552}
 .num-elige-ver .ne-cifra{color:#A3AEBA}
+
+/* La vista a tres se cambia (dueño, 30 Oct 2026, 10:45: «cambiar la vista… como en la llamada normal»): tocando a una persona se
+   ve en grande y la otra en pequeño, arriba a la izquierda; tocando la pequeña, se cambian; tocando la grande, vuelve la pantalla
+   partida. Tu imagen se mueve con el dedo o el ratón */
+.gc-llamada.tres:not(.mini) .videos #v-remoto,.gc-llamada.tres:not(.mini) .videos #v-tercero{cursor:pointer}
+.gc-llamada.tres[data-foco="remoto"]:not(.mini) .videos #v-remoto,.gc-llamada.tres[data-foco="tercero"]:not(.mini) .videos #v-tercero{left:0!important;top:0!important;width:100%!important;height:100%!important;z-index:0}
+.gc-llamada.tres[data-foco="remoto"]:not(.mini) .videos #v-tercero,.gc-llamada.tres[data-foco="tercero"]:not(.mini) .videos #v-remoto{left:16px!important;top:calc(env(safe-area-inset-top) + 116px)!important;width:120px!important;max-width:30%!important;height:auto!important;aspect-ratio:3/4!important;border:1px solid rgba(218,236,250,.22)!important;border-radius:12px!important;z-index:2;box-shadow:0 8px 24px -10px rgba(0,0,0,.7)}
+.gc-llamada.tres[data-foco="remoto"]:not(.mini) .videos::after,.gc-llamada.tres[data-foco="tercero"]:not(.mini) .videos::after{display:none}
+.gc-llamada.tres[data-foco="remoto"] #ll-tercero-n,.gc-llamada.tres[data-foco="tercero"] #ll-remoto-n{display:none}
+.gc-llamada.tres[data-foco="remoto"] #ll-remoto-n,.gc-llamada.tres[data-foco="tercero"] #ll-tercero-n{left:16px;top:auto;bottom:calc(140px + env(safe-area-inset-bottom));max-width:calc(100% - 200px)}
+.gc-llamada.tres.movida:not(.mini) .videos #v-local{left:var(--mi-x)!important;top:var(--mi-y)!important;right:auto!important;bottom:auto!important}

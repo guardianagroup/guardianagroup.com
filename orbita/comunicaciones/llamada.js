@@ -361,7 +361,7 @@
     let reposo = null;
     function despierta() {
       // cualquier toque vuelve a arrancar el sonido y la imagen que llegan (el iPhone a veces los deja parados)
-      if (estado === 'hablando') { suenaRemoto(); if (remotoV) reproduce($('#v-remoto')); if (ctx && ctx.state !== 'running' && ctx.state !== 'closed') ctx.resume().catch(() => {}); }
+      if (estado === 'hablando') { suenaRemoto(); if (remotoV) reproduce($('#v-remoto')); if (ctx && ctx.state !== 'running' && ctx.state !== 'closed') ctx.resume().catch(() => {}); if (mezcla && mezcla.ctx.state !== 'running' && mezcla.ctx.state !== 'closed') mezcla.ctx.resume().catch(() => {}); { const a3 = $('#a-tercero'); if (a3 && a3.srcObject && a3.paused) reproduce(a3); } }
       caja.classList.remove('reposo'); clearTimeout(reposo);
       reposo = setTimeout(() => {
         const foco = document.activeElement && caja.contains(document.activeElement) && document.activeElement.matches(':focus-visible');
@@ -1132,7 +1132,11 @@
       else if (visto) { pista = visto.video || null; conCam = visto.camara !== false; }
       const ve = !!(video && pista && pista.readyState === 'live' && !pista.muted && conCam && estado !== 'libre' && estado !== 'cerrando');
       if (v3) { if (ve && (!v3.srcObject || v3.srcObject.getVideoTracks()[0] !== pista)) { v3.srcObject = new MediaStream([pista]); reproduce(v3); } v3.hidden = !ve; }
+      // la vista a tres (dueño, 30 Oct 2026, 10:38–10:45: «nadie… puede cambiar la vista… fijas»): al empezar, las dos personas a
+      // pantalla partida; al acabar, la vista de una llamada normal
+      const antes3 = caja.classList.contains('tres');
       caja.classList.toggle('tres', ve);
+      if (ve !== antes3) { if (ve) caja.dataset.foco = ''; else delete caja.dataset.foco; if (video) raiz.requestAnimationFrame(() => miImagen()); }
       caja.classList.toggle('a-tres', !!((tercero && tercero.estado === 'hablando') || visto));
       if (n3) { n3.textContent = nombreTercero(); n3.hidden = !ve; }
       if (n1) { n1.textContent = o.nombre() || t('Persona invitada'); n1.hidden = !ve; }
@@ -1144,6 +1148,7 @@
       const ice = o.ice() || [];
       if (!ice.length && !LOCAL) { o.aviso && o.aviso(t('El servicio de llamadas no está disponible ahora mismo.')); return false; }
       const mz = mezclaCrea(); if (!mz) return false;
+      if (mz.ctx.state !== 'running') mz.ctx.resume().catch(() => {});
       const id = Math.random().toString(36).slice(2, 10);
       const t3 = tercero = { sala: String(sala), nombre: String(d.nombre || '').slice(0, 40), compartido: String(d.suNombre || '').slice(0, 40), id, pc: null, estado: 'saliente', pendientes: [], vozRemota: null, videoRemoto: null, suCamara: true, suTres: false, trHaciaB: null, trHaciaC: null, sinRespuesta: null, inicio: 0, corte: null };
       const tieneTurn = ice.some((s) => [].concat(s.urls).some((u) => /^turns?:/.test(u)));
@@ -1196,6 +1201,7 @@
       // a la otra persona: quién se ha unido, y desde ahora mi voz junto con la del tercero
       o.manda({ acto: 'tres', id: idLlamada, on: 1, nombre: t3.compartido || undefined });
       mezclaAlDia();
+      if (mezcla && mezcla.ctx.state !== 'running') mezcla.ctx.resume().catch(() => {});
       const s = emisorVoz(pc), a = mezcla && mezcla.aB.stream.getAudioTracks()[0];
       if (s && a && s.track !== a) s.replaceTrack(a).catch(() => {});
       if (!camaraOn() && video) mandaT({ acto: 'camara', id: t3.id, on: false });
@@ -1272,8 +1278,18 @@
       if (m.acto === 'ocupado') { quitaTercero('ocupado'); return true; }
       return true;
     }
+    // tocar a una persona: se ve en grande y la otra en pequeño; tocar la pequeña: se cambian; tocar la grande: otra vez partida
+    function tocaVista(cual) {
+      if (!caja.classList.contains('tres') || caja.classList.contains('mini')) return;
+      const f = caja.dataset.foco || '';
+      caja.dataset.foco = f === cual ? '' : cual;
+    }
+    { const v1 = $('#v-remoto'), v3 = $('#v-tercero'); if (v1) v1.addEventListener('click', () => tocaVista('remoto')); if (v3) v3.addEventListener('click', () => tocaVista('tercero')); }
     function botonAnadir() {
       if (tercero && tercero.estado === 'saliente') { mandaT({ acto: 'colgar', id: tercero.id }); quitaTercero('yo'); return; }
+      // el audio de la mezcla se arranca aquí, dentro del toque: el navegador (sobre todo el iPhone) deja parado un contexto de
+      // audio creado fuera de un gesto, y entonces las dos personas oirían silencio (prueba tres.js, 30 Oct 2026)
+      const mz = mezclaCrea(); if (mz && mz.ctx.state !== 'running') mz.ctx.resume().catch(() => {});
       if (o.eligeTercero) o.eligeTercero();
     }
     // ya colgada (o colgándose): un segundo toque, o que el otro cuelgue a la vez, no vuelve a terminarla (si no, dos tarjetas de
@@ -1283,7 +1299,7 @@
       if (estado === 'libre' || estado === 'cerrando') return;
       if (tercero && tercero.estado === 'hablando' && !colgoYo && (por === 'fin' || por === 'fallo')) { asciende(); return; }
       if (tercero) { mandaT({ acto: 'colgar', id: tercero.id }); quitaTercero('yo', true); }
-      visto = null; suTres = false; vozSuya = null; { const v3 = $('#v-tercero'); if (v3) v3.srcObject = null; }
+      visto = null; suTres = false; vozSuya = null; mezclaFin(); { const v3 = $('#v-tercero'); if (v3) v3.srcObject = null; }
       const dur = iniciada ? Date.now() - iniciada : 0, era = estado, conImagen = video;
       paraTono(); clearTimeout(sinRespuesta); clearTimeout(ausenteT); ausenteT = null; ultimaOferta = null; sueltaWake(); sueltaCompleta();
       clearInterval(reloj); reloj = null; clearInterval(sondeo); sondeo = null;
@@ -1471,7 +1487,9 @@
       // partida por defecto en el ordenador y también en el teléfono, tú abajo (dueño, 28 Oct 2026, 17:24: «que salga directamente a
       // pantalla dividida… y luego la persona, si quiere… algún botoncito… y que entonces se ponga como si fuera una llamada de
       // WhatsApp o de FaceTime»); antes, en el teléfono, empezaba como FaceTime (15:36)
-      if (partidaPorDefecto && video && cam && CW) ponDividida(CW >= CH ? 'der' : 'abajo');
+      // a tres, nunca partida contigo: la pantalla es de las otras dos personas y tu imagen va en pequeño, y se puede mover
+      if (caja.classList.contains('tres')) ponDividida(null);
+      else if (partidaPorDefecto && video && cam && CW) ponDividida(CW >= CH ? 'der' : 'abajo');
       else if (mi.div && CW) { const hz = CW >= CH, mapa = hz ? { arriba: 'izq', abajo: 'der' } : { izq: 'arriba', der: 'abajo' }; ponDividida(mapa[mi.div] || mi.div); }
       else ponDividida(null);
       // tamaño elegido (proporción del ancho), con su mínimo y su máximo
@@ -1550,7 +1568,7 @@
       const p = enLienzo(e), enAsa = FINO.matches && sobreAsa(p);
       if (!enAsa && !sobreMiImagen(p)) return;
       // doble clic sobre tu imagen en el ordenador: pantalla dividida, o vuelta a la imagen pequeña (en el teléfono, un toque: suelta)
-      const ahora = Date.now(); if (FINO.matches && !enAsa && ahora - ultimoToque < 320) { ultimoToque = 0; alternaDividida(); e.preventDefault(); return; } ultimoToque = ahora;
+      const ahora = Date.now(); if (FINO.matches && !enAsa && ahora - ultimoToque < 320 && !caja.classList.contains('tres')) { ultimoToque = 0; alternaDividida(); e.preventDefault(); return; } ultimoToque = ahora;
       if (caja.classList.contains('dividida')) { if (!enAsa) return; sueltaDividida(); }
       const vl = vidLocal(), cont = lienzoVid(), CW = cont.clientWidth, CH = cont.clientHeight;
       const W = vl.offsetWidth, H = vl.offsetHeight, L = vl.offsetLeft, T = vl.offsetTop, es = esquinaAsa(vl, CW, CH);
@@ -1587,7 +1605,7 @@
       const a = arrastre; arrastre = null; caja.classList.remove('arrastrando');
       try { caja.releasePointerCapture(e.pointerId); } catch (_) {}
       // en el teléfono, un toque en tu imagen pequeña vuelve a partir la pantalla (como el botón de su esquina)
-      if (!a.movido && !FINO.matches && a.modo === 'mover' && !caja.classList.contains('dividida') && e.type === 'pointerup') { alternaDividida(); return; }
+      if (!a.movido && !FINO.matches && a.modo === 'mover' && !caja.classList.contains('dividida') && !caja.classList.contains('tres') && e.type === 'pointerup') { alternaDividida(); return; }
       if (!a.movido) { colocaAsa(); return; }
       const vl = vidLocal(), cont = lienzoVid(), CW = cont.clientWidth, CH = cont.clientHeight;
       // agrandada hasta casi media pantalla: queda la pantalla dividida
@@ -1599,7 +1617,7 @@
     if (FINO.addEventListener) FINO.addEventListener('change', escala);
     escala();
     { const vlx = vidLocal(); if (vlx) { vlx.addEventListener('loadedmetadata', () => miImagen()); vlx.addEventListener('resize', () => colocaAsa()); } }
-    return { llamar, recibe, colgar, eligeVoz, seFue, volvio, anade, recibeTercero, get terceroSala() { return tercero ? tercero.sala : null; }, get aTres() { return !!(tercero || visto); }, get estado() { return estado; }, get ocupado() { return ocupado(); }, get voz() { return voz; }, get cambioActivo() { return !!nodo; }, get video() { return video; }, get imagen() { return imagen; } };
+    return { llamar, recibe, colgar, eligeVoz, seFue, volvio, anade, recibeTercero, get terceroSala() { return tercero ? tercero.sala : null; }, get aTres() { return !!(tercero || visto); }, get mezclaEstado() { return mezcla ? mezcla.ctx.state : null; }, get estado() { return estado; }, get ocupado() { return ocupado(); }, get voz() { return voz; }, get cambioActivo() { return !!nodo; }, get video() { return video; }, get imagen() { return imagen; } };
   }
   raiz.GuardianaLlamada = { crea, VOCES };
 })(typeof window !== 'undefined' ? window : globalThis);
