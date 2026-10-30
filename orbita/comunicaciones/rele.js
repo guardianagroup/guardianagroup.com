@@ -10,6 +10,35 @@
   // Instalación propia (dueño, 27 Oct 2026, 23:21: «mejora este modelo», Threema OnPrem): si la página no la sirve
   // guardianagroup.com, el relé es el mismo servidor que la sirve. Nada pasa por GUARDIANA.
   const PROPIO = !LOCAL && !/(^|\.)guardianagroup\.com$/.test(location.hostname);
+  // Puente en Rusia (dueño, 30 Oct 2026, 09:10–09:23: con su hijo en Moscú el chat va, pero las fotos y la videollamada no).
+  // Desde junio de 2025 las redes rusas cortan a unos 16 KB las conexiones hacia los grandes alojamientos extranjeros: entran
+  // los mensajes cortos y se quedan a medias las fotos, el audio y el vídeo. Quien está en Rusia entra por un servidor de paso
+  // dentro de Rusia que reenvía al relé principal sin abrir nada (todo va ya cifrado de extremo a extremo; el relé y la sala
+  // son los mismos para las dos personas). Se usa si la zona horaria del equipo es rusa, o a mano con ?puente=ru (y ?puente=no
+  // para quitarlo), y solo si el puente responde; si no, todo sigue como hasta ahora.
+  const PUENTE_RU = 'wss://ru.guardianagroup.com';
+  const ZONAS_RU = /^(Europe\/(Moscow|Kaliningrad|Kirov|Volgograd|Astrakhan|Saratov|Ulyanovsk|Samara|Simferopol)|Asia\/(Yekaterinburg|Omsk|Novosibirsk|Barnaul|Tomsk|Novokuznetsk|Krasnoyarsk|Irkutsk|Chita|Yakutsk|Khandyga|Vladivostok|Ust-Nera|Magadan|Sakhalin|Srednekolymsk|Kamchatka|Anadyr)|W-SU)$/;
+  function quierePuente() {
+    let f = q.get('puente');
+    try { if (f === 'ru' || f === 'no') localStorage.setItem('gcom-puente', f); else f = localStorage.getItem('gcom-puente'); } catch (_) {}
+    if (f === 'ru') return true;
+    if (f === 'no') return false;
+    try { return ZONAS_RU.test(Intl.DateTimeFormat().resolvedOptions().timeZone || ''); } catch (_) { return false; }
+  }
+  async function puenteVivo() {
+    const c = typeof AbortController !== 'undefined' ? new AbortController() : null;
+    const t = setTimeout(() => { try { c && c.abort(); } catch (_) {} }, 3500);
+    try { await fetch(PUENTE_RU.replace(/^wss:/, 'https:') + '/salud', { mode: 'no-cors', cache: 'no-store', signal: c ? c.signal : undefined }); return true; }
+    catch (_) { return false; } finally { clearTimeout(t); }
+  }
+  // por el puente, las credenciales de llamada del relé principal valen igual: solo cambia la puerta (el puente reenvía el
+  // puerto 3478 al relé de llamadas). La ruta TLS (turns:) se quita: su certificado es el del servidor principal.
+  function icePorPuente(lista) {
+    return (lista || []).map((sv) => {
+      const urls = [].concat(sv.urls || []).filter((u) => /^turn:/.test(u)).map((u) => u.replace(/^turn:[^:?]+/, 'turn:' + PUENTE_RU.replace(/^wss:\/\//, '')));
+      return Object.assign({}, sv, { urls });
+    }).filter((sv) => sv.urls.length);
+  }
 
   function crea(o) {
     o = o || {};
@@ -34,6 +63,7 @@
       if (q.get('rele')) return q.get('rele');
       if (LOCAL) return 'ws://127.0.0.1:8794';
       if (PROPIO) return (location.protocol === 'https:' ? 'wss://' : 'ws://') + location.host;
+      if (quierePuente() && await puenteVivo()) return PUENTE_RU;
       return MOTORES[0];
     }
 
@@ -56,8 +86,8 @@
         if (typeof e.data === 'string') {
           let m; try { m = JSON.parse(e.data); } catch (_) { return; }
           switch (m.t) {
-            case 'hola': region = m.region || ''; llamadas = !!m.llamadas; ice = m.ice || []; caduca = m.caduca || 0; avisos = typeof m.avisos === 'string' ? m.avisos : ''; marca = m.marca === 1; reto = /^[0-9a-f]{32}$/.test(m.reto || '') ? m.reto : ''; conNumeros = m.num === 1; emite('hola', { region, llamadas, ice, avisos, reto, num: conNumeros });  conBuzon = m.buzon === 1; break;
-            case 'ice': ice = m.ice || []; caduca = m.caduca || 0; emite('ice', ice); break;
+            case 'hola': region = m.region || ''; llamadas = !!m.llamadas; ice = url === PUENTE_RU ? icePorPuente(m.ice) : m.ice || []; caduca = m.caduca || 0; avisos = typeof m.avisos === 'string' ? m.avisos : ''; marca = m.marca === 1; reto = /^[0-9a-f]{32}$/.test(m.reto || '') ? m.reto : ''; conNumeros = m.num === 1; emite('hola', { region, llamadas, ice, avisos, reto, num: conNumeros });  conBuzon = m.buzon === 1; break;
+            case 'ice': ice = url === PUENTE_RU ? icePorPuente(m.ice) : m.ice || []; caduca = m.caduca || 0; emite('ice', ice); break;
             case 'sala': emite('sala', m.sala, m.miembros || []); break;
             case 'llega': emite('llega', m.sala, m.quien); break;
             case 'sale': emite('sale', m.sala, m.quien); break;
@@ -219,5 +249,5 @@
       ws.onerror = () => acaba(null); ws.onclose = () => acaba(ice && ms.length ? { ice, caduca, region, ms: Math.round(Math.min(...ms)) } : null);
     });
   }
-  raiz.GuardianaRele = { crea, MOTORES, PROPIO, iceDe };
+  raiz.GuardianaRele = { crea, MOTORES, PROPIO, PUENTE_RU, iceDe, icePorPuente };
 })(typeof window !== 'undefined' ? window : globalThis);

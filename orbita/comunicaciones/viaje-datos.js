@@ -25,6 +25,8 @@
   function rele(url) {
     let h = ''; try { h = new URL(String(url).replace(/^ws/, 'http')).hostname; } catch (_) {}
     if (RELES[h]) return Object.assign({ host: h }, RELES[h]);
+    // el puente de Rusia solo reenvía: el relé es el principal
+    if (h === 'ru.guardianagroup.com') return Object.assign({ host: 'motor.guardianagroup.com', puente: 'ru' }, RELES['motor.guardianagroup.com']);
     if (/^(127\.0\.0\.1|localhost)$/.test(h)) return Object.assign({ host: h, prueba: true }, RELES['motor.guardianagroup.com']);
     return { host: h, ciudad: '', cc: null, lat: null, lon: null };
   }

@@ -1,7 +1,7 @@
 // Notas de voz con la onda real y velocidad 1× / 1,5× / 2×; fotos con el hueco reservado y el visor dentro de la app
 // (agencia, ronda 76, fase 4). Dos teléfonos con Número GUARDIANA contra el relé de pruebas:
 //   1. A manda una nota de voz (WAV: una mitad fuerte y otra floja) → en B, 44 barras y las primeras más altas que las últimas.
-//   2. La velocidad: 1× → 1,5× → 2× → 1×, se recuerda y se aplica al reproducir; al sonar, las barras oídas se colorean.
+//   2. Al dar ▶: ‖ al instante; al sonar, las barras oídas se colorean; sin botón de velocidad (dueño, 30 Oct 2026, 09:17).
 //   3. A manda una foto de 1200 × 800 → en los dos, el hueco de 280 × 187 antes y después de cargar; al tocarla, el visor sin
 //      cuenta atrás; al cerrarlo, la foto sigue. Tras recargar, el hueco se conserva.
 'use strict';
@@ -52,27 +52,21 @@ const media = (xs) => xs.reduce((a, b) => a + b, 0) / Math.max(1, xs.length);
   comprueba(media(hB.slice(0, 20)) > media(hB.slice(24)) * 1.8 && Math.max(...hB) >= 20, 'en B, la onda es real: la mitad fuerte más alta que la floja (' + media(hB.slice(0, 20)).toFixed(1) + ' frente a ' + media(hB.slice(24)).toFixed(1) + ')');
   comprueba(media(hA.slice(0, 20)) > media(hA.slice(24)) * 1.8, 'en A, también');
   comprueba(await B.evaluate(() => { const c = [...GuardianaCom.convs.values()].find((x) => x.numero); const m = c.mensajes.find((x) => x.tipo === 'archivo'); return !!(m && m.archivo.onda && m.archivo.onda.length > 40); }), 'la onda queda guardada con el mensaje (no se vuelve a calcular)');
-  comprueba((await texto(B, '.gc-suya .gc-voz-t')) === '0:03' && (await texto(B, '.gc-suya .gc-voz-vel')) === '1×', 'en reposo: la duración (0:03) y la velocidad 1×');
+  comprueba((await texto(B, '.gc-suya .gc-voz-t')) === '0:03' && !(await B.$('.gc-suya .gc-voz-vel')), 'en reposo: la duración (0:03), sin botón de velocidad (dueño, 09:17)');
   await foto(B, '01-B-nota');
   // la onda, centrada con el círculo de ▶ (dueño, 07:58: «a la altura del centro perfecto del círculo»)
-  const centros = (p, sel) => p.evaluate((sel) => { const c = (e) => { const r = e.getBoundingClientRect(); return r.top + r.height / 2; }; const d = document.querySelector(sel + ' .gc-voz'); return { play: c(d.querySelector('.gc-voz-play')), onda: c(d.querySelector('.gc-voz-onda')), punto: c(d.querySelector('.gc-voz-punto')), vel: c(d.querySelector('.gc-voz-vel')) }; }, sel);
-  for (const [P, sel, q] of [[B, '.gc-suya', 'B'], [A, '.gc-mia', 'A']]) { const k = await centros(P, sel); comprueba(Math.abs(k.play - k.onda) <= 1 && Math.abs(k.play - k.punto) <= 1 && Math.abs(k.play - k.vel) <= 1, q + ': la onda, la bolita y la velocidad, en el centro del círculo de ▶ (' + JSON.stringify(k) + ')'); }
-  // 2. la velocidad
-  await B.click('.gc-suya .gc-voz-vel'); await espera(200);
-  comprueba((await texto(B, '.gc-suya .gc-voz-vel')) === '1,5×' && await B.evaluate(() => document.querySelector('.gc-suya .gc-voz-vel').classList.contains('activa') && localStorage.getItem('gcom-voz-vel') === '1.5'), 'un toque: 1,5× (se recuerda)');
-  await B.click('.gc-suya .gc-voz-vel'); await espera(200);
-  comprueba((await texto(B, '.gc-suya .gc-voz-vel')) === '2×', 'otro: 2×');
+  const centros = (p, sel) => p.evaluate((sel) => { const c = (e) => { const r = e.getBoundingClientRect(); return r.top + r.height / 2; }; const d = document.querySelector(sel + ' .gc-voz'); return { play: c(d.querySelector('.gc-voz-play')), onda: c(d.querySelector('.gc-voz-onda')), punto: c(d.querySelector('.gc-voz-punto')) }; }, sel);
+  for (const [P, sel, q] of [[B, '.gc-suya', 'B'], [A, '.gc-mia', 'A']]) { const k = await centros(P, sel); comprueba(Math.abs(k.play - k.onda) <= 1 && Math.abs(k.play - k.punto) <= 1, q + ': la onda y la bolita, en el centro del círculo de ▶ (' + JSON.stringify(k) + ')'); }
+  // 2. al dar ▶
   await B.evaluate(() => { const b = document.querySelector('.gc-suya .gc-voz-play'); b.click(); window.__icono = b.querySelectorAll('svg rect').length; });
   comprueba(await B.evaluate(() => window.__icono === 2), 'al dar ▶, en el mismo toque pasa a ‖ (dos rayas verticales)');
   await espera(900);
   const sonando = await B.evaluate(() => { const d = document.querySelector('.gc-suya .gc-voz'), au = d.querySelector('audio'); return { rate: au.playbackRate, oidas: d.querySelectorAll('.gc-voz-onda i.oida').length, sonando: d.classList.contains('sonando') }; });
-  comprueba(sonando.rate === 2, 'al reproducir, va a 2× (' + sonando.rate + ')');
+  comprueba(sonando.rate === 1, 'al reproducir, a velocidad normal (' + sonando.rate + ')');
   comprueba(sonando.oidas > 0 && sonando.oidas < 44, 'mientras suena, las barras oídas se colorean (' + sonando.oidas + ' de 44)');
   await foto(B, '02-B-sonando');
-  await espera(2500);
+  await espera(3800);
   comprueba(await B.evaluate(() => !document.querySelector('.gc-suya .gc-voz-play svg rect')), 'al terminar, vuelve a ▶');
-  await B.click('.gc-suya .gc-voz-vel'); await espera(200);
-  comprueba((await texto(B, '.gc-suya .gc-voz-vel')) === '1×' && !(await B.evaluate(() => document.querySelector('.gc-suya .gc-voz-vel').classList.contains('activa'))), 'y vuelve a 1×');
   // 3. la foto
   const png = await A.evaluate(() => { const c = document.createElement('canvas'); c.width = 1200; c.height = 800; const x = c.getContext('2d'); const g = x.createLinearGradient(0, 0, 1200, 800); g.addColorStop(0, '#1E3A58'); g.addColorStop(1, '#9CC3E4'); x.fillStyle = g; x.fillRect(0, 0, 1200, 800); x.fillStyle = '#fff'; x.font = 'bold 120px sans-serif'; x.fillText('GUARDIANA', 150, 440); return c.toDataURL('image/png').split(',')[1]; });
   await A.setInputFiles('#archivo', { name: 'foto.png', mimeType: 'image/png', buffer: Buffer.from(png, 'base64') }); await espera(6000);

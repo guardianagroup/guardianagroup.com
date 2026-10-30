@@ -1474,7 +1474,9 @@
   let iceUsado = '';
   const iceCercano = () => {
     const prin = R ? (R.latenciaMin != null ? R.latenciaMin : R.latencia) : null;
-    if (iceAm && iceAm.caduca * 1000 > Date.now() + 120000 && prin != null && iceAm.ms + 25 < prin) { iceUsado = 'am'; return iceAm.ice; }
+    // por el puente de Rusia, siempre el relé principal a través del puente (Miami iría directo, por la ruta que se corta)
+    const porPuente = R && window.GuardianaRele && R.url === GuardianaRele.PUENTE_RU;
+    if (!porPuente && iceAm && iceAm.caduca * 1000 > Date.now() + 120000 && prin != null && iceAm.ms + 25 < prin) { iceUsado = 'am'; return iceAm.ice; }
     iceUsado = LOCAL || (window.GuardianaRele && GuardianaRele.PROPIO) ? '' : 'eu';
     return R ? R.ice : [];
   };
@@ -2755,10 +2757,6 @@
     }
     ONDA_CACHE.set(m.id, vals); return vals;
   }
-  // la velocidad de las notas (1× · 1,5× · 2×), la misma para todas, como en WhatsApp; se recuerda en este equipo
-  const VELS = [1, 1.5, 2];
-  const velVoz = () => { try { const v = +localStorage.getItem('gcom-voz-vel'); return VELS.includes(v) ? v : 1; } catch (_) { return 1; } };
-  const textoVel = (v) => (v === 1.5 ? (/^en/.test(LOC()) ? '1.5' : '1,5') : String(v)) + '×';
   function reproductorVoz(m, blob) {
     const d = document.createElement('div'); d.className = 'gc-voz'; d.style.gridColumn = '1 / -1';
     const au = document.createElement('audio'); au.preload = 'auto'; au.src = URL.createObjectURL(blob); au.setAttribute('aria-hidden', 'true'); try { au.load(); } catch (_) {} // cargada desde el principio: en el iPhone, el primer toque ya suena (dueño, 29 Oct 2026, 12:41 y 12:51)
@@ -2774,11 +2772,7 @@
     const pintaOnda = (vals) => { for (let i = 0; i < ONDA_N; i++) { const v = vals ? vals[i] / 255 : 0.3; barras[i].style.height = Math.max(3, Math.round(3 + v * 21)) + 'px'; } };
     pintaOnda(null); ondaDe(m, blob).then((vals) => { if (vals) pintaOnda(vals); });
     let ultimoK = -1;
-    const vel = document.createElement('button'); vel.type = 'button'; vel.className = 'gc-voz-vel'; vel.setAttribute('aria-label', T('Velocidad'));
-    const pintaVel = () => { const v = velVoz(); vel.textContent = textoVel(v); vel.classList.toggle('activa', v !== 1); try { au.defaultPlaybackRate = v; au.playbackRate = v; } catch (_) {} };
-    vel.addEventListener('click', () => { const v = VELS[(VELS.indexOf(velVoz()) + 1) % VELS.length]; try { localStorage.setItem('gcom-voz-vel', String(v)); } catch (_) {} document.dispatchEvent(new CustomEvent('gcom-voz-vel')); });
-    document.addEventListener('gcom-voz-vel', pintaVel); pintaVel();
-    au.addEventListener('play', () => { try { au.playbackRate = velVoz(); } catch (_) {} }); // al volver a poner la fuente, el navegador la deja en 1×
+    // sin botón de velocidad (dueño, 30 Oct 2026, 09:17: «elimina… el aceleramiento de los audios… quítalo»): siempre a 1×
     const t = document.createElement('span'); t.className = 'gc-voz-t';
     let dur = m.archivo && Number.isFinite(m.archivo.dur) ? m.archivo.dur : 0, raf = 0;
     const total = () => (Number.isFinite(au.duration) && au.duration > 0 ? au.duration : dur);
@@ -2845,7 +2839,7 @@
     barra.addEventListener('pointermove', (e) => { if (arrastra) salta(e); });
     for (const ev of ['pointerup', 'pointercancel']) barra.addEventListener(ev, () => { arrastra = false; });
     barra.addEventListener('keydown', (e) => { const tot = total(); if (!tot) return; if (e.key === 'ArrowRight') { au.currentTime = Math.min(tot, au.currentTime + 5); pos = leida = au.currentTime; pinta(); } if (e.key === 'ArrowLeft') { au.currentTime = Math.max(0, au.currentTime - 5); pos = leida = au.currentTime; pinta(); } });
-    pinta(); d.append(au, b, barra, t, vel);
+    pinta(); d.append(au, b, barra, t);
     // la bolita se coloca con el ancho real de la barra: al entrar en la página y si cambia el tamaño
     try { new ResizeObserver(() => pinta()).observe(barra); } catch (_) {}
     return d;

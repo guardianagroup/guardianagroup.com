@@ -1910,20 +1910,14 @@ body.con-pestanas #marcar .mi-numero-n{font-size:26px}
 .gc-mia .gc-voz-onda i{background:rgba(244,246,248,.3)}
 .gc-mia .gc-voz-onda i.oida{background:#F4F6F8}
 .gc-voz-t{min-width:34px}
-.gc-voz-vel{all:unset;cursor:pointer;flex:none;min-width:26px;height:22px;padding:0 6px;border-radius:11px;background:rgba(255,255,255,.08);color:var(--g-texto-2,#A3AEBA);font:600 11.5px/22px var(--texto);text-align:center;font-variant-numeric:tabular-nums;-webkit-tap-highlight-color:transparent}
-.gc-voz-vel:active{opacity:.6}
-.gc-voz-vel.activa{background:var(--g-acento,#9CC3E4);color:#06080C}
-.gc-mia .gc-voz-vel{background:rgba(244,246,248,.14);color:#DBE9F4}
-.gc-mia .gc-voz-vel.activa{background:#F4F6F8;color:#0C1118}
 @media (max-width:760px){.gc-archivo-voz .gc-voz{width:min(72vw,300px)}}
 
 /* La nota de voz, como en WhatsApp: el círculo de ▶ y la onda en la misma fila, con el centro de la onda en el centro exacto del
    círculo (dueño, 30 Oct 2026, 07:58); la duración debajo de la onda; la velocidad a la derecha; la hora, abajo a la derecha */
-.gc-burbuja-voz .gc-voz{grid-template-columns:40px minmax(0,1fr) auto;grid-template-rows:40px 16px;column-gap:10px;align-items:center}
+.gc-burbuja-voz .gc-voz{grid-template-columns:40px minmax(0,1fr);grid-template-rows:40px 16px;column-gap:10px;align-items:center}
 .gc-burbuja-voz .gc-voz-play{grid-column:1;grid-row:1;align-self:center}
 .gc-burbuja-voz .gc-voz-barra{grid-column:2;grid-row:1;align-self:center;height:28px}
-.gc-burbuja-voz .gc-voz-vel{grid-column:3;grid-row:1;align-self:center}
-.gc-burbuja-voz .gc-voz-t{grid-column:2/4;grid-row:2;align-self:start;padding-right:72px}
+.gc-burbuja-voz .gc-voz-t{grid-column:2;grid-row:2;align-self:start;padding-right:72px}
 /* la flechita del menú en el PC: solo con ratón, al pasar por la burbuja */
 .gc-mas-msg{display:none}
 @media (hover:hover) and (pointer:fine){
@@ -1999,3 +1993,11 @@ body.con-pestanas #marcar .marcar-llamar:not(:disabled):active{transform:scale(.
 body.con-pestanas #marcar .marcar-llamar:disabled{opacity:.32}
 body.con-pestanas #marcar .marcar-llamar svg{width:30px!important;height:30px!important;fill:currentColor!important;stroke:none!important}
 body.con-pestanas #marcar .marcar-llamar span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+/* videollamada en el PC (dueño, 30 Oct 2026, 09:21: «yo me veo en una esquina… hay dos botones y se ve muy lioso»): tu imagen
+   pequeña, limpia; el botón de tamaño y el asa solo aparecen al pasar el ratón por la llamada y se van cuando el ratón se queda quieto */
+@media (hover:hover) and (pointer:fine){
+  .gc-llamada .mi-tam-boton,.gc-llamada .videos .mi-asa{transition:opacity .2s}
+  .gc-llamada:not(:hover) .mi-tam-boton,.gc-llamada:not(:hover) .videos .mi-asa,.gc-llamada.con-video.reposo .mi-tam-boton{opacity:0!important;pointer-events:none}
+  .gc-llamada .mi-tam-boton{width:32px;height:32px;opacity:.85;border-color:rgba(218,236,250,.18)}
+  .gc-llamada .mi-tam-boton svg{width:16px;height:16px}
+}

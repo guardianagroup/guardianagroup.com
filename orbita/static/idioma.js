@@ -3889,7 +3889,7 @@
       const st = localStorage.getItem('guardiana-lang'), ch = localStorage.getItem('guardiana-lang-chosen');
       if (ch && IDIOMAS.includes(st)) return st;
       const navs = (navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || '']).map((x) => String(x).toLowerCase());
-      const nav = navs.map((x) => (x.startsWith('zh') && /tw|hk|hant/.test(x) ? 'zh-tw' : x === 'pt-pt' ? 'pt-pt' : x.slice(0, 2))).find((x) => IDIOMAS.includes(x));
+      const nav = navs.map((x) => (x.startsWith('zh') && /tw|hk|hant/.test(x) ? 'zh-tw' : x === 'pt-pt' ? 'pt-pt' : x.split('-')[0] === 'fil' || x === 'tl' || x.startsWith('tl-') ? 'fil' : /^(no|nn)(-|$)/.test(x) ? 'nb' : /^iw(-|$)/.test(x) ? 'he' : x.split('-')[0])).find((x) => IDIOMAS.includes(x)); // el código entero antes del guion: «fil-PH» es filipino, no finés (30 Oct 2026)
       return nav || 'en';
     } catch (_) { return 'es'; }
   }
