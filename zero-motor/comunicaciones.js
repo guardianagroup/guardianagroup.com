@@ -53,6 +53,7 @@ class Rele {
     this.turnHost = o.turnHost || '';
     this.turnSecreto = o.turnSecreto || '';
     this.turnPuerto = o.turnPuerto || 3478;
+    this.turnPuertoTls = o.turnPuertoTls || +(process.env.TURN_PUERTO_TLS || 5349);
     this.region = o.region || '';
     this.salas = new Map();       // id hex → Map(yo hex → cliente)
     this.conexiones = new Set();
@@ -76,11 +77,13 @@ class Rele {
 
   compruebaCoturn() {
     const { execFile } = require('child_process');
-    const r = { activo: false, escucha: false, visto: new Date().toISOString() };
+    const r = { activo: false, escucha: false, tls: !!(this.coturn && this.coturn.tls), visto: new Date().toISOString() };
     execFile('systemctl', ['is-active', 'coturn'], { timeout: 4000 }, (e, out) => {
       r.activo = String(out || '').trim() === 'active';
       execFile('ss', ['-Hlnu', 'sport = :' + this.turnPuerto], { timeout: 4000 }, (e2, out2) => {
         r.escucha = /:(\d+)/.test(String(out2 || ''));
+        // la ruta TLS (5349/tcp): solo se ofrece si coturn la tiene abierta
+        execFile('ss', ['-Hlnt', 'sport = :' + this.turnPuertoTls], { timeout: 4000 }, (e3, out3) => { r.tls = /:(\d+)/.test(String(out3 || '')); });
         // si no está activo, la última línea útil del registro de instalación o de estado (sin direcciones)
         if (!r.activo) { try { const fs = require('fs'); for (const f of ['/var/log/guardiana-coturn-estado.log', '/var/log/guardiana-coturn-instalacion.log']) { if (fs.existsSync(f)) { const l = fs.readFileSync(f, 'utf8').trim().split('\n').filter(Boolean); r.nota = (r.nota ? r.nota + ' | ' : '') + f.replace(/.*guardiana-coturn-/, '') + ': ' + l.slice(-2).join(' / ').slice(0, 300); } } } catch (_) {} }
         this.coturn = r;
@@ -95,7 +98,11 @@ class Rele {
     const username = caduca + ':' + crypto.randomBytes(4).toString('hex');
     const credential = crypto.createHmac('sha1', this.turnSecreto).update(username).digest('base64');
     const h = this.turnHost + ':' + this.turnPuerto;
-    return { ice: [{ urls: ['turn:' + h + '?transport=udp', 'turn:' + h + '?transport=tcp'], username, credential }], caduca };
+    const urls = ['turn:' + h + '?transport=udp', 'turn:' + h + '?transport=tcp'];
+    // TURN dentro de TLS (dueño, 30 Oct 2026, 09:10: desde Rusia el chat va y la videollamada no): para las redes que reconocen
+    // y cortan el tráfico de las llamadas, la misma llamada viaja como una conexión cifrada más hacia este servidor
+    if (this.coturn.tls) urls.push('turns:' + this.turnHost + ':' + this.turnPuertoTls + '?transport=tcp');
+    return { ice: [{ urls, username, credential }], caduca };
   }
 
   // ip: solo para los límites de abuso del número, resumida con una clave de este arranque (numeros.js); no se guarda

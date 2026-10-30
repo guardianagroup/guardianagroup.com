@@ -789,7 +789,7 @@
         const b = await sella(c, carga); if (!b || !R.manda(c.id, c.suId, b, true)) break;
         if (vj && sesU) { vj.pq = !!sesU.pq; vj.sid = sesU.sid; vj.sesionDesde = sesU.desde; vj.tAnuncio = Date.now(); }
         if (vj) evento(vj, T('Anuncio enviado al destinatario, encriptado de extremo a extremo; se espera su confirmación.')); // antes de cualquier espera: va antes que la respuesta
-        c.cola.shift(); m.estado = 'enviado'; m.enviadoEn = Date.now(); await guardaMensaje(c, m); pintaEstado(m);
+        c.cola.shift(); m.estado = 'enviado'; m.enviadoEn = Date.now(); await guardaMensaje(c, m); pintaEstado(m); if (m.tipo === 'texto') vigilaAcuse(c, m);
         if (m.tipo === 'archivo') mandaArchivo(c, m);
       }
     } finally { c.enviando = false; }
@@ -1482,7 +1482,7 @@
   const puedeLlamar = () => { const c = CONVS.get(ACTUAL); return !!(c && enLinea(c) && c.sesion && c.sesion.confirmada && puedeEnviar(c)); };
   // solo en local (pruebas): simular un mensaje manipulado y ver la alarma sin tocar el relé
   if (LOCAL) window.gcomPruebaTemporal = { estado: () => ({ en: enTemporal(), uso: ultimoUso(), convs: [...CONVS.values()].filter((c) => c.estado !== 'destruida').map((c) => ({ id: c.id, temporal: temporalConv(c), su: c.suTemporal || 0, dije: !!c.dijeTemporal })) }), envejece: (ms) => { try { localStorage.setItem('gcom-temporal-uso', String(Date.now() - ms)); } catch (_) {} usoT = 0; }, caduca: (op) => caducaChatTemporal(op), envejeceSuyos: (ms) => { for (const c of CONVS.values()) if (c.suTemporal) { c.suVistoT = Date.now() - ms; c.ultimo = Date.now() - ms; c.suTemporal = Date.now() - ms; } }, caducaSuyos: () => caducaSuyos(true) };
-  if (LOCAL) window.gcomPrueba = { traspaso: () => ({ llave: llaveTraspaso(), conv: traspasoConvId(), ocultas: [...CONVS.values()].filter((c) => c.traspasoDe && !c.huella).length, total: CONVS.size, vivas: vivas().length, nombres: vivas().map((c) => nombreConv(c, true)) }), avisos: () => ({ firma: avisosFirma, ultimo: ultimoAvisos, despierta: ultimoDespierta, sw: !!swReg, puede: puedePush(), permiso: permisoAvisos() }), activa: () => activaAvisos(), incidencia: async (id) => { const c = CONVS.get(id || ACTUAL); if (!c) return; c.incidencias = (c.incidencias || 0) + 1; await anotaSistema(c, 'Un mensaje no superó la comprobación de integridad y se ha descartado.'); vigila(c, T('Un mensaje no superó la autenticación: descartado.'), 'mal'); return alarmaSiToca(c); }, conv: () => CONVS.get(ACTUAL), corta: () => R.corta(), llamada: () => (LL ? LL.estado : ''), enlace: () => { const c = CONVS.get(ACTUAL); return c && c.semilla ? enlaceB(c) : null; }, cuantas: () => [...CONVS.values()].filter((x) => x.estado !== 'destruida' && x.estado !== 'destruida_pendiente').length };
+  if (LOCAL) window.gcomPrueba = { ponNombre: async (sala, n) => { const c = CONVS.get(sala); if (!c) return false; c.alias = n; await guardaConv(c); pintaLista(); return true; }, abre: (sala) => abreConv(sala), traspaso: () => ({ llave: llaveTraspaso(), conv: traspasoConvId(), ocultas: [...CONVS.values()].filter((c) => c.traspasoDe && !c.huella).length, total: CONVS.size, vivas: vivas().length, nombres: vivas().map((c) => nombreConv(c, true)) }), avisos: () => ({ firma: avisosFirma, ultimo: ultimoAvisos, despierta: ultimoDespierta, sw: !!swReg, puede: puedePush(), permiso: permisoAvisos() }), activa: () => activaAvisos(), incidencia: async (id) => { const c = CONVS.get(id || ACTUAL); if (!c) return; c.incidencias = (c.incidencias || 0) + 1; await anotaSistema(c, 'Un mensaje no superó la comprobación de integridad y se ha descartado.'); vigila(c, T('Un mensaje no superó la autenticación: descartado.'), 'mal'); return alarmaSiToca(c); }, conv: () => CONVS.get(ACTUAL), corta: () => R.corta(), llamada: () => (LL ? LL.estado : ''), enlace: () => { const c = CONVS.get(ACTUAL); return c && c.semilla ? enlaceB(c) : null; }, cuantas: () => [...CONVS.values()].filter((x) => x.estado !== 'destruida' && x.estado !== 'destruida_pendiente').length };
   function arrancaLlamadas() {
     if (!window.GuardianaLlamada || !window.RTCPeerConnection) { for (const id of ['#llamar', '#videollamar']) { const b = $(id); if (b) b.hidden = true; } return; }
     if (!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia)) { const b = $('#videollamar'); if (b) b.hidden = true; }
@@ -3264,6 +3264,9 @@
   // alguien escribe o llama a una sala en la que este equipo no está, el relé le manda un aviso mínimo y cifrado («mensaje» o
   // «llamada»); el service worker (sw.js) lo enseña. En el iPhone y el iPad solo funciona con GUARDIANA en la pantalla de inicio.
   const SW_URL = '/orbita/comunicaciones/sw.js';
+  // los avisos del teléfono, en el idioma elegido en la app (no en el del sistema): el service worker lo lee de aquí
+  const idiomaParaAvisos = () => { try { const l = (window.GuardianaIdioma && GuardianaIdioma.lang) || 'es'; if (window.caches) caches.open('gcom-ajustes').then((c) => c.put('/orbita/comunicaciones/__idioma', new Response(String(l)))).catch(() => {}); } catch (_) {} };
+  idiomaParaAvisos(); addEventListener('guardiana-idioma', idiomaParaAvisos);
   let swReg = null, avisosFirma = '', avisosSync = null, ultimoAvisos = null, ultimoDespierta = null;
   const puedePush = () => { try { return 'serviceWorker' in navigator && 'PushManager' in window && 'Notification' in window && window.isSecureContext && (!/iPhone|iPad|iPod/.test(navigator.userAgent || '') || comoApp()); } catch (_) { return false; } };
   let swProm = null;
@@ -3359,6 +3362,12 @@
     // (23:47: «a mi mujer le están llegando notificaciones, pero a mí no»: con su app en segundo plano y aún conectada, no se avisaba)
     const ahora = Date.now(); if (tipo === 'mensaje' && c.despertadoEn && ahora - c.despertadoEn < 2500) return false;
     c.despertadoEn = ahora; const ok = R.despiertaA(c.id, tipo); if (ok && tipo === 'llamada') c.avisoLlamadaEn = ahora; return ok;
+  }
+  // el teléfono de la otra persona puede quedarse congelado con la conexión abierta (pantalla bloqueada sin que la app llegue a
+  // decir «fuera»): el relé le entrega el mensaje, pero nadie lo ve. Si a los 4 s no hay acuse, se le avisa en su teléfono igual
+  // (dueño, 30 Oct 2026, 08:27: «máxima precisión»). Si en realidad lo estaba viendo, su app retira el aviso al leerlo.
+  function vigilaAcuse(c, m) {
+    setTimeout(() => { if (m.estado !== 'enviado' || m.porBuzon || !CONVS.has(c.id)) return; if (despierta(c, 'mensaje', true)) m.avisadoSinAcuse = 1; }, 4000);
   }
   // llamar a quien no está conectado: se le avisa y la llamada empieza en cuanto abra GUARDIANA (hasta 45 s)
   function despiertaLlamada(c, video) {

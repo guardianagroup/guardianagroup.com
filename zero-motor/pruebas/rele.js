@@ -11,7 +11,14 @@ const { Rele } = require('../comunicaciones');
 
 const PUERTO = +process.argv[2] || 8794;
 const RELE = new Rele({ turnHost: process.env.TURN_HOST || '', turnSecreto: process.env.TURN_SECRETO || '', turnPuerto: +(process.env.TURN_PUERTO || 3478), region: 'pruebas' });
+// los avisos que manda el relé (las pruebas los leen en /avisos; /avisos?borra=1 los vacía)
+const AVISOS = [];
+if (RELE.avisos) RELE.avisos.alAvisar = (x) => { AVISOS.push(x); if (AVISOS.length > 500) AVISOS.shift(); };
 const srv = http.createServer((req, res) => {
+  if (req.url.startsWith('/avisos')) {
+    const cab = { 'content-type': 'application/json', 'cache-control': 'no-store', 'access-control-allow-origin': '*' };
+    res.writeHead(200, cab); res.end(JSON.stringify(AVISOS)); if (/borra=1/.test(req.url)) AVISOS.length = 0; return;
+  }
   if (req.url === '/salud') {
     const cab = { 'content-type': 'application/json', 'cache-control': 'no-store', 'access-control-allow-origin': req.headers.origin || '*' };
     res.writeHead(200, cab); return res.end(JSON.stringify({ ok: true, version: 'pruebas', region: 'pruebas', com: RELE.estado() }));

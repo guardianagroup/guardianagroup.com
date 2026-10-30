@@ -7,7 +7,7 @@
    Número GUARDIANA (29 Oct 2026): «contacto» llega al buzón de tu número cuando alguien a quien añadiste también te ha añadido;
    no dice quién: la app lo sabe al abrirse. */
 'use strict';
-const VERSION = 'gcom-sw-2026-10-29h';
+const VERSION = 'gcom-sw-2026-10-30a';
 self.addEventListener('install', () => { self.skipWaiting(); });
 self.addEventListener('activate', (e) => { e.waitUntil(self.clients.claim()); });
 
@@ -52,14 +52,42 @@ const CONTACTO = {
   ru: ['Новый контакт', 'GUARDIANA · человек, которого вы добавили, тоже добавил ваш номер: нажмите, чтобы поговорить.'],
   cs: ['Nový kontakt', 'GUARDIANA · někdo, koho jste přidali, si také přidal vaše číslo: klepněte a mluvte.'],
 };
-const textos = () => { let l = 'en'; try { l = String((self.navigator && self.navigator.language) || 'en').slice(0, 2).toLowerCase(); } catch (_) {} const t = TEXTOS[l] || TEXTOS.en; const k = CONTACTO[l] || CONTACTO.en; return Object.assign({}, t.fin ? t : Object.assign({}, t, { fin: TEXTOS.en.fin, finCuerpo: TEXTOS.en.finCuerpo }), { contacto: k[0], contactoCuerpo: k[1] }); };
+const textos = () => { const l = idiomaSW(); const t = TEXTOS[l] || TEXTOS.en; const k = CONTACTO[l] || CONTACTO.en; return Object.assign({}, t.fin ? t : Object.assign({}, t, { fin: TEXTOS.en.fin, finCuerpo: TEXTOS.en.finCuerpo }), { contacto: k[0], contactoCuerpo: k[1] }); };
 const salaOk = (s) => typeof s === 'string' && /^[0-9a-f]{64}$/.test(s);
+// el nombre de esa conversación, tal como lo guardaste en este teléfono (dueño, 30 Oct 2026, 08:27: «máxima precisión y detalle»).
+// El aviso cifrado no lo trae (el servidor no lo sabe): se lee aquí, del almacén de la app; si no hay, el aviso va sin nombre
+const bonito = (n) => String(n || '').replace(/(\d{3})(?=\d)/g, '$1-');
+async function nombreDe(sala) {
+  if (!sala) return '';
+  try {
+    const db = await new Promise((res, rej) => { const r = indexedDB.open('guardiana-com'); r.onupgradeneeded = () => { try { r.transaction.abort(); } catch (_) {} }; r.onsuccess = () => res(r.result); r.onerror = () => rej(r.error); r.onblocked = () => rej(new Error('bloqueada')); });
+    try {
+      if (!db.objectStoreNames.contains('conv')) return '';
+      const c = await new Promise((res) => { try { const q = db.transaction('conv', 'readonly').objectStore('conv').get(sala); q.onsuccess = () => res(q.result || null); q.onerror = () => res(null); } catch (_) { res(null); } });
+      if (!c || c.tumba) return '';
+      return String(c.alias || c.nombre || (c.numero ? bonito(c.numero) : '')).trim().slice(0, 40);
+    } finally { try { db.close(); } catch (_) {} }
+  } catch (_) { return ''; }
+}
+// con nombre: el título es el nombre y el cuerpo, lo que pasa; en los idiomas de la app (en los demás, en inglés)
+const CON_NOMBRE = {
+  es: { mensaje: 'Mensaje nuevo', llamada: 'Te está llamando', fin: 'Llamada perdida' },
+  en: { mensaje: 'New message', llamada: 'Calling you', fin: 'Missed call' },
+  pt: { mensaje: 'Mensagem nova', llamada: 'Está ligando para você', fin: 'Chamada perdida' },
+  ru: { mensaje: 'Новое сообщение', llamada: 'Звонит вам', fin: 'Пропущенный звонок' },
+  cs: { mensaje: 'Nová zpráva', llamada: 'Volá vám', fin: 'Zmeškaný hovor' },
+};
+// el idioma elegido en la app (la app lo deja en la caché «gcom-ajustes»); si no, el del teléfono
+let IDIOMA = '';
+const idiomaSW = () => IDIOMA || (() => { try { return String((self.navigator && self.navigator.language) || 'en').slice(0, 2).toLowerCase(); } catch (_) { return 'en'; } })();
+async function leeIdioma() { try { const r = await caches.match('/orbita/comunicaciones/__idioma', { cacheName: 'gcom-ajustes' }); if (r) { const l = (await r.text()).trim().toLowerCase(); if (/^[a-z]{2,3}(-[a-z]{2})?$/.test(l)) IDIOMA = l.slice(0, 2); } } catch (_) {} }
+const conNombre = (l) => CON_NOMBRE[l] || (TEXTOS[l] ? { mensaje: TEXTOS[l].mensaje, llamada: TEXTOS[l].llamada, fin: TEXTOS[l].fin || CON_NOMBRE.en.fin } : CON_NOMBRE.en);
 
 self.addEventListener('push', (e) => {
   let d = {}; try { d = e.data ? e.data.json() : {}; } catch (_) { d = {}; }
   const tipo = d.tipo === 'llamada' ? 'llamada' : d.tipo === 'fin' ? 'fin' : d.tipo === 'contacto' ? 'contacto' : 'mensaje', sala = salaOk(d.sala) ? d.sala : '';
-  const t = textos();
   e.waitUntil((async () => {
+    await leeIdioma(); const t = textos();
     // «contacto»: alguien a quien añadiste también te ha añadido; al tocarlo, la app se abre y abre el chat
     if (tipo === 'contacto') {
       const cs1 = await self.clients.matchAll({ type: 'window', includeUncontrolled: true });
@@ -71,7 +99,8 @@ self.addEventListener('push', (e) => {
     // «fin»: quien llamaba se cansó de esperar o canceló; el aviso «Te están llamando» se retira y en su lugar, «Llamada perdida»
     if (tipo === 'fin') {
       try { const ns = await self.registration.getNotifications({ tag: 'gcom-llamada-' + sala.slice(0, 16) }); for (const n of ns) n.close(); } catch (_) {}
-      await self.registration.showNotification(t.fin, { body: t.finCuerpo, icon: '/icon-192.png?v=2', badge: '/icon-192.png?v=2', tag: 'gcom-perdida-' + sala.slice(0, 16), vibrate: [120], timestamp: Number(d.t) || Date.now(), data: { sala, tipo: 'fin' } });
+      const nf = await nombreDe(sala), cf = conNombre(idiomaSW());
+      await self.registration.showNotification(nf || t.fin, { body: nf ? cf.fin : t.finCuerpo, icon: '/icon-192.png?v=2', badge: '/icon-192.png?v=2', tag: 'gcom-perdida-' + sala.slice(0, 16), vibrate: [120], timestamp: Number(d.t) || Date.now(), data: { sala, tipo: 'fin' } });
       const cs0 = await self.clients.matchAll({ type: 'window', includeUncontrolled: true });
       if (!cs0.some((c) => c.visibilityState === 'visible')) await insignia();
       return;
@@ -89,10 +118,16 @@ self.addEventListener('push', (e) => {
       data: { sala, tipo },
     };
     // el aviso de esa conversación se sustituye por uno que cuenta: 1, 2, 3… (cada uno vuelve a sonar)
-    let n = 1;
-    if (tipo === 'mensaje') { try { for (const x of await self.registration.getNotifications({ tag: op.tag })) n = Math.max(n, (((x.data || {}).n) | 0) + 1); } catch (_) {} op.data.n = n; }
-    let l = 'en'; try { l = String((self.navigator && self.navigator.language) || 'en').slice(0, 2).toLowerCase(); } catch (_) {}
-    const titulo = tipo === 'llamada' ? t.llamada : n > 1 ? (MENSAJES[l] || MENSAJES.en).replace('{n}', n) : t.mensaje;
+    // un aviso puede traer varios mensajes juntos (n): los que llegaron mientras el relé esperaba para no repetir el sonido
+    const suma = Math.max(1, Math.min(99, (Number(d.n) | 0) || 1));
+    let n = suma;
+    if (tipo === 'mensaje') { try { for (const x of await self.registration.getNotifications({ tag: op.tag })) n = Math.max(n, (((x.data || {}).n) | 0) + suma); } catch (_) {} op.data.n = n; }
+    const l = idiomaSW(), cuantos = n > 1 ? (MENSAJES[l] || MENSAJES.en).replace('{n}', n) : '';
+    const nombre = await nombreDe(sala), cn = conNombre(l);
+    let titulo;
+    if (nombre) { titulo = nombre; op.body = tipo === 'llamada' ? cn.llamada : (cuantos || cn.mensaje); }
+    else titulo = tipo === 'llamada' ? t.llamada : (cuantos || t.mensaje);
+    for (const c of cs) { try { c.postMessage({ t: 'aviso-texto', titulo, cuerpo: op.body, n }); } catch (_) {} } // lo que dice el aviso, a la propia app (no sale de aquí)
     await self.registration.showNotification(titulo, op);
     if (!aLaVista) await insignia();
   })());

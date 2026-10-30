@@ -209,6 +209,10 @@ if command -v turnserver >/dev/null 2>&1; then
   cat > /etc/turnserver.conf <<EOF
 # GUARDIANA · Comunicaciones · relé de llamadas. Generado por zero-motor/instalar.sh (se reescribe al reinstalar).
 listening-port=3478
+# 30 Oct 2026: también dentro de TLS (turns:, 5349/tcp), con el certificado de la web; para las redes que cortan las llamadas
+tls-listening-port=5349
+cert=/etc/coturn/tls/cert.pem
+pkey=/etc/coturn/tls/key.pem
 fingerprint
 use-auth-secret
 static-auth-secret=$TURN_SECRETO
@@ -247,14 +251,56 @@ denied-peer-ip=fc00::-fdff:ffff:ffff:ffff:ffff:ffff:ffff:ffff
 denied-peer-ip=fe80::-febf:ffff:ffff:ffff:ffff:ffff:ffff:ffff
 EOF
   chmod 640 /etc/turnserver.conf; chown root:turnserver /etc/turnserver.conf 2>/dev/null || true
+  # el certificado de la web (lo saca y renueva Caddy) se copia para coturn; a diario, por si se ha renovado
+  cat > "$BASE/coturn-certificado.sh" <<'CERT'
+#!/usr/bin/env bash
+# Copia a /etc/coturn/tls el certificado que Caddy tiene para el dominio del motor; reinicia coturn solo si ha cambiado.
+set -e
+D=$(cat /etc/guardiana/dominio 2>/dev/null || echo motor.guardianagroup.com)
+C=$(ls -1t /var/lib/caddy/.local/share/caddy/certificates/*/"$D"/"$D".crt 2>/dev/null | head -1)
+[ -n "$C" ] || { echo "sin certificado de Caddy para $D todavía"; exit 0; }
+K="${C%.crt}.key"
+mkdir -p /etc/coturn/tls
+if ! cmp -s "$C" /etc/coturn/tls/cert.pem || ! cmp -s "$K" /etc/coturn/tls/key.pem; then
+  install -m 644 "$C" /etc/coturn/tls/cert.pem
+  install -m 640 "$K" /etc/coturn/tls/key.pem
+  chown root:turnserver /etc/coturn/tls/key.pem 2>/dev/null || true
+  systemctl restart coturn 2>/dev/null || true
+  echo "certificado de coturn al día"
+fi
+CERT
+  chmod 755 "$BASE/coturn-certificado.sh"
+  cat > /etc/systemd/system/guardiana-coturn-certificado.service <<EOF
+[Unit]
+Description=GUARDIANA · certificado TLS para el relé de llamadas (coturn)
+After=caddy.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/bash $BASE/coturn-certificado.sh
+EOF
+  cat > /etc/systemd/system/guardiana-coturn-certificado.timer <<EOF
+[Unit]
+Description=GUARDIANA · certificado de coturn, cada día
+
+[Timer]
+OnBootSec=3min
+OnUnitActiveSec=1d
+
+[Install]
+WantedBy=timers.target
+EOF
+  systemctl daemon-reload
+  systemctl enable -q --now guardiana-coturn-certificado.timer 2>/dev/null || true
+  bash "$BASE/coturn-certificado.sh" || true
   if [ -f /etc/default/coturn ]; then sed -i 's/^#\?TURNSERVER_ENABLED=.*/TURNSERVER_ENABLED=1/' /etc/default/coturn; grep -q '^TURNSERVER_ENABLED=1' /etc/default/coturn || echo 'TURNSERVER_ENABLED=1' >> /etc/default/coturn; fi
   systemctl enable -q coturn 2>/dev/null || true
   systemctl restart coturn || rojo "  coturn no arranca: journalctl -u coturn -n 30 (el relé sigue, sin llamadas)"
   sleep 2; { systemctl is-active coturn; systemctl status coturn --no-pager -n 15 2>&1 | sed -E 's/[0-9]{1,3}(\.[0-9]{1,3}){3}/IP/g'; } > /var/log/guardiana-coturn-estado.log 2>&1 || true; chmod 644 /var/log/guardiana-coturn-estado.log 2>/dev/null || true
   if command -v ufw >/dev/null && ufw status | grep -q '^Status: active'; then
-    ufw allow 3478/tcp >/dev/null; ufw allow 3478/udp >/dev/null; ufw allow 49160:49999/udp >/dev/null
+    ufw allow 3478/tcp >/dev/null; ufw allow 3478/udp >/dev/null; ufw allow 5349/tcp >/dev/null; ufw allow 49160:49999/udp >/dev/null
   fi
-  echo "  coturn en $DOMINIO:3478 (udp y tcp), relé 49160–49999/udp"
+  echo "  coturn en $DOMINIO:3478 (udp y tcp) y :5349 (tls), relé 49160–49999/udp"
 else
   rojo "  coturn no se pudo instalar: Comunicaciones funcionará sin llamadas"
 fi

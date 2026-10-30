@@ -33,6 +33,7 @@ class Avisos {
     this.subs = new Map();      // endpoint → { endpoint, p256dh, auth, salas: Set, id, creado, usado }
     this.porSala = new Map();   // sala → Set(endpoint)
     this.ultimos = new Map();   // endpoint + '|' + sala + '|' + tipo → cuándo se avisó
+    this.pendientes = new Map(); // mensajes llegados durante el silencio: se mandan juntos al acabar, con cuántos son (n)
     this.guardando = null; this.pendienteGuardar = false;
     try { fs.mkdirSync(this.dir, { recursive: true, mode: 0o700 }); } catch (e) { console.error('avisos: sin carpeta', this.dir, e.message); }
     this.claves = this.cargaClaves();
@@ -127,12 +128,31 @@ class Avisos {
     for (const endpoint of c) {
       const s = this.subs.get(endpoint); if (!s || (excepto && s.id === excepto)) continue;
       const k = endpoint + '|' + sala + '|' + tipo, ahora = Date.now();
-      if (this.ultimos.get(k) && ahora - this.ultimos.get(k) < (tipo === 'mensaje' ? SILENCIO_MENSAJE_MS : SILENCIO_MS)) { sil++; continue; }
+      if (this.ultimos.get(k) && ahora - this.ultimos.get(k) < (tipo === 'mensaje' ? SILENCIO_MENSAJE_MS : SILENCIO_MS)) {
+        // los mensajes que llegan durante el silencio no se pierden: al acabar sale un aviso con cuántos son (dueño, 30 Oct 2026,
+        // 08:27: «máxima precisión»; antes, con tres mensajes seguidos el teléfono decía «2 mensajes nuevos»)
+        if (tipo === 'mensaje') this.acumula(k, endpoint, sala, SILENCIO_MENSAJE_MS - (ahora - this.ultimos.get(k)));
+        sil++; continue;
+      }
       this.ultimos.set(k, ahora); n++;
+      if (this.alAvisar) { try { this.alAvisar({ tipo, sala, id: s.id, t: ahora }); } catch (_) {} } // solo el relé de pruebas lo usa
       // «fin» va con el mismo topic que «llamada»: si el aviso de la llamada aún no había llegado al teléfono, lo sustituye
       this.envia(s, JSON.stringify({ tipo, sala, t: ahora }), tipo === 'llamada' ? 40 : tipo === 'fin' ? 120 : tipo === 'contacto' ? 2 * 24 * 3600 : 900, tipo === 'llamada' ? 'high' : 'normal', sala, tipo === 'fin' ? 'llamada' : tipo).catch(() => {});
     }
     return { avisados: n, silenciados: sil };
+  }
+
+  acumula(k, endpoint, sala, falta) {
+    const p = this.pendientes.get(k) || { n: 0, t: null }; p.n++; this.pendientes.set(k, p);
+    if (p.t) return;
+    p.t = setTimeout(() => {
+      this.pendientes.delete(k);
+      const s = this.subs.get(endpoint); if (!s || !p.n) return;
+      const ahora = Date.now(); this.ultimos.set(k, ahora);
+      if (this.alAvisar) { try { this.alAvisar({ tipo: 'mensaje', sala, id: s.id, t: ahora, n: p.n }); } catch (_) {} }
+      this.envia(s, JSON.stringify({ tipo: 'mensaje', sala, t: ahora, n: p.n }), 900, 'normal', sala, 'mensaje').catch(() => {});
+    }, Math.max(50, falta + 30));
+    if (p.t.unref) p.t.unref();
   }
 
   // a una sola suscripción (la de quien tiene la app en segundo plano), con el mismo silencio entre avisos
