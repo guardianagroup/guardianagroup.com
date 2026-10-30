@@ -2,7 +2,7 @@
    aplicación»). It does only what an installed app needs: it keeps a copy of the offline page and shows it when there is
    no connection, instead of the browser's error. It records nothing about anyone, sends nothing anywhere, and leaves
    every other request to the browser as if it were not here. */
-const VERSION = 'guardiana-app-1';
+const VERSION = 'guardiana-app-2'; // 2: offline.html sin manejador en línea (CSP con hashes, 29 Oct 2026); la copia guardada se renueva
 self.addEventListener('install', (e) => {
   e.waitUntil(caches.open(VERSION).then((c) => c.add('/offline.html')).then(() => self.skipWaiting()));
 });

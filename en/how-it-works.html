@@ -20,7 +20,7 @@
 <meta name="twitter:title" content="How GUARDIANA works · GUARDIANA">
 <meta name="twitter:description" content="How GUARDIANA works: the question every device asks before it connects, the whole home, your AI, installing it and how to check everything.">
 <meta name="twitter:image" content="https://guardianagroup.com/og-2-en.png">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-hcXV/h5mFbzE5nPU/ih/fHSTM+1ewgqy6ya7zypGFcs=' 'sha256-g1Wbu0JjqD26mjgREBrf85kBte8QY2SwPrGFDOjo4hI=' 'sha256-SffYqJhdZRJTvz7I7pxv+TNNEMhOrfM1qwk76EIzW0A=' 'sha256-GRnbe5xsWeye68UtIl3Buj2pyLE2pzTNrogV8k7NGhw=' 'sha256-bU2DpsE0Cm6QLD/1DjyiujyAAM9aqMeE0fMUgE/Ul7c=' 'sha256-MlbQMR0Dfgvz3HSY6jnL/XNZWuca2148M35PnSyGzMU='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'none'">
 <meta name="theme-color" content="#06080C">
 <link rel="icon" href="/favicon.ico" sizes="32x32">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -396,7 +396,7 @@ header.top .descargar:hover{background:var(--azul-oscuro);color:#E8ECF1}header.t
 @media (max-width:700px){.panel2{padding:18px}.panel2 .cats{grid-template-columns:repeat(2,minmax(0,1fr))}.panel2 .barra{grid-template-columns:100px 1fr 50px}.panel2 .mini{display:none}}
 </style>
 </head>
-<body ontouchstart="">
+<body>
 <div class="wrap">
 <header class="top">
   <a class="marca" href="/?lang=en" aria-label="GUARDIANA"><i></i><span class="lema-marca">GUARDIANA<small>Your data, under your control</small></span></a>
@@ -503,4 +503,4 @@ header.top .descargar:hover{background:var(--azul-oscuro);color:#E8ECF1}header.t
 (function(){try{var P=window.GUARDIANA_PRICES;if(!P)return;var a=document.getElementById('plus-precio'),b=document.getElementById('plus-nota');if(a)a.textContent=P.plusEn;if(b)b.textContent=P.plusNoteEn;var h=document.getElementById('hero-precio');if(h)h.textContent='Then '+P.plusEn+' or '+P.fundEn+' once';}catch(e){}})();
 </script>
 <script>(function(){try{var K='guardiana-idioma',a=document.querySelectorAll('a[data-idioma]');for(var i=0;i<a.length;i++)a[i].addEventListener('click',function(){try{localStorage.setItem(K,this.getAttribute('data-idioma'))}catch(e){}});}catch(e){}})();</script><script>(function(){document.addEventListener("click",function(e){var d=document.querySelectorAll("details.idm[open]");for(var i=0;i<d.length;i++)if(!d[i].contains(e.target))d[i].removeAttribute("open");});document.addEventListener("keydown",function(e){if(e.key==="Escape"){var d=document.querySelector("details.idm[open]");if(d){d.removeAttribute("open");d.querySelector("summary").focus();}}});})();</script><script src="/portada/luz.js?v=20261023a" defer data-luz="main h1" data-aparece="main h2"></script>
-</body></html>
+<script>document.addEventListener('touchstart',function(){},{passive:true})</script></body></html>

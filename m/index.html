@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="script-src 'self' 'sha256-69pqhPCr+4TR0Sr3dFoKR2T5mCSMATE5NXL3ITeXpx8=' 'sha256-MlbQMR0Dfgvz3HSY6jnL/XNZWuca2148M35PnSyGzMU='; object-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover, interactive-widget=resizes-content">
 <meta name="robots" content="noindex, nofollow">
 <meta name="referrer" content="no-referrer">
@@ -231,7 +232,7 @@ main{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden}
 </style>
 <link rel="stylesheet" href="/m/componentes.css">
 </head>
-<body ontouchstart="">
+<body>
 <!-- The header (18 Oct 2026, the committee's spec): ‹, avatar 36 with the initial, the name, the
      steel trust line, call, and the 16 px shield that opens the «Escudo en directo». -->
 <header class="gc-cabecera" id="cabecera">
@@ -1519,5 +1520,5 @@ main{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden}
 </div></div>
 <div class="visor" id="visor" role="dialog" aria-modal="true"><img id="visor-img" alt=""><div class="v-barra"><button type="button" id="visor-guardar"></button><button type="button" id="visor-cerrar"></button></div><div class="v-pista" id="visor-pista"></div></div>
 <button type="button" class="oir" id="oir" hidden></button>
-</body>
+<script>document.addEventListener('touchstart',function(){},{passive:true})</script></body>
 </html>

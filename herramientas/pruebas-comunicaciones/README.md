@@ -21,3 +21,4 @@ Después, desde esta carpeta:
 - `node web.js` — la página en el ordenador y en el navegador del teléfono.
 - `node ingles.js` — textos nuevos en inglés.
 - `python3 hoja.py salida.png 360 a.png b.png …` — junta capturas en una hoja.
+- `node ../csp-comprueba.js` (desde la raíz: `node herramientas/csp-comprueba.js`) — la Content-Security-Policy de toda la web, página a página, en Chromium: cero violaciones y cero manejadores en línea. Antes, si cambió algún script escrito dentro de una página (también en m/, e/ y Comunicaciones), `python3 herramientas/csp-hashes.py` recalcula los hashes de script-src; si no, el navegador deja ese script sin ejecutar.

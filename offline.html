@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-vJIoAciRfADK/5JE+yyMYI24mEXAkiu6N39QvCSdQOc='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex">
@@ -23,9 +23,11 @@ button{appearance:none;border:0;border-radius:999px;background:#9CC3E4;color:#06
   <img src="/icon-192.png" alt="">
   <h1 id="t">Sin conexión</h1>
   <p id="d">GUARDIANA necesita internet para dibujar el planeta y medir tu conexión en directo. Cuando vuelva la conexión, toca el botón.</p>
-  <button type="button" id="b" onclick="location.reload()">Volver a intentarlo</button>
+  <button type="button" id="b">Volver a intentarlo</button>
 </main>
 <script>
+/* the button reloads the page (as a listener, not as an onclick attribute: the page's policy allows no inline handlers) */
+document.getElementById('b').addEventListener('click', function () { location.reload(); });
 /* the visitor's language when it is one of the first three of the site; the rest read the Spanish page */
 (function () { try {
   var l = (localStorage.getItem('guardiana-lang') || navigator.language || 'es').slice(0, 2);
