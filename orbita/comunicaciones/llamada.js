@@ -1118,6 +1118,7 @@
       // la clave revelada de quien llama: tiene que ser la del compromiso de la oferta; si no, la comprobación queda rota
       if (m.acto === 'sas' && sas && !inicioYo) { let p = null; try { p = typeof m.p === 'string' && m.p.length < 120 ? deB64u(m.p) : null; } catch (_) {} if (p && p.length === 65) { const h = await sha256(p); if (sas.suCompromiso && h.length === 32 && h.every((x, i) => x === sas.suCompromiso[i])) { sas.suPub = p; sasCalcula(); return; } } sas.estado = 'roto'; pintaSas(); return; }
       if (m.acto === 'camara') { suCamara = !!m.on; pintaVideo(); reenviaImagenes(); return; }
+      if (m.acto === 'pausa') { di(m.on ? t('La otra persona ha puesto la llamada en pausa.') : ''); return; }
       // pasar la llamada al teléfono: la otra persona me da la llave de la sala de su teléfono (yo añado el teléfono), me dice que
       // lo deja (cancelar), o yo le digo que su teléfono ya está dentro / ya habla (ella cuelga)
       if (m.acto === 'llevar' && typeof m.k === 'string' && /^[A-Za-z0-9_-]{43}$/.test(m.k)) { if (estado === 'hablando' && o.alLlevar) o.alLlevar(m.k); return; }
@@ -1583,6 +1584,7 @@
       suTres = false; vozSuya = null; mezclaFin(); PR = null; quitaTiles();
       const dur = iniciada ? Date.now() - iniciada : 0, era = estado, conImagen = video;
       paraTono(); clearTimeout(sinRespuesta); clearTimeout(ausenteT); ausenteT = null; ultimaOferta = null; sueltaWake(); sueltaCompleta();
+      enPausa = null; { const pz = $('#ll-pausa'); if (pz) pz.hidden = true; }
       clearInterval(reloj); reloj = null; clearInterval(sondeo); sondeo = null;
       reiniciando = false; clearTimeout(reinicioT); reinicioT = null; clearTimeout(reinicioFin); reinicioFin = null;
       if (pc) { olvidaPq(pc); try { pc.close(); } catch (_) {} pc = null; }
@@ -1613,6 +1615,28 @@
       if (o.fin && era !== 'libre') o.fin({ por, duracion: dur, mia: inicioYo, yoColgue: colgoYo, saliente: era === 'saliente' || (era === 'hablando' && colgoYo), voz: voz !== 'natural', video: conImagen });
     }
     $('#ll-colgar').addEventListener('click', colgar);
+    // El Vigía (app.js): pausa con el micrófono y la cámara parados, y la otra persona lo sabe; «Seguir» solo cuando ya no hay alerta
+    let enPausa = null;
+    function pausa(on, lineas, limpio) {
+      const caja2 = $('#ll-pausa'); if (!caja2) return;
+      if (on) {
+        if (!enPausa && estado !== 'libre') {
+          enPausa = [];
+          for (const s of [envio, mic, cam]) if (s) for (const x of s.getTracks()) { enPausa.push([x, x.enabled]); x.enabled = false; }
+          o.manda({ acto: 'pausa', id: idLlamada, on: true });
+        }
+        const l = $('#ll-pausa-l'); l.textContent = '';
+        for (const x of (lineas || []).slice(0, 6)) { const li = document.createElement('li'); li.textContent = x; l.appendChild(li); }
+        $('#ll-pausa-nota').textContent = limpio ? t('Ya no se detecta nada. Puedes seguir con la llamada.') : t('Tu micrófono y tu cámara están parados. Cierra ese programa para seguir.');
+        $('#ll-pausa-seguir').disabled = !limpio;
+        caja2.hidden = false;
+      } else {
+        if (enPausa) { for (const [x, en] of enPausa) x.enabled = en; enPausa = null; o.manda({ acto: 'pausa', id: idLlamada, on: false }); }
+        caja2.hidden = true;
+      }
+    }
+    { const b = $('#ll-pausa-seguir'); if (b) b.addEventListener('click', () => pausa(false)); }
+    { const b = $('#ll-pausa-colgar'); if (b) b.addEventListener('click', () => { pausa(false); colgar(); }); }
     // en grupo, «Cambiar vista» te pone en una columna más (con tu imagen como la de los demás) o te deja en pequeño (12:10)
     { const b = $('#ll-vista'); if (b) b.addEventListener('click', () => { if (caja.classList.contains('tres')) { caja.classList.toggle('tres-yo'); grupoFr = null; colocaTiles(video ? vistas() : []); } else alternaDividida(); pinta(); }); }
     { const b = $('#ll-anadir'); if (b) b.addEventListener('click', botonAnadir); }
@@ -2020,7 +2044,7 @@
     if (FINO.addEventListener) FINO.addEventListener('change', escala);
     escala();
     { const vlx = vidLocal(); if (vlx) { vlx.addEventListener('loadedmetadata', () => miImagen()); vlx.addEventListener('resize', () => colocaAsa()); } }
-    return { llamar, recibe, colgar, eligeVoz, seFue, volvio, anade, recibeTercero, get pq() { return pqActiva(); }, get pcPrueba() { return LOCAL ? pc : null; }, pqCuenta: () => new Promise((r) => { if (!obrero) return r(null); const f = (e) => { if (e.data && e.data.tipo === 'cuenta') { obrero.removeEventListener('message', f); r(e.data.cuenta); } }; obrero.addEventListener('message', f); obrero.postMessage({ tipo: 'cuenta' }); setTimeout(() => r(pqCuenta), 1500); }), get llevando() { return patas.some((L) => L.llevar); }, esTramo: (sala) => patas.some((L) => L.sala === String(sala)), get terceroSala() { return patas[0] ? patas[0].sala : null; }, get aTres() { return enGrupo(); }, get total() { return estado === 'hablando' ? totalGrupo() : 0; }, get puedeAnadir() { return puedeAnadir(); }, get mezclaEstado() { return mezcla ? mezcla.ctx.state : null; }, get depura() { const r = (L) => ({ clave: L.clave, n: L.n, estado: L.estado || 'principal', sabe: tsabe(L), cam: !!tcam(L), camOn: tcamOn(L), videos: [...L.videos].map(([k, v]) => k + (v.pista ? ':' + v.pista.readyState + (v.pista.muted ? ':muda' : '') : '')), quien: L.quien, reenvios: [...L.reenvios].map(([k, x]) => k + '→' + x.tr.mid + (x.tr.sender.track ? '' : ':vacio')), sig: tpc(L) ? tpc(L).signalingState : '' }); return { tramos: tramos(true).map(r), tiles: [...TILES.keys()] }; }, get estado() { return estado; }, get ocupado() { return ocupado(); }, get voz() { return voz; }, get cambioActivo() { return !!nodo; }, get video() { return video; }, get imagen() { return imagen; } };
+    return { llamar, recibe, colgar, eligeVoz, seFue, volvio, anade, recibeTercero, pausa, get enPausa() { return !!enPausa; }, get pq() { return pqActiva(); }, get pcPrueba() { return LOCAL ? pc : null; }, pqCuenta: () => new Promise((r) => { if (!obrero) return r(null); const f = (e) => { if (e.data && e.data.tipo === 'cuenta') { obrero.removeEventListener('message', f); r(e.data.cuenta); } }; obrero.addEventListener('message', f); obrero.postMessage({ tipo: 'cuenta' }); setTimeout(() => r(pqCuenta), 1500); }), get llevando() { return patas.some((L) => L.llevar); }, esTramo: (sala) => patas.some((L) => L.sala === String(sala)), get terceroSala() { return patas[0] ? patas[0].sala : null; }, get aTres() { return enGrupo(); }, get total() { return estado === 'hablando' ? totalGrupo() : 0; }, get puedeAnadir() { return puedeAnadir(); }, get mezclaEstado() { return mezcla ? mezcla.ctx.state : null; }, get depura() { const r = (L) => ({ clave: L.clave, n: L.n, estado: L.estado || 'principal', sabe: tsabe(L), cam: !!tcam(L), camOn: tcamOn(L), videos: [...L.videos].map(([k, v]) => k + (v.pista ? ':' + v.pista.readyState + (v.pista.muted ? ':muda' : '') : '')), quien: L.quien, reenvios: [...L.reenvios].map(([k, x]) => k + '→' + x.tr.mid + (x.tr.sender.track ? '' : ':vacio')), sig: tpc(L) ? tpc(L).signalingState : '' }); return { tramos: tramos(true).map(r), tiles: [...TILES.keys()] }; }, get estado() { return estado; }, get ocupado() { return ocupado(); }, get voz() { return voz; }, get cambioActivo() { return !!nodo; }, get video() { return video; }, get imagen() { return imagen; } };
   }
   raiz.GuardianaLlamada = { crea, VOCES };
 })(typeof window !== 'undefined' ? window : globalThis);

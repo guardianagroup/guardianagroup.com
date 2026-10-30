@@ -816,6 +816,12 @@
         <span class="ajuste-txt"><b>Sonido</b><small>Un pitido al recibir un mensaje con la app abierta.</small></span>
         <i class="interruptor-mini" aria-hidden="true"></i>
       </button>
+      <!-- El Vigía (programa para Windows): solo en el ordenador -->
+      <button type="button" class="ajuste" id="aj-vigia" role="switch" aria-checked="false" hidden>
+        <span class="ajuste-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 4.6-3 8.3-7 9.9-4-1.6-7-5.3-7-9.9V6z"/><path d="M9 12l2 2 4-4"/></svg></span>
+        <span class="ajuste-txt"><b>Vigía de este ordenador</b><small id="aj-vigia-est">Con el programa GUARDIANA para Windows: si otro programa usa tu micrófono, tu cámara o tu pantalla durante una llamada, la llamada se pone en pausa.</small></span>
+        <i class="interruptor-mini" aria-hidden="true"></i>
+      </button>
       <button type="button" class="ajuste" id="aj-anadir" hidden>
         <span class="ajuste-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M12 8v7M8.5 11.5h7"/></svg></span>
         <span class="ajuste-txt"><b>Añadir a la pantalla de inicio</b><small>Se abre como una app, a pantalla completa.</small></span>
@@ -956,6 +962,13 @@
     <strong class="ll-sas-num" id="ll-sas-num" translate="no">— —</strong>
     <p class="ll-sas-texto" id="ll-sas-texto"></p>
     <div class="ll-sas-botones"><button type="button" class="boton principal" id="ll-sas-si">Sí, coinciden</button><button type="button" class="boton" id="ll-sas-no">No coinciden</button></div>
+  </div>
+  <!-- El Vigía: la llamada en pausa porque algo de este ordenador puede estar escuchando o mirando -->
+  <div class="ll-pausa" id="ll-pausa" role="alertdialog" aria-labelledby="ll-pausa-t" hidden>
+    <b class="ll-pausa-t" id="ll-pausa-t">Llamada en pausa</b>
+    <ul class="ll-pausa-l" id="ll-pausa-l"></ul>
+    <p class="ll-pausa-nota" id="ll-pausa-nota">Tu micrófono y tu cámara están parados. Cierra ese programa para seguir.</p>
+    <div class="fila"><button type="button" class="boton peligro" id="ll-pausa-colgar">Colgar</button><button type="button" class="boton principal" id="ll-pausa-seguir" disabled>Seguir con la llamada</button></div>
   </div>
   <div class="gc-llamada-centro" id="ll-centro">
     <span class="gc-avatar-grande" id="ll-avatar" aria-hidden="true">·</span>

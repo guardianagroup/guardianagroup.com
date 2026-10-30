@@ -3308,6 +3308,7 @@
   let servidorDicho = false;
   function avisaLlamada(est, video) {
     if (LLEVAR && window.gcomLlevarEstado) window.gcomLlevarEstado(est);
+    vigiaLlamada(est);
     if (est === 'entrante' || est === 'conectando') { const lc = $('#llevar-cortada'); if (lc) lc.hidden = true; }
     // una llamada que entra se ve limpia: fuera cualquier aviso que hubiera (el de «Contacto guardado» tapaba «Contestar»)
     if (est === 'entrante') { const a = $('#aviso'); if (a) { a.hidden = true; clearTimeout(avisoT); } }
@@ -3405,6 +3406,7 @@
   // ---------- Ajustes (idea de Nathalie, por el dueño, 29 Oct 2026, 16:02: «activar o desactivar las notificaciones… en ajustes»)
   // Lo justo y claro: avisos, sonido, pantalla de inicio y versión. Nada que se pueda romper sin querer.
   function pintaAjustes() {
+    try { pintaVigia(true); } catch (_) {}
     const av = $('#aj-avisos'); if (!av) return;
     const puede = puedePush(), perm = permisoAvisos();
     let quiere = true; try { quiere = localStorage.getItem('gcom-avisos') !== 'off'; } catch (_) {}
@@ -4618,6 +4620,41 @@
     };
     intenta();
   }
+  // ----- El Vigía del programa para Windows (dueño, 30 Oct 2026, 14:44) -----
+  // Durante una llamada, la web pregunta cada 3 segundos al programa GUARDIANA de este mismo ordenador (http://127.0.0.1:7443/vigia,
+  // que solo contesta a guardianagroup.com y solo desde este ordenador) si otro programa está usando el micrófono, la cámara o la
+  // pantalla, si hay un control remoto o si el antivirus de Windows avisa. Si es así, la llamada se pone en pausa y se dice por qué.
+  // Solo en el ordenador y solo si la persona lo activa en Ajustes: sin el programa no hay a quién preguntar (y el navegador pediría
+  // permiso para hablar con este ordenador sin motivo).
+  const VIGIA = 'http://127.0.0.1:7443/vigia';
+  const vigiaOn = () => { try { return localStorage.getItem('gcom-vigia') === '1'; } catch (_) { return false; } };
+  let vigiaT = null, vigiaEstado = '';
+  async function preguntaVigia() {
+    const ctl = new AbortController(), to = setTimeout(() => ctl.abort(), 2000);
+    const idi = /^(es|en|pt)/.exec(LOC()) ? LOC().slice(0, 2) : 'en';
+    try { const r = await fetch(VIGIA + '?idioma=' + idi, { credentials: 'omit', cache: 'no-store', signal: ctl.signal }); if (!r.ok) return { estado: 'sin-programa' }; return await r.json(); }
+    catch (_) { return { estado: 'sin-programa' }; } finally { clearTimeout(to); }
+  }
+  async function vigiaPaso() {
+    vigiaT = null;
+    if (!LL || !vigiaOn() || esMovil() || !(LL.estado === 'hablando' || LL.estado === 'conectando')) return;
+    const r = await preguntaVigia(); vigiaEstado = r && r.estado || '';
+    const frases = r && r.hay_alertas && Array.isArray(r.alertas) ? r.alertas.map((x) => String((x && (x.frase || x.nombre)) || '').slice(0, 200)).filter(Boolean) : [];
+    if (frases.length) LL.pausa(true, frases, false);
+    else if (LL.enPausa) LL.pausa(true, [], true);
+    vigiaT = setTimeout(vigiaPaso, 3000);
+  }
+  function vigiaLlamada(est) { if ((est === 'hablando' || est === 'conectando') && !vigiaT && vigiaOn() && !esMovil()) vigiaT = setTimeout(vigiaPaso, 400); }
+  async function pintaVigia(probar) {
+    const b = $('#aj-vigia'); if (!b) return;
+    b.hidden = esMovil(); b.setAttribute('aria-checked', String(vigiaOn()));
+    const est = $('#aj-vigia-est'); if (!est || !probar) return;
+    if (!vigiaOn()) { est.textContent = T('Con el programa GUARDIANA para Windows: si otro programa usa tu micrófono, tu cámara o tu pantalla durante una llamada, la llamada se pone en pausa.'); return; }
+    est.textContent = T('Comprobando el programa GUARDIANA…');
+    const r = await preguntaVigia();
+    est.textContent = r.estado === 'sin-programa' ? T('No se encuentra el programa GUARDIANA en este ordenador. Descárgalo desde la página «Programa para Windows».') : r.estado === 'no_disponible' ? T('El Vigía solo funciona en Windows.') : T('Activado: el programa GUARDIANA vigila este ordenador durante tus llamadas.');
+  }
+  { const b = $('#aj-vigia'); if (b) b.addEventListener('click', () => { try { localStorage.setItem('gcom-vigia', vigiaOn() ? '0' : '1'); } catch (_) {} pintaVigia(true); }); }
   // ----- el teléfono: una sola pantalla, sin guardar nada -----
   function borraLlevar(c) {
     try { sessionStorage.removeItem('gcom-llevar'); sessionStorage.removeItem('gcom-llevar-yo'); } catch (_) {}
