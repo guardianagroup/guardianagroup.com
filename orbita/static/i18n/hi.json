@@ -3600,7 +3600,8 @@
 "{n} no ha contestado.":"{n} ने जवाब नहीं दिया।",
 "No hay nadie más a quien añadir.":"जोड़ने के लिए और कोई नहीं है।",
 "Avisando a {n}: entra en la llamada en cuanto abra GUARDIANA.":"{n} को सूचित किया जा रहा है: जैसे ही वे GUARDIANA खोलेंगे, कॉल में शामिल हो जाएँगे।",
-"Cada persona oye y ve a las otras dos. Tu equipo une las dos llamadas; cada una va encriptada de extremo a extremo.":"हर व्यक्ति बाकी दोनों को सुन और देख सकता है। आपका डिवाइस दोनों कॉल को जोड़ता है; हर कॉल एंड-टू-एंड एन्क्रिप्टेड है।"
+"Cada persona oye y ve a las otras dos. Tu equipo une las dos llamadas; cada una va encriptada de extremo a extremo.":"हर व्यक्ति बाकी दोनों को सुन और देख सकता है। आपका डिवाइस दोनों कॉल को जोड़ता है; हर कॉल एंड-टू-एंड एन्क्रिप्टेड है।",
+"Tu red está limitando la conexión con GUARDIANA: los mensajes llegan, pero las fotos y las llamadas pueden fallar. Prueba con otra red (wifi o datos) o con una VPN.":"आपका नेटवर्क GUARDIANA से कनेक्शन को सीमित कर रहा है: संदेश पहुँच रहे हैं, लेकिन फ़ोटो और कॉल विफल हो सकते हैं। कोई दूसरा नेटवर्क (वाई-फ़ाई या मोबाइल डेटा) या VPN आज़माएँ।"
 },
 "p":{
 "intento":"आज सबसे ज़्यादा कोशिश: {1}, {2} {2?बार|बार}।",

@@ -1841,6 +1841,8 @@
     // iguales (segunda llamada seguida), silenciados > 0 y no se dice nada
     R.on('despierta', (m) => { ultimoDespierta = m; if (m && m.tipo === 'llamada' && (m.avisados | 0) === 0 && (m.silenciados | 0) === 0) aviso(T('La otra persona no tiene los avisos activados: solo le llegará con GUARDIANA abierta.')); });
     R.on('avisos', (m) => { ultimoAvisos = m; });
+    // la red corta la conexión con GUARDIANA (prueba de 64 KB; agencia, ronda 77): se dice una vez, claro y con qué hacer
+    R.on('limitada', () => { aviso(T('Tu red está limitando la conexión con GUARDIANA: los mensajes llegan, pero las fotos y las llamadas pueden fallar. Prueba con otra red (wifi o datos) o con una VPN.')); });
     // al perder la conexión se olvida también si la otra persona estaba «fuera»: al volver, el relé solo reenvía la presencia de
     // quien sigue fuera, y sin esto se quedaba «No conectado» para siempre (revisión, 29 Oct 2026)
     R.on('cerrado', () => { quietoTodas(4000); pintaBarra(); for (const c of CONVS.values()) { c.miembros.clear(); c.sesion = null; c.salaSabida = false; c.suFuera = false; for (const [id, a] of c.archivos || []) { if (a && a.envio) { const m = c.mensajes.find((x) => x.id === id); if (m && m.estado !== 'pendiente') pierde(c, m, a, T('Se perdió la conexión.')); } } if (c.archivos) { for (const [id, a] of [...c.archivos]) if (!(a && a.envio)) c.archivos.delete(id); } pintaCabecera(c); } pintaLista(); });

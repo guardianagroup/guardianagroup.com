@@ -3600,7 +3600,8 @@
 "{n} no ha contestado.":"{n} hat nicht geantwortet.",
 "No hay nadie más a quien añadir.":"Es gibt niemanden mehr, den du hinzufügen kannst.",
 "Avisando a {n}: entra en la llamada en cuanto abra GUARDIANA.":"{n} wird benachrichtigt: Der Anruf beginnt für diese Person, sobald sie GUARDIANA öffnet.",
-"Cada persona oye y ve a las otras dos. Tu equipo une las dos llamadas; cada una va encriptada de extremo a extremo.":"Alle hören und sehen die beiden anderen. Dein Gerät verbindet die zwei Anrufe; jeder ist Ende-zu-Ende-verschlüsselt."
+"Cada persona oye y ve a las otras dos. Tu equipo une las dos llamadas; cada una va encriptada de extremo a extremo.":"Alle hören und sehen die beiden anderen. Dein Gerät verbindet die zwei Anrufe; jeder ist Ende-zu-Ende-verschlüsselt.",
+"Tu red está limitando la conexión con GUARDIANA: los mensajes llegan, pero las fotos y las llamadas pueden fallar. Prueba con otra red (wifi o datos) o con una VPN.":"Dein Netzwerk schränkt die Verbindung zu GUARDIANA ein: Nachrichten kommen an, aber Fotos und Anrufe können fehlschlagen. Versuche ein anderes Netz (WLAN oder mobile Daten) oder ein VPN."
 },
 "p":{
 "intento":"Hat es heute am häufigsten versucht: {1}, {2} {2?Mal|Mal}.",

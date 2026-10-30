@@ -31,6 +31,18 @@
     try { await fetch(PUENTE_RU.replace(/^wss:/, 'https:') + '/salud', { mode: 'no-cors', cache: 'no-store', signal: c ? c.signal : undefined }); return true; }
     catch (_) { return false; } finally { clearTimeout(t); }
   }
+  // Prueba de la ruta (agencia, ronda 77): ¿pasa una transferencia sostenida de 64 KB hacia ese relé? true: sí; false: se corta
+  // (lo típico de las redes que estrangulan: se queda en unos 16 KB); null: no se sabe (servidor sin la prueba, sin red…)
+  async function rutaSana(base, ms) {
+    const u = String(base).replace(/^wss:/, 'https:').replace(/^ws:/, 'http:').replace(/\/$/, '') + '/prueba?n=' + Math.random().toString(36).slice(2, 10);
+    const c = typeof AbortController !== 'undefined' ? new AbortController() : null;
+    const t = setTimeout(() => { try { c && c.abort(); } catch (_) {} }, ms || 8000);
+    try {
+      const r = await fetch(u, { cache: 'no-store', signal: c ? c.signal : undefined });
+      if (!r.ok) return null;
+      const b = await r.arrayBuffer(); return b.byteLength >= 60000;
+    } catch (e) { return typeof navigator !== 'undefined' && navigator.onLine === false ? null : false; } finally { clearTimeout(t); }
+  }
   // por el puente, las credenciales de llamada del relé principal valen igual: solo cambia la puerta (el puente reenvía el
   // puerto 3478 al relé de llamadas). La ruta TLS (turns:) se quita: su certificado es el del servidor principal.
   function icePorPuente(lista) {
@@ -52,6 +64,8 @@
     const esperasQ = new Map(); let qn = 0, reto = '', conNumeros = false;
     // la app en segundo plano (presencia): si la página nace oculta (el teléfono la abre en segundo plano), ya cuenta como fuera
     let fueraAhora = typeof document !== 'undefined' && document.visibilityState !== 'visible';
+    // la ruta: probada una vez por carga de la página; si el relé principal se corta y el puente no, se usa el puente
+    let rutaProbada = false, prefierePuente = false, limitada = false;
     let subUlt = null, salasUlt = []; // la última suscripción de avisos, para reenviarla nada más abrir (si no, el relé no sabe
     // todavía que esta conexión es la de este teléfono y un aviso suyo podría volver a él mismo)
 
@@ -63,7 +77,7 @@
       if (q.get('rele')) return q.get('rele');
       if (LOCAL) return 'ws://127.0.0.1:8794';
       if (PROPIO) return (location.protocol === 'https:' ? 'wss://' : 'ws://') + location.host;
-      if (quierePuente() && await puenteVivo()) return PUENTE_RU;
+      if ((prefierePuente || quierePuente()) && await puenteVivo()) return PUENTE_RU;
       return MOTORES[0];
     }
 
@@ -81,6 +95,7 @@
         if (fueraAhora) { try { ws.send(JSON.stringify({ t: 'presencia', fuera: 1 })); } catch (_) {} }
         clearInterval(ping); pingEn = 0; ping = setInterval(mide, 10000); setTimeout(mide, 300);
         emite('abierto', { url });
+        compruebaRuta();
       };
       ws.onmessage = (e) => {
         if (typeof e.data === 'string') {
@@ -129,6 +144,22 @@
       };
       ws.onclose = () => { const estaba = abierto; abierto = false; marca = false; reto = ''; clearInterval(ping); ws = null; for (const [q, f] of esperasQ) { esperasQ.delete(q); try { f({ ok: false, por: 'sin relé' }); } catch (_) {} } if (estaba) emite('cerrado'); reintenta(); };
       ws.onerror = () => {};
+    }
+    // la prueba de la ruta, en segundo plano y una vez: si la de ahora se corta y la del puente pasa, se cambia (la conexión se
+    // vuelve a abrir por el puente; las salas se recuperan solas); si no hay puente que sirva, la app lo dice
+    async function compruebaRuta() {
+      if (rutaProbada || LOCAL && !q.has('prueba-ruta') || PROPIO || q.get('rele')) return;
+      rutaProbada = true;
+      const actual = url;
+      const ok = await rutaSana(actual);
+      if (ok !== false || cerrando) return;
+      if (actual !== PUENTE_RU && await puenteVivo() && (await rutaSana(PUENTE_RU)) === true) {
+        prefierePuente = true; url = PUENTE_RU;
+        try { if (ws) ws.close(); } catch (_) {}
+        emite('ruta', { puente: true });
+        return;
+      }
+      limitada = true; emite('limitada', { url: actual });
     }
     function reintenta() {
       if (cerrando) return;
@@ -223,7 +254,7 @@
     conecta();
     // para las pruebas: un corte de la conexión como los del teléfono (se vuelve a conectar sola)
     const corta = () => { try { if (ws) ws.close(); } catch (_) {} };
-    return { on, entra, sale, manda, pideIce, cierra, invita, busca, retira, mide, suscribe, despiertaA, presencia, corta, num, cita, citas, citaFin, buzonDeja, buzonBorra, get conBuzon() { return conBuzon && abierto; }, get reto() { return reto; }, get conNumeros() { return conNumeros; }, get avisos() { return avisos; }, get abierto() { return abierto; }, get atraso() { return ws ? ws.bufferedAmount : 0; }, get region() { return region; }, get llamadas() { return llamadas; }, get ice() { return ice; }, get caduca() { return caduca; }, get url() { return url; }, get latencia() { return latencia; }, get latenciaMin() { return hist.length ? Math.min(...hist) : null; }, get ultimoPong() { return ultimoPong; } };
+    return { on, entra, sale, manda, pideIce, cierra, invita, busca, retira, mide, suscribe, despiertaA, presencia, corta, num, cita, citas, citaFin, buzonDeja, buzonBorra, get conBuzon() { return conBuzon && abierto; }, get reto() { return reto; }, get conNumeros() { return conNumeros; }, get avisos() { return avisos; }, get abierto() { return abierto; }, get atraso() { return ws ? ws.bufferedAmount : 0; }, get region() { return region; }, get llamadas() { return llamadas; }, get ice() { return ice; }, get caduca() { return caduca; }, get url() { return url; }, get limitada() { return limitada; }, get latencia() { return latencia; }, get latenciaMin() { return hist.length ? Math.min(...hist) : null; }, get ultimoPong() { return ultimoPong; } };
   }
   // Otro servidor de llamadas (dueño, 28 Oct 2026, 14:17: «que las llamadas sean todas buenas, independientemente de si la
   // persona está en Sudamérica, en Europa…»): una conexión corta para medir su tiempo de ida y vuelta y pedirle sus

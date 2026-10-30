@@ -13,11 +13,19 @@ const PUERTO = +process.argv[2] || 8794;
 const RELE = new Rele({ turnHost: process.env.TURN_HOST || '', turnSecreto: process.env.TURN_SECRETO || '', turnPuerto: +(process.env.TURN_PUERTO || 3478), region: 'pruebas' });
 // los avisos que manda el relé (las pruebas los leen en /avisos; /avisos?borra=1 los vacía)
 const AVISOS = [];
+let ESTRANGULA = false;
 if (RELE.avisos) RELE.avisos.alAvisar = (x) => { AVISOS.push(x); if (AVISOS.length > 500) AVISOS.shift(); };
 const srv = http.createServer((req, res) => {
   if (req.url.startsWith('/avisos')) {
     const cab = { 'content-type': 'application/json', 'cache-control': 'no-store', 'access-control-allow-origin': '*' };
     res.writeHead(200, cab); res.end(JSON.stringify(AVISOS)); if (/borra=1/.test(req.url)) AVISOS.length = 0; return;
+  }
+  // la prueba de la ruta (64 KB); con /estrangula?on=1 se imita una red que corta a 16 KB (manda 16 KB y se queda parada)
+  if (req.url.startsWith('/estrangula')) { ESTRANGULA = /on=1/.test(req.url); res.writeHead(200, { 'access-control-allow-origin': '*' }); return res.end(String(ESTRANGULA)); }
+  if (req.url.startsWith('/prueba')) {
+    res.writeHead(200, { 'content-type': 'application/octet-stream', 'cache-control': 'no-store', 'content-length': 65536, 'access-control-allow-origin': req.headers.origin || '*' });
+    if (ESTRANGULA) { res.write(Buffer.alloc(16384)); return; }
+    return res.end(Buffer.alloc(65536));
   }
   if (req.url === '/salud') {
     const cab = { 'content-type': 'application/json', 'cache-control': 'no-store', 'access-control-allow-origin': req.headers.origin || '*' };

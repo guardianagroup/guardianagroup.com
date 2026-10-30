@@ -3600,7 +3600,8 @@
 "{n} no ha contestado.":"{n} hakujibu.",
 "No hay nadie más a quien añadir.":"Hakuna mtu mwingine wa kuongeza.",
 "Avisando a {n}: entra en la llamada en cuanto abra GUARDIANA.":"Tunamjulisha {n}: atajiunga na simu mara tu atakapofungua GUARDIANA.",
-"Cada persona oye y ve a las otras dos. Tu equipo une las dos llamadas; cada una va encriptada de extremo a extremo.":"Kila mtu anawasikia na kuwaona wale wengine wawili. Kifaa chako kinaunganisha simu hizo mbili; kila moja imesimbwa kutoka mwanzo hadi mwisho."
+"Cada persona oye y ve a las otras dos. Tu equipo une las dos llamadas; cada una va encriptada de extremo a extremo.":"Kila mtu anawasikia na kuwaona wale wengine wawili. Kifaa chako kinaunganisha simu hizo mbili; kila moja imesimbwa kutoka mwanzo hadi mwisho.",
+"Tu red está limitando la conexión con GUARDIANA: los mensajes llegan, pero las fotos y las llamadas pueden fallar. Prueba con otra red (wifi o datos) o con una VPN.":"Mtandao wako unazuia muunganisho na GUARDIANA: ujumbe unafika, lakini picha na simu huenda zisifanye kazi. Jaribu mtandao mwingine (Wi-Fi au data ya simu) au VPN."
 },
 "p":{
 "intento":"Iliyojaribu zaidi leo: {1}, {2?mara|mara} {2}.",

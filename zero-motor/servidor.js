@@ -1149,6 +1149,13 @@ async function main() {
         'content-security-policy': "frame-ancestors https://guardianagroup.com https://www.guardianagroup.com http://127.0.0.1:* http://localhost:*" });
       return res.end(html);
     }
+    if (/^\/prueba(\?|$)/.test(req.url)) {
+      // prueba de la ruta (agencia, ronda 77): 64 KB al azar (no se comprimen por el camino) para que la app vea si su red deja
+      // pasar una transferencia sostenida; las redes que estrangulan cortan a unos 16 KB. No guarda nada.
+      const cab = { 'content-type': 'application/octet-stream', 'cache-control': 'no-store', 'content-length': 65536 };
+      if (origenPermitido(req)) { cab['access-control-allow-origin'] = String(req.headers.origin).replace(/\/$/, ''); cab.vary = 'Origin'; }
+      res.writeHead(200, cab); return res.end(crypto.randomBytes(65536));
+    }
     if (req.url === '/salud') {
       // la página de ZERO (otro origen) pregunta aquí antes de usar este motor: CORS solo para los orígenes permitidos
       const cab = { 'content-type': 'application/json', 'cache-control': 'no-store' };

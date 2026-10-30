@@ -78,6 +78,8 @@ class Rele {
   compruebaCoturn() {
     const { execFile } = require('child_process');
     const r = { activo: false, escucha: false, tls: !!(this.coturn && this.coturn.tls), visto: new Date().toISOString() };
+    // el 443 compartido (agencia, ronda 77): instalar.sh lo deja marcado solo si la web sigue respondiendo a través de él
+    try { r.tls443 = require('fs').existsSync('/etc/guardiana/turn443'); } catch (_) { r.tls443 = false; }
     execFile('systemctl', ['is-active', 'coturn'], { timeout: 4000 }, (e, out) => {
       r.activo = String(out || '').trim() === 'active';
       execFile('ss', ['-Hlnu', 'sport = :' + this.turnPuerto], { timeout: 4000 }, (e2, out2) => {
@@ -101,7 +103,8 @@ class Rele {
     const urls = ['turn:' + h + '?transport=udp', 'turn:' + h + '?transport=tcp'];
     // TURN dentro de TLS (dueño, 30 Oct 2026, 09:10: desde Rusia el chat va y la videollamada no): para las redes que reconocen
     // y cortan el tráfico de las llamadas, la misma llamada viaja como una conexión cifrada más hacia este servidor
-    if (this.coturn.tls) urls.push('turns:' + this.turnHost + ':' + this.turnPuertoTls + '?transport=tcp');
+    // por el 443 compartido si está montado (para las redes que solo dejan salir la web); si no, por el 5349
+    if (this.coturn.tls) urls.push('turns:' + this.turnHost + ':' + (this.coturn.tls443 ? 443 : this.turnPuertoTls) + '?transport=tcp');
     return { ice: [{ urls, username, credential }], caduca };
   }
 

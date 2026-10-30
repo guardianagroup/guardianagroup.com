@@ -3600,7 +3600,8 @@
 "{n} no ha contestado.":"{n} ไม่รับสาย",
 "No hay nadie más a quien añadir.":"ไม่มีใครให้เพิ่มอีกแล้ว",
 "Avisando a {n}: entra en la llamada en cuanto abra GUARDIANA.":"กำลังแจ้ง {n}: จะเข้าร่วมการโทรทันทีที่เปิด GUARDIANA",
-"Cada persona oye y ve a las otras dos. Tu equipo une las dos llamadas; cada una va encriptada de extremo a extremo.":"ทุกคนได้ยินและเห็นอีกสองคน อุปกรณ์ของคุณเชื่อมการโทรทั้งสองสายเข้าด้วยกัน และแต่ละสายเข้ารหัสแบบต้นทางถึงปลายทาง"
+"Cada persona oye y ve a las otras dos. Tu equipo une las dos llamadas; cada una va encriptada de extremo a extremo.":"ทุกคนได้ยินและเห็นอีกสองคน อุปกรณ์ของคุณเชื่อมการโทรทั้งสองสายเข้าด้วยกัน และแต่ละสายเข้ารหัสแบบต้นทางถึงปลายทาง",
+"Tu red está limitando la conexión con GUARDIANA: los mensajes llegan, pero las fotos y las llamadas pueden fallar. Prueba con otra red (wifi o datos) o con una VPN.":"เครือข่ายของคุณกำลังจำกัดการเชื่อมต่อกับ GUARDIANA: ข้อความยังส่งถึง แต่รูปภาพและการโทรอาจล้มเหลว ลองใช้เครือข่ายอื่น (Wi-Fi หรืออินเทอร์เน็ตมือถือ) หรือ VPN"
 },
 "p":{
 "intento":"พยายามมากที่สุดวันนี้: {1}, {2} {2?ครั้ง|ครั้ง}",
