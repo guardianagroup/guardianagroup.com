@@ -56,6 +56,7 @@ const hasta = async (fn, ms) => { const h = Date.now() + ms; while (Date.now() <
   await espera(2500);
   comprueba(await visible(A, '#ll-llevar'), '0. en el PC, en la videollamada: «Pasar al teléfono»');
   if (!BPC) comprueba(!(await visible(B, '#ll-llevar')), '0. en el teléfono de B no sale');
+  if (BPC) { comprueba(await visible(B, '#ll-llevar'), '0. en el PC de quien contesta (B) también sale «Pasar al teléfono»'); await B.screenshot({ path: path.join(OUT, '0-b-pc.png') }); }
   await A.evaluate(() => document.querySelector('#ll-llevar').click()); await espera(800);
   comprueba(await visible(A, '#h-llevar .llevar-qr svg'), '0. sale el código QR', await A.textContent('#llevar-estado'));
   comprueba(await A.evaluate(() => { const p = document.querySelector('#llevar-qr svg path'); const c = getComputedStyle(p); return c.fill === 'rgb(0, 0, 0)' && c.stroke === 'none'; }), '0. el código se ve negro sobre blanco (se puede leer)');

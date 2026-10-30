@@ -1404,8 +1404,10 @@
     // llamada a tres: lo que manda la tercera persona va a su tramo de la llamada
     if (LL.esTramo && LL.esTramo(c.id)) { await LL.recibeTercero(c.id, j); return; }
     if (j.acto === 'oferta') {
-      if (LL.ocupado && LLAMADA_CONV && LLAMADA_CONV !== c.id) { enviaControl(c, { tipo: 'llamada', acto: 'ocupado', id: j.id }); return; }
-      if (!LL.ocupado) LLAMADA_CONV = c.id;
+      // (una llamada que acaba de colgarse, todavía «cerrando», cuenta como libre: si no, la nueva contestaba por otra conversación)
+      const libre = !LL.ocupado || LL.estado === 'cerrando';
+      if (!libre && LLAMADA_CONV && LLAMADA_CONV !== c.id) { enviaControl(c, { tipo: 'llamada', acto: 'ocupado', id: j.id }); return; }
+      if (libre) LLAMADA_CONV = c.id;
       await LL.recibe(j); pintaLista();
       // el teléfono al que se pasó la llamada contesta solo: la persona ya dijo que sí al leer el código
       if (c.efimera && c.telefono) contestaSolo();

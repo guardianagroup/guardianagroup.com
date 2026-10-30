@@ -1691,7 +1691,7 @@
       // tu mitad, a media altura. Pequeña: en la esquina que mira al centro en vertical, al otro lado del asa.
       const cont = lienzoVid(), CW = cont ? cont.clientWidth : 0, CH = cont ? cont.clientHeight : 0; let x, y;
       const l = div ? ['izq', 'der', 'arriba', 'abajo'].find((z) => caja.classList.contains('lado-' + z)) : null;
-      if (conNombre) { const W = b.offsetWidth || 180, H = b.offsetHeight || 40; if (l === 'arriba' || l === 'abajo') { x = CW - W - 12; y = CH / 2 - H / 2; } else { x = CW / 2 - W / 2; y = CH - H - 150; } }
+      if (conNombre) { const W = b.offsetWidth || 180, H = b.offsetHeight || 40; if (l === 'arriba' || l === 'abajo') { x = CW - W - 12; y = CH / 2 - H / 2; } else { x = CW / 2 - W / 2; y = Math.round(CH * 0.3 - H / 2); } } // partida de lado: en la raya, a un tercio de altura, lejos de los botones (dueño, 30 Oct 2026, 15:10: «la frase está muy cerca de los botones»)
       else if (div) { x = l === 'izq' ? 14 : CW - 52; y = l === 'arriba' ? CH * 0.25 - 19 : l === 'abajo' ? CH * 0.75 - 19 : CH / 2 - 19; }
       else { const e = esquinaAsa(vl, CW, CH); x = e.izq ? vl.offsetLeft + vl.offsetWidth - 44 : vl.offsetLeft + 6; y = e.arriba ? vl.offsetTop + 6 : vl.offsetTop + vl.offsetHeight - 44; }
       caja.style.setProperty('--tam-x', Math.round(x) + 'px'); caja.style.setProperty('--tam-y', Math.round(y) + 'px');
