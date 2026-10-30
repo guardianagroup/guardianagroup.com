@@ -47,6 +47,8 @@ const hasta = async (fn, ms) => { const h = Date.now() + ms; while (Date.now() <
   comprueba(!(await visible(B, '#ll-llevar')), '0. en el teléfono de B no sale');
   await A.evaluate(() => document.querySelector('#ll-llevar').click()); await espera(800);
   comprueba(await visible(A, '#h-llevar .llevar-qr svg'), '0. sale el código QR', await A.textContent('#llevar-estado'));
+  comprueba(await A.evaluate(() => { const p = document.querySelector('#llevar-qr svg path'); const c = getComputedStyle(p); return c.fill === 'rgb(0, 0, 0)' && c.stroke === 'none'; }), '0. el código se ve negro sobre blanco (se puede leer)');
+  comprueba(await A.evaluate(() => { const r = document.querySelector('#llevar-qr').getBoundingClientRect(); const e = document.elementFromPoint(r.left + r.width / 2, r.top + r.height / 2); return !!(e && e.closest('#h-llevar')); }), '0. el código está por encima de la videollamada');
   await A.screenshot({ path: path.join(OUT, '0-pc-codigo.png') });
   const dir = await A.evaluate(() => document.querySelector('#llevar-qr').dataset.url);
   comprueba(/#llevar=[A-Za-z0-9_-]{43}$/.test(dir || ''), '0. la llave va solo en el fragmento de la dirección', dir);
@@ -58,6 +60,10 @@ const hasta = async (fn, ms) => { const h = Date.now() + ms; while (Date.now() <
   const t0 = Date.now();
   const paso = await hasta(async () => (await estado(T)) === 'hablando' && (await estado(A)) === 'libre' && (await estado(B)) === 'hablando', 30000);
   comprueba(paso, '1. traspaso hecho: T habla con B y A ha salido (' + Math.round((Date.now() - t0) / 1000) + ' s)', { A: await estado(A), B: await estado(B), T: await estado(T) });
+  // los dos avisos salen al empezar a hablar (y se van solos a los pocos segundos)
+  comprueba(await hasta(() => visible(T, '#llevar-nota'), 3000), '2. el aviso de cierre se ve al empezar');
+  comprueba(await hasta(() => visible(T, '#llevar-banda'), 3000), '2. y la recomendación de «No molestar»');
+  await T.screenshot({ path: path.join(OUT, '2-tel-avisos.png') });
   await espera(3000);
   const vB = await B.evaluate(() => { const v = document.querySelector('#v-remoto'); return v && v.srcObject && v.videoWidth > 0 ? v.getVideoPlaybackQuality().totalVideoFrames : -1; });
   await espera(2000);
@@ -72,8 +78,6 @@ const hasta = async (fn, ms) => { const h = Date.now() + ms; while (Date.now() <
   // 2. la pantalla del teléfono: solo «Colgar» y nada guardado
   const botones = await T.evaluate(() => [...document.querySelectorAll('#ll-botones .gc-llamada-boton')].filter((b) => getComputedStyle(b).display !== 'none' && !b.hidden).map((b) => (b.querySelector('span') || b).textContent.trim()));
   comprueba(botones.length === 1, '2. en el teléfono, un solo botón: ' + botones.join(' · '));
-  comprueba(await visible(T, '#llevar-nota'), '2. el aviso de cierre se ve al empezar');
-  comprueba(await visible(T, '#llevar-banda'), '2. y la recomendación de «No molestar»');
   await T.screenshot({ path: path.join(OUT, '2-tel-llamada.png') });
   await B.screenshot({ path: path.join(OUT, '2-b-llamada.png') });
   const bd = await T.evaluate(async () => { try { const l = await indexedDB.databases(); return l.map((x) => x.name); } catch (_) { return ['?']; } });
@@ -81,8 +85,10 @@ const hasta = async (fn, ms) => { const h = Date.now() + ms; while (Date.now() <
   const ls = await T.evaluate(() => Object.keys(localStorage).filter((k) => /gcom|guardiana/i.test(k)));
   comprueba(!ls.length, '2. ni guarda nada en el almacenamiento del navegador', ls);
   // 3. la conexión se corta: «Volver a llamar»
-  await T.evaluate(() => { for (const p of window.__pcs) { try { p.close(); } catch (_) {} } });
-  await B.evaluate(() => { for (const p of window.__pcs) { try { if (p.connectionState === 'connected') p.close(); } catch (_) {} } });
+  // (en el navegador de pruebas no se puede quitar la red a una conexión: se cierra y se le dice a la llamada que ha fallado, que es
+  // lo que el navegador avisa cuando de verdad se pierde la ruta)
+  const cae = (P) => P.evaluate(() => { for (const p of window.__pcs) { if (p.connectionState !== 'connected') continue; try { p.close(); } catch (_) {} Object.defineProperty(p, 'connectionState', { get: () => 'failed' }); Object.defineProperty(p, 'iceConnectionState', { get: () => 'failed' }); p.dispatchEvent(new Event('iceconnectionstatechange')); p.dispatchEvent(new Event('connectionstatechange')); } });
+  await cae(T); await cae(B);
   const corta = await hasta(() => visible(T, '#llevar-volver'), 60000);
   comprueba(corta, '3. cortada: en el teléfono sale «Volver a llamar»', await T.textContent('#llevar-t'));
   await T.screenshot({ path: path.join(OUT, '3-tel-cortada.png') });

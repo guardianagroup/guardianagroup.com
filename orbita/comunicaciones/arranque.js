@@ -8,6 +8,17 @@
 //   (window.gcomArranque) y pone el suyo.
 (function () {
   var raiz = document.documentElement, app = false, vuelve = false, seguro = null, cancelado = false;
+  // El teléfono al que se pasa una videollamada (app.js, «Pasar al teléfono»): no deja nada en el almacenamiento del navegador ni
+  // toca lo que ya hubiera en él (si esa persona usa GUARDIANA en este mismo navegador, lo suyo sigue igual).
+  try {
+    if (/^#llevar=[A-Za-z0-9_-]{43}$/.test(location.hash) || /^[A-Za-z0-9_-]{43}$/.test(sessionStorage.getItem('gcom-llevar') || '')) {
+      var ls = window.localStorage, S = Storage.prototype, pon = S.setItem, quita = S.removeItem, vacia = S.clear;
+      S.setItem = function (k, v) { if (this !== ls) return pon.call(this, k, v); };
+      S.removeItem = function (k) { if (this !== ls) return quita.call(this, k); };
+      S.clear = function () { if (this !== ls) return vacia.call(this); };
+      window.gcomLlevando = true;
+    }
+  } catch (e) {}
   try { app = matchMedia('(display-mode: standalone)').matches || matchMedia('(display-mode: fullscreen)').matches || navigator.standalone === true; } catch (e) {}
   try { vuelve = !!sessionStorage.getItem('gcom-volver'); } catch (e) {}
   // y si el teléfono cerró la app hace poco, también se vuelve a la última pantalla (app.js, guardaUltima)

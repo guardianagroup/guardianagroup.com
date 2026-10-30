@@ -4561,21 +4561,36 @@
   }
   function llevarNo() { for (const c of [...EFI.values()]) if (!c.telefono && !c.principal) sueltaEfimera(c); }
   // ----- el final de una llamada por la sala efímera (en el teléfono o en el equipo de la otra persona) -----
+  // Solo una llamada que se cuelga de verdad («fin») cierra el traspaso. Cualquier otro final (la conexión se perdió, nadie
+  // contestó a «Volver a llamar», la otra persona no estaba) deja la llamada recuperable mientras las dos pantallas sigan abiertas.
   function finEfimera(c, info) {
-    const cortada = info.por === 'fallo';
+    const por = info && info.por;
     if (c.telefono) {
-      if (cortada) pintaLlevar('cortada');
-      else { pintaLlevar('terminada'); borraLlevar(c); }
+      if (por === 'fin') { pintaLlevar('terminada'); borraLlevar(c); }
+      else pintaLlevar(por === 'sin-medios' ? 'permiso' : 'cortada');
       return;
     }
     if (!c.principal) { c.anadido = false; return; } // el teléfono no llegó a contestar: si vuelve a entrar, se le llama otra vez
-    if (cortada) { $('#llevar-cortada-l').textContent = T('Se ha perdido la conexión con el teléfono de {n}. Mientras su pantalla siga abierta, podéis volver a llamar.').replace('{n}', c.nombre || T('la otra persona')); $('#llevar-cortada').hidden = false; $('#llevar-cortada').dataset.sala = c.id; }
-    else sueltaEfimera(c);
+    if (por === 'fin') sueltaEfimera(c); else muestraCortada(c, false);
   }
+  function muestraCortada(c, ausente) {
+    const n = c.nombre || T('la otra persona');
+    $('#llevar-cortada-l').textContent = (ausente ? T('El teléfono de {n} no está conectado ahora mismo. Si su pantalla sigue abierta, podréis volver a llamar en cuanto vuelva.') : T('Se ha perdido la conexión con el teléfono de {n}. Mientras su pantalla siga abierta, podéis volver a llamar.')).replace('{n}', n);
+    $('#llevar-cortada').dataset.sala = c.id; $('#llevar-cortada').hidden = false;
+  }
+  // «Volver a llamar» (en el teléfono o en el equipo de la otra persona): si la llamada anterior aún se está cerrando, se espera a
+  // que acabe; si la otra parte no está en la sala, se dice y se puede volver a intentar.
   function volverALlamar(c) {
-    if (!c || !LL || LL.ocupado) return;
+    if (!c || !LL) return;
     $('#llevar-cortada').hidden = true;
-    LLAMADA_CONV = c.id; LL.llamar(true);
+    let n = 0;
+    const intenta = () => {
+      if (!EFI.has(c.id)) return;
+      if (LL.ocupado) { if (LL.estado === 'cerrando' && ++n < 40) setTimeout(intenta, 100); else if (c.telefono) pintaLlevar('cortada'); return; }
+      if (!c.suId || !c.miembros.has(c.suId) || !R || !R.abierto) { if (c.telefono) pintaLlevar('ausente'); else muestraCortada(c, true); return; }
+      LLAMADA_CONV = c.id; LL.llamar(true);
+    };
+    intenta();
   }
   // ----- el teléfono: una sola pantalla, sin guardar nada -----
   function borraLlevar(c) {
@@ -4586,6 +4601,7 @@
   const TEXTOS_LLEVAR = {
     conectando: ['Conectando…', 'Preparando la cámara y el micrófono.'],
     cortada: ['Llamada cortada', 'Se ha perdido la conexión.'],
+    ausente: ['Llamada cortada', 'La otra persona no está conectada ahora mismo. Vuelve a intentarlo en unos segundos.'],
     terminada: ['Llamada terminada', 'Puedes cerrar esta pestaña. En este teléfono no queda nada de la llamada.'],
     invalida: ['Este código ya no sirve', 'Pide que te enseñen un código nuevo en el ordenador.'],
     permiso: ['Sin acceso a la cámara y al micrófono', 'Permítelos en los ajustes del navegador y vuelve a intentarlo.'],
@@ -4597,10 +4613,11 @@
     const [tt, ll] = TEXTOS_LLEVAR[estado] || TEXTOS_LLEVAR.conectando;
     $('#llevar-t').textContent = T(tt); $('#llevar-l').textContent = T(ll);
     p.dataset.estado = estado; p.hidden = estado === 'llamada';
-    $('#llevar-volver').hidden = estado !== 'cortada';
-    $('#llevar-colgar').hidden = estado !== 'cortada' && estado !== 'conectando';
+    const recuperable = estado === 'cortada' || estado === 'ausente';
+    $('#llevar-volver').hidden = !recuperable;
+    $('#llevar-colgar').hidden = !recuperable && estado !== 'conectando';
     $('#llevar-reintentar').hidden = estado !== 'permiso';
-    $('#llevar-aviso').hidden = !(estado === 'conectando' || estado === 'cortada');
+    $('#llevar-aviso').hidden = !(estado === 'conectando' || recuperable);
   }
   async function arrancaLlevar() {
     document.body.classList.add('modo-llevar');

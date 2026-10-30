@@ -8,7 +8,7 @@
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; manifest-src 'self' blob: data:; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob:; media-src blob:; connect-src 'self' https://motor.guardianagroup.com wss://motor.guardianagroup.com https://ru.guardianagroup.com wss://ru.guardianagroup.com https://motor-am.guardianagroup.com wss://motor-am.guardianagroup.com http://127.0.0.1:* ws://127.0.0.1:* http://localhost:* ws://localhost:*; worker-src 'self'; form-action 'none'; base-uri 'none'">
 <meta name="theme-color" content="#06080C">
 <!-- a pantalla completa, como una app, si se añade a la pantalla de inicio (dueño, 28 Oct 2026, 16:03: «que solo se vea lo nuestro») -->
-<script src="arranque.js?v=20261031b"></script>
+<script src="arranque.js?v=20261101j"></script>
 <!-- el manifiesto lo pone arranque.js: con una invitación en el iPhone, uno propio con la invitación dentro (dueño, 29 Oct 2026, 18:01) -->
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -1123,14 +1123,16 @@
     <p class="llevar-l" id="llevar-l">Preparando la cámara y el micrófono.</p>
     <div class="llevar-botones">
       <button type="button" class="boton principal" id="llevar-volver" hidden>Volver a llamar</button>
-      <button type="button" class="boton llevar-colgar" id="llevar-colgar" hidden>Colgar</button>
+      <button type="button" class="boton peligro llevar-colgar" id="llevar-colgar" hidden>Colgar</button>
       <button type="button" class="boton principal" id="llevar-reintentar" hidden>Reintentar</button>
     </div>
     <p class="llevar-aviso" id="llevar-aviso">Mientras esta pantalla siga abierta, la llamada se recupera sola. Si la cierras, se borra y no se podrá reconectar.</p>
   </div>
 </div>
+<div class="llevar-avisos" id="llevar-avisos">
 <div class="llevar-nota" id="llevar-nota" role="status" hidden>Mientras esta pantalla siga abierta, la llamada se recupera sola. Si la cierras, se borra.</div>
 <div class="llevar-banda" id="llevar-banda" role="status" hidden><span>Para que no te interrumpan otras llamadas, activa «No molestar» en el teléfono.</span><button type="button" id="llevar-banda-ok">Entendido</button></div>
+</div>
 <div class="aviso" id="aviso" role="status" aria-live="polite" hidden></div>
 <!-- En el teléfono, GUARDIANA va en vertical (dueño, 28 Oct 2026, 16:12 y 29 Oct, 14:25). Android se fija solo; en el iPhone, que no
      deja fijarlo desde una web, en horizontal sale este aviso (app.css) -->
