@@ -31,12 +31,20 @@ const estado = (P) => P.evaluate(() => (window.GuardianaCom && GuardianaCom.llam
 const hasta = async (fn, ms) => { const h = Date.now() + ms; while (Date.now() < h) { if (await fn()) return true; await espera(400); } return false; };
 (async () => {
   const browser = await chromium.launch({ args: ['--use-fake-ui-for-media-stream', '--use-fake-device-for-media-stream', '--autoplay-policy=no-user-gesture-required'] });
-  const { p: A } = await equipo(browser, true, 'A'), { p: B } = await equipo(browser, false, 'B');
+  const BPC = process.env.B_PC === '1';
+  const { p: A } = await equipo(browser, true, 'A'), { p: B } = await equipo(browser, BPC, 'B');
   const { p: T, ctx: ctxT } = await equipo(browser, false, 'T', false);
-  // B invita (en el teléfono), A acepta en el PC
-  await B.goto(URL0 + '?app=1'); await espera(1500);
-  await B.click('#nueva-blindada'); await espera(400); await B.click('#invitar-otra'); await espera(1200);
-  const url = String((await B.evaluate(() => window.__compartidos[window.__compartidos.length - 1])).url).replace('https://guardianagroup.com', 'http://127.0.0.1:8080');
+  // B invita, A acepta en el PC
+  let url;
+  if (BPC) {
+    await B.goto(URL0); await espera(1500);
+    await B.click('#nueva-blindada'); await espera(1500);
+    url = String(await B.inputValue('#enlace-b')).replace('https://guardianagroup.com', 'http://127.0.0.1:8080');
+  } else {
+    await B.goto(URL0 + '?app=1'); await espera(1500);
+    await B.click('#nueva-blindada'); await espera(400); await B.click('#invitar-otra'); await espera(1200);
+    url = String((await B.evaluate(() => window.__compartidos[window.__compartidos.length - 1])).url).replace('https://guardianagroup.com', 'http://127.0.0.1:8080');
+  }
   await A.goto(url); await espera(1500); if (await A.$('#aceptar-si:visible')) await A.click('#aceptar-si'); await espera(5000);
   // A llama con vídeo; B contesta
   await A.evaluate(() => document.querySelector('#videollamar').click()); await espera(2500);
@@ -44,7 +52,7 @@ const hasta = async (fn, ms) => { const h = Date.now() + ms; while (Date.now() <
   await hasta(async () => (await estado(A)) === 'hablando' && (await estado(B)) === 'hablando', 20000);
   await espera(2500);
   comprueba(await visible(A, '#ll-llevar'), '0. en el PC, en la videollamada: «Pasar al teléfono»');
-  comprueba(!(await visible(B, '#ll-llevar')), '0. en el teléfono de B no sale');
+  if (!BPC) comprueba(!(await visible(B, '#ll-llevar')), '0. en el teléfono de B no sale');
   await A.evaluate(() => document.querySelector('#ll-llevar').click()); await espera(800);
   comprueba(await visible(A, '#h-llevar .llevar-qr svg'), '0. sale el código QR', await A.textContent('#llevar-estado'));
   comprueba(await A.evaluate(() => { const p = document.querySelector('#llevar-qr svg path'); const c = getComputedStyle(p); return c.fill === 'rgb(0, 0, 0)' && c.stroke === 'none'; }), '0. el código se ve negro sobre blanco (se puede leer)');
