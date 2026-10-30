@@ -403,3 +403,15 @@ Versiones en main: app.css, app.js y llamada.js `20261030i`; idioma.js `20261029
   Comunicaciones en origen propio o CSP con hashes en todas las páginas, DNSSEC/CAA/verificación de Pages/HSTS (Porkbun y GitHub),
   workflows por SHA, systemd estricto.
 - Versiones: app.js 31h, app.css 31i, cripto.js 31a, rele.js 31c, sw.js 29g, orbita.js 31a, idioma.js p88.
+- **Publicado después (0623ac92, f52dacdb):** «¿Cómo funciona?» con el número, la pantalla de inicio por sistema, web frente a
+  tienda (honesto) y PC a PC; «¿Por qué?» con dos tarjetas nuevas (GASA/Feedzai 2025: 57 % / 23 %; extorsión en Colombia 2025:
+  13.428 casos, 48,8 % por teléfono en capitales) y fuentes en terminos.html §6; el aviso de Windows dice menú Inicio + barra de
+  tareas y cómo llevarla al escritorio (dueño 22:52: «no la veo en el escritorio»). idioma.js p90.
+- **Porkbun (dueño 22:37, «el paso 5 hazlo tú», él entró con su contraseña en el navegador integrado):** DNSSEC activado (DS en
+  el registro) y tres CAA (`0 issue "letsencrypt.org"`, `0 issue "sectigo.com"`, `0 issuewild ";"`). Visto: la cuenta sin 2FA y
+  «API Access: Globally On» → recomendado al dueño activar 2FA y apagar el API. Pendiente: verificación del dominio en GitHub Pages
+  (TXT `_github-pages-challenge-…`), llaves de acceso en GitHub y Porkbun, HSTS a GitHub Support.
+- **Fuera del repo público (el dueño tiene los PDF):** `herramientas/auditoria-web/informe.md` y
+  `herramientas/agencia-rondas/competencia/` (podio: SimpleX 81, Ultra según diseño 73 → 85 con auditoría, Threema 64, Session
+  51; GUARDIANA hoy quedaría en 48). Dueño: «hagamos eso para estar en lo más alto del podio» → Ultra con operadores
+  independientes + relleno constante (#67), auditoría independiente (#89).
