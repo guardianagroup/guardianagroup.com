@@ -3117,9 +3117,9 @@
     // el logotipo de arriba lleva al inicio desde Contactos, «¿Cómo funciona?» o «¿Por qué?» (dueño, 29 Oct 2026, 09:29); en el
     // resto no hace nada (28 Oct). Sustituye a «la etiqueta GUARDIANA de arriba no hace nada».
     { const bt = $('.barra-t');
-      const panelAbierto = () => { const i = $('#inicio'); const pq = $('#porque'); return !!((i && (i.classList.contains('ver-contactos') || i.classList.contains('ver-como'))) || (pq && !pq.hidden)); };
+      const panelAbierto = () => { const i = $('#inicio'); const pq = $('#porque'); return !!((i && (i.classList.contains('ver-contactos') || i.classList.contains('ver-como') || i.classList.contains('ver-marcar'))) || (pq && !pq.hidden)); }; // también desde «Llamar» (dueño, 30 Oct 2026, 00:12)
       if (bt) { bt.setAttribute('role', 'button'); bt.setAttribute('tabindex', '0'); bt.setAttribute('aria-label', T('Ir al inicio'));
-        const alInicio = () => { if (!panelAbierto()) return; const pq = $('#porque'); if (pq && !pq.hidden) { pq.hidden = true; if (history.state && history.state.porque) { try { history.back(); } catch (_) {} } } if (verContactos) { verContactos = false; pintaContactos(); } pintaComo(false); };
+        const alInicio = () => { if (!panelAbierto()) return; const pq = $('#porque'); if (pq && !pq.hidden) { pq.hidden = true; if (history.state && history.state.porque) { try { history.back(); } catch (_) {} } } if (verContactos) { verContactos = false; pintaContactos(); } pintaComo(false); if (verMarcar) pintaMarcar(false); };
         bt.addEventListener('click', alInicio); bt.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); alInicio(); } });
         const marca = () => bt.classList.toggle('lleva-inicio', panelAbierto());
         new MutationObserver(marca).observe($('#inicio'), { attributes: true, attributeFilter: ['class'] });
