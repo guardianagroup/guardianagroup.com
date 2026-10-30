@@ -3630,7 +3630,11 @@
 "Mientras esta pantalla siga abierta, la llamada se recupera sola. Si la cierras, se borra.":"この画面が開いている間は、通話は自動で復旧します。閉じると通話は削除されます。",
 "Para que no te interrumpan otras llamadas, activa «No molestar» en el teléfono.":"ほかの着信に邪魔されないよう、スマートフォンで「おやすみモード」をオンにしてください。",
 "Pasando la llamada al teléfono de {n}…":"{n} のスマートフォンに通話を移しています…",
-"La llamada continúa en el teléfono de {n}.":"通話は {n} のスマートフォンで続いています。"
+"La llamada continúa en el teléfono de {n}.":"通話は {n} のスマートフォンで続いています。",
+"Videollamada encriptada post-cuántica":"ポスト量子暗号化されたビデオ通話",
+"Llamada encriptada post-cuántica":"ポスト量子暗号化された通話",
+"Post-cuántica":"ポスト量子",
+"No se puede descifrar el sonido o la imagen de la otra persona.":"相手の音声または映像を復号できません。"
 },
 "p":{
 "intento":"今日最も多く試みたのは {1}、{2} {2?回|回}。",

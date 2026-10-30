@@ -113,7 +113,9 @@ const hasta = async (fn, ms) => { const h = Date.now() + ms; while (Date.now() <
   comprueba(botones.length === 1, '2. en el teléfono, un solo botón: ' + botones.join(' · '));
   // un solo título arriba, con el tiempo de llamada; la otra persona a toda pantalla (sin partir); en horizontal, «gira el teléfono»
   const cab = { capsula: await visible(T, '.gc-llamada-arriba .gc-llamada-cifrado'), nombre: await visible(T, '#ll-nombre') && (await T.textContent('#ll-nombre')).trim(), tiempo: await visible(T, '#ll-tiempo') && (await T.textContent('#ll-tiempo')).trim() };
-  comprueba(!cab.capsula && cab.nombre === 'Videollamada encriptada' && /^\d\d:\d\d$/.test(cab.tiempo), '2. un solo título arriba: «Videollamada encriptada» y el tiempo', cab);
+  comprueba(!cab.capsula && /^Videollamada encriptada( post-cuántica)?$/.test(cab.nombre) && /^\d\d:\d\d$/.test(cab.tiempo), '2. un solo título arriba: «Videollamada encriptada» y el tiempo', cab);
+  // la llave de la capa post-cuántica sale del código QR (nunca viajó por la red): en el teléfono y en B va la capa
+  comprueba(await T.evaluate(() => GuardianaCom.llamada.pq) && await B.evaluate(() => GuardianaCom.llamada.pq) && cab.nombre === 'Videollamada encriptada post-cuántica', '2. con la capa post-cuántica (llave del código QR) y el título lo dice', cab.nombre);
   comprueba(!(await T.evaluate(() => document.querySelector('#llamada').classList.contains('dividida'))), '2. la otra persona a toda pantalla (sin partir)');
   await T.setViewportSize({ width: 852, height: 393 }); await espera(700);
   comprueba(await T.evaluate(() => [...document.querySelectorAll('body > .gira')].some((g) => getComputedStyle(g).display !== 'none')), '2. en horizontal: «gira el teléfono»');

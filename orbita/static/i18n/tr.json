@@ -3630,7 +3630,11 @@
 "Mientras esta pantalla siga abierta, la llamada se recupera sola. Si la cierras, se borra.":"Bu ekran açık kaldığı sürece arama kendiliğinden geri gelir. Ekranı kapatırsanız arama silinir.",
 "Para que no te interrumpan otras llamadas, activa «No molestar» en el teléfono.":"Başka aramalar sizi bölmesin diye telefonda “Rahatsız Etme” modunu açın.",
 "Pasando la llamada al teléfono de {n}…":"Arama, {n} kişisinin telefonuna aktarılıyor…",
-"La llamada continúa en el teléfono de {n}.":"Arama, {n} kişisinin telefonunda devam ediyor."
+"La llamada continúa en el teléfono de {n}.":"Arama, {n} kişisinin telefonunda devam ediyor.",
+"Videollamada encriptada post-cuántica":"Kuantum sonrası şifreli görüntülü arama",
+"Llamada encriptada post-cuántica":"Kuantum sonrası şifreli arama",
+"Post-cuántica":"Kuantum sonrası",
+"No se puede descifrar el sonido o la imagen de la otra persona.":"Karşı tarafın sesinin veya görüntüsünün şifresi çözülemiyor."
 },
 "p":{
 "intento":"Bugün en çok deneyen: {1}, {2} {2?kez|kez}.",

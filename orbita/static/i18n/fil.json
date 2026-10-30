@@ -3630,7 +3630,11 @@
 "Mientras esta pantalla siga abierta, la llamada se recupera sola. Si la cierras, se borra.":"Hangga't bukas ang screen na ito, kusang bumabalik ang tawag. Kapag isinara mo ito, mabubura ang tawag.",
 "Para que no te interrumpan otras llamadas, activa «No molestar» en el teléfono.":"Para hindi ka maistorbo ng ibang tawag, i-on ang “Huwag Istorbohin” sa telepono.",
 "Pasando la llamada al teléfono de {n}…":"Inililipat ang tawag sa telepono ni {n}…",
-"La llamada continúa en el teléfono de {n}.":"Tuloy ang tawag sa telepono ni {n}."
+"La llamada continúa en el teléfono de {n}.":"Tuloy ang tawag sa telepono ni {n}.",
+"Videollamada encriptada post-cuántica":"Post-quantum na naka-encrypt na video call",
+"Llamada encriptada post-cuántica":"Post-quantum na naka-encrypt na tawag",
+"Post-cuántica":"Post-quantum",
+"No se puede descifrar el sonido o la imagen de la otra persona.":"Hindi ma-decrypt ang tunog o larawan ng kausap mo."
 },
 "p":{
 "intento":"Pinakamadalas sumubok ngayon: {1}, {2} {2?beses|beses}.",

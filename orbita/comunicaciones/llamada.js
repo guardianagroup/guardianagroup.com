@@ -87,6 +87,85 @@
     let suTres = false, mezcla = null, vozSuya = null;
     // pasar la llamada al teléfono (ver «Pasar al teléfono» más abajo): ¿lo entiende el equipo de la otra persona?
     var suLlevar = false;
+    // ---------- La capa post-cuántica del audio y el vídeo (medios-pq.js; dueño, 30 Oct 2026, 14:41) ----------
+    // Encima del cifrado de siempre de la llamada (DTLS-SRTP, clásico), cada fragmento de voz e imagen va cifrado con AES-256-GCM con
+    // una llave que sale de la sesión post-cuántica del chat (o, en el traspaso al teléfono, de la llave del código QR). Quien llama
+    // dice en la oferta qué sesión usa («pqm»); quien contesta la busca y, si la tiene, lo confirma («pqm: 1»). Solo entonces se
+    // pone la capa en los dos lados; si la otra persona tiene una versión anterior, la llamada sigue con el cifrado de siempre y el
+    // título no dice «post-cuántica».
+    // De momento, solo en navegadores Chromium (Chrome, Edge, Brave, Opera, Samsung Internet y el programa ZERO), los probados; en
+    // Safari y Firefox la llamada sigue con el cifrado de siempre hasta probarlo en sus equipos (y el título no dice «post-cuántica»)
+    const CHROMIUM = !!(navigator.userAgentData && Array.isArray(navigator.userAgentData.brands) && navigator.userAgentData.brands.some((b) => /Chromium/.test(b.brand)));
+    const PQM = CHROMIUM && typeof raiz.RTCRtpScriptTransform === 'function' && typeof raiz.Worker === 'function';
+    let obrero = null, pqCuenta = null, pqOferta = null;
+    const pqDe = new WeakMap(); // conexión → { tx, rx, puestos, confirmada, visto }
+    const pqPorRx = new Map(); // id de la llave de recibir → su contexto (para el aviso «visto» del obrero)
+    function obreroPq() {
+      if (!obrero) {
+        obrero = new Worker('medios-pq.js?v=20261101a');
+        obrero.onmessage = (e) => {
+          const m = e.data || {}; if (m.cuenta) pqCuenta = m.cuenta;
+          if (m.tipo === 'visto') { const x = pqPorRx.get(m.id); if (x) { x.visto = true; pinta(); } }
+          if (m.tipo === 'fallo' && estado === 'hablando' && m.cuenta && m.cuenta.seguidos > 40) di(t('No se puede descifrar el sonido o la imagen de la otra persona.'), true);
+        };
+      }
+      return obrero;
+    }
+    const nuevoId = () => 'k' + Math.random().toString(36).slice(2) + Math.random().toString(36).slice(2);
+    // El navegador solo deja poner las transformaciones antes de negociar: se ponen al crear cada conexión (en claro hasta que la
+    // otra persona confirma la capa) y a cada emisor y receptor que aparece (addTrack, addTransceiver, la llegada de su pista)
+    function pqNueva(p) {
+      if (!PQM || !p || pqDe.get(p)) return;
+      try {
+        const w = obreroPq(), x = { tx: nuevoId(), rx: nuevoId(), puestos: new WeakSet(), confirmada: false, visto: false };
+        pqDe.set(p, x); pqPorRx.set(x.rx, x);
+        w.postMessage({ tipo: 'modo', id: x.tx, modo: 'claro' }); w.postMessage({ tipo: 'modo', id: x.rx, modo: 'auto' });
+        const at = p.addTrack.bind(p), ac = p.addTransceiver.bind(p);
+        p.addTrack = (...a) => { const r = at(...a); ponPq(p); return r; };
+        p.addTransceiver = (...a) => { const r = ac(...a); ponPq(p); return r; };
+        p.addEventListener('track', () => ponPq(p));
+        for (const f of ['setLocalDescription', 'setRemoteDescription']) { const orig = p[f].bind(p); p[f] = async (...a) => { const r = await orig(...a); codecsPq(p); return r; }; }
+        ponPq(p);
+      } catch (_) {}
+    }
+    function ponPq(p) {
+      const x = pqDe.get(p); if (!x) return;
+      const w = obreroPq();
+      for (const tr of p.getTransceivers()) {
+        const kind = tr.receiver && tr.receiver.track ? tr.receiver.track.kind : '';
+        if (!kind) continue;
+        if (tr.sender && !x.puestos.has(tr.sender)) { try { tr.sender.transform = new RTCRtpScriptTransform(w, { op: 'cifra', k: x.tx, kind }); x.puestos.add(tr.sender); } catch (_) {} }
+        if (tr.receiver && !x.puestos.has(tr.receiver)) { try { tr.receiver.transform = new RTCRtpScriptTransform(w, { op: 'descifra', k: x.rx, kind }); x.puestos.add(tr.receiver); } catch (_) {} }
+      }
+    }
+    // los tipos de carga de la negociación, por si el navegador no dice el códec de cada fragmento
+    function codecsPq(p) {
+      const x = pqDe.get(p); if (!x || !obrero) return;
+      try { const sdp = ((p.remoteDescription && p.remoteDescription.sdp) || '') + ((p.localDescription && p.localDescription.sdp) || ''); const mapa = {}; for (const m of sdp.matchAll(/a=rtpmap:(\d+) ([A-Za-z0-9-]+)\/\d+/g)) mapa[m[1]] = ('video/' + m[2]).toLowerCase(); obrero.postMessage({ tipo: 'codecs', id: x.tx, mapa }); obrero.postMessage({ tipo: 'codecs', id: x.rx, mapa }); } catch (_) {}
+    }
+    const te8 = new TextEncoder();
+    async function hkdfPq(sec, sal, info) { const k = await crypto.subtle.importKey('raw', sec, 'HKDF', false, ['deriveBits']); return new Uint8Array(await crypto.subtle.deriveBits({ name: 'HKDF', hash: 'SHA-256', salt: te8.encode(sal), info: te8.encode(info) }, k, 256)); }
+    // la otra persona confirma la capa: las dos llaves (una por sentido, del secreto de la sesión y del identificador de esa
+    // llamada) y, desde ya, lo que sale va cifrado
+    async function pqConfirma(p, sec, idL, soyQuienLlama) {
+      const x = p && pqDe.get(p); if (!x || !sec) return false;
+      try {
+        const sal = 'GUARDIANA medios v1\n' + idL;
+        const a = await hkdfPq(sec, sal, 'de quien llama'), b = await hkdfPq(sec, sal, 'de quien contesta');
+        const tx = soyQuienLlama ? a : b, rx = soyQuienLlama ? b : a;
+        obrero.postMessage({ tipo: 'llave', id: x.tx, raw: tx.buffer }, [tx.buffer]); obrero.postMessage({ tipo: 'llave', id: x.rx, raw: rx.buffer }, [rx.buffer]);
+        obrero.postMessage({ tipo: 'modo', id: x.tx, modo: 'cifra' });
+        x.confirmada = true; codecsPq(p); return true;
+      } catch (_) { return false; }
+    }
+    // la otra persona no tiene la capa: los dos sentidos, en claro (con el cifrado de siempre de la llamada)
+    function pqClaro(p) { const x = p && pqDe.get(p); if (!x || !obrero) return; obrero.postMessage({ tipo: 'modo', id: x.tx, modo: 'claro' }); obrero.postMessage({ tipo: 'modo', id: x.rx, modo: 'claro' }); }
+    function olvidaPq(p) { const x = p && pqDe.get(p); if (x && obrero) { obrero.postMessage({ tipo: 'olvida', id: x.tx }); obrero.postMessage({ tipo: 'olvida', id: x.rx }); pqPorRx.delete(x.rx); } }
+    // ¿va la capa en toda la llamada? Confirmada por la otra persona y ya descifrando lo suyo, en cada conexión que habla
+    const pqBien = (p) => { const x = p && pqDe.get(p); return !!(x && x.confirmada && x.visto); };
+    const pqActiva = () => estado === 'hablando' && !!pc && pqBien(pc) && patas.every((L) => L.estado !== 'hablando' || pqBien(L.pc));
+    // lo que ofrezco: el secreto de la sesión de esta conversación (o de la sala del traspaso)
+    const pqPide = (sala) => { try { return PQM && o.medios ? o.medios(sala || null, null) : null; } catch (_) { return null; } };
     // la llamada en grupo (ver «Llamada en grupo» más abajo): los tramos que añadí yo y el estado de grupo del tramo principal
     let patas = [], PR = null;
     const MAX_GRUPO = 4;
@@ -108,7 +187,10 @@
       giro(estado !== 'libre' && estado !== 'cerrando');
       // dueño, 28 Oct 2026, 12:49 («que sea profesional… como hacen las otras aplicaciones»): el nombre que la otra persona se puso
       // y, si no se puso ninguno, «Llamada encriptada» o «Videollamada encriptada» (antes, «La otra persona»)
-      { const base = o.nombre() || (video ? t('Videollamada encriptada') : t('Llamada encriptada'));
+      // con la capa post-cuántica en marcha (confirmada y descifrando en cada conexión), el título lo dice (dueño, 30 Oct 2026, 15:01)
+      const pqOn = pqActiva();
+      { const cap = document.querySelector('.gc-llamada-arriba .gc-llamada-cifrado'); if (cap) { let b = cap.querySelector('.ll-pq'); if (pqOn && !b) { b = document.createElement('b'); b.className = 'll-pq'; cap.appendChild(b); } if (b) { b.hidden = !pqOn; b.textContent = t('Post-cuántica'); } } }
+      { const base = o.nombre() || (video ? (pqOn ? t('Videollamada encriptada post-cuántica') : t('Videollamada encriptada')) : (pqOn ? t('Llamada encriptada post-cuántica') : t('Llamada encriptada')));
         // al sonar, si llaman desde un grupo, también cuántos son ya (para saber que se entra en una llamada en grupo)
         const tot = estado === 'hablando' ? totalGrupo() : estado === 'entrante' && PR ? 1 + Math.max(1, PR.n | 0) : 0;
         const g = t('Llamada en grupo · {n} personas').replace('{n}', tot);
@@ -768,7 +850,7 @@
           const pl = perfilH264(c), pm1 = /packetization-mode=1/i.test(c.sdpFmtpLine || '');
           return /^42e0/.test(pl) && pm1 ? 0 : /^42/.test(pl) ? 1 : 10 * pesos['video/vp8'] + 5; // los otros perfiles, detrás de VP8
         };
-        const orden = caps.codecs.slice().sort((a, b) => peso(a) - peso(b));
+        const orden = caps.codecs.slice().filter((c) => !(PQM && /\/av1$/i.test(c.mimeType))).sort((a, b) => peso(a) - peso(b));
         for (const tr of (solo ? [solo] : (p || pc).getTransceivers())) { const k = (tr.sender.track && tr.sender.track.kind) || (tr.receiver.track && tr.receiver.track.kind); if (k === 'video' && tr.setCodecPreferences) tr.setCodecPreferences(orden); }
       } catch (_) {}
     }
@@ -822,6 +904,7 @@
       const tieneTurn = ice.some((s) => [].concat(s.urls).some((u) => /^turns?:/.test(u)));
       // fuera de las pruebas locales, solo por el relé: sin TURN la llamada no conecta, nunca va directa (las IP quedarían a la vista)
       pc = new RTCPeerConnection({ iceServers: ice, iceTransportPolicy: (tieneTurn || !LOCAL) ? 'relay' : 'all', bundlePolicy: 'max-bundle', rtcpMuxPolicy: 'require' });
+      pqNueva(pc);
       const remoto = new MediaStream(); mudasRemotas = [];
       pc.ontrack = (e) => {
         // llamada a tres: una segunda imagen que llega por la misma llamada es la de la tercera persona (la trae el puente)
@@ -986,8 +1069,9 @@
       di(t('Llamando…'));
       const of = await pc.createOffer(); await pc.setLocalDescription({ type: of.type, sdp: altaFidelidad(of.sdp) });
       await sasNuevo();
-      ultimaOferta = { acto: 'oferta', id: idLlamada, video: video ? 1 : undefined, equipo: EQUIPO, plat: PLAT, sas: sas ? b64u(sas.compromiso) : undefined, tres: TRES, llevar: 1 };
-      o.manda({ acto: 'oferta', id: idLlamada, sdp: pc.localDescription.sdp, video: video ? 1 : undefined, equipo: EQUIPO, plat: PLAT, sas: sas ? b64u(sas.compromiso) : undefined, tres: TRES, llevar: 1 });
+      pqOferta = pqPide(null);
+      ultimaOferta = { acto: 'oferta', id: idLlamada, video: video ? 1 : undefined, equipo: EQUIPO, plat: PLAT, sas: sas ? b64u(sas.compromiso) : undefined, tres: TRES, llevar: 1, pqm: pqOferta ? pqOferta.sid : undefined };
+      o.manda({ acto: 'oferta', id: idLlamada, sdp: pc.localDescription.sdp, video: video ? 1 : undefined, equipo: EQUIPO, plat: PLAT, sas: sas ? b64u(sas.compromiso) : undefined, tres: TRES, llevar: 1, pqm: pqOferta ? pqOferta.sid : undefined });
       if (estado === 'saliente') { tono('saliente'); esperaRespuesta(true); }
       pinta();
     }
@@ -1028,7 +1112,7 @@
       }
       if (m.id && idLlamada && m.id !== idLlamada) return;
       if (m.acto === 'sonando') { if (estado === 'saliente') di(t('Sonando…')); return; }
-      if (m.acto === 'respuesta' && pc && typeof m.sdp === 'string') { suTres = (m.tres | 0) >= 1; suLlevar = m.llevar === 1; paraTono(); clearTimeout(sinRespuesta); await pc.setRemoteDescription({ type: 'answer', sdp: m.sdp }); for (const c of pendientes) { try { await pc.addIceCandidate(c); } catch (_) {} } pendientes = []; di(t('Conectando…')); if (video) topeVideo();
+      if (m.acto === 'respuesta' && pc && typeof m.sdp === 'string') { suTres = (m.tres | 0) >= 1; suLlevar = m.llevar === 1; paraTono(); clearTimeout(sinRespuesta); await pc.setRemoteDescription({ type: 'answer', sdp: m.sdp }); if (m.pqm === 1 && pqOferta) await pqConfirma(pc, pqOferta.sec, idLlamada, true); else pqClaro(pc); pqOferta = null; for (const c of pendientes) { try { await pc.addIceCandidate(c); } catch (_) {} } pendientes = []; di(t('Conectando…')); if (video) topeVideo();
         if (sas && inicioYo) { try { sas.suPub = typeof m.sas === 'string' && m.sas.length < 120 ? deB64u(m.sas) : null; } catch (_) { sas.suPub = null; } if (sas.suPub && sas.suPub.length === 65) { o.manda({ acto: 'sas', id: idLlamada, p: b64u(sas.pub) }); sasCalcula(); } else { sas.estado = 'roto'; pintaSas(); } }
         return; }
       // la clave revelada de quien llama: tiene que ser la del compromiso de la oferta; si no, la comprobación queda rota
@@ -1066,11 +1150,15 @@
       // la respuesta decide el códec de los dos sentidos: si cualquiera de los dos es teléfono o Safari, los compatibles
       // quien contesta decide el códec de los dos sentidos: con un Android en la llamada (o de quien llama no se sabe el sistema y aquí
       // es Android), VP8; entre iPhones, H.264
-      const suPlat = typeof m.plat === 'string' ? m.plat : '', vp8 = PLAT === 'android' || suPlat === 'android' || (!!suPlat && suPlat !== PLAT);
+      const quierePq = PQM && typeof m.pqm === 'string';
+      const suPlat = typeof m.plat === 'string' ? m.plat : '', vp8 = quierePq || PLAT === 'android' || suPlat === 'android' || (!!suPlat && suPlat !== PLAT);
       if (video) prefiereCodecs(EQUIPO === 'compatible' || m.equipo === 'compatible' ? 'compatible' : 'escritorio', vp8);
+      let pqSi = false;
+      if (PQM && typeof m.pqm === 'string' && m.pqm.length <= 32 && o.medios) { let ll = null; try { ll = o.medios(null, m.pqm); } catch (_) {} if (ll) pqSi = await pqConfirma(pc, ll.sec, idLlamada, false); }
+      if (!pqSi) pqClaro(pc);
       for (const c of pendientes) { try { await pc.addIceCandidate(c); } catch (_) {} } pendientes = [];
       const an = await pc.createAnswer(); await pc.setLocalDescription({ type: an.type, sdp: altaFidelidad(an.sdp) });
-      o.manda({ acto: 'respuesta', id: idLlamada, sdp: pc.localDescription.sdp, sas: sas ? b64u(sas.pub) : undefined, tres: TRES, llevar: 1 });
+      o.manda({ acto: 'respuesta', id: idLlamada, sdp: pc.localDescription.sdp, sas: sas ? b64u(sas.pub) : undefined, tres: TRES, llevar: 1, pqm: pqSi ? 1 : undefined });
       if (video) { topeVideo(); if (!cam) o.manda({ acto: 'camara', id: idLlamada, on: false }); }
       pinta();
       di(t('Conectando…'));
@@ -1327,6 +1415,7 @@
       patas.push(L);
       const tieneTurn = ice.some((s) => [].concat(s.urls).some((u) => /^turns?:/.test(u)));
       const p = L.pc = new RTCPeerConnection({ iceServers: ice, iceTransportPolicy: (tieneTurn || !LOCAL) ? 'relay' : 'all', bundlePolicy: 'max-bundle', rtcpMuxPolicy: 'require' });
+      pqNueva(p);
       cablea(L);
       mezclaAlDia();
       const d3 = destDe(L), voz3 = d3 && d3.stream.getAudioTracks()[0];
@@ -1340,7 +1429,8 @@
       try {
         const of = await p.createOffer(); await p.setLocalDescription({ type: of.type, sdp: altaFidelidad(of.sdp) });
         if (!patas.includes(L)) return false;
-        tmanda(L, { acto: 'oferta', id, sdp: p.localDescription.sdp, video: video ? 1 : undefined, equipo: 'compatible', plat: PLAT, tres: TRES, puente: 1, n: L.llevar ? 1 : totalGrupo(), llevar: 1 });
+        L.pqOferta = pqPide(L.sala);
+        tmanda(L, { acto: 'oferta', id, sdp: p.localDescription.sdp, video: video ? 1 : undefined, equipo: 'compatible', plat: PLAT, tres: TRES, puente: 1, n: L.llevar ? 1 : totalGrupo(), llevar: 1, pqm: L.pqOferta ? L.pqOferta.sid : undefined });
       } catch (_) { quitaPata(L, 'fallo'); return false; }
       L.sinRespuesta = setTimeout(() => { if (patas.includes(L) && L.estado === 'saliente') { tmanda(L, { acto: 'colgar', id }); quitaPata(L, 'sin-respuesta'); } }, SIN_RESPUESTA_MS);
       return true;
@@ -1391,7 +1481,7 @@
     function quitaPata(L, por, final) {
       const i = patas.indexOf(L); if (i < 0) return; patas.splice(i, 1);
       clearTimeout(L.sinRespuesta); clearTimeout(L.corte);
-      try { L.pc.close(); } catch (_) {}
+      olvidaPq(L.pc); try { L.pc.close(); } catch (_) {}
       if (L.el) { try { L.el.srcObject = null; L.el.remove(); } catch (_) {} }
       if (!final) {
         mezclaAlDia(); reenviaImagenes(); mandaCuentas();
@@ -1414,7 +1504,7 @@
       // la llamada con la otra persona queda en su chat
       if (o.fin) o.fin({ por: 'fin', duracion: iniciada ? Date.now() - iniciada : 0, mia: inicioYo, yoColgue: false, saliente: false, voz: voz !== 'natural', video });
       if (o.cambia) o.cambia(P1.sala);
-      try { pc.close(); } catch (_) {}
+      olvidaPq(pc); try { pc.close(); } catch (_) {}
       reiniciando = false; clearTimeout(reinicioT); reinicioT = null; clearTimeout(reinicioFin); reinicioFin = null;
       pc = P1.pc; idLlamada = P1.id; inicioYo = true; suTres = P1.sabe; suLlevar = !!P1.sabeLlevar; mudasRemotas = []; pendientes = [];
       pc.oniceconnectionstatechange = alIcePc; pc.onnegotiationneeded = alNegociarPc;
@@ -1464,7 +1554,7 @@
       if (m.acto === 'respuesta') {
         if (typeof m.sdp !== 'string' || m.sdp.length > 60000) return true;
         L.sabe = (m.tres | 0) >= 1; L.sabeLlevar = m.llevar === 1;
-        try { await p.setRemoteDescription({ type: 'answer', sdp: m.sdp }); for (const c of L.pendientes) { try { await p.addIceCandidate(c); } catch (_) {} } L.pendientes = []; } catch (_) { tmanda(L, { acto: 'colgar', id: L.id }); quitaPata(L, 'fallo'); }
+        try { await p.setRemoteDescription({ type: 'answer', sdp: m.sdp }); if (m.pqm === 1 && L.pqOferta) await pqConfirma(p, L.pqOferta.sec, L.id, true); else pqClaro(p); L.pqOferta = null; for (const c of L.pendientes) { try { await p.addIceCandidate(c); } catch (_) {} } L.pendientes = []; } catch (_) { tmanda(L, { acto: 'colgar', id: L.id }); quitaPata(L, 'fallo'); }
         return true;
       }
       if (m.acto === 'ice' && m.cand && typeof m.cand === 'object') { if (p.remoteDescription) { try { await p.addIceCandidate(m.cand); } catch (_) {} } else if (L.pendientes.length < 64) L.pendientes.push(m.cand); return true; }
@@ -1495,7 +1585,8 @@
       paraTono(); clearTimeout(sinRespuesta); clearTimeout(ausenteT); ausenteT = null; ultimaOferta = null; sueltaWake(); sueltaCompleta();
       clearInterval(reloj); reloj = null; clearInterval(sondeo); sondeo = null;
       reiniciando = false; clearTimeout(reinicioT); reinicioT = null; clearTimeout(reinicioFin); reinicioFin = null;
-      if (pc) { try { pc.close(); } catch (_) {} pc = null; }
+      if (pc) { olvidaPq(pc); try { pc.close(); } catch (_) {} pc = null; }
+      pqOferta = null;
       for (const s of [mic, envio, envioVoz, cam]) if (s) s.getTracks().forEach((x) => x.stop());
       if (muda) { try { muda.stop(); } catch (_) {} muda = null; }
       envioVoz = null; restableceSalida();
@@ -1919,7 +2010,7 @@
     if (FINO.addEventListener) FINO.addEventListener('change', escala);
     escala();
     { const vlx = vidLocal(); if (vlx) { vlx.addEventListener('loadedmetadata', () => miImagen()); vlx.addEventListener('resize', () => colocaAsa()); } }
-    return { llamar, recibe, colgar, eligeVoz, seFue, volvio, anade, recibeTercero, get llevando() { return patas.some((L) => L.llevar); }, esTramo: (sala) => patas.some((L) => L.sala === String(sala)), get terceroSala() { return patas[0] ? patas[0].sala : null; }, get aTres() { return enGrupo(); }, get total() { return estado === 'hablando' ? totalGrupo() : 0; }, get puedeAnadir() { return puedeAnadir(); }, get mezclaEstado() { return mezcla ? mezcla.ctx.state : null; }, get depura() { const r = (L) => ({ clave: L.clave, n: L.n, estado: L.estado || 'principal', sabe: tsabe(L), cam: !!tcam(L), camOn: tcamOn(L), videos: [...L.videos].map(([k, v]) => k + (v.pista ? ':' + v.pista.readyState + (v.pista.muted ? ':muda' : '') : '')), quien: L.quien, reenvios: [...L.reenvios].map(([k, x]) => k + '→' + x.tr.mid + (x.tr.sender.track ? '' : ':vacio')), sig: tpc(L) ? tpc(L).signalingState : '' }); return { tramos: tramos(true).map(r), tiles: [...TILES.keys()] }; }, get estado() { return estado; }, get ocupado() { return ocupado(); }, get voz() { return voz; }, get cambioActivo() { return !!nodo; }, get video() { return video; }, get imagen() { return imagen; } };
+    return { llamar, recibe, colgar, eligeVoz, seFue, volvio, anade, recibeTercero, get pq() { return pqActiva(); }, get pcPrueba() { return LOCAL ? pc : null; }, pqCuenta: () => new Promise((r) => { if (!obrero) return r(null); const f = (e) => { if (e.data && e.data.tipo === 'cuenta') { obrero.removeEventListener('message', f); r(e.data.cuenta); } }; obrero.addEventListener('message', f); obrero.postMessage({ tipo: 'cuenta' }); setTimeout(() => r(pqCuenta), 1500); }), get llevando() { return patas.some((L) => L.llevar); }, esTramo: (sala) => patas.some((L) => L.sala === String(sala)), get terceroSala() { return patas[0] ? patas[0].sala : null; }, get aTres() { return enGrupo(); }, get total() { return estado === 'hablando' ? totalGrupo() : 0; }, get puedeAnadir() { return puedeAnadir(); }, get mezclaEstado() { return mezcla ? mezcla.ctx.state : null; }, get depura() { const r = (L) => ({ clave: L.clave, n: L.n, estado: L.estado || 'principal', sabe: tsabe(L), cam: !!tcam(L), camOn: tcamOn(L), videos: [...L.videos].map(([k, v]) => k + (v.pista ? ':' + v.pista.readyState + (v.pista.muted ? ':muda' : '') : '')), quien: L.quien, reenvios: [...L.reenvios].map(([k, x]) => k + '→' + x.tr.mid + (x.tr.sender.track ? '' : ':vacio')), sig: tpc(L) ? tpc(L).signalingState : '' }); return { tramos: tramos(true).map(r), tiles: [...TILES.keys()] }; }, get estado() { return estado; }, get ocupado() { return ocupado(); }, get voz() { return voz; }, get cambioActivo() { return !!nodo; }, get video() { return video; }, get imagen() { return imagen; } };
   }
   raiz.GuardianaLlamada = { crea, VOCES };
 })(typeof window !== 'undefined' ? window : globalThis);

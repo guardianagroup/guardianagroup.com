@@ -3630,7 +3630,11 @@
 "Mientras esta pantalla siga abierta, la llamada se recupera sola. Si la cierras, se borra.":"এই স্ক্রিন খোলা থাকা পর্যন্ত কলটি নিজে থেকেই ফিরে আসে। আপনি এটি বন্ধ করলে কলটি মুছে যায়।",
 "Para que no te interrumpan otras llamadas, activa «No molestar» en el teléfono.":"অন্য কলে যাতে বিঘ্ন না ঘটে, ফোনে “বিরক্ত করবেন না” চালু করুন।",
 "Pasando la llamada al teléfono de {n}…":"কলটি {n}-এর ফোনে সরানো হচ্ছে…",
-"La llamada continúa en el teléfono de {n}.":"কলটি {n}-এর ফোনে চলছে।"
+"La llamada continúa en el teléfono de {n}.":"কলটি {n}-এর ফোনে চলছে।",
+"Videollamada encriptada post-cuántica":"পোস্ট-কোয়ান্টাম এনক্রিপ্টেড ভিডিও কল",
+"Llamada encriptada post-cuántica":"পোস্ট-কোয়ান্টাম এনক্রিপ্টেড কল",
+"Post-cuántica":"পোস্ট-কোয়ান্টাম",
+"No se puede descifrar el sonido o la imagen de la otra persona.":"অন্য ব্যক্তির শব্দ বা ছবি ডিক্রিপ্ট করা যাচ্ছে না।"
 },
 "p":{
 "intento":"আজ সবচেয়ে বেশি চেষ্টা: {1}, {2} {2?বার|বার}।",

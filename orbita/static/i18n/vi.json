@@ -3630,7 +3630,11 @@
 "Mientras esta pantalla siga abierta, la llamada se recupera sola. Si la cierras, se borra.":"Chừng nào màn hình này còn mở, cuộc gọi sẽ tự khôi phục. Nếu bạn đóng màn hình, cuộc gọi sẽ bị xóa.",
 "Para que no te interrumpan otras llamadas, activa «No molestar» en el teléfono.":"Để không bị cuộc gọi khác làm gián đoạn, hãy bật “Không làm phiền” trên điện thoại.",
 "Pasando la llamada al teléfono de {n}…":"Đang chuyển cuộc gọi sang điện thoại của {n}…",
-"La llamada continúa en el teléfono de {n}.":"Cuộc gọi đang tiếp tục trên điện thoại của {n}."
+"La llamada continúa en el teléfono de {n}.":"Cuộc gọi đang tiếp tục trên điện thoại của {n}.",
+"Videollamada encriptada post-cuántica":"Cuộc gọi video được mã hóa hậu lượng tử",
+"Llamada encriptada post-cuántica":"Cuộc gọi được mã hóa hậu lượng tử",
+"Post-cuántica":"Hậu lượng tử",
+"No se puede descifrar el sonido o la imagen de la otra persona.":"Không thể giải mã âm thanh hoặc hình ảnh của người kia."
 },
 "p":{
 "intento":"Cố gắng nhiều nhất hôm nay: {1}, {2} {2?lần|lần}.",

@@ -3630,7 +3630,11 @@
 "Mientras esta pantalla siga abierta, la llamada se recupera sola. Si la cierras, se borra.":"تا وقتی این صفحه باز بماند، تماس خودبه‌خود بازیابی می‌شود. اگر آن را ببندید، تماس پاک می‌شود.",
 "Para que no te interrumpan otras llamadas, activa «No molestar» en el teléfono.":"برای اینکه تماس‌های دیگر مزاحمتان نشوند، «مزاحم نشوید» را در تلفن روشن کنید.",
 "Pasando la llamada al teléfono de {n}…":"در حال انتقال تماس به تلفن {n}…",
-"La llamada continúa en el teléfono de {n}.":"تماس روی تلفن {n} ادامه دارد."
+"La llamada continúa en el teléfono de {n}.":"تماس روی تلفن {n} ادامه دارد.",
+"Videollamada encriptada post-cuántica":"تماس تصویری رمزگذاری‌شدهٔ پساکوانتومی",
+"Llamada encriptada post-cuántica":"تماس رمزگذاری‌شدهٔ پساکوانتومی",
+"Post-cuántica":"پساکوانتومی",
+"No se puede descifrar el sonido o la imagen de la otra persona.":"رمزگشایی صدا یا تصویر طرف مقابل ممکن نیست."
 },
 "p":{
 "intento":"بیشترین تلاش امروز: {1}، {2} {2?بار|بار}.",

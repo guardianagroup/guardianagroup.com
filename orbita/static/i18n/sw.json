@@ -3630,7 +3630,11 @@
 "Mientras esta pantalla siga abierta, la llamada se recupera sola. Si la cierras, se borra.":"Maadamu skrini hii iko wazi, simu hurejea yenyewe. Ukiifunga, simu inafutwa.",
 "Para que no te interrumpan otras llamadas, activa «No molestar» en el teléfono.":"Ili simu nyingine zisikukatize, washa «Usinisumbue» kwenye simu ya mkononi.",
 "Pasando la llamada al teléfono de {n}…":"Inahamishia simu kwenye simu ya mkononi ya {n}…",
-"La llamada continúa en el teléfono de {n}.":"Simu inaendelea kwenye simu ya mkononi ya {n}."
+"La llamada continúa en el teléfono de {n}.":"Simu inaendelea kwenye simu ya mkononi ya {n}.",
+"Videollamada encriptada post-cuántica":"Simu ya video iliyosimbwa fiche ya baada ya kwantum",
+"Llamada encriptada post-cuántica":"Simu iliyosimbwa fiche ya baada ya kwantum",
+"Post-cuántica":"Baada ya kwantum",
+"No se puede descifrar el sonido o la imagen de la otra persona.":"Sauti au picha ya mtu mwingine haiwezi kufumbuliwa."
 },
 "p":{
 "intento":"Iliyojaribu zaidi leo: {1}, {2?mara|mara} {2}.",

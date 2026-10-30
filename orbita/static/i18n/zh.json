@@ -3630,7 +3630,11 @@
 "Mientras esta pantalla siga abierta, la llamada se recupera sola. Si la cierras, se borra.":"只要此屏幕保持打开，通话就会自动恢复。如果你关闭它，通话将被删除。",
 "Para que no te interrumpan otras llamadas, activa «No molestar» en el teléfono.":"为免被其他来电打断，请在手机上打开“勿扰模式”。",
 "Pasando la llamada al teléfono de {n}…":"正在将通话转到 {n} 的手机…",
-"La llamada continúa en el teléfono de {n}.":"通话在 {n} 的手机上继续。"
+"La llamada continúa en el teléfono de {n}.":"通话在 {n} 的手机上继续。",
+"Videollamada encriptada post-cuántica":"后量子加密视频通话",
+"Llamada encriptada post-cuántica":"后量子加密通话",
+"Post-cuántica":"后量子",
+"No se puede descifrar el sonido o la imagen de la otra persona.":"无法解密对方的声音或画面。"
 },
 "p":{
 "intento":"今天尝试最多的：{1}，{2} {2?次|次}。",

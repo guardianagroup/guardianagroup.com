@@ -3630,7 +3630,11 @@
 "Mientras esta pantalla siga abierta, la llamada se recupera sola. Si la cierras, se borra.":"Dokud zůstane tato obrazovka otevřená, hovor se obnoví sám. Pokud ji zavřete, hovor se smaže.",
 "Para que no te interrumpan otras llamadas, activa «No molestar» en el teléfono.":"Aby vás nerušily další hovory, zapněte v telefonu „Nerušit“.",
 "Pasando la llamada al teléfono de {n}…":"Přepojování hovoru do telefonu {n}…",
-"La llamada continúa en el teléfono de {n}.":"Hovor pokračuje v telefonu {n}."
+"La llamada continúa en el teléfono de {n}.":"Hovor pokračuje v telefonu {n}.",
+"Videollamada encriptada post-cuántica":"Postkvantově šifrovaný videohovor",
+"Llamada encriptada post-cuántica":"Postkvantově šifrovaný hovor",
+"Post-cuántica":"Postkvantová",
+"No se puede descifrar el sonido o la imagen de la otra persona.":"Zvuk nebo obraz druhé osoby nelze dešifrovat."
 },
 "p":{
 "intento":"Nejvíc se dnes snažila: {1}, {2}{2?krát|krát}.",

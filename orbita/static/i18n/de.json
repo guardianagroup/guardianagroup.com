@@ -3630,7 +3630,11 @@
 "Mientras esta pantalla siga abierta, la llamada se recupera sola. Si la cierras, se borra.":"Solange dieser Bildschirm geöffnet bleibt, stellt sich der Anruf von selbst wieder her. Wenn du ihn schließt, wird der Anruf gelöscht.",
 "Para que no te interrumpan otras llamadas, activa «No molestar» en el teléfono.":"Damit dich andere Anrufe nicht unterbrechen, aktiviere „Nicht stören“ auf dem Telefon.",
 "Pasando la llamada al teléfono de {n}…":"Der Anruf wird auf das Telefon von {n} übertragen…",
-"La llamada continúa en el teléfono de {n}.":"Der Anruf läuft auf dem Telefon von {n} weiter."
+"La llamada continúa en el teléfono de {n}.":"Der Anruf läuft auf dem Telefon von {n} weiter.",
+"Videollamada encriptada post-cuántica":"Post-Quanten-verschlüsselter Videoanruf",
+"Llamada encriptada post-cuántica":"Post-Quanten-verschlüsselter Anruf",
+"Post-cuántica":"Post-Quanten",
+"No se puede descifrar el sonido o la imagen de la otra persona.":"Ton oder Bild der anderen Person lässt sich nicht entschlüsseln."
 },
 "p":{
 "intento":"Hat es heute am häufigsten versucht: {1}, {2} {2?Mal|Mal}.",

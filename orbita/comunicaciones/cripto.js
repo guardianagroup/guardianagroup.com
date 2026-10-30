@@ -112,11 +112,13 @@
     const info = pq
       ? 'GUARDIANA sesión v3 ECDH-P256+ML-KEM-768\n' + hex(hA) + '\n' + hex(efA) + '\n' + hex(hB) + '\n' + hex(efB) + '\n' + hex(await sha256(pq.ek)) + '\n' + hex(await sha256(pq.ct))
       : 'GUARDIANA sesión v2\n' + hex(hA) + '\n' + hex(efA) + '\n' + hex(hB) + '\n' + hex(efB);
-    const r = await hkdf(ikm, deHex(sala), info, 96);
+    // 128 bytes: los 96 de siempre (HKDF da los mismos primeros bytes pida 96 o 128) y 32 más, el secreto de las llamadas
+    // (la capa post-cuántica del audio y el vídeo, llamada.js; 30 Oct 2026)
+    const r = await hkdf(ikm, deHex(sala), info, 128);
     ikm.fill(0); efef.fill(0); idA_efB.fill(0); efA_idB.fill(0);
-    const ab = new Uint8Array(r.subarray(0, 32)), ba = new Uint8Array(r.subarray(32, 64)), hash = new Uint8Array(r.subarray(64, 96));
+    const ab = new Uint8Array(r.subarray(0, 32)), ba = new Uint8Array(r.subarray(32, 64)), hash = new Uint8Array(r.subarray(64, 96)), medios = new Uint8Array(r.subarray(96, 128));
     r.fill(0);
-    return { envio: inicio ? ab : ba, recibo: inicio ? ba : ab, hash, pq: !!pq };
+    return { envio: inicio ? ab : ba, recibo: inicio ? ba : ab, hash, medios, pq: !!pq };
   }
 
   // ---- ML-KEM-768 (FIPS 203), en híbrido con el ECDH ----
@@ -257,11 +259,12 @@
     const hA = inicio ? u8(miHuella) : u8(suHuella), hB = inicio ? u8(suHuella) : u8(miHuella);
     const efA = inicio ? ef.pub : u8(suyo.ef), efB = inicio ? u8(suyo.ef) : ef.pub;
     const info = 'GUARDIANA sesión v4 blindada P-384+ML-KEM-1024 SHA-384\n' + hex(hA) + '\n' + hex(efA) + '\n' + hex(hB) + '\n' + hex(efB) + '\n' + hex(await sha384(pq.ek)) + '\n' + hex(await sha384(pq.ct));
-    const r = await hkdf384(ikm, deHex(sala), info, 128);
+    // 176 bytes: los 128 de siempre y 48 más, el secreto de las llamadas (como en «sesion»)
+    const r = await hkdf384(ikm, deHex(sala), info, 176);
     ikm.fill(0); efef.fill(0); idA_efB.fill(0); efA_idB.fill(0);
-    const ab = new Uint8Array(r.subarray(0, 48)), ba = new Uint8Array(r.subarray(48, 96)), hash = new Uint8Array(r.subarray(96, 128));
+    const ab = new Uint8Array(r.subarray(0, 48)), ba = new Uint8Array(r.subarray(48, 96)), hash = new Uint8Array(r.subarray(96, 128)), medios = new Uint8Array(r.subarray(128, 176));
     r.fill(0);
-    return { envio: inicio ? ab : ba, recibo: inicio ? ba : ab, hash, pq: true, blindada: true };
+    return { envio: inicio ? ab : ba, recibo: inicio ? ba : ab, hash, medios, pq: true, blindada: true };
   }
   // Cadena blindada: como «cadena», con HMAC-SHA-384; la clave de mensaje son los 32 primeros bytes (AES-256).
   function cadenaB(ck) {

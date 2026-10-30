@@ -3630,7 +3630,11 @@
 "Mientras esta pantalla siga abierta, la llamada se recupera sola. Si la cierras, se borra.":"Niin kauan kuin tämä näyttö on auki, puhelu palautuu itsestään. Jos suljet sen, puhelu poistetaan.",
 "Para que no te interrumpan otras llamadas, activa «No molestar» en el teléfono.":"Jotta muut puhelut eivät keskeytä sinua, ota puhelimessa käyttöön ”Älä häiritse”.",
 "Pasando la llamada al teléfono de {n}…":"Puhelu siirretään henkilön {n} puhelimeen…",
-"La llamada continúa en el teléfono de {n}.":"Puhelu jatkuu henkilön {n} puhelimessa."
+"La llamada continúa en el teléfono de {n}.":"Puhelu jatkuu henkilön {n} puhelimessa.",
+"Videollamada encriptada post-cuántica":"Kvanttikestävä salattu videopuhelu",
+"Llamada encriptada post-cuántica":"Kvanttikestävä salattu puhelu",
+"Post-cuántica":"Kvanttikestävä",
+"No se puede descifrar el sonido o la imagen de la otra persona.":"Toisen osapuolen äänen tai kuvan salausta ei voi purkaa."
 },
 "p":{
 "intento":"Eniten yrittänyt tänään: {1}, {2} {2?kerta|kertaa}.",

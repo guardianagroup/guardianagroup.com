@@ -3630,7 +3630,11 @@
 "Mientras esta pantalla siga abierta, la llamada se recupera sola. Si la cierras, se borra.":"Поки цей екран відкритий, дзвінок відновлюється сам. Якщо ви його закриєте, дзвінок видалиться.",
 "Para que no te interrumpan otras llamadas, activa «No molestar» en el teléfono.":"Щоб вас не переривали інші дзвінки, увімкніть на телефоні «Не турбувати».",
 "Pasando la llamada al teléfono de {n}…":"Переносимо дзвінок на телефон {n}…",
-"La llamada continúa en el teléfono de {n}.":"Дзвінок триває на телефоні {n}."
+"La llamada continúa en el teléfono de {n}.":"Дзвінок триває на телефоні {n}.",
+"Videollamada encriptada post-cuántica":"Відеодзвінок із постквантовим шифруванням",
+"Llamada encriptada post-cuántica":"Дзвінок із постквантовим шифруванням",
+"Post-cuántica":"Постквантове",
+"No se puede descifrar el sonido o la imagen de la otra persona.":"Не вдається розшифрувати звук або зображення співрозмовника."
 },
 "p":{
 "intento":"Найнаполегливіша сьогодні: {1}, {2} {2?раз|разів}.",

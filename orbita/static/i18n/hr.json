@@ -3630,7 +3630,11 @@
 "Mientras esta pantalla siga abierta, la llamada se recupera sola. Si la cierras, se borra.":"Dok ovaj zaslon ostaje otvoren, poziv se sam oporavlja. Ako ga zatvorite, poziv se briše.",
 "Para que no te interrumpan otras llamadas, activa «No molestar» en el teléfono.":"Da vas ne bi prekidali drugi pozivi, uključite „Ne uznemiruj” na telefonu.",
 "Pasando la llamada al teléfono de {n}…":"Prebacivanje poziva na telefon kontakta {n}…",
-"La llamada continúa en el teléfono de {n}.":"Poziv se nastavlja na telefonu kontakta {n}."
+"La llamada continúa en el teléfono de {n}.":"Poziv se nastavlja na telefonu kontakta {n}.",
+"Videollamada encriptada post-cuántica":"Postkvantno šifrirani videopoziv",
+"Llamada encriptada post-cuántica":"Postkvantno šifrirani poziv",
+"Post-cuántica":"Postkvantno",
+"No se puede descifrar el sonido o la imagen de la otra persona.":"Zvuk ili slika druge osobe ne mogu se dešifrirati."
 },
 "p":{
 "intento":"Najupornija danas: {1}, {2} {2?put|puta}.",

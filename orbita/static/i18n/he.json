@@ -3630,7 +3630,11 @@
 "Mientras esta pantalla siga abierta, la llamada se recupera sola. Si la cierras, se borra.":"כל עוד המסך הזה נשאר פתוח, השיחה מתחדשת מעצמה. אם תסגרו אותו, השיחה נמחקת.",
 "Para que no te interrumpan otras llamadas, activa «No molestar» en el teléfono.":"כדי ששיחות אחרות לא יפריעו לכם, הפעילו את \"נא לא להפריע\" בטלפון.",
 "Pasando la llamada al teléfono de {n}…":"מעביר את השיחה לטלפון של {n}…",
-"La llamada continúa en el teléfono de {n}.":"השיחה ממשיכה בטלפון של {n}."
+"La llamada continúa en el teléfono de {n}.":"השיחה ממשיכה בטלפון של {n}.",
+"Videollamada encriptada post-cuántica":"שיחת וידאו מוצפנת פוסט-קוונטית",
+"Llamada encriptada post-cuántica":"שיחה מוצפנת פוסט-קוונטית",
+"Post-cuántica":"פוסט-קוונטית",
+"No se puede descifrar el sonido o la imagen de la otra persona.":"לא ניתן לפענח את הקול או התמונה של הצד השני."
 },
 "p":{
 "intento":"ניסתה הכי הרבה היום: {1}, {2} {2?פעם|פעמים}.",

@@ -3630,7 +3630,11 @@
 "Mientras esta pantalla siga abierta, la llamada se recupera sola. Si la cierras, se borra.":"ตราบใดที่หน้าจอนี้ยังเปิดอยู่ การโทรจะกู้คืนเอง หากคุณปิด การโทรจะถูกลบ",
 "Para que no te interrumpan otras llamadas, activa «No molestar» en el teléfono.":"เพื่อไม่ให้สายอื่นมารบกวน ให้เปิด «ห้ามรบกวน» บนโทรศัพท์",
 "Pasando la llamada al teléfono de {n}…":"กำลังย้ายการโทรไปที่โทรศัพท์ของ {n}…",
-"La llamada continúa en el teléfono de {n}.":"การโทรดำเนินต่อบนโทรศัพท์ของ {n}"
+"La llamada continúa en el teléfono de {n}.":"การโทรดำเนินต่อบนโทรศัพท์ของ {n}",
+"Videollamada encriptada post-cuántica":"วิดีโอคอลที่เข้ารหัสแบบหลังควอนตัม",
+"Llamada encriptada post-cuántica":"การโทรที่เข้ารหัสแบบหลังควอนตัม",
+"Post-cuántica":"หลังควอนตัม",
+"No se puede descifrar el sonido o la imagen de la otra persona.":"ไม่สามารถถอดรหัสเสียงหรือภาพของอีกฝ่ายได้"
 },
 "p":{
 "intento":"พยายามมากที่สุดวันนี้: {1}, {2} {2?ครั้ง|ครั้ง}",

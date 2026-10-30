@@ -3630,7 +3630,11 @@
 "Mientras esta pantalla siga abierta, la llamada se recupera sola. Si la cierras, se borra.":"Όσο αυτή η οθόνη μένει ανοιχτή, η κλήση αποκαθίσταται μόνη της. Αν την κλείσετε, η κλήση διαγράφεται.",
 "Para que no te interrumpan otras llamadas, activa «No molestar» en el teléfono.":"Για να μη σας διακόπτουν άλλες κλήσεις, ενεργοποιήστε τη λειτουργία «Μην ενοχλείτε» στο τηλέφωνο.",
 "Pasando la llamada al teléfono de {n}…":"Μεταφορά της κλήσης στο τηλέφωνο του ατόμου {n}…",
-"La llamada continúa en el teléfono de {n}.":"Η κλήση συνεχίζεται στο τηλέφωνο του ατόμου {n}."
+"La llamada continúa en el teléfono de {n}.":"Η κλήση συνεχίζεται στο τηλέφωνο του ατόμου {n}.",
+"Videollamada encriptada post-cuántica":"Μετακβαντική κρυπτογραφημένη βιντεοκλήση",
+"Llamada encriptada post-cuántica":"Μετακβαντική κρυπτογραφημένη κλήση",
+"Post-cuántica":"Μετακβαντική",
+"No se puede descifrar el sonido o la imagen de la otra persona.":"Δεν είναι δυνατή η αποκρυπτογράφηση του ήχου ή της εικόνας του άλλου ατόμου."
 },
 "p":{
 "intento":"Η πιο επίμονη σήμερα: {1}, {2} {2?φορά|φορές}.",

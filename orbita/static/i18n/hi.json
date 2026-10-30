@@ -3630,7 +3630,11 @@
 "Mientras esta pantalla siga abierta, la llamada se recupera sola. Si la cierras, se borra.":"जब तक यह स्क्रीन खुली रहती है, कॉल अपने-आप फिर से जुड़ जाती है। अगर आप इसे बंद करते हैं, तो कॉल मिट जाती है।",
 "Para que no te interrumpan otras llamadas, activa «No molestar» en el teléfono.":"दूसरी कॉल से रुकावट न हो, इसके लिए फ़ोन पर “परेशान न करें” चालू करें।",
 "Pasando la llamada al teléfono de {n}…":"कॉल को {n} के फ़ोन पर ले जाया जा रहा है…",
-"La llamada continúa en el teléfono de {n}.":"कॉल {n} के फ़ोन पर जारी है।"
+"La llamada continúa en el teléfono de {n}.":"कॉल {n} के फ़ोन पर जारी है।",
+"Videollamada encriptada post-cuántica":"पोस्ट-क्वांटम एन्क्रिप्टेड वीडियो कॉल",
+"Llamada encriptada post-cuántica":"पोस्ट-क्वांटम एन्क्रिप्टेड कॉल",
+"Post-cuántica":"पोस्ट-क्वांटम",
+"No se puede descifrar el sonido o la imagen de la otra persona.":"दूसरे व्यक्ति की आवाज़ या तस्वीर डिक्रिप्ट नहीं की जा सकती।"
 },
 "p":{
 "intento":"आज सबसे ज़्यादा कोशिश: {1}, {2} {2?बार|बार}।",

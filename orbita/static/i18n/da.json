@@ -3630,7 +3630,11 @@
 "Mientras esta pantalla siga abierta, la llamada se recupera sola. Si la cierras, se borra.":"Så længe denne skærm er åben, genopretter opkaldet sig selv. Hvis du lukker den, slettes opkaldet.",
 "Para que no te interrumpan otras llamadas, activa «No molestar» en el teléfono.":"Slå »Forstyr ikke« til på telefonen, så andre opkald ikke afbryder dig.",
 "Pasando la llamada al teléfono de {n}…":"{n} flytter opkaldet til sin telefon…",
-"La llamada continúa en el teléfono de {n}.":"{n} fortsætter opkaldet på sin telefon."
+"La llamada continúa en el teléfono de {n}.":"{n} fortsætter opkaldet på sin telefon.",
+"Videollamada encriptada post-cuántica":"Postkvantekrypteret videoopkald",
+"Llamada encriptada post-cuántica":"Postkvantekrypteret opkald",
+"Post-cuántica":"Postkvante",
+"No se puede descifrar el sonido o la imagen de la otra persona.":"Lyd eller billede fra den anden person kan ikke dekrypteres."
 },
 "p":{
 "intento":"Den, der prøvede mest i dag: {1}, {2} {2?gang|gange}.",

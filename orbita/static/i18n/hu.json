@@ -3630,7 +3630,11 @@
 "Mientras esta pantalla siga abierta, la llamada se recupera sola. Si la cierras, se borra.":"Amíg ez a képernyő nyitva marad, a hívás magától helyreáll. Ha bezárod, a hívás törlődik.",
 "Para que no te interrumpan otras llamadas, activa «No molestar» en el teléfono.":"Hogy más hívások ne zavarjanak meg, kapcsold be a telefonon a „Ne zavarjanak” módot.",
 "Pasando la llamada al teléfono de {n}…":"A hívás átvitele {n} telefonjára…",
-"La llamada continúa en el teléfono de {n}.":"A hívás {n} telefonján folytatódik."
+"La llamada continúa en el teléfono de {n}.":"A hívás {n} telefonján folytatódik.",
+"Videollamada encriptada post-cuántica":"Posztkvantum titkosított videohívás",
+"Llamada encriptada post-cuántica":"Posztkvantum titkosított hívás",
+"Post-cuántica":"Posztkvantum",
+"No se puede descifrar el sonido o la imagen de la otra persona.":"A másik fél hangja vagy képe nem fejthető vissza."
 },
 "p":{
 "intento":"Ma a legtöbbször próbálkozott: {1}, {2} {2?alkalommal|alkalommal}.",

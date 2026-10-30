@@ -3630,7 +3630,11 @@
 "Mientras esta pantalla siga abierta, la llamada se recupera sola. Si la cierras, se borra.":"ఈ స్క్రీన్ తెరిచి ఉన్నంత వరకు, కాల్ దానంతట అదే తిరిగి వస్తుంది. మీరు దీన్ని మూసివేస్తే, కాల్ తొలగించబడుతుంది.",
 "Para que no te interrumpan otras llamadas, activa «No molestar» en el teléfono.":"ఇతర కాల్‌లు అంతరాయం కలిగించకుండా, ఫోన్‌లో «అంతరాయం కలిగించవద్దు»ను ఆన్ చేయండి.",
 "Pasando la llamada al teléfono de {n}…":"కాల్‌ను {n} ఫోన్‌కు మారుస్తోంది…",
-"La llamada continúa en el teléfono de {n}.":"కాల్ {n} ఫోన్‌లో కొనసాగుతోంది."
+"La llamada continúa en el teléfono de {n}.":"కాల్ {n} ఫోన్‌లో కొనసాగుతోంది.",
+"Videollamada encriptada post-cuántica":"పోస్ట్-క్వాంటమ్ ఎన్‌క్రిప్ట్ చేయబడిన వీడియో కాల్",
+"Llamada encriptada post-cuántica":"పోస్ట్-క్వాంటమ్ ఎన్‌క్రిప్ట్ చేయబడిన కాల్",
+"Post-cuántica":"పోస్ట్-క్వాంటమ్",
+"No se puede descifrar el sonido o la imagen de la otra persona.":"అవతలి వ్యక్తి శబ్దం లేదా చిత్రాన్ని డీక్రిప్ట్ చేయడం సాధ్యం కాదు."
 },
 "p":{
 "intento":"ఈరోజు ఎక్కువగా ప్రయత్నించింది: {1}, {2} {2?సారి|సార్లు}.",

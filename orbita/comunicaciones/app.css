@@ -2195,3 +2195,10 @@ body.modo-llevar{background:#06080C}
 .modo-llevar .gc-llamada-arriba .gc-llamada-cifrado{display:none!important}
 .llevar-aviso .llevar-aviso-2{display:block;margin-top:8px;padding-top:8px;border-top:1px solid rgba(156,195,228,.14)}
 .llevar-nota{font-size:12px;background:rgba(8,12,18,.66)}
+
+/* La capa post-cuántica del audio y el vídeo (30 Oct 2026): «· POST-CUÁNTICA» en la cápsula de arriba; el título, en dos líneas si
+   no cabe en el teléfono */
+.gc-llamada-cifrado .ll-pq{font-weight:600;font-size:.9em;color:#9CC3E4;letter-spacing:.09em;text-transform:uppercase;white-space:nowrap}
+.gc-llamada-cifrado .ll-pq::before{content:'·';margin:0 7px 0 2px;color:rgba(156,195,228,.55);letter-spacing:0}
+.gc-llamada-cifrado .ll-pq[hidden]{display:none}
+@media (max-width:760px){.gc-llamada.con-video:not(.mini) .gc-llamada-nombre{max-width:calc(100vw - 64px);white-space:normal;text-align:center;overflow:visible;text-overflow:clip}}

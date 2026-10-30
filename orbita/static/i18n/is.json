@@ -3630,7 +3630,11 @@
 "Mientras esta pantalla siga abierta, la llamada se recupera sola. Si la cierras, se borra.":"Á meðan þessi skjár er opinn kemst símtalið sjálfkrafa aftur á. Ef þú lokar honum er símtalinu eytt.",
 "Para que no te interrumpan otras llamadas, activa «No molestar» en el teléfono.":"Kveiktu á „Ónáðið ekki“ í símanum svo önnur símtöl trufli þig ekki.",
 "Pasando la llamada al teléfono de {n}…":"Færi símtalið í símann sem {n} notar…",
-"La llamada continúa en el teléfono de {n}.":"Símtalið heldur áfram í símanum sem {n} notar."
+"La llamada continúa en el teléfono de {n}.":"Símtalið heldur áfram í símanum sem {n} notar.",
+"Videollamada encriptada post-cuántica":"Skammtaþolið dulkóðað myndsímtal",
+"Llamada encriptada post-cuántica":"Skammtaþolið dulkóðað símtal",
+"Post-cuántica":"Skammtaþolið",
+"No se puede descifrar el sonido o la imagen de la otra persona.":"Ekki er hægt að afkóða hljóð eða mynd hins aðilans."
 },
 "p":{
 "intento":"Sá sem reyndi mest í dag: {1}, {2} {2?sinni|sinnum}.",

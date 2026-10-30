@@ -3630,7 +3630,11 @@
 "Mientras esta pantalla siga abierta, la llamada se recupera sola. Si la cierras, se borra.":"Selagi skrin ini terbuka, panggilan pulih dengan sendirinya. Jika anda menutupnya, panggilan dipadam.",
 "Para que no te interrumpan otras llamadas, activa «No molestar» en el teléfono.":"Supaya tidak diganggu panggilan lain, hidupkan “Jangan Ganggu” pada telefon.",
 "Pasando la llamada al teléfono de {n}…":"Memindahkan panggilan ke telefon {n}…",
-"La llamada continúa en el teléfono de {n}.":"Panggilan diteruskan di telefon {n}."
+"La llamada continúa en el teléfono de {n}.":"Panggilan diteruskan di telefon {n}.",
+"Videollamada encriptada post-cuántica":"Panggilan video yang disulitkan pascakuantum",
+"Llamada encriptada post-cuántica":"Panggilan yang disulitkan pascakuantum",
+"Post-cuántica":"Pascakuantum",
+"No se puede descifrar el sonido o la imagen de la otra persona.":"Suara atau imej pihak satu lagi tidak dapat dinyahsulit."
 },
 "p":{
 "intento":"Paling banyak mencuba hari ini: {1}, {2} {2?kali|kali}.",

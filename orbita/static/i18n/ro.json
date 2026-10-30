@@ -3630,7 +3630,11 @@
 "Mientras esta pantalla siga abierta, la llamada se recupera sola. Si la cierras, se borra.":"Cât timp acest ecran rămâne deschis, apelul se reface singur. Dacă îl închizi, apelul se șterge.",
 "Para que no te interrumpan otras llamadas, activa «No molestar» en el teléfono.":"Ca să nu te întrerupă alte apeluri, activează „Nu deranjați” pe telefon.",
 "Pasando la llamada al teléfono de {n}…":"Se mută apelul pe telefonul folosit de {n}…",
-"La llamada continúa en el teléfono de {n}.":"Apelul continuă pe telefonul folosit de {n}."
+"La llamada continúa en el teléfono de {n}.":"Apelul continuă pe telefonul folosit de {n}.",
+"Videollamada encriptada post-cuántica":"Apel video criptat postcuantic",
+"Llamada encriptada post-cuántica":"Apel criptat postcuantic",
+"Post-cuántica":"Postcuantică",
+"No se puede descifrar el sonido o la imagen de la otra persona.":"Sunetul sau imaginea celeilalte persoane nu pot fi decriptate."
 },
 "p":{
 "intento":"Cea care a încercat cel mai mult azi: {1}, {2} {2?dată|ori}.",

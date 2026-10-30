@@ -3630,7 +3630,11 @@
 "Mientras esta pantalla siga abierta, la llamada se recupera sola. Si la cierras, se borra.":"Zolang dit scherm openstaat, herstelt de oproep zich vanzelf. Als je het sluit, wordt de oproep gewist.",
 "Para que no te interrumpan otras llamadas, activa «No molestar» en el teléfono.":"Om niet door andere oproepen gestoord te worden, zet je “Niet storen” aan op de telefoon.",
 "Pasando la llamada al teléfono de {n}…":"Oproep wordt overgezet naar de telefoon van {n}…",
-"La llamada continúa en el teléfono de {n}.":"De oproep gaat verder op de telefoon van {n}."
+"La llamada continúa en el teléfono de {n}.":"De oproep gaat verder op de telefoon van {n}.",
+"Videollamada encriptada post-cuántica":"Post-kwantum versleuteld videogesprek",
+"Llamada encriptada post-cuántica":"Post-kwantum versleutelde oproep",
+"Post-cuántica":"Post-kwantum",
+"No se puede descifrar el sonido o la imagen de la otra persona.":"Het geluid of beeld van de andere persoon kan niet worden ontsleuteld."
 },
 "p":{
 "intento":"Probeerde het vandaag het vaakst: {1}, {2} {2?keer|keer}.",

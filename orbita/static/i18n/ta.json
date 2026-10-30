@@ -3630,7 +3630,11 @@
 "Mientras esta pantalla siga abierta, la llamada se recupera sola. Si la cierras, se borra.":"இந்தத் திரை திறந்திருக்கும் வரை, அழைப்பு தானாக மீளும். நீங்கள் அதை மூடினால், அழைப்பு அழிக்கப்படும்.",
 "Para que no te interrumpan otras llamadas, activa «No molestar» en el teléfono.":"பிற அழைப்புகள் குறுக்கிடாமல் இருக்க, தொலைபேசியில் «தொந்தரவு செய்ய வேண்டாம்» என்பதை இயக்குங்கள்.",
 "Pasando la llamada al teléfono de {n}…":"அழைப்பு {n}-இன் தொலைபேசிக்கு மாற்றப்படுகிறது…",
-"La llamada continúa en el teléfono de {n}.":"அழைப்பு {n}-இன் தொலைபேசியில் தொடர்கிறது."
+"La llamada continúa en el teléfono de {n}.":"அழைப்பு {n}-இன் தொலைபேசியில் தொடர்கிறது.",
+"Videollamada encriptada post-cuántica":"போஸ்ட்-குவாண்டம் மறையாக்கம் செய்யப்பட்ட வீடியோ அழைப்பு",
+"Llamada encriptada post-cuántica":"போஸ்ட்-குவாண்டம் மறையாக்கம் செய்யப்பட்ட அழைப்பு",
+"Post-cuántica":"போஸ்ட்-குவாண்டம்",
+"No se puede descifrar el sonido o la imagen de la otra persona.":"மற்றவரின் ஒலியையோ படத்தையோ மறைவிலக்க முடியாது."
 },
 "p":{
 "intento":"இன்று அதிகம் முயன்றது: {1}, {2} {2?முறை|முறை}.",

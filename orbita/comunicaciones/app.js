@@ -442,7 +442,7 @@
     if (pq && pq.ss) pq.ss.fill(0);
     const sid = C.hex(s.hash.subarray(0, 8));
     // pq: true solo si esta sesión mezcla ML-KEM-768 con el ECDH (los dos lados con la versión nueva)
-    const ses = { sid, hash: s.hash, envio: C.cadena(s.envio), recibo: C.cadena(s.recibo), desde: Date.now(), confirmada: false, pq: !!s.pq };
+    const ses = { sid, hash: s.hash, envio: C.cadena(s.envio), recibo: C.cadena(s.recibo), medios: s.medios || null, desde: Date.now(), confirmada: false, pq: !!s.pq };
     c.sesiones.set(sid, ses); c.sesion = ses; clearTimeout(c.reintento); c.encuentros = (c.encuentros || 0) + 1;
     // 27 Oct 2026: el registro dice si la sesión lleva la capa poscuántica; si una conversación que ya la tuvo vuelve a una
     // sesión sin ella (la otra persona con una versión anterior, o alguien con la invitación quitándola), se avisa en rojo.
@@ -537,12 +537,12 @@
     const s = await C.B.sesion(c.idB, efMia, { ef: suEf, acuerdoPub: c.acuerdoPub }, c.id, inicio, c.psk, c.miHuellaB, c.huella, pq);
     pq.ss.fill(0);
     const sid = C.hex(s.hash.subarray(0, 8)), renovada = !!c.sesion;
-    const ses = { sid, hash: s.hash, envio: C.B.cadena(s.envio), recibo: C.B.cadena(s.recibo), desde: Date.now(), confirmada: false, pq: true, blindada: true };
+    const ses = { sid, hash: s.hash, envio: C.B.cadena(s.envio), recibo: C.B.cadena(s.recibo), medios: s.medios || null, desde: Date.now(), confirmada: false, pq: true, blindada: true };
     c.sesiones.set(sid, ses); c.sesion = ses; clearTimeout(c.reintento); c.encuentros = (c.encuentros || 0) + 1;
     if (!c.pqVisto) { c.pqVisto = true; guardaConv(c); }
     vigila(c, renovada ? T('Claves renovadas (algoritmos de la suite CNSA 2.0): lo anterior ya no se puede leer con las claves nuevas.') : T('Claves acordadas con la otra persona: algoritmos de la suite CNSA 2.0 (ML-KEM-1024 y ECDH P-384).'), 'info');
     // de las sesiones anteriores quedan las dos últimas (por los mensajes en vuelo); las demás se borran de la memoria
-    for (const k of [...c.sesiones.keys()].slice(0, -3)) { const x = c.sesiones.get(k); try { x.envio.borra(); x.recibo.borra(); } catch (_) {} c.sesiones.delete(k); }
+    for (const k of [...c.sesiones.keys()].slice(0, -3)) { const x = c.sesiones.get(k); try { x.envio.borra(); x.recibo.borra(); if (x.medios) x.medios.fill(0); } catch (_) {} c.sesiones.delete(k); }
     pintaCabecera(c); pintaLista();
     enviaControl(c, { tipo: 'ok' });
     if (YO.nombre) enviaControl(c, { tipo: 'nombre', nombre: YO.nombre });
@@ -1489,6 +1489,16 @@
     return R ? R.ice : [];
   };
   const servidorLlamada = () => (iceUsado === 'am' ? T('Miami (Estados Unidos)') : iceUsado === 'eu' ? T('Núremberg (Alemania)') : '');
+  // La capa post-cuántica del audio y el vídeo (30 Oct 2026): el secreto sale de la sesión del chat (ML-KEM-768, o ML-KEM-1024 en
+  // la blindada) o, en la sala del traspaso al teléfono, de la llave del código QR. Quien llama dice qué sesión usa (sid); quien
+  // contesta busca esa misma.
+  const llaveMedios = (sala, sid) => {
+    const id = sala || LLAMADA_CONV || ACTUAL, e = EFI.get(id);
+    if (e) return e.medios ? { sid: 'qr', sec: e.medios, pq: true } : null;
+    const c = CONVS.get(id); if (!c) return null;
+    const ses = sid ? (c.sesiones && c.sesiones.get(sid)) : c.sesion;
+    return ses && ses.medios && ses.pq ? { sid: ses.sid, sec: ses.medios, pq: true, blindada: !!ses.blindada } : null;
+  };
   const puedeLlamar = () => { const e = EFI.get(LLAMADA_CONV); if (e) return !!(e.suId && R && R.abierto); const c = CONVS.get(ACTUAL); return !!(c && enLinea(c) && c.sesion && c.sesion.confirmada && puedeEnviar(c)); };
   // solo en local (pruebas): simular un mensaje manipulado y ver la alarma sin tocar el relé
   if (LOCAL) window.gcomPruebaTemporal = { estado: () => ({ en: enTemporal(), uso: ultimoUso(), convs: [...CONVS.values()].filter((c) => c.estado !== 'destruida').map((c) => ({ id: c.id, temporal: temporalConv(c), su: c.suTemporal || 0, dije: !!c.dijeTemporal })) }), envejece: (ms) => { try { localStorage.setItem('gcom-temporal-uso', String(Date.now() - ms)); } catch (_) {} usoT = 0; }, caduca: (op) => caducaChatTemporal(op), envejeceSuyos: (ms) => { for (const c of CONVS.values()) if (c.suTemporal) { c.suVistoT = Date.now() - ms; c.ultimo = Date.now() - ms; c.suTemporal = Date.now() - ms; } }, caducaSuyos: () => caducaSuyos(true) };
@@ -1499,7 +1509,7 @@
     LL = GuardianaLlamada.crea({
       ice: iceCercano, servidor: servidorLlamada, puede: puedeLlamar, t: T, aviso, suena: LLEVAR ? () => {} : avisaSonido, fin: anotaLlamada, estado: avisaLlamada,
       // pasar la llamada al teléfono: el botón (en el PC), la llave que llega de la otra persona, y lo que avisa la otra parte
-      llevar: LLEVAR ? null : () => abreLlevar(), sencilla: !!LLEVAR,
+      llevar: LLEVAR ? null : () => abreLlevar(), sencilla: !!LLEVAR, medios: llaveMedios,
       alLlevar: (k) => alLlevar(k), llevarNo: () => llevarNo(), llevarVisto: () => llevarVisto(), llevarListo: () => llevarListo(),
       blindada: () => { const c = convLl(); return !!(c && extrasB(c)); },
       sas: () => { const c = convLl(); return !!(c && extrasB(c)); }, // el número de seguridad en la llamada: blindado y Ultra (dueño, 29 Oct 2026, 12:55: «en el modo normal no») // las opciones de imagen, solo en la sesión blindada
@@ -4487,7 +4497,8 @@
     const kb = await C.sha256(C.cat(C.te.encode('GUARDIANA llevar clave\n'), raw));
     const k = await crypto.subtle.importKey('raw', kb, 'AES-GCM', false, ['encrypt', 'decrypt']);
     const yo = (opc && /^[0-9a-f]{16}$/.test(opc.yo || '')) ? opc.yo : C.hex(C.azar(8));
-    const c = { id: sala, efimera: true, k, k64, yo, suId: null, miembros: new Set(), nombre: (opc && opc.nombre) || '', alias: '', cola: [], mensajes: [] };
+    const medios = await C.sha256(C.cat(C.te.encode('GUARDIANA llevar medios\n'), raw));
+    const c = { id: sala, efimera: true, k, k64, medios, yo, suId: null, miembros: new Set(), nombre: (opc && opc.nombre) || '', alias: '', cola: [], mensajes: [] };
     EFI.set(sala, c); R.entra(sala, yo);
     return c;
   }

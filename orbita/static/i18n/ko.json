@@ -3630,7 +3630,11 @@
 "Mientras esta pantalla siga abierta, la llamada se recupera sola. Si la cierras, se borra.":"이 화면이 열려 있는 동안에는 통화가 저절로 복구돼요. 화면을 닫으면 통화가 삭제돼요.",
 "Para que no te interrumpan otras llamadas, activa «No molestar» en el teléfono.":"다른 전화에 방해받지 않도록 휴대폰에서 ‘방해 금지 모드’를 켜세요.",
 "Pasando la llamada al teléfono de {n}…":"{n}의 휴대폰으로 통화를 옮기는 중…",
-"La llamada continúa en el teléfono de {n}.":"통화가 {n}의 휴대폰에서 계속돼요."
+"La llamada continúa en el teléfono de {n}.":"통화가 {n}의 휴대폰에서 계속돼요.",
+"Videollamada encriptada post-cuántica":"양자 내성 암호화된 영상 통화",
+"Llamada encriptada post-cuántica":"양자 내성 암호화된 통화",
+"Post-cuántica":"양자 내성",
+"No se puede descifrar el sonido o la imagen de la otra persona.":"상대방의 음성이나 영상을 복호화할 수 없어요."
 },
 "p":{
 "intento":"오늘 가장 많이 시도한 곳: {1}, {2}{2?회|회}.",

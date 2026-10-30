@@ -3630,7 +3630,11 @@
 "Mientras esta pantalla siga abierta, la llamada se recupera sola. Si la cierras, se borra.":"Докато този екран е отворен, разговорът се възстановява сам. Ако го затворите, разговорът се изтрива.",
 "Para que no te interrumpan otras llamadas, activa «No molestar» en el teléfono.":"За да не ви прекъсват други обаждания, включете „Не безпокойте“ на телефона.",
 "Pasando la llamada al teléfono de {n}…":"Прехвърляне на разговора към телефона на {n}…",
-"La llamada continúa en el teléfono de {n}.":"Разговорът продължава на телефона на {n}."
+"La llamada continúa en el teléfono de {n}.":"Разговорът продължава на телефона на {n}.",
+"Videollamada encriptada post-cuántica":"Постквантово криптирано видеообаждане",
+"Llamada encriptada post-cuántica":"Постквантово криптирано обаждане",
+"Post-cuántica":"Постквантово",
+"No se puede descifrar el sonido o la imagen de la otra persona.":"Звукът или образът на другия човек не може да се дешифрира."
 },
 "p":{
 "intento":"Най-настойчивата днес: {1}, {2} {2?път|пъти}.",
