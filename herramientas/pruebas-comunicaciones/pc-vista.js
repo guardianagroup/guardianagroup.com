@@ -71,6 +71,7 @@ const partida = (P) => P.evaluate(() => document.querySelector('#llamada').class
   comprueba(bv && bc && Math.abs((bv.y + bv.h / 2) - (bc.y + bc.h / 2)) < 4, '4. en la fila de los botones (con «Colgar»)');
   await P.evaluate(() => document.querySelector('#ll-vista').click()); await espera(500);
   comprueba(!(await partida(P)) && !(await visible(P, '#ll-raya')), '4. «Cambiar vista»: ya no está partida, ni la raya');
+  { const v = await caja(P, '#v-local'); let flecha = false; for (const [dx, dy] of [[2, 2], [v.w - 2, 2], [2, v.h - 2], [v.w - 2, v.h - 2]]) { await P.mouse.move(v.x + dx, v.y + dy); await espera(120); if (await P.evaluate(() => document.querySelector('#llamada').classList.contains('mi-tam'))) flecha = true; } comprueba(!flecha, '4. en pequeño, sin la flecha de cambiar el tamaño en ninguna esquina (13:43)'); }
   await P.mouse.move(420, 320); await espera(300);
   await P.screenshot({ path: path.join(OUT, '4-pc-pequena.png') });
   await P.evaluate(() => document.querySelector('#ll-vista').click()); await espera(500);

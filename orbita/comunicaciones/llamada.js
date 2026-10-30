@@ -1552,7 +1552,7 @@
     // la calidad: solo «Conexión: excelente»; ni al pasar el ratón ni al tocarla salen los datos técnicos (dueño, 30 Oct 2026, 12:06)
     // en el teléfono la calidad solo sale si la conexión es débil; tocando «Encriptada de extremo a extremo» se ve el detalle (la
     // resolución y el formato de la imagen que va y viene), para mandar una captura si algo falla (29 Oct 2026, 15:20)
-    { const ci = document.querySelector('#gc-llamada .gc-llamada-cifrado') || document.querySelector('.gc-llamada-cifrado'); if (ci) { ci.style.cursor = 'pointer'; ci.addEventListener('click', () => { const on = !caja.classList.contains('ver-calidad'); caja.classList.toggle('ver-calidad', on); calidad.classList.toggle('ver', on); if (calidad.dataset.largo) calidad.textContent = on ? calidad.dataset.largo : (calidad.dataset.corto || ''); }); } }
+    { const ci = document.querySelector('#gc-llamada .gc-llamada-cifrado') || document.querySelector('.gc-llamada-cifrado'); if (ci) { ci.addEventListener('click', () => { if (raiz.matchMedia && raiz.matchMedia('(min-width: 761px)').matches) return; /* en el PC, solo la etiqueta (13:43) */ const on = !caja.classList.contains('ver-calidad'); caja.classList.toggle('ver-calidad', on); calidad.classList.toggle('ver', on); if (calidad.dataset.largo) calidad.textContent = on ? calidad.dataset.largo : (calidad.dataset.corto || ''); }); } }
     // cámara encendida o apagada durante la videollamada; la otra persona lo sabe por el canal encriptado
     // Girar la cámara (dueño, 29 Oct 2026, 14:49: «como WhatsApp»): la delantera o la trasera, sin cortar la llamada. Primero se suelta
     // la que hay (muchos teléfonos no abren dos a la vez) y se pide la otra; si no se puede, se vuelve a la de antes.
@@ -1761,7 +1761,9 @@
     const enLienzo = (e) => ({ x: e.clientX / escalaYa, y: e.clientY / escalaYa });
     const visible = () => { const vl = vidLocal(); return !!(vl && video && !caja.classList.contains('mini') && vl.offsetWidth && cam && !$('#ll-videos').hidden); };
     const sobreMiImagen = (p) => { if (!visible() || caja.classList.contains('tres-yo-col')) return false; const vl = vidLocal(); return p.x >= vl.offsetLeft && p.x <= vl.offsetLeft + vl.offsetWidth && p.y >= vl.offsetTop && p.y <= vl.offsetTop + vl.offsetHeight; };
-    const sobreAsa = (p) => { if (!visible() || caja.classList.contains('tres-yo-col') || (FINO.matches && caja.classList.contains('dividida'))) return false; const cs = getComputedStyle(caja); const x = parseFloat(cs.getPropertyValue('--asa-x')) + 11, y = parseFloat(cs.getPropertyValue('--asa-y')) + 11; return Number.isFinite(x) && Math.hypot(p.x - x, p.y - y) <= 18; };
+    // en el ordenador, tu imagen pequeña no cambia de tamaño desde su esquina (dueño, 30 Oct 2026, 13:43, con la foto de la flecha
+    // doble: «borra ese símbolo»): se mueve con el ratón; para verte más grande, «Cambiar vista» y la raya del medio
+    const sobreAsa = (p) => { if (FINO.matches || !visible() || caja.classList.contains('tres-yo-col')) return false; const cs = getComputedStyle(caja); const x = parseFloat(cs.getPropertyValue('--asa-x')) + 11, y = parseFloat(cs.getPropertyValue('--asa-y')) + 11; return Number.isFinite(x) && Math.hypot(p.x - x, p.y - y) <= 18; };
     // de la pantalla dividida a la imagen flotante del mismo tamaño (para seguir agrandando o achicando desde ahí)
     function sueltaDividida() {
       partidaPorDefecto = false;
