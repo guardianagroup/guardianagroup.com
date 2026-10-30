@@ -3645,7 +3645,13 @@
 "Comprobando el programa GUARDIANA…":"GUARDIANA پروگرام کی جانچ ہو رہی ہے…",
 "No se encuentra el programa GUARDIANA en este ordenador. Descárgalo desde la página «Programa para Windows».":"اس کمپیوٹر پر GUARDIANA پروگرام نہیں ملا۔ اسے “Windows کے لیے پروگرام” صفحے سے ڈاؤن لوڈ کریں۔",
 "El Vigía solo funciona en Windows.":"نگہبان صرف Windows پر کام کرتا ہے۔",
-"Activado: el programa GUARDIANA vigila este ordenador durante tus llamadas.":"فعال: آپ کی کالوں کے دوران GUARDIANA پروگرام اس کمپیوٹر کی نگرانی کرتا ہے۔"
+"Activado: el programa GUARDIANA vigila este ordenador durante tus llamadas.":"فعال: آپ کی کالوں کے دوران GUARDIANA پروگرام اس کمپیوٹر کی نگرانی کرتا ہے۔",
+"Seguridad de esta llamada":"اس کال کی سیکیورٹی",
+"Encriptada de extremo a extremo: solo los equipos de esta llamada tienen la llave.":"اینڈ ٹو اینڈ انکرپٹڈ: چابی صرف اس کال کے آلات کے پاس ہے۔",
+"Capa post-cuántica activa en el sonido y la imagen.":"آواز اور تصویر پر پوسٹ کوانٹم پرت فعال ہے۔",
+"Capa post-cuántica: no disponible en esta llamada.":"پوسٹ کوانٹم پرت: اس کال میں دستیاب نہیں۔",
+"Número de seguridad comprobado.":"سیفٹی نمبر چیک کیا گیا۔",
+"Número de seguridad sin comprobar.":"سیفٹی نمبر چیک نہیں کیا گیا۔"
 },
 "p":{
 "intento":"آج سب سے زیادہ کوشش: {1}، {2} {2?بار|بار}۔",

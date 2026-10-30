@@ -451,14 +451,15 @@
     // En la videollamada, la barra de arriba, el nombre y los botones se esconden solos a los 3 s sin tocar nada, para
     // ver la imagen entera (dueño, 28 Oct 2026, 10:36: «la botonería me corta la zona del pecho»); vuelven al mover el
     // ratón, al tocar la pantalla o con el teclado. Nunca con la tarjeta abierta, en pequeño o con un botón enfocado.
-    let reposo = null;
+    let reposo = null, masAbierto = false;
     function despierta() {
       // cualquier toque vuelve a arrancar el sonido y la imagen que llegan (el iPhone a veces los deja parados)
       if (estado === 'hablando') { suenaRemoto(); if (remotoV) reproduce($('#v-remoto')); if (ctx && ctx.state !== 'running' && ctx.state !== 'closed') ctx.resume().catch(() => {}); if (mezcla && mezcla.ctx.state !== 'running' && mezcla.ctx.state !== 'closed') mezcla.ctx.resume().catch(() => {}); for (const L of patas) if (L.el && L.el.srcObject && L.el.paused) reproduce(L.el); }
       caja.classList.remove('reposo'); clearTimeout(reposo);
       reposo = setTimeout(() => {
         const foco = document.activeElement && caja.contains(document.activeElement) && document.activeElement.matches(':focus-visible');
-        if (estado === 'hablando' && caja.classList.contains('con-video') && !ajustes && !caja.classList.contains('mini') && !foco) caja.classList.add('reposo');
+        const segAbierto = !!($('#ll-seg') && !$('#ll-seg').hidden);
+        if (estado === 'hablando' && caja.classList.contains('con-video') && !ajustes && !masAbierto && !segAbierto && !caja.classList.contains('mini') && !foco) caja.classList.add('reposo');
       }, 3000);
     }
     for (const ev of ['pointermove', 'pointerdown', 'keydown', 'touchstart']) caja.addEventListener(ev, despierta, { passive: true });
@@ -1585,6 +1586,7 @@
       const dur = iniciada ? Date.now() - iniciada : 0, era = estado, conImagen = video;
       paraTono(); clearTimeout(sinRespuesta); clearTimeout(ausenteT); ausenteT = null; ultimaOferta = null; sueltaWake(); sueltaCompleta();
       enPausa = null; { const pz = $('#ll-pausa'); if (pz) pz.hidden = true; }
+      masAbierto = false; { const m = $('#ll-mas-menu'), s = $('#ll-seg'); if (m) m.hidden = true; if (s) s.hidden = true; caja.classList.remove('mas-abierto'); }
       clearInterval(reloj); reloj = null; clearInterval(sondeo); sondeo = null;
       reiniciando = false; clearTimeout(reinicioT); reinicioT = null; clearTimeout(reinicioFin); reinicioFin = null;
       if (pc) { olvidaPq(pc); try { pc.close(); } catch (_) {} pc = null; }
@@ -1667,7 +1669,40 @@
     // la calidad: solo «Conexión: excelente»; ni al pasar el ratón ni al tocarla salen los datos técnicos (dueño, 30 Oct 2026, 12:06)
     // en el teléfono la calidad solo sale si la conexión es débil; tocando «Encriptada de extremo a extremo» se ve el detalle (la
     // resolución y el formato de la imagen que va y viene), para mandar una captura si algo falla (29 Oct 2026, 15:20)
-    { const ci = document.querySelector('#gc-llamada .gc-llamada-cifrado') || document.querySelector('.gc-llamada-cifrado'); if (ci) { ci.addEventListener('click', () => { if (raiz.matchMedia && raiz.matchMedia('(min-width: 761px)').matches) return; /* en el PC, solo la etiqueta (13:43) */ const on = !caja.classList.contains('ver-calidad'); caja.classList.toggle('ver-calidad', on); calidad.classList.toggle('ver', on); if (calidad.dataset.largo) calidad.textContent = on ? calidad.dataset.largo : (calidad.dataset.corto || ''); }); } }
+    // La cápsula de arriba abre «Seguridad de esta llamada»: lo que es verdad en esta llamada, ahora (agencia, ronda 83)
+    function pintaSeg() {
+      const l = $('#ll-seg-l'); if (!l) return;
+      const filas = [['si', t('Encriptada de extremo a extremo: solo los equipos de esta llamada tienen la llave.')]];
+      const pqOn = pqActiva();
+      filas.push([pqOn ? 'si' : 'no', pqOn ? t('Capa post-cuántica activa en el sonido y la imagen.') : t('Capa post-cuántica: no disponible en esta llamada.')]);
+      if (sas && sas.numero) filas.push([sas.estado === 'coinciden' ? 'si' : 'aviso', sas.estado === 'coinciden' ? t('Número de seguridad comprobado.') : t('Número de seguridad sin comprobar.')]);
+      // (la calidad de la conexión ya tiene su indicador; aquí, solo la seguridad. Clases con prefijo: «aviso» ya es el aviso flotante)
+      l.textContent = ''; for (const [cl, x] of filas) { const li = document.createElement('li'); li.className = 'seg-' + cl; li.textContent = x; l.appendChild(li); }
+    }
+    function abreSeg(on) { const s = $('#ll-seg'); if (!s) return; if (on) pintaSeg(); s.hidden = !on; if (on) { caja.classList.remove('reposo'); clearTimeout(reposo); } else despierta(); }
+    { const ci = document.querySelector('#gc-llamada .gc-llamada-cifrado') || document.querySelector('.gc-llamada-cifrado'); if (ci) { ci.setAttribute('role', 'button'); ci.setAttribute('tabindex', '0'); ci.setAttribute('aria-controls', 'll-seg'); ci.addEventListener('click', (e) => { e.stopPropagation(); const s = $('#ll-seg'); abreSeg(!!(s && s.hidden)); }); ci.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); ci.click(); } }); } }
+    // «Más»: los botones que se usan poco, en un menú encima de la barra; «Más» solo sale si hay algo dentro
+    function abreMas(on) {
+      const m = $('#ll-mas-menu'), b = $('#ll-mas'); if (!m || !b) return;
+      masAbierto = !!on && [...m.children].some((c) => !c.hidden);
+      m.hidden = !masAbierto; b.setAttribute('aria-expanded', String(masAbierto)); caja.classList.toggle('mas-abierto', masAbierto);
+      if (masAbierto) { caja.classList.remove('reposo'); clearTimeout(reposo); const p = m.querySelector('.gc-llamada-boton:not([hidden]) button'); if (p && FINO.matches) p.focus({ preventScroll: true }); } else despierta();
+    }
+    { const m = $('#ll-mas-menu'), mc = $('#ll-mas-caja');
+      if (m && mc) {
+        // («Cambiar vista» se queda en la barra del PC, donde se usa a menudo; en el teléfono va arriba)
+        for (const s of ['#ll-girar-caja', '#ll-ajustes-caja', '#ll-grave-caja', '#ll-mosaico-caja', '#ll-anadir-caja', '#ll-completa-caja']) { const c = $(s); if (!c) continue; c.classList.add('ll-mas-fila'); c.setAttribute('role', 'none'); const bt = c.querySelector('button'); if (bt) bt.setAttribute('role', 'menuitem'); m.appendChild(c); }
+        const alDia = () => { const hay = [...m.children].some((c) => !c.hidden); mc.hidden = !hay; if (!hay && masAbierto) abreMas(false); };
+        new MutationObserver(alDia).observe(m, { attributes: true, attributeFilter: ['hidden'], subtree: true, childList: true }); alDia();
+        $('#ll-mas').addEventListener('click', (e) => { e.stopPropagation(); abreMas(!masAbierto); });
+        // toda la fila es el botón; al elegir, el menú se cierra
+        m.addEventListener('click', (e) => { const fila = e.target.closest('.gc-llamada-boton'); if (!fila) return; const bt = fila.querySelector('button'); if (bt && !bt.contains(e.target)) bt.click(); setTimeout(() => abreMas(false), 0); });
+      }
+      document.addEventListener('click', (e) => { if (masAbierto && !e.target.closest('#ll-mas-menu, #ll-mas')) abreMas(false); const s = $('#ll-seg'); if (s && !s.hidden && !e.target.closest('#ll-seg, .gc-llamada-cifrado')) abreSeg(false); });
+      document.addEventListener('keydown', (e) => { if (e.key !== 'Escape') return; if (masAbierto) { abreMas(false); const b = $('#ll-mas'); if (b) b.focus(); } const s = $('#ll-seg'); if (s && !s.hidden) abreSeg(false); });
+    }
+    // en el teléfono, doble toque en la imagen de la otra persona: pantalla completa ↔ dividida (como Wire)
+    { let ult = 0; const v = $('#ll-videos'); if (v) v.addEventListener('pointerup', (e) => { if (FINO.matches || e.pointerType === 'mouse' || !e.target || e.target.id !== 'v-remoto') return; const ahora = Date.now(); if (ahora - ult < 320) { ult = 0; if (!caja.classList.contains('tres') && !o.sencilla && visible()) { alternaDividida(); pintaBotonTam(); } } else ult = ahora; }); }
     // cámara encendida o apagada durante la videollamada; la otra persona lo sabe por el canal encriptado
     // Girar la cámara (dueño, 29 Oct 2026, 14:49: «como WhatsApp»): la delantera o la trasera, sin cortar la llamada. Primero se suelta
     // la que hay (muchos teléfonos no abren dos a la vez) y se pide la otra; si no se puede, se vuelve a la de antes.

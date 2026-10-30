@@ -3645,7 +3645,13 @@
 "Comprobando el programa GUARDIANA…":"GUARDIANA プログラムを確認中…",
 "No se encuentra el programa GUARDIANA en este ordenador. Descárgalo desde la página «Programa para Windows».":"このパソコンに GUARDIANA プログラムが見つかりません。「Windows 用プログラム」のページからダウンロードしてください。",
 "El Vigía solo funciona en Windows.":"見張り番は Windows でのみ使えます。",
-"Activado: el programa GUARDIANA vigila este ordenador durante tus llamadas.":"オン：通話中は GUARDIANA プログラムがこのパソコンを見張ります。"
+"Activado: el programa GUARDIANA vigila este ordenador durante tus llamadas.":"オン：通話中は GUARDIANA プログラムがこのパソコンを見張ります。",
+"Seguridad de esta llamada":"この通話のセキュリティ",
+"Encriptada de extremo a extremo: solo los equipos de esta llamada tienen la llave.":"エンドツーエンド暗号化済み：鍵を持っているのはこの通話の端末だけです。",
+"Capa post-cuántica activa en el sonido y la imagen.":"音声と映像にポスト量子レイヤーが有効です。",
+"Capa post-cuántica: no disponible en esta llamada.":"ポスト量子レイヤー：この通話では利用できません。",
+"Número de seguridad comprobado.":"安全番号を確認済みです。",
+"Número de seguridad sin comprobar.":"安全番号は未確認です。"
 },
 "p":{
 "intento":"今日最も多く試みたのは {1}、{2} {2?回|回}。",

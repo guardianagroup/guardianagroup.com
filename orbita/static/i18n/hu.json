@@ -3645,7 +3645,13 @@
 "Comprobando el programa GUARDIANA…":"A GUARDIANA program ellenőrzése…",
 "No se encuentra el programa GUARDIANA en este ordenador. Descárgalo desde la página «Programa para Windows».":"A GUARDIANA program nem található ezen a számítógépen. Töltsd le a „Program Windowsra” oldalról.",
 "El Vigía solo funciona en Windows.":"Az Őrszem csak Windowson működik.",
-"Activado: el programa GUARDIANA vigila este ordenador durante tus llamadas.":"Bekapcsolva: a GUARDIANA program figyeli ezt a számítógépet a hívásaid alatt."
+"Activado: el programa GUARDIANA vigila este ordenador durante tus llamadas.":"Bekapcsolva: a GUARDIANA program figyeli ezt a számítógépet a hívásaid alatt.",
+"Seguridad de esta llamada":"A hívás biztonsága",
+"Encriptada de extremo a extremo: solo los equipos de esta llamada tienen la llave.":"Végpontok között titkosított: a kulcs csak a hívás eszközeinél van.",
+"Capa post-cuántica activa en el sonido y la imagen.":"A posztkvantum réteg aktív a hangon és a képen.",
+"Capa post-cuántica: no disponible en esta llamada.":"Posztkvantum réteg: ebben a hívásban nem érhető el.",
+"Número de seguridad comprobado.":"Biztonsági szám ellenőrizve.",
+"Número de seguridad sin comprobar.":"A biztonsági szám nincs ellenőrizve."
 },
 "p":{
 "intento":"Ma a legtöbbször próbálkozott: {1}, {2} {2?alkalommal|alkalommal}.",

@@ -3645,7 +3645,13 @@
 "Comprobando el programa GUARDIANA…":"Kontrollerar programmet GUARDIANA…",
 "No se encuentra el programa GUARDIANA en este ordenador. Descárgalo desde la página «Programa para Windows».":"Programmet GUARDIANA hittades inte på den här datorn. Ladda ned det från sidan ”Program för Windows”.",
 "El Vigía solo funciona en Windows.":"Vakten fungerar bara i Windows.",
-"Activado: el programa GUARDIANA vigila este ordenador durante tus llamadas.":"På: programmet GUARDIANA vaktar den här datorn under dina samtal."
+"Activado: el programa GUARDIANA vigila este ordenador durante tus llamadas.":"På: programmet GUARDIANA vaktar den här datorn under dina samtal.",
+"Seguridad de esta llamada":"Säkerhet i det här samtalet",
+"Encriptada de extremo a extremo: solo los equipos de esta llamada tienen la llave.":"Totalsträckskrypterat: bara enheterna i det här samtalet har nyckeln.",
+"Capa post-cuántica activa en el sonido y la imagen.":"Postkvantlager aktivt för ljud och bild.",
+"Capa post-cuántica: no disponible en esta llamada.":"Postkvantlager: inte tillgängligt i det här samtalet.",
+"Número de seguridad comprobado.":"Säkerhetsnummer kontrollerat.",
+"Número de seguridad sin comprobar.":"Säkerhetsnummer inte kontrollerat."
 },
 "p":{
 "intento":"Den som försökte mest i dag: {1}, {2} {2?gång|gånger}.",

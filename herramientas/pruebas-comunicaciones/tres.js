@@ -26,6 +26,7 @@ async function telefono(browser, nombre) {
   return p;
 }
 const foto = (p, n) => p.screenshot({ path: path.join(OUT, n + '.png') });
+const disponible = (P, s) => P.evaluate((s) => { const e = document.querySelector(s); const c = e && e.closest('.gc-llamada-boton'); return !!(e && c && !c.hidden && !e.closest('#ll-botones [hidden], #llamada[hidden]')); }, s); // (ronda 83) en la barra o dentro de «Más»
 const visible = (p, s) => p.evaluate((s) => { const e = document.querySelector(s); if (!e) return false; const r = e.getBoundingClientRect(); return !e.closest('[hidden]') && getComputedStyle(e).display !== 'none' && getComputedStyle(e).visibility !== 'hidden' && r.width > 0 && r.height > 0; }, s);
 const marca = async (p, n) => { for (const d of n) await p.click('#teclado button[data-d="' + d + '"]'); };
 const hasta = async (fn, ms) => { const h = Date.now() + ms; while (Date.now() < h) { if (await fn()) return true; await espera(400); } return false; };
@@ -74,9 +75,9 @@ async function seAnaden(X, numX, Y, numY, nomY, nomX) {
   await A.click('#videollamar');
   const s1 = await suena(B, 15000); comprueba(s1, '1. A llama a B: a B le suena');
   if (s1) await B.click('#ll-contestar');
-  await hasta(async () => /^\d\d:\d\d$/.test(((await A.textContent('#ll-tiempo')) || '').trim()) && await visible(A, '#ll-anadir'), 15000);
-  comprueba(await visible(A, '#ll-anadir'), '1. hablando: a A le sale «Añadir»');
-  comprueba(!(await visible(B, '#ll-anadir')) || true, '1. (a B también le puede salir: es una llamada normal)');
+  await hasta(async () => /^\d\d:\d\d$/.test(((await A.textContent('#ll-tiempo')) || '').trim()) && await disponible(A, '#ll-anadir'), 15000);
+  comprueba(await disponible(A, '#ll-anadir'), '1. hablando: a A le sale «Añadir»');
+  comprueba(!(await disponible(B, '#ll-anadir')) || true, '1. (a B también le puede salir: es una llamada normal)');
   await foto(A, '01-A-con-anadir');
   // 2. A añade a C
   await A.evaluate(() => document.querySelector('#ll-anadir').click()); await espera(700);
@@ -124,7 +125,7 @@ async function seAnaden(X, numX, Y, numY, nomY, nomX) {
   comprueba(!(await B.evaluate(() => document.querySelector('#llamada').classList.contains('tres'))), '5. C cuelga: B deja de ver la tercera imagen');
   comprueba(!(await A.evaluate(() => document.querySelector('#llamada').classList.contains('tres'))), '5. A también');
   comprueba(await imagenes(B, '#v-remoto') && await imagenes(A, '#v-remoto'), '5. A y B siguen viéndose');
-  comprueba(await visible(A, '#ll-anadir'), '5. a A le vuelve a salir «Añadir»');
+  comprueba(await disponible(A, '#ll-anadir'), '5. a A le vuelve a salir «Añadir»');
   await foto(B, '05-B-sin-C');
   // 6. A vuelve a añadir a C; cuelga B: sigue A con C
   await espera(2000);

@@ -3645,7 +3645,13 @@
 "Comprobando el programa GUARDIANA…":"正在检查 GUARDIANA 程序…",
 "No se encuentra el programa GUARDIANA en este ordenador. Descárgalo desde la página «Programa para Windows».":"在这台电脑上找不到 GUARDIANA 程序。请从“Windows 版程序”页面下载。",
 "El Vigía solo funciona en Windows.":"哨兵仅支持 Windows。",
-"Activado: el programa GUARDIANA vigila este ordenador durante tus llamadas.":"已开启：通话期间，GUARDIANA 程序会监测这台电脑。"
+"Activado: el programa GUARDIANA vigila este ordenador durante tus llamadas.":"已开启：通话期间，GUARDIANA 程序会监测这台电脑。",
+"Seguridad de esta llamada":"本次通话的安全",
+"Encriptada de extremo a extremo: solo los equipos de esta llamada tienen la llave.":"已端到端加密：只有本次通话中的设备持有密钥。",
+"Capa post-cuántica activa en el sonido y la imagen.":"后量子层已在声音和图像上启用。",
+"Capa post-cuántica: no disponible en esta llamada.":"后量子层：本次通话不可用。",
+"Número de seguridad comprobado.":"安全码已核对。",
+"Número de seguridad sin comprobar.":"安全码未核对。"
 },
 "p":{
 "intento":"今天尝试最多的：{1}，{2} {2?次|次}。",

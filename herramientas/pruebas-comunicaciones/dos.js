@@ -138,6 +138,8 @@ const caja = (p, sel) => p.evaluate((s) => { const e = document.querySelector(s)
     const tb = await caja(A, '#ll-vista-tel'); const txt = await A.evaluate(() => { const b = document.querySelector('#ll-vista-tel'); return b && b.getAttribute('aria-label'); });
     comprueba(tb && tb.vis && /Pantalla completa/.test(txt) && tb.y < 120, 'video: botón «Pantalla completa» arriba (' + JSON.stringify(tb) + ')');
     comprueba(!(await caja(A, '#ll-tam') || {}).vis, 'video: ningún botón encima de la imagen');
+    // (los botones se esconden a los 3 s sin tocar nada, como FaceTime: primero se despiertan)
+    await A.evaluate(() => document.querySelector('#llamada').dispatchEvent(new PointerEvent('pointermove'))); await espera(300);
     await A.click('#ll-vista-tel'); await espera(800);
     comprueba(!/dividida/.test(await A.evaluate(() => document.querySelector('#llamada').className)), 'video: con el botón, como FaceTime');
     await foto(A, '13-A-video-facetime');

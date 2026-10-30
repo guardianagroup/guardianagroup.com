@@ -25,6 +25,7 @@ async function equipo(browser, pc) {
   const p = await ctx.newPage(); p.on('pageerror', (e) => { console.log('pageerror', String(e).slice(0, 200)); fallos.push('pageerror'); });
   return p;
 }
+const disponible = (P, s) => P.evaluate((s) => { const e = document.querySelector(s); const c = e && e.closest('.gc-llamada-boton'); return !!(e && c && !c.hidden && !e.closest('#ll-botones [hidden], #llamada[hidden]')); }, s); // (ronda 83) en la barra o dentro de «Más»
 const visible = (P, s) => P.evaluate((s) => { const e = document.querySelector(s); return !!(e && e.getClientRects().length && getComputedStyle(e).display !== 'none' && getComputedStyle(e).visibility !== 'hidden' && !e.closest('[hidden]')); }, s);
 const caja = (P, s) => P.evaluate((s) => { const e = document.querySelector(s); if (!e) return null; const r = e.getBoundingClientRect(); return { x: r.left, y: r.top, w: r.width, h: r.height }; }, s);
 const partida = (P) => P.evaluate(() => document.querySelector('#llamada').classList.contains('dividida'));
@@ -66,7 +67,7 @@ const partida = (P) => P.evaluate(() => document.querySelector('#llamada').class
   await P.screenshot({ path: path.join(OUT, '3-pc-raya-movida.png') });
   // 4. «Cambiar vista», abajo con los demás botones
   const txt = ((await P.textContent('#ll-vista-caja > span')) || '').trim();
-  comprueba(await visible(P, '#ll-vista') && txt === 'Cambiar vista', '4. el botón «' + txt + '» está abajo');
+  comprueba(await disponible(P, '#ll-vista') && txt === 'Cambiar vista', '4. el botón «' + txt + '» está abajo');
   const bv = await caja(P, '#ll-vista'), bc = await caja(P, '#ll-colgar');
   comprueba(bv && bc && Math.abs((bv.y + bv.h / 2) - (bc.y + bc.h / 2)) < 4, '4. en la fila de los botones (con «Colgar»)');
   await P.evaluate(() => document.querySelector('#ll-vista').click()); await espera(500);

@@ -3645,7 +3645,13 @@
 "Comprobando el programa GUARDIANA…":"กำลังตรวจสอบโปรแกรม GUARDIANA…",
 "No se encuentra el programa GUARDIANA en este ordenador. Descárgalo desde la página «Programa para Windows».":"ไม่พบโปรแกรม GUARDIANA บนคอมพิวเตอร์เครื่องนี้ ดาวน์โหลดได้จากหน้า «โปรแกรมสำหรับ Windows»",
 "El Vigía solo funciona en Windows.":"ผู้เฝ้าระวังใช้ได้เฉพาะใน Windows",
-"Activado: el programa GUARDIANA vigila este ordenador durante tus llamadas.":"เปิดอยู่: โปรแกรม GUARDIANA เฝ้าระวังคอมพิวเตอร์เครื่องนี้ระหว่างการโทรของคุณ"
+"Activado: el programa GUARDIANA vigila este ordenador durante tus llamadas.":"เปิดอยู่: โปรแกรม GUARDIANA เฝ้าระวังคอมพิวเตอร์เครื่องนี้ระหว่างการโทรของคุณ",
+"Seguridad de esta llamada":"ความปลอดภัยของการโทรนี้",
+"Encriptada de extremo a extremo: solo los equipos de esta llamada tienen la llave.":"เข้ารหัสแบบต้นทางถึงปลายทาง: มีเพียงอุปกรณ์ในการโทรนี้เท่านั้นที่มีกุญแจ",
+"Capa post-cuántica activa en el sonido y la imagen.":"ชั้นหลังควอนตัมทำงานอยู่กับเสียงและภาพ",
+"Capa post-cuántica: no disponible en esta llamada.":"ชั้นหลังควอนตัม: ไม่พร้อมใช้งานในการโทรนี้",
+"Número de seguridad comprobado.":"ตรวจสอบหมายเลขความปลอดภัยแล้ว",
+"Número de seguridad sin comprobar.":"ยังไม่ได้ตรวจสอบหมายเลขความปลอดภัย"
 },
 "p":{
 "intento":"พยายามมากที่สุดวันนี้: {1}, {2} {2?ครั้ง|ครั้ง}",

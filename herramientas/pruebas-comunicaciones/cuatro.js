@@ -25,6 +25,7 @@ async function telefono(browser, nombre) {
   return p;
 }
 const foto = (p, n) => p.screenshot({ path: path.join(OUT, n + '.png') });
+const disponible = (P, s) => P.evaluate((s) => { const e = document.querySelector(s); const c = e && e.closest('.gc-llamada-boton'); return !!(e && c && !c.hidden && !e.closest('#ll-botones [hidden], #llamada[hidden]')); }, s); // (ronda 83) en la barra o dentro de «Más»
 const visible = (p, s) => p.evaluate((s) => { const e = document.querySelector(s); if (!e) return false; const r = e.getBoundingClientRect(); return !e.closest('[hidden]') && getComputedStyle(e).display !== 'none' && r.width > 0 && r.height > 0; }, s);
 const marca = async (p, n) => { for (const d of n) await p.click('#teclado button[data-d="' + d + '"]'); };
 const hasta = async (fn, ms) => { const h = Date.now() + ms; while (Date.now() < h) { if (await fn()) return true; await espera(400); } return false; };
@@ -76,12 +77,12 @@ async function seAnaden(X, numX, Y, numY, nomY, nomX) {
   await A.evaluate((s) => window.gcomPrueba.abre(s), salaB); await espera(1500);
   await A.click('#videollamar');
   if (await suena(B, 15000)) await B.click('#ll-contestar');
-  await hasta(async () => await visible(A, '#ll-anadir'), 15000);
+  await hasta(async () => await disponible(A, '#ll-anadir'), 15000);
   await A.evaluate(() => document.querySelector('#ll-anadir').click()); await espera(700);
   await A.click('#h-tercero .reenviar-a[data-id="' + salaC + '"]');
   if (await suena(C, 15000)) await C.click('#ll-contestar');
   await hasta(async () => (await total(B)) === 3, 20000);
-  comprueba(await visible(B, '#ll-anadir'), '1. a B (que no llamó ni añadió) también le sale «Añadir»');
+  comprueba(await disponible(B, '#ll-anadir'), '1. a B (que no llamó ni añadió) también le sale «Añadir»');
   await B.evaluate(() => document.querySelector('#ll-anadir').click()); await espera(700);
   comprueba(await visible(B, '#h-tercero .reenviar-a[data-id="' + salaD + '"]'), '1. en la hoja de B está D');
   await B.click('#h-tercero .reenviar-a[data-id="' + salaD + '"]');
@@ -98,7 +99,7 @@ async function seAnaden(X, numX, Y, numY, nomY, nomX) {
   if (process.env.DEPURA) for (const [k, P] of todos) console.log(k, JSON.stringify(await P.evaluate(() => GuardianaCom.llamada.depura)));
   if (process.env.DEPURA) for (const [k, P] of todos) { const f = () => P.evaluate(() => [...document.querySelectorAll('#v-remoto, .ll-tile')].map((v) => (v.id || v.className) + ' w' + v.videoWidth + ' f' + (v.getVideoPlaybackQuality ? v.getVideoPlaybackQuality().totalVideoFrames : -1) + ' ' + getComputedStyle(v).display + (v.paused ? ' PAUSA' : '') + ' ' + (v.srcObject ? v.srcObject.getVideoTracks().map((x) => x.readyState + (x.muted ? '/muda' : '')).join() : 'sin'))); console.log(k, JSON.stringify(await f())); await espera(2500); console.log(k, JSON.stringify(await f())); }
   // 3. con cuatro, nadie puede añadir
-  for (const [k, P] of todos) comprueba(!(await visible(P, '#ll-anadir')), '3. ' + k + ': sin «Añadir» (somos cuatro)');
+  for (const [k, P] of todos) comprueba(!(await disponible(P, '#ll-anadir')), '3. ' + k + ': sin «Añadir» (somos cuatro)');
   // 4. con A, B y C en silencio, A y C oyen a D
   for (const P of [A, B, C]) await silencia(P);
   await espera(1500);
@@ -113,7 +114,7 @@ async function seAnaden(X, numX, Y, numY, nomY, nomX) {
   await espera(3000);
   for (const [k, P] of [['A', A], ['B', B], ['C', C]]) comprueba((await total(P)) === 3, '5. D cuelga: ' + k + ' son 3 (' + (await total(P)) + ')');
   for (const [k, P] of [['A', A], ['B', B], ['C', C]]) { const n = await imagenesVivas(P, 2); comprueba(n === 2, '5. ' + k + ' ve a los otros dos (' + n + ')'); }
-  comprueba(await visible(C, '#ll-anadir'), '5. vuelve «Añadir»');
+  comprueba(await disponible(C, '#ll-anadir'), '5. vuelve «Añadir»');
   await foto(C, '05-C');
   await A.evaluate(() => document.querySelector('#ll-colgar').click()); await espera(2000);
   await browser.close();

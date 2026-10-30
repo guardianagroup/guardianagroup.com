@@ -3645,7 +3645,13 @@
 "Comprobando el programa GUARDIANA…":"Verifica del programma GUARDIANA…",
 "No se encuentra el programa GUARDIANA en este ordenador. Descárgalo desde la página «Programa para Windows».":"Il programma GUARDIANA non è stato trovato su questo computer. Scaricalo dalla pagina «Programma per Windows».",
 "El Vigía solo funciona en Windows.":"La Sentinella funziona solo su Windows.",
-"Activado: el programa GUARDIANA vigila este ordenador durante tus llamadas.":"Attiva: il programma GUARDIANA sorveglia questo computer durante le tue chiamate."
+"Activado: el programa GUARDIANA vigila este ordenador durante tus llamadas.":"Attiva: il programma GUARDIANA sorveglia questo computer durante le tue chiamate.",
+"Seguridad de esta llamada":"Sicurezza di questa chiamata",
+"Encriptada de extremo a extremo: solo los equipos de esta llamada tienen la llave.":"Cifrata end-to-end: solo i dispositivi di questa chiamata hanno la chiave.",
+"Capa post-cuántica activa en el sonido y la imagen.":"Livello post-quantistico attivo su audio e video.",
+"Capa post-cuántica: no disponible en esta llamada.":"Livello post-quantistico: non disponibile in questa chiamata.",
+"Número de seguridad comprobado.":"Numero di sicurezza verificato.",
+"Número de seguridad sin comprobar.":"Numero di sicurezza non verificato."
 },
 "p":{
 "intento":"Quella che ci ha provato di più oggi: {1}, {2} {2?volta|volte}.",

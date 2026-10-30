@@ -3645,7 +3645,13 @@
 "Comprobando el programa GUARDIANA…":"Athuga forritið GUARDIANA…",
 "No se encuentra el programa GUARDIANA en este ordenador. Descárgalo desde la página «Programa para Windows».":"Forritið GUARDIANA fannst ekki á þessari tölvu. Sæktu það á síðunni „Forrit fyrir Windows“.",
 "El Vigía solo funciona en Windows.":"Vörðurinn virkar aðeins í Windows.",
-"Activado: el programa GUARDIANA vigila este ordenador durante tus llamadas.":"Virkur: forritið GUARDIANA vaktar þessa tölvu meðan á símtölum þínum stendur."
+"Activado: el programa GUARDIANA vigila este ordenador durante tus llamadas.":"Virkur: forritið GUARDIANA vaktar þessa tölvu meðan á símtölum þínum stendur.",
+"Seguridad de esta llamada":"Öryggi þessa símtals",
+"Encriptada de extremo a extremo: solo los equipos de esta llamada tienen la llave.":"Dulkóðað enda á milli: aðeins tækin í þessu símtali hafa lykilinn.",
+"Capa post-cuántica activa en el sonido y la imagen.":"Skammtaþolið lag virkt á hljóði og mynd.",
+"Capa post-cuántica: no disponible en esta llamada.":"Skammtaþolið lag: ekki í boði í þessu símtali.",
+"Número de seguridad comprobado.":"Öryggisnúmer athugað.",
+"Número de seguridad sin comprobar.":"Öryggisnúmer ekki athugað."
 },
 "p":{
 "intento":"Sá sem reyndi mest í dag: {1}, {2} {2?sinni|sinnum}.",

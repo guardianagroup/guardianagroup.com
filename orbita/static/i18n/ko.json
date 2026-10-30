@@ -3645,7 +3645,13 @@
 "Comprobando el programa GUARDIANA…":"GUARDIANA 프로그램 확인 중…",
 "No se encuentra el programa GUARDIANA en este ordenador. Descárgalo desde la página «Programa para Windows».":"이 컴퓨터에서 GUARDIANA 프로그램을 찾을 수 없어요. ‘Windows용 프로그램’ 페이지에서 다운로드하세요.",
 "El Vigía solo funciona en Windows.":"파수꾼은 Windows에서만 작동해요.",
-"Activado: el programa GUARDIANA vigila este ordenador durante tus llamadas.":"켜짐: 통화 중에는 GUARDIANA 프로그램이 이 컴퓨터를 지켜봐요."
+"Activado: el programa GUARDIANA vigila este ordenador durante tus llamadas.":"켜짐: 통화 중에는 GUARDIANA 프로그램이 이 컴퓨터를 지켜봐요.",
+"Seguridad de esta llamada":"이 통화의 보안",
+"Encriptada de extremo a extremo: solo los equipos de esta llamada tienen la llave.":"종단간 암호화됨: 이 통화의 기기만 키를 가지고 있습니다.",
+"Capa post-cuántica activa en el sonido y la imagen.":"소리와 영상에 양자 내성 계층이 활성화되어 있습니다.",
+"Capa post-cuántica: no disponible en esta llamada.":"양자 내성 계층: 이 통화에서는 사용할 수 없습니다.",
+"Número de seguridad comprobado.":"안전 번호 확인됨.",
+"Número de seguridad sin comprobar.":"안전 번호 미확인."
 },
 "p":{
 "intento":"오늘 가장 많이 시도한 곳: {1}, {2}{2?회|회}.",

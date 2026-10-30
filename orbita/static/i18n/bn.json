@@ -3645,7 +3645,13 @@
 "Comprobando el programa GUARDIANA…":"GUARDIANA প্রোগ্রাম যাচাই করা হচ্ছে…",
 "No se encuentra el programa GUARDIANA en este ordenador. Descárgalo desde la página «Programa para Windows».":"এই কম্পিউটারে GUARDIANA প্রোগ্রাম পাওয়া যায়নি। “Windows-এর জন্য প্রোগ্রাম” পেজ থেকে এটি ডাউনলোড করুন।",
 "El Vigía solo funciona en Windows.":"প্রহরী শুধু Windows-এ কাজ করে।",
-"Activado: el programa GUARDIANA vigila este ordenador durante tus llamadas.":"চালু: আপনার কলের সময় GUARDIANA প্রোগ্রাম এই কম্পিউটারের ওপর নজর রাখে।"
+"Activado: el programa GUARDIANA vigila este ordenador durante tus llamadas.":"চালু: আপনার কলের সময় GUARDIANA প্রোগ্রাম এই কম্পিউটারের ওপর নজর রাখে।",
+"Seguridad de esta llamada":"এই কলের নিরাপত্তা",
+"Encriptada de extremo a extremo: solo los equipos de esta llamada tienen la llave.":"এন্ড-টু-এন্ড এনক্রিপ্টেড: শুধু এই কলের ডিভাইসগুলোর কাছেই চাবি আছে।",
+"Capa post-cuántica activa en el sonido y la imagen.":"শব্দ ও ছবিতে পোস্ট-কোয়ান্টাম স্তর সক্রিয়।",
+"Capa post-cuántica: no disponible en esta llamada.":"পোস্ট-কোয়ান্টাম স্তর: এই কলে উপলব্ধ নয়।",
+"Número de seguridad comprobado.":"নিরাপত্তা নম্বর যাচাই করা হয়েছে।",
+"Número de seguridad sin comprobar.":"নিরাপত্তা নম্বর যাচাই করা হয়নি।"
 },
 "p":{
 "intento":"আজ সবচেয়ে বেশি চেষ্টা: {1}, {2} {2?বার|বার}।",

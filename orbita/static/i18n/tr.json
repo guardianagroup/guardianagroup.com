@@ -3645,7 +3645,13 @@
 "Comprobando el programa GUARDIANA…":"GUARDIANA programı kontrol ediliyor…",
 "No se encuentra el programa GUARDIANA en este ordenador. Descárgalo desde la página «Programa para Windows».":"GUARDIANA programı bu bilgisayarda bulunamadı. “Windows için program” sayfasından indirin.",
 "El Vigía solo funciona en Windows.":"Nöbetçi yalnızca Windows'ta çalışır.",
-"Activado: el programa GUARDIANA vigila este ordenador durante tus llamadas.":"Açık: GUARDIANA programı, aramalarınız sırasında bu bilgisayarı gözetler."
+"Activado: el programa GUARDIANA vigila este ordenador durante tus llamadas.":"Açık: GUARDIANA programı, aramalarınız sırasında bu bilgisayarı gözetler.",
+"Seguridad de esta llamada":"Bu aramanın güvenliği",
+"Encriptada de extremo a extremo: solo los equipos de esta llamada tienen la llave.":"Uçtan uca şifreli: anahtar yalnızca bu aramadaki cihazlarda.",
+"Capa post-cuántica activa en el sonido y la imagen.":"Ses ve görüntüde kuantum sonrası katman etkin.",
+"Capa post-cuántica: no disponible en esta llamada.":"Kuantum sonrası katman: bu aramada kullanılamıyor.",
+"Número de seguridad comprobado.":"Güvenlik numarası doğrulandı.",
+"Número de seguridad sin comprobar.":"Güvenlik numarası doğrulanmadı."
 },
 "p":{
 "intento":"Bugün en çok deneyen: {1}, {2} {2?kez|kez}.",

@@ -3645,7 +3645,13 @@
 "Comprobando el programa GUARDIANA…":"Inakagua programu ya GUARDIANA…",
 "No se encuentra el programa GUARDIANA en este ordenador. Descárgalo desde la página «Programa para Windows».":"Programu ya GUARDIANA haipatikani kwenye kompyuta hii. Ipakue kutoka ukurasa wa «Programu ya Windows».",
 "El Vigía solo funciona en Windows.":"Mlinzi hufanya kazi kwenye Windows pekee.",
-"Activado: el programa GUARDIANA vigila este ordenador durante tus llamadas.":"Imewashwa: programu ya GUARDIANA inafuatilia kompyuta hii wakati wa simu zako."
+"Activado: el programa GUARDIANA vigila este ordenador durante tus llamadas.":"Imewashwa: programu ya GUARDIANA inafuatilia kompyuta hii wakati wa simu zako.",
+"Seguridad de esta llamada":"Usalama wa simu hii",
+"Encriptada de extremo a extremo: solo los equipos de esta llamada tienen la llave.":"Imesimbwa kutoka mwisho hadi mwisho: vifaa vilivyo kwenye simu hii pekee ndivyo vyenye ufunguo.",
+"Capa post-cuántica activa en el sonido y la imagen.":"Safu ya baada ya kwantum imewashwa kwenye sauti na picha.",
+"Capa post-cuántica: no disponible en esta llamada.":"Safu ya baada ya kwantum: haipatikani kwenye simu hii.",
+"Número de seguridad comprobado.":"Nambari ya usalama imehakikiwa.",
+"Número de seguridad sin comprobar.":"Nambari ya usalama haijahakikiwa."
 },
 "p":{
 "intento":"Iliyojaribu zaidi leo: {1}, {2?mara|mara} {2}.",

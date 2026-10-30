@@ -23,6 +23,7 @@ async function equipo(browser, pc, nombre) {
   const p = await ctx.newPage(); p.on('pageerror', (e) => { console.log('[' + nombre + '] pageerror', String(e).slice(0, 200)); fallos.push('pageerror ' + nombre); });
   return p;
 }
+const disponible = (P, s) => P.evaluate((s) => { const e = document.querySelector(s); const c = e && e.closest('.gc-llamada-boton'); return !!(e && c && !c.hidden && !e.closest('#ll-botones [hidden], #llamada[hidden]')); }, s); // (ronda 83) en la barra o dentro de «Más»
 const visible = (P, s) => P.evaluate((s) => { const e = document.querySelector(s); return !!(e && e.getClientRects().length && getComputedStyle(e).display !== 'none' && getComputedStyle(e).visibility !== 'hidden' && !e.closest('[hidden]')); }, s);
 const caja = (P, s) => P.evaluate((s) => { const e = document.querySelector(s); if (!e) return null; const r = e.getBoundingClientRect(); return { x: Math.round(r.left), y: Math.round(r.top), w: Math.round(r.width), h: Math.round(r.height) }; }, s);
 const columnas = (P) => P.evaluate(() => [...document.querySelectorAll('#v-remoto, .ll-tile, #v-local')].filter((v) => getComputedStyle(v).display !== 'none').map((v) => { const r = v.getBoundingClientRect(); return { id: v.id || 'tile', x: Math.round(r.left), w: Math.round(r.width), h: Math.round(r.height) }; }).filter((c) => c.h >= 700).sort((a, b) => a.x - b.x));
@@ -44,7 +45,9 @@ const salas = (X) => X.evaluate(() => [...GuardianaCom.convs.keys()]);
   await P.evaluate((s) => window.gcomPrueba.abre(s), salaA); await espera(1500);
   await P.evaluate(() => document.querySelector('#videollamar').click()); await espera(2500);
   if (await A.$('#ll-contestar:visible')) await A.click('#ll-contestar');
-  await espera(6000);
+  await espera(3000);
+  // «Añadir» sale en cuanto la llamada está hablando (con la capa post-cuántica tarda algo más en conectar)
+  for (let i = 0; i < 40 && !(await disponible(P, '#ll-anadir')); i++) await espera(500);
   await P.evaluate(() => document.querySelector('#ll-anadir').click()); await espera(800);
   await P.click('#h-tercero .reenviar-a[data-id="' + salaC + '"]'); await espera(2500);
   if (await C.$('#ll-contestar:visible')) await C.click('#ll-contestar');
@@ -75,7 +78,7 @@ const salas = (X) => X.evaluate(() => [...GuardianaCom.convs.keys()]);
   await P.screenshot({ path: path.join(OUT, '1b-grupo-raya.png') });
   // 2. «Cambiar vista» en grupo
   const txt = ((await P.textContent('#ll-vista-caja > span')) || '').trim();
-  comprueba(await visible(P, '#ll-vista') && txt === 'Cambiar vista', '2. «Cambiar vista» también en grupo');
+  comprueba(await disponible(P, '#ll-vista') && txt === 'Cambiar vista', '2. «Cambiar vista» también en grupo');
   await P.evaluate(() => document.querySelector('#ll-vista').click()); await espera(800);
   col = await columnas(P); ry = await rayas(P);
   comprueba(col.length === 3 && col.some((c) => c.id === 'v-local') && col.every((c) => Math.abs(c.w - W / 3) <= 6), '2. tú en una columna más: tres a partes iguales', col);

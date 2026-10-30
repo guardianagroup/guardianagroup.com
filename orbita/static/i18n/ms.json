@@ -3645,7 +3645,13 @@
 "Comprobando el programa GUARDIANA…":"Menyemak program GUARDIANA…",
 "No se encuentra el programa GUARDIANA en este ordenador. Descárgalo desde la página «Programa para Windows».":"Program GUARDIANA tidak ditemui pada komputer ini. Muat turun daripada halaman “Program untuk Windows”.",
 "El Vigía solo funciona en Windows.":"Pengawal hanya berfungsi di Windows.",
-"Activado: el programa GUARDIANA vigila este ordenador durante tus llamadas.":"Hidup: program GUARDIANA mengawasi komputer ini semasa panggilan anda."
+"Activado: el programa GUARDIANA vigila este ordenador durante tus llamadas.":"Hidup: program GUARDIANA mengawasi komputer ini semasa panggilan anda.",
+"Seguridad de esta llamada":"Keselamatan panggilan ini",
+"Encriptada de extremo a extremo: solo los equipos de esta llamada tienen la llave.":"Disulitkan hujung ke hujung: hanya peranti dalam panggilan ini yang memegang kuncinya.",
+"Capa post-cuántica activa en el sonido y la imagen.":"Lapisan pascakuantum aktif pada bunyi dan imej.",
+"Capa post-cuántica: no disponible en esta llamada.":"Lapisan pascakuantum: tidak tersedia dalam panggilan ini.",
+"Número de seguridad comprobado.":"Nombor keselamatan disemak.",
+"Número de seguridad sin comprobar.":"Nombor keselamatan belum disemak."
 },
 "p":{
 "intento":"Paling banyak mencuba hari ini: {1}, {2} {2?kali|kali}.",

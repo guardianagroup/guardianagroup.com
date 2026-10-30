@@ -3645,7 +3645,13 @@
 "Comprobando el programa GUARDIANA…":"Tarkistetaan GUARDIANA-ohjelmaa…",
 "No se encuentra el programa GUARDIANA en este ordenador. Descárgalo desde la página «Programa para Windows».":"GUARDIANA-ohjelmaa ei löydy tästä tietokoneesta. Lataa se sivulta ”Ohjelma Windowsille”.",
 "El Vigía solo funciona en Windows.":"Vartija toimii vain Windowsissa.",
-"Activado: el programa GUARDIANA vigila este ordenador durante tus llamadas.":"Käytössä: GUARDIANA-ohjelma valvoo tätä tietokonetta puheluidesi aikana."
+"Activado: el programa GUARDIANA vigila este ordenador durante tus llamadas.":"Käytössä: GUARDIANA-ohjelma valvoo tätä tietokonetta puheluidesi aikana.",
+"Seguridad de esta llamada":"Tämän puhelun suojaus",
+"Encriptada de extremo a extremo: solo los equipos de esta llamada tienen la llave.":"Päästä päähän salattu: avain on vain tämän puhelun laitteilla.",
+"Capa post-cuántica activa en el sonido y la imagen.":"Kvanttikestävä kerros käytössä äänessä ja kuvassa.",
+"Capa post-cuántica: no disponible en esta llamada.":"Kvanttikestävä kerros: ei käytettävissä tässä puhelussa.",
+"Número de seguridad comprobado.":"Turvanumero tarkistettu.",
+"Número de seguridad sin comprobar.":"Turvanumeroa ei ole tarkistettu."
 },
 "p":{
 "intento":"Eniten yrittänyt tänään: {1}, {2} {2?kerta|kertaa}.",

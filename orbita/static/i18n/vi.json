@@ -3645,7 +3645,13 @@
 "Comprobando el programa GUARDIANA…":"Đang kiểm tra chương trình GUARDIANA…",
 "No se encuentra el programa GUARDIANA en este ordenador. Descárgalo desde la página «Programa para Windows».":"Không tìm thấy chương trình GUARDIANA trên máy tính này. Hãy tải xuống từ trang “Chương trình cho Windows”.",
 "El Vigía solo funciona en Windows.":"Lính canh chỉ hoạt động trên Windows.",
-"Activado: el programa GUARDIANA vigila este ordenador durante tus llamadas.":"Đã bật: chương trình GUARDIANA canh chừng máy tính này trong các cuộc gọi của bạn."
+"Activado: el programa GUARDIANA vigila este ordenador durante tus llamadas.":"Đã bật: chương trình GUARDIANA canh chừng máy tính này trong các cuộc gọi của bạn.",
+"Seguridad de esta llamada":"Bảo mật của cuộc gọi này",
+"Encriptada de extremo a extremo: solo los equipos de esta llamada tienen la llave.":"Đã mã hóa đầu cuối: chỉ các thiết bị trong cuộc gọi này mới có khóa.",
+"Capa post-cuántica activa en el sonido y la imagen.":"Lớp hậu lượng tử đang bật cho âm thanh và hình ảnh.",
+"Capa post-cuántica: no disponible en esta llamada.":"Lớp hậu lượng tử: không khả dụng trong cuộc gọi này.",
+"Número de seguridad comprobado.":"Đã kiểm tra số an toàn.",
+"Número de seguridad sin comprobar.":"Chưa kiểm tra số an toàn."
 },
 "p":{
 "intento":"Cố gắng nhiều nhất hôm nay: {1}, {2} {2?lần|lần}.",

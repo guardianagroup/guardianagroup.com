@@ -3645,7 +3645,13 @@
 "Comprobando el programa GUARDIANA…":"Έλεγχος του προγράμματος GUARDIANA…",
 "No se encuentra el programa GUARDIANA en este ordenador. Descárgalo desde la página «Programa para Windows».":"Το πρόγραμμα GUARDIANA δεν βρέθηκε σε αυτόν τον υπολογιστή. Κατεβάστε το από τη σελίδα «Πρόγραμμα για Windows».",
 "El Vigía solo funciona en Windows.":"Ο Φρουρός λειτουργεί μόνο στα Windows.",
-"Activado: el programa GUARDIANA vigila este ordenador durante tus llamadas.":"Ενεργός: το πρόγραμμα GUARDIANA επιτηρεί αυτόν τον υπολογιστή κατά τις κλήσεις σας."
+"Activado: el programa GUARDIANA vigila este ordenador durante tus llamadas.":"Ενεργός: το πρόγραμμα GUARDIANA επιτηρεί αυτόν τον υπολογιστή κατά τις κλήσεις σας.",
+"Seguridad de esta llamada":"Ασφάλεια αυτής της κλήσης",
+"Encriptada de extremo a extremo: solo los equipos de esta llamada tienen la llave.":"Κρυπτογραφημένη από άκρο σε άκρο: μόνο οι συσκευές αυτής της κλήσης έχουν το κλειδί.",
+"Capa post-cuántica activa en el sonido y la imagen.":"Μετακβαντικό επίπεδο ενεργό σε ήχο και εικόνα.",
+"Capa post-cuántica: no disponible en esta llamada.":"Μετακβαντικό επίπεδο: δεν είναι διαθέσιμο σε αυτή την κλήση.",
+"Número de seguridad comprobado.":"Ο αριθμός ασφαλείας ελέγχθηκε.",
+"Número de seguridad sin comprobar.":"Ο αριθμός ασφαλείας δεν έχει ελεγχθεί."
 },
 "p":{
 "intento":"Η πιο επίμονη σήμερα: {1}, {2} {2?φορά|φορές}.",

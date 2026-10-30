@@ -99,7 +99,7 @@ async function videollamada(A, B) {
   comprueba(vb.hablando.grave && vb.hablando.mosaico && !vb.hablando.ajustes && !vb.hablando.pildora, 'blindado: con la llamada en marcha, «Voz grave» y «Mosaico» (y nada más)', vb.hablando);
   // desde el 29 Oct 2026 (dueño, 09:23) la llamada blindada empieza con los dos puestos; un toque los quita
   comprueba(await C.evaluate(() => document.querySelector('#ll-grave').getAttribute('aria-pressed') === 'true' && document.querySelector('#ll-mosaico').getAttribute('aria-pressed') === 'true'), 'blindado: empieza con «Voz grave» y «Mosaico» puestos');
-  await C.click('#ll-grave'); await C.click('#ll-mosaico'); await espera(1500);
+  await C.evaluate(() => { document.querySelector('#ll-grave').click(); document.querySelector('#ll-mosaico').click(); }); await espera(1500);
   comprueba(await C.evaluate(() => document.querySelector('#ll-grave').getAttribute('aria-pressed') === 'false' && document.querySelector('#ll-mosaico').getAttribute('aria-pressed') === 'false'), 'blindado: los dos se quitan con un toque');
   await C.touchscreen.tap(196, 200).catch(() => {}); await espera(300);
   await C.screenshot({ path: path.join(OUT, '6-video-blindado.png') });

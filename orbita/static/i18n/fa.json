@@ -3645,7 +3645,13 @@
 "Comprobando el programa GUARDIANA…":"در حال بررسی برنامهٔ GUARDIANA…",
 "No se encuentra el programa GUARDIANA en este ordenador. Descárgalo desde la página «Programa para Windows».":"برنامهٔ GUARDIANA روی این رایانه پیدا نشد. آن را از صفحهٔ «برنامه برای Windows» دانلود کنید.",
 "El Vigía solo funciona en Windows.":"نگهبان فقط در Windows کار می‌کند.",
-"Activado: el programa GUARDIANA vigila este ordenador durante tus llamadas.":"فعال: برنامهٔ GUARDIANA در طول تماس‌های شما بر این رایانه نظارت می‌کند."
+"Activado: el programa GUARDIANA vigila este ordenador durante tus llamadas.":"فعال: برنامهٔ GUARDIANA در طول تماس‌های شما بر این رایانه نظارت می‌کند.",
+"Seguridad de esta llamada":"امنیت این تماس",
+"Encriptada de extremo a extremo: solo los equipos de esta llamada tienen la llave.":"رمزگذاری‌شده سرتاسری: فقط دستگاه‌های این تماس کلید را دارند.",
+"Capa post-cuántica activa en el sonido y la imagen.":"لایهٔ پساکوانتومی روی صدا و تصویر فعال است.",
+"Capa post-cuántica: no disponible en esta llamada.":"لایهٔ پساکوانتومی: در این تماس در دسترس نیست.",
+"Número de seguridad comprobado.":"شماره امنیتی بررسی شد.",
+"Número de seguridad sin comprobar.":"شماره امنیتی بررسی نشده است."
 },
 "p":{
 "intento":"بیشترین تلاش امروز: {1}، {2} {2?بار|بار}.",

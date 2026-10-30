@@ -3645,7 +3645,13 @@
 "Comprobando el programa GUARDIANA…":"Перевірка програми GUARDIANA…",
 "No se encuentra el programa GUARDIANA en este ordenador. Descárgalo desde la página «Programa para Windows».":"Програму GUARDIANA не знайдено на цьому комп’ютері. Завантажте її зі сторінки «Програма для Windows».",
 "El Vigía solo funciona en Windows.":"Вартовий працює лише у Windows.",
-"Activado: el programa GUARDIANA vigila este ordenador durante tus llamadas.":"Увімкнено: програма GUARDIANA стежить за цим комп’ютером під час ваших дзвінків."
+"Activado: el programa GUARDIANA vigila este ordenador durante tus llamadas.":"Увімкнено: програма GUARDIANA стежить за цим комп’ютером під час ваших дзвінків.",
+"Seguridad de esta llamada":"Безпека цього дзвінка",
+"Encriptada de extremo a extremo: solo los equipos de esta llamada tienen la llave.":"Наскрізне шифрування: ключ мають лише пристрої в цьому дзвінку.",
+"Capa post-cuántica activa en el sonido y la imagen.":"Постквантовий шар увімкнено для звуку й зображення.",
+"Capa post-cuántica: no disponible en esta llamada.":"Постквантовий шар: недоступний у цьому дзвінку.",
+"Número de seguridad comprobado.":"Номер безпеки звірено.",
+"Número de seguridad sin comprobar.":"Номер безпеки не звірено."
 },
 "p":{
 "intento":"Найнаполегливіша сьогодні: {1}, {2} {2?раз|разів}.",

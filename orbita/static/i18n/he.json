@@ -3645,7 +3645,13 @@
 "Comprobando el programa GUARDIANA…":"בדיקת תוכנת GUARDIANA…",
 "No se encuentra el programa GUARDIANA en este ordenador. Descárgalo desde la página «Programa para Windows».":"תוכנת GUARDIANA לא נמצאה במחשב הזה. הורידו אותה מהעמוד \"תוכנה ל־Windows\".",
 "El Vigía solo funciona en Windows.":"השומר פועל רק ב־Windows.",
-"Activado: el programa GUARDIANA vigila este ordenador durante tus llamadas.":"פעיל: תוכנת GUARDIANA משגיחה על המחשב הזה במהלך השיחות שלכם."
+"Activado: el programa GUARDIANA vigila este ordenador durante tus llamadas.":"פעיל: תוכנת GUARDIANA משגיחה על המחשב הזה במהלך השיחות שלכם.",
+"Seguridad de esta llamada":"אבטחת השיחה הזו",
+"Encriptada de extremo a extremo: solo los equipos de esta llamada tienen la llave.":"מוצפנת מקצה לקצה: רק למכשירים בשיחה הזו יש את המפתח.",
+"Capa post-cuántica activa en el sonido y la imagen.":"שכבה פוסט-קוונטית פעילה בקול ובתמונה.",
+"Capa post-cuántica: no disponible en esta llamada.":"שכבה פוסט-קוונטית: לא זמינה בשיחה הזו.",
+"Número de seguridad comprobado.":"מספר הבטיחות נבדק.",
+"Número de seguridad sin comprobar.":"מספר הבטיחות לא נבדק."
 },
 "p":{
 "intento":"ניסתה הכי הרבה היום: {1}, {2} {2?פעם|פעמים}.",

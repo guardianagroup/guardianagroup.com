@@ -3645,7 +3645,13 @@
 "Comprobando el programa GUARDIANA…":"GUARDIANA ప్రోగ్రామ్‌ను తనిఖీ చేస్తోంది…",
 "No se encuentra el programa GUARDIANA en este ordenador. Descárgalo desde la página «Programa para Windows».":"ఈ కంప్యూటర్‌లో GUARDIANA ప్రోగ్రామ్ కనిపించలేదు. «Windows కోసం ప్రోగ్రామ్» పేజీ నుండి దాన్ని డౌన్‌లోడ్ చేయండి.",
 "El Vigía solo funciona en Windows.":"కాపలాదారు Windows‌లో మాత్రమే పనిచేస్తుంది.",
-"Activado: el programa GUARDIANA vigila este ordenador durante tus llamadas.":"ఆన్: మీ కాల్‌ల సమయంలో GUARDIANA ప్రోగ్రామ్ ఈ కంప్యూటర్‌ను కాపలా కాస్తుంది."
+"Activado: el programa GUARDIANA vigila este ordenador durante tus llamadas.":"ఆన్: మీ కాల్‌ల సమయంలో GUARDIANA ప్రోగ్రామ్ ఈ కంప్యూటర్‌ను కాపలా కాస్తుంది.",
+"Seguridad de esta llamada":"ఈ కాల్ భద్రత",
+"Encriptada de extremo a extremo: solo los equipos de esta llamada tienen la llave.":"ఎండ్-టు-ఎండ్ ఎన్‌క్రిప్ట్ చేయబడింది: ఈ కాల్‌లోని పరికరాల వద్ద మాత్రమే కీ ఉంది.",
+"Capa post-cuántica activa en el sonido y la imagen.":"శబ్దం మరియు చిత్రంపై పోస్ట్-క్వాంటమ్ పొర సక్రియంగా ఉంది.",
+"Capa post-cuántica: no disponible en esta llamada.":"పోస్ట్-క్వాంటమ్ పొర: ఈ కాల్‌లో అందుబాటులో లేదు.",
+"Número de seguridad comprobado.":"భద్రతా సంఖ్య తనిఖీ చేయబడింది.",
+"Número de seguridad sin comprobar.":"భద్రతా సంఖ్య తనిఖీ చేయబడలేదు."
 },
 "p":{
 "intento":"ఈరోజు ఎక్కువగా ప్రయత్నించింది: {1}, {2} {2?సారి|సార్లు}.",

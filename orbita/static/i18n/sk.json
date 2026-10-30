@@ -3645,7 +3645,13 @@
 "Comprobando el programa GUARDIANA…":"Kontroluje sa program GUARDIANA…",
 "No se encuentra el programa GUARDIANA en este ordenador. Descárgalo desde la página «Programa para Windows».":"Program GUARDIANA sa v tomto počítači nenašiel. Stiahnite si ho zo stránky „Program pre Windows“.",
 "El Vigía solo funciona en Windows.":"Strážca funguje len vo Windows.",
-"Activado: el programa GUARDIANA vigila este ordenador durante tus llamadas.":"Zapnutý: program GUARDIANA počas vašich hovorov stráži tento počítač."
+"Activado: el programa GUARDIANA vigila este ordenador durante tus llamadas.":"Zapnutý: program GUARDIANA počas vašich hovorov stráži tento počítač.",
+"Seguridad de esta llamada":"Zabezpečenie tohto hovoru",
+"Encriptada de extremo a extremo: solo los equipos de esta llamada tienen la llave.":"Šifrované end-to-end: kľúč majú len zariadenia v tomto hovore.",
+"Capa post-cuántica activa en el sonido y la imagen.":"Postkvantová vrstva je aktívna pre zvuk aj obraz.",
+"Capa post-cuántica: no disponible en esta llamada.":"Postkvantová vrstva: v tomto hovore nie je k dispozícii.",
+"Número de seguridad comprobado.":"Bezpečnostné číslo overené.",
+"Número de seguridad sin comprobar.":"Bezpečnostné číslo neoverené."
 },
 "p":{
 "intento":"Najviac sa dnes snažila: {1}, {2}{2?-krát|-krát}.",

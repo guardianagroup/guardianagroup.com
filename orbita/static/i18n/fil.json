@@ -3645,7 +3645,13 @@
 "Comprobando el programa GUARDIANA…":"Sinusuri ang programang GUARDIANA…",
 "No se encuentra el programa GUARDIANA en este ordenador. Descárgalo desde la página «Programa para Windows».":"Hindi makita ang programang GUARDIANA sa computer na ito. I-download ito mula sa pahinang “Program para sa Windows”.",
 "El Vigía solo funciona en Windows.":"Gumagana lang ang Bantay sa Windows.",
-"Activado: el programa GUARDIANA vigila este ordenador durante tus llamadas.":"Naka-on: binabantayan ng programang GUARDIANA ang computer na ito habang may tawag ka."
+"Activado: el programa GUARDIANA vigila este ordenador durante tus llamadas.":"Naka-on: binabantayan ng programang GUARDIANA ang computer na ito habang may tawag ka.",
+"Seguridad de esta llamada":"Seguridad ng tawag na ito",
+"Encriptada de extremo a extremo: solo los equipos de esta llamada tienen la llave.":"End-to-end encrypted: ang mga device lang sa tawag na ito ang may susi.",
+"Capa post-cuántica activa en el sonido y la imagen.":"Aktibo ang post-quantum na layer sa tunog at larawan.",
+"Capa post-cuántica: no disponible en esta llamada.":"Post-quantum na layer: hindi available sa tawag na ito.",
+"Número de seguridad comprobado.":"Nasuri na ang safety number.",
+"Número de seguridad sin comprobar.":"Hindi pa nasusuri ang safety number."
 },
 "p":{
 "intento":"Pinakamadalas sumubok ngayon: {1}, {2} {2?beses|beses}.",

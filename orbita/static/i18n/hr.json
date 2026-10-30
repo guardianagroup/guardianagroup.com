@@ -3645,7 +3645,13 @@
 "Comprobando el programa GUARDIANA…":"Provjera programa GUARDIANA…",
 "No se encuentra el programa GUARDIANA en este ordenador. Descárgalo desde la página «Programa para Windows».":"Program GUARDIANA nije pronađen na ovom računalu. Preuzmite ga sa stranice „Program za Windows”.",
 "El Vigía solo funciona en Windows.":"Čuvar radi samo u Windowsima.",
-"Activado: el programa GUARDIANA vigila este ordenador durante tus llamadas.":"Uključen: program GUARDIANA nadzire ovo računalo tijekom vaših poziva."
+"Activado: el programa GUARDIANA vigila este ordenador durante tus llamadas.":"Uključen: program GUARDIANA nadzire ovo računalo tijekom vaših poziva.",
+"Seguridad de esta llamada":"Sigurnost ovog poziva",
+"Encriptada de extremo a extremo: solo los equipos de esta llamada tienen la llave.":"End-to-end šifrirano: ključ imaju samo uređaji u ovom pozivu.",
+"Capa post-cuántica activa en el sonido y la imagen.":"Postkvantni sloj aktivan je za zvuk i sliku.",
+"Capa post-cuántica: no disponible en esta llamada.":"Postkvantni sloj: nije dostupan u ovom pozivu.",
+"Número de seguridad comprobado.":"Sigurnosni broj provjeren.",
+"Número de seguridad sin comprobar.":"Sigurnosni broj nije provjeren."
 },
 "p":{
 "intento":"Najupornija danas: {1}, {2} {2?put|puta}.",

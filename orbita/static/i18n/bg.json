@@ -3645,7 +3645,13 @@
 "Comprobando el programa GUARDIANA…":"Проверка на програмата GUARDIANA…",
 "No se encuentra el programa GUARDIANA en este ordenador. Descárgalo desde la página «Programa para Windows».":"Програмата GUARDIANA не е открита на този компютър. Изтеглете я от страницата „Програма за Windows“.",
 "El Vigía solo funciona en Windows.":"Пазачът работи само в Windows.",
-"Activado: el programa GUARDIANA vigila este ordenador durante tus llamadas.":"Включен: програмата GUARDIANA наблюдава този компютър по време на вашите обаждания."
+"Activado: el programa GUARDIANA vigila este ordenador durante tus llamadas.":"Включен: програмата GUARDIANA наблюдава този компютър по време на вашите обаждания.",
+"Seguridad de esta llamada":"Сигурност на това обаждане",
+"Encriptada de extremo a extremo: solo los equipos de esta llamada tienen la llave.":"Криптирано от край до край: само устройствата в това обаждане имат ключа.",
+"Capa post-cuántica activa en el sonido y la imagen.":"Постквантовият слой е активен за звука и образа.",
+"Capa post-cuántica: no disponible en esta llamada.":"Постквантов слой: не е наличен в това обаждане.",
+"Número de seguridad comprobado.":"Номерът за сигурност е проверен.",
+"Número de seguridad sin comprobar.":"Номерът за сигурност не е проверен."
 },
 "p":{
 "intento":"Най-настойчивата днес: {1}, {2} {2?път|пъти}.",

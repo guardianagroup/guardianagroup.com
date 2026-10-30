@@ -3645,7 +3645,13 @@
 "Comprobando el programa GUARDIANA…":"GUARDIANA நிரலைச் சரிபார்க்கிறது…",
 "No se encuentra el programa GUARDIANA en este ordenador. Descárgalo desde la página «Programa para Windows».":"இந்தக் கணினியில் GUARDIANA நிரல் கண்டறியப்படவில்லை. «Windows-க்கான நிரல்» பக்கத்திலிருந்து அதைப் பதிவிறக்குங்கள்.",
 "El Vigía solo funciona en Windows.":"காவலர் Windows-இல் மட்டுமே செயல்படும்.",
-"Activado: el programa GUARDIANA vigila este ordenador durante tus llamadas.":"இயக்கத்தில்: உங்கள் அழைப்புகளின்போது GUARDIANA நிரல் இந்தக் கணினியைக் கண்காணிக்கிறது."
+"Activado: el programa GUARDIANA vigila este ordenador durante tus llamadas.":"இயக்கத்தில்: உங்கள் அழைப்புகளின்போது GUARDIANA நிரல் இந்தக் கணினியைக் கண்காணிக்கிறது.",
+"Seguridad de esta llamada":"இந்த அழைப்பின் பாதுகாப்பு",
+"Encriptada de extremo a extremo: solo los equipos de esta llamada tienen la llave.":"முழுமையாக மறைகுறியாக்கப்பட்டது: இந்த அழைப்பில் உள்ள சாதனங்களிடம் மட்டுமே சாவி உள்ளது.",
+"Capa post-cuántica activa en el sonido y la imagen.":"ஒலி மற்றும் படத்தில் போஸ்ட்-குவாண்டம் அடுக்கு செயலில் உள்ளது.",
+"Capa post-cuántica: no disponible en esta llamada.":"போஸ்ட்-குவாண்டம் அடுக்கு: இந்த அழைப்பில் கிடைக்கவில்லை.",
+"Número de seguridad comprobado.":"பாதுகாப்பு எண் சரிபார்க்கப்பட்டது.",
+"Número de seguridad sin comprobar.":"பாதுகாப்பு எண் சரிபார்க்கப்படவில்லை."
 },
 "p":{
 "intento":"இன்று அதிகம் முயன்றது: {1}, {2} {2?முறை|முறை}.",

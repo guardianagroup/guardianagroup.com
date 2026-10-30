@@ -3645,7 +3645,13 @@
 "Comprobando el programa GUARDIANA…":"جارٍ التحقق من برنامج GUARDIANA…",
 "No se encuentra el programa GUARDIANA en este ordenador. Descárgalo desde la página «Programa para Windows».":"لم يُعثر على برنامج GUARDIANA على هذا الحاسوب. نزّله من صفحة «برنامج لنظام Windows».",
 "El Vigía solo funciona en Windows.":"لا يعمل الحارس إلا في Windows.",
-"Activado: el programa GUARDIANA vigila este ordenador durante tus llamadas.":"مفعّل: يراقب برنامج GUARDIANA هذا الحاسوب أثناء مكالماتك."
+"Activado: el programa GUARDIANA vigila este ordenador durante tus llamadas.":"مفعّل: يراقب برنامج GUARDIANA هذا الحاسوب أثناء مكالماتك.",
+"Seguridad de esta llamada":"أمان هذه المكالمة",
+"Encriptada de extremo a extremo: solo los equipos de esta llamada tienen la llave.":"مشفّرة من طرف إلى طرف: الأجهزة المشاركة في هذه المكالمة وحدها تملك المفتاح.",
+"Capa post-cuántica activa en el sonido y la imagen.":"طبقة ما بعد الكمومية مفعّلة على الصوت والصورة.",
+"Capa post-cuántica: no disponible en esta llamada.":"طبقة ما بعد الكمومية: غير متاحة في هذه المكالمة.",
+"Número de seguridad comprobado.":"تم التحقق من رقم الأمان.",
+"Número de seguridad sin comprobar.":"لم يتم التحقق من رقم الأمان."
 },
 "p":{
 "intento":"الأكثر محاولةً اليوم: {1}، {2} {2?مرة|مرات}.",
