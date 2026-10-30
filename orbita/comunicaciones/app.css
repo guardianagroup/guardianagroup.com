@@ -587,7 +587,7 @@ svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-l
 .gc-llamada.voz-abierta .ll-voz-pill i{transform:translateY(2px) rotate(-135deg)}
 .ll-voz-pill:hover{border-color:rgba(156,195,228,.55)}
 .ll-voz-pill:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
-.gc-llamada-estado{cursor:pointer;-webkit-tap-highlight-color:transparent}
+.gc-llamada-estado{cursor:default;-webkit-tap-highlight-color:transparent}
 .gc-llamada-estado[data-nivel]::before{content:'';display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:7px;vertical-align:1px;background:#5CC98A}
 .gc-llamada-estado[data-nivel="media"]::before{background:#F0C77F}
 .gc-llamada-estado[data-nivel="baja"]::before{background:#E07A6C}

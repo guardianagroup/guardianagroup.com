@@ -904,7 +904,8 @@
           const largo = t('Calidad estimada') + ': ' + nivel + (rtt != null ? ' · ' + rtt + ' ms' : '') + (video && vw && suCamara ? ' · ' + t('imagen') + ' ' + vw + '×' + vh + (fps ? ' · ' + Math.round(fps) + ' fps' : '') : '') + (video ? ' · ' + t('envío') + ' ' + (diag.envia || '–') + (diag.codec ? ' ' + diag.codec : '') + ' · ' + t('recibo') + ' ' + (diag.recibe || '–') + (diag.codecRecibe ? ' ' + diag.codecRecibe : '') : '') + (serv ? ' · ' + t('servidor de llamadas') + ': ' + serv : '');
           calidad.dataset.nivel = p < 0.01 && (rtt == null || rtt < 250) ? 'alta' : p < 0.05 ? 'media' : 'baja';
           const corto = t('Conexión') + ': ' + nivel;
-          calidad.dataset.largo = largo; calidad.dataset.corto = corto; calidad.title = largo;
+          // sin los datos técnicos al pasar el ratón (dueño, 30 Oct 2026, 12:06: «esos datos, quítalos de ahí»)
+          calidad.dataset.largo = largo; calidad.dataset.corto = corto; calidad.removeAttribute('title');
           calidad.textContent = calidad.classList.contains('ver') ? largo : corto;
         } catch (_) {}
       }, 2000);
@@ -1501,8 +1502,7 @@
     const pill = $('#ll-voz-pill');
     if (pill) pill.addEventListener('click', () => { caja.classList.toggle('voz-abierta'); pinta(); });
     for (const b of document.querySelectorAll('#ll-voces [data-voz]')) b.addEventListener('click', () => { if (estado === 'entrante') pinta(); });
-    // la calidad: corta en pantalla («Conexión: excelente»); al tocarla, los datos técnicos
-    calidad.addEventListener('click', () => { calidad.classList.toggle('ver'); if (calidad.dataset.largo) calidad.textContent = calidad.classList.contains('ver') ? calidad.dataset.largo : (calidad.dataset.corto || ''); });
+    // la calidad: solo «Conexión: excelente»; ni al pasar el ratón ni al tocarla salen los datos técnicos (dueño, 30 Oct 2026, 12:06)
     // en el teléfono la calidad solo sale si la conexión es débil; tocando «Encriptada de extremo a extremo» se ve el detalle (la
     // resolución y el formato de la imagen que va y viene), para mandar una captura si algo falla (29 Oct 2026, 15:20)
     { const ci = document.querySelector('#gc-llamada .gc-llamada-cifrado') || document.querySelector('.gc-llamada-cifrado'); if (ci) { ci.style.cursor = 'pointer'; ci.addEventListener('click', () => { const on = !caja.classList.contains('ver-calidad'); caja.classList.toggle('ver-calidad', on); calidad.classList.toggle('ver', on); if (calidad.dataset.largo) calidad.textContent = on ? calidad.dataset.largo : (calidad.dataset.corto || ''); }); } }
