@@ -41,30 +41,39 @@ async function acepta(P, url) { await P.goto(url); await espera(1500); if (await
 (async () => {
   const browser = await chromium.launch({ args: ['--use-fake-ui-for-media-stream', '--use-fake-device-for-media-stream'] });
 
-  // 1. Android (dueño, 29 Oct 2026, 20:02–20:14): la invitación abre el chat directamente, sin «¿Aceptas?» ni preguntas; con el chat
-  //    empezado, la barra azul fina encima de donde se escribe; un toque y la ventana del sistema. Instalada, la barra se va sola y el
-  //    chat deja de ser temporal (Chrome y la app guardan juntos)
+  // 1. Android (dueño, 29 Oct 2026, 20:02–20:53): la invitación abre el chat directamente, sin «¿Aceptas?»; al empezar el chat, una
+  //    vez, «¿Añadir GUARDIANA a tu pantalla de inicio?»; «Sí, añadir» abre la ventana del sistema. Instalada, el chat deja de ser
+  //    temporal (Chrome y la app guardan juntos)
   const B = await equipo(browser, ANDROID, { aviso: true });
   await B.goto(await invitacion(browser)); await espera(1500);
   comprueba(!(await visible(B, '#aceptar-si')), 'Android: sin «¿Aceptas?», el chat se abre directamente');
-  const barra = async (P) => P.evaluate(() => { const t = document.querySelector('#tira-anadir'), b = document.querySelector('#tira-anadir-b'); return !!(t && !t.hidden && b && !b.hidden && t.classList.contains('en-android')); });
-  let vio = false; for (let k = 0; k < 40 && !vio; k++) { vio = await barra(B); if (!vio) await espera(300); }
-  comprueba(vio, 'Android: con el chat empezado, la barra azul «Añadir a pantalla de inicio» encima de donde se escribe');
-  comprueba(!(await hojaAbierta(B)) && await B.evaluate(() => document.querySelector('#anadir-guia').hidden), 'Android: sin hojas ni guías por medio');
+  let vio = false; for (let k = 0; k < 60 && !vio; k++) { vio = await hojaAbierta(B); if (!vio) await espera(300); }
+  comprueba(vio, 'Android: al empezar el chat, «¿Añadir GUARDIANA a tu pantalla de inicio?» (como antes; dueño, 20:53)');
+  comprueba(!(await B.$('#tira-anadir')), 'Android: sin barra azul');
   comprueba(await B.evaluate(() => /Chat temporal/.test(document.querySelector('#mensajes').textContent)), 'Android: dentro del chat, la línea del chat temporal');
   await B.screenshot({ path: path.join(OUT, '1-android.png') });
-  await B.click('#tira-anadir-b'); await espera(500);
-  comprueba(await B.evaluate(() => window.__instalar) === 1, 'Android: un toque en la barra, la ventana del sistema');
+  await B.click('#instalar-si'); await espera(500);
+  comprueba(await B.evaluate(() => window.__instalar) === 1 && !(await hojaAbierta(B)), '«Sí, añadir»: la ventana del sistema, y la pregunta se cierra');
   await B.evaluate(() => dispatchEvent(new Event('appinstalled'))); await espera(600);
-  comprueba(!(await barra(B)) && await B.evaluate(() => localStorage.getItem('gcom-app-instalada') === '1' && !window.gcomPruebaTemporal.estado().convs.some((c) => c.temporal)), 'Android: instalada, la barra se va y el chat ya no es temporal');
+  comprueba(await B.evaluate(() => localStorage.getItem('gcom-app-instalada') === '1' && !window.gcomPruebaTemporal.estado().convs.some((c) => c.temporal)), 'Android: instalada, el chat ya no es temporal');
 
-  // 2. Android sin el aviso del navegador (lo abre dentro de otra app): la barra enseña los pasos (⋮ y «Instalar app»)
+  // 2. «Ahora no»: no se vuelve a preguntar (ni al recargar)
+  const C = await equipo(browser, ANDROID, { aviso: true });
+  await C.goto(await invitacion(browser)); await espera(1500);
+  vio = false; for (let k = 0; k < 60 && !vio; k++) { vio = await hojaAbierta(C); if (!vio) await espera(300); }
+  comprueba(vio, 'otro Android: la pregunta');
+  await C.click('#instalar-no'); await espera(400);
+  comprueba(!(await hojaAbierta(C)) && await C.evaluate(() => window.__instalar) === 0, '«Ahora no» la cierra sin instalar');
+  await C.reload(); await espera(5000);
+  comprueba(!(await hojaAbierta(C)), 'al volver a abrir, no se repite la pregunta');
+
+  // 3. Android sin el aviso del navegador (lo abre dentro de otra app): pregunta igual y «Sí» enseña los pasos (⋮ y «Instalar app»)
   const D = await equipo(browser, ANDROID, {});
   await D.goto(await invitacion(browser)); await espera(1500);
-  vio = false; for (let k = 0; k < 40 && !vio; k++) { vio = await barra(D); if (!vio) await espera(300); }
-  comprueba(vio, 'Android sin aviso del navegador: la barra, igual');
-  await D.click('#tira-anadir-b'); await espera(500);
-  comprueba(await D.evaluate(() => document.querySelector('#h-completa').classList.contains('gc-abierta')), 'la barra: los pasos (⋮ y «Instalar app»)');
+  vio = false; for (let k = 0; k < 60 && !vio; k++) { vio = await hojaAbierta(D); if (!vio) await espera(300); }
+  comprueba(vio, 'Android sin aviso del navegador: la pregunta llega igual');
+  await D.click('#instalar-si'); await espera(500);
+  comprueba(await D.evaluate(() => document.querySelector('#h-completa').classList.contains('gc-abierta')), '«Sí»: los pasos (⋮ y «Instalar app»)');
 
   // 4. Ordenador (Chrome o Edge): «¿Instalar GUARDIANA en este ordenador?» y el botón del inicio
   const E = await equipo(browser, PC, { aviso: true });

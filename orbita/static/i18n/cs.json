@@ -3449,7 +3449,11 @@
 "Chat temporal: la otra persona lo tiene abierto en el navegador del móvil, sin GUARDIANA. Si no la añade a su pantalla de inicio, este chat se borrará a los 10 minutos sin usarlo.":"Dočasný chat: druhá osoba ho má otevřený v prohlížeči telefonu, bez GUARDIANA. Pokud si ji nepřidá na plochu, chat se po 10 minutách bez použití smaže.",
 "La otra persona ya tiene GUARDIANA: este chat se queda guardado.":"Druhá osoba už má GUARDIANA: tento chat zůstane uložený.",
 "Chat temporal: si no añades GUARDIANA a tu pantalla de inicio, se borra a los 10 minutos sin usarlo.":"Dočasný chat: pokud si GUARDIANA nepřidáte na plochu, smaže se po 10 minutách bez použití.",
-"Pulsa el botón de abajo":"Klepněte na tlačítko dole"
+"Pulsa el botón de abajo":"Klepněte na tlačítko dole",
+"Mantén pulsado el micrófono para grabar y suelta para enviar.":"Podržte mikrofon pro nahrávání a pusťte pro odeslání.",
+"Desliza para cancelar":"Přejeďte pro zrušení",
+"Cancelar la grabación":"Zrušit nahrávání",
+"Para tener tus chats y los avisos siempre. Se hace una sola vez.":"Abyste měli chaty a upozornění vždy. Dělá se to jen jednou."
 },
 "p":{
 "intento":"Nejvíc se dnes snažila: {1}, {2}{2?krát|krát}.",

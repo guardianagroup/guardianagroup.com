@@ -341,3 +341,24 @@ Versiones en main: app.css, app.js y llamada.js `20261030i`; idioma.js `20261029
 - **Siguiente (tarea #80)**: programa instalable para PC a partir de «Guardiana ZERO», misma interfaz que la web, cuadro comparativo en la
   web; sin firmar de momento, luego Certum a nombre de GUARDIANA GROUP. Pasar por la agencia antes.
 - Versiones: app.js 31f, app.css 31g, arranque.js 31b, idioma.js p86 (ru y cs al día).
+
+## 19. Tramo 11 (20:51–21:30) — notas de voz como WhatsApp, guía una sola vez, ideas nuevas del dueño
+- **Reproductor** (app.js `reproductorVoz`, app.css `.gc-burbuja-voz`): la caja tipo WhatsApp (play centrado en alto, barra, tiempo abajo a
+  la izquierda, hora y ticks a la derecha; la burbuja lleva `gc-burbuja-voz`); la bolita y la barra se mueven con `transform` y la
+  posición se suaviza entre lecturas de `currentTime` (el teléfono la actualiza pocas veces por segundo); al acabar, 0:00 y «play»
+  (`termina`); vigilancia del final para el iPhone, que a veces no manda `ended` con notas de otro iPhone (20:54, foto de Nathalie:
+  se quedaba en 0:04 con el cuadradito).
+- **Grabar** (bloque «Notas de voz» en eventos): mantener pulsado graba, soltar envía (menos de 0,8 s: no se envía y se explica),
+  deslizar a la izquierda cancela, hacia arriba deja la grabación fija (papelera + «Enviar»); con ratón, clic = fija. Mientras: punto
+  rojo, tiempo, onda del micrófono (AnalyserNode, canvas `#grabando-onda`, solo en modo fijo). `rec.start()` sin trozos: el iPhone
+  escribe un MP4 completo con su duración. OJO: el `click` que sigue al toque se ignora (`ultimoSuelto`); el gesto hecho antes de que
+  llegue el micrófono se apunta en `dedo.cancelado/fijar`. Pruebas: voz-grabar.js (nueva) y voz.js (al día).
+- **Guía una sola vez** (dueño 20:53: «la barra azul, quítala… como antes… al principio y luego ya no aparece más»): fuera `#tira-anadir`;
+  en Safari del iPhone, al empezar el chat, la ventanita `#h-anadir` (dos pasos con los símbolos, «Entendido»), una vez por chat
+  (`gcom-anadir-visto`); en Android, la pregunta de siempre `#h-instalar` (`ofreceInstalarAndroid` → `preguntaInstalar`). El arranque
+  con `?app=1#t=` ya no reabre la guía (`/#[ibt]=/`).
+- **Ideas del dueño (21:03, definitiva para el móvil; tarea #83)**: número de GUARDIANA fijo por persona, dado al abrir la app
+  instalada; se llama al número y la otra persona acepta una vez. El PC se decide después. Pendiente: ronda de la agencia y plan con
+  pantallas antes de construir. Llamadas telefónicas normales pasando por GUARDIANA (21:20): explicado que no hay extremo a extremo
+  sin app en los dos lados; posible solo como centralita (nos oiría el servidor) → no ahora.
+- Versiones: app.js 31g, app.css 31h, idioma.js p87 (ru y cs al día).

@@ -1440,6 +1440,10 @@
     "Añade GUARDIANA a tu pantalla de inicio": ["Add GUARDIANA to your Home Screen", "Adicione a GUARDIANA à sua tela de início"],
     "Instala GUARDIANA en este ordenador": ["Install GUARDIANA on this computer", "Instale a GUARDIANA neste computador"],
     // 29 Oct 2026, 19:36–20:08: «Descargar GUARDIANA», chat temporal, GUARDIANA entera en el ordenador
+    "Mantén pulsado el micrófono para grabar y suelta para enviar.": ["Press and hold the microphone to record; release to send.", "Mantenha o microfone pressionado para gravar e solte para enviar."],
+    "Desliza para cancelar": ["Slide to cancel", "Deslize para cancelar"],
+    "Cancelar la grabación": ["Cancel the recording", "Cancelar a gravação"],
+    "Para tener tus chats y los avisos siempre. Se hace una sola vez.": ["To keep your chats and get notifications, always. You only do it once.", "Para ter seus chats e os avisos sempre. Faz-se uma só vez."],
     "Pulsa el botón de abajo": ["Tap the button at the bottom", "Toque no botão de baixo"],
     "Tu chat ya está en la app": ["Your chat is now in the app", "Seu chat já está no app"],
     "Ábrela desde tu pantalla de inicio: el icono de GUARDIANA. Ya puedes cerrar esta página.": ["Open it from your home screen: the GUARDIANA icon. You can close this page now.", "Abra pela tela inicial: o ícone do GUARDIANA. Já pode fechar esta página."],

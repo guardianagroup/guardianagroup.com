@@ -314,7 +314,6 @@
   function muestraDescargar(ver) {
     const p = $('#paso-descargar'); if (!p) return;
     if (ver) { if (ACTUAL) cierraConv(); verContactos = false; $('#inicio').classList.remove('ver-contactos'); $('#contactos').hidden = true; for (const h of document.querySelectorAll('.gc-hoja.gc-abierta')) cierraHoja(h.id); }
-    for (const k of ['nav-safari26', 'nav-safari', 'nav-chrome', 'nav-otro']) p.classList.remove(k); p.classList.add('nav-' + navegadorIOS());
     p.hidden = !ver; $('#inicio').classList.toggle('con-invitacion', ver); document.body.classList.toggle('aceptando', ver); document.body.classList.toggle('descargando', ver);
     if (ver) { for (const id of ['paso-inicio', 'paso-codigo', 'paso-enlace', 'paso-entrar', 'paso-aceptar', 'paso-traspasado']) { const e = $('#' + id); if (e) e.hidden = true; } $('#inicio').hidden = false; $('#conv').hidden = true; }
     else $('#paso-inicio').hidden = false;
@@ -1443,7 +1442,6 @@
       const nueva = !!(op.silencio && window.gcomTraspasoNueva); window.gcomTraspasoNueva = false;
       try { for (const k of ['gcom-traspaso-conv', 'gcom-temporal-uso', 'gcom-ultima'].concat(nueva ? [] : ['gcom-traspaso'])) localStorage.removeItem(k); } catch (_) {}
       if (!nueva) window.gcomTraspaso = null; usoT = 0;
-      pintaTiraAnadir();
       if (!op.silencio) {
         if (vivas().length) aviso(T('Chat temporal borrado: {n}.').replace('{n}', nombres.join(', ')));
         else muestraFinTemporal(op.ya ? 'mano' : 'tiempo');
@@ -1462,7 +1460,7 @@
     if (!c || esB(c) || !c.huella) return;
     if (temporalConv(c)) { if (!c.dijeTemporal) { c.dijeTemporal = true; guardaConv(c); marcaUso(true); anotaSistema(c, 'Chat temporal: si no añades GUARDIANA a tu pantalla de inicio, se borra a los 10 minutos sin usarlo.'); } enviaControl(c, { tipo: 'temporal', min: 10 }); }
     else if (c.dijeTemporal) { c.dijeTemporal = false; guardaConv(c); enviaControl(c, { tipo: 'guardado' }); }
-    if (ACTUAL === c.id) pintaTiraAnadir();
+    ofreceInstalarAndroid(c);
   }
   // en el lado de quien invitó (con la app): lo que dice la otra persona de su chat
   async function recibeTemporal(c, es) {
@@ -1494,7 +1492,6 @@
     if (!androidUA || appAndroidVista()) return;
     try { localStorage.setItem('gcom-app-instalada', '1'); } catch (_) {}
     for (const c of CONVS.values()) { if (c.temporal) { c.temporal = false; guardaConv(c); } if (c.dijeTemporal && enLinea(c)) avisaTemporal(c); }
-    pintaTiraAnadir();
   }
   function mandaTraspaso(c) {
     if (!c || esB(c) || !c.huella || !iosSafari()) return;
@@ -1550,55 +1547,26 @@
     // la llave ya cumplió: un icono que se añada después nace limpio (y la próxima invitación trae una llave nueva)
     try { for (const k of ['gcom-traspaso-conv', 'gcom-traspaso', 'gcom-temporal-uso']) localStorage.removeItem(k); } catch (_) {}
     try { await destruyeLocal(c, false, true); } catch (_) {}
-    abreAnadir(false); pintaTiraAnadir();
+    try { cierraHoja('h-anadir'); } catch (_) {}
     const p = $('#paso-traspasado'); if (p) { for (const id of ['paso-inicio', 'paso-codigo', 'paso-enlace', 'paso-entrar', 'paso-aceptar', 'paso-descargar']) { const e = $('#' + id); if (e) e.hidden = true; } p.hidden = false; $('#inicio').hidden = false; $('#inicio').classList.add('con-invitacion'); document.body.classList.add('aceptando'); $('#conv').hidden = true; }
   }
-  // el botón azul «Añadir a pantalla de inicio», abajo, encima de donde se escribe (dueño, 19:14); al tocarlo se despliega la guía fácil
-  // y lo primero que se ve en el chat es la guía desplegada (dueño, 19:22: «una vez que se ha abierto el chat… lo primero que ve ahí es
-  // agregar a la pantalla de inicio»); se recoge con un toque y se puede chatear mientras
-  let anadirMostrado = false;
+  // La guía, una sola vez, al empezar el chat (dueño, 29 Oct 2026, 20:53: «la barra azul, quítala… como antes lo teníamos, que era
+  // al principio… te lo decía al principio y luego ya no aparece más»): en el iPhone, una ventanita con los dos pasos (Compartir y
+  // «Añadir a pantalla de inicio», con sus símbolos; 20:07–20:27) y «Entendido»; no vuelve a salir para ese chat. En Android, la
+  // pregunta de siempre («¿Añadir GUARDIANA a tu pantalla de inicio?»: «Sí, añadir» abre la ventana del sistema).
+  let anadirMostrado = '';
   function ofreceAnadir() {
     if (!(iosSafari() && llaveTraspaso())) return;
-    pintaTiraAnadir();
-    if (!anadirMostrado && ACTUAL && ACTUAL === traspasoConvId()) { anadirMostrado = true; abreAnadir(true); }
+    const c = ACTUAL ? CONVS.get(ACTUAL) : null; if (!c || ACTUAL !== traspasoConvId()) return;
+    let visto = ''; try { visto = localStorage.getItem('gcom-anadir-visto') || ''; } catch (_) {}
+    if (visto === c.id || anadirMostrado === c.id) return; anadirMostrado = c.id;
+    try { localStorage.setItem('gcom-anadir-visto', c.id); } catch (_) {}
+    setTimeout(() => { if (ACTUAL === c.id && !document.querySelector('.gc-hoja.gc-abierta') && !(LL && LL.ocupado)) abreHoja('h-anadir'); }, 900);
   }
-  // la barra azul, fina, justo encima de donde se escribe, solo con el chat ya empezado (dueño, 20:08: «no quiero que aparezca [la guía]
-  // por ninguna parte hasta que el chat no ha empezado… justo encima de la barra donde se escribe… en azul… muy minimalista y muy fino»).
-  // Se quita sola: en el iPhone, al abrir la app el chat se muda y Safari se despide; en Android, el sistema avisa al instalarla y el
-  // chat ya está dentro (Chrome y la app guardan juntos). En Android, el botón abre la instalación del sistema; en el iPhone, la guía.
-  function pintaTiraAnadir() {
-    const t = $('#tira-anadir'); if (!t) return;
-    const c = ACTUAL ? CONVS.get(ACTUAL) : null;
-    const muda = !!(c && iosSafari() && llaveTraspaso() && ACTUAL === traspasoConvId());
-    const temporal = !!(c && c.huella && temporalConv(c));
-    const boton = muda || (temporal && androidUA);
-    t.hidden = !(muda || temporal);
-    const b = $('#tira-anadir-b'); if (b) b.hidden = !boton;
-    if (!muda) abreAnadir(false);
-    t.classList.toggle('en-android', !!(boton && !muda));
-    for (const k of ['nav-safari26', 'nav-safari', 'nav-chrome', 'nav-otro']) t.classList.remove(k);
-    t.classList.add('nav-' + navegadorIOS());
-  }
-  // dónde está «Compartir» en cada navegador del iPhone (dueño, 19:18: en su iPhone, Chrome, arriba a la derecha; en el de su mujer,
-  // Safari de iOS 26, en las rayitas de abajo). Safari anterior: abajo en el centro. Los demás: texto, sin flecha.
-  // (dueño, 19:29: «vamos a dejar solamente para las versiones modernas… quita la de la barrita de abajo»): una sola guía para todos,
-  // la de Compartir arriba a la derecha, como en su iPhone 16
-  // (20:12: el iPhone de Nathalie, ya con iOS 27.2, sigue con el botón en la barra de abajo: vuelven las dos guías, la de Safari y la
-  // de Chrome)
-  function navegadorIOS() { return navegadorIOSDetalle(); }
-  function navegadorIOSDetalle() {
-    const ua = navigator.userAgent || '';
-    if (/CriOS\//.test(ua)) return 'chrome';
-    if (/FxiOS|EdgiOS|OPiOS|OPT\/|DuckDuckGo|GSA\//.test(ua)) return 'otro';
-    const v = (ua.match(/Version\/(\d+)/) || [])[1] | 0;
-    return v >= 26 ? 'safari26' : v ? 'safari' : 'otro';
-  }
-  function abreAnadir(abrir) {
-    const t = $('#tira-anadir'), g = $('#anadir-guia'), b = $('#tira-anadir-b'); if (!t || !g) return;
-    if (t.classList.contains('en-android') && abrir !== false) return; // en Android no hay guía: el botón instala
-    const ver = typeof abrir === 'boolean' ? abrir : g.hidden;
-    g.hidden = !ver; t.classList.toggle('abierta', ver); if (b) b.setAttribute('aria-expanded', String(ver));
-    if (ver) { const l = $('#mensajes'); if (l) l.scrollTop = l.scrollHeight; }
+  let pideInstalar = null; // (eventos: la pregunta de Android)
+  function ofreceInstalarAndroid(c) {
+    if (!androidUA || comoApp() || !c || c.instalarOfrecido || !temporalConv(c)) return; c.instalarOfrecido = true;
+    setTimeout(() => { if (pideInstalar && ACTUAL === c.id) pideInstalar(); }, 2000);
   }
   async function entraTraspaso(t) {
     try {
@@ -1898,7 +1866,7 @@
     try { pintaInsignia(); } catch (_) {}
   }
   async function abreConv(id) {
-    retiraAvisos(id); avisosCuandoToque(); setTimeout(pintaTiraAnadir, 0);
+    retiraAvisos(id); avisosCuandoToque();
     const c = CONVS.get(id); if (!c) return;
     if (ACTUAL && ACTUAL !== id) { paraEscribe(); guardaBorrador(); }
     const cambia = ACTUAL !== id;
@@ -2055,7 +2023,7 @@
       // la ubicación, con su botón «Abrir en el mapa»
       const u = /^📍 [^:]+: (-?\d{1,2}\.\d{2,6}), (-?\d{1,3}\.\d{2,6}) \(([^)]*)\)\n(https:\/\/www\.openstreetmap\.org\/\S+)$/.exec(m.texto || '');
       if (u) { s.textContent = ''; s.classList.add('gc-ubicacion'); const t = document.createElement('b'); t.textContent = '📍 ' + T('Ubicación'); const k = document.createElement('small'); k.textContent = u[1] + ', ' + u[2] + ' · ' + u[3]; const a = document.createElement('a'); a.href = u[4]; a.target = '_blank'; a.rel = 'noopener noreferrer'; a.className = 'gc-ubi-abrir'; a.textContent = T('Abrir en el mapa'); s.append(t, k, a); } }
-    else if (m.tipo === 'archivo') bur.append(tarjetaArchivo(m));
+    else if (m.tipo === 'archivo') { bur.append(tarjetaArchivo(m)); if (m.archivo.voz) bur.classList.add('gc-burbuja-voz'); }
     const meta = document.createElement('span'); meta.className = 'gc-meta'; const tm = document.createElement('time'); tm.textContent = hora(m.t); meta.append(tm);
     if (m.dir === 'mia') { const tk = document.createElement('span'); tk.className = 'gc-ticks'; meta.append(tk); }
     bur.append(meta); li.append(bur); pintaEstado(m);
@@ -2136,9 +2104,36 @@
     const t = document.createElement('span'); t.className = 'gc-voz-t';
     let dur = m.archivo && Number.isFinite(m.archivo.dur) ? m.archivo.dur : 0, raf = 0;
     const total = () => (Number.isFinite(au.duration) && au.duration > 0 ? au.duration : dur);
-    const pinta = () => { const tot = total(), f = tot ? Math.min(1, au.currentTime / tot) : 0; prog.style.width = (f * 100) + '%'; punto.style.left = (f * 100) + '%'; t.textContent = mmssVoz(au.currentTime) + ' / ' + (tot ? mmssVoz(tot) : '–:––'); barra.setAttribute('aria-valuenow', String(Math.round(f * 100))); };
-    const bucle = () => { pinta(); if (!au.paused && !au.ended) raf = requestAnimationFrame(bucle); };
-    const para = () => { cancelAnimationFrame(raf); b.innerHTML = PLAY; b.setAttribute('aria-label', T('Reproducir')); d.classList.remove('sonando'); pinta(); if (vozSonando === au) { vozSonando = null; try { if (navigator.mediaSession) { navigator.mediaSession.playbackState = 'none'; navigator.mediaSession.metadata = null; } } catch (_) {} } };
+    // la bolita, suave (dueño, 29 Oct 2026, 20:51: «la bolita blanca va a tirones»): el teléfono solo actualiza la posición del
+    // audio unas pocas veces por segundo; entre una lectura y otra se avanza con el reloj, y se dibuja con transform (sin
+    // recalcular la página en cada fotograma)
+    let pos = 0, leida = 0, leidaEn = 0, ultimoTxt = '';
+    const posicion = (ahora) => {
+      const ct = au.currentTime;
+      if (ct !== leida) { leida = ct; leidaEn = ahora; pos = Math.abs(ct - pos) > 0.35 ? ct : pos + (ct - pos) * 0.5; }
+      else if (!au.paused && !au.ended) pos = Math.max(pos, leida + (ahora - leidaEn) / 1000 * (au.playbackRate || 1));
+      const tot = total(); if (tot) pos = Math.min(pos, tot);
+      return pos;
+    };
+    const pinta = (ahora) => {
+      const tot = total(), p = posicion(ahora || performance.now()), f = tot ? Math.min(1, p / tot) : 0;
+      prog.style.transform = 'scaleX(' + f + ')'; punto.style.transform = 'translateX(' + (f * barra.clientWidth) + 'px)';
+      const txt = mmssVoz(p) + ' / ' + (tot ? mmssVoz(tot) : '–:––'); if (txt !== ultimoTxt) { ultimoTxt = txt; t.textContent = txt; barra.setAttribute('aria-valuenow', String(Math.round(f * 100))); }
+    };
+    // al terminar, al principio y con «play» otra vez (dueño, 20:54: «tiene que volver… a la barra de inicio… el botón de play otra
+    // vez»). En el iPhone, la nota grabada por otro iPhone a veces se para al final sin avisar («ended» no llega): se vigila aquí
+    const termina = () => { try { au.pause(); } catch (_) {} try { au.currentTime = 0; } catch (_) {} pos = 0; leida = 0; para(); };
+    let quietoDesde = 0;
+    const bucle = (ahora) => {
+      pinta(ahora);
+      if (au.paused || au.ended) return;
+      const tot = total();
+      if (tot && au.currentTime >= tot - 0.08) { termina(); return; }
+      if (tot && au.currentTime === leida && ahora - leidaEn > 900 && leida >= tot - 0.6) { termina(); return; } // parada muda al final
+      if (au.currentTime === leida) { if (!quietoDesde) quietoDesde = ahora; } else quietoDesde = 0;
+      raf = requestAnimationFrame(bucle);
+    };
+    const para = () => { cancelAnimationFrame(raf); b.innerHTML = PLAY; b.setAttribute('aria-label', T('Reproducir')); d.classList.remove('sonando'); if (total() && au.currentTime >= total() - 0.08) { try { au.currentTime = 0; } catch (_) {} pos = 0; leida = 0; } pinta(); if (vozSonando === au) { vozSonando = null; try { if (navigator.mediaSession) { navigator.mediaSession.playbackState = 'none'; navigator.mediaSession.metadata = null; } } catch (_) {} } };
     // en el iPhone, lo que suena sale en la pantalla bloqueada: que diga «Nota de voz · GUARDIANA» y no el título de la pestaña
     const sesionMedios = () => { try { if (navigator.mediaSession && window.MediaMetadata) { navigator.mediaSession.metadata = new MediaMetadata({ title: T('Nota de voz'), artist: 'GUARDIANA' }); navigator.mediaSession.playbackState = 'playing'; navigator.mediaSession.setActionHandler('play', () => { const p = au.play(); if (p && p.catch) p.catch(() => {}); }); navigator.mediaSession.setActionHandler('pause', () => au.pause()); for (const a of ['seekbackward', 'seekforward', 'seekto', 'previoustrack', 'nexttrack']) { try { navigator.mediaSession.setActionHandler(a, null); } catch (_) {} } } } catch (_) {} };
     // las notas grabadas en Android (WebM de MediaRecorder) llegan sin duración y sin índice: el navegador no deja saltar a un punto.
@@ -2147,17 +2142,19 @@
     au.addEventListener('loadedmetadata', () => { if (au.duration === Infinity && au.paused) { ajustando = true; try { au.currentTime = 1e101; } catch (_) { ajustando = false; } } pinta(); });
     au.addEventListener('durationchange', () => { if (ajustando && Number.isFinite(au.duration)) { ajustando = false; try { au.currentTime = 0; } catch (_) {} } pinta(); });
     au.addEventListener('play', () => { if (vozSonando && vozSonando !== au) { try { vozSonando.pause(); } catch (_) {} } vozSonando = au; sesionMedios(); b.innerHTML = PAUSA; b.setAttribute('aria-label', T('Pausa')); d.classList.add('sonando'); cancelAnimationFrame(raf); raf = requestAnimationFrame(bucle); });
-    au.addEventListener('pause', para); au.addEventListener('ended', () => { try { au.currentTime = 0; } catch (_) {} para(); });
+    au.addEventListener('pause', para); au.addEventListener('ended', termina);
     au.addEventListener('error', () => { t.textContent = T('No se puede reproducir'); b.disabled = true; });
     b.addEventListener('click', () => { if (au.paused) { const p = au.play(); if (p && p.catch) p.catch(() => {}); } else au.pause(); }); // sin tocar la sesión de audio del iPhone al reproducir: cambiarla justo antes de play() dejaba el primer toque sin sonido
     // tocar o arrastrar en la barra: saltar a ese punto
-    const salta = (e) => { const r = barra.getBoundingClientRect(); const f = Math.max(0, Math.min(1, (e.clientX - r.left) / r.width)); const tot = total(); if (tot) { try { au.currentTime = f * tot; } catch (_) {} } pinta(); };
+    const salta = (e) => { const r = barra.getBoundingClientRect(); const f = Math.max(0, Math.min(1, (e.clientX - r.left) / r.width)); const tot = total(); if (tot) { try { au.currentTime = f * tot; } catch (_) {} pos = leida = f * tot; leidaEn = performance.now(); } pinta(); };
     let arrastra = false;
     barra.addEventListener('pointerdown', (e) => { arrastra = true; try { barra.setPointerCapture(e.pointerId); } catch (_) {} salta(e); e.preventDefault(); });
     barra.addEventListener('pointermove', (e) => { if (arrastra) salta(e); });
     for (const ev of ['pointerup', 'pointercancel']) barra.addEventListener(ev, () => { arrastra = false; });
-    barra.addEventListener('keydown', (e) => { const tot = total(); if (!tot) return; if (e.key === 'ArrowRight') { au.currentTime = Math.min(tot, au.currentTime + 5); pinta(); } if (e.key === 'ArrowLeft') { au.currentTime = Math.max(0, au.currentTime - 5); pinta(); } });
+    barra.addEventListener('keydown', (e) => { const tot = total(); if (!tot) return; if (e.key === 'ArrowRight') { au.currentTime = Math.min(tot, au.currentTime + 5); pos = leida = au.currentTime; pinta(); } if (e.key === 'ArrowLeft') { au.currentTime = Math.max(0, au.currentTime - 5); pos = leida = au.currentTime; pinta(); } });
     pinta(); d.append(au, b, barra, t);
+    // la bolita se coloca con el ancho real de la barra: al entrar en la página y si cambia el tamaño
+    try { new ResizeObserver(() => pinta()).observe(barra); } catch (_) {}
     return d;
   }
 
@@ -2851,7 +2848,7 @@
     $('#cm-completa').addEventListener('click', () => { cierraMenu(); if (puedeCompleta()) pantallaCompleta(); else abreGuia(); });
     $('#completa-ok').addEventListener('click', () => cierraHoja('h-completa'));
     // ---- llevar el chat de Safari a la app (dueño, 19:02) ----
-    { const b = $('#tira-anadir-b'); if (b) b.addEventListener('click', () => { const t = $('#tira-anadir'); if (t && t.classList.contains('en-android')) { if (avisoInstalar) instala(); else abreGuia(); } else abreAnadir(); }); }
+    { const b = $('#anadir-ok'); if (b) b.addEventListener('click', () => cierraHoja('h-anadir')); }
     // al acabar un chat temporal: descargar GUARDIANA (en el iPhone, la guía; en Android, la instalación), desde una página limpia
     { const b = $('#fin-descargar'); if (b) b.addEventListener('click', () => { location.replace(location.pathname + '?instalar'); }); }
     // «Descargar GUARDIANA» en el iPhone: «Ahora no» vuelve al inicio
@@ -2914,7 +2911,7 @@
     let guiaSeguir = null; // con una invitación en Safari: lo que hace «Seguir en Safari» (se recuerda por si la guía se cierra y se vuelve a abrir)
     function abreGuia() {
       // en el iPhone, una sola guía (19:29): en un chat que se muda, la del chat; si no, la pantalla de «Descargar GUARDIANA»
-      if (esIOS && !comoApp() && !guiaSeguir) { const t = $('#tira-anadir'), b = $('#tira-anadir-b'); if (t && !t.hidden && b && !b.hidden && !t.classList.contains('en-android')) abreAnadir(true); else muestraDescargar(true); return; }
+      if (esIOS && !comoApp() && !guiaSeguir) { if (ACTUAL && !$('#conv').hidden) abreHoja('h-anadir'); else muestraDescargar(true); return; }
       pintaGuia(); const h = $('#h-completa'), inv = !!guiaSeguir && /#[ib]=/.test(location.hash) && !comoApp();
       // con la invitación: solo los pasos, sin «Seguir en Safari» ni «Entendido» (dueño, 29 Oct 2026, 14:31 y 17:04: «tiene que ser de
       // una vez… que no se vea en Safari»); se puede cerrar tocando fuera, y detrás queda la pantalla que la vuelve a abrir
@@ -2982,6 +2979,7 @@
     // conversación sigue allí: en Android y en el ordenador, la app y el navegador comparten lo guardado. En el iPhone aún no: allí
     // la app guarda aparte y la conversación no pasaría (cuando lleguen los contactos con Face ID). Si dice «Ahora no», no se repite.
     const yaPreguntado = () => { try { return localStorage.getItem('gcom-instalar') === 'no'; } catch (_) { return false; } };
+    pideInstalar = () => preguntaInstalar(0, false);
     function preguntaInstalar(intento, forzar) {
       if (comoApp() || esIOS || (yaPreguntado() && !forzar)) return;
       if (!avisoInstalar) {
@@ -3002,7 +3000,7 @@
     if (new URLSearchParams(location.search).has('instalar') && !comoApp()) setTimeout(abreGuia, 600);
     // el marcador de la app compartido desde el iPhone o Android («Compartir marcador»: llega con ?app=1) abierto en un navegador:
     // lo primero, añadirla a la pantalla de inicio, sin buscar nada (dueño, 29 Oct 2026, 10:00: «automatiza todo»)
-    if (new URLSearchParams(location.search).get('app') === '1' && !comoApp() && (esIOS || esAndroid) && !/#[ib]=/.test(location.hash)) setTimeout(() => { if (esIOS) abreGuia(); else preguntaInstalar(0, true); }, 900);
+    if (new URLSearchParams(location.search).get('app') === '1' && !comoApp() && (esIOS || esAndroid) && !/#[ibt]=/.test(location.hash)) setTimeout(() => { if (esIOS) abreGuia(); else preguntaInstalar(0, true); }, 900);
     // en Android, la pantalla completa entra sola con el primer toque importante: crear, aceptar, llamar o contestar
     for (const id of ['#nueva-blindada', '#aceptar-si', '#llamar', '#videollamar', '#ll-contestar']) { const b = $(id); if (b) b.addEventListener('click', () => { if (esMovil() && puedeCompleta()) pantallaCompleta(); }, { capture: true }); }
     // tocar el nombre o el candado abre la seguridad de la conversación, como en las aplicaciones de mensajería
@@ -3169,31 +3167,95 @@
     $('#velo-pista').addEventListener('keyup', cubre);
     ponDiscreto(discreto);
     // Notas de voz (dueño, 26 Oct 20:05): se graban aquí, se cifran y viajan como un archivo más; con la voz tal cual.
-    let grab = null;
+    // Como en WhatsApp (dueño, 29 Oct 2026, 20:51: «la forma de grabar hazla como en wassap o otras app de chat profesionales»):
+    // se mantiene pulsado el micrófono para grabar y se suelta para enviar; deslizar a la izquierda cancela; deslizar hacia arriba
+    // deja la grabación «fija» (sin el dedo), con la papelera y «Enviar». Con ratón, un clic empieza (fija) y «Enviar» la manda.
+    // Mientras se graba: el punto rojo, el tiempo y la onda de la voz. La grabación sale de una pieza (sin trozos): así el
+    // iPhone escribe un archivo completo, con su duración, y al reproducirlo sabe dónde acaba.
+    let grab = null, dedo = null;
     const compositor = document.querySelector('.gc-compositor');
+    const grabar = $('#grabar');
+    const vibra = (p) => { try { if (navigator.vibrate) navigator.vibrate(p); } catch (_) {} };
     const paraGrabacion = (enviar) => {
-      if (!grab) return; const g = grab; grab = null; clearInterval(g.reloj);
-      g.enviar = enviar; try { g.rec.stop(); } catch (_) {} setTimeout(() => { g.stream.getTracks().forEach((x) => x.stop()); try { if (navigator.audioSession && !(LL && LL.ocupado)) navigator.audioSession.type = 'playback'; } catch (_) {} }, 300);
-      compositor.classList.remove('grabando-ya'); $('#grabando').hidden = true; $('#grabar').setAttribute('aria-pressed', 'false');
+      if (!grab) return; const g = grab; grab = null; clearInterval(g.reloj); cancelAnimationFrame(g.raf);
+      const seg = (Date.now() - g.t0) / 1000;
+      if (enviar && seg < 0.8 && !g.fija) { enviar = false; aviso(T('Mantén pulsado el micrófono para grabar y suelta para enviar.')); }
+      g.enviar = enviar; try { g.rec.stop(); } catch (_) {}
+      try { if (g.ctx) g.ctx.close(); } catch (_) {}
+      setTimeout(() => { g.stream.getTracks().forEach((x) => x.stop()); try { if (navigator.audioSession && !(LL && LL.ocupado)) navigator.audioSession.type = 'playback'; } catch (_) {} }, 300);
+      compositor.classList.remove('grabando-ya', 'grab-fija'); $('#grabando').hidden = true; $('#grabando-candado').hidden = true;
+      grabar.setAttribute('aria-pressed', 'false'); grabar.classList.remove('pulsando'); grabar.style.transform = '';
+      const dz = $('#grabando-desliza'); if (dz) { dz.style.transform = ''; dz.style.opacity = ''; }
+      if (!enviar && seg >= 0.8) vibra([20, 40, 20]);
       avisaEscribe(ta.value.trim() ? 'texto' : 'no');
     };
-    $('#grabar').addEventListener('click', async () => {
-      const c = CONVS.get(ACTUAL); if (!c) return;
-      if (grab) return paraGrabacion(true);
-      if (!navigator.mediaDevices || !window.MediaRecorder) return aviso(T('Este navegador no puede grabar audio.'));
+    const fijaGrabacion = () => { if (!grab || grab.fija) return; grab.fija = true; compositor.classList.add('grab-fija'); $('#grabando-candado').hidden = true; const dz = $('#grabando-desliza'); if (dz) { dz.style.transform = ''; dz.style.opacity = ''; } grabar.style.transform = ''; vibra(15); };
+    // la onda de la voz mientras se graba: el nivel del micrófono, barra a barra
+    const pintaOnda = (g) => {
+      const cv = $('#grabando-onda'); if (!cv || !g.an) return;
+      g.an.getByteTimeDomainData(g.datos); let sum = 0; for (let k = 0; k < g.datos.length; k++) { const v = (g.datos[k] - 128) / 128; sum += v * v; }
+      const rms = Math.sqrt(sum / g.datos.length); g.barras.push(Math.min(1, rms * 3.2)); if (g.barras.length > 40) g.barras.shift();
+      const ctx2 = cv.getContext('2d'); const W = cv.width, H = cv.height; ctx2.clearRect(0, 0, W, H); ctx2.fillStyle = '#F4F6F8';
+      for (let k = 0; k < g.barras.length; k++) { const h = 2 + g.barras[k] * (H - 4); const x = W - (g.barras.length - k) * 4; ctx2.fillRect(x, (H - h) / 2, 2, h); }
+    };
+    async function empiezaGrabacion(c, d) {
+      if (!navigator.mediaDevices || !window.MediaRecorder) { aviso(T('Este navegador no puede grabar audio.')); return; }
       try { if (navigator.audioSession) navigator.audioSession.type = 'play-and-record'; } catch (_) {}
-      let stream; try { stream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true } }); } catch (_) { try { if (navigator.audioSession) navigator.audioSession.type = 'playback'; } catch (_) {} return aviso(T('Sin permiso para el micrófono.')); }
+      let stream; try { stream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true } }); } catch (_) { try { if (navigator.audioSession) navigator.audioSession.type = 'playback'; } catch (_) {} aviso(T('Sin permiso para el micrófono.')); return; }
+      // el dedo ya se levantó mientras el teléfono pedía el permiso (o la grabación ya no toca): no se graba nada
+      if (grab || (d && (d.suelto || d.cancelado) && !d.raton) || ACTUAL !== c.id) { stream.getTracks().forEach((x) => x.stop()); try { if (navigator.audioSession && !(LL && LL.ocupado)) navigator.audioSession.type = 'playback'; } catch (_) {} if (d && d.suelto && !grab) aviso(T('Mantén pulsado el micrófono para grabar y suelta para enviar.')); return; }
       const mime = ['audio/webm;codecs=opus', 'audio/webm', 'audio/mp4', 'audio/ogg;codecs=opus'].find((m) => MediaRecorder.isTypeSupported(m)) || '';
       const rec = new MediaRecorder(stream, mime ? { mimeType: mime, audioBitsPerSecond: 64000 } : undefined);
       const trozos = []; const t0 = Date.now();
       rec.ondataavailable = (e) => { if (e.data && e.data.size) trozos.push(e.data); };
       rec.onstop = () => { const g = este; if (!g.enviar || !trozos.length) return; const tipo = rec.mimeType || mime || 'audio/webm'; const ext = /mp4/.test(tipo) ? 'm4a' : /ogg/.test(tipo) ? 'ogg' : 'webm'; const dur = Math.round((Date.now() - t0) / 1000); const f = new File(trozos, T('Nota de voz') + ' ' + new Date().toLocaleTimeString(LOC(), { hour: '2-digit', minute: '2-digit' }).replace(':', '.') + ' (' + Math.floor(dur / 60) + ':' + String(dur % 60).padStart(2, '0') + ').' + ext, { type: tipo }); const cc = CONVS.get(ACTUAL) || c; if (cc) enviaArchivos(cc, [f], { voz: true, dur: (Date.now() - t0) / 1000 }); };
-      const este = { rec, stream, enviar: false, reloj: null };
-      grab = este; rec.start(250);
-      compositor.classList.add('grabando-ya'); $('#grabando').hidden = false; $('#grabar').setAttribute('aria-pressed', 'true');
-      este.reloj = setInterval(() => { const s = Math.floor((Date.now() - t0) / 1000); $('#grabando-t').textContent = Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); avisaEscribe('audio'); if (s >= 600) paraGrabacion(true); }, 250);
+      const este = { rec, stream, enviar: false, reloj: null, raf: 0, t0, fija: false, ctx: null, an: null, datos: null, barras: [] };
+      try { const AC = window.AudioContext || window.webkitAudioContext; if (AC) { este.ctx = new AC(); const src = este.ctx.createMediaStreamSource(stream); este.an = este.ctx.createAnalyser(); este.an.fftSize = 512; src.connect(este.an); este.datos = new Uint8Array(este.an.fftSize); } } catch (_) { este.ctx = null; este.an = null; }
+      grab = este; rec.start();
+      compositor.classList.add('grabando-ya'); $('#grabando').hidden = false; grabar.setAttribute('aria-pressed', 'true');
+      $('#grabando-t').textContent = '0:00'; const dz = $('#grabando-desliza'); if (dz) { dz.style.transform = ''; dz.style.opacity = ''; }
+      if (d && (d.raton || d.fijar)) fijaGrabacion(); else { $('#grabando-candado').hidden = false; vibra(12); }
+      const onda = () => { if (grab !== este) return; pintaOnda(este); este.raf = requestAnimationFrame(onda); }; este.raf = requestAnimationFrame(onda);
+      este.reloj = setInterval(() => { const s = Math.floor((Date.now() - t0) / 1000); $('#grabando-t').textContent = Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); avisaEscribe('audio'); if (s >= 600) paraGrabacion(true); }, 200);
       avisaEscribe('audio');
+    }
+    grabar.addEventListener('pointerdown', (e) => {
+      if (e.button) return;
+      if (grab) { if (grab.fija) { e.preventDefault(); paraGrabacion(true); } return; } // fija: este toque la envía
+      const c = CONVS.get(ACTUAL); if (!c) return;
+      e.preventDefault();
+      dedo = { id: e.pointerId, x0: e.clientX, y0: e.clientY, raton: e.pointerType === 'mouse', suelto: false };
+      try { grabar.setPointerCapture(e.pointerId); } catch (_) {}
+      grabar.classList.add('pulsando');
+      empiezaGrabacion(c, dedo);
     });
+    grabar.addEventListener('pointermove', (e) => {
+      if (!dedo || e.pointerId !== dedo.id || dedo.raton) return;
+      const dx = Math.min(0, e.clientX - dedo.x0), dy = Math.min(0, e.clientY - dedo.y0);
+      // el gesto antes de que el micrófono esté listo (el teléfono tarda un momento): se apunta y se aplica al empezar
+      if (!grab) { if (dx < -100) dedo.cancelado = true; else if (dy < -70) dedo.fijar = true; return; }
+      if (grab.fija) return;
+      const dz = $('#grabando-desliza'); if (dz) { dz.style.transform = 'translateX(' + dx + 'px)'; dz.style.opacity = String(Math.max(0, 1 + dx / 110)); }
+      if (dy < -12) grabar.style.transform = 'translateY(' + Math.max(-40, dy) + 'px)';
+      if (dx < -100) { const d = dedo; dedo = null; try { grabar.releasePointerCapture(d.id); } catch (_) {} paraGrabacion(false); return; }
+      if (dy < -70) { const d = dedo; dedo = null; try { grabar.releasePointerCapture(d.id); } catch (_) {} fijaGrabacion(); }
+    });
+    const sueltaDedo = (e, cancela) => {
+      if (!dedo || e.pointerId !== dedo.id) return;
+      const d = dedo; dedo = null; grabar.classList.remove('pulsando'); try { grabar.releasePointerCapture(d.id); } catch (_) {}
+      if (d.raton) return; // con ratón la grabación queda fija: se manda con «Enviar»
+      if (!grab) { d.suelto = true; return; } // todavía pidiendo el micrófono
+      if (grab.fija) return;
+      paraGrabacion(!cancela); // soltar = enviar
+    };
+    let ultimoSuelto = 0;
+    grabar.addEventListener('pointerup', (e) => { ultimoSuelto = Date.now(); sueltaDedo(e, false); });
+    grabar.addEventListener('pointercancel', (e) => { ultimoSuelto = Date.now(); sueltaDedo(e, true); });
+    grabar.addEventListener('lostpointercapture', (e) => sueltaDedo(e, false)); // por si el navegador se queda el dedo (al desplazar, por ejemplo)
+    grabar.addEventListener('contextmenu', (e) => e.preventDefault());
+    // con el teclado (Enter o espacio): empieza fija; otra vez, la envía
+    // (el «click» que sigue a un toque o a un clic de ratón se ignora: ya lo hicieron los eventos del puntero)
+    grabar.addEventListener('click', () => { if (Date.now() - ultimoSuelto < 1000 || dedo) return; if (grab) { if (grab.fija) paraGrabacion(true); return; } const c = CONVS.get(ACTUAL); if (c) empiezaGrabacion(c, { raton: true }); });
     $('#grabar-cancelar').addEventListener('click', () => paraGrabacion(false));
     // Revisar antes de enviar (dueño, 28 Oct 2026: «la quiero ver en pantalla y darle yo al OK»): lo que se elige, se pega o
     // se suelta ya no sale solo. Primero se ve aquí (la imagen, o el nombre y el tamaño) y se envía al pulsar «Enviar».

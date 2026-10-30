@@ -26,7 +26,7 @@ async function telefono(browser, nombre) {
 const foto = async (p, n) => { await p.screenshot({ path: path.join(OUT, n + '.png') }); };
 // en el blindado el chat va borroso (modo discreto): la captura, con el dedo puesto
 const fotoDestapada = async (p, n) => { await p.mouse.move(196, 300); await p.mouse.down(); await espera(250); await foto(p, n); await p.mouse.up(); await espera(200); };
-const estadoVoz = (p, sel) => p.evaluate((s) => { const d = document.querySelector(s); if (!d) return null; const au = d.querySelector('audio'); return { t: d.querySelector('.gc-voz-t').textContent, w: d.querySelector('.gc-voz-prog').style.width, sonando: d.classList.contains('sonando'), paused: au.paused, cur: au.currentTime, dur: au.duration }; }, sel);
+const estadoVoz = (p, sel) => p.evaluate((s) => { const d = document.querySelector(s); if (!d) return null; const au = d.querySelector('audio'); return { t: d.querySelector('.gc-voz-t').textContent, w: (Math.round(parseFloat((d.querySelector('.gc-voz-prog').style.transform.match(/scaleX\(([\d.]+)\)/) || [])[1] || 0) * 1000) / 10) + '%', sonando: d.classList.contains('sonando'), paused: au.paused, cur: au.currentTime, dur: au.duration }; }, sel);
 
 (async () => {
   const browser = await chromium.launch({ args: ['--use-fake-ui-for-media-stream', '--use-fake-device-for-media-stream', '--autoplay-policy=no-user-gesture-required'] });
@@ -38,8 +38,8 @@ const estadoVoz = (p, sel) => p.evaluate((s) => { const d = document.querySelect
   await B.goto(enlace.replace('https://guardianagroup.com', 'http://127.0.0.1:8080')); await espera(2000);
   if (await B.$('#aceptar-si:visible')) await B.click('#aceptar-si');
   await espera(5000);
-  // A graba 3 segundos y envía
-  await A.click('#grabar'); await espera(3200); await A.click('#grabar');
+  // A graba 3 segundos y envía (con ratón, un clic deja la grabación fija y «Enviar» la manda; 29 Oct 2026, 20:51)
+  await A.click('#grabar'); await espera(3200); await A.click('#enviar');
   comprueba(await hasta(A, () => !!document.querySelector('.gc-mia .gc-voz'), 8000), 'A: la nota de voz enviada tiene el reproductor propio');
   comprueba(await hasta(A, () => { const t = document.querySelector('.gc-mia .gc-voz .gc-voz-t'); return !!t && /^0:00 \/ 0:0[2-4]$/.test(t.textContent); }, 8000), 'A: el tiempo total es el de la grabación (' + (await A.evaluate(() => { const t = document.querySelector('.gc-mia .gc-voz .gc-voz-t'); return t && t.textContent; })) + ')');
   // B la recibe velada (blindado) → Mostrar

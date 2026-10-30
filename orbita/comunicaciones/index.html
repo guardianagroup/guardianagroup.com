@@ -39,7 +39,7 @@
 <link rel="canonical" href="https://guardianagroup.com/orbita/comunicaciones/">
 <link rel="icon" href="/favicon.ico">
 <link rel="stylesheet" href="componentes.css?v=20261028m">
-<link rel="stylesheet" href="app.css?v=20261031g">
+<link rel="stylesheet" href="app.css?v=20261031h">
 <link rel="stylesheet" href="viaje.css?v=20261029b">
 <!-- antes de pintar: como app desde el primer fotograma y, al volver a un chat tras recargar, sin enseñar el inicio entretanto -->
 </head>
@@ -531,23 +531,13 @@
     <!-- Safari del iPhone (dueño, 29 Oct 2026, 19:02–19:14: «añadir a pantalla de inicio tiene que salir abajo, justo encima de donde
          se escribe… un botón… y ahí tocas y sale un desprendible»). El botón azul despliega la guía fácil; la flecha amarilla salta sobre el
          botón de Safari (iOS 26: las rayitas, a la izquierda de la dirección; antes: Compartir, en el centro). El chat se pasa solo a la app. -->
-    <div class="tira-anadir" id="tira-anadir" hidden>
-      <div class="anadir-guia" id="anadir-guia" hidden>
-        <!-- dos pasos, con los dos símbolos del iPhone (dueño, 29 Oct 2026, 20:07: «súper simplificada… uno, el botón de compartir,
-             dos, añadir a pantalla de inicio… con ese símbolo igualito en el iPhone»); la flecha amarilla, sobre Compartir (19:25–19:29).
-             Solo esos dos pasos en todos los navegadores, sin flechas (20:26–20:27: «ya la persona lo buscará en su teléfono donde está»;
-             «las flechas amarillas también quítalas»). -->
-        <ol class="anadir-pasos">
-          <li><span class="ap-ic"><svg viewBox="0 0 24 24"><path d="M12 14.5V3.5M8.2 7.2 12 3.5l3.8 3.7"/><path d="M8.5 10H7a1.6 1.6 0 0 0-1.6 1.6v7.8A1.6 1.6 0 0 0 7 21h10a1.6 1.6 0 0 0 1.6-1.6v-7.8A1.6 1.6 0 0 0 17 10h-1.5"/></svg></span><span>Pulsa <b>Compartir</b></span></li>
-          <li><span class="ap-ic"><svg viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="4.5"/><path d="M12 8v8M8 12h8"/></svg></span><span>Pulsa <b>Añadir a pantalla de inicio</b></span></li>
-        </ol>
-      </div>
-      <button type="button" class="boton principal" id="tira-anadir-b" aria-expanded="false" aria-controls="anadir-guia"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="4.5"/><path d="M12 8v8M8 12h8"/></svg><span>Añadir a pantalla de inicio</span><i class="anadir-flecha" aria-hidden="true">⌃</i></button>
-    </div>
     <div class="gc-compositor">
       <button type="button" class="gc-redondo" id="adjuntar" aria-label="Enviar un archivo" title="Enviar un archivo (del tamaño que sea)"><svg viewBox="0 0 24 24"><path d="M21 12.5l-8.5 8.5a5.5 5.5 0 0 1-7.8-7.8L13.5 4.4a3.5 3.5 0 0 1 5 5L10 18a1.5 1.5 0 0 1-2.1-2.1L15.5 8.3"/></svg></button>
       <div class="campo-envoltura" id="campo-envoltura"><div class="mascara" id="texto-mascara" aria-hidden="true"></div><textarea class="gc-campo" id="texto" rows="1" placeholder="Escribe un mensaje" aria-label="Mensaje" autocomplete="off" spellcheck="false"></textarea></div>
-      <div class="grabando" id="grabando" hidden><i></i><span id="grabando-t">0:00</span><span class="t">Grabando nota de voz…</span><button type="button" class="boton" id="grabar-cancelar">Cancelar</button></div>
+      <!-- grabando, como en WhatsApp (dueño, 29 Oct 2026, 20:51): punto rojo, tiempo, la onda de la voz; «Desliza para cancelar» mientras se
+           mantiene pulsado; fija (deslizando hacia arriba, o con ratón), la papelera y «Enviar» -->
+      <div class="grabando" id="grabando" hidden><i></i><span id="grabando-t">0:00</span><canvas class="grab-onda" id="grabando-onda" width="160" height="26" aria-hidden="true"></canvas><span class="grab-desliza" id="grabando-desliza"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg><span>Desliza para cancelar</span></span><button type="button" class="grab-papelera" id="grabar-cancelar" aria-label="Cancelar la grabación" title="Cancelar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M9.5 7V4.8h5V7M6.5 7l.9 12.2a1.6 1.6 0 0 0 1.6 1.5h6a1.6 1.6 0 0 0 1.6-1.5L17.5 7M10 11v6M14 11v6"/></svg></button></div>
+      <div class="grab-candado" id="grabando-candado" hidden aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 5.5l-6 6 6 6" transform="rotate(90 12 12) translate(0 0)"/></svg><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></div>
       <button type="button" class="gc-redondo gc-papelera" id="vaciar" aria-label="Borrar el chat" title="Borrar el chat"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M9.5 7V4.8h5V7M6.5 7l.9 12.2a1.6 1.6 0 0 0 1.6 1.5h6a1.6 1.6 0 0 0 1.6-1.5L17.5 7M10 11v6M14 11v6"/></svg></button><button type="button" class="gc-redondo" id="grabar" aria-label="Grabar nota de voz" title="Nota de voz"><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></button>
       <button type="button" class="gc-redondo gc-principal" id="enviar" aria-label="Enviar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.6 10.9 19.7 4.3c.7-.3 1.3.4 1 1l-6.6 16.1c-.3.7-1.3.6-1.5-.1l-1.9-6.1-6.1-1.9c-.7-.2-.8-1.2-.1-1.5z"/></svg></button>
     </div>
@@ -661,6 +651,19 @@
       <li data-p="pcno"><span class="g-icono"><svg viewBox="0 0 24 24"><rect x="6.5" y="2.5" width="11" height="19" rx="2.4"/><path d="M12 7.5v6.5M9.3 11.4 12 14l2.7-2.6"/></svg></span><div class="g-txt">En Chrome o Edge, haz clic en el icono de instalar, a la derecha de la dirección</div></li>
     </ol>
     <div class="fila"><button type="button" class="boton principal" id="completa-ok"><span data-p="ios26 ios ipad crios26 crios otro26 otro app appand androidmenu androidotro pcno mac">Entendido</span><span data-p="android pc">Ahora no</span></button><button type="button" class="boton principal" id="guia-instalar" data-p="android pc">Instalar</button><button type="button" class="boton" id="guia-safari" hidden>Seguir en Safari</button></div>
+  </div>
+</div>
+<!-- La guía, una sola vez al empezar el chat en el iPhone (dueño, 29 Oct 2026, 20:53: «te lo decía al principio y luego ya no aparece
+     más»): dos pasos con los símbolos del iPhone (20:07–20:27) y «Entendido». -->
+<div class="gc-hoja" id="h-anadir" role="dialog" aria-modal="true" aria-labelledby="h-anadir-t">
+  <div class="gc-hoja-caja caja anadir">
+    <div class="gc-asa"></div>
+    <div class="anadir-cab"><img src="/apple-touch-icon.png?v=2" alt="" width="52" height="52"><div><h2 class="gc-hoja-titulo" id="h-anadir-t">Añade GUARDIANA a tu pantalla de inicio</h2><p class="t">Para tener tus chats y los avisos siempre. Se hace una sola vez.</p></div></div>
+    <ol class="anadir-pasos">
+      <li><span class="ap-ic"><svg viewBox="0 0 24 24"><path d="M12 14.5V3.5M8.2 7.2 12 3.5l3.8 3.7"/><path d="M8.5 10H7a1.6 1.6 0 0 0-1.6 1.6v7.8A1.6 1.6 0 0 0 7 21h10a1.6 1.6 0 0 0 1.6-1.6v-7.8A1.6 1.6 0 0 0 17 10h-1.5"/></svg></span><span>Pulsa <b>Compartir</b></span></li>
+      <li><span class="ap-ic"><svg viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="4.5"/><path d="M12 8v8M8 12h8"/></svg></span><span>Pulsa <b>Añadir a pantalla de inicio</b></span></li>
+    </ol>
+    <div class="fila"><button type="button" class="boton principal" id="anadir-ok">Entendido</button></div>
   </div>
 </div>
 <!-- Recién instalada en el ordenador (dueño, 29 Oct 2026, 19:41: «ha salido ahí como una captura de pantalla y se ha eliminado
@@ -905,7 +908,7 @@
 
 <!-- En el ordenador, en el chat blindado: la pantalla se tapa con la tecla de captura o si la ventana pierde el foco (29 Oct 2026, 08:02) -->
 <div class="captura-velo" id="captura-velo" role="alert" hidden><div><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><b>Modo blindado</b><span>No se puede capturar</span></div></div>
-<script src="/orbita/static/idioma.js?v=20261029p86"></script>
+<script src="/orbita/static/idioma.js?v=20261029p87"></script>
 <script src="pq-mlkem.js?v=20261027a"></script>
 <script src="pq-cnsa.js?v=20261027a"></script>
 <script src="qrhaz.js?v=20261027a"></script>
@@ -916,6 +919,6 @@
 <script src="viaje-datos.js?v=20261027a"></script>
 <script src="viaje.js?v=20261029b"></script>
 <script src="llamada.js?v=20261031e"></script>
-<script src="app.js?v=20261031f"></script>
+<script src="app.js?v=20261031g"></script>
 </body>
 </html>

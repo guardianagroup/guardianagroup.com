@@ -181,11 +181,32 @@ svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-l
 .conv.discreta #texto{color:transparent;caret-color:var(--accent);font-family:var(--mono);word-break:break-all;letter-spacing:0}
 .conv.discreta #texto::placeholder{color:var(--muted-2);font-family:var(--texto)}
 .conv:not(.discreta) .velo-pista{display:none}
-.grabando{flex:1;min-height:44px;display:flex;align-items:center;gap:10px;padding:6px 6px 6px 14px;border-radius:22px;border:1px solid rgba(224,122,108,.5);background:var(--campo);font:400 14px/1.3 var(--texto)}
-.grabando i{width:10px;height:10px;border-radius:50%;background:var(--alerta);animation:late 1s infinite}
-@keyframes late{50%{opacity:.3}}
-.grabando #grabando-t{font-family:var(--mono);min-width:38px}.grabando .t{color:var(--muted);flex:1}.grabando .boton{min-height:32px;padding:4px 12px;font-size:12.5px}
-.gc-compositor.grabando-ya #texto,.gc-compositor.grabando-ya #adjuntar{display:none}.gc-compositor.grabando-ya #grabar{background:var(--alerta);color:var(--accent-fg)}
+.grabando{flex:1;min-width:0;min-height:44px;display:flex;align-items:center;gap:10px;padding:6px 6px 6px 14px;border-radius:22px;border:1px solid rgba(224,122,108,.5);background:var(--campo);font:400 14px/1.3 var(--texto);color:var(--tinta);overflow:hidden;position:relative}
+.grabando[hidden]{display:none}
+.grabando i{flex:none;width:10px;height:10px;border-radius:50%;background:var(--alerta);animation:late 1.1s ease-in-out infinite}
+@keyframes late{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.8)}}
+.grabando #grabando-t{flex:none;font-family:var(--mono);font-variant-numeric:tabular-nums;min-width:38px}
+.grab-onda{display:none;flex:1;min-width:60px;width:auto;height:26px;opacity:.9} /* la onda, con la grabación fija (mientras se mantiene pulsado, «Desliza para cancelar») */
+.grab-desliza{flex:1;min-width:0;display:inline-flex;align-items:center;justify-content:center;gap:2px;color:var(--muted);font-size:14px;white-space:nowrap;overflow:hidden;will-change:transform,opacity}
+.grab-desliza svg{width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;animation:deslizaPista 1.4s ease-in-out infinite}
+@keyframes deslizaPista{0%,100%{transform:translateX(0)}50%{transform:translateX(-5px)}}
+.grab-papelera{all:unset;cursor:pointer;flex:none;width:36px;height:36px;border-radius:50%;display:none;place-items:center;color:var(--alerta);margin-left:auto}
+.grab-papelera svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.grab-papelera:focus-visible{outline:2px solid #F4F6F8;outline-offset:2px}
+.gc-compositor.grab-fija .grab-desliza{display:none}.gc-compositor.grab-fija .grab-papelera{display:grid}
+.gc-compositor.grab-fija .grab-onda{display:block}
+/* el candado, encima del micrófono: deslizar hacia arriba deja la grabación fija */
+.grab-candado{position:absolute;right:10px;bottom:calc(100% + 6px);width:36px;padding:8px 0 6px;border-radius:18px;background:#1B232E;border:1px solid rgba(156,195,228,.3);display:flex;flex-direction:column;align-items:center;gap:4px;color:#dbe9f4;box-shadow:0 8px 24px rgba(0,0,0,.5);animation:candadoSube 1.2s ease-in-out infinite}
+.grab-candado[hidden]{display:none}
+.grab-candado svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+@keyframes candadoSube{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+.gc-compositor{position:relative}
+.gc-compositor.grabando-ya #texto,.gc-compositor.grabando-ya #adjuntar,.gc-compositor.grabando-ya .campo-envoltura{display:none}
+.gc-compositor.grabando-ya #grabar{background:var(--alerta);color:var(--accent-fg)}
+#grabar{touch-action:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;transition:transform .12s ease}
+#grabar.pulsando{transform:scale(1.22)}
+.gc-compositor.grabando-ya:not(.grab-fija) #enviar{display:none!important}
+.gc-compositor.grab-fija #grabar{display:none}
 .gc-compositor.con-texto #grabar{display:none}
 .gc-burbuja audio{display:block;width:min(100%,320px);min-width:240px;height:40px;margin:2px 0 4px}
 .gc-campo{font-size:15px}
@@ -1538,8 +1559,8 @@ body.con-visor{overflow:hidden}
 .gc-voz-play svg{width:20px;height:20px;fill:currentColor}
 .gc-voz-barra{position:relative;flex:1;height:28px;cursor:pointer;touch-action:none}
 .gc-voz-barra::before{content:'';position:absolute;left:0;right:0;top:12px;height:4px;border-radius:2px;background:rgba(156,195,228,.22)}
-.gc-voz-prog{position:absolute;left:0;top:12px;height:4px;border-radius:2px;background:var(--accent);width:0}
-.gc-voz-punto{position:absolute;top:8px;width:12px;height:12px;margin-left:-6px;border-radius:50%;background:#F4F6F8;box-shadow:0 1px 4px rgba(0,0,0,.5);left:0}
+.gc-voz-prog{position:absolute;left:0;top:12px;height:4px;border-radius:2px;background:var(--accent);width:100%;transform:scaleX(0);transform-origin:left center;will-change:transform}
+.gc-voz-punto{position:absolute;top:8px;left:0;width:12px;height:12px;margin-left:-6px;border-radius:50%;background:#F4F6F8;box-shadow:0 1px 4px rgba(0,0,0,.5);will-change:transform}
 .gc-voz-barra:focus-visible{outline:2px solid rgba(156,195,228,.6);outline-offset:2px;border-radius:6px}
 .gc-voz-t{flex:none;font:500 12px/1 var(--mono);color:var(--muted);font-variant-numeric:tabular-nums;min-width:74px;text-align:right}
 .gc-mia .gc-voz-play{background:#F4F6F8;color:#0C1118}
@@ -1616,14 +1637,7 @@ body.con-visor{overflow:hidden}
 #paso-ios .ios-ayuda{max-width:340px;margin:14px auto 0;text-wrap:balance}
 #paso-ios .ios-ok{color:#9CC3E4;font-weight:600}
 /* Llevar el chat de Safari a la app (dueño, 29 Oct 2026, 18:56–19:14): abajo, encima de donde se escribe, con la guía desplegable */
-.tira-anadir{padding:6px 10px 0;display:flex;flex-direction:column;align-items:stretch;gap:6px}
-.tira-anadir[hidden]{display:none}
-.tira-anadir>.boton{min-height:44px;display:flex;align-items:center;justify-content:center;gap:9px;font-size:16px;border-radius:12px;padding-block:0} /* fina (dueño, 20:08: «muy minimalista y muy fino para que no estorbe») */
-.tira-anadir>.boton svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round}
-.tira-anadir .anadir-flecha{font-style:normal;font-size:15px;transition:transform .2s;margin-left:2px}
-.tira-anadir.abierta .anadir-flecha{transform:rotate(180deg)}
-.anadir-guia{background:#0E141C;border:1px solid rgba(156,195,228,.25);border-radius:16px;padding:12px 12px 10px}
-.anadir-guia[hidden]{display:none}
+/* la guía de los dos pasos (ventanita #h-anadir y pantalla «Descargar GUARDIANA»); la barra azul del chat se quitó (dueño, 20:53) */
 .anadir-pasos{list-style:none;margin:0;padding:0;display:grid;gap:10px;counter-reset:ap}
 .anadir-pasos>li{counter-increment:ap;display:grid;grid-template-columns:24px 44px minmax(0,1fr);align-items:center;gap:10px;font:400 16px/1.3 var(--texto);color:#F4F6F8}
 .anadir-pasos>li::before{content:counter(ap);width:24px;height:24px;border-radius:50%;background:#9CC3E4;color:#06080C;display:grid;place-items:center;font:700 13px/1 var(--texto)}
@@ -1632,8 +1646,6 @@ body.con-visor{overflow:hidden}
 .ap-ic{width:44px;height:44px;border-radius:12px;background:#2C2C2E;display:grid;place-items:center}
 .ap-ic svg{width:24px;height:24px;fill:none;stroke:#fff;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
 .ap-app{background:none;overflow:hidden;box-shadow:none}.ap-app img{width:44px;height:44px;border-radius:12px;display:block}
-.anadir-pasos>li.p-safari26,.anadir-pasos>li.p-safari,.anadir-pasos>li.p-chrome,.anadir-pasos>li.p-otro{display:none}
-.nav-safari26 .anadir-pasos>li.p-safari26,.nav-safari .anadir-pasos>li.p-safari,.nav-chrome .anadir-pasos>li.p-chrome,.nav-otro .anadir-pasos>li.p-otro{display:grid}
 /* (sin flechas amarillas: dueño, 29 Oct 2026, 20:27: «las flechas amarillas también quítalas, la persona ya lo buscará») */
 /* «Descargar GUARDIANA» desde la web (dueño, 29 Oct 2026, 19:36): en el iPhone, una pantalla sola con la guía del chat */
 .paso.descargar{gap:16px;padding-top:22px}
@@ -1644,7 +1656,6 @@ body.con-visor{overflow:hidden}
 .desc-pasos{width:100%;max-width:400px;text-align:left;background:#0E141C;border:1px solid rgba(156,195,228,.25);border-radius:16px;padding:14px 14px 12px;gap:14px}
 .desc-pasos>li{font-size:17px}
 body.descargando #pro,body.descargando .como-plegable{display:none!important}
-.tira-anadir.en-android>.boton .anadir-flecha{display:none}
 /* el chat temporal, borrado: la misma despedida, con «Descargar GUARDIANA» */
 .fin-invitado .fin-t{display:none}
 .fin-invitado.temporal .fin-n{display:none}
@@ -1659,3 +1670,24 @@ body.descargando #pro,body.descargando .como-plegable{display:none!important}
 .instalada-ok svg{width:16px;height:16px;fill:none;stroke:#06080C;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
 .caja.instalada .t{max-width:380px;margin:0;line-height:1.45}
 .caja.instalada .fila{justify-content:center;margin-top:6px}
+/* la nota de voz, como en las apps de mensajería (dueño, 29 Oct 2026, 20:51: «el audio dentro de la caja azul está descentrado»):
+   el play a la izquierda, centrado en alto; la barra; debajo, el tiempo a la izquierda y la hora con los ticks a la derecha */
+.gc-burbuja-voz{position:relative;padding:8px 10px 7px 8px!important}
+.gc-burbuja-voz .gc-archivo-voz{display:block;min-width:0}
+.gc-burbuja-voz .gc-voz{display:grid;grid-template-columns:40px minmax(0,1fr);grid-template-rows:28px 16px;column-gap:10px;row-gap:0;align-items:center;width:min(100%,320px);min-width:0;margin:0;padding:0}
+.gc-burbuja-voz .gc-voz-play{grid-column:1;grid-row:1/3;align-self:center}
+.gc-burbuja-voz .gc-voz-barra{grid-column:2;grid-row:1;height:28px}
+.gc-burbuja-voz .gc-voz-t{grid-column:2;grid-row:2;text-align:left;min-width:0;padding-right:84px;line-height:16px}
+.gc-burbuja-voz .gc-meta{position:absolute;right:10px;bottom:8px;float:none;margin:0;line-height:16px}
+.gc-burbuja-voz::after{display:none}
+.gc-burbuja-voz .sello{margin:4px 0 0}
+@media (max-width:760px){.gc-archivo-voz .gc-voz{width:min(68vw,300px)}.gc-burbuja-voz{min-width:min(78vw,300px)}}
+/* la ventanita de la guía (dueño, 20:53) */
+.caja.anadir{display:flex;flex-direction:column;gap:14px}
+.anadir-cab{display:flex;align-items:center;gap:12px}
+.anadir-cab img{width:52px;height:52px;border-radius:13px;flex:none}
+.anadir-cab h2{margin:0;font-size:18px;line-height:1.25}
+.anadir-cab .t{margin:4px 0 0;color:var(--muted);font-size:14px;line-height:1.35}
+.caja.anadir .anadir-pasos{background:#0E141C;border:1px solid rgba(156,195,228,.25);border-radius:16px;padding:12px 12px 10px;gap:12px}
+.caja.anadir .anadir-pasos>li{font-size:17px}
+.caja.anadir .fila{justify-content:center;margin:0}
