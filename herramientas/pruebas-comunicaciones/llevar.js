@@ -38,8 +38,11 @@ const hasta = async (fn, ms) => { const h = Date.now() + ms; while (Date.now() <
   let url;
   if (BPC) {
     await B.goto(URL0); await espera(1500);
-    await B.click('#nueva-blindada'); await espera(1500);
-    url = String(await B.inputValue('#enlace-b')).replace('https://guardianagroup.com', 'http://127.0.0.1:8080');
+    // en el PC: «Crear invitación» y «Copiar el enlace» (la sesión blindada del PC está en «próximamente»)
+    await B.evaluate(() => { window.__copiados = []; try { navigator.clipboard.writeText = (x) => { window.__copiados.push(String(x)); return Promise.resolve(); }; } catch (_) {} });
+    await B.click('#nueva'); await espera(2500); await B.click('#codigo-enlace'); await espera(600);
+    url = await B.evaluate(() => window.__copiados[window.__copiados.length - 1] || '');
+    url = String(url).replace('https://guardianagroup.com', 'http://127.0.0.1:8080');
   } else {
     await B.goto(URL0 + '?app=1'); await espera(1500);
     await B.click('#nueva-blindada'); await espera(400); await B.click('#invitar-otra'); await espera(1200);
