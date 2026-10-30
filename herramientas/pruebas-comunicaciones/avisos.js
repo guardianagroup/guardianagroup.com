@@ -61,7 +61,9 @@ const foto = async (p, n) => { await p.screenshot({ path: path.join(OUT, n + '.p
   comprueba(await hasta(A.p, () => !/En línea/.test(document.querySelector('#cconfianza').textContent), 10000), 'A: ve a B desconectada');
   await A.p.tap('#texto'); await A.p.fill('#texto', 'Te escribo con la app cerrada'); await A.p.click('#enviar'); await espera(1500);
   const d1 = await A.p.evaluate(() => window.gcomPrueba.avisos().despierta);
-  comprueba(d1 && d1.tipo === 'mensaje' && d1.avisados === 1, 'A: el relé despierta a B por «mensaje» (' + JSON.stringify(d1) + ')');
+  // con el buzón cifrado (30 Oct 2026) el mensaje se deja en el relé y es el relé quien avisa al guardarlo: la página ya no pide «despierta»
+  const porBuzon = await A.p.evaluate(() => { const c = window.gcomPrueba.conv(); const m = c && c.mensajes.find((x) => x.texto === 'Te escribo con la app cerrada'); return !!(m && m.porBuzon && m.estado === 'enviado'); });
+  comprueba(porBuzon || (d1 && d1.tipo === 'mensaje' && d1.avisados === 1), 'A: a B se le avisa del mensaje (' + (porBuzon ? 'por el buzón cifrado, ✓' : JSON.stringify(d1)) + ')');
   // llamar con B cerrada: se le despierta por «llamada» y se espera a que abra
   await A.p.evaluate(() => document.querySelector('#llamar').click()); await espera(1200);
   const d2 = await A.p.evaluate(() => window.gcomPrueba.avisos().despierta);

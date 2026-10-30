@@ -23,6 +23,8 @@ async function telefono(browser, nombre) {
     // qué pista de audio sale hacia la otra persona
     window.__pistas = []; window.__tonos = [];
     const pl = HTMLMediaElement.prototype.play; HTMLMediaElement.prototype.play = function () { if (this.loop && String(this.src).startsWith('blob:')) window.__tonos.push((this.muted ? 'mudo ' : '') + 'suena'); return pl.call(this); };
+    // el tono de «Llamando…» suena con el audio del navegador desde el 30 Oct 2026 (para no quedarse en la pantalla bloqueada): cuenta un oscilador que arranca
+    { const AC = window.AudioContext || window.webkitAudioContext; if (AC) { const co = AC.prototype.createOscillator; AC.prototype.createOscillator = function () { const o = co.call(this); const st = o.start.bind(o); o.start = (...a) => { window.__tonos.push('suena'); return st(...a); }; return o; }; } }
     const at = RTCPeerConnection.prototype.addTrack;
     RTCPeerConnection.prototype.addTrack = function (tr, ...r) { window.__pistas.push(tr.kind + ':' + tr.label); return at.call(this, tr, ...r); };
     const rt = RTCRtpSender.prototype.replaceTrack;

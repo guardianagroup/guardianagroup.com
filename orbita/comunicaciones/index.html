@@ -39,7 +39,7 @@
 <link rel="canonical" href="https://guardianagroup.com/orbita/comunicaciones/">
 <link rel="icon" href="/favicon.ico">
 <link rel="stylesheet" href="componentes.css?v=20261028m">
-<link rel="stylesheet" href="app.css?v=20261031n">
+<link rel="stylesheet" href="app.css?v=20261031o">
 <link rel="stylesheet" href="viaje.css?v=20261029b">
 <!-- antes de pintar: como app desde el primer fotograma y, al volver a un chat tras recargar, sin enseñar el inicio entretanto -->
 </head>
@@ -215,6 +215,7 @@
         <p><b>Nadie puede escribirte por saber tu número.</b> Quien teclee un número al azar, o el tuyo sin que tú lo hayas añadido, no consigue nada: ni un mensaje, ni una llamada, ni saber si ese número existe. Así no hay llamadas de desconocidos ni publicidad.</p>
         <p><b>Cómo pasar tu número.</b> Tu número no es una llave: con él nadie lee nada ni te contacta. Lo seguro es dárselo en persona o de viva voz; por escrito también vale (WhatsApp, correo…). Si alguien te dice «guarda mi nuevo número», llámale antes a su número de siempre: es una estafa habitual.</p>
         <p><b>Qué sabe GUARDIANA de tu número.</b> El número nunca sale de tu teléfono: a nuestro servidor llega una huella (un cálculo del que no sale el número) junto con tus claves públicas. Mientras los dos os añadís, el servidor guarda una «cita» cerrada que ninguno de los dos puede leer por separado y que se borra cuando el chat se abre. No guardamos nombres, teléfonos ni correos. Para avisarte con la app cerrada, el servidor guarda la dirección de avisos de tu teléfono y las salas de tus chats (identificadores al azar, sin nombres ni contenido). Y, como cualquier servidor, ve tu dirección de conexión y la hora mientras estás conectado.</p>
+        <p><b>Buzón cifrado.</b> Si la otra persona tiene GUARDIANA cerrada, tu mensaje no espera en tu teléfono: se cierra en un sobre que solo el suyo puede abrir y queda en nuestro servidor hasta que lo recoge (7 días como mucho); después se borra. Verás ✓ cuando está guardado, ✓✓ cuando le llega y ✓✓ en azul cuando lo lee.</p>
 
         <h3>En tu pantalla de inicio</h3>
         <p><b>iPhone.</b> Abre guardianagroup.com en Safari, toca «Descargar GUARDIANA», luego el botón Compartir (el cuadrado con la flecha) y «Añadir a pantalla de inicio». Los avisos con la app cerrada solo llegan desde ese icono (iOS 16.4 o posterior).</p>
@@ -292,7 +293,7 @@
           <div class="mi-numero-ops"><button type="button" class="mi-numero-op" id="num-otro">Otro número</button><button type="button" class="mi-numero-op" id="num-elegir" aria-expanded="false" aria-controls="num-elige">Elegir el mío</button></div>
           <div class="mi-numero-elige" id="num-elige" hidden>
             <label for="num-elige-in">Escribe 11 cifras; la última la ponemos nosotros para evitar errores al marcar.</label>
-            <input class="campo" id="num-elige-in" inputmode="numeric" autocomplete="off" maxlength="15" spellcheck="false" placeholder="000 000 000 00">
+            <input class="campo" id="num-elige-in" inputmode="numeric" autocomplete="off" maxlength="15" spellcheck="false" placeholder="000-000-000-00">
             <small>No uses tu teléfono ni tu fecha de nacimiento: se adivinan fácil.</small>
           </div>
           <small class="mi-numero-error" id="num-error" role="alert" hidden></small>
@@ -487,7 +488,7 @@
         <article class="pro-tarjeta">
           <span class="pro-icono" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/><path d="M12 15v2"/></svg></span>
           <h3>Encriptado antes de salir</h3>
-          <p>Mensajes y archivos se encriptan en tu equipo. Nuestro servidor solo pasa paquetes que no puede leer y no guarda mensajes, nombres ni claves.</p>
+          <p>Mensajes y archivos se encriptan en tu equipo. Nuestro servidor pasa paquetes que no puede leer y no guarda nombres ni claves. Si la otra persona no está conectada, guarda tu mensaje en un sobre cerrado que solo su teléfono abre, hasta entregarlo (7 días como mucho).</p>
         </article>
         <article class="pro-tarjeta">
           <span class="pro-icono" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.6 2.6"/><path d="M9.5 2.5h5"/></svg></span>
@@ -524,7 +525,7 @@
               <li><b>Contenido</b><span>AES-256-GCM, con una clave por mensaje derivada con cadenas HMAC-SHA256; la anterior se descarta.</span></li>
               <li><b>Archivos</b><span>Trozos de 192 KB encriptados uno a uno; quien envía nunca carga el archivo entero y, con Chrome o Edge, quien recibe lo escribe en disco según llega.</span></li>
               <li><b>Invitación</b><span>Código de 9 cifras, un solo uso, 10 minutos e intentos limitados. El relé solo guarda un sobre cerrado con una clave derivada del código en el navegador (PBKDF2, 300.000 iteraciones).</span></li>
-              <li><b>Relé y verificación</b><span>El relé no guarda mensajes, nombres ni claves; solo sabe qué conexiones comparten una sala y cuántos bytes mueven. Número de seguridad de 60 cifras para comprobar fuera de banda.</span></li>
+              <li><b>Relé y verificación</b><span>El relé no guarda nombres ni claves y solo sabe qué conexiones comparten una sala y cuántos bytes mueven; para quien no está conectado, guarda el mensaje en un buzón cifrado (sobre híbrido ECDH P-256 + ML-KEM-768, firmado) hasta entregarlo, 7 días como mucho. Número de seguridad de 60 cifras para comprobar fuera de banda.</span></li>
               <li><b>Sesión blindada</b><span>Acuerdo híbrido ECDH P-384 + ML-KEM-1024 (FIPS 203) con HKDF-SHA-384; firmas ECDSA P-384 sobre SHA-384 y ML-DSA-87 (FIPS 204) sobre toda la negociación; identidad nueva en cada sesión; invitación de 256 bits solo por enlace o QR; verificación mutua obligatoria; claves renovadas cada 5 minutos; mensajes rellenos a múltiplos de 1 KB y último trozo de cada archivo completo.</span></li>
               <li><b>Llamadas</b><span>WebRTC solo a través del servidor TURN de GUARDIANA; la oferta, la respuesta y la huella DTLS viajan dentro del canal encriptado de extremo a extremo; audio con DTLS-SRTP; cambio de voz procesado en el navegador (AudioWorklet).</span></li>
             </ul>
@@ -744,7 +745,7 @@
 <div class="gc-hoja" id="h-guia" role="dialog" aria-modal="true" aria-labelledby="h-guia-t">
   <div class="gc-hoja-caja caja guia-caja">
     <div class="gc-asa"></div>
-    <h2 class="gc-hoja-titulo" id="h-guia-t">Guía de instalación</h2>
+    <div class="guia-cabecera"><button type="button" class="guia-atras" id="guia-atras" aria-label="Volver"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button><h2 class="gc-hoja-titulo" id="h-guia-t">Guía de instalación</h2></div>
     <div class="guia-tabs" role="tablist"><button type="button" class="guia-tab activa" id="guia-tab-iphone" role="tab" aria-selected="true">iPhone</button><button type="button" class="guia-tab" id="guia-tab-android" role="tab" aria-selected="false">Android</button></div>
     <div class="guia-panel" id="guia-iphone" role="tabpanel">
       <p class="t">Abre guardianagroup.com en Safari y sigue los tres toques marcados en rojo:</p>
@@ -755,8 +756,13 @@
       </ol>
     </div>
     <div class="guia-panel" id="guia-android" role="tabpanel" hidden>
-      <p class="t">Abre guardianagroup.com en Chrome, toca <b>Descargar GUARDIANA</b> y acepta <b>Instalar</b>. Si no aparece, toca el menú <b>⋮</b> de arriba a la derecha y elige <b>Añadir a pantalla de inicio</b> (o «Instalar aplicación»).</p>
-      <p class="t sutil">Las capturas de Android, muy pronto.</p>
+      <p class="t">Abre guardianagroup.com en Chrome y sigue estos tres pasos:</p>
+      <ol class="guia-capturas guia-sin-capturas">
+        <li><span><b>1.</b> Toca <b>Descargar GUARDIANA</b>.</span></li>
+        <li><span><b>2.</b> Toca <b>Instalar</b>. Si no aparece, abre el menú <b>⋮</b> de arriba a la derecha y elige <b>Añadir a pantalla de inicio</b> (o «Instalar aplicación»).</span></li>
+        <li><span><b>3.</b> GUARDIANA queda en tu pantalla de inicio: ábrela siempre desde ese icono.</span></li>
+      </ol>
+      <p class="t sutil guia-pronto">Las capturas de Android, muy pronto.</p>
     </div>
     <div class="fila"><button type="button" class="boton principal" id="guia-ok">Entendido</button></div>
   </div>
@@ -1031,17 +1037,17 @@
 
 <!-- En el ordenador, en el chat blindado: la pantalla se tapa con la tecla de captura o si la ventana pierde el foco (29 Oct 2026, 08:02) -->
 <div class="captura-velo" id="captura-velo" role="alert" hidden><div><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><b>Modo blindado</b><span>No se puede capturar</span></div></div>
-<script src="/orbita/static/idioma.js?v=20261029p92"></script>
+<script src="/orbita/static/idioma.js?v=20261029p93"></script>
 <script src="pq-mlkem.js?v=20261027a"></script>
 <script src="pq-cnsa.js?v=20261027a"></script>
 <script src="qrhaz.js?v=20261027a"></script>
-<script src="cripto.js?v=20261031a"></script>
+<script src="cripto.js?v=20261031b"></script>
 <script src="/orbita/static/red-nucleo.js?v=20261027b"></script>
-<script src="rele.js?v=20261031c"></script>
+<script src="rele.js?v=20261031d"></script>
 <script src="sha256.js?v=20261027a"></script>
 <script src="viaje-datos.js?v=20261027a"></script>
 <script src="viaje.js?v=20261029b"></script>
 <script src="llamada.js?v=20261031f"></script>
-<script src="app.js?v=20261031m"></script>
+<script src="app.js?v=20261031n"></script>
 </body>
 </html>

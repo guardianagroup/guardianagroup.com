@@ -1,6 +1,6 @@
 // Grabar como en WhatsApp (dueño, 29 Oct 2026, 20:51: «la forma de grabar hazla como en wassap o otras app de chat profesionales»;
 // 20:54: «cuando ya un audio se ha escuchado… tiene que volver… a la barra de inicio… el botón de play otra vez»). Comprueba: mantener
-// pulsado graba y soltar envía; un toque corto no envía (y lo explica); deslizar a la izquierda cancela; deslizar hacia arriba deja la
+// pulsado graba y soltar envía; un toque corto la deja fija (papelera o «Enviar»); deslizar a la izquierda cancela; deslizar hacia arriba deja la
 // grabación fija (papelera y «Enviar»); mientras se graba, el tiempo y la onda; con ratón, un clic empieza y «Enviar» manda. Y el
 // reproductor: la caja tipo WhatsApp (play, barra, tiempo abajo a la izquierda y la hora a la derecha), la bolita avanza con transform,
 // al acabar vuelve a 0:00 con «play». La nota viaja de una pieza (sin trozos).
@@ -59,12 +59,13 @@ async function dedo(p, desde, pasos, ms, soltar) {
   for (const h of await A.$$('.gc-hoja.gc-abierta')) { try { await A.evaluate((e) => e.classList.remove('gc-abierta'), h); } catch (_) {} }
   const mic = await centro(A, '#grabar');
 
-  // 1. toque corto: no se envía nada y se explica
+  // 1. toque corto (30 Oct 2026, 00:30): la grabación queda fija, con la papelera y «Enviar»; nada se envía solo
   await dedo(A, mic, [], 150);
-  await espera(900);
-  comprueba(await A.evaluate(() => !document.querySelector('.gc-compositor').classList.contains('grabando-ya')), 'toque corto: no queda grabando');
-  comprueba(await hasta(A, () => /Mantén pulsado el micrófono/.test(document.body.textContent), 3000), 'toque corto: «Mantén pulsado el micrófono para grabar y suelta para enviar»');
-  comprueba(await notas(A, '.gc-mia') === 0, 'toque corto: no se envía nada');
+  await espera(1200);
+  comprueba(await A.evaluate(() => { const k = document.querySelector('.gc-compositor').classList; return k.contains('grabando-ya') && k.contains('grab-fija'); }), 'toque corto: la grabación queda fija');
+  comprueba(await notas(A, '.gc-mia') === 0, 'toque corto: no se envía nada solo');
+  await A.evaluate(() => document.querySelector('#grabar-cancelar').click()); await espera(700);
+  comprueba(await A.evaluate(() => !document.querySelector('.gc-compositor').classList.contains('grabando-ya')) && await notas(A, '.gc-mia') === 0, 'toque corto: la papelera la tira');
 
   // 2. mantener pulsado graba (tiempo, onda, candado, «Desliza para cancelar») y soltar envía
   const cdp = await A.context().newCDPSession(A);

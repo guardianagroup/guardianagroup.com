@@ -56,7 +56,7 @@
         if (typeof e.data === 'string') {
           let m; try { m = JSON.parse(e.data); } catch (_) { return; }
           switch (m.t) {
-            case 'hola': region = m.region || ''; llamadas = !!m.llamadas; ice = m.ice || []; caduca = m.caduca || 0; avisos = typeof m.avisos === 'string' ? m.avisos : ''; marca = m.marca === 1; reto = /^[0-9a-f]{32}$/.test(m.reto || '') ? m.reto : ''; conNumeros = m.num === 1; emite('hola', { region, llamadas, ice, avisos, reto, num: conNumeros }); break;
+            case 'hola': region = m.region || ''; llamadas = !!m.llamadas; ice = m.ice || []; caduca = m.caduca || 0; avisos = typeof m.avisos === 'string' ? m.avisos : ''; marca = m.marca === 1; reto = /^[0-9a-f]{32}$/.test(m.reto || '') ? m.reto : ''; conNumeros = m.num === 1; emite('hola', { region, llamadas, ice, avisos, reto, num: conNumeros });  conBuzon = m.buzon === 1; break;
             case 'ice': ice = m.ice || []; caduca = m.caduca || 0; emite('ice', ice); break;
             case 'sala': emite('sala', m.sala, m.miembros || []); break;
             case 'llega': emite('llega', m.sala, m.quien); break;
@@ -76,11 +76,23 @@
             // Número GUARDIANA: respuestas a preguntas con número, y la otra mitad de una cita que acaba de llegar
             case 'num': case 'cita': case 'citas': case 'cita-fin': { const f = m.q && esperasQ.get(m.q); if (f) { esperasQ.delete(m.q); f(m); } break; }
             case 'cita-lista': emite('cita-lista', m); break;
+            // buzón cifrado (30 Oct 2026): el relé confirma que guardó el sobre entero
+            case 'buzon-ok': { const f = esperasBz.get(m.sala + '|' + m.id); if (f) { esperasBz.delete(m.sala + '|' + m.id); f(m); } break; }
             default: break;
           }
           return;
         }
         const b = new Uint8Array(e.data);
+        // un sobre del buzón cifrado (por trozos): [0x04][32 sala][8 de][16 id][1 trozo][1 de cuántos][carga]
+        if (b[0] === 4 && b.length >= 59) {
+          const sala = hex(b.subarray(1, 33)), de = hex(b.subarray(33, 41)), id = hex(b.subarray(41, 57)), parte = b[57], total = b[58];
+          const k = sala + '|' + id; let p = sobresParciales.get(k);
+          if (!p || p.total !== total) { p = { total, partes: new Array(total).fill(null), t: Date.now() }; sobresParciales.set(k, p); }
+          p.partes[parte] = b.slice(59);
+          if (p.partes.every(Boolean)) { sobresParciales.delete(k); let n = 0; for (const x of p.partes) n += x.length; const todo = new Uint8Array(n); let o = 0; for (const x of p.partes) { todo.set(x, o); o += x.length; } emite('buzon', sala, de, id, todo); }
+          for (const [kk, pp] of sobresParciales) if (Date.now() - pp.t > 120000) sobresParciales.delete(kk);
+          return;
+        }
         if (b.length < 41 || b[0] !== 2) return;
         const sala = hex(b.subarray(1, 33)), de = hex(b.subarray(33, 41));
         emite('trama', sala, de, b.subarray(41));
@@ -155,12 +167,33 @@
     const cita = (T, s) => pideQ('cita', { T, s });
     const citas = (ts) => pideQ('citas', { ts });
     const citaFin = (T, cancela) => pideQ('cita-fin', { T, cancela: cancela ? 1 : undefined });
+    // Buzón cifrado (30 Oct 2026): deja un sobre (ya cerrado en la página) para «para» en esa sala; por trozos de 960 KB.
+    // Responde cuando el relé lo tiene entero: { ok, por }.
+    const esperasBz = new Map(), sobresParciales = new Map();
+    let conBuzon = false;
+    function buzonDeja(sala, para, id, sobre, avisa) {
+      return new Promise((res) => {
+        if (!abierto || !ws || !conBuzon) return res({ ok: false, por: 'sin relé' });
+        const TROZO = 960 * 1024, total = Math.max(1, Math.ceil(sobre.length / TROZO));
+        if (total > 8) return res({ ok: false, por: 'demasiado grande' });
+        const k = sala + '|' + id; esperasBz.set(k, res);
+        try {
+          for (let i = 0; i < total; i++) {
+            const c = sobre.subarray(i * TROZO, (i + 1) * TROZO), f = new Uint8Array(60 + c.length);
+            f[0] = 3; f.set(deHex(sala), 1); f.set(deHex(para), 33); f.set(deHex(id), 41); f[57] = i; f[58] = total; f[59] = avisa ? 1 : 0; f.set(c, 60);
+            ws.send(f);
+          }
+        } catch (_) { esperasBz.delete(k); return res({ ok: false, por: 'sin relé' }); }
+        setTimeout(() => { if (esperasBz.get(k) === res) { esperasBz.delete(k); res({ ok: false, por: 'sin respuesta' }); } }, 30000);
+      });
+    }
+    const buzonBorra = (sala, ids) => { if (!abierto || !ws || !ids || !ids.length) return false; try { ws.send(JSON.stringify({ t: 'buzon-borra', sala, ids })); return true; } catch (_) { return false; } };
     function cierra() { cerrando = true; clearInterval(ping); try { ws && ws.close(); } catch (_) {} }
 
     conecta();
     // para las pruebas: un corte de la conexión como los del teléfono (se vuelve a conectar sola)
     const corta = () => { try { if (ws) ws.close(); } catch (_) {} };
-    return { on, entra, sale, manda, pideIce, cierra, invita, busca, retira, mide, suscribe, despiertaA, presencia, corta, num, cita, citas, citaFin, get reto() { return reto; }, get conNumeros() { return conNumeros; }, get avisos() { return avisos; }, get abierto() { return abierto; }, get atraso() { return ws ? ws.bufferedAmount : 0; }, get region() { return region; }, get llamadas() { return llamadas; }, get ice() { return ice; }, get caduca() { return caduca; }, get url() { return url; }, get latencia() { return latencia; }, get latenciaMin() { return hist.length ? Math.min(...hist) : null; }, get ultimoPong() { return ultimoPong; } };
+    return { on, entra, sale, manda, pideIce, cierra, invita, busca, retira, mide, suscribe, despiertaA, presencia, corta, num, cita, citas, citaFin, buzonDeja, buzonBorra, get conBuzon() { return conBuzon && abierto; }, get reto() { return reto; }, get conNumeros() { return conNumeros; }, get avisos() { return avisos; }, get abierto() { return abierto; }, get atraso() { return ws ? ws.bufferedAmount : 0; }, get region() { return region; }, get llamadas() { return llamadas; }, get ice() { return ice; }, get caduca() { return caduca; }, get url() { return url; }, get latencia() { return latencia; }, get latenciaMin() { return hist.length ? Math.min(...hist) : null; }, get ultimoPong() { return ultimoPong; } };
   }
   // Otro servidor de llamadas (dueño, 28 Oct 2026, 14:17: «que las llamadas sean todas buenas, independientemente de si la
   // persona está en Sudamérica, en Europa…»): una conexión corta para medir su tiempo de ida y vuelta y pedirle sus

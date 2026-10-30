@@ -1777,7 +1777,7 @@ output.mi-numero-n{cursor:default}
 }
 /* Guía de instalación con capturas (dueño, 29 Oct 2026, 23:04): las pantallas del teléfono con el toque en rojo */
 .guia-caja{max-height:92vh;overflow:auto}
-.gc-hoja-caja.caja.guia-caja{display:flex;flex-direction:column;min-height:min(88vh,760px)}
+.gc-hoja-caja.caja.guia-caja{display:flex;flex-direction:column;height:min(90vh,860px);max-height:90vh;box-sizing:border-box} /* la misma altura en iPhone y Android (dueño, 30 Oct 2026, 00:23) */
 .guia-caja>*{flex:0 0 auto}.guia-caja>.guia-panel{flex:1 0 auto} /* la hoja no cambia de tamaño al pasar de iPhone a Android */
 .guia-tabs{display:flex;gap:8px;margin:0 0 12px}
 .guia-tab{appearance:none;flex:1;min-height:40px;border:1px solid rgba(156,195,228,.38);background:transparent;color:#9CC3E4;border-radius:999px;font:600 15px/1 var(--texto);cursor:pointer}
@@ -1808,3 +1808,17 @@ output.mi-numero-n{cursor:default}
 .grabando i{width:11px;height:11px}
 .grabando #grabando-t{font-size:15px;color:#F4F6F8}
 .grab-candado{bottom:calc(100% + 30px);right:14px;width:40px;padding:10px 0 8px;border-radius:20px}
+/* la guía: «‹» para volver (dueño, 30 Oct 2026, 00:23) y Android con la misma forma que iPhone, en tarjetas numeradas */
+.guia-cabecera{display:flex;align-items:center;gap:8px;margin:0 0 4px}
+.guia-cabecera .gc-hoja-titulo{margin:0}
+.guia-atras{all:unset;cursor:pointer;flex:none;width:36px;height:36px;margin-left:-8px;border-radius:50%;display:grid;place-items:center;color:#9CC3E4;-webkit-tap-highlight-color:transparent}
+.guia-atras:active{background:rgba(156,195,228,.14)}
+.guia-atras svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.guia-sin-capturas li{padding:16px 16px;border-radius:16px;background:rgba(156,195,228,.06);border:1px solid rgba(156,195,228,.14)}
+.guia-pronto{margin-top:auto;text-align:center}
+#guia-android:not([hidden]){display:flex;flex-direction:column;gap:12px}
+/* nada que seleccionar, copiar ni lupa (dueño, 30 Oct 2026, 00:29): el teclado de «Llamar» y sus teclas, sin selección ni menú;
+   en la barra del número no se ve el cursor (mantener pulsado sigue dando «Pegar») */
+.teclado,.teclado *{-webkit-user-select:none!important;user-select:none!important;-webkit-touch-callout:none!important;-webkit-tap-highlight-color:transparent}
+#marcar-n{caret-color:transparent!important}
+button,a,[role="button"],label{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}

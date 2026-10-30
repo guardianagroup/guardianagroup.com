@@ -6,6 +6,7 @@ const http = require('http');
 const { WS } = require('../ws');
 const { Rele } = require('../comunicaciones');
 
+process.env.COM_PRUEBAS = '1'; // sin el límite de altas por dirección: aquí todo sale de 127.0.0.1 (ver numeros.js)
 const PUERTO = +process.argv[2] || 8794;
 const RELE = new Rele({ turnHost: process.env.TURN_HOST || '', turnSecreto: process.env.TURN_SECRETO || '', turnPuerto: +(process.env.TURN_PUERTO || 3478), region: 'pruebas' });
 const srv = http.createServer((req, res) => {

@@ -21,7 +21,8 @@
   const sub = crypto.subtle;
   const u8 = (x) => (x instanceof Uint8Array ? x : new Uint8Array(x));
   const cat = (...xs) => { const n = xs.reduce((a, b) => a + b.length, 0); const o = new Uint8Array(n); let i = 0; for (const x of xs) { o.set(x, i); i += x.length; } return o; };
-  const b64u = (b) => btoa(String.fromCharCode(...u8(b))).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+  // por trozos de 32 KB: con fotos y notas de voz enteras (buzón cifrado), «...bytes» desbordaba la pila
+  const b64u = (b) => { const x = u8(b); let s = ''; for (let i = 0; i < x.length; i += 32768) s += String.fromCharCode.apply(null, x.subarray(i, i + 32768)); return btoa(s).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, ''); };
   const deB64u = (s) => { s = String(s).replace(/-/g, '+').replace(/_/g, '/'); while (s.length % 4) s += '='; return Uint8Array.from(atob(s), (c) => c.charCodeAt(0)); };
   const hex = (b) => [...u8(b)].map((x) => x.toString(16).padStart(2, '0')).join('');
   const deHex = (s) => Uint8Array.from(String(s).match(/../g) || [], (h) => parseInt(h, 16));
@@ -297,7 +298,8 @@
   const numeroValido = (s) => /^\d{12}$/.test(String(s)) && damm(s) === 0;
   const conControl = (once) => String(once) + String(damm(once));
   const nuevoNumero = () => { let s = ''; while (s.length < 11) { for (const x of azar(16)) { if (x < 250 && s.length < 11) s += String(x % 10); } } return conControl(s); };
-  const numeroBonito = (s) => String(s || '').replace(/(\d{3})(?=\d)/g, '$1 ');
+  // en grupos de tres con guiones, puestos solos mientras se escribe (dueño, 30 Oct 2026, 00:15: «quiero guiones automáticos»)
+  const numeroBonito = (s) => String(s || '').replace(/([\d·]{3})(?=[\d·])/g, '$1-');
   async function pbkdf2(texto, sal, vueltas, bits) {
     const k = await sub.importKey('raw', te.encode(texto), 'PBKDF2', false, ['deriveBits']);
     return new Uint8Array(await sub.deriveBits({ name: 'PBKDF2', hash: 'SHA-256', salt: te.encode(sal), iterations: vueltas }, k, bits));
@@ -334,5 +336,45 @@
 
   const B = { sha384, hkdf384, hmac384, hayBlindada, creaIdentidad: creaIdentidadB, abreDsa: abreDsaB, huella: huellaB, numeroSeguridad: numeroSeguridadB, firma: firmaB, verifica: verificaB, firmaPQ, verificaPQ, deSemilla: deSemillaB, efimera: efimeraB, kemPar: kemParB, kemEncapsula: kemEncapsulaB, kemAbre: kemAbreB, datosInicia: datosIniciaB, datosResponde: datosRespondeB, sesion: sesionB, cadena: cadenaB, rellena, RELLENO, EK: B_EK, DK: B_DK, CT: B_CT, DSA_PUB: B_DSA_PUB, DSA_FIRMA: B_DSA_FIRMA, EC: B_EC, CTX: B_CTX };
 
-  raiz.GuardianaCripto = { te, td, u8, cat, b64u, deB64u, hex, deHex, azar, sha256, hkdf, hmac, aes, sella, abre, nonce, creaIdentidad, huella, numeroSeguridad, firma, verifica, deSemilla, nuevaSemilla, efimera, sesion, cadena, claveDeCodigo, nuevoCodigo, hayPQ, kemPar, kemEncapsula, kemAbre, datosInicia, datosResponde, KEM_EK, KEM_DK, KEM_CT, B, N };
+  // ---- Buzón cifrado (30 Oct 2026; dueño, 00:05: elige el «buzón cifrado», como WhatsApp, Signal o Threema) ----
+  // Para quien no está conectado, el mensaje se deja en el relé dentro de un sobre que solo su teléfono abre. Acuerdo híbrido:
+  // ECDH P-256 entre una clave efímera de quien envía (una por sobre) y la identidad de acuerdo de quien recibe, más ML-KEM-768
+  // (FIPS 203) a la «llave de buzón» que quien recibe entregó en la última sesión; HKDF-SHA256 de los dos secretos (con la sala,
+  // los dos identificadores y la llave en «info») → AES-256-GCM. Firmado (ECDSA P-256) con la identidad de quien envía, sobre la
+  // sala, los dos identificadores y el sobre entero: el relé no puede leerlo ni cambiarlo sin que se note.
+  // Formato: [1 versión][8 id de la llave][65 clave efímera][1088 cifrado ML-KEM][12 iv][AES-GCM…][64 firma]
+  const BZ_CAB = 1 + 8 + 65 + 1088 + 12;
+  const bzInfo = (sala, de, para, kid) => 'GUARDIANA buzón v1\n' + sala + '\n' + de + '\n' + para + '\n' + kid;
+  async function buzonCierra(yo, o, datos) {
+    const eph = await sub.generateKey({ name: 'ECDH', namedCurve: 'P-256' }, false, ['deriveBits']);
+    const ephPub = new Uint8Array(await sub.exportKey('raw', eph.publicKey));
+    const su = await sub.importKey('raw', u8(o.acuerdoPub), { name: 'ECDH', namedCurve: 'P-256' }, false, []);
+    const ss1 = new Uint8Array(await sub.deriveBits({ name: 'ECDH', public: su }, eph.privateKey, 256));
+    const { ct, ss: ss2 } = kemEncapsula(o.ek);
+    const info = bzInfo(o.sala, o.de, o.para, o.kid);
+    const clave = await hkdf(cat(ss1, ss2), await sha256(cat(ephPub, ct)), info, 32); ss1.fill(0); ss2.fill(0);
+    const iv = azar(12), k = await aes(clave); clave.fill(0);
+    const cab = cat(new Uint8Array([1]), deHex(o.kid), ephPub, ct, iv);
+    const cifrado = new Uint8Array(await sub.encrypt({ name: 'AES-GCM', iv, additionalData: cat(te.encode(info), cab) }, k, u8(datos)));
+    const cuerpo = cat(cab, cifrado);
+    return cat(cuerpo, await firma(yo, cat(te.encode(info), cuerpo)));
+  }
+  // dkDe(kid): la clave privada de esa llave de buzón (o null). Lanza si la firma o el cifrado no cuadran.
+  async function buzonAbre(yo, o, sobre) {
+    sobre = u8(sobre); if (sobre.length < BZ_CAB + 16 + 64 || sobre[0] !== 1) throw new Error('sobre');
+    const cuerpo = sobre.subarray(0, sobre.length - 64), sig = sobre.subarray(sobre.length - 64);
+    const kid = hex(cuerpo.subarray(1, 9)), info = bzInfo(o.sala, o.de, o.para, kid);
+    if (!(await verifica(o.firmaPub, sig, cat(te.encode(info), cuerpo)))) throw new Error('firma');
+    const dk = o.dkDe(kid); if (!dk) throw new Error('llave');
+    const ephPub = cuerpo.subarray(9, 74), ct = cuerpo.subarray(74, 74 + KEM_CT), iv = cuerpo.subarray(74 + KEM_CT, BZ_CAB);
+    const ep = await sub.importKey('raw', ephPub, { name: 'ECDH', namedCurve: 'P-256' }, false, []);
+    const ss1 = new Uint8Array(await sub.deriveBits({ name: 'ECDH', public: ep }, yo.acuerdo.privateKey, 256));
+    const ss2 = kemAbre(ct, dk);
+    const clave = await hkdf(cat(ss1, ss2), await sha256(cat(ephPub, ct)), info, 32); ss1.fill(0); ss2.fill(0);
+    const k = await aes(clave); clave.fill(0);
+    return new Uint8Array(await sub.decrypt({ name: 'AES-GCM', iv, additionalData: cat(te.encode(info), cuerpo.subarray(0, BZ_CAB)) }, k, cuerpo.subarray(BZ_CAB)));
+  }
+  const BZ = { cierra: buzonCierra, abre: buzonAbre, llave: () => { const p = kemPar(); return p ? { kid: hex(azar(8)), ek: p.ek, dk: p.dk, t: Date.now() } : null; } };
+
+  raiz.GuardianaCripto = { te, td, u8, cat, b64u, deB64u, hex, deHex, azar, sha256, hkdf, hmac, aes, sella, abre, nonce, creaIdentidad, huella, numeroSeguridad, firma, verifica, deSemilla, nuevaSemilla, efimera, sesion, cadena, claveDeCodigo, nuevoCodigo, hayPQ, kemPar, kemEncapsula, kemAbre, datosInicia, datosResponde, KEM_EK, KEM_DK, KEM_CT, B, N, BZ };
 })(typeof window !== 'undefined' ? window : globalThis);

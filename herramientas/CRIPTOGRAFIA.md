@@ -58,6 +58,21 @@ Identidad nueva en cada sesión. Usa los algoritmos de la suite CNSA 2.0 en híb
 - **Señalización** (oferta, respuesta, candidatos y **huella del certificado DTLS**): viaja dentro del canal encriptado de extremo a extremo de la sesión (normal o blindada), así que hereda su cifrado.
 - **Transporte:** siempre por el TURN de GUARDIANA (`iceTransportPolicy: 'relay'` fuera de local): ninguno ve la IP del otro, pero el TURN sí ve las IP.
 
+## 5 bis. Comunicaciones · buzón cifrado (30 Oct 2026)
+Para quien no está conectado, el mensaje se deja en el relé dentro de un sobre que solo su teléfono abre (`cripto.js` `BZ`, `app.js` «Buzón cifrado», `zero-motor/buzones.js`). Solo en la sesión normal (no en la blindada); textos, acuses, «leído» y fotos o notas de voz de hasta 4 MB.
+
+| Uso | Algoritmo | Nota |
+|---|---|---|
+| Llave de buzón | ML-KEM-768 (FIPS 203), un par por teléfono y conversación, renovado cada 7 días; se guardan las 4 últimas | Se entrega al otro teléfono por la sesión (control `buzon-llave`) al confirmarse cada sesión |
+| Acuerdo clásico | ECDH P-256: clave efímera de quien envía (una por sobre) × identidad de acuerdo de quien recibe | El secreto de quien recibe nunca sale de WebCrypto (no exportable) |
+| Derivación | HKDF-SHA256(ss_ECDH ‖ ss_ML-KEM, sal = SHA-256(efímera ‖ texto cifrado ML-KEM), info = «GUARDIANA buzón v1» + sala + emisor + receptor + id de llave) → 32 bytes | Híbrido: hay que romper los dos |
+| Cifrado | AES-256-GCM, iv al azar de 12 bytes, AAD = info + cabecera del sobre | |
+| Autenticación | ECDSA P-256 (SHA-256) de quien envía sobre info + sobre entero | Quien recibe comprueba con la identidad que conoció en la sesión; un sobre ajeno o cambiado se descarta |
+| Formato | [1 versión][8 id de llave][65 efímera][1088 ML-KEM][12 iv][AES-GCM…][64 firma] | |
+| En el relé | Sobre opaco + sala + identificadores de 16 hex de los dos teléfonos en esa sala + hora + tamaño; en disco (un archivo por sobre), se borra al recogerlo o a los 7 días | Límites: 300 sobres y 40 MB por sala, 2 GB en total |
+
+Lo que no da (dicho tal cual): el sobre no tiene secreto hacia delante por mensaje como la sesión (quien robe a la vez el teléfono de quien recibe, con sus llaves de buzón aún guardadas, y los sobres del relé podría abrirlos); por eso las llaves caducan y los sobres se borran al recogerse. El relé sabe que hubo un sobre, de qué sala, cuándo y de qué tamaño.
+
 ## 6. Relé y servidor (nunca ven el contenido)
 | Uso | Algoritmo | Nota |
 |---|---|---|

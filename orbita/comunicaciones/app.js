@@ -121,7 +121,7 @@
   function convNueva(sala, semilla, rol, modo) {
     return { id: sala, semilla, rol, modo: modo === 'blindada' ? 'blindada' : 'normal', suVerificada: false, estado: 'invitacion', nombre: '', firmaPub: null, acuerdoPub: null, huella: null, verificada: false, creado: Date.now(), ultimo: Date.now(), ultimoTexto: null, noLeidos: 0, temporal: enTemporal() || undefined };
   }
-  const guardable = (c) => ({ id: c.id, tumba: c.tumba, vaciarPendiente: c.vaciarPendiente || undefined, borrarPendientes: c.borrarPendientes && c.borrarPendientes.length ? c.borrarPendientes : undefined, semilla: c.semilla, rol: c.rol, estado: c.estado, nombre: c.nombre, firmaPub: c.firmaPub, acuerdoPub: c.acuerdoPub, huella: c.huella, verificada: c.verificada, creado: c.creado, ultimo: c.ultimo, ultimoTexto: c.ultimoTexto, noLeidos: c.noLeidos, enlace: !!c.enlace || undefined, pqVisto: !!c.pqVisto, clasicaAceptada: !!c.clasicaAceptada, modo: c.modo || 'normal', suVerificada: !!c.suVerificada, dsaPub: c.dsaPub || null, idB: c.idB || null, alias: c.alias || '', num: c.num || 0, contacto: !!c.contacto, sinContacto: !!c.sinContacto, traspasoDe: c.traspasoDe || undefined, traspasoApp: !!c.traspasoApp || undefined, temporal: !!c.temporal || undefined, dijeTemporal: !!c.dijeTemporal || undefined, suTemporal: c.suTemporal || undefined, numero: c.numero || undefined, huellaEsperada: c.huellaEsperada || undefined });
+  const guardable = (c) => ({ id: c.id, tumba: c.tumba, vaciarPendiente: c.vaciarPendiente || undefined, borrarPendientes: c.borrarPendientes && c.borrarPendientes.length ? c.borrarPendientes : undefined, semilla: c.semilla, rol: c.rol, estado: c.estado, nombre: c.nombre, firmaPub: c.firmaPub, acuerdoPub: c.acuerdoPub, huella: c.huella, verificada: c.verificada, creado: c.creado, ultimo: c.ultimo, ultimoTexto: c.ultimoTexto, noLeidos: c.noLeidos, enlace: !!c.enlace || undefined, pqVisto: !!c.pqVisto, clasicaAceptada: !!c.clasicaAceptada, modo: c.modo || 'normal', suVerificada: !!c.suVerificada, dsaPub: c.dsaPub || null, idB: c.idB || null, alias: c.alias || '', num: c.num || 0, contacto: !!c.contacto, sinContacto: !!c.sinContacto, traspasoDe: c.traspasoDe || undefined, traspasoApp: !!c.traspasoApp || undefined, temporal: !!c.temporal || undefined, dijeTemporal: !!c.dijeTemporal || undefined, suTemporal: c.suTemporal || undefined, numero: c.numero || undefined, huellaEsperada: c.huellaEsperada || undefined, buzon: c.buzon || undefined });
   const guardaConv = (c) => BD.pon('conv', guardable(c));
   async function preparaConv(c) {
     if (esB(c)) await preparaIdentidadB(c);
@@ -665,7 +665,7 @@
     const m = { id: uuid(), conv: c.id, t: Date.now(), dir: 'mia', estado: 'pendiente', tipo: 'texto', texto };
     await guardaMensaje(c, m); c.mensajes.push(m); c.cola.push(m);
     pintaMensaje(c, m); actualizaUltimo(c, m);
-    enviaCola(c); if (!enLinea(c) || c.suFuera) despierta(c, 'mensaje', true);
+    enviaCola(c); if (!enLinea(c) && !puedeBuzon(c)) despierta(c, 'mensaje');
   }
   // «Borrar el chat» pendiente: sale en cuanto la sesión con la otra persona está lista (si no se pudo mandar, se queda pendiente)
   function mandaVaciar(c) {
@@ -674,8 +674,96 @@
     if (c && c.borrarPendientes && c.borrarPendientes.length && enLinea(c)) { const ids = c.borrarPendientes; c.borrarPendientes = []; for (const id of ids) if (!enviaControl(c, { tipo: 'borra', id })) c.borrarPendientes.push(id); guardaConv(c); }
   }
   const anuncioDe = (m) => ({ tipo: 'archivo', id: m.id, t: m.t, nombre: m.archivo.nombre, tam: m.archivo.tam, mime: m.archivo.mime, clave: m.archivo.clave, trozos: m.archivo.trozos, v: ULTRA ? 1 : 0, region: MI_PAIS || undefined, voz: m.archivo.voz ? 1 : undefined, vida: m.archivo.vida, dur: m.archivo.dur, paq: m.archivo.paq });
+  // ---------- Buzón cifrado (30 Oct 2026; dueño, 00:05: «buzón cifrado») ----------
+  // Si la otra persona no está conectada, el mensaje no se queda con el reloj: se cierra en un sobre que solo su teléfono abre
+  // (cripto.js, «Buzón cifrado») y se deja en el relé, que lo guarda hasta entregarlo (7 días como mucho). ✓ cuando el relé lo
+  // tiene; ✓✓ cuando llega a su teléfono; ✓✓ en color cuando lo lee. Los acuses y el «leído» viajan igual. Para cerrar el sobre
+  // hace falta la «llave de buzón» de la otra persona (ML-KEM-768): cada teléfono manda la suya al empezar cada sesión.
+  const BZ_ARCHIVO = 4 * 1024 * 1024; // fotos y notas de voz de hasta 4 MB van por el buzón; lo demás espera a que estéis los dos
+  const puedeBuzon = (c) => !!(c && !esB(c) && c.buzon && c.buzon.suya && c.acuerdoPub && c.firmaPub && c.suId && c.yo && R && R.conBuzon && C.hayPQ() && YO);
+  async function mandaLlaveBuzon(c) {
+    if (esB(c) || !c.sesion || c.sesion.llaveBz || !C.hayPQ()) return;
+    c.sesion.llaveBz = true;
+    c.buzon = c.buzon || { mias: [], suya: null };
+    const ult = c.buzon.mias[c.buzon.mias.length - 1];
+    if (!ult || Date.now() - ult.t > 7 * 24 * 3600 * 1000) { const l = C.BZ.llave(); if (!l) return; c.buzon.mias.push(l); c.buzon.mias = c.buzon.mias.slice(-4); await guardaConv(c); }
+    const l = c.buzon.mias[c.buzon.mias.length - 1];
+    enviaControl(c, { tipo: 'buzon-llave', kid: l.kid, ek: C.b64u(l.ek) });
+  }
+  async function recibeLlaveBuzon(c, j) {
+    if (esB(c) || !/^[0-9a-f]{16}$/.test(j.kid || '')) return;
+    let ek; try { ek = C.deB64u(String(j.ek || '')); } catch (_) { return; }
+    if (ek.length !== C.KEM_EK) return;
+    c.buzon = c.buzon || { mias: [], suya: null };
+    if (c.buzon.suya && c.buzon.suya.kid === j.kid) return;
+    c.buzon.suya = { kid: j.kid, ek, t: Date.now() }; await guardaConv(c);
+  }
+  const idBuzon = async (s) => C.hex(await C.sha256(C.te.encode('GUARDIANA buzón id\n' + s))).slice(0, 32);
+  async function cierraBuzon(c, obj) {
+    return C.BZ.cierra(YO, { sala: c.id, de: c.yo, para: c.suId, acuerdoPub: c.acuerdoPub, kid: c.buzon.suya.kid, ek: c.buzon.suya.ek }, C.te.encode(JSON.stringify(obj)));
+  }
+  // lo de la cola (y lo «enviado» que nunca tuvo acuse: el otro teléfono se durmió con la conexión abierta), al buzón, en orden
+  async function depositaCola(c) {
+    if (c.depositando || enLinea(c) || !puedeBuzon(c)) return;
+    c.depositando = true;
+    try {
+      const ahora = Date.now();
+      const rescate = c.mensajes.filter((m) => m.dir === 'mia' && m.tipo === 'texto' && m.estado === 'enviado' && !m.porBuzon && m.enviadoEn && ahora - m.enviadoEn > 15000);
+      for (const m of rescate) { if (enLinea(c) || !puedeBuzon(c)) break; const r = await R.buzonDeja(c.id, c.suId, await idBuzon(m.id), await cierraBuzon(c, { tipo: 'texto', id: m.id, t: m.t, texto: m.texto }), true); if (!r.ok) break; m.porBuzon = 1; await guardaMensaje(c, m); }
+      while (c.cola.length && !enLinea(c) && puedeBuzon(c)) {
+        const m = c.cola[0];
+        let carga = null;
+        if (m.tipo === 'texto') carga = { tipo: 'texto', id: m.id, t: m.t, texto: m.texto };
+        else if (m.tipo === 'archivo' && /^(image|audio)\//.test(m.archivo.mime || '') && m.archivo.tam <= BZ_ARCHIVO && !m.archivo.vida && !m.archivo.paq) {
+          let f = c.archivos && c.archivos.get(m.id) && c.archivos.get(m.id).f;
+          if (!f) { try { const r = await BD.saca('arch', m.id); if (r && r.blob) f = r.blob; } catch (_) {} }
+          if (!f) break;
+          const datos = new Uint8Array(await f.arrayBuffer());
+          carga = { tipo: 'archivo-buzon', id: m.id, t: m.t, nombre: m.archivo.nombre, tam: datos.length, mime: m.archivo.mime, voz: m.archivo.voz ? 1 : undefined, dur: m.archivo.dur, datos: C.b64u(datos) };
+        }
+        if (!carga) break; // lo grande espera a que estéis los dos (y conserva el orden)
+        const r = await R.buzonDeja(c.id, c.suId, await idBuzon(m.id), await cierraBuzon(c, carga), true);
+        if (!r.ok) break;
+        if (c.cola[0] !== m) break;
+        c.cola.shift(); m.estado = 'enviado'; m.porBuzon = 1; m.enviadoEn = Date.now(); if (m.tipo === 'archivo') { m.archivo.progreso = 1; if (c.archivos) c.archivos.delete(m.id); }
+        await guardaMensaje(c, m); pintaEstado(m); if (m.tipo === 'archivo') pintaMensaje(c, m, true);
+      }
+    } catch (e) { console.warn('buzón', e); } finally { c.depositando = false; }
+  }
+  // acuses y «leído»: por la sesión si está, si no por el buzón (sin aviso en el teléfono)
+  function acusa(c, obj) {
+    if (enviaControl(c, obj)) return true;
+    if (!puedeBuzon(c)) return false;
+    (async () => { try { await R.buzonDeja(c.id, c.suId, C.hex(C.azar(16)), await cierraBuzon(c, obj), false); } catch (_) {} })();
+    return true;
+  }
+  // lo que llega del buzón: se abre, se comprueba la firma y se trata como si llegara por la sesión; después se borra del relé
+  async function recibeBuzon(c, de, id, sobre) {
+    if (esB(c) || !c.firmaPub || (c.suId && de !== c.suId)) return;
+    if (!c.cargados) await cargaMensajes(c);
+    let j = null;
+    try { j = JSON.parse(C.td.decode(await C.BZ.abre(YO, { sala: c.id, de, para: c.yo, firmaPub: c.firmaPub, dkDe: (kid) => { const l = c.buzon && c.buzon.mias.find((x) => x.kid === kid); return l ? l.dk : null; } }, sobre))); }
+    catch (e) { console.warn('buzón: no se abre', e && e.message); R.buzonBorra(c.id, [id]); return; }
+    try { await trataCarga(c, j, null, true); } finally { R.buzonBorra(c.id, [id]); }
+  }
+  async function recibeArchivoBuzon(c, j) {
+    if (c.mensajes.some((x) => x.id === j.id)) { acusa(c, { tipo: 'ack', ids: [j.id] }); return; }
+    const mime = String(j.mime || 'application/octet-stream').slice(0, 100);
+    if (!/^(image|audio)\//.test(mime)) return;
+    let datos; try { datos = C.deB64u(String(j.datos || '')); } catch (_) { return; }
+    if (!datos.length || datos.length > BZ_ARCHIVO) return;
+    const voz = j.voz === 1, tipo = mimeAbrible(mime) ? mime : 'application/octet-stream';
+    const m = { id: String(j.id).slice(0, 64), conv: c.id, t: Math.min(Date.now(), +j.t || Date.now()), dir: 'suya', estado: 'recibido', tipo: 'archivo', archivo: { nombre: limpiaNombre(j.nombre), tam: datos.length, mime: tipo, trozos: 1, progreso: 1, voz: voz || undefined, dur: Number.isFinite(+j.dur) ? +j.dur : undefined } };
+    await BD.pon('arch', { id: m.id, conv: c.id, blob: new Blob([datos], { type: tipo }), nombre: m.archivo.nombre, mime: tipo, tam: datos.length });
+    await guardaMensaje(c, m); c.mensajes.push(m); pintaMensaje(c, m); actualizaUltimo(c, m, true);
+    acusa(c, { tipo: 'ack', ids: [m.id] });
+    const aLaVista = ACTUAL === c.id && document.visibilityState === 'visible';
+    if (aLaVista) marcaLeidos(c);
+    avisaFuera(c, voz ? 'voz' : 'archivo'); if (!aLaVista) avisaSonido();
+  }
   async function enviaCola(c) {
     mandaVaciar(c);
+    if (enLinea(c) && c.sesion && c.sesion.confirmada) mandaLlaveBuzon(c);
     if (c.enviando) return; c.enviando = true;
     try {
       while (c.cola.length && enLinea(c) && puedeEnviar(c)) {
@@ -688,10 +776,11 @@
         const b = await sella(c, carga); if (!b || !R.manda(c.id, c.suId, b, true)) break;
         if (vj && sesU) { vj.pq = !!sesU.pq; vj.sid = sesU.sid; vj.sesionDesde = sesU.desde; vj.tAnuncio = Date.now(); }
         if (vj) evento(vj, T('Anuncio enviado al destinatario, encriptado de extremo a extremo; se espera su confirmación.')); // antes de cualquier espera: va antes que la respuesta
-        c.cola.shift(); m.estado = 'enviado'; await guardaMensaje(c, m); pintaEstado(m);
+        c.cola.shift(); m.estado = 'enviado'; m.enviadoEn = Date.now(); await guardaMensaje(c, m); pintaEstado(m);
         if (m.tipo === 'archivo') mandaArchivo(c, m);
       }
     } finally { c.enviando = false; }
+    if (!enLinea(c)) depositaCola(c);
   }
   async function recibeMensaje(c, de, b) {
     if (b.length < 13 + 16) return;
@@ -702,14 +791,22 @@
     try { const k = await ses.recibo.para(n); j = JSON.parse(C.td.decode(await C.abre(k, n, b.subarray(13), C.cat(b.subarray(0, 13), ses.hash)))); } catch (e) { if (!/repetido|saltados/.test(e.message)) { c.incidencias = (c.incidencias || 0) + 1; await anotaSistema(c, 'Un mensaje no superó la comprobación de integridad y se ha descartado.'); vigila(c, T('Un mensaje no superó la autenticación: descartado.'), 'mal'); pintaRadio(c); await alarmaSiToca(c); } return; }
     if (c.suId !== de) return;
     c.ultimaVerificacion = Date.now();
-    if (!ses.confirmada) { ses.confirmada = true; if (c.sesion === ses) pintaCabecera(c); vigila(c, T('Confirmación de clave recibida: la otra persona tiene la misma clave.'), 'bien'); } // la otra persona tiene la misma clave: sesión confirmada
-    if (j.tipo === 'texto' || j.tipo === 'archivo' || j.tipo === 'llamada') { marcaUso(true); c.suVistoT = Date.now(); } // el chat temporal se está usando
+    if (!ses.confirmada) { ses.confirmada = true; if (c.sesion === ses) { pintaCabecera(c); mandaLlaveBuzon(c); } vigila(c, T('Confirmación de clave recibida: la otra persona tiene la misma clave.'), 'bien'); } // la otra persona tiene la misma clave: sesión confirmada
+    return trataCarga(c, j, ses);
+  }
+  // lo que dice cada mensaje, venga por la sesión o por el buzón cifrado (porBuzon: solo textos, fotos y notas de voz, acuses y «leído»)
+  async function trataCarga(c, j, ses, porBuzon) {
+    if (!j || typeof j !== 'object') return;
+    if (porBuzon && !['texto', 'archivo-buzon', 'ack', 'leido'].includes(j.tipo)) return;
+    if (j.tipo === 'texto' || j.tipo === 'archivo' || j.tipo === 'archivo-buzon' || j.tipo === 'llamada') { marcaUso(true); c.suVistoT = Date.now(); } // el chat temporal se está usando
     switch (j.tipo) {
+      case 'buzon-llave': return recibeLlaveBuzon(c, j);
+      case 'archivo-buzon': return recibeArchivoBuzon(c, j);
       case 'texto': {
-        if (c.mensajes.some((x) => x.id === j.id)) { enviaControl(c, { tipo: 'ack', ids: [j.id] }); return; }
+        if (c.mensajes.some((x) => x.id === j.id)) { acusa(c, { tipo: 'ack', ids: [j.id] }); return; }
         const m = { id: String(j.id).slice(0, 64), conv: c.id, t: Math.min(Date.now(), +j.t || Date.now()), dir: 'suya', estado: 'recibido', tipo: 'texto', texto: String(j.texto || '').slice(0, 20000), velado: extrasB(c) || undefined };
         await guardaMensaje(c, m); c.mensajes.push(m); pintaMensaje(c, m); actualizaUltimo(c, m, true); vigila(c, T('Mensaje recibido: superó la verificación criptográfica.'), 'ok'); pintaRadio(c);
-        enviaControl(c, { tipo: 'ack', ids: [m.id] });
+        acusa(c, { tipo: 'ack', ids: [m.id] });
         const aLaVista = ACTUAL === c.id && document.visibilityState === 'visible';
         if (aLaVista) marcaLeidos(c);
         avisaFuera(c, 'mensaje'); if (!aLaVista) avisaSonido(); // el pip siempre; el aviso del sistema va en silencio para no sonar dos veces
@@ -800,7 +897,7 @@
     if (!c || ACTUAL !== c.id || !seVeElChat()) return;
     const ids = c.mensajes.filter((m) => m.dir === 'suya' && m.estado === 'recibido' && !m.velado && enPantalla(m.id)).map((m) => m.id);
     // sin «confirmaciones de lectura» se apunta aquí como leído, pero no se envía (y al reactivarlas no se mandan las antiguas)
-    if (ids.length && (!pref('leido') || enviaControl(c, { tipo: 'leido', ids }))) { for (const m of c.mensajes) if (ids.includes(m.id)) { m.estado = 'leido'; await guardaMensaje(c, m); } }
+    if (ids.length && (!pref('leido') || acusa(c, { tipo: 'leido', ids }))) { for (const m of c.mensajes) if (ids.includes(m.id)) { m.estado = 'leido'; await guardaMensaje(c, m); } }
     if (c.noLeidos) { c.noLeidos = 0; await guardaConv(c); pintaLista(); }
     retiraAvisos(c.id); pintaInsignia();
   }
@@ -849,7 +946,7 @@
       await guardaMensaje(c, m); c.mensajes.push(m); c.cola.push(m); pintaMensaje(c, m); actualizaUltimo(c, m);
       abreSiToca(v);
     }
-    enviaCola(c); if (!enLinea(c) || c.suFuera) despierta(c, 'mensaje', true);
+    enviaCola(c); if (!enLinea(c) && !puedeBuzon(c)) despierta(c, 'mensaje');
   }
   // Reenvío automático (dueño, 29 Oct 2026, 23:47: «cuando se envía la imagen… sale como un símbolo de exclamación… todo
   // sincronizado»): si se corta la conexión (la app pasa a segundo plano, se bloquea el teléfono, la otra persona sale), un archivo
@@ -1723,15 +1820,16 @@
     R.on('cerrado', () => { quietoTodas(4000); pintaBarra(); for (const c of CONVS.values()) { c.miembros.clear(); c.sesion = null; c.salaSabida = false; c.suFuera = false; for (const [id, a] of c.archivos || []) { if (a && a.envio) { const m = c.mensajes.find((x) => x.id === id); if (m && m.estado !== 'pendiente') pierde(c, m, a, T('Se perdió la conexión.')); } } if (c.archivos) { for (const [id, a] of [...c.archivos]) if (!(a && a.envio)) c.archivos.delete(id); } pintaCabecera(c); } pintaLista(); });
     setInterval(() => { if (R.abierto && R.caduca && R.caduca * 1000 - Date.now() < 2 * 3600 * 1000) R.pideIce(); }, 10 * 60 * 1000);
     // con la otra persona en la sala, el tiempo de acordar las claves, quieta; sin ella (y si no se acaba de ir), «No conectado» ya
-    R.on('sala', (sala, miembros) => { const c = CONVS.get(sala); if (!c) return; c.miembros = new Set(miembros); c.sesion = null; c.salaSabida = true; c.suFuera = false; if (c.suId && miembros.includes(c.suId)) quietoConv(c, 6000); if (miembros.length && (!c.suId || miembros.includes(c.suId))) enCola(c, () => presentaX(c, null, true)); pintaCabecera(c); pintaLista(); pintaContactos(); });
+    R.on('sala', (sala, miembros) => { const c = CONVS.get(sala); if (!c) return; c.miembros = new Set(miembros); c.sesion = null; c.salaSabida = true; c.suFuera = false; if (c.suId && miembros.includes(c.suId)) quietoConv(c, 6000); if (miembros.length && (!c.suId || miembros.includes(c.suId))) enCola(c, () => presentaX(c, null, true)); else setTimeout(() => depositaCola(c), 300); pintaCabecera(c); pintaLista(); pintaContactos(); }); // sin la otra persona en la sala, lo pendiente, al buzón
     R.on('llega', (sala, quien) => { const c = CONVS.get(sala); if (!c) return; c.miembros.add(quien); if (!c.suId || c.suId === quien) c.suFuera = false; if (!c.suId || c.suId === quien) { c.sesion = null; if (c.huella) quietoConv(c, 6000); enCola(c, () => presentaX(c, null, true)); } pintaCabecera(c); pintaLista();
       // la invitación que salió por WhatsApp: el chat se abre cuando la otra persona entra, si no se está en otra conversación
       if (c.compartido && !c.huella && c.rol === 'invita' && (!ACTUAL || !CONVS.has(ACTUAL)) && !document.body.classList.contains('en-llamada')) abreConv(c.id); });
     // si la otra persona se va, puede que solo esté recargando: unos segundos sin cambiar nada
-    R.on('sale', (sala, quien) => { const c = CONVS.get(sala); if (!c) return; c.miembros.delete(quien); if (c.suId === quien) c.suFuera = false; if (c.suId === quien) { c.sesion = null; quietoConv(c, 6000); vigila(c, T('La otra persona se ha desconectado.'), 'info'); if (LL && LL.ocupado && (LLAMADA_CONV || ACTUAL) === c.id) LL.seFue(); } pintaCabecera(c); pintaLista(); }); // ya no cuelga: ver seFue (llamada.js)
+    R.on('sale', (sala, quien) => { const c = CONVS.get(sala); if (!c) return; c.miembros.delete(quien); if (c.suId === quien) c.suFuera = false; if (c.suId === quien) { c.sesion = null; quietoConv(c, 6000); vigila(c, T('La otra persona se ha desconectado.'), 'info'); if (LL && LL.ocupado && (LLAMADA_CONV || ACTUAL) === c.id) LL.seFue(); setTimeout(() => depositaCola(c), 300); } pintaCabecera(c); pintaLista(); }); // ya no cuelga: ver seFue (llamada.js). Al irse la otra persona, lo pendiente, al buzón
     R.on('sustituido', (sala) => { const c = CONVS.get(sala); if (c) { c.miembros.clear(); c.sesion = null; } aviso(T('Este chat se ha abierto en otro sitio (otra pestaña o la app): sigue allí.')); });
     // Las tramas de una conversación se procesan en orden (una detrás de otra): así un trozo de archivo nunca
     // adelanta al anuncio del archivo, ni un mensaje a la presentación que abre su sesión.
+    R.on('buzon', (sala, de, id, sobre) => { const c = CONVS.get(sala); if (!c) return; c.proc = (c.proc || Promise.resolve()).then(() => recibeBuzon(c, de, id, sobre)).catch((e) => console.warn('buzón', e)); });
     R.on('trama', (sala, de, b) => {
       const c = CONVS.get(sala); if (!c || !b.length) return;
       c.proc = (c.proc || Promise.resolve()).then(async () => {
@@ -2144,6 +2242,10 @@
     $('#num-compartir').addEventListener('click', compartirNumero);
     $('#llamar-num').addEventListener('click', () => { pintaMarcar(true); const i = $('#inicio'); if (i) i.scrollTop = 0; });
     $('#marcar-atras').addEventListener('click', () => pintaMarcar(false));
+    // la barra del número no se queda con el foco al tocar el teclado: con el foco dentro, al mantener pulsado en cualquier sitio salía
+    // la lupa del iPhone y se podía arrastrar por toda la pantalla (dueño, 30 Oct 2026, 00:29)
+    $('#teclado').addEventListener('pointerdown', () => { const c = $('#marcar-n'); if (c && document.activeElement === c) c.blur(); });
+    $('#teclado').addEventListener('contextmenu', (e) => e.preventDefault());
     $('#teclado').addEventListener('click', (e) => { const b = e.target.closest('button[data-d]'); if (!b || NUM_MARCADO.length >= 12) return; NUM_MARCADO += b.dataset.d; pintaMarcar(); });
     $('#marcar-borra').addEventListener('click', () => { NUM_MARCADO = NUM_MARCADO.slice(0, -1); pintaMarcar(); });
     // Pegar (dueño, 29 Oct 2026, 23:16: «se tiene que poder pegar… simplifícalo»): manteniendo pulsada la barra del número (23:30:
@@ -2348,7 +2450,7 @@
       // el «escribiendo…» va siempre el último: se aparta mientras entra el mensaje y vuelve detrás; si el mensaje es suyo, se quita
       const esc = ul.querySelector('li.gc-escribiendo'); if (esc) esc.remove();
       if (ul.dataset.dia !== diaDe(m.t)) { ul.dataset.dia = diaDe(m.t); const f = document.createElement('li'); f.className = 'gc-fecha'; f.textContent = fecha(m.t); ul.append(f); }
-      li = document.createElement('li'); li.dataset.id = m.id; ul.append(li);
+      li = document.createElement('li'); li.dataset.id = m.id; if (Date.now() - (m.t || 0) < 4000) li.classList.add('g-nueva'); ul.append(li); // la nueva entra con movimiento; el historial, quieto
       if (esc) { if (m.dir === 'suya') clearTimeout(escribeT); else ul.append(esc); }
       const prev = li.previousElementSibling; if (prev && prev.dataset.dir === m.dir && m.dir !== 'sistema' && m.tipo !== 'llamada' && !prev.classList.contains('gc-llam-li') && m.t - (+prev.dataset.t || 0) < 300000) li.classList.add('gc-sigue');
     }
@@ -2372,7 +2474,7 @@
     bur.append(meta); li.append(bur); pintaEstado(m);
     if (!sinScroll && (abajo || m.dir === 'mia')) ul.scrollTop = ul.scrollHeight;
   }
-  const TICK1 = '<svg viewBox="0 0 16 11"><path d="M1 6l3.5 3.5L11 2"/></svg>', TICK2 = '<svg viewBox="0 0 16 11"><path d="M1 6l3.5 3.5L11 2M6 9.5L15 2"/></svg>', RELOJ = '<svg viewBox="0 0 12 12"><circle cx="6" cy="6" r="4.6"/><path d="M6 3.3V6l1.9 1.2"/></svg>';
+  const TICK1 = '<svg viewBox="0 0 16 11"><path d="M1 6.2l3.1 3.1 6.5-6.7"/></svg>', TICK2 = '<svg viewBox="0 0 16 11"><path d="M1 6.2l3.1 3.1 6.5-6.7M7.2 8.4l.9.9 6.5-6.7"/></svg>', RELOJ = '<svg viewBox="0 0 12 12"><circle cx="6" cy="6" r="4.6"/><path d="M6 3.3V6l1.9 1.2"/></svg>';
   function pintaEstado(m) {
     const li = $('#mensajes [data-id="' + m.id + '"]'); if (!li) return;
     const tk = li.querySelector('.gc-ticks'); if (!tk) return;
@@ -3249,8 +3351,11 @@
     // las pestañas solo cambian lo que se ve, sin cerrar la guía (dueño, 29 Oct 2026, 23:37: «cuando toco Android, la pantalla se
     // desaparece y vuelve atrás»: antes, cada pestaña cerraba todas las hojas, también la propia guía, y la volvía a abrir)
     { const pestanaGuia = (and) => { $('#guia-tab-iphone').classList.toggle('activa', !and); $('#guia-tab-android').classList.toggle('activa', and); $('#guia-tab-iphone').setAttribute('aria-selected', String(!and)); $('#guia-tab-android').setAttribute('aria-selected', String(and)); $('#guia-iphone').hidden = and; $('#guia-android').hidden = !and; const c = $('#h-guia .gc-hoja-caja'); if (c) c.scrollTop = 0; };
-      const abreGuiaCapturas = (pestana) => { for (const h of document.querySelectorAll('.gc-hoja.gc-abierta')) if (h.id !== 'h-guia') cierraHoja(h.id); pestanaGuia(pestana ? pestana === 'android' : androidUA); abreHoja('h-guia'); };
-      for (const id of ['aj-guia', 'como-guia', 'anadir-guia', 'desc-guia']) { const b = $('#' + id); if (b) b.addEventListener('click', () => abreGuiaCapturas()); }
+      let guiaDesde = '';
+      const abreGuiaCapturas = (pestana, desde) => { guiaDesde = desde || ''; for (const h of document.querySelectorAll('.gc-hoja.gc-abierta')) if (h.id !== 'h-guia') cierraHoja(h.id); pestanaGuia(pestana ? pestana === 'android' : androidUA); abreHoja('h-guia'); };
+      // «‹»: vuelve a donde estaba (a Ajustes, si se abrió desde ahí)
+      { const b = $('#guia-atras'); if (b) b.addEventListener('click', () => { cierraHoja('h-guia'); if (guiaDesde === 'aj-guia') abreAjustes(); }); }
+      for (const id of ['aj-guia', 'como-guia', 'anadir-guia', 'desc-guia']) { const b = $('#' + id); if (b) b.addEventListener('click', () => abreGuiaCapturas(null, id)); }
       $('#guia-tab-iphone').addEventListener('click', (e) => { e.stopPropagation(); pestanaGuia(false); }); $('#guia-tab-android').addEventListener('click', (e) => { e.stopPropagation(); pestanaGuia(true); });
       $('#guia-ok').addEventListener('click', () => cierraHoja('h-guia')); }
     { const b = $('#aj-version'); if (b) b.addEventListener('click', async () => { const e = $('#aj-version-est'); if (e) e.textContent = T('Comprobando…'); const hay = await miraVersion(true); if (e) e.textContent = hay ? T('Hay una versión nueva: se instala ahora.') : T('Ya tienes la última versión.'); }); }
@@ -3466,7 +3571,7 @@
     ta.addEventListener('input', () => { if (grab) return; clearTimeout(escribeParaT); const hay = !!ta.value.trim(); avisaEscribe(hay ? 'texto' : 'no'); if (hay) escribeParaT = setTimeout(() => { if (!grab) avisaEscribe('no'); }, 3500); });
     // mientras se graba una nota de voz, «Enviar» la termina y la envía, igual que el botón del micrófono (dueño, 28 Oct 2026:
     // «después de grabar, el botón de enviar no me dejaba»)
-    const envia = async () => { if (grab) { paraGrabacion(true); return; } const c = CONVS.get(ACTUAL); const t = ta.value.replace(/\s+$/, ''); if (!c || !t) return; ta.value = ''; ajusta(); ta.dispatchEvent(new Event('input')); await enviaTexto(c, t); ta.focus(); };
+    const envia = async () => { if (grab) { if (grab.fijadaEn && Date.now() - grab.fijadaEn < 450) return; paraGrabacion(true); return; } const c = CONVS.get(ACTUAL); const t = ta.value.replace(/\s+$/, ''); if (!c || !t) return; ta.value = ''; ajusta(); ta.dispatchEvent(new Event('input')); await enviaTexto(c, t); ta.focus(); };
     ta.addEventListener('keydown', (e) => { if (e.key === 'Enter' && !e.shiftKey && !e.isComposing) { e.preventDefault(); envia(); } });
     $('#enviar').addEventListener('click', envia);
     // al tocar «Enviar» se nota (29 Oct 2026, 07:53: «al tocarlo sepa uno que lo ha tocado»): se hunde y se oscurece mientras se
@@ -3565,9 +3670,10 @@
     const preparaUI = () => { compositor.classList.add('grabando-ya'); $('#grabando').hidden = false; $('#grabando-t').textContent = '0:00'; $('#grabando-candado').hidden = false; grabar.classList.add('pulsando'); const dz = $('#grabando-desliza'); if (dz) { dz.style.transform = ''; dz.style.opacity = ''; } };
     const limpiaUI = () => { compositor.classList.remove('grabando-ya', 'grab-fija'); $('#grabando').hidden = true; $('#grabando-candado').hidden = true; grabar.setAttribute('aria-pressed', 'false'); grabar.classList.remove('pulsando'); grabar.style.transform = ''; const dz = $('#grabando-desliza'); if (dz) { dz.style.transform = ''; dz.style.opacity = ''; } };
     const paraGrabacion = (enviar) => {
-      if (!grab) return; const g = grab; grab = null; clearInterval(g.reloj); cancelAnimationFrame(g.raf);
+      if (!grab) return;
+      if (enviar && !grab.fija && (Date.now() - grab.t0) / 1000 < 0.8) { fijaGrabacion(); return; } // demasiado corta al soltar: sigue grabando, fija (papelera o enviar)
+      const g = grab; grab = null; clearInterval(g.reloj); cancelAnimationFrame(g.raf);
       const seg = (Date.now() - g.t0) / 1000;
-      if (enviar && seg < 0.8 && !g.fija) { enviar = false; aviso(T('Mantén pulsado el micrófono para grabar y suelta para enviar.')); }
       g.enviar = enviar; try { g.rec.stop(); } catch (_) {}
       try { if (g.ctx) g.ctx.close(); } catch (_) {}
       setTimeout(() => { g.stream.getTracks().forEach((x) => x.stop()); try { if (navigator.audioSession && !(LL && LL.ocupado)) navigator.audioSession.type = 'playback'; } catch (_) {} }, 300);
@@ -3575,7 +3681,7 @@
       if (!enviar && seg >= 0.8) vibra([20, 40, 20]); else if (enviar) haptico(10);
       avisaEscribe(ta.value.trim() ? 'texto' : 'no');
     };
-    const fijaGrabacion = () => { if (!grab || grab.fija) return; grab.fija = true; compositor.classList.add('grab-fija'); $('#grabando-candado').hidden = true; const dz = $('#grabando-desliza'); if (dz) { dz.style.transform = ''; dz.style.opacity = ''; } grabar.style.transform = ''; grabar.classList.remove('pulsando'); haptico(15); };
+    const fijaGrabacion = () => { if (!grab || grab.fija) return; grab.fija = true; grab.fijadaEn = Date.now(); compositor.classList.add('grab-fija'); $('#grabando-candado').hidden = true; const dz = $('#grabando-desliza'); if (dz) { dz.style.transform = ''; dz.style.opacity = ''; } grabar.style.transform = ''; grabar.classList.remove('pulsando'); haptico(15); };
     // la onda de la voz mientras se graba: el nivel del micrófono, barra a barra
     const pintaOnda = (g) => {
       const cv = $('#grabando-onda'); if (!cv || !g.an) return;
@@ -3589,7 +3695,7 @@
       try { if (navigator.audioSession) navigator.audioSession.type = 'play-and-record'; } catch (_) {}
       let stream; try { stream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true } }); } catch (_) { try { if (navigator.audioSession) navigator.audioSession.type = 'playback'; } catch (_) {} if (!grab) limpiaUI(); aviso(T('Sin permiso para el micrófono.')); return; }
       // el dedo ya se levantó mientras el teléfono pedía el permiso (o la grabación ya no toca): no se graba nada
-      if (grab || (d && (d.suelto || d.cancelado) && !d.raton) || ACTUAL !== c.id) { stream.getTracks().forEach((x) => x.stop()); try { if (navigator.audioSession && !(LL && LL.ocupado)) navigator.audioSession.type = 'playback'; } catch (_) {} if (!grab) limpiaUI(); if (d && d.suelto && !grab) aviso(T('Mantén pulsado el micrófono para grabar y suelta para enviar.')); return; }
+      if (grab || (d && d.cancelado && !d.raton) || ACTUAL !== c.id) { stream.getTracks().forEach((x) => x.stop()); try { if (navigator.audioSession && !(LL && LL.ocupado)) navigator.audioSession.type = 'playback'; } catch (_) {} if (!grab) limpiaUI(); if (d && d.suelto && !grab) aviso(T('Mantén pulsado el micrófono para grabar y suelta para enviar.')); return; }
       const mime = ['audio/webm;codecs=opus', 'audio/webm', 'audio/mp4', 'audio/ogg;codecs=opus'].find((m) => MediaRecorder.isTypeSupported(m)) || '';
       const rec = new MediaRecorder(stream, mime ? { mimeType: mime, audioBitsPerSecond: 64000 } : undefined);
       const trozos = []; const t0 = Date.now();
@@ -3610,7 +3716,7 @@
       if (grab) { if (grab.fija) { e.preventDefault(); paraGrabacion(true); } return; } // fija: este toque la envía
       const c = CONVS.get(ACTUAL); if (!c) return;
       e.preventDefault();
-      dedo = { id: e.pointerId, x0: e.clientX, y0: e.clientY, raton: e.pointerType === 'mouse', suelto: false };
+      dedo = { id: e.pointerId, x0: e.clientX, y0: e.clientY, raton: e.pointerType === 'mouse', suelto: false, t: Date.now() };
       try { grabar.setPointerCapture(e.pointerId); } catch (_) {}
       haptico(12); if (!dedo.raton) preparaUI(); else grabar.classList.add('pulsando');
       empiezaGrabacion(c, dedo);
@@ -3626,19 +3732,29 @@
       if (dx < -100) { const d = dedo; dedo = null; try { grabar.releasePointerCapture(d.id); } catch (_) {} paraGrabacion(false); return; }
       if (dy < -70) { const d = dedo; dedo = null; try { grabar.releasePointerCapture(d.id); } catch (_) {} fijaGrabacion(); }
     });
+    // Soltar (dueño, 30 Oct 2026, 00:26–00:30: «ha mejorado, pero sigue sin funcionar bien… un poco de todo»). En el iPhone, el
+    // micrófono tarda un momento, el aviso de permiso o un desplazamiento se quedan el dedo, y un toque rápido acababa en nada. Ahora
+    // nada se pierde: un toque corto (o soltar antes de que el micrófono esté listo) deja la grabación fija, con la papelera y
+    // «Enviar»; mantener y soltar envía; si el sistema se queda el dedo, también queda fija.
     const sueltaDedo = (e, cancela) => {
       if (!dedo || e.pointerId !== dedo.id) return;
       const d = dedo; dedo = null; grabar.classList.remove('pulsando'); try { grabar.releasePointerCapture(d.id); } catch (_) {}
       if (d.raton) return; // con ratón la grabación queda fija: se manda con «Enviar»
-      if (!grab) { d.suelto = true; limpiaUI(); return; } // todavía pidiendo el micrófono
+      const corto = Date.now() - d.t < 350;
+      if (!grab) { if (d.cancelado) { d.suelto = true; limpiaUI(); return; } d.fijar = true; return; } // el micrófono aún no está: al llegar, fija
       if (grab.fija) return;
-      paraGrabacion(!cancela); // soltar = enviar
+      if (cancela || corto) { fijaGrabacion(); return; }
+      paraGrabacion(true); // mantener y soltar = enviar
     };
     let ultimoSuelto = 0;
     grabar.addEventListener('pointerup', (e) => { ultimoSuelto = Date.now(); sueltaDedo(e, false); });
     grabar.addEventListener('pointercancel', (e) => { ultimoSuelto = Date.now(); sueltaDedo(e, true); });
     grabar.addEventListener('lostpointercapture', (e) => sueltaDedo(e, false)); // por si el navegador se queda el dedo (al desplazar, por ejemplo)
     grabar.addEventListener('contextmenu', (e) => e.preventDefault());
+    // sin «clic» de compatibilidad tras el toque: con la grabación ya fija, «Enviar» ocupa el sitio del micrófono y ese clic la
+    // mandaba al momento (dueño, 30 Oct 2026, 00:30: «un poco de todo»)
+    // y, en el iPhone, el toque que se nota: Safari solo lo da dentro de un gesto completo (al levantar el dedo), no al apoyarlo
+    grabar.addEventListener('touchend', (e) => { if (e.cancelable) e.preventDefault(); haptico(10); }, { passive: false });
     // con el teclado (Enter o espacio): empieza fija; otra vez, la envía
     // (el «click» que sigue a un toque o a un clic de ratón se ignora: ya lo hicieron los eventos del puntero)
     grabar.addEventListener('click', () => { if (Date.now() - ultimoSuelto < 1000 || dedo) return; if (grab) { if (grab.fija) paraGrabacion(true); return; } const c = CONVS.get(ACTUAL); if (c) empiezaGrabacion(c, { raton: true }); });

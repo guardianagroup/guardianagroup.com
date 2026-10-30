@@ -1,6 +1,7 @@
 // GUARDIANA · Comunicaciones · relé (26 Oct 2026).
 //
-// Pasa tramas entre los miembros de una «sala» y no guarda nada: ni mensajes, ni nombres, ni claves. Todo lo que
+// Pasa tramas entre los miembros de una «sala»; no guarda nombres ni claves, y los mensajes solo como sobres cerrados para quien
+// no está conectado (buzón cifrado, desde el 30 Oct 2026: ver buzones.js), hasta que los recoge. Todo lo que
 // cruza por aquí viene sellado por las páginas (AES-256-GCM con claves que el relé nunca ve); el relé solo sabe
 // qué conexiones comparten una sala y cuántos bytes mueven. Cuando la última conexión se va, la sala deja de existir.
 //
@@ -12,12 +13,15 @@
 //   binario → [0x01][32 bytes sala][8 bytes destinatario o ceros = todos][carga]  (del cliente al relé)
 //             [0x02][32 bytes sala][8 bytes remitente][carga]                     (del relé a los demás)
 //   sala: 64 hexadecimales (la página la deriva de la invitación; la clave no viaja); yo: 16 hexadecimales.
+//   Buzón cifrado (30 Oct 2026, ver buzones.js): binario 0x03 (dejar un sobre para quien no está) y 0x04 (entregarlo); texto
+//   {t:'buzon-borra', sala, ids} cuando el destinatario lo ha recogido; respuesta {t:'buzon-ok', sala, id, ok}.
 //   Número GUARDIANA (29 Oct 2026, ver numeros.js): {t:'num', idn, f, a, sig, alta} · {t:'cita', T, s} · {t:'citas', ts} ·
 //   {t:'cita-fin', T, cancela}; con «q», la respuesta lleva la misma «q». Aviso del relé: {t:'cita-lista', T, otros}.
 'use strict';
 const crypto = require('crypto');
 const { Avisos } = require('./avisos');
 const { Numeros } = require('./numeros');
+const { Buzones } = require('./buzones');
 
 const MAX_MIEMBROS = 8;          // personas por sala (conversaciones pequeñas; nada de canales)
 const MAX_SALAS_CONEXION = 64;   // salas abiertas por una misma conexión
@@ -58,6 +62,8 @@ class Rele {
     this.avisos = o.avisos === null ? null : (o.avisos || new Avisos({ dir: o.avisosDir, remitente: o.remitente }));
     // el directorio del Número GUARDIANA (29 Oct 2026): huellas y claves públicas, nunca los números; ver numeros.js
     this.numeros = o.numeros === null ? null : (o.numeros || new Numeros({ dir: o.numerosDir }));
+    // el buzón cifrado (30 Oct 2026): sobres cerrados para quien no está conectado, hasta que los recoge (7 días como mucho); ver buzones.js
+    this.buzones = o.buzones === null ? null : (o.buzones || new Buzones({ dir: o.buzonesDir }));
     if (this.turnHost && this.turnSecreto) { this.compruebaCoturn(); const t = setInterval(() => this.compruebaCoturn(), 60 * 1000); if (t.unref) t.unref(); }
     this.vigila = setInterval(() => this.barre(), 30 * 1000);
     if (this.vigila.unref) this.vigila.unref();
@@ -66,7 +72,7 @@ class Rele {
   // Hay llamadas solo si hay secreto y coturn está de verdad activo en este servidor (se comprueba cada minuto)
   get llamadas() { return !!(this.turnHost && this.turnSecreto && this.coturn.activo); }
 
-  estado() { let b = 0; for (const x of this.conexiones) if (x.blindada) b++; return { salas: this.salas.size, conexiones: this.conexiones.size, blindadas: b, codigos: this.codigos.size, llamadas: this.llamadas, coturn: this.coturn, avisos: this.avisos ? this.avisos.estado() : null, numeros: this.numeros ? this.numeros.estado() : null }; }
+  estado() { let b = 0; for (const x of this.conexiones) if (x.blindada) b++; return { buzon: this.buzones ? this.buzones.cuantos : null, salas: this.salas.size, conexiones: this.conexiones.size, blindadas: b, codigos: this.codigos.size, llamadas: this.llamadas, coturn: this.coturn, avisos: this.avisos ? this.avisos.estado() : null, numeros: this.numeros ? this.numeros.estado() : null }; }
 
   compruebaCoturn() {
     const { execFile } = require('child_process');
@@ -112,7 +118,7 @@ class Rele {
         // «marca»: este relé entiende las tramas marcadas (0x11, las que merecen aviso). Sin esto, la página no las usa: un relé
         // anterior las descartaría y el mensaje se perdería mientras los servidores se actualizan (29 Oct 2026)
         // «reto»: lo que firma la app al presentar su Número GUARDIANA en esta conexión (una firma vieja no sirve en otra)
-        c.ws.json({ t: 'hola', v: 1, marca: 1, region: this.region, llamadas: this.llamadas, ice: t.ice, caduca: t.caduca, avisos: this.avisos ? this.avisos.clavePublica : '', reto: c.reto, num: this.numeros ? 1 : 0 });
+        c.ws.json({ t: 'hola', v: 1, marca: 1, region: this.region, llamadas: this.llamadas, ice: t.ice, caduca: t.caduca, avisos: this.avisos ? this.avisos.clavePublica : '', reto: c.reto, num: this.numeros ? 1 : 0, buzon: this.buzones ? 1 : 0 });
         return;
       }
       case 'ice': { const t = this.ice(); c.ws.json({ t: 'ice', ice: t.ice, caduca: t.caduca }); return; }
@@ -133,6 +139,7 @@ class Rele {
       case 'cita': return this.cita(c, m);
       case 'citas': return this.citas(c, m);
       case 'cita-fin': return this.citaFin(c, m);
+      case 'buzon-borra': { if (!this.buzones) return; const sala = String(m.sala || ''); if (!c.salas.has(sala) || !Array.isArray(m.ids)) return; this.buzones.borra(sala, c.yo.get(sala), m.ids.slice(0, 200).map(String)); return; }
       default: return;
     }
   }
@@ -154,6 +161,7 @@ class Rele {
     } else if (s.size >= MAX_MIEMBROS) return c.ws.json({ t: 'error', sala, por: 'sala llena' });
     s.set(yo, c); c.salas.add(sala); c.yo.set(sala, yo);
     c.ws.json({ t: 'sala', sala, miembros: this.otros(sala, yo) });
+    if (this.buzones) for (const x of this.buzones.para(sala, yo)) this.mandaSobre(c, sala, x.de, x.id, x.datos);
     for (const [id, otro] of s) if (id !== yo && otro !== c) { try { otro.ws.json({ t: 'llega', sala, quien: yo }); } catch (_) {} }
     // la presencia «fuera» (app en segundo plano), en los dos sentidos: quien entra la sabe de los demás y los demás, la suya
     for (const [id, otro] of s) if (id !== yo && otro !== c) {
@@ -275,6 +283,7 @@ class Rele {
   // que estar en orden»). Antes se avisaba por cualquier trama entregada, y el acuse, el «leído» o el «escribiendo…» de la otra
   // persona llegaban como «Mensaje nuevo». La página marca solo los mensajes y los anuncios de archivo; el relé sigue sin ver nada.
   trama(c, b) {
+    if (Buffer.isBuffer(b) && b[0] === 0x03) return this.dejaSobre(c, b);
     if (!Buffer.isBuffer(b) || b.length < 41 || (b[0] !== 0x01 && b[0] !== 0x11)) return;
     const avisa = b[0] === 0x11;
     const sala = b.subarray(1, 33).toString('hex');
@@ -294,6 +303,35 @@ class Rele {
       const otro = s.get(id);
       if (!otro || id === yo) return c.ws.json({ t: 'ausente', sala, quien: id });
       this.entrega(c, otro, sala, id, salida, avisa);
+    }
+  }
+
+  // Buzón cifrado. Del cliente: [0x03][32 sala][8 para][16 id][1 trozo][1 de cuántos][1 avisa][carga ≤ 960 KB]. Al destinatario:
+  // [0x04][32 sala][8 de][16 id][1 trozo][1 de cuántos][carga]. Entero, se contesta {t:'buzon-ok', sala, id} a quien lo dejó y, si el
+  // destinatario está en la sala, se le entrega ya; si no está (o tiene la app en segundo plano) y el sobre lo merece, el aviso.
+  dejaSobre(c, b) {
+    if (!this.buzones || b.length < 61) return;
+    const sala = b.subarray(1, 33).toString('hex'), para = b.subarray(33, 41).toString('hex'), id = b.subarray(41, 57).toString('hex');
+    const parte = b[57], total = b[58], avisa = b[59] === 1;
+    if (!c.salas.has(sala)) return c.ws.json({ t: 'buzon-ok', sala, id, ok: false, por: 'no estás en la sala' });
+    if (!this.cabe(c, b.length)) return c.ws.json({ t: 'buzon-ok', sala, id, ok: false, por: 'lento' });
+    const de = c.yo.get(sala);
+    const r = this.buzones.deja(sala, de, para, id, parte, total, b.subarray(60), avisa);
+    if (!r.ok) return c.ws.json({ t: 'buzon-ok', sala, id, ok: false, por: r.por });
+    if (!r.completo) return;
+    c.ws.json({ t: 'buzon-ok', sala, id, ok: true });
+    if (r.repetido) return;
+    const s = this.salas.get(sala), a = s && s.get(para);
+    if (a && a !== c && a.ws.abierto) { const x = this.buzones.para(sala, para).find((y) => y.id === id); if (x) this.mandaSobre(a, sala, de, id, x.datos); }
+    if (avisa && this.avisos && (!a || a.fuera || Date.now() - a.vivo > 25 * 1000)) { try { this.avisos.avisa(sala, c.avisoId || null, 'mensaje'); } catch (_) {} }
+  }
+  mandaSobre(a, sala, de, id, datos) {
+    const TROZO = 960 * 1024, total = Math.max(1, Math.ceil(datos.length / TROZO));
+    for (let i = 0; i < total; i++) {
+      const carga = datos.subarray(i * TROZO, (i + 1) * TROZO);
+      const f = Buffer.allocUnsafe(59 + carga.length);
+      f[0] = 0x04; Buffer.from(sala, 'hex').copy(f, 1); Buffer.from(de, 'hex').copy(f, 33); Buffer.from(id, 'hex').copy(f, 41); f[57] = i; f[58] = total; carga.copy(f, 59);
+      try { a.ws.send(f); } catch (_) { return; }
     }
   }
 
@@ -322,6 +360,7 @@ class Rele {
     const ahora = Date.now();
     for (const [k, r] of this.codigos) if (ahora - r.creado > CODIGO_MIN * 60 * 1000) this.codigos.delete(k);
     for (const c of this.conexiones) if (ahora - c.vivo > SIN_VIDA_MS) { try { c.ws.cierra(); } catch (_) {} this.despide(c); }
+    if (this.buzones) this.buzones.barre();
   }
 }
 

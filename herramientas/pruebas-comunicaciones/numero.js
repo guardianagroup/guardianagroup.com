@@ -36,15 +36,15 @@ const marca = async (p, n) => { for (const d of n) await p.click('#teclado butto
   comprueba(await visible(A, '#mi-numero-nuevo'), 'A: «Bienvenido», con un número propuesto');
   comprueba(!(await visible(A, '#nueva-blindada')), 'A: sin «Invitar a chat» en el inicio');
   const prop1 = await texto(A, '#num-propuesto');
-  comprueba(/^\d{3} \d{3} \d{3} \d{3}$/.test(prop1), 'el número propuesto se lee en grupos de tres (' + prop1 + ')');
+  comprueba(/^\d{3}-\d{3}-\d{3}-\d{3}$/.test(prop1), 'el número propuesto se lee en grupos de tres con guiones (' + prop1 + ')');
   await A.click('#num-otro'); await espera(200);
   const prop2 = await texto(A, '#num-propuesto');
-  comprueba(prop2 !== prop1 && /^\d{3} \d{3} \d{3} \d{3}$/.test(prop2), '«Otro número» propone otro (' + prop2 + ')');
+  comprueba(prop2 !== prop1 && /^\d{3}-\d{3}-\d{3}-\d{3}$/.test(prop2), '«Otro número» propone otro (' + prop2 + ')');
   await foto(A, '01-A-bienvenida');
   await A.click('#num-usar'); await espera(2500);
   comprueba(await visible(A, '#mi-numero-hecho') && await visible(A, '#llamar-num'), 'A: «Usar este número» → «Tu Número GUARDIANA» y «Llamar»');
   const numA = await A.evaluate(() => window.gcomPruebaNumero.mio());
-  comprueba(numA.length === 12 && prop2.replace(/ /g, '') === numA, 'A tiene el número propuesto (' + numA + ')');
+  comprueba(numA.length === 12 && prop2.replace(/[ -]/g, '') === numA, 'A tiene el número propuesto (' + numA + ')');
   await foto(A, '02-A-mi-numero');
   // B elige el suyo: trivial → no; ocupado (el de A) → no; uno bueno → sí
   await B.click('#num-elegir'); await espera(200);
@@ -77,7 +77,7 @@ const marca = async (p, n) => { for (const d of n) await p.click('#teclado butto
   // A añade a B
   await A.click('#llamar-num'); await espera(300); await marca(A, numB); await A.click('#marcar-llamar'); await espera(400);
   await A.fill('#num-nombre', 'Mi mujer'); await A.click('#num-anadir'); await espera(2500);
-  comprueba(/Esperando a Mi mujer/.test(await texto(A, '#num-espera-t')) && (await texto(A, '#num-espera-mio')).replace(/ /g, '') === numA, 'A añade a B: espera, y le enseña su propio número para pasárselo');
+  comprueba(/Esperando a Mi mujer/.test(await texto(A, '#num-espera-t')) && (await texto(A, '#num-espera-mio')).replace(/[ -]/g, '') === numA, 'A añade a B: espera, y le enseña su propio número para pasárselo');
   await foto(A, '06-A-esperando-B');
   comprueba(!(await visible(B, '#conv')) && !(await visible(B, '#h-num')), 'B sigue sin enterarse de nada');
   await A.click('#num-espera-ok'); await espera(300);

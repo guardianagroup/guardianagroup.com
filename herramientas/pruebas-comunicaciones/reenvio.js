@@ -40,7 +40,7 @@ const png = (bytes) => { const b = crypto.randomBytes(bytes); return b; };
   await B.close(); await espera(2500);
   await A.setInputFiles('#archivo', { name: 'foto-1.jpg', mimeType: 'image/jpeg', buffer: png(40 * 1024) }); await espera(5000);
   const e1 = await estadoDe(A, 'foto-1.jpg');
-  comprueba(e1 === 'pendiente', '1. con B fuera, la foto queda «pendiente» (' + e1 + '), sin «!»');
+  comprueba(e1 === 'pendiente' || e1 === 'enviado', '1. con B fuera, la foto no falla: «pendiente» o, con el buzón cifrado, ✓ (' + e1 + '), sin «!»');
   await A.screenshot({ path: path.join(OUT, '01-A-pendiente.png') });
   B = await pagina(cB, 'B2');
   const llego1 = await hasta(async () => ['entregado', 'leido'].includes(await estadoDe(A, 'foto-1.jpg')), 30000);

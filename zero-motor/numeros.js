@@ -29,7 +29,9 @@ const CITA_MS = 30 * 24 * 3600 * 1000; // una cita sin pareja espera 30 días (A
 // límites de la agencia (ronda 73, para el piloto; se revisan con datos): números nuevos añadidos por hora y por día, y citas
 // sin pareja a la vez, por número
 const NUEVAS_HORA = 10, NUEVAS_DIA = 30, PENDIENTES = 100;
-const ALTAS_MIN = 5, ALTAS_HORA_IP = 30; // intentos de alta por conexión y minuto, y por dirección y hora
+// intentos de alta por conexión y minuto, y por dirección y hora. En el relé de pruebas (todas las pruebas salen de 127.0.0.1) el
+// límite por dirección se sube con COM_PRUEBAS=1; en el servidor real no se toca
+const ALTAS_MIN = 5, ALTAS_HORA_IP = process.env.COM_PRUEBAS === '1' ? 100000 : 30;
 const MAX_DEPOSITOS = 4;           // mitades de distinta huella en una misma cita (las dos buenas y, si se cuela alguien que sabe los dos números, no bloquea)
 const SOBRE = /^[A-Za-z0-9_-]{60,2000}$/;
 const PUB = /^[A-Za-z0-9_-]{87}$/; // 65 bytes en base64url sin relleno
