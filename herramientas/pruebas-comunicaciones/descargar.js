@@ -102,7 +102,7 @@ const pasosVisibles = (p, sel) => p.evaluate((sel) => [...document.querySelector
   await P.click('#anadir-app'); await espera(300);
   comprueba(await P.evaluate(() => window.__instalar) === 1, 'ordenador: «Instalar en este ordenador», la ventana del navegador');
   await P.evaluate(() => dispatchEvent(new Event('appinstalled'))); await espera(900);
-  comprueba(await P.evaluate(() => document.querySelector('#h-instalada').classList.contains('gc-abierta') && /escritorio y en el menú Inicio/.test(document.querySelector('#h-instalada').innerText)), 'ordenador: «GUARDIANA ya está en tu ordenador · el icono en el escritorio y en el menú Inicio»');
+  comprueba(await P.evaluate(() => document.querySelector('#h-instalada').classList.contains('gc-abierta') && /menú Inicio y anclada en la barra de tareas/.test(document.querySelector('#h-instalada').innerText)), 'ordenador: «GUARDIANA ya está en tu ordenador · en el menú Inicio y anclada en la barra de tareas (texto del 29 Oct, 22:52)»');
   await P.screenshot({ path: path.join(OUT, '102-pc-instalada.png') });
   const NU = await equipo(browser, 'NUCLEO', PC);
   await NU.goto(WEB + 'orbita/'); await espera(1000);

@@ -1998,16 +1998,20 @@
     if (cambio) { await guardaCitas(); pintaContactos(); }
   }
   async function quitaCita(p) { CITAS = CITAS.filter((x) => x.T !== p.T); await guardaCitas(); if (R && R.abierto) R.citaFin(p.T, true); pintaContactos(); }
-  async function compartirNumero() {
-    if (!MI_NUM) return;
-    const txt = T('Mi Número GUARDIANA es {n}. Añádelo en GUARDIANA con «Llamar» para que podamos hablar. Si aún no la tienes: {u}').replace('{n}', bonito(MI_NUM.n)).replace('{u}', 'https://guardianagroup.com/');
-    if (navigator.share) { try { await navigator.share({ text: txt }); return; } catch (e) { if (e && e.name === 'AbortError') return; } }
-    try { await navigator.clipboard.writeText(txt); aviso(T('Copiado: pégalo donde quieras enviarlo.')); } catch (_) { aviso(bonito(MI_NUM.n)); }
-  }
+  const textoNumero = () => T('Mi Número GUARDIANA:') + '\n' + bonito(MI_NUM.n) + '\n\n' + T('Cópialo y pégalo en GUARDIANA, en «Llamar». Si aún no la tienes: {u}').replace('{u}', 'https://guardianagroup.com/');
+  // «Compartir mi número» abre una hoja: WhatsApp (la propia app, con el texto escrito), otras apps (la hoja del sistema) o copiar.
+  // Desde la hoja del sistema, WhatsApp en el iPhone deja el mensaje en cola hasta que se abre WhatsApp (dueño, 29 Oct 2026, 23:13)
+  function compartirNumero() { if (!MI_NUM) return; abreHoja('h-compartir'); }
+  async function copiaNumero() { const txt = textoNumero(); try { await navigator.clipboard.writeText(txt); aviso(T('Copiado: pégalo donde quieras enviarlo.')); } catch (_) { aviso(bonito(MI_NUM.n)); } }
   // ---------- pantalla del número ----------
   function pintaNumero() {
     const ver = usaNumero(), caja = $('#mi-numero'); if (!caja) return;
     document.body.classList.toggle('con-numero', ver);
+    // en el navegador del móvil (sin la app), el botón principal es «Añadir a la pantalla de inicio»: el número y «Llamar» viven en
+    // la app (dueño, 29 Oct 2026, 23:07: «me sigue apareciendo invitar a chat… esa es la que debe ser llamar»)
+    { const sinApp = esMovil() && !comoApp() && !sinNumeroPrueba() && releConNumeros(); document.body.classList.toggle('movil-sin-app', sinApp);
+      // el botón sube justo debajo de esa línea, encima de «Mis chats»
+      const b = $('#anadir-app'), paso = $('#paso-inicio'); if (sinApp && b && paso && b.nextElementSibling !== paso) paso.parentNode.insertBefore(b, paso); }
     caja.hidden = !ver; $('#llamar-num').hidden = !ver || !MI_NUM;
     if (!ver) return;
     $('#mi-numero-nuevo').hidden = !!MI_NUM; $('#mi-numero-hecho').hidden = !MI_NUM;
@@ -2030,12 +2034,23 @@
     sec.hidden = !verMarcar; $('#inicio').classList.toggle('ver-marcar', verMarcar);
     if (verMarcar) $('#inicio').classList.remove('ver-contactos');
     const n = NUM_MARCADO, ok = n.length === 12 && C.N.numeroValido(n);
-    $('#marcar-n').textContent = bonito(n);
+    { const c = $('#marcar-n'); const v = bonito(n); if (c.value !== v) c.value = v; }
     const ayuda = $('#marcar-ayuda');
-    ayuda.textContent = n.length < 12 ? T('Escribe el Número GUARDIANA de la otra persona.') : ok ? (MI_NUM && n === MI_NUM.n ? T('Ese es tu propio número.') : T('Número correcto.')) : T('Ese número no es correcto: revisa las cifras.');
+    ayuda.textContent = n.length < 12 ? T('Escribe o pega el Número GUARDIANA de la otra persona.') : ok ? (MI_NUM && n === MI_NUM.n ? T('Ese es tu propio número.') : T('Número correcto.')) : T('Ese número no es correcto: revisa las cifras.');
     ayuda.classList.toggle('mal', n.length === 12 && (!ok || (MI_NUM && n === MI_NUM.n))); ayuda.classList.toggle('bien', ok && !(MI_NUM && n === MI_NUM.n));
     $('#marcar-llamar').disabled = !ok || !!(MI_NUM && n === MI_NUM.n);
     $('#marcar-borra').disabled = !n.length;
+  }
+  // saca el Número GUARDIANA de un texto pegado (el mensaje entero de WhatsApp vale: «Mi Número GUARDIANA es 038 907 491 883…»)
+  const numeroDeTexto = (t) => { t = String(t || ''); const m = t.match(/\d{3}[\s.\-]?\d{3}[\s.\-]?\d{3}[\s.\-]?\d{3}/); const d = (m ? m[0] : t).replace(/\D/g, ''); return d.length === 12 ? d : ''; };
+  async function pegaEnMarcar(t) {
+    t = String(t || '');
+    { const mt = t.match(/#t=([A-Za-z0-9_-]{43})/); if (mt) { pintaMarcar(false); await entraTraspaso(mt[1]); return; } }
+    if (/#[ib]=[A-Za-z0-9_-]{43}/.test(t)) { pintaMarcar(false); const ok = await preguntaInvitacion(t); if (!ok) aviso(T('Ese enlace no es una invitación de GUARDIANA.')); return; }
+    const n = numeroDeTexto(t);
+    if (!n) { aviso(T('No hay un Número GUARDIANA copiado.')); return; }
+    NUM_MARCADO = n; pintaMarcar();
+    if (C.N.numeroValido(n) && MI_NUM && n !== MI_NUM.n) { try { $('#marcar-n').blur(); } catch (_) {} marcaNumero(n); }
   }
   // «Llamar» con un número bien escrito: un contacto se llama; uno pendiente enseña la espera; uno nuevo pide su nombre
   function marcaNumero(n) {
@@ -2079,15 +2094,44 @@
     });
     $('#mi-numero-n').addEventListener('click', async () => { if (!MI_NUM) return; try { await navigator.clipboard.writeText(MI_NUM.n); aviso(T('Número copiado.')); } catch (_) { aviso(bonito(MI_NUM.n)); } });
     $('#num-compartir').addEventListener('click', compartirNumero);
+    { const h = $('#h-compartir');
+      if (h) {
+        $('#comp-whatsapp').addEventListener('click', () => { if (!MI_NUM) return; cierraHoja('h-compartir');
+          // el esquema whatsapp:// pasa el texto de app a app, en el propio teléfono: no sale a ningún servidor por el camino
+          const a = document.createElement('a'); a.href = 'whatsapp://send?text=' + encodeURIComponent(textoNumero()); a.rel = 'noopener'; document.body.appendChild(a); a.click(); a.remove(); });
+        $('#comp-otras').addEventListener('click', async () => { if (!MI_NUM) return; cierraHoja('h-compartir');
+          if (navigator.share) { try { await navigator.share({ title: T('Mi Número GUARDIANA'), text: textoNumero() }); return; } catch (e) { if (e && e.name === 'AbortError') return; } }
+          copiaNumero(); });
+        $('#comp-copiar').addEventListener('click', () => { if (!MI_NUM) return; cierraHoja('h-compartir'); copiaNumero(); });
+        $('#comp-cerrar').addEventListener('click', () => cierraHoja('h-compartir'));
+      }
+    }
     $('#llamar-num').addEventListener('click', () => { pintaMarcar(true); const i = $('#inicio'); if (i) i.scrollTop = 0; });
     $('#marcar-atras').addEventListener('click', () => pintaMarcar(false));
     $('#teclado').addEventListener('click', (e) => { const b = e.target.closest('button[data-d]'); if (!b || NUM_MARCADO.length >= 12) return; NUM_MARCADO += b.dataset.d; pintaMarcar(); });
     $('#marcar-borra').addEventListener('click', () => { NUM_MARCADO = NUM_MARCADO.slice(0, -1); pintaMarcar(); });
-    $('#marcar-pegar').addEventListener('click', async () => { let t = ''; try { t = await navigator.clipboard.readText(); } catch (_) {} const d = String(t || '').replace(/\D/g, ''); if (d.length !== 12) { aviso(T('No hay un Número GUARDIANA copiado.')); return; } NUM_MARCADO = d; pintaMarcar(); });
+    // Pegar (dueño, 29 Oct 2026, 23:16: «se tiene que poder pegar… simplifícalo»): la tecla «Pegar» o mantener pulsada la barra del
+    // número. Vale el mensaje entero de WhatsApp: se saca el número. Si está bien, se pasa directo a «¿Cómo se llama?».
+    $('#marcar-pegar').addEventListener('click', async () => {
+      let t = ''; try { t = await navigator.clipboard.readText(); } catch (_) { t = ''; }
+      if (!t) { aviso(T('Mantén pulsada la barra del número y elige «Pegar».')); try { $('#marcar-n').focus(); } catch (_) {} return; }
+      pegaEnMarcar(t);
+    });
+    { const c = $('#marcar-n');
+      c.addEventListener('paste', (e) => { e.preventDefault(); let t = ''; try { t = (e.clipboardData || window.clipboardData).getData('text'); } catch (_) {} pegaEnMarcar(t); });
+      // con un teclado físico (ordenador, tableta): cifras y borrar; lo demás no entra
+      c.addEventListener('beforeinput', (e) => {
+        if (e.inputType === 'insertFromPaste' || e.inputType === 'insertFromDrop') return;
+        e.preventDefault();
+        if (/^insert/.test(e.inputType)) { const d = String(e.data || '').replace(/\D/g, ''); if (d) { NUM_MARCADO = (NUM_MARCADO + d).slice(0, 12); pintaMarcar(); } }
+        else if (/^delete/.test(e.inputType)) { NUM_MARCADO = NUM_MARCADO.slice(0, -1); pintaMarcar(); }
+      });
+      c.addEventListener('input', () => { const d = c.value.replace(/\D/g, '').slice(0, 12); if (d !== NUM_MARCADO) { NUM_MARCADO = d; } pintaMarcar(); });
+      c.addEventListener('keydown', (e) => { if (e.key === 'Enter' && NUM_MARCADO.length === 12) { e.preventDefault(); $('#marcar-llamar').click(); } });
+    }
     // también con el teclado físico (ordenador, tableta)
     addEventListener('keydown', (e) => { if (!verMarcar || e.target.closest('input, textarea')) return; if (/^\d$/.test(e.key) && NUM_MARCADO.length < 12) { NUM_MARCADO += e.key; pintaMarcar(); } else if (e.key === 'Backspace') { NUM_MARCADO = NUM_MARCADO.slice(0, -1); pintaMarcar(); } else if (e.key === 'Enter' && !$('#marcar-llamar').disabled) marcaNumero(NUM_MARCADO); });
     $('#marcar-llamar').addEventListener('click', () => marcaNumero(NUM_MARCADO));
-    $('#marcar-invitar').addEventListener('click', () => { pintaMarcar(false); const b = $('#nueva-blindada'); if (b) b.click(); });
     $('#num-cancelar').addEventListener('click', () => cierraHoja('h-num'));
     $('#num-anadir').addEventListener('click', async () => {
       const b = $('#num-anadir'); if (b.disabled || !NUM_NUEVO) return;
@@ -3145,6 +3189,11 @@
     }); }
     { const b = $('#aj-sonido'); if (b) b.addEventListener('click', () => { try { localStorage.setItem('gcom-sonido', pref('sonido') ? '0' : '1'); } catch (_) {} pintaAjustes(); if (pref('sonido')) avisaSonido(); }); }
     { const b = $('#aj-anadir'); if (b) b.addEventListener('click', () => { cierraHoja('h-ajustes'); if (avisoInstalar) instala(); else abreGuia(); }); }
+    // la guía de instalación con capturas (dueño, 29 Oct 2026, 23:04): desde Ajustes, «¿Cómo funciona?», la hoja de añadir y la pantalla de descarga
+    { const abreGuiaCapturas = (pestana) => { for (const h of document.querySelectorAll('.gc-hoja.gc-abierta')) cierraHoja(h.id); const and = pestana ? pestana === 'android' : androidUA; $('#guia-tab-iphone').classList.toggle('activa', !and); $('#guia-tab-android').classList.toggle('activa', and); $('#guia-tab-iphone').setAttribute('aria-selected', String(!and)); $('#guia-tab-android').setAttribute('aria-selected', String(and)); $('#guia-iphone').hidden = and; $('#guia-android').hidden = !and; abreHoja('h-guia'); const c = $('#h-guia .gc-hoja-caja'); if (c) c.scrollTop = 0; };
+      for (const id of ['aj-guia', 'como-guia', 'anadir-guia', 'desc-guia']) { const b = $('#' + id); if (b) b.addEventListener('click', () => abreGuiaCapturas()); }
+      $('#guia-tab-iphone').addEventListener('click', () => abreGuiaCapturas('iphone')); $('#guia-tab-android').addEventListener('click', () => abreGuiaCapturas('android'));
+      $('#guia-ok').addEventListener('click', () => cierraHoja('h-guia')); }
     { const b = $('#aj-version'); if (b) b.addEventListener('click', async () => { const e = $('#aj-version-est'); if (e) e.textContent = T('Comprobando…'); const hay = await miraVersion(true); if (e) e.textContent = hay ? T('Hay una versión nueva: se instala ahora.') : T('Ya tienes la última versión.'); }); }
     // «Añadir a la pantalla de inicio»: en Android, la ventana del propio sistema; en el iPhone, los pasos (no deja hacerlo desde la web)
     let avisoInstalar = avisoInstalarTemprano;
@@ -3233,7 +3282,7 @@
     }
     { const b = $('#instalada-ok'); if (b) b.addEventListener('click', () => cierraHoja('h-instalada')); }
     // en Android, un toque: la ventana del sistema; si todavía no la da (o en el iPhone), la guía
-    $('#anadir-app').addEventListener('click', () => { if (avisoInstalar) instala(); else abreGuia(); });
+    $('#anadir-app').addEventListener('click', () => { if (avisoInstalar) instala(); else if (esIOS && $('#aj-guia')) $('#aj-guia').click(); else abreGuia(); });
     // ---- iPhone: la invitación, dentro de la app (dueño, 29 Oct 2026, 16:05–16:11) ----
     const trozoInv = (e) => { const m = String(e || '').match(/#[ib]=[A-Za-z0-9_-]{43}/); return m ? m[0] : ''; };
     for (const b of document.querySelectorAll('.pegar-inv')) { b.hidden = !(esIOS && comoApp());

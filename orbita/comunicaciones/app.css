@@ -1726,6 +1726,7 @@ output.mi-numero-n{cursor:default}
   #paso-inicio #llamar-num svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
   #paso-inicio #llamar-num:active{background:#8AB4DA}
   body.con-numero #paso-inicio #nueva-blindada{display:none!important}
+  body.con-numero .pegar-inv{display:none!important}
   body.con-numero #inicio>h1,body.con-numero #inicio>.lema,body.con-numero #inicio>.pq-k{display:none}
   body.con-numero .inicio .red-nucleo{width:min(13vh,112px);height:min(13vh,112px)}
 }
@@ -1736,7 +1737,9 @@ output.mi-numero-n{cursor:default}
 .marcar{display:grid;gap:10px;justify-items:center}
 .marcar[hidden]{display:none}
 .marcar .contactos-cab{justify-self:stretch}
-.marcar-n{display:block;min-height:44px;font:600 31px/1.35 var(--mono);letter-spacing:.05em;color:#F4F6F8;text-align:center;font-variant-numeric:tabular-nums;white-space:nowrap}
+.marcar-n{display:block;box-sizing:border-box;width:min(100%,340px);min-height:52px;margin:0;padding:4px 8px;border:1px solid rgba(156,195,228,.22);border-radius:14px;background:rgba(156,195,228,.05);font:600 31px/1.35 var(--mono);letter-spacing:.05em;color:#F4F6F8;text-align:center;font-variant-numeric:tabular-nums;white-space:nowrap;caret-color:#9CC3E4;outline:none;-webkit-user-select:text;user-select:text}
+.marcar-n:focus{border-color:rgba(156,195,228,.55)}
+.marcar-n::placeholder{font:400 15.5px/1.35 var(--texto);letter-spacing:0;color:#7f93a5}
 .marcar-ayuda{min-height:21px;font:400 15px/1.4 var(--texto);color:#a9bccb;text-align:center;text-wrap:balance}
 .marcar-ayuda.mal{color:#F2A7A0}
 .marcar-ayuda.bien{color:#9FD8B0}
@@ -1765,3 +1768,28 @@ output.mi-numero-n{cursor:default}
   #inicio>#anadir-app svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
   #inicio>#anadir-app:active{background:rgba(156,195,228,.12)}
 }
+/* Guía de instalación con capturas (dueño, 29 Oct 2026, 23:04): las pantallas del teléfono con el toque en rojo */
+.guia-caja{max-height:92vh;overflow:auto}
+.guia-tabs{display:flex;gap:8px;margin:0 0 12px}
+.guia-tab{appearance:none;flex:1;min-height:40px;border:1px solid rgba(156,195,228,.38);background:transparent;color:#9CC3E4;border-radius:999px;font:600 15px/1 var(--texto);cursor:pointer}
+.guia-tab.activa{background:#9CC3E4;color:#06080C;border-color:#9CC3E4}
+.guia-panel[hidden]{display:none}
+.guia-capturas{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:18px}
+.guia-capturas li{display:grid;gap:10px}
+.guia-capturas img{display:block;width:100%;max-width:100%;height:auto;border-radius:14px;border:1px solid rgba(156,195,228,.22);background:#000}
+.guia-capturas span{font:400 15.5px/1.45 var(--texto);color:#E1E7ED}
+.guia-capturas b{color:#F4F6F8}
+.guia-enlace{appearance:none;display:block;margin:6px auto 2px;border:0;background:none;color:#9CC3E4;font:500 14.5px/1.4 var(--texto);text-decoration:underline;text-underline-offset:3px;padding:8px;cursor:pointer}
+.como-texto .guia-boton{display:block;width:100%;margin:4px 0 14px;font-size:16px}
+/* En el navegador del móvil, sin la app (dueño, 29 Oct 2026, 23:07): «Añadir a la pantalla de inicio» pasa a ser el botón principal,
+   arriba, y «Invitar a chat» se va; una línea explica que el número y «Llamar» están en la app */
+.movil-app-nota{display:none}
+@media (max-width:760px){
+  body.movil-sin-app #paso-inicio #nueva-blindada{display:none!important}
+  body.movil-sin-app .movil-app-nota{display:block;max-width:440px;margin:4px 4px 0;font:400 15px/1.45 var(--texto);color:#C9D4DE;text-align:center;text-wrap:balance}
+  body.movil-sin-app #inicio>#anadir-app:not([hidden]){background:#9CC3E4;color:#06080C;border-color:#9CC3E4;margin-top:0}
+  body.movil-sin-app #inicio>#anadir-app:active{background:#8AB4DA}
+}
+.compartir-opciones{display:grid;gap:10px;margin:4px 0 6px}
+.compartir-opciones .boton{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:50px;font-size:16.5px}
+.compartir-opciones svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}

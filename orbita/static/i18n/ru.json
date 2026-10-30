@@ -3529,7 +3529,26 @@
 "en GUARDIANA nadie puede presentarse con un nombre que no puedas comprobar. Cada conversación nace de una invitación que solo tiene la persona que tú elegiste o de un número que los dos habéis añadido, y el número de seguridad te dice si hay alguien en medio.":"в GUARDIANA никто не может представиться именем, которое вы не можете проверить. Каждая беседа начинается с приглашения, которое есть только у выбранного вами человека, или с номера, который добавили вы оба, а номер безопасности показывает, нет ли кого-то посередине.",
 "GUARDIANA no pasa por ninguna tienda. Vive en tu navegador: no puede leer tus contactos ni tus fotos, no deja nada corriendo a escondidas y no hay una versión falsa que descargar de una tienda; solo comprueba que la dirección es guardianagroup.com. Añadirla a la pantalla de inicio es guardar esa misma página en tu teléfono. Y seamos claros: ninguna app, de tienda o web, protege un teléfono que ya tenga un programa espía dentro.":"GUARDIANA не проходит через магазины. Она живёт в вашем браузере: не может читать ваши контакты и фото, ничего не оставляет работать в фоне, и из магазина нечего скачать поддельного; просто проверьте, что адрес — guardianagroup.com. Добавить её на главный экран — значит сохранить ту же страницу на телефоне. И скажем прямо: никакое приложение, из магазина или из веба, не защитит телефон, в котором уже есть шпионская программа.",
 "en GUARDIANA no hay cuentas que crear ni buscar. Nadie puede escribirte si no le diste tú la invitación o si no has añadido tú su número, y nadie puede encontrarte por tu teléfono.":"в GUARDIANA нет учётных записей, которые нужно создавать или искать. Никто не может вам написать, если вы не дали приглашение или не добавили его номер, и никто не найдёт вас по номеру телефона.",
-"La tienes en el menú Inicio y anclada en la barra de tareas. Para ponerla en el escritorio: abre Inicio, escribe GUARDIANA y arrastra el resultado al escritorio.":"Она в меню «Пуск» и закреплена на панели задач. Чтобы вынести её на рабочий стол: откройте «Пуск», введите GUARDIANA и перетащите результат на рабочий стол."
+"La tienes en el menú Inicio y anclada en la barra de tareas. Para ponerla en el escritorio: abre Inicio, escribe GUARDIANA y arrastra el resultado al escritorio.":"Она в меню «Пуск» и закреплена на панели задач. Чтобы вынести её на рабочий стол: откройте «Пуск», введите GUARDIANA и перетащите результат на рабочий стол.",
+"Guía de instalación":"Руководство по установке",
+"Abre guardianagroup.com en Safari y sigue los tres toques marcados en rojo:":"Откройте guardianagroup.com в Safari и выполните три касания, отмеченные красным:",
+"(el cuadrado con la flecha). En iOS 26 está dentro del menú":"(квадрат со стрелкой). В iOS 26 она находится в меню",
+"de abajo a la derecha; en versiones anteriores, en la barra de abajo.":"внизу справа; в более ранних версиях — на нижней панели.",
+"Baja en la lista y toca":"Пролистайте список вниз и нажмите",
+"(o «Añadir a pantalla de inicio»).":"(название может немного отличаться).",
+"Deja activado":"Оставьте включённым",
+"Abrir como app web":"Открывать как веб-приложение",
+"y toca":"и нажмите",
+". GUARDIANA queda en tu pantalla de inicio: ábrela siempre desde ese icono.":". GUARDIANA появится на главном экране: всегда открывайте её с этого значка.",
+"Abre guardianagroup.com en Chrome, toca":"Откройте guardianagroup.com в Chrome, нажмите",
+"y acepta":"и подтвердите",
+". Si no aparece, toca el menú":". Если его нет, нажмите меню",
+"de arriba a la derecha y elige":"вверху справа и выберите",
+"(o «Instalar aplicación»).":"(или «Установить приложение»).",
+"Las capturas de Android, muy pronto.":"Скриншоты для Android — совсем скоро.",
+"Ver la guía con capturas de pantalla":"Открыть руководство со скриншотами",
+"Guía de instalación con capturas":"Руководство по установке со скриншотами",
+"Paso a paso con capturas, para iPhone y Android.":"Пошагово со скриншотами, для iPhone и Android."
 },
 "p":{
 "intento":"Настойчивее всех сегодня: {1}, {2} {2?раз|раз}.",
@@ -3657,5 +3676,17 @@
 "sobreLugar":"Небо · {1}",
 "burbujaDestruida":"Пузырь уничтожен по твоему запросу. Печать {1}",
 "motorNoConecta":"Не удалось подключиться к движку по адресу {1}"
-}
+},
+"Tu Número GUARDIANA y «Llamar» están en la app: añádela a tu pantalla de inicio y ábrela desde su icono.":"Ваш номер GUARDIANA и «Позвонить» — в приложении: добавьте его на экран «Домой» и открывайте через значок.",
+"Lo más seguro es dárselo en persona o de viva voz; por escrito también vale.":"Надёжнее всего передать его лично или голосом; письменно тоже можно.",
+"Con WhatsApp se abre la propia app con el mensaje escrito: eliges a la persona y tocas enviar.":"Откроется WhatsApp с готовым сообщением: выберите человека и нажмите «Отправить».",
+"Mantén pulsado aquí para pegar":"Нажмите и удерживайте, чтобы вставить",
+"Escribe o pega el Número GUARDIANA de la otra persona.":"Введите или вставьте номер GUARDIANA собеседника.",
+"Mantén pulsada la barra del número y elige «Pegar».":"Нажмите и удерживайте поле номера и выберите «Вставить».",
+"Número GUARDIANA de la otra persona":"Номер GUARDIANA собеседника",
+"Mi Número GUARDIANA:":"Мой номер GUARDIANA:",
+"Cópialo y pégalo en GUARDIANA, en «Llamar». Si aún no la tienes: {u}":"Скопируйте его и вставьте в GUARDIANA, в разделе «Позвонить». Если у вас ещё нет приложения: {u}",
+"Correo, Mensajes y más":"Почта, «Сообщения» и другое",
+"Por correo o Mensajes sale al momento y sigues en GUARDIANA. Con WhatsApp se abre la propia app con el mensaje escrito: eliges a la persona y tocas enviar.":"По почте или в «Сообщениях» оно уходит сразу, и вы остаётесь в GUARDIANA. С WhatsApp откроется само приложение с готовым сообщением: выберите человека и нажмите «Отправить».",
+"Mi Número GUARDIANA":"Мой номер GUARDIANA"
 }

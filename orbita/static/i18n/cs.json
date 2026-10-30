@@ -3529,7 +3529,26 @@
 "en GUARDIANA nadie puede presentarse con un nombre que no puedas comprobar. Cada conversación nace de una invitación que solo tiene la persona que tú elegiste o de un número que los dos habéis añadido, y el número de seguridad te dice si hay alguien en medio.":"v GUARDIANA se nikdo nemůže představit jménem, které si nemůžete ověřit. Každá konverzace vzniká z pozvánky, kterou má jen osoba, kterou jste si vybrali, nebo z čísla, které jste si oba přidali, a bezpečnostní číslo vám řekne, zda je někdo uprostřed.",
 "GUARDIANA no pasa por ninguna tienda. Vive en tu navegador: no puede leer tus contactos ni tus fotos, no deja nada corriendo a escondidas y no hay una versión falsa que descargar de una tienda; solo comprueba que la dirección es guardianagroup.com. Añadirla a la pantalla de inicio es guardar esa misma página en tu teléfono. Y seamos claros: ninguna app, de tienda o web, protege un teléfono que ya tenga un programa espía dentro.":"GUARDIANA neprochází žádným obchodem. Žije ve vašem prohlížeči: nemůže číst vaše kontakty ani fotky, nenechává nic běžet na pozadí a z obchodu není co stáhnout falešného; jen zkontrolujte, že adresa je guardianagroup.com. Přidat ji na plochu znamená uložit si tutéž stránku do telefonu. A řekněme to na rovinu: žádná aplikace, z obchodu ani z webu, neochrání telefon, ve kterém už je špionážní program.",
 "en GUARDIANA no hay cuentas que crear ni buscar. Nadie puede escribirte si no le diste tú la invitación o si no has añadido tú su número, y nadie puede encontrarte por tu teléfono.":"v GUARDIANA nejsou žádné účty k vytvoření ani k hledání. Nikdo vám nemůže psát, pokud jste mu nedali pozvánku nebo jste si nepřidali jeho číslo, a nikdo vás nenajde podle telefonu.",
-"La tienes en el menú Inicio y anclada en la barra de tareas. Para ponerla en el escritorio: abre Inicio, escribe GUARDIANA y arrastra el resultado al escritorio.":"Najdete ji v nabídce Start a připnutou na hlavním panelu. Chcete-li ji mít na ploše: otevřete Start, napište GUARDIANA a přetáhněte výsledek na plochu."
+"La tienes en el menú Inicio y anclada en la barra de tareas. Para ponerla en el escritorio: abre Inicio, escribe GUARDIANA y arrastra el resultado al escritorio.":"Najdete ji v nabídce Start a připnutou na hlavním panelu. Chcete-li ji mít na ploše: otevřete Start, napište GUARDIANA a přetáhněte výsledek na plochu.",
+"Guía de instalación":"Průvodce instalací",
+"Abre guardianagroup.com en Safari y sigue los tres toques marcados en rojo:":"Otevřete guardianagroup.com v Safari a proveďte tři klepnutí označená červeně:",
+"(el cuadrado con la flecha). En iOS 26 está dentro del menú":"(čtverec se šipkou). V iOS 26 je uvnitř nabídky",
+"de abajo a la derecha; en versiones anteriores, en la barra de abajo.":"vpravo dole; ve starších verzích v dolní liště.",
+"Baja en la lista y toca":"Sjeďte v seznamu dolů a klepněte na",
+"(o «Añadir a pantalla de inicio»).":"(znění se může mírně lišit).",
+"Deja activado":"Nechte zapnuté",
+"Abrir como app web":"Otevřít jako webovou aplikaci",
+"y toca":"a klepněte na",
+". GUARDIANA queda en tu pantalla de inicio: ábrela siempre desde ese icono.":". GUARDIANA je nyní na vaší ploše: vždy ji otevírejte z této ikony.",
+"Abre guardianagroup.com en Chrome, toca":"Otevřete guardianagroup.com v Chromu, klepněte na",
+"y acepta":"a potvrďte",
+". Si no aparece, toca el menú":". Pokud se nezobrazí, klepněte na nabídku",
+"de arriba a la derecha y elige":"vpravo nahoře a zvolte",
+"(o «Instalar aplicación»).":"(nebo „Instalovat aplikaci“).",
+"Las capturas de Android, muy pronto.":"Snímky obrazovky pro Android již brzy.",
+"Ver la guía con capturas de pantalla":"Zobrazit průvodce se snímky obrazovky",
+"Guía de instalación con capturas":"Průvodce instalací se snímky obrazovky",
+"Paso a paso con capturas, para iPhone y Android.":"Krok za krokem se snímky obrazovky, pro iPhone a Android."
 },
 "p":{
 "intento":"Nejvíc se dnes snažila: {1}, {2}{2?krát|krát}.",
@@ -3657,5 +3676,17 @@
 "sobreLugar":"Obloha · {1}",
 "burbujaDestruida":"Bublina zničena na tvou žádost. Pečeť {1}",
 "motorNoConecta":"Nepodařilo se připojit k motoru na {1}"
-}
+},
+"Tu Número GUARDIANA y «Llamar» están en la app: añádela a tu pantalla de inicio y ábrela desde su icono.":"Vaše číslo GUARDIANA a „Volat“ najdete v aplikaci: přidejte si ji na plochu a otevírejte ji z ikony.",
+"Lo más seguro es dárselo en persona o de viva voz; por escrito también vale.":"Nejbezpečnější je předat ho osobně nebo hlasem; písemně to jde také.",
+"Con WhatsApp se abre la propia app con el mensaje escrito: eliges a la persona y tocas enviar.":"Otevře se WhatsApp s napsanou zprávou: vyberte osobu a klepněte na odeslat.",
+"Mantén pulsado aquí para pegar":"Podržením sem vložíte",
+"Escribe o pega el Número GUARDIANA de la otra persona.":"Napište nebo vložte číslo GUARDIANA druhé osoby.",
+"Mantén pulsada la barra del número y elige «Pegar».":"Podržte pole s číslem a zvolte „Vložit“.",
+"Número GUARDIANA de la otra persona":"Číslo GUARDIANA druhé osoby",
+"Mi Número GUARDIANA:":"Moje číslo GUARDIANA:",
+"Cópialo y pégalo en GUARDIANA, en «Llamar». Si aún no la tienes: {u}":"Zkopírujte ho a vložte v GUARDIANA do „Volat“. Pokud ji ještě nemáte: {u}",
+"Correo, Mensajes y más":"E-mail, Zprávy a další",
+"Por correo o Mensajes sale al momento y sigues en GUARDIANA. Con WhatsApp se abre la propia app con el mensaje escrito: eliges a la persona y tocas enviar.":"E-mailem nebo přes Zprávy odejde hned a zůstanete v GUARDIANA. U WhatsAppu se otevře aplikace s napsanou zprávou: vyberte osobu a klepněte na odeslat.",
+"Mi Número GUARDIANA":"Moje číslo GUARDIANA"
 }

@@ -39,7 +39,7 @@
 <link rel="canonical" href="https://guardianagroup.com/orbita/comunicaciones/">
 <link rel="icon" href="/favicon.ico">
 <link rel="stylesheet" href="componentes.css?v=20261028m">
-<link rel="stylesheet" href="app.css?v=20261031j">
+<link rel="stylesheet" href="app.css?v=20261031k">
 <link rel="stylesheet" href="viaje.css?v=20261029b">
 <!-- antes de pintar: como app desde el primer fotograma y, al volver a un chat tras recargar, sin enseñar el inicio entretanto -->
 </head>
@@ -188,8 +188,8 @@
          como el del teléfono. Si el número es de un contacto, le llama; si no, lo añade y espera a que la otra persona añada el tuyo -->
     <section class="contactos marcar" id="marcar" aria-labelledby="marcar-t" hidden>
       <div class="contactos-cab"><button type="button" class="contactos-atras" id="marcar-atras" aria-label="Volver"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button><h2 class="contactos-t" id="marcar-t">Llamar</h2></div>
-      <output class="marcar-n" id="marcar-n" translate="no" aria-live="polite"></output>
-      <small class="marcar-ayuda" id="marcar-ayuda">Escribe el Número GUARDIANA de la otra persona.</small>
+      <input class="marcar-n" id="marcar-n" translate="no" inputmode="none" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Mantén pulsado aquí para pegar" aria-label="Número GUARDIANA de la otra persona">
+      <small class="marcar-ayuda" id="marcar-ayuda">Escribe o pega el Número GUARDIANA de la otra persona.</small>
       <div class="teclado" id="teclado" role="group" aria-label="Teclado">
         <button type="button" data-d="1">1</button><button type="button" data-d="2">2</button><button type="button" data-d="3">3</button>
         <button type="button" data-d="4">4</button><button type="button" data-d="5">5</button><button type="button" data-d="6">6</button>
@@ -197,7 +197,6 @@
         <button type="button" class="tecla-sec" id="marcar-pegar">Pegar</button><button type="button" data-d="0">0</button><button type="button" class="tecla-sec" id="marcar-borra" aria-label="Borrar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5h11a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H9l-6-7z"/><path d="M12 9l6 6M18 9l-6 6"/></svg></button>
       </div>
       <button type="button" class="boton principal marcar-llamar" id="marcar-llamar" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg><span>Llamar</span></button>
-      <button type="button" class="marcar-invitar" id="marcar-invitar">¿No tiene GUARDIANA? Invítale con un enlace</button>
     </section>
     <!-- «¿Cómo funciona?» en el móvil (dueño, 29 Oct 2026, 08:24 y 08:41): para quien lo lee por primera vez y se queda tranquilo.
          Solo lo que hace el código hoy; sin prometer protección absoluta -->
@@ -221,6 +220,7 @@
         <p><b>iPhone.</b> Abre guardianagroup.com en Safari, toca «Descargar GUARDIANA», luego el botón Compartir (el cuadrado con la flecha) y «Añadir a pantalla de inicio». Los avisos con la app cerrada solo llegan desde ese icono (iOS 16.4 o posterior).</p>
         <p><b>Android.</b> Abre guardianagroup.com en Chrome, toca «Descargar GUARDIANA» y acepta «Instalar» (o, en el menú ⋮, «Añadir a pantalla de inicio»). Desde el icono, los avisos funcionan con la app cerrada.</p>
         <p><b>Sin tiendas.</b> No hace falta App Store ni Google Play: la app es la propia página, guardada en tu teléfono, y se actualiza sola al abrirla.</p>
+        <button type="button" class="boton guia-boton" id="como-guia">Guía de instalación con capturas</button>
 
         <h3>Tres versiones</h3>
         <div class="como-modos">
@@ -279,6 +279,7 @@
         <button type="button" class="boton principal como-porque" id="como-porque">Ver los datos: ¿por qué es así?</button>
       </div>
     </section>
+    <p class="movil-app-nota" id="movil-app-nota">Tu Número GUARDIANA y «Llamar» están en la app: añádela a tu pantalla de inicio y ábrela desde su icono.</p>
     <div class="grandes" id="paso-inicio">
       <!-- Número GUARDIANA (dueño, 29 Oct 2026, 20:56–21:55; agencia, ronda 73): en la app del teléfono, tu número y «Llamar», que
            abre un teclado (21:42: «ya no pondrá invitar al chat… llamar»). Nadie puede escribirte por saber tu número: solo hablan
@@ -393,6 +394,7 @@
         <li><span class="ap-ic"><svg viewBox="0 0 24 24"><path d="M12 14.5V3.5M8.2 7.2 12 3.5l3.8 3.7"/><path d="M8.5 10H7a1.6 1.6 0 0 0-1.6 1.6v7.8A1.6 1.6 0 0 0 7 21h10a1.6 1.6 0 0 0 1.6-1.6v-7.8A1.6 1.6 0 0 0 17 10h-1.5"/></svg></span><span>Pulsa <b>Compartir</b></span></li>
         <li><span class="ap-ic"><svg viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="4.5"/><path d="M12 8v8M8 12h8"/></svg></span><span>Pulsa <b>Añadir a pantalla de inicio</b></span></li>
       </ol>
+      <button type="button" class="guia-enlace" id="desc-guia">Ver la guía con capturas de pantalla</button>
       <div class="fila centro"><button type="button" class="boton" id="desc-cerrar">Ahora no</button></div>
     </div>
 
@@ -733,9 +735,50 @@
       <li><span class="ap-ic"><svg viewBox="0 0 24 24"><path d="M12 14.5V3.5M8.2 7.2 12 3.5l3.8 3.7"/><path d="M8.5 10H7a1.6 1.6 0 0 0-1.6 1.6v7.8A1.6 1.6 0 0 0 7 21h10a1.6 1.6 0 0 0 1.6-1.6v-7.8A1.6 1.6 0 0 0 17 10h-1.5"/></svg></span><span>Pulsa <b>Compartir</b></span></li>
       <li><span class="ap-ic"><svg viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="4.5"/><path d="M12 8v8M8 12h8"/></svg></span><span>Pulsa <b>Añadir a pantalla de inicio</b></span></li>
     </ol>
+    <button type="button" class="guia-enlace" id="anadir-guia">Ver la guía con capturas de pantalla</button>
     <div class="fila"><button type="button" class="boton principal" id="anadir-ok">Entendido</button></div>
   </div>
 </div>
+<!-- Guía de instalación con capturas (dueño, 29 Oct 2026, 23:04–23:05: «cada palabra… con un circulito rojo… para la persona que
+     tenga problemas»): las tres pantallas del iPhone con el toque marcado; Android, cuando lleguen sus capturas -->
+<!-- Compartir el número (dueño, 29 Oct 2026, 23:13): desde la hoja de compartir del iPhone, WhatsApp guarda el mensaje y no lo
+     envía hasta que se abre WhatsApp. «WhatsApp» abre la propia app con el texto escrito: se elige a la persona y se envía allí.
+     Por correo sale al momento sin salir de GUARDIANA (dueño, 23:20: «creo que es una buena idea»): va primero -->
+<div class="gc-hoja" id="h-compartir" role="dialog" aria-modal="true" aria-labelledby="h-compartir-t">
+  <div class="gc-hoja-caja caja">
+    <div class="gc-asa"></div>
+    <h2 class="gc-hoja-titulo" id="h-compartir-t">Compartir mi número</h2>
+    <p class="t">Lo más seguro es dárselo en persona o de viva voz; por escrito también vale.</p>
+    <div class="compartir-opciones">
+      <button type="button" class="boton principal" id="comp-otras"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 6.5l8.5 6.5 8.5-6.5"/></svg><span>Correo, Mensajes y más</span></button>
+      <button type="button" class="boton" id="comp-whatsapp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l1.3-3.9A8 8 0 1 1 8 19z"/><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5l1.2-1.4-2-1-.9.8a4 4 0 0 1-2.2-2.2l.8-.9-1-2z"/></svg><span>WhatsApp</span></button>
+      <button type="button" class="boton" id="comp-copiar">Copiar</button>
+    </div>
+    <p class="t sutil">Por correo o Mensajes sale al momento y sigues en GUARDIANA. Con WhatsApp se abre la propia app con el mensaje escrito: eliges a la persona y tocas enviar.</p>
+    <div class="fila"><button type="button" class="boton" id="comp-cerrar">Cancelar</button></div>
+  </div>
+</div>
+<div class="gc-hoja" id="h-guia" role="dialog" aria-modal="true" aria-labelledby="h-guia-t">
+  <div class="gc-hoja-caja caja guia-caja">
+    <div class="gc-asa"></div>
+    <h2 class="gc-hoja-titulo" id="h-guia-t">Guía de instalación</h2>
+    <div class="guia-tabs" role="tablist"><button type="button" class="guia-tab activa" id="guia-tab-iphone" role="tab" aria-selected="true">iPhone</button><button type="button" class="guia-tab" id="guia-tab-android" role="tab" aria-selected="false">Android</button></div>
+    <div class="guia-panel" id="guia-iphone" role="tabpanel">
+      <p class="t">Abre guardianagroup.com en Safari y sigue los tres toques marcados en rojo:</p>
+      <ol class="guia-capturas">
+        <li><img src="guia/iphone-1.jpg" alt="" width="640" height="971" loading="lazy" decoding="async"><span><b>1.</b> Toca <b>Compartir</b> (el cuadrado con la flecha). En iOS 26 está dentro del menú <b>⋯</b> de abajo a la derecha; en versiones anteriores, en la barra de abajo.</span></li>
+        <li><img src="guia/iphone-2.jpg" alt="" width="640" height="880" loading="lazy" decoding="async"><span><b>2.</b> Baja en la lista y toca <b>Agregar a Inicio</b> (o «Añadir a pantalla de inicio»).</span></li>
+        <li><img src="guia/iphone-3.jpg" alt="" width="640" height="597" loading="lazy" decoding="async"><span><b>3.</b> Deja activado <b>Abrir como app web</b> y toca <b>Agregar</b>. GUARDIANA queda en tu pantalla de inicio: ábrela siempre desde ese icono.</span></li>
+      </ol>
+    </div>
+    <div class="guia-panel" id="guia-android" role="tabpanel" hidden>
+      <p class="t">Abre guardianagroup.com en Chrome, toca <b>Descargar GUARDIANA</b> y acepta <b>Instalar</b>. Si no aparece, toca el menú <b>⋮</b> de arriba a la derecha y elige <b>Añadir a pantalla de inicio</b> (o «Instalar aplicación»).</p>
+      <p class="t sutil">Las capturas de Android, muy pronto.</p>
+    </div>
+    <div class="fila"><button type="button" class="boton principal" id="guia-ok">Entendido</button></div>
+  </div>
+</div>
+
 <!-- Recién instalada en el ordenador (dueño, 29 Oct 2026, 19:41: «ha salido ahí como una captura de pantalla y se ha eliminado
      todo»): Chrome se lleva la pestaña a su propia ventana, sin barras; aquí se dice que ya está y dónde queda el icono. Y es GUARDIANA
      entera (19:52: «tendría que abrirme la página web entera… todo»): al abrirla, NÚCLEO, con ZERO, Órbita y Comunicaciones. -->
@@ -768,6 +811,10 @@
       <button type="button" class="ajuste" id="aj-anadir" hidden>
         <span class="ajuste-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M12 8v7M8.5 11.5h7"/></svg></span>
         <span class="ajuste-txt"><b>Añadir a la pantalla de inicio</b><small>Se abre como una app, a pantalla completa.</small></span>
+      </button>
+      <button type="button" class="ajuste" id="aj-guia">
+        <span class="ajuste-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H18a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6.5A2.5 2.5 0 0 1 4 18.5z"/><path d="M4 18.5A2.5 2.5 0 0 1 6.5 16H20"/><path d="M9 8h7M9 11.5h5"/></svg></span>
+        <span class="ajuste-txt"><b>Guía de instalación</b><small>Paso a paso con capturas, para iPhone y Android.</small></span>
       </button>
       <button type="button" class="ajuste" id="aj-version">
         <span class="ajuste-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.3-5.6"/><path d="M20 4v4h-4"/></svg></span>
@@ -1001,7 +1048,7 @@
 
 <!-- En el ordenador, en el chat blindado: la pantalla se tapa con la tecla de captura o si la ventana pierde el foco (29 Oct 2026, 08:02) -->
 <div class="captura-velo" id="captura-velo" role="alert" hidden><div><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><b>Modo blindado</b><span>No se puede capturar</span></div></div>
-<script src="/orbita/static/idioma.js?v=20261029p90"></script>
+<script src="/orbita/static/idioma.js?v=20261029p91"></script>
 <script src="pq-mlkem.js?v=20261027a"></script>
 <script src="pq-cnsa.js?v=20261027a"></script>
 <script src="qrhaz.js?v=20261027a"></script>
@@ -1012,6 +1059,6 @@
 <script src="viaje-datos.js?v=20261027a"></script>
 <script src="viaje.js?v=20261029b"></script>
 <script src="llamada.js?v=20261031e"></script>
-<script src="app.js?v=20261031h"></script>
+<script src="app.js?v=20261031i"></script>
 </body>
 </html>
