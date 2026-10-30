@@ -3589,7 +3589,18 @@
 "Ese mensaje ya no está aquí.":"Этого сообщения здесь больше нет.",
 "1 mensaje nuevo":"1 новое сообщение",
 "Recibido":"Получено",
-"por el buzón cifrado":"через зашифрованный почтовый ящик"
+"por el buzón cifrado":"через зашифрованный почтовый ящик",
+"Persona invitada":"Приглашённый участник",
+"Llamada a tres":"Звонок втроём",
+"Añadir a la llamada":"Добавить в звонок",
+"{n} se ha unido a la llamada.":"{n} теперь в звонке.",
+"{n} ha salido de la llamada.":"{n} больше не в звонке.",
+"Llamando a {n}…":"Вызов: {n}…",
+"{n} está en otra llamada.":"{n} сейчас в другом звонке.",
+"{n} no ha contestado.":"{n} не отвечает.",
+"No hay nadie más a quien añadir.":"Больше некого добавить.",
+"Avisando a {n}: entra en la llamada en cuanto abra GUARDIANA.":"Уведомляем {n}: подключение к звонку начнётся, как только откроется GUARDIANA.",
+"Cada persona oye y ve a las otras dos. Tu equipo une las dos llamadas; cada una va encriptada de extremo a extremo.":"Каждый слышит и видит двух других. Ваше устройство соединяет два звонка; каждый из них защищён сквозным шифрованием."
 },
 "p":{
 "intento":"Настойчивее всех сегодня: {1}, {2} {2?раз|раз}.",

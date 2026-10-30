@@ -3589,7 +3589,18 @@
 "Ese mensaje ya no está aquí.":"ข้อความนั้นไม่อยู่ที่นี่แล้ว",
 "1 mensaje nuevo":"ข้อความใหม่ 1 ข้อความ",
 "Recibido":"ได้รับแล้ว",
-"por el buzón cifrado":"ผ่านกล่องจดหมายเข้ารหัส"
+"por el buzón cifrado":"ผ่านกล่องจดหมายเข้ารหัส",
+"Persona invitada":"ผู้ได้รับเชิญ",
+"Llamada a tres":"การโทรสามสาย",
+"Añadir a la llamada":"เพิ่มในการโทร",
+"{n} se ha unido a la llamada.":"{n} เข้าร่วมการโทรแล้ว",
+"{n} ha salido de la llamada.":"{n} ออกจากการโทรแล้ว",
+"Llamando a {n}…":"กำลังโทรหา {n}…",
+"{n} está en otra llamada.":"{n} กำลังอยู่ในสายอื่น",
+"{n} no ha contestado.":"{n} ไม่รับสาย",
+"No hay nadie más a quien añadir.":"ไม่มีใครให้เพิ่มอีกแล้ว",
+"Avisando a {n}: entra en la llamada en cuanto abra GUARDIANA.":"กำลังแจ้ง {n}: จะเข้าร่วมการโทรทันทีที่เปิด GUARDIANA",
+"Cada persona oye y ve a las otras dos. Tu equipo une las dos llamadas; cada una va encriptada de extremo a extremo.":"ทุกคนได้ยินและเห็นอีกสองคน อุปกรณ์ของคุณเชื่อมการโทรทั้งสองสายเข้าด้วยกัน และแต่ละสายเข้ารหัสแบบต้นทางถึงปลายทาง"
 },
 "p":{
 "intento":"พยายามมากที่สุดวันนี้: {1}, {2} {2?ครั้ง|ครั้ง}",

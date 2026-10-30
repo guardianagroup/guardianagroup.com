@@ -3589,7 +3589,18 @@
 "Ese mensaje ya no está aquí.":"Ujumbe huo haupo hapa tena.",
 "1 mensaje nuevo":"Ujumbe 1 mpya",
 "Recibido":"Umepokelewa",
-"por el buzón cifrado":"kupitia sanduku la barua lililosimbwa fiche"
+"por el buzón cifrado":"kupitia sanduku la barua lililosimbwa fiche",
+"Persona invitada":"Mtu aliyealikwa",
+"Llamada a tres":"Simu ya watu watatu",
+"Añadir a la llamada":"Ongeza kwenye simu",
+"{n} se ha unido a la llamada.":"{n} amejiunga na simu.",
+"{n} ha salido de la llamada.":"{n} ameondoka kwenye simu.",
+"Llamando a {n}…":"Inampigia {n}…",
+"{n} está en otra llamada.":"{n} yuko kwenye simu nyingine.",
+"{n} no ha contestado.":"{n} hakujibu.",
+"No hay nadie más a quien añadir.":"Hakuna mtu mwingine wa kuongeza.",
+"Avisando a {n}: entra en la llamada en cuanto abra GUARDIANA.":"Tunamjulisha {n}: atajiunga na simu mara tu atakapofungua GUARDIANA.",
+"Cada persona oye y ve a las otras dos. Tu equipo une las dos llamadas; cada una va encriptada de extremo a extremo.":"Kila mtu anawasikia na kuwaona wale wengine wawili. Kifaa chako kinaunganisha simu hizo mbili; kila moja imesimbwa kutoka mwanzo hadi mwisho."
 },
 "p":{
 "intento":"Iliyojaribu zaidi leo: {1}, {2?mara|mara} {2}.",

@@ -3589,7 +3589,18 @@
 "Ese mensaje ya no está aquí.":"Táto správa tu už nie je.",
 "1 mensaje nuevo":"1 nová správa",
 "Recibido":"Prijaté",
-"por el buzón cifrado":"cez šifrovanú schránku"
+"por el buzón cifrado":"cez šifrovanú schránku",
+"Persona invitada":"Pozvaná osoba",
+"Llamada a tres":"Hovor vo troch",
+"Añadir a la llamada":"Pridať do hovoru",
+"{n} se ha unido a la llamada.":"{n} je teraz v hovore.",
+"{n} ha salido de la llamada.":"{n} už nie je v hovore.",
+"Llamando a {n}…":"Volanie: {n}…",
+"{n} está en otra llamada.":"{n} má iný hovor.",
+"{n} no ha contestado.":"{n} neodpovedá.",
+"No hay nadie más a quien añadir.":"Nie je nikto ďalší, koho pridať.",
+"Avisando a {n}: entra en la llamada en cuanto abra GUARDIANA.":"Upozorňujeme {n}: pripojí sa k hovoru, hneď ako otvorí GUARDIANA.",
+"Cada persona oye y ve a las otras dos. Tu equipo une las dos llamadas; cada una va encriptada de extremo a extremo.":"Každý počuje a vidí ostatných dvoch. Vaše zariadenie spája oba hovory; každý z nich je šifrovaný end-to-end."
 },
 "p":{
 "intento":"Najviac sa dnes snažila: {1}, {2}{2?-krát|-krát}.",

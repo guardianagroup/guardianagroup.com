@@ -3589,7 +3589,18 @@
 "Ese mensaje ya no está aquí.":"這則訊息已不在這裡。",
 "1 mensaje nuevo":"1 則新訊息",
 "Recibido":"已接收",
-"por el buzón cifrado":"透過加密信箱"
+"por el buzón cifrado":"透過加密信箱",
+"Persona invitada":"受邀者",
+"Llamada a tres":"三方通話",
+"Añadir a la llamada":"加入通話",
+"{n} se ha unido a la llamada.":"{n} 已加入通話。",
+"{n} ha salido de la llamada.":"{n} 已離開通話。",
+"Llamando a {n}…":"正在撥打給 {n}…",
+"{n} está en otra llamada.":"{n} 正在另一通電話中。",
+"{n} no ha contestado.":"{n} 沒有接聽。",
+"No hay nadie más a quien añadir.":"沒有其他可以加入的人了。",
+"Avisando a {n}: entra en la llamada en cuanto abra GUARDIANA.":"正在通知 {n}：對方一開啟 GUARDIANA 就會加入通話。",
+"Cada persona oye y ve a las otras dos. Tu equipo une las dos llamadas; cada una va encriptada de extremo a extremo.":"每個人都能聽到並看到另外兩人。你的裝置把兩通電話連接在一起；每一通都經過端對端加密。"
 },
 "p":{
 "intento":"今天嘗試最多的：{1}，{2} {2?次|次}。",

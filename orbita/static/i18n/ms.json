@@ -3589,7 +3589,18 @@
 "Ese mensaje ya no está aquí.":"Mesej itu sudah tiada di sini.",
 "1 mensaje nuevo":"1 mesej baharu",
 "Recibido":"Diterima",
-"por el buzón cifrado":"melalui peti mel yang disulitkan"
+"por el buzón cifrado":"melalui peti mel yang disulitkan",
+"Persona invitada":"Orang jemputan",
+"Llamada a tres":"Panggilan bertiga",
+"Añadir a la llamada":"Tambah ke panggilan",
+"{n} se ha unido a la llamada.":"{n} telah menyertai panggilan.",
+"{n} ha salido de la llamada.":"{n} telah meninggalkan panggilan.",
+"Llamando a {n}…":"Memanggil {n}…",
+"{n} está en otra llamada.":"{n} sedang dalam panggilan lain.",
+"{n} no ha contestado.":"{n} tidak menjawab.",
+"No hay nadie más a quien añadir.":"Tiada orang lain untuk ditambah.",
+"Avisando a {n}: entra en la llamada en cuanto abra GUARDIANA.":"Memaklumkan {n}: dia akan menyertai panggilan sebaik sahaja membuka GUARDIANA.",
+"Cada persona oye y ve a las otras dos. Tu equipo une las dos llamadas; cada una va encriptada de extremo a extremo.":"Setiap orang mendengar dan melihat dua orang yang lain. Peranti anda menyambungkan kedua-dua panggilan; setiap satu disulitkan hujung ke hujung."
 },
 "p":{
 "intento":"Paling banyak mencuba hari ini: {1}, {2} {2?kali|kali}.",

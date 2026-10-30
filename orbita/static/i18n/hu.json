@@ -3589,7 +3589,18 @@
 "Ese mensaje ya no está aquí.":"Ez az üzenet már nincs itt.",
 "1 mensaje nuevo":"1 új üzenet",
 "Recibido":"Fogadva",
-"por el buzón cifrado":"a titkosított postafiókon keresztül"
+"por el buzón cifrado":"a titkosított postafiókon keresztül",
+"Persona invitada":"Meghívott személy",
+"Llamada a tres":"Háromfős hívás",
+"Añadir a la llamada":"Hozzáadás a híváshoz",
+"{n} se ha unido a la llamada.":"{n} csatlakozott a híváshoz.",
+"{n} ha salido de la llamada.":"{n} kilépett a hívásból.",
+"Llamando a {n}…":"{n} hívása…",
+"{n} está en otra llamada.":"{n} egy másik hívásban van.",
+"{n} no ha contestado.":"{n} nem vette fel.",
+"No hay nadie más a quien añadir.":"Nincs más, akit hozzá lehetne adni.",
+"Avisando a {n}: entra en la llamada en cuanto abra GUARDIANA.":"{n} értesítése folyamatban: csatlakozik a híváshoz, amint megnyitja a GUARDIANA alkalmazást.",
+"Cada persona oye y ve a las otras dos. Tu equipo une las dos llamadas; cada una va encriptada de extremo a extremo.":"Mindenki hallja és látja a másik kettőt. A készüléked köti össze a két hívást; mindkettő végponttól végpontig titkosított."
 },
 "p":{
 "intento":"Ma a legtöbbször próbálkozott: {1}, {2} {2?alkalommal|alkalommal}.",

@@ -3589,7 +3589,18 @@
 "Ese mensaje ya no está aquí.":"সেই বার্তাটি আর এখানে নেই।",
 "1 mensaje nuevo":"1টি নতুন বার্তা",
 "Recibido":"প্রাপ্ত",
-"por el buzón cifrado":"এনক্রিপ্টেড মেইলবক্সের মাধ্যমে"
+"por el buzón cifrado":"এনক্রিপ্টেড মেইলবক্সের মাধ্যমে",
+"Persona invitada":"আমন্ত্রিত ব্যক্তি",
+"Llamada a tres":"তিনজনের কল",
+"Añadir a la llamada":"কলে যোগ করুন",
+"{n} se ha unido a la llamada.":"{n} কলে যোগ দিয়েছেন।",
+"{n} ha salido de la llamada.":"{n} কল ছেড়ে গেছেন।",
+"Llamando a {n}…":"{n}-কে কল করা হচ্ছে…",
+"{n} está en otra llamada.":"{n} অন্য একটি কলে আছেন।",
+"{n} no ha contestado.":"{n} উত্তর দেননি।",
+"No hay nadie más a quien añadir.":"যোগ করার মতো আর কেউ নেই।",
+"Avisando a {n}: entra en la llamada en cuanto abra GUARDIANA.":"{n}-কে জানানো হচ্ছে: তিনি GUARDIANA খোলা মাত্রই কলে যোগ দেবেন।",
+"Cada persona oye y ve a las otras dos. Tu equipo une las dos llamadas; cada una va encriptada de extremo a extremo.":"প্রত্যেকে অন্য দুজনকে শুনতে ও দেখতে পান। আপনার ডিভাইস দুটি কলকে যুক্ত করে; প্রতিটি কল এন্ড-টু-এন্ড এনক্রিপ্টেড।"
 },
 "p":{
 "intento":"আজ সবচেয়ে বেশি চেষ্টা: {1}, {2} {2?বার|বার}।",

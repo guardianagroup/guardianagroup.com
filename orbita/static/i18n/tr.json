@@ -3589,7 +3589,18 @@
 "Ese mensaje ya no está aquí.":"Bu mesaj artık burada değil.",
 "1 mensaje nuevo":"1 yeni mesaj",
 "Recibido":"Alındı",
-"por el buzón cifrado":"şifreli posta kutusu üzerinden"
+"por el buzón cifrado":"şifreli posta kutusu üzerinden",
+"Persona invitada":"Davetli kişi",
+"Llamada a tres":"Üçlü arama",
+"Añadir a la llamada":"Aramaya ekle",
+"{n} se ha unido a la llamada.":"{n} aramaya katıldı.",
+"{n} ha salido de la llamada.":"{n} aramadan ayrıldı.",
+"Llamando a {n}…":"{n} aranıyor…",
+"{n} está en otra llamada.":"{n} başka bir aramada.",
+"{n} no ha contestado.":"{n} yanıt vermedi.",
+"No hay nadie más a quien añadir.":"Eklenecek başka kimse yok.",
+"Avisando a {n}: entra en la llamada en cuanto abra GUARDIANA.":"{n} bilgilendiriliyor: GUARDIANA'yı açar açmaz aramaya katılacak.",
+"Cada persona oye y ve a las otras dos. Tu equipo une las dos llamadas; cada una va encriptada de extremo a extremo.":"Herkes diğer iki kişiyi duyar ve görür. Cihazınız iki aramayı birleştirir; her biri uçtan uca şifrelidir."
 },
 "p":{
 "intento":"Bugün en çok deneyen: {1}, {2} {2?kez|kez}.",

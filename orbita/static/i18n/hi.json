@@ -3589,7 +3589,18 @@
 "Ese mensaje ya no está aquí.":"वह संदेश अब यहाँ नहीं है।",
 "1 mensaje nuevo":"1 नया संदेश",
 "Recibido":"प्राप्त हुआ",
-"por el buzón cifrado":"एन्क्रिप्टेड मेलबॉक्स के माध्यम से"
+"por el buzón cifrado":"एन्क्रिप्टेड मेलबॉक्स के माध्यम से",
+"Persona invitada":"आमंत्रित व्यक्ति",
+"Llamada a tres":"तीन लोगों की कॉल",
+"Añadir a la llamada":"कॉल में जोड़ें",
+"{n} se ha unido a la llamada.":"{n} कॉल में शामिल हो गए हैं।",
+"{n} ha salido de la llamada.":"{n} कॉल से चले गए हैं।",
+"Llamando a {n}…":"{n} को कॉल किया जा रहा है…",
+"{n} está en otra llamada.":"{n} दूसरी कॉल पर हैं।",
+"{n} no ha contestado.":"{n} ने जवाब नहीं दिया।",
+"No hay nadie más a quien añadir.":"जोड़ने के लिए और कोई नहीं है।",
+"Avisando a {n}: entra en la llamada en cuanto abra GUARDIANA.":"{n} को सूचित किया जा रहा है: जैसे ही वे GUARDIANA खोलेंगे, कॉल में शामिल हो जाएँगे।",
+"Cada persona oye y ve a las otras dos. Tu equipo une las dos llamadas; cada una va encriptada de extremo a extremo.":"हर व्यक्ति बाकी दोनों को सुन और देख सकता है। आपका डिवाइस दोनों कॉल को जोड़ता है; हर कॉल एंड-टू-एंड एन्क्रिप्टेड है।"
 },
 "p":{
 "intento":"आज सबसे ज़्यादा कोशिश: {1}, {2} {2?बार|बार}।",

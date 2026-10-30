@@ -2011,3 +2011,39 @@ body.con-pestanas #marcar .marcar-llamar span{position:absolute;width:1px;height
   .gc-llamada .mi-tam-boton{width:32px;height:32px;opacity:.85;border-color:rgba(218,236,250,.18)}
   .gc-llamada .mi-tam-boton svg{width:16px;height:16px}
 }
+
+/* ==== Llamada a tres (dueño, 30 Oct 2026, 08:33 y 09:16): las dos personas a pantalla partida, cada una con su nombre (en el PC,
+   una al lado de la otra; con el teléfono en vertical, una encima de la otra), y tu imagen en pequeño en su esquina ==== */
+.gc-llamada .videos #v-tercero[hidden]{display:none!important}
+.gc-llamada.tres:not(.mini) .videos #v-remoto,.gc-llamada.tres:not(.mini) .videos #v-tercero{display:block;position:absolute!important;top:0!important;left:0!important;right:auto!important;bottom:auto!important;width:50%!important;height:100%!important;max-width:none!important;aspect-ratio:auto!important;border:0!important;border-radius:0!important;object-fit:cover!important;background:#000}
+.gc-llamada.tres:not(.mini) .videos #v-tercero{left:50%!important}
+.gc-llamada.tres:not(.mini) .videos::after{content:'';position:absolute;z-index:1;left:50%;top:0;bottom:0;width:1px;background:rgba(156,195,228,.35);pointer-events:none}
+.gc-llamada.tres:not(.mini) .videos #v-local{position:absolute!important;left:auto!important;top:auto!important;right:16px!important;bottom:140px!important;width:150px!important;max-width:26%!important;height:auto!important;aspect-ratio:3/4!important;border:1px solid rgba(218,236,250,.22)!important;border-radius:12px!important;object-fit:cover!important;z-index:2}
+.gc-llamada.tres .mi-tam-boton,.gc-llamada.tres .videos .mi-asa{display:none!important}
+.ll-tile-n{position:absolute;z-index:2;left:16px;bottom:140px;max-width:calc(50% - 32px);padding:6px 12px;border-radius:999px;background:rgba(6,8,12,.62);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);color:#F4F6F8;font:500 13px/1.2 var(--texto);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;pointer-events:none;transition:opacity .35s ease}
+.ll-tile-n3{left:calc(50% + 16px)}
+.gc-llamada.tres.reposo .ll-tile-n{opacity:.75}
+.gc-llamada:not(.tres) .ll-tile-n,.gc-llamada.mini .ll-tile-n{display:none}
+@media (orientation:portrait){
+  .gc-llamada.tres:not(.mini) .videos #v-remoto,.gc-llamada.tres:not(.mini) .videos #v-tercero{width:100%!important;height:50%!important}
+  .gc-llamada.tres:not(.mini) .videos #v-tercero{left:0!important;top:50%!important}
+  .gc-llamada.tres:not(.mini) .videos::after{left:0;right:0;top:50%;bottom:auto;width:auto;height:1px}
+  .gc-llamada.tres:not(.mini) .videos #v-local{top:calc(50% - 12px - 30vw)!important;bottom:auto!important;width:24vw!important;max-width:120px!important}
+  .ll-tile-n{left:12px;bottom:auto;top:calc(50% - 44px);max-width:calc(100% - 24px)}
+  .ll-tile-n3{left:12px;top:auto;bottom:calc(150px + env(safe-area-inset-bottom))}
+}
+/* «Añadir»: una persona con un más; mientras suena el tercero, una equis para cancelar */
+#ll-anadir .x,#ll-anadir.cancela .mas{display:none}
+#ll-anadir.cancela .x{display:inline}
+.tercero-nota{margin:-4px 0 12px;color:var(--muted);font:400 14px/1.45 var(--texto);text-wrap:pretty}
+#h-tercero{z-index:90}
+.tercero-estado{display:block;margin-top:2px;color:var(--muted);font:400 12.5px/1.2 var(--texto)}
+
+/* «Elegir el mío»: la cifra 12 aparece sola, en gris, dentro del mismo campo (dueño, 30 Oct 2026, 10:06). El campo escribe en
+   transparente y encima se pinta el número completo con la misma letra de ancho fijo, así el cursor cae justo en su sitio */
+.num-elige-caja{position:relative}
+.mi-numero-elige .num-elige-caja .campo{text-align:left;color:transparent;caret-color:#F4F6F8;padding-left:max(12px,calc((100% - 15 * (1ch + .06em)) / 2))}
+.mi-numero-elige .num-elige-caja .campo::placeholder{color:transparent}
+.num-elige-ver{position:absolute;inset:0;display:flex;align-items:center;box-sizing:border-box;padding-left:max(12px,calc((100% - 15 * (1ch + .06em)) / 2));border:1px solid transparent;font:600 20px/1.2 var(--mono);letter-spacing:.06em;white-space:pre;pointer-events:none;color:#F4F6F8;overflow:hidden}
+.num-elige-ver .ne-falta{color:#3A4552}
+.num-elige-ver .ne-cifra{color:#A3AEBA}

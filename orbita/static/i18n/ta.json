@@ -3589,7 +3589,18 @@
 "Ese mensaje ya no está aquí.":"அந்தச் செய்தி இப்போது இங்கே இல்லை.",
 "1 mensaje nuevo":"1 புதிய செய்தி",
 "Recibido":"பெறப்பட்டது",
-"por el buzón cifrado":"மறையாக்கப்பட்ட அஞ்சல்பெட்டி வழியாக"
+"por el buzón cifrado":"மறையாக்கப்பட்ட அஞ்சல்பெட்டி வழியாக",
+"Persona invitada":"அழைக்கப்பட்டவர்",
+"Llamada a tres":"மூவர் அழைப்பு",
+"Añadir a la llamada":"அழைப்பில் சேர்",
+"{n} se ha unido a la llamada.":"{n} அழைப்பில் இணைந்தார்.",
+"{n} ha salido de la llamada.":"{n} அழைப்பிலிருந்து வெளியேறினார்.",
+"Llamando a {n}…":"{n}-ஐ அழைக்கிறது…",
+"{n} está en otra llamada.":"{n} வேறொரு அழைப்பில் இருக்கிறார்.",
+"{n} no ha contestado.":"{n} பதிலளிக்கவில்லை.",
+"No hay nadie más a quien añadir.":"சேர்க்க வேறு யாரும் இல்லை.",
+"Avisando a {n}: entra en la llamada en cuanto abra GUARDIANA.":"{n}-க்குத் தெரிவிக்கப்படுகிறது: GUARDIANA-வைத் திறந்ததும் அழைப்பில் இணைவார்.",
+"Cada persona oye y ve a las otras dos. Tu equipo une las dos llamadas; cada una va encriptada de extremo a extremo.":"ஒவ்வொருவரும் மற்ற இருவரையும் கேட்கவும் பார்க்கவும் முடியும். உங்கள் சாதனம் இரண்டு அழைப்புகளையும் இணைக்கிறது; ஒவ்வொன்றும் முனையிலிருந்து முனை வரை மறையாக்கப்பட்டுள்ளது."
 },
 "p":{
 "intento":"இன்று அதிகம் முயன்றது: {1}, {2} {2?முறை|முறை}.",

@@ -3589,7 +3589,18 @@
 "Ese mensaje ya no está aquí.":"Tej wiadomości już tu nie ma.",
 "1 mensaje nuevo":"1 nowa wiadomość",
 "Recibido":"Odebrano",
-"por el buzón cifrado":"przez zaszyfrowaną skrzynkę"
+"por el buzón cifrado":"przez zaszyfrowaną skrzynkę",
+"Persona invitada":"Osoba zaproszona",
+"Llamada a tres":"Rozmowa we trójkę",
+"Añadir a la llamada":"Dodaj do rozmowy",
+"{n} se ha unido a la llamada.":"{n} jest teraz w rozmowie.",
+"{n} ha salido de la llamada.":"{n} opuszcza rozmowę.",
+"Llamando a {n}…":"Dzwonienie: {n}…",
+"{n} está en otra llamada.":"{n} prowadzi inną rozmowę.",
+"{n} no ha contestado.":"{n} nie odbiera.",
+"No hay nadie más a quien añadir.":"Nie ma nikogo więcej do dodania.",
+"Avisando a {n}: entra en la llamada en cuanto abra GUARDIANA.":"Powiadamianie: {n} dołączy do rozmowy, gdy tylko otworzy GUARDIANA.",
+"Cada persona oye y ve a las otras dos. Tu equipo une las dos llamadas; cada una va encriptada de extremo a extremo.":"Każda osoba słyszy i widzi pozostałe dwie. Twoje urządzenie łączy obie rozmowy; każda jest szyfrowana end-to-end."
 },
 "p":{
 "intento":"Najwięcej prób dziś: {1}, {2} {2?raz|razy}.",

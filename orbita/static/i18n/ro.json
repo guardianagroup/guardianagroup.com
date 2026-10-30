@@ -3589,7 +3589,18 @@
 "Ese mensaje ya no está aquí.":"Acest mesaj nu mai este aici.",
 "1 mensaje nuevo":"1 mesaj nou",
 "Recibido":"Primit",
-"por el buzón cifrado":"prin cutia poștală criptată"
+"por el buzón cifrado":"prin cutia poștală criptată",
+"Persona invitada":"Persoană invitată",
+"Llamada a tres":"Apel în trei",
+"Añadir a la llamada":"Adaugă la apel",
+"{n} se ha unido a la llamada.":"{n} s-a alăturat apelului.",
+"{n} ha salido de la llamada.":"{n} a părăsit apelul.",
+"Llamando a {n}…":"Se apelează {n}…",
+"{n} está en otra llamada.":"{n} este într-un alt apel.",
+"{n} no ha contestado.":"{n} nu a răspuns.",
+"No hay nadie más a quien añadir.":"Nu mai este nimeni de adăugat.",
+"Avisando a {n}: entra en la llamada en cuanto abra GUARDIANA.":"Anunțăm {n}: intră în apel imediat ce deschide GUARDIANA.",
+"Cada persona oye y ve a las otras dos. Tu equipo une las dos llamadas; cada una va encriptada de extremo a extremo.":"Fiecare persoană le aude și le vede pe celelalte două. Dispozitivul tău unește cele două apeluri; fiecare este criptat integral."
 },
 "p":{
 "intento":"Cea care a încercat cel mai mult azi: {1}, {2} {2?dată|ori}.",

@@ -855,6 +855,8 @@
       // hay una llamada en curso con otra, se le dice «ocupado» sin decir nada más (agencia, ronda 74, bloque J)
       case 'llamada': {
         if (!LL) return;
+        // llamada a tres: lo que manda la tercera persona va a su tramo de la llamada
+        if (LL.terceroSala && LL.terceroSala === c.id) { await LL.recibeTercero(c.id, j); return; }
         if (j.acto === 'oferta') {
           if (LL.ocupado && LLAMADA_CONV && LLAMADA_CONV !== c.id) { enviaControl(c, { tipo: 'llamada', acto: 'ocupado', id: j.id }); return; }
           if (!LL.ocupado) LLAMADA_CONV = c.id;
@@ -1500,6 +1502,12 @@
       // el nombre que la otra persona se puso o el que le pusiste tú; sin ninguno, «Llamada encriptada» o «Videollamada encriptada»
       nombre: () => { const c = convLl(); return (c && (c.alias || c.nombre)) || (c && vivas().length > 1 ? nombreConv(c, true) : ''); },
       inicial: () => { const c = convLl(); return inicial(c && (c.alias || c.nombre)); },
+      // llamada a tres: mensajes a la conversación del tercero, la llamada que pasa a otra conversación, el apunte en el chat del
+      // tercero y la hoja para elegir a quién añadir
+      mandaA: (sala, m) => { const c = CONVS.get(sala); if (c) enviaControl(c, Object.assign({ tipo: 'llamada' }, m)); },
+      cambia: (sala) => { LLAMADA_CONV = sala; pintaLista(); },
+      finA: (sala, info) => { const antes = LLAMADA_CONV; LLAMADA_CONV = sala; anotaLlamada(info); LLAMADA_CONV = antes; },
+      eligeTercero: () => abreAnadir(),
     });
     const llama = (video) => { if (LL.ocupado) { aviso(T('Ya tienes una llamada en curso.')); return; } const c = CONVS.get(ACTUAL); if (c && c.huella && !enLinea(c) && R.abierto) { despiertaLlamada(c, video); return; } if (c && c.suFuera && puedeLlamar()) despierta(c, 'llamada', true); LLAMADA_CONV = ACTUAL; LL.llamar(video); };
     $('#llamar').addEventListener('click', () => llama(false));
@@ -2208,6 +2216,16 @@
     const elige = !$('#num-elige').hidden;
     $('#num-propuesto').textContent = elige ? numeroElegido().bonito : bonito(NUM_PROPUESTO);
   }
+  // dentro del campo: lo escrito, lo que falta (tenue) y la cifra 12, que aparece sola en gris al completar las 11 (10:06)
+  function pintaElegido() {
+    const v = $('#num-elige-ver'), e = $('#num-elige-in'); if (!v || !e) return;
+    const d = String(e.value || '').replace(/\D/g, '').slice(0, 11), escrito = d ? bonito(d) : '', mascara = '000-000-000-00';
+    const s1 = document.createElement('span'); s1.textContent = escrito;
+    const s2 = document.createElement('span'); s2.className = 'ne-falta'; s2.textContent = mascara.slice(escrito.length);
+    const s3 = document.createElement('span'); s3.className = d.length === 11 ? 'ne-cifra' : 'ne-falta';
+    s3.textContent = d.length === 11 ? String(C.N.damm(d)) : '0'; // agrupado como el número de arriba: 000-000-000-000
+    v.replaceChildren(s1, s2, s3);
+  }
   // lo que se escribe en «Elegir el mío»: 11 cifras y la de control añadida
   function numeroElegido() {
     const d = String($('#num-elige-in').value || '').replace(/\D/g, '').slice(0, 11);
@@ -2284,7 +2302,8 @@
     if (!$('#mi-numero')) return;
     $('#num-otro').addEventListener('click', () => { NUM_PROPUESTO = C.N.nuevoNumero(); $('#num-elige').hidden = true; $('#num-elegir').setAttribute('aria-expanded', 'false'); errorNumero(''); pintaNumero(); });
     $('#num-elegir').addEventListener('click', () => { const ver = $('#num-elige').hidden; $('#num-elige').hidden = !ver; $('#num-elegir').setAttribute('aria-expanded', String(ver)); errorNumero(''); pintaNumero(); if (ver) setTimeout(() => { try { $('#num-elige-in').focus(); } catch (_) {} }, 50); });
-    $('#num-elige-in').addEventListener('input', () => { const e = $('#num-elige-in'), d = e.value.replace(/\D/g, '').slice(0, 11); e.value = bonito(d); errorNumero(''); pintaNumero(); });
+    $('#num-elige-in').addEventListener('input', () => { const e = $('#num-elige-in'), d = e.value.replace(/\D/g, '').slice(0, 11); e.value = bonito(d); errorNumero(''); pintaNumero(); pintaElegido(); });
+    pintaElegido();
     $('#num-usar').addEventListener('click', async () => {
       const b = $('#num-usar'); if (b.disabled) return;
       let n = NUM_PROPUESTO, elegido = false;
@@ -2546,6 +2565,44 @@
     let left = m.dir === 'mia' ? br.right - lr.left - mw : br.left - lr.left; left = Math.max(8, Math.min(left, lr.width - mw - 8));
     mn.style.top = top + 'px'; mn.style.left = left + 'px';
     HAPTICO(10);
+  }
+  // ---- Llamada a tres: a quién añadir (dueño, 30 Oct 2026, 08:33: «que podamos hablar los tres a la vez») ----
+  // Las personas guardadas y las conversaciones abiertas, salvo la de la llamada y las blindadas; primero las conectadas. Si la
+  // elegida no tiene GUARDIANA abierta, se le avisa en el teléfono y se la añade en cuanto se conecte (45 s, como una llamada).
+  // A cada una se le dice solo el nombre que la otra se puso a sí misma, nunca el nombre con el que la guardaste tú.
+  const nombrePropio = (c) => (c && !c.nombreFijado && c.nombre) || '';
+  let esperaTercero = null;
+  function abreAnadir() {
+    if (!LL || LL.estado !== 'hablando') return;
+    const enLl = convLl();
+    const otros = vivas().filter((x) => x.id !== (enLl && enLl.id) && x.huella && !esB(x)).sort((a, b) => (enLinea(b) ? 1 : 0) - (enLinea(a) ? 1 : 0) || (b.ultimo || 0) - (a.ultimo || 0));
+    if (!otros.length) { aviso(T('No hay nadie más a quien añadir.')); return; }
+    const ul = $('#tercero-lista'); ul.textContent = '';
+    for (const x of otros) {
+      const b = document.createElement('button'); b.type = 'button'; b.className = 'reenviar-a'; b.dataset.id = x.id;
+      const av = document.createElement('span'); av.className = 'contacto-av ' + (enLinea(x) ? 'en-linea' : 'no-linea'); av.textContent = inicial(nombreConv(x, true)); av.setAttribute('aria-hidden', 'true');
+      const tx = document.createElement('span'); const n = document.createElement('b'); n.textContent = nombreConv(x, true);
+      const es = document.createElement('small'); es.className = 'tercero-estado'; es.textContent = enLinea(x) ? T('En línea') : T('Desconectado'); tx.append(n, es);
+      b.append(av, tx); b.addEventListener('click', () => { cierraHoja('h-tercero'); anadeA(x); });
+      ul.append(b);
+    }
+    abreHoja('h-tercero');
+  }
+  function anadeA(x) {
+    if (!LL || LL.estado !== 'hablando' || !x) return;
+    const enLl = convLl();
+    const datos = { nombre: nombreConv(x, true), suNombre: nombrePropio(x), nombreOtro: nombrePropio(enLl) };
+    const listo = () => enLinea(x) && x.sesion && x.sesion.confirmada && puedeEnviar(x);
+    clearInterval(esperaTercero); esperaTercero = null;
+    if (listo()) { LL.anade(x.id, datos); return; }
+    if (!despierta(x, 'llamada')) { aviso(T('Para llamar, la otra persona tiene que estar conectada y la sesión, verificada.')); return; }
+    aviso(T('Avisando a {n}: entra en la llamada en cuanto abra GUARDIANA.').replace('{n}', nombreConv(x, true)));
+    const hasta = Date.now() + 45000;
+    esperaTercero = setInterval(() => {
+      if (!LL || LL.estado !== 'hablando' || x.estado === 'destruida') { clearInterval(esperaTercero); esperaTercero = null; return; }
+      if (Date.now() > hasta) { clearInterval(esperaTercero); esperaTercero = null; aviso(T('La otra persona no ha abierto GUARDIANA: inténtalo más tarde.')); if (x.avisoLlamadaEn && R.abierto) { try { R.despiertaA(x.id, 'fin'); } catch (_) {} x.avisoLlamadaEn = 0; } return; }
+      if (listo()) { clearInterval(esperaTercero); esperaTercero = null; LL.anade(x.id, datos); }
+    }, 700);
   }
   function abreReenviar(m) {
     const c = CONVS.get(ACTUAL); if (!c || !sePuedeReenviar(m)) return;
@@ -3798,7 +3855,7 @@
       ul.addEventListener('contextmenu', (e) => { const li = liDe(e); if (!li) return; e.preventDefault(); const m = msgDe(li); suelta(); if (m && !m.velado && !(MENU_MSG && MENU_MSG.id === m.id)) abreMenuMsg(m, li); });
       ul.addEventListener('scroll', () => { cierraMenuMsg(); if (NUEVOS_ABAJO && ul.scrollHeight - ul.scrollTop - ul.clientHeight < 80) pintaNuevosAbajo(0); }, { passive: true });
       document.addEventListener('pointerdown', (e) => { const mn = $('#mmenu'); if (mn && !mn.hidden && !(e.target instanceof Element && mn.contains(e.target))) cierraMenuMsg(); }, true);
-      document.addEventListener('keydown', (e) => { if (e.key !== 'Escape') return; cierraMenuMsg(); for (const id of ['h-reenviar', 'h-info-msg', 'h-borrar-msg']) if ($('#' + id).classList.contains('gc-abierta')) { if (id === 'h-reenviar') REENVIA_MSG = null; if (id === 'h-borrar-msg') BORRAR_MSG = null; cierraHoja(id); } });
+      document.addEventListener('keydown', (e) => { if (e.key !== 'Escape') return; cierraMenuMsg(); for (const id of ['h-reenviar', 'h-info-msg', 'h-borrar-msg', 'h-tercero']) if ($('#' + id).classList.contains('gc-abierta')) { if (id === 'h-reenviar') REENVIA_MSG = null; if (id === 'h-borrar-msg') BORRAR_MSG = null; cierraHoja(id); } });
       $('#mm-responder').addEventListener('click', () => { const m = MENU_MSG; cierraMenuMsg(); if (m) ponResponde(m); });
       $('#mm-reenviar').addEventListener('click', () => { const m = MENU_MSG; cierraMenuMsg(); if (m) abreReenviar(m); });
       $('#mm-info').addEventListener('click', () => { const m = MENU_MSG; cierraMenuMsg(); if (m) abreInfoMsg(m); });
@@ -3807,6 +3864,7 @@
       $('#responde-x').addEventListener('click', () => { quitaResponde(); try { $('#texto').focus(); } catch (_) {} });
       $('#nuevos-abajo').addEventListener('click', () => { try { ul.scrollTo({ top: ul.scrollHeight, behavior: 'smooth' }); } catch (_) { ul.scrollTop = ul.scrollHeight; } pintaNuevosAbajo(0); });
       $('#reenviar-cancelar').addEventListener('click', () => { REENVIA_MSG = null; cierraHoja('h-reenviar'); });
+      $('#tercero-cancelar').addEventListener('click', () => cierraHoja('h-tercero'));
       $('#info-msg-ok').addEventListener('click', () => cierraHoja('h-info-msg'));
       $('#borrar-msg-cancelar').addEventListener('click', () => { BORRAR_MSG = null; cierraHoja('h-borrar-msg'); });
       $('#borrar-msg-mi').addEventListener('click', async () => { const m = BORRAR_MSG; BORRAR_MSG = null; cierraHoja('h-borrar-msg'); const c = m && CONVS.get(m.conv); if (c) await borraLocal(c, m.id, false); });

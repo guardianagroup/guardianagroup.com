@@ -3589,7 +3589,18 @@
 "Ese mensaje ya no está aquí.":"لم تعد تلك الرسالة موجودة هنا.",
 "1 mensaje nuevo":"1 رسالة جديدة",
 "Recibido":"تم الاستلام",
-"por el buzón cifrado":"عبر صندوق البريد المشفّر"
+"por el buzón cifrado":"عبر صندوق البريد المشفّر",
+"Persona invitada":"شخص مدعو",
+"Llamada a tres":"مكالمة ثلاثية",
+"Añadir a la llamada":"إضافة إلى المكالمة",
+"{n} se ha unido a la llamada.":"انضم {n} إلى المكالمة.",
+"{n} ha salido de la llamada.":"غادر {n} المكالمة.",
+"Llamando a {n}…":"جارٍ الاتصال بـ {n}…",
+"{n} está en otra llamada.":"{n} في مكالمة أخرى.",
+"{n} no ha contestado.":"لم يرد {n}.",
+"No hay nadie más a quien añadir.":"لا يوجد أحد آخر لإضافته.",
+"Avisando a {n}: entra en la llamada en cuanto abra GUARDIANA.":"جارٍ تنبيه {n}: سينضم إلى المكالمة بمجرد أن يفتح GUARDIANA.",
+"Cada persona oye y ve a las otras dos. Tu equipo une las dos llamadas; cada una va encriptada de extremo a extremo.":"يسمع كل شخص الشخصين الآخرين ويراهما. يربط جهازك المكالمتين؛ وكل منهما مشفرة من طرف إلى طرف."
 },
 "p":{
 "intento":"الأكثر محاولةً اليوم: {1}، {2} {2?مرة|مرات}.",

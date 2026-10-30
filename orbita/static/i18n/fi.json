@@ -3589,7 +3589,18 @@
 "Ese mensaje ya no está aquí.":"Viestiä ei enää ole täällä.",
 "1 mensaje nuevo":"1 uusi viesti",
 "Recibido":"Vastaanotettu",
-"por el buzón cifrado":"salatun postilaatikon kautta"
+"por el buzón cifrado":"salatun postilaatikon kautta",
+"Persona invitada":"Kutsuttu henkilö",
+"Llamada a tres":"Kolmen hengen puhelu",
+"Añadir a la llamada":"Lisää puheluun",
+"{n} se ha unido a la llamada.":"{n} liittyi puheluun.",
+"{n} ha salido de la llamada.":"{n} poistui puhelusta.",
+"Llamando a {n}…":"Soitetaan: {n}…",
+"{n} está en otra llamada.":"{n} on toisessa puhelussa.",
+"{n} no ha contestado.":"{n} ei vastannut.",
+"No hay nadie más a quien añadir.":"Ei ole ketään muuta lisättävää.",
+"Avisando a {n}: entra en la llamada en cuanto abra GUARDIANA.":"Ilmoitetaan: {n} liittyy puheluun heti, kun avaa GUARDIANAn.",
+"Cada persona oye y ve a las otras dos. Tu equipo une las dos llamadas; cada una va encriptada de extremo a extremo.":"Jokainen kuulee ja näkee kaksi muuta. Laitteesi yhdistää kaksi puhelua; kumpikin on päästä päähän salattu."
 },
 "p":{
 "intento":"Eniten yrittänyt tänään: {1}, {2} {2?kerta|kertaa}.",

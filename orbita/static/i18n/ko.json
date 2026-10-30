@@ -3589,7 +3589,18 @@
 "Ese mensaje ya no está aquí.":"그 메시지는 더 이상 여기에 없습니다.",
 "1 mensaje nuevo":"새 메시지 1개",
 "Recibido":"수신됨",
-"por el buzón cifrado":"암호화된 우편함을 통해"
+"por el buzón cifrado":"암호화된 우편함을 통해",
+"Persona invitada":"초대된 사람",
+"Llamada a tres":"3인 통화",
+"Añadir a la llamada":"통화에 추가",
+"{n} se ha unido a la llamada.":"{n} 님이 통화에 참여했어요.",
+"{n} ha salido de la llamada.":"{n} 님이 통화에서 나갔어요.",
+"Llamando a {n}…":"{n} 님에게 거는 중…",
+"{n} está en otra llamada.":"{n} 님은 다른 통화 중이에요.",
+"{n} no ha contestado.":"{n} 님이 받지 않았어요.",
+"No hay nadie más a quien añadir.":"더 추가할 사람이 없어요.",
+"Avisando a {n}: entra en la llamada en cuanto abra GUARDIANA.":"{n} 님에게 알리는 중이에요. GUARDIANA를 열면 바로 통화에 참여해요.",
+"Cada persona oye y ve a las otras dos. Tu equipo une las dos llamadas; cada una va encriptada de extremo a extremo.":"모두 나머지 두 사람의 목소리를 듣고 모습을 볼 수 있어요. 내 기기가 두 통화를 연결하며, 각 통화는 종단 간 암호화돼요."
 },
 "p":{
 "intento":"오늘 가장 많이 시도한 곳: {1}, {2}{2?회|회}.",

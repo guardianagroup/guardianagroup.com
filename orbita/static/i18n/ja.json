@@ -3589,7 +3589,18 @@
 "Ese mensaje ya no está aquí.":"そのメッセージはもうここにありません。",
 "1 mensaje nuevo":"新着メッセージ 1 件",
 "Recibido":"受信",
-"por el buzón cifrado":"暗号化メールボックス経由"
+"por el buzón cifrado":"暗号化メールボックス経由",
+"Persona invitada":"招待された人",
+"Llamada a tres":"3人通話",
+"Añadir a la llamada":"通話に追加",
+"{n} se ha unido a la llamada.":"{n} さんが通話に参加しました。",
+"{n} ha salido de la llamada.":"{n} さんが通話から退出しました。",
+"Llamando a {n}…":"{n} さんに発信中…",
+"{n} está en otra llamada.":"{n} さんは別の通話中です。",
+"{n} no ha contestado.":"{n} さんは応答しませんでした。",
+"No hay nadie más a quien añadir.":"ほかに追加できる人はいません。",
+"Avisando a {n}: entra en la llamada en cuanto abra GUARDIANA.":"{n} さんに知らせています。GUARDIANA を開くとすぐに通話に参加します。",
+"Cada persona oye y ve a las otras dos. Tu equipo une las dos llamadas; cada una va encriptada de extremo a extremo.":"それぞれがほかの2人の声を聞き、姿を見られます。あなたの端末が2つの通話をつなぎます。どちらの通話もエンドツーエンドで暗号化されています。"
 },
 "p":{
 "intento":"今日最も多く試みたのは {1}、{2} {2?回|回}。",

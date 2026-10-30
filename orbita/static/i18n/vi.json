@@ -3589,7 +3589,18 @@
 "Ese mensaje ya no está aquí.":"Tin nhắn đó không còn ở đây.",
 "1 mensaje nuevo":"1 tin nhắn mới",
 "Recibido":"Đã nhận",
-"por el buzón cifrado":"qua hộp thư mã hóa"
+"por el buzón cifrado":"qua hộp thư mã hóa",
+"Persona invitada":"Người được mời",
+"Llamada a tres":"Cuộc gọi ba người",
+"Añadir a la llamada":"Thêm vào cuộc gọi",
+"{n} se ha unido a la llamada.":"{n} đã tham gia cuộc gọi.",
+"{n} ha salido de la llamada.":"{n} đã rời cuộc gọi.",
+"Llamando a {n}…":"Đang gọi {n}…",
+"{n} está en otra llamada.":"{n} đang trong một cuộc gọi khác.",
+"{n} no ha contestado.":"{n} không trả lời.",
+"No hay nadie más a quien añadir.":"Không còn ai khác để thêm.",
+"Avisando a {n}: entra en la llamada en cuanto abra GUARDIANA.":"Đang báo cho {n}: họ sẽ tham gia cuộc gọi ngay khi mở GUARDIANA.",
+"Cada persona oye y ve a las otras dos. Tu equipo une las dos llamadas; cada una va encriptada de extremo a extremo.":"Mỗi người đều nghe và thấy hai người còn lại. Thiết bị của bạn nối hai cuộc gọi; mỗi cuộc gọi đều được mã hóa đầu cuối."
 },
 "p":{
 "intento":"Cố gắng nhiều nhất hôm nay: {1}, {2} {2?lần|lần}.",

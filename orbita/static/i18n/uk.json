@@ -3589,7 +3589,18 @@
 "Ese mensaje ya no está aquí.":"Цього повідомлення тут уже немає.",
 "1 mensaje nuevo":"1 нове повідомлення",
 "Recibido":"Отримано",
-"por el buzón cifrado":"через зашифровану поштову скриньку"
+"por el buzón cifrado":"через зашифровану поштову скриньку",
+"Persona invitada":"Запрошений учасник",
+"Llamada a tres":"Дзвінок утрьох",
+"Añadir a la llamada":"Додати до дзвінка",
+"{n} se ha unido a la llamada.":"{n} тепер у дзвінку.",
+"{n} ha salido de la llamada.":"{n} більше не в дзвінку.",
+"Llamando a {n}…":"Виклик: {n}…",
+"{n} está en otra llamada.":"{n} зараз в іншому дзвінку.",
+"{n} no ha contestado.":"{n} не відповідає.",
+"No hay nadie más a quien añadir.":"Більше нікого додати.",
+"Avisando a {n}: entra en la llamada en cuanto abra GUARDIANA.":"Сповіщаємо {n}: під’єднання до дзвінка почнеться, щойно відкриється GUARDIANA.",
+"Cada persona oye y ve a las otras dos. Tu equipo une las dos llamadas; cada una va encriptada de extremo a extremo.":"Кожен чує і бачить двох інших. Ваш пристрій поєднує два дзвінки; кожен із них захищений наскрізним шифруванням."
 },
 "p":{
 "intento":"Найнаполегливіша сьогодні: {1}, {2} {2?раз|разів}.",

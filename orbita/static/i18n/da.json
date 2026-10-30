@@ -3589,7 +3589,18 @@
 "Ese mensaje ya no está aquí.":"Den besked er her ikke længere.",
 "1 mensaje nuevo":"1 ny besked",
 "Recibido":"Modtaget",
-"por el buzón cifrado":"via den krypterede postkasse"
+"por el buzón cifrado":"via den krypterede postkasse",
+"Persona invitada":"Inviteret person",
+"Llamada a tres":"Trepartsopkald",
+"Añadir a la llamada":"Føj til opkaldet",
+"{n} se ha unido a la llamada.":"{n} er nu med i opkaldet.",
+"{n} ha salido de la llamada.":"{n} har forladt opkaldet.",
+"Llamando a {n}…":"Ringer til {n}…",
+"{n} está en otra llamada.":"{n} er i et andet opkald.",
+"{n} no ha contestado.":"{n} svarede ikke.",
+"No hay nadie más a quien añadir.":"Der er ikke flere at tilføje.",
+"Avisando a {n}: entra en la llamada en cuanto abra GUARDIANA.":"Giver {n} besked: vedkommende kommer med i opkaldet, så snart GUARDIANA åbnes.",
+"Cada persona oye y ve a las otras dos. Tu equipo une las dos llamadas; cada una va encriptada de extremo a extremo.":"Alle hører og ser de to andre. Din enhed forbinder de to opkald; hvert af dem er end-to-end-krypteret."
 },
 "p":{
 "intento":"Den, der prøvede mest i dag: {1}, {2} {2?gang|gange}.",

@@ -3589,7 +3589,18 @@
 "Ese mensaje ya no está aquí.":"آن پیام دیگر اینجا نیست.",
 "1 mensaje nuevo":"1 پیام جدید",
 "Recibido":"دریافت‌شده",
-"por el buzón cifrado":"از طریق صندوق پستی رمزگذاری‌شده"
+"por el buzón cifrado":"از طریق صندوق پستی رمزگذاری‌شده",
+"Persona invitada":"فرد دعوت‌شده",
+"Llamada a tres":"تماس سه‌نفره",
+"Añadir a la llamada":"افزودن به تماس",
+"{n} se ha unido a la llamada.":"{n} به تماس پیوست.",
+"{n} ha salido de la llamada.":"{n} از تماس خارج شد.",
+"Llamando a {n}…":"در حال تماس با {n}…",
+"{n} está en otra llamada.":"{n} در تماس دیگری است.",
+"{n} no ha contestado.":"{n} پاسخ نداد.",
+"No hay nadie más a quien añadir.":"کس دیگری برای افزودن نیست.",
+"Avisando a {n}: entra en la llamada en cuanto abra GUARDIANA.":"در حال خبر دادن به {n}: به محض اینکه GUARDIANA را باز کند به تماس می‌پیوندد.",
+"Cada persona oye y ve a las otras dos. Tu equipo une las dos llamadas; cada una va encriptada de extremo a extremo.":"هر نفر دو نفر دیگر را می‌شنود و می‌بیند. دستگاه شما دو تماس را به هم وصل می‌کند؛ هر کدام رمزگذاری سرتاسری دارد."
 },
 "p":{
 "intento":"بیشترین تلاش امروز: {1}، {2} {2?بار|بار}.",

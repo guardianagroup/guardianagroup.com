@@ -3589,7 +3589,18 @@
 "Ese mensaje ya no está aquí.":"Dat bericht is hier niet meer.",
 "1 mensaje nuevo":"1 nieuw bericht",
 "Recibido":"Ontvangen",
-"por el buzón cifrado":"via de versleutelde brievenbus"
+"por el buzón cifrado":"via de versleutelde brievenbus",
+"Persona invitada":"Gast",
+"Llamada a tres":"Drie-gesprek",
+"Añadir a la llamada":"Toevoegen aan gesprek",
+"{n} se ha unido a la llamada.":"{n} doet mee aan het gesprek.",
+"{n} ha salido de la llamada.":"{n} heeft het gesprek verlaten.",
+"Llamando a {n}…":"{n} wordt gebeld…",
+"{n} está en otra llamada.":"{n} is in een ander gesprek.",
+"{n} no ha contestado.":"{n} heeft niet opgenomen.",
+"No hay nadie más a quien añadir.":"Er is niemand anders om toe te voegen.",
+"Avisando a {n}: entra en la llamada en cuanto abra GUARDIANA.":"{n} wordt gewaarschuwd: doet mee aan het gesprek zodra die GUARDIANA opent.",
+"Cada persona oye y ve a las otras dos. Tu equipo une las dos llamadas; cada una va encriptada de extremo a extremo.":"Iedereen hoort en ziet de andere twee. Jouw apparaat verbindt de twee gesprekken; elk is end-to-end versleuteld."
 },
 "p":{
 "intento":"Probeerde het vandaag het vaakst: {1}, {2} {2?keer|keer}.",

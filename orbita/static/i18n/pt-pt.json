@@ -3589,7 +3589,18 @@
 "Ese mensaje ya no está aquí.":"Essa mensagem já não está aqui.",
 "1 mensaje nuevo":"1 mensagem nova",
 "Recibido":"Recebida",
-"por el buzón cifrado":"pela caixa de correio cifrada"
+"por el buzón cifrado":"pela caixa de correio cifrada",
+"Persona invitada":"Pessoa convidada",
+"Llamada a tres":"Chamada a três",
+"Añadir a la llamada":"Adicionar à chamada",
+"{n} se ha unido a la llamada.":"{n} entrou na chamada.",
+"{n} ha salido de la llamada.":"{n} saiu da chamada.",
+"Llamando a {n}…":"A ligar a {n}…",
+"{n} está en otra llamada.":"{n} está noutra chamada.",
+"{n} no ha contestado.":"{n} não atendeu.",
+"No hay nadie más a quien añadir.":"Não há mais ninguém para adicionar.",
+"Avisando a {n}: entra en la llamada en cuanto abra GUARDIANA.":"A avisar {n}: entra na chamada assim que abrir a GUARDIANA.",
+"Cada persona oye y ve a las otras dos. Tu equipo une las dos llamadas; cada una va encriptada de extremo a extremo.":"Cada pessoa ouve e vê as outras duas. O teu equipamento une as duas chamadas; cada uma é cifrada de ponta a ponta."
 },
 "p":{
 "intento":"A que mais tentou hoje: {1}, {2} {2?vez|vezes}.",
