@@ -2058,3 +2058,9 @@ body.con-pestanas #marcar .marcar-llamar span{position:absolute;width:1px;height
 .gc-llamada.tres[data-foco="remoto"] #ll-tercero-n,.gc-llamada.tres[data-foco="tercero"] #ll-remoto-n{display:none}
 .gc-llamada.tres[data-foco="remoto"] #ll-remoto-n,.gc-llamada.tres[data-foco="tercero"] #ll-tercero-n{left:16px;top:auto;bottom:calc(140px + env(safe-area-inset-bottom));max-width:calc(100% - 200px)}
 .gc-llamada.tres.movida:not(.mini) .videos #v-local{left:var(--mi-x)!important;top:var(--mi-y)!important;right:auto!important;bottom:auto!important}
+/* La nota de voz en el PC (dueño, 30 Oct 2026, 10:51: «el audio se sale del botón»): la burbuja se quedaba en su ancho mínimo y las
+   44 barras, que no caben en menos de 130 px, se salían por la derecha. Ahora la burbuja tiene su ancho (300 px, como en el
+   teléfono) y la onda nunca pinta fuera de su sitio */
+@media (min-width:761px){.gc-burbuja-voz{min-width:300px}}
+.gc-burbuja-voz .gc-voz{width:100%}
+.gc-voz-onda{overflow:hidden}
