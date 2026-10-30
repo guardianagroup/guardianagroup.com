@@ -196,13 +196,14 @@ class Rele {
     c.avisoId = id;
     c.ws.json({ t: 'avisos', ok: true, id, salas: salas.length });
   }
-  // quien escribe o llama a una sala donde no está la otra persona pide que se le avise; como mucho uno cada 10 s por conexión
+  // quien escribe o llama a una sala donde no está la otra persona (o la tiene en segundo plano) pide que se le avise
   despierta(c, m) {
     if (!this.avisos) return;
     const sala = String(m.sala || ''), tipo = m.tipo === 'llamada' ? 'llamada' : m.tipo === 'fin' ? 'fin' : 'mensaje';
     if (!esHex(sala, 64) || !c.salas.has(sala)) return;
     const ahora = Date.now();
-    if (c.despertoEn && ahora - c.despertoEn < 10 * 1000 && c.despertoTipo === tipo) return;
+    // cada mensaje puede avisar (el aviso cuenta 1, 2, 3…; 29 Oct 2026, 23:41); las llamadas, como mucho una cada 10 s
+    if (c.despertoEn && ahora - c.despertoEn < (tipo === 'mensaje' ? 2000 : 10 * 1000) && c.despertoTipo === tipo) return;
     c.despertoEn = ahora; c.despertoTipo = tipo;
     const r = this.avisos.avisa(sala, c.avisoId || null, tipo);
     c.ws.json({ t: 'despierta', sala, tipo, avisados: r.avisados, silenciados: r.silenciados });

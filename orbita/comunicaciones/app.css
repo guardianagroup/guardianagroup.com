@@ -202,9 +202,11 @@ svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-l
 @keyframes candadoSube{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
 .gc-compositor{position:relative}
 .gc-compositor.grabando-ya #texto,.gc-compositor.grabando-ya #adjuntar,.gc-compositor.grabando-ya .campo-envoltura{display:none}
-.gc-compositor.grabando-ya #grabar{background:var(--alerta);color:var(--accent-fg)}
-#grabar{touch-action:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;transition:transform .12s ease}
-#grabar.pulsando{transform:scale(1.22)}
+.gc-compositor.grabando-ya #grabar{background:#9CC3E4;color:#06080C;border-color:#9CC3E4}
+#grabar{touch-action:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent;transition:transform .16s cubic-bezier(.2,.9,.3,1.25),background .12s ease,box-shadow .16s ease;position:relative;z-index:2}
+/* como en WhatsApp (dueño, 29 Oct 2026, 23:40 y 23:59): al tocarlo, el botón crece bajo el dedo, se ilumina y se nota */
+#grabar:active{transform:scale(.92)}
+#grabar.pulsando{transform-origin:72% 55%;transform:scale(1.75);background:#9CC3E4;color:#06080C;box-shadow:0 0 0 7px rgba(156,195,228,.18),0 10px 28px rgba(0,0,0,.45)}
 .gc-compositor.grabando-ya:not(.grab-fija) #enviar{display:none!important}
 .gc-compositor.grab-fija #grabar{display:none}
 .gc-compositor.con-texto #grabar{display:none}
@@ -1328,7 +1330,7 @@ body.en-conv .barra .ajustes-b{display:none}
 .ajuste-txt small{font:400 13px/1.35 var(--texto);color:var(--muted);display:block;min-height:2.7em}
 /* «Buscar actualizaciones», centrado: su texto suele ser de una línea y el hueco de la segunda lo subía (dueño, 29 Oct 2026, 23:34) */
 #aj-version .ajuste-txt small{min-height:0}
-#aj-avisos-est{display:grid;min-height:0}#aj-avisos-est>span{grid-area:1/1}#aj-avisos-est>.medida{visibility:hidden}
+#aj-avisos-est,#aj-sonido .ajuste-txt small{min-height:0}#aj-avisos-est[hidden],#aj-sonido .ajuste-txt small{display:none}
 .ajuste .interruptor-mini{margin-left:auto;width:42px;height:24px;border-radius:999px;background:var(--line);position:relative;flex:none;transition:background .2s}
 .ajuste .interruptor-mini::after{content:'';position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:var(--muted);transition:transform .2s,background .2s}
 .ajuste[aria-checked="true"] .interruptor-mini{background:var(--accent)}
@@ -1801,3 +1803,8 @@ output.mi-numero-n{cursor:default}
 #ver-contactos{position:relative;gap:10px}
 #ver-contactos .mis-n{font-style:normal;min-width:26px;height:26px;padding:0 8px;box-sizing:border-box;border-radius:999px;background:#5CC98A;color:#06080C;font:700 14px/26px var(--texto);text-align:center;font-variant-numeric:tabular-nums}
 #ver-contactos .mis-n[hidden]{display:none}
+/* grabando con el dedo puesto (como WhatsApp): sin marco, el punto rojo y el tiempo a la izquierda, «‹ Desliza para cancelar» en medio */
+.gc-compositor.grabando-ya:not(.grab-fija) .grabando{border-color:transparent;background:transparent;padding-left:6px}
+.grabando i{width:11px;height:11px}
+.grabando #grabando-t{font-size:15px;color:#F4F6F8}
+.grab-candado{bottom:calc(100% + 30px);right:14px;width:40px;padding:10px 0 8px;border-radius:20px}

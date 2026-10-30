@@ -20,6 +20,7 @@ const MAX_SUBS = 50000;
 const MAX_POR_SALA = 8;
 const DIAS = 180;
 const SILENCIO_MS = 20 * 1000;
+const SILENCIO_MENSAJE_MS = 2 * 1000; // cada mensaje, su aviso: el teléfono cuenta 1, 2, 3… (29 Oct 2026, 23:41)
 const b64u = (b) => Buffer.from(b).toString('base64').replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
 const deB64u = (s) => Buffer.from(String(s).replace(/-/g, '+').replace(/_/g, '/'), 'base64');
 const esHex = (s, n) => typeof s === 'string' && s.length === n && /^[0-9a-f]+$/.test(s);
@@ -126,7 +127,7 @@ class Avisos {
     for (const endpoint of c) {
       const s = this.subs.get(endpoint); if (!s || (excepto && s.id === excepto)) continue;
       const k = endpoint + '|' + sala + '|' + tipo, ahora = Date.now();
-      if (this.ultimos.get(k) && ahora - this.ultimos.get(k) < SILENCIO_MS) { sil++; continue; }
+      if (this.ultimos.get(k) && ahora - this.ultimos.get(k) < (tipo === 'mensaje' ? SILENCIO_MENSAJE_MS : SILENCIO_MS)) { sil++; continue; }
       this.ultimos.set(k, ahora); n++;
       // «fin» va con el mismo topic que «llamada»: si el aviso de la llamada aún no había llegado al teléfono, lo sustituye
       this.envia(s, JSON.stringify({ tipo, sala, t: ahora }), tipo === 'llamada' ? 40 : tipo === 'fin' ? 120 : tipo === 'contacto' ? 2 * 24 * 3600 : 900, tipo === 'llamada' ? 'high' : 'normal', sala, tipo === 'fin' ? 'llamada' : tipo).catch(() => {});
