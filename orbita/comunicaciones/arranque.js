@@ -13,21 +13,27 @@
   // y si el teléfono cerró la app hace poco, también se vuelve a la última pantalla (app.js, guardaUltima)
   try { var u = JSON.parse(localStorage.getItem('gcom-ultima') || 'null'); if (u && Date.now() - u.t < 15 * 60 * 1000) vuelve = true; } catch (e) {}
   if (app) raiz.classList.add('como-app');
-  // El manifiesto (29 Oct 2026, 17:58–18:01: en el iPhone, la app añadida desde una invitación nacía vacía). Se crea aquí, antes de
-  // que Safari lea ninguno: normalmente el de siempre; en el iPhone, en Safari y con una invitación, uno propio cuya dirección de
-  // inicio (absoluta) lleva la invitación dentro, y la dirección de la página también, por si el iPhone toma esa. Siempre en el
-  // fragmento («#i=…»), nunca en la consulta: la consulta llega al servidor y la invitación es el secreto (Astra, ronda 72).
+  // El manifiesto (29 Oct 2026, 17:58–19:04). Se crea aquí, antes de que Safari lea ninguno (WebKit lee el primero y no lo vuelve a
+  // leer): normalmente el de siempre; en Safari del iPhone, uno propio cuya dirección de inicio lleva la llave del traspaso
+  // («#t=…», solo en el fragmento: nunca llega a ningún servidor). Esa llave se crea la primera vez que Safari abre una invitación y
+  // se guarda en Safari; la app que se añade a la pantalla de inicio arranca con ella y recoge el chat (app.js, «traspaso»).
   try {
-    var inv = (location.hash.match(/^#([ib]=[A-Za-z0-9_-]{43})$/) || [])[1];
     var ios = /iPhone|iPad|iPod/.test(navigator.userAgent) || (/Macintosh/.test(navigator.userAgent) && navigator.maxTouchPoints > 1);
     var l = document.createElement('link'); l.rel = 'manifest'; l.href = '/orbita/comunicaciones/comunicaciones.webmanifest';
-    if (inv && ios && !app) {
-      var O = location.origin, base = O + '/orbita/comunicaciones/';
-      var man = { name: 'GUARDIANA', short_name: 'GUARDIANA', id: base, start_url: base + '?app=1#' + inv, scope: base, display: 'fullscreen', display_override: ['fullscreen', 'standalone'], orientation: 'portrait', background_color: '#06080C', theme_color: '#06080C', lang: 'es', dir: 'ltr', icons: [{ src: O + '/icon-192.png?v=2', sizes: '192x192', type: 'image/png', purpose: 'any' }, { src: O + '/icon-512.png?v=2', sizes: '512x512', type: 'image/png', purpose: 'any' }, { src: O + '/icon-maskable-192.png?v=2', sizes: '192x192', type: 'image/png', purpose: 'maskable' }, { src: O + '/icon-maskable-512.png?v=2', sizes: '512x512', type: 'image/png', purpose: 'maskable' }] };
-      var u = ''; try { u = URL.createObjectURL(new Blob([JSON.stringify(man)], { type: 'application/manifest+json' })); } catch (e) {}
-      l.href = u || 'data:application/manifest+json,' + encodeURIComponent(JSON.stringify(man));
-      history.replaceState(null, '', '/orbita/comunicaciones/?app=1#' + inv);
-      window.gcomManifiestoInv = man;
+    if (ios && !app) {
+      var t = null; try { t = localStorage.getItem('gcom-traspaso'); } catch (e) {}
+      if (!/^[A-Za-z0-9_-]{43}$/.test(t || '') && /^#i=[A-Za-z0-9_-]{43}$/.test(location.hash)) {
+        var b = new Uint8Array(32); crypto.getRandomValues(b); var x = ''; for (var k = 0; k < b.length; k++) x += String.fromCharCode(b[k]);
+        t = btoa(x).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+        try { localStorage.setItem('gcom-traspaso', t); } catch (e) {}
+      }
+      if (/^[A-Za-z0-9_-]{43}$/.test(t || '')) {
+        var O = location.origin, base = O + '/orbita/comunicaciones/';
+        var man = { name: 'GUARDIANA', short_name: 'GUARDIANA', id: base, start_url: base + '?app=1#t=' + t, scope: base, display: 'fullscreen', display_override: ['fullscreen', 'standalone'], orientation: 'portrait', background_color: '#06080C', theme_color: '#06080C', lang: 'es', dir: 'ltr', icons: [{ src: O + '/icon-192.png?v=2', sizes: '192x192', type: 'image/png', purpose: 'any' }, { src: O + '/icon-512.png?v=2', sizes: '512x512', type: 'image/png', purpose: 'any' }, { src: O + '/icon-maskable-192.png?v=2', sizes: '192x192', type: 'image/png', purpose: 'maskable' }, { src: O + '/icon-maskable-512.png?v=2', sizes: '512x512', type: 'image/png', purpose: 'maskable' }] };
+        var u = ''; try { u = URL.createObjectURL(new Blob([JSON.stringify(man)], { type: 'application/manifest+json' })); } catch (e) {}
+        l.href = u || 'data:application/manifest+json,' + encodeURIComponent(JSON.stringify(man));
+        window.gcomTraspaso = t; window.gcomManifiestoInv = man;
+      }
     }
     document.head.appendChild(l);
   } catch (e) {}

@@ -36,8 +36,8 @@ async function guarda(p, nombre) {
   const browser = await chromium.launch({ args: ['--use-fake-ui-for-media-stream', '--use-fake-device-for-media-stream', '--autoplay-policy=no-user-gesture-required'] });
   const A = await telefono(browser, 'A'), B = await telefono(browser, 'B');
   await A.goto(URL0); await B.goto(URL0); await espera(1500);
-  // 29 Oct 2026, 17:28 (dueño): sin «Tengo una invitación» en el inicio; la invitación entra sola en la app al añadirla
-  comprueba(!(await A.$('#pegar-inv')), 'el inicio, sin «Tengo una invitación»');
+  // iPhone con la app: «Abrir invitación» existe (para pegar una invitación copiada), discreto
+  comprueba(await visible(A, '#pegar-inv'), 'iPhone (app): «Abrir invitación» en el inicio');
   // B entra pegando el enlace en la app (como haría la esposa)
   const enlace = await conecta(A, B);
   comprueba(!(await A.$('#enlace-whatsapp')) && !(await A.$('#enlace-copiar-2')), 'invitación: sin botones de más');

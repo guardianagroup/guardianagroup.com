@@ -3425,6 +3425,8 @@
 ,
 "Abre":"Otevřete",
 "El chat ya está dentro.":"Chat už je uvnitř."
+,
+"Desliza hacia abajo y pulsa":"Posuňte dolů a klepněte na"
 },
 "p":{
 "intento":"Nejvíc se dnes snažila: {1}, {2}{2?krát|krát}.",

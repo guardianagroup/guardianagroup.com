@@ -121,7 +121,7 @@
   function convNueva(sala, semilla, rol, modo) {
     return { id: sala, semilla, rol, modo: modo === 'blindada' ? 'blindada' : 'normal', suVerificada: false, estado: 'invitacion', nombre: '', firmaPub: null, acuerdoPub: null, huella: null, verificada: false, creado: Date.now(), ultimo: Date.now(), ultimoTexto: null, noLeidos: 0 };
   }
-  const guardable = (c) => ({ id: c.id, tumba: c.tumba, vaciarPendiente: c.vaciarPendiente || undefined, borrarPendientes: c.borrarPendientes && c.borrarPendientes.length ? c.borrarPendientes : undefined, semilla: c.semilla, rol: c.rol, estado: c.estado, nombre: c.nombre, firmaPub: c.firmaPub, acuerdoPub: c.acuerdoPub, huella: c.huella, verificada: c.verificada, creado: c.creado, ultimo: c.ultimo, ultimoTexto: c.ultimoTexto, noLeidos: c.noLeidos, enlace: !!c.enlace || undefined, pqVisto: !!c.pqVisto, clasicaAceptada: !!c.clasicaAceptada, modo: c.modo || 'normal', suVerificada: !!c.suVerificada, dsaPub: c.dsaPub || null, idB: c.idB || null, alias: c.alias || '', num: c.num || 0, contacto: !!c.contacto, sinContacto: !!c.sinContacto });
+  const guardable = (c) => ({ id: c.id, tumba: c.tumba, vaciarPendiente: c.vaciarPendiente || undefined, borrarPendientes: c.borrarPendientes && c.borrarPendientes.length ? c.borrarPendientes : undefined, semilla: c.semilla, rol: c.rol, estado: c.estado, nombre: c.nombre, firmaPub: c.firmaPub, acuerdoPub: c.acuerdoPub, huella: c.huella, verificada: c.verificada, creado: c.creado, ultimo: c.ultimo, ultimoTexto: c.ultimoTexto, noLeidos: c.noLeidos, enlace: !!c.enlace || undefined, pqVisto: !!c.pqVisto, clasicaAceptada: !!c.clasicaAceptada, modo: c.modo || 'normal', suVerificada: !!c.suVerificada, dsaPub: c.dsaPub || null, idB: c.idB || null, alias: c.alias || '', num: c.num || 0, contacto: !!c.contacto, sinContacto: !!c.sinContacto, traspasoDe: c.traspasoDe || undefined, traspasoApp: !!c.traspasoApp || undefined });
   const guardaConv = (c) => BD.pon('conv', guardable(c));
   async function preparaConv(c) {
     if (esB(c)) await preparaIdentidadB(c);
@@ -150,7 +150,7 @@
   // de la conversación (32 bytes) se cierra con una clave derivada del código (PBKDF2) y ese «sobre» se deja en el relé
   // durante 10 minutos, una sola vez; el relé no puede abrirlo sin el código y limita los intentos de búsqueda.
   // una invitación sin usar se sustituye por la nueva; las conversaciones ya empezadas no se tocan (varias a la vez)
-  async function limpiaInvitaciones() { for (const x of [...CONVS.values()]) if (x.estado === 'invitacion' && x.rol === 'invita' && !x.huella && !esB(x)) await destruye(x, true); }
+  async function limpiaInvitaciones() { for (const x of [...CONVS.values()]) if (x.estado === 'invitacion' && x.rol === 'invita' && !x.huella && !esB(x) && !x.traspasoDe) await destruye(x, true); }
   const caben = () => { if (vivas().filter((x) => !(x.estado === 'invitacion' && x.rol === 'invita' && !x.huella && !esB(x))).length < MAX_CONVS) return true; aviso(T('Ya tienes {n} conversaciones abiertas: termina alguna para empezar otra.').replace('{n}', MAX_CONVS)); return false; };
   async function creaInvitacion() {
     if (!R.abierto) { aviso(T('Sin conexión: espera un momento.')); return; }
@@ -220,7 +220,7 @@
   addEventListener('pagehide', () => { if (R) R.presencia(true); });
   addEventListener('pageshow', () => { if (R) R.presencia(document.visibilityState !== 'visible'); });
   // en el móvil, una conversación nueva borra las anteriores… salvo los contactos guardados (dueño, 28 Oct 2026, 17:33)
-  async function borraAnteriores(salvo) { for (const x of [...CONVS.values()]) if (x.id !== salvo && !x.contacto) { try { await destruye(x, true); } catch (_) {} } }
+  async function borraAnteriores(salvo) { for (const x of [...CONVS.values()]) if (x.id !== salvo && !x.contacto && !(x.traspasoDe && !x.huella) && x.id !== traspasoConvId()) { try { await destruye(x, true); } catch (_) {} } }
   // opc.sinPantalla: la invitación que sale del inicio del teléfono en un solo toque (dueño, 28 Oct 2026, 19:17: «desde la
   // primera interfaz que diga invitar a chat, ya tiene que abrir directo… es mejor solo una pantalla»). No abre ninguna pantalla
   // de espera y no exige que el relé esté ya conectado: el enlace sale de aquí y la sala se pide en cuanto haya conexión.
@@ -403,6 +403,7 @@
       c.suId = de; c.miembros.add(de);
       if (nueva || j.nombre !== c.nombreVisto) { c.nombreVisto = j.nombre; await guardaConv(c); }
       if (nueva) await fundeConContacto(c); // si es alguien ya guardado, este es «el mismo chat de siempre» (12:53–12:56)
+      if (nueva && c.traspasoDe) await fundeTraspaso(c); // la app de la pantalla de inicio de la otra persona recoge su chat de Safari (19:02)
       const esResp = !!efMia;
       if (!soyInicio(c)) { const pq = await presenta(c, { epoca, ef, ek: kemEk }); await derivaSesion(c, ef, c.ef, pq); }
       else if (esResp) {
@@ -447,6 +448,7 @@
     pintaCabecera(c); pintaLista();
     enviaControl(c, { tipo: 'ok' });
     if (YO.nombre) enviaControl(c, { tipo: 'nombre', nombre: YO.nombre });
+    mandaTraspaso(c);
     if (LL && LL.ocupado && (LLAMADA_CONV || ACTUAL) === c.id) LL.volvio(); // la otra persona ha vuelto: si se la estaba llamando, otra vez
     enviaCola(c);
     reenviaCustodias(c);
@@ -719,6 +721,8 @@
         return;
       }
       case 'verificada': return recibeVerificada(c, j);
+      case 'traspaso': return recibeTraspaso(c, j);
+      case 'traspasado': return chatTraspasado(c);
       case 'nombre': { const n = String(j.nombre || '').trim().slice(0, 40); if (!c.nombreFijado && n && n !== c.nombre) { c.nombre = n; await guardaConv(c); pintaLista(); pintaCabecera(c); } return; }
       case 'archivo': return recibeAnuncioArchivo(c, j, ses);
       case 'archivo-ack': { const a = c.archivos.get(j.id); if (a && a.envio) { a.ack = Math.max(a.ack, +j.hasta || 0); a.sigue && a.sigue(); acuseViaje(j, a); } return; }
@@ -1312,7 +1316,7 @@
   const servidorLlamada = () => (iceUsado === 'am' ? T('Miami (Estados Unidos)') : iceUsado === 'eu' ? T('Núremberg (Alemania)') : '');
   const puedeLlamar = () => { const c = CONVS.get(ACTUAL); return !!(c && enLinea(c) && c.sesion && c.sesion.confirmada && puedeEnviar(c)); };
   // solo en local (pruebas): simular un mensaje manipulado y ver la alarma sin tocar el relé
-  if (LOCAL) window.gcomPrueba = { avisos: () => ({ firma: avisosFirma, ultimo: ultimoAvisos, despierta: ultimoDespierta, sw: !!swReg, puede: puedePush(), permiso: permisoAvisos() }), activa: () => activaAvisos(), incidencia: async (id) => { const c = CONVS.get(id || ACTUAL); if (!c) return; c.incidencias = (c.incidencias || 0) + 1; await anotaSistema(c, 'Un mensaje no superó la comprobación de integridad y se ha descartado.'); vigila(c, T('Un mensaje no superó la autenticación: descartado.'), 'mal'); return alarmaSiToca(c); }, conv: () => CONVS.get(ACTUAL), corta: () => R.corta(), llamada: () => (LL ? LL.estado : ''), enlace: () => { const c = CONVS.get(ACTUAL); return c && c.semilla ? enlaceB(c) : null; }, cuantas: () => [...CONVS.values()].filter((x) => x.estado !== 'destruida' && x.estado !== 'destruida_pendiente').length };
+  if (LOCAL) window.gcomPrueba = { traspaso: () => ({ llave: llaveTraspaso(), conv: traspasoConvId(), ocultas: [...CONVS.values()].filter((c) => c.traspasoDe && !c.huella).length, total: CONVS.size, vivas: vivas().length, nombres: vivas().map((c) => nombreConv(c, true)) }), avisos: () => ({ firma: avisosFirma, ultimo: ultimoAvisos, despierta: ultimoDespierta, sw: !!swReg, puede: puedePush(), permiso: permisoAvisos() }), activa: () => activaAvisos(), incidencia: async (id) => { const c = CONVS.get(id || ACTUAL); if (!c) return; c.incidencias = (c.incidencias || 0) + 1; await anotaSistema(c, 'Un mensaje no superó la comprobación de integridad y se ha descartado.'); vigila(c, T('Un mensaje no superó la autenticación: descartado.'), 'mal'); return alarmaSiToca(c); }, conv: () => CONVS.get(ACTUAL), corta: () => R.corta(), llamada: () => (LL ? LL.estado : ''), enlace: () => { const c = CONVS.get(ACTUAL); return c && c.semilla ? enlaceB(c) : null; }, cuantas: () => [...CONVS.values()].filter((x) => x.estado !== 'destruida' && x.estado !== 'destruida_pendiente').length };
   function arrancaLlamadas() {
     if (!window.GuardianaLlamada || !window.RTCPeerConnection) { for (const id of ['#llamar', '#videollamar']) { const b = $(id); if (b) b.hidden = true; } return; }
     if (!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia)) { const b = $('#videollamar'); if (b) b.hidden = true; }
@@ -1376,6 +1380,120 @@
   // de alguien ya conocido, este chat hereda su nombre, si era contacto y todo lo hablado, y las conversaciones viejas con esa
   // misma persona desaparecen de la lista (sus mensajes y archivos pasan aquí). En el blindado no se puede: allí la identidad es
   // nueva en cada sesión, a propósito.
+  // ---------- traspaso de Safari a la app (dueño, 29 Oct 2026, 18:56–19:04: «primero un chat y después… añadir a pantalla de inicio…
+  // que cuando la persona haya hecho eso, automáticamente el chat de fuera pase a la aplicación… para que la persona no se pierda») ----
+  // En el iPhone, Safari y la app de la pantalla de inicio no comparten nada, y la identidad de cada una es distinta y no se puede
+  // exportar. Así que el chat no se copia: se «muda». Safari guarda una llave nueva de 32 bytes (arranque.js, «gcom-traspaso») y la
+  // mete en la dirección de inicio de la app que se añade (solo en el fragmento «#t=», que no llega a ningún servidor). En cuanto
+  // Safari y la otra persona tienen sesión, Safari le manda esa llave por el canal encriptado; la otra persona abre con ella una
+  // sala nueva, oculta, que espera a la app. Cuando la app se abre con «#t=» entra en esa sala con su propia identidad, la otra
+  // persona la recibe como la misma persona (firmado por la sesión de Safari) y funde los dos chats en uno: mismo nombre, mismo
+  // contacto y todo lo hablado. A Safari le dice «traspasado» y Safari se despide.
+  const iosSafari = () => { try { return (/iPhone|iPad|iPod/.test(navigator.userAgent || '') || (/Macintosh/.test(navigator.userAgent || '') && navigator.maxTouchPoints > 1)) && !comoApp(); } catch (_) { return false; } };
+  const llaveTraspaso = () => { const t = window.gcomTraspaso || (() => { try { return localStorage.getItem('gcom-traspaso'); } catch (_) { return null; } })(); return /^[A-Za-z0-9_-]{43}$/.test(t || '') ? t : null; };
+  function traspasoConvId() { try { return localStorage.getItem('gcom-traspaso-conv') || ''; } catch (_) { return ''; } }
+  function mandaTraspaso(c) {
+    if (!c || esB(c) || !c.huella || !iosSafari()) return;
+    const t = llaveTraspaso(); if (!t) return;
+    const ya = traspasoConvId(); if (ya && ya !== c.id && CONVS.has(ya)) return; // una sola conversación se muda (la primera)
+    try { localStorage.setItem('gcom-traspaso-conv', c.id); } catch (_) {}
+    enviaControl(c, { tipo: 'traspaso', s: t });
+    // y la dirección de esta página también la lleva, por si el iPhone añade la app con la dirección de la página
+    try { history.replaceState(history.state, '', location.pathname + '?app=1#t=' + t); } catch (_) {}
+    setTimeout(() => ofreceAnadir(c), 300);
+  }
+  async function recibeTraspaso(c, j) {
+    try {
+      if (!c || esB(c) || !c.huella || !c.sesion) return;
+      const s = String(j.s || ''); if (!/^[A-Za-z0-9_-]{43}$/.test(s)) return;
+      const semilla = C.deB64u(s); if (semilla.length !== 32) return;
+      const d = await C.deSemilla(semilla);
+      if (CONVS.has(d.sala)) return; // ya la tengo (la llave se manda en cada sesión)
+      const n = convNueva(d.sala, semilla, 'invita'); n.num = siguienteNum(); n.enlace = true; n.traspasoDe = c.id;
+      await preparaConv(n); await guardaConv(n);
+    } catch (e) { console.warn('traspaso', e); }
+  }
+  async function fundeTraspaso(n) {
+    try {
+      const o = CONVS.get(n.traspasoDe); n.traspasoDe = null;
+      if (!o || o === n) { await guardaConv(n); pintaLista(); return; }
+      if (o.contacto) { n.contacto = true; n.sinContacto = false; } else if (o.sinContacto) n.sinContacto = true;
+      if (o.alias && !n.alias) n.alias = o.alias;
+      if (!n.nombre && o.nombre) n.nombre = o.nombre;
+      if (o.verificada) n.verificada = true;
+      // a Safari: «tu chat ya está en la app»
+      try { if (enLinea(o)) enviaControl(o, { tipo: 'traspasado' }); } catch (_) {}
+      let abrirAqui = ACTUAL === o.id;
+      if (LLAMADA_CONV === o.id) LLAMADA_CONV = n.id;
+      for (const m of o.mensajes || []) { try { VIAJES.delete(m.id); } catch (_) {} }
+      const viejos = o.mensajes || [];
+      o.estado = 'destruida'; o.mensajes = []; o.cola = [];
+      setTimeout(() => { try { R.sale(o.id); } catch (_) {} }, 1500); // un momento, para que «traspasado» salga antes
+      CONVS.delete(o.id);
+      for (const st of ['msg', 'arch']) { const xs = await BD.porConv(st, o.id); for (const x of xs) { x.conv = n.id; await BD.pon(st, x); } }
+      await BD.borra('conv', o.id);
+      n.cargados = false; n.mensajes = []; n.cola = []; await cargaMensajes(n);
+      const u = n.mensajes.filter((x) => x.dir !== 'sistema').pop(); if (u) { n.ultimo = Math.max(n.ultimo || 0, u.t || 0); n.ultimoTexto = await guardaSellado({ texto: u.tipo === 'texto' ? u.texto : u.tipo === 'archivo' ? '📎 ' + u.archivo.nombre : u.texto || '' }); }
+      void viejos;
+      await guardaConv(n);
+      if (abrirAqui) await abreConv(n.id); else if (ACTUAL === n.id) { pintaCabecera(n); pintaTodos(n); }
+      pintaLista(); pintaContactos();
+    } catch (e) { console.warn('fundir traspaso', e); }
+  }
+  // en Safari: la otra persona ya habla con la app; esta copia se borra y se dice dónde está el chat
+  async function chatTraspasado(c) {
+    try { localStorage.removeItem('gcom-traspaso-conv'); } catch (_) {}
+    try { await destruyeLocal(c, false, true); } catch (_) {}
+    abreAnadir(false);
+    const p = $('#paso-traspasado'); if (p) { for (const id of ['paso-inicio', 'paso-codigo', 'paso-enlace', 'paso-entrar', 'paso-aceptar', 'paso-ios']) { const e = $('#' + id); if (e) e.hidden = true; } p.hidden = false; $('#inicio').hidden = false; $('#inicio').classList.add('con-invitacion'); document.body.classList.add('aceptando'); $('#conv').hidden = true; }
+  }
+  // el botón azul «Añadir a pantalla de inicio», abajo, encima de donde se escribe (dueño, 19:14); al tocarlo se despliega la guía fácil
+  // y lo primero que se ve en el chat es la guía desplegada (dueño, 19:22: «una vez que se ha abierto el chat… lo primero que ve ahí es
+  // agregar a la pantalla de inicio»); se recoge con un toque y se puede chatear mientras
+  let anadirMostrado = false;
+  function ofreceAnadir() {
+    if (!(iosSafari() && llaveTraspaso())) return;
+    pintaTiraAnadir();
+    if (!anadirMostrado && ACTUAL && ACTUAL === traspasoConvId()) { anadirMostrado = true; abreAnadir(true); }
+  }
+  function pintaTiraAnadir() {
+    const t = $('#tira-anadir'); if (!t) return;
+    const ver = !!(iosSafari() && llaveTraspaso() && ACTUAL && ACTUAL === traspasoConvId());
+    t.hidden = !ver;
+    for (const k of ['nav-safari26', 'nav-safari', 'nav-chrome', 'nav-otro']) t.classList.remove(k);
+    t.classList.add('nav-' + navegadorIOS());
+  }
+  // dónde está «Compartir» en cada navegador del iPhone (dueño, 19:18: en su iPhone, Chrome, arriba a la derecha; en el de su mujer,
+  // Safari de iOS 26, en las rayitas de abajo). Safari anterior: abajo en el centro. Los demás: texto, sin flecha.
+  // (dueño, 19:29: «vamos a dejar solamente para las versiones modernas… quita la de la barrita de abajo»): una sola guía para todos,
+  // la de Compartir arriba a la derecha, como en su iPhone 16
+  function navegadorIOS() { return 'chrome'; }
+  function navegadorIOSDetalle() {
+    const ua = navigator.userAgent || '';
+    if (/CriOS\//.test(ua)) return 'chrome';
+    if (/FxiOS|EdgiOS|OPiOS|OPT\/|DuckDuckGo|GSA\//.test(ua)) return 'otro';
+    const v = (ua.match(/Version\/(\d+)/) || [])[1] | 0;
+    return v >= 26 ? 'safari26' : v ? 'safari' : 'otro';
+  }
+  function abreAnadir(abrir) {
+    const t = $('#tira-anadir'), g = $('#anadir-guia'), b = $('#tira-anadir-b'); if (!t || !g) return;
+    const ver = typeof abrir === 'boolean' ? abrir : g.hidden;
+    g.hidden = !ver; t.classList.toggle('abierta', ver); if (b) b.setAttribute('aria-expanded', String(ver));
+    if (ver) { const l = $('#mensajes'); if (l) l.scrollTop = l.scrollHeight; }
+  }
+  async function entraTraspaso(t) {
+    try {
+      const semilla = C.deB64u(t); if (semilla.length !== 32) return false;
+      const d = await C.deSemilla(semilla);
+      if (CONVS.has(d.sala)) { abreConv(d.sala); return true; }
+      const c = convNueva(d.sala, semilla, 'acepta'); c.num = siguienteNum(); c.traspasoApp = true;
+      await preparaConv(c); await guardaConv(c);
+      pintaLista(); await abreConv(c.id);
+      // lo primero en la app: los avisos (dueño, 19:04: un solo botón, «Activar avisos», y el «Permitir» del iPhone)
+      setTimeout(() => { if (puedePush() && permisoAvisos() === 'default') { avisosPreguntado = true; abreHoja('h-avisos'); } }, 1200);
+      return true;
+    } catch (e) { console.warn('entrar traspaso', e); return false; }
+  }
   async function fundeConContacto(c) {
     try {
       if (!c || !c.huella || esB(c)) return;
@@ -1508,7 +1626,7 @@
   // el móvil es una pantalla propia y «‹» vuelve a ella. Sin vista previa del texto: el nombre, la hora y lo que hay de nuevo.
   const MAX_CONVS = 8;
   let quiereNueva = false; // la persona pulsó «Nueva»: se queda en el inicio aunque haya conversaciones
-  const vivas = () => [...CONVS.values()].filter((c) => c.estado !== 'destruida_pendiente' && c.estado !== 'destruida');
+  const vivas = () => [...CONVS.values()].filter((c) => c.estado !== 'destruida_pendiente' && c.estado !== 'destruida' && !(c.traspasoDe && !c.huella));
   const siguienteNum = () => 1 + Math.max(0, ...[...CONVS.values()].map((c) => c.num || 0));
   function nombreConv(c, corto) {
     if (!c) return '';
@@ -1659,7 +1777,7 @@
     try { pintaInsignia(); } catch (_) {}
   }
   async function abreConv(id) {
-    retiraAvisos(id); avisosCuandoToque();
+    retiraAvisos(id); avisosCuandoToque(); setTimeout(pintaTiraAnadir, 0);
     const c = CONVS.get(id); if (!c) return;
     if (ACTUAL && ACTUAL !== id) { paraEscribe(); guardaBorrador(); }
     const cambia = ACTUAL !== id;
@@ -1729,7 +1847,7 @@
     const ll = $('#llamar'); if (ll) { const si = puedeLlamar() && (R.llamadas || LOCAL); if (!(quieta && !si)) ll.classList.toggle('apagado', !si); ll.title = si ? T('Llamada de voz') : esB(c) && !(c.verificada && c.suVerificada) ? T('Las llamadas se activan cuando los dos hayan comprobado el número de seguridad.') : !R.llamadas && !LOCAL ? T('El servicio de llamadas no está disponible ahora mismo.') : T('La otra persona tiene que estar conectada.'); }
     const vl = $('#videollamar'); if (vl && ll) { vl.classList.toggle('apagado', ll.classList.contains('apagado')); vl.title = ll.classList.contains('apagado') ? ll.title : T('Videollamada'); }
     // contactos (17:33): «Guardar contacto» en «⋯» y, en el teléfono, una tira una vez al empezar
-    { const k = $('#cm-contacto'); if (k) k.hidden = !(c.huella && !c.contacto); const s = $('#ccontacto'); if (s) s.hidden = !(esMovil() && c.huella && !c.contacto && !c.sinContacto); $('#conv').classList.toggle('es-contacto', !!c.contacto); }
+    { const k = $('#cm-contacto'); if (k) k.hidden = !(c.huella && !c.contacto); const s = $('#ccontacto'); if (s) s.hidden = !(esMovil() && c.huella && !c.contacto && !c.sinContacto) || (iosSafari() && c.id === traspasoConvId()); $('#conv').classList.toggle('es-contacto', !!c.contacto); }
   }
   // Vigilancia a la derecha (dueño, 26 Oct 20:22): anota cada comprobación real según ocurre y mantiene la última a la vista.
   const hms = (t) => new Date(t || Date.now()).toLocaleTimeString(LOC(), { hour: '2-digit', minute: '2-digit', second: '2-digit' });
@@ -2594,6 +2712,8 @@
     $('#cm-completa').hidden = !esMovil() || comoApp();
     $('#cm-completa').addEventListener('click', () => { cierraMenu(); if (puedeCompleta()) pantallaCompleta(); else abreGuia(); });
     $('#completa-ok').addEventListener('click', () => cierraHoja('h-completa'));
+    // ---- llevar el chat de Safari a la app (dueño, 19:02) ----
+    { const b = $('#tira-anadir-b'); if (b) b.addEventListener('click', () => abreAnadir()); }
     // ---- Ajustes (dueño, 29 Oct 2026, 16:02) ----
     for (const id of ['#ajustes-btn', '#cm-ajustes']) { const b = $(id); if (b) b.addEventListener('click', () => { cierraMenu(); abreAjustes(); }); }
     { const b = $('#ajustes-ok'); if (b) b.addEventListener('click', () => cierraHoja('h-ajustes')); }
@@ -2691,6 +2811,7 @@
     for (const b of document.querySelectorAll('.pegar-inv')) { b.hidden = !(esIOS && comoApp());
       b.addEventListener('click', async () => {
         let t = ''; try { t = await navigator.clipboard.readText(); } catch (_) { t = ''; }
+        { const mt = t.match(/#t=([A-Za-z0-9_-]{43})/); if (mt) { await entraTraspaso(mt[1]); return; } }
         if (!/#[ib]=[A-Za-z0-9_-]{43}/.test(t)) { aviso(T('No hay ninguna invitación copiada. En Safari, pulsa «Ya tengo GUARDIANA» y vuelve aquí.')); return; }
         const ok = await preguntaInvitacion(t);
         if (!ok) aviso(T('Ese enlace no es una invitación de GUARDIANA.'));
@@ -3254,10 +3375,12 @@
     // (29 Oct 2026, 16:05–16:11: «a mi mujer… en la aplicación no le aparecen y le aparece una página abierta en Safari… le
     // aparece duplicado»): en el iPhone, Safari y la app guardan por separado y Safari no avisa con la app cerrada. Con una
     // invitación en Safari no se acepta aquí: se elige añadir la app (la invitación entra dentro) o copiarla y pegarla en la app.
-    if (/#[ib]=/.test(location.hash) && iosSafari && !comoApp()) {
-      revela();
-      muestraIOS(true, location.href);
-    }
+    // (19:02–19:04: «primero un chat y después añadir a pantalla de inicio… el mínimo de pasos»): en Safari del iPhone, la invitación
+    // normal se acepta sola, sin «¿Aceptas?»; el chat se muda a la app después (ver «traspaso»)
+    if (/#i=/.test(location.hash) && iosSafari && !comoApp()) { const ok = await aceptaInvitacion(location.href); history.replaceState(null, '', location.pathname + location.search); if (!ok) aviso(T('Ese enlace no es una invitación de GUARDIANA.')); }
+    // la app recién añadida con la llave del traspaso: entra en la sala que la espera y abre el chat
+    else if (/#t=[A-Za-z0-9_-]{43}/.test(location.hash) && comoApp()) { const t = location.hash.match(/#t=([A-Za-z0-9_-]{43})/)[1]; history.replaceState(null, '', location.pathname + '?app=1'); await entraTraspaso(t); }
+    else if (/#t=/.test(location.hash)) { history.replaceState(null, '', location.pathname); }
     // la app recién añadida a la pantalla de inicio desde una invitación (arranca con «?app=1#i=…»): el chat se abre solo, sin «¿Aceptas?»
     // (dueño, 29 Oct 2026, 18:01–18:54: «el mínimo de pasos»; ya aceptó al añadirla)
     else if (/#[ib]=/.test(location.hash) && comoApp() && new URLSearchParams(location.search).get('app') === '1') { const ok = await aceptaInvitacion(location.href); history.replaceState(null, '', location.pathname + location.search); if (!ok) aviso(T('Ese enlace no es una invitación de GUARDIANA.')); }

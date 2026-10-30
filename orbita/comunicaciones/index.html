@@ -307,6 +307,12 @@
          en Safari… en la invitación ya tiene que ir la app»). En el iPhone, Safari y la app de la pantalla de inicio guardan cada
          uno sus cosas por separado y Safari no puede dar avisos: por eso la invitación no se abre aquí. Se añade la app (dos toques,
          la guía sale sola) y la invitación va dentro: la app nace con el chat. Esta pantalla queda detrás de la guía, por si se cierra. -->
+    <!-- Safari del iPhone, cuando el chat ya se ha mudado a la app (dueño, 19:02: «para que la persona no se pierda») -->
+    <div class="paso aceptar" id="paso-traspasado" hidden>
+      <div class="espera-anillos quieto" aria-hidden="true"><span></span><svg viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7"/></svg></div>
+      <h2>Tu chat ya está en la app</h2>
+      <p class="t">Ábrela desde tu pantalla de inicio: el icono de GUARDIANA. Ya puedes cerrar Safari.</p>
+    </div>
     <div class="paso aceptar" id="paso-ios" hidden>
       <!-- Ronda 72 de la agencia (29 Oct 2026, 18:15–18:40; dueño, 18:01: «simplifícalo todo… el mínimo de pasos»): una sola pantalla
            con los tres pasos a la vista, sin botones que elegir; la invitación viaja dentro del icono (manifiesto de arranque.js). Debajo,
@@ -523,6 +529,22 @@
     </div>
     <!-- quien entra por un enlace, hasta que la otra persona esté conectada por primera vez: sin campo de escribir (15:33) -->
     <div class="espera-otro" id="espera-otro"><span class="espera-pulso" aria-hidden="true"></span><b>Conectando con la otra persona…</b><small>La conversación se abre sola en cuanto esté conectada.</small></div>
+    <!-- Safari del iPhone (dueño, 29 Oct 2026, 19:02–19:14: «añadir a pantalla de inicio tiene que salir abajo, justo encima de donde
+         se escribe… un botón… y ahí tocas y sale un desprendible»). El botón azul despliega la guía fácil; la flecha amarilla salta sobre el
+         botón de Safari (iOS 26: las rayitas, a la izquierda de la dirección; antes: Compartir, en el centro). El chat se pasa solo a la app. -->
+    <div class="tira-anadir" id="tira-anadir" hidden>
+      <div class="anadir-guia" id="anadir-guia" hidden>
+        <!-- una sola guía, la de los iPhone modernos: Compartir arriba a la derecha (dueño, 19:29) -->
+        <ol class="anadir-pasos">
+          <li class="p-chrome"><span class="ap-ic"><svg viewBox="0 0 24 24"><path d="M12 14.5V3.5M8.2 7.2 12 3.5l3.8 3.7"/><path d="M8.5 10H7a1.6 1.6 0 0 0-1.6 1.6v7.8A1.6 1.6 0 0 0 7 21h10a1.6 1.6 0 0 0 1.6-1.6v-7.8A1.6 1.6 0 0 0 17 10h-1.5"/></svg></span><span>Pulsa <b>Compartir</b>, arriba a la derecha<small>Donde salta la flecha amarilla</small></span></li>
+          <li><span class="ap-ic"><svg viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="4.5"/><path d="M12 8v8M8 12h8"/></svg></span><span>Desliza hacia abajo y pulsa <b>«Añadir a pantalla de inicio»</b><small><span data-es-es="Y después, «Añadir»">Y después, «Agregar»</span></small></span></li>
+          <li><span class="ap-ic ap-app"><img src="/apple-touch-icon.png?v=2" alt="" width="40" height="40"></span><span>Abre <b>GUARDIANA</b><small>Tu chat ya estará dentro.</small></span></li>
+        </ol>
+        <!-- dueño, 19:25: el botón amarillo parpadeando y, pegado, «Pulsa Compartir» con su dibujo (el cuadrado con la flecha) -->
+        <div class="flecha-salta" aria-hidden="true"><span class="fs-bola"><svg viewBox="0 0 24 24"><path d="M12 3v16M5.5 12.5 12 19l6.5-6.5"/></svg></span><span class="fs-txt"><span class="fs-compartir">Pulsa <svg viewBox="0 0 24 24"><path d="M12 14.5V3.5M8.2 7.2 12 3.5l3.8 3.7"/><path d="M8.5 10H7a1.6 1.6 0 0 0-1.6 1.6v7.8A1.6 1.6 0 0 0 7 21h10a1.6 1.6 0 0 0 1.6-1.6v-7.8A1.6 1.6 0 0 0 17 10h-1.5"/></svg></span></span></div>
+      </div>
+      <button type="button" class="boton principal" id="tira-anadir-b" aria-expanded="false" aria-controls="anadir-guia"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="4.5"/><path d="M12 8v8M8 12h8"/></svg><span>Añadir a pantalla de inicio</span><i class="anadir-flecha" aria-hidden="true">⌃</i></button>
+    </div>
     <div class="gc-compositor">
       <button type="button" class="gc-redondo" id="adjuntar" aria-label="Enviar un archivo" title="Enviar un archivo (del tamaño que sea)"><svg viewBox="0 0 24 24"><path d="M21 12.5l-8.5 8.5a5.5 5.5 0 0 1-7.8-7.8L13.5 4.4a3.5 3.5 0 0 1 5 5L10 18a1.5 1.5 0 0 1-2.1-2.1L15.5 8.3"/></svg></button>
       <div class="campo-envoltura" id="campo-envoltura"><div class="mascara" id="texto-mascara" aria-hidden="true"></div><textarea class="gc-campo" id="texto" rows="1" placeholder="Escribe un mensaje" aria-label="Mensaje" autocomplete="off" spellcheck="false"></textarea></div>
