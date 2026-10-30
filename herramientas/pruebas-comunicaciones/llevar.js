@@ -73,7 +73,7 @@ const hasta = async (fn, ms) => { const h = Date.now() + ms; while (Date.now() <
   comprueba(paso, '1. traspaso hecho: T habla con B y A ha salido (' + Math.round((Date.now() - t0) / 1000) + ' s)', { A: await estado(A), B: await estado(B), T: await estado(T) });
   // los dos avisos salen al empezar a hablar (y se van solos a los pocos segundos)
   comprueba(await hasta(() => visible(T, '#llevar-nota'), 3000), '2. el aviso de cierre se ve al empezar');
-  comprueba(await hasta(() => visible(T, '#llevar-banda'), 3000), '2. y la recomendación de «No molestar»');
+  comprueba(/No molestar/.test(await T.textContent('#llevar-aviso')), '2. «No molestar», en la pantalla de «Conectando…»');
   await T.screenshot({ path: path.join(OUT, '2-tel-avisos.png') });
   await espera(3000);
   const vB = await B.evaluate(() => { const v = document.querySelector('#v-remoto'); return v && v.srcObject && v.videoWidth > 0 ? v.getVideoPlaybackQuality().totalVideoFrames : -1; });
@@ -86,9 +86,39 @@ const hasta = async (fn, ms) => { const h = Date.now() + ms; while (Date.now() <
   comprueba(!(await visible(A, '#h-llevar')), '1. en el PC se cierra el código');
   const nB = ((await B.textContent('#ll-nombre')) || '').trim();
   comprueba(!/grupo/i.test(nB), '1. B no ve «llamada en grupo»: «' + nB + '»');
+  // 6. (AMBOS=1, con B en el PC) los dos pasan la llamada a su teléfono: B también la pasa al suyo (U) y hablan T y U
+  if (BPC && process.env.AMBOS === '1') {
+    const { p: U } = await equipo(browser, false, 'U', false);
+    await espera(1500);
+    comprueba(await visible(B, '#ll-llevar'), '6. en el PC de B también sale «Pasar al teléfono»');
+    await B.evaluate(() => document.querySelector('#ll-llevar').click()); await espera(800);
+    const dirB = await B.evaluate(() => document.querySelector('#llevar-qr').dataset.url);
+    await U.goto(String(dirB).replace('https://guardianagroup.com', 'http://127.0.0.1:8080'));
+    const ok6 = await hasta(async () => (await estado(T)) === 'hablando' && (await estado(U)) === 'hablando' && (await estado(B)) === 'libre', 30000);
+    comprueba(ok6, '6. los dos en el teléfono: T habla con U y el PC de B sale', { B: await estado(B), T: await estado(T), U: await estado(U) });
+    await espera(3000);
+    const vU = await U.evaluate(() => { const v = document.querySelector('#v-remoto'); return v && v.srcObject && v.videoWidth > 0; });
+    const vT = await T.evaluate(() => { const v = document.querySelector('#v-remoto'); return v && v.srcObject && v.videoWidth > 0; });
+    comprueba(vU && vT, '6. y se ven los dos', { vU, vT });
+    await T.screenshot({ path: path.join(OUT, '6-tel-T.png') }); await U.screenshot({ path: path.join(OUT, '6-tel-U.png') });
+    await U.evaluate(() => document.querySelector('#ll-colgar').click());
+    comprueba(await hasta(async () => (await T.textContent('#llevar-t')) === 'Llamada terminada', 15000), '6. U cuelga: en T, «Llamada terminada»');
+    await browser.close();
+    console.log(fallos.length ? 'FALLOS: ' + fallos.length + '\n - ' + fallos.join('\n - ') : 'TODO BIEN');
+    process.exit(fallos.length ? 1 : 0);
+  }
   // 2. la pantalla del teléfono: solo «Colgar» y nada guardado
   const botones = await T.evaluate(() => [...document.querySelectorAll('#ll-botones .gc-llamada-boton')].filter((b) => getComputedStyle(b).display !== 'none' && !b.hidden).map((b) => (b.querySelector('span') || b).textContent.trim()));
   comprueba(botones.length === 1, '2. en el teléfono, un solo botón: ' + botones.join(' · '));
+  // un solo título arriba, con el tiempo de llamada; la otra persona a toda pantalla (sin partir); en horizontal, «gira el teléfono»
+  const cab = { capsula: await visible(T, '.gc-llamada-arriba .gc-llamada-cifrado'), nombre: await visible(T, '#ll-nombre') && (await T.textContent('#ll-nombre')).trim(), tiempo: await visible(T, '#ll-tiempo') && (await T.textContent('#ll-tiempo')).trim() };
+  comprueba(!cab.capsula && cab.nombre === 'Videollamada encriptada' && /^\d\d:\d\d$/.test(cab.tiempo), '2. un solo título arriba: «Videollamada encriptada» y el tiempo', cab);
+  comprueba(!(await T.evaluate(() => document.querySelector('#llamada').classList.contains('dividida'))), '2. la otra persona a toda pantalla (sin partir)');
+  await T.setViewportSize({ width: 852, height: 393 }); await espera(700);
+  comprueba(await T.evaluate(() => [...document.querySelectorAll('body > .gira')].some((g) => getComputedStyle(g).display !== 'none')), '2. en horizontal: «gira el teléfono»');
+  await T.screenshot({ path: path.join(OUT, '2-tel-horizontal.png') });
+  await T.setViewportSize({ width: 393, height: 852 }); await espera(700);
+  comprueba(!(await T.evaluate(() => document.querySelector('#llamada').classList.contains('dividida'))) && !(await T.evaluate(() => [...document.querySelectorAll('body > .gira')].some((g) => getComputedStyle(g).display !== 'none'))), '2. y al volver a vertical, igual que antes');
   await T.screenshot({ path: path.join(OUT, '2-tel-llamada.png') });
   await B.screenshot({ path: path.join(OUT, '2-b-llamada.png') });
   const bd = await T.evaluate(async () => { try { const l = await indexedDB.databases(); return l.map((x) => x.name); } catch (_) { return ['?']; } });

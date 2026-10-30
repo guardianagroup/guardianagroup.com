@@ -2155,7 +2155,7 @@ body.con-pestanas #marcar .marcar-llamar span{position:absolute;width:1px;height
 .llevar-cortada p{margin:6px 0 14px;font:400 13.5px/1.5 var(--texto);color:#B9C6D2}
 .llevar-cortada .fila{display:flex;gap:10px;justify-content:flex-end}
 /* en el teléfono (modo llevar): solo la llamada y esta pantalla */
-body.modo-llevar>*:not(#llamada):not(#llevar):not(#llevar-avisos):not(#aviso):not(script){display:none!important}
+body.modo-llevar>*:not(#llamada):not(#llevar):not(#llevar-avisos):not(#aviso):not(.gira):not(script){display:none!important}
 body.modo-llevar{background:#06080C}
 .modo-llevar #ll-botones>.gc-llamada-boton:not(.gc-colgar),.modo-llevar #ll-entrante,.modo-llevar .ll-mini-b,.modo-llevar #ll-voces,.modo-llevar .ll-ajustes,.modo-llevar #ll-sas-mini,.modo-llevar #ll-sas,.modo-llevar .mi-tam-boton{display:none!important}
 .llevar{position:fixed;inset:0;z-index:120;display:grid;place-items:center;padding:max(24px,env(safe-area-inset-top)) max(24px,env(safe-area-inset-right)) max(24px,env(safe-area-inset-bottom)) max(24px,env(safe-area-inset-left));background:radial-gradient(ellipse 80% 55% at 50% 30%,rgba(156,195,228,.09),transparent 70%),#06080C;color:#E8ECF1;text-align:center}
@@ -2165,9 +2165,9 @@ body.modo-llevar{background:#06080C}
 .llevar-sello{width:84px;height:84px;margin-bottom:26px}
 .llevar-sello svg{width:100%;height:100%;fill:none;stroke:rgba(156,195,228,.55);stroke-width:1.4;stroke-linecap:round}
 .llevar-sello circle:first-child{stroke:rgba(156,195,228,.18)}
-.llevar-sello .gira{stroke:#9CC3E4;stroke-dasharray:46 142;transform-origin:32px 32px;animation:llevarGira 1.8s linear infinite}
-.llevar[data-estado="cortada"] .gira,.llevar[data-estado="ausente"] .gira{stroke:#E07A6C;animation-duration:3.2s}
-.llevar[data-estado="terminada"] .gira,.llevar[data-estado="invalida"] .gira,.llevar[data-estado="permiso"] .gira{display:none}
+.llevar-sello .gira-arco{stroke:#9CC3E4;stroke-dasharray:46 142;transform-origin:32px 32px;animation:llevarGira 1.8s linear infinite}
+.llevar[data-estado="cortada"] .gira-arco,.llevar[data-estado="ausente"] .gira-arco{stroke:#E07A6C;animation-duration:3.2s}
+.llevar[data-estado="terminada"] .gira-arco,.llevar[data-estado="invalida"] .gira-arco,.llevar[data-estado="permiso"] .gira-arco{display:none}
 @keyframes llevarGira{to{transform:rotate(360deg)}}
 .llevar-t{margin:0;font:300 28px/1.2 var(--texto);letter-spacing:-.01em;color:#F4F6F8;text-wrap:balance}
 .llevar-l{margin:12px 0 0;font:400 15px/1.5 var(--texto);color:#B9C6D2;text-wrap:balance}
@@ -2180,7 +2180,7 @@ body.modo-llevar{background:#06080C}
 #h-llevar{z-index:90}
 .llevar-aviso{margin:28px 0 0;padding:12px 14px;border-radius:14px;border:1px solid rgba(156,195,228,.18);background:rgba(156,195,228,.05);font:400 13px/1.5 var(--texto);color:#AFC1D1}
 .llevar-aviso[hidden]{display:none}
-.llevar-avisos{position:fixed;z-index:110;left:50%;top:calc(64px + env(safe-area-inset-top));transform:translateX(-50%);width:min(380px,calc(100vw - 32px));display:flex;flex-direction:column;gap:8px;pointer-events:none}
+.llevar-avisos{position:fixed;z-index:110;left:50%;bottom:calc(150px + env(safe-area-inset-bottom));transform:translateX(-50%);width:min(380px,calc(100vw - 32px));display:flex;flex-direction:column;gap:8px;pointer-events:none}
 .llevar-avisos>*{pointer-events:auto}
 .llevar-nota,.llevar-banda{border-radius:14px;border:1px solid rgba(156,195,228,.22);background:rgba(8,12,18,.82);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);color:#DCE6EF;font:400 12.5px/1.45 var(--texto);text-align:center}
 .llevar-nota{padding:9px 14px}
@@ -2188,3 +2188,10 @@ body.modo-llevar{background:#06080C}
 .llevar-banda span{flex:1}
 .llevar-banda button{flex:none;min-height:34px;padding:0 12px;border-radius:999px;border:1px solid rgba(156,195,228,.35);background:rgba(156,195,228,.08);color:#E8ECF1;font:500 12.5px/1 var(--texto)}
 .llevar-nota[hidden],.llevar-banda[hidden]{display:none}
+
+/* el teléfono al que se pasó la llamada (30 Oct 2026, 14:54: «aparecían como dos títulos… pon solamente llamada encriptada… y
+   el tiempo de llamada»): solo «Videollamada encriptada · 00:00», sin la cápsula de arriba; el aviso de cierre, abajo y
+   discreto; «No molestar», en la pantalla de «Conectando…» */
+.modo-llevar .gc-llamada-arriba .gc-llamada-cifrado{display:none!important}
+.llevar-aviso .llevar-aviso-2{display:block;margin-top:8px;padding-top:8px;border-top:1px solid rgba(156,195,228,.14)}
+.llevar-nota{font-size:12px;background:rgba(8,12,18,.66)}

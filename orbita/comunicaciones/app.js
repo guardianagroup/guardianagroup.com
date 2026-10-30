@@ -1497,7 +1497,7 @@
     LL = GuardianaLlamada.crea({
       ice: iceCercano, servidor: servidorLlamada, puede: puedeLlamar, t: T, aviso, suena: LLEVAR ? () => {} : avisaSonido, fin: anotaLlamada, estado: avisaLlamada,
       // pasar la llamada al teléfono: el botón (en el PC), la llave que llega de la otra persona, y lo que avisa la otra parte
-      llevar: LLEVAR ? null : () => abreLlevar(),
+      llevar: LLEVAR ? null : () => abreLlevar(), sencilla: !!LLEVAR,
       alLlevar: (k) => alLlevar(k), llevarNo: () => llevarNo(), llevarVisto: () => llevarVisto(), llevarListo: () => llevarListo(),
       blindada: () => { const c = convLl(); return !!(c && extrasB(c)); },
       sas: () => { const c = convLl(); return !!(c && extrasB(c)); }, // el número de seguridad en la llamada: blindado y Ultra (dueño, 29 Oct 2026, 12:55: «en el modo normal no») // las opciones de imagen, solo en la sesión blindada
@@ -1513,7 +1513,7 @@
       // llamada a tres: mensajes a la conversación del tercero, la llamada que pasa a otra conversación, el apunte en el chat del
       // tercero y la hoja para elegir a quién añadir
       mandaA: (sala, m) => { const c = CONVS.get(sala) || EFI.get(sala); if (c) enviaControl(c, Object.assign({ tipo: 'llamada' }, m)); },
-      cambia: (sala) => { LLAMADA_CONV = sala; const e = EFI.get(sala); if (e) e.principal = true; pintaLista(); },
+      cambia: (sala) => { LLAMADA_CONV = sala; const e = EFI.get(sala); if (e) { e.principal = true; if (LLEVAR) llevarSigue(e); } pintaLista(); },
       finA: (sala, info) => { const antes = LLAMADA_CONV; LLAMADA_CONV = sala; anotaLlamada(info); LLAMADA_CONV = antes; },
       eligeTercero: () => abreAnadir(),
       // el nombre que la otra persona de la llamada se puso a sí misma (lo que se dice a los demás del grupo)
@@ -4485,10 +4485,11 @@
     const kb = await C.sha256(C.cat(C.te.encode('GUARDIANA llevar clave\n'), raw));
     const k = await crypto.subtle.importKey('raw', kb, 'AES-GCM', false, ['encrypt', 'decrypt']);
     const yo = (opc && /^[0-9a-f]{16}$/.test(opc.yo || '')) ? opc.yo : C.hex(C.azar(8));
-    const c = { id: sala, efimera: true, k, yo, suId: null, miembros: new Set(), nombre: (opc && opc.nombre) || '', alias: '', cola: [], mensajes: [] };
+    const c = { id: sala, efimera: true, k, k64, yo, suId: null, miembros: new Set(), nombre: (opc && opc.nombre) || '', alias: '', cola: [], mensajes: [] };
     EFI.set(sala, c); R.entra(sala, yo);
     return c;
   }
+  if (LOCAL) window.gcomPruebaEfi = () => ({ conv: LLAMADA_CONV && LLAMADA_CONV.slice(0, 6), llevar: llevarConv && llevarConv.id.slice(0, 6), efi: [...EFI.values()].map((c) => ({ id: c.id.slice(0, 6), yo: c.yo, suId: c.suId, tel: !!c.telefono, pr: !!c.principal, miembros: [...c.miembros] })) });
   function sueltaEfimera(c) { if (!c || !EFI.has(c.id)) return; EFI.delete(c.id); try { R.sale(c.id); } catch (_) {} }
   async function mandaEfimera(c, obj) {
     if (!c.suId || !R || !R.abierto) { if (c.cola.length < 64) c.cola.push(obj); return false; }
@@ -4565,13 +4566,25 @@
   // contestó a «Volver a llamar», la otra persona no estaba) deja la llamada recuperable mientras las dos pantallas sigan abiertas.
   function finEfimera(c, info) {
     const por = info && info.por;
-    if (c.telefono) {
+    // en el teléfono al que se pasó la llamada, si la otra persona también pasa la suya a su teléfono, la llamada sigue con ese otro
+    // teléfono (llevarSigue): lo que acaba es solo el tramo con su PC
+    if (LLEVAR && LL && LL.estado === 'hablando') return;
+    if (c.telefono || LLEVAR) {
       if (por === 'fin') { pintaLlevar('terminada'); borraLlevar(c); }
       else pintaLlevar(por === 'sin-medios' ? 'permiso' : 'cortada');
       return;
     }
     if (!c.principal) { c.anadido = false; return; } // el teléfono no llegó a contestar: si vuelve a entrar, se le llama otra vez
-    if (por === 'fin') sueltaEfimera(c); else muestraCortada(c, false);
+    // (un momento después: el «colgar» que acaba de salir por esta sala tiene que llegar antes de salir de ella)
+    if (por === 'fin') setTimeout(() => { if (!LL || LLAMADA_CONV !== c.id) sueltaEfimera(c); }, 1200); else muestraCortada(c, false);
+  }
+  // (en el teléfono) la llamada sigue en otra sala efímera: la de la otra persona, que también la pasó a su teléfono. «Volver a llamar»
+  // y «Colgar» pasan a esa sala, y su llave sustituye a la anterior en la pestaña (aguanta una recarga como la primera)
+  let llevarConv = null;
+  function llevarSigue(e) {
+    const viejo = llevarConv; e.telefono = true; llevarConv = e;
+    try { if (e.k64) { sessionStorage.setItem('gcom-llevar', e.k64); sessionStorage.setItem('gcom-llevar-yo', e.yo); } } catch (_) {}
+    if (viejo && viejo !== e) setTimeout(() => sueltaEfimera(viejo), 1500);
   }
   function muestraCortada(c, ausente) {
     const n = c.nombre || T('la otra persona');
@@ -4628,21 +4641,16 @@
     const c = await salaEfimera(LLEVAR, { yo });
     if (!c) { pintaLlevar('invalida'); borraLlevar(null); return; }
     try { sessionStorage.setItem('gcom-llevar-yo', c.yo); } catch (_) {}
-    c.telefono = true;
-    $('#llevar-volver').addEventListener('click', () => { pintaLlevar('conectando'); volverALlamar(c); });
-    $('#llevar-colgar').addEventListener('click', () => { if (LL && LL.ocupado) LL.colgar(); pintaLlevar('terminada'); borraLlevar(c); });
+    c.telefono = true; llevarConv = c;
+    $('#llevar-volver').addEventListener('click', () => { pintaLlevar('conectando'); volverALlamar(llevarConv); });
+    $('#llevar-colgar').addEventListener('click', () => { if (LL && LL.ocupado) LL.colgar(); pintaLlevar('terminada'); borraLlevar(llevarConv); });
     $('#llevar-reintentar').addEventListener('click', () => location.reload());
-    // el aviso de cierre y la recomendación de «No molestar», unos segundos al empezar la llamada (agencia, ronda 79)
+    // el aviso de cierre, abajo y discreto unos segundos al empezar (el de «No molestar» va en la pantalla de «Conectando…»)
     let primera = true;
     const alEstado = window.gcomLlevarEstado = (est) => {
       if (est === 'hablando') {
         pintaLlevar('llamada');
-        if (primera) {
-          primera = false;
-          const n = $('#llevar-nota'), b = $('#llevar-banda');
-          n.hidden = false; b.hidden = false;
-          setTimeout(() => { n.hidden = true; }, 8000); setTimeout(() => { b.hidden = true; }, 10000);
-        }
+        if (primera) { primera = false; const n = $('#llevar-nota'); n.hidden = false; setTimeout(() => { n.hidden = true; }, 8000); }
       }
     };
     void alEstado;

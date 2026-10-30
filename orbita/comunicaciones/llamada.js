@@ -1718,7 +1718,7 @@
       // pantalla dividida… y luego la persona, si quiere… algún botoncito… y que entonces se ponga como si fuera una llamada de
       // WhatsApp o de FaceTime»); antes, en el teléfono, empezaba como FaceTime (15:36)
       // a tres, nunca partida contigo: la pantalla es de las otras dos personas y tu imagen va en pequeño, y se puede mover
-      if (caja.classList.contains('tres')) ponDividida(null);
+      if (caja.classList.contains('tres') || o.sencilla) ponDividida(null); // (sencilla: el teléfono al que se pasó la llamada, siempre la otra persona a toda pantalla)
       else if (partidaPorDefecto && video && cam && CW) ponDividida(CW >= CH ? 'der' : 'abajo');
       else if (mi.div && CW) { const hz = CW >= CH, mapa = hz ? { arriba: 'izq', abajo: 'der' } : { izq: 'arriba', der: 'abajo' }; ponDividida(mapa[mi.div] || mi.div); }
       else ponDividida(null);
@@ -1836,6 +1836,7 @@
       const m = parseFloat(caja.style.getPropertyValue('--mi-p')); if (Number.isFinite(m)) guardaMi({ p: m });
     }
     function alternaDividida() {
+      if (o.sencilla) return;
       partidaPorDefecto = false;
       const vl = vidLocal(), cont = lienzoVid(); if (!vl || !cont) return;
       if (caja.classList.contains('dividida')) {
@@ -1906,6 +1907,15 @@
     };
     caja.addEventListener('pointerup', suelta); caja.addEventListener('pointercancel', suelta);
     addEventListener('resize', escala, { passive: true });
+    // al girar el teléfono con la pantalla partida, las dos mitades pasan de lado a lado (horizontal) a arriba y abajo (vertical), y
+    // al revés (dueño, 30 Oct 2026, 14:54: al girar el móvil y volver «ya se veía mal»: se quedaba partida de lado en vertical)
+    addEventListener('resize', () => {
+      if (!caja.classList.contains('dividida')) return;
+      const cont = lienzoVid(); if (!cont || !cont.clientWidth) return;
+      const hz = cont.clientWidth >= cont.clientHeight, l = ['izq', 'der', 'arriba', 'abajo'].find((x) => caja.classList.contains('lado-' + x));
+      const nuevo = hz ? ({ arriba: 'izq', abajo: 'der' }[l] || l) : ({ izq: 'arriba', der: 'abajo' }[l] || l);
+      if (nuevo && nuevo !== l) { ponDividida(nuevo); try { colocaAsa(); } catch (_) {} }
+    }, { passive: true });
     if (FINO.addEventListener) FINO.addEventListener('change', escala);
     escala();
     { const vlx = vidLocal(); if (vlx) { vlx.addEventListener('loadedmetadata', () => miImagen()); vlx.addEventListener('resize', () => colocaAsa()); } }

@@ -39,7 +39,7 @@
 <link rel="canonical" href="https://guardianagroup.com/orbita/comunicaciones/">
 <link rel="icon" href="/favicon.ico">
 <link rel="stylesheet" href="componentes.css?v=20261028m">
-<link rel="stylesheet" href="app.css?v=20261101j">
+<link rel="stylesheet" href="app.css?v=20261101k">
 <link rel="stylesheet" href="diseno.css?v=20261031a">
 <link rel="stylesheet" href="viaje.css?v=20261029b">
 <!-- antes de pintar: como app desde el primer fotograma y, al volver a un chat tras recargar, sin enseñar el inicio entretanto -->
@@ -1118,7 +1118,7 @@
 <div class="llevar" id="llevar" hidden>
   <div class="llevar-caja">
     <div class="llevar-marca" translate="no">GUARDIANA</div>
-    <div class="llevar-sello" aria-hidden="true"><svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="30"/><circle class="gira" cx="32" cy="32" r="30"/><rect x="24" y="17" width="16" height="30" rx="3"/><path d="M29.5 41.5h5"/></svg></div>
+    <div class="llevar-sello" aria-hidden="true"><svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="30"/><circle class="gira-arco" cx="32" cy="32" r="30"/><rect x="24" y="17" width="16" height="30" rx="3"/><path d="M29.5 41.5h5"/></svg></div>
     <h1 class="llevar-t" id="llevar-t">Conectando…</h1>
     <p class="llevar-l" id="llevar-l">Preparando la cámara y el micrófono.</p>
     <div class="llevar-botones">
@@ -1126,12 +1126,11 @@
       <button type="button" class="boton peligro llevar-colgar" id="llevar-colgar" hidden>Colgar</button>
       <button type="button" class="boton principal" id="llevar-reintentar" hidden>Reintentar</button>
     </div>
-    <p class="llevar-aviso" id="llevar-aviso">Mientras esta pantalla siga abierta, la llamada se recupera sola. Si la cierras, se borra y no se podrá reconectar.</p>
+    <p class="llevar-aviso" id="llevar-aviso">Mientras esta pantalla siga abierta, la llamada se recupera sola. Si la cierras, se borra y no se podrá reconectar.<span class="llevar-aviso-2">Para que no te interrumpan otras llamadas, activa «No molestar» en el teléfono.</span></p>
   </div>
 </div>
 <div class="llevar-avisos" id="llevar-avisos">
 <div class="llevar-nota" id="llevar-nota" role="status" hidden>Mientras esta pantalla siga abierta, la llamada se recupera sola. Si la cierras, se borra.</div>
-<div class="llevar-banda" id="llevar-banda" role="status" hidden><span>Para que no te interrumpan otras llamadas, activa «No molestar» en el teléfono.</span><button type="button" id="llevar-banda-ok">Entendido</button></div>
 </div>
 <div class="aviso" id="aviso" role="status" aria-live="polite" hidden></div>
 <!-- En el teléfono, GUARDIANA va en vertical (dueño, 28 Oct 2026, 16:12 y 29 Oct, 14:25). Android se fija solo; en el iPhone, que no
@@ -1150,7 +1149,7 @@
 <script src="sha256.js?v=20261027a"></script>
 <script src="viaje-datos.js?v=20261031a"></script>
 <script src="viaje.js?v=20261029b"></script>
-<script src="llamada.js?v=20261101j"></script>
-<script src="app.js?v=20261101j"></script>
+<script src="llamada.js?v=20261101k"></script>
+<script src="app.js?v=20261101k"></script>
 </body>
 </html>
