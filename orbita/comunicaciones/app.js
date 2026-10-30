@@ -67,6 +67,11 @@
   let YO = null;            // { firma, acuerdo, firmaPub, acuerdoPub, nombre, reposo, huella }
   const CONVS = new Map();  // sala → conv
   let ACTUAL = null;        // sala abierta
+  let RESPONDE = null;      // mensaje al que se está respondiendo (ronda 76, fase 3)
+  let MENU_MSG = null;      // mensaje con el menú abierto
+  let NUEVOS_ABAJO = 0;     // mensajes llegados con el chat desplazado hacia arriba («↓ nuevos»)
+  let REENVIA_MSG = null, BORRAR_MSG = null;
+  let HAPTICO = () => {};   // el toque que se nota (se fija en eventos(), donde vive haptico)
   let R = null;
   let LL = null; // llamadas de voz (llamada.js)
   let ponDiscretoConv = () => {}; // el modo discreto según el chat: siempre en el blindado, nunca en el normal (eventos())
@@ -661,8 +666,13 @@
   // suficiente… tiene que ser una experiencia muy fácil»: la blindada ya no espera a la comprobación; compararlo es opcional
   const puedeEnviar = (c) => !!c;
 
-  async function enviaTexto(c, texto) {
+  // lo que viaja de un texto: el texto, la cita (si responde a algo) y la marca de reenviado; todo dentro del sobre cifrado
+  const cargaTexto = (m) => ({ tipo: 'texto', id: m.id, t: m.t, texto: m.texto, cita: m.cita ? { id: m.cita.id, de: m.cita.de, texto: m.cita.texto } : undefined, rv: m.reenviado ? 1 : undefined });
+  async function enviaTexto(c, texto, opc) {
     const m = { id: uuid(), conv: c.id, t: Date.now(), dir: 'mia', estado: 'pendiente', tipo: 'texto', texto };
+    // responder (ronda 76, fase 3): la cita va cifrada dentro del mensaje, como el texto; «de» dice de quién era lo citado
+    if (RESPONDE && RESPONDE.conv === c.id) { m.cita = { id: RESPONDE.id, de: RESPONDE.dir === 'mia' ? 'yo' : 'otro', texto: etiquetaMsg(RESPONDE).slice(0, 140) }; quitaResponde(); }
+    if (opc && opc.reenviado) m.reenviado = 1;
     await guardaMensaje(c, m); c.mensajes.push(m); c.cola.push(m);
     pintaMensaje(c, m); actualizaUltimo(c, m);
     enviaCola(c); if (!enLinea(c) && !puedeBuzon(c)) despierta(c, 'mensaje');
@@ -709,11 +719,11 @@
     try {
       const ahora = Date.now();
       const rescate = c.mensajes.filter((m) => m.dir === 'mia' && m.tipo === 'texto' && m.estado === 'enviado' && !m.porBuzon && m.enviadoEn && ahora - m.enviadoEn > 15000);
-      for (const m of rescate) { if (enLinea(c) || !puedeBuzon(c)) break; const r = await R.buzonDeja(c.id, c.suId, await idBuzon(m.id), await cierraBuzon(c, { tipo: 'texto', id: m.id, t: m.t, texto: m.texto }), true); if (!r.ok) break; m.porBuzon = 1; await guardaMensaje(c, m); }
+      for (const m of rescate) { if (enLinea(c) || !puedeBuzon(c)) break; const r = await R.buzonDeja(c.id, c.suId, await idBuzon(m.id), await cierraBuzon(c, cargaTexto(m)), true); if (!r.ok) break; m.porBuzon = 1; await guardaMensaje(c, m); }
       while (c.cola.length && !enLinea(c) && puedeBuzon(c)) {
         const m = c.cola[0];
         let carga = null;
-        if (m.tipo === 'texto') carga = { tipo: 'texto', id: m.id, t: m.t, texto: m.texto };
+        if (m.tipo === 'texto') carga = cargaTexto(m);
         else if (m.tipo === 'archivo' && /^(image|audio)\//.test(m.archivo.mime || '') && m.archivo.tam <= BZ_ARCHIVO && !m.archivo.vida && !m.archivo.paq) {
           let f = c.archivos && c.archivos.get(m.id) && c.archivos.get(m.id).f;
           if (!f) { try { const r = await BD.saca('arch', m.id); if (r && r.blob) f = r.blob; } catch (_) {} }
@@ -768,7 +778,7 @@
     try {
       while (c.cola.length && enLinea(c) && puedeEnviar(c)) {
         const m = c.cola[0];
-        const carga = m.tipo === 'texto' ? { tipo: 'texto', id: m.id, t: m.t, texto: m.texto } : m.tipo === 'archivo' ? anuncioDe(m) : null;
+        const carga = m.tipo === 'texto' ? cargaTexto(m) : m.tipo === 'archivo' ? anuncioDe(m) : null;
         if (!carga) { c.cola.shift(); continue; }
         const vj = m.tipo === 'archivo' && VIAJES.get(m.id), sesU = c.sesion; // la clave del archivo viaja en esta sesión
         // el cuarto argumento: esta trama sí merece aviso en el teléfono de la otra persona (un mensaje o un archivo), al revés
@@ -805,6 +815,8 @@
       case 'texto': {
         if (c.mensajes.some((x) => x.id === j.id)) { acusa(c, { tipo: 'ack', ids: [j.id] }); return; }
         const m = { id: String(j.id).slice(0, 64), conv: c.id, t: Math.min(Date.now(), +j.t || Date.now()), dir: 'suya', estado: 'recibido', tipo: 'texto', texto: String(j.texto || '').slice(0, 20000), velado: extrasB(c) || undefined };
+        if (j.cita && typeof j.cita === 'object') m.cita = { id: String(j.cita.id || '').slice(0, 64), de: j.cita.de === 'yo' ? 'yo' : 'otro', texto: String(j.cita.texto || '').slice(0, 140) };
+        if (j.rv === 1) m.reenviado = 1;
         await guardaMensaje(c, m); c.mensajes.push(m); pintaMensaje(c, m); actualizaUltimo(c, m, true); vigila(c, T('Mensaje recibido: superó la verificación criptográfica.'), 'ok'); pintaRadio(c);
         acusa(c, { tipo: 'ack', ids: [m.id] });
         const aLaVista = ACTUAL === c.id && document.visibilityState === 'visible';
@@ -861,7 +873,7 @@
     }
   }
   async function guardaMensaje(c, m) {
-    const cuerpo = m.tipo === 'texto' ? { tipo: 'texto', texto: m.texto } : m.tipo === 'archivo' ? { tipo: 'archivo', archivo: m.archivo } : m.tipo === 'custodia' ? { tipo: 'custodia', custodia: m.custodia, texto: m.texto } : { tipo: m.tipo, texto: m.texto, llamada: m.llamada };
+    const cuerpo = m.tipo === 'texto' ? { tipo: 'texto', texto: m.texto, cita: m.cita, reenviado: m.reenviado } : m.tipo === 'archivo' ? { tipo: 'archivo', archivo: m.archivo } : m.tipo === 'custodia' ? { tipo: 'custodia', custodia: m.custodia, texto: m.texto } : { tipo: m.tipo, texto: m.texto, llamada: m.llamada };
     if (m.velado) cuerpo.velado = 1;
     const s = await guardaSellado(cuerpo);
     await BD.pon('msg', { id: m.id, conv: c.id, t: m.t, dir: m.dir, estado: m.estado, iv: s.iv, datos: s.datos });
@@ -870,7 +882,7 @@
     if (c.cargados) return;
     const xs = (await BD.porConv('msg', c.id)).sort((a, b) => a.t - b.t);
     c.mensajes = [];
-    for (const x of xs) { const cu = await leeSellado(x); if (!cu) continue; const m = { id: x.id, conv: c.id, t: x.t, dir: x.dir, estado: x.estado, tipo: cu.tipo, texto: cu.texto, archivo: cu.archivo, llamada: cu.llamada, custodia: cu.custodia, velado: cu.velado ? true : undefined }; if (m.dir === 'mia' && m.estado === 'pendiente') c.cola.push(m); if (m.tipo === 'archivo' && m.dir === 'mia' && m.estado !== 'entregado' && m.estado !== 'leido' && m.estado !== 'fallo' && m.archivo && (m.archivo.progreso || 0) < 1) { c.cola = c.cola.filter((q) => q !== m); if (await preparaReenvio(c, m)) { m.estado = 'pendiente'; m.archivo.progreso = 0; c.cola.push(m); } else m.estado = 'fallo'; } if (m.tipo === 'archivo' && m.dir === 'suya' && m.estado === 'recibiendo') m.estado = 'fallo'; c.mensajes.push(m); }
+    for (const x of xs) { const cu = await leeSellado(x); if (!cu) continue; const m = { id: x.id, conv: c.id, t: x.t, dir: x.dir, estado: x.estado, tipo: cu.tipo, texto: cu.texto, archivo: cu.archivo, llamada: cu.llamada, custodia: cu.custodia, cita: cu.cita, reenviado: cu.reenviado, velado: cu.velado ? true : undefined }; if (m.dir === 'mia' && m.estado === 'pendiente') c.cola.push(m); if (m.tipo === 'archivo' && m.dir === 'mia' && m.estado !== 'entregado' && m.estado !== 'leido' && m.estado !== 'fallo' && m.archivo && (m.archivo.progreso || 0) < 1) { c.cola = c.cola.filter((q) => q !== m); if (await preparaReenvio(c, m)) { m.estado = 'pendiente'; m.archivo.progreso = 0; c.cola.push(m); } else m.estado = 'fallo'; } if (m.tipo === 'archivo' && m.dir === 'suya' && m.estado === 'recibiendo') m.estado = 'fallo'; c.mensajes.push(m); }
     c.cargados = true;
   }
   async function anotaSistema(c, texto) {
@@ -2341,7 +2353,7 @@
     const cambia = ACTUAL !== id;
     quiereNueva = false; document.body.classList.remove('ver-lista');
     ACTUAL = id; await cargaMensajes(c);
-    if (cambia) ponBorrador(c);
+    if (cambia) { ponBorrador(c); quitaResponde(); cierraMenuMsg(); }
     if (c.perdida) { c.perdida = false; }
     const inv = c.estado === 'invitacion' && c.rol === 'invita' && !c.huella && !esperaEnChat(c);
     $('#inicio').hidden = !inv; $('#conv').hidden = inv; $('#app').classList.toggle('en-conv', !inv); document.body.classList.toggle('en-conv', !inv);
@@ -2370,6 +2382,8 @@
     // en el móvil, el nombre y la línea de confianza, cortos y en una fila (agencia, ronda 74: antes «Convers…» y tres líneas)
     const movil = matchMedia('(max-width: 760px)').matches;
     $('#cnombre').textContent = nombreConv(c, movil);
+    // la inicial del nombre en el avatar, con el candado como insignia (ronda 76, fase 3); sin nombre, el candado solo
+    { const ini = $('#cavatar-ini'), av = $('#cavatar'); if (ini && av) { const n = c.alias || c.nombre || ''; ini.hidden = !n; ini.textContent = n ? inicial(n) : ''; av.classList.toggle('con-inicial', !!n); } }
     const conf = $('#cconfianza'); conf.classList.remove('gc-sin-verificar');
     let txt;
     if (c.ocupada && !c.huella) txt = T('Esta invitación ya la usó otra persona.');
@@ -2454,7 +2468,7 @@
       : T('Encriptación de extremo a extremo') + ' · ' + msgs + ' ' + (msgs === 1 ? T('mensaje') : T('mensajes')) + ' · ' + arch + ' ' + (arch === 1 ? T('archivo') : T('archivos')) + ' · ' + T('verificación criptográfica superada') + (c.verificada ? ' · ' + T('identidad verificada') : '');
   }
   function pintaTodos(c) {
-    const ul = $('#mensajes'); ul.textContent = ''; ul.dataset.dia = '';
+    const ul = $('#mensajes'); ul.textContent = ''; ul.dataset.dia = ''; pintaNuevosAbajo(0); cierraMenuMsg();
     // quien invita espera dentro del chat (12:50): arriba, qué va a pasar y, por si no llegó a enviarse, «Volver a enviar» (14:33)
     if (esperaEnChat(c)) {
       const li = document.createElement('li'); li.className = 'gc-nota-sistema gc-espera';
@@ -2464,6 +2478,96 @@
     }
     for (const m of c.mensajes) pintaMensaje(c, m, false, true);
     ul.scrollTop = ul.scrollHeight;
+  }
+  // ---------- Responder, reenviar, información y borrar (agencia, ronda 76, fase 3; dueño, 00:34: «aplica todo a vuestro gusto») ----------
+  // Mantener pulsado un mensaje (o el botón derecho) abre un menú junto a la burbuja: Responder · Reenviar · Información · Borrar.
+  // Sin «Copiar» (dueño, 28 Oct 2026, 15:17: «que no se pueda copiar nada»). Deslizar un mensaje a la derecha también responde.
+  const etiquetaMsg = (m) => !m ? '' : m.tipo === 'texto' ? String(m.texto || '').replace(/\s+/g, ' ').trim() : m.tipo === 'archivo' ? (m.archivo.voz ? '🎤 ' + T('Nota de voz') : /^image\//.test(m.archivo.mime || '') ? '📷 ' + T('Foto') : /^video\//.test(m.archivo.mime || '') ? '🎬 ' + T('Vídeo') : '📎 ' + (m.archivo.nombre || T('Archivo'))) : m.tipo === 'llamada' ? '📞 ' + T('Llamada') : String(m.texto || '');
+  // quién escribió lo citado, visto desde este equipo: «de: yo» lo puso quien envió el mensaje que cita
+  const nombreCita = (c, m) => (m.dir === 'mia') === (m.cita.de === 'yo') ? T('Tú') : nombreConv(c, true);
+  const sePuedeReenviar = (m) => !!m && !m.velado && m.estado !== 'fallo' && m.estado !== 'descartado' && (m.tipo === 'texto' || (m.tipo === 'archivo' && !m.archivo.vida && !m.archivo.caducado && !m.archivo.vistoBorrado && (m.dir === 'mia' || m.estado === 'recibido' || m.estado === 'leido')));
+  function pintaNuevosAbajo(n) {
+    NUEVOS_ABAJO = Math.max(0, n | 0);
+    const b = $('#nuevos-abajo'); if (!b) return;
+    b.hidden = !NUEVOS_ABAJO; $('#nuevos-n').textContent = NUEVOS_ABAJO > 99 ? '99+' : String(NUEVOS_ABAJO);
+    b.setAttribute('aria-label', NUEVOS_ABAJO === 1 ? T('1 mensaje nuevo') : T('{n} mensajes nuevos').replace('{n}', NUEVOS_ABAJO));
+  }
+  function saltaA(id) {
+    const ul = $('#mensajes'), li = ul && ul.querySelector('[data-id="' + id + '"]'); if (!li) { aviso(T('Ese mensaje ya no está aquí.')); return; }
+    try { li.scrollIntoView({ block: 'center', behavior: 'smooth' }); } catch (_) { li.scrollIntoView(); }
+    const b = li.querySelector('.gc-burbuja'); if (b) { b.classList.remove('gc-brilla'); void b.offsetWidth; b.classList.add('gc-brilla'); setTimeout(() => b.classList.remove('gc-brilla'), 1400); }
+  }
+  function ponResponde(m) {
+    const c = CONVS.get(ACTUAL); if (!c || !m || m.conv !== c.id || m.velado) return;
+    RESPONDE = m; const r = $('#responde'); if (!r) return;
+    $('#responde-a').textContent = m.dir === 'mia' ? T('Tú') : nombreConv(c, true); $('#responde-t').textContent = etiquetaMsg(m);
+    r.hidden = false; try { $('#texto').focus(); } catch (_) {}
+  }
+  function quitaResponde() { RESPONDE = null; const r = $('#responde'); if (r) r.hidden = true; }
+  function cierraMenuMsg() {
+    const mn = $('#mmenu'); if (!mn || mn.hidden) return;
+    mn.hidden = true; MENU_MSG = null; $('#conv').classList.remove('con-menu-msg');
+    for (const el of document.querySelectorAll('#mensajes li.gc-elegida')) el.classList.remove('gc-elegida');
+  }
+  function abreMenuMsg(m, li) {
+    const mn = $('#mmenu'), c = CONVS.get(ACTUAL); if (!mn || !c || !m || !li || m.velado) return;
+    cierraMenuMsg(); MENU_MSG = m; li.classList.add('gc-elegida'); $('#conv').classList.add('con-menu-msg');
+    $('#mm-reenviar').hidden = !sePuedeReenviar(m) || !vivas().some((x) => x.id !== c.id && x.huella);
+    mn.hidden = false;
+    // junto a la burbuja: debajo si cabe y, si no, encima; alineado con el lado de la burbuja (derecha las mías, izquierda las suyas)
+    const lienzo = $('#lienzo'), lr = lienzo.getBoundingClientRect(), bur = li.querySelector('.gc-burbuja') || li.firstElementChild || li, br = bur.getBoundingClientRect();
+    const mw = mn.offsetWidth, mh = mn.offsetHeight;
+    let top = br.bottom - lr.top + 6; if (top + mh > lr.height - 8) top = Math.max(8, br.top - lr.top - mh - 6);
+    let left = m.dir === 'mia' ? br.right - lr.left - mw : br.left - lr.left; left = Math.max(8, Math.min(left, lr.width - mw - 8));
+    mn.style.top = top + 'px'; mn.style.left = left + 'px';
+    HAPTICO(10);
+  }
+  function abreReenviar(m) {
+    const c = CONVS.get(ACTUAL); if (!c || !sePuedeReenviar(m)) return;
+    const otros = vivas().filter((x) => x.id !== c.id && x.huella).sort((a, b) => (b.ultimo || 0) - (a.ultimo || 0));
+    if (!otros.length) { aviso(T('No hay otro chat al que reenviar.')); return; }
+    REENVIA_MSG = m;
+    const ul = $('#reenviar-lista'); ul.textContent = '';
+    for (const x of otros) {
+      const b = document.createElement('button'); b.type = 'button'; b.className = 'reenviar-a'; b.dataset.id = x.id;
+      const av = document.createElement('span'); av.className = 'contacto-av'; av.textContent = inicial(nombreConv(x, true)); av.setAttribute('aria-hidden', 'true');
+      const n = document.createElement('b'); n.textContent = nombreConv(x, true);
+      b.append(av, n); b.addEventListener('click', () => { const mm = REENVIA_MSG; REENVIA_MSG = null; cierraHoja('h-reenviar'); reenviaA(x, mm); });
+      ul.append(b);
+    }
+    abreHoja('h-reenviar');
+  }
+  async function reenviaA(destino, m) {
+    if (!destino || !m) return;
+    if (m.tipo === 'texto') await enviaTexto(destino, m.texto, { reenviado: 1 });
+    else if (m.tipo === 'archivo') {
+      let f = null;
+      try { const r = await BD.saca('arch', m.id); if (r && r.blob) f = new File([r.blob], m.archivo.nombre || 'archivo', { type: m.archivo.mime || 'application/octet-stream' }); } catch (_) {}
+      if (!f) { const co = CONVS.get(m.conv), a = co && co.archivos.get(m.id); if (a && a.f) f = a.f; }
+      if (!f) { aviso(T('Este archivo ya no está en este navegador.')); return; }
+      await enviaArchivos(destino, [f], { voz: !!m.archivo.voz, dur: m.archivo.dur });
+    } else return;
+    aviso(T('Reenviado a {n}').replace('{n}', nombreConv(destino, true)));
+  }
+  function abreInfoMsg(m) {
+    const c = CONVS.get(ACTUAL); if (!c || !m) return;
+    const dl = $('#info-msg'); dl.textContent = '';
+    const fila = (k, v) => { if (!v) return; const dt = document.createElement('dt'); dt.textContent = k; const dd = document.createElement('dd'); dd.textContent = v; dl.append(dt, dd); };
+    const cuando = (t) => new Date(t).toLocaleString(LOC(), { day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit' });
+    fila(T('Tipo'), m.tipo === 'texto' ? T('Mensaje') : m.tipo === 'archivo' ? (m.archivo.voz ? T('Nota de voz') : /^image\//.test(m.archivo.mime || '') ? T('Foto') : /^video\//.test(m.archivo.mime || '') ? T('Vídeo') : T('Archivo')) : T('Mensaje'));
+    fila(m.dir === 'mia' ? T('Enviado') : T('Recibido'), cuando(m.t));
+    if (m.dir === 'mia') fila(T('Estado'), m.estado === 'pendiente' ? T('Pendiente: saldrá cuando la otra persona entre') : m.estado === 'enviado' ? T('Enviado') : m.estado === 'entregado' ? T('Entregado') : m.estado === 'leido' ? T('Leído') : m.estado === 'fallo' ? T('No se pudo enviar') : m.estado === 'descartado' ? T('Descartado por la otra persona sin mostrarlo') : '');
+    if (m.tipo === 'archivo' && m.archivo.tam) fila(T('Tamaño'), tamano(m.archivo.tam));
+    fila(T('Protección'), (esB(c) ? T('Sesión blindada') : T('Encriptación de extremo a extremo')) + (m.porBuzon ? ' · ' + T('por el buzón cifrado') : ''));
+    abreHoja('h-info-msg');
+  }
+  function abreBorrarMsg(m) {
+    const c = CONVS.get(ACTUAL); if (!c || !m) return;
+    BORRAR_MSG = m;
+    const todos = m.dir === 'mia' && !!c.huella && m.estado !== 'fallo';
+    $('#borrar-msg-todos').hidden = !todos;
+    $('#borrar-msg-t').textContent = todos ? T('«Borrar para todos» lo quita también del equipo de la otra persona.') : T('Se borra de este equipo.');
+    abreHoja('h-borrar-msg');
   }
   function pintaMensaje(c, m, reemplaza, sinScroll) {
     if (ACTUAL !== c.id) return;
@@ -2489,6 +2593,9 @@
     // blindado (dueño, 29 Oct 2026, 10:08: «cuando llega el mensaje, que tú puedas aceptarlo o no… en el blindado no [directo]»):
     // lo que llega va velado, con lo que es y su tamaño; «Mostrar» lo abre y «Descartar» lo borra sin abrirlo (y la otra persona lo sabe)
     if (m.velado && m.dir === 'suya') { bur.classList.add('gc-velada'); bur.append(burbujaVelada(c, m)); const meta = document.createElement('span'); meta.className = 'gc-meta'; const tm = document.createElement('time'); tm.textContent = hora(m.t); meta.append(tm); bur.append(meta); li.append(bur); if (!sinScroll && abajo) ul.scrollTop = ul.scrollHeight; return; }
+    // reenviado y cita (ronda 76, fase 3): la marca «Reenviado» y, encima del texto, lo citado; al tocar la cita se salta al original
+    if (m.reenviado) { const rv = document.createElement('small'); rv.className = 'gc-reenviado'; rv.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 6l6 6-6 6"/><path d="M20 12H9a5 5 0 0 0-5 5v1"/></svg>'; rv.append(document.createTextNode(T('Reenviado'))); bur.append(rv); }
+    if (m.cita && m.cita.texto) { const q = document.createElement('button'); q.type = 'button'; q.className = 'gc-cita'; q.dataset.a = m.cita.id; const qn = document.createElement('b'); qn.textContent = nombreCita(c, m); const qt = document.createElement('span'); qt.textContent = m.cita.texto; q.append(qn, qt); q.addEventListener('click', () => saltaA(m.cita.id)); bur.append(q); }
     if (m.tipo === 'texto') { const s = document.createElement('span'); s.className = 'gc-texto'; s.append(...enlaza(m.texto)); bur.append(s);
       // la ubicación, con su botón «Abrir en el mapa»
       const u = /^📍 [^:]+: (-?\d{1,2}\.\d{2,6}), (-?\d{1,3}\.\d{2,6}) \(([^)]*)\)\n(https:\/\/www\.openstreetmap\.org\/\S+)$/.exec(m.texto || '');
@@ -2498,6 +2605,7 @@
     if (m.dir === 'mia') { const tk = document.createElement('span'); tk.className = 'gc-ticks'; meta.append(tk); }
     bur.append(meta); li.append(bur); pintaEstado(m);
     if (!sinScroll && (abajo || m.dir === 'mia')) ul.scrollTop = ul.scrollHeight;
+    else if (!sinScroll && m.dir === 'suya' && !reemplaza) pintaNuevosAbajo(NUEVOS_ABAJO + 1); // llegó con el chat desplazado hacia arriba: «↓ nuevos»
   }
   const TICK1 = '<svg viewBox="0 0 16 11"><path d="M1 6.2l3.1 3.1 6.5-6.7"/></svg>', TICK2 = '<svg viewBox="0 0 16 11"><path d="M1 6.2l3.1 3.1 6.5-6.7M7.2 8.4l.9.9 6.5-6.7"/></svg>', RELOJ = '<svg viewBox="0 0 12 12"><circle cx="6" cy="6" r="4.6"/><path d="M6 3.3V6l1.9 1.2"/></svg>';
   function pintaEstado(m) {
@@ -3530,6 +3638,46 @@
     }
     $('#cavisos-no').addEventListener('click', () => { try { localStorage.setItem('gcom-avisos', 'no:' + Date.now()); } catch (_) {} pintaAvisos(CONVS.get(ACTUAL)); });
     // «leído» al desplazarse hasta el mensaje y al pasar la llamada a pequeño o terminarla
+    // ---- mantener pulsado, botón derecho y deslizar para responder (ronda 76, fase 3) ----
+    {
+      const ul = $('#mensajes');
+      const liDe = (e) => { const t = e.target; if (!(t instanceof Element)) return null; if (t.closest('button:not(.gc-cita), a, input, audio, video, .gc-voz, .gc-menu')) return null; /* sobre la cita también vale: su toque corto salta al original */ const li = t.closest('#mensajes > li[data-id]'); return li && !li.classList.contains('gc-centro') && !li.classList.contains('gc-nota-sistema') && !li.classList.contains('gc-fecha') ? li : null; };
+      const msgDe = (li) => { const c = CONVS.get(ACTUAL); return c && li ? c.mensajes.find((x) => x.id === li.dataset.id) : null; };
+      let pulsa = null, menuEn = 0;
+      // tras abrir el menú con el dedo, el «click» que suelta el navegador no abre nada más (una foto abriría el visor)
+      ul.addEventListener('click', (e) => { if (Date.now() - menuEn < 700) { e.stopImmediatePropagation(); e.preventDefault(); } }, true);
+      const suelta = () => { if (pulsa) { clearTimeout(pulsa.t); if (pulsa.desliza) { pulsa.li.style.transition = 'transform .22s cubic-bezier(.2,.8,.2,1)'; pulsa.li.style.transform = ''; } pulsa.li.classList.remove('gc-responde-lista'); } pulsa = null; };
+      ul.addEventListener('pointerdown', (e) => {
+        if (e.pointerType === 'mouse' && e.button !== 0) return;
+        const li = liDe(e); if (!li) return;
+        suelta();
+        const m = msgDe(li); if (!m || m.velado) return;
+        pulsa = { li, m, x: e.clientX, y: e.clientY, dx: 0, desliza: false, tacto: e.pointerType !== 'mouse', t: setTimeout(() => { if (!pulsa || pulsa.desliza) return; const p = pulsa; pulsa = null; menuEn = Date.now(); abreMenuMsg(p.m, p.li); }, 430) };
+      });
+      ul.addEventListener('pointermove', (e) => {
+        if (!pulsa) return;
+        const dx = e.clientX - pulsa.x, dy = e.clientY - pulsa.y;
+        if (!pulsa.desliza) { if (Math.abs(dy) > 10) { suelta(); return; } if (pulsa.tacto && dx > 14) { pulsa.desliza = true; clearTimeout(pulsa.t); pulsa.li.style.transition = 'none'; } else if (Math.abs(dx) > 10) { suelta(); return; } }
+        if (pulsa.desliza) { pulsa.dx = Math.max(0, Math.min(dx - 14, 88)); pulsa.li.style.transform = 'translateX(' + pulsa.dx + 'px)'; pulsa.li.classList.toggle('gc-responde-lista', pulsa.dx >= 56); }
+      }, { passive: true });
+      ul.addEventListener('pointerup', () => { if (!pulsa) return; const m = pulsa.desliza && pulsa.dx >= 56 ? pulsa.m : null; suelta(); if (m) { HAPTICO(10); ponResponde(m); } });
+      ul.addEventListener('pointercancel', suelta);
+      ul.addEventListener('contextmenu', (e) => { const li = liDe(e); if (!li) return; e.preventDefault(); const m = msgDe(li); suelta(); if (m && !m.velado && !(MENU_MSG && MENU_MSG.id === m.id)) abreMenuMsg(m, li); });
+      ul.addEventListener('scroll', () => { cierraMenuMsg(); if (NUEVOS_ABAJO && ul.scrollHeight - ul.scrollTop - ul.clientHeight < 80) pintaNuevosAbajo(0); }, { passive: true });
+      document.addEventListener('pointerdown', (e) => { const mn = $('#mmenu'); if (mn && !mn.hidden && !(e.target instanceof Element && mn.contains(e.target))) cierraMenuMsg(); }, true);
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') cierraMenuMsg(); });
+      $('#mm-responder').addEventListener('click', () => { const m = MENU_MSG; cierraMenuMsg(); if (m) ponResponde(m); });
+      $('#mm-reenviar').addEventListener('click', () => { const m = MENU_MSG; cierraMenuMsg(); if (m) abreReenviar(m); });
+      $('#mm-info').addEventListener('click', () => { const m = MENU_MSG; cierraMenuMsg(); if (m) abreInfoMsg(m); });
+      $('#mm-borrar').addEventListener('click', () => { const m = MENU_MSG; cierraMenuMsg(); if (m) abreBorrarMsg(m); });
+      $('#responde-x').addEventListener('click', () => { quitaResponde(); try { $('#texto').focus(); } catch (_) {} });
+      $('#nuevos-abajo').addEventListener('click', () => { try { ul.scrollTo({ top: ul.scrollHeight, behavior: 'smooth' }); } catch (_) { ul.scrollTop = ul.scrollHeight; } pintaNuevosAbajo(0); });
+      $('#reenviar-cancelar').addEventListener('click', () => { REENVIA_MSG = null; cierraHoja('h-reenviar'); });
+      $('#info-msg-ok').addEventListener('click', () => cierraHoja('h-info-msg'));
+      $('#borrar-msg-cancelar').addEventListener('click', () => { BORRAR_MSG = null; cierraHoja('h-borrar-msg'); });
+      $('#borrar-msg-mi').addEventListener('click', async () => { const m = BORRAR_MSG; BORRAR_MSG = null; cierraHoja('h-borrar-msg'); const c = m && CONVS.get(m.conv); if (c) await borraLocal(c, m.id, false); });
+      $('#borrar-msg-todos').addEventListener('click', async () => { const m = BORRAR_MSG; BORRAR_MSG = null; cierraHoja('h-borrar-msg'); const c = m && CONVS.get(m.conv); if (c) await borraEnLosDos(c, m); });
+    }
     let leidoT = null; $('#mensajes').addEventListener('scroll', () => { clearTimeout(leidoT); leidoT = setTimeout(() => { const c = CONVS.get(ACTUAL); if (c) marcaLeidos(c); }, 250); }, { passive: true });
     try { new MutationObserver(() => { const c = CONVS.get(ACTUAL); if (c) setTimeout(() => marcaLeidos(c), 80); }).observe($('#llamada'), { attributes: true, attributeFilter: ['class'] }); } catch (_) {}
     // al girar el teléfono o cambiar el tamaño, la cabecera elige su versión corta o larga
@@ -3696,6 +3844,7 @@
     // el toque que se nota, como en WhatsApp (dueño, 29 Oct 2026, 23:40: «cuando toco el botón, se tiene que notar»): en Android, la
     // vibración; en el iPhone (iOS 18 o posterior), el interruptor nativo de Safari da un toque al cambiar
     const haptico = (() => { let lab = null; return (p) => { try { if (navigator.vibrate && navigator.vibrate(p || 12)) return; } catch (_) {} try { if (!lab) { const i = document.createElement('input'); i.type = 'checkbox'; i.setAttribute('switch', ''); i.id = 'gc-haptico'; i.tabIndex = -1; i.setAttribute('aria-hidden', 'true'); i.style.cssText = 'position:fixed;left:-40px;top:0;width:1px;height:1px;opacity:0;pointer-events:none'; lab = document.createElement('label'); lab.htmlFor = 'gc-haptico'; lab.setAttribute('aria-hidden', 'true'); lab.style.cssText = i.style.cssText; document.body.append(i, lab); } lab.click(); } catch (_) {} }; })();
+    HAPTICO = haptico;
     // lo que se ve al grabar, al instante: el botón crece bajo el dedo y aparece el tiempo, sin esperar al micrófono (23:40: «desde
     // que toco el botón ya tiene que empezar a grabar… tarda, lleva como un lag»); si el micrófono no llega, se deshace
     const preparaUI = () => { compositor.classList.add('grabando-ya'); $('#grabando').hidden = false; $('#grabando-t').textContent = '0:00'; $('#grabando-candado').hidden = false; grabar.classList.add('pulsando'); const dz = $('#grabando-desliza'); if (dz) { dz.style.transform = ''; dz.style.opacity = ''; } };

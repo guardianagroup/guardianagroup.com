@@ -39,7 +39,7 @@
 <link rel="canonical" href="https://guardianagroup.com/orbita/comunicaciones/">
 <link rel="icon" href="/favicon.ico">
 <link rel="stylesheet" href="componentes.css?v=20261028m">
-<link rel="stylesheet" href="app.css?v=20261031p">
+<link rel="stylesheet" href="app.css?v=20261031q">
 <link rel="stylesheet" href="diseno.css?v=20261031a">
 <link rel="stylesheet" href="viaje.css?v=20261029b">
 <!-- antes de pintar: como app desde el primer fotograma y, al volver a un chat tras recargar, sin enseñar el inicio entretanto -->
@@ -551,7 +551,7 @@
   <section class="conv" id="conv" hidden>
     <header class="gc-cabecera">
       <button type="button" class="gc-atras" id="cvolver" aria-label="Conversaciones" title="Conversaciones"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button>
-      <span class="gc-avatar candado" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span>
+      <span class="gc-avatar candado" id="cavatar" aria-hidden="true"><b class="gc-av-ini" id="cavatar-ini" hidden></b><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span>
       <!-- dueño, 29 Oct 2026, 16:01: «que no ponga ni conectado ni desconectado… cuando está conectado un puntito verde, cuando
            está desconectado un puntito rojo, es más fácil así» -->
       <div class="gc-quien"><span class="gc-nombre"><span id="cnombre">Conversación encriptada</span><i class="gc-punto" id="cpunto" hidden aria-hidden="true"></i> <em class="sello-insignia" id="sello-insignia" hidden>SELLADA</em></span><span class="gc-confianza" id="cconfianza">Esperando a la otra persona…</span></div>
@@ -589,6 +589,14 @@
     <div class="radio" id="radio" hidden><i></i><span id="radiotxt"></span></div>
     <div class="lienzo" id="lienzo">
       <ul class="gc-mensajes" id="mensajes"></ul>
+      <!-- ronda 76, fase 3: «↓ nuevos» cuando llega algo con el chat desplazado hacia arriba, y el menú de un mensaje (mantener pulsado) -->
+      <button type="button" class="gc-nuevos" id="nuevos-abajo" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12l7 7 7-7"/></svg><span id="nuevos-n"></span></button>
+      <div class="gc-menu gc-menu-msg" id="mmenu" role="menu" aria-label="Opciones del mensaje" hidden>
+        <button type="button" role="menuitem" id="mm-responder"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 6l-6 6 6 6"/><path d="M4 12h11a5 5 0 0 1 5 5v1"/></svg><span>Responder</span></button>
+        <button type="button" role="menuitem" id="mm-reenviar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 6l6 6-6 6"/><path d="M20 12H9a5 5 0 0 0-5 5v1"/></svg><span>Reenviar</span></button>
+        <button type="button" role="menuitem" id="mm-info"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8v.5"/></svg><span>Información</span></button>
+        <button type="button" role="menuitem" class="peligro" id="mm-borrar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M9.5 7V4.8h5V7M6.5 7l.9 12.2a1.6 1.6 0 0 0 1.6 1.5h6a1.6 1.6 0 0 0 1.6-1.5L17.5 7M10 11v6M14 11v6"/></svg><span>Borrar</span></button>
+      </div>
       <button type="button" class="velo-pista" id="velo-pista" aria-label="Mantén pulsado para ver los mensajes"><svg viewBox="0 0 24 24"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg><span>Mantén pulsado para ver</span></button>
     </div>
     <div class="gc-enviando" id="enviando" hidden></div>
@@ -605,6 +613,8 @@
     <!-- Safari del iPhone (dueño, 29 Oct 2026, 19:02–19:14: «añadir a pantalla de inicio tiene que salir abajo, justo encima de donde
          se escribe… un botón… y ahí tocas y sale un desprendible»). El botón azul despliega la guía fácil; la flecha amarilla salta sobre el
          botón de Safari (iOS 26: las rayitas, a la izquierda de la dirección; antes: Compartir, en el centro). El chat se pasa solo a la app. -->
+    <!-- responder (ronda 76, fase 3): a quién y qué se responde; la cita viaja cifrada dentro del mensaje -->
+    <div class="gc-responde" id="responde" hidden><div class="gc-responde-txt"><b id="responde-a"></b><span id="responde-t"></span></div><button type="button" class="gc-responde-x" id="responde-x" aria-label="Cancelar la respuesta"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
     <div class="gc-compositor">
       <button type="button" class="gc-redondo" id="adjuntar" aria-label="Enviar un archivo" title="Enviar un archivo (del tamaño que sea)"><svg viewBox="0 0 24 24"><path d="M21 12.5l-8.5 8.5a5.5 5.5 0 0 1-7.8-7.8L13.5 4.4a3.5 3.5 0 0 1 5 5L10 18a1.5 1.5 0 0 1-2.1-2.1L15.5 8.3"/></svg></button>
       <div class="campo-envoltura" id="campo-envoltura"><div class="mascara" id="texto-mascara" aria-hidden="true"></div><textarea class="gc-campo" id="texto" rows="1" placeholder="Escribe un mensaje" aria-label="Mensaje" autocomplete="off" spellcheck="false"></textarea></div>
@@ -881,6 +891,32 @@
   </div>
 </div>
 
+<!-- ronda 76, fase 3: reenviar a otro chat, información del mensaje y borrar -->
+<div class="gc-hoja" id="h-reenviar" role="dialog" aria-modal="true" aria-labelledby="h-reenviar-t">
+  <div class="gc-hoja-caja caja">
+    <div class="gc-asa"></div>
+    <h2 class="gc-hoja-titulo" id="h-reenviar-t">Reenviar a</h2>
+    <div class="reenviar-lista" id="reenviar-lista"></div>
+    <div class="fila"><button type="button" class="boton" id="reenviar-cancelar">Cancelar</button></div>
+  </div>
+</div>
+<div class="gc-hoja" id="h-info-msg" role="dialog" aria-modal="true" aria-labelledby="h-info-msg-t">
+  <div class="gc-hoja-caja caja">
+    <div class="gc-asa"></div>
+    <h2 class="gc-hoja-titulo" id="h-info-msg-t">Información</h2>
+    <dl class="info-msg" id="info-msg"></dl>
+    <div class="fila"><button type="button" class="boton principal" id="info-msg-ok">Listo</button></div>
+  </div>
+</div>
+<div class="gc-hoja" id="h-borrar-msg" role="dialog" aria-modal="true" aria-labelledby="h-borrar-msg-t">
+  <div class="gc-hoja-caja caja">
+    <div class="gc-asa"></div>
+    <h2 class="gc-hoja-titulo" id="h-borrar-msg-t">¿Borrar este mensaje?</h2>
+    <p class="t" id="borrar-msg-t">Se borra de este equipo.</p>
+    <div class="fila"><button type="button" class="boton" id="borrar-msg-cancelar">Cancelar</button><button type="button" class="boton" id="borrar-msg-todos" hidden>Borrar para todos</button><button type="button" class="boton peligro" id="borrar-msg-mi">Borrar para mí</button></div>
+  </div>
+</div>
+
 <!-- Llamada de voz: encriptada de extremo a extremo (DTLS-SRTP), por el relé; el cambio de voz se hace en este equipo -->
 <div class="gc-llamada" id="llamada" role="dialog" aria-modal="true" aria-label="Llamada de voz">
   <div class="gc-llamada-arriba"><span class="gc-llamada-cifrado"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><span>Encriptada de extremo a extremo<span class="solo-pc"> · por el relé de GUARDIANA</span></span></span><span class="gc-llamada-estado" id="ll-calidad"></span><button type="button" class="ll-mini-b" id="ll-mini" aria-label="Ver el chat"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v10H8l-4 4z"/></svg><span>Ver el chat</span></button></div>
@@ -1053,7 +1089,7 @@
 
 <!-- En el ordenador, en el chat blindado: la pantalla se tapa con la tecla de captura o si la ventana pierde el foco (29 Oct 2026, 08:02) -->
 <div class="captura-velo" id="captura-velo" role="alert" hidden><div><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><b>Modo blindado</b><span>No se puede capturar</span></div></div>
-<script src="/orbita/static/idioma.js?v=20261029p94"></script>
+<script src="/orbita/static/idioma.js?v=20261029p95"></script>
 <script src="pq-mlkem.js?v=20261027a"></script>
 <script src="pq-cnsa.js?v=20261027a"></script>
 <script src="qrhaz.js?v=20261027a"></script>
@@ -1064,6 +1100,6 @@
 <script src="viaje-datos.js?v=20261027a"></script>
 <script src="viaje.js?v=20261029b"></script>
 <script src="llamada.js?v=20261031f"></script>
-<script src="app.js?v=20261031o"></script>
+<script src="app.js?v=20261031p"></script>
 </body>
 </html>
