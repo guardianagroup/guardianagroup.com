@@ -39,7 +39,7 @@
 <link rel="canonical" href="https://guardianagroup.com/orbita/comunicaciones/">
 <link rel="icon" href="/favicon.ico">
 <link rel="stylesheet" href="componentes.css?v=20261028m">
-<link rel="stylesheet" href="app.css?v=20261101e">
+<link rel="stylesheet" href="app.css?v=20261101h">
 <link rel="stylesheet" href="diseno.css?v=20261031a">
 <link rel="stylesheet" href="viaje.css?v=20261029b">
 <!-- antes de pintar: como app desde el primer fotograma y, al volver a un chat tras recargar, sin enseñar el inicio entretanto -->
@@ -901,6 +901,22 @@
     <div class="fila"><button type="button" class="boton" id="reenviar-cancelar">Cancelar</button></div>
   </div>
 </div>
+<!-- Pasar la llamada al teléfono (dueño, 30 Oct 2026, 12:56–13:07; agencia, ronda 79): el código para la cámara del teléfono -->
+<div class="gc-hoja hoja-llevar" id="h-llevar" role="dialog" aria-modal="true" aria-labelledby="h-llevar-t">
+  <div class="gc-hoja-caja caja">
+    <h2 class="gc-hoja-titulo" id="h-llevar-t">Pasar la llamada al teléfono</h2>
+    <p class="llevar-explica">Escanea el código con la cámara del teléfono. No hace falta app, cuenta ni número: la llamada seguirá allí y este equipo saldrá de ella.</p>
+    <div class="llevar-qr" id="llevar-qr" role="img" aria-label="Código para la cámara del teléfono"></div>
+    <p class="llevar-estado" id="llevar-estado" role="status" aria-live="polite">Esperando al teléfono…</p>
+    <p class="llevar-aviso-pc">Mientras la pantalla del teléfono siga abierta, la llamada se recupera sola. Si se cierra, se borra y no se podrá reconectar.</p>
+    <div class="fila"><button type="button" class="boton" id="llevar-cancelar">Cancelar</button></div>
+  </div>
+</div>
+<div class="llevar-cortada" id="llevar-cortada" role="alertdialog" aria-labelledby="llevar-cortada-t" hidden>
+  <b id="llevar-cortada-t">Llamada cortada</b>
+  <p id="llevar-cortada-l"></p>
+  <div class="fila"><button type="button" class="boton" id="llevar-cortada-cerrar">Cerrar</button><button type="button" class="boton principal" id="llevar-cortada-volver">Volver a llamar</button></div>
+</div>
 <div class="gc-hoja" id="h-tercero" role="dialog" aria-modal="true" aria-labelledby="h-tercero-t">
   <div class="gc-hoja-caja caja">
     <div class="gc-asa"></div>
@@ -989,6 +1005,8 @@
     <div class="gc-llamada-boton ll-efecto" id="ll-grave-caja" hidden><button type="button" id="ll-grave" aria-pressed="false" aria-label="Voz grave"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h1.5M6.5 8.5v7M10 6v12M13.5 9v6M17 10.5v3"/><path d="M19.5 15.5l1.5 1.5 1.5-1.5M21 9.5V17"/></svg></button><span>Voz grave</span></div>
     <div class="gc-llamada-boton ll-efecto" id="ll-mosaico-caja" hidden><button type="button" id="ll-mosaico" aria-pressed="false" aria-label="Mosaico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2.5"/><path d="M9.3 4v16M14.7 4v16M4 9.3h16M4 14.7h16"/></svg></button><span>Mosaico</span></div>
     <div class="gc-llamada-boton" id="ll-anadir-caja" hidden><button type="button" id="ll-anadir" aria-label="Añadir a la llamada"><svg viewBox="0 0 24 24" aria-hidden="true"><g class="mas"><circle cx="9.5" cy="8" r="3.6"/><path d="M3 20c.6-3.7 3.3-6.1 6.5-6.1s5.9 2.4 6.5 6.1M18.5 7.5v6M15.5 10.5h6"/></g><path class="x" d="M6.5 6.5l11 11M17.5 6.5l-11 11"/></svg></button><span>Añadir</span></div>
+    <!-- «Pasar al teléfono» (dueño, 30 Oct 2026, 12:56; agencia, ronda 79): un teléfono con una flecha que entra en él -->
+    <div class="gc-llamada-boton" id="ll-llevar-caja" hidden><button type="button" id="ll-llevar" aria-label="Pasar al teléfono"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="12.5" y="3.5" width="8" height="17" rx="2"/><path d="M15.5 17.5h2"/><path d="M3 12h7.5M7.5 8.8 10.7 12l-3.2 3.2"/></svg></button><span>Pasar al teléfono</span></div>
     <div class="gc-llamada-boton" id="ll-vista-caja" hidden><button type="button" id="ll-vista" aria-label="Cambiar vista"><svg viewBox="0 0 24 24" aria-hidden="true"><g class="parte"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M12 5v14"/></g><g class="peq"><rect x="3" y="5" width="18" height="14" rx="2.5"/><rect x="12.5" y="11.5" width="6" height="5" rx="1.2"/></g></svg></button><span>Cambiar vista</span></div>
     <div class="gc-llamada-boton" id="ll-completa-caja" hidden><button type="button" id="ll-completa" aria-pressed="false" aria-label="Pantalla completa"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="entra" d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/><path class="sale" d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5"/></svg></button><span>Pantalla completa</span></div>
     <div class="gc-llamada-boton gc-colgar"><button type="button" id="ll-colgar" aria-label="Colgar"><svg viewBox="0 0 24 24"><path d="M3 12c5-5 13-5 18 0l-2.5 2.5-3-1.5v-2.5a9 9 0 0 0-7 0V13l-3 1.5z"/></svg></button><span>Colgar</span></div>
@@ -1096,6 +1114,23 @@
   <div class="tapar-pie"><small>Pasa el dedo o el ratón por lo que quieras tapar: caras, matrículas, datos. Se envía ya tapado.</small><button type="button" class="boton" id="tapar-otra">Empezar de nuevo</button></div>
 </div>
 <input type="file" id="archivo" multiple hidden>
+<!-- El teléfono al que se pasa la llamada (modo llevar): una sola pantalla, sin cuenta ni número, sin guardar nada -->
+<div class="llevar" id="llevar" hidden>
+  <div class="llevar-caja">
+    <div class="llevar-marca" translate="no">GUARDIANA</div>
+    <div class="llevar-sello" aria-hidden="true"><svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="30"/><circle class="gira" cx="32" cy="32" r="30"/><rect x="24" y="17" width="16" height="30" rx="3"/><path d="M29.5 41.5h5"/></svg></div>
+    <h1 class="llevar-t" id="llevar-t">Conectando…</h1>
+    <p class="llevar-l" id="llevar-l">Preparando la cámara y el micrófono.</p>
+    <div class="llevar-botones">
+      <button type="button" class="boton principal" id="llevar-volver" hidden>Volver a llamar</button>
+      <button type="button" class="boton llevar-colgar" id="llevar-colgar" hidden>Colgar</button>
+      <button type="button" class="boton principal" id="llevar-reintentar" hidden>Reintentar</button>
+    </div>
+    <p class="llevar-aviso" id="llevar-aviso">Mientras esta pantalla siga abierta, la llamada se recupera sola. Si la cierras, se borra y no se podrá reconectar.</p>
+  </div>
+</div>
+<div class="llevar-nota" id="llevar-nota" role="status" hidden>Mientras esta pantalla siga abierta, la llamada se recupera sola. Si la cierras, se borra.</div>
+<div class="llevar-banda" id="llevar-banda" role="status" hidden><span>Para que no te interrumpan otras llamadas, activa «No molestar» en el teléfono.</span><button type="button" id="llevar-banda-ok">Entendido</button></div>
 <div class="aviso" id="aviso" role="status" aria-live="polite" hidden></div>
 <!-- En el teléfono, GUARDIANA va en vertical (dueño, 28 Oct 2026, 16:12 y 29 Oct, 14:25). Android se fija solo; en el iPhone, que no
      deja fijarlo desde una web, en horizontal sale este aviso (app.css) -->
@@ -1113,7 +1148,7 @@
 <script src="sha256.js?v=20261027a"></script>
 <script src="viaje-datos.js?v=20261031a"></script>
 <script src="viaje.js?v=20261029b"></script>
-<script src="llamada.js?v=20261101f"></script>
-<script src="app.js?v=20261101b"></script>
+<script src="llamada.js?v=20261101h"></script>
+<script src="app.js?v=20261101h"></script>
 </body>
 </html>

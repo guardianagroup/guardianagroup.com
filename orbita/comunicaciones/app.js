@@ -624,7 +624,7 @@
     if (esB(c)) clave.fill(0); // la clave de este mensaje ya no sirve: fuera de la memoria
     return C.cat(cab, ct);
   }
-  function enviaControl(c, obj) { if (!c.sesion || !R.abierto || !c.miembros.has(c.suId)) return false; sella(c, obj).then((b) => b && R.manda(c.id, c.suId, b)); return true; }
+  function enviaControl(c, obj) { if (c && c.efimera) { mandaEfimera(c, obj); return true; } if (!c.sesion || !R.abierto || !c.miembros.has(c.suId)) return false; sella(c, obj).then((b) => b && R.manda(c.id, c.suId, b)); return true; }
   const enLinea = (c) => !!(c.suId && c.miembros.has(c.suId) && c.sesion && R.abierto);
   // Sin parpadeos de estado (dueño, 29 Oct 2026, 08:38: «cuando la actualizo… arriba me aparece durante un momento desconectado y
   // como que se mueve la parte de arriba. Vigila eso para que no pase»). Tras recargar, al perderse un momento la conexión o cuando
@@ -853,18 +853,7 @@
       case 'archivo-cancel': { const a = c.archivos.get(j.id); if (a) { a.cancelado = true; clearTimeout(a.esperaTrailer); if (a.escritor) { try { await a.escritor.abort(); } catch (_) {} } a.partes = null; if (a.pendientes) a.pendientes.clear(); c.archivos.delete(j.id); } const m = c.mensajes.find((x) => x.id === j.id); const vc = VIAJES.get(j.id); if (vc && vc.estado !== 'entregado') { vc.estado = 'fallo'; vc.tFin = Date.now(); evento(vc, j.por === 'integridad' ? T('El otro equipo ha detenido el envío: un fragmento no superó la autenticación.') : j.por === 'persona' ? T('La otra persona ha cortado el envío.') : T('El otro equipo ha cancelado el envío.'), 'mal'); } if (m && m.estado !== 'recibido') { m.estado = 'fallo'; if (j.por === 'persona') m.archivo.motivo = T('cortado por la otra persona'); if (j.por === 'integridad') { m.archivo.motivo = T('cortado en el otro lado: datos alterados'); c.incidencias = (c.incidencias || 0) + 1; await anotaSistema(c, 'La otra persona cortó un envío porque no superó la comprobación de integridad.'); } if (j.por === 'piezas') m.archivo.motivo = T('al otro equipo no le llegaron todas las piezas'); await guardaMensaje(c, m); pintaMensaje(c, m, true); pintaRadio(c); if (j.por === 'integridad') await alarmaSiToca(c); } return; }
       // llamadas (dueño, 27 Oct 2026, 23:05). Con varias conversaciones: una llamada de otra conversación también suena; si ya
       // hay una llamada en curso con otra, se le dice «ocupado» sin decir nada más (agencia, ronda 74, bloque J)
-      case 'llamada': {
-        if (!LL) return;
-        // llamada a tres: lo que manda la tercera persona va a su tramo de la llamada
-        if (LL.esTramo && LL.esTramo(c.id)) { await LL.recibeTercero(c.id, j); return; }
-        if (j.acto === 'oferta') {
-          if (LL.ocupado && LLAMADA_CONV && LLAMADA_CONV !== c.id) { enviaControl(c, { tipo: 'llamada', acto: 'ocupado', id: j.id }); return; }
-          if (!LL.ocupado) LLAMADA_CONV = c.id;
-          await LL.recibe(j); pintaLista(); return;
-        }
-        if (LLAMADA_CONV ? LLAMADA_CONV === c.id : c.id === ACTUAL) await LL.recibe(j);
-        return;
-      }
+      case 'llamada': return llegaLlamada(c, j);
       case 'vaciar': return vaciaLocal(c, true);
       case 'destruir': { if (c.suTemporal) { const n = nombreConv(c, true); await destruyeLocal(c, true, true); aviso(T('El chat temporal con {n} ha terminado y se ha borrado.').replace('{n}', n)); return; } return destruyeLocal(c, true); }
       // blindado (dueño, 29 Oct 2026, 10:08–10:14): lo que llega se muestra solo si la persona quiere; fotos y documentos con
@@ -1409,9 +1398,24 @@
   // duración y un botón para volver a llamar. Cada equipo apunta la suya; no viaja nada más por la red.
   // con varias conversaciones, la llamada va atada a la suya (puede no ser la que está en pantalla)
   let LLAMADA_CONV = null;
-  const convLl = () => CONVS.get(LLAMADA_CONV || ACTUAL);
+  const convLl = () => CONVS.get(LLAMADA_CONV || ACTUAL) || EFI.get(LLAMADA_CONV);
+  async function llegaLlamada(c, j) {
+    if (!LL) return;
+    // llamada a tres: lo que manda la tercera persona va a su tramo de la llamada
+    if (LL.esTramo && LL.esTramo(c.id)) { await LL.recibeTercero(c.id, j); return; }
+    if (j.acto === 'oferta') {
+      if (LL.ocupado && LLAMADA_CONV && LLAMADA_CONV !== c.id) { enviaControl(c, { tipo: 'llamada', acto: 'ocupado', id: j.id }); return; }
+      if (!LL.ocupado) LLAMADA_CONV = c.id;
+      await LL.recibe(j); pintaLista();
+      // el teléfono al que se pasó la llamada contesta solo: la persona ya dijo que sí al leer el código
+      if (c.efimera && c.telefono) contestaSolo();
+      return;
+    }
+    if (LLAMADA_CONV ? LLAMADA_CONV === c.id : c.id === ACTUAL) await LL.recibe(j);
+  }
   async function anotaLlamada(info) {
     const c = convLl(); LLAMADA_CONV = null; if (!c || !info) return;
+    if (c.efimera) { finEfimera(c, info); return; }
     // se avisó al teléfono de la otra persona («Te están llamando») y la llamada acabó sin contestar: ese aviso pasa a «Llamada perdida»
     if (info.saliente && info.por !== 'fin' && c.avisoLlamadaEn && Date.now() - c.avisoLlamadaEn < 3 * 60 * 1000 && R && R.abierto) { try { R.despiertaA(c.id, 'fin'); } catch (_) {} }
     c.avisoLlamadaEn = 0;
@@ -1483,7 +1487,7 @@
     return R ? R.ice : [];
   };
   const servidorLlamada = () => (iceUsado === 'am' ? T('Miami (Estados Unidos)') : iceUsado === 'eu' ? T('Núremberg (Alemania)') : '');
-  const puedeLlamar = () => { const c = CONVS.get(ACTUAL); return !!(c && enLinea(c) && c.sesion && c.sesion.confirmada && puedeEnviar(c)); };
+  const puedeLlamar = () => { const e = EFI.get(LLAMADA_CONV); if (e) return !!(e.suId && R && R.abierto); const c = CONVS.get(ACTUAL); return !!(c && enLinea(c) && c.sesion && c.sesion.confirmada && puedeEnviar(c)); };
   // solo en local (pruebas): simular un mensaje manipulado y ver la alarma sin tocar el relé
   if (LOCAL) window.gcomPruebaTemporal = { estado: () => ({ en: enTemporal(), uso: ultimoUso(), convs: [...CONVS.values()].filter((c) => c.estado !== 'destruida').map((c) => ({ id: c.id, temporal: temporalConv(c), su: c.suTemporal || 0, dije: !!c.dijeTemporal })) }), envejece: (ms) => { try { localStorage.setItem('gcom-temporal-uso', String(Date.now() - ms)); } catch (_) {} usoT = 0; }, caduca: (op) => caducaChatTemporal(op), envejeceSuyos: (ms) => { for (const c of CONVS.values()) if (c.suTemporal) { c.suVistoT = Date.now() - ms; c.ultimo = Date.now() - ms; c.suTemporal = Date.now() - ms; } }, caducaSuyos: () => caducaSuyos(true) };
   if (LOCAL) window.gcomPrueba = { ponNombre: async (sala, n) => { const c = CONVS.get(sala); if (!c) return false; c.alias = n; await guardaConv(c); pintaLista(); return true; }, abre: (sala) => abreConv(sala), traspaso: () => ({ llave: llaveTraspaso(), conv: traspasoConvId(), ocultas: [...CONVS.values()].filter((c) => c.traspasoDe && !c.huella).length, total: CONVS.size, vivas: vivas().length, nombres: vivas().map((c) => nombreConv(c, true)) }), avisos: () => ({ firma: avisosFirma, ultimo: ultimoAvisos, despierta: ultimoDespierta, sw: !!swReg, puede: puedePush(), permiso: permisoAvisos() }), activa: () => activaAvisos(), incidencia: async (id) => { const c = CONVS.get(id || ACTUAL); if (!c) return; c.incidencias = (c.incidencias || 0) + 1; await anotaSistema(c, 'Un mensaje no superó la comprobación de integridad y se ha descartado.'); vigila(c, T('Un mensaje no superó la autenticación: descartado.'), 'mal'); return alarmaSiToca(c); }, conv: () => CONVS.get(ACTUAL), corta: () => R.corta(), llamada: () => (LL ? LL.estado : ''), enlace: () => { const c = CONVS.get(ACTUAL); return c && c.semilla ? enlaceB(c) : null; }, cuantas: () => [...CONVS.values()].filter((x) => x.estado !== 'destruida' && x.estado !== 'destruida_pendiente').length };
@@ -1491,7 +1495,10 @@
     if (!window.GuardianaLlamada || !window.RTCPeerConnection) { for (const id of ['#llamar', '#videollamar']) { const b = $(id); if (b) b.hidden = true; } return; }
     if (!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia)) { const b = $('#videollamar'); if (b) b.hidden = true; }
     LL = GuardianaLlamada.crea({
-      ice: iceCercano, servidor: servidorLlamada, puede: puedeLlamar, t: T, aviso, suena: avisaSonido, fin: anotaLlamada, estado: avisaLlamada,
+      ice: iceCercano, servidor: servidorLlamada, puede: puedeLlamar, t: T, aviso, suena: LLEVAR ? () => {} : avisaSonido, fin: anotaLlamada, estado: avisaLlamada,
+      // pasar la llamada al teléfono: el botón (en el PC), la llave que llega de la otra persona, y lo que avisa la otra parte
+      llevar: LLEVAR ? null : () => abreLlevar(),
+      alLlevar: (k) => alLlevar(k), llevarNo: () => llevarNo(), llevarVisto: () => llevarVisto(), llevarListo: () => llevarListo(),
       blindada: () => { const c = convLl(); return !!(c && extrasB(c)); },
       sas: () => { const c = convLl(); return !!(c && extrasB(c)); }, // el número de seguridad en la llamada: blindado y Ultra (dueño, 29 Oct 2026, 12:55: «en el modo normal no») // las opciones de imagen, solo en la sesión blindada
       manda: (m) => { const c = convLl(); if (c) enviaControl(c, Object.assign({ tipo: 'llamada' }, m)); },
@@ -1505,8 +1512,8 @@
       inicial: () => { const c = convLl(); return inicial(c && (c.alias || c.nombre)); },
       // llamada a tres: mensajes a la conversación del tercero, la llamada que pasa a otra conversación, el apunte en el chat del
       // tercero y la hoja para elegir a quién añadir
-      mandaA: (sala, m) => { const c = CONVS.get(sala); if (c) enviaControl(c, Object.assign({ tipo: 'llamada' }, m)); },
-      cambia: (sala) => { LLAMADA_CONV = sala; pintaLista(); },
+      mandaA: (sala, m) => { const c = CONVS.get(sala) || EFI.get(sala); if (c) enviaControl(c, Object.assign({ tipo: 'llamada' }, m)); },
+      cambia: (sala) => { LLAMADA_CONV = sala; const e = EFI.get(sala); if (e) e.principal = true; pintaLista(); },
       finA: (sala, info) => { const antes = LLAMADA_CONV; LLAMADA_CONV = sala; anotaLlamada(info); LLAMADA_CONV = antes; },
       eligeTercero: () => abreAnadir(),
       // el nombre que la otra persona de la llamada se puso a sí misma (lo que se dice a los demás del grupo)
@@ -1823,6 +1830,7 @@
   // ---------- relé ----------
   function arrancaRele() {
     R = GuardianaRele.crea();
+    oyentesEfimeras();
     const estadoRele = (txt, cls) => { const e = $('#rele'); e.className = 'rele ' + (cls || ''); $('#reletxt').textContent = txt; };
     // sin conversación, nada que decir (agencia, ronda 75: «Desconectado» en el inicio asustaba); y mientras está «quieta» (tras
     // recargar o un corte de un momento), lo que ya se veía (29 Oct 2026, 08:38)
@@ -3287,11 +3295,13 @@
   let tituloLlamada = false;
   let servidorDicho = false;
   function avisaLlamada(est, video) {
+    if (LLEVAR && window.gcomLlevarEstado) window.gcomLlevarEstado(est);
+    if (est === 'entrante' || est === 'conectando') { const lc = $('#llevar-cortada'); if (lc) lc.hidden = true; }
     // una llamada que entra se ve limpia: fuera cualquier aviso que hubiera (el de «Contacto guardado» tapaba «Contestar»)
     if (est === 'entrante') { const a = $('#aviso'); if (a) { a.hidden = true; clearTimeout(avisoT); } }
     if ((est === 'conectando' || est === 'hablando') && LLAMADA_CONV && ACTUAL !== LLAMADA_CONV && CONVS.has(LLAMADA_CONV)) abreConv(LLAMADA_CONV);
     if (est === 'libre') servidorDicho = false;
-    if (est === 'hablando' && !servidorDicho && servidorLlamada()) { servidorDicho = true; const c = convLl(); if (c) vigila(c, T('Tu llamada pasa por el servidor de llamadas de {s}.').replace('{s}', servidorLlamada()), 'ok'); }
+    if (est === 'hablando' && !servidorDicho && servidorLlamada()) { servidorDicho = true; const c = convLl(); if (c && !c.efimera) vigila(c, T('Tu llamada pasa por el servidor de llamadas de {s}.').replace('{s}', servidorLlamada()), 'ok'); }
     if (est === 'libre' || est === 'entrante') setTimeout(pintaLista, 0);
     if (est === 'entrante') {
       if (!fuera()) return;
@@ -4448,9 +4458,187 @@
       if (Date.now() - versionMirada > 15 * 1000) setTimeout(miraVersion, 1200);
     });
   }
+  // ---------- Pasar la videollamada al teléfono (dueño, 30 Oct 2026, 12:56–13:14; agencia, ronda 79) ----------
+  // «Cuando dos personas estén en comunicación de PC a PC… un botón que diga pasar la conversación al teléfono. Aparezca un QR, se
+  // lea con la cámara del teléfono y aparezca ahí la interfaz… muy simple… cuando se cuelgue… desaparezca… como si no hubiera
+  // existido». El PC enseña un código QR con una llave nueva de 32 bytes, solo en el fragmento de la dirección (nunca llega a ningún
+  // servidor). El teléfono que lo lee abre esta página en «modo llevar»: sin cuenta, sin número, sin abrir la base de datos ni
+  // guardar nada; entra en una sala efímera que sale de la llave. La otra persona de la llamada, avisada por el canal cifrado de la
+  // llamada, añade el teléfono como un tramo (como en la llamada en grupo); cuando el teléfono ya habla, el PC cuelga y el tramo del
+  // teléfono pasa a ser la llamada (asciende, llamada.js). Lo que va por la sala efímera va cifrado con AES-256-GCM con una clave
+  // que también sale de la llave. La llave vive solo en esa pestaña (sessionStorage): aguanta que el teléfono recargue la página y se
+  // borra al colgar o al cerrar la pestaña. Mientras la pestaña siga abierta, una llamada cortada se recupera con «Volver a llamar».
+  const LLEVAR = (() => {
+    try {
+      const m = location.hash.match(/#llevar=([A-Za-z0-9_-]{43})/);
+      if (m) { sessionStorage.setItem('gcom-llevar', m[1]); history.replaceState(null, '', location.pathname); return m[1]; }
+      const s = sessionStorage.getItem('gcom-llevar');
+      return /^[A-Za-z0-9_-]{43}$/.test(s || '') ? s : null;
+    } catch (_) { return null; }
+  })();
+  const EFI = new Map(); // sala efímera → { id, efimera, k, yo, suId, miembros, nombre, cola }
+  async function salaEfimera(k64, opc) {
+    let raw; try { raw = C.deB64u(k64); } catch (_) { return null; }
+    if (!raw || raw.length !== 32) return null;
+    const sala = C.hex(await C.sha256(C.cat(C.te.encode('GUARDIANA llevar sala\n'), raw)));
+    if (EFI.has(sala)) return EFI.get(sala);
+    const kb = await C.sha256(C.cat(C.te.encode('GUARDIANA llevar clave\n'), raw));
+    const k = await crypto.subtle.importKey('raw', kb, 'AES-GCM', false, ['encrypt', 'decrypt']);
+    const yo = (opc && /^[0-9a-f]{16}$/.test(opc.yo || '')) ? opc.yo : C.hex(C.azar(8));
+    const c = { id: sala, efimera: true, k, yo, suId: null, miembros: new Set(), nombre: (opc && opc.nombre) || '', alias: '', cola: [], mensajes: [] };
+    EFI.set(sala, c); R.entra(sala, yo);
+    return c;
+  }
+  function sueltaEfimera(c) { if (!c || !EFI.has(c.id)) return; EFI.delete(c.id); try { R.sale(c.id); } catch (_) {} }
+  async function mandaEfimera(c, obj) {
+    if (!c.suId || !R || !R.abierto) { if (c.cola.length < 64) c.cola.push(obj); return false; }
+    const iv = C.azar(12);
+    const ct = new Uint8Array(await crypto.subtle.encrypt({ name: 'AES-GCM', iv, additionalData: C.te.encode(c.id) }, c.k, C.te.encode(JSON.stringify(obj))));
+    const b = new Uint8Array(13 + ct.length); b[0] = 9; b.set(iv, 1); b.set(ct, 13);
+    return R.manda(c.id, c.suId, b);
+  }
+  function vaciaColaEfimera(c) { const q = c.cola.splice(0); for (const x of q) mandaEfimera(c, x); }
+  async function recibeEfimera(c, de, b) {
+    if (!b || b[0] !== 9 || b.length < 30) return;
+    let j; try { j = JSON.parse(C.td.decode(await crypto.subtle.decrypt({ name: 'AES-GCM', iv: b.slice(1, 13), additionalData: C.te.encode(c.id) }, c.k, b.slice(13)))); } catch (_) { return; }
+    if (!c.suId) { c.suId = de; vaciaColaEfimera(c); }
+    if (de !== c.suId || !j || typeof j !== 'object') return;
+    if (j.tipo === 'llamada') { await llegaLlamada(c, j); return; }
+    // la otra parte cierra el traspaso: ya no hay nada que recuperar
+    if (j.tipo === 'llevar-fin') { if (c.telefono) { pintaLlevar('terminada'); borraLlevar(c); } else { $('#llevar-cortada').hidden = true; sueltaEfimera(c); } }
+  }
+  function alguienEnEfimera(c, quien) {
+    if (!quien || quien === c.yo) return;
+    c.miembros.add(quien);
+    if (!c.suId || !c.miembros.has(c.suId)) c.suId = quien;
+    vaciaColaEfimera(c);
+    if (c.alLlegar) c.alLlegar();
+  }
+  function oyentesEfimeras() {
+    R.on('sala', (sala, miembros) => { const c = EFI.get(sala); if (!c) return; c.miembros = new Set(); for (const q of miembros) alguienEnEfimera(c, q); });
+    R.on('llega', (sala, quien) => { const c = EFI.get(sala); if (c) alguienEnEfimera(c, quien); });
+    R.on('sale', (sala, quien) => { const c = EFI.get(sala); if (c) c.miembros.delete(quien); });
+    R.on('trama', (sala, de, b) => { const c = EFI.get(sala); if (!c) return; c.proc = (c.proc || Promise.resolve()).then(() => recibeEfimera(c, de, b)).catch((e) => console.warn('efímera', e)); });
+  }
+  // ----- en el PC que pasa la llamada: el código y la espera -----
+  let llevarK = null;
+  function abreLlevar() {
+    if (!LL || LL.estado !== 'hablando' || !window.qrSvg) return;
+    const c = convLl(); if (!c) return;
+    llevarK = C.b64u(C.azar(32));
+    const url = location.origin + location.pathname.replace(/[^/]*$/, '') + '#llevar=' + llevarK;
+    const q = $('#llevar-qr'); q.innerHTML = window.qrSvg(url); q.dataset.url = url;
+    $('#llevar-estado').textContent = T('Esperando al teléfono…'); $('#llevar-estado').className = 'llevar-estado';
+    enviaControl(c, { tipo: 'llamada', acto: 'llevar', k: llevarK });
+    abreHoja('h-llevar');
+  }
+  function cancelaLlevar() {
+    const k = llevarK; llevarK = null; cierraHoja('h-llevar');
+    const q = $('#llevar-qr'); if (q) { q.textContent = ''; delete q.dataset.url; }
+    const c = convLl(); if (k && c && LL && LL.estado === 'hablando') enviaControl(c, { tipo: 'llamada', acto: 'llevar-no' });
+  }
+  function llevarVisto() { if (llevarK) { $('#llevar-estado').textContent = T('El teléfono se está conectando…'); $('#llevar-estado').className = 'llevar-estado viene'; } }
+  function llevarListo() {
+    if (!llevarK) return;
+    llevarK = null;
+    $('#llevar-estado').textContent = T('El teléfono ya tiene la llamada.'); $('#llevar-estado').className = 'llevar-estado listo';
+    setTimeout(() => { cierraHoja('h-llevar'); const q = $('#llevar-qr'); if (q) { q.textContent = ''; delete q.dataset.url; } if (LL && LL.estado !== 'libre') LL.colgar(); aviso(T('La llamada continúa en tu teléfono.')); }, 900);
+  }
+  // ----- en el equipo de la otra persona: la llave llega por el canal cifrado de la llamada; el teléfono se añade en cuanto entra -----
+  async function alLlevar(k) {
+    if (!LL || LL.estado !== 'hablando') return;
+    const de = convLl(); if (!de) return;
+    const c = await salaEfimera(k, { nombre: de.efimera ? de.nombre : nombreConv(de, true) });
+    if (!c) return;
+    c.de = de.id;
+    c.alLlegar = () => {
+      if (c.anadido || c.principal || !LL || LL.estado !== 'hablando') return;
+      c.anadido = true;
+      const d0 = CONVS.get(c.de) || EFI.get(c.de); if (d0) enviaControl(d0, { tipo: 'llamada', acto: 'llevar-visto' });
+      LL.anade(c.id, { nombre: c.nombre, llevar: true });
+    };
+    if (c.suId) c.alLlegar();
+  }
+  function llevarNo() { for (const c of [...EFI.values()]) if (!c.telefono && !c.principal) sueltaEfimera(c); }
+  // ----- el final de una llamada por la sala efímera (en el teléfono o en el equipo de la otra persona) -----
+  function finEfimera(c, info) {
+    const cortada = info.por === 'fallo';
+    if (c.telefono) {
+      if (cortada) pintaLlevar('cortada');
+      else { pintaLlevar('terminada'); borraLlevar(c); }
+      return;
+    }
+    if (!c.principal) { c.anadido = false; return; } // el teléfono no llegó a contestar: si vuelve a entrar, se le llama otra vez
+    if (cortada) { $('#llevar-cortada-l').textContent = T('Se ha perdido la conexión con el teléfono de {n}. Mientras su pantalla siga abierta, podéis volver a llamar.').replace('{n}', c.nombre || T('la otra persona')); $('#llevar-cortada').hidden = false; $('#llevar-cortada').dataset.sala = c.id; }
+    else sueltaEfimera(c);
+  }
+  function volverALlamar(c) {
+    if (!c || !LL || LL.ocupado) return;
+    $('#llevar-cortada').hidden = true;
+    LLAMADA_CONV = c.id; LL.llamar(true);
+  }
+  // ----- el teléfono: una sola pantalla, sin guardar nada -----
+  function borraLlevar(c) {
+    try { sessionStorage.removeItem('gcom-llevar'); sessionStorage.removeItem('gcom-llevar-yo'); } catch (_) {}
+    if (c) { mandaEfimera(c, { tipo: 'llevar-fin' }); setTimeout(() => sueltaEfimera(c), 600); }
+  }
+  function contestaSolo() { let n = 0; const intenta = () => { const b = $('#ll-contestar'); if (b && !b.closest('[hidden]')) b.click(); else if (++n < 20) setTimeout(intenta, 100); }; setTimeout(intenta, 60); }
+  const TEXTOS_LLEVAR = {
+    conectando: ['Conectando…', 'Preparando la cámara y el micrófono.'],
+    cortada: ['Llamada cortada', 'Se ha perdido la conexión.'],
+    terminada: ['Llamada terminada', 'Puedes cerrar esta pestaña. En este teléfono no queda nada de la llamada.'],
+    invalida: ['Este código ya no sirve', 'Pide que te enseñen un código nuevo en el ordenador.'],
+    permiso: ['Sin acceso a la cámara y al micrófono', 'Permítelos en los ajustes del navegador y vuelve a intentarlo.'],
+  };
+  let llevarEstado = '';
+  function pintaLlevar(estado) {
+    llevarEstado = estado;
+    const p = $('#llevar'); if (!p) return;
+    const [tt, ll] = TEXTOS_LLEVAR[estado] || TEXTOS_LLEVAR.conectando;
+    $('#llevar-t').textContent = T(tt); $('#llevar-l').textContent = T(ll);
+    p.dataset.estado = estado; p.hidden = estado === 'llamada';
+    $('#llevar-volver').hidden = estado !== 'cortada';
+    $('#llevar-colgar').hidden = estado !== 'cortada' && estado !== 'conectando';
+    $('#llevar-reintentar').hidden = estado !== 'permiso';
+    $('#llevar-aviso').hidden = !(estado === 'conectando' || estado === 'cortada');
+  }
+  async function arrancaLlevar() {
+    document.body.classList.add('modo-llevar');
+    try { document.title = 'GUARDIANA · ' + T('Videollamada'); } catch (_) {}
+    pintaLlevar('conectando'); revela();
+    arrancaRele(); arrancaLlamadas();
+    let yo = null; try { yo = sessionStorage.getItem('gcom-llevar-yo'); } catch (_) {}
+    const c = await salaEfimera(LLEVAR, { yo });
+    if (!c) { pintaLlevar('invalida'); borraLlevar(null); return; }
+    try { sessionStorage.setItem('gcom-llevar-yo', c.yo); } catch (_) {}
+    c.telefono = true;
+    $('#llevar-volver').addEventListener('click', () => { pintaLlevar('conectando'); volverALlamar(c); });
+    $('#llevar-colgar').addEventListener('click', () => { if (LL && LL.ocupado) LL.colgar(); pintaLlevar('terminada'); borraLlevar(c); });
+    $('#llevar-reintentar').addEventListener('click', () => location.reload());
+    // el aviso de cierre y la recomendación de «No molestar», unos segundos al empezar la llamada (agencia, ronda 79)
+    let primera = true;
+    const alEstado = window.gcomLlevarEstado = (est) => {
+      if (est === 'hablando') {
+        pintaLlevar('llamada');
+        if (primera) {
+          primera = false;
+          const n = $('#llevar-nota'), b = $('#llevar-banda');
+          n.hidden = false; b.hidden = false;
+          setTimeout(() => { n.hidden = true; }, 8000); setTimeout(() => { b.hidden = true; }, 10000);
+        }
+      }
+    };
+    void alEstado;
+  }
+  { const b = $('#llevar-banda-ok'); if (b) b.addEventListener('click', () => { $('#llevar-banda').hidden = true; }); }
+  { const b = $('#llevar-cancelar'); if (b) b.addEventListener('click', cancelaLlevar); }
+  { const b = $('#llevar-cortada-cerrar'); if (b) b.addEventListener('click', () => { const c = EFI.get($('#llevar-cortada').dataset.sala); $('#llevar-cortada').hidden = true; if (c) { mandaEfimera(c, { tipo: 'llevar-fin' }); setTimeout(() => sueltaEfimera(c), 600); } }); }
+  { const b = $('#llevar-cortada-volver'); if (b) b.addEventListener('click', () => volverALlamar(EFI.get($('#llevar-cortada').dataset.sala))); }
+
   async function arranca() {
     setTimeout(revela, 2500); // por si algo tarda: nunca más de esto con la pantalla tapada
     if (!window.isSecureContext || !crypto.subtle || !window.indexedDB) { revela(); $('#inicio').innerHTML = '<p>' + T('Este navegador no puede abrir Comunicaciones: hace falta una conexión segura (https) y un navegador actual.') + '</p>'; return; }
+    if (LLEVAR) { await arrancaLlevar(); return; }
     quietoArranque();
     await BD.abre();
     await cargaIdentidad();
