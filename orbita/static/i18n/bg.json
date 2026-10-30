@@ -3651,7 +3651,10 @@
 "Capa post-cuántica activa en el sonido y la imagen.":"Постквантовият слой е активен за звука и образа.",
 "Capa post-cuántica: no disponible en esta llamada.":"Постквантов слой: не е наличен в това обаждане.",
 "Número de seguridad comprobado.":"Номерът за сигурност е проверен.",
-"Número de seguridad sin comprobar.":"Номерът за сигурност не е проверен."
+"Número de seguridad sin comprobar.":"Номерът за сигурност не е проверен.",
+"La llave cambia cada minuto. Compara este código con la otra persona: debe ser el mismo.":"Ключът се сменя всяка минута. Сравнете този код с другия човек: трябва да е същият.",
+"La llave de la capa post-cuántica cambia cada minuto. Código de ahora: {c}.":"Ключът на постквантовия слой се сменя всяка минута. Текущ код: {c}.",
+"Compáralo con la otra persona: si coincide, los dos tenéis la misma llave. Si no, esperad al siguiente cambio; si sigue sin coincidir, colgad.":"Сравнете го с другия човек: ако съвпада, двамата имате един и същ ключ. Ако не, изчакайте следващата смяна; ако пак не съвпада, затворете."
 },
 "p":{
 "intento":"Най-настойчивата днес: {1}, {2} {2?път|пъти}.",

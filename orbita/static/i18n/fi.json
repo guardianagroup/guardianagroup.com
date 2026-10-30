@@ -3651,7 +3651,10 @@
 "Capa post-cuántica activa en el sonido y la imagen.":"Kvanttikestävä kerros käytössä äänessä ja kuvassa.",
 "Capa post-cuántica: no disponible en esta llamada.":"Kvanttikestävä kerros: ei käytettävissä tässä puhelussa.",
 "Número de seguridad comprobado.":"Turvanumero tarkistettu.",
-"Número de seguridad sin comprobar.":"Turvanumeroa ei ole tarkistettu."
+"Número de seguridad sin comprobar.":"Turvanumeroa ei ole tarkistettu.",
+"La llave cambia cada minuto. Compara este código con la otra persona: debe ser el mismo.":"Avain vaihtuu joka minuutti. Vertaa tätä koodia toisen henkilön kanssa: sen on oltava sama.",
+"La llave de la capa post-cuántica cambia cada minuto. Código de ahora: {c}.":"Kvanttikestävän kerroksen avain vaihtuu joka minuutti. Nykyinen koodi: {c}.",
+"Compáralo con la otra persona: si coincide, los dos tenéis la misma llave. Si no, esperad al siguiente cambio; si sigue sin coincidir, colgad.":"Vertaa sitä toisen henkilön kanssa: jos se täsmää, teillä on molemmilla sama avain. Jos ei, odottakaa seuraavaa vaihtoa; jos se ei vieläkään täsmää, lopettakaa puhelu."
 },
 "p":{
 "intento":"Eniten yrittänyt tänään: {1}, {2} {2?kerta|kertaa}.",

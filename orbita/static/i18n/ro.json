@@ -3651,7 +3651,10 @@
 "Capa post-cuántica activa en el sonido y la imagen.":"Stratul postcuantic este activ pentru sunet și imagine.",
 "Capa post-cuántica: no disponible en esta llamada.":"Strat postcuantic: indisponibil în acest apel.",
 "Número de seguridad comprobado.":"Număr de siguranță verificat.",
-"Número de seguridad sin comprobar.":"Număr de siguranță neverificat."
+"Número de seguridad sin comprobar.":"Număr de siguranță neverificat.",
+"La llave cambia cada minuto. Compara este código con la otra persona: debe ser el mismo.":"Cheia se schimbă în fiecare minut. Compară acest cod cu cealaltă persoană: trebuie să fie același.",
+"La llave de la capa post-cuántica cambia cada minuto. Código de ahora: {c}.":"Cheia stratului postcuantic se schimbă în fiecare minut. Codul actual: {c}.",
+"Compáralo con la otra persona: si coincide, los dos tenéis la misma llave. Si no, esperad al siguiente cambio; si sigue sin coincidir, colgad.":"Compară-l cu cealaltă persoană: dacă se potrivește, amândoi aveți aceeași cheie. Dacă nu, așteptați următoarea schimbare; dacă tot nu se potrivește, închideți."
 },
 "p":{
 "intento":"Cea care a încercat cel mai mult azi: {1}, {2} {2?dată|ori}.",

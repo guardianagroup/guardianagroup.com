@@ -3651,7 +3651,10 @@
 "Capa post-cuántica activa en el sonido y la imagen.":"A posztkvantum réteg aktív a hangon és a képen.",
 "Capa post-cuántica: no disponible en esta llamada.":"Posztkvantum réteg: ebben a hívásban nem érhető el.",
 "Número de seguridad comprobado.":"Biztonsági szám ellenőrizve.",
-"Número de seguridad sin comprobar.":"A biztonsági szám nincs ellenőrizve."
+"Número de seguridad sin comprobar.":"A biztonsági szám nincs ellenőrizve.",
+"La llave cambia cada minuto. Compara este código con la otra persona: debe ser el mismo.":"A kulcs percenként változik. Hasonlítsátok össze ezt a kódot a másik féllel: ugyanannak kell lennie.",
+"La llave de la capa post-cuántica cambia cada minuto. Código de ahora: {c}.":"A posztkvantum réteg kulcsa percenként változik. Jelenlegi kód: {c}.",
+"Compáralo con la otra persona: si coincide, los dos tenéis la misma llave. Si no, esperad al siguiente cambio; si sigue sin coincidir, colgad.":"Hasonlítsátok össze a másik féllel: ha egyezik, mindkettőtöknél ugyanaz a kulcs. Ha nem, várjátok meg a következő váltást; ha akkor sem egyezik, tegyétek le."
 },
 "p":{
 "intento":"Ma a legtöbbször próbálkozott: {1}, {2} {2?alkalommal|alkalommal}.",

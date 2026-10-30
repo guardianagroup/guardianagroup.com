@@ -3651,7 +3651,10 @@
 "Capa post-cuántica activa en el sonido y la imagen.":"Postkvantni sloj aktivan je za zvuk i sliku.",
 "Capa post-cuántica: no disponible en esta llamada.":"Postkvantni sloj: nije dostupan u ovom pozivu.",
 "Número de seguridad comprobado.":"Sigurnosni broj provjeren.",
-"Número de seguridad sin comprobar.":"Sigurnosni broj nije provjeren."
+"Número de seguridad sin comprobar.":"Sigurnosni broj nije provjeren.",
+"La llave cambia cada minuto. Compara este código con la otra persona: debe ser el mismo.":"Ključ se mijenja svake minute. Usporedite ovaj kod s drugom osobom: mora biti isti.",
+"La llave de la capa post-cuántica cambia cada minuto. Código de ahora: {c}.":"Ključ postkvantnog sloja mijenja se svake minute. Trenutačni kod: {c}.",
+"Compáralo con la otra persona: si coincide, los dos tenéis la misma llave. Si no, esperad al siguiente cambio; si sigue sin coincidir, colgad.":"Usporedite ga s drugom osobom: ako se podudara, oboje imate isti ključ. Ako ne, pričekajte sljedeću promjenu; ako se ni tada ne podudara, prekinite poziv."
 },
 "p":{
 "intento":"Najupornija danas: {1}, {2} {2?put|puta}.",

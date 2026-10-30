@@ -3651,7 +3651,10 @@
 "Capa post-cuántica activa en el sonido y la imagen.":"Postkvantová vrstva je aktívna pre zvuk aj obraz.",
 "Capa post-cuántica: no disponible en esta llamada.":"Postkvantová vrstva: v tomto hovore nie je k dispozícii.",
 "Número de seguridad comprobado.":"Bezpečnostné číslo overené.",
-"Número de seguridad sin comprobar.":"Bezpečnostné číslo neoverené."
+"Número de seguridad sin comprobar.":"Bezpečnostné číslo neoverené.",
+"La llave cambia cada minuto. Compara este código con la otra persona: debe ser el mismo.":"Kľúč sa mení každú minútu. Porovnajte tento kód s druhou osobou: musí byť rovnaký.",
+"La llave de la capa post-cuántica cambia cada minuto. Código de ahora: {c}.":"Kľúč postkvantovej vrstvy sa mení každú minútu. Aktuálny kód: {c}.",
+"Compáralo con la otra persona: si coincide, los dos tenéis la misma llave. Si no, esperad al siguiente cambio; si sigue sin coincidir, colgad.":"Porovnajte ho s druhou osobou: ak sa zhoduje, máte obaja rovnaký kľúč. Ak nie, počkajte na ďalšiu zmenu; ak sa ani potom nezhoduje, zložte."
 },
 "p":{
 "intento":"Najviac sa dnes snažila: {1}, {2}{2?-krát|-krát}.",

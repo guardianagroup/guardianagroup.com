@@ -3651,7 +3651,10 @@
 "Capa post-cuántica activa en el sonido y la imagen.":"Camada pós-quântica ativa no som e na imagem.",
 "Capa post-cuántica: no disponible en esta llamada.":"Camada pós-quântica: não disponível nesta chamada.",
 "Número de seguridad comprobado.":"Número de segurança confirmado.",
-"Número de seguridad sin comprobar.":"Número de segurança por confirmar."
+"Número de seguridad sin comprobar.":"Número de segurança por confirmar.",
+"La llave cambia cada minuto. Compara este código con la otra persona: debe ser el mismo.":"A chave muda a cada minuto. Compare este código com a outra pessoa: tem de ser o mesmo.",
+"La llave de la capa post-cuántica cambia cada minuto. Código de ahora: {c}.":"A chave da camada pós-quântica muda a cada minuto. Código atual: {c}.",
+"Compáralo con la otra persona: si coincide, los dos tenéis la misma llave. Si no, esperad al siguiente cambio; si sigue sin coincidir, colgad.":"Compare-o com a outra pessoa: se coincidir, os dois têm a mesma chave. Se não, esperem pela próxima mudança; se continuar a não coincidir, desliguem."
 },
 "p":{
 "intento":"A que mais tentou hoje: {1}, {2} {2?vez|vezes}.",

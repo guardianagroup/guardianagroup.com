@@ -3651,7 +3651,10 @@
 "Capa post-cuántica activa en el sonido y la imagen.":"आवाज़ और तस्वीर पर पोस्ट-क्वांटम परत सक्रिय है।",
 "Capa post-cuántica: no disponible en esta llamada.":"पोस्ट-क्वांटम परत: इस कॉल में उपलब्ध नहीं है।",
 "Número de seguridad comprobado.":"सुरक्षा नंबर जाँचा गया।",
-"Número de seguridad sin comprobar.":"सुरक्षा नंबर नहीं जाँचा गया।"
+"Número de seguridad sin comprobar.":"सुरक्षा नंबर नहीं जाँचा गया।",
+"La llave cambia cada minuto. Compara este código con la otra persona: debe ser el mismo.":"चाबी हर मिनट बदलती है। इस कोड को दूसरे व्यक्ति के कोड से मिलाएँ: यह एक जैसा होना चाहिए।",
+"La llave de la capa post-cuántica cambia cada minuto. Código de ahora: {c}.":"पोस्ट-क्वांटम परत की चाबी हर मिनट बदलती है। अभी का कोड: {c}।",
+"Compáralo con la otra persona: si coincide, los dos tenéis la misma llave. Si no, esperad al siguiente cambio; si sigue sin coincidir, colgad.":"इसे दूसरे व्यक्ति से मिलाएँ: अगर मेल खाता है, तो आप दोनों के पास एक ही चाबी है। अगर नहीं, तो अगले बदलाव का इंतज़ार करें; फिर भी मेल न खाए तो कॉल काट दें।"
 },
 "p":{
 "intento":"आज सबसे ज़्यादा कोशिश: {1}, {2} {2?बार|बार}।",

@@ -3651,7 +3651,10 @@
 "Capa post-cuántica activa en el sonido y la imagen.":"Skammtaþolið lag virkt á hljóði og mynd.",
 "Capa post-cuántica: no disponible en esta llamada.":"Skammtaþolið lag: ekki í boði í þessu símtali.",
 "Número de seguridad comprobado.":"Öryggisnúmer athugað.",
-"Número de seguridad sin comprobar.":"Öryggisnúmer ekki athugað."
+"Número de seguridad sin comprobar.":"Öryggisnúmer ekki athugað.",
+"La llave cambia cada minuto. Compara este código con la otra persona: debe ser el mismo.":"Lykillinn skiptir um á hverri mínútu. Berðu þennan kóða saman við hinn aðilann: hann verður að vera sá sami.",
+"La llave de la capa post-cuántica cambia cada minuto. Código de ahora: {c}.":"Lykill skammtaþolna lagsins skiptir um á hverri mínútu. Núverandi kóði: {c}.",
+"Compáralo con la otra persona: si coincide, los dos tenéis la misma llave. Si no, esperad al siguiente cambio; si sigue sin coincidir, colgad.":"Berðu hann saman við hinn aðilann: ef hann stemmir eruð þið bæði með sama lykil. Ef ekki, bíðið eftir næstu skiptingu; ef hann stemmir enn ekki, leggið á."
 },
 "p":{
 "intento":"Sá sem reyndi mest í dag: {1}, {2} {2?sinni|sinnum}.",

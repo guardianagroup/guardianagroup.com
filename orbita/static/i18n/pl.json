@@ -3651,7 +3651,10 @@
 "Capa post-cuántica activa en el sonido y la imagen.":"Warstwa postkwantowa aktywna dla dźwięku i obrazu.",
 "Capa post-cuántica: no disponible en esta llamada.":"Warstwa postkwantowa: niedostępna w tym połączeniu.",
 "Número de seguridad comprobado.":"Numer bezpieczeństwa sprawdzony.",
-"Número de seguridad sin comprobar.":"Numer bezpieczeństwa niesprawdzony."
+"Número de seguridad sin comprobar.":"Numer bezpieczeństwa niesprawdzony.",
+"La llave cambia cada minuto. Compara este código con la otra persona: debe ser el mismo.":"Klucz zmienia się co minutę. Porównaj ten kod z drugą osobą: musi być taki sam.",
+"La llave de la capa post-cuántica cambia cada minuto. Código de ahora: {c}.":"Klucz warstwy postkwantowej zmienia się co minutę. Obecny kod: {c}.",
+"Compáralo con la otra persona: si coincide, los dos tenéis la misma llave. Si no, esperad al siguiente cambio; si sigue sin coincidir, colgad.":"Porównaj go z drugą osobą: jeśli się zgadza, oboje macie ten sam klucz. Jeśli nie, poczekajcie na następną zmianę; jeśli nadal się nie zgadza, rozłączcie się."
 },
 "p":{
 "intento":"Najwięcej prób dziś: {1}, {2} {2?raz|razy}.",

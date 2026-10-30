@@ -3651,7 +3651,10 @@
 "Capa post-cuántica activa en el sonido y la imagen.":"Aktibo ang post-quantum na layer sa tunog at larawan.",
 "Capa post-cuántica: no disponible en esta llamada.":"Post-quantum na layer: hindi available sa tawag na ito.",
 "Número de seguridad comprobado.":"Nasuri na ang safety number.",
-"Número de seguridad sin comprobar.":"Hindi pa nasusuri ang safety number."
+"Número de seguridad sin comprobar.":"Hindi pa nasusuri ang safety number.",
+"La llave cambia cada minuto. Compara este código con la otra persona: debe ser el mismo.":"Nagbabago ang susi bawat minuto. Ihambing ang code na ito sa kausap mo: dapat pareho ito.",
+"La llave de la capa post-cuántica cambia cada minuto. Código de ahora: {c}.":"Nagbabago bawat minuto ang susi ng post-quantum na layer. Code ngayon: {c}.",
+"Compáralo con la otra persona: si coincide, los dos tenéis la misma llave. Si no, esperad al siguiente cambio; si sigue sin coincidir, colgad.":"Ihambing ito sa kausap mo: kung tugma, pareho kayo ng susi. Kung hindi, hintayin ang susunod na pagbabago; kung hindi pa rin tugma, ibaba ang tawag."
 },
 "p":{
 "intento":"Pinakamadalas sumubok ngayon: {1}, {2} {2?beses|beses}.",

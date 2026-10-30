@@ -3651,7 +3651,10 @@
 "Capa post-cuántica activa en el sonido y la imagen.":"後量子層已在聲音和影像上啟用。",
 "Capa post-cuántica: no disponible en esta llamada.":"後量子層：本次通話無法使用。",
 "Número de seguridad comprobado.":"安全碼已核對。",
-"Número de seguridad sin comprobar.":"安全碼未核對。"
+"Número de seguridad sin comprobar.":"安全碼未核對。",
+"La llave cambia cada minuto. Compara este código con la otra persona: debe ser el mismo.":"金鑰每分鐘更換一次。請與對方核對此代碼：必須相同。",
+"La llave de la capa post-cuántica cambia cada minuto. Código de ahora: {c}.":"後量子層的金鑰每分鐘更換一次。目前代碼：{c}。",
+"Compáralo con la otra persona: si coincide, los dos tenéis la misma llave. Si no, esperad al siguiente cambio; si sigue sin coincidir, colgad.":"請與對方核對：如果一致，代表你們雙方持有相同的金鑰。如果不一致，請等待下一次更換；若仍不一致，請掛斷。"
 },
 "p":{
 "intento":"今天嘗試最多的：{1}，{2} {2?次|次}。",

@@ -3651,7 +3651,10 @@
 "Capa post-cuántica activa en el sonido y la imagen.":"Lớp hậu lượng tử đang bật cho âm thanh và hình ảnh.",
 "Capa post-cuántica: no disponible en esta llamada.":"Lớp hậu lượng tử: không khả dụng trong cuộc gọi này.",
 "Número de seguridad comprobado.":"Đã kiểm tra số an toàn.",
-"Número de seguridad sin comprobar.":"Chưa kiểm tra số an toàn."
+"Número de seguridad sin comprobar.":"Chưa kiểm tra số an toàn.",
+"La llave cambia cada minuto. Compara este código con la otra persona: debe ser el mismo.":"Khóa thay đổi mỗi phút. Hãy so mã này với người kia: phải giống nhau.",
+"La llave de la capa post-cuántica cambia cada minuto. Código de ahora: {c}.":"Khóa của lớp hậu lượng tử thay đổi mỗi phút. Mã hiện tại: {c}.",
+"Compáralo con la otra persona: si coincide, los dos tenéis la misma llave. Si no, esperad al siguiente cambio; si sigue sin coincidir, colgad.":"Hãy so với người kia: nếu khớp, cả hai đều có cùng một khóa. Nếu không, hãy chờ lần thay đổi tiếp theo; nếu vẫn không khớp, hãy gác máy."
 },
 "p":{
 "intento":"Cố gắng nhiều nhất hôm nay: {1}, {2} {2?lần|lần}.",

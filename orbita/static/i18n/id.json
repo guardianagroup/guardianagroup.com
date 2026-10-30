@@ -3651,7 +3651,10 @@
 "Capa post-cuántica activa en el sonido y la imagen.":"Lapisan pascakuantum aktif pada suara dan gambar.",
 "Capa post-cuántica: no disponible en esta llamada.":"Lapisan pascakuantum: tidak tersedia dalam panggilan ini.",
 "Número de seguridad comprobado.":"Nomor keamanan sudah diperiksa.",
-"Número de seguridad sin comprobar.":"Nomor keamanan belum diperiksa."
+"Número de seguridad sin comprobar.":"Nomor keamanan belum diperiksa.",
+"La llave cambia cada minuto. Compara este código con la otra persona: debe ser el mismo.":"Kunci berganti setiap menit. Bandingkan kode ini dengan lawan bicara: harus sama.",
+"La llave de la capa post-cuántica cambia cada minuto. Código de ahora: {c}.":"Kunci lapisan pascakuantum berganti setiap menit. Kode saat ini: {c}.",
+"Compáralo con la otra persona: si coincide, los dos tenéis la misma llave. Si no, esperad al siguiente cambio; si sigue sin coincidir, colgad.":"Bandingkan dengan lawan bicara: jika cocok, kalian berdua memegang kunci yang sama. Jika tidak, tunggu pergantian berikutnya; jika masih tidak cocok, tutup panggilan."
 },
 "p":{
 "intento":"Paling gigih mencoba hari ini: {1}, {2} {2?kali|kali}.",

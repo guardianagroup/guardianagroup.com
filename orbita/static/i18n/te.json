@@ -3651,7 +3651,10 @@
 "Capa post-cuántica activa en el sonido y la imagen.":"శబ్దం మరియు చిత్రంపై పోస్ట్-క్వాంటమ్ పొర సక్రియంగా ఉంది.",
 "Capa post-cuántica: no disponible en esta llamada.":"పోస్ట్-క్వాంటమ్ పొర: ఈ కాల్‌లో అందుబాటులో లేదు.",
 "Número de seguridad comprobado.":"భద్రతా సంఖ్య తనిఖీ చేయబడింది.",
-"Número de seguridad sin comprobar.":"భద్రతా సంఖ్య తనిఖీ చేయబడలేదు."
+"Número de seguridad sin comprobar.":"భద్రతా సంఖ్య తనిఖీ చేయబడలేదు.",
+"La llave cambia cada minuto. Compara este código con la otra persona: debe ser el mismo.":"కీ ప్రతి నిమిషం మారుతుంది. ఈ కోడ్‌ను అవతలి వ్యక్తితో పోల్చండి: అది ఒకటే అయి ఉండాలి.",
+"La llave de la capa post-cuántica cambia cada minuto. Código de ahora: {c}.":"పోస్ట్-క్వాంటమ్ పొర కీ ప్రతి నిమిషం మారుతుంది. ప్రస్తుత కోడ్: {c}.",
+"Compáralo con la otra persona: si coincide, los dos tenéis la misma llave. Si no, esperad al siguiente cambio; si sigue sin coincidir, colgad.":"దాన్ని అవతలి వ్యక్తితో పోల్చండి: సరిపోతే, మీ ఇద్దరి దగ్గరా ఒకే కీ ఉంది. సరిపోకపోతే, తదుపరి మార్పు వరకు ఆగండి; అప్పటికీ సరిపోకపోతే, కాల్ ముగించండి."
 },
 "p":{
 "intento":"ఈరోజు ఎక్కువగా ప్రయత్నించింది: {1}, {2} {2?సారి|సార్లు}.",

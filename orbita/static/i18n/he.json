@@ -3651,7 +3651,10 @@
 "Capa post-cuántica activa en el sonido y la imagen.":"שכבה פוסט-קוונטית פעילה בקול ובתמונה.",
 "Capa post-cuántica: no disponible en esta llamada.":"שכבה פוסט-קוונטית: לא זמינה בשיחה הזו.",
 "Número de seguridad comprobado.":"מספר הבטיחות נבדק.",
-"Número de seguridad sin comprobar.":"מספר הבטיחות לא נבדק."
+"Número de seguridad sin comprobar.":"מספר הבטיחות לא נבדק.",
+"La llave cambia cada minuto. Compara este código con la otra persona: debe ser el mismo.":"המפתח מתחלף בכל דקה. השוו את הקוד הזה עם האדם השני: הוא חייב להיות זהה.",
+"La llave de la capa post-cuántica cambia cada minuto. Código de ahora: {c}.":"המפתח של השכבה הפוסט-קוונטית מתחלף בכל דקה. הקוד הנוכחי: {c}.",
+"Compáralo con la otra persona: si coincide, los dos tenéis la misma llave. Si no, esperad al siguiente cambio; si sigue sin coincidir, colgad.":"השוו אותו עם האדם השני: אם הוא תואם, לשניכם יש אותו מפתח. אם לא, חכו להחלפה הבאה; אם הוא עדיין לא תואם, נתקו."
 },
 "p":{
 "intento":"ניסתה הכי הרבה היום: {1}, {2} {2?פעם|פעמים}.",

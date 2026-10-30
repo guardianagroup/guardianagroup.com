@@ -3651,7 +3651,10 @@
 "Capa post-cuántica activa en el sonido y la imagen.":"Livello post-quantistico attivo su audio e video.",
 "Capa post-cuántica: no disponible en esta llamada.":"Livello post-quantistico: non disponibile in questa chiamata.",
 "Número de seguridad comprobado.":"Numero di sicurezza verificato.",
-"Número de seguridad sin comprobar.":"Numero di sicurezza non verificato."
+"Número de seguridad sin comprobar.":"Numero di sicurezza non verificato.",
+"La llave cambia cada minuto. Compara este código con la otra persona: debe ser el mismo.":"La chiave cambia ogni minuto. Confronta questo codice con l’altra persona: deve essere lo stesso.",
+"La llave de la capa post-cuántica cambia cada minuto. Código de ahora: {c}.":"La chiave del livello post-quantistico cambia ogni minuto. Codice attuale: {c}.",
+"Compáralo con la otra persona: si coincide, los dos tenéis la misma llave. Si no, esperad al siguiente cambio; si sigue sin coincidir, colgad.":"Confrontalo con l’altra persona: se coincide, avete entrambi la stessa chiave. Altrimenti, aspettate il cambio successivo; se continua a non coincidere, riattaccate."
 },
 "p":{
 "intento":"Quella che ci ha provato di più oggi: {1}, {2} {2?volta|volte}.",

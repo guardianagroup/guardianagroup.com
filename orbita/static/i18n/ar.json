@@ -3651,7 +3651,10 @@
 "Capa post-cuántica activa en el sonido y la imagen.":"طبقة ما بعد الكمومية مفعّلة على الصوت والصورة.",
 "Capa post-cuántica: no disponible en esta llamada.":"طبقة ما بعد الكمومية: غير متاحة في هذه المكالمة.",
 "Número de seguridad comprobado.":"تم التحقق من رقم الأمان.",
-"Número de seguridad sin comprobar.":"لم يتم التحقق من رقم الأمان."
+"Número de seguridad sin comprobar.":"لم يتم التحقق من رقم الأمان.",
+"La llave cambia cada minuto. Compara este código con la otra persona: debe ser el mismo.":"يتغيّر المفتاح كل دقيقة. قارن هذا الرمز مع الشخص الآخر: يجب أن يكون نفسه.",
+"La llave de la capa post-cuántica cambia cada minuto. Código de ahora: {c}.":"يتغيّر مفتاح طبقة ما بعد الكمومية كل دقيقة. الرمز الحالي: {c}.",
+"Compáralo con la otra persona: si coincide, los dos tenéis la misma llave. Si no, esperad al siguiente cambio; si sigue sin coincidir, colgad.":"قارنه مع الشخص الآخر: إذا تطابق، فلديكما المفتاح نفسه. وإن لم يتطابق، انتظرا التغيير التالي؛ وإذا استمر عدم التطابق، أنهيا المكالمة."
 },
 "p":{
 "intento":"الأكثر محاولةً اليوم: {1}، {2} {2?مرة|مرات}.",

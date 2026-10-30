@@ -3651,7 +3651,10 @@
 "Capa post-cuántica activa en el sonido y la imagen.":"Ses ve görüntüde kuantum sonrası katman etkin.",
 "Capa post-cuántica: no disponible en esta llamada.":"Kuantum sonrası katman: bu aramada kullanılamıyor.",
 "Número de seguridad comprobado.":"Güvenlik numarası doğrulandı.",
-"Número de seguridad sin comprobar.":"Güvenlik numarası doğrulanmadı."
+"Número de seguridad sin comprobar.":"Güvenlik numarası doğrulanmadı.",
+"La llave cambia cada minuto. Compara este código con la otra persona: debe ser el mismo.":"Anahtar her dakika değişir. Bu kodu karşı tarafla karşılaştırın: aynı olmalıdır.",
+"La llave de la capa post-cuántica cambia cada minuto. Código de ahora: {c}.":"Kuantum sonrası katmanın anahtarı her dakika değişir. Şu anki kod: {c}.",
+"Compáralo con la otra persona: si coincide, los dos tenéis la misma llave. Si no, esperad al siguiente cambio; si sigue sin coincidir, colgad.":"Karşı tarafla karşılaştırın: eşleşiyorsa ikinizde de aynı anahtar var. Eşleşmiyorsa bir sonraki değişimi bekleyin; yine eşleşmezse aramayı kapatın."
 },
 "p":{
 "intento":"Bugün en çok deneyen: {1}, {2} {2?kez|kez}.",

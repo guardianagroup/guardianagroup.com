@@ -2245,5 +2245,19 @@ body.modo-llevar{background:#06080C}
 .ll-seg-l li.seg-no::before{background:rgba(156,195,228,.35)}
 .ll-seg-l li.seg-aviso::before{background:#E0B66A}
 .ll-seg-l li.seg-no{color:#9fb3c4}
+.ll-seg-l li.seg-nota{margin-top:-3px;color:#9fb3c4;font-size:12.5px}
+.ll-seg-l li.seg-nota::before{content:none}
 /* en el teléfono, el tiempo de la llamada en su propia línea, debajo del título (sin el punto suelto al partirse) */
-@media (max-width:760px){.gc-llamada.con-video:not(.mini) .gc-llamada-tiempo{flex-basis:100%;text-align:center}.gc-llamada.con-video:not(.mini) .gc-llamada-tiempo::before{content:none}}
+@media (max-width:760px){.gc-llamada.con-video:not(.mini) .gc-llamada-nombre{flex-basis:100%;text-align:center}.gc-llamada.con-video:not(.mini) .gc-llamada-tiempo::before{content:none}}
+/* el código de la llave de ahora (cambia cada minuto; el mismo en las dos pantallas) */
+.gc-llamada-codigo{font:500 13px/1.3 var(--mono,ui-monospace,monospace);letter-spacing:.06em;color:#DCE5ED;white-space:nowrap;border-radius:6px}
+.gc-llamada-codigo[hidden]{display:none!important}
+.gc-llamada-codigo::before{content:'·';margin:0 8px;color:var(--muted);letter-spacing:0}
+.gc-llamada:not(.con-video) .gc-llamada-codigo{display:block;margin-top:6px}
+.gc-llamada:not(.con-video) .gc-llamada-codigo::before{content:none}
+.gc-llamada.mini .gc-llamada-codigo{display:none}
+.gc-llamada-codigo.nuevo{animation:ll-codigo-nuevo 1.6s ease-out}
+@keyframes ll-codigo-nuevo{0%{background:rgba(108,203,165,.45);color:#fff}100%{background:transparent}}
+@media (prefers-reduced-motion:reduce){.gc-llamada-codigo.nuevo{animation:none}}
+/* en el PC, el panel de seguridad se abre debajo del título, sin taparlo */
+@media (min-width:761px){.ll-seg{top:calc(114px + env(safe-area-inset-top))}}

@@ -3651,7 +3651,10 @@
 "Capa post-cuántica activa en el sonido y la imagen.":"শব্দ ও ছবিতে পোস্ট-কোয়ান্টাম স্তর সক্রিয়।",
 "Capa post-cuántica: no disponible en esta llamada.":"পোস্ট-কোয়ান্টাম স্তর: এই কলে উপলব্ধ নয়।",
 "Número de seguridad comprobado.":"নিরাপত্তা নম্বর যাচাই করা হয়েছে।",
-"Número de seguridad sin comprobar.":"নিরাপত্তা নম্বর যাচাই করা হয়নি।"
+"Número de seguridad sin comprobar.":"নিরাপত্তা নম্বর যাচাই করা হয়নি।",
+"La llave cambia cada minuto. Compara este código con la otra persona: debe ser el mismo.":"চাবি প্রতি মিনিটে বদলায়। এই কোডটি অন্য ব্যক্তির সঙ্গে মিলিয়ে নিন: একই হতে হবে।",
+"La llave de la capa post-cuántica cambia cada minuto. Código de ahora: {c}.":"পোস্ট-কোয়ান্টাম স্তরের চাবি প্রতি মিনিটে বদলায়। এখনকার কোড: {c}।",
+"Compáralo con la otra persona: si coincide, los dos tenéis la misma llave. Si no, esperad al siguiente cambio; si sigue sin coincidir, colgad.":"অন্য ব্যক্তির সঙ্গে মিলিয়ে নিন: মিললে আপনাদের দুজনের কাছে একই চাবি আছে। না মিললে পরের পরিবর্তনের জন্য অপেক্ষা করুন; তখনও না মিললে কল কেটে দিন।"
 },
 "p":{
 "intento":"আজ সবচেয়ে বেশি চেষ্টা: {1}, {2} {2?বার|বার}।",

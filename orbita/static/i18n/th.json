@@ -3651,7 +3651,10 @@
 "Capa post-cuántica activa en el sonido y la imagen.":"ชั้นหลังควอนตัมทำงานอยู่กับเสียงและภาพ",
 "Capa post-cuántica: no disponible en esta llamada.":"ชั้นหลังควอนตัม: ไม่พร้อมใช้งานในการโทรนี้",
 "Número de seguridad comprobado.":"ตรวจสอบหมายเลขความปลอดภัยแล้ว",
-"Número de seguridad sin comprobar.":"ยังไม่ได้ตรวจสอบหมายเลขความปลอดภัย"
+"Número de seguridad sin comprobar.":"ยังไม่ได้ตรวจสอบหมายเลขความปลอดภัย",
+"La llave cambia cada minuto. Compara este código con la otra persona: debe ser el mismo.":"กุญแจเปลี่ยนทุกนาที เทียบรหัสนี้กับอีกฝ่าย: ต้องตรงกัน",
+"La llave de la capa post-cuántica cambia cada minuto. Código de ahora: {c}.":"กุญแจของชั้นหลังควอนตัมเปลี่ยนทุกนาที รหัสปัจจุบัน: {c}",
+"Compáralo con la otra persona: si coincide, los dos tenéis la misma llave. Si no, esperad al siguiente cambio; si sigue sin coincidir, colgad.":"เทียบกับอีกฝ่าย: ถ้าตรงกัน แสดงว่าทั้งสองฝ่ายมีกุญแจเดียวกัน ถ้าไม่ตรง ให้รอการเปลี่ยนครั้งถัดไป ถ้ายังไม่ตรงอีก ให้วางสาย"
 },
 "p":{
 "intento":"พยายามมากที่สุดวันนี้: {1}, {2} {2?ครั้ง|ครั้ง}",

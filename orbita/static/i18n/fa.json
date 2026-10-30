@@ -3651,7 +3651,10 @@
 "Capa post-cuántica activa en el sonido y la imagen.":"لایهٔ پساکوانتومی روی صدا و تصویر فعال است.",
 "Capa post-cuántica: no disponible en esta llamada.":"لایهٔ پساکوانتومی: در این تماس در دسترس نیست.",
 "Número de seguridad comprobado.":"شماره امنیتی بررسی شد.",
-"Número de seguridad sin comprobar.":"شماره امنیتی بررسی نشده است."
+"Número de seguridad sin comprobar.":"شماره امنیتی بررسی نشده است.",
+"La llave cambia cada minuto. Compara este código con la otra persona: debe ser el mismo.":"کلید هر دقیقه عوض می‌شود. این کد را با طرف مقابل مقایسه کنید: باید یکی باشد.",
+"La llave de la capa post-cuántica cambia cada minuto. Código de ahora: {c}.":"کلید لایهٔ پساکوانتومی هر دقیقه عوض می‌شود. کد فعلی: {c}.",
+"Compáralo con la otra persona: si coincide, los dos tenéis la misma llave. Si no, esperad al siguiente cambio; si sigue sin coincidir, colgad.":"آن را با طرف مقابل مقایسه کنید: اگر یکی بود، هر دو کلید یکسانی دارید. اگر نه، منتظر تغییر بعدی بمانید؛ اگر باز هم یکی نبود، تماس را قطع کنید."
 },
 "p":{
 "intento":"بیشترین تلاش امروز: {1}، {2} {2?بار|بار}.",

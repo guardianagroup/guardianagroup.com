@@ -3651,7 +3651,10 @@
 "Capa post-cuántica activa en el sonido y la imagen.":"Safu ya baada ya kwantum imewashwa kwenye sauti na picha.",
 "Capa post-cuántica: no disponible en esta llamada.":"Safu ya baada ya kwantum: haipatikani kwenye simu hii.",
 "Número de seguridad comprobado.":"Nambari ya usalama imehakikiwa.",
-"Número de seguridad sin comprobar.":"Nambari ya usalama haijahakikiwa."
+"Número de seguridad sin comprobar.":"Nambari ya usalama haijahakikiwa.",
+"La llave cambia cada minuto. Compara este código con la otra persona: debe ser el mismo.":"Ufunguo hubadilika kila dakika. Linganisha msimbo huu na mtu mwingine: lazima uwe sawa.",
+"La llave de la capa post-cuántica cambia cada minuto. Código de ahora: {c}.":"Ufunguo wa safu ya baada ya kwantum hubadilika kila dakika. Msimbo wa sasa: {c}.",
+"Compáralo con la otra persona: si coincide, los dos tenéis la misma llave. Si no, esperad al siguiente cambio; si sigue sin coincidir, colgad.":"Ulinganishe na mtu mwingine: ukilingana, nyote wawili mna ufunguo mmoja. Usipolingana, subirini mabadiliko yanayofuata; ukiendelea kutolingana, katani simu."
 },
 "p":{
 "intento":"Iliyojaribu zaidi leo: {1}, {2?mara|mara} {2}.",

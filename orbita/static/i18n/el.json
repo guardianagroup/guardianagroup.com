@@ -3651,7 +3651,10 @@
 "Capa post-cuántica activa en el sonido y la imagen.":"Μετακβαντικό επίπεδο ενεργό σε ήχο και εικόνα.",
 "Capa post-cuántica: no disponible en esta llamada.":"Μετακβαντικό επίπεδο: δεν είναι διαθέσιμο σε αυτή την κλήση.",
 "Número de seguridad comprobado.":"Ο αριθμός ασφαλείας ελέγχθηκε.",
-"Número de seguridad sin comprobar.":"Ο αριθμός ασφαλείας δεν έχει ελεγχθεί."
+"Número de seguridad sin comprobar.":"Ο αριθμός ασφαλείας δεν έχει ελεγχθεί.",
+"La llave cambia cada minuto. Compara este código con la otra persona: debe ser el mismo.":"Το κλειδί αλλάζει κάθε λεπτό. Συγκρίνετε αυτόν τον κωδικό με το άλλο άτομο: πρέπει να είναι ίδιος.",
+"La llave de la capa post-cuántica cambia cada minuto. Código de ahora: {c}.":"Το κλειδί του μετακβαντικού επιπέδου αλλάζει κάθε λεπτό. Τρέχων κωδικός: {c}.",
+"Compáralo con la otra persona: si coincide, los dos tenéis la misma llave. Si no, esperad al siguiente cambio; si sigue sin coincidir, colgad.":"Συγκρίνετέ τον με το άλλο άτομο: αν ταιριάζει, έχετε και οι δύο το ίδιο κλειδί. Αν όχι, περιμένετε την επόμενη αλλαγή· αν συνεχίζει να μην ταιριάζει, κλείστε την κλήση."
 },
 "p":{
 "intento":"Η πιο επίμονη σήμερα: {1}, {2} {2?φορά|φορές}.",

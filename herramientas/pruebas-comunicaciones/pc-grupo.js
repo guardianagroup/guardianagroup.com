@@ -39,8 +39,11 @@ const salas = (X) => X.evaluate(() => [...GuardianaCom.convs.keys()]);
   const P = await equipo(browser, true, 'P'), A = await equipo(browser, false, 'A'), C = await equipo(browser, false, 'C');
   const W = 1280;
   const uA = await invita(A), uC = await invita(C);
-  for (const u of [uA, uC]) { await P.goto('about:blank'); await P.goto(u); await espera(1500); if (await P.$('#aceptar-si:visible')) await P.click('#aceptar-si'); await espera(5000); }
+  // (el «¿Aceptas?» a veces tarda en salir: se espera hasta 10 s; si no, el PC se quedaba con un solo chat)
+  for (const u of [uA, uC]) { await P.goto('about:blank'); await P.goto(u); for (let i = 0; i < 20 && !(await P.$('#aceptar-si:visible')); i++) await espera(500); if (await P.$('#aceptar-si:visible')) await P.click('#aceptar-si'); await espera(5000); }
   const [salaA] = await salas(A), [salaC] = await salas(C);
+  // (a veces el PC no llega a entrar en la segunda invitación a la primera: se intenta otra vez)
+  for (const [u, sa] of [[uA, salaA], [uC, salaC]]) if (!(await salas(P)).includes(sa)) { await P.goto('about:blank'); await P.goto(u); for (let i = 0; i < 20 && !(await P.$('#aceptar-si:visible')); i++) await espera(500); if (await P.$('#aceptar-si:visible')) await P.click('#aceptar-si'); await espera(5000); }
   comprueba((await salas(P)).length >= 2 && !!salaA && !!salaC, 'el PC tiene a los dos (' + (await salas(P)).length + ' chats)');
   await P.evaluate((s) => window.gcomPrueba.abre(s), salaA); await espera(1500);
   await P.evaluate(() => document.querySelector('#videollamar').click()); await espera(2500);

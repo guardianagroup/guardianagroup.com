@@ -3651,7 +3651,10 @@
 "Capa post-cuántica activa en el sonido y la imagen.":"ஒலி மற்றும் படத்தில் போஸ்ட்-குவாண்டம் அடுக்கு செயலில் உள்ளது.",
 "Capa post-cuántica: no disponible en esta llamada.":"போஸ்ட்-குவாண்டம் அடுக்கு: இந்த அழைப்பில் கிடைக்கவில்லை.",
 "Número de seguridad comprobado.":"பாதுகாப்பு எண் சரிபார்க்கப்பட்டது.",
-"Número de seguridad sin comprobar.":"பாதுகாப்பு எண் சரிபார்க்கப்படவில்லை."
+"Número de seguridad sin comprobar.":"பாதுகாப்பு எண் சரிபார்க்கப்படவில்லை.",
+"La llave cambia cada minuto. Compara este código con la otra persona: debe ser el mismo.":"சாவி ஒவ்வொரு நிமிடமும் மாறும். இந்தக் குறியீட்டை மற்றவருடன் ஒப்பிடுங்கள்: அது ஒன்றாக இருக்க வேண்டும்.",
+"La llave de la capa post-cuántica cambia cada minuto. Código de ahora: {c}.":"போஸ்ட்-குவாண்டம் அடுக்கின் சாவி ஒவ்வொரு நிமிடமும் மாறும். தற்போதைய குறியீடு: {c}.",
+"Compáralo con la otra persona: si coincide, los dos tenéis la misma llave. Si no, esperad al siguiente cambio; si sigue sin coincidir, colgad.":"அதை மற்றவருடன் ஒப்பிடுங்கள்: பொருந்தினால், இருவரிடமும் ஒரே சாவி உள்ளது. பொருந்தாவிட்டால், அடுத்த மாற்றம் வரை காத்திருங்கள்; அப்போதும் பொருந்தாவிட்டால், அழைப்பைத் துண்டியுங்கள்."
 },
 "p":{
 "intento":"இன்று அதிகம் முயன்றது: {1}, {2} {2?முறை|முறை}.",

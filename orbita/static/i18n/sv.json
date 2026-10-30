@@ -3651,7 +3651,10 @@
 "Capa post-cuántica activa en el sonido y la imagen.":"Postkvantlager aktivt för ljud och bild.",
 "Capa post-cuántica: no disponible en esta llamada.":"Postkvantlager: inte tillgängligt i det här samtalet.",
 "Número de seguridad comprobado.":"Säkerhetsnummer kontrollerat.",
-"Número de seguridad sin comprobar.":"Säkerhetsnummer inte kontrollerat."
+"Número de seguridad sin comprobar.":"Säkerhetsnummer inte kontrollerat.",
+"La llave cambia cada minuto. Compara este código con la otra persona: debe ser el mismo.":"Nyckeln byts varje minut. Jämför den här koden med den andra personen: den måste vara densamma.",
+"La llave de la capa post-cuántica cambia cada minuto. Código de ahora: {c}.":"Nyckeln för postkvantlagret byts varje minut. Aktuell kod: {c}.",
+"Compáralo con la otra persona: si coincide, los dos tenéis la misma llave. Si no, esperad al siguiente cambio; si sigue sin coincidir, colgad.":"Jämför den med den andra personen: om den stämmer har ni båda samma nyckel. Om inte, vänta på nästa byte; om den fortfarande inte stämmer, lägg på."
 },
 "p":{
 "intento":"Den som försökte mest i dag: {1}, {2} {2?gång|gånger}.",

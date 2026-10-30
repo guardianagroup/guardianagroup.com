@@ -3651,7 +3651,10 @@
 "Capa post-cuántica activa en el sonido y la imagen.":"音声と映像にポスト量子レイヤーが有効です。",
 "Capa post-cuántica: no disponible en esta llamada.":"ポスト量子レイヤー：この通話では利用できません。",
 "Número de seguridad comprobado.":"安全番号を確認済みです。",
-"Número de seguridad sin comprobar.":"安全番号は未確認です。"
+"Número de seguridad sin comprobar.":"安全番号は未確認です。",
+"La llave cambia cada minuto. Compara este código con la otra persona: debe ser el mismo.":"鍵は1分ごとに変わります。このコードを相手と照らし合わせてください。同じでなければなりません。",
+"La llave de la capa post-cuántica cambia cada minuto. Código de ahora: {c}.":"ポスト量子レイヤーの鍵は1分ごとに変わります。現在のコード：{c}。",
+"Compáralo con la otra persona: si coincide, los dos tenéis la misma llave. Si no, esperad al siguiente cambio; si sigue sin coincidir, colgad.":"相手と照らし合わせてください。一致すれば、二人とも同じ鍵を持っています。一致しない場合は次の切り替えを待ち、それでも一致しなければ通話を切ってください。"
 },
 "p":{
 "intento":"今日最も多く試みたのは {1}、{2} {2?回|回}。",

@@ -3651,7 +3651,10 @@
 "Capa post-cuántica activa en el sonido y la imagen.":"Post-Quanten-Schicht für Ton und Bild aktiv.",
 "Capa post-cuántica: no disponible en esta llamada.":"Post-Quanten-Schicht: in diesem Anruf nicht verfügbar.",
 "Número de seguridad comprobado.":"Sicherheitsnummer geprüft.",
-"Número de seguridad sin comprobar.":"Sicherheitsnummer nicht geprüft."
+"Número de seguridad sin comprobar.":"Sicherheitsnummer nicht geprüft.",
+"La llave cambia cada minuto. Compara este código con la otra persona: debe ser el mismo.":"Der Schlüssel wechselt jede Minute. Vergleicht diesen Code mit der anderen Person: Er muss gleich sein.",
+"La llave de la capa post-cuántica cambia cada minuto. Código de ahora: {c}.":"Der Schlüssel der Post-Quanten-Schicht wechselt jede Minute. Aktueller Code: {c}.",
+"Compáralo con la otra persona: si coincide, los dos tenéis la misma llave. Si no, esperad al siguiente cambio; si sigue sin coincidir, colgad.":"Vergleicht ihn mit der anderen Person: Stimmt er überein, habt ihr beide denselben Schlüssel. Wenn nicht, wartet auf den nächsten Wechsel; stimmt er dann immer noch nicht, legt auf."
 },
 "p":{
 "intento":"Hat es heute am häufigsten versucht: {1}, {2} {2?Mal|Mal}.",
