@@ -134,6 +134,9 @@
       const efectos = blindada() && estado === 'hablando';
       $('#ll-grave-caja').hidden = !efectos;
       $('#ll-mosaico-caja').hidden = !(efectos && video && !!cam);
+      // En la Blindada (la versión gratis; dueño, 30 Oct 2026: «sin mosaico y sin cambiar la voz») el cambio de voz y, con imagen, el
+      // mosaico se ven con la llamada en marcha, cerrados y con «ULTRA»: un toque abre la hoja de Ultra y la llamada sigue igual
+      { const u = $('#ll-ultra'); if (u) { const ver = !blindada() && estado === 'hablando' && !!o.ultra; u.hidden = !ver; const m = $('#ll-mosaico-ultra'); if (m) m.hidden = !(ver && video && !!cam); } }
       $('#ll-grave').setAttribute('aria-pressed', String(voz === 'grave'));
       $('#ll-mosaico').setAttribute('aria-pressed', String(imagen === 'mosaico'));
       // cada botón dice en qué estado está y qué hace el toque (dueño, 29 Oct 2026, 09:23: «súper fácil de utilizar en pantalla»)
@@ -414,7 +417,10 @@
       nodo.parameters.get('robot').setValueAtTime(v.robot, ctx.currentTime);
     }
     function eligeVoz(v) {
-      if (!VOCES[v]) return; voz = v;
+      if (!VOCES[v]) return;
+      // en la Blindada (gratis) la voz va siempre natural: el cambio de voz es de Ultra (30 Oct 2026)
+      if (v !== 'natural' && !blindada()) { if (o.ultra) o.ultra(); return; }
+      voz = v;
       aplicaVoz(); pintaVoces();
       if (pc && mic && estado !== 'libre' && estado !== 'cerrando') cambiaEnvio();
     }
@@ -733,7 +739,10 @@
       voz = 'grave'; imagen = video ? 'mosaico' : 'natural';
     }
     function eligeImagen(m) {
-      if (!(m in IMAGENES)) return; imagen = m;
+      if (!(m in IMAGENES)) return;
+      // en la Blindada (gratis) la imagen va tal cual: el mosaico es de Ultra (30 Oct 2026)
+      if (m !== 'natural' && !blindada()) { if (o.ultra) o.ultra(); return; }
+      imagen = m;
       aplicaImagen(); pintaImagenes();
     }
     // el audio (con el cambio de voz) y la imagen, en el mismo flujo para que vayan sincronizados
@@ -1527,6 +1536,8 @@
     $('#ll-luz').addEventListener('click', eligeLuz);
     $('#ll-grave').addEventListener('click', () => { eligeVoz(voz === 'grave' ? 'natural' : 'grave'); pinta(); });
     $('#ll-mosaico').addEventListener('click', () => { eligeImagen(imagen === 'mosaico' ? 'natural' : 'mosaico'); pinta(); });
+    // cerrados en la Blindada: solo abren la hoja de Ultra; no tocan la voz ni la imagen
+    for (const id of ['#ll-voz-ultra', '#ll-mosaico-ultra']) { const b = $(id); if (b) b.addEventListener('click', (e) => { e.stopPropagation(); if (o.ultra) o.ultra(); }); }
     $('#ll-ajustes-b').addEventListener('click', () => { ajustes = !ajustes; pinta(); });
     // cerrar «Voz e imagen»: con «Atrás», con el mismo botón o tocando la imagen fuera del panel
     const cierraAjustes = () => { ajustes = false; caja.classList.remove('voz-abierta'); pinta(); };

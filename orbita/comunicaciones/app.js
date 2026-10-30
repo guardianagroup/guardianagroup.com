@@ -938,9 +938,10 @@
   // lo permite (Chrome, Edge: «Guardar en…») o lo junta en memoria hasta MAX_MEMORIA (los demás). Quien manda espera a
   // «archivo-listo» y luego avanza con ventana (acuses cada 4 trozos) sin pasarse del cupo del relé.
   const MAX_MEMORIA = 300 * 1024 * 1024;
-  // Tope por archivo (dueño, 29 Oct 2026, 09:52: «como el de WhatsApp, Signal, Telegram, o un poquito más»): 4 GB en el chat normal y
-  // en el blindado, el doble que WhatsApp y Telegram. La versión Ultra, de pago, subirá el tope (hasta 1 TB por archivo).
-  const MAX_ARCHIVO = 4 * 1024 * 1024 * 1024;
+  // Tope por archivo (dueño, 29 Oct 2026, 09:52: «como el de WhatsApp, Signal, Telegram, o un poquito más»). Desde el 30 Oct 2026
+  // (dueño), 2 GB en la Blindada, la versión gratis (antes, 4 GB en el chat normal y en el blindado); la versión Ultra, de pago por
+  // horas, llegará hasta 1 TB por archivo.
+  const MAX_ARCHIVO = 2 * 1024 * 1024 * 1024;
   const fmtGB = (b) => (b / (1024 * 1024 * 1024)).toLocaleString(LOC(), { maximumFractionDigits: 0 }) + ' GB';
   const conDisco = () => typeof window.showSaveFilePicker === 'function';
   const fidDe = (id) => C.deHex(id.replace(/-/g, '').slice(0, 32).padEnd(32, '0'));
@@ -1114,8 +1115,9 @@
       await completaRecepcion(c, m, a);
     }
   }
-  // AES-CTR para la capa «todo o nada» de los archivos blindados: cada pieza empieza en su propio bloque (192 KB = 12 288 bloques)
-  const MAX_PAQUETE = 4 * 1024 * 1024 * 1024;
+  // AES-CTR para la capa «todo o nada» de los archivos blindados: cada pieza empieza en su propio bloque (192 KB = 12 288 bloques).
+  // Hasta el tope por archivo de la Blindada, 2 GB (30 Oct 2026)
+  const MAX_PAQUETE = 2 * 1024 * 1024 * 1024;
   const claveCtr = (raw) => crypto.subtle.importKey('raw', raw, 'AES-CTR', false, ['encrypt', 'decrypt']);
   async function ctr(k, i, datos) { const cnt = new Uint8Array(16); new DataView(cnt.buffer).setBigUint64(8, BigInt(i) * 12288n); return new Uint8Array(await crypto.subtle.encrypt({ name: 'AES-CTR', counter: cnt, length: 64 }, k, datos)); }
   // Abre el paquete «todo o nada» (solo con todas las piezas y la pieza final): recupera la clave de un solo uso con la huella
@@ -1493,6 +1495,8 @@
     LL = GuardianaLlamada.crea({
       ice: iceCercano, servidor: servidorLlamada, puede: puedeLlamar, t: T, aviso, suena: avisaSonido, fin: anotaLlamada, estado: avisaLlamada,
       blindada: () => { const c = convLl(); return !!(c && extrasB(c)); },
+      // en la Blindada (gratis), el cambio de voz y el mosaico son de Ultra: sus botones cerrados abren su hoja (30 Oct 2026)
+      ultra: () => abreUltra('llamada'),
       sas: () => { const c = convLl(); return !!(c && extrasB(c)); }, // el número de seguridad en la llamada: blindado y Ultra (dueño, 29 Oct 2026, 12:55: «en el modo normal no») // las opciones de imagen, solo en la sesión blindada
       manda: (m) => { const c = convLl(); if (c) enviaControl(c, Object.assign({ tipo: 'llamada' }, m)); },
       // el número grande de la llamada (dueño, 29 Oct 2026, 10:16): si los dos ven el mismo, nadie está en medio; «Coinciden» deja
@@ -3058,6 +3062,14 @@
   // ---------- hojas ----------
   const abreHoja = (id) => { $('#' + id).classList.add('gc-abierta'); if (id === 'h-ajustes') pintaPestanas(); };
   const cierraHoja = (id) => { $('#' + id).classList.remove('gc-abierta'); if (id === 'h-ajustes') pintaPestanas(); const c = CONVS.get(ACTUAL); if (c) setTimeout(() => marcaLeidos(c), 60); };
+  // La hoja de Ultra (dueño, 30 Oct 2026: la Blindada gratis y Ultra, de pago por horas, próximamente). Va por encima de todo, también
+  // de la llamada; si se abre desde la llamada, dice que esta sigue con la voz y la imagen tal cual. Solo informa: no cambia nada.
+  function abreUltra(desde) {
+    if (!$('#h-ultra')) return;
+    const ll = $('#ultra-llamada'); if (ll) ll.hidden = desde !== 'llamada';
+    abreHoja('h-ultra');
+    const ok = $('#ultra-ok'); if (ok) { try { ok.focus({ preventScroll: true }); } catch (_) {} }
+  }
   function pintaCodigo(c) {
     const e = $('#codigo'); e.textContent = codigoBonito(c.codigo); e.className = 'codigo' + (c.codigoUsado ? ' usado' : (c.codigo && Date.now() > c.codigoCaduca ? ' caducado' : ''));
     const caducado = c.codigo && Date.now() > c.codigoCaduca;
@@ -4281,20 +4293,26 @@
     // 29 Oct 2026, 07:49 (dueño): «cuando la persona le da a invitar a chat… una opción que le diga chat normal o blindado. Y el
     // blindado salga en otro color y ahí ya metemos… la máxima que tenemos». La misma hoja en el iPhone y en Android: el tipo de
     // chat (de entrada, el normal) y debajo WhatsApp u «Otras apps».
+    // 30 Oct 2026 (dueño): «dos. La blindada, que será gratis, y la ultra… de pago por horas». La opción «Blindada» es el chat de
+    // siempre (tipo 'normal', el antiguo «fuerte»); «Ultra», próximamente: un toque enseña su hoja y nunca cambia el tipo, así que
+    // no se puede crear un chat Ultra ni del antiguo blindado. 'blindada' solo vuelve al reenviar una invitación blindada antigua.
     let tipoInv = 'normal';
-    const pintaTipo = () => { for (const [id, t] of [['#tipo-normal', 'normal'], ['#tipo-blindado', 'blindada']]) { const b = $(id); if (b) b.setAttribute('aria-checked', String(tipoInv === t)); } $('#h-invitar').classList.toggle('es-blindado', tipoInv === 'blindada'); };
+    const pintaTipo = () => { const b = $('#tipo-normal'); if (b) b.setAttribute('aria-checked', String(tipoInv === 'normal')); const u = $('#tipo-ultra'); if (u) u.setAttribute('aria-checked', 'false'); $('#h-invitar').classList.toggle('es-blindado', tipoInv === 'blindada'); };
     let reenvioId = null; // «Volver a enviar» desde el chat que espera: la misma invitación, no una nueva
     reenvia = (c) => { if (!c || c.huella) return; reenvioId = c.id; tipoInv = esB(c) ? 'blindada' : 'normal'; pintaTipo(); abreHoja('h-invitar'); };
     function invitar() {
       reenvioId = null;
       if (esMovil() && navigator.share) { tipoInv = 'normal'; pintaTipo(); abreHoja('h-invitar'); return; }
       // el blindado, «próximamente» (dueño, 29 Oct 2026, 12:55–12:59): en el teléfono sin menú de compartir, la invitación normal con
-      // su enlace; en el ordenador, el aviso y «Crear invitación»
-      if (!BLINDADO_ACTIVO) { if (esMovil()) invitaConMenu('normal'); else { aviso(T('El chat blindado llegará próximamente. Mientras, «Crear invitación».')); $('#nueva').focus(); } return; }
+      // su enlace; en el ordenador, este botón presenta Ultra (30 Oct 2026): su hoja, y la invitación sigue en «Crear invitación»
+      if (!BLINDADO_ACTIVO) { if (esMovil()) invitaConMenu('normal'); else abreUltra(); return; }
       nuevaBlindadaConCopia();
     }
     $('#tipo-normal').addEventListener('click', () => { tipoInv = 'normal'; pintaTipo(); });
-    $('#tipo-blindado').addEventListener('click', () => { if (!BLINDADO_ACTIVO) { aviso(T('El chat blindado llegará próximamente. De momento, el chat fuerte.')); return; } if (!C.B.hayBlindada()) { aviso(T('Este navegador no puede abrir una sesión blindada: hace falta uno actual.')); return; } tipoInv = 'blindada'; pintaTipo(); });
+    // Ultra, próximamente: su hoja, encima de esta (al cerrarla, se sigue invitando con la Blindada)
+    $('#tipo-ultra').addEventListener('click', () => abreUltra());
+    $('#ultra-ok').addEventListener('click', () => cierraHoja('h-ultra'));
+    { const b = $('#aj-ultra'); if (b) b.addEventListener('click', () => abreUltra()); }
     // «Otras apps»: el menú de compartir del teléfono, dentro del mismo toque (la invitación se crea a la vez)
     function invitaConMenu(modo) {
       const semilla = semillaLista || C.nuevaSemilla(); semillaLista = null; setTimeout(preparaSemilla, 0);

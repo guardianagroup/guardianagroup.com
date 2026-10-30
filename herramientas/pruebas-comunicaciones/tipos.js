@@ -48,8 +48,10 @@ async function videollamada(A, B) {
   // 1. la hoja: el normal elegido de entrada
   const A = await equipo(browser), B = await equipo(browser);
   await A.goto(URL0); await espera(1500);
-  // 29 Oct 2026, 12:55–12:59 (dueño): el blindado va «próximamente» (no se puede elegir); esta prueba queda para cuando vuelva
-  if (await A.evaluate(() => { document.querySelector('#nueva-blindada').click(); const b = document.querySelector('#tipo-blindado'); return !!b && b.getAttribute('aria-disabled') === 'true'; })) { console.log('El chat blindado está en «próximamente»: prueba omitida (se retoma cuando se active).'); await browser.close(); process.exit(0); }
+  // 29 Oct 2026, 12:55–12:59 (dueño): el blindado va «próximamente» (no se puede elegir); esta prueba queda para cuando vuelva.
+  // 30 Oct 2026 (dueño): al invitar ya no sale el «Chat blindado»: «Blindada» (gratis, el chat de siempre) y «Ultra», próximamente
+  // (lo comprueba ultra.js). Si el botón del blindado no está o está deshabilitado, esta prueba se omite.
+  if (await A.evaluate(() => { document.querySelector('#nueva-blindada').click(); const b = document.querySelector('#tipo-blindado'); return !b || b.getAttribute('aria-disabled') === 'true'; })) { console.log('El chat blindado no se ofrece al invitar (Blindada gratis y Ultra próximamente; ver ultra.js): prueba omitida.'); await browser.close(); process.exit(0); }
   await A.click('#invitar-no').catch(() => {}); await espera(300);
   await A.click('#nueva-blindada'); await espera(500);
   comprueba(await A.evaluate(() => document.querySelector('#tipo-normal').getAttribute('aria-checked') === 'true' && document.querySelector('#tipo-blindado').getAttribute('aria-checked') === 'false'), 'la hoja: «Chat normal» elegido de entrada');

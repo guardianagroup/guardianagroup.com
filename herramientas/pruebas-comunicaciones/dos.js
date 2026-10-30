@@ -108,10 +108,12 @@ const caja = (p, sel) => p.evaluate((s) => { const e = document.querySelector(s)
       const au = await p.evaluate(() => { const a = document.querySelector('#a-remoto'); return { paused: a.paused, pistas: a.srcObject ? a.srcObject.getAudioTracks().length : 0 }; });
       comprueba(!au.paused && au.pistas === 2, 'voz ' + n + ': suena la otra persona (voz y pista muda: ' + au.pistas + ' pistas)');
       // 29 Oct 2026, 07:51: sin «Tu voz» ni «Voz e imagen»; en el chat normal, ningún efecto (los del blindado, en tipos.js)
-      const ef = { pildora: (await caja(p, '#ll-voz-pill')).vis, ajustes: (await caja(p, '#ll-ajustes')).vis, grave: (await caja(p, '#ll-grave')).vis };
+      const ef = { pildora: (await caja(p, '#ll-voz-pill')).vis, ajustes: (await caja(p, '#ll-ajustes')).vis, grave: (await caja(p, '#ll-grave')).vis, ultra: (await caja(p, '#ll-voz-ultra')).vis };
       // (aquí el chat es blindado: sin navigator.share, «Invitar a chat» crea la blindada de siempre con el enlace en pantalla)
       // 29 Oct 2026, 12:55–12:59: el blindado va «próximamente» y sus efectos de voz e imagen no se ofrecen: pantalla limpia del todo
-      comprueba(!ef.pildora && !ef.ajustes && !ef.grave, 'voz ' + n + ': pantalla limpia, sin efectos (el blindado, próximamente) ' + JSON.stringify(ef));
+      // 30 Oct 2026 (dueño): en la Blindada (gratis) el cambio de voz se ve, cerrado con «ULTRA» (abre la hoja de Ultra; ver ultra.js),
+      // y la voz sale natural (lo comprueban las pistas de arriba)
+      comprueba(!ef.pildora && !ef.ajustes && !ef.grave && ef.ultra, 'voz ' + n + ': sin efectos de voz; el cambio de voz, cerrado con «ULTRA» ' + JSON.stringify(ef));
     }
     console.log('     pistas A:', JSON.stringify(await A.evaluate(() => window.__pistas.slice())));
     if (PASOS.has('colgar')) {

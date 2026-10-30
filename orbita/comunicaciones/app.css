@@ -2121,3 +2121,101 @@ body.con-pestanas #marcar .marcar-llamar span{position:absolute;width:1px;height
 }
 .gc-llamada.tres-yo-col #ll-vista .parte{display:none}
 .gc-llamada.tres-yo-col #ll-vista .peq{display:inline}
+
+/* ---------- Dos versiones (dueño, 30 Oct 2026: «la blindada, que será gratis, y la ultra… de pago por horas») ----------
+   La Blindada, el chat de siempre, en el acero de la casa. Ultra, con un acabado algo más noble: un filo plateado (acero claro que
+   se aclara en las esquinas), sin colores chillones. Sirve igual en el PC y en el iPhone. */
+:root{--ultra-filo:linear-gradient(135deg,rgba(244,246,248,.78),rgba(126,142,158,.26) 38%,rgba(156,195,228,.18) 62%,rgba(220,229,237,.62));--ultra-plata:linear-gradient(135deg,#F4F6F8,#B9C7D4 45%,#DCE5ED)}
+
+/* la hoja de invitar: «Blindada» elegida y «Ultra», próximamente (con candado; un toque abre su hoja) */
+.inv-tipo.ultra{border:1.5px solid transparent;background:linear-gradient(160deg,#141B24,#0C1118) padding-box,var(--ultra-filo) border-box}
+.inv-tipo.ultra.pronto{opacity:.88}
+.inv-tipo.ultra b{color:#E8EEF4;letter-spacing:.03em}
+.inv-tipo.ultra small,.inv-tipo.ultra.pronto small{color:#B9C7D4;font:600 11px/1.35 var(--mono);letter-spacing:.06em;text-transform:uppercase}
+.inv-tipo-candado{position:absolute;top:11px;right:11px;width:18px;height:18px;color:#B9C7D4}
+.inv-tipo-candado svg{display:block;width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.inv-tipo:not(.ultra) small{color:#9CC3E4;font:600 11px/1.35 var(--mono);letter-spacing:.06em;text-transform:uppercase}
+@media (min-width:761px){.hoja-invitar .gc-hoja-caja.caja{width:min(460px,calc(100% - 32px));margin:0}}
+
+/* la llamada en la Blindada: el cambio de voz y el mosaico, a la vista pero cerrados, con «ULTRA» */
+.ll-ultra{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin:0 auto 14px;transition:opacity .35s ease}
+.ll-ultra[hidden],.ll-ultra-b[hidden]{display:none}
+.ll-ultra-b{all:unset;box-sizing:border-box;display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:6px 7px 6px 13px;border-radius:999px;border:1px solid transparent;background:linear-gradient(rgba(10,14,20,.84),rgba(10,14,20,.84)) padding-box,var(--ultra-filo) border-box;color:#AEB9C4;font:500 14px/1.2 var(--texto);cursor:pointer;-webkit-tap-highlight-color:transparent;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);transition:transform .1s ease,background-color .15s}
+.ll-ultra-b svg{flex:none;width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;opacity:.7}
+.ll-ultra-b span{color:#C3CDD7}
+.ll-ultra-b em{font:600 9.5px/1 var(--mono);font-style:normal;letter-spacing:.16em;padding:5px 7px 4px;border-radius:999px;color:#06080C;background:var(--ultra-plata)}
+.ll-ultra-b:hover span{color:#E8EEF4}
+.ll-ultra-b:active{transform:scale(.96)}
+.ll-ultra-b:focus-visible{outline:2px solid #F4F6F8;outline-offset:2px}
+.gc-llamada.mini .ll-ultra{display:none}
+@media (max-width:760px){.ll-ultra{gap:8px;margin-bottom:12px}.ll-ultra-b{gap:6px;min-height:38px;padding:5px 5px 5px 11px;font-size:13.5px}.ll-ultra-b svg{width:15px;height:15px}.ll-ultra-b em{letter-spacing:.12em;padding:5px 6px 4px}}
+.gc-llamada.con-video.reposo .ll-ultra{opacity:0;pointer-events:none}
+
+/* la hoja de Ultra: por encima de todo, también de la llamada */
+#h-ultra{z-index:95}
+.hoja-ultra .gc-hoja-caja.caja.ultra-caja{position:relative;width:min(640px,calc(100% - 32px));gap:16px;padding:26px 26px 22px;border-radius:22px;background:radial-gradient(110% 70% at 50% 0%,rgba(156,195,228,.11),rgba(156,195,228,0) 62%),linear-gradient(180deg,#0E141C,#090D13)}
+.ultra-caja::before{content:'';position:absolute;inset:0;border-radius:inherit;padding:1px;background:var(--ultra-filo);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+.ultra-cab{display:grid;justify-items:center;text-align:center;gap:4px}
+.ultra-sello{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;margin:0 0 6px;background:radial-gradient(circle at 32% 26%,rgba(244,246,248,.24),rgba(156,195,228,.06) 62%);box-shadow:inset 0 0 0 1px rgba(220,229,237,.5),0 10px 28px -12px rgba(156,195,228,.6)}
+.ultra-sello svg{width:22px;height:22px;fill:none;stroke:#E8EEF4;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.ultra-k{margin:0;font:600 10.5px/1.2 var(--mono);letter-spacing:.34em;padding-left:.34em;color:#8FA3B6}
+.ultra-t{margin:0;font:600 36px/1.05 var(--texto);letter-spacing:.05em;color:#E8EEF4;background:linear-gradient(180deg,#F4F6F8 12%,#C3CFDA 55%,#8E9FB0);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.ultra-sub{margin:2px 0 0;font:400 15.5px/1.45 var(--texto);color:#A3AEBA}
+.ultra-llamada{margin:10px 0 0;padding:8px 14px;border-radius:10px;background:rgba(156,195,228,.09);color:#C9D7E3;font:400 13.5px/1.4 var(--texto)}
+.ultra-llamada[hidden]{display:none}
+.ultra-cols{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px}
+.ultra-col{border-radius:16px;padding:14px 14px 14px;background:rgba(255,255,255,.022);box-shadow:inset 0 0 0 1px rgba(156,195,228,.16)}
+.ultra-col-u{position:relative;background:linear-gradient(180deg,rgba(156,195,228,.10),rgba(255,255,255,.015) 70%);box-shadow:inset 0 0 0 1px rgba(220,229,237,.44),0 16px 40px -26px rgba(156,195,228,.7)}
+.ultra-col-cab{display:grid;gap:4px;padding:0 0 11px;margin:0 0 11px;border-bottom:1px solid rgba(156,195,228,.14)}
+.ultra-col-cab b{font:600 17px/1.2 var(--texto);color:#F4F6F8}
+.ultra-col-u .ultra-col-cab b{letter-spacing:.04em}
+.ultra-col-cab small{font:600 10.5px/1.4 var(--mono);letter-spacing:.07em;text-transform:uppercase;color:#9CC3E4}
+.ultra-col-u .ultra-col-cab small{color:#C9D3DC}
+.ultra-col ul{list-style:none;margin:0;padding:0;display:grid;gap:9px}
+.ultra-col li{position:relative;padding-inline-start:21px;font:400 14px/1.4 var(--texto);color:#DCE5ED;overflow-wrap:break-word}
+.ultra-col li::before{content:'';position:absolute;inset-inline-start:0;top:.28em;width:13px;height:13px;background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M5 12.5l4.2 4.2L19 7' fill='none' stroke='%239CC3E4' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/></svg>") center/13px no-repeat}
+.ultra-col-u li::before{background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M5 12.5l4.2 4.2L19 7' fill='none' stroke='%23E8EEF4' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/></svg>")}
+.ultra-col li small{display:block;margin-top:3px;font:600 9.5px/1.3 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:#8FA3B6}
+.ultra-precio{margin:0;text-align:center;font:500 14px/1.4 var(--texto);letter-spacing:.01em;color:#A3AEBA}
+.hoja-ultra .fila{justify-content:center}
+.hoja-ultra .fila .boton{min-width:200px}
+@media (max-width:760px){
+  .hoja-ultra .gc-hoja-caja.caja.ultra-caja{width:100%;max-height:94dvh;border-radius:22px 22px 0 0;gap:14px;padding:10px 16px calc(18px + env(safe-area-inset-bottom))}
+  .ultra-caja::before{border-radius:22px 22px 0 0}
+  .ultra-t{font-size:32px}
+  .ultra-sello{width:40px;height:40px;margin-bottom:4px}
+  .ultra-sello svg{width:19px;height:19px}
+  .ultra-sub{font-size:15px}
+  .ultra-cols{gap:8px}
+  .ultra-col{padding:12px 11px 12px}
+  .ultra-col li{font-size:13.5px;padding-inline-start:19px}
+  .ultra-col-cab b{font-size:16px}
+  .hoja-ultra .fila .boton{width:100%}
+}
+
+/* «¿Cómo funciona?»: dos versiones y el cuadro en dos columnas, Ultra en plata */
+.como-modo-u{border-color:rgba(220,229,237,.42);background:linear-gradient(180deg,rgba(220,229,237,.07),rgba(12,18,26,.82))}
+.como-modo-u b::before{background:var(--ultra-plata);box-shadow:0 0 10px rgba(220,229,237,.55)}
+.como-modo-u .como-precio{color:#DCE5ED}
+.como-modos-2 .como-modo b{justify-content:flex-start;gap:0}
+.como-modo-pie{display:block;margin:10px 0 0;font:600 11px/1.35 var(--mono);letter-spacing:.07em;text-transform:uppercase;color:#B9C7D4}
+@media (min-width:761px){.como-modos.como-modos-2{grid-template-columns:1fr 1fr}}
+.comp-2{margin:14px 0 4px}
+.comp-2 .comp-cab{position:sticky;top:0;z-index:1;background:linear-gradient(#06080C 80%,rgba(6,8,12,0));padding-top:6px}
+.comp-2 .comp-cab,.comp-2 .comp-celdas{grid-template-columns:repeat(2,minmax(0,1fr))}
+.comp-2 .comp-cab span.comp-c0{display:none}
+.comp-2 .comp-cab span{font-size:11.5px}
+.comp-2 .comp-cab span.comp-g{color:#E8EEF4;border-bottom-color:rgba(220,229,237,.6)}
+.comp-2 .comp-v.comp-g{background:linear-gradient(180deg,rgba(220,229,237,.09),rgba(156,195,228,.04));border:1px solid rgba(220,229,237,.3)}
+.comp-2 .comp-v.comp-g small{color:#DCE5ED}
+.comp-2 .comp-v.no i{color:#6F7B88}
+@media (min-width:761px){.comp-2 .comp-fila,.comp-2 .comp-cab{grid-template-columns:minmax(0,1.8fr) repeat(2,minmax(0,1fr))}.comp-2 .comp-cab span.comp-c0{display:block}}
+
+/* las etiquetas en mayúsculas espaciadas, solo en escritura latina, griega y cirílica: en árabe, persa, urdu, hebreo, las de la India,
+   tailandés, chino, japonés y coreano el espaciado rompe la escritura; ahí van con la letra de texto y sin espaciar */
+html:is([lang^="ar"],[lang^="fa"],[lang^="ur"],[lang^="he"],[lang^="hi"],[lang^="bn"],[lang^="ta"],[lang^="te"],[lang^="th"],[lang^="zh"],[lang^="ja"],[lang^="ko"]) :is(.inv-tipo small,.ultra-col-cab small,.ultra-col li small,.como-modo-pie,.ultra-precio){letter-spacing:0;font-family:var(--texto)}
+/* el mismo cuadro en «Cómo funciona Comunicaciones» del ordenador */
+.pro .pro-comp{margin:6px 0 34px}
+.pro .pro-comp .comp-cab{position:static;background:none}
+/* Ajustes: tu versión y la puerta a Ultra */
+.ajuste-sello{margin-left:auto;flex:none;font:600 9.5px/1 var(--mono);font-style:normal;letter-spacing:.16em;padding:5px 7px 4px;border-radius:999px;color:#06080C;background:var(--ultra-plata)}

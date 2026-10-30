@@ -16,6 +16,7 @@ Después, desde esta carpeta:
 - `node enviar.js` — el botón de enviar: en el sitio del micrófono, del mismo tamaño, de color, lejos del teclado y con respuesta al pulsarlo.
 - `node actualiza.js` — la actualización sola: con una versión nueva simulada, espera a que no haya nada a medias, se recarga, vuelve al mismo chat y no entra en bucle.
 - `node tipos.js` — chat normal y chat blindado: la hoja de invitar, los enlaces «#i=» y «#b=», el marco y el velo del blindado, los números al escribir, «Voz grave» y «Mosaico» solo con la llamada en marcha, y la tecla de captura en el ordenador.
+- `node ultra.js` — las dos versiones (30 Oct 2026): al invitar, «Blindada» (gratis) elegida y «Ultra» próximamente, que solo abre su hoja; la hoja de Ultra; «¿Cómo funciona?» y el desplegable del PC con el cuadro de dos columnas; en la videollamada de la Blindada, el cambio de voz y el mosaico cerrados con «ULTRA» (la llamada sigue con la voz y la imagen tal cual); el tope de 2 GB por archivo. Capturas del iPhone y del PC en `ultra/`.
 - `node contactos.js` — guardar contactos, volver, llamar desde la lista, recargas.
 - `node tirar.js` — tirar para actualizar (solo el ✓, sin palabra).
 - `node web.js` — la página en el ordenador y en el navegador del teléfono.
