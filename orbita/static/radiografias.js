@@ -115,6 +115,25 @@
     if (d) texto(d, si ? SUB_PROGRAMA : SUB_WEB);
     if (si && !pc) panel.insertBefore(tarjetaPC(), panel.querySelector('.tarjeta.tu'));
     else if (!si && pc) pc.remove();
+    // the PC Scanner: inside the program, right after «Tu PC», and it scans; on the web, after «Una web», and it says what it
+    // does and offers the program (it needs it to measure)
+    let esc = panel.querySelector('.tarjeta.escaner'); if (!esc) esc = tarjetaEscaner();
+    const ancla = si ? panel.querySelector('.tu-pc') : panel.querySelector('.tarjeta.web');
+    if (ancla && ancla.nextElementSibling !== esc) ancla.after(esc);
+    texto(esc.querySelector('p'), si ? ESC_PROGRAMA : ESC_WEB);
+    texto(esc.querySelector('.accion span'), si ? 'Escanear este equipo' : 'Ver qué examina');
+  }
+  // 31 Oct 2026 (the owner, 23:32 and 00:10: «Vigía se cambia por escáner pc»): static/escaner.js
+  const ESC_PROGRAMA = 'Protección y antivirus, cámara, micrófono y pantalla, control remoto, telemetría y todo lo que sale de este equipo, en una sola lectura que no cambia nada.';
+  const ESC_WEB = 'Lo que Windows y el programa saben de este equipo, en una sola lectura. Necesita el programa GUARDIANA para Windows.';
+  function tarjetaEscaner() {
+    const es = crea('article', 'tarjeta escaner');
+    const k = crea('div', 'tk'); k.append(crea('span', '', 'Escáner PC'));
+    const b = document.createElement('button'); b.type = 'button'; b.className = 'accion';
+    b.append(crea('span', '', 'Escanear este equipo')); b.insertAdjacentHTML('beforeend', FLECHA);
+    b.addEventListener('click', () => { const prog = enPrograma(); vete(); setTimeout(() => { if (window.OrbitaEscaner) window.OrbitaEscaner.abre({ escanea: prog }); }, 380); });
+    es.append(k, crea('h3', '', 'Examen completo de este equipo'), crea('p', '', ESC_PROGRAMA), b);
+    return es;
   }
   // the measured front pages, from the mirror's own data
   async function pintaSitios() {

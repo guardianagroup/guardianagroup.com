@@ -1474,7 +1474,9 @@ void main(){
   const conocer = document.getElementById('conocer');
   const idiomaConocer = () => { const l = window.GuardianaIdioma && window.GuardianaIdioma.lang; if (conocer && l) conocer.href = '/?lang=' + l; };
   addEventListener('guardiana-idioma', idiomaConocer); idiomaConocer();
-  if (window.ResizeObserver) new ResizeObserver(() => mide()).observe(der);
+  // 31 Oct 2026: and the left group too («Inicio» comes and goes with NÚCLEO; inside the program «Tu PC» and «Escáner PC»
+  // join it), so the bar never stays in the middle on top of them
+  if (window.ResizeObserver) { const ro = new ResizeObserver(() => mide()); ro.observe(der); ro.observe(izq); }
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(mide);
   mide();
 })();
