@@ -30,6 +30,7 @@
   const NOTA_LUGAR = 'El lugar es el del servidor según una base de datos de direcciones; si se cortó antes de salir, el país de la sede de la empresa. No es la ruta exacta que siguen los datos.';
   const NOTA_AQUI = 'Estos datos los entrega el programa a esta página dentro de tu equipo; la página no los envía a ningún sitio.';
   const NOTA_SIN = 'Las conexiones sin lugar conocido cuentan en el total, pero no se dibujan.';
+  const NOTA_CABLE = 'Cada conexión se dibuja por los cables submarinos y la fibra terrestre del mapa, por el camino más corto: es ilustrativo, porque el cable exacto no se conoce desde fuera de la red. Donde el mapa no tiene cable, va a ras de suelo y en discontinua.';
 
   // ---------- geometry ----------
   const vec = (lon, lat) => { const a = lat * RAD, b = lon * RAD; return [Math.cos(a) * Math.sin(b), Math.sin(a), Math.cos(a) * Math.cos(b)]; };
@@ -91,14 +92,23 @@
 
   // ---------- drawing (in the planet's clean mode, through OrbitaCapas.soloTu) ----------
   const N = 48, CERCA = 0.02; // points of an arc; closer than this (about 130 km) a server is next to you
+  // 31 Oct 2026 (the owner, 08:51: «los datos salen que parecen misiles… no puede ser volando… tiene que ser todo por
+  // cable, cable terrestre, cable submarino, como la realidad»): each connection runs over the ground, along the map's
+  // submarine cables and land fibre (static/red.js, the same shortest path as «Mi conexión»). Where the map has no way
+  // there, it hugs the ground on the straight course, thinner and dashed, never in the air. Illustrative: the exact
+  // cable a connection used cannot be known from outside the network, and the panel says so.
   function arco(L, l) {
     const casa = vec(L.lon, L.lat); let dest = vec(l.lon, l.lat), ang = angulo(casa, dest);
     if (ang < CERCA) return { cerca: true };
-    if (ang > 3.1) { dest = vec(l.lon + 1.5, l.lat + 1); ang = angulo(casa, dest); } // the far side of the planet: one of its many great circles
-    // low over the planet, a little higher the farther it goes: data, not a missile (owner, 23 Oct 2026, on ESPEJO's first arcs)
-    const alto = 0.018 + 0.11 * Math.min(1, ang / 1.6), w = [];
-    for (let i = 0; i <= N; i++) { const t = i / N, g = slerp(casa, dest, t), a = 1.004 + alto * Math.sin(Math.PI * t); w.push([g[0] * a, g[1] * a, g[2] * a]); }
-    return { cerca: false, w, pts: new Array(N + 1), sale: N, largo: N, periodo: 2400 + 2600 * Math.min(1, ang / 1.6) + 1000 * semilla(l.key) };
+    const R = window.OrbitaRed, ruta = R && R.lista ? R.camino({ lon: L.lon, lat: L.lat }, { lon: l.lon, lat: l.lat }) : null;
+    const w = [];
+    if (ruta) for (const g of R.muestrea(ruta, N)) w.push([g[0] * 1.003, g[1] * 1.003, g[2] * 1.003]);
+    else {
+      if (ang > 3.1) { dest = vec(l.lon + 1.5, l.lat + 1); ang = angulo(casa, dest); } // the far side of the planet: one of its many great circles
+      for (let i = 0; i <= N; i++) { const g = slerp(casa, dest, i / N); w.push([g[0] * 1.003, g[1] * 1.003, g[2] * 1.003]); }
+    }
+    const km = ruta ? ruta.km : ang * 6371;
+    return { cerca: false, red: !!ruta, w, pts: new Array(N + 1), sale: N, largo: N, periodo: 2600 + 3000 * Math.min(1, km / 12000) + 1000 * semilla(l.key) };
   }
   let CAJAS = [];
   function cabe(x, y, w, h) { const b = [x - 3, y - h / 2, x + w + 3, y + h / 2]; for (const c of CAJAS) if (b[0] < c[2] && b[2] > c[0] && b[1] < c[3] && b[3] > c[1]) return false; CAJAS.push(b); return true; }
@@ -166,7 +176,7 @@
     for (const l of vivos) {
       const r = l.ruta; if (r.cerca) continue;
       const a = Math.min(0.42, 0.13 + 0.06 * Math.log10(1 + l.n)) * l.a;
-      if (l.queda > 0) { cx.strokeStyle = `rgba(${ACENTO},${a.toFixed(3)})`; cx.lineWidth = 1.2; trazo(cx, r.pts, 0, r.largo); }
+      if (l.queda > 0) { if (!r.red) cx.setLineDash([3, 4]); cx.strokeStyle = `rgba(${ACENTO},${(r.red ? a : a * 0.7).toFixed(3)})`; cx.lineWidth = r.red ? 1.2 : 0.9; trazo(cx, r.pts, 0, r.largo); cx.setLineDash([]); }
       if (l.corta > 0 && l.queda === 0) { cx.setLineDash([2, 5]); cx.strokeStyle = `rgba(${ROJO},${(a * 0.95).toFixed(3)})`; cx.lineWidth = 1; trazo(cx, r.pts, Math.min(r.sale, r.largo), r.largo); cx.setLineDash([]); }
     }
     // 2 · the pulses: what leaves your PC reaches its place; what GUARDIANA cut bursts in coral against the ring around you
@@ -291,7 +301,7 @@
     const ol = crea('ol'); ol.setAttribute('aria-label', 'Empresas');
     emp.append(crea('div', 'k2', 'Empresas'), ol);
     const notas = crea('div', 'notas'), sin = crea('p', 'sin-lugar', NOTA_SIN); sin.hidden = true;
-    notas.append(sin, crea('p', '', NOTA_LUGAR), crea('p', '', NOTA_AQUI));
+    notas.append(sin, crea('p', '', NOTA_CABLE), crea('p', '', NOTA_LUGAR), crea('p', '', NOTA_AQUI));
     hud.append(cab, t, estado, cifras, emp, notas);
     document.body.append(hud);
     return hud;
@@ -463,6 +473,7 @@
     document.body.classList.add('en-tupc');
     if (boton) boton.setAttribute('aria-pressed', 'true');
     if (window.OrbitaCapas) window.OrbitaCapas.soloTu(true, pinta);
+    if (window.OrbitaRed && !window.OrbitaRed.lista) window.OrbitaRed.prepara().then((si) => { if (si && E) for (const l of E.lugares.values()) l.ruta = null; });
     arrancaReloj(); pide();
     requestAnimationFrame(midePanel);
     setTimeout(() => { if (E && hud && !hud.hidden) { const h = hud.querySelector('.t'); (h && getComputedStyle(h).display !== 'none' ? h : hud).focus({ preventScroll: true }); } }, 450);

@@ -62,6 +62,8 @@
   const esSID = (s) => /^S-1-\d/.test(String(s || ''));
   const httpsDe = (u) => (typeof u === 'string' && /^https:\/\/[^\s"'<>]+$/i.test(u) && u.length < 400 ? u : '');
   const lista = (x) => (Array.isArray(x) ? x : []);
+  // this computer's own entries: the program (1.0.50) keeps only those and then strips device_id before handing them over
+  const deEste = (x) => !!x && typeof x === 'object' && (x.device_id === undefined || x.device_id === 'self');
   const numero = (x) => (typeof x === 'number' && Number.isFinite(x) ? x : typeof x === 'string' && x.trim() !== '' && Number.isFinite(+x) ? +x : null);
 
   // ---------- números, bytes, horas ----------
@@ -232,6 +234,7 @@
       st.ms = r.ms; st.estado = r.estado; st.t = Date.now();
       if (r.ok) { st.e = 'medido'; S.d[k] = r.json; S.v[k] = (S.v[k] || 0) + 1; }
       else { st.e = 'no_medido'; st.motivo = r.motivo; st.maximo = r.maximo; }
+      eventoLectura(k);
       late(); pintaAvanceLuego(); informeLuego();
       return r;
     });
@@ -243,6 +246,7 @@
   function escanea() {
     if (!enPrograma() || (S && !S.fin)) return;
     S = nuevo(); const g = S.g;
+    if (C.dLog) { C.dLog.textContent = ''; C.dLog.append(h('li', { class: 'vacio' }, 'Los pasos de la revisión de Windows aparecen aquí según los da.')); C.dAhora.textContent = ''; C.pct = 0; C.dPct.textContent = '0'; C.ultimo = null; }
     const pRevA = lee(g, 'revAhora');
     const pVigA = lee(g, 'vigAhora');
     S.vig.tPedido = Date.now();
@@ -327,6 +331,7 @@
     if (!S || S.rev.fin) return;
     S.rev.fin = true; S.rev.e = e; S.rev.motivo = motivo || ''; S.rev.detalle = detalle || '';
     const st = S.l.revision; st.e = e; st.ms = Date.now() - S.t0; st.t = Date.now(); if (motivo) st.motivo = motivo; if (detalle) st.detalle = detalle;
+    if (abierto) evento(filaEvento('Revisión de Windows', h('b', null, e === 'medido' ? 'Secciones hechas' : MOTIVO[motivo] || MOTIVO.error), e === 'medido' ? 'Medido' : 'No medido', e !== 'medido', dato(segundos(st.ms), null, 'small')));
     late(); pintaAvanceLuego(); informeLuego();
   }
 
@@ -346,7 +351,7 @@
     } else {
       const lentas = LENTAS.filter((id) => { const x = lista(j.vigilancias).find((w) => w && w.id === id); return x && x.disponible !== false; });
       S.vig.lentas = {}; for (const id of lentas) S.vig.lentas[id] = false;
-      const marca = (jj) => { for (const id of lentas) { const x = lista(jj.vigilancias).find((w) => w && w.id === id); if (x && esHora(x.ultima) && +x.ultima >= umbral) S.vig.lentas[id] = true; } };
+      const marca = (jj) => { for (const id of lentas) { const x = lista(jj.vigilancias).find((w) => w && w.id === id); if (x && esHora(x.ultima) && +x.ultima >= umbral) { if (!S.vig.lentas[id] && abierto) evento(filaEvento('Vigilancia continua', h('b', null, { arranque: 'Arranque', privacidad: 'Privacidad', proteccion: 'Protección' }[id]), 'Mirada nueva hecha')); S.vig.lentas[id] = true; } } };
       marca(j);
       if (!mirando) { S.vig.e = 'sin_orden'; S.vig.motivo = S.l.vigAhora.motivo || 'error'; }
       else if (lentas.every((id) => S.vig.lentas[id])) S.vig.e = 'hecha';
@@ -518,10 +523,70 @@
     C.lentas = h('ul', { class: 'esc-lentas' });
     const mV = h('div', { class: 'esc-med m-vig' }, h('h3', { class: 'esc-rot' }, 'Vigilancia continua'), C.vigE, C.lentas);
     C.feed = h('ol', { class: 'esc-feed', 'aria-hidden': 'true' });
-    avance.append(h('div', { class: 'esc-av-rejilla' }, mL, mR, mV), C.feed);
+    // 31 Oct 2026 (the owner, 08:45: «se tiene que ir viendo cómo se analiza, para que la persona tenga la percepción de que
+    // se está analizando en vivo»): a live band on top. The figure is the real progress of the readings, the check-up's
+    // sections and the monitoring's fresh look; «Ahora» and the log are the real events as they arrive (each reading that
+    // answers, each step of the check-up, each fresh look), never a made-up activity.
+    C.dPct = dato('0', 'esc-dir-n'); C.pct = 0; C.pctMeta = 0;
+    C.dBarra = h('div', { class: 'esc-dir-barra', 'aria-hidden': 'true' }, h('i', { class: 'lleno' }), h('i', { class: 'barrido' }));
+    C.dAhora = h('div', { class: 'esc-dir-ahora' });
+    C.dLog = h('ol', { class: 'esc-dir-log', 'aria-hidden': 'true' });
+    C.directo = h('div', { class: 'esc-directo' },
+      h('div', { class: 'esc-dir-cab' },
+        h('p', { class: 'esc-dir-rot' }, h('i', { class: 'esc-vivo', 'aria-hidden': 'true' }), h('span', null, 'Análisis en directo')),
+        h('p', { class: 'esc-dir-pct' }, C.dPct, h('small', { translate: 'no' }, '%'), h('span', { class: 'esc-dir-pk' }, 'Avance del escaneo'))),
+      C.dBarra,
+      h('div', { class: 'esc-dir-ahora-caja' }, h('span', { class: 'esc-dir-k' }, 'Ahora'), C.dAhora),
+      C.dLog);
+    avance.append(C.directo, h('div', { class: 'esc-av-rejilla' }, mL, mR, mV));
+  }
+  // one real event in the live band: newest on top, the time since the scan started, and the same row as «Ahora»
+  function evento(li) {
+    if (!S || !C.dLog || !li) return;
+    li.prepend(dato(reloj(Date.now() - S.t0), 'tm'));
+    C.dLog.prepend(li);
+    while (C.dLog.children.length > 7) C.dLog.lastElementChild.remove();
+    const v = C.dLog.querySelector('.vacio'); if (v) v.remove();
+    const ahora = li.cloneNode(true); const tm = ahora.querySelector('.tm'); if (tm) tm.remove();
+    ahora.className = 'esc-dir-fila' + (li.classList.contains('aviso') ? ' aviso' : '');
+    C.dAhora.textContent = ''; C.dAhora.append(ahora);
+    C.ultimo = ahora;
+    hablaRed();
+  }
+  const filaEvento = (tipo, b, est, aviso, extra) => h('li', aviso ? { class: 'aviso' } : null, h('span', { class: 'tipo' }, tipo), b, est ? h('span', { class: 'est' + (aviso ? ' aviso' : '') }, est) : null, extra || null);
+  function eventoLectura(k) {
+    const st = S && S.l[k]; if (!st || !abierto) return;
+    if (k === 'revision') return; // the check-up has its own events (its steps and its end)
+    const medido = st.e === 'medido';
+    evento(filaEvento('Lectura', h('b', null, LD[k].n), medido ? 'Leído' : st.e === 'omitido' ? 'Omitida' : 'No medido', !medido && st.e !== 'omitido', medido && st.ms != null ? dato(segundos(st.ms), null, 'small') : null));
+  }
+  // the progress, from what really came back: the readings (40 %), the check-up's sections (45 %), the fresh look (15 %)
+  function avanceReal() {
+    if (!S) return 0;
+    if (S.fin) return 100;
+    const nL = L.filter(([k]) => /medido|omitido/.test(S.l[k].e)).length / L.length;
+    const nR = S.rev.fin ? 1 : Math.min(1, (S.rev.hechas.length + (S.rev.seccion ? 0.5 : 0)) / SECS.length);
+    const lentas = Object.keys(S.vig.lentas), nV = /hecha|caduco|no_medido|sin_orden/.test(S.vig.e) ? 1 : lentas.length ? lentas.filter((x) => S.vig.lentas[x]).length / lentas.length : 0;
+    return Math.min(99, Math.floor(100 * (0.4 * nL + 0.45 * nR + 0.15 * nV)));
+  }
+  let rafPct = 0;
+  function pintaPct() {
+    if (!C.dPct || !S) return;
+    C.pctMeta = avanceReal();
+    C.dBarra.firstChild.style.width = C.pctMeta + '%';
+    C.directo.classList.toggle('fin', !!S.fin);
+    if (rafPct) return;
+    const paso = () => {
+      rafPct = 0;
+      if (C.pct === C.pctMeta) return;
+      C.pct = reducido() ? C.pctMeta : C.pct + Math.sign(C.pctMeta - C.pct) * Math.max(1, Math.round(Math.abs(C.pctMeta - C.pct) / 6));
+      C.dPct.textContent = String(C.pct);
+      rafPct = requestAnimationFrame(paso);
+    };
+    paso();
   }
   let rafAvance = 0;
-  function pintaAvanceLuego() { if (!rafAvance) rafAvance = requestAnimationFrame(() => { rafAvance = 0; pintaAvance(); pintaTira(); pintaCabeza(); }); }
+  function pintaAvanceLuego() { if (!rafAvance) rafAvance = requestAnimationFrame(() => { rafAvance = 0; pintaAvance(); pintaTira(); pintaCabeza(); pintaPct(); }); }
   function pintaAvance() {
     if (!S || !abierto) return;
     const resueltas = L.filter(([k]) => /medido|omitido/.test(S.l[k].e));
@@ -562,12 +627,14 @@
       }
     }
     if (!C.feed.childElementCount) C.feed.append(h('li', { class: 'vacio' }, 'Los pasos de la revisión de Windows aparecen aquí según los da.'));
+    if (C.dLog && !C.dLog.childElementCount) C.dLog.append(h('li', { class: 'vacio' }, 'Los pasos de la revisión de Windows aparecen aquí según los da.'));
   }
   function pintaFeed(p) {
     if (!abierto || !C.feed) return;
     const li = filaPaso(p); if (!li) return;
     const v = C.feed.querySelector('.vacio'); if (v) v.remove();
     C.feed.append(li); while (C.feed.children.length > 8) C.feed.firstElementChild.remove();
+    const otra = filaPaso(p); if (otra) { if (p[0] === 'firma' && otra.querySelector('.est') && !otra.querySelector('.est.aviso')) otra.querySelector('.est').classList.add('ok'); if (otra.querySelector('.est.aviso')) otra.classList.add('aviso'); evento(otra); }
     hablaRed();
   }
   function rehaceFeed() {
@@ -583,6 +650,7 @@
       const n = S.rev.hechas.length, barra = h('span', { class: 'barra' }, h('i'));
       barra.firstChild.style.width = (100 * n / SECS.length).toFixed(1) + '%';
       tira.append(h('i', { class: 'esc-vivo', 'aria-hidden': 'true' }), h('b', null, 'La revisión de Windows sigue en curso'), barra, dato(n + ' / ' + SECS.length, 'mono'), h('span', null, 'Secciones hechas'), dato(reloj(Date.now() - S.t0), 'mono'));
+      if (C.ultimo) { const u = C.ultimo.cloneNode(true); u.className = 'esc-tira-ahora'; tira.append(h('span', { class: 'esc-dir-k' }, 'Ahora'), u); }
     } else if (!S.fin) {
       tira.append(h('i', { class: 'esc-vivo', 'aria-hidden': 'true' }), h('b', null, 'Terminando las últimas lecturas'), dato(reloj(Date.now() - S.t0), 'mono'));
     } else {
@@ -611,6 +679,7 @@
 
   // ---------- el informe ----------
   const NIVEL = { alerta: 4, aviso: 3, info: 2, nd: 2, ok: 1 };
+  const CATS = ['telemetria', 'publicidad', 'rastreador'];
   const CHIP = { alerta: 'Para arreglar', aviso: 'Para revisar', info: 'Para saber', ok: 'Correcto', nd: 'Sin dato', curso: 'En curso', nomedido: 'No medido', esperando: 'Esperando', medido: 'Medido', parcial: 'Parcial' };
   // which section shows each check of the revision: by its id, or else by its group (so new checks appear by themselves)
   const SEC_DE_CHECK = { defender_nube: 'antivirus', camara: 'sensores', microfono: 'sensores', ubicacion: 'sensores', pantalla: 'sensores', fabricante: 'fabrica', aprovisionados: 'fabrica', telemetria: 'telemetria', diagtrack: 'telemetria', publicidad: 'telemetria', certificados: 'certificados', recall: 'ia', usb: 'equipo', bluetooth: 'equipo', bios: 'equipo' };
@@ -815,9 +884,10 @@
     if (fuente('vigia') === 'medido' || (res && Array.isArray(res.en_uso))) xs.push({ v: num(usos.length), l: 'En uso ahora (cámara, micrófono, pantalla)', n: usos.length ? 'aviso' : '', s: fuente('vigia') === 'medido' ? 'Vigía de las llamadas' : 'Vigilancia continua' });
     const p = pd();
     if (p && p.mide_bytes !== false) {
-      let total = 0, tel = 0; for (const d of p.destinos) { const e = numero(d && d.enviados) || 0; total += e; if (d && /^(telemetria|publicidad|rastreador)$/.test(d.categoria)) tel += e; }
-      xs.push({ v: bytes(total), l: 'Enviado en 24 h', s: numero(p.destinos_omitidos) ? 'Suma parcial' : 'Conexiones de las últimas 24 horas' });
-      xs.push({ v: bytes(tel), l: 'Telemetría, publicidad y rastreo (24 h)', n: tel ? 'aviso' : '', s: 'Conexiones de las últimas 24 horas' });
+      // 1.0.50: the program hands this page only the connections to telemetry, advertising and tracking (and the antivirus's
+      // own), never the rest of what the computer visited: so there is no grand total here, only that sum
+      let tel = 0; for (const d of p.destinos) { if (d && CATS.includes(d.categoria)) tel += numero(d.enviados) || 0; }
+      xs.push({ v: bytes(tel), l: 'Telemetría, publicidad y rastreo (24 h)', n: tel ? 'aviso' : '', s: numero(p.destinos_omitidos) ? 'Suma parcial' : 'Conexiones de las últimas 24 horas' });
     }
     const av = S.d.antivirus; if (av && av.resumen && numero(av.resumen.subidos) != null) xs.push({ v: bytes(av.resumen.subidos), l: 'Enviado por tu antivirus (24 h)', s: 'Actividad del antivirus' });
     const idn = S.d.identificacion; if (idn && idn.cobertura && numero(idn.cobertura.pct_identificada) != null) xs.push({ v: num(idn.cobertura.pct_identificada) + ' %', l: 'Consultas con empresa identificada (7 días)', s: 'Identificación de destinos' });
@@ -861,7 +931,7 @@
       if (!nada) cuerpo.push(bloque('En las últimas 24 horas', cifras([{ v: bytes(r.subidos), l: 'Datos enviados' }, { v: bytes(r.bajados), l: 'Datos recibidos' }, { v: num(r.destinos), l: 'Destinos' }, { v: num(r.paises), l: 'Países' }, { v: bytes(r.subidos_noche), l: 'Enviado de madrugada (00–06 h)', n: numero(r.subidos_noche) ? 'aviso' : '' }])));
       // each product on this computer (never the other devices of the house)
       const p = pd();
-      for (const x of lista(av.vistos).filter((x) => x && x.device_id === 'self')) {
+      for (const x of lista(av.vistos).filter(deEste)) {
         const prod = limpia(x.producto, 80), traf = lista(av.trafico).find((t) => t && t.producto === x.producto);
         const progs = lista(x.programas).filter((g) => g && typeof g === 'object').map((g) => h('li', null, dato(limpia(g.nombre, 80), null, 'b'), g.firma ? dato(limpia(g.firma, 80), null, 'small') : null, h('span', { class: 'der' }, panel((tpn('av_consultas', g.consultas) || '{n}').replace('{n}', num(g.consultas))))));
         const dest = lista(x.destinos).filter((d) => d && typeof d === 'object').slice(0, 8).map((d) => {
@@ -883,7 +953,7 @@
           dentro ? bloque('Dentro del equipo', dentro) : null));
       }
       // official sanctions of the products installed here (the catalogue the panel keeps, with its sources)
-      const inst = new Set([...lista(av.vistos).filter((x) => x && x.device_id === 'self').map((x) => String(x.producto).toLowerCase()), ...lista(S.d.detectar && S.d.detectar.detectados).map((d) => String(d && d.nombre).toLowerCase())]);
+      const inst = new Set([...lista(av.vistos).filter(deEste).map((x) => String(x.producto).toLowerCase()), ...lista(S.d.detectar && S.d.detectar.detectados).map((d) => String(d && d.nombre).toLowerCase())]);
       const sanc = [];
       for (const f of lista(av.catalogo)) {
         if (!f || !lista(f.sanciones).length) continue;
@@ -966,7 +1036,6 @@
     return { nivel: v.nivel, ver: v.ver, cuerpo: [bloque('Comprobaciones de Windows', pr.nodo), bFab] };
   }
   // ---- 8 · Telemetría y datos que salen
-  const CATS = ['telemetria', 'publicidad', 'rastreador'];
   function secTelemetria() {
     const pr = parteRev('telemetria'), cuerpo = [], p = pd();
     let nivel = nivelRev(pr), ver;
@@ -975,8 +1044,7 @@
       for (const d of p.destinos) { if (!d) continue; const e = numero(d.enviados) || 0; suma.total += e; if (CATS.includes(d.categoria)) suma[d.categoria] += e; }
       ver = [h('span', null, 'Lo que este equipo envió en las últimas 24 horas, por categoría.')];
       // the categories' names are the panel's, in its language
-      cuerpo.push(cifras([{ v: bytes(suma.total), l: 'Total enviado', s: numero(p.destinos_omitidos) ? 'Suma parcial' : null },
-        ...CATS.map((c) => ({ v: bytes(suma[c]), lp: tp('rg_cat_' + c), l: humano(c), n: suma[c] ? 'aviso' : '' }))]));
+      cuerpo.push(cifras(CATS.map((c) => ({ v: bytes(suma[c]), lp: tp('rg_cat_' + c), l: humano(c), n: suma[c] ? 'aviso' : '', s: numero(p.destinos_omitidos) ? 'Suma parcial' : null }))));
       if (numero(p.destinos_omitidos)) cuerpo.push(h('p', { class: 'esc-nota' }, 'Suma parcial: el programa atribuyó solo los destinos principales.'));
       const filas = p.destinos.filter((d) => d && CATS.includes(d.categoria)).sort((a, b) => (numero(b.enviados) || 0) - (numero(a.enviados) || 0)).slice(0, 14).map((d) => h('tr', null,
         h('td', null, dato(limpia(d.destino, 120, false) || '—', null, 'b'), dato(limpia(d.programa, 60), null, 'small')),
@@ -1024,7 +1092,7 @@
     const ia = S.d.ia, qv = S.d.qv, cuerpo = [];
     let nivel = 'info', ver;
     if (ia && typeof ia === 'object') {
-      const sv = lista(ia.servicios).filter((s) => s && s.device_id === 'self');
+      const sv = lista(ia.servicios).filter(deEste);
       const total = sv.reduce((a, s) => a + (numero(s.consultas) || 0), 0);
       ver = [sv.length ? 'Este equipo habló con servicios de IA en los últimos 7 días.' : 'Este equipo no habló con ningún servicio de IA de la lista en los últimos 7 días.'];
       cuerpo.push(cifras([{ v: num(sv.length), l: 'Servicios de IA con los que habló este equipo' }, { v: num(total), l: 'Consultas (7 días)' }]));
@@ -1088,6 +1156,12 @@
       const fil = (x) => (x && typeof x === 'object' ? h('li', null, dato(limpia(x.qname, 120, false) || '—', null, 'b'), h('span', { class: 'der' }, panel((tp('id_consultas') || '{n}').replace('{n}', num(x.consultas)))),
         x.identidad && x.identidad.frase ? panel(limpia(x.identidad.frase, 200), null, 'small') : null, lista(x.identidad && x.identidad.pruebas_texto).slice(0, 2).map((t) => panel(limpia(t, 160), null, 'small'))) : null);
       const pro = lista(idn.probables).slice(0, 10).map(fil), sin = lista(idn.sin_identificar).slice(0, 10).map(fil);
+      // 1.0.50: the program keeps the names themselves (they would say what was visited) and hands over how many there are
+      if (!pro.length && !sin.length && (numero(idn.n_probables) != null || numero(idn.n_sin_identificar) != null)) {
+        cuerpo.push(cifras([numero(idn.n_probables) != null ? { v: num(idn.n_probables), l: 'Nombres probables' } : null,
+          numero(idn.n_sin_identificar) != null ? { v: num(idn.n_sin_identificar), l: 'Nombres sin identificar', n: numero(idn.n_sin_identificar) ? 'aviso' : '' } : null]),
+        h('p', { class: 'esc-nota' }, 'La lista de nombres no sale del programa: está en su panel.'));
+      }
       if (pro.length || sin.length) cuerpo.push(h('div', { class: 'esc-dos' }, h('div', null, h('h5', null, panel(tp('id_probables_titulo') || '')), pro.length ? h('ul', { class: 'esc-lista plana' }, pro) : panel(tp('id_lista_vacia') || '', 'esc-nota', 'p')),
         h('div', null, h('h5', null, panel(tp('id_sin_titulo') || '')), sin.length ? h('ul', { class: 'esc-lista plana' }, sin) : panel(tp('id_lista_vacia') || '', 'esc-nota', 'p'))));
       const pf = Object.entries(idn.por_fuente && typeof idn.por_fuente === 'object' ? idn.por_fuente : {}).filter(([, n]) => numero(n)).sort((a, b) => b[1] - a[1]);
@@ -1098,13 +1172,13 @@
     if (p && p.mide_bytes !== false) {
       const em = new Map();
       for (const d of p.destinos) {
-        if (!d) continue; const k = limpia(d.empresa, 60) || '';
+        if (!d || !CATS.includes(d.categoria)) continue; const k = limpia(d.empresa, 60) || '';
         const x = em.get(k) || { n: k, env: 0, cons: 0, paises: new Set(), progs: new Set() };
         x.env += numero(d.enviados) || 0; x.cons += numero(d.consultas) || 0; if (paisNombre(d.pais)) x.paises.add(paisNombre(d.pais)); if (d.programa) x.progs.add(limpia(d.programa, 40));
         em.set(k, x);
       }
       const top = [...em.values()].sort((a, b) => b.env - a.env).slice(0, 10);
-      if (top.length) cuerpo.push(bloque('Empresas que más reciben de este equipo (24 h)', h('div', { class: 'esc-tabla-caja' }, h('table', { class: 'esc-tabla' },
+      if (top.length) cuerpo.push(bloque('Empresas de telemetría, publicidad y rastreo que más reciben de este equipo (24 h)', h('div', { class: 'esc-tabla-caja' }, h('table', { class: 'esc-tabla' },
         h('thead', null, h('tr', null, h('th', null, 'Empresa'), h('th', null, 'Países'), h('th', { class: 'num' }, 'Enviado'), h('th', { class: 'num' }, 'Consultas'))),
         h('tbody', null, top.map((x) => h('tr', null, h('td', null, x.n ? dato(x.n, null, 'b') : h('b', null, 'Sin empresa identificada'), dato([...x.progs].slice(0, 4).join(', '), null, 'small')), h('td', null, dato([...x.paises].join(', ') || '—')),
           h('td', { class: 'num' }, dato(bytes(x.env))), h('td', { class: 'num' }, dato(num(x.cons))))))))));
