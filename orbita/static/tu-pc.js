@@ -273,7 +273,7 @@
   function pon(el, s) { if (el.dataset.es !== s) { el.dataset.es = s; el.textContent = s; } }
   function montaHud() {
     if (hud) return hud;
-    hud = crea('section', 'tupc-hud'); hud.id = 'tupc'; hud.hidden = true;
+    hud = crea('section', 'tupc-hud'); hud.id = 'tupc'; hud.hidden = true; hud.tabIndex = -1;
     hud.setAttribute('role', 'dialog'); hud.setAttribute('aria-labelledby', 'tupc-t');
     const cab = crea('div', 'cab'), k = crea('div', 'k'), vivo = crea('i', 'vivo'); vivo.setAttribute('aria-hidden', 'true');
     const sep = crea('span', 'sep'); sep.textContent = '·'; sep.setAttribute('aria-hidden', 'true');
@@ -464,7 +464,7 @@
     if (window.OrbitaCapas) window.OrbitaCapas.soloTu(true, pinta);
     arrancaReloj(); pide();
     requestAnimationFrame(midePanel);
-    setTimeout(() => { if (E && hud && !hud.hidden) { const h = hud.querySelector('.t'); if (h && getComputedStyle(h).display !== 'none') h.focus({ preventScroll: true }); else hud.querySelector('.cerrar').focus({ preventScroll: true }); } }, 450);
+    setTimeout(() => { if (E && hud && !hud.hidden) { const h = hud.querySelector('.t'); (h && getComputedStyle(h).display !== 'none' ? h : hud).focus({ preventScroll: true }); } }, 450);
     return true;
   }
   function cierra() {
@@ -482,22 +482,23 @@
       if (v) v.focus({ preventScroll: true });
     }, 300);
   }
-  // ---------- the way in from the planet, inside the program: «Tu PC» beside «Ver mi conexión». On a computer the ring of
-  //            doors is hidden since NÚCLEO (nucleo.css), so without this the view would only open from /orbita/#radiografias.
-  //            Outside the program there is no button. ----------
+  // ---------- the way in from the planet, inside the program: «Tu PC» in the header, where the web has «Conocer GUARDIANA»
+  //            (which the program hides; the header keeps its measure). On a computer the ring of doors is hidden since
+  //            NÚCLEO (nucleo.css), so without this the view would only open from /orbita/#radiografias. Outside the program
+  //            there is no button. ----------
   let boton = null;
   function ponBoton() {
-    const der = document.querySelector('header .derecha');
+    const marca = document.querySelector('header .izq .marca');
     if (!enPrograma()) { if (boton) { boton.remove(); boton = null; } return; }
-    if (boton || !der) return;
+    if (boton || !marca) return;
     boton = document.createElement('button'); boton.type = 'button'; boton.id = 'tupc-btn'; boton.className = 'lugar-btn tupc-btn';
     boton.setAttribute('aria-pressed', E ? 'true' : 'false'); boton.setAttribute('aria-controls', 'tupc');
     boton.innerHTML = '<i aria-hidden="true"></i><span></span>'; pon(boton.querySelector('span'), 'Tu PC');
     boton.addEventListener('click', () => { if (E) cierra(); else abre(); });
-    const c = $('conexion-btn'); der.insertBefore(boton, c || der.firstChild);
+    marca.after(boton);
   }
-  // after «Ver mi conexión» is in place (conexion.js, on DOMContentLoaded); and if the program marks the page a moment later
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', () => setTimeout(ponBoton, 0)); else setTimeout(ponBoton, 0);
+  ponBoton();
+  // and if the program marks the page a moment later
   try { new MutationObserver(ponBoton).observe(document.documentElement, { attributes: true, attributeFilter: ['data-en-programa'] }); } catch (_) {}
   window.OrbitaTuPC = { abre, cierra, get activo() { return !!E; } };
 })();

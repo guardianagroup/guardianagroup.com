@@ -1165,7 +1165,10 @@ body.en-tupc #estado { opacity: .35; }
 @media (max-height: 820px) and (min-width: 761px) { .tupc-hud { gap: 10px; } .tupc-hud .t { font-size: 22px; } .tupc-hud .cifras { padding: 10px 0; } .tupc-hud .notas { gap: 4px; padding-top: 8px; } .tupc-hud .notas p { font-size: 9.5px; line-height: 1.45; } }
 /* the new phone layout (movil.css): its bars step back as for ESPEJO, the sheet is the view */
 body.m2.en-tupc #puertas, body.m2.en-tupc #conexion-btn, body.m2.en-tupc .m2-arriba { opacity: 0 !important; pointer-events: none !important; }
-/* the way in from the planet, inside the program: «Tu PC» beside «Ver mi conexión» (tu-pc.js) */
+/* the way in from the planet, inside the program: «Tu PC» in the header, where the web has «Conocer GUARDIANA» (tu-pc.js) */
+.tupc-btn { margin-left: 4px; }
+body.dentro .tupc-btn, body.m2 .tupc-btn { display: none; }
+.tupc-hud { outline: none; }
 .tupc-btn i { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 8px rgba(156,195,228,.85); }
 .tupc-btn[aria-pressed="true"] { background: rgba(156,195,228,.18); border-color: rgba(156,195,228,.6); color: #F4F6F8; }
 .tupc-btn[aria-pressed="true"] i { animation: tupc-late 2.4s ease-in-out infinite; }
@@ -1180,6 +1183,11 @@ body.m2.en-tupc #puertas, body.m2.en-tupc #conexion-btn, body.m2.en-tupc .m2-arr
   .tupc-hud .t { display: none; }
   .tupc-hud .cifras { padding: 9px 0; } .tupc-hud .cifras b { font-size: 20px; }
   .tupc-hud .notas { padding-top: 8px; }
+  /* on a phone the whole sheet scrolls (the list, then the notes), with its top line in place */
+  .tupc-hud { overflow: auto; overscroll-behavior: contain; }
+  .tupc-hud .cab { position: sticky; top: -14px; z-index: 1; margin: -14px -4px -4px 0; padding: 14px 4px 6px 0; background: rgba(8,11,16,.97); }
+  .tupc-hud .empresas, .tupc-hud ol { flex: none; }
+  .tupc-hud ol { overflow: visible; min-height: 0; -webkit-mask-image: none; mask-image: none; padding-bottom: 0; }
   [dir="rtl"] .tupc-hud { right: 0; }
 }
 @media (prefers-reduced-motion: reduce) { .tupc-hud, .tupc-hud.sale { animation-duration: .01ms; } .tupc-hud .vivo, .radio-panel .tarjeta .vivo::before { animation: none; } .tupc-hud li.nueva, .tupc-hud li .v.sube { animation: none; } }
