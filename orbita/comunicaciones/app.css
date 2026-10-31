@@ -2264,5 +2264,5 @@ body.modo-llevar{background:#06080C}
 @media (prefers-reduced-motion:reduce){.gc-llamada-codigo.nuevo{animation:none}}
 /* en el PC, el panel de seguridad se abre debajo del título, sin taparlo */
 @media (min-width:761px){.ll-seg{top:calc(114px + env(safe-area-inset-top))}}
-/* 1.0.50: dentro del programa para Windows, Comunicaciones es una pestaña: sin «‹ Volver» a la web */
-html[data-en-programa] #volver{display:none!important}
+/* 1.0.50 escondía aquí «‹ Volver» dentro del programa para Windows. 31 Oct 2026: se ve, y lleva a la pestaña de Órbita del
+   programa (app.js, data-producto="orbita") */

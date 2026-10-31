@@ -3923,6 +3923,25 @@
     // demás webs (el lector de pantalla sigue diciendo adónde lleva)
     // en el teléfono (marco de app, /marco/marco.js) no hay NÚCLEO: «‹ Inicio» lleva a Inicio (revisión del 30 Oct 2026)
     try { const v = sessionStorage.getItem('guardiana-vuelta') === 'nucleo', a = $('#volver'); if (a && window.GuardianaMarco && GuardianaMarco.activo) { a.href = '/inicio/'; } else if (a) { a.href = v ? '/orbita/?nucleo=pide' : '/orbita/'; const sp = a.querySelector('span'); if (sp) sp.textContent = v ? T('Atrás') : T('Inicio'); a.setAttribute('aria-label', v ? T('Volver a NÚCLEO') : T('Volver al inicio')); } } catch (_) {}
+    // 31 Oct 2026 (dueño, 30 Oct: «la versión web que teníamos, que ya estaba terminada, quiero que la metas en el programa»): dentro
+    // del programa para Windows (data-en-programa), esta página es su pestaña de Comunicaciones, que sigue abierta por detrás para
+    // que lleguen las llamadas y los mensajes. «‹ Órbita» lleva a la pestaña de Órbita del programa: el clic lleva
+    // data-producto="orbita" y lo coge el programa; si nada lo coge, el enlace va a Órbita como en la web. Si esta misma pestaña
+    // vino de Órbita (el programa no cogió aquella puerta), se vuelve como en la web: cambiar a la pestaña de Órbita no haría nada.
+    const volverPrograma = () => {
+      try {
+        const a = $('#volver'); if (!a || document.documentElement.dataset.enPrograma !== '1' || a.dataset.producto === 'orbita') return;
+        if (window.GuardianaMarco && GuardianaMarco.activo) return;
+        let vino = false; try { vino = sessionStorage.getItem('guardiana-nucleo') === '1'; } catch (_) {}
+        if (vino) return;
+        a.dataset.producto = 'orbita'; a.href = '/orbita/';
+        // en español: idioma.js lo enseña en el idioma de la pantalla y guarda el original para el siguiente cambio
+        const sp = a.querySelector('span'); if (sp) sp.textContent = 'Órbita';
+        a.setAttribute('aria-label', 'Volver a Órbita');
+      } catch (_) {}
+    };
+    volverPrograma();
+    try { new MutationObserver(volverPrograma).observe(document.documentElement, { attributes: true, attributeFilter: ['data-en-programa'] }); } catch (_) {}
     // dueño, 10:20: arriba, la red neuronal de NÚCLEO (la misma firma que la portada)
     try { const l = $('.inicio .red-nucleo'); if (l && window.RedNucleo) window.RedNucleo(l, { nace: false }); } catch (_) {}
     // dueño, 10:10: la explicación, en un desplegable bajo los dos botones

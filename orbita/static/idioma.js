@@ -3764,6 +3764,24 @@
     "Para lo delicado. Todo lo del fuerte y, además: identidad nueva en cada conversación, claves que se renuevan cada 5 minutos, pantalla velada, mosaico y voz grave en las videollamadas, y autodestrucción ante un ataque.": ["For sensitive matters. Everything in the strong chat plus: a new identity in every conversation, keys renewed every 5 minutes, a veiled screen, mosaic and deep voice in video calls, and self-destruction under attack.", "Para o delicado. Tudo do forte e, além disso: identidade nova em cada conversa, chaves renovadas a cada 5 minutos, tela velada, mosaico e voz grave nas videochamadas, e autodestruição diante de um ataque."],
     "Hoy está disponible el chat Fuerte. Blindado y Ultra están en preparación: lo que figura aquí es lo previsto y se irá activando por tramos. Fuerte y Blindado son gratis.": ["The Strong chat is available today. Shielded and Ultra are in preparation: what appears here is what is planned and will be switched on in stages. Strong and Shielded are free.", "Hoje está disponível o chat Forte. Blindado e Ultra estão em preparação: o que aparece aqui é o previsto e será ativado por etapas. Forte e Blindado são grátis."],
     "Hoy está disponible el chat Normal. Blindado y Ultra están en preparación: lo que figura aquí es lo previsto y se irá activando por tramos. Normal y Blindado son gratis.": ["The Normal chat is available today. Shielded and Ultra are in preparation: what appears here is what is planned and will be switched on in stages. Normal and Shielded are free.", "Hoje está disponível o chat Normal. Blindado e Ultra estão em preparação: o que aparece aqui é o previsto e será ativado por etapas. Normal e Blindado são grátis."],
+    // «Tu PC, en directo» (31 Oct 2026): only inside the Windows program (static/tu-pc.js, static/radiografias.js)
+    "Tu PC": ["Your PC", "Seu PC"],
+    "Lo que hace tu PC ahora mismo": ["What your PC is doing right now", "O que o seu PC está fazendo agora"],
+    "Cada conexión de este equipo, en directo: con qué empresa habla, dónde está su servidor y si GUARDIANA la ha cortado. Solo lo ve el programa instalado.": ["Every connection from this computer, live: which company it talks to, where its server is and whether GUARDIANA has cut it. Only the installed program can see it.", "Cada conexão deste computador, ao vivo: com qual empresa ela fala, onde fica o servidor e se a GUARDIANA a cortou. Só o programa instalado consegue ver."],
+    "Ver mi PC en directo": ["See my PC live", "Ver meu PC ao vivo"],
+    "Herramientas del programa": ["Program tools", "Ferramentas do programa"],
+    "Qué hace tu PC, qué sabe de ti cualquier web y a quién habla cada página.": ["What your PC does, what any website knows about you and who each page talks to.", "O que o seu PC faz, o que qualquer site sabe de você e com quem cada página fala."],
+    "Con quién habla tu PC": ["Who your PC talks to", "Com quem o seu PC fala"],
+    "Esperando al programa…": ["Waiting for the program…", "Aguardando o programa…"],
+    "Todavía no ha respondido; se vuelve a preguntar cada 5 segundos.": ["It has not answered yet; it is asked again every 5 seconds.", "Ainda não respondeu; a pergunta se repete a cada 5 segundos."],
+    "Todavía no hay conexiones que mostrar en este momento.": ["There are no connections to show at the moment.", "Ainda não há conexões para mostrar neste momento."],
+    "empresas": ["companies", "empresas"],
+    "cortadas": ["cut", "cortadas"],
+    "Sin empresa identificada": ["No company identified", "Sem empresa identificada"],
+    "El lugar es el del servidor según una base de datos de direcciones; si se cortó antes de salir, el país de la sede de la empresa. No es la ruta exacta que siguen los datos.": ["The place is the server's, according to an address database; if it was cut before leaving, the country of the company's headquarters. It is not the exact route the data takes.", "O lugar é o do servidor, segundo uma base de dados de endereços; se foi cortada antes de sair, o país da sede da empresa. Não é a rota exata que os dados seguem."],
+    "Estos datos los entrega el programa a esta página dentro de tu equipo; la página no los envía a ningún sitio.": ["The program hands this data to this page inside your computer; the page does not send it anywhere.", "Estes dados são entregues pelo programa a esta página dentro do seu computador; a página não os envia a lugar nenhum."],
+    "Las conexiones sin lugar conocido cuentan en el total, pero no se dibujan.": ["Connections without a known place count in the total but are not drawn.", "As conexões sem lugar conhecido contam no total, mas não são desenhadas."],
+    "Sin respuesta del programa desde las": ["No answer from the program since", "Sem resposta do programa desde as"],
   };
   const PAISES_EXTRA = { 'Yahoo Japón': ['Yahoo Japan', 'Yahoo Japão'] };
   Object.assign(D, PAISES_EXTRA);

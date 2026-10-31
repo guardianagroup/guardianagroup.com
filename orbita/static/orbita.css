@@ -984,18 +984,18 @@ body.dentro .izq .conocer { display: none; }
 /* ---------- every close button of a panel sits in its own small square, always visible (owner, 23 Oct 2026, 21:43, on a
    photo of Radiografías: «hay una X que está como suelta… tiene que estar metido como lo de abajo, en un cuadradito con
    otro color») ---------- */
-.radio-panel .cerrar, .conexion .titulo .cerrar, .espejo-lista .cerrar, .espejo-modo .salir, .lista-cerca .cerrar, .ficha-panel .botones button {
+.radio-panel .cerrar, .tupc-hud .cerrar, .conexion .titulo .cerrar, .espejo-lista .cerrar, .espejo-modo .salir, .lista-cerca .cerrar, .ficha-panel .botones button {
   box-sizing: border-box; width: 34px; height: 34px; padding: 0; display: inline-grid; place-items: center; flex: none; border-radius: 10px;
   border: 1px solid rgba(156,195,228,.34); background: rgba(156,195,228,.13); color: #E8ECF1; font: 500 18px/1 var(--texto);
   transition: background .15s, border-color .15s, color .15s; }
-.radio-panel .cerrar:hover, .conexion .titulo .cerrar:hover, .espejo-lista .cerrar:hover, .espejo-modo .salir:hover, .lista-cerca .cerrar:hover, .ficha-panel .botones button:hover {
+.radio-panel .cerrar:hover, .tupc-hud .cerrar:hover, .conexion .titulo .cerrar:hover, .espejo-lista .cerrar:hover, .espejo-modo .salir:hover, .lista-cerca .cerrar:hover, .ficha-panel .botones button:hover {
   background: rgba(156,195,228,.24); border-color: #9CC3E4; color: #FFFFFF; }
-.radio-panel .cerrar:focus-visible, .conexion .titulo .cerrar:focus-visible, .espejo-lista .cerrar:focus-visible, .lista-cerca .cerrar:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.radio-panel .cerrar:focus-visible, .tupc-hud .cerrar:focus-visible, .conexion .titulo .cerrar:focus-visible, .espejo-lista .cerrar:focus-visible, .lista-cerca .cerrar:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .conexion .titulo .cerrar { margin: -4px -4px -4px 0; }
 .lista-cerca .cerrar { top: 8px; right: 8px; }
 .lista-cerca .titulo { padding-right: 46px; min-height: 34px; display: flex; align-items: center; }
 @media (pointer: coarse) {
-  .radio-panel .cerrar, .conexion .titulo .cerrar, .espejo-lista .cerrar, .espejo-modo .salir, .lista-cerca .cerrar, .ficha-panel .botones button { width: 40px; height: 40px; border-radius: 12px; }
+  .radio-panel .cerrar, .tupc-hud .cerrar, .conexion .titulo .cerrar, .espejo-lista .cerrar, .espejo-modo .salir, .lista-cerca .cerrar, .ficha-panel .botones button { width: 40px; height: 40px; border-radius: 12px; }
 }
 /* «Medir desde fuera»: the answer lights up for a moment where it appears (owner, 23 Oct 2026, 21:45) */
 .conexion .bloque.recien { animation: conexion-recien 2s ease-out; border-radius: 10px; }
@@ -1115,3 +1115,81 @@ body.mapa-cerca:not(.limpio) .zoom { background: none; padding: 0; backdrop-filt
 /* 1.0.50: dentro del programa para Windows, Órbita es una pestaña más: sin «Conocer GUARDIANA» y la marca no lleva fuera */
 html[data-en-programa] #conocer{display:none!important}
 html[data-en-programa] header .marca{pointer-events:none;cursor:default}
+/* 31 Oct 2026: NÚCLEO's «← Volver» leads to the website's front page too (/): inside the program it goes, like «Conocer» */
+html[data-en-programa] #nuc-volver{display:none!important}
+
+/* ---------- «Tu PC, en directo» (31 Oct 2026): only inside the Windows program (static/tu-pc.js). The planet shows whom this
+   computer is talking to right now; the counts and the companies, on the left in a card of their own (on a phone, a sheet
+   from the bottom). Opened from Radiografías › «Tu PC». ---------- */
+body.en-tupc #directo, body.en-tupc #puertas, body.en-tupc #capas, body.en-tupc #sat-vista, body.en-tupc #sat-fase, body.en-tupc #capa-nota, body.en-tupc #ficha, body.en-tupc .sat-ficha, body.en-tupc .ficha-panel, body.en-tupc .altura, body.en-tupc .empezar { opacity: 0 !important; pointer-events: none !important; transition: opacity .4s; }
+body.en-tupc #estado { opacity: .35; }
+.tupc-hud { position: fixed; z-index: 25; left: calc(40px + env(safe-area-inset-left, 0px)); top: max(104px, calc(50% - 330px)); width: 320px; box-sizing: border-box; max-height: calc(100vh - max(104px, 50vh - 330px) - 28px); display: flex; flex-direction: column; gap: 12px; padding: 16px 18px 14px; border-radius: 18px; border: 1px solid rgba(156,195,228,.2); background: rgba(9,13,19,.8); backdrop-filter: blur(14px) saturate(1.1); -webkit-backdrop-filter: blur(14px) saturate(1.1); box-shadow: 0 24px 60px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.03); color: var(--fg); animation: radio-entra .55s cubic-bezier(.2,.7,.2,1); }
+.tupc-hud[hidden] { display: none; }
+.tupc-hud.sale { animation: radio-sale .26s ease forwards; }
+.tupc-hud .cab { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: -2px -4px -2px 0; }
+.tupc-hud .k { display: flex; align-items: center; gap: 8px; min-width: 0; font: 500 10px/1 var(--mono); letter-spacing: .16em; text-transform: uppercase; color: #8A95A2; }
+.tupc-hud .k .sep { color: #4A5664; }
+.tupc-hud .vivo { flex: none; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 10px rgba(156,195,228,.9); animation: tupc-late 2.4s ease-in-out infinite; }
+.tupc-hud.mudo .vivo { background: #4A5664; box-shadow: none; animation: none; }
+@keyframes tupc-late { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: .4; transform: scale(.75); } }
+.tupc-hud .t { margin: 0; font: 300 26px/1.08 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; letter-spacing: -.015em; color: var(--fg); text-wrap: balance; outline: none; }
+.tupc-hud .estado { margin: 0; display: flex; flex-direction: column; gap: 5px; font: 400 13px/1.5 var(--texto); color: #B4BEC9; }
+.tupc-hud .estado[hidden] { display: none; }
+.tupc-hud .estado small { font: 400 10.5px/1.5 var(--mono); color: #7C8794; }
+.tupc-hud .cifras { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; padding: 12px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.tupc-hud .cifras[hidden], .tupc-hud .empresas[hidden], .tupc-hud .notas p[hidden] { display: none; }
+.tupc-hud .cifras div { display: flex; flex-direction: column; gap: 7px; min-width: 0; }
+.tupc-hud .cifras b { font: 600 23px/1 var(--texto); font-variant-numeric: tabular-nums; letter-spacing: -.01em; color: var(--fg); white-space: nowrap; }
+.tupc-hud .cifras .rojo b { color: var(--alerta); }
+.tupc-hud .cifras span { font: 500 8.5px/1.3 var(--mono); letter-spacing: .06em; text-transform: uppercase; color: #8A95A2; overflow-wrap: anywhere; }
+.tupc-hud .empresas { display: flex; flex-direction: column; gap: 6px; flex: 1 1 auto; min-height: 0; }
+.tupc-hud .empresas .k2 { font: 500 9.5px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: #8A95A2; }
+.tupc-hud ol { list-style: none; margin: 0 -8px; padding: 0 8px 10px; flex: 1 1 auto; min-height: 72px; overflow: auto; scrollbar-width: thin; scrollbar-color: rgba(156,195,228,.25) transparent; -webkit-mask-image: linear-gradient(180deg, #000 calc(100% - 26px), transparent); mask-image: linear-gradient(180deg, #000 calc(100% - 26px), transparent); }
+.tupc-hud li { padding: 8px 0 7px; border-top: 1px solid rgba(156,195,228,.08); }
+.tupc-hud li:first-child { border-top: 0; padding-top: 2px; }
+.tupc-hud li .fila { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.tupc-hud li b { flex: 1 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font: 500 12.5px/1.3 var(--texto); color: #DDE3EA; }
+.tupc-hud li em { flex: none; font: 500 8.5px/1 var(--mono); font-style: normal; letter-spacing: .07em; text-transform: uppercase; padding: 3px 5px; border-radius: 4px; color: var(--alerta); background: var(--alerta-suave); }
+.tupc-hud li em[hidden] { display: none; }
+.tupc-hud li em.parte { color: var(--aviso); background: rgba(224,182,106,.1); }
+.tupc-hud li .v { flex: none; min-width: 24px; text-align: right; font: 500 11px/1 var(--mono); font-variant-numeric: tabular-nums; color: var(--muted); }
+.tupc-hud li .v.sube { animation: tupc-sube 1.4s ease-out; }
+@keyframes tupc-sube { 0%, 20% { color: #F4F6F8; text-shadow: 0 0 10px rgba(156,195,228,.9); } 100% { color: var(--muted); text-shadow: none; } }
+.tupc-hud li small { display: block; margin-top: 3px; font: 400 10.5px/1.35 var(--texto); color: #7C8794; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.tupc-hud li.cortada b { color: #A7B1BC; }
+.tupc-hud li.nueva { animation: tupc-fila .55s cubic-bezier(.2,.7,.2,1); }
+@keyframes tupc-fila { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: none; } }
+.tupc-hud .notas { display: flex; flex-direction: column; gap: 6px; padding-top: 10px; border-top: 1px solid var(--line); }
+.tupc-hud .notas p { margin: 0; font: 400 10px/1.5 var(--mono); color: #7C8794; }
+/* short windows: a smaller title and tighter notes, so the list keeps its room */
+@media (max-height: 820px) and (min-width: 761px) { .tupc-hud { gap: 10px; } .tupc-hud .t { font-size: 22px; } .tupc-hud .cifras { padding: 10px 0; } .tupc-hud .notas { gap: 4px; padding-top: 8px; } .tupc-hud .notas p { font-size: 9.5px; line-height: 1.45; } }
+/* the new phone layout (movil.css): its bars step back as for ESPEJO, the sheet is the view */
+body.m2.en-tupc #puertas, body.m2.en-tupc #conexion-btn, body.m2.en-tupc .m2-arriba { opacity: 0 !important; pointer-events: none !important; }
+/* the way in from the planet, inside the program: «Tu PC» beside «Ver mi conexión» (tu-pc.js) */
+.tupc-btn i { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 8px rgba(156,195,228,.85); }
+.tupc-btn[aria-pressed="true"] { background: rgba(156,195,228,.18); border-color: rgba(156,195,228,.6); color: #F4F6F8; }
+.tupc-btn[aria-pressed="true"] i { animation: tupc-late 2.4s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) { .tupc-btn[aria-pressed="true"] i { animation: none; } }
+[dir="rtl"] .tupc-hud { left: auto; right: calc(40px + env(safe-area-inset-right, 0px)); }
+[dir="rtl"] .tupc-hud .cab { margin: -2px 0 -2px -4px; }
+[dir="rtl"] .tupc-hud li .v { text-align: left; }
+@media (max-width: 1100px) { .tupc-hud { width: 296px; } .tupc-hud .t { font-size: 23px; } .tupc-hud .cifras b { font-size: 21px; } }
+@media (max-width: 760px) {
+  .tupc-hud { z-index: 60; left: 0; right: 0; top: auto; bottom: 0; width: auto; max-height: min(46vh, 430px); gap: 10px; padding: 14px max(16px, env(safe-area-inset-right, 0px)) calc(12px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px)); border-width: 1px 0 0; border-radius: 18px 18px 0 0; background: rgba(8,11,16,.95); animation-name: radio-sube; }
+  .tupc-hud.sale { animation-name: radio-baja; }
+  .tupc-hud .t { display: none; }
+  .tupc-hud .cifras { padding: 9px 0; } .tupc-hud .cifras b { font-size: 20px; }
+  .tupc-hud .notas { padding-top: 8px; }
+  [dir="rtl"] .tupc-hud { right: 0; }
+}
+@media (prefers-reduced-motion: reduce) { .tupc-hud, .tupc-hud.sale { animation-duration: .01ms; } .tupc-hud .vivo, .radio-panel .tarjeta .vivo::before { animation: none; } .tupc-hud li.nueva, .tupc-hud li .v.sube { animation: none; } }
+/* Radiografías › «Tu PC»: the first card inside the program, lit a little, with its live mark and a quieter way to the program's tools */
+.radio-panel .tarjeta.tu-pc { border-color: rgba(156,195,228,.34); background: linear-gradient(180deg, rgba(156,195,228,.08), rgba(10,14,20,.8) 62%); }
+.radio-panel .tarjeta .vivo { display: inline-flex; align-items: center; gap: 6px; padding: 3px 8px 3px 7px; border: 1px solid rgba(156,195,228,.32); border-radius: 999px; font-size: 9px; letter-spacing: .12em; color: var(--accent); }
+.radio-panel .tarjeta .vivo::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 8px rgba(156,195,228,.9); animation: tupc-late 2.4s ease-in-out infinite; }
+.radio-panel .acciones { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; margin-top: 4px; }
+.radio-panel .acciones .accion { margin-top: 0; }
+.radio-panel .secundaria { display: inline-flex; align-items: center; gap: 6px; padding: 5px 0 4px; border-bottom: 1px solid rgba(156,195,228,.18); font: 500 12px/1 var(--texto); color: #A9B3BE; text-decoration: none; transition: color .2s, border-color .2s; }
+.radio-panel .secundaria:hover { color: var(--fg); border-color: rgba(156,195,228,.6); }
+.radio-panel .secundaria:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 3px; }
+[dir="rtl"] .radio-panel .secundaria svg { transform: scaleX(-1); }

@@ -592,6 +592,10 @@
 "605": "Bientôt disponible",
 "606": "GUARDIANA réunit le navigateur ZERO, Orbite et Communications. Sur PC, le programme ajoute la surveillance de tout l’ordinateur. Sans compte et, à ce jour, sans frais.",
 "607": "Programme pour Windows",
-"608": "Programme pour Windows · Sans compte · Open source"
+"608": "Programme pour Windows · Sans compte · Open source",
+"609": "votre PC ?",
+"610": "Pendant vos appels GUARDIANA, la Sentinelle surveille votre propre ordinateur : si un autre programme utilise votre microphone, votre caméra ou votre écran, ou si une prise de contrôle à distance est en cours,",
+"611": "l’appel est mis en pause et la Sentinelle vous indique de quel programme il s’agit.",
+"612": "Elle s’active dans Communications › Réglages."
 }
 }

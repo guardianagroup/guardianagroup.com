@@ -13,13 +13,19 @@
    bottom of the front page and lives here, in «Una web» (its control only shows while the mirror is open), and «Abrir
    sin miedo» joins as a card of its own.
    The panel opens where the doors are (on the left; on a phone, from the bottom) and the planet stays in view.
-   Nothing here is invented: no figure is shown that was not measured. */
+   Nothing here is invented: no figure is shown that was not measured.
+   31 Oct 2026 (owner, 30 Oct: «la versión web que teníamos, que ya estaba terminada, quiero que la metas en el programa»):
+   inside the Windows program (data-en-programa on <html>), which does see the computer's own connections, a first card
+   «Tu PC» opens them live on the planet (static/tu-pc.js), and the subtitle no longer says «Sin instalar nada». Outside the
+   program the panel is exactly as before. */
 (function () {
   'use strict';
   const $ = (id) => document.getElementById(id);
   const T = (s) => (window.GuardianaIdioma ? window.GuardianaIdioma.t(s) : s);
+  const enPrograma = () => document.documentElement.dataset.enPrograma === '1';
   const X = '<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8"/></svg>';
   const FLECHA = '<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h9.5M8.5 4l4 4-4 4"/></svg>';
+  const SALTO = '<svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3.5H3.5v9h9V10M9 3.5h3.5V7M12.3 3.7 7.5 8.5"/></svg>';
   let panel = null, boton = null, abierto = false, salir = null;
 
   // ---------- the panel ----------
@@ -78,9 +84,37 @@
 
     panel.append(cab, t, d, tu, web, en, ap);
     document.body.append(panel);
+    programa();
     traduce();
     pintaSitios();
     return panel;
+  }
+  // ---------- inside the Windows program: «Tu PC», first, and a subtitle that does not say «Sin instalar nada» ----------
+  const SUB_WEB = 'Qué sabe de ti cualquier web y a quién habla cada página. Sin instalar nada.';
+  const SUB_PROGRAMA = 'Qué hace tu PC, qué sabe de ti cualquier web y a quién habla cada página.';
+  function tarjetaPC() {
+    const pc = crea('article', 'tarjeta tu-pc');
+    const k = crea('div', 'tk'); k.append(crea('span', '', 'Tu PC'), crea('span', 'vivo', 'En directo'));
+    const h = crea('h3', '', 'Lo que hace tu PC ahora mismo');
+    const p = crea('p', '', 'Cada conexión de este equipo, en directo: con qué empresa habla, dónde está su servidor y si GUARDIANA la ha cortado. Solo lo ve el programa instalado.');
+    const acc = crea('div', 'acciones');
+    const b = document.createElement('button'); b.type = 'button'; b.className = 'accion';
+    b.append(crea('span', '', 'Ver mi PC en directo')); b.insertAdjacentHTML('beforeend', FLECHA);
+    b.addEventListener('click', () => { vete(); setTimeout(() => { if (window.OrbitaTuPC) window.OrbitaTuPC.abre(); }, 380); });
+    // the program's own tools: the program takes this click (data-producto) and shows its panel; the address is that panel's,
+    // on this same computer, for the case nothing takes it
+    const herr = document.createElement('a'); herr.className = 'secundaria'; herr.href = 'http://127.0.0.1:7443/'; herr.dataset.producto = 'guardiana';
+    herr.append(crea('span', '', 'Herramientas del programa')); herr.insertAdjacentHTML('beforeend', SALTO);
+    acc.append(b, herr);
+    pc.append(k, h, p, acc);
+    return pc;
+  }
+  function programa() {
+    if (!panel) return;
+    const si = enPrograma(), d = panel.querySelector(':scope > .d'), pc = panel.querySelector('.tu-pc');
+    if (d) texto(d, si ? SUB_PROGRAMA : SUB_WEB);
+    if (si && !pc) panel.insertBefore(tarjetaPC(), panel.querySelector('.tarjeta.tu'));
+    else if (!si && pc) pc.remove();
   }
   // the measured front pages, from the mirror's own data
   async function pintaSitios() {
@@ -112,12 +146,14 @@
     monta(); salir = typeof fuera === 'function' ? fuera : null;
     if (abierto) return;
     abierto = true;
+    programa(); traduce();
     // another view that holds the planet steps aside first
     if (window.OrbitaEspejo && window.OrbitaEspejo.activo) window.OrbitaEspejo.cierra();
+    if (window.OrbitaTuPC && window.OrbitaTuPC.activo) window.OrbitaTuPC.cierra();
     const pc = $('conexion'); if (pc && !pc.hidden && window.OrbitaConexion) window.OrbitaConexion.abre(false);
     panel.hidden = false; panel.classList.remove('sale');
     document.body.classList.add('en-radio');
-    setTimeout(() => { const b = panel.querySelector('.tu .accion'); if (abierto && b) b.focus({ preventScroll: true }); }, 450);
+    setTimeout(() => { const b = panel.querySelector('.tu-pc .accion') || panel.querySelector('.tu .accion'); if (abierto && b) b.focus({ preventScroll: true }); }, 450);
   }
   function cierra() {
     if (!abierto) return;
@@ -210,7 +246,7 @@
     e.preventDefault(); vete();
   });
   // a view that takes the whole planet (a door, the journey) closes the panel
-  new MutationObserver(() => { if (abierto && /\b(dentro|viaje|en-espejo)\b/.test(document.body.className)) cierra(); }).observe(document.body, { attributes: true, attributeFilter: ['class'] });
+  new MutationObserver(() => { if (abierto && /\b(dentro|viaje|en-espejo|en-tupc)\b/.test(document.body.className)) cierra(); }).observe(document.body, { attributes: true, attributeFilter: ['class'] });
   addEventListener('guardiana-idioma', traduce);
   window.OrbitaRadiografias = { abre, cierra, get abierto() { return abierto; } };
 })();

@@ -591,6 +591,10 @@
 "605": "Tulossa pian",
 "606": "GUARDIANA kokoaa yhteen ZERO-selaimen, Kiertoradan ja Viestinnän. PC:llä ohjelma lisää koko tietokoneen valvonnan. Ilman tiliä ja toistaiseksi maksutta.",
 "607": "Ohjelma Windowsille",
-"608": "Ohjelma Windowsille · Ei tiliä · Avoin lähdekoodi"
+"608": "Ohjelma Windowsille · Ei tiliä · Avoin lähdekoodi",
+"609": "tietokonettasi?",
+"610": "GUARDIANA-puhelujesi aikana Vartija valvoo omaa tietokonettasi: jos jokin muu ohjelma käyttää mikrofoniasi, kameraasi tai näyttöäsi tai jos tietokonettasi ohjataan etänä,",
+"611": "puhelu asetetaan tauolle ja Vartija kertoo, mikä ohjelma on kyseessä.",
+"612": "Vartija otetaan käyttöön kohdassa Viestintä › Asetukset."
 }
 }

@@ -53,7 +53,22 @@
     }, 500);
   }
   // ronda 63: «Crear una invitación» y «Tengo un código» llegan directos a ese paso de Comunicaciones (?paso=…)
-  const irComunicaciones = (paso) => { location.href = 'comunicaciones/' + (paso === 'crear' || paso === 'codigo' ? '?paso=' + paso : ''); };
+  // 31 Oct 2026: dentro del programa para Windows (data-en-programa), Comunicaciones es su propia pestaña, que sigue abierta por
+  // detrás para que lleguen las llamadas y los mensajes: el clic lleva data-producto="secure", el programa lo coge y enseña esa
+  // pestaña sin sacar a Órbita de la suya. Si nada lo coge, el enlace va a Comunicaciones como en la web.
+  const enPrograma = () => document.documentElement.dataset.enPrograma === '1';
+  const irComunicaciones = (paso) => {
+    const url = 'comunicaciones/' + (paso === 'crear' || paso === 'codigo' ? '?paso=' + paso : '');
+    if (!enPrograma()) { location.href = url; return; }
+    const a = document.createElement('a'); a.href = url; a.dataset.producto = 'secure'; a.hidden = true;
+    document.body.append(a); a.click(); a.remove();
+  };
+  // la tarjeta de la portada, marcada para que el programa coja su clic (también si marca la página un momento después)
+  function marcaPortada() {
+    const b = ini && ini.querySelector('.nuc-op[data-n="com"]'); if (!b) return;
+    if (enPrograma()) b.dataset.producto = 'secure'; else delete b.dataset.producto;
+  }
+  try { new MutationObserver(marcaPortada).observe(document.documentElement, { attributes: true, attributeFilter: ['data-en-programa'] }); } catch (_) {}
   // El PDF de una web lo hace ZERO con lo que ha visto en la web abierta.
   function pdfWeb() { const w = marcoZero(); if (w && hayWeb() && typeof w.zeroInforme === 'function') { cierraTodo(); w.zeroInforme(); return true; } return false; }
 
@@ -402,7 +417,7 @@ ${doc.secciones.map(tabla).join('')}<p class="nota">${esc(doc.final)}</p></body>
     pasos.forEach((p, i) => setTimeout(() => p.classList.add('ve'), tiempos[Math.min(i, tiempos.length - 1)]));
   }
   function muestraInicio(rapido) {
-    if (!ini) ini = construyeInicio();
+    if (!ini) { ini = construyeInicio(); marcaPortada(); }
     ini.hidden = false; ini.classList.remove('sale'); tapa();
     if (laRed) laRed.para(); laRed = red(ini.querySelector('.nuc-lienzo'), { nace: !rapido });
     revela(ini, !!rapido);

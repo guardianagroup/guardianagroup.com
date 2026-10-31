@@ -89,12 +89,13 @@
     { id: 'sistema', n: 'GUARDIANA OS', s: 'En preparación', estado: 'EN PREPARACIÓN', separada: true, url: null, desarrollo: true,
       d: 'Un sistema operativo de código abierto que se descarga desde aquí: verás y podrás cortar cada conexión de tu equipo, programa por programa.',
       aparte: 'Cada descarga llevará su firma para comprobar que nadie la ha tocado. Lo que no hará: frenar el phishing ni a quien entrega su contraseña, ni ejecutar programas de Windows sin virtualizarlos.' });
-  // 1.0.50 (dueño, 30 Oct 2026, 21:05: «todo tiene que ir dentro del programa»): dentro del programa para Windows, ZERO y
-  // Comunicaciones son sus propias pestañas; aquí no se ofrecen sus puertas web (el programa marca el documento con
-  // data-en-programa, solo en guardianagroup.com).
-  if (document.documentElement.dataset.enPrograma === '1') {
-    for (let i = PUERTAS.length - 1; i >= 0; i--) if (PUERTAS[i].id === 'zero' || PUERTAS[i].id === 'comunicaciones') PUERTAS.splice(i, 1);
-  }
+  // 1.0.50 hid the ZERO and Comunicaciones doors inside the Windows program. 31 Oct 2026 (owner, 30 Oct, 22:29: «la versión
+  // web que teníamos, que ya estaba terminada, quiero que la metas en el programa»): inside the program every door shows as on
+  // the web, and ZERO opens its frame as here. Comunicaciones is the program's own tab there, kept open behind so calls and
+  // messages arrive: its door carries data-producto="secure", the program takes the click and shows that tab instead of
+  // taking Órbita away. If nothing takes it, the door works as on the web. The program marks the page with data-en-programa
+  // (only guardianagroup.com); outside it nothing changes.
+  const enPrograma = () => RAIZ.dataset.enPrograma === '1';
   const nav = $('puertas');
   const NP = PUERTAS.length;
   PUERTAS.forEach((p, i) => {
@@ -132,6 +133,17 @@
   });
   { const de = document.querySelector('#ficha .de'); if (de) de.textContent = '/' + String(NP).padStart(2, '0'); }
   let sel = 0;
+  // the doors the program takes (inside it only): the door itself, and the reading card's arrow while it shows that door
+  function marcaProductos() {
+    const si = enPrograma(), fa = $('ficha-a');
+    PUERTAS.forEach((p, k) => {
+      if (p.id !== 'comunicaciones' || !p.el) return;
+      const b = p.el.querySelector('button');
+      if (si) b.dataset.producto = 'secure'; else delete b.dataset.producto;
+      if (k === sel && si) fa.dataset.producto = 'secure';
+    });
+    if (!si || PUERTAS[sel].id !== 'comunicaciones') delete fa.dataset.producto;
+  }
   function elige(i) {
     sel = (i + NP) % NP;
     PUERTAS.forEach((p, k) => p.el.classList.toggle('on', k === sel));
@@ -141,8 +153,11 @@
     $('ficha-t').textContent = p.n;
     $('ficha-d').textContent = p.d;
     $('ficha-a').setAttribute('aria-label', 'Abrir ' + p.n);
+    marcaProductos();
   }
   elige(0);
+  // the program may mark the page a moment after this script ran: the doors follow the mark
+  try { new MutationObserver(marcaProductos).observe(RAIZ, { attributes: true, attributeFilter: ['data-en-programa'] }); } catch (_) {}
   $('ficha-a').addEventListener('click', (e) => { e.preventDefault(); abre(sel); });
 
   // ---------- A door opened, in the same screen ----------
