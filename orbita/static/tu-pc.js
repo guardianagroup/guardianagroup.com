@@ -42,7 +42,7 @@
 
   // ---------- what the program hands over, cleaned ----------
   // control characters and direction marks out: a name shows as what it is, and nothing in it can turn the line around
-  const RARO = /[\u0000-\u001f\u007f-\u009f​-‏‪-‮⁦-⁩﻿]/g;
+  const RARO = /[\u0000-\u001f\u007f-\u009f\u200b-\u200f\u202a-\u202e\u2066-\u2069\ufeff]/g;
   const texto = (x, max) => (typeof x === 'string' ? x.replace(RARO, '').replace(/\s+/g, ' ').trim().slice(0, max) : '');
   // two capital letters; not the «unknown» and continent codes some address tables use, nor the program's own marks (@local)
   const NO_PAIS = new Set(['ZZ', 'XX', 'EU', 'AP']);
