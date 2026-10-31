@@ -451,7 +451,8 @@
     // the other views that hold the planet step aside first
     if (window.OrbitaEspejo && window.OrbitaEspejo.activo) { try { window.OrbitaEspejo.cierra(); } catch (_) {} }
     const pc = $('conexion'); if (pc && !pc.hidden && window.OrbitaConexion) { try { window.OrbitaConexion.abre(false); } catch (_) {} }
-    if (window.OrbitaRadiografias && window.OrbitaRadiografias.abierto) { try { window.OrbitaRadiografias.cierra(); } catch (_) {} }
+    // Radiografías leaves through its own close (it also tidies the address of its «#radiografias»)
+    if (window.OrbitaRadiografias && window.OrbitaRadiografias.abierto) { try { const x = document.querySelector('#radiografias .cerrar'); if (x) x.click(); else window.OrbitaRadiografias.cierra(); } catch (_) {} }
     const ahora = Date.now();
     E = { t0: ahora, visible: ahora, pedido: 0, ultima: 0, res: null, lugares: new Map(), lk: '', enfocado: false, movido: false, antes: document.activeElement, reloj: 0, tPrev: 0, lista: false, aRing: 0, caja: null };
     montaHud(); hud.hidden = false; hud.classList.remove('sale');

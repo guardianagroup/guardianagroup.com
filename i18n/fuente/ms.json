@@ -26,7 +26,7 @@
 "share": "Mana-mana laman web boleh tahu semua ini tentang saya tanpa bertanya: {d}. Bagaimana pula dengan anda? Lihat sendiri:",
 "copied": "Disalin. Tampal di mana-mana sahaja.",
 "shared": "Terima kasih kerana berkongsi.",
-"meta": "Terokai infrastruktur internet, lihat sambungan setiap laman dalam pelayar ZERO dan hantar mesej serta fail yang disulitkan. Tanpa akaun dan tanpa pemasangan."
+"meta": "Terokai infrastruktur internet, lihat sambungan setiap laman dalam pelayar ZERO dan hantar mesej serta fail yang disulitkan. Program untuk Windows, tanpa akaun."
 },
 "t": {
 "1": "Di darat, gentian optik membawanya ke pusat data.",
@@ -598,6 +598,9 @@
 "609": "komputer anda?",
 "610": "Semasa panggilan GUARDIANA anda, Pengawal memantau komputer anda sendiri: jika program lain menggunakan mikrofon, kamera atau skrin anda, atau terdapat akses jauh,",
 "611": "panggilan akan dijeda dan anda akan diberitahu program mana yang terlibat.",
-"612": "Boleh diaktifkan dalam Komunikasi › Tetapan."
+"612": "Boleh diaktifkan dalam Komunikasi › Tetapan.",
+"613": "Empat alat dalam satu program.",
+"614": "Dipasang pada PC Windows anda dan tidak memerlukan akaun.",
+"615": "Di dalam program."
 }
 }

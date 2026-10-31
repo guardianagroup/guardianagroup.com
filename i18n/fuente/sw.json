@@ -24,7 +24,7 @@
 "share": "Tovuti yoyote inaweza kujua haya yote kunihusu bila kuniuliza: {d}. Na wewe je? Jionee hapa:",
 "copied": "Imenakiliwa. Ibandike popote unapotaka.",
 "shared": "Asante kwa kushiriki.",
-"meta": "Gundua miundombinu ya intaneti, tazama miunganisho ya kila tovuti kwenye kivinjari cha ZERO na utume ujumbe na faili zilizosimbwa kwa njia fiche. Bila akaunti na bila kusakinisha chochote."
+"meta": "Gundua miundombinu ya intaneti, tazama miunganisho ya kila tovuti kwenye kivinjari cha ZERO na utume ujumbe na faili zilizosimbwa kwa njia fiche. Programu ya Windows, bila akaunti."
 },
 "t": {
 "1": "Nchi kavu, nyuzi za mwanga huipeleka hadi kwenye vituo vya data.",
@@ -596,6 +596,9 @@
 "609": "kompyuta yako?",
 "610": "Wakati wa simu zako za GUARDIANA, Mlinzi hufuatilia kompyuta yako mwenyewe: programu nyingine ikitumia maikrofoni, kamera au skrini yako, au kukiwa na udhibiti wa mbali,",
 "611": "simu husitishwa kwa muda, nawe unaarifiwa ni programu ipi.",
-"612": "Huwashwa katika Mawasiliano › Mipangilio."
+"612": "Huwashwa katika Mawasiliano › Mipangilio.",
+"613": "Zana nne katika programu moja.",
+"614": "Husakinishwa kwenye kompyuta yako yenye Windows na haiombi akaunti.",
+"615": "Ndani ya programu."
 }
 }

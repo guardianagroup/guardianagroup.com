@@ -24,7 +24,7 @@
 "share": "Hvaða vefsíða sem er getur vitað allt þetta um mig án þess að spyrja: {d}. En um þig? Sjáðu sjálf(ur) hér:",
 "copied": "Afritað. Límdu það hvar sem þú vilt.",
 "shared": "Takk fyrir að deila.",
-"meta": "Kannaðu innviði netsins, sjáðu tengingar hverrar vefsíðu í ZERO-vafranum og sendu dulkóðuð skilaboð og skrár. Enginn aðgangur og engin uppsetning."
+"meta": "Kannaðu innviði netsins, sjáðu tengingar hverrar vefsíðu í ZERO-vafranum og sendu dulkóðuð skilaboð og skrár. Forrit fyrir Windows, án aðgangs."
 },
 "t": {
 "1": "Á landi flytur ljósleiðarinn þau alla leið í gagnaverin.",
@@ -596,6 +596,9 @@
 "609": "með tölvunni þinni?",
 "610": "Meðan á GUARDIANA-símtölum þínum stendur, fylgist Vörðurinn með þinni eigin tölvu: ef annað forrit notar hljóðnemann, myndavélina eða skjáinn, eða ef tölvunni er fjarstýrt,",
 "611": "er gert hlé á símtalinu og Vörðurinn segir þér hvaða forrit á í hlut.",
-"612": "Hann er virkjaður undir Samskipti › Stillingar."
+"612": "Hann er virkjaður undir Samskipti › Stillingar.",
+"613": "Fjögur verkfæri í einu forriti.",
+"614": "Það er sett upp á Windows-tölvunni þinni og biður ekki um aðgang.",
+"615": "Inni í forritinu."
 }
 }

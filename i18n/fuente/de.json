@@ -25,7 +25,7 @@
 "share": "Jede Website kann all das über mich wissen, ohne zu fragen: {d}. Und über Sie? Sehen Sie selbst:",
 "copied": "Kopiert. Fügen Sie es ein, wo Sie möchten.",
 "shared": "Danke fürs Teilen.",
-"meta": "Erkunde die Infrastruktur des Internets, sieh dir im ZERO-Browser die Verbindungen jeder Website an und sende verschlüsselte Nachrichten und Dateien. Ohne Konto und ohne Installation."
+"meta": "Erkunde die Infrastruktur des Internets, sieh dir im ZERO-Browser die Verbindungen jeder Website an und sende verschlüsselte Nachrichten und Dateien. Ein Programm für Windows, ohne Konto."
 },
 "t": {
 "1": "An Land bringt die Glasfaser sie bis zu den Rechenzentren.",
@@ -597,6 +597,9 @@
 "609": "Ihren PC?",
 "610": "Während Ihrer GUARDIANA-Anrufe überwacht der Wächter Ihren eigenen Computer: Wenn ein anderes Programm Ihr Mikrofon, Ihre Kamera oder Ihren Bildschirm nutzt oder ein Fernzugriff aktiv ist,",
 "611": "wird der Anruf pausiert und Sie erfahren, welches Programm es ist.",
-"612": "Sie aktivieren den Wächter unter Kommunikation › Einstellungen."
+"612": "Sie aktivieren den Wächter unter Kommunikation › Einstellungen.",
+"613": "Vier Werkzeuge in einem einzigen Programm.",
+"614": "Es wird auf deinem Windows-PC installiert und verlangt kein Konto.",
+"615": "Im Programm."
 }
 }

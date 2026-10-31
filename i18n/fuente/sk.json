@@ -24,7 +24,7 @@
 "share": "Ktorýkoľvek web o mne toto všetko vie bez toho, aby sa spýtal: {d}. A čo vie o vás? Pozrite sa sami:",
 "copied": "Skopírované. Vložte, kam chcete.",
 "shared": "Ďakujeme za zdieľanie.",
-"meta": "Preskúmaj infraštruktúru internetu, sleduj v prehliadači ZERO spojenia každého webu a posielaj šifrované správy a súbory. Bez účtu a bez inštalácie."
+"meta": "Preskúmaj infraštruktúru internetu, sleduj v prehliadači ZERO spojenia každého webu a posielaj šifrované správy a súbory. Program pre Windows, bez účtu."
 },
 "t": {
 "1": "Na pevnine ich optické vlákna dovedú až do dátových centier.",
@@ -596,6 +596,9 @@
 "609": "váš počítač?",
 "610": "Strážca počas hovorov cez GUARDIANA dohliada na váš vlastný počítač: ak iný program používa váš mikrofón, kameru či obrazovku alebo ak prebieha vzdialené ovládanie,",
 "611": "hovor sa pozastaví a dozviete sa, o ktorý program ide.",
-"612": "Zapína sa v sekcii Komunikácia › Nastavenia."
+"612": "Zapína sa v sekcii Komunikácia › Nastavenia.",
+"613": "Štyri nástroje v jednom programe.",
+"614": "Inštaluje sa do tvojho počítača so systémom Windows a nevyžaduje účet.",
+"615": "Vo vnútri programu."
 }
 }

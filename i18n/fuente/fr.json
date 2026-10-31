@@ -24,7 +24,7 @@
 "share": "N’importe quel site peut savoir tout cela sur moi sans rien me demander : {d}. Et sur vous ? Voyez par vous-même :",
 "copied": "Copié. Collez-le où vous voulez.",
 "shared": "Merci pour le partage.",
-"meta": "Explore l’infrastructure d’Internet, regarde les connexions de chaque site dans le navigateur ZERO et envoie des messages et des fichiers chiffrés. Sans compte et sans rien installer."
+"meta": "Explore l’infrastructure d’Internet, regarde les connexions de chaque site dans le navigateur ZERO et envoie des messages et des fichiers chiffrés. Un logiciel pour Windows, sans compte."
 },
 "t": {
 "1": "Sur terre, la fibre les achemine jusqu’aux centres de données.",
@@ -596,6 +596,9 @@
 "609": "votre PC ?",
 "610": "Pendant vos appels GUARDIANA, la Sentinelle surveille votre propre ordinateur : si un autre programme utilise votre microphone, votre caméra ou votre écran, ou si une prise de contrôle à distance est en cours,",
 "611": "l’appel est mis en pause et la Sentinelle vous indique de quel programme il s’agit.",
-"612": "Elle s’active dans Communications › Réglages."
+"612": "Elle s’active dans Communications › Réglages.",
+"613": "Quatre outils en un seul logiciel.",
+"614": "Il s’installe sur ton PC sous Windows et ne demande pas de compte.",
+"615": "Dans le logiciel."
 }
 }

@@ -24,7 +24,7 @@
 "share": "Orice site poate afla toate acestea despre mine fără să mă întrebe: {d}. Dar despre tine? Vezi singur aici:",
 "copied": "Copiat. Lipește-l unde vrei.",
 "shared": "Mulțumim că ai distribuit.",
-"meta": "Explorează infrastructura internetului, vezi conexiunile fiecărui site în browserul ZERO și trimite mesaje și fișiere criptate. Fără cont și fără să instalezi nimic."
+"meta": "Explorează infrastructura internetului, vezi conexiunile fiecărui site în browserul ZERO și trimite mesaje și fișiere criptate. Un program pentru Windows, fără cont."
 },
 "t": {
 "1": "Pe uscat, fibra le duce până în centrele de date.",
@@ -596,6 +596,9 @@
 "609": "PC-ul tău?",
 "610": "În timpul apelurilor tale prin GUARDIANA, Santinela îți supraveghează propriul computer: dacă un alt program îți folosește microfonul, camera sau ecranul ori dacă există acces de la distanță,",
 "611": "apelul este pus în pauză și ți se spune despre ce program este vorba.",
-"612": "Se activează din Comunicații › Setări."
+"612": "Se activează din Comunicații › Setări.",
+"613": "Patru instrumente într-un singur program.",
+"614": "Se instalează pe PC-ul tău cu Windows și nu necesită cont.",
+"615": "În interiorul programului."
 }
 }

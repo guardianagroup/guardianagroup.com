@@ -26,7 +26,7 @@
 "share": "Situs mana pun bisa tahu semua ini tentang saya tanpa bertanya: {d}. Bagaimana dengan Anda? Lihat sendiri di sini:",
 "copied": "Tersalin. Tempel di mana saja.",
 "shared": "Terima kasih sudah membagikan.",
-"meta": "Jelajahi infrastruktur internet, lihat koneksi setiap situs di peramban ZERO, dan kirim pesan serta file terenkripsi. Tanpa akun dan tanpa instalasi."
+"meta": "Jelajahi infrastruktur internet, lihat koneksi setiap situs di peramban ZERO, dan kirim pesan serta file terenkripsi. Program untuk Windows, tanpa akun."
 },
 "t": {
 "1": "Di darat, serat optik membawanya sampai ke pusat data.",
@@ -598,6 +598,9 @@
 "609": "komputer Anda?",
 "610": "Selama panggilan GUARDIANA Anda, Penjaga mengawasi komputer Anda sendiri: jika program lain menggunakan mikrofon, kamera, atau layar Anda, atau ada akses jarak jauh,",
 "611": "panggilan akan dijeda dan Penjaga memberi tahu Anda program mana yang terlibat.",
-"612": "Fitur ini diaktifkan di Komunikasi › Pengaturan."
+"612": "Fitur ini diaktifkan di Komunikasi › Pengaturan.",
+"613": "Empat alat dalam satu program.",
+"614": "Program ini dipasang di PC Windows Anda dan tidak memerlukan akun.",
+"615": "Di dalam program."
 }
 }

@@ -26,7 +26,7 @@
 "share": "Qualquer site pode saber tudo isto sobre mim sem perguntar: {d}. E sobre si? Veja aqui:",
 "copied": "Copiado. Cole onde quiser.",
 "shared": "Obrigado por partilhar.",
-"meta": "Explora a infraestrutura da internet, vê as ligações de cada site no navegador ZERO e envia mensagens e ficheiros encriptados. Sem conta e sem instalar nada."
+"meta": "Explora a infraestrutura da internet, vê as ligações de cada site no navegador ZERO e envia mensagens e ficheiros encriptados. Um programa para Windows, sem conta."
 },
 "t": {
 "1": "Em terra, a fibra leva-os até aos centros de dados.",
@@ -598,6 +598,9 @@
 "609": "o seu computador?",
 "610": "Durante as suas chamadas GUARDIANA, a Sentinela vigia o seu próprio computador: se outro programa utilizar o microfone, a câmara ou o ecrã, ou se houver acesso remoto,",
 "611": "a chamada é colocada em pausa e é-lhe indicado de que programa se trata.",
-"612": "Ativa-se em Comunicações › Definições."
+"612": "Ativa-se em Comunicações › Definições.",
+"613": "Quatro ferramentas num só programa.",
+"614": "Instala-se no teu PC com Windows e não exige conta.",
+"615": "Dentro do programa."
 }
 }

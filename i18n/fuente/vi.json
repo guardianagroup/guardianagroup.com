@@ -28,7 +28,7 @@
 "share": "Bất kỳ trang web nào cũng có thể biết tất cả những điều này về tôi mà không cần hỏi: {d}. Còn bạn thì sao? Tự xem tại đây:",
 "copied": "Đã sao chép. Dán vào bất cứ đâu bạn muốn.",
 "shared": "Cảm ơn bạn đã chia sẻ.",
-"meta": "Khám phá hạ tầng internet, xem các kết nối của từng trang web trong trình duyệt ZERO và gửi tin nhắn, tệp được mã hóa. Không cần tài khoản, không cần cài đặt."
+"meta": "Khám phá hạ tầng internet, xem các kết nối của từng trang web trong trình duyệt ZERO và gửi tin nhắn, tệp được mã hóa. Một chương trình dành cho Windows, không cần tài khoản."
 },
 "t": {
 "1": "Trên đất liền, cáp quang đưa chúng đến tận các trung tâm dữ liệu.",
@@ -600,6 +600,9 @@
 "609": "máy tính của bạn?",
 "610": "Trong các cuộc gọi GUARDIANA, Lính canh giám sát chính máy tính của bạn: nếu một chương trình khác sử dụng micrô, camera hoặc màn hình, hoặc máy tính đang bị điều khiển từ xa,",
 "611": "cuộc gọi sẽ được tạm dừng và bạn sẽ được thông báo đó là chương trình nào.",
-"612": "Bật tính năng này trong Liên lạc › Cài đặt."
+"612": "Bật tính năng này trong Liên lạc › Cài đặt.",
+"613": "Bốn công cụ trong một chương trình duy nhất.",
+"614": "Được cài đặt trên máy tính chạy Windows của bạn và không yêu cầu tài khoản.",
+"615": "Bên trong chương trình."
 }
 }

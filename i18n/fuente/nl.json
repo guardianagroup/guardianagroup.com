@@ -26,7 +26,7 @@
 "share": "Elke website kan dit allemaal over mij weten zonder het te vragen: {d}. En over jou? Kijk zelf:",
 "copied": "Gekopieerd. Plak het waar je wilt.",
 "shared": "Bedankt voor het delen.",
-"meta": "Verken de infrastructuur van het internet, bekijk in de ZERO-browser de verbindingen van elke website en stuur versleutelde berichten en bestanden. Zonder account en zonder iets te installeren."
+"meta": "Verken de infrastructuur van het internet, bekijk in de ZERO-browser de verbindingen van elke website en stuur versleutelde berichten en bestanden. Een programma voor Windows, zonder account."
 },
 "t": {
 "1": "Op het land brengt glasvezel ze naar de datacenters.",
@@ -598,6 +598,9 @@
 "609": "je pc in de gaten?",
 "610": "Tijdens je GUARDIANA-gesprekken houdt de Wachter je eigen computer in de gaten: als een ander programma je microfoon, camera of scherm gebruikt, of als je computer op afstand wordt bestuurd,",
 "611": "wordt het gesprek gepauzeerd en laat GUARDIANA je weten om welk programma het gaat.",
-"612": "In te schakelen via Communicatie › Instellingen."
+"612": "In te schakelen via Communicatie › Instellingen.",
+"613": "Vier tools in één programma.",
+"614": "Het wordt op je Windows-pc geïnstalleerd en vraagt niet om een account.",
+"615": "In het programma."
 }
 }

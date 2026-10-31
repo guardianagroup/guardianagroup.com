@@ -24,7 +24,7 @@
 "share": "Każda strona może wiedzieć o mnie to wszystko, nie pytając: {d}. A o tobie? Sprawdź sam:",
 "copied": "Skopiowano. Wklej, gdzie chcesz.",
 "shared": "Dzięki za udostępnienie.",
-"meta": "Poznaj infrastrukturę internetu, zobacz w przeglądarce ZERO połączenia każdej strony i wysyłaj szyfrowane wiadomości oraz pliki. Bez konta i bez instalacji."
+"meta": "Poznaj infrastrukturę internetu, zobacz w przeglądarce ZERO połączenia każdej strony i wysyłaj szyfrowane wiadomości oraz pliki. Program dla systemu Windows, bez konta."
 },
 "t": {
 "1": "Na lądzie światłowód doprowadza je do centrów danych.",
@@ -596,6 +596,9 @@
 "609": "twojego komputera?",
 "610": "Strażnik pilnuje twojego własnego komputera podczas rozmów w GUARDIANA: jeśli inny program używa twojego mikrofonu, kamery lub ekranu albo trwa zdalne sterowanie,",
 "611": "rozmowa zostaje wstrzymana, a GUARDIANA wskazuje, który program za tym stoi.",
-"612": "Strażnika włącza się w sekcji Komunikacja › Ustawienia."
+"612": "Strażnika włącza się w sekcji Komunikacja › Ustawienia.",
+"613": "Cztery narzędzia w jednym programie.",
+"614": "Instaluje się na twoim komputerze z systemem Windows i nie wymaga konta.",
+"615": "Wewnątrz programu."
 }
 }

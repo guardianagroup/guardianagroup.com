@@ -25,7 +25,7 @@
 "share": "Qualsiasi sito può sapere tutto questo di me senza chiedermelo: {d}. E di te? Guarda qui:",
 "copied": "Copiato. Incollalo dove vuoi.",
 "shared": "Grazie per averlo condiviso.",
-"meta": "Esplora l’infrastruttura di internet, guarda le connessioni di ogni sito nel browser ZERO e invia messaggi e file crittografati. Senza account e senza installare nulla."
+"meta": "Esplora l’infrastruttura di internet, guarda le connessioni di ogni sito nel browser ZERO e invia messaggi e file crittografati. Un programma per Windows, senza account."
 },
 "t": {
 "1": "Sulla terraferma, la fibra li porta fino ai data center.",
@@ -597,6 +597,9 @@
 "609": "il tuo PC?",
 "610": "Durante le tue chiamate GUARDIANA, la Sentinella sorveglia il tuo stesso computer: se un altro programma usa il microfono, la fotocamera o lo schermo, o se è in corso un accesso remoto,",
 "611": "la chiamata viene messa in pausa e la Sentinella ti indica di quale programma si tratta.",
-"612": "Si attiva da Comunicazioni › Impostazioni."
+"612": "Si attiva da Comunicazioni › Impostazioni.",
+"613": "Quattro strumenti in un solo programma.",
+"614": "Si installa sul tuo PC con Windows e non richiede un account.",
+"615": "Dentro il programma."
 }
 }

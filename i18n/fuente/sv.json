@@ -26,7 +26,7 @@
 "share": "Vilken webbplats som helst kan veta allt det här om mig utan att fråga: {d}. Och om dig? Se själv här:",
 "copied": "Kopierat. Klistra in var du vill.",
 "shared": "Tack för att du delar.",
-"meta": "Utforska internets infrastruktur, se varje webbplats anslutningar i ZERO-webbläsaren och skicka krypterade meddelanden och filer. Inget konto och inget att installera."
+"meta": "Utforska internets infrastruktur, se varje webbplats anslutningar i ZERO-webbläsaren och skicka krypterade meddelanden och filer. Ett program för Windows, utan konto."
 },
 "t": {
 "1": "På land bär fibern den till datacentren.",
@@ -598,6 +598,9 @@
 "609": "på din dator?",
 "610": "Under dina GUARDIANA-samtal håller Vakten koll på din egen dator: om ett annat program använder din mikrofon, kamera eller skärm, eller om datorn fjärrstyrs,",
 "611": "pausas samtalet och du får veta vilket program det gäller.",
-"612": "Aktiveras under Kommunikation › Inställningar."
+"612": "Aktiveras under Kommunikation › Inställningar.",
+"613": "Fyra verktyg i ett enda program.",
+"614": "Det installeras på din dator med Windows och kräver inget konto.",
+"615": "Inuti programmet."
 }
 }

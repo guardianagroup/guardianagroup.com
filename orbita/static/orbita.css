@@ -1129,9 +1129,9 @@ body.en-tupc #estado { opacity: .35; }
 .tupc-hud .cab { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: -2px -4px -2px 0; }
 .tupc-hud .k { display: flex; align-items: center; gap: 8px; min-width: 0; font: 500 10px/1 var(--mono); letter-spacing: .16em; text-transform: uppercase; color: #8A95A2; }
 .tupc-hud .k .sep { color: #4A5664; }
-.tupc-hud .vivo { flex: none; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 10px rgba(156,195,228,.9); animation: tupc-late 2.4s ease-in-out infinite; }
+.tupc-hud .vivo { flex: none; width: 8px; height: 8px; border-radius: 50%; background: #B9D6EE; box-shadow: 0 0 0 3px rgba(156,195,228,.16), 0 0 12px rgba(156,195,228,.9); animation: tupc-late 2.4s ease-in-out infinite; }
 .tupc-hud.mudo .vivo { background: #4A5664; box-shadow: none; animation: none; }
-@keyframes tupc-late { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: .4; transform: scale(.75); } }
+@keyframes tupc-late { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: .55; transform: scale(.8); } }
 .tupc-hud .t { margin: 0; font: 300 26px/1.08 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; letter-spacing: -.015em; color: var(--fg); text-wrap: balance; outline: none; }
 .tupc-hud .estado { margin: 0; display: flex; flex-direction: column; gap: 5px; font: 400 13px/1.5 var(--texto); color: #B4BEC9; }
 .tupc-hud .estado[hidden] { display: none; }

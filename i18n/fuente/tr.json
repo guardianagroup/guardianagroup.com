@@ -24,7 +24,7 @@
 "share": "Herhangi bir site benim hakkımda tüm bunları sormadan bilebilir: {d}. Peki ya sizin hakkınızda? Kendiniz görün:",
 "copied": "Kopyalandı. İstediğiniz yere yapıştırın.",
 "shared": "Paylaştığınız için teşekkürler.",
-"meta": "İnternetin altyapısını keşfet, ZERO tarayıcısında her sitenin bağlantılarını gör ve şifreli mesajlar ve dosyalar gönder. Hesap yok, kurulum yok."
+"meta": "İnternetin altyapısını keşfet, ZERO tarayıcısında her sitenin bağlantılarını gör ve şifreli mesajlar ve dosyalar gönder. Windows için bir program, hesap yok."
 },
 "t": {
 "1": "Karada da fiber onları veri merkezlerine kadar götürür.",
@@ -596,6 +596,9 @@
 "609": "bilgisayarınızı kim denetliyor?",
 "610": "GUARDIANA görüşmeleriniz sırasında Nöbetçi kendi bilgisayarınızı izler: Başka bir program mikrofonunuzu, kameranızı veya ekranınızı kullanırsa ya da uzaktan erişim varsa,",
 "611": "görüşme duraklatılır ve size hangi program olduğu bildirilir.",
-"612": "İletişim › Ayarlar bölümünden etkinleştirilir."
+"612": "İletişim › Ayarlar bölümünden etkinleştirilir.",
+"613": "Tek bir programda dört araç.",
+"614": "Windows bilgisayarına kurulur ve hesap gerektirmez.",
+"615": "Programın içinde."
 }
 }

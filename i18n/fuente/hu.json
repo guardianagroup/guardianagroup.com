@@ -24,7 +24,7 @@
 "share": "Bármelyik weboldal megtudhatja rólam mindezt kérdezés nélkül: {d}. És rólad? Nézd meg itt:",
 "copied": "Kimásolva. Illeszd be, ahová szeretnéd.",
 "shared": "Köszönjük, hogy megosztottad.",
-"meta": "Fedezd fel az internet infrastruktúráját, nézd meg a ZERO böngészőben minden oldal kapcsolatait, és küldj titkosított üzeneteket és fájlokat. Fiók és telepítés nélkül."
+"meta": "Fedezd fel az internet infrastruktúráját, nézd meg a ZERO böngészőben minden oldal kapcsolatait, és küldj titkosított üzeneteket és fájlokat. Program Windowsra, fiók nélkül."
 },
 "t": {
 "1": "A szárazföldön az optikai kábel viszi tovább őket az adatközpontokig.",
@@ -596,6 +596,9 @@
 "609": "a számítógépedet?",
 "610": "A GUARDIANA-hívásaid alatt az Őrszem a saját számítógépedet figyeli: ha egy másik program használja a mikrofonodat, a kamerádat vagy a képernyődet, vagy ha a gépet távolról vezérlik,",
 "611": "a hívás szünetel, és az Őrszem jelzi, melyik programról van szó.",
-"612": "A Kommunikáció › Beállítások menüpontban kapcsolható be."
+"612": "A Kommunikáció › Beállítások menüpontban kapcsolható be.",
+"613": "Négy eszköz egyetlen programban.",
+"614": "A Windowst futtató számítógépedre települ, és nem kér fiókot.",
+"615": "A programon belül."
 }
 }

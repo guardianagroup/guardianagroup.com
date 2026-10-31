@@ -25,7 +25,7 @@
 "share": "Enhver hjemmeside kan vide alt det her om mig uden at spørge: {d}. Og om dig? Se selv her:",
 "copied": "Kopieret. Indsæt det, hvor du vil.",
 "shared": "Tak, fordi du deler.",
-"meta": "Udforsk internettets infrastruktur, se forbindelserne fra hvert websted i ZERO-browseren, og send krypterede beskeder og filer. Ingen konto og intet at installere."
+"meta": "Udforsk internettets infrastruktur, se forbindelserne fra hvert websted i ZERO-browseren, og send krypterede beskeder og filer. Et program til Windows, uden konto."
 },
 "t": {
 "1": "På land fører fiberen dem frem til datacentrene.",
@@ -597,6 +597,9 @@
 "609": "med din computer?",
 "610": "Under dine GUARDIANA-opkald holder Vagten øje med din egen computer: Hvis et andet program bruger din mikrofon, dit kamera eller din skærm, eller hvis computeren fjernstyres,",
 "611": "sættes opkaldet på pause, og du får at vide, hvilket program det er.",
-"612": "Vagten slås til under Kommunikation › Indstillinger."
+"612": "Vagten slås til under Kommunikation › Indstillinger.",
+"613": "Fire værktøjer i ét program.",
+"614": "Det installeres på din Windows-pc og kræver ingen konto.",
+"615": "Inde i programmet."
 }
 }

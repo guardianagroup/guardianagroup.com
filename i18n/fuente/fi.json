@@ -23,7 +23,7 @@
 "share": "Mikä tahansa verkkosivu voi tietää minusta kaiken tämän kysymättä: {d}. Entä sinusta? Katso itse:",
 "copied": "Kopioitu. Liitä minne haluat.",
 "shared": "Kiitos, kun jaoit.",
-"meta": "Tutki internetin infrastruktuuria, katso ZERO-selaimessa jokaisen sivuston yhteydet ja lähetä salattuja viestejä ja tiedostoja. Ilman tiliä ja ilman asennusta."
+"meta": "Tutki internetin infrastruktuuria, katso ZERO-selaimessa jokaisen sivuston yhteydet ja lähetä salattuja viestejä ja tiedostoja. Ohjelma Windowsille, ilman tiliä."
 },
 "t": {
 "1": "Maalla kuitu vie ne datakeskuksiin asti.",
@@ -595,6 +595,9 @@
 "609": "tietokonettasi?",
 "610": "GUARDIANA-puhelujesi aikana Vartija valvoo omaa tietokonettasi: jos jokin muu ohjelma käyttää mikrofoniasi, kameraasi tai näyttöäsi tai jos tietokonettasi ohjataan etänä,",
 "611": "puhelu asetetaan tauolle ja Vartija kertoo, mikä ohjelma on kyseessä.",
-"612": "Vartija otetaan käyttöön kohdassa Viestintä › Asetukset."
+"612": "Vartija otetaan käyttöön kohdassa Viestintä › Asetukset.",
+"613": "Neljä työkalua yhdessä ohjelmassa.",
+"614": "Se asennetaan Windows-tietokoneellesi, eikä se vaadi tiliä.",
+"615": "Ohjelman sisällä."
 }
 }

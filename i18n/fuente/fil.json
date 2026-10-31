@@ -28,7 +28,7 @@
 "share": "Kayang malaman ng kahit anong website ang lahat ng ito tungkol sa akin nang hindi nagtatanong: {d}. Ikaw naman? Tingnan mo rito:",
 "copied": "Nakopya na. I-paste mo kahit saan.",
 "shared": "Salamat sa pagbabahagi.",
-"meta": "Tuklasin ang imprastraktura ng internet, tingnan ang mga koneksyon ng bawat website sa ZERO browser at magpadala ng mga naka-encrypt na mensahe at file. Walang account at walang ii-install."
+"meta": "Tuklasin ang imprastraktura ng internet, tingnan ang mga koneksyon ng bawat website sa ZERO browser at magpadala ng mga naka-encrypt na mensahe at file. Isang programa para sa Windows, walang account."
 },
 "t": {
 "1": "Sa lupa, dinadala ito ng fiber hanggang sa mga data center.",
@@ -600,6 +600,9 @@
 "609": "sa computer mo?",
 "610": "Habang nasa tawag ka sa GUARDIANA, binabantayan ng Bantay ang sarili mong computer: kapag may ibang program na gumagamit ng mikropono, camera o screen mo, o may remote access dito,",
 "611": "pansamantalang ititigil ang tawag at sasabihin sa iyo ng Bantay kung aling program iyon.",
-"612": "Mapapagana ito sa Komunikasyon › Mga setting."
+"612": "Mapapagana ito sa Komunikasyon › Mga setting.",
+"613": "Apat na tool sa iisang programa.",
+"614": "Ini-install ito sa iyong Windows PC at hindi ito humihingi ng account.",
+"615": "Sa loob ng programa."
 }
 }
