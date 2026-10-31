@@ -517,18 +517,31 @@ class Sesion {
     if (s.clase === 'webrtc') { st.n.permisos++; return this.suceso({ clase: 'webrtc', certeza: 'comprobado', dominio, texto: 'La web ha intentado abrir una conexión directa (WebRTC), la vía habitual para averiguar la dirección de red real. ZERO la mantiene desactivada.' }); }
     if (s.clase === 'formulario') return this.suceso({ clase: 'formulario', certeza: 'comprobado', dominio, texto: s.detenido ? 'Este formulario enviaría tus datos sin encriptar. ZERO ha detenido el envío.' : 'Atención: este formulario enviaría lo que escribas sin encriptar.', detalle: { accion: s.accion, detenido: s.detenido } });
     if (s.clase === 'subasta') {
+      // 30 Oct 2026 (dueño: «las subastas en todo el resumen… todos los datos posibles, con el precio»). Lo que llega de la
+      // página se trata como dato ajeno: números comprobados, listas con tope y textos acotados (poda).
+      const num = (x) => (typeof x === 'number' && Number.isFinite(x) ? x : null);
+      const lista = (xs, n) => (Array.isArray(xs) ? xs : []).slice(0, n).map((x) => poda(x));
+      if (s.fase === 'tope') return this.suceso({ clase: 'subasta', certeza: 'comprobado', dominio, texto: 'ZERO ha dejado de detallar las subastas de esta página: ha llegado al máximo de datos de subastas que guarda por página.', detalle: { fase: 'tope', avisos: num(s.avisos) } });
       st.n.subastas++;
       if (s.fase === 'fin') {
-        const pujas = (s.pujas || []).map((p) => ({ ...poda(p), ...empresaDe(p.pujador) }));
-        const n = new Set([...(s.pedidos || []), ...pujas.map((p) => p.pujador)]).size;
-        return this.suceso({ clase: 'subasta', certeza: 'comprobado', dominio, texto: 'Esta página ha subastado sus espacios publicitarios: ' + n + (n === 1 ? ' empresa pujó' : ' empresas pujaron') + ' por ' + (s.unidades || 1) + ((s.unidades || 1) === 1 ? ' espacio' : ' espacios') + ' en ' + (s.ms != null ? s.ms + ' ms' : 'milisegundos') + '. Los precios son los declarados por cada pujador.', detalle: { id: s.id, ms: s.ms, limite: s.limite || null, unidades: s.unidades, pedidos: poda(s.pedidos), pujas, sinPuja: poda(s.sinPuja), tarde: poda(s.tarde), peticiones: poda(s.peticiones), config: poda(s.config), tcf: poda(s.tcf) } });
+        const pujas = (Array.isArray(s.pujas) ? s.pujas : []).slice(0, 80).map((p) => ({ ...poda(p), ...empresaDe(p && p.pujador) }));
+        // empresas que pujaron de verdad (antes contaba también las que solo recibieron la petición)
+        const n = new Set(pujas.map((p) => p.pujador)).size;
+        const unidades = num(s.unidades) || 1, ms = num(s.ms);
+        return this.suceso({ clase: 'subasta', certeza: 'comprobado', dominio, texto: 'Esta página ha subastado sus espacios publicitarios: ' + n + (n === 1 ? ' empresa pujó' : ' empresas pujaron') + ' por ' + unidades + (unidades === 1 ? ' espacio' : ' espacios') + ' en ' + (ms != null ? ms + ' ms' : 'milisegundos') + '. Los precios son los declarados por cada pujador.',
+          detalle: { id: poda(s.id), ms, limite: num(s.limite), unidades: num(s.unidades), nPujas: num(s.nPujas), pedidos: lista(s.pedidos, 40), pujas, sinPuja: lista(s.sinPuja, 40), sinPujaPor: lista(s.sinPujaPor, 80).map((x) => ({ ...x, ...empresaDe(x && x.pujador) })), tarde: lista(s.tarde, 40), tardePor: lista(s.tardePor, 80).map((x) => ({ ...x, ...empresaDe(x && x.pujador) })),
+            rechazadas: lista(s.rechazadas, 40).map((r) => ({ ...r, ...empresaDe(r && r.pujador) })), huecos: lista(s.huecos, 20), peticiones: poda(s.peticiones), config: poda(s.config), tcf: poda(s.tcf) } });
       }
       if (s.fase === 'amazon') {
-        const n = (s.pujas || []).length;
-        return this.suceso({ clase: 'subasta', certeza: 'comprobado', dominio, texto: n ? 'Amazon ha pujado por ' + n + (n === 1 ? ' espacio publicitario' : ' espacios publicitarios') + ' de esta página. Su precio va encriptado: solo lo lee el servidor de anuncios.' : 'Amazon ha recibido los datos de tu visita para pujar, pero no ha pujado.', detalle: { fase: 'amazon', huecos: s.huecos || 0, pujas: (s.pujas || []).map(poda) } });
+        const pujas = lista(s.pujas, 20), n = pujas.length;
+        return this.suceso({ clase: 'subasta', certeza: 'comprobado', dominio, texto: n ? 'Amazon ha pujado por ' + n + (n === 1 ? ' espacio publicitario' : ' espacios publicitarios') + ' de esta página. Su precio va encriptado: solo lo lee el servidor de anuncios.' : 'Amazon ha recibido los datos de tu visita para pujar, pero no ha pujado.', detalle: { fase: 'amazon', huecos: num(s.huecos) || 0, ms: num(s.ms), pujas } });
       }
-      if (s.fase === 'ganada') return this.suceso({ clase: 'subasta', certeza: 'comprobado', dominio, texto: 'Ganó la puja ' + s.pujador + (s.cpm != null ? ' declarando ' + s.cpm + ' ' + (s.moneda || '') + ' por mil impresiones' : '') + (s.anunciante ? ' para el anunciante ' + s.anunciante : '') + '.', detalle: { ...poda(s), ...empresaDe(s.pujador) } });
-      return this.suceso({ clase: 'subasta', certeza: 'comprobado', dominio, texto: 'Espacio publicitario servido por Google' + (s.vacio ? ' (vacío)' : '') + (s.anunciante ? ' · anunciante n.º ' + s.anunciante : '') + '.', detalle: poda(s) });
+      if (s.fase === 'ganada') {
+        const cpm = num(s.cpm), quien = String(s.pujador || '').slice(0, 30), anun = String(s.anunciante || '').slice(0, 120);
+        return this.suceso({ clase: 'subasta', certeza: 'comprobado', dominio, texto: 'Ganó la puja ' + quien + (cpm != null ? ' declarando ' + cpm + ' ' + String(s.moneda || '').slice(0, 4) + ' por mil impresiones' : '') + (anun ? ' para el anunciante ' + anun : '') + '.', detalle: { ...poda(s), ...empresaDe(quien) } });
+      }
+      if (s.fase !== 'google') return; // ninguna otra fase existe: lo desconocido no se atribuye a nadie
+      return this.suceso({ clase: 'subasta', certeza: 'comprobado', dominio, texto: 'Espacio publicitario servido por Google' + (s.vacio ? ' (vacío)' : '') + (s.anunciante ? ' · anunciante n.º ' + String(s.anunciante).slice(0, 24) : '') + '.', detalle: poda(s) });
     }
   }
 

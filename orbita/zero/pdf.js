@@ -71,8 +71,8 @@
     cabecera();
     const LIN = 9.6;
     for (const f of filas) {
-      // columnas con «wrap»: el texto se reparte en varias líneas (hasta 6) en vez de cortarse
-      const lineas = cols.map((c, i) => (c.wrap ? parte(f[i], TAM, c.px - 8, 6) : [ajusta(f[i], TAM, false, c.px - 8)]));
+      // columnas con «wrap»: el texto se reparte en varias líneas (hasta 6, o las que diga «lineas») en vez de cortarse
+      const lineas = cols.map((c, i) => (c.wrap ? parte(f[i], TAM, c.px - 8, c.lineas || 6) : [ajusta(f[i], TAM, false, c.px - 8)]));
       const n = Math.max(1, ...lineas.map((l) => l.length)), alto = ALTO + (n - 1) * LIN;
       if (d.sitio(alto)) cabecera();
       cols.forEach((c, i) => lineas[i].forEach((t, k) => d.texto(c.der ? xs[i] + c.px - 4 : xs[i] + 4, d.y + 9.4 + k * LIN, t, TAM, false, c.rojo ? '#c0503f' : c.ambar && t ? '#9a6b12' : '#1d2733', c.der)));

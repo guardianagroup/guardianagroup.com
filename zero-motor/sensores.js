@@ -12,7 +12,19 @@ module.exports = String.raw`(() => {
   const vistos = new Set();
   const unaVez = (clave, dato) => { if (vistos.has(clave)) return; vistos.add(clave); try { avisa(JSON.stringify({ origen, ...dato })); } catch (_) {} };
   const cuenta = (dato) => { try { avisa(JSON.stringify({ origen, ...dato })); } catch (_) {} };
-  const deniega = (nombre) => { const e = new DOMException('Permiso denegado por ZERO', 'NotAllowedError'); return Promise.reject(e); };
+  // Subastas (30 Oct 2026, dueño: «todos los datos posibles, con el precio, con todo»): cada aviso de subasta pasa por aquí,
+  // con un tope por página (este documento) para que una web que repite subastas sin parar no llene la sesión: como mucho
+  // 2 MB o 800 avisos. Al llegar al tope se dice una sola vez (fase «tope») y se deja de detallar.
+  const TOPE_SUB_BYTES = 2000000, TOPE_SUB_AVISOS = 800;
+  let subBytes = 0, subAvisos = 0, subTope = false;
+  const cuentaSub = (dato) => {
+    if (subTope) return;
+    let j; try { j = JSON.stringify({ origen, ...dato }); } catch (_) { return; }
+    if (subBytes + j.length > TOPE_SUB_BYTES || subAvisos >= TOPE_SUB_AVISOS) { subTope = true; try { avisa(JSON.stringify({ origen, clase: 'subasta', fase: 'tope', avisos: subAvisos })); } catch (_) {} return; }
+    subBytes += j.length; subAvisos++;
+    try { avisa(j); } catch (_) {}
+  };
+  const deniega =(nombre) => { const e = new DOMException('Permiso denegado por ZERO', 'NotAllowedError'); return Promise.reject(e); };
   const envuelve = (obj, prop, f) => {
     if (!obj) return;
     const d = Object.getOwnPropertyDescriptor(obj, prop);
@@ -133,7 +145,7 @@ module.exports = String.raw`(() => {
           });
         } catch (_) {}
       };
-      ev('auctionInit', (a) => { const s = { inicio: Date.now(), limite: a.timeout || null, unidades: (a.adUnitCodes || []).length, pujadores: new Set(), tarde: new Set(), config: configura() }; subastas[a.auctionId] = s; leeTcf(s); });
+      ev('auctionInit', (a) => { const s = { inicio: Date.now(), limite: a.timeout || null, unidades: (a.adUnitCodes || []).length, pujadores: new Set(), tarde: new Set(), tardePor: [], config: configura() }; subastas[a.auctionId] = s; leeTcf(s); });
       // Qué llevaba cada petición de puja (dueño, 26 Oct 2026: «qué información, el máximo que podamos saber»). Se lee del
       // propio objeto de Prebid: dirección de la página y referente, tamaños y tipo del hueco, consentimiento, identificadores
       // de usuario (módulos userId / eids), datos de primera parte (palabras clave, segmentos, año de nacimiento, género,
@@ -167,21 +179,37 @@ module.exports = String.raw`(() => {
         return pet;
       };
       ev('bidRequested', (b) => { const s = subastas[b.auctionId]; if (s) { s.pujadores.add(b.bidderCode); try { (s.peticiones = s.peticiones || {})[b.bidderCode] = llevaba(b); } catch (_) {} } });
-      ev('bidTimeout', (xs) => { for (const x of (Array.isArray(xs) ? xs : [xs])) { const s = x && subastas[x.auctionId]; if (s) s.tarde.add(x.bidder || x.bidderCode); } });
+      ev('bidTimeout', (xs) => { for (const x of (Array.isArray(xs) ? xs : [xs])) { const s = x && subastas[x.auctionId]; if (s) { const q = x.bidder || x.bidderCode; s.tarde.add(q); if (s.tardePor && s.tardePor.length < 80) s.tardePor.push({ pujador: corto(q, 30), unidad: corto(x.adUnitCode, 80) }); } } });
       const puja = (b) => {
-        const m = b.meta || {};
+        const m = b.meta || {}; const fl = b.floorData || null;
         return { pujador: b.bidderCode || b.bidder, cpm: b.cpm, moneda: b.currency, original: b.originalCpm != null && b.originalCurrency && b.originalCurrency !== b.currency ? { cpm: b.originalCpm, moneda: b.originalCurrency } : null, neto: b.netRevenue === true ? true : b.netRevenue === false ? false : null,
           ms: b.timeToRespond, tam: b.size, tipo: corto(b.mediaType, 10), unidad: b.adUnitCode, acuerdo: corto(b.dealId, 40), creatividad: corto(b.creativeId, 40), ttl: b.ttl || null, via: b.source === 's2s' ? 'servidor' : 'cliente',
           anunciante: lista(m.advertiserDomains, 6).map((x) => corto(x, 60)).join(','), anuncianteNombre: corto(m.advertiserName, 60), marca: corto(m.brandName, 60), agencia: corto(m.agencyName, 60), red: corto(m.networkName, 60), categoria: corto(m.primaryCatId, 20), dcadena: m.dchain && Array.isArray(m.dchain.nodes) ? m.dchain.nodes.length : null,
-          tramo: b.adserverTargeting && corto(b.adserverTargeting.hb_pb, 12) };
+          tramo: b.adserverTargeting && corto(b.adserverTargeting.hb_pb, 12),
+          // precio mínimo que la web fijó para ese hueco (módulo de suelos de Prebid), si lo declara
+          suelo: fl && typeof fl.floorValue === 'number' ? { cpm: fl.floorValue, moneda: corto(fl.floorCurrency, 4) } : null };
+      };
+      // Cada hueco subastado, con sus tamaños y tipos tal como la web los pide (también los que nadie pujó).
+      const huecoDe = (u) => {
+        const mt = (u && u.mediaTypes) || {}; const tams = [];
+        const bs = (mt.banner && mt.banner.sizes) || (u && u.sizes) || [];
+        for (const t of (Array.isArray(bs[0]) ? bs : [bs])) if (Array.isArray(t) && t.length === 2) tams.push(t.join('x'));
+        if (mt.video && mt.video.playerSize) for (const t of (Array.isArray(mt.video.playerSize[0]) ? mt.video.playerSize : [mt.video.playerSize])) if (Array.isArray(t) && t.length === 2) tams.push(t.join('x') + ' vídeo');
+        return { unidad: corto(u && u.code, 80), tam: tams.slice(0, 8), tipos: Object.keys(mt).slice(0, 4).map((x) => corto(x, 10)), video: mt.video ? corto(mt.video.context, 12) : null };
       };
       ev('auctionEnd', (a) => {
         const s = subastas[a.auctionId] || {};
-        const pujas = (a.bidsReceived || []).map(puja);
-        const sinPuja = (a.noBids || []).map((b) => b.bidderCode || b.bidder);
-        cuenta({ clase: 'subasta', fase: 'fin', id: a.auctionId, ms: s.inicio ? Date.now() - s.inicio : (a.auctionEnd && a.timestamp ? a.auctionEnd - a.timestamp : null), limite: s.limite || a.timeout || null, unidades: s.unidades || (a.adUnitCodes || []).length, pedidos: [...(s.pujadores || [])], pujas, sinPuja, tarde: [...(s.tarde || [])], peticiones: s.peticiones || {}, config: s.config || null, tcf: s.tcf || null });
+        // todas las pujas recibidas, con tope: si hubiera más de 80, se quedan las de importe más alto y se dice cuántas hubo
+        const todas = Array.isArray(a.bidsReceived) ? a.bidsReceived : [];
+        const pujas = (todas.length > 80 ? todas.slice().sort((x, y) => (+y.cpm || 0) - (+x.cpm || 0)).slice(0, 80) : todas).map(puja);
+        const sinPuja = [...new Set((a.noBids || []).map((b) => b.bidderCode || b.bidder))].slice(0, 40);
+        const sinPujaPor = lista(a.noBids, 80).map((b) => ({ pujador: corto(b.bidderCode || b.bidder, 30), unidad: corto(b.adUnitCode, 80) }));
+        // pujas que llegaron pero Prebid descartó (por ejemplo, por debajo del precio mínimo): Prebid 7 o posterior las da aquí
+        const rechazadas = lista(a.bidsRejected, 40).map((b) => ({ pujador: corto(b.bidderCode || b.bidder, 30), cpm: typeof b.cpm === 'number' ? b.cpm : null, moneda: corto(b.currency, 4), unidad: corto(b.adUnitCode, 80), motivo: corto(b.rejectionReason, 60) }));
+        cuentaSub({ clase: 'subasta', fase: 'fin', id: a.auctionId, ms: s.inicio ? Date.now() - s.inicio : (a.auctionEnd && a.timestamp ? a.auctionEnd - a.timestamp : null), limite: s.limite || a.timeout || null, unidades: s.unidades || (a.adUnitCodes || []).length, pedidos: [...(s.pujadores || [])].slice(0, 40), pujas, nPujas: todas.length, sinPuja, sinPujaPor, tarde: [...(s.tarde || [])].slice(0, 40), tardePor: s.tardePor || [], rechazadas, huecos: lista(a.adUnits, 20).map(huecoDe), peticiones: s.peticiones || {}, config: s.config || null, tcf: s.tcf || null });
+        delete subastas[a.auctionId];
       });
-      ev('bidWon', (b) => { const x = puja(b); cuenta({ clase: 'subasta', fase: 'ganada', id: b.auctionId, ...x, objetivo: b.adserverTargeting ? { pujador: corto(b.adserverTargeting.hb_bidder, 30), tramo: corto(b.adserverTargeting.hb_pb, 12), tam: corto(b.adserverTargeting.hb_size, 12) } : null }); });
+      ev('bidWon', (b) => { const x = puja(b); cuentaSub({ clase: 'subasta', fase: 'ganada', id: b.auctionId, ...x, objetivo: b.adserverTargeting ? { pujador: corto(b.adserverTargeting.hb_bidder, 30), tramo: corto(b.adserverTargeting.hb_pb, 12), tam: corto(b.adserverTargeting.hb_size, 12) } : null }); });
     };
     try {
       if (Array.isArray(p.que)) p.que.unshift(listo); else if (p.que && typeof p.que.push === 'function') p.que.push(listo); else p.que = [listo];
@@ -189,9 +217,20 @@ module.exports = String.raw`(() => {
   };
   const enganchaGoogle = (g) => {
     if (!g || g.__zero) return; g.__zero = true;
-    const listo = () => { try { g.pubads().addEventListener('slotRenderEnded', (e) => {
+    // 30 Oct 2026: cuándo pidió la página cada hueco y cuándo respondió Google (tiempo de respuesta), el identificador del
+    // elemento de la página (con él se une a su subasta de Prebid) y los tamaños que la página declara para el hueco
+    const pedido = new WeakMap(), respuesta = new WeakMap();
+    const listo = () => { try {
+      const pa = g.pubads();
+      try { pa.addEventListener('slotRequested', (e) => { try { if (e && e.slot) pedido.set(e.slot, Date.now()); } catch (_) {} }); } catch (_) {}
+      try { pa.addEventListener('slotResponseReceived', (e) => { try { if (e && e.slot) respuesta.set(e.slot, Date.now()); } catch (_) {} }); } catch (_) {}
+      pa.addEventListener('slotRenderEnded', (e) => {
       let hb = null; try { const m = e.slot && e.slot.getTargetingMap ? e.slot.getTargetingMap() : {}; if (m && (m.hb_bidder || m.hb_pb)) hb = { pujador: String((m.hb_bidder || [])[0] || '').slice(0, 30), tramo: String((m.hb_pb || [])[0] || '').slice(0, 12), tam: String((m.hb_size || [])[0] || '').slice(0, 12) }; } catch (_) {}
-      cuenta({ clase: 'subasta', fase: 'google', unidad: e.slot && e.slot.getAdUnitPath && e.slot.getAdUnitPath(), vacio: e.isEmpty, anunciante: e.advertiserId, campana: e.campaignId, linea: e.lineItemId, creatividad: e.creativeId || e.sourceAgnosticCreativeId || null, relleno: e.isBackfill, grupos: Array.isArray(e.yieldGroupIds) ? e.yieldGroupIds.length : null, empresas: Array.isArray(e.companyIds) ? e.companyIds.length : null, tam: Array.isArray(e.size) ? e.size.join('x') : e.size, objetivo: hb });
+      let elemento = null, ms = null; const tamanos = [];
+      try { elemento = e.slot && e.slot.getSlotElementId ? String(e.slot.getSlotElementId() || '').slice(0, 80) || null : null; } catch (_) {}
+      try { const zs = e.slot && e.slot.getSizes ? e.slot.getSizes() : []; for (const z of (Array.isArray(zs) ? zs : []).slice(0, 8)) { if (z && typeof z.getWidth === 'function') tamanos.push(z.getWidth() + 'x' + z.getHeight()); else if (typeof z === 'string') tamanos.push(z.slice(0, 12)); } } catch (_) {}
+      try { const t0 = pedido.get(e.slot), t1 = respuesta.get(e.slot); if (t0 && t1 && t1 >= t0) ms = t1 - t0; } catch (_) {}
+      cuentaSub({ clase: 'subasta', fase: 'google', unidad: e.slot && e.slot.getAdUnitPath && e.slot.getAdUnitPath(), elemento, tamanos, ms, vacio: e.isEmpty, anunciante: e.advertiserId, campana: e.campaignId, linea: e.lineItemId, creatividad: e.creativeId || e.sourceAgnosticCreativeId || null, relleno: e.isBackfill, grupos: Array.isArray(e.yieldGroupIds) ? e.yieldGroupIds.length : null, empresas: Array.isArray(e.companyIds) ? e.companyIds.length : null, tam: Array.isArray(e.size) ? e.size.join('x') : e.size, objetivo: hb });
     }); } catch (_) {} };
     try { if (Array.isArray(g.cmd)) g.cmd.unshift(listo); else if (g.cmd && typeof g.cmd.push === 'function') g.cmd.push(listo); else g.cmd = [listo]; } catch (_) {}
   };
@@ -221,11 +260,12 @@ module.exports = String.raw`(() => {
     const envuelve = (f) => {
       if (typeof f !== 'function' || f.__zero) return f;
       const g = function (cfg, cb) {
+        const t0 = Date.now();
         const envuelto = function (bids) {
           try {
             const xs = (Array.isArray(bids) ? bids : []).slice(0, 20);
             const con = xs.filter((b) => b && b.amznbid && !/^[0-2]$/.test(String(b.amznbid)));
-            cuenta({ clase: 'subasta', fase: 'amazon', id: 'amz-' + Date.now(), huecos: xs.length, pujas: con.map((b) => ({ pujador: 'amazon', unidad: String(b.slotID || '').slice(0, 80), tam: String(b.amznsz || b.size || '').slice(0, 20), cifrado: true })) });
+            cuentaSub({ clase: 'subasta', fase: 'amazon', id: 'amz-' + Date.now(), huecos: xs.length, ms: Date.now() - t0, pujas: con.map((b) => ({ pujador: 'amazon', unidad: String(b.slotID || '').slice(0, 80), tam: String(b.amznsz || b.size || '').slice(0, 20), cifrado: true })) });
           } catch (_) {}
           return typeof cb === 'function' ? cb.apply(this, arguments) : undefined;
         };
