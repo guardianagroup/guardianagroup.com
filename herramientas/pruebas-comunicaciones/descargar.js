@@ -61,11 +61,12 @@ const pasosVisibles = (p, sel) => p.evaluate((sel) => [...document.querySelector
   comprueba(await W2.evaluate(() => { const h = document.querySelector('.bajar-hoja'); return !!h && /ya está en tu ordenador/.test(h.textContent) && /escritorio/.test(h.textContent); }), 'instalada: «Listo: GUARDIANA ya está en tu ordenador… el icono en el escritorio…»');
   await W2.screenshot({ path: path.join(OUT, '98-portada-pc-lista.png') });
 
-  // 2. la portada en el iPhone: el botón de arriba se ve y lleva a la descarga de Comunicaciones
+  // 2. la portada en el iPhone: ya no es el relato largo sino Inicio, la pantalla de la app (dueño, 30 Oct 2026, 15:16: «que no
+  //    le aparezca el descargar, solamente que le aparezca entrar»; 15:27 y 18:37: la web en el teléfono, como una app)
   const M = await equipo(browser, 'portada-iPhone', IPHONE);
-  await M.goto(WEB); await espera(1200);
-  comprueba(await M.evaluate(() => { const a = document.querySelector('header [data-bajar]'); const r = a.getBoundingClientRect(); return r.width > 0 && r.right <= innerWidth && getComputedStyle(a).display !== 'none'; }), 'portada en el iPhone: «Descargar» se ve arriba');
-  comprueba(await M.evaluate(() => [...document.querySelectorAll('[data-bajar]')].every((a) => a.getAttribute('href') === '/orbita/comunicaciones/?instalar')), 'en el móvil lleva a la descarga de Comunicaciones (la app del móvil es el chat)');
+  await M.goto(WEB); await espera(1500);
+  comprueba(await M.evaluate(() => location.pathname === '/inicio/'), 'portada en el iPhone: abre Inicio', await M.evaluate(() => location.pathname));
+  comprueba(await M.evaluate(() => !document.querySelector('[data-bajar]') && !!document.querySelector('.mc-pestanas a[aria-current=page][data-pestana=inicio]')), 'Inicio: sin «Descargar» y con la barra de pestañas');
   comprueba((await manifiesto(M)).length === 0, 'portada en el móvil: sin manifiesto (no ofrece instalar la web)');
   comprueba(await M.evaluate(() => document.documentElement.scrollWidth <= innerWidth), 'portada en el iPhone: nada se sale por los lados');
   await M.screenshot({ path: path.join(OUT, '99-portada-iphone.png') });
