@@ -188,7 +188,10 @@
     os.addEventListener('click', () => { cierra(); setTimeout(() => { if (window.OrbitaPuertas) window.OrbitaPuertas.abre('sistema'); }, 330); });
     h.cuerpo.appendChild(os);
     const pie = document.createElement('div'); pie.className = 'm2-pie';
-    pie.innerHTML = '<a href="/terminos.html">' + texto('Términos') + '</a><a href="/privacidad.html">' + texto('Privacidad') + '</a><a href="/contacto.html">' + texto('Contacto') + '</a>';
+    // las páginas legales existen en español, inglés y portugués: cada una en el idioma elegido (revisión del 30 Oct 2026)
+    const l = (window.GuardianaIdioma && GuardianaIdioma.lang) || 'es', en = l !== 'es' && l !== 'pt' && l !== 'pt-pt', pt = l === 'pt' || l === 'pt-pt';
+    const ruta = (es, i, p) => (pt ? p : en ? i : es);
+    pie.innerHTML = '<a href="' + ruta('/terminos.html', '/en/terms.html', '/pt/termos.html') + '">' + texto('Términos') + '</a><a href="' + ruta('/privacidad.html', '/en/privacy.html', '/pt/privacidade.html') + '">' + texto('Privacidad') + '</a><a href="' + ruta('/contacto.html', '/en/contact.html', '/pt/contato.html') + '">' + texto('Contacto') + '</a>';
     h.cuerpo.appendChild(pie);
   }
   const mas = hoja('m2-mas', 'Más', pintaMas);

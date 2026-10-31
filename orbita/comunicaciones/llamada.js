@@ -181,7 +181,7 @@
       el.hidden = !c;
       if (c) {
         el.textContent = t('Código') + ' ' + c.slice(0, 3) + ' ' + c.slice(3);
-        el.setAttribute('title', t('La llave cambia cada minuto. Compara este código con la otra persona: debe ser el mismo.'));
+        el.setAttribute('title', t('La clave cambia cada minuto. Compara este código con la otra persona: debe ser el mismo.'));
         if (nuevo && codigoVisto && c !== codigoVisto) { el.classList.remove('nuevo'); void el.offsetWidth; el.classList.add('nuevo'); }
         codigoVisto = c;
       } else codigoVisto = '';
@@ -213,8 +213,8 @@
       // con la capa post-cuántica en marcha (confirmada y descifrando en cada conexión), el título lo dice (dueño, 30 Oct 2026, 15:01)
       const pqOn = pqActiva();
       pintaCodigo(false);
-      { const cap = document.querySelector('.gc-llamada-arriba .gc-llamada-cifrado'); if (cap) { let b = cap.querySelector('.ll-pq'); if (pqOn && !b) { b = document.createElement('b'); b.className = 'll-pq'; cap.appendChild(b); } if (b) { b.hidden = !pqOn; b.textContent = t('Post-cuántica'); } } }
-      { const base = o.nombre() || (video ? (pqOn ? t('Videollamada encriptada post-cuántica') : t('Videollamada encriptada')) : (pqOn ? t('Llamada encriptada post-cuántica') : t('Llamada encriptada')));
+      { const cap = document.querySelector('.gc-llamada-arriba .gc-llamada-cifrado'); if (cap) { let b = cap.querySelector('.ll-pq'); if (pqOn && !b) { b = document.createElement('b'); b.className = 'll-pq'; cap.appendChild(b); } if (b) { b.hidden = !pqOn; b.textContent = t('Postcuántica'); } } }
+      { const base = o.nombre() || (video ? (pqOn ? t('Videollamada encriptada postcuántica') : t('Videollamada encriptada')) : (pqOn ? t('Llamada encriptada postcuántica') : t('Llamada encriptada')));
         // al sonar, si llaman desde un grupo, también cuántos son ya (para saber que se entra en una llamada en grupo)
         const tot = estado === 'hablando' ? totalGrupo() : estado === 'entrante' && PR ? 1 + Math.max(1, PR.n | 0) : 0;
         const g = t('Llamada en grupo · {n} personas').replace('{n}', tot);
@@ -1067,7 +1067,7 @@
       if (!hay) { caja.classList.remove('sas-plegado'); clearTimeout(sasPlegadoT); return; }
       const num = sas.numero ? sas.numero.slice(0, 2) + ' ' + sas.numero.slice(2) : '— —';
       $('#ll-sas-num').textContent = num; $('#ll-sas-num').setAttribute('aria-label', t('Número de seguridad') + ': ' + num);
-      $('#ll-sas-texto').textContent = sas.estado === 'roto' ? t('No se pudo calcular el número de seguridad de esta llamada: no hables de nada delicado y vuelve a llamar.') : t('La otra persona debe ver este mismo número en su pantalla. Decidlo en voz alta: si no coincide, hay alguien en medio.');
+      $('#ll-sas-texto').textContent = sas.estado === 'roto' ? t('No se pudo calcular el número de seguridad de esta llamada: no hables de nada delicado y vuelve a llamar.') : t('La otra persona debe ver este mismo número en su pantalla. Díganlo en voz alta: si no coincide, hay alguien en medio.');
       $('#ll-sas-si').hidden = sas.estado === 'roto';
       mini.textContent = (sas.estado === 'coinciden' ? '✓ ' : sas.estado === 'roto' ? '! ' : '') + num;
       mini.classList.toggle('bien', sas.estado === 'coinciden'); mini.classList.toggle('mal', sas.estado === 'roto');
@@ -1696,10 +1696,10 @@
     // La cápsula de arriba abre «Seguridad de esta llamada»: lo que es verdad en esta llamada, ahora (agencia, ronda 83)
     function pintaSeg() {
       const l = $('#ll-seg-l'); if (!l) return;
-      const filas = [['si', t('Encriptada de extremo a extremo: solo los equipos de esta llamada tienen la llave.')]];
+      const filas = [['si', t('Encriptada de extremo a extremo: solo los equipos de esta llamada tienen la clave.')]];
       const pqOn = pqActiva();
-      filas.push([pqOn ? 'si' : 'no', pqOn ? t('Capa post-cuántica activa en el sonido y la imagen.') : t('Capa post-cuántica: no disponible en esta llamada.')]);
-      { const c = codigoAhora(); if (c) { filas.push(['si', t('La llave de la capa post-cuántica cambia cada minuto. Código de ahora: {c}.').replace('{c}', c.slice(0, 3) + ' ' + c.slice(3))]); filas.push(['nota', t('Compáralo con la otra persona: si coincide, los dos tenéis la misma llave. Si no, esperad al siguiente cambio; si sigue sin coincidir, colgad.')]); } }
+      filas.push([pqOn ? 'si' : 'no', pqOn ? t('Capa postcuántica activa en el sonido y la imagen.') : t('Capa postcuántica: no disponible en esta llamada.')]);
+      { const c = codigoAhora(); if (c) { filas.push(['si', t('La clave de la capa postcuántica cambia cada minuto. Código de ahora: {c}.').replace('{c}', c.slice(0, 3) + ' ' + c.slice(3))]); filas.push(['nota', t('Compáralo con la otra persona: si coincide, los dos tienen la misma clave. Si no, esperen al siguiente cambio; si sigue sin coincidir, cuelguen.')]); } }
       if (sas && sas.numero) filas.push([sas.estado === 'coinciden' ? 'si' : 'aviso', sas.estado === 'coinciden' ? t('Número de seguridad comprobado.') : t('Número de seguridad sin comprobar.')]);
       // (la calidad de la conexión ya tiene su indicador; aquí, solo la seguridad. Clases con prefijo: «aviso» ya es el aviso flotante)
       l.textContent = ''; for (const [cl, x] of filas) { const li = document.createElement('li'); li.className = 'seg-' + cl; li.textContent = x; l.appendChild(li); }

@@ -796,6 +796,8 @@ a,button,summary,label,[role="button"]{cursor:pointer}
 #inicio.con-invitacion #como-btn{display:none}
 /* Invitado: sin la barra de la web ni la lista; al terminar, solo el final (dueño, 28 Oct 2026, 15:50) */
 body.modo-invitado .barra,body.modo-invitado #lista,body.modo-invitado #volver-lista,body.modo-invitado #cvolver,body.modo-invitado #como-btn{display:none!important}
+/* sin la lista, la conversación ocupa todo el ancho (auditoría, 30 Oct 2026: en el PC caía en la columna de 300 px de la lista) */
+body.modo-invitado .app.con-lista{grid-template-columns:minmax(0,1fr)}
 .fin-invitado{position:fixed;inset:0;z-index:9999;background:#06080C;color:#F4F6F8;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:10px;padding:24px calc(24px + env(safe-area-inset-right)) calc(24px + env(safe-area-inset-bottom)) calc(24px + env(safe-area-inset-left))}
 .fin-invitado[hidden]{display:none}
 .fin-invitado svg{width:46px;height:46px;fill:none;stroke:#9CC3E4;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;margin-bottom:6px}
@@ -1638,7 +1640,8 @@ body.con-visor{overflow:hidden}
 .gc-archivo-voz .gc-voz{width:min(68vw,280px);min-width:200px}
 @media (min-width:761px){.gc-archivo-voz .gc-voz{width:300px}}
 /* «Mis chats» en azul, igual que «Invitar a chat» (dueño, 29 Oct 2026, 15:53) */
-@media (max-width:760px){#paso-inicio #ver-contactos-inicio{background:#9CC3E4;color:#06080C;border-color:#9CC3E4;min-height:66px}#paso-inicio #ver-contactos-inicio b{color:inherit}#paso-inicio #ver-contactos-inicio:active{background:#8AB4DA}}
+/* «Mis chats», botón principal en el teléfono: el fondo con !important, porque diseno.css pinta .grande de oscuro y dejaba el texto oscuro sobre oscuro (auditoría del móvil, 30 Oct 2026) */
+@media (max-width:760px){#paso-inicio #ver-contactos-inicio{background:#9CC3E4!important;color:#06080C;border-color:#9CC3E4!important;min-height:66px}#paso-inicio #ver-contactos-inicio b{color:inherit}#paso-inicio #ver-contactos-inicio:active{background:#8AB4DA!important}}
 /* Los tres botones del inicio, idénticos: mismo alto, mismo relleno, misma letra y misma separación (dueño, 29 Oct 2026, 17:01:
    «el botón de mis chats tiene un tamaño diferente al de invitar a chat. Los tres tienen que ser iguales») */
 @media (max-width:760px){#paso-inicio #nueva-blindada,#paso-inicio #ver-contactos-inicio,#paso-inicio #ver-como{display:flex;align-items:center;justify-content:center;box-sizing:border-box;width:100%;min-height:62px;height:62px;margin-top:0;padding:0 20px;border-radius:16px;border-width:1px}#paso-inicio #nueva-blindada b,#paso-inicio #ver-contactos-inicio b,#paso-inicio #ver-como b{font-size:17.5px;line-height:1.2;font-weight:600}}
@@ -2261,3 +2264,5 @@ body.modo-llevar{background:#06080C}
 @media (prefers-reduced-motion:reduce){.gc-llamada-codigo.nuevo{animation:none}}
 /* en el PC, el panel de seguridad se abre debajo del título, sin taparlo */
 @media (min-width:761px){.ll-seg{top:calc(114px + env(safe-area-inset-top))}}
+/* 1.0.50: dentro del programa para Windows, Comunicaciones es una pestaña: sin «‹ Volver» a la web */
+html[data-en-programa] #volver{display:none!important}

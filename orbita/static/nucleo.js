@@ -262,8 +262,8 @@ ${doc.secciones.map(tabla).join('')}<p class="nota">${esc(doc.final)}</p></body>
   // de aquí: el mismo árbol (ronda 63: nunca dos menús que se contradigan). Seis opciones con palabras de la calle, primero
   // lo que se viene a hacer y al final descubrir y la ayuda; después, como mucho cuatro opciones por pregunta.
   const GRUPOS = [
-    ['nav', 'Navegar por internet', 'Abre webs y busca sin que te rastreen, con el navegador ZERO.', 'buscar', ['z-web', 'z-buscar', 'z-tor', 'z-que']],
-    ['rad', 'Ver quién me rastrea', 'En cada web, qué empresas intentan llevarse tus datos y de qué países.', 'ojo', ['z-radio', 'z-pdf', 'r-que', 'd-corte']],
+    ['nav', 'Navegar por internet', 'Abre webs y busca con el navegador ZERO, y decide qué rastreo se corta.', 'buscar', ['z-web', 'z-buscar', 'z-tor', 'z-que']],
+    ['rad', 'Ver quién me rastrea', 'En cada web, qué empresas reciben datos de tu visita y de qué países.', 'ojo', ['z-radio', 'z-pdf', 'r-que', 'd-corte']],
     ['dat', 'Ver mis datos', 'Lo que el navegador ZERO ha cortado. Se guarda solo en este navegador.', 'datos', ['datos', 'res-pdf', 'res-video', 'borrar']],
     ['com', 'Hablar y enviar archivos', 'Chatea y manda archivos encriptados a otra persona.', 'chat', ['c-crear', 'c-codigo', 'c-que']],
     ['orb', 'Explorar el planeta', 'Mira por dónde viaja internet: cables, centros de datos y satélites.', 'planeta', ['p-pais', 'p-capas', 'p-directo']],
@@ -291,13 +291,13 @@ ${doc.secciones.map(tabla).join('')}<p class="nota">${esc(doc.final)}</p></body>
     // cada grupo del menú: su línea de explicación y sus opciones
     if (/^m-/.test(id)) { const g = GRUPOS.find((x) => x[0] === id.slice(2)); if (g) return { intro: g[2], t: '¿Qué quieres hacer?', c: g[4] }; }
     switch (id) {
-      case 'saludo': return { t: 'Hola, soy NÚCLEO. ¿Quieres navegar, explorar el planeta o chatear encriptado?', c: ['zero', 'planeta', 'com'] };
+      case 'saludo': return { t: 'Hola, soy NÚCLEO. ¿Quieres navegar, explorar el planeta o usar el chat encriptado?', c: ['zero', 'planeta', 'com'] };
       case 'despedida': return { t: 'Hasta luego. Puedes volver cuando quieras.' };
       case 'gracias': return { t: 'De nada. ¿Quieres hacer algo más?' };
       case 'menu': case 'atras': return { t: 'Te llevo al inicio.', a: () => { cierraSala(); muestraInicio(true); }, va: true };
       case 'ayuda': return { t: 'Esto es lo que puedes pedirme. Pulsa una opción o escríbelo a tu manera.', a: () => panel(true) };
       case 'quien-eres': return { t: 'Soy NÚCLEO, la guía de GUARDIANA: entiendo peticiones concretas y te llevo a cada parte. No soy una IA generativa y no guardo lo que me pides.' };
-      case 'que-es-guardiana': return { x: [['Navegador ZERO', 'Navegar viendo quién intenta llevarse tus datos.'], ['Órbita', 'Ver por dónde viajan tus datos en el planeta.'], ['Comunicaciones', 'Hablar y enviar archivos encriptados con otra persona.']], t: '¿Por dónde empezamos?', c: ['zero', 'planeta', 'com'] };
+      case 'que-es-guardiana': return { x: [['Navegador ZERO', 'Navegar viendo qué empresas reciben datos de tu visita.'], ['Órbita', 'Ver por dónde viajan tus datos en el planeta.'], ['Comunicaciones', 'Hablar y enviar archivos encriptados con otra persona.']], t: '¿Por dónde empezamos?', c: ['zero', 'planeta', 'com'] };
       case 'zero': return { t: 'Abro el navegador ZERO: escribe una dirección o lo que quieras buscar.', a: () => abreZero(), va: true };
       // dueño, 10:55: «cuando pregunta para abrir una web, mejor que no la abras tú: llévalo al navegador y él decide con qué
       // buscador (Google, Brave, Tor). Lo justo y sencillo.» Abrir una web, buscar y la Radiografía llevan al navegador ZERO.
@@ -313,7 +313,7 @@ ${doc.secciones.map(tabla).join('')}<p class="nota">${esc(doc.final)}</p></body>
       case 'p-directo': return { t: 'Te llevo al planeta: a la derecha, en EN DIRECTO, aparece cada corte.', a: () => alPlaneta(), va: true };
       case 'p-caidas': return { t: 'No sigo caídas de internet. En Órbita, los cortes en directo son las conexiones que GUARDIANA corta mientras navegas. ¿Te los enseño?', c: ['p-directo'] };
       case 'p-que': return { t: AYUDA.orbita, c: ['p-sub', 'p-sat', 'p-pais'] };
-      case 'com': return { t: 'Abro Comunicaciones: chat y archivos encriptados de PC a PC.', a: irComunicaciones, va: true };
+      case 'com': return { t: 'Abro Comunicaciones: chat y archivos encriptados de extremo a extremo.', a: irComunicaciones, va: true };
       case 'c-crear': return { t: 'Abro Comunicaciones: pulsa «Crear invitación» y dale el código a la otra persona.', a: () => irComunicaciones('crear'), va: true };
       case 'c-codigo': return { t: 'Abro Comunicaciones: pulsa «Tengo un código» y escribe las 9 cifras.', a: () => irComunicaciones('codigo'), va: true };
       case 'c-que': return { t: AYUDA.com, c: ['c-crear', 'c-codigo'] };
@@ -327,20 +327,20 @@ ${doc.secciones.map(tabla).join('')}<p class="nota">${esc(doc.final)}</p></body>
       case 'seguridad': return { x: [['¿Es seguro?', 'El navegador ZERO abre la web lejos de tu equipo: a tu equipo solo llegan imágenes. Eso reduce riesgos, pero ninguna herramienta protege de todo.'], ['Privacidad', 'NÚCLEO no guarda lo que le pides. Lo que corta el navegador ZERO («Mis datos») se guarda solo en este navegador, y puedes borrarlo cuando quieras.']], t: '¿Qué quieres hacer?', c: ['vpn', 'z-que'] };
       case 'vpn': return { t: 'ZERO no es una VPN: es un navegador aislado. La web se abre en un servidor de GUARDIANA y a tu equipo solo llegan imágenes.', c: ['zero'] };
       case 'precio': return { x: [['Precio', 'Hoy GUARDIANA no cobra nada.']], t: 'No necesitas crear una cuenta para usar el navegador ZERO, Órbita ni Comunicaciones. ¿A cuál quieres entrar?', c: ['zero', 'planeta', 'com'] };
-      case 'idioma': return { t: 'Ahora GUARDIANA está en español e inglés; hay 40 idiomas más en preparación. ¿Cuál prefieres?', c: [{ l: 'Español', id: 'idioma-es', nt: true }, { l: 'English', id: 'idioma-en', nt: true }] };
+      case 'idioma': return { t: 'GUARDIANA está en 42 idiomas; las páginas de información, en español, inglés y portugués. ¿Cuál prefieres?', c: [{ l: 'Español', id: 'idioma-es', nt: true }, { l: 'English', id: 'idioma-en', nt: true }, { l: 'Português', id: 'idioma-pt', nt: true }] };
       // tras cambiar de idioma, la guía sigue en el idioma nuevo, desde el menú principal
-      case 'idioma-es': case 'idioma-en': idioma(id.slice(-2)); return { t: '¿Qué quieres hacer?', menu: true };
+      case 'idioma-es': case 'idioma-en': case 'idioma-pt': idioma(id.slice(-2)); return { t: '¿Qué quieres hacer?', menu: true };
       case 'cuenta': return { t: 'No necesitas crear una cuenta para usar el navegador ZERO, Órbita ni Comunicaciones. ¿A cuál quieres entrar?', c: ['zero', 'planeta', 'com'] };
       case 'contacto': return { t: 'Puedes escribir a hola@guardianagroup.com: lo lee una persona.', enlace: ['mailto:hola@guardianagroup.com', 'hola@guardianagroup.com'] };
       // lo delicado (rondas 53 y 54)
       case 'clave': return { t: 'No escribas contraseñas aquí: NÚCLEO no las necesita y no guarda lo que escribes.' };
       case 'banco': return { t: 'No compartas datos del banco ni de tarjetas aquí. Hoy GUARDIANA no cobra nada.' };
-      case 'hackear': return { t: 'No ayudo a entrar en cuentas, redes o equipos ajenos. Puedo ayudarte a navegar aislado con el navegador ZERO o a chatear encriptado.', c: ['zero', 'com'] };
+      case 'hackear': return { t: 'No ayudo a entrar en cuentas, redes o equipos ajenos. Puedo ayudarte a navegar aislado con el navegador ZERO o a usar el chat encriptado.', c: ['zero', 'com'] };
       case 'robada': return { t: 'Usa la recuperación oficial de ese servicio y cambia tus contraseñas desde su web. Si quieres, te llevo al navegador ZERO.', c: ['zero'] };
       case 'peligro': return { t: 'Si estás en peligro, llama ya a emergencias o a la policía de tu país. NÚCLEO no puede hacer esa llamada.' };
       case 'autolesion': return { t: 'Siento que estés pasando por esto. Si piensas en hacerte daño, llama ahora a emergencias o a una línea de ayuda de tu país; hablar con alguien ayuda.' };
       case 'espian': return { t: 'No puedo revisar tu equipo. Con el navegador ZERO, las webs se abren fuera de tu equipo y en la Radiografía ves quién intenta seguirte.', c: ['z-que', 'z-web'] };
-      case 'insulto': return { t: 'Perdona si no te he entendido. Dime si quieres navegar, ver el planeta o chatear encriptado.', c: ['zero', 'planeta', 'com'] };
+      case 'insulto': return { t: 'Perdona si no te he entendido. Dime si quieres navegar, ver el planeta o usar el chat encriptado.', c: ['zero', 'planeta', 'com'] };
       case 'estafa': return { t: 'Entiendo tu desconfianza. Hoy GUARDIANA no cobra nada, no necesitas cuenta y NÚCLEO no guarda lo que le escribes.', c: ['privacidad', 'contacto'] };
       case 'salud': return { t: 'No doy consejos de salud: un profesional sanitario puede orientarte.' };
       default: return null;
@@ -375,9 +375,9 @@ ${doc.secciones.map(tabla).join('')}<p class="nota">${esc(doc.final)}</p></body>
       + '<h1 class="nuc-paso" id="nuc-saludo">Toma el control de tus datos</h1>' // dueño, 09:42 y 09:49
       + '<p class="nuc-sub nuc-paso" id="nuc-sub"><b>¿Qué deseas hacer?</b></p>'
       + '<div class="nuc-ops nuc-paso" id="nuc-ops" role="group" aria-label="Qué deseas hacer">'
-      + '<button type="button" class="nuc-op" data-n="zero"><i>ZERO</i><b>Navegar con NÚCLEO</b><small>Entra en cualquier web y mira quién intenta llevarse tus datos.</small></button>'
+      + '<button type="button" class="nuc-op" data-n="zero"><i>ZERO</i><b>Navegar con ZERO</b><small>Entra en cualquier web y mira qué empresas reciben datos de tu visita.</small></button>'
       + '<button type="button" class="nuc-op" data-n="planeta"><i>ÓRBITA</i><b>Explorar el planeta</b><small>Cables submarinos, cables terrestres, centros de datos, satélites y cortes en directo.</small></button>'
-      + '<button type="button" class="nuc-op" data-n="com"><i>COMUNICACIONES</i><b>Chat y archivos encriptados</b><small>Para particulares y profesionales: datos y documentación sensible, encriptados de PC a PC.</small></button>'
+      + '<button type="button" class="nuc-op" data-n="com"><i>COMUNICACIONES</i><b>Chat y archivos encriptados</b><small>Para particulares y profesionales: datos y documentación sensible, encriptados de extremo a extremo.</small></button>'
       // dueño, 10:00: «añade uno más: pedir las cosas»; ronda 54: «Pídeselo a NÚCLEO»; dueño, 14:08: «Habla con NÚCLEO»
       + '<button type="button" class="nuc-op nuc-op-n" data-n="nucleo"><i translate="no">NÚCLEO</i><b>Habla con NÚCLEO</b><small>Pídele que te lleve al navegador ZERO, que consulte tus datos o que prepare resúmenes en PDF o en vídeo.</small></button>'
       + '</div>'
@@ -722,7 +722,7 @@ ${doc.secciones.map(tabla).join('')}<p class="nota">${esc(doc.final)}</p></body>
   // al volver de otra página: se rehace el camino, paso a paso, sin repetir nada que haga algo (ni resúmenes ni borrar)
   function reconstruye(cam) {
     if (!cam || !Array.isArray(cam.c) || !(Date.now() - (cam.t || 0) < 3600e3)) return;
-    const NO = new Set(['borrar-si', 'borrar-no', 'idioma-es', 'idioma-en']);
+    const NO = new Set(['borrar-si', 'borrar-no', 'idioma-es', 'idioma-en', 'idioma-pt']);
     for (const e of cam.c) {
       if (!e || typeof e.id !== 'string' || NO.has(e.id)) break;
       const ex = e.extra && typeof e.extra === 'object' ? e.extra : null;

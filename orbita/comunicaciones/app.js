@@ -520,7 +520,7 @@
       if (nueva) {
         clearInterval(muestraInvitacion.reloj);
         // en el teléfono, la nota corta de siempre, como WhatsApp (revisión de diseño, 19:15: la larga era jerga); en el ordenador, la de antes
-        await anotaSistema(c, esMovil() ? 'Mensajes y llamadas encriptados de extremo a extremo.' : 'Sesión blindada establecida. Si queréis, comparad el número de seguridad en «⋯» → «Seguridad y verificación».');
+        await anotaSistema(c, esMovil() ? 'Mensajes y llamadas encriptados de extremo a extremo.' : 'Sesión blindada establecida. Si quieren, comparen el número de seguridad en «⋯» → «Seguridad y verificación».');
         if (ACTUAL === c.id) abreConv(c.id);
         // la invitación se mandó desde el inicio sin otra pantalla (19:17): cuando la otra persona entra, su chat se abre solo,
         // salvo si estás en otra conversación o en una llamada (entonces, un aviso que lo abre al tocarlo)
@@ -1367,7 +1367,7 @@
     const k = document.createElement('span'); k.className = 'cu-k'; k.textContent = est === 'firmado' ? T('Llegó a su destino intacto') : est === 'pendiente' ? T('Pendiente de confirmar la entrega') : T('Entrega sin confirmar'); // (20:21: «que se entienda bien»)
     const t = document.createElement('span'); t.className = 'cu-t'; t.setAttribute('translate', 'no'); t.textContent = (ar.nombre || '') + ' · ' + tamano(ar.bytes || 0);
     const s = document.createElement('span'); s.className = 'cu-s';
-    s.textContent = est === 'firmado' ? T('Custodiado de principio a fin y confirmado por los dos.') : est === 'pendiente' ? T('Falta la confirmación del equipo de la otra persona.') : T('El equipo de la otra persona no ha podido confirmar el registro.');
+    s.textContent = est === 'firmado' ? T('Encriptado de principio a fin y confirmado por los dos equipos.') : est === 'pendiente' ? T('Falta la confirmación del equipo de la otra persona.') : T('El equipo de la otra persona no ha podido confirmar el registro.');
     d.append(ico, k, t, s);
     if (reg.archivo && VJ()) {
       const fila = document.createElement('div'); fila.className = 'fila';
@@ -2195,8 +2195,8 @@
         R.citaFin(p.T);
         pintaLista(); pintaContactos(); sincronizaAvisos();
         const quien = nombreConv(c, true);
-        if (!ACTUAL && !(LL && LL.ocupado)) { verContactos = false; pintaMarcar(false); cierraHoja('h-num'); abreConv(c.id); aviso(T('Ya podéis hablar con {n}.').replace('{n}', quien)); }
-        else aviso(T('{n} también te ha añadido: ya podéis hablar.').replace('{n}', quien));
+        if (!ACTUAL && !(LL && LL.ocupado)) { verContactos = false; pintaMarcar(false); cierraHoja('h-num'); abreConv(c.id); aviso(T('Ya puedes hablar con {n}.').replace('{n}', quien)); }
+        else aviso(T('{n} también te ha añadido: ya pueden hablar.').replace('{n}', quien));
         return c;
       }
       return null;
@@ -2506,11 +2506,11 @@
     const hm = (t) => new Date(t).toLocaleTimeString(LOC(), { hour: '2-digit', minute: '2-digit' });
     fila(ses ? 'gc-ok' : 'gc-aviso', T('Encriptado'), ses ? T('De extremo a extremo; confirmación de clave recibida.') + ' ' + T('Claves de este encuentro') + ': ' + hm(c.sesion.desde) + ' · ' + T('encuentro') + ' ' + (c.encuentros || 1) : T('Acordando claves…'));
     const verOk = esB(c) ? !!(c.verificada && c.suVerificada) : !!c.verificada;
-    fila(verOk ? 'gc-ok' : 'gc-aviso', T('Identidad'), verOk ? T('Verificada por las dos personas.') : esB(c) ? T('Pendiente de la verificación mutua: no sale nada hasta que los dos comprueben el número.') : T('Sin verificar: compara el número de seguridad con la otra persona (escudo).'));
+    fila(verOk ? 'gc-ok' : 'gc-aviso', T('Identidad'), verOk ? T('Verificada por las dos personas.') : esB(c) ? T('Sin verificar: compara el número de seguridad con la otra persona.') : T('Sin verificar: compara el número de seguridad con la otra persona (escudo).'));
     const presente = !!(c.suId && c.miembros.has(c.suId));
     fila(presente ? 'gc-ok' : 'gc-aviso', T('Otro extremo'), presente ? T('La otra pestaña está conectada a la sala.') : T('La otra pestaña está desconectada; lo pendiente espera en tu equipo.'));
     const lat = R.latencia, hace = R.ultimoPong ? Math.round((Date.now() - R.ultimoPong) / 1000) : null;
-    fila(R.abierto && hace != null && hace < 40 ? 'gc-ok' : 'gc-aviso', T('Servidor'), (R.abierto ? T('responde') + (lat != null ? ' · ' + lat + ' ms' : '') + (hace != null ? ' · ' + T('hace') + ' ' + hace + ' s' : '') : T('sin respuesta · reconectando')) + ' · ' + T('transporta contenido encriptado; sin almacenamiento de mensajes'));
+    fila(R.abierto && hace != null && hace < 40 ? 'gc-ok' : 'gc-aviso', T('Servidor'), (R.abierto ? T('responde') + (lat != null ? ' · ' + lat + ' ms' : '') + (hace != null ? ' · ' + T('hace') + ' ' + hace + ' s' : '') : T('sin respuesta · reconectando')) + ' · ' + T('transporta contenido encriptado; solo guarda, encriptados, los mensajes pendientes de entrega (7 días como mucho)'));
     const msgs = c.mensajes.filter((m) => m.tipo === 'texto' && m.dir === 'suya').length, arch = c.mensajes.filter((m) => m.tipo === 'archivo' && (m.estado === 'recibido' || m.estado === 'entregado' || m.estado === 'leido')).length, incompletos = c.mensajes.filter((m) => m.tipo === 'archivo' && m.estado === 'fallo').length;
     fila(inc ? 'gc-alerta' : 'gc-ok', T('Verificación'), (inc ? inc + ' ' + (inc === 1 ? T('dato que no superó la autenticación: descartado') : T('datos que no superaron la autenticación: descartados')) + ' · ' : '') + msgs + ' ' + (msgs === 1 ? T('mensaje recibido autenticado') : T('mensajes recibidos autenticados')) + ' · ' + arch + ' ' + (arch === 1 ? T('archivo completo') : T('archivos completos')) + (incompletos ? ' · ' + incompletos + ' ' + T('incompletos') : ''));
     fila(rech ? 'gc-aviso' : 'gc-ok', T('Entradas rechazadas'), rech ? rech + ' · ' + T('intento de entrada con otra identidad: rechazado; la conversación sigue intacta') : T('Ninguna.'));
@@ -3022,8 +3022,8 @@
   }
   function muestraAlarma(por, porElla) {
     const a = $('#alarma'); if (!a) return;
-    $('#alarma-por').textContent = por === 'numero' ? T('El número de seguridad de la llamada no coincidía en los dos equipos: alguien podía estar en medio.') : por === 'integridad' ? T('Llegaron mensajes o piezas manipulados: alguien intentó alterar o colarse en la conversación.') : T('El otro equipo detectó un ataque.');
-    $('#alarma-donde').textContent = porElla ? T('El otro equipo dio la alarma. Esta conversación se ha destruido aquí también: claves, mensajes y archivos.') : T('Para que nada pueda ser robado, esta conversación se ha destruido en los dos equipos: claves, mensajes y archivos.');
+    $('#alarma-por').textContent = por === 'numero' ? T('El número de seguridad de la llamada no coincidía en los dos equipos: alguien podía estar en medio.') : por === 'integridad' ? T('Llegaron mensajes o piezas manipulados: alguien intentó alterar la conversación o entrar en ella.') : T('El otro equipo detectó un ataque.');
+    $('#alarma-donde').textContent = porElla ? T('El otro equipo dio la alarma. Esta conversación se ha borrado aquí también: claves, mensajes y archivos.') : T('Por precaución, esta conversación se ha borrado en los dos equipos: claves, mensajes y archivos.');
     a.hidden = false; try { $('#alarma-ok').focus(); } catch (_) {}
   }
   // Cortar un archivo a medias (dueño, 28 Oct 2026: «por si alguien quiere cortar, que lo pueda cortar»): desde los dos
@@ -3062,7 +3062,7 @@
     if (!navigator.geolocation) { aviso(T('Este navegador no puede dar la ubicación.')); return; }
     navigator.geolocation.getCurrentPosition((p) => {
       const d = aprox ? 2 : 5, la = p.coords.latitude.toFixed(d), lo = p.coords.longitude.toFixed(d), z = aprox ? 14 : 17;
-      const precision = aprox ? T('aproximada, unos 1 km') : '±' + Math.max(1, Math.round(p.coords.accuracy || 0)) + ' m';
+      const precision = aprox ? T('aproximada, en torno a 1 km') : '±' + Math.max(1, Math.round(p.coords.accuracy || 0)) + ' m';
       const texto = '📍 ' + T('Ubicación') + ': ' + la + ', ' + lo + ' (' + precision + ')\nhttps://www.openstreetmap.org/?mlat=' + la + '&mlon=' + lo + '#map=' + z + '/' + la + '/' + lo;
       const ta = $('#texto'); ta.value = texto; ta.dispatchEvent(new Event('input')); $('#enviar').click();
     }, () => aviso(T('No se ha podido obtener la ubicación: revisa el permiso del navegador.')), { enableHighAccuracy: !aprox, timeout: 15000, maximumAge: 30000 });
@@ -3097,7 +3097,7 @@
     if (esB(c)) {
       fila(c.sesion ? 'gc-ok' : 'gc-info', T('Sesión blindada'), T('Algoritmos de la suite CNSA 2.0: ML-KEM-1024 y ECDH P-384 para las claves, ML-DSA-87 y ECDSA P-384 para las firmas, AES-256-GCM y SHA-384.'));
       fila('gc-ok', T('Renovación de claves'), T('Claves nuevas cada 5 minutos y en cada reconexión: lo anterior deja de poder leerse con lo nuevo.'));
-      fila(c.verificada && c.suVerificada ? 'gc-ok' : 'gc-aviso', T('Verificación mutua'), c.verificada && c.suVerificada ? T('Los dos han comprobado el número de seguridad.') : T('Hasta que los dos comprueben el número de seguridad, no se envía nada.'));
+      fila(c.verificada && c.suVerificada ? 'gc-ok' : 'gc-aviso', T('Verificación mutua'), c.verificada && c.suVerificada ? T('Los dos han comprobado el número de seguridad.') : T('Sin verificar: compara el número de seguridad con la otra persona.'));
     } else fila(c.sesion ? 'gc-ok' : 'gc-info', T('Encriptación de extremo a extremo'), T('AES-256-GCM con una clave distinta por mensaje; la sesión se renueva en cada conexión (ECDH P-256 con firma ECDSA).'));
     fila('gc-info', T('Servidor de GUARDIANA'), T('encamina tramas encriptadas que no puede leer; ve conexión y volumen, no contenido; no guarda historial'));
     fila(c.incidencias ? 'gc-alerta' : 'gc-ok', T('Verificación'), c.incidencias ? (c.incidencias + ' ' + (c.incidencias === 1 ? T('incidencia') : T('incidencias')) + ': ' + T('datos que no superaron la autenticación, descartados y anotados en la conversación.')) : T('Cada mensaje y cada trozo de archivo se autentica al llegar; hasta ahora, todos superaron la verificación.'));
@@ -3921,7 +3921,8 @@
     // dueño, 10:53: «todas las páginas tienen que tener un botón de volver a donde estás»: a NÚCLEO si se vino desde NÚCLEO,
     // si no, al inicio (la portada). Dueño, 28 Oct 2026, 13:35: «Regresar a NÚCLEO» era demasiado grande: «Atrás», como en las
     // demás webs (el lector de pantalla sigue diciendo adónde lleva)
-    try { const v = sessionStorage.getItem('guardiana-vuelta') === 'nucleo', a = $('#volver'); if (a) { a.href = v ? '/orbita/?nucleo=pide' : '/orbita/'; const sp = a.querySelector('span'); if (sp) sp.textContent = v ? T('Atrás') : T('Inicio'); a.setAttribute('aria-label', v ? T('Volver a NÚCLEO') : T('Volver al inicio')); } } catch (_) {}
+    // en el teléfono (marco de app, /marco/marco.js) no hay NÚCLEO: «‹ Inicio» lleva a Inicio (revisión del 30 Oct 2026)
+    try { const v = sessionStorage.getItem('guardiana-vuelta') === 'nucleo', a = $('#volver'); if (a && window.GuardianaMarco && GuardianaMarco.activo) { a.href = '/inicio/'; } else if (a) { a.href = v ? '/orbita/?nucleo=pide' : '/orbita/'; const sp = a.querySelector('span'); if (sp) sp.textContent = v ? T('Atrás') : T('Inicio'); a.setAttribute('aria-label', v ? T('Volver a NÚCLEO') : T('Volver al inicio')); } } catch (_) {}
     // dueño, 10:20: arriba, la red neuronal de NÚCLEO (la misma firma que la portada)
     try { const l = $('.inicio .red-nucleo'); if (l && window.RedNucleo) window.RedNucleo(l, { nace: false }); } catch (_) {}
     // dueño, 10:10: la explicación, en un desplegable bajo los dos botones
@@ -4046,7 +4047,7 @@
       const enBlindado = () => { const c = CONVS.get(ACTUAL); return !!(c && extrasB(c) && !$('#conv').hidden); };
       const ordenador = !!(matchMedia('(hover: hover) and (pointer: fine)').matches);
       if (tapa) {
-        addEventListener('keyup', (e) => { if (e.key !== 'PrintScreen' || !enBlindado()) return; tapa.hidden = false; clearTimeout(capT); capT = setTimeout(() => { tapa.hidden = true; }, 3000); try { navigator.clipboard.writeText(T('Modo blindado: no se puede capturar')).catch(() => {}); } catch (_) {} });
+        addEventListener('keyup', (e) => { if (e.key !== 'PrintScreen' || !enBlindado()) return; tapa.hidden = false; clearTimeout(capT); capT = setTimeout(() => { tapa.hidden = true; }, 3000); try { navigator.clipboard.writeText(T('Modo blindado: la pantalla se tapó durante la captura.')).catch(() => {}); } catch (_) {} });
         if (ordenador) { addEventListener('blur', () => { if (enBlindado()) { clearTimeout(capT); tapa.hidden = false; } }); addEventListener('focus', () => { tapa.hidden = true; }); }
       } }
     $('#velo-pista').addEventListener('keydown', (e) => { if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); descubre(e); } });
@@ -4603,7 +4604,7 @@
   }
   function muestraCortada(c, ausente) {
     const n = c.nombre || T('la otra persona');
-    $('#llevar-cortada-l').textContent = (ausente ? T('El teléfono de {n} no está conectado ahora mismo. Si su pantalla sigue abierta, podréis volver a llamar en cuanto vuelva.') : T('Se ha perdido la conexión con el teléfono de {n}. Mientras su pantalla siga abierta, podéis volver a llamar.')).replace('{n}', n);
+    $('#llevar-cortada-l').textContent = (ausente ? T('El teléfono de {n} no está conectado ahora mismo. Si su pantalla sigue abierta, podrán volver a llamar en cuanto vuelva.') : T('Se ha perdido la conexión con el teléfono de {n}. Mientras su pantalla siga abierta, pueden volver a llamar.')).replace('{n}', n);
     $('#llevar-cortada').dataset.sala = c.id; $('#llevar-cortada').hidden = false;
   }
   // «Volver a llamar» (en el teléfono o en el equipo de la otra persona): si la llamada anterior aún se está cerrando, se espera a

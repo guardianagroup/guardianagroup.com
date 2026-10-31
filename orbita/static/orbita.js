@@ -89,6 +89,12 @@
     { id: 'sistema', n: 'GUARDIANA OS', s: 'En preparación', estado: 'EN PREPARACIÓN', separada: true, url: null, desarrollo: true,
       d: 'Un sistema operativo de código abierto que se descarga desde aquí: verás y podrás cortar cada conexión de tu equipo, programa por programa.',
       aparte: 'Cada descarga llevará su firma para comprobar que nadie la ha tocado. Lo que no hará: frenar el phishing ni a quien entrega su contraseña, ni ejecutar programas de Windows sin virtualizarlos.' });
+  // 1.0.50 (dueño, 30 Oct 2026, 21:05: «todo tiene que ir dentro del programa»): dentro del programa para Windows, ZERO y
+  // Comunicaciones son sus propias pestañas; aquí no se ofrecen sus puertas web (el programa marca el documento con
+  // data-en-programa, solo en guardianagroup.com).
+  if (document.documentElement.dataset.enPrograma === '1') {
+    for (let i = PUERTAS.length - 1; i >= 0; i--) if (PUERTAS[i].id === 'zero' || PUERTAS[i].id === 'comunicaciones') PUERTAS.splice(i, 1);
+  }
   const nav = $('puertas');
   const NP = PUERTAS.length;
   PUERTAS.forEach((p, i) => {

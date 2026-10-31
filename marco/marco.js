@@ -53,6 +53,10 @@
     try { e.viewTransition.types.add(tipo); } catch (_) {}
   });
 
+  // la página de la que se viene (para que «‹» sea Atrás de verdad)
+  const PREVIA = 'guardiana-marco-previa', AQUI = 'guardiana-marco-aqui';
+  try { const a = sessionStorage.getItem(AQUI); if (a && a !== location.pathname + location.search) sessionStorage.setItem(PREVIA, a); sessionStorage.setItem(AQUI, location.pathname + location.search); } catch (_) {}
+  addEventListener('pageshow', (e) => { if (e.persisted) try { sessionStorage.setItem(AQUI, location.pathname + location.search); } catch (_) {} });
   const listo = (f) => (document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', f, { once: true }) : f());
   listo(() => {
     const B = document.body; if (!B) return;
@@ -90,7 +94,9 @@
         const b = document.createElement('a'); b.className = 'mc-atras'; b.href = atras; b.innerHTML = SVG('<path d="M15 5l-7 7 7 7"/>') + '<span></span>';
         const nombreAtras = () => { b.querySelector('span').textContent = pi >= 0 ? et(PEST[pi][2]) : et(4); b.setAttribute('aria-label', et(4) + ' · ' + b.querySelector('span').textContent); };
         nombreAtras(); addEventListener('guardiana-idioma', nombreAtras); addEventListener('guardiana-marco-idioma', nombreAtras);
-        b.addEventListener('click', (ev) => { marca('atras'); let ref = ''; try { ref = document.referrer ? new URL(document.referrer).origin : ''; } catch (_) {} if (ref === location.origin && history.length > 1) { ev.preventDefault(); history.back(); } });
+        // si la página anterior es justo adonde lleva «‹», es Atrás de verdad (sin entrada nueva en el historial). La web va con
+        // «no-referrer»: la página anterior la recuerda el propio marco al salir de cada página (revisión del 30 Oct 2026)
+        b.addEventListener('click', (ev) => { marca('atras'); let previa = ''; try { previa = sessionStorage.getItem(PREVIA) || ''; } catch (_) {} let destino = ''; try { const u = new URL(b.href, location.href); destino = u.pathname; } catch (_) {} if (previa && destino && previa.split('?')[0] === destino && history.length > 1) { ev.preventDefault(); history.back(); } });
         cab.appendChild(b);
       }
       const t = document.createElement('div'); t.className = 'mc-t'; t.textContent = tit ? (window.GuardianaIdioma ? GuardianaIdioma.t(tit) : tit) : (grande ? grande.textContent.trim() : document.title.split('·')[0].trim());

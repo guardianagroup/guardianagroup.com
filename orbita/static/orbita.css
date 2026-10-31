@@ -1112,3 +1112,6 @@ body.mapa-cerca:not(.limpio) .zoom { background: none; padding: 0; backdrop-filt
 .capas { gap: 2px; }
 .capas button { padding: 7px 12px 7px 9px; gap: 7px; }
 .lugar-btn { padding: 8px 11px; gap: 7px; }
+/* 1.0.50: dentro del programa para Windows, Órbita es una pestaña más: sin «Conocer GUARDIANA» y la marca no lleva fuera */
+html[data-en-programa] #conocer{display:none!important}
+html[data-en-programa] header .marca{pointer-events:none;cursor:default}

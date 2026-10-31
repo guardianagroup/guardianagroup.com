@@ -31,7 +31,7 @@
 /* las páginas de texto existen en español, inglés y portugués: cada enlace, en el idioma elegido */
 (() => {
   const RUTAS = { '/como-funciona.html': ['/en/how-it-works.html', '/pt/como-funciona.html'], '/terminos.html': ['/en/terms.html', '/pt/termos.html'],
-    '/privacidad.html': ['/en/privacy.html', '/pt/privacidade.html'], '/zero.html': ['/en/zero.html', '/zero.html'] };
+    '/privacidad.html': ['/en/privacy.html', '/pt/privacidade.html'], '/zero.html': ['/en/zero.html', '/pt/zero.html'] };
   const pinta = () => {
     const l = (window.GuardianaIdioma && GuardianaIdioma.lang) || 'es';
     document.querySelectorAll('a[href]').forEach((a) => {
@@ -39,5 +39,6 @@
       a.setAttribute('href', l === 'es' ? base : (l === 'pt' || l === 'pt-pt') ? RUTAS[base][1] : RUTAS[base][0]);
     });
   };
-  pinta(); addEventListener('guardiana-idioma', pinta);
+  // idioma.js decide el idioma al terminar de leerse la página y, en inglés y portugués, no avisa: se repinta después
+  pinta(); addEventListener('guardiana-idioma', pinta); document.addEventListener('DOMContentLoaded', () => setTimeout(pinta, 0)); setTimeout(pinta, 0);
 })();

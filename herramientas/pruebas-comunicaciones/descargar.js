@@ -40,26 +40,34 @@ const pasosVisibles = (p, sel) => p.evaluate((sel) => [...document.querySelector
 (async () => {
   const browser = await chromium.launch();
 
-  // 1. la portada en el ordenador: arriba, junto a «Entrar» y en el cierre; el manifiesto de GUARDIANA entera
+  // 1. la portada en el ordenador (dueño, 30 Oct 2026, 20:27–20:38): arriba solo la marca, el idioma y «Descargar GUARDIANA»; sin
+  //    «Entrar» ni «En construcción»; el botón abre un menú pequeño (Windows · macOS próximamente) y Windows empieza la descarga
   const W = await equipo(browser, 'portada-PC', PC);
+  await W.route('**/descargas/**/*.msi', (r) => r.fulfill({ status: 200, body: 'MSI', headers: { 'content-type': 'application/x-msi' } }));
   await W.goto(WEB); await espera(1200);
-  const botones = await W.evaluate(() => [...document.querySelectorAll('[data-bajar]')].map((a) => ({ txt: a.textContent.replace(/\s+/g, ' ').trim(), en: a.closest('header') ? 'cabecera' : a.closest('#final') ? 'cierre' : a.closest('.hero') ? 'portada' : '?' })));
-  comprueba(botones.length === 3 && ['cabecera', 'portada', 'cierre'].every((x) => botones.some((b) => b.en === x)), 'portada: «Descargar GUARDIANA» arriba, junto a «Entrar» y en el cierre', botones);
+  const botones = await W.evaluate(() => [...document.querySelectorAll('.dl-b')].filter((b) => getComputedStyle(b.parentNode).display !== 'none').map((a) => ({ txt: a.textContent.replace(/\s+/g, ' ').trim(), en: a.closest('header') ? 'cabecera' : a.closest('#final') ? 'cierre' : a.closest('.hero') ? 'portada' : '?' })));
+  comprueba(botones.length === 3 && ['cabecera', 'portada', 'cierre'].every((x) => botones.some((b) => b.en === x)), 'portada: «Descargar GUARDIANA» arriba, en el inicio y en el cierre', botones);
   comprueba(botones.every((b) => /Descargar/.test(b.txt) && /GUARDIANA/.test(b.txt)), 'el botón dice «Descargar GUARDIANA»', botones);
+  const cab = await W.evaluate(() => [...document.querySelectorAll('header.nav a, header.nav button')].filter((e) => e.offsetParent && getComputedStyle(e).display !== 'none').map((e) => e.textContent.replace(/\s+/g, ' ').trim()));
+  comprueba(!cab.some((t) => /^(Entrar|La subasta|Qué es|Servicios|Comunicaciones|Programa para Windows)$/.test(t)), 'cabecera: sin La subasta, Qué es, Servicios, Comunicaciones, Programa para Windows ni Entrar', cab);
+  comprueba(await W.evaluate(() => ![...document.querySelectorAll('.hero a, #final a')].some((a) => a.offsetParent && /^Entrar$/.test(a.textContent.trim())) && !/En construcción/.test(document.body.innerText)), 'inicio y cierre: sin «Entrar» ni «En construcción»');
   comprueba((await manifiesto(W)).join() === '/manifest.webmanifest', 'portada en el ordenador: el manifiesto de GUARDIANA entera', await manifiesto(W));
   await W.screenshot({ path: path.join(OUT, '96-portada-pc.png') });
-  await W.click('header [data-bajar]'); await espera(1400);
-  comprueba(await W.evaluate(() => { const h = document.querySelector('.bajar-hoja'); return !!h && /Instalar GUARDIANA en este ordenador/.test(h.textContent) && /icono de instalar/.test(h.textContent); }), 'ordenador sin la ventana del navegador: cómo instalarla (el icono de instalar de la barra)');
-  await W.screenshot({ path: path.join(OUT, '97-portada-pc-pasos.png') });
+  await W.click('header .dl-b'); await espera(500);
+  const menu = await W.evaluate(() => { const m = document.querySelector('header .dl-m'); return m && [...m.querySelectorAll('.dl-i')].map((a) => ({ txt: a.textContent.replace(/\s+/g, ' ').trim(), href: a.getAttribute('href'), dl: a.hasAttribute('download'), off: a.getAttribute('aria-disabled') === 'true' })); });
+  comprueba(!!menu && menu.length === 2 && /^Windows/.test(menu[0].txt) && /\/descargas\/\d+\.\d+\.\d+\/guardiana-[\d.]+-windows-x64\.msi$/.test(menu[0].href) && menu[0].dl, 'el menú: Windows descarga el instalador en español', menu);
+  comprueba(!!menu && /^macOS/.test(menu[1].txt) && /Próximamente/.test(menu[1].txt) && menu[1].off && !menu[1].href, 'el menú: macOS, próximamente y sin descarga', menu);
+  await W.screenshot({ path: path.join(OUT, '97-portada-pc-menu.png') });
+  const [descarga] = await Promise.all([W.waitForEvent('download', { timeout: 5000 }).catch(() => null), W.click('header .dl-m .dl-i[href]')]);
+  await espera(300);
+  comprueba(!!descarga && /guardiana-[\d.]+-windows-x64\.msi$/.test(descarga.suggestedFilename()), 'un clic en Windows: empieza la descarga', descarga && descarga.suggestedFilename());
+  comprueba(await W.evaluate(() => { const o = document.querySelector('header .dl-ok'); return !!o && /Descarga iniciada/.test(o.textContent) && /\/instalar\.html#descargar$/.test(o.querySelector('a').getAttribute('href')); }), 'y avisa: «Descarga iniciada. Cómo instalarlo →»');
   await W.keyboard.press('Escape'); await espera(200);
-  comprueba(await W.evaluate(() => !document.querySelector('.bajar-hoja')), 'se cierra con Escape');
-  const W2 = await equipo(browser, 'portada-PC-aviso', PC, { aviso: true });
-  await W2.goto(WEB); await espera(1200);
-  await W2.click('header [data-bajar]'); await espera(400);
-  comprueba(await W2.evaluate(() => window.__instalar) === 1, 'ordenador con la ventana del navegador: un clic, «Instalar»');
-  await W2.evaluate(() => dispatchEvent(new Event('appinstalled'))); await espera(900);
-  comprueba(await W2.evaluate(() => { const h = document.querySelector('.bajar-hoja'); return !!h && /ya está en tu ordenador/.test(h.textContent) && /escritorio/.test(h.textContent); }), 'instalada: «Listo: GUARDIANA ya está en tu ordenador… el icono en el escritorio…»');
-  await W2.screenshot({ path: path.join(OUT, '98-portada-pc-lista.png') });
+  comprueba(await W.evaluate(() => !document.querySelector('.dl-m') && document.activeElement && document.activeElement.classList.contains('dl-b')), 'Escape lo cierra y deja el foco en el botón');
+  const W2 = await equipo(browser, 'portada-PC-en', PC);
+  await W2.goto(WEB + '?lang=en'); await espera(2600);
+  await W2.evaluate(() => document.querySelector('.hero .dl-b').click()); await espera(400);
+  comprueba(await W2.evaluate(() => /-windows-x64-en\.msi$/.test(document.querySelector('.hero .dl-m .dl-i[href]').getAttribute('href'))), 'en inglés, el instalador en inglés');
 
   // 2. la portada en el iPhone: ya no es el relato largo sino Inicio, la pantalla de la app (dueño, 30 Oct 2026, 15:16: «que no
   //    le aparezca el descargar, solamente que le aparezca entrar»; 15:27 y 18:37: la web en el teléfono, como una app)

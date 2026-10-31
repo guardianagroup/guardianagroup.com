@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="es" data-marco-pestana="inicio" data-marco-atras="/inicio/" data-marco-grande="main h1"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Cómo funciona GUARDIANA · GUARDIANA</title>
+<title>Cómo funciona · GUARDIANA</title>
 <meta name="description" content="Cómo funciona GUARDIANA desde la web: el navegador ZERO, Comunicaciones encriptadas de extremo a extremo, Órbita y NÚCLEO. Qué hace cada uno, qué no hace y cómo comprobarlo.">
 <link rel="canonical" href="https://guardianagroup.com/como-funciona.html">
 <meta name="robots" content="index,follow">
 <link rel="alternate" hreflang="es" href="https://guardianagroup.com/como-funciona.html">
 <link rel="alternate" hreflang="en" href="https://guardianagroup.com/en/how-it-works.html">
 <link rel="alternate" hreflang="pt" href="https://guardianagroup.com/pt/como-funciona.html">
-<link rel="alternate" hreflang="x-default" href="https://guardianagroup.com/en/how-it-works.html"><meta property="og:title" content="Cómo funciona GUARDIANA · GUARDIANA">
+<link rel="alternate" hreflang="x-default" href="https://guardianagroup.com/en/how-it-works.html"><meta property="og:title" content="Cómo funciona · GUARDIANA">
 <meta property="og:description" content="Cómo funciona GUARDIANA desde la web: el navegador ZERO, Comunicaciones encriptadas de extremo a extremo, Órbita y NÚCLEO. Qué hace cada uno, qué no hace y cómo comprobarlo.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://guardianagroup.com/como-funciona.html">
@@ -17,7 +17,7 @@
 <meta property="og:locale" content="es_CO">
 <meta property="og:site_name" content="GUARDIANA">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Cómo funciona GUARDIANA · GUARDIANA">
+<meta name="twitter:title" content="Cómo funciona · GUARDIANA">
 <meta name="twitter:description" content="Cómo funciona GUARDIANA desde la web: el navegador ZERO, Comunicaciones encriptadas de extremo a extremo, Órbita y NÚCLEO. Qué hace cada uno, qué no hace y cómo comprobarlo.">
 <meta name="twitter:image" content="https://guardianagroup.com/og-2-es.png">
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-GRnbe5xsWeye68UtIl3Buj2pyLE2pzTNrogV8k7NGhw=' 'sha256-bU2DpsE0Cm6QLD/1DjyiujyAAM9aqMeE0fMUgE/Ul7c=' 'sha256-MlbQMR0Dfgvz3HSY6jnL/XNZWuca2148M35PnSyGzMU='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'none'">
@@ -423,10 +423,10 @@ header.top .descargar:hover{background:var(--azul-oscuro);color:#E8ECF1}header.t
 
 <section id="comunicaciones">
   <div class="cab-sec"><span class="k">COMUNICACIONES</span><h2>Mensajes, archivos y llamadas entre dos personas, sin cuenta ni teléfono.</h2><p>Todo se encripta en tu navegador antes de salir. El servidor de GUARDIANA que lo transporta, el relé, pasa paquetes que no puede leer y no guarda nombres ni claves; si la otra persona no está conectada, guarda el mensaje en un sobre cerrado que solo su teléfono abre, hasta entregarlo (7 días como mucho).</p></div>
-  <div class="pasos"><div class="paso"><span class="num">1</span><h3>CREAS UNA INVITACIÓN</h3><p>Un código de 9 cifras, válido durante 10 minutos y para un solo uso.</p></div><div class="paso"><span class="num">2</span><h3>LA OTRA PERSONA LO ESCRIBE</h3><p>Se lo pasas por teléfono o por cualquier aplicación de mensajería.</p></div><div class="paso"><span class="num">3</span><h3>COMPRUEBAS EL NÚMERO</h3><p>Compara el número de seguridad con la otra persona por otra vía: si coincide, nadie se ha puesto en medio.</p></div><div class="paso"><span class="num">4</span><h3>ESCRIBES, ENVÍAS Y LLAMAS</h3><p>Chat, notas de voz, archivos de cualquier tamaño, llamadas y videollamadas. Al terminar, la conversación se borra de tu navegador y se pide su borrado en el de la otra persona.</p></div></div>
+  <div class="pasos"><div class="paso"><span class="num">1</span><h3>CREAS UNA INVITACIÓN</h3><p>Un código de 9 cifras, válido durante 10 minutos y para un solo uso.</p></div><div class="paso"><span class="num">2</span><h3>LA OTRA PERSONA LO ESCRIBE</h3><p>Se lo pasas por teléfono o por cualquier aplicación de mensajería.</p></div><div class="paso"><span class="num">3</span><h3>COMPRUEBAS EL NÚMERO</h3><p>Compara el número de seguridad con la otra persona por otra vía: si coincide, nadie se ha puesto en medio.</p></div><div class="paso"><span class="num">4</span><h3>ESCRIBES, ENVÍAS Y LLAMAS</h3><p>Chat, notas de voz, archivos de hasta 4 GB, llamadas y videollamadas. Al terminar, la conversación se borra de tu navegador y se pide su borrado en el de la otra persona.</p></div></div>
   <div class="ia">
-    <div class="tarjeta"><span class="k">ENCRIPTACIÓN</span><p>Mensajes y archivos usan un acuerdo de claves híbrido postcuántico (ECDH P-256 y ML-KEM-768) y una clave AES-256-GCM distinta para cada mensaje y cada trozo de archivo. La sesión blindada usa los algoritmos de la suite CNSA 2.0, con una firma clásica y otra postcuántica. Las llamadas y las videollamadas van con DTLS-SRTP, la encriptación estándar de las llamadas del navegador, que no es postcuántica.</p></div>
-    <div class="tarjeta"><span class="k">COMPROBANTE DE ENTREGA</span><p>Cada archivo llega en trozos que se comprueban uno a uno. Al final, los dos navegadores firman un comprobante con la huella SHA-256 del archivo, que cualquiera puede comprobar en <a href="/orbita/comunicaciones/verificar/">Verificar un comprobante</a>.</p></div>
+    <div class="tarjeta"><span class="k">ENCRIPTACIÓN</span><p>Mensajes y archivos usan un acuerdo de claves híbrido postcuántico (ECDH P-256 y ML-KEM-768) y una clave AES-256-GCM distinta para cada mensaje y cada trozo de archivo. La sesión blindada usa los algoritmos de la suite CNSA 2.0, con una firma clásica y otra postcuántica. Las llamadas y las videollamadas van con DTLS-SRTP, la encriptación estándar de las llamadas del navegador; en Chrome y Edge se añade una capa postcuántica cuando los dos equipos la tienen activa, y la pantalla de la llamada lo indica.</p></div>
+    <div class="tarjeta"><span class="k">COMPROBANTE DE ENTREGA (ULTRA, PRÓXIMAMENTE)</span><p>Cada archivo llega en trozos que se comprueban uno a uno. Al final, los dos navegadores firman un comprobante con la huella SHA-256 del archivo, que cualquiera puede comprobar en <a href="/orbita/comunicaciones/verificar/">Verificar un comprobante</a>.</p></div>
   </div>
   <p class="nota">Lo que no puede garantizar: la encriptación no protege un equipo o un navegador ya comprometidos, ni impide que quien recibe guarde copias o haga capturas. El relé ve las direcciones IP, la sala, las horas y el volumen de datos: no es anonimato.</p>
 </section>
