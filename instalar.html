@@ -110,6 +110,8 @@ main .pc-descarga h2{font-family:'Schibsted Grotesk',system-ui,sans-serif!import
 .pc-btn small{font:500 12.5px/1.2 'Hanken Grotesk',system-ui,sans-serif;color:#18324a}
 .pc-otros{margin:14px 0 0;font-size:14px;color:#A9B3BE}
 .pc-nota{margin:14px 0 0;max-width:64ch;font-size:13px;color:#8fa9bd}
+.pc-pausa{display:grid;gap:10px;max-width:68ch;margin:6px 0 0;padding:16px 18px;border-radius:14px;border:1px solid rgba(240,199,127,.34);background:rgba(240,199,127,.06)}
+.pc-pausa p{margin:0;font-size:15px;line-height:1.55;color:#D8DEE5}.pc-pausa b{color:#F0C77F;font-weight:600}
 .pc-huellas{margin-top:14px;font-size:13px;color:#A9B3BE}.pc-huellas summary{cursor:pointer;color:#9CC3E4}
 .pc-huellas p{margin:8px 0 0}.pc-huellas span{display:block;font-size:12px;color:#8fa9bd}
 </style>
@@ -164,21 +166,18 @@ details.seccion>div{padding:0 20px 18px}
 <p class="k">DESCARGAR</p>
 <h1>GUARDIANA, en la web y en tu PC</h1>
 <p class="lead">Desde esta web, GUARDIANA funciona sin instalar nada, en el ordenador, la tablet o el móvil. Para tu PC con Windows, el programa GUARDIANA añade el navegador ZERO y la vigilancia de todo el equipo.</p>
-<!-- 30 Oct 2026 (dueño, 13:31: «publícalo en la web y que ponga descargar programa GUARDIANA… que se haga desde la web»): el programa
+<!-- 30 Oct 2026, 20:21 (dueño: «Retíralo»): la 1.0.48 se retira por el fallo del vigilante (tarea de SYSTEM con un script que el usuario podía cambiar); la 1.0.49 lo corrige.
+     Antes, 13:31 (dueño: «publícalo en la web y que ponga descargar programa GUARDIANA… que se haga desde la web»): el programa
      para Windows 1.0.48 (con el Vigía), compilado y probado en un Windows limpio (candidato.yml, ejecución 41129796122). Sin firma de código todavía
      (llega con el certificado de Certum): se dice tal cual. -->
 <section class="pc-descarga" id="descargar" aria-labelledby="pc-descarga-t">
-  <p class="pc-k">PROGRAMA PARA WINDOWS · VERSIÓN 1.0.48</p>
+  <p class="pc-k">PROGRAMA PARA WINDOWS · DESCARGA EN PAUSA</p>
   <h2 id="pc-descarga-t">GUARDIANA para Windows</h2>
   <p class="pc-d">El navegador ZERO, que corta en tiempo real los intentos de seguirte y te enseña cada subasta de publicidad, y la vigilancia de todo el equipo: a qué empresas se conecta tu PC. Y el Vigía: durante tus llamadas de GUARDIANA, si otro programa usa tu micrófono, tu cámara o tu pantalla, o hay un control remoto, la llamada se pone en pausa y te dice cuál (se activa en Comunicaciones › Ajustes). Si el programa deja de funcionar, tu PC recupera su conexión solo.</p>
-  <a class="pc-btn" href="/descargas/1.0.48/guardiana-1.0.48-windows-x64.msi" download>Descargar programa GUARDIANA<small>Windows 10 y 11 · 55,7 MB · español</small></a>
-  <p class="pc-otros">En otro idioma: <a href="/descargas/1.0.48/guardiana-1.0.48-windows-x64-en.msi" download>English</a> · <a href="/descargas/1.0.48/guardiana-1.0.48-windows-x64-pt.msi" download>Português</a></p>
-  <p class="pc-nota">Mientras llega nuestro certificado de firma de código, Windows avisará de «Editor desconocido»: pulsa «Más información» y después «Ejecutar de todas formas». La instalación pide la contraseña de administrador. Para Mac, próximamente.</p>
-  <details class="pc-huellas"><summary>Huellas SHA-256 de los instaladores</summary>
-    <p><span>Español</span><code class="huella">202371b92395e316045a0bed07d00309c5d5aa75554988960397fee8ccc65d70</code></p>
-    <p><span>English</span><code class="huella">2200452187bebe78171d5de43cf4a59c8b5a7ce0e4a10150c007ed06ec57354b</code></p>
-    <p><span>Português</span><code class="huella">7e6658854ea1eefecba98ae7c0e0b450d01b93fb387ee402f239564030bc2e7b</code></p>
-  </details>
+  <div class="pc-pausa" role="note">
+    <p><b>Hemos retirado la versión 1.0.48.</b> El 30 de octubre de 2026, una revisión interna encontró que una tarea del programa podía ser aprovechada, por otra cuenta del mismo equipo o por un programa malicioso que ya estuviera en él, para obtener los máximos permisos de Windows. La versión 1.0.49 lo corrige y se publicará en esta página cuando supere todas las pruebas.</p>
+    <p><b>Si ya la instalaste,</b> te recomendamos desinstalarla ahora desde Configuración › Aplicaciones › Aplicaciones instaladas, o instalar la 1.0.49 encima en cuanto esté disponible: la sustituye y corrige el fallo.</p>
+  </div>
 </section>
 <div class="web-op"><a href="/orbita/#radiografias"><span class="e">Gratis</span><span class="t">Tu radiografía</span><span class="d">Qué ve de ti cualquier web y a quién habla cada página.</span><span class="ir">Ver mi radiografía →</span></a><a href="/orbita/"><span class="e">Gratis</span><span class="t">Órbita</span><span class="d">El mapa de la infraestructura de internet: cables, centros de datos y satélites.</span><span class="ir">Abrir Órbita →</span></a><a href="/orbita/#zero"><span class="e ambar">Demostración</span><span class="t">ZERO</span><span class="d">El navegador de GUARDIANA, en demostración.</span><span class="ir">Probar ZERO →</span></a></div>
 <p class="muted">¿Dudas, o una licencia que ya compraste? Escríbenos a <a href="mailto:hola@guardianagroup.com">hola@guardianagroup.com</a>.</p>
