@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self' data:; connect-src 'self'; base-uri 'none'; form-action 'none'; upgrade-insecure-requests">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="referrer" content="no-referrer">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#06080C">
+<title>GUARDIANA · Firma de publicaciones</title>
+<link rel="icon" href="/favicon.ico">
+<link rel="stylesheet" href="firma.css?v=20261101a">
+</head>
+<body>
+<main>
+  <header>
+    <p class="marca" translate="no">GUARDIANA</p>
+    <h1>Firma de publicaciones</h1>
+    <p class="sub">Cada publicación de la web y de los servidores la firmas tú con tu llave de acceso: Face ID en el iPhone o Windows Hello en el PC. Tu llave no sale nunca de tu aparato.</p>
+  </header>
+
+  <p class="aviso" id="aviso" role="alert" hidden></p>
+
+  <section class="tarjeta" id="sin-llaves" hidden>
+    <h2>Crear tu llave de firma</h2>
+    <p>Se hace una vez en cada aparato con el que quieras firmar. Te pedirá Face ID, la huella o tu PIN.</p>
+    <label for="nombre">Nombre de este aparato</label>
+    <input id="nombre" type="text" maxlength="40" placeholder="Por ejemplo, iPhone o PC de casa" autocomplete="off">
+    <button type="button" class="boton principal" id="crear">Crear mi llave</button>
+  </section>
+
+  <section class="tarjeta" id="pendiente" hidden>
+    <h2 id="p-num">Publicación</h2>
+    <p class="nota" id="p-nota"></p>
+    <dl>
+      <dt>Preparada</dt><dd id="p-fecha"></dd>
+      <dt>Caduca</dt><dd id="p-caduca"></dd>
+      <dt>Servidores</dt><dd id="p-servidores"></dd>
+    </dl>
+    <p id="p-man"></p>
+    <p class="ncambios" id="p-ncambios"></p>
+    <ul class="cambios" id="p-cambios"></ul>
+    <button type="button" class="boton principal grande" id="firmar" disabled>Firmar con Face ID o Windows Hello</button>
+  </section>
+
+  <section class="tarjeta" id="nada" hidden>
+    <h2>No hay nada pendiente de firma</h2>
+    <p>Cuando haya una publicación nueva, aparecerá aquí.</p>
+  </section>
+
+  <section class="tarjeta" id="resultado" hidden></section>
+
+  <p class="otra" id="otra-llave" hidden><button type="button" class="enlace" id="crear2">Crear una llave en otro aparato</button></p>
+
+  <footer>
+    <p>Esta página no envía nada a ningún sitio: la firma se copia y la pegas tú en la conversación con quien publica. Así funciona el sello de GUARDIANA: los servidores y el programa solo aceptan lo que lleva tu firma.</p>
+  </footer>
+</main>
+<script src="firma.js?v=20261101a"></script>
+</body>
+</html>
