@@ -22,7 +22,10 @@
   // dueño, 10:53: «todas las páginas que se abren tienen que tener un botón de volver a donde estás»: se recuerda de dónde se
   // salió (la portada o la sección de NÚCLEO) y los botones de volver lo dicen («Inicio» o «Regresar a NÚCLEO»).
   const VUELTA = 'guardiana-vuelta';
-  const vuelta = () => { try { return sessionStorage.getItem(VUELTA) || 'portada'; } catch (_) { return 'portada'; } };
+  // dueño, 1 Nov 2026, 16:34: «quiero que quites la palabra núcleo, porque el núcleo ya no va a estar»: la sección de NÚCLEO
+  // (pedirle las cosas) queda apagada y la portada es la de GUARDIANA. Su código sigue aquí, sin ninguna entrada.
+  const SALA_ACTIVA = false;
+  const vuelta = () => { let v = 'portada'; try { v = sessionStorage.getItem(VUELTA) || 'portada'; } catch (_) {} return v === 'nucleo' && !SALA_ACTIVA ? 'portada' : v; };
   const ponVuelta = (v) => { try { sessionStorage.setItem(VUELTA, v); } catch (_) {} pintaVuelta(); };
 
   // ---------- acciones reales ----------
@@ -386,9 +389,9 @@ ${doc.secciones.map(tabla).join('')}<p class="nota">${esc(doc.final)}</p></body>
   let ini = null, laRed = null;
   function construyeInicio() {
     const d = document.createElement('section');
-    d.className = 'nuc-ini'; d.id = 'nuc-ini'; d.setAttribute('aria-label', 'NÚCLEO, la entrada de GUARDIANA');
+    d.className = 'nuc-ini'; d.id = 'nuc-ini'; d.setAttribute('aria-label', 'La entrada de GUARDIANA');
     d.innerHTML = '<canvas class="nuc-lienzo" aria-hidden="true"></canvas>'
-      + '<p class="nuc-k nuc-paso" translate="no">NÚCLEO</p>'
+      + '<p class="nuc-k nuc-paso" translate="no">GUARDIANA</p>'
       + '<h1 class="nuc-paso" id="nuc-saludo">Toma el control de tus datos</h1>' // dueño, 09:42 y 09:49
       + '<p class="nuc-sub nuc-paso" id="nuc-sub"><b>¿Qué deseas hacer?</b></p>'
       + '<div class="nuc-ops nuc-paso" id="nuc-ops" role="group" aria-label="Qué deseas hacer">'
@@ -397,8 +400,6 @@ ${doc.secciones.map(tabla).join('')}<p class="nota">${esc(doc.final)}</p></body>
       + '<button type="button" class="nuc-op" data-n="com"><i>COMUNICACIONES</i><b>Chat y archivos encriptados</b><small>Para particulares y profesionales: datos y documentación sensible, encriptados de extremo a extremo.</small></button>'
       // 31 Oct 2026: el Escáner PC (static/escaner.js), solo dentro del programa para Windows (marcaPortada la enseña)
       + '<button type="button" class="nuc-op" data-n="escaner" hidden><i>ESCÁNER PC</i><b>Escanear este equipo</b><small>Revisa a fondo antivirus, cámara, micrófono, control remoto y lo que este equipo envía fuera.</small></button>'
-      // dueño, 10:00: «añade uno más: pedir las cosas»; ronda 54: «Pídeselo a NÚCLEO»; dueño, 14:08: «Habla con NÚCLEO»
-      + '<button type="button" class="nuc-op nuc-op-n" data-n="nucleo"><i translate="no">NÚCLEO</i><b>Habla con NÚCLEO</b><small>Pídele que te lleve al navegador ZERO, que consulte tus datos o que prepare resúmenes en PDF o en vídeo.</small></button>'
       + '</div>'
       // dueño, 12:23: la página del planeta es la portada de la web y su «Empezar» trae aquí; fuera «¿Qué es GUARDIANA?».
       // Arriba a la izquierda, «Volver» a esa portada (dueño, 10:53: «tienes que poder ir y volver»).
@@ -535,6 +536,7 @@ ${doc.secciones.map(tabla).join('')}<p class="nota">${esc(doc.final)}</p></body>
   });
   // camino: el de la guía antes de irse a otra página (Comunicaciones), para volver al mismo paso
   function abreSala(apila, camino) {
+    if (!SALA_ACTIVA) { muestraInicio(true); return; }
     if (!sala) sala = construyeSala();
     if (!sala.hidden) return;
     if (apila !== false && !PUERTA_EN_URL) ponEnHistoria();
@@ -854,7 +856,7 @@ ${doc.secciones.map(tabla).join('')}<p class="nota">${esc(doc.final)}</p></body>
   let visto = false; try { visto = sessionStorage.getItem('guardiana-nucleo') === '1'; sessionStorage.setItem('guardiana-nucleo', '1'); } catch (_) {}
   // el camino de la guía, si se volvió de otra página (Comunicaciones): se lee una vez y se borra
   let camino = null; try { camino = JSON.parse(sessionStorage.getItem(CAMINO) || 'null'); sessionStorage.removeItem(CAMINO); } catch (_) {}
-  if (q.get('nucleo') === 'pide') { try { history.replaceState(Object.assign({}, history.state || {}, { nucleo: 'sala' }), ''); } catch (_) {} abreSala(false, vuelta() === 'nucleo' ? camino : null); }
+  if (q.get('nucleo') === 'pide' && SALA_ACTIVA) { try { history.replaceState(Object.assign({}, history.state || {}, { nucleo: 'sala' }), ''); } catch (_) {} abreSala(false, vuelta() === 'nucleo' ? camino : null); }
   else if (q.get('nucleo') === '0' || PUERTA_EN_URL) botonInicio(true);
   else muestraInicio(visto);
   window.GuardianaNucleo = { inicio: () => muestraInicio(true), sala: () => abreSala(), pide: escribe };

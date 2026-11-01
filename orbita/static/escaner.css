@@ -311,12 +311,8 @@ body.dentro .escaner-btn, body.m2 .escaner-btn { display: none; }
 .escaner-btn svg { flex: none; color: var(--accent, #9CC3E4); }
 .escaner-btn[aria-pressed="true"] { background: rgba(156,195,228,.18); border-color: rgba(156,195,228,.6); color: #F4F6F8; }
 .nuc-op[hidden] { display: none; }
-@media (min-width: 1401px) { .nuc-ops.con-escaner { grid-template-columns: repeat(5, minmax(0, 1fr)); width: min(1260px, 100%); } }
-@media (min-width: 1101px) and (max-width: 1400px) {
-  .nuc-ops.con-escaner { grid-template-columns: repeat(6, minmax(0, 1fr)); width: min(1040px, 100%); }
-  .nuc-ops.con-escaner > .nuc-op { grid-column: span 2; }
-  .nuc-ops.con-escaner > .nuc-op[data-n="escaner"] { grid-column: 2 / span 2; }
-}
+/* sin NÚCLEO (dueño, 1 Nov 2026, 16:34): cuatro tarjetas en una fila */
+@media (min-width: 1101px) { .nuc-ops.con-escaner { grid-template-columns: repeat(4, minmax(0, 1fr)); width: min(1180px, 100%); } }
 
 /* ---------- pantallas más estrechas ---------- */
 @media (max-width: 1180px) {
