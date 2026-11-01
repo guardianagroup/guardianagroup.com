@@ -1,0 +1,16 @@
+/* GUARDIANA · solo en el PC (1 Nov 2026). La paleta de GUARDIANA. */
+@font-face{font-family:'IBM Plex Sans';font-weight:400;font-display:swap;src:url(/fonts/IBMPlexSans-400-latin.woff2) format('woff2')}
+@font-face{font-family:'IBM Plex Sans';font-weight:600;font-display:swap;src:url(/fonts/IBMPlexSans-600-latin.woff2) format('woff2')}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:#06080C;color:#F4F6F8}
+body{display:flex;align-items:center;justify-content:center;min-height:100%;padding:calc(32px + env(safe-area-inset-top)) 24px calc(32px + env(safe-area-inset-bottom));
+  font:16px/1.55 'IBM Plex Sans',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;-webkit-text-size-adjust:100%;text-align:center;
+  background:radial-gradient(60% 50% at 50% 38%,rgba(156,195,228,.10),transparent 70%),#06080C}
+main{max-width:420px}
+svg{display:block;margin:0 auto 22px}
+.marca{margin:0 0 18px;font-size:12px;font-weight:600;letter-spacing:.24em;color:#9CC3E4}
+h1{margin:0 0 12px;font-size:24px;line-height:1.3;font-weight:600}
+.sub{margin:0 0 34px;color:#A9B3BE}
+.pie{margin:0;font-size:13.5px;color:#6F7B88}
+.pie span{margin:0 10px}
+.pie a{color:#9CC3E4;text-decoration:none}
