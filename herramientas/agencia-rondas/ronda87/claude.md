@@ -14,6 +14,11 @@
   auditoría independiente sin fallos graves. https://www.phoronix.com/news/GotaTun-Rust-WireGuard-OSS ·
   https://www.techradar.com/vpn/vpn-services/no-major-vulnerabilities-mullvads-wireguard-implementation-gets-thumbs-up-from-independent-security-audit
 
+- **abuse.ch (corrige a Gemini, que las daba por libres):** desde el 4 nov 2025, MalwareBazaar, URLhaus y ThreatFox son
+  de uso libre solo sin ánimo de lucro; el uso con ánimo de lucro puede pedir una suscripción (Spamhaus), y las descargas
+  piden una llave del portal de abuse.ch. Solo Feodo Tracker, SSL Blacklist y YARAify son CC0. Usarlas es decisión del
+  dueño. https://abuse.ch/terms-of-use/ · https://bazaar.abuse.ch/export/
+
 ## Por comprobar antes de usarlo en público
 
 Precios de servidores (Hetzner, Vultr, 1984 Hosting), fechas de incautaciones y auditorías de otros proveedores, cifras de
