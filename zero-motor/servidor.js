@@ -1169,6 +1169,15 @@ async function main() {
       if (origenPermitido(req)) { cab['access-control-allow-origin'] = String(req.headers.origin).replace(/\/$/, ''); cab.vary = 'Origin'; }
       res.writeHead(200, cab); return res.end(crypto.randomBytes(65536));
     }
+    if (req.url === '/vigilante') {
+      // el sello (1 Nov 2026): el último informe del vigilante (zero-motor/vigilante.js, cada 15 min): si la web es la firmada
+      // por el dueño, los certificados nuevos del dominio y el DNS. Solo datos públicos.
+      const cab = { 'content-type': 'application/json', 'cache-control': 'no-store' };
+      if (origenPermitido(req)) { cab['access-control-allow-origin'] = String(req.headers.origin).replace(/\/$/, ''); cab.vary = 'Origin'; }
+      let cuerpo = '{"ok":null,"motivo":"el vigilante todavía no ha pasado por este servidor"}';
+      try { cuerpo = fs.readFileSync(process.env.VIGILANTE_SALIDA || '/opt/guardiana/vigilante.json', 'utf8'); } catch (_) {}
+      res.writeHead(200, cab); return res.end(cuerpo);
+    }
     if (req.url === '/salud') {
       // la página de ZERO (otro origen) pregunta aquí antes de usar este motor: CORS solo para los orígenes permitidos
       const cab = { 'content-type': 'application/json', 'cache-control': 'no-store' };

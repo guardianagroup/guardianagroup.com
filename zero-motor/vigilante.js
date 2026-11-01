@@ -154,7 +154,8 @@ async function dns(problemas) {
 async function vuelta() {
   const memoria = lee(MEMORIA, {});
   const problemas = [];
-  const r = { v: 1, servidor: os.hostname(), revisado: ahora() };
+  let dominio = ''; try { dominio = fs.readFileSync('/etc/guardiana/dominio', 'utf8').trim(); } catch (_) {}
+  const r = { v: 1, servidor: dominio, revisado: ahora() };
   try { r.web = await web(memoria, problemas); } catch (e) { r.web = { error: e.message }; problemas.push('no se pudo revisar la web: ' + e.message); }
   try { r.certificados = await certificados(memoria, problemas); } catch (e) { r.certificados = { error: e.message }; }
   try { r.dns = await dns(problemas); } catch (e) { r.dns = { error: e.message }; }

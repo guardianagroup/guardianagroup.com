@@ -69,7 +69,10 @@ mkdir -p "$BASE" "$NAVEGADORES" /etc/guardiana
 chown zero:zero "$BASE" "$NAVEGADORES"
 
 paso "Código del motor ($REPO, rama $RAMA)"
-if [ -d "$DIR/.git" ]; then
+if [ -n "${ZERO_SELLADO:-}" ] && [ -d "$DIR/.git" ]; then
+  # el sello (1 Nov 2026): esta reinstalación la pidió una versión ya comprobada con la firma del dueño; se queda esa
+  echo "  versión firmada ya comprobada: se queda la del disco"
+elif [ -d "$DIR/.git" ]; then
   sudo -u zero git -C "$DIR" fetch -q --depth 1 origin "$RAMA"
   sudo -u zero git -C "$DIR" checkout -q -f FETCH_HEAD
 else
@@ -117,32 +120,49 @@ Persistent=true
 WantedBy=timers.target
 EOF
 
-paso "Actualización automática del motor (cada 15 min desde la rama $RAMA)"
+paso "El sello: el motor solo pasa a versiones firmadas por el dueño (mira la rama $RAMA cada 15 min)"
+# 1 Nov 2026 (dueño, 16:21–16:30: «sellar la página web… del máximo nivel posible»). Antes, cualquier cambio en la rama
+# llegaba solo a los servidores. Ahora lo que llega tiene que llevar la firma del dueño (sello/, zero-motor/sello.js):
+#  - zero-motor/sello-actualiza.sh (usuario zero) trae la rama y solo pone una versión si su publicación vigente lleva la
+#    firma del dueño, comprobada con las llaves instaladas aquí, y su zero-motor/ es exactamente el firmado;
+#  - zero-motor/sello-aplica.sh (root) lo vuelve a comprobar por su cuenta antes de reiniciar o reinstalar, y reinstala con
+#    el instalador de una copia comprobada;
+#  - el comprobador, esos dos guiones y las llaves (/etc/guardiana/sello-llaves.json) son de root y solo cambian en una
+#    reinstalación firmada; la última publicación aplicada queda en /var/lib/guardiana/sello-seq (no se vuelve atrás).
 echo "$DOMINIO" > /etc/guardiana/dominio
-cat > "$BASE/actualizar-motor.sh" <<EOF
-#!/usr/bin/env bash
-# Trae la última versión del motor desde el repositorio; deja una marca si cambió (el servicio reinicia o reinstala).
-set -e
-cd "$DIR"
-antes=\$(git rev-parse HEAD)
-inst_antes=\$(sha256sum zero-motor/instalar.sh | cut -c1-16)
-git fetch -q --depth 1 origin "$RAMA"
-git checkout -q -f FETCH_HEAD
-despues=\$(git rev-parse HEAD)
-inst_despues=\$(sha256sum zero-motor/instalar.sh | cut -c1-16)
-rm -f "$BASE/.cambio" "$BASE/.reinstala"
-if [ "\$inst_antes" != "\$inst_despues" ]; then touch "$BASE/.reinstala"; echo "instalador nuevo: se reinstala"
-elif [ "\$antes" != "\$despues" ]; then touch "$BASE/.cambio"; echo "motor actualizado: \$antes → \$despues"; fi
-EOF
-chmod 755 "$BASE/actualizar-motor.sh"
+FUENTE="${ZERO_FUENTE:-$DIR}"
+LIB=/usr/local/lib/guardiana
+install -d -m 755 "$LIB" /var/lib/guardiana
+for f in sello.js sello-actualiza.sh sello-aplica.sh vigilante.js; do install -m 755 "$FUENTE/zero-motor/$f" "$LIB/$f"; done
+LLAVES_TMP=$(mktemp)
+if [ -f "$FUENTE/sello/llaves.json" ]; then cp "$FUENTE/sello/llaves.json" "$LLAVES_TMP"
+else sudo -u zero git -C "$DIR" show HEAD:sello/llaves.json > "$LLAVES_TMP" 2>/dev/null || : ; fi
+if node -e 'const l=JSON.parse(require("fs").readFileSync(process.argv[1],"utf8")).llaves; if(!Array.isArray(l)||!l.length) process.exit(1)' "$LLAVES_TMP" 2>/dev/null; then
+  install -m 644 "$LLAVES_TMP" /etc/guardiana/sello-llaves.json
+  echo "  llaves del dueño: $(node -p 'JSON.parse(require("fs").readFileSync("/etc/guardiana/sello-llaves.json","utf8")).llaves.length')"
+else
+  rojo "  sin llaves del dueño en sello/llaves.json: el motor no se actualizará hasta que las haya"
+fi
+rm -f "$LLAVES_TMP"
+# la publicación de la versión instalada: desde ella no se vuelve atrás
+V=$(mktemp -d)
+if sudo -u zero git -C "$DIR" archive --format=tar HEAD zero-motor sello 2>/dev/null | tar -x --no-same-owner -C "$V" 2>/dev/null \
+   && R=$(env -i PATH=/usr/bin:/bin SELLO_LLAVES=/etc/guardiana/sello-llaves.json "$(command -v node)" "$LIB/sello.js" servidor "$V" zero-motor); then
+  echo "$R" | sed -n 's/.*"seq":\([0-9]*\).*/\1/p' > /var/lib/guardiana/sello-seq
+  echo "  versión instalada: publicación $(cat /var/lib/guardiana/sello-seq) firmada por el dueño"
+else
+  rojo "  la versión instalada no lleva una firma válida del dueño todavía: ${R:-sin sello}"
+fi
+rm -rf "$V"
+rm -f "$BASE/actualizar-motor.sh"
 cat > /etc/systemd/system/zero-actualiza.service <<EOF
 [Unit]
-Description=GUARDIANA ZERO · actualización del motor desde el repositorio
+Description=GUARDIANA ZERO · actualización del motor, solo a versiones firmadas por el dueño
 [Service]
 Type=oneshot
 User=zero
-ExecStart=/usr/bin/bash $BASE/actualizar-motor.sh
-ExecStartPost=+/bin/bash -c 'if [ -f $BASE/.reinstala ]; then rm -f $BASE/.reinstala; bash $DIR/zero-motor/instalar.sh "\$(cat /etc/guardiana/dominio)"; elif [ -f $BASE/.cambio ]; then rm -f $BASE/.cambio; systemctl restart zero-motor; fi'
+ExecStart=/usr/bin/bash $LIB/sello-actualiza.sh $DIR $RAMA $BASE
+ExecStartPost=+/usr/bin/bash $LIB/sello-aplica.sh
 EOF
 cat > /etc/systemd/system/zero-actualiza.timer <<EOF
 [Unit]
@@ -153,15 +173,49 @@ OnUnitActiveSec=15min
 [Install]
 WantedBy=timers.target
 EOF
+# el vigilante del sello: la web firmada, los certificados nuevos y el DNS, cada 15 minutos; el motor lo enseña en /vigilante
+cat > /etc/systemd/system/zero-vigilante.service <<EOF
+[Unit]
+Description=GUARDIANA · vigilante del sello (la web firmada, certificados y DNS)
+After=network-online.target
+[Service]
+Type=oneshot
+User=zero
+Environment=SELLO_LLAVES=/etc/guardiana/sello-llaves.json VIGILANTE_SALIDA=$BASE/vigilante.json VIGILANTE_MEMORIA=$BASE/vigilante-memoria.json
+ExecStart=/usr/bin/node $LIB/vigilante.js
+SuccessExitStatus=1
+TimeoutStartSec=20min
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=full
+ProtectHome=true
+EOF
+cat > /etc/systemd/system/zero-vigilante.timer <<EOF
+[Unit]
+Description=GUARDIANA · vigilante del sello cada 15 minutos
+[Timer]
+OnBootSec=4min
+OnUnitActiveSec=15min
+RandomizedDelaySec=90
+[Install]
+WantedBy=timers.target
+EOF
 
 paso "Playwright $PLAYWRIGHT_VERSION y Chromium"
 cd "$DIR/zero-motor"
 [ -f package.json ] || sudo -u zero npm init -y >/dev/null
 sudo -u zero npm install --no-audit --no-fund --save-exact "playwright@$PLAYWRIGHT_VERSION" >/dev/null
 sudo -u zero env PLAYWRIGHT_BROWSERS_PATH="$NAVEGADORES" npx --yes playwright install chromium >/dev/null
-npx --yes playwright install-deps chromium >/dev/null
+# 1 Nov 2026 (el sello): lo que necesita root (dependencias del sistema y Google Chrome) se hace con una copia de Playwright
+# de root, no con la del usuario zero
+PWR=/usr/local/lib/guardiana/playwright
+if [ "$(node -p "require('$PWR/node_modules/playwright/package.json').version" 2>/dev/null)" != "$PLAYWRIGHT_VERSION" ]; then
+  rm -rf "$PWR"; install -d -m 755 "$PWR"
+  (cd "$PWR" && npm init -y >/dev/null && npm install --no-audit --no-fund --ignore-scripts --save-exact "playwright@$PLAYWRIGHT_VERSION" >/dev/null)
+fi
+"$PWR/node_modules/.bin/playwright" install-deps chromium >/dev/null
 # 27 Oct 2026: Google Chrome para los vídeos (H.264/AAC; el Chromium libre no los reproduce). Si falla, el motor usa Chromium.
-if npx --yes playwright install chrome >/dev/null 2>&1; then echo "  Google Chrome instalado (vídeos H.264/AAC)"; else echo "  Aviso: no se pudo instalar Google Chrome; el motor seguirá con Chromium y algunos vídeos no se verán" >&2; fi
+if "$PWR/node_modules/.bin/playwright" install chrome >/dev/null 2>&1; then echo "  Google Chrome instalado (vídeos H.264/AAC)"; else echo "  Aviso: no se pudo instalar Google Chrome; el motor seguirá con Chromium y algunos vídeos no se verán" >&2; fi
 
 paso "Configuración ($ENVF)"
 RAM_MB=$(awk '/MemTotal/ {print int($2/1024)}' /proc/meminfo 2>/dev/null || echo 4096)
@@ -252,7 +306,7 @@ denied-peer-ip=fe80::-febf:ffff:ffff:ffff:ffff:ffff:ffff:ffff
 EOF
   chmod 640 /etc/turnserver.conf; chown root:turnserver /etc/turnserver.conf 2>/dev/null || true
   # el certificado de la web (lo saca y renueva Caddy) se copia para coturn; a diario, por si se ha renovado
-  cat > "$BASE/coturn-certificado.sh" <<'CERT'
+  cat > "/usr/local/lib/guardiana/coturn-certificado.sh" <<'CERT'
 #!/usr/bin/env bash
 # Copia a /etc/coturn/tls el certificado que Caddy tiene para el dominio del motor; reinicia coturn solo si ha cambiado.
 set -e
@@ -269,7 +323,8 @@ if ! cmp -s "$C" /etc/coturn/tls/cert.pem || ! cmp -s "$K" /etc/coturn/tls/key.p
   echo "certificado de coturn al día"
 fi
 CERT
-  chmod 755 "$BASE/coturn-certificado.sh"
+  chmod 755 "/usr/local/lib/guardiana/coturn-certificado.sh"
+  rm -f "$BASE/coturn-certificado.sh"
   cat > /etc/systemd/system/guardiana-coturn-certificado.service <<EOF
 [Unit]
 Description=GUARDIANA · certificado TLS para el relé de llamadas (coturn)
@@ -277,7 +332,7 @@ After=caddy.service
 
 [Service]
 Type=oneshot
-ExecStart=/usr/bin/bash $BASE/coturn-certificado.sh
+ExecStart=/usr/bin/bash /usr/local/lib/guardiana/coturn-certificado.sh
 EOF
   cat > /etc/systemd/system/guardiana-coturn-certificado.timer <<EOF
 [Unit]
@@ -292,7 +347,7 @@ WantedBy=timers.target
 EOF
   systemctl daemon-reload
   systemctl enable -q --now guardiana-coturn-certificado.timer 2>/dev/null || true
-  bash "$BASE/coturn-certificado.sh" || true
+  bash "/usr/local/lib/guardiana/coturn-certificado.sh" || true
   if [ -f /etc/default/coturn ]; then sed -i 's/^#\?TURNSERVER_ENABLED=.*/TURNSERVER_ENABLED=1/' /etc/default/coturn; grep -q '^TURNSERVER_ENABLED=1' /etc/default/coturn || echo 'TURNSERVER_ENABLED=1' >> /etc/default/coturn; fi
   systemctl enable -q coturn 2>/dev/null || true
   systemctl restart coturn || rojo "  coturn no arranca: journalctl -u coturn -n 30 (el relé sigue, sin llamadas)"
@@ -457,6 +512,7 @@ paso "Arrancando el motor"
 systemctl daemon-reload
 systemctl enable -q zero-listas.timer; systemctl start zero-listas.timer
 systemctl enable -q zero-actualiza.timer; systemctl start zero-actualiza.timer
+systemctl enable -q zero-vigilante.timer; systemctl start zero-vigilante.timer
 systemctl enable -q zero-motor
 systemctl restart zero-motor
 for i in $(seq 1 20); do
