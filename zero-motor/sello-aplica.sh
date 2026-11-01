@@ -9,9 +9,11 @@ COMPRUEBA=/usr/local/lib/guardiana/sello.js
 LLAVES=/etc/guardiana/sello-llaves.json
 SEQ=/var/lib/guardiana/sello-seq
 NODE=$(command -v node)
-[ -f "$B/.reinstala" ] || [ -f "$B/.cambio" ] || exit 0
+# .reinstala: instalador o sello nuevos; .cambio: motor nuevo; .sello: solo una publicación nueva (se apunta su número)
+[ -f "$B/.reinstala" ] || [ -f "$B/.cambio" ] || [ -f "$B/.sello" ] || exit 0
 reinstala=0; [ -f "$B/.reinstala" ] && reinstala=1
-rm -f "$B/.reinstala" "$B/.cambio"
+reinicia=0; [ -f "$B/.cambio" ] && reinicia=1
+rm -f "$B/.reinstala" "$B/.cambio" "$B/.sello"
 tmp=$(mktemp -d); trap 'rm -rf "$tmp"' EXIT
 mkdir "$tmp/v"
 if ! sudo -u zero git -C "$D" archive --format=tar HEAD zero-motor sello > "$tmp/v.tar" 2>/dev/null; then
@@ -29,6 +31,6 @@ seq=$(printf '%s' "$r" | sed -n 's/.*"seq":\([0-9]*\).*/\1/p')
 echo "aplica: publicación $seq firmada por el dueño ($r)"
 if [ "$reinstala" = 1 ]; then
   ZERO_SELLADO=1 ZERO_FUENTE="$tmp/v" bash "$tmp/v/zero-motor/instalar.sh" "$(cat /etc/guardiana/dominio)"
-else
+elif [ "$reinicia" = 1 ]; then
   systemctl restart zero-motor
 fi

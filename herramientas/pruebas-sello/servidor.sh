@@ -85,6 +85,9 @@ git -C "$T" rm -q enlace.html && git -C "$T" commit -qm "sin enlace" && git -C "
 : > "$P/instalar.log"; sed -i 's/instalar v1/instalar v2/' "$T/zero-motor/instalar.sh"; publica "instalador v2"; vuelta
 comprueba 'grep -q "instalar v2 SELLADO=1 FUENTE=sí motor.prueba" "$P/instalar.log"' "7 reinstala con la copia firmada ($A | $B | $(cat "$P/instalar.log"))"
 comprueba '[ "$(cat /var/lib/guardiana/sello-seq)" = 3 ]' "7 queda la publicación 3"
+# 7b) una publicación firmada que solo cambia la web: el motor no se reinicia, pero su número queda apuntado
+: > "$P/systemctl.log"; echo '<p>web nueva</p>' > "$T/index.html"; publica "solo la web"; vuelta
+comprueba '[ "$(cat /var/lib/guardiana/sello-seq)" = 4 ] && [ ! -s "$P/systemctl.log" ]' "7b solo la web: se apunta la nº 4 sin reiniciar ($A | $B)"
 # 8) zero cambia el instalador en el disco y pide reinstalar: root ejecuta el firmado, no el del disco
 : > "$P/instalar.log"; sudo -u zero sed -i 's/instalar v2/instalar MANIPULADO/' /opt/guardiana/web/zero-motor/instalar.sh
 sudo -u zero touch /opt/guardiana/.reinstala; B=$(PATH="$FAKE:$PATH" bash /usr/local/lib/guardiana/sello-aplica.sh 2>&1)

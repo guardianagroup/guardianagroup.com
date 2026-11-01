@@ -35,7 +35,7 @@ fi
 cambia=1; git diff-tree -r --quiet HEAD "$nuevo" -- zero-motor orbita/datos && cambia=0
 reinstala=1; git diff-tree -r --quiet HEAD "$nuevo" -- zero-motor/instalar.sh zero-motor/sello.js zero-motor/sello-actualiza.sh zero-motor/sello-aplica.sh sello/llaves.json && reinstala=0
 git checkout -q -f "$nuevo"
-rm -f "$BASE/.cambio" "$BASE/.reinstala"
+rm -f "$BASE/.cambio" "$BASE/.reinstala" "$BASE/.sello"
 if [ "$reinstala" = 1 ]; then touch "$BASE/.reinstala"; echo "versión firmada $corto con instalador o sello nuevos: se reinstala ($r)"
 elif [ "$cambia" = 1 ]; then touch "$BASE/.cambio"; echo "motor en la versión firmada $corto ($r)"
-else echo "versión firmada $corto sin cambios para el motor ($r)"; fi
+else touch "$BASE/.sello"; echo "versión firmada $corto sin cambios para el motor ($r)"; fi
