@@ -29,7 +29,7 @@
   addEventListener('DOMContentLoaded', function () {
     document.documentElement.lang = clave;
     document.getElementById('t1').textContent = t[0];
-    document.getElementById('t2').textContent = t[1].replace(/Windows (\d+)/, 'Windows\u00a0$1').replace(/ (11)/, '\u00a0$1');
+    document.getElementById('t2').textContent = t[1].replace(/Windows (\d+) (\S+) (\d+)/, 'Windows\u00a0$1\u00a0$2\u00a0$3');
     for (var i = 0; i < 3; i++) { var a = document.getElementById('a' + (i + 1)); a.textContent = enlaces[i][0]; a.href = enlaces[i][1]; }
   });
 })();
