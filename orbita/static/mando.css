@@ -1,0 +1,143 @@
+/* GUARDIANA · Órbita · the instrument on the right (2 Nov 2026; the owner, 08:31: «a la derecha sale la barra con altura,
+   los botones, si es mapa, satélite. No se ve de calidad… quiero que lo cambies todo, que lo perfecciones… profesionalidad
+   máxima»). One piece of glass instead of three loose ones, and three readings with their keys under each: the altitude
+   on a logarithmic track that can be dragged; the zoom (×1) over − + and «Planeta entero»; the view (Satélite or Mapa)
+   over its two keys. The same family as the layers' bar on top (steel lines, IBM Plex).
+   Loaded after orbita.css: everything here is under #mando and only where the phone's layout (body.m2) does not apply;
+   on a phone the old pieces keep their own places (movil.css). */
+
+body:not(.m2) #mando {
+  --m-linea: rgba(156, 195, 228, .16);
+  --m-linea-f: rgba(156, 195, 228, .28);
+  --m-texto: #E8EEF4;
+  --m-suave: #8F9CAA;
+  --m-tenue: #5F6B78;
+  --m-tecla: rgba(6, 10, 15, .45);
+  --m-mono: var(--mono, 'IBM Plex Mono', ui-monospace, monospace);
+  --m-sans: var(--texto, 'IBM Plex Sans', system-ui, sans-serif);
+  position: fixed; z-index: 4;
+  right: calc(28px + env(safe-area-inset-right, 0px)); top: 50%; transform: translateY(-50%);
+  width: 88px; box-sizing: border-box;
+  display: flex; flex-direction: column; align-items: stretch;
+  padding: 16px 10px 12px;
+  border: 1px solid var(--m-linea); border-radius: 22px;
+  background: linear-gradient(180deg, rgba(14, 20, 29, .80), rgba(8, 12, 18, .72));
+  -webkit-backdrop-filter: blur(16px) saturate(125%); backdrop-filter: blur(16px) saturate(125%);
+  box-shadow: 0 24px 60px -28px rgba(0, 0, 0, .9), 0 0 0 1px rgba(0, 0, 0, .25), inset 0 1px 0 rgba(255, 255, 255, .05);
+  direction: ltr;
+  opacity: 0; transition: opacity .8s 1.6s;
+}
+body.listo:not(.m2) #mando { opacity: 1; }
+/* gone when a section opens over the planet, during a trip (back at its end), behind «Mi conexión» and behind a card */
+body.dentro:not(.m2) #mando, body.viaje:not(.m2):not(.viaje-fin) #mando, body.con-conexion:not(.m2) #mando, body.con-ficha:not(.m2) #mando { opacity: 0; transition: opacity .3s; }
+body.dentro:not(.m2) #mando, body.dentro:not(.m2) #mando *, body.viaje:not(.m2):not(.viaje-fin) #mando, body.viaje:not(.m2):not(.viaje-fin) #mando *,
+body.con-conexion:not(.m2) #mando, body.con-conexion:not(.m2) #mando *, body.con-ficha:not(.m2) #mando, body.con-ficha:not(.m2) #mando * { pointer-events: none !important; }
+
+/* the pieces inside the glass: no longer fixed, nor faded on their own */
+body:not(.m2) #mando .altura, body:not(.m2) #mando .zoom {
+  position: relative !important; transform: none !important; inset: auto !important;
+  width: auto !important; opacity: 1 !important;
+  background: none !important; border: 0 !important; padding: 0 !important; margin: 0 !important; border-radius: 0 !important;
+  -webkit-backdrop-filter: none !important; backdrop-filter: none !important;
+}
+
+/* ---- altitude ---- */
+body:not(.m2) #mando .altura { display: flex !important; flex-direction: column; align-items: center; gap: 0; }
+#mando .altura .k { font: 500 9.5px/1 var(--m-mono); letter-spacing: .2em; text-transform: uppercase; color: var(--m-suave); }
+#mando .altura .v { display: flex !important; flex-direction: column; align-items: center; gap: 4px; margin-top: 10px; min-height: 34px; font-variant-numeric: tabular-nums; }
+#mando .altura .v b { font: 600 15px/1 var(--m-mono); letter-spacing: -.01em; color: var(--m-texto); white-space: nowrap; }
+#mando .altura .v small { font: 500 10px/1 var(--m-mono); letter-spacing: .06em; color: var(--m-suave); } /* «km», as written */
+/* the track: 4 % to 96 % of its height is the whole range, logarithmic (each ×2 of zoom, the same step) */
+body:not(.m2) #mando .altura .barra {
+  position: relative; width: 100%; height: 168px; margin: 14px 0 4px; padding: 0;
+  background: none; border-radius: 0; cursor: ns-resize; touch-action: none; outline: none;
+}
+#mando .altura .barra::before { /* the rail */
+  content: ''; position: absolute; left: 17px; top: 4%; bottom: 4%; width: 2px; border-radius: 2px;
+  background: linear-gradient(180deg, rgba(156, 195, 228, .55), rgba(156, 195, 228, .14));
+}
+#mando .altura .barra b { display: none; } /* the old end labels, if any page still has them */
+#mando .altura .marcas { position: absolute; inset: 0; pointer-events: none; }
+#mando .altura .marcas span { position: absolute; left: 13px; display: flex; align-items: center; gap: 7px; transform: translateY(-50%);
+  font: 500 9px/1 var(--m-mono); color: var(--m-tenue); white-space: nowrap; font-variant-numeric: tabular-nums; }
+#mando .altura .marcas span::before { content: ''; width: 10px; height: 1px; background: rgba(156, 195, 228, .35); }
+#mando .altura .marcas span.pasada { color: var(--m-suave); }
+/* the dot: where the view is now */
+body:not(.m2) #mando .altura .barra i {
+  position: absolute; left: 12px; top: 4%; width: 12px; height: 12px; margin-top: -6px; border-radius: 50%;
+  background: #CFE4F5; box-shadow: 0 0 0 3px rgba(156, 195, 228, .22), 0 0 14px rgba(156, 195, 228, .75);
+  transition: top .15s linear, box-shadow .2s;
+}
+#mando .altura .barra i .vv { display: none !important; } /* the value is read above, once */
+#mando .altura .barra:hover i, #mando .altura .barra.arrastra i { box-shadow: 0 0 0 5px rgba(156, 195, 228, .28), 0 0 18px rgba(156, 195, 228, .9); }
+#mando .altura .barra:focus-visible { outline: 2px solid var(--accent, #9CC3E4); outline-offset: 2px; border-radius: 10px; }
+/* the mirror and «Tu PC» keep a clean planet: the altitude steps out, the zoom stays */
+body.en-espejo:not(.m2) #mando .altura, body.en-tupc:not(.m2) #mando .altura { display: none !important; }
+body.en-espejo:not(.m2) #mando .zoom, body.en-tupc:not(.m2) #mando .zoom { margin-top: 0 !important; padding-top: 0 !important; border-top: 0 !important; }
+
+/* ---- zoom: the level, then − + and «Planeta entero» under them ---- */
+body:not(.m2) #mando .zoom { display: flex !important; flex-direction: column; align-items: stretch; gap: 9px; margin-top: 12px !important; padding-top: 14px !important; border-top: 1px solid var(--m-linea) !important; }
+#mando .zoom .nivel { all: unset; display: block; text-align: center; font: 500 11px/1 var(--m-mono); letter-spacing: .04em; color: var(--m-suave); font-variant-numeric: tabular-nums; white-space: nowrap; }
+body:not(.m2) #mando .zoom .zgrupo {
+  display: grid !important; grid-template-columns: 1fr 1fr; gap: 0; width: auto !important; height: auto !important;
+  border: 1px solid var(--m-linea-f) !important; border-radius: 12px !important; overflow: hidden; background: var(--m-tecla) !important;
+  -webkit-backdrop-filter: none !important; backdrop-filter: none !important; box-shadow: none !important;
+}
+body:not(.m2) #mando .zoom .zgrupo button {
+  all: unset; box-sizing: border-box; width: auto; height: 34px; display: grid; place-items: center; color: #D7E3EE; cursor: pointer;
+  transition: background .15s, color .15s;
+}
+body:not(.m2) #mando .zoom .zgrupo button + button { border-left: 1px solid var(--m-linea-f); }
+body:not(.m2) #mando .zoom .zgrupo .base { grid-column: 1 / -1; height: 30px; border-left: 0; border-top: 1px solid var(--m-linea-f); }
+body:not(.m2) #mando .zoom .zgrupo .base span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
+body:not(.m2) #mando .zoom .zgrupo button:hover:not(:disabled) { background: rgba(156, 195, 228, .14); color: #FFFFFF; }
+body:not(.m2) #mando .zoom .zgrupo button:active:not(:disabled) { background: rgba(156, 195, 228, .22); }
+body:not(.m2) #mando .zoom .zgrupo button:disabled { color: var(--m-tenue); cursor: default; opacity: 1; }
+body:not(.m2) #mando .zoom .zgrupo button:focus-visible { outline: 2px solid var(--accent, #9CC3E4); outline-offset: -2px; }
+#mando .zoom .mapa { display: none !important; }
+
+/* ---- the view: its name, then its two keys (the pressed key's own label is the name above) ---- */
+body:not(.m2) #mando .zoom .mapa-t {
+  position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 0; width: auto;
+  margin-top: 5px; padding: 37px 0 0; border: 0; border-top: 1px solid var(--m-linea); border-radius: 0; background: none;
+  box-sizing: border-box; box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none;
+}
+body:not(.m2) #mando .zoom .mapa-t .op {
+  all: unset; box-sizing: border-box; height: 34px; display: grid; place-items: center; cursor: pointer;
+  border: 1px solid var(--m-linea-f); background: var(--m-tecla); color: var(--m-suave);
+  transition: color .15s, background .15s;
+}
+body:not(.m2) #mando .zoom .mapa-t .op:first-of-type { border-radius: 12px 0 0 12px; }
+body:not(.m2) #mando .zoom .mapa-t .op:last-of-type { border-radius: 0 12px 12px 0; border-left: 0; }
+body:not(.m2) #mando .zoom .mapa-t .op .ico { display: block; }
+body:not(.m2) #mando .zoom .mapa-t .op .txt { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
+body:not(.m2) #mando .zoom .mapa-t .op[aria-pressed="true"] .txt {
+  width: auto; height: auto; overflow: visible; clip: auto; clip-path: none;
+  left: 0; right: 0; top: 14px; text-align: center; white-space: normal; overflow-wrap: anywhere;
+  font: 500 11px/1.15 var(--m-sans); letter-spacing: .01em; color: var(--m-suave); cursor: default;
+}
+body:not(.m2) #mando .zoom .mapa-t .op:hover { color: var(--m-texto); background: rgba(156, 195, 228, .12); }
+body:not(.m2) #mando .zoom .mapa-t .op[aria-pressed="true"] { color: var(--accent, #9CC3E4); background: rgba(156, 195, 228, .18); cursor: default; }
+body:not(.m2) #mando .zoom .mapa-t .op:focus-visible { outline: 2px solid var(--accent, #9CC3E4); outline-offset: -2px; }
+
+/* close over a bright map: the glass a little darker, so it reads */
+body.mapa-cerca:not(.limpio):not(.m2) #mando { background: linear-gradient(180deg, rgba(8, 12, 18, .88), rgba(6, 9, 14, .84)); }
+
+/* «El mundo, ahora» / «¿Sabías que…?» keeps clear of the instrument (it sat under it on windows up to ~1080 px high) */
+@media (max-height: 1100px) { body:not(.m2):not(.estrecho) #directo { right: calc(140px + env(safe-area-inset-right, 0px)); } }
+
+/* a shorter window: a shorter track */
+@media (max-height: 760px) { body:not(.m2) #mando .altura .barra { height: 120px; } body:not(.m2) #mando { padding-top: 13px; } }
+@media (max-height: 620px) {
+  body:not(.m2) #mando .altura .barra { height: 84px; margin-top: 10px; }
+  #mando .altura .marcas span:not(.extremo) { display: none; }
+  body:not(.m2) #mando .zoom { gap: 7px; margin-top: 8px !important; padding-top: 10px !important; }
+  body:not(.m2) #mando .zoom .zgrupo button, body:not(.m2) #mando .zoom .mapa-t .op { height: 30px; }
+  body:not(.m2) #mando .zoom .zgrupo .base { height: 26px; }
+  body:not(.m2) #mando .zoom .mapa-t { padding-top: 33px; }
+  body:not(.m2) #mando .zoom .mapa-t .op[aria-pressed="true"] .txt { top: 11px; }
+}
+@media (prefers-reduced-motion: reduce) { body:not(.m2) #mando .altura .barra i, body:not(.m2) #mando .zoom .zgrupo button, body:not(.m2) #mando .zoom .mapa-t .op { transition: none; } }
+
+/* on a phone (and a wide touch screen) the old pieces keep their own places (movil.css) */
+body.m2 #mando { display: contents; }

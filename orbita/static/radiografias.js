@@ -117,7 +117,6 @@
     else if (!si && pc) pc.remove();
     // 2 Nov 2026 (owner, 08:01: no doors between sections): the Antivirus is chosen on the main cover, never from here
     { const esc = panel.querySelector('.tarjeta.esc-pc'); if (esc) esc.remove(); }
-    texto(esc.querySelector('.accion span'), si ? 'Escanear este equipo' : 'Ver qué examina');
   }
   // the measured front pages, from the mirror's own data
   async function pintaSitios() {

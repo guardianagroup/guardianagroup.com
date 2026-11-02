@@ -954,7 +954,36 @@
   }
   // El escudo de GUARDIANA (1.0.52): lo que vio el antivirus del propio programa (GET /api/escudo). Sus avisos llegan
   // escritos por el programa; los graves primero. Nombres, no rutas. Una versión anterior no lo ofrece: entonces no aparece.
-  const REGLA_ESCUDO = { primera_vez: 'Primera vez', muestra_conocida: 'Muestra conocida', ladron: 'Datos guardados', documento: 'Documento', navegador: 'Navegador', guion: 'Guion', copias: 'Copias de seguridad', arranque: 'Arranca solo', secuestro: 'Secuestro de archivos', lector: 'Lector de PDF o correo', comprimido: 'Archivo comprimido', proteccion: 'Protección de Windows', hosts: 'Archivo hosts', sin_nombre: 'Conexión sin nombre', disfraz: 'Disfraz', credenciales: 'Credenciales', defensor: 'Microsoft Defender', engano: 'Engaño', medio: 'Desde un USB o una imagen' };
+  const REGLA_ESCUDO = { primera_vez: 'Primera vez', muestra_conocida: 'Muestra conocida', ladron: 'Datos guardados', documento: 'Documento', navegador: 'Navegador', guion: 'Guion', copias: 'Copias de seguridad', arranque: 'Arranca solo', secuestro: 'Secuestro de archivos', lector: 'Lector de PDF o correo', comprimido: 'Archivo comprimido', proteccion: 'Protección de Windows', hosts: 'Archivo hosts', sin_nombre: 'Conexión sin nombre', disfraz: 'Disfraz', credenciales: 'Credenciales', defensor: 'Microsoft Defender', engano: 'Engaño', medio: 'Desde un USB o una imagen', senuelo: 'Señuelo', copias_borradas: 'Copias de seguridad borradas' };
+  // Lo congelado (2 nov 2026; el dueño, 07:55: «tenemos que poder detectarlos y sacarlos»): un programa que tocó un señuelo
+  // o mandó borrar las copias de seguridad, congelado al momento por el programa. Desde aquí se puede detener (y su archivo
+  // va a la cuarentena); dejarlo seguir, solo desde el panel del programa.
+  const ID_CASO = /^c-\d{1,16}-\d{1,10}$/;
+  function congeladoDe(a) {
+    if (typeof a.incidente !== 'string' || !ID_CASO.test(a.incidente) || typeof a.congelado !== 'string') return null;
+    if (a.congelado === 'detenido') return h('span', { class: 'esc-marca' }, 'Detenido');
+    if (a.congelado === 'reanudado') return h('span', { class: 'esc-marca' }, 'Sigue en marcha: lo permitiste');
+    const caja = h('span', { class: 'esc-cuarentena-caja' }, h('span', { class: 'esc-marca rojo' }, 'Congelado'));
+    if (!enPrograma()) return caja;
+    const b = h('button', { type: 'button', class: 'esc-cuarentena' }, h('span', null, 'Detener y poner en cuarentena'));
+    const nota = h('small', { class: 'esc-cuarentena-nota', role: 'status' }, 'Si es tuyo, déjalo seguir desde el panel del programa: «Tu antivirus» → «El escudo».');
+    b.addEventListener('click', () => {
+      b.disabled = true; nota.textContent = 'Deteniendo…';
+      pide('POST', '/api/escudo/congelado/' + a.incidente + '/detener', 30000).then((r) => {
+        const j = r && r.json && typeof r.json === 'object' ? r.json : null;
+        if (r && r.ok && j && j.ok === true) {
+          a.congelado = 'detenido';
+          b.replaceWith(h('span', { class: 'esc-marca' }, 'Detenido'));
+          nota.textContent = j.cuarentena && j.cuarentena.ok === true ? 'Detenido, y su archivo en la cuarentena (encriptado; se puede devolver desde el panel).' : 'Detenido. Su archivo no pudo ir a la cuarentena.';
+          return;
+        }
+        b.disabled = false;
+        nota.textContent = 'No se pudo. ' + (j && typeof j.motivo === 'string' ? limpia(j.motivo, 200) : (r && r.motivo === 'tiempo' ? 'El programa no respondió a tiempo.' : 'El programa no lo permitió.'));
+      });
+    });
+    caja.append(' ', b, nota);
+    return caja;
+  }
   // La cuarentena (1.0.52; el dueño, 1 nov 2026, ronda 88): solo archivos que el propio escudo señaló, nunca dentro de la
   // carpeta de Windows ni de los programas instalados, y siempre restaurable desde el panel del programa. El programa dice
   // en cada aviso si se puede («posible») o si ya está («hecha»); la web lo pide por el id del aviso, nunca por una ruta.
@@ -985,7 +1014,7 @@
     return h('li', null, dato(limpia(a.programa, 80) || '—', null, 'b'), grave ? h('span', { class: 'esc-marca rojo' }, 'Grave') : null,
       regla ? h('span', { class: 'esc-marca' + (grave ? '' : ' fuerte') }, regla) : null,
       esHora(a.cuando_ms) ? h('time', { translate: 'no', datetime: iso(a.cuando_ms) }, fecha(a.cuando_ms)) : null,
-      sitio ? dato(sitio, null, 'small') : null, h('small', { lang: 'es' }, limpia(a.texto, 400)), cuarentenaDe(a));
+      sitio ? dato(sitio, null, 'small') : null, h('small', { lang: 'es' }, limpia(a.texto, 400)), congeladoDe(a), cuarentenaDe(a));
   }
   function bloqueEscudo() {
     const es = S.d.escudo; if (!es || typeof es !== 'object') return null;

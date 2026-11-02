@@ -976,6 +976,11 @@ body.en-radio #puertas, body.en-radio #ficha { opacity: 0 !important; pointer-ev
 @media (prefers-reduced-motion: reduce) { .radio-panel, .radio-panel.sale { animation-duration: .01ms; } .empezar svg, .radio-panel .accion svg { transition: none; } }
 /* the layer bar on its own line when the centred bar would run into the header's buttons (orbita.js measures it) */
 body.capas-abajo .capas { position: static; transform: none; order: 3; width: max-content; max-width: 100%; margin: 0 auto; justify-content: center; flex-wrap: wrap; }
+/* 2 Nov 2026: …and on its own line even when the row would have room for it at one side (without «Ver mi conexión» the
+   three fit in one row and the bar landed on the right): a zero-height break before it, the same 24 px of air as before */
+body.capas-abajo:not(.m2) header { row-gap: 0; }
+body.capas-abajo:not(.m2) header::after { content: ''; order: 2; flex: 0 0 100%; height: 0; }
+body.capas-abajo:not(.m2) .capas { margin-top: 24px; }
 /* «Conocer GUARDIANA»: the presentation, now behind Órbita (23 Oct 2026, 13:40) */
 .izq .conocer { font: 500 10px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: #8A95A2; text-decoration: none; padding: 6px 0 5px; border-bottom: 1px solid rgba(156,195,228,.18); transition: color .2s, border-color .2s; white-space: nowrap; }
 .izq .conocer:hover { color: var(--fg); border-color: rgba(156,195,228,.6); }

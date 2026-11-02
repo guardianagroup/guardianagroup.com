@@ -472,7 +472,9 @@
     const der = document.querySelector('header .derecha'); if (!der) return;
     boton = document.createElement('button'); boton.type = 'button'; boton.id = 'conexion-btn'; boton.className = 'lugar-btn conexion-btn'; boton.setAttribute('aria-pressed', 'false');
     boton.innerHTML = '<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="8" cy="12.5" r="1.2"/><path d="M5.2 9.7a4 4 0 0 1 5.6 0M2.6 7a7.6 7.6 0 0 1 10.8 0"/></svg><span>' + T('Ver mi conexión') + '</span>';
-    der.insertBefore(boton, der.firstChild);
+    // 2 Nov 2026 (owner, 08:40: «En órbita también quiero que desaparezca el botón de "ver mi conexión"»): the button is made
+    // (the panel's code still speaks to it) but never shown; «Mi conexión» opens only as Radiografías' own result («Hacer mi
+    // radiografía») or from an old link (#mi-conexion)
     panel = document.createElement('aside'); panel.id = 'conexion'; panel.className = 'conexion'; panel.hidden = true; panel.setAttribute('aria-label', T('Mi conexión'));
     panel.innerHTML = '<div class="titulo"><span>' + T('Mi conexión') + '</span><button type="button" class="cerrar" aria-label="' + T('Cerrar') + '" title="' + T('Cerrar') + '"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8"/></svg></button></div><div class="cuerpo"></div><p class="pie">' + T('Son tus datos y de nadie más. Nada se guarda fuera de este equipo.') + '</p>';
     document.body.append(panel);

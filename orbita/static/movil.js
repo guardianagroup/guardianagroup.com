@@ -27,14 +27,7 @@
     const tag = document.createElement('span'); tag.className = 'm2-tag'; tag.textContent = p[1]; b.appendChild(tag);
   });
 
-  // ---------- «Ver mi conexión» leaves the header and floats over the bar (and goes back if the window grows wide) ----------
-  const M2 = matchMedia('(max-width: 760px), (max-width: 1400px) and (pointer: coarse)');
-  const mueveConexion = () => { const b = $('conexion-btn'); if (!b) return false;
-    if (M2.matches) { if (b.parentElement !== B) B.appendChild(b); }
-    else { const der = document.querySelector('header .derecha'); if (der && b.parentElement !== der) der.insertBefore(b, der.firstChild); }
-    return true; };
-  if (!mueveConexion()) { const mo = new MutationObserver(() => { if (mueveConexion()) mo.disconnect(); }); mo.observe(document.querySelector('header') || B, { childList: true, subtree: true }); }
-  M2.addEventListener('change', mueveConexion);
+  // ---------- «Ver mi conexión» used to float over the bar here; since 2 Nov 2026 (owner, 08:40) it is not a button of Órbita ----------
 
   // ---------- top right: «Capas» and «···» ----------
   const arriba = document.createElement('div'); arriba.className = 'm2-arriba';

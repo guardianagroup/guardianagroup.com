@@ -320,7 +320,7 @@
     const arriba = Math.max(rm && rm.height ? rm.bottom + 14 : 0, 64);
     const pu = $('puertas'), rp = pu && pu.getBoundingClientRect();
     const tope = rp && rp.height ? rp.top : H - 70;
-    const abajo = W <= 760 ? tope - 52 - 26 : tope - 24; // phone: the bar, the big button above it and some air; tablet: the bar
+    const abajo = tope - 24; // the bar and some air (2 Nov 2026: no big «Ver mi conexión» button above it any more)
     return { arriba, abajo: Math.max(arriba + 120, abajo) };
   }
   function centroAlto() {
@@ -490,11 +490,12 @@
   }
   function pintaZoom() {
     const z = Math.round(ZOOM.zt * 10) / 10;
-    if (zNivel) zNivel.textContent = '×' + (z < 100 && z % 1 ? z.toFixed(1).replace('.', ',') : Math.round(z).toLocaleString(document.documentElement.lang === 'en' ? 'en-GB' : 'es-ES'));
+    const locZ = (window.GuardianaIdioma && window.GuardianaIdioma.locale) || (document.documentElement.lang === 'en' ? 'en-GB' : 'es-ES');
+    if (zNivel) zNivel.textContent = '×' + (z < 100 && z % 1 ? z.toLocaleString(locZ, { minimumFractionDigits: 1, maximumFractionDigits: 1 }) : Math.round(z).toLocaleString(locZ, { useGrouping: 'always' }));
     if (zControl) {
       zControl.querySelector('[data-z="mas"]').disabled = ZOOM.zt >= ZOOM.MAX - 1e-3;
       zControl.querySelector('[data-z="menos"]').disabled = ZOOM.zt <= 1 + 1e-3;
-      zControl.querySelector('[data-z="base"]').hidden = ZOOM.zt <= 1 + 1e-3;
+      zControl.querySelector('[data-z="base"]').disabled = ZOOM.zt <= 1 + 1e-3; // 2 Nov 2026: always in its place, off at ×1
     }
     document.body.classList.toggle('cerca', ZOOM.zt > 1.02);
     pintaAltura();
@@ -502,18 +503,78 @@
   // 22 Oct 2026, 13:12 (owner): «en un lado de la pantalla, que se vaya viendo la altitud a la que está el zoom».
   // A nominal height: the whole planet in view counts as a look from about 40 000 km; each ×2 halves it.
   const alturaEl = $('altura');
+  // 2 Nov 2026 (owner, 08:31: «profesionalidad máxima»): the instrument on the right (static/mando.css). The track runs from 4 %
+  // to 96 % of its height, logarithmic: the whole planet at the top, the closest look at the bottom; it can be dragged and
+  // moved with the arrows.
+  const PISTA = [4, 96];
+  const enPista = (z) => PISTA[0] + (PISTA[1] - PISTA[0]) * Math.log(Math.max(1, z)) / Math.log(ZOOM.MAX);
+  const deLaPista = (pc) => Math.exp((Math.min(PISTA[1], Math.max(PISTA[0], pc)) - PISTA[0]) / (PISTA[1] - PISTA[0]) * Math.log(ZOOM.MAX));
+  const locAltura = () => (window.GuardianaIdioma && window.GuardianaIdioma.locale) || (document.documentElement.lang === 'en' ? 'en-GB' : 'es-ES');
+  // a height as people say it: kilometres while it reads as such, metres below 1 km (22 Oct 2026, 13:50)
+  const partesAltura = (km) => {
+    const loc = locAltura();
+    if (km >= 1) {
+      const n = km >= 1000 ? Math.round(km / 100) * 100 : km >= 100 ? Math.round(km / 10) * 10 : km >= 10 ? Math.round(km) : Math.round(km * 10) / 10;
+      return [n.toLocaleString(loc, km < 10 ? { minimumFractionDigits: 1, maximumFractionDigits: 1 } : { useGrouping: 'always' }), 'km']; // «1.000» beside «10.000» on the track
+    }
+    return [String(Math.round(km * 1000 / 10) * 10), 'm'];
+  };
+  // the marks of the track: the whole planet, 10 000, 1 000 and 100 km, and the closest
+  function pintaMarcas() {
+    const caja = alturaEl && alturaEl.querySelector('.marcas'); if (!caja) return;
+    caja.textContent = '';
+    const kms = [40000, 10000, 1000, 100, 40000 / ZOOM.MAX];
+    kms.forEach((km, n) => {
+      const s = document.createElement('span'); s.dataset.km = km;
+      if (n === 0 || n === kms.length - 1) s.className = 'extremo';
+      s.style.top = enPista(40000 / km).toFixed(2) + '%';
+      s.textContent = partesAltura(km)[0];
+      caja.appendChild(s);
+    });
+  }
   function pintaAltura() {
     if (!alturaEl) return;
-    const z = Math.max(1, ZOOM.z), km = 40000 / z, loc = document.documentElement.lang === 'en' ? 'en-GB' : 'es-ES';
+    const z = Math.max(1, ZOOM.z), km = 40000 / z;
+    const [n, u] = partesAltura(km);
     const v = alturaEl.querySelector('.v'), i = alturaEl.querySelector('i');
-    // 22 Oct 2026, 13:50 (owner): down to 500 m — kilometres while it reads as such, metres below 10 km
-    const texto = km >= 1000 ? Math.round(km / 100) * 100 + ' km' : km >= 100 ? Math.round(km / 10) * 10 + ' km' : km >= 10 ? Math.round(km) + ' km'
-      : km >= 1 ? (Math.round(km * 10) / 10).toLocaleString(loc, { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + ' km' : Math.round(km * 1000 / 10) * 10 + ' m';
-    const valor = '≈ ' + (km >= 10 ? Number(texto.split(' ')[0]).toLocaleString(loc) + ' ' + texto.split(' ')[1] : texto);
-    if (v) v.textContent = valor;
-    const vv = alturaEl.querySelector('.vv'); if (vv && vv.textContent !== valor) vv.textContent = valor; // the number rides beside the dot
-    if (i) i.style.top = (5 + 90 * Math.log(z) / Math.log(ZOOM.MAX)).toFixed(1) + '%'; // the dot never touches the ends of the bar (owner, 22 Oct 2026, 17:54)
+    if (v) {
+      const b = v.querySelector('b'), s = v.querySelector('small');
+      if (b && s) { if (b.textContent !== n) b.textContent = n; if (s.textContent !== u) s.textContent = u; } else v.textContent = '≈ ' + n + ' ' + u;
+    }
+    const pc = enPista(z);
+    if (i) i.style.top = pc.toFixed(2) + '%';
+    const barra = alturaEl.querySelector('.barra');
+    if (barra) { barra.setAttribute('aria-valuenow', String(Math.round(pc))); barra.setAttribute('aria-valuetext', '≈ ' + n + ' ' + u); }
+    for (const s of alturaEl.querySelectorAll('.marcas span')) s.classList.toggle('pasada', Number(s.dataset.km) >= km - 1e-6);
   }
+  // the track can be dragged (the zoom follows the dot) and moved with the keyboard
+  (function () {
+    const barra = alturaEl && alturaEl.querySelector('.barra'); if (!barra) return;
+    let arrastrando = false;
+    const lleva = (e) => {
+      const r = barra.getBoundingClientRect(); if (!r.height) return;
+      const pc = (e.clientY - r.top) / r.height * 100;
+      acerca(deLaPista(pc), CX, CY);
+    };
+    barra.addEventListener('pointerdown', (e) => {
+      if (!libreZoom()) return;
+      arrastrando = true; barra.classList.add('arrastra');
+      try { barra.setPointerCapture(e.pointerId); } catch (_) {}
+      lleva(e); e.preventDefault();
+    });
+    barra.addEventListener('pointermove', (e) => { if (arrastrando) lleva(e); });
+    const suelta = () => { arrastrando = false; barra.classList.remove('arrastra'); };
+    barra.addEventListener('pointerup', suelta); barra.addEventListener('pointercancel', suelta);
+    barra.addEventListener('keydown', (e) => {
+      if (!libreZoom()) return;
+      if (e.key === 'ArrowDown' || e.key === 'PageDown') { e.preventDefault(); e.stopPropagation(); acerca(ZOOM.zt * (e.key === 'PageDown' ? 2 : 1.25), CX, CY); }
+      else if (e.key === 'ArrowUp' || e.key === 'PageUp') { e.preventDefault(); e.stopPropagation(); acerca(ZOOM.zt / (e.key === 'PageUp' ? 2 : 1.25)); }
+      else if (e.key === 'Home') { e.preventDefault(); acerca(1); }
+      else if (e.key === 'End') { e.preventDefault(); acerca(ZOOM.MAX, CX, CY); }
+    });
+    pintaMarcas();
+    addEventListener('guardiana-idioma', () => { pintaMarcas(); pintaAltura(); });
+  })();
   const libreZoom = () => !dentro && caja.hidden;
   addEventListener('wheel', (e) => {
     // 22 Oct 2026, 18:16 (owner): with a panel open in front of the planet, the wheel moves the panel, not the planet.
@@ -568,7 +629,12 @@
     const t = MAPA_LIMPIO ? T('Volver al mapa en color') : T('Mapa limpio: tierra gris y mar oscuro, sin la foto');
     b.title = t; b.setAttribute('aria-label', t);
     // 26 Oct 2026 (dueño, 01:01: «Color / Limpio no lo entiende nadie»): las dos opciones a la vista, como en cualquier mapa
-    zControl.querySelectorAll('.mapa-t .op').forEach((o) => { const limpio = o.dataset.m === 'limpio'; o.setAttribute('aria-pressed', String(limpio === MAPA_LIMPIO)); o.textContent = limpio ? T('Mapa') : T('Satélite'); o.title = limpio ? T('Mapa limpio: tierra gris y mar oscuro, sin la foto') : T('Foto de satélite; al acercar, con las carreteras y los nombres') ; });
+    zControl.querySelectorAll('.mapa-t .op').forEach((o) => {
+      const limpio = o.dataset.m === 'limpio', txt = o.querySelector('.txt');
+      o.setAttribute('aria-pressed', String(limpio === MAPA_LIMPIO));
+      if (txt) txt.textContent = limpio ? T('Mapa') : T('Satélite'); else o.textContent = limpio ? T('Mapa') : T('Satélite');
+      o.title = limpio ? T('Mapa limpio: tierra gris y mar oscuro, sin la foto') : T('Foto de satélite; al acercar, con las carreteras y los nombres');
+    });
   }
   function ponMapa(limpio) {
     MAPA_LIMPIO = !!limpio;
