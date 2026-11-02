@@ -347,3 +347,8 @@ a.nuc-multas-b{text-decoration:none}
 @media (min-width:900px) and (max-width:1199px){.nuc-ini .nuc-ops.con-escaner{gap:14px;width:min(1000px,calc(100vw - 48px))}.nuc-ini .nuc-ops.con-escaner>.nuc-op{flex-basis:calc((100% - 28px) / 3);padding:20px 22px 22px}.nuc-ini .nuc-op b{font-size:20px}}
 @media (min-width:761px) and (max-width:899px){.nuc-ini .nuc-ops.con-escaner{width:min(760px,calc(100vw - 48px))}}
 @media (max-width:760px){.nuc-op b{font-size:20px}.nuc-op small{font-size:14px}}
+
+/* (dueño, 2 Nov 2026, 13:16) hasta que está la portada, nada del planeta por debajo: el mismo fondo que la portada */
+html.con-portada:not(.portada-lista),html.con-portada:not(.portada-lista) body{background:#06080C}
+/* un velo por encima de todo (lo que se esconde con visibility puede volver a verse si una regla lo pide) */
+html.con-portada:not(.portada-lista)::after{content:"";position:fixed;inset:0;z-index:2147483647;background:#06080C;pointer-events:none}

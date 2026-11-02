@@ -433,6 +433,7 @@ ${doc.secciones.map(tabla).join('')}<p class="nota">${esc(doc.final)}</p></body>
   function muestraInicio(rapido) {
     if (!ini) { ini = construyeInicio(); marcaPortada(); }
     ini.hidden = false; ini.classList.remove('sale'); tapa();
+    document.documentElement.classList.add('portada-lista'); // ya tapa el planeta (ver el principio de orbita/index.html)
     if (laRed) laRed.para(); laRed = red(ini.querySelector('.nuc-lienzo'), { nace: !rapido });
     revela(ini, !!rapido);
     botonInicio(false);
