@@ -113,7 +113,8 @@ const hasta = async (fn, ms) => { const h = Date.now() + ms; while (Date.now() <
   const botones = await T.evaluate(() => [...document.querySelectorAll('#ll-botones .gc-llamada-boton')].filter((b) => getComputedStyle(b).display !== 'none' && !b.hidden).map((b) => (b.querySelector('span') || b).textContent.trim()));
   // «Pantalla», solo si el navegador del teléfono tiene con qué (aquí, Chromium con la identidad de un iPhone; en Android no sale)
   const conPantalla = await T.evaluate(() => !!(navigator.mediaDevices && navigator.mediaDevices.getDisplayMedia) && !/Android/i.test(navigator.userAgent));
-  const esperados = conPantalla ? 'Compartir pantalla · Girar · Volver al PC · Colgar' : 'Girar · Volver al PC · Colgar'; // sin «Flotante» (dueño, 15:42)
+  // sin «Flotante» (dueño, 15:42); con «Enviar» (foto, ubicación y archivo sin colgar; dueño, 2 Nov 2026, 16:37; ver enviar-llamada.js)
+  const esperados = conPantalla ? 'Compartir pantalla · Girar · Enviar · Volver al PC · Colgar' : 'Girar · Enviar · Volver al PC · Colgar';
   comprueba(botones.join(' · ') === esperados, '2. en el teléfono, los botones: ' + botones.join(' · '));
   // un solo título arriba, con el tiempo de llamada; la otra persona a toda pantalla (sin partir); en horizontal, «gira el teléfono»
   const cab = { capsula: await visible(T, '.gc-llamada-arriba .gc-llamada-cifrado'), nombre: await visible(T, '#ll-nombre') && (await T.textContent('#ll-nombre')).trim(), tiempo: await visible(T, '#ll-tiempo') && (await T.textContent('#ll-tiempo')).trim() };

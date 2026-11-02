@@ -1517,6 +1517,8 @@
       red: () => { try { if (R && R.despierta) R.despierta(); } catch (_) {} },
       // pasar la llamada al teléfono: el botón (en el PC), la llave que llega de la otra persona, y lo que avisa la otra parte
       llevar: LLEVAR ? null : () => abreLlevar(), sencilla: !!LLEVAR, medios: llaveMedios,
+      // «Enviar» en la llamada (foto, ubicación, archivo): solo en la llamada de dos que va por una sala efímera
+      enviar: () => !!salaLlamada(),
       alLlevar: (k, alPc) => alLlevar(k, alPc), llevarNo: () => llevarNo(), llevarVisto: () => llevarVisto(), llevarListo: () => llevarListo(),
       blindada: () => { const c = convLl(); return !!(c && extrasB(c)); },
       sas: () => { const c = convLl(); return !!(c && extrasB(c)); }, // el número de seguridad en la llamada: blindado y Ultra (dueño, 29 Oct 2026, 12:55: «en el modo normal no») // las opciones de imagen, solo en la sesión blindada
@@ -1538,6 +1540,7 @@
       // el nombre que la otra persona de la llamada se puso a sí misma (lo que se dice a los demás del grupo)
       nombrePropio: () => nombrePropio(convLl()),
     });
+    arrancaEnvios();
     const llama = (video) => { if (LL.ocupado) { aviso(T('Ya tienes una llamada en curso.')); return; } const c = CONVS.get(ACTUAL); if (c && c.huella && !enLinea(c) && R.abierto) { despiertaLlamada(c, video); return; } if (c && c.suFuera && puedeLlamar()) despierta(c, 'llamada', true); LLAMADA_CONV = ACTUAL; LL.llamar(video); };
     $('#llamar').addEventListener('click', () => llama(false));
     if (SOLO_VIDEO) $('#llamar').hidden = true;
@@ -3316,6 +3319,7 @@
   let servidorDicho = false;
   function avisaLlamada(est, video) {
     if (LLEVAR && window.gcomLlevarEstado) window.gcomLlevarEstado(est);
+    envioEstado(est);
     vigiaLlamada(est);
     if (est === 'entrante' || est === 'conectando') { const lc = $('#llevar-cortada'); if (lc) lc.hidden = true; }
     // una llamada que entra se ve limpia: fuera cualquier aviso que hubiera (el de «Contacto guardado» tapaba «Contestar»)
@@ -4594,6 +4598,8 @@
   async function mandaEfimeraA(c, quien, obj) { if (!quien || !R || !R.abierto) return false; return R.manda(c.id, quien, await sellaEfimera(c, obj)); }
   function vaciaColaEfimera(c) { const q = c.cola.splice(0); for (const x of q) mandaEfimera(c, x); }
   async function recibeEfimera(c, de, b) {
+    // un trozo de lo que se envía en la llamada (ver «Enviar» en la llamada): solo de la otra persona de esta sala
+    if (b && b[0] === 10) { if (!c.vuelta && !c.soloPc && !(c.pcId && de === c.pcId) && de === c.suId) await llegaTrozoEnvio(c, b); return; }
     if (!b || b[0] !== 9 || b.length < 30) return;
     let j; try { j = JSON.parse(C.td.decode(await crypto.subtle.decrypt({ name: 'AES-GCM', iv: b.slice(1, 13), additionalData: C.te.encode(c.id) }, c.k, b.slice(13)))); } catch (_) { return; }
     if (!j || typeof j !== 'object') return;
@@ -4604,6 +4610,8 @@
     if (!c.suId) { c.suId = de; vaciaColaEfimera(c); }
     if (de !== c.suId || !j || typeof j !== 'object') return;
     if (j.tipo === 'llamada') { await llegaLlamada(c, j); return; }
+    // «Enviar» en la llamada: el aviso de una foto o un archivo, la ubicación y las respuestas
+    if (typeof j.tipo === 'string' && (/^envio(-(listo|elige|ack|fin|no))?$/.test(j.tipo) || j.tipo === 'ubicacion')) { await llegaEnvio(c, j); return; }
     // la otra parte cierra el traspaso: ya no hay nada que recuperar
     // (2 Nov 2026) en un teléfono cuya llamada ya va por otra sala (la otra persona pasó o devolvió la suya), el fin de esta sala
     // no termina nada: solo se suelta la sala
@@ -4622,7 +4630,8 @@
   function oyentesEfimeras() {
     R.on('sala', (sala, miembros) => { const c = EFI.get(sala); if (!c) return; c.miembros = new Set(); if (c.pcId) c.pcAqui = false; for (const q of miembros) alguienEnEfimera(c, q); pintaVolverPc(); });
     R.on('llega', (sala, quien) => { const c = EFI.get(sala); if (c) alguienEnEfimera(c, quien); });
-    R.on('sale', (sala, quien) => { const c = EFI.get(sala); if (!c) return; c.miembros.delete(quien); if (c.pcId && quien === c.pcId) { c.pcAqui = false; pintaVolverPc(); } });
+    R.on('sale', (sala, quien) => { const c = EFI.get(sala); if (!c) return; c.miembros.delete(quien); if (c.pcId && quien === c.pcId) { c.pcAqui = false; pintaVolverPc(); } if (quien === c.suId) envioSinRele(sala); });
+    R.on('cerrado', () => envioSinRele(null));
     R.on('trama', (sala, de, b) => { const c = EFI.get(sala); if (!c) return; c.proc = (c.proc || Promise.resolve()).then(() => recibeEfimera(c, de, b)).catch((e) => console.warn('efímera', e)); });
   }
   // ----- en el PC que pasa la llamada: el código y la espera -----
@@ -4914,6 +4923,476 @@
   { const b = $('#llevar-cancelar'); if (b) b.addEventListener('click', cancelaLlevar); }
   { const b = $('#llevar-cortada-cerrar'); if (b) b.addEventListener('click', () => { const c = EFI.get($('#llevar-cortada').dataset.sala); $('#llevar-cortada').hidden = true; if (c) { mandaEfimera(c, { tipo: 'llevar-fin' }); setTimeout(() => sueltaEfimera(c), 600); } }); }
   { const b = $('#llevar-cortada-volver'); if (b) b.addEventListener('click', () => volverALlamar(EFI.get($('#llevar-cortada').dataset.sala))); }
+
+  // ---------- «Enviar» en la llamada: una foto, la ubicación o un archivo, sin colgar ----------
+  // (dueño, 2 Nov 2026, 16:37: «incluye también lo de enviar la foto, la ubicación y archivos en la llamada del móvil. Correcto, sí.»)
+  // En la llamada que va por una sala efímera (la del teléfono al que se pasó la llamada: en ese teléfono y en el equipo de la otra
+  // persona mientras habla con él), el botón «Enviar» ofrece «Foto», «Ubicación» y «Archivo». Todo va por esa misma sala del relé:
+  //  - el aviso de cada foto o archivo (nombre, tamaño, tipo y su clave), la ubicación y las respuestas van sellados con la clave de la
+  //    sala (sellaEfimera: AES-256-GCM; la clave sale de la llave del código QR o de la llave nueva que viajó por el canal encriptado de
+  //    la llamada al volver al PC; el relé no la tiene);
+  //  - el contenido va como los archivos del chat: en trozos de 192 KB, cada uno sellado con AES-256-GCM con una clave nueva de 32 bytes
+  //    para ese envío (la que viaja dentro del aviso), con el número de trozo en el nonce y la cabecera en los datos asociados: un trozo
+  //    cambiado, repetido o fuera de sitio no se abre.
+  // El relé solo pasa los bytes encriptados y no guarda nada: esta sala no usa el buzón, y si la otra persona no está, no le llega. Lo
+  // recibido vive solo en la memoria de la página (nada en la base de datos ni en el almacenamiento del navegador): se ve y se guarda
+  // desde la llamada, y al terminar la llamada se suelta. La foto sale sin datos ocultos: se dibuja de nuevo en un lienzo antes de
+  // encriptarla (sin GPS, modelo ni fecha) y, si no se puede, no sale. Los archivos van tal cual. La ubicación se pide solo al tocarla,
+  // una vez, y sale solo si se confirma. Topes, los del chat: 4 GB por archivo; más de 300 MB solo si el navegador de quien lo recibe
+  // puede escribirlo en el disco según llega (y elige dónde).
+  const ENV = new Map(); // id (32 hexadecimales) → lo que sale o llega
+  const ENV_ESPERA = 30000; // sin noticias de la otra parte en este tiempo, el envío se da por cortado
+  const ENV_HECHO = 10000; // «Foto enviada», «Ubicación enviada», «Archivo enviado»: se ven este rato y se quitan solas
+  const ENV_MAX = 40; // tarjetas a la vez: lo que pase de ahí no entra (la bandeja no crece sin fin)
+  // la llamada comparte la línea: menos trozos en vuelo que en el chat, para que la voz, la imagen y lo que la llamada se dice por la
+  // sala no esperen detrás de un archivo
+  const VENTANA_LL = 8, ATRASO_LL = 1024 * 1024;
+  let envCorre = false, envVigiaT = null;
+  const idEnvio = () => C.hex(C.azar(16));
+  // la sala de la llamada de dos que está en marcha (la del teléfono, o la de quien habla con él)
+  const salaLlamada = () => { const c = LL && LL.estado === 'hablando' ? convLl() : null; return c && c.efimera && EFI.get(c.id) === c && !c.vuelta && !c.soloPc && c.suId ? c : null; };
+  // lo que llega solo se acepta de la sala de la llamada en marcha (o de su tramo, durante el paso al teléfono)
+  const deLaLlamada = (c) => !!(c && LL && LL.estado === 'hablando' && (LLAMADA_CONV === c.id || (LL.esTramo && LL.esTramo(c.id))));
+  const enCurso = (it) => it.estado !== 'hecho' && it.estado !== 'error';
+  const anunciado = (it) => it.dir === 'llega' || it.estado === 'espera' || it.estado === 'envia' || it.estado === 'espera-fin';
+  // el nombre que llega, sin caracteres de control ni de dirección del texto (un «.exe» disfrazado de «.txt»)
+  const nombreVisible = (n) => limpiaNombre(String(n || '').replace(/[\u0000-\u001f\u007f\u200b-\u200f\u202a-\u202e\u2066-\u2069]/g, '')).trim() || T('archivo');
+  // la foto recibida se guarda con la fecha y la hora de este equipo (la de quien la manda no viaja)
+  const nombreFoto = (mime) => { const d = new Date(), p = (n) => String(n).padStart(2, '0'); return 'foto-' + d.getFullYear() + p(d.getMonth() + 1) + p(d.getDate()) + '-' + p(d.getHours()) + p(d.getMinutes()) + p(d.getSeconds()) + (mime === 'image/png' ? '.png' : '.jpg'); };
+  const finoEnv = () => !!(window.matchMedia && matchMedia('(hover: hover) and (pointer: fine)').matches);
+  const responde = (c, obj) => (c && c.suId ? mandaEfimeraA(c, c.suId, obj).catch(() => false) : Promise.resolve(false));
+  // La foto, sin datos ocultos: se dibuja de nuevo en un lienzo (con la orientación ya aplicada) y sale como un JPEG o PNG nuevo, sin el
+  // GPS, el modelo ni la fecha del archivo original. Si no se puede volver a dibujar, no sale (en el chat, sinDatosOcultos manda el original).
+  async function fotoLimpia(f) {
+    let fuente = null, w = 0, h = 0, suelta = () => {};
+    try { const b = await createImageBitmap(f, { imageOrientation: 'from-image' }); fuente = b; w = b.width; h = b.height; suelta = () => { try { b.close(); } catch (_) {} }; }
+    catch (_) {
+      const u = URL.createObjectURL(f), i = new Image(); suelta = () => URL.revokeObjectURL(u);
+      try { i.src = u; await i.decode(); fuente = i; w = i.naturalWidth; h = i.naturalHeight; } catch (e) { suelta(); throw e; }
+    }
+    try {
+      if (!w || !h) throw new Error('sin medidas');
+      // como mucho 4096 px por lado y 16 millones de puntos (lo que admite un lienzo en el iPhone)
+      const k = Math.min(1, 4096 / Math.max(w, h), Math.sqrt(16e6 / (w * h))), W = Math.max(1, Math.round(w * k)), H = Math.max(1, Math.round(h * k));
+      const png = /^image\/png$/i.test(f.type || ''), tipo = png ? 'image/png' : 'image/jpeg';
+      const cv = document.createElement('canvas'); cv.width = W; cv.height = H;
+      const g = cv.getContext('2d'); if (!png) { g.fillStyle = '#fff'; g.fillRect(0, 0, W, H); } g.drawImage(fuente, 0, 0, W, H);
+      const blob = await new Promise((r) => cv.toBlob(r, tipo, 0.92));
+      cv.width = cv.height = 0;
+      if (!blob || !blob.size) throw new Error('sin imagen');
+      return { blob, mime: tipo, w: W, h: H };
+    } finally { suelta(); }
+  }
+  // «Abrir en el mapa»: la app de mapas del teléfono (Mapas en el iPhone; en Android, la que la persona tenga para «geo:») o, en el
+  // ordenador, OpenStreetMap en otra pestaña. Solo al tocarlo: la página no carga ningún mapa.
+  function enlaceMapa(la, lo) {
+    const a = la.toFixed(5), b = lo.toFixed(5);
+    if (iosUA) return { href: 'https://maps.apple.com/?ll=' + a + ',' + b + '&q=' + a + ',' + b, aparte: true };
+    if (androidUA) return { href: 'geo:' + a + ',' + b + '?q=' + a + ',' + b, aparte: false };
+    return { href: 'https://www.openstreetmap.org/?mlat=' + a + '&mlon=' + b + '#map=17/' + a + '/' + b, aparte: true };
+  }
+  const precision = (m) => (m == null ? '' : m < 1000 ? '±' + m + '\u00a0m' : '±' + (m / 1000).toLocaleString(LOC(), { maximumFractionDigits: 1 }) + '\u00a0km');
+  const coordenadas = (it) => it.la.toFixed(5) + ', ' + it.lo.toFixed(5) + (it.prec != null ? ' · ' + precision(it.prec) : '');
+  // ----- el menú -----
+  function menuEnviar(on) {
+    const m = $('#ll-enviar-menu'), b = $('#ll-enviar'), caja = $('#ll-enviar-caja'); if (!m || !b) return;
+    const abrir = !!on && !!caja && !caja.hidden;
+    // (mientras el menú está abierto, las tarjetas no se ven: así no asoman por detrás)
+    const tray = $('#ll-envios'); if (tray) tray.classList.toggle('tapada', abrir);
+    if (!abrir) { if (!m.hidden) { m.hidden = true; b.setAttribute('aria-expanded', 'false'); } return; }
+    m.hidden = false; b.setAttribute('aria-expanded', 'true'); apartaNota();
+    // encima de la barra y centrado en el botón, sin salirse de la pantalla
+    const ll = $('#llamada').getBoundingClientRect(), br = b.getBoundingClientRect(), bar = $('#ll-botones').getBoundingClientRect(), w = m.offsetWidth;
+    m.style.right = 'auto'; m.style.left = Math.round(Math.max(12, Math.min(ll.width - w - 12, br.left - ll.left + br.width / 2 - w / 2))) + 'px';
+    m.style.bottom = Math.max(12, Math.round(ll.bottom - bar.top + 10)) + 'px';
+    if (finoEnv()) { const p = m.querySelector('.ll-env-op'); if (p) p.focus({ preventScroll: true }); }
+  }
+  function eligeEnvio(que) {
+    menuEnviar(false);
+    if (!salaLlamada()) return;
+    // (el selector del teléfono se abre dentro del mismo toque: si no, el navegador no lo deja abrir)
+    if (que === 'foto') $('#ll-env-foto').click();
+    else if (que === 'archivo') $('#ll-env-archivo').click();
+    else if (que === 'ubicacion') pideUbicacion();
+  }
+  // ----- lo que sale -----
+  function encolaEnvio(que, f) {
+    const c = salaLlamada(); if (!c || !f || !f.size) return;
+    if (f.size > MAX_ARCHIVO) { aviso(T('«{n}» pasa del tope de {g} por archivo.').replace('{n}', nombreVisible(f.name).slice(0, 40)).replace('{g}', fmtGB(MAX_ARCHIVO))); return; }
+    const foto = que === 'foto';
+    const it = { id: idEnvio(), dir: 'sale', que: foto ? 'foto' : 'archivo', sala: c.id, f, tam: f.size, nombre: foto ? '' : nombreVisible(f.name), mime: foto ? '' : String(f.type || 'application/octet-stream').slice(0, 100), estado: 'cola', t: Date.now() };
+    ENV.set(it.id, it); pintaEnvio(it); corre();
+  }
+  // de uno en uno y en orden
+  async function corre() {
+    if (envCorre) return; envCorre = true;
+    try {
+      for (let it; (it = [...ENV.values()].find((x) => x.dir === 'sale' && (x.estado === 'cola' || x.estado === 'prepara')));) {
+        try { await mandaEnvio(it); } catch (e) { console.warn('envío', e); }
+        if (it.estado === 'cola' || it.estado === 'prepara') fallaEnvio(it, T('No se ha podido enviar.'));
+      }
+    } finally { envCorre = false; }
+  }
+  const esperaEnvio = (it, ms) => new Promise((r) => { it.sigue = r; setTimeout(r, ms); });
+  async function mandaEnvio(it) {
+    if (it.que === 'foto' && !it.limpia) {
+      it.estado = 'prepara'; pintaEnvio(it);
+      let r = null; try { r = await fotoLimpia(it.f); } catch (_) { r = null; }
+      if (ENV.get(it.id) !== it || it.estado !== 'prepara') return; // cancelada mientras se preparaba
+      if (!r) return fallaEnvio(it, T('No se ha podido preparar la foto: prueba con otra.'), true);
+      it.f = r.blob; it.tam = r.blob.size; it.mime = r.mime; it.w = r.w; it.h = r.h; it.limpia = true; it.nombre = r.mime === 'image/png' ? 'foto.png' : 'foto.jpg';
+      it.url = URL.createObjectURL(r.blob);
+    }
+    const c = salaLlamada();
+    if (!c) return fallaEnvio(it, T('La llamada ya no está en marcha.'));
+    it.sala = c.id; it.ack = 0; it.enviados = 0; it.listo = false; it.elige = false; it.trozos = Math.ceil(it.tam / TROZO) || 1;
+    const clave = C.azar(32); it.k = await C.aes(clave);
+    const anuncio = { tipo: 'envio', id: it.id, que: it.que, nombre: it.nombre, tam: it.tam, mime: it.mime, trozos: it.trozos, clave: C.b64u(clave), w: it.w, h: it.h };
+    clave.fill(0);
+    it.estado = 'espera'; it.ultimo = Date.now(); pintaEnvio(it); vigilaEnvios();
+    if (!(await mandaEfimeraA(c, c.suId, anuncio))) return fallaEnvio(it, T('Se perdió la conexión.'));
+    // la otra persona está lista (en memoria) o ya ha elegido dónde guardarlo (si pasa de 300 MB)
+    while (!it.listo) {
+      if (it.estado !== 'espera') return;
+      if (Date.now() - it.ultimo > (it.elige ? 10 * 60 * 1000 : ENV_ESPERA)) return fallaEnvio(it, T('La otra persona no ha contestado.'));
+      await esperaEnvio(it, 500);
+    }
+    if (it.estado !== 'espera') return;
+    it.estado = 'envia'; it.ultimo = Date.now(); pintaEnvio(it);
+    const fid = C.deHex(it.id);
+    for (let i = 0; i < it.trozos; i++) {
+      while (i - it.ack >= VENTANA_LL || R.atraso > ATRASO_LL) {
+        if (it.estado !== 'envia') return;
+        if (Date.now() - it.ultimo > ENV_ESPERA) return fallaEnvio(it, T('Se perdió la conexión.'));
+        await esperaEnvio(it, 250);
+      }
+      if (it.estado !== 'envia') return;
+      let claro; try { claro = new Uint8Array(await it.f.slice(i * TROZO, (i + 1) * TROZO).arrayBuffer()); } catch (_) { return fallaEnvio(it, T('No se pudo leer el archivo: ¿sigue en el mismo sitio?'), true); }
+      // [10][16 id][4 número de trozo] + AES-256-GCM (clave del envío, nonce = número de trozo, datos asociados = esa cabecera)
+      const cab = new Uint8Array(21); cab[0] = 10; cab.set(fid, 1); new DataView(cab.buffer).setUint32(17, i);
+      const ct = await C.sella(it.k, i, claro, cab);
+      if (it.estado !== 'envia') return;
+      if (!c.suId || !R.manda(c.id, c.suId, C.cat(cab, ct))) return fallaEnvio(it, T('Se perdió la conexión.'));
+      it.enviados = i + 1; pintaProgreso(it);
+    }
+    // todo ha salido: «Enviado» cuando la otra persona confirma que lo tiene entero
+    it.estado = 'espera-fin'; it.ultimo = Date.now(); pintaEnvio(it);
+  }
+  function fallaEnvio(it, motivo, sinReintento, porOtra) {
+    if (!it || !enCurso(it)) return;
+    const avisar = !porOtra && anunciado(it);
+    it.estado = 'error'; it.motivo = motivo || ''; it.k = null; it.reintento = !sinReintento && (it.que === 'ubicacion' || !!it.f);
+    if (avisar) responde(EFI.get(it.sala), { tipo: 'envio-no', id: it.id, por: 'cancelado' });
+    if (it.sigue) it.sigue();
+    pintaEnvio(it);
+  }
+  function reintentaEnvio(it) {
+    if (!it || it.estado !== 'error') return;
+    if (it.que === 'ubicacion') { quitaEnvio(it); pideUbicacion(); return; }
+    const c = salaLlamada(); if (!c) { aviso(T('La llamada ya no está en marcha.')); return; }
+    if (!it.f) { quitaEnvio(it); return; }
+    // el mismo archivo (la foto, ya limpia), con otro nombre de envío y otra clave
+    const nuevo = { id: idEnvio(), dir: 'sale', que: it.que, sala: c.id, f: it.f, tam: it.tam, nombre: it.nombre, mime: it.mime, w: it.w, h: it.h, limpia: it.limpia, url: it.url, estado: 'cola', t: Date.now() };
+    it.url = null; it.f = null; quitaEnvio(it);
+    ENV.set(nuevo.id, nuevo); pintaEnvio(nuevo); corre();
+  }
+  // la ubicación: solo al tocar, una vez; antes de salir se enseña y se confirma
+  function pideUbicacion() {
+    const c = salaLlamada(); if (!c) return;
+    const it = { id: idEnvio(), dir: 'sale', que: 'ubicacion', sala: c.id, estado: 'busca', t: Date.now() };
+    ENV.set(it.id, it); pintaEnvio(it);
+    if (!navigator.geolocation) return fallaEnvio(it, T('Este navegador no puede dar la ubicación.'), true);
+    navigator.geolocation.getCurrentPosition((p) => {
+      if (ENV.get(it.id) !== it || it.estado !== 'busca') return;
+      const la = Number(p.coords.latitude), lo = Number(p.coords.longitude), ac = Number(p.coords.accuracy);
+      if (!Number.isFinite(la) || !Number.isFinite(lo) || Math.abs(la) > 90 || Math.abs(lo) > 180) return fallaEnvio(it, T('No se ha podido obtener la ubicación. Vuelve a intentarlo.'));
+      it.la = Math.round(la * 1e5) / 1e5; it.lo = Math.round(lo * 1e5) / 1e5; it.prec = Number.isFinite(ac) && ac >= 0 ? Math.max(1, Math.round(ac)) : null;
+      it.estado = 'confirma'; pintaEnvio(it);
+    }, (e) => {
+      if (ENV.get(it.id) !== it || it.estado !== 'busca') return;
+      fallaEnvio(it, e && e.code === 1 ? T('No se ha podido obtener la ubicación: revisa el permiso del navegador.') : T('No se ha podido obtener la ubicación. Vuelve a intentarlo.'));
+    }, { enableHighAccuracy: true, timeout: 20000, maximumAge: 0 });
+  }
+  async function mandaUbicacionLl(it) {
+    if (!it || it.estado !== 'confirma') return;
+    const c = salaLlamada(); if (!c) return fallaEnvio(it, T('La llamada ya no está en marcha.'));
+    it.sala = c.id; it.estado = 'espera-fin'; it.ultimo = Date.now(); pintaEnvio(it); vigilaEnvios();
+    if (!(await mandaEfimeraA(c, c.suId, { tipo: 'ubicacion', id: it.id, la: it.la, lo: it.lo, prec: it.prec }))) fallaEnvio(it, T('Se perdió la conexión.'));
+  }
+  // ----- lo que llega (por la sala de la llamada; ver recibeEfimera) -----
+  async function llegaEnvio(c, j) {
+    if (j.tipo === 'envio') return llegaAnuncio(c, j);
+    if (j.tipo === 'ubicacion') return llegaUbicacion(c, j);
+    const it = ENV.get(String(j.id || '')); if (!it || it.sala !== c.id) return;
+    if (it.dir === 'sale') {
+      if (j.tipo === 'envio-listo' && it.estado === 'espera') { it.listo = true; it.ultimo = Date.now(); }
+      else if (j.tipo === 'envio-elige' && it.estado === 'espera') { it.elige = true; it.ultimo = Date.now(); pintaEnvio(it); }
+      else if (j.tipo === 'envio-ack' && (it.estado === 'envia' || it.estado === 'espera-fin')) { const h = Math.floor(Number(j.hasta)); if (h > it.ack && h <= it.trozos) { it.ack = h; it.ultimo = Date.now(); pintaProgreso(it); } }
+      else if (j.tipo === 'envio-fin' && j.ok === 1 && (it.estado === 'espera-fin' || (it.estado === 'envia' && it.ack === it.trozos))) { it.estado = 'hecho'; it.k = null; pintaEnvio(it); }
+      else if (j.tipo === 'envio-no' && enCurso(it)) fallaEnvio(it, motivoNo(j.por), j.por === 'grande' || j.por === 'sin-llamada', true);
+    } else if (j.tipo === 'envio-no' && enCurso(it)) fallaLlegada(it, j.por === 'fin' ? T('Cortado: la llamada terminó en el otro equipo.') : T('La otra persona ha cancelado el envío.'), true);
+    if (it.sigue) it.sigue();
+  }
+  const motivoNo = (por) => (por === 'rechazado' ? T('La otra persona lo ha cancelado.') : por === 'grande' ? T('Pasa de 300 MB y el navegador de la otra persona no puede guardarlo en el disco según llega.') : por === 'integridad' ? T('Detenido en el otro equipo: un trozo no superó la comprobación de integridad.') : por === 'ocupado' ? T('La otra persona está recibiendo otro envío: vuelve a intentarlo en un momento.') : por === 'sin-llamada' ? T('La otra persona ya no está en la llamada.') : por === 'fin' ? T('Cortado: la llamada terminó en el otro equipo.') : T('La otra persona no ha podido recibirlo.'));
+  async function llegaAnuncio(c, j) {
+    const id = String(j.id || '');
+    if (!/^[0-9a-f]{32}$/.test(id) || ENV.has(id)) return;
+    const no = (por) => responde(c, { tipo: 'envio-no', id, por });
+    if (!deLaLlamada(c)) return no('sin-llamada');
+    if (ENV.size >= ENV_MAX || [...ENV.values()].some((x) => x.dir === 'llega' && (x.estado === 'recibe' || x.estado === 'elige'))) return no('ocupado');
+    const tam = Number(j.tam), trozos = Number(j.trozos);
+    let clave = null; try { clave = C.deB64u(String(j.clave || '')); } catch (_) { clave = null; }
+    if (!Number.isSafeInteger(tam) || tam < 1 || tam > MAX_ARCHIVO || trozos !== (Math.ceil(tam / TROZO) || 1) || !clave || clave.length !== 32) return no('error');
+    const m0 = String(j.mime || '').toLowerCase().slice(0, 100), mime = /^[a-z0-9.+-]+\/[a-z0-9.+-]+$/.test(m0) ? m0 : 'application/octet-stream';
+    const foto = j.que === 'foto' && /^image\/(jpeg|png)$/.test(mime) && tam <= MAX_MEMORIA;
+    const it = { id, dir: 'llega', que: foto ? 'foto' : 'archivo', sala: c.id, tam, trozos, mime, nombre: foto ? nombreFoto(mime) : nombreVisible(j.nombre), tengo: 0, estado: 'recibe', t: Date.now(), ultimo: Date.now() };
+    try { it.k = await C.aes(clave); } finally { clave.fill(0); }
+    if (ENV.has(id) || !deLaLlamada(c)) return;
+    ENV.set(id, it);
+    if (tam > MAX_MEMORIA) {
+      if (!conDisco()) { it.estado = 'error'; it.k = null; it.motivo = T('Pasa de 300 MB y este navegador no puede guardarlo en el disco según llega.'); pintaEnvio(it); return no('grande'); }
+      it.estado = 'elige'; it.pendientes = new Map(); it.siguiente = 0; pintaEnvio(it); vigilaEnvios();
+      return responde(c, { tipo: 'envio-elige', id });
+    }
+    it.partes = new Array(trozos); pintaEnvio(it); vigilaEnvios();
+    await responde(c, { tipo: 'envio-listo', id });
+  }
+  // más de 300 MB: se escribe en el disco según llega, donde la persona elija (como «Guardar en…» del chat)
+  async function eligeDisco(it) {
+    if (!it || it.estado !== 'elige') return;
+    try {
+      const h = await window.showSaveFilePicker({ suggestedName: it.nombre });
+      if (it.estado !== 'elige') return;
+      it.escritor = await h.createWritable(); it.enDisco = true; it.estado = 'recibe'; it.ultimo = Date.now(); pintaEnvio(it);
+      responde(EFI.get(it.sala), { tipo: 'envio-listo', id: it.id });
+    } catch (_) { /* cerró el diálogo: los botones siguen ahí */ }
+  }
+  async function llegaTrozoEnvio(c, b) {
+    if (b.length < 21 + 16) return;
+    const id = C.hex(b.subarray(1, 17)), i = new DataView(b.buffer, b.byteOffset).getUint32(17);
+    const it = ENV.get(id); if (!it || it.dir !== 'llega' || it.sala !== c.id || it.estado !== 'recibe' || i >= it.trozos) return;
+    let claro; try { claro = await C.abre(it.k, i, b.subarray(21), b.subarray(0, 21)); } catch (_) { return fallaLlegada(it, T('Un trozo no superó la comprobación de integridad: se ha detenido.'), false, 'integridad'); }
+    if (it.estado !== 'recibe') return;
+    const esperado = i < it.trozos - 1 ? TROZO : it.tam - (it.trozos - 1) * TROZO;
+    if (claro.length !== esperado) return fallaLlegada(it, T('Un trozo no superó la comprobación de integridad: se ha detenido.'), false, 'integridad');
+    it.ultimo = Date.now();
+    if (it.partes) { if (it.partes[i]) return; it.partes[i] = claro; it.tengo++; }
+    else {
+      // al disco, en orden: lo que llega adelantado espera en memoria (como mucho la ventana)
+      if (i < it.siguiente || it.pendientes.has(i)) return;
+      it.pendientes.set(i, claro);
+      while (it.pendientes.has(it.siguiente)) {
+        const x = it.pendientes.get(it.siguiente); it.pendientes.delete(it.siguiente);
+        try { await it.escritor.write(x); } catch (_) { return fallaLlegada(it, T('No se pudo escribir el archivo en el disco.'), false, 'disco'); }
+        it.siguiente++; it.tengo++;
+      }
+    }
+    pintaProgreso(it);
+    if (it.tengo % 4 === 0 || it.tengo === it.trozos) responde(c, { tipo: 'envio-ack', id, hasta: it.tengo });
+    if (it.tengo === it.trozos) await completaLlegada(c, it);
+  }
+  async function completaLlegada(c, it) {
+    if (it.estado !== 'recibe') return;
+    if (it.escritor) { const w = it.escritor; it.escritor = null; try { await w.close(); } catch (_) { return fallaLlegada(it, T('No se pudo escribir el archivo en el disco.'), false, 'disco'); } }
+    // (solo con un tipo que no puede llevar código; si no, genérico, como «abreArchivo»)
+    else { it.blob = new Blob(it.partes, { type: mimeAbrible(it.mime) ? it.mime : 'application/octet-stream' }); it.partes = null; it.url = URL.createObjectURL(it.blob); }
+    it.estado = 'hecho'; it.k = null;
+    responde(c, { tipo: 'envio-fin', id: it.id, ok: 1 });
+    pintaEnvio(it);
+    if (it.que === 'foto') abreVer(it);
+    recibidoEnPequeno();
+  }
+  function fallaLlegada(it, motivo, porOtra, por) {
+    if (!it || !enCurso(it)) return;
+    it.estado = 'error'; it.motivo = motivo || ''; it.k = null; it.partes = null; if (it.pendientes) it.pendientes.clear();
+    if (it.escritor) { const w = it.escritor; it.escritor = null; Promise.resolve().then(() => w.abort()).catch(() => {}); }
+    if (!porOtra) responde(EFI.get(it.sala), { tipo: 'envio-no', id: it.id, por: por || 'error' });
+    pintaEnvio(it);
+  }
+  function llegaUbicacion(c, j) {
+    const id = String(j.id || '');
+    if (!/^[0-9a-f]{32}$/.test(id) || ENV.has(id)) return;
+    if (!deLaLlamada(c)) return responde(c, { tipo: 'envio-no', id, por: 'sin-llamada' });
+    if (ENV.size >= ENV_MAX) return responde(c, { tipo: 'envio-no', id, por: 'ocupado' });
+    const la = Number(j.la), lo = Number(j.lo), prec = Number(j.prec);
+    if (!Number.isFinite(la) || !Number.isFinite(lo) || Math.abs(la) > 90 || Math.abs(lo) > 180) return responde(c, { tipo: 'envio-no', id, por: 'error' });
+    const it = { id, dir: 'llega', que: 'ubicacion', sala: c.id, la, lo, prec: Number.isFinite(prec) && prec >= 0 && prec < 1e7 ? Math.round(prec) : null, estado: 'hecho', t: Date.now() };
+    ENV.set(id, it); pintaEnvio(it);
+    responde(c, { tipo: 'envio-fin', id, ok: 1 });
+    recibidoEnPequeno();
+  }
+  // con la llamada en pequeño (en el ordenador, «Ver el chat»), lo que llega no se ve: se dice
+  function recibidoEnPequeno() { const ll = $('#llamada'); if (ll && ll.classList.contains('mini')) aviso(T('Ha llegado algo en la llamada: amplíala para verlo.')); }
+  // guardar: la descarga del navegador, con el tipo genérico si no es uno que no puede llevar código (como «abreArchivo»)
+  function guardaEnvio(it) {
+    if (!it || !it.blob) return;
+    const u = URL.createObjectURL(it.blob), a = document.createElement('a');
+    a.href = u; a.download = it.nombre || T('archivo'); a.rel = 'noopener'; a.hidden = true;
+    ($('#llamada') || document.body).append(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(u), 60000);
+  }
+  // la persona corta un envío o una recepción en marcha (la otra parte lo sabe) o quita una tarjeta
+  function cancelaEnvio(it) {
+    if (!it) return;
+    if (enCurso(it)) { const avisar = anunciado(it); it.estado = 'error'; if (avisar) responde(EFI.get(it.sala), { tipo: 'envio-no', id: it.id, por: it.dir === 'sale' ? 'cancelado' : 'rechazado' }); }
+    quitaEnvio(it);
+  }
+  function quitaEnvio(it) {
+    if (!it) return;
+    clearTimeout(it.vaseT);
+    if (enCurso(it)) it.estado = 'error';
+    ENV.delete(it.id);
+    if (it.el) { it.el.remove(); it.el = null; }
+    const v = $('#ll-ver'); if (v && !v.hidden && v.dataset.id === it.id) cierraVer();
+    if (it.url) { try { URL.revokeObjectURL(it.url); } catch (_) {} it.url = null; }
+    if (it.escritor) { const w = it.escritor; it.escritor = null; Promise.resolve().then(() => w.abort()).catch(() => {}); }
+    it.blob = null; it.partes = null; it.f = null; it.k = null; if (it.pendientes) it.pendientes.clear();
+    if (it.sigue) it.sigue();
+    pintaBandeja();
+  }
+  // ----- la foto en grande -----
+  function abreVer(it) {
+    const v = $('#ll-ver'), img = $('#ll-ver-img'); if (!v || !img || !it || !it.url) return;
+    menuEnviar(false);
+    img.src = it.url; v.dataset.id = it.id; v.hidden = false;
+    if (finoEnv()) $('#ll-ver-cerrar').focus({ preventScroll: true });
+  }
+  function cierraVer() { const v = $('#ll-ver'); if (!v || v.hidden) return; v.hidden = true; delete v.dataset.id; $('#ll-ver-img').removeAttribute('src'); }
+  // ----- las tarjetas, encima de los botones de la llamada -----
+  const ICO_ENV = {
+    foto: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="14" rx="2.5"/><circle cx="9" cy="10" r="1.6"/><path d="M20.5 15.5l-5-4.5-8 8"/></svg>',
+    ubicacion: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6.5-6.1-6.5-11a6.5 6.5 0 0 1 13 0c0 4.9-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.4"/></svg>',
+    archivo: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></svg>',
+  };
+  function tituloEnvio(it) {
+    const sale = it.dir === 'sale', q = it.que, e = it.estado;
+    if (q === 'ubicacion') return !sale ? T('Ubicación recibida') : e === 'busca' ? T('Buscando tu ubicación…') : e === 'confirma' ? T('¿Enviar tu ubicación?') : e === 'hecho' ? T('Ubicación enviada') : e === 'error' ? T('Ubicación no enviada') : T('Enviando tu ubicación…');
+    if (sale) return e === 'hecho' ? (q === 'foto' ? T('Foto enviada') : T('Archivo enviado')) : e === 'error' ? (q === 'foto' ? T('Foto no enviada') : T('Archivo no enviado')) : e === 'prepara' ? T('Preparando la foto…') : q === 'foto' ? T('Enviando la foto…') : T('Enviando el archivo…');
+    return e === 'hecho' ? (q === 'foto' ? T('Foto recibida') : T('Archivo recibido')) : e === 'error' ? (q === 'foto' ? T('Foto no recibida') : T('Archivo no recibido')) : e === 'elige' ? T('Te envían un archivo grande') : q === 'foto' ? T('Recibiendo una foto…') : T('Recibiendo un archivo…');
+  }
+  function detalleEnvio(it) {
+    if (it.que === 'ubicacion') return [it.la != null ? coordenadas(it) : '', it.estado === 'error' ? it.motivo : ''].filter(Boolean).join(' · ');
+    if (it.estado === 'error') return it.motivo || '';
+    const x = [];
+    if (it.que !== 'foto' && it.nombre) x.push(it.nombre);
+    if (it.tam && (it.que !== 'foto' || it.limpia || it.dir === 'llega')) x.push(tamano(it.tam));
+    if (it.estado === 'cola') x.push(T('en espera'));
+    if (it.estado === 'espera') x.push(it.elige ? T('la otra persona está eligiendo dónde guardarlo') : T('esperando a la otra persona'));
+    if (it.estado === 'elige') x.push(T('elige dónde guardarlo para recibirlo'));
+    if (it.estado === 'hecho' && it.enDisco) x.push(T('guardado en tu disco'));
+    return x.join(' · ');
+  }
+  function pintaEnvio(it) {
+    const tray = $('#ll-envios'); if (!tray || ENV.get(it.id) !== it) return;
+    const nueva = !it.el;
+    const el = it.el || (it.el = document.createElement('div'));
+    el.className = 'll-env'; el.dataset.id = it.id; el.dataset.dir = it.dir; el.dataset.que = it.que; el.dataset.estado = it.estado; el.textContent = '';
+    // la miniatura de la foto (la que llega se abre en grande al tocarla) o el icono
+    let ico;
+    if (it.que === 'foto' && it.url) {
+      ico = document.createElement(it.dir === 'llega' ? 'button' : 'span');
+      const im = document.createElement('img'); im.src = it.url; im.alt = ''; ico.append(im);
+      if (it.dir === 'llega') { ico.type = 'button'; ico.setAttribute('aria-label', T('Ver la foto')); ico.addEventListener('click', () => abreVer(it)); }
+    } else { ico = document.createElement('span'); ico.innerHTML = ICO_ENV[it.que] || ICO_ENV.archivo; }
+    ico.classList.add('ll-env-ico');
+    const tx = document.createElement('span'); tx.className = 'll-env-txt';
+    const b = document.createElement('b'); b.textContent = tituloEnvio(it);
+    const s = document.createElement('small'); s.textContent = detalleEnvio(it);
+    const pc = document.createElement('span'); pc.className = 'll-env-pc'; pc.setAttribute('aria-hidden', 'true'); s.append(pc);
+    tx.append(b, s);
+    const acc = document.createElement('span'); acc.className = 'll-env-acc';
+    const boton = (txt, fn, principal) => { const x = document.createElement('button'); x.type = 'button'; x.className = 'll-env-b' + (principal ? ' principal' : ''); x.textContent = txt; x.addEventListener('click', fn); acc.append(x); return x; };
+    const e = it.estado, sale = it.dir === 'sale';
+    let dos = false;
+    if (sale && e === 'confirma') { boton(T('Cancelar'), () => cancelaEnvio(it)); boton(T('Enviar'), () => mandaUbicacionLl(it), true); dos = true; }
+    else if (e === 'elige') { boton(T('Rechazar'), () => cancelaEnvio(it)); boton(T('Guardar en…'), () => eligeDisco(it), true); dos = true; }
+    else if (enCurso(it)) boton(T('Cancelar'), () => cancelaEnvio(it));
+    else if (e === 'error' && sale && it.reintento) boton(T('Reintentar'), () => reintentaEnvio(it), true);
+    else if (e === 'hecho' && !sale && it.que === 'ubicacion') { const m = enlaceMapa(it.la, it.lo), a = document.createElement('a'); a.className = 'll-env-b principal'; a.href = m.href; if (m.aparte) a.target = '_blank'; a.rel = 'noopener noreferrer'; a.textContent = T('Abrir en el mapa'); acc.append(a); dos = true; }
+    else if (e === 'hecho' && !sale && it.blob) { if (it.que === 'foto') { boton(T('Ver'), () => abreVer(it)); dos = true; } boton(T('Guardar'), () => guardaEnvio(it), true); }
+    el.classList.toggle('dos', dos);
+    el.append(ico, tx);
+    // terminada (enviada, recibida o fallida): se puede quitar
+    if (!enCurso(it)) { const x = document.createElement('button'); x.type = 'button'; x.className = 'll-env-x'; x.setAttribute('aria-label', T('Quitar')); x.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>'; x.addEventListener('click', () => quitaEnvio(it)); if (dos || !acc.childNodes.length) el.append(x); else acc.append(x); }
+    if (acc.childNodes.length) el.append(acc);
+    if (it.que !== 'ubicacion' && (e === 'envia' || e === 'espera-fin' || e === 'recibe')) { const br = document.createElement('i'); br.className = 'll-env-barra'; br.setAttribute('aria-hidden', 'true'); br.append(document.createElement('i')); el.append(br); }
+    if (nueva) { tray.append(el); }
+    pintaProgreso(it); pintaBandeja();
+    if (nueva) tray.scrollTop = tray.scrollHeight;
+    if (sale && e === 'hecho' && !it.vaseT) it.vaseT = setTimeout(() => { if (ENV.get(it.id) === it && it.estado === 'hecho') quitaEnvio(it); }, ENV_HECHO);
+  }
+  function pintaProgreso(it) {
+    const el = it.el; if (!el) return;
+    const n = it.dir === 'sale' ? Math.max(it.ack || 0, it.enviados || 0) : (it.tengo || 0), p = it.trozos ? Math.min(1, n / it.trozos) : 0;
+    const i = el.querySelector('.ll-env-barra > i'); if (i) i.style.width = Math.round(p * 100) + '%';
+    const pc = el.querySelector('.ll-env-pc'); if (pc) pc.textContent = it.estado === 'envia' || it.estado === 'recibe' ? ' · ' + Math.round(p * 100) + ' %' : '';
+  }
+  // (se iba solo a los 8 s; si se abre el menú o sale una tarjeta, se va ya)
+  function apartaNota() { const n = $('#llevar-nota'); if (n && !n.hidden) n.hidden = true; }
+  function pintaBandeja() {
+    const tray = $('#ll-envios'); if (!tray) return;
+    tray.hidden = !ENV.size; if (ENV.size) apartaNota();
+    // lo recibido no se queda: se dice una vez, debajo
+    const nota = [...ENV.values()].some((x) => x.dir === 'llega' && x.blob);
+    let n = tray.querySelector('.ll-envios-nota');
+    if (nota && !n) { n = document.createElement('p'); n.className = 'll-envios-nota'; n.textContent = T('Lo recibido se borra de este equipo al terminar la llamada, salvo lo que guardes.'); }
+    if (n) { if (nota) tray.append(n); else n.remove(); }
+    colocaEnvios();
+  }
+  // encima de la barra de botones (y de la píldora del código de seguridad, si está), sin taparla
+  function colocaEnvios() {
+    const tray = $('#ll-envios'), ll = $('#llamada'), bar = $('#ll-botones'); if (!tray || tray.hidden || !ll || !bar) return;
+    const r = ll.getBoundingClientRect(), b = bar.getBoundingClientRect(); if (!r.height) return;
+    let tope = b.height ? b.top : r.bottom - 140;
+    const chip = $('#ll-cod-chip'); if (chip && !chip.hidden) { const k = chip.getBoundingClientRect(); if (k.height && k.top < tope) tope = k.top; }
+    tray.style.bottom = Math.max(12, Math.round(r.bottom - tope + 10)) + 'px';
+    tray.style.maxHeight = Math.max(140, Math.round(tope - r.top - 100)) + 'px';
+  }
+  // cada segundo, mientras algo va o viene: lo que lleva demasiado sin noticias, o ya no es de la llamada, se da por cortado
+  function vigilaEnvios() {
+    if (envVigiaT) return;
+    envVigiaT = setInterval(() => {
+      const ahora = Date.now(); let hay = false;
+      for (const it of [...ENV.values()]) {
+        if (!enCurso(it)) continue; hay = true;
+        const vale = deLaLlamada(EFI.get(it.sala));
+        if (it.dir === 'llega') {
+          if (!vale || (it.estado === 'recibe' && ahora - it.ultimo > ENV_ESPERA)) fallaLlegada(it, T('Se perdió la conexión.'));
+          else if (it.estado === 'elige' && ahora - it.t > 10 * 60 * 1000) fallaLlegada(it, T('No se eligió dónde guardarlo.'), false, 'rechazado');
+        } else if (anunciado(it) && (!vale || (it.estado === 'espera-fin' && ahora - it.ultimo > ENV_ESPERA))) fallaEnvio(it, T('Se perdió la conexión.'));
+      }
+      if (!hay) { clearInterval(envVigiaT); envVigiaT = null; }
+      colocaEnvios();
+    }, 1000);
+  }
+  // sin relé (o la otra persona sale de la sala), lo que estaba en camino no sigue: se dice, y se puede volver a enviar
+  function envioSinRele(sala) {
+    for (const it of [...ENV.values()]) {
+      if (!enCurso(it) || !anunciado(it) || (sala && it.sala !== sala)) continue;
+      if (it.dir === 'sale') fallaEnvio(it, T('Se perdió la conexión.'), false, true); else fallaLlegada(it, T('Se perdió la conexión.'), true);
+    }
+  }
+  // al terminar la llamada: lo que iba en camino se corta (la otra parte lo sabe) y lo recibido se suelta de la memoria
+  function envioEstado(est) {
+    if (est === 'hablando') { if (ENV.size) colocaEnvios(); return; }
+    if (est !== 'libre' && est !== 'cerrando') return;
+    menuEnviar(false); cierraVer();
+    for (const it of [...ENV.values()]) { if (enCurso(it) && anunciado(it)) { it.estado = 'error'; responde(EFI.get(it.sala), { tipo: 'envio-no', id: it.id, por: 'fin' }); } quitaEnvio(it); }
+  }
+  function arrancaEnvios() {
+    const b = $('#ll-enviar'), m = $('#ll-enviar-menu'); if (!b || !m) return;
+    b.addEventListener('click', () => menuEnviar(m.hidden));
+    m.addEventListener('click', (e) => { const op = e.target.closest('.ll-env-op'); if (op) eligeEnvio(op.dataset.que); });
+    // un toque fuera lo cierra (en captura: «Más» para el clic y el menú no se enteraría)
+    document.addEventListener('pointerdown', (e) => { if (!m.hidden && !(e.target && e.target.closest && e.target.closest('#ll-enviar-menu, #ll-enviar'))) menuEnviar(false); }, true);
+    document.addEventListener('keydown', (e) => { if (e.key !== 'Escape') return; const v = $('#ll-ver'); if (v && !v.hidden) { cierraVer(); return; } if (!m.hidden) { menuEnviar(false); b.focus(); } });
+    for (const [id, que] of [['#ll-env-foto', 'foto'], ['#ll-env-archivo', 'archivo']]) { const x = $(id); if (x) x.addEventListener('change', (e) => { const fs = [...(e.target.files || [])]; e.target.value = ''; for (const f of fs) encolaEnvio(que, f); }); }
+    { const x = $('#ll-ver-cerrar'); if (x) x.addEventListener('click', cierraVer); }
+    { const x = $('#ll-ver-guardar'); if (x) x.addEventListener('click', () => guardaEnvio(ENV.get(($('#ll-ver').dataset.id) || ''))); }
+    addEventListener('resize', () => { colocaEnvios(); if (!m.hidden) menuEnviar(true); }, { passive: true });
+  }
+  // solo en pruebas locales: lo que hay en la bandeja
+  if (LOCAL) window.gcomPruebaEnvios = () => [...ENV.values()].map((x) => ({ id: x.id, dir: x.dir, que: x.que, estado: x.estado, nombre: x.nombre, tam: x.tam, mime: x.mime, motivo: x.motivo || '', la: x.la, lo: x.lo, prec: x.prec, url: x.url || '' }));
+  if (LOCAL) window.gcomPruebaEnvioBytes = async (id) => { const x = ENV.get(id), b = x && (x.blob || (x.dir === 'sale' && x.f)); return b ? C.b64u(new Uint8Array(await b.arrayBuffer())) : null; };
 
   async function arranca() {
     setTimeout(revela, 2500); // por si algo tarda: nunca más de esto con la pantalla tapada

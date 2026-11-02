@@ -1024,7 +1024,7 @@ html.aparece .barra,html.aparece #app{animation:gcom-aparece .16s ease-out both}
 #ll-completa[aria-pressed="true"] .sale{display:inline}
 /* en el PC, los botones de la llamada en columnas iguales: con «Pantalla completa» (más largo) los huecos ya no salían desiguales */
 @media (hover:hover) and (pointer:fine){
-  .gc-llamada:not(.mini) .gc-llamada-botones{display:grid;grid-auto-flow:column;grid-auto-columns:108px;justify-content:center;align-items:start;column-gap:0}
+  .gc-llamada:not(.mini) .gc-llamada-botones{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,108px);justify-content:center;align-items:start;column-gap:0;max-width:100%}
   .gc-llamada:not(.mini) .gc-llamada-boton{min-width:0;text-align:center}
   .gc-llamada:not(.mini) .gc-llamada-boton>span{max-width:100%;overflow-wrap:break-word}
 }
@@ -2191,7 +2191,7 @@ body.con-pestanas #marcar .marcar-llamar span{position:absolute;width:1px;height
 /* en el teléfono (modo llevar): solo la llamada y esta pantalla */
 body.modo-llevar>*:not(#llamada):not(#llevar):not(#llevar-avisos):not(#aviso):not(.gira):not(script){display:none!important}
 body.modo-llevar{background:#06080C}
-.modo-llevar #ll-botones>.gc-llamada-boton:not(.gc-colgar):not(.ll-volver-pc):not(#ll-girar-caja):not(#ll-flotante-caja):not(#ll-pantalla-caja),.modo-llevar #ll-entrante,.modo-llevar .ll-mini-b,.modo-llevar #ll-voces,.modo-llevar .ll-ajustes,.modo-llevar #ll-sas-mini,.modo-llevar #ll-sas,.modo-llevar .mi-tam-boton{display:none!important}
+.modo-llevar #ll-botones>.gc-llamada-boton:not(.gc-colgar):not(.ll-volver-pc):not(#ll-girar-caja):not(#ll-flotante-caja):not(#ll-pantalla-caja):not(#ll-enviar-caja),.modo-llevar #ll-entrante,.modo-llevar .ll-mini-b,.modo-llevar #ll-voces,.modo-llevar .ll-ajustes,.modo-llevar #ll-sas-mini,.modo-llevar #ll-sas,.modo-llevar .mi-tam-boton{display:none!important}
 .llevar{position:fixed;inset:0;z-index:120;display:grid;place-items:center;padding:max(24px,env(safe-area-inset-top)) max(24px,env(safe-area-inset-right)) max(24px,env(safe-area-inset-bottom)) max(24px,env(safe-area-inset-left));background:radial-gradient(ellipse 80% 55% at 50% 30%,rgba(156,195,228,.09),transparent 70%),#06080C;color:#E8ECF1;text-align:center}
 .llevar[hidden]{display:none}
 .llevar-caja{width:min(360px,100%);display:flex;flex-direction:column;align-items:center}
@@ -2342,3 +2342,69 @@ body.modo-llevar{background:#06080C}
 .gc-llamada.yo-grande:not(.mini):not(.dividida):not(.tres) .videos #v-remoto{position:absolute;right:16px;bottom:140px;left:auto;top:auto;width:160px;max-width:28%;height:auto;aspect-ratio:3/4;object-fit:cover;border-radius:12px;border:1px solid var(--line);background:#111;z-index:2;cursor:pointer}
 .gc-llamada.yo-grande.movida:not(.mini):not(.dividida):not(.tres) .videos #v-remoto{left:var(--mi-x);top:var(--mi-y);right:auto;bottom:auto}
 @media (hover:hover) and (pointer:fine),(min-width:761px){.gc-llamada.yo-grande:not(.mini):not(.dividida):not(.tres) .videos #v-remoto{width:240px;max-width:24%;aspect-ratio:16/9;bottom:150px}}
+
+/* «Enviar» en la llamada (dueño, 2 Nov 2026, 16:37: «incluye también lo de enviar la foto, la ubicación y archivos en la llamada del
+   móvil»): el botón va con los demás; el menú, de cristal como «Más», encima de la barra y centrado en el botón; lo que sale y lo que
+   llega, en tarjetas encima de los botones; la foto que llega, en grande */
+#ll-enviar-caja[hidden]{display:none!important}
+.ll-enviar-menu{right:auto;left:16px;min-width:0;width:min(340px,calc(100% - 24px));padding:6px}
+.ll-env-op{all:unset;box-sizing:border-box;display:flex;align-items:center;gap:13px;width:100%;min-height:58px;padding:8px 12px 8px 8px;border-radius:12px;cursor:pointer;color:#E8ECF1;text-align:left;-webkit-tap-highlight-color:transparent}
+.ll-env-op:hover,.ll-env-op:active{background:rgba(156,195,228,.1)}
+.ll-env-op:focus-visible{outline:2px solid #9CC3E4;outline-offset:-2px}
+.ll-env-op-ico{flex:none;width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:rgba(156,195,228,.12);color:#9CC3E4}
+.ll-env-op-ico svg{width:20px;height:20px;stroke-width:1.8}
+.ll-env-op b{display:block;font:500 16px/1.25 var(--texto);color:#F4F6F8}
+.ll-env-op small{display:block;margin-top:2px;font:400 12.5px/1.35 var(--texto);color:#9fb3c4}
+/* las tarjetas: encima de los botones (app.js las coloca), las nuevas abajo */
+.ll-envios{position:absolute;z-index:31;left:50%;transform:translateX(-50%);bottom:calc(150px + env(safe-area-inset-bottom));width:min(420px,calc(100% - 24px));max-height:46%;overflow-y:auto;overscroll-behavior:contain;display:flex;flex-direction:column;gap:8px;pointer-events:none;text-align:left;scrollbar-width:none}
+.ll-envios::-webkit-scrollbar{display:none}
+.ll-envios[hidden]{display:none}
+.ll-envios.tapada{visibility:hidden}
+.ll-envios>*{pointer-events:auto;flex:none}
+.ll-env{position:relative;display:grid;grid-template-columns:44px minmax(0,1fr) auto;align-items:center;column-gap:12px;row-gap:8px;padding:10px;border-radius:16px;border:1px solid rgba(156,195,228,.22);background:rgba(9,13,19,.93);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:0 18px 50px -24px rgba(0,0,0,.9);color:#E8ECF1;animation:llEnvEntra .22s cubic-bezier(.2,.8,.2,1)}
+@keyframes llEnvEntra{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.ll-env{animation:none}}
+.ll-env-ico{all:unset;box-sizing:border-box;width:44px;height:44px;border-radius:12px;display:grid;place-items:center;overflow:hidden;background:rgba(156,195,228,.12);color:#9CC3E4}
+button.ll-env-ico{cursor:pointer}
+button.ll-env-ico:focus-visible{outline:2px solid #9CC3E4;outline-offset:2px}
+.ll-env-ico svg{width:21px;height:21px}
+.ll-env-ico img{width:100%;height:100%;object-fit:cover;display:block}
+.ll-env[data-estado="hecho"] span.ll-env-ico{background:rgba(108,203,165,.14);color:#6CCBA5}
+.ll-env[data-estado="error"] .ll-env-ico{background:rgba(224,122,108,.14);color:#E9897B}
+.ll-env-txt{min-width:0}
+.ll-env-txt b{display:block;font:600 14.5px/1.3 var(--texto);color:#F4F6F8;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ll-env[data-estado="hecho"] .ll-env-txt b::before{content:'✓ ';color:#6CCBA5}
+.ll-env[data-estado="error"] .ll-env-txt b{color:#F1B1A7}
+.ll-env-txt small{display:block;margin-top:2px;font:400 12.5px/1.4 var(--texto);color:#AFC1D1;overflow-wrap:anywhere;-webkit-user-select:text;user-select:text}
+.ll-env-acc{display:flex;align-items:center;justify-content:flex-end;gap:4px}
+.ll-env.dos .ll-env-acc{grid-column:1/-1;gap:8px}
+.ll-env-b{all:unset;box-sizing:border-box;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;min-height:40px;padding:0 14px;border-radius:10px;font:600 14px/1 var(--texto);color:#9CC3E4;white-space:nowrap;-webkit-tap-highlight-color:transparent;transition:transform .1s ease,background-color .15s ease}
+.ll-env-b:hover{background:rgba(156,195,228,.1)}
+.ll-env-b.principal{background:#9CC3E4;color:#06080C}
+.ll-env-b.principal:hover{background:#B3D2EC}
+.ll-env-b:active{transform:scale(.96)}
+.ll-env-b:focus-visible{outline:2px solid #9CC3E4;outline-offset:2px}
+.ll-env-x{all:unset;box-sizing:border-box;cursor:pointer;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;color:#9fb3c4;flex:none}
+.ll-env-x:hover{background:rgba(156,195,228,.1);color:#E8ECF1}
+.ll-env-x:focus-visible{outline:2px solid #9CC3E4;outline-offset:-2px}
+.ll-env-x svg{width:16px;height:16px;stroke-width:2}
+.ll-env-barra{grid-column:1/-1;display:block;height:3px;margin-top:-2px;border-radius:2px;background:rgba(156,195,228,.16);overflow:hidden}
+.ll-env-barra>i{display:block;height:100%;width:0;background:#9CC3E4;border-radius:2px;transition:width .25s linear}
+.ll-envios-nota{margin:0;padding:0 8px;font:400 12px/1.4 var(--texto);color:#C9D6E2;text-align:center;text-shadow:0 1px 6px rgba(0,0,0,.95)}
+/* la foto que llega, en grande, encima de la llamada (que sigue) */
+.ll-ver{position:absolute;inset:0;z-index:50;display:flex;flex-direction:column;background:#04060A;color:#F4F6F8;padding:calc(10px + env(safe-area-inset-top)) max(12px,env(safe-area-inset-right)) calc(16px + env(safe-area-inset-bottom)) max(12px,env(safe-area-inset-left));text-align:center}
+.ll-ver[hidden]{display:none}
+.ll-ver-cab{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:48px;padding:0 4px 0 8px}
+.ll-ver-cab b{font:600 17px/1.3 var(--texto)}
+.ll-ver-cerrar{all:unset;box-sizing:border-box;cursor:pointer;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:rgba(232,236,241,.1);color:#F4F6F8}
+.ll-ver-cerrar:focus-visible{outline:2px solid #9CC3E4;outline-offset:2px}
+.ll-ver-cerrar svg{width:18px;height:18px;stroke-width:2}
+.ll-ver-cuerpo{position:relative;flex:1;min-height:0;margin:8px 0}
+.ll-ver-cuerpo img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;-webkit-user-drag:none}
+.ll-ver-pie{display:flex;flex-direction:column;align-items:center;gap:10px}
+.ll-ver-pie .ll-env-b{min-width:200px;min-height:50px;border-radius:14px;font-size:16px}
+.ll-ver-pie small{max-width:44ch;font:400 12.5px/1.45 var(--texto);color:#9fb3c4}
+/* en pequeño (en el ordenador, «Ver el chat») no caben: lo que llega se avisa */
+.gc-llamada.mini .ll-envios,.gc-llamada.mini .ll-ver,.gc-llamada.mini .ll-enviar-menu{display:none!important}
+/* el icono de «Enviar», con el trazo de los demás botones de la llamada */
+#ll-enviar svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
