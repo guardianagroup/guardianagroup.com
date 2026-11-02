@@ -78,9 +78,10 @@
   }
 
   // ---------- el estado ----------
-  const FASE = { desconectada: 'Desconectada', conectando: 'Conectando…', conectada: 'Conectada', reconectando: 'Reconectando…', error: 'No se pudo conectar' };
-  // con túnel (y su corte) puesto: conectada, o reconectando porque el servidor dejó de contestar (desde la 1.0.53)
-  const CON_TUNEL = (f) => f === 'conectada' || f === 'reconectando';
+  const FASE = { desconectada: 'Desconectada', conectando: 'Conectando…', conectada: 'Conectada', sin_respuesta: 'El servidor no contesta', reconectando: 'Reconectando…', error: 'No se pudo conectar' };
+  // con túnel (y su corte) puesto: conectada; sin respuesta del servidor (1.0.53: lo dice y deja desconectar); o
+  // reconectando (cuando el programa rehaga el túnel solo)
+  const CON_TUNEL = (f) => f === 'conectada' || f === 'sin_respuesta' || f === 'reconectando';
   function fase() {
     if (!enPrograma()) return 'fuera';
     if (!foto) return 'desconectada';
@@ -98,6 +99,7 @@
     pon(V.lead, f === 'fuera' ? 'Un túnel encriptado desde este equipo hasta un servidor de GUARDIANA, con corte si cae y clave poscuántica. Va dentro del mismo programa que el Antivirus, el navegador y Comunicaciones.'
       : f === 'no_disponible' ? (foto && foto.motivo ? String(foto.motivo) : 'El programa no puede abrir el túnel aquí.')
       : f === 'conectada' ? 'Todo lo que sale de este equipo va por el túnel. Si el túnel cae, nada sale fuera de él.'
+      : f === 'sin_respuesta' ? 'El servidor de la VPN no contesta. Mientras tanto, nada sale fuera del túnel. Para volver a tu conexión normal, desconecta; cuando el servidor vuelva, podrás conectar de nuevo.'
       : f === 'reconectando' ? 'El servidor dejó de contestar: GUARDIANA pide un alta nueva y rehace el túnel. Mientras tanto, nada sale fuera de él. Si prefieres volver a tu conexión normal, desconecta.'
       : f === 'conectando' ? 'Llaves nuevas, alta en el servidor, túnel y corte; después, el primer saludo del servidor. Unos segundos.'
       : f === 'error' ? 'El equipo quedó como estaba: sin túnel y sin corte.'
@@ -113,7 +115,7 @@
       if (CON_TUNEL(f) && foto.direccion) filas.push(['Dirección en el túnel', dato(String(foto.direccion))]);
       if (f === 'conectada' && foto.enviados != null) filas.push(['Enviados', dato(bytes(foto.enviados))]);
       if (f === 'conectada' && foto.recibidos != null) filas.push(['Recibidos', dato(bytes(foto.recibidos))]);
-      if (f === 'conectada' && foto.ultimo_saludo_ms) filas.push(['Último saludo del servidor, hace', dato(hace(foto.ultimo_saludo_ms))]);
+      if (CON_TUNEL(f) && foto.ultimo_saludo_ms) filas.push(['Último saludo del servidor, hace', dato(hace(foto.ultimo_saludo_ms))]);
       if ((f === 'error' || f === 'reconectando') && foto.error) filas.push(['Motivo', dato(String(foto.error))]);
     }
     V.datos.textContent = ''; V.datos.hidden = !filas.length;

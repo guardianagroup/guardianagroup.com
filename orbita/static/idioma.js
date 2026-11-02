@@ -1417,6 +1417,8 @@
     "Conectando con el relé…": ["Connecting to the relay…", "Conectando ao relé…"],
     "Conectando…": ["Connecting…", "Conectando…"],
     "Reconectando…": ["Reconnecting…", "Reconectando…"],
+    "El servidor no contesta": ["The server is not answering", "O servidor não responde"],
+    "El servidor de la VPN no contesta. Mientras tanto, nada sale fuera del túnel. Para volver a tu conexión normal, desconecta; cuando el servidor vuelva, podrás conectar de nuevo.": ["The VPN server is not answering. Meanwhile, nothing goes outside the tunnel. To go back to your normal connection, disconnect; when the server is back, you can connect again.", "O servidor da VPN não responde. Enquanto isso, nada sai fora do túnel. Para voltar à sua conexão normal, desconecte; quando o servidor voltar, você poderá conectar de novo."],
     "El servidor dejó de contestar: GUARDIANA pide un alta nueva y rehace el túnel. Mientras tanto, nada sale fuera de él. Si prefieres volver a tu conexión normal, desconecta.": ["The server stopped answering: GUARDIANA asks for a new sign-up and rebuilds the tunnel. Meanwhile, nothing goes outside it. If you would rather go back to your normal connection, disconnect.", "O servidor parou de responder: a GUARDIANA pede um novo registro e refaz o túnel. Enquanto isso, nada sai fora dele. Se preferir voltar à sua conexão normal, desconecte."],
     "Conexión interrumpida, intentando recuperarla…": ["Connection interrupted, trying to recover it…", "Conexão interrompida, tentando recuperar…"],
     "Contestar": ["Answer", "Atender"],
