@@ -2191,7 +2191,7 @@ body.con-pestanas #marcar .marcar-llamar span{position:absolute;width:1px;height
 /* en el teléfono (modo llevar): solo la llamada y esta pantalla */
 body.modo-llevar>*:not(#llamada):not(#llevar):not(#llevar-avisos):not(#aviso):not(.gira):not(script){display:none!important}
 body.modo-llevar{background:#06080C}
-.modo-llevar #ll-botones>.gc-llamada-boton:not(.gc-colgar):not(.ll-volver-pc):not(#ll-girar-caja),.modo-llevar #ll-entrante,.modo-llevar .ll-mini-b,.modo-llevar #ll-voces,.modo-llevar .ll-ajustes,.modo-llevar #ll-sas-mini,.modo-llevar #ll-sas,.modo-llevar .mi-tam-boton{display:none!important}
+.modo-llevar #ll-botones>.gc-llamada-boton:not(.gc-colgar):not(.ll-volver-pc):not(#ll-girar-caja):not(#ll-flotante-caja),.modo-llevar #ll-entrante,.modo-llevar .ll-mini-b,.modo-llevar #ll-voces,.modo-llevar .ll-ajustes,.modo-llevar #ll-sas-mini,.modo-llevar #ll-sas,.modo-llevar .mi-tam-boton{display:none!important}
 .llevar{position:fixed;inset:0;z-index:120;display:grid;place-items:center;padding:max(24px,env(safe-area-inset-top)) max(24px,env(safe-area-inset-right)) max(24px,env(safe-area-inset-bottom)) max(24px,env(safe-area-inset-left));background:radial-gradient(ellipse 80% 55% at 50% 30%,rgba(156,195,228,.09),transparent 70%),#06080C;color:#E8ECF1;text-align:center}
 .llevar[hidden]{display:none}
 .llevar-caja{width:min(360px,100%);display:flex;flex-direction:column;align-items:center}
@@ -2307,3 +2307,4 @@ body.modo-llevar{background:#06080C}
 #ll-volver-pc-caja[hidden]{display:none!important}
 #ll-volver-pc-caja.apagado button{opacity:.45}
 #ll-girar-caja[hidden]{display:none!important}
+#ll-flotante-caja[hidden]{display:none!important}

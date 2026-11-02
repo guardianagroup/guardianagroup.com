@@ -1683,6 +1683,8 @@
     "La llamada no llega": ["The call is not coming through", "A chamada não está chegando"],
     "Toca para ver y oír la llamada": ["Tap to see and hear the call", "Toque para ver e ouvir a chamada"],
     "Volver al PC": ["Back to PC", "Voltar ao PC"],
+    "Flotante": ["Float", "Flutuante"],
+    "Ventana flotante": ["Floating window", "Janela flutuante"],
     "La llamada vuelve a este ordenador…": ["The call is coming back to this computer…", "A chamada está voltando para este computador…"],
     "El ordenador no está conectado: abre Comunicaciones en él y vuelve a intentarlo.": ["The computer is not connected: open Communications on it and try again.", "O computador não está conectado: abra o Comunicações nele e tente de novo."],
     "Pasando la llamada al ordenador…": ["Moving the call to the computer…", "Passando a chamada para o computador…"],

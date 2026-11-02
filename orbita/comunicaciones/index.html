@@ -41,7 +41,7 @@
 <link rel="canonical" href="https://guardianagroup.com/orbita/comunicaciones/">
 <link rel="icon" href="/favicon.ico">
 <link rel="stylesheet" href="componentes.css?v=20261028m">
-<link rel="stylesheet" href="app.css?v=20261102e">
+<link rel="stylesheet" href="app.css?v=20261102f">
 <link rel="stylesheet" href="diseno.css?v=20261031a">
 <link rel="stylesheet" href="viaje.css?v=20261029b">
 <!-- antes de pintar: como app desde el primer fotograma y, al volver a un chat tras recargar, sin enseñar el inicio entretanto -->
@@ -1035,6 +1035,8 @@
     <div class="gc-llamada-boton" id="ll-completa-caja" hidden><button type="button" id="ll-completa" aria-pressed="false" aria-label="Pantalla completa"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="entra" d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/><path class="sale" d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5"/></svg></button><span>Pantalla completa</span></div>
     <!-- «Más» (ronda 83): lo que se usa poco va en este menú (girar la cámara, voz e imagen, añadir, pantalla completa) -->
     <div class="gc-llamada-boton ll-mas-caja" id="ll-mas-caja" hidden><button type="button" id="ll-mas" aria-haspopup="menu" aria-expanded="false" aria-controls="ll-mas-menu" aria-label="Más opciones"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="5.5" cy="12" r="1.7"/><circle cx="12" cy="12" r="1.7"/><circle cx="18.5" cy="12" r="1.7"/></svg></button><span>Más</span></div>
+    <!-- «Flotante» (dueño, 2 Nov 2026, 14:23; ronda 90): la otra persona en la ventana flotante del sistema, movible -->
+    <div class="gc-llamada-boton ll-flotante" id="ll-flotante-caja" hidden><button type="button" id="ll-flotante" aria-label="Ventana flotante"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><rect class="relleno" x="12" y="12" width="7.5" height="5.5" rx="1.2"/></svg></button><span>Flotante</span></div>
     <!-- «Volver al PC» (dueño, 2 Nov 2026, 13:27): en el teléfono al que se pasó la llamada, la devuelve al ordenador -->
     <div class="gc-llamada-boton ll-volver-pc" id="ll-volver-pc-caja" hidden><button type="button" id="ll-volver-pc" aria-label="Volver al PC"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="4.5" width="14" height="10" rx="1.6"/><path d="M6.5 19h6M9.5 14.5V19"/><path d="M21.5 12.5h-6.2M18.2 9.3 15 12.5l3.2 3.2"/></svg></button><span>Volver al PC</span></div>
     <div class="gc-llamada-boton gc-colgar"><button type="button" id="ll-colgar" aria-label="Colgar"><svg viewBox="0 0 24 24"><path d="M3 12c5-5 13-5 18 0l-2.5 2.5-3-1.5v-2.5a9 9 0 0 0-7 0V13l-3 1.5z"/></svg></button><span>Colgar</span></div>
@@ -1170,7 +1172,7 @@
 
 <!-- En el ordenador, en el chat blindado: la pantalla se tapa con la tecla de captura o si la ventana pierde el foco (29 Oct 2026, 08:02) -->
 <div class="captura-velo" id="captura-velo" role="alert" hidden><div><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><b>Modo blindado</b><span>Pantalla tapada durante la captura</span></div></div>
-<script src="/orbita/static/idioma.js?v=20261102-com3"></script>
+<script src="/orbita/static/idioma.js?v=20261102-com4"></script>
 <script src="pq-mlkem.js?v=20261027a"></script>
 <script src="pq-cnsa.js?v=20261027a"></script>
 <script src="qrhaz.js?v=20261027a"></script>
@@ -1180,7 +1182,7 @@
 <script src="sha256.js?v=20261027a"></script>
 <script src="viaje-datos.js?v=20261031a"></script>
 <script src="viaje.js?v=20261029b"></script>
-<script src="llamada.js?v=20261102e"></script>
-<script src="app.js?v=20261102e"></script>
+<script src="llamada.js?v=20261102f"></script>
+<script src="app.js?v=20261102f"></script>
 </body>
 </html>

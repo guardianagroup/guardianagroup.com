@@ -53,6 +53,7 @@
     const b = document.getElementById('ll-toca'); if (b) b.hidden = true;
   }
   for (const g of ['click', 'touchend', 'pointerup', 'keydown']) document.addEventListener(g, arrancaParados, true);
+  const PIP = !!(document.pictureInPictureEnabled || (window.HTMLVideoElement && 'webkitSetPresentationMode' in HTMLVideoElement.prototype));
   const reproduce = (v) => {
     try {
       const p = v.play();
@@ -247,6 +248,7 @@
       $('#ll-avatar').textContent = o.inicial();
       caja.setAttribute('aria-label', video ? t('Videollamada') : t('Llamada de voz'));
       $('#ll-camara-caja').hidden = !(video && cam);
+      { const f = $('#ll-flotante-caja'); if (f) f.hidden = !(PIP && video && estado === 'hablando' && remotoV); }
       { const g = $('#ll-girar-caja'); if (g) g.hidden = !(video && cam && TEL_UA && camaraOn()); }
       // «Pantalla completa», solo en el ordenador y con imagen (dueño, 30 Oct 2026, 09:02: «toda la pantalla del PC»)
       { const f = $('#ll-completa-caja'); if (f) f.hidden = !(video && completaPC()); }
@@ -704,7 +706,7 @@
       // iPhone: la sesión de audio en «play-and-record» durante la llamada (al colgar vuelve a «auto», ver termina)
       try { if (navigator.audioSession) navigator.audioSession.type = 'play-and-record'; } catch (_) {}
       if (conVideo) {
-        try { const s = await navigator.mediaDevices.getUserMedia({ audio: AUDIO, video: VIDEO }); mic = new MediaStream(s.getAudioTracks()); cam = new MediaStream(s.getVideoTracks()); }
+        try { const s = await navigator.mediaDevices.getUserMedia({ audio: AUDIO, video: VIDEO }); mic = new MediaStream(s.getAudioTracks()); cam = new MediaStream(s.getVideoTracks()); vigilaPistas(s); }
         catch (_) { cam = null; }
         if (cam) { preparaCamara(); return microfono(); }
         o.aviso && o.aviso(t('Sin permiso para la cámara: la llamada sigue solo con voz.'));
@@ -716,7 +718,7 @@
     // cambio de voz se podía quedar parado al pasar el teléfono a modo llamada y entonces se mandaba silencio. Solo se usa si se
     // elige otra voz, y se puede cambiar en plena llamada (se sustituye la pista que se envía, sin cortar).
     async function microfono() {
-      if (!mic) mic = await navigator.mediaDevices.getUserMedia({ audio: AUDIO });
+      if (!mic) { mic = await navigator.mediaDevices.getUserMedia({ audio: AUDIO }); vigilaPistas(mic); }
       envio = mic;
       if (voz !== 'natural') { const v = await cadenaVoz(); if (v) envio = v; }
       return envio;
@@ -1687,6 +1689,7 @@
       clearInterval(medidor); medidor = null; if (vCam) { vCam.srcObject = null; vCam.remove(); vCam = null; } ganancia = 1; ajustes = false;
       mic = null; envio = null; cam = null; nodo = null; if (ctx) { try { ctx.close(); } catch (_) {} ctx = null; }
       parados.clear(); { const b = $('#ll-toca'); if (b) b.hidden = true; }
+      try { if (document.pictureInPictureElement) document.exitPictureInPicture().catch(() => {}); const vr = $('#v-remoto'); if (vr && vr.webkitPresentationMode === 'picture-in-picture') vr.webkitSetPresentationMode('inline'); } catch (_) {}
       $('#a-remoto').srcObject = null; $('#v-remoto').srcObject = null; $('#v-local').srcObject = null; $('#v-local').classList.remove('trasera'); try { mirando = 'user'; } catch (_) {} remotoV = null; suCamara = true; video = false;
       const bc = $('#ll-camara'); if (bc) bc.setAttribute('aria-pressed', 'false');
       pendientes = []; ofertaEntrante = null; iniciada = 0; partidaPorDefecto = true;
@@ -1782,7 +1785,7 @@
       if (m && mc) {
         // («Cambiar vista» se queda en la barra del PC, donde se usa a menudo; en el teléfono va arriba)
         // (en el teléfono al que se pasó la llamada, «Girar la cámara» se queda a la vista, junto a «Colgar»: dueño, 2 Nov 2026, 14:15)
-        for (const s of (o.sencilla ? [] : ['#ll-girar-caja']).concat(['#ll-ajustes-caja', '#ll-grave-caja', '#ll-mosaico-caja', '#ll-anadir-caja', '#ll-completa-caja'])) { const c = $(s); if (!c) continue; c.classList.add('ll-mas-fila'); c.setAttribute('role', 'none'); const bt = c.querySelector('button'); if (bt) bt.setAttribute('role', 'menuitem'); m.appendChild(c); }
+        for (const s of (o.sencilla ? [] : ['#ll-girar-caja', '#ll-flotante-caja']).concat(['#ll-ajustes-caja', '#ll-grave-caja', '#ll-mosaico-caja', '#ll-anadir-caja', '#ll-completa-caja'])) { const c = $(s); if (!c) continue; c.classList.add('ll-mas-fila'); c.setAttribute('role', 'none'); const bt = c.querySelector('button'); if (bt) bt.setAttribute('role', 'menuitem'); m.appendChild(c); }
         const alDia = () => { const hay = [...m.children].some((c) => !c.hidden); mc.hidden = !hay; if (!hay && masAbierto) abreMas(false); };
         new MutationObserver(alDia).observe(m, { attributes: true, attributeFilter: ['hidden'], subtree: true, childList: true }); alDia();
         $('#ll-mas').addEventListener('click', (e) => { e.stopPropagation(); abreMas(!masAbierto); });
@@ -1823,6 +1826,54 @@
       girando = false; pinta();
     }
     { const b = $('#ll-girar'); if (b) b.addEventListener('click', () => { giraCamara(); }); }
+    // «Flotante» (dueño, 2 Nov 2026, 14:23: «que yo siga viendo a mi amigo en pequeño, en la pantalla, lo pueda mover donde yo
+    // quiera»; ronda 90): la imagen de la otra persona en la ventana flotante del propio sistema (iPhone, Android, ordenador), que
+    // sigue a la vista sobre otras apps y se mueve con el dedo. El teléfono solo la abre con un toque: no se abre sola al salir.
+    function flotante() {
+      const v = $('#v-remoto'); if (!v || !v.srcObject) return;
+      try {
+        if (document.pictureInPictureElement) { document.exitPictureInPicture().catch(() => {}); return; }
+        if (v.webkitPresentationMode === 'picture-in-picture') { v.webkitSetPresentationMode('inline'); return; }
+        reproduce(v);
+        if (v.requestPictureInPicture) { v.requestPictureInPicture().catch(() => { try { if (v.webkitSetPresentationMode) v.webkitSetPresentationMode('picture-in-picture'); } catch (_) {} }); return; }
+        if (v.webkitSetPresentationMode) v.webkitSetPresentationMode('picture-in-picture');
+      } catch (_) {}
+    }
+    { const b = $('#ll-flotante'); if (b) b.addEventListener('click', flotante); }
+    // (ronda 90) Al volver a la página (de otra app, de una llamada de teléfono, de la pantalla bloqueada) o cuando el sistema corta
+    // una pista: el audio del navegador se reanuda, lo que se cortó (la cámara o el micrófono, si otra app los tomó) se pide otra vez y
+    // se cambia sin cortar la llamada (replaceTrack conserva la capa post-cuántica del emisor), las imágenes arrancan y, si la
+    // conexión cayó, se reinicia.
+    let recuperando = false;
+    async function recuperaMedios() {
+      if (recuperando || estado !== 'hablando' || document.visibilityState !== 'visible') return;
+      recuperando = true;
+      try {
+        for (const x of [ctx, mezcla && mezcla.ctx]) if (x && x.state !== 'running' && x.state !== 'closed') x.resume().catch(() => {});
+        if (mic && mic.getAudioTracks().length && mic.getAudioTracks().every((x) => x.readyState === 'ended')) {
+          const s = await navigator.mediaDevices.getUserMedia({ audio: AUDIO });
+          if (estado === 'hablando') {
+            vigilaPistas(s); mic = s; envio = mic; if (voz !== 'natural') { const v = await cadenaVoz(); if (v) envio = v; }
+            const yo = vozMia();
+            for (const p of [pc].concat(patas.filter((L) => L.llevar).map((L) => L.pc))) { const sv = emisorVoz(p); if (sv && yo && sv.track !== yo) await sv.replaceTrack(yo).catch(() => {}); }
+            mezclaAlDia();
+          } else s.getTracks().forEach((x) => x.stop());
+        }
+        if (video && cam && cam.getVideoTracks().length && cam.getVideoTracks().every((x) => x.readyState === 'ended')) {
+          const s = await navigator.mediaDevices.getUserMedia({ video: Object.assign({}, VIDEO, { facingMode: mirando }) });
+          const n = s.getVideoTracks()[0];
+          if (n && estado === 'hablando') { vigilaPistas(s); try { n.contentHint = 'motion'; } catch (_) {} cam = new MediaStream([n]); if (vCam) { vCam.srcObject = new MediaStream([n]); reproduce(vCam); } await aplicaImagen(); }
+          else s.getTracks().forEach((x) => x.stop());
+        }
+      } catch (_) {}
+      recuperando = false;
+      if (estado !== 'hablando') return;
+      miImagen(); suenaRemoto(); if (remotoV) reproduce($('#v-remoto'));
+      if (pc && (pc.connectionState === 'disconnected' || pc.connectionState === 'failed')) reconecta('fallo');
+    }
+    function vigilaPistas(s) { for (const x of (s && s.getTracks()) || []) x.addEventListener('ended', () => setTimeout(recuperaMedios, 600)); }
+    document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') setTimeout(recuperaMedios, 300); });
+    addEventListener('pageshow', () => setTimeout(recuperaMedios, 300));
     { const b = $('#ll-vista-tel'); if (b) b.addEventListener('click', () => { if (caja.classList.contains('tres') || o.sencilla) return; alternaDividida(); pintaBotonTam(); }); }
     $('#ll-camara').addEventListener('click', () => { if (!cam) return; const on = !camaraOn(); cam.getVideoTracks().forEach((x) => { x.enabled = on; }); o.manda({ acto: 'camara', id: idLlamada, on }); for (const L of patas) tmanda(L, { acto: 'camara', id: L.id, on }); pintaVideo(); });
     $('#ll-mini').addEventListener('click', () => pequena(true));

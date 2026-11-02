@@ -111,7 +111,7 @@ const hasta = async (fn, ms) => { const h = Date.now() + ms; while (Date.now() <
   }
   // 2. la pantalla del teléfono: solo «Colgar» y nada guardado
   const botones = await T.evaluate(() => [...document.querySelectorAll('#ll-botones .gc-llamada-boton')].filter((b) => getComputedStyle(b).display !== 'none' && !b.hidden).map((b) => (b.querySelector('span') || b).textContent.trim()));
-  comprueba(botones.join(' · ') === 'Girar · Volver al PC · Colgar', '2. en el teléfono, tres botones: ' + botones.join(' · '));
+  comprueba(botones.join(' · ') === 'Girar · Flotante · Volver al PC · Colgar', '2. en el teléfono, cuatro botones: ' + botones.join(' · '));
   // un solo título arriba, con el tiempo de llamada; la otra persona a toda pantalla (sin partir); en horizontal, «gira el teléfono»
   const cab = { capsula: await visible(T, '.gc-llamada-arriba .gc-llamada-cifrado'), nombre: await visible(T, '#ll-nombre') && (await T.textContent('#ll-nombre')).trim(), tiempo: await visible(T, '#ll-tiempo') && (await T.textContent('#ll-tiempo')).trim() };
   comprueba(!cab.capsula && /^Videollamada encriptada( postcuántica)?$/.test(cab.nombre) && /^\d\d:\d\d$/.test(cab.tiempo), '2. un solo título arriba: «Videollamada encriptada» y el tiempo', cab);
