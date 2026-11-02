@@ -17,7 +17,7 @@
   const sinTildes = (s) => String(s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/\s+/g, ' ').trim();
   const pon = (tpl, ...xs) => xs.reduce((s, x, i) => s.split('{' + (i + 1) + '}').join(x), T(tpl));
   const q = new URLSearchParams(location.search);
-  const PUERTA_EN_URL = /^#(zero|radiografias|comunicaciones|mi-conexion|escaner)$/.test(location.hash); // 31 Oct 2026: y el Antivirus
+  const PUERTA_EN_URL = /^#(zero|radiografias|comunicaciones|mi-conexion|escaner|vpn)$/.test(location.hash); // 31 Oct 2026: y el Antivirus; 1 nov: y la VPN
   const red = (lienzo, op) => (window.RedNucleo ? window.RedNucleo(lienzo, op) : { habla() {}, para() {} });
   // dueño, 10:53: «todas las páginas que se abren tienen que tener un botón de volver a donde estás»: se recuerda de dónde se
   // salió (la portada o la sección de NÚCLEO) y los botones de volver lo dicen («Inicio» o «Regresar a NÚCLEO»).
@@ -400,6 +400,8 @@ ${doc.secciones.map(tabla).join('')}<p class="nota">${esc(doc.final)}</p></body>
       + '<button type="button" class="nuc-op" data-n="com"><i>COMUNICACIONES</i><b>Chat y archivos encriptados</b><small>Para particulares y profesionales: datos y documentación sensible, encriptados de extremo a extremo.</small></button>'
       // 31 Oct 2026: el Antivirus (static/escaner.js), solo dentro del programa para Windows (marcaPortada la enseña)
       + '<button type="button" class="nuc-op" data-n="escaner" hidden><i>ANTIVIRUS</i><b>Escanear este equipo</b><small>Revisa a fondo antivirus, cámara, micrófono, control remoto y lo que este equipo envía fuera.</small></button>'
+      // 1 nov 2026 (el dueño: «VPN como sección propia»): la VPN (static/vpn.js); fuera del programa dice qué es y qué hace falta
+      + '<button type="button" class="nuc-op" data-n="vpn"><i>VPN</i><b>Túnel encriptado</b><small>Lo que sale de este equipo, encriptado hasta un servidor de GUARDIANA; si el túnel cae, nada sale.</small></button>'
       + '</div>'
       // dueño, 12:23: la página del planeta es la portada de la web y su «Empezar» trae aquí; fuera «¿Qué es GUARDIANA?».
       // Arriba a la izquierda, «Volver» a esa portada (dueño, 10:53: «tienes que poder ir y volver»).
@@ -414,7 +416,7 @@ ${doc.secciones.map(tabla).join('')}<p class="nota">${esc(doc.final)}</p></body>
     d.addEventListener('keydown', (e) => { if (e.key === 'Escape') alPlaneta(); });
     return d;
   }
-  function entra(id) { if (id !== 'nucleo') ponVuelta('portada'); if (id === 'zero') abreZero(); else if (id === 'planeta') alPlaneta(); else if (id === 'com') irComunicaciones(); else if (id === 'nucleo') abreSala(); else if (id === 'escaner') { cierraTodo(); if (window.OrbitaEscaner) window.OrbitaEscaner.abre({ volver: 'nucleo' }); } }
+  function entra(id) { if (id !== 'nucleo') ponVuelta('portada'); if (id === 'zero') abreZero(); else if (id === 'planeta') alPlaneta(); else if (id === 'com') irComunicaciones(); else if (id === 'nucleo') abreSala(); else if (id === 'escaner') { cierraTodo(); if (window.OrbitaEscaner) window.OrbitaEscaner.abre({ volver: 'nucleo' }); } else if (id === 'vpn') { cierraTodo(); if (window.OrbitaVpn) window.OrbitaVpn.abre(); } }
   function revela(d, todo) {
     const pasos = [...d.querySelectorAll('.nuc-paso')];
     if (todo || matchMedia('(prefers-reduced-motion: reduce)').matches) { pasos.forEach((p) => p.classList.add('ve')); return; }

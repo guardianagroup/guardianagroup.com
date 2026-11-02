@@ -317,7 +317,7 @@ body.dentro .escaner-btn, body.m2 .escaner-btn { display: none; }
 .escaner-btn[aria-pressed="true"] { background: rgba(156,195,228,.18); border-color: rgba(156,195,228,.6); color: #F4F6F8; }
 .nuc-op[hidden] { display: none; }
 /* sin NÚCLEO (dueño, 1 Nov 2026, 16:34): cuatro tarjetas en una fila */
-@media (min-width: 1101px) { .nuc-ops.con-escaner { grid-template-columns: repeat(4, minmax(0, 1fr)); width: min(1180px, 100%); } }
+@media (min-width: 1101px) { .nuc-ops.con-escaner { grid-template-columns: repeat(3, minmax(0, 1fr)); width: min(900px, 100%); } } /* 1 nov 2026: cinco tarjetas con la VPN, en tres columnas */
 
 /* ---------- pantallas más estrechas ---------- */
 @media (max-width: 1180px) {

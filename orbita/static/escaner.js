@@ -1554,5 +1554,6 @@
     }
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', arranca, { once: true }); else arranca();
-  window.OrbitaEscaner = { abre, cierra: sal, escanea: () => { if (!abierto) abre(); escanea(); }, get abierto() { return abierto; }, get escaneando() { return !!(S && !S.fin); } };
+  // `pide`: the program's gateway, shared with «VPN» (static/vpn.js), which asks the same service through the same rules.
+  window.OrbitaEscaner = { abre, cierra: sal, escanea: () => { if (!abierto) abre(); escanea(); }, pide, get abierto() { return abierto; }, get escaneando() { return !!(S && !S.fin); } };
 })();

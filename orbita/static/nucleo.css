@@ -335,4 +335,3 @@ a.nuc-multas-b{text-decoration:none}
 @media (prefers-reduced-motion:reduce){.ns-espera .nuc-bt::after{animation:none}.ns-aviso{animation:none}}
 @media (max-width:350px){.ns-opciones.ns-menu-ops{grid-template-columns:1fr}}
 /* Sin NÚCLEO (dueño, 1 Nov 2026, 16:34): en la web, tres tarjetas; en el programa, cuatro con el Antivirus */
-@media (min-width:1101px){.nuc-ops:not(.con-escaner){grid-template-columns:repeat(3,minmax(0,1fr));width:min(860px,100%)}}
