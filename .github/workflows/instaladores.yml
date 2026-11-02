@@ -1,0 +1,100 @@
+# The Windows installers of a version, from its customer test (candidato.yml of the program, a public repository) to
+# /descargas/<version>/ (2 Nov 2026; owner, 07:53 and 09:07: «publica para que yo pueda descargar el programa»).
+# The working session cannot fetch GitHub Actions artifacts itself, so this flow brings the three MSIs of the run it is
+# given, checks each one against the hash that run published on its own page (given here by hand, from a second path),
+# and leaves them in descargas/<version>/ with their SHA256SUMS. The pages (instalar, ZERO, the front page) are brought
+# up to date apart, with the same hashes. By hand only.
+name: Instaladores a la web
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Versión (p. ej. 1.0.52)'
+        required: true
+      ejecucion:
+        description: 'Id de la ejecución de candidato.yml en guardianagroup/guardiana'
+        required: true
+      huella_es:
+        description: 'SHA-256 del MSI en español (de la página de la ejecución)'
+        required: true
+      huella_en:
+        description: 'SHA-256 del MSI en inglés'
+        required: true
+      huella_pt:
+        description: 'SHA-256 del MSI en portugués'
+        required: true
+
+permissions:
+  contents: write
+  actions: read
+
+concurrency:
+  group: instaladores
+  cancel-in-progress: false
+
+jobs:
+  instaladores:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Lo que se pide
+        env:
+          V: ${{ inputs.version }}
+          E: ${{ inputs.ejecucion }}
+          HES: ${{ inputs.huella_es }}
+          HEN: ${{ inputs.huella_en }}
+          HPT: ${{ inputs.huella_pt }}
+        run: |
+          set -euo pipefail
+          [[ "$V" =~ ^1\.[0-9]{1,3}\.[0-9]{1,3}$ ]] || { echo "::error::versión rara: $V"; exit 1; }
+          [[ "$E" =~ ^[0-9]{6,20}$ ]] || { echo "::error::ejecución rara: $E"; exit 1; }
+          for h in "$HES" "$HEN" "$HPT"; do [[ "$h" =~ ^[0-9a-f]{64}$ ]] || { echo "::error::huella rara: $h"; exit 1; }; done
+
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+
+      - name: Los instaladores de esa ejecución
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: candidato-msi
+          path: /tmp/msi
+          repository: guardianagroup/guardiana
+          run-id: ${{ inputs.ejecucion }}
+          github-token: ${{ github.token }}
+
+      - name: Huellas comprobadas y descargas/<versión>
+        env:
+          V: ${{ inputs.version }}
+          HES: ${{ inputs.huella_es }}
+          HEN: ${{ inputs.huella_en }}
+          HPT: ${{ inputs.huella_pt }}
+        run: |
+          set -euo pipefail
+          ls -la /tmp/msi
+          d="descargas/$V"
+          mkdir -p "$d"
+          comprueba() {
+            local n="$1" quiero="$2" tengo
+            tengo=$(sha256sum "/tmp/msi/$n" | cut -d' ' -f1)
+            if [ "$tengo" != "$quiero" ]; then echo "::error title=$n::la huella no coincide ($tengo)"; exit 1; fi
+            cp "/tmp/msi/$n" "$d/$n"
+            echo "OK $n $tengo"
+          }
+          comprueba "guardiana-$V-windows-x64.msi" "$HES"
+          comprueba "guardiana-$V-windows-x64-en.msi" "$HEN"
+          comprueba "guardiana-$V-windows-x64-pt.msi" "$HPT"
+          (cd "$d" && sha256sum "guardiana-$V-windows-x64-en.msi" "guardiana-$V-windows-x64-pt.msi" "guardiana-$V-windows-x64.msi" > SHA256SUMS && cat SHA256SUMS)
+
+      - name: Guardar
+        env:
+          V: ${{ inputs.version }}
+          E: ${{ inputs.ejecucion }}
+        run: |
+          set -euo pipefail
+          git config user.name "GUARDIANA descargas"
+          git config user.email "datos@guardianagroup.com"
+          git add "descargas/$V"
+          if git diff --cached --quiet; then echo "Sin cambios"; exit 0; fi
+          git commit -m "Descargas: los instaladores de la $V para Windows (candidato.yml, ejecución $E), con sus huellas comprobadas"
+          for i in 1 2 3; do git pull --rebase -q && git push -q && exit 0; sleep 5; done
+          exit 1
