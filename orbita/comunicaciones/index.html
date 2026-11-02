@@ -7,7 +7,7 @@
 <meta name="referrer" content="no-referrer">
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; manifest-src 'self' blob: data:; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob:; media-src blob:; connect-src 'self' https://motor.guardianagroup.com wss://motor.guardianagroup.com https://ru.guardianagroup.com wss://ru.guardianagroup.com https://motor-am.guardianagroup.com wss://motor-am.guardianagroup.com http://127.0.0.1:* ws://127.0.0.1:* http://localhost:* ws://localhost:*; worker-src 'self'; form-action 'none'; base-uri 'none'">
 <link rel="stylesheet" href="/marco/marco.css?v=20261030a">
-<script src="/marco/marco.js?v=20261101b"></script>
+<script src="/marco/marco.js?v=20261102c"></script>
 <meta name="theme-color" content="#06080C">
 <!-- a pantalla completa, como una app, si se añade a la pantalla de inicio (dueño, 28 Oct 2026, 16:03: «que solo se vea lo nuestro») -->
 <script src="arranque.js?v=20261101j"></script>
@@ -41,7 +41,7 @@
 <link rel="canonical" href="https://guardianagroup.com/orbita/comunicaciones/">
 <link rel="icon" href="/favicon.ico">
 <link rel="stylesheet" href="componentes.css?v=20261028m">
-<link rel="stylesheet" href="app.css?v=20261101s">
+<link rel="stylesheet" href="app.css?v=20261102c">
 <link rel="stylesheet" href="diseno.css?v=20261031a">
 <link rel="stylesheet" href="viaje.css?v=20261029b">
 <!-- antes de pintar: como app desde el primer fotograma y, al volver a un chat tras recargar, sin enseñar el inicio entretanto -->
@@ -405,7 +405,13 @@
     <div class="paso" id="paso-entrar" hidden>
       <div class="contactos-cab seccion-cab"><button type="button" class="contactos-atras" id="entrar-atras" aria-label="Volver"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button><h2 class="contactos-t">Tengo un código</h2></div>
       <h2>Escribe las 9 cifras que te han enviado</h2>
-      <input class="campo codigo-campo" id="unir-codigo" inputmode="numeric" autocomplete="off" maxlength="11" placeholder="···-···-···" aria-label="Código de invitación" translate="no" spellcheck="false">
+      <!-- 2 Nov 2026 (dueño, 13:19, con una foto: «Haz esa zona del código profesional»): nueve casillas en tres grupos, como
+           el código que se envía. El campo de verdad sigue siendo uno solo y está encima, invisible: el teclado numérico del
+           teléfono, pegar el código o el enlace de una sesión blindada y los lectores de pantalla funcionan como antes. -->
+      <div class="codigo-celdas" id="unir-celdas" translate="no">
+        <input class="campo codigo-campo" id="unir-codigo" inputmode="numeric" autocomplete="off" maxlength="11" aria-label="Código de invitación" translate="no" spellcheck="false">
+        <div class="cc-fila" aria-hidden="true"><span class="cc"></span><span class="cc"></span><span class="cc"></span><i class="cc-guion"></i><span class="cc"></span><span class="cc"></span><span class="cc"></span><i class="cc-guion"></i><span class="cc"></span><span class="cc"></span><span class="cc"></span></div>
+      </div>
       <p class="t alerta" id="unir-mal" hidden>Código erróneo o caducado.</p>
       <p class="t sutil">¿Te han enviado un enlace de sesión blindada? Ábrelo directamente o pégalo aquí.</p>
       <p class="t" id="unir-espera" hidden>Comprobando…</p>
@@ -1171,6 +1177,6 @@
 <script src="viaje-datos.js?v=20261031a"></script>
 <script src="viaje.js?v=20261029b"></script>
 <script src="llamada.js?v=20261101r"></script>
-<script src="app.js?v=20261101s"></script>
+<script src="app.js?v=20261102c"></script>
 </body>
 </html>

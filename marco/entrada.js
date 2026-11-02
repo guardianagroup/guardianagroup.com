@@ -33,6 +33,16 @@
     if (datos && datos.v === 1 && !datos.sala) return;
   }
 
+  // 2 Nov 2026, 13:27 (dueño: «hay una opción que es pasar la llamada al teléfono… con un código QR… lo leemos y la videollamada
+  // se pasa directamente al teléfono… Esto quiero que lo actives»): el código QR de «Pasar al teléfono» de una videollamada de
+  // Comunicaciones lleva a /orbita/comunicaciones/#llevar=<llave>. Esa página, con esa llave, solo enseña la llamada (app.js,
+  // arrancaLlevar: ni chats, ni invitaciones, ni nada guardado). Al recargar, la pestaña guarda la llave solo para sí.
+  if (/^\/orbita\/comunicaciones\/(index\.html)?$/.test(ruta)) {
+    var llave = (location.hash.match(/^#llevar=([A-Za-z0-9_-]{43})$/) || [])[1] || '';
+    if (!llave) { try { llave = sessionStorage.getItem('gcom-llevar') || ''; } catch (_) {} }
+    if (/^[A-Za-z0-9_-]{43}$/.test(llave)) { window.GuardianaMarco.llevar = true; return; }
+  }
+
   // el idioma del aviso: el de la página; en las de la app, el que se eligió en GUARDIANA o el del aparato
   var l = (document.documentElement.getAttribute('lang') || 'es').toLowerCase();
   var m = ruta.match(/^\/(en|pt|ja|ko|th|vi|zh-tw|id)\//);
