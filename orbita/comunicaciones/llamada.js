@@ -627,6 +627,7 @@
       caja.classList.toggle('con-video', veoSuyo);
       if (veoSuyo && !antes) despierta(); else if (!veoSuyo) { caja.classList.remove('reposo'); clearTimeout(reposo); }
       caja.classList.toggle('solo-mia', !veoSuyo && veoMio);
+      if (!veoSuyo || !veoMio) caja.classList.remove('yo-grande');
       pintaBotonTam(); // al llegar su imagen, sale «Pantalla completa»
       const b = $('#ll-camara'); if (b) { const on = camaraOn(); b.setAttribute('aria-pressed', String(!on)); b.setAttribute('aria-label', on ? t('Apagar la cámara') : t('Encender la cámara')); }
       sesionLlamada();
@@ -1805,6 +1806,7 @@
       parados.clear(); { const b = $('#ll-toca'); if (b) b.hidden = true; }
       if (compartiendo) { try { compartiendo.stop(); } catch (_) {} compartiendo = null; }
       codConfirmado = ''; codPlegado = false; codAbierto = false; codPendiente = ''; clearTimeout(codPendT); clearTimeout(codPlegarT);
+      caja.classList.remove('yo-grande'); toqueGrande = null;
       try { if (document.pictureInPictureElement) document.exitPictureInPicture().catch(() => {}); const vr = $('#v-remoto'); if (vr && vr.webkitPresentationMode === 'picture-in-picture') vr.webkitSetPresentationMode('inline'); } catch (_) {}
       $('#a-remoto').srcObject = null; $('#v-remoto').srcObject = null; $('#v-local').srcObject = null; $('#v-local').classList.remove('trasera'); try { mirando = 'user'; } catch (_) {} remotoV = null; suCamara = true; video = false;
       const bc = $('#ll-camara'); if (bc) bc.setAttribute('aria-pressed', 'false');
@@ -2202,6 +2204,12 @@
     const guardaMi = (o) => { try { localStorage.setItem(MI_IMG, JSON.stringify(Object.assign(leeMi(), o))); } catch (_) {} };
     const asa = () => { let a = $('#ll-asa'); if (!a) { a = document.createElement('span'); a.id = 'll-asa'; a.className = 'mi-asa'; a.setAttribute('aria-hidden', 'true'); const c = lienzoVid(); if (c) c.append(a); } return a; };
     // lado de la pantalla dividida: en horizontal, izquierda o derecha; en vertical (teléfono), arriba o abajo
+    let toqueGrande = null;
+    function alternaGrande(si) {
+      const puede = !!(video && remotoV && suCamara && camaraOn());
+      caja.classList.toggle('yo-grande', !!si && puede);
+      raiz.requestAnimationFrame(() => { miImagen(); reproduce($('#v-remoto')); reproduce($('#v-local')); });
+    }
     function ladoDe(cx, cy, CW, CH) { return CW >= CH ? (cx > CW / 2 ? 'der' : 'izq') : (cy > CH / 2 ? 'abajo' : 'arriba'); }
     function ponDividida(lado) {
       for (const l of ['izq', 'der', 'arriba', 'abajo']) caja.classList.toggle('lado-' + l, lado === l);
@@ -2348,6 +2356,12 @@
       if (caja.classList.contains('mini')) return;
       if (e.button > 0 || e.target.closest('button, a, input, label, .ll-ajustes')) return;
       { const sr = sobreRaya(e); if (sr) { arrRaya = { id: e.pointerId, g: sr.g }; caja.classList.add('raya-moviendo'); try { caja.setPointerCapture(e.pointerId); } catch (_) {} e.preventDefault(); return; } }
+      // con tu imagen en grande (como en WhatsApp), un toque en la pequeña (la otra persona) vuelve a cambiarlas
+      if (caja.classList.contains('yo-grande')) {
+        const vr = $('#v-remoto'), r = vr && vr.getBoundingClientRect();
+        if (r && r.width && e.clientX >= r.left && e.clientX <= r.right && e.clientY >= r.top && e.clientY <= r.bottom) toqueGrande = { id: e.pointerId, x0: e.clientX, y0: e.clientY };
+        return;
+      }
       // en grupo, contigo en una columna, tu imagen no se mueve ni cambia de tamaño
       if (caja.classList.contains('tres-yo-col')) return;
       // en el teléfono no hay asa (se mueve con el dedo; el tamaño, con el botón de la pantalla partida)
@@ -2390,11 +2404,13 @@
     });
     const suelta = (e) => {
       if (arrRaya && e.pointerId === arrRaya.id) { sueltaRaya(e); return; }
+      if (toqueGrande && e.pointerId === toqueGrande.id) { const t0 = toqueGrande; toqueGrande = null; if (e.type === 'pointerup' && Math.hypot(e.clientX - t0.x0, e.clientY - t0.y0) < 10) alternaGrande(false); return; }
       if (!arrastre || e.pointerId !== arrastre.id) return;
       const a = arrastre; arrastre = null; caja.classList.remove('arrastrando');
       try { caja.releasePointerCapture(e.pointerId); } catch (_) {}
-      // en el teléfono, un toque en tu imagen pequeña vuelve a partir la pantalla (como el botón de su esquina)
-      if (!a.movido && !FINO.matches && a.modo === 'mover' && !caja.classList.contains('dividida') && !caja.classList.contains('tres') && e.type === 'pointerup') { alternaDividida(); return; }
+      // en el teléfono, un toque en tu imagen pequeña la pone en grande y a la otra persona en pequeño, como en WhatsApp (dueño, 2 Nov
+      // 2026, 16:42: «Al tocar la imagen pequeña debe ponerse en grande, es como lo hace wassap»; antes partía la pantalla)
+      if (!a.movido && !FINO.matches && a.modo === 'mover' && !caja.classList.contains('dividida') && !caja.classList.contains('tres') && e.type === 'pointerup') { alternaGrande(true); return; }
       if (!a.movido) { colocaAsa(); return; }
       const vl = vidLocal(), cont = lienzoVid(), CW = cont.clientWidth, CH = cont.clientHeight;
       // agrandada hasta casi media pantalla: queda la pantalla dividida

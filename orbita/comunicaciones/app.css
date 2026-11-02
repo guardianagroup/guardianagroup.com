@@ -2337,3 +2337,8 @@ body.modo-llevar{background:#06080C}
 .gc-llamada.con-video.reposo .ll-cod-chip{opacity:0;pointer-events:none}
 @media (max-width:520px){.ll-cod{top:44%;padding:18px 16px 16px}.ll-cod-texto{font-size:15px}.ll-cod-chip{bottom:calc(150px + env(safe-area-inset-bottom));font-size:17px}}
 @media (prefers-reduced-motion:reduce){.ll-cod.cambia .ll-cod-num{animation:none}}
+/* Como en WhatsApp (dueño, 2 Nov 2026, 16:42): tocar la imagen pequeña la pone en grande, y la otra persona pasa a la pequeña */
+.gc-llamada.yo-grande:not(.mini):not(.dividida):not(.tres) .videos #v-local{left:0;top:0;right:auto;bottom:auto;width:100%;height:100%;max-width:none;aspect-ratio:auto;border:0;border-radius:0;object-fit:contain;background:#000;z-index:0}
+.gc-llamada.yo-grande:not(.mini):not(.dividida):not(.tres) .videos #v-remoto{position:absolute;right:16px;bottom:140px;left:auto;top:auto;width:160px;max-width:28%;height:auto;aspect-ratio:3/4;object-fit:cover;border-radius:12px;border:1px solid var(--line);background:#111;z-index:2;cursor:pointer}
+.gc-llamada.yo-grande.movida:not(.mini):not(.dividida):not(.tres) .videos #v-remoto{left:var(--mi-x);top:var(--mi-y);right:auto;bottom:auto}
+@media (hover:hover) and (pointer:fine),(min-width:761px){.gc-llamada.yo-grande:not(.mini):not(.dividida):not(.tres) .videos #v-remoto{width:240px;max-width:24%;aspect-ratio:16/9;bottom:150px}}

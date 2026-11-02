@@ -1689,6 +1689,8 @@
     "Dejar de compartir la pantalla": ["Stop sharing your screen", "Parar de compartilhar a tela"],
     "Este navegador no deja compartir la pantalla.": ["This browser doesn't allow screen sharing.", "Este navegador não permite compartilhar a tela."],
     "Compartir pantalla": ["Share screen", "Compartilhar tela"],
+    "Buscando el ordenador…": ["Looking for the computer…", "Procurando o computador…"],
+    "El ordenador no contesta: comprueba que tiene Comunicaciones abierto y vuelve a intentarlo.": ["The computer is not answering: check that Comunicaciones is open on it and try again.", "O computador não responde: verifique se o Comunicaciones está aberto nele e tente de novo."],
     "Léelo en voz alta y comprueba con la otra persona que los números coinciden.": ["Read it aloud and check with the other person that the numbers match.", "Leia em voz alta e confirme com a outra pessoa que os números coincidem."],
     "Si no coinciden, cuelga: alguien podría estar interceptando la llamada.": ["If they don't match, hang up: someone could be intercepting the call.", "Se não coincidirem, desligue: alguém pode estar interceptando a chamada."],
     "Coinciden": ["They match", "Coincidem"],

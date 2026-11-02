@@ -121,6 +121,18 @@ const hasta = async (fn, ms) => { const h = Date.now() + ms; while (Date.now() <
   // la llave de la capa post-cuántica sale del código QR (nunca viajó por la red): en el teléfono y en B va la capa
   comprueba(await T.evaluate(() => GuardianaCom.llamada.pq) && await B.evaluate(() => GuardianaCom.llamada.pq) && cab.nombre === 'Videollamada encriptada postcuántica', '2. con la capa post-cuántica (llave del código QR) y el título lo dice', cab.nombre);
   comprueba(!(await T.evaluate(() => document.querySelector('#llamada').classList.contains('dividida'))), '2. la otra persona a toda pantalla (sin partir)');
+  // como en WhatsApp (dueño, 2 Nov 2026, 16:42): un toque en tu imagen pequeña la pone en grande, y otro en la pequeña, vuelta
+  {
+    const tam = () => T.evaluate(() => { const r = (s) => { const e = document.querySelector(s).getBoundingClientRect(); return Math.round(e.width); }; return { yo: r('#v-local'), otro: r('#v-remoto'), clase: document.querySelector('#llamada').classList.contains('yo-grande') }; });
+    const c0 = await tam();
+    await T.tap('#v-local'); await espera(600);
+    const c1 = await tam();
+    comprueba(c1.clase && c1.yo > c0.yo * 1.8 && c1.otro < c0.otro / 1.8, '2. un toque en tu imagen pequeña: tú en grande y la otra persona en pequeño', { antes: c0, despues: c1 });
+    await T.screenshot({ path: path.join(OUT, '2-tel-yo-grande.png') });
+    await T.tap('#v-remoto'); await espera(600);
+    const c2 = await tam();
+    comprueba(!c2.clase && Math.abs(c2.yo - c0.yo) < 4 && Math.abs(c2.otro - c0.otro) < 4, '2. y un toque en la pequeña: cada una a su sitio', c2);
+  }
   await T.setViewportSize({ width: 852, height: 393 }); await espera(700);
   comprueba(await T.evaluate(() => [...document.querySelectorAll('body > .gira')].some((g) => getComputedStyle(g).display !== 'none')), '2. en horizontal: «gira el teléfono»');
   await T.screenshot({ path: path.join(OUT, '2-tel-horizontal.png') });

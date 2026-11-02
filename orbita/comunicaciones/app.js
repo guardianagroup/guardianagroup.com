@@ -4683,10 +4683,12 @@
   }
   // el teléfono pide la llamada: con el secreto (una sola vez) y la llave de la sala donde esperar la llamada de la otra persona
   async function aceptaVuelta(c, j) {
-    const v = c.vuelta; if (!v || v.usada) return;
+    const v = c.vuelta; if (!v) return;
     if (typeof j.v !== 'string' || j.v !== v.v || typeof j.k !== 'string' || !/^[A-Za-z0-9_-]{43}$/.test(j.k)) return;
+    // la misma petición otra vez (al teléfono no le llegó la respuesta): se le contesta otra vez, sin hacer nada más
+    if (v.usada) { if (j.k === v.k) await mandaEfimeraA(c, v.tel, { tipo: 'volver-ok' }); return; }
     if (LL && LL.ocupado && LL.estado !== 'cerrando') return; // este ordenador ya está en otra llamada: el teléfono lo dirá
-    v.usada = true;
+    v.usada = true; v.k = j.k;
     try { sessionStorage.removeItem('gcom-vuelta'); } catch (_) {}
     const n = await salaEfimera(j.k, { nombre: v.nombre });
     if (!n) return;
@@ -4705,21 +4707,32 @@
     const caja = $('#ll-volver-pc-caja'); if (!caja) return;
     const sv = LLEVAR ? salaPc() : null;
     caja.hidden = !(sv && LLEVAR_V && LL && LL.estado === 'hablando');
-    caja.classList.toggle('apagado', !(sv && sv.pcAqui) || !!volviendo);
+    // siempre se puede pulsar (lo que el teléfono sabe de si el PC está puede ser viejo: se pregunta al pulsar); solo mientras se pasa
+    caja.classList.toggle('apagado', !!volviendo);
   }
   async function volverAlPc() {
     const sv = salaPc(); if (!sv || !LLEVAR_V || !LL || LL.estado !== 'hablando' || volviendo) return;
-    if (!sv.pcAqui) { aviso(T('El ordenador no está conectado: abre Comunicaciones en él y vuelve a intentarlo.')); return; }
+    // (dueño, 2 Nov 2026, 16:36: «desde el iPhone he querido volver al PC, no me ha dejado») el teléfono puede tener dormida la
+    // conexión con el relé (la página estuvo detrás) y lo que sabe de si el PC está puede ser viejo: se despierta la conexión, se
+    // pide aunque el PC parezca no estar, y se repite cada 2,5 s hasta que conteste (el PC contesta otra vez si se lo vuelven a pedir)
+    try { if (R && R.despierta) R.despierta(); } catch (_) {}
     const k = C.b64u(C.azar(32));
-    volviendo = { k, ok: false, listo: false }; llevarK = k; pintaVolverPc();
-    aviso(T('Pasando la llamada al ordenador…'));
-    await mandaEfimeraA(sv, sv.pcId, { tipo: 'volver-pc', v: LLEVAR_V, k });
-    volviendo.espera = setTimeout(() => { if (volviendo && !volviendo.ok) { volviendo = null; llevarK = null; pintaVolverPc(); aviso(T('El ordenador no contesta: vuelve a intentarlo.')); } }, 10000);
+    volviendo = { k, ok: false, listo: false, intentos: 0 }; llevarK = k; pintaVolverPc();
+    aviso(sv.pcAqui ? T('Pasando la llamada al ordenador…') : T('Buscando el ordenador…'));
+    const pide = async () => {
+      if (!volviendo || volviendo.ok || volviendo.k !== k) return;
+      volviendo.intentos++;
+      await mandaEfimeraA(sv, sv.pcId, { tipo: 'volver-pc', v: LLEVAR_V, k });
+      if (volviendo && !volviendo.ok && volviendo.k === k && volviendo.intentos < 6) volviendo.repite = setTimeout(pide, 2500);
+    };
+    await pide();
+    if (!volviendo) return;
+    volviendo.espera = setTimeout(() => { if (volviendo && !volviendo.ok) { clearTimeout(volviendo.repite); volviendo = null; llevarK = null; pintaVolverPc(); aviso(T('El ordenador no contesta: comprueba que tiene Comunicaciones abierto y vuelve a intentarlo.')); } }, 15000);
   }
   // el PC está listo: la otra persona recibe la llave (como al pasar la llamada al teléfono) y llama al PC
   function vueltaLista() {
     if (!volviendo || volviendo.ok) return;
-    volviendo.ok = true; clearTimeout(volviendo.espera);
+    volviendo.ok = true; clearTimeout(volviendo.espera); clearTimeout(volviendo.repite);
     const c = convLl(); if (!c) { volviendo = null; llevarK = null; pintaVolverPc(); return; }
     enviaControl(c, { tipo: 'llamada', acto: 'llevar', k: volviendo.k, pc: 1 });
     volviendo.espera = setTimeout(() => { if (volviendo && !volviendo.listo) { volviendo = null; llevarK = null; pintaVolverPc(); aviso(T('No se pudo pasar la llamada al ordenador: sigue aquí.')); } }, 30000);
