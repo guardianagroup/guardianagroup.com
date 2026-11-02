@@ -92,6 +92,7 @@
     let cam = null, video = false, suCamara = true, remotoV = null; // videollamada: mi cámara, si la llamada es con imagen, si la otra persona tiene la cámara encendida y su imagen
     let compartiendo = null; // la pista de la pantalla que se está compartiendo (dueño, 2 Nov 2026, 14:22: «que él vea lo que yo veo en mi pantalla»)
     let pantallaNo = false; // este navegador tiene la función pero no deja compartir (lo dijo al instante): «Pantalla» ya no sale
+    let sesionOn = false, flotaSola = false; // la ventana flotante automática del navegador (ver sesionLlamada)
     // El número de seguridad de la llamada (dueño, 29 Oct 2026, 10:16: «un número grande en el medio de la pantalla… el otro tiene
     // que ver el mismo número»). Es el esquema de ZRTP (Zimmermann; RFC 6189): cada llamada estrena un acuerdo de claves P-256 con
     // compromiso previo (quien llama manda primero la huella de su clave y la revela cuando ya tiene la de la otra persona), y el
@@ -255,6 +256,7 @@
       caja.setAttribute('aria-label', video ? t('Videollamada') : t('Llamada de voz'));
       $('#ll-camara-caja').hidden = !(video && cam);
       { const f = $('#ll-flotante-caja'); if (f) f.hidden = !(PIP && video && estado === 'hablando' && remotoV); }
+      sesionLlamada();
       { const sp = $('#ll-pantalla-caja'); if (sp) { sp.hidden = !(PANTALLA && !pantallaNo && video && estado === 'hablando'); const b = $('#ll-pantalla'); if (b) { b.setAttribute('aria-pressed', String(!!compartiendo)); b.setAttribute('aria-label', compartiendo ? t('Dejar de compartir la pantalla') : t('Compartir la pantalla')); } } }
       { const g = $('#ll-girar-caja'); if (g) g.hidden = !(video && cam && TEL_UA && camaraOn()); }
       // «Pantalla completa», solo en el ordenador y con imagen (dueño, 30 Oct 2026, 09:02: «toda la pantalla del PC»)
@@ -529,6 +531,7 @@
       caja.classList.toggle('solo-mia', !veoSuyo && veoMio);
       pintaBotonTam(); // al llegar su imagen, sale «Pantalla completa»
       const b = $('#ll-camara'); if (b) { const on = camaraOn(); b.setAttribute('aria-pressed', String(!on)); b.setAttribute('aria-label', on ? t('Apagar la cámara') : t('Encender la cámara')); }
+      sesionLlamada();
     }
     function pintaImagenes() {
       for (const b of document.querySelectorAll('#ll-imagenes [data-imagen]')) b.setAttribute('aria-pressed', String(b.dataset.imagen === imagen));
@@ -1747,7 +1750,7 @@
     { const si = $('#ll-sas-si'), no = $('#ll-sas-no'), mini = $('#ll-sas-mini'); if (si) si.addEventListener('click', sasCoinciden); if (no) no.addEventListener('click', sasNoCoinciden); if (mini) mini.addEventListener('click', () => { if (sas && sas.estado === 'pendiente') { caja.classList.remove('sas-plegado'); pintaSas(); } }); }
     $('#ll-rechazar').addEventListener('click', colgar);
     $('#ll-contestar').addEventListener('click', () => { contestar().catch(() => termina('fallo')); });
-    $('#ll-silenciar').addEventListener('click', (e) => { const b = e.currentTarget; const on = b.getAttribute('aria-pressed') !== 'true'; b.setAttribute('aria-pressed', String(on)); for (const s of [envio, mic]) if (s) s.getAudioTracks().forEach((x) => { x.enabled = !on; }); });
+    $('#ll-silenciar').addEventListener('click', (e) => { const b = e.currentTarget; const on = b.getAttribute('aria-pressed') !== 'true'; b.setAttribute('aria-pressed', String(on)); for (const s of [envio, mic]) if (s) s.getAudioTracks().forEach((x) => { x.enabled = !on; }); sesionLlamada(); });
     { const b = $('#ll-altavoz'); if (b) b.addEventListener('click', () => { altavoz = !altavoz; aplicaSalida(); }); }
     // cada vez que la voz de la otra persona vuelve a sonar (al empezar, tras una interrupción o al volver a la app), el silencio
     // vuelve a pedir la salida elegida
@@ -1841,14 +1844,51 @@
     function flotante() {
       const v = $('#v-remoto'); if (!v || !v.srcObject) return;
       try {
-        if (document.pictureInPictureElement) { document.exitPictureInPicture().catch(() => {}); return; }
+        if (document.pictureInPictureElement) { flotaSola = false; document.exitPictureInPicture().catch(() => {}); return; }
         if (v.webkitPresentationMode === 'picture-in-picture') { v.webkitSetPresentationMode('inline'); return; }
-        reproduce(v);
-        if (v.requestPictureInPicture) { v.requestPictureInPicture().catch(() => { try { if (v.webkitSetPresentationMode) v.webkitSetPresentationMode('picture-in-picture'); } catch (_) {} }); return; }
-        if (v.webkitSetPresentationMode) v.webkitSetPresentationMode('picture-in-picture');
+        entraFlotante(v);
       } catch (_) {}
     }
-    { const b = $('#ll-flotante'); if (b) b.addEventListener('click', flotante); }
+    function entraFlotante(v, alFallar) {
+      reproduce(v);
+      if (v.requestPictureInPicture) { v.requestPictureInPicture().catch(() => { if (alFallar) alFallar(); try { if (v.webkitSetPresentationMode) v.webkitSetPresentationMode('picture-in-picture'); } catch (_) {} }); return; }
+      if (v.webkitSetPresentationMode) v.webkitSetPresentationMode('picture-in-picture');
+    }
+    { const b = $('#ll-flotante'); if (b) b.addEventListener('click', () => { flotaSola = false; flotante(); }); }
+    // La ventana flotante sola (dueño, 2 Nov 2026, 13:43–13:53: «que siga funcionando por toda Guardiana… y también por fuera…
+    // si mi amigo está visitando una página web normal»; ronda 90): en mitad de una videollamada, al cambiar de pestaña o de
+    // programa, Chrome de escritorio (desde la 120) abre solo la ventana flotante con la otra persona, movible y por encima de todo
+    // («enterpictureinpicture» de Media Session), con sus propios botones de micrófono, cámara y colgar (togglemicrophone,
+    // togglecamera, hangup). Al volver a la pestaña, si se abrió sola, se cierra. Donde el navegador no lo trae, no pasa nada.
+    function accion(a, f) { try { navigator.mediaSession.setActionHandler(a, f); } catch (_) {} }
+    function sesionLlamada() {
+      const MS = navigator.mediaSession; if (!MS) return;
+      const quiere = !!(video && estado === 'hablando');
+      if (quiere !== sesionOn) {
+        sesionOn = quiere;
+        if (quiere) {
+          accion('enterpictureinpicture', () => {
+            const v = $('#v-remoto');
+            if (!v || !v.srcObject || document.pictureInPictureElement || v.webkitPresentationMode === 'picture-in-picture') return;
+            flotaSola = true; entraFlotante(v, () => { flotaSola = false; });
+          });
+          accion('togglemicrophone', () => { const b = $('#ll-silenciar'); if (b) b.click(); });
+          accion('togglecamera', () => { const b = $('#ll-camara'); if (b) b.click(); });
+          accion('hangup', () => { const b = $('#ll-colgar'); if (b) b.click(); else colgar(); });
+        } else {
+          for (const a of ['enterpictureinpicture', 'togglemicrophone', 'togglecamera', 'hangup']) accion(a, null);
+          flotaSola = false;
+        }
+      }
+      if (!sesionOn) return;
+      try { if (MS.setMicrophoneActive) MS.setMicrophoneActive($('#ll-silenciar').getAttribute('aria-pressed') !== 'true'); } catch (_) {}
+      try { if (MS.setCameraActive) MS.setCameraActive(camaraOn()); } catch (_) {}
+    }
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState !== 'visible' || !flotaSola) return;
+      flotaSola = false;
+      try { if (document.pictureInPictureElement) document.exitPictureInPicture().catch(() => {}); } catch (_) {}
+    });
     // «Pantalla» (dueño, 2 Nov 2026, 14:22–14:23; ronda 90): lo que se envía pasa a ser la pantalla (o la ventana o la pestaña que se
     // elija en la ventana del propio navegador) en vez de la cámara, sin cortar la llamada; la capa post-cuántica sigue igual. Al
     // dejar de compartir (aquí o desde el aviso del navegador), vuelve la cámara.
