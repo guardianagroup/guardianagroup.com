@@ -330,6 +330,25 @@ ProtectHome=true
 WantedBy=multi-user.target
 EOF
 
+# 2 Nov 2026 (dueño, 10:40: «Utilizamos el de Helsinki. Conéctalo ya»): la VPN de GUARDIANA, solo en el servidor de Helsinki (o
+# donde exista /etc/guardiana/vpn): zero-motor/vpn.sh. Si no se puede montar, el motor sigue como siempre.
+VPN_CADDY=""
+if [ "$DOMINIO" = "motor-hel.guardianagroup.com" ] || [ -f /etc/guardiana/vpn ]; then
+  paso "VPN: WireGuard, el alta de GUARDIANA y su resolutor (zero-motor/vpn.sh)"
+  if bash "$DIR/zero-motor/vpn.sh"; then
+    VPN_CADDY='
+vpn.guardianagroup.com {
+	header -Server
+	handle /vpn/alta {
+		reverse_proxy 127.0.0.1:8793
+	}
+	respond 404
+}'
+  else
+    rojo "  La VPN no se pudo montar; el motor sigue. Registro: /var/log/guardiana-vpn-*.log y journalctl -u guardiana-vpn-alta"
+  fi
+fi
+
 paso "Caddy: https://$DOMINIO → 127.0.0.1:$PUERTO"
 if [ -z "${ZERO_SIN_PROXY:-}" ]; then
   # otros nombres que sirve este mismo servidor (p. ej. el de un puente que solo reenvía bytes: ver puente-ru.sh), uno por línea
@@ -343,6 +362,7 @@ $SITIOS {
 	header -Server
 	reverse_proxy 127.0.0.1:$PUERTO
 }
+$VPN_CADDY
 EOF
   }
   # 30 Oct 2026 (agencia, ronda 77; dueño, 10:30): el 443 compartido con el relé de llamadas, para las redes que solo dejan salir
@@ -407,6 +427,7 @@ $SITIOS {
 http://$(echo "$SITIOS" | sed 's/, /, http:\/\//g') {
 	redir https://{host}{uri} 308
 }
+$VPN_CADDY
 EOF
     caddy validate --config /etc/caddy/Caddyfile --adapter caddyfile >/dev/null 2>&1 || return 1
     systemctl enable -q caddy; systemctl restart caddy || return 1
