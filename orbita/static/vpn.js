@@ -78,7 +78,9 @@
   }
 
   // ---------- el estado ----------
-  const FASE = { desconectada: 'Desconectada', conectando: 'Conectando…', conectada: 'Conectada', error: 'No se pudo conectar' };
+  const FASE = { desconectada: 'Desconectada', conectando: 'Conectando…', conectada: 'Conectada', reconectando: 'Reconectando…', error: 'No se pudo conectar' };
+  // con túnel (y su corte) puesto: conectada, o reconectando porque el servidor dejó de contestar (desde la 1.0.53)
+  const CON_TUNEL = (f) => f === 'conectada' || f === 'reconectando';
   function fase() {
     if (!enPrograma()) return 'fuera';
     if (!foto) return 'desconectada';
@@ -91,27 +93,28 @@
     const f = fase();
     raiz.dataset.fase = f;
     const enPC = f !== 'fuera';
-    V.fuera.hidden = enPC; V.boton.hidden = !enPC || f === 'no_disponible'; V.servidor.hidden = !enPC || f === 'conectada';
+    V.fuera.hidden = enPC; V.boton.hidden = !enPC || f === 'no_disponible'; V.servidor.hidden = !enPC || CON_TUNEL(f);
     pon(V.titulo, f === 'fuera' ? 'La VPN de GUARDIANA' : f === 'no_disponible' ? 'No disponible en este equipo' : FASE[f]);
     pon(V.lead, f === 'fuera' ? 'Un túnel encriptado desde este equipo hasta un servidor de GUARDIANA, con corte si cae y clave poscuántica. Va dentro del mismo programa que el Antivirus, el navegador y Comunicaciones.'
       : f === 'no_disponible' ? (foto && foto.motivo ? String(foto.motivo) : 'El programa no puede abrir el túnel aquí.')
       : f === 'conectada' ? 'Todo lo que sale de este equipo va por el túnel. Si el túnel cae, nada sale fuera de él.'
+      : f === 'reconectando' ? 'El servidor dejó de contestar: GUARDIANA pide un alta nueva y rehace el túnel. Mientras tanto, nada sale fuera de él. Si prefieres volver a tu conexión normal, desconecta.'
       : f === 'conectando' ? 'Llaves nuevas, alta en el servidor, túnel y corte; después, el primer saludo del servidor. Unos segundos.'
       : f === 'error' ? 'El equipo quedó como estaba: sin túnel y sin corte.'
       : 'Al conectar, lo que salga de este equipo irá encriptado hasta el servidor de GUARDIANA.');
-    pon(V.boton.querySelector('span'), f === 'conectada' ? 'Desconectar' : f === 'conectando' ? 'Conectando…' : 'Conectar');
+    pon(V.boton.querySelector('span'), CON_TUNEL(f) ? 'Desconectar' : f === 'conectando' ? 'Conectando…' : 'Conectar');
     V.boton.disabled = f === 'conectando';
-    V.boton.classList.toggle('secundario', f === 'conectada');
+    V.boton.classList.toggle('secundario', CON_TUNEL(f));
     // the figures, only while there is a tunnel
     const filas = [];
-    if (foto && (f === 'conectada' || f === 'conectando' || f === 'error')) {
+    if (foto && (CON_TUNEL(f) || f === 'conectando' || f === 'error')) {
       if (foto.servidor) filas.push(['Servidor', dato(String(foto.servidor))]);
-      if (f === 'conectada' && foto.desde_ms) filas.push(['Desde', dato(hora(foto.desde_ms) + ' · ' + hace(foto.desde_ms))]);
-      if (f === 'conectada' && foto.direccion) filas.push(['Dirección en el túnel', dato(String(foto.direccion))]);
+      if (CON_TUNEL(f) && foto.desde_ms) filas.push(['Desde', dato(hora(foto.desde_ms) + ' · ' + hace(foto.desde_ms))]);
+      if (CON_TUNEL(f) && foto.direccion) filas.push(['Dirección en el túnel', dato(String(foto.direccion))]);
       if (f === 'conectada' && foto.enviados != null) filas.push(['Enviados', dato(bytes(foto.enviados))]);
       if (f === 'conectada' && foto.recibidos != null) filas.push(['Recibidos', dato(bytes(foto.recibidos))]);
       if (f === 'conectada' && foto.ultimo_saludo_ms) filas.push(['Último saludo del servidor, hace', dato(hace(foto.ultimo_saludo_ms))]);
-      if (f === 'error' && foto.error) filas.push(['Motivo', dato(String(foto.error))]);
+      if ((f === 'error' || f === 'reconectando') && foto.error) filas.push(['Motivo', dato(String(foto.error))]);
     }
     V.datos.textContent = ''; V.datos.hidden = !filas.length;
     for (const [k, v] of filas) V.datos.append(h('div', null, h('dt', null, k), h('dd', null, v)));
@@ -126,8 +129,9 @@
   }
   async function orden() {
     const f = fase(); if (f === 'conectando' || f === 'fuera' || f === 'no_disponible') return;
-    aviso = f === 'conectada' ? 'Cerrando el túnel…' : 'Abriendo el túnel…'; pinta();
-    const r = await pide('POST', f === 'conectada' ? '/api/vpn/desconecta' : '/api/vpn/conecta', 15000);
+    aviso = CON_TUNEL(f) ? 'Cerrando el túnel…' : 'Abriendo el túnel…'; pinta();
+    // desconectar mientras reconecta puede esperar a que acabe el intento en curso (hasta unos 25 segundos)
+    const r = await pide('POST', CON_TUNEL(f) ? '/api/vpn/desconecta' : '/api/vpn/conecta', CON_TUNEL(f) ? 40000 : 15000);
     const j = r && r.json && typeof r.json === 'object' ? r.json : null;
     if (r && r.ok && j && j.ok === true) aviso = '';
     else if (r && r.estado === 428) aviso = 'El programa solo acepta la orden justo después de pulsar: vuelve a pulsar.';
