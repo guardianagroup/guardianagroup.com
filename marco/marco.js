@@ -38,7 +38,7 @@
   // Comunicaciones lleva a /orbita/comunicaciones/#llevar=<llave>. Esa página, con esa llave, solo enseña la llamada (app.js,
   // arrancaLlevar: ni chats, ni invitaciones, ni nada guardado). Al recargar, la pestaña guarda la llave solo para sí.
   if (/^\/orbita\/comunicaciones\/(index\.html)?$/.test(ruta)) {
-    var llave = (location.hash.match(/^#llevar=([A-Za-z0-9_-]{43})$/) || [])[1] || '';
+    var llave = (location.hash.match(/^#llevar=([A-Za-z0-9_-]{43})(?:\.[A-Za-z0-9_-]{43})?$/) || [])[1] || '';
     if (!llave) { try { llave = sessionStorage.getItem('gcom-llevar') || ''; } catch (_) {} }
     if (/^[A-Za-z0-9_-]{43}$/.test(llave)) { window.GuardianaMarco.llevar = true; return; }
   }

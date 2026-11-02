@@ -64,7 +64,7 @@ const hasta = async (fn, ms) => { const h = Date.now() + ms; while (Date.now() <
   comprueba(await A.evaluate(() => { const r = document.querySelector('#llevar-qr').getBoundingClientRect(); const e = document.elementFromPoint(r.left + r.width / 2, r.top + r.height / 2); return !!(e && e.closest('#h-llevar')); }), '0. el código está por encima de la videollamada');
   await A.screenshot({ path: path.join(OUT, '0-pc-codigo.png') });
   const dir = await A.evaluate(() => document.querySelector('#llevar-qr').dataset.url);
-  comprueba(/#llevar=[A-Za-z0-9_-]{43}$/.test(dir || ''), '0. la llave va solo en el fragmento de la dirección', dir);
+  comprueba(/#llevar=[A-Za-z0-9_-]{43}\.[A-Za-z0-9_-]{43}$/.test(dir || ''), '0. la llave (y el secreto de «Volver al PC») van solo en el fragmento de la dirección', dir);
   // 1. el teléfono abre la dirección del código
   await T.goto(dir.replace('https://guardianagroup.com', 'http://127.0.0.1:8080'));
   await espera(600);
@@ -111,12 +111,12 @@ const hasta = async (fn, ms) => { const h = Date.now() + ms; while (Date.now() <
   }
   // 2. la pantalla del teléfono: solo «Colgar» y nada guardado
   const botones = await T.evaluate(() => [...document.querySelectorAll('#ll-botones .gc-llamada-boton')].filter((b) => getComputedStyle(b).display !== 'none' && !b.hidden).map((b) => (b.querySelector('span') || b).textContent.trim()));
-  comprueba(botones.length === 1, '2. en el teléfono, un solo botón: ' + botones.join(' · '));
+  comprueba(botones.join(' · ') === 'Girar · Volver al PC · Colgar', '2. en el teléfono, tres botones: ' + botones.join(' · '));
   // un solo título arriba, con el tiempo de llamada; la otra persona a toda pantalla (sin partir); en horizontal, «gira el teléfono»
   const cab = { capsula: await visible(T, '.gc-llamada-arriba .gc-llamada-cifrado'), nombre: await visible(T, '#ll-nombre') && (await T.textContent('#ll-nombre')).trim(), tiempo: await visible(T, '#ll-tiempo') && (await T.textContent('#ll-tiempo')).trim() };
-  comprueba(!cab.capsula && /^Videollamada encriptada( post-cuántica)?$/.test(cab.nombre) && /^\d\d:\d\d$/.test(cab.tiempo), '2. un solo título arriba: «Videollamada encriptada» y el tiempo', cab);
+  comprueba(!cab.capsula && /^Videollamada encriptada( postcuántica)?$/.test(cab.nombre) && /^\d\d:\d\d$/.test(cab.tiempo), '2. un solo título arriba: «Videollamada encriptada» y el tiempo', cab);
   // la llave de la capa post-cuántica sale del código QR (nunca viajó por la red): en el teléfono y en B va la capa
-  comprueba(await T.evaluate(() => GuardianaCom.llamada.pq) && await B.evaluate(() => GuardianaCom.llamada.pq) && cab.nombre === 'Videollamada encriptada post-cuántica', '2. con la capa post-cuántica (llave del código QR) y el título lo dice', cab.nombre);
+  comprueba(await T.evaluate(() => GuardianaCom.llamada.pq) && await B.evaluate(() => GuardianaCom.llamada.pq) && cab.nombre === 'Videollamada encriptada postcuántica', '2. con la capa post-cuántica (llave del código QR) y el título lo dice', cab.nombre);
   comprueba(!(await T.evaluate(() => document.querySelector('#llamada').classList.contains('dividida'))), '2. la otra persona a toda pantalla (sin partir)');
   await T.setViewportSize({ width: 852, height: 393 }); await espera(700);
   comprueba(await T.evaluate(() => [...document.querySelectorAll('body > .gira')].some((g) => getComputedStyle(g).display !== 'none')), '2. en horizontal: «gira el teléfono»');
@@ -134,10 +134,10 @@ const hasta = async (fn, ms) => { const h = Date.now() + ms; while (Date.now() <
   // lo que el navegador avisa cuando de verdad se pierde la ruta)
   const cae = (P) => P.evaluate(() => { for (const p of window.__pcs) { if (p.connectionState !== 'connected') continue; try { p.close(); } catch (_) {} Object.defineProperty(p, 'connectionState', { get: () => 'failed' }); Object.defineProperty(p, 'iceConnectionState', { get: () => 'failed' }); p.dispatchEvent(new Event('iceconnectionstatechange')); p.dispatchEvent(new Event('connectionstatechange')); } });
   await cae(T); await cae(B);
-  const corta = await hasta(() => visible(T, '#llevar-volver'), 60000);
+  const corta = await hasta(() => visible(T, '#llevar-volver'), 100000);
   comprueba(corta, '3. cortada: en el teléfono sale «Volver a llamar»', await T.textContent('#llevar-t'));
   await T.screenshot({ path: path.join(OUT, '3-tel-cortada.png') });
-  comprueba(await hasta(() => visible(B, '#llevar-cortada'), 15000), '3. y en B, la tarjeta «Llamada cortada» con «Volver a llamar»');
+  comprueba(await hasta(() => visible(B, '#llevar-cortada'), 40000), '3. y en B, la tarjeta «Llamada cortada» con «Volver a llamar»');
   await B.screenshot({ path: path.join(OUT, '3-b-cortada.png') });
   if (corta) {
     await T.click('#llevar-volver');

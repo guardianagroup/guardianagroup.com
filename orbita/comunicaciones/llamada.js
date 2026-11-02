@@ -44,8 +44,12 @@
   // ahorro del iPhone). Lo que no arranca se apunta y sale «Toca para ver y oír la llamada»; el primer toque arranca todo.
   const parados = new Set();
   function arrancaParados() {
-    if (!parados.size) return;
-    for (const v of [...parados]) { parados.delete(v); try { const p = v.play(); if (p && p.catch) p.catch(() => {}); } catch (_) {} }
+    // también lo que no avisó de que estaba parado (dueño, 14:08: en Brave, tras tocar, todo iba salvo su propia imagen)
+    const todos = new Set(parados);
+    for (const v of document.querySelectorAll('#llamada video, #a-remoto, body > audio')) if (v.srcObject && v.paused) todos.add(v);
+    if (!todos.size) return;
+    parados.clear();
+    for (const v of todos) { try { const p = v.play(); if (p && p.catch) p.catch(() => {}); } catch (_) {} }
     const b = document.getElementById('ll-toca'); if (b) b.hidden = true;
   }
   for (const g of ['click', 'touchend', 'pointerup', 'keydown']) document.addEventListener(g, arrancaParados, true);
@@ -857,7 +861,7 @@
       if (!video || !cam) return;
       const vl = $('#v-local'), pi = pistaImagen(); if (!vl || !pi || pi.readyState !== 'live') return;
       const tiene = vl.srcObject && vl.srcObject.getVideoTracks()[0];
-      if (tiene !== pi || (vl.readyState >= 1 && !vl.videoWidth)) vl.srcObject = new MediaStream([pi]);
+      if (tiene !== pi || (!vl.paused && vl.readyState >= 1 && !vl.videoWidth)) vl.srcObject = new MediaStream([pi]);
       if (vl.paused || vl.readyState < 2) reproduce(vl);
     }
     function eligeLuz() {
@@ -1187,7 +1191,7 @@
       if (m.acto === 'pausa') { di(m.on ? t('La otra persona ha puesto la llamada en pausa.') : ''); return; }
       // pasar la llamada al teléfono: la otra persona me da la llave de la sala de su teléfono (yo añado el teléfono), me dice que
       // lo deja (cancelar), o yo le digo que su teléfono ya está dentro / ya habla (ella cuelga)
-      if (m.acto === 'llevar' && typeof m.k === 'string' && /^[A-Za-z0-9_-]{43}$/.test(m.k)) { if (estado === 'hablando' && o.alLlevar) o.alLlevar(m.k); return; }
+      if (m.acto === 'llevar' && typeof m.k === 'string' && /^[A-Za-z0-9_-]{43}$/.test(m.k)) { if (estado === 'hablando' && o.alLlevar) o.alLlevar(m.k, m.pc === 1); return; }
       if (m.acto === 'llevar-no') { for (const L of patas.slice()) if (L.llevar && L.estado !== 'hablando') { tmanda(L, { acto: 'colgar', id: L.id }); quitaPata(L, 'yo'); } if (o.llevarNo) o.llevarNo(); return; }
       if (m.acto === 'llevar-visto') { if (o.llevarVisto) o.llevarVisto(); return; }
       if (m.acto === 'llevar-listo') { if (o.llevarListo) o.llevarListo(); return; }
@@ -1482,7 +1486,7 @@
       const mz = d.llevar ? null : mezclaCrea(); if (!d.llevar && !mz) return false;
       if (mz && mz.ctx.state !== 'running') mz.ctx.resume().catch(() => {});
       const id = Math.random().toString(36).slice(2, 10);
-      const L = { sala: String(sala), clave: 'x' + id, nombre: String(d.nombre || '').slice(0, 40), compartido: String(d.suNombre || '').slice(0, 40), id, pc: null, estado: 'saliente', pendientes: [], voz: null, cam: null, camOn: true, sabe: false, videos: new Map(), quien: null, reenvios: new Map(), dest: null, n: 1, nEnviado: 0, quienEnviado: '', renegPendiente: false, el: null, miCam: null, sinRespuesta: null, inicio: 0, corte: null, llevar: !!d.llevar };
+      const L = { sala: String(sala), clave: 'x' + id, nombre: String(d.nombre || '').slice(0, 40), compartido: String(d.suNombre || '').slice(0, 40), id, pc: null, estado: 'saliente', pendientes: [], voz: null, cam: null, camOn: true, sabe: false, videos: new Map(), quien: null, reenvios: new Map(), dest: null, n: 1, nEnviado: 0, quienEnviado: '', renegPendiente: false, el: null, miCam: null, sinRespuesta: null, inicio: 0, corte: null, llevar: !!d.llevar, alPc: !!d.pc };
       patas.push(L);
       const tieneTurn = ice.some((s) => [].concat(s.urls).some((u) => /^turns?:/.test(u)));
       const p = L.pc = new RTCPeerConnection({ iceServers: ice, iceTransportPolicy: (tieneTurn || !LOCAL) ? 'relay' : 'all', bundlePolicy: 'max-bundle', rtcpMuxPolicy: 'require' });
@@ -1495,7 +1499,7 @@
       flujo.getTracks().forEach((x) => { const s = p.addTrack(x, flujo); if (x.kind === 'video') L.miCam = s; });
       if (video && !pi) { try { p.addTransceiver('video', { direction: 'recvonly' }); } catch (_) {} }
       if (video) prefiereCodecs('compatible', true, p);
-      di(L.llevar ? t('Pasando la llamada al teléfono de {n}…').replace('{n}', L.nombre || t('Persona invitada')) : t('Llamando a {n}…').replace('{n}', L.nombre || t('Persona invitada')));
+      di(L.llevar ? (L.alPc ? t('Pasando la llamada al ordenador de {n}…') : t('Pasando la llamada al teléfono de {n}…')).replace('{n}', L.nombre || t('Persona invitada')) : t('Llamando a {n}…').replace('{n}', L.nombre || t('Persona invitada')));
       pinta();
       try {
         const of = await p.createOffer(); await p.setLocalDescription({ type: of.type, sdp: altaFidelidad(of.sdp) });
@@ -1602,7 +1606,7 @@
       PR = { principal: true, clave: 'p', videos: P1.videos, quien: P1.quien, reenvios: P1.reenvios, dest: P1.dest, n: P1.n, nEnviado: P1.nEnviado, quienEnviado: P1.quienEnviado, renegPendiente: false, miCam: P1.miCam };
       quitaTiles();
       mezclaAlDia(); reenviaImagenes(); mandaCuentas();
-      const x = (P1.llevar ? t('La llamada continúa en el teléfono de {n}.') : t('{n} ha salido de la llamada.')).replace('{n}', nB); di(x); setTimeout(() => { if (paso.textContent === x) di(''); }, 6000);
+      const x = (P1.llevar ? (P1.alPc ? t('La llamada continúa en el ordenador de {n}.') : t('La llamada continúa en el teléfono de {n}.')) : t('{n} ha salido de la llamada.')).replace('{n}', nB); di(x); setTimeout(() => { if (paso.textContent === x) di(''); }, 6000);
       pintaVideo(); pinta(); topeAudio(); if (video) topeVideo();
     }
     // lo que llega de cualquier tramo sobre el grupo: ofertas para una imagen más, quién es cada imagen y cuántos somos
@@ -1777,7 +1781,8 @@
     { const m = $('#ll-mas-menu'), mc = $('#ll-mas-caja');
       if (m && mc) {
         // («Cambiar vista» se queda en la barra del PC, donde se usa a menudo; en el teléfono va arriba)
-        for (const s of ['#ll-girar-caja', '#ll-ajustes-caja', '#ll-grave-caja', '#ll-mosaico-caja', '#ll-anadir-caja', '#ll-completa-caja']) { const c = $(s); if (!c) continue; c.classList.add('ll-mas-fila'); c.setAttribute('role', 'none'); const bt = c.querySelector('button'); if (bt) bt.setAttribute('role', 'menuitem'); m.appendChild(c); }
+        // (en el teléfono al que se pasó la llamada, «Girar la cámara» se queda a la vista, junto a «Colgar»: dueño, 2 Nov 2026, 14:15)
+        for (const s of (o.sencilla ? [] : ['#ll-girar-caja']).concat(['#ll-ajustes-caja', '#ll-grave-caja', '#ll-mosaico-caja', '#ll-anadir-caja', '#ll-completa-caja'])) { const c = $(s); if (!c) continue; c.classList.add('ll-mas-fila'); c.setAttribute('role', 'none'); const bt = c.querySelector('button'); if (bt) bt.setAttribute('role', 'menuitem'); m.appendChild(c); }
         const alDia = () => { const hay = [...m.children].some((c) => !c.hidden); mc.hidden = !hay; if (!hay && masAbierto) abreMas(false); };
         new MutationObserver(alDia).observe(m, { attributes: true, attributeFilter: ['hidden'], subtree: true, childList: true }); alDia();
         $('#ll-mas').addEventListener('click', (e) => { e.stopPropagation(); abreMas(!masAbierto); });

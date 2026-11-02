@@ -2191,7 +2191,7 @@ body.con-pestanas #marcar .marcar-llamar span{position:absolute;width:1px;height
 /* en el teléfono (modo llevar): solo la llamada y esta pantalla */
 body.modo-llevar>*:not(#llamada):not(#llevar):not(#llevar-avisos):not(#aviso):not(.gira):not(script){display:none!important}
 body.modo-llevar{background:#06080C}
-.modo-llevar #ll-botones>.gc-llamada-boton:not(.gc-colgar),.modo-llevar #ll-entrante,.modo-llevar .ll-mini-b,.modo-llevar #ll-voces,.modo-llevar .ll-ajustes,.modo-llevar #ll-sas-mini,.modo-llevar #ll-sas,.modo-llevar .mi-tam-boton{display:none!important}
+.modo-llevar #ll-botones>.gc-llamada-boton:not(.gc-colgar):not(.ll-volver-pc):not(#ll-girar-caja),.modo-llevar #ll-entrante,.modo-llevar .ll-mini-b,.modo-llevar #ll-voces,.modo-llevar .ll-ajustes,.modo-llevar #ll-sas-mini,.modo-llevar #ll-sas,.modo-llevar .mi-tam-boton{display:none!important}
 .llevar{position:fixed;inset:0;z-index:120;display:grid;place-items:center;padding:max(24px,env(safe-area-inset-top)) max(24px,env(safe-area-inset-right)) max(24px,env(safe-area-inset-bottom)) max(24px,env(safe-area-inset-left));background:radial-gradient(ellipse 80% 55% at 50% 30%,rgba(156,195,228,.09),transparent 70%),#06080C;color:#E8ECF1;text-align:center}
 .llevar[hidden]{display:none}
 .llevar-caja{width:min(360px,100%);display:flex;flex-direction:column;align-items:center}
@@ -2302,3 +2302,8 @@ body.modo-llevar{background:#06080C}
 .ll-toca{position:absolute;z-index:60;left:50%;top:50%;transform:translate(-50%,-50%);display:flex;white-space:nowrap;max-width:calc(100vw - 32px);align-items:center;gap:12px;min-height:58px;padding:0 26px 0 20px;border-radius:999px;border:1px solid rgba(156,195,228,.55);background:rgba(8,12,18,.86);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);color:#F4F6F8;font:600 16px/1.2 var(--texto);box-shadow:0 18px 50px -18px #000,0 0 0 6px rgba(156,195,228,.08);cursor:pointer}
 .ll-toca svg{width:22px;height:22px;fill:#9CC3E4}
 .ll-toca[hidden]{display:none}
+
+/* «Volver al PC» (2 Nov 2026): en el teléfono, junto a «Colgar»; apagado mientras el ordenador no está conectado o ya se está pasando */
+#ll-volver-pc-caja[hidden]{display:none!important}
+#ll-volver-pc-caja.apagado button{opacity:.45}
+#ll-girar-caja[hidden]{display:none!important}

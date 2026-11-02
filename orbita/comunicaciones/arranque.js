@@ -11,7 +11,7 @@
   // El teléfono al que se pasa una videollamada (app.js, «Pasar al teléfono»): no deja nada en el almacenamiento del navegador ni
   // toca lo que ya hubiera en él (si esa persona usa GUARDIANA en este mismo navegador, lo suyo sigue igual).
   try {
-    if (/^#llevar=[A-Za-z0-9_-]{43}$/.test(location.hash) || /^[A-Za-z0-9_-]{43}$/.test(sessionStorage.getItem('gcom-llevar') || '')) {
+    if (/^#llevar=[A-Za-z0-9_-]{43}(\.[A-Za-z0-9_-]{43})?$/.test(location.hash) || /^[A-Za-z0-9_-]{43}$/.test(sessionStorage.getItem('gcom-llevar') || '')) {
       var ls = window.localStorage, S = Storage.prototype, pon = S.setItem, quita = S.removeItem, vacia = S.clear;
       S.setItem = function (k, v) { if (this !== ls) return pon.call(this, k, v); };
       S.removeItem = function (k) { if (this !== ls) return quita.call(this, k); };
