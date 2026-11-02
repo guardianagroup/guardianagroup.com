@@ -11,9 +11,13 @@ en `claude.md`.
 
 1. **No se disimula.** Nada que oculte que ZERO es automatizado, ni captchas resueltos, ni proxies residenciales. Esto
    quedó cerrado el 1 nov a las 22:50 y no se reabre.
-2. **La radiografía se muda al PC del cliente** («radiografía local»): el programa abre un Chromium en el equipo, con la
-   conexión del cliente, y observa lo que la página hace por CDP sin cambiarla. Una web ve una persona porque lo es.
-   Los servidores quedan para quien mire desde la web sin el programa, con sus límites dichos.
+2. **La radiografía se muda al PC del cliente** («radiografía local»). ZERO ya lo hace desde 1.0.46
+   (`crates/zero/src/subasta.rs`): lee en la propia página las pujas de Prebid (empresas, CPM, ganador, consentimiento) y
+   cada petición con su corte; es el navegador de la persona, en su equipo y con su conexión, y por eso una web ve una
+   persona. Lo que falta: que, dentro del programa, la puerta «Radiografías» de Órbita enseñe lo que ZERO ve de la
+   página abierta en vez de pedírselo al motor de los servidores (que es lo que las webs detectan como centro de datos),
+   y que el informe de ZERO enseñe más de lo que ya guarda (anunciante, agencia, marca y tiempo de respuesta de cada
+   puja, que Prebid da). Los servidores quedan para quien mire desde la web sin el programa, con sus límites dichos.
 3. **Subastas:** se leen `pbjs.getBidResponses()` y `getAllWinningBids()` (pujador, CPM, moneda, anunciante, agencia,
    marca, tiempo de respuesta) y los eventos de Google Publisher Tag; se enseñan tal cual, con «fuente: la propia
    página». Donde no haya Prebid se dice «esta web no publica sus pujas en la página».
