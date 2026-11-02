@@ -124,12 +124,14 @@ cat > "$BASE/actualizar-motor.sh" <<EOF
 # Trae la última versión del motor desde el repositorio; deja una marca si cambió (el servicio reinicia o reinstala).
 set -e
 cd "$DIR"
+# lo que hace falta volver a instalar: el instalador y, en el servidor con la VPN, también su guion (zero-motor/vpn.sh)
+instalador() { { cat zero-motor/instalar.sh; if [ -d /etc/guardiana/vpn ]; then cat zero-motor/vpn.sh 2>/dev/null; fi; } | sha256sum | cut -c1-16; }
 antes=\$(git rev-parse HEAD)
-inst_antes=\$(sha256sum zero-motor/instalar.sh | cut -c1-16)
+inst_antes=\$(instalador)
 git fetch -q --depth 1 origin "$RAMA"
 git checkout -q -f FETCH_HEAD
 despues=\$(git rev-parse HEAD)
-inst_despues=\$(sha256sum zero-motor/instalar.sh | cut -c1-16)
+inst_despues=\$(instalador)
 rm -f "$BASE/.cambio" "$BASE/.reinstala"
 if [ "\$inst_antes" != "\$inst_despues" ]; then touch "$BASE/.reinstala"; echo "instalador nuevo: se reinstala"
 elif [ "\$antes" != "\$despues" ]; then touch "$BASE/.cambio"; echo "motor actualizado: \$antes → \$despues"; fi
@@ -331,11 +333,14 @@ WantedBy=multi-user.target
 EOF
 
 # 2 Nov 2026 (dueño, 10:40: «Utilizamos el de Helsinki. Conéctalo ya»): la VPN de GUARDIANA, solo en el servidor de Helsinki (o
-# donde exista /etc/guardiana/vpn): zero-motor/vpn.sh. Si no se puede montar, el motor sigue como siempre.
+# donde exista la carpeta /etc/guardiana/vpn, que deja vpn.sh): zero-motor/vpn.sh, con 50 minutos como mucho (compila el alta
+# la primera vez). Si no se puede montar, el motor sigue como siempre. En Caddy, si el alta no contesta (un instante, al
+# reiniciarse), handle_errors responde 503 y el error queda en el nivel de depuración, que no se escribe: así el diario no
+# guarda la dirección de quien pedía el alta.
 VPN_CADDY=""
-if [ "$DOMINIO" = "motor-hel.guardianagroup.com" ] || [ -f /etc/guardiana/vpn ]; then
+if [ "$DOMINIO" = "motor-hel.guardianagroup.com" ] || [ -d /etc/guardiana/vpn ]; then
   paso "VPN: WireGuard, el alta de GUARDIANA y su resolutor (zero-motor/vpn.sh)"
-  if bash "$DIR/zero-motor/vpn.sh"; then
+  if timeout 50m bash "$DIR/zero-motor/vpn.sh"; then
     VPN_CADDY='
 vpn.guardianagroup.com {
 	header -Server
@@ -343,6 +348,9 @@ vpn.guardianagroup.com {
 		reverse_proxy 127.0.0.1:8793
 	}
 	respond 404
+	handle_errors {
+		respond 503
+	}
 }'
   else
     rojo "  La VPN no se pudo montar; el motor sigue. Registro: /var/log/guardiana-vpn-*.log y journalctl -u guardiana-vpn-alta"
@@ -367,7 +375,8 @@ EOF
   }
   # 30 Oct 2026 (agencia, ronda 77; dueño, 10:30): el 443 compartido con el relé de llamadas, para las redes que solo dejan salir
   # la web (hoteles, empresas, algunos países). nginx no abre el TLS: mira si el saludo trae ALPN. El TURN-TLS de los navegadores
-  # no lo trae (comprobado con Chromium); la web, el WebSocket y la validación del certificado, sí.
+  # no lo trae (comprobado con Chromium); la web, el WebSocket y la validación del certificado, sí. 2 Nov 2026: antes que el
+  # ALPN, el nombre: el alta de la VPN (vpn.guardianagroup.com) va siempre a Caddy, porque su cliente (ureq) no manda ALPN.
   puerta_443() {
     printf '#!/bin/sh\nexit 101\n' > /usr/sbin/policy-rc.d; chmod 755 /usr/sbin/policy-rc.d
     DEBIAN_FRONTEND=noninteractive apt-get install -y -q nginx libnginx-mod-stream > /var/log/guardiana-nginx-instalacion.log 2>&1; local r=$?
@@ -384,8 +393,13 @@ error_log /var/log/nginx/error.log crit;
 events { worker_connections 8192; }
 stream {
 	access_log off;
+	# el alta de la VPN → Caddy (su cliente no manda ALPN); lo demás, por el ALPN
+	map $ssl_preread_server_name $guardiana_destino {
+		vpn.guardianagroup.com 127.0.0.1:8443;
+		default                $guardiana_alpn;
+	}
 	# sin ALPN: el TURN-TLS del navegador → coturn; con ALPN: la web, el WebSocket y el certificado → Caddy
-	map $ssl_preread_alpn_protocols $guardiana_destino {
+	map $ssl_preread_alpn_protocols $guardiana_alpn {
 		""      127.0.0.1:9101;
 		default 127.0.0.1:8443;
 	}

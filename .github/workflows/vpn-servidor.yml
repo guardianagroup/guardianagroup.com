@@ -1,0 +1,39 @@
+# La mitad del servidor de la VPN (zero-motor/vpn.sh) y su paso por el 443 de instalar.sh, de verdad, en un Ubuntu con
+# systemd y el WireGuard del núcleo, antes de que llegue a Helsinki (2 Nov 2026; segunda revisión, fallos 1 a 5).
+# Lo que se prueba está en zero-motor/pruebas/vpn-servidor.sh. Llaves de prueba, hechas en la máquina y tiradas con ella;
+# no se publica nada.
+name: VPN · servidor
+
+on:
+  push:
+    branches: ['vpn-helsinki', 'main']
+    paths:
+      - 'zero-motor/vpn.sh'
+      - 'zero-motor/instalar.sh'
+      - 'zero-motor/pruebas/vpn-servidor.sh'
+      - '.github/workflows/vpn-servidor.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: vpn-servidor-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  servidor:
+    name: vpn.sh y el 443 compartido en un Ubuntu de verdad
+    runs-on: ubuntu-24.04
+    timeout-minutes: 75
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - name: Herramientas de la prueba
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq dnsutils ncat > /dev/null
+      - name: La prueba
+        run: bash zero-motor/pruebas/vpn-servidor.sh
+      - name: Lo que dijeron los servicios
+        if: always()
+        run: |
+          sudo tail -n 40 /var/log/guardiana-vpn-compilacion.log 2> /dev/null || true
+          sudo journalctl -u guardiana-wg0 -u guardiana-vpn-red -u unbound -u guardiana-vpn-alta -u caddy -u nginx -n 120 --no-pager || true
