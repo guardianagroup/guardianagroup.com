@@ -72,8 +72,14 @@ async function pasa(P, Tel) {
   await T.click('#ll-volver-pc');
   const t0 = Date.now();
   const otro = U || B;
+  // (dueño, 2 Nov 2026, 14:30: «no me sale en grande hasta que mi amigo se conecta… que se vea grande desde un principio») en el PC,
+  // en cuanto acepta la vuelta, la pantalla grande de «La llamada vuelve a este ordenador»; luego, la llamada en grande
+  const enGrande = () => A.evaluate(() => { const ll = document.querySelector('#llamada'), lv = document.querySelector('#llevar'); const t = document.querySelector('#llevar-t'); return !!(lv && !lv.hidden && t && t.textContent === 'La llamada vuelve a este ordenador') || !!(ll && ll.classList.contains('gc-abierta') && !ll.classList.contains('mini')); });
+  comprueba(await hasta(enGrande, 3000), '2. en el PC, en grande desde el primer momento (' + Math.round((Date.now() - t0) / 100) / 10 + ' s)');
+  await A.screenshot({ path: path.join(OUT, '2-pc-vuelve.png') });
   const vuelve = await hasta(async () => (await estado(A)) === 'hablando' && (await estado(otro)) === 'hablando' && (await estado(T)) !== 'hablando', 30000);
   comprueba(vuelve, '2. la llamada vuelve al PC (' + Math.round((Date.now() - t0) / 1000) + ' s) y el teléfono sale', { A: await estado(A), T: await estado(T), otro: await estado(otro) });
+  comprueba(!(await visible(A, '#llevar')) && await A.evaluate(() => { const ll = document.querySelector('#llamada'); return ll.classList.contains('gc-abierta') && !ll.classList.contains('mini'); }), '2. y luego la llamada, en grande (sin la pantalla de espera)');
   comprueba(await hasta(async () => (await T.textContent('#llevar-t')) === 'La llamada sigue en el ordenador' && await visible(T, '#llevar'), 10000), '2. en el teléfono: «La llamada sigue en el ordenador»', await T.textContent('#llevar-t'));
   await espera(2500);
   comprueba(await imagen(A), '2. A ve a la otra persona');

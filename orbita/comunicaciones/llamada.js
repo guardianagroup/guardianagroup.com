@@ -120,19 +120,25 @@
     // dice en la oferta qué sesión usa («pqm»); quien contesta la busca y, si la tiene, lo confirma («pqm: 1»). Solo entonces se
     // pone la capa en los dos lados; si la otra persona tiene una versión anterior, la llamada sigue con el cifrado de siempre y el
     // título no dice «post-cuántica».
-    // De momento, solo en navegadores Chromium (Chrome, Edge, Brave, Opera, Samsung Internet y el programa ZERO), los probados; en
-    // Safari y Firefox la llamada sigue con el cifrado de siempre hasta probarlo en sus equipos (y el título no dice «post-cuántica»)
+    // En los navegadores Chromium (Chrome, Edge, Brave, Opera, Samsung Internet y el programa ZERO) y, desde el 2 Nov 2026, en Safari y
+    // en cualquier navegador del iPhone, que usan WebKit (dueño, 14:45–14:48: «si yo me paso a mi teléfono iPhone, la llamada ya no
+    // sigue poscuántica»). Si a los pocos segundos de hablar un lado no descifra nada del otro, los dos vuelven al cifrado de siempre
+    // de la llamada (pqVigila): mejor una llamada encriptada que una llamada muda. En Firefox, el cifrado de siempre hasta probarlo.
     const CHROMIUM = !!(navigator.userAgentData && Array.isArray(navigator.userAgentData.brands) && navigator.userAgentData.brands.some((b) => /Chromium/.test(b.brand)));
-    const PQM = CHROMIUM && typeof raiz.RTCRtpScriptTransform === 'function' && typeof raiz.Worker === 'function';
+    const WEBKIT = !CHROMIUM && /AppleWebKit\//.test(navigator.userAgent || '') && !/Gecko\/\d/.test(navigator.userAgent || '');
+    const PQM = (CHROMIUM || WEBKIT) && typeof raiz.RTCRtpScriptTransform === 'function' && typeof raiz.Worker === 'function';
     let obrero = null, pqCuenta = null, pqOferta = null;
     const pqDe = new WeakMap(); // conexión → { tx, rx, puestos, confirmada, visto }
     const pqPorRx = new Map(); // id de la llave de recibir → su contexto (para el aviso «visto» del obrero)
     const pqPorCod = new Map(); // id de la llave de la que sale el código → su contexto
-    // la llave cambia cada minuto (en pruebas locales, lo que se diga)
-    const ROTA_MS = (() => { try { const v = LOCAL && Number(sessionStorage.getItem('gcom-rota-ms')); if (v >= 2000) return v; } catch (_) {} return 60000; })();
+    // la llave cambia cada 2 minutos (dueño, 2 Nov 2026, 14:43: «cada 2 minutos, cada 5 minutos»; antes, cada minuto); en pruebas
+    // locales, lo que se diga. Quien llama dice su ritmo en la oferta («pqc», en segundos) y quien contesta lo sigue: las versiones
+    // de antes no lo dicen y cambian cada minuto
+    const ROTA_MS = (() => { try { const v = LOCAL && Number(sessionStorage.getItem('gcom-rota-ms')); if (v >= 2000) return v; } catch (_) {} return 120000; })();
+    const pqCada = (m) => { const v = Number(m && m.pqc); return v >= 2 && v <= 600 ? v * 1000 : 60000; };
     function obreroPq() {
       if (!obrero) {
-        obrero = new Worker('medios-pq.js?v=20261101c');
+        obrero = new Worker('medios-pq.js?v=20261102a');
         obrero.onmessage = (e) => {
           const m = e.data || {}; if (m.cuenta) pqCuenta = m.cuenta;
           if (m.tipo === 'visto') { const x = pqPorRx.get(m.id); if (x) { x.visto = true; pinta(); } }
@@ -172,40 +178,72 @@
     // los tipos de carga de la negociación, por si el navegador no dice el códec de cada fragmento
     function codecsPq(p) {
       const x = pqDe.get(p); if (!x || !obrero) return;
-      try { const sdp = ((p.remoteDescription && p.remoteDescription.sdp) || '') + ((p.localDescription && p.localDescription.sdp) || ''); const mapa = {}; for (const m of sdp.matchAll(/a=rtpmap:(\d+) ([A-Za-z0-9-]+)\/\d+/g)) mapa[m[1]] = ('video/' + m[2]).toLowerCase(); obrero.postMessage({ tipo: 'codecs', id: x.tx, mapa }); obrero.postMessage({ tipo: 'codecs', id: x.rx, mapa }); } catch (_) {}
+      try {
+        const sdp = ((p.remoteDescription && p.remoteDescription.sdp) || '') + ((p.localDescription && p.localDescription.sdp) || ''); const mapa = {}; for (const m of sdp.matchAll(/a=rtpmap:(\d+) ([A-Za-z0-9-]+)\/\d+/g)) mapa[m[1]] = ('video/' + m[2]).toLowerCase();
+        // el de la imagen que se usa: el primero de la línea m=video de la respuesta
+        const resp = p.localDescription && p.localDescription.type === 'answer' ? p.localDescription.sdp : p.remoteDescription && p.remoteDescription.type === 'answer' ? p.remoteDescription.sdp : '';
+        const pt = (/\nm=video \d+ [A-Z/]+ (\d+)/.exec(resp || '') || [])[1], defecto = pt && mapa[pt] ? mapa[pt] : '';
+        obrero.postMessage({ tipo: 'codecs', id: x.tx, mapa, defecto }); obrero.postMessage({ tipo: 'codecs', id: x.rx, mapa, defecto });
+      } catch (_) {}
     }
     const te8 = new TextEncoder();
     async function hkdfPq(sec, sal, info) { const k = await crypto.subtle.importKey('raw', sec, 'HKDF', false, ['deriveBits']); return new Uint8Array(await crypto.subtle.deriveBits({ name: 'HKDF', hash: 'SHA-256', salt: te8.encode(sal), info: te8.encode(info) }, k, 256)); }
     // la otra persona confirma la capa: las dos llaves (una por sentido, del secreto de la sesión y del identificador de esa
     // llamada) y, desde ya, lo que sale va cifrado
-    // «rota»: los dos tienen el cambio de llave cada minuto (medios-pq.js): quien llamó lo marca; el código sale de su llave
-    async function pqConfirma(p, sec, idL, soyQuienLlama, rota) {
+    // «rota»: los dos tienen el cambio de llave (cada ROTA_MS, medios-pq.js): quien llamó lo marca; el código sale de su llave
+    // «cada»: el ritmo de quien llamó (el mío si llamé yo). Sin número de seguridad (el teléfono al que se pasó la llamada, los tramos
+    // de una llamada que se pasó), el código va atado a la llave de la sala, que nadie en medio tiene
+    async function pqConfirma(p, sec, idL, soyQuienLlama, rota, cada) {
       const x = p && pqDe.get(p); if (!x || !sec) return false;
+      // solo en pruebas locales: un lado con otra llave, para probar la vuelta al cifrado de siempre (pqVigila)
+      try { if (LOCAL && sessionStorage.getItem('gcom-pq-roto') === '1') { sec = Uint8Array.from(sec instanceof ArrayBuffer ? new Uint8Array(sec) : new Uint8Array(sec.buffer, sec.byteOffset, sec.byteLength)); sec[0] ^= 1; } } catch (_) {}
       try {
         const sal = 'GUARDIANA medios v1\n' + idL;
         const a = await hkdfPq(sec, sal, 'de quien llama'), b = await hkdfPq(sec, sal, 'de quien contesta');
         const tx = soyQuienLlama ? a : b, rx = soyQuienLlama ? b : a;
+        x.lazoPropio = await hkdfPq(sec, 'GUARDIANA lazo del código v1\n' + idL, 'sin número de seguridad');
         obrero.postMessage({ tipo: 'llave', id: x.tx, raw: tx.buffer }, [tx.buffer]); obrero.postMessage({ tipo: 'llave', id: x.rx, raw: rx.buffer }, [rx.buffer]);
         obrero.postMessage({ tipo: 'modo', id: x.tx, modo: 'cifra' });
-        if (rota) { x.codId = soyQuienLlama ? x.tx : x.rx; pqPorCod.set(x.codId, x); obrero.postMessage({ tipo: 'cadena', tx: x.tx, rx: x.rx, guia: !!soyQuienLlama, codigo: x.codId, cada: ROTA_MS }); if (p === pc) pqLazo(); }
+        if (rota) {
+          x.codId = soyQuienLlama ? x.tx : x.rx; pqPorCod.set(x.codId, x); x.cada = soyQuienLlama ? ROTA_MS : (cada || 60000);
+          obrero.postMessage({ tipo: 'cadena', tx: x.tx, rx: x.rx, guia: !!soyQuienLlama, codigo: x.codId, cada: soyQuienLlama ? ROTA_MS : (cada || 60000) });
+          if (p === pc) pqLazo(); else obrero.postMessage({ tipo: 'lazo', id: x.codId, lazo: x.lazoPropio.slice().buffer });
+        }
         x.confirmada = true; codecsPq(p); return true;
       } catch (_) { return false; }
     }
+    // Si la conexión lleva 4 s hablando y aquí no se ha descifrado nada de la otra persona (su navegador trae la función, pero no
+    // cuadra con el mío), los dos sentidos vuelven al cifrado de siempre y se le dice a la otra persona por el canal encriptado de la
+    // llamada (nadie en medio puede mandarlo); el título deja de decir «postcuántica» y el código se quita.
+    function pqVigila(p, manda) {
+      const x = p && pqDe.get(p); if (!x || !x.confirmada) return;
+      let desde = 0, vueltas = 0; clearInterval(x.vigila);
+      x.vigila = setInterval(() => {
+        if (pqDe.get(p) !== x || x.visto || !x.confirmada || p.connectionState === 'closed' || ++vueltas > 90) { clearInterval(x.vigila); return; }
+        if (p.connectionState !== 'connected') { desde = 0; return; }
+        if (!desde) desde = Date.now();
+        if (Date.now() - desde < 4000) return;
+        clearInterval(x.vigila); pqAClaro(p); try { manda({ acto: 'pq-claro' }); } catch (_) {}
+      }, 1000);
+    }
+    function pqAClaro(p) { const x = p && pqDe.get(p); if (!x) return; clearInterval(x.vigila); x.confirmada = false; pqClaro(p); pinta(); }
     // la otra persona no tiene la capa: los dos sentidos, en claro (con el cifrado de siempre de la llamada)
     function pqClaro(p) { const x = p && pqDe.get(p); if (!x || !obrero) return; obrero.postMessage({ tipo: 'modo', id: x.tx, modo: 'claro' }); obrero.postMessage({ tipo: 'modo', id: x.rx, modo: 'claro' }); }
     // el código de la llave va atado al número de seguridad de la llamada (con compromiso previo: nadie en medio puede elegirlo)
-    function pqLazo() { const x = pc && pqDe.get(pc); if (x && x.codId && obrero && sas && sas.lazo) obrero.postMessage({ tipo: 'lazo', id: x.codId, lazo: sas.lazo.slice().buffer }); }
-    function olvidaPq(p) { const x = p && pqDe.get(p); if (x && obrero) { obrero.postMessage({ tipo: 'olvida', id: x.tx }); obrero.postMessage({ tipo: 'olvida', id: x.rx }); pqPorRx.delete(x.rx); if (x.codId) pqPorCod.delete(x.codId); x.codigo = ''; } }
+    function pqLazo() { const x = pc && pqDe.get(pc); if (!x || !x.codId || !obrero) return; const l = sas ? sas.lazo : x.lazoPropio; if (l) obrero.postMessage({ tipo: 'lazo', id: x.codId, lazo: l.slice().buffer }); }
+    function olvidaPq(p) { const x = p && pqDe.get(p); if (x) clearInterval(x.vigila); if (x && obrero) { obrero.postMessage({ tipo: 'olvida', id: x.tx }); obrero.postMessage({ tipo: 'olvida', id: x.rx }); pqPorRx.delete(x.rx); if (x.codId) pqPorCod.delete(x.codId); x.codigo = ''; } }
     // ¿va la capa en toda la llamada? Confirmada por la otra persona y ya descifrando lo suyo, en cada conexión que habla
     const pqBien = (p) => { const x = p && pqDe.get(p); return !!(x && x.confirmada && x.visto); };
     const pqActiva = () => estado === 'hablando' && !!pc && pqBien(pc) && patas.every((L) => L.estado !== 'hablando' || pqBien(L.pc));
-    // el código de 6 cifras de la llave de ahora (cambia cada minuto): en las dos pantallas tiene que ser el mismo
+    // el código de 6 cifras de la llave de ahora (cambia con ella): en las dos pantallas tiene que ser el mismo
     const codigoAhora = () => { const x = pc && pqDe.get(pc); return pqActiva() && totalGrupo() <= 2 && x && x.codigo ? x.codigo : ''; };
     let codigoVisto = '';
     function pintaCodigo(nuevo) {
       const el = $('#ll-codigo'); if (!el) return;
       const c = codigoAhora();
-      el.hidden = !c;
+      // ya no arriba en pequeño (dueño, 2 Nov 2026, 14:43): en grande, en el centro (pintaCod)
+      el.hidden = true;
+      pintaCod();
       if (c) {
         el.textContent = t('Código') + ' ' + c.slice(0, 3) + ' ' + c.slice(3);
         el.setAttribute('title', t('La clave cambia cada minuto. Compara este código con la otra persona: debe ser el mismo.'));
@@ -213,6 +251,61 @@
         codigoVisto = c;
       } else codigoVisto = '';
       const s = $('#ll-seg'); if (nuevo && s && !s.hidden) pintaSeg();
+    }
+    // El código, en grande, en rojo y en el centro (dueño, 2 Nov 2026, 14:43: «Que dile este número a tu amigo en voz alta para ver si
+    // coincide. En caso de que no coincida, cortar la llamada… Y que también se pueda hacer desde el móvil»; 15:20: no «tu amigo»).
+    // Sale al empezar y cada vez que cambia la llave (un momento después del cambio: justo al cambiar, las dos pantallas pueden no
+    // coincidir un instante). «Coincide» lo quita hasta el próximo cambio; «No coincide» cuelga. Si nadie toca, a los 30 s se pliega en
+    // una píldora roja encima de los botones, que lo vuelve a abrir.
+    let codConfirmado = '', codPlegado = false, codAbierto = false, codPendiente = '', codPendT = null, codPlegarT = null;
+    function pintaCod() {
+      const card = $('#ll-cod'), chip = $('#ll-cod-chip'); if (!card || !chip) return;
+      const c = estado === 'hablando' ? codigoAhora() : '';
+      if (!c) { card.hidden = true; chip.hidden = true; delete card.dataset.cod; codPendiente = ''; clearTimeout(codPendT); clearTimeout(codPlegarT); return; }
+      const visto = card.dataset.cod || '';
+      if (c === visto) { muestraCod(false); return; } // el mismo: solo se repinta
+      if (c === codPendiente) return; // ya va a salir
+      // mientras tanto, nada en pantalla: ni el código de antes (de otra llave o de otra conexión) ni uno que aún no está en los dos
+      card.hidden = true; chip.hidden = true; clearTimeout(codPlegarT);
+      codPendiente = c; clearTimeout(codPendT);
+      codPendT = setTimeout(() => {
+        codPendiente = '';
+        if (estado !== 'hablando' || codigoAhora() !== c) return;
+        card.dataset.cambio = visto ? '1' : ''; card.dataset.cod = c; codPlegado = false; codAbierto = false;
+        muestraCod(true);
+      }, 1500);
+    }
+    function muestraCod(anima) {
+      const card = $('#ll-cod'), chip = $('#ll-cod-chip'), c = card ? card.dataset.cod : ''; if (!c || !chip) return;
+      const bien = c === codConfirmado, grande = codAbierto || (!bien && !codPlegado), num = c.slice(0, 3) + ' ' + c.slice(3);
+      $('#ll-cod-t').textContent = card.dataset.cambio === '1' && !bien ? t('El código ha cambiado') : t('Código de seguridad');
+      $('#ll-cod-num').textContent = num; $('#ll-cod-num').setAttribute('aria-label', t('Código de seguridad') + ': ' + c.split('').join(' '));
+      const quien = (o.nombre && o.nombre()) || t('la otra persona');
+      const tx = $('#ll-cod-texto'); tx.textContent = t('Díselo en voz alta a {n}. Tiene que ver el mismo número en su pantalla.').replace('{n}', quien);
+      const sm = document.createElement('small'); sm.textContent = t('Si no coincide, cuelga: puede haber alguien en medio.'); tx.appendChild(sm);
+      $('#ll-cod-si').hidden = bien; $('#ll-cod-no').hidden = bien;
+      const eraVisible = !card.hidden;
+      if (grande && (anima || !eraVisible)) { card.classList.remove('cambia'); void card.offsetWidth; card.classList.add('cambia'); }
+      card.hidden = !grande; chip.hidden = grande;
+      chip.classList.toggle('bien', bien);
+      chip.textContent = (bien ? '✓ ' : '') + t('Código') + ' ' + num;
+      chip.setAttribute('aria-label', t('Código de seguridad') + ' ' + num + ' · ' + (bien ? t('coincide') : t('Comprobar')));
+      // en grande 30 s; si nadie toca, se pliega en la píldora (que lo vuelve a abrir)
+      if (!grande) clearTimeout(codPlegarT);
+      else if (!eraVisible) { clearTimeout(codPlegarT); codPlegarT = setTimeout(() => { codPlegado = true; codAbierto = false; muestraCod(false); }, 30000); }
+    }
+    function codCoincide() {
+      const c = ($('#ll-cod') || {}).dataset ? $('#ll-cod').dataset.cod : ''; if (!c || c !== codigoAhora()) return;
+      codConfirmado = c; codPlegado = false; codAbierto = false; clearTimeout(codPlegarT);
+      // atado al número de seguridad: si el código coincide, el número también (en el blindado, la conversación queda verificada)
+      if (sas && sas.estado === 'pendiente' && sas.numero) sasCoinciden();
+      muestraCod(false); di(t('El código coincide.')); setTimeout(() => { if (paso.textContent === t('El código coincide.')) di(''); }, 3000);
+    }
+    function codNoCoincide() {
+      if (estado !== 'hablando') return;
+      const msg = t('Llamada colgada: el código no coincidía. Puede haber alguien en medio: no habléis de nada delicado y volved a llamar.');
+      if (sas && sas.estado === 'pendiente' && sas.numero) sasNoCoinciden(); else colgar();
+      o.aviso && o.aviso(msg);
     }
     // lo que ofrezco: el secreto de la sesión de esta conversación (o de la sala del traspaso)
     const pqPide = (sala) => { try { return PQM && o.medios ? o.medios(sala || null, null) : null; } catch (_) { return null; } };
@@ -255,13 +348,13 @@
       $('#ll-avatar').textContent = o.inicial();
       caja.setAttribute('aria-label', video ? t('Videollamada') : t('Llamada de voz'));
       $('#ll-camara-caja').hidden = !(video && cam);
-      // «Flotante», solo en el teléfono: en el ordenador la ventana flotante sale sola al cambiar de pestaña (sesionLlamada) y el botón
-      // dejaba la llamada en negro con «Reproduciendo…» (dueño, 2 Nov 2026, 14:50–14:52: «la pantalla se pone negra… es un error»)
-      { const f = $('#ll-flotante-caja'); if (f) f.hidden = !(PIP && TEL_UA && video && estado === 'hablando' && remotoV); }
+      // «Flotante», fuera (dueño, 2 Nov 2026, 15:42: «eso de flotante, quítalo»; antes, 14:50–14:52: el botón dejaba la llamada en negro
+      // con «Reproduciendo…»). En el ordenador la ventana flotante sale sola al cambiar de pestaña (sesionLlamada).
+      { const f = $('#ll-flotante-caja'); if (f) f.hidden = true; }
       sesionLlamada(); pintaFlotando();
       { const sp = $('#ll-pantalla-caja'); if (sp) { sp.hidden = !(PANTALLA && !pantallaNo && video && estado === 'hablando'); const b = $('#ll-pantalla'); if (b) { b.setAttribute('aria-pressed', String(!!compartiendo)); b.setAttribute('aria-label', compartiendo ? t('Dejar de compartir la pantalla') : t('Compartir la pantalla')); }
-        // en el ordenador, «Compartir pantalla» (dueño, 14:50); en el teléfono no cabe junto a los demás: «Pantalla»
-        const sl = sp.querySelector('span'); if (sl) sl.textContent = compartiendo ? t('Dejar de compartir') : TEL_UA ? t('Pantalla') : t('Compartir pantalla'); } }
+        // «Compartir pantalla», también en el teléfono (dueño, 14:50 y 15:42: «que se vea mejor compartir pantalla, así se entiende más»)
+        const sl = sp.querySelector('span'); if (sl) sl.textContent = compartiendo ? t('Dejar de compartir') : t('Compartir pantalla'); } }
       { const g = $('#ll-girar-caja'); if (g) g.hidden = !(video && cam && TEL_UA && camaraOn()); }
       // «Pantalla completa», solo en el ordenador y con imagen (dueño, 30 Oct 2026, 09:02: «toda la pantalla del PC»)
       { const f = $('#ll-completa-caja'); if (f) f.hidden = !(video && completaPC()); }
@@ -1123,7 +1216,8 @@
     function pintaSas() {
       const caja2 = $('#ll-sas'), mini = $('#ll-sas-mini'); if (!caja2 || !mini) return;
       // el número solo se enseña donde toca (app.js, o.sas: blindado y Ultra; dueño, 29 Oct 2026, 12:55: «en el modo normal no»)
-      const hay = !!(sas && (sas.numero || sas.estado === 'roto') && estado === 'hablando' && (!o.sas || o.sas()));
+      const xq = pc && pqDe.get(pc), conCodigo = !!(xq && xq.confirmada && xq.codId) && totalGrupo() <= 2;
+      const hay = !!(sas && (sas.numero || sas.estado === 'roto') && estado === 'hablando' && (!o.sas || o.sas())) && !(conCodigo && sas.estado !== 'roto');
       const grande = hay && sas.estado === 'pendiente' && !caja.classList.contains('sas-plegado');
       caja2.hidden = !grande; mini.hidden = !(hay && !grande); caja.classList.toggle('sas-grande', grande);
       if (!hay) { caja.classList.remove('sas-plegado'); clearTimeout(sasPlegadoT); return; }
@@ -1157,8 +1251,8 @@
       const of = await pc.createOffer(); await pc.setLocalDescription({ type: of.type, sdp: altaFidelidad(of.sdp) });
       await sasNuevo();
       pqOferta = pqPide(null);
-      ultimaOferta = { acto: 'oferta', id: idLlamada, video: video ? 1 : undefined, equipo: EQUIPO, plat: PLAT, sas: sas ? b64u(sas.compromiso) : undefined, tres: TRES, llevar: 1, pqm: pqOferta ? pqOferta.sid : undefined, pqr: pqOferta ? 1 : undefined };
-      o.manda({ acto: 'oferta', id: idLlamada, sdp: pc.localDescription.sdp, video: video ? 1 : undefined, equipo: EQUIPO, plat: PLAT, sas: sas ? b64u(sas.compromiso) : undefined, tres: TRES, llevar: 1, pqm: pqOferta ? pqOferta.sid : undefined, pqr: pqOferta ? 1 : undefined });
+      ultimaOferta = { acto: 'oferta', id: idLlamada, video: video ? 1 : undefined, equipo: EQUIPO, plat: PLAT, sas: sas ? b64u(sas.compromiso) : undefined, tres: TRES, llevar: 1, pqm: pqOferta ? pqOferta.sid : undefined, pqr: pqOferta ? 1 : undefined, pqc: pqOferta ? ROTA_MS / 1000 : undefined };
+      o.manda({ acto: 'oferta', id: idLlamada, sdp: pc.localDescription.sdp, video: video ? 1 : undefined, equipo: EQUIPO, plat: PLAT, sas: sas ? b64u(sas.compromiso) : undefined, tres: TRES, llevar: 1, pqm: pqOferta ? pqOferta.sid : undefined, pqr: pqOferta ? 1 : undefined, pqc: pqOferta ? ROTA_MS / 1000 : undefined });
       if (estado === 'saliente') { tono('saliente'); esperaRespuesta(true); }
       pinta();
     }
@@ -1199,12 +1293,13 @@
       }
       if (m.id && idLlamada && m.id !== idLlamada) return;
       if (m.acto === 'sonando') { if (estado === 'saliente') di(t('Sonando…')); return; }
-      if (m.acto === 'respuesta' && pc && typeof m.sdp === 'string') { suTres = (m.tres | 0) >= 1; suLlevar = m.llevar === 1; paraTono(); clearTimeout(sinRespuesta); await pc.setRemoteDescription({ type: 'answer', sdp: m.sdp }); if (m.pqm === 1 && pqOferta) await pqConfirma(pc, pqOferta.sec, idLlamada, true, m.pqr === 1); else pqClaro(pc); pqOferta = null; for (const c of pendientes) { try { await pc.addIceCandidate(c); } catch (_) {} } pendientes = []; di(t('Conectando…')); if (video) topeVideo();
+      if (m.acto === 'respuesta' && pc && typeof m.sdp === 'string') { suTres = (m.tres | 0) >= 1; suLlevar = m.llevar === 1; paraTono(); clearTimeout(sinRespuesta); await pc.setRemoteDescription({ type: 'answer', sdp: m.sdp }); if (m.pqm === 1 && pqOferta) { if (await pqConfirma(pc, pqOferta.sec, idLlamada, true, m.pqr === 1)) pqVigila(pc, (x) => o.manda(Object.assign({ id: idLlamada }, x))); } else pqClaro(pc); pqOferta = null; for (const c of pendientes) { try { await pc.addIceCandidate(c); } catch (_) {} } pendientes = []; di(t('Conectando…')); if (video) topeVideo();
         if (sas && inicioYo) { try { sas.suPub = typeof m.sas === 'string' && m.sas.length < 120 ? deB64u(m.sas) : null; } catch (_) { sas.suPub = null; } if (sas.suPub && sas.suPub.length === 65) { o.manda({ acto: 'sas', id: idLlamada, p: b64u(sas.pub) }); sasCalcula(); } else { sas.estado = 'roto'; pintaSas(); } }
         return; }
       // la clave revelada de quien llama: tiene que ser la del compromiso de la oferta; si no, la comprobación queda rota
       if (m.acto === 'sas' && sas && !inicioYo) { let p = null; try { p = typeof m.p === 'string' && m.p.length < 120 ? deB64u(m.p) : null; } catch (_) {} if (p && p.length === 65) { const h = await sha256(p); if (sas.suCompromiso && h.length === 32 && h.every((x, i) => x === sas.suCompromiso[i])) { sas.suPub = p; sasCalcula(); return; } } sas.estado = 'roto'; pintaSas(); return; }
       if (m.acto === 'camara') { suCamara = !!m.on; pintaVideo(); reenviaImagenes(); return; }
+      if (m.acto === 'pq-claro') { if (pc) pqAClaro(pc); return; }
       if (m.acto === 'pausa') { di(m.on ? t('La otra persona ha puesto la llamada en pausa.') : ''); return; }
       // pasar la llamada al teléfono: la otra persona me da la llave de la sala de su teléfono (yo añado el teléfono), me dice que
       // lo deja (cancelar), o yo le digo que su teléfono ya está dentro / ya habla (ella cuelga)
@@ -1242,8 +1337,8 @@
       const suPlat = typeof m.plat === 'string' ? m.plat : '', vp8 = quierePq || PLAT === 'android' || suPlat === 'android' || (!!suPlat && suPlat !== PLAT);
       if (video) prefiereCodecs(EQUIPO === 'compatible' || m.equipo === 'compatible' ? 'compatible' : 'escritorio', vp8);
       let pqSi = false;
-      if (PQM && typeof m.pqm === 'string' && m.pqm.length <= 32 && o.medios) { let ll = null; try { ll = o.medios(null, m.pqm); } catch (_) {} if (ll) pqSi = await pqConfirma(pc, ll.sec, idLlamada, false, m.pqr === 1); }
-      if (!pqSi) pqClaro(pc);
+      if (PQM && typeof m.pqm === 'string' && m.pqm.length <= 32 && o.medios) { let ll = null; try { ll = o.medios(null, m.pqm); } catch (_) {} if (ll) pqSi = await pqConfirma(pc, ll.sec, idLlamada, false, m.pqr === 1, pqCada(m)); }
+      if (!pqSi) pqClaro(pc); else pqVigila(pc, (x) => o.manda(Object.assign({ id: idLlamada }, x)));
       for (const c of pendientes) { try { await pc.addIceCandidate(c); } catch (_) {} } pendientes = [];
       const an = await pc.createAnswer(); await pc.setLocalDescription({ type: an.type, sdp: altaFidelidad(an.sdp) });
       o.manda({ acto: 'respuesta', id: idLlamada, sdp: pc.localDescription.sdp, sas: sas ? b64u(sas.pub) : undefined, tres: TRES, llevar: 1, pqm: pqSi ? 1 : undefined, pqr: pqSi && m.pqr === 1 ? 1 : undefined });
@@ -1522,7 +1617,7 @@
         const of = await p.createOffer(); await p.setLocalDescription({ type: of.type, sdp: altaFidelidad(of.sdp) });
         if (!patas.includes(L)) return false;
         L.pqOferta = pqPide(L.sala);
-        tmanda(L, { acto: 'oferta', id, sdp: p.localDescription.sdp, video: video ? 1 : undefined, equipo: 'compatible', plat: PLAT, tres: TRES, puente: 1, n: L.llevar ? 1 : totalGrupo(), llevar: 1, pqm: L.pqOferta ? L.pqOferta.sid : undefined, pqr: L.pqOferta ? 1 : undefined });
+        tmanda(L, { acto: 'oferta', id, sdp: p.localDescription.sdp, video: video ? 1 : undefined, equipo: 'compatible', plat: PLAT, tres: TRES, puente: 1, n: L.llevar ? 1 : totalGrupo(), llevar: 1, pqm: L.pqOferta ? L.pqOferta.sid : undefined, pqr: L.pqOferta ? 1 : undefined, pqc: L.pqOferta ? ROTA_MS / 1000 : undefined });
       } catch (_) { quitaPata(L, 'fallo'); return false; }
       L.sinRespuesta = setTimeout(() => { if (patas.includes(L) && L.estado === 'saliente') { tmanda(L, { acto: 'colgar', id }); quitaPata(L, 'sin-respuesta'); } }, SIN_RESPUESTA_MS);
       return true;
@@ -1614,6 +1709,8 @@
       olvidaPq(pc); try { pc.close(); } catch (_) {}
       reiniciando = false; clearTimeout(reinicioT); reinicioT = null; clearTimeout(reinicioFin); reinicioFin = null;
       pc = P1.pc; idLlamada = P1.id; inicioYo = true; suTres = P1.sabe; suLlevar = !!P1.sabeLlevar; mudasRemotas = []; pendientes = [];
+      // el número de seguridad era de la llamada de antes: el código de esta conexión va atado a la llave de su sala
+      sas = null; pqLazo(); codConfirmado = ''; codPlegado = false;
       pc.oniceconnectionstatechange = alIcePc; pc.onnegotiationneeded = alNegociarPc;
       vozSuya = P1.voz;
       const ar = $('#a-remoto'); ar.srcObject = P1.voz ? new MediaStream([P1.voz]) : null; suenaRemoto(); if (salidas) aplicaSalida();
@@ -1661,13 +1758,14 @@
       if (m.acto === 'respuesta') {
         if (typeof m.sdp !== 'string' || m.sdp.length > 60000) return true;
         L.sabe = (m.tres | 0) >= 1; L.sabeLlevar = m.llevar === 1;
-        try { await p.setRemoteDescription({ type: 'answer', sdp: m.sdp }); if (m.pqm === 1 && L.pqOferta) await pqConfirma(p, L.pqOferta.sec, L.id, true, m.pqr === 1); else pqClaro(p); L.pqOferta = null; for (const c of L.pendientes) { try { await p.addIceCandidate(c); } catch (_) {} } L.pendientes = []; } catch (_) { tmanda(L, { acto: 'colgar', id: L.id }); quitaPata(L, 'fallo'); }
+        try { await p.setRemoteDescription({ type: 'answer', sdp: m.sdp }); if (m.pqm === 1 && L.pqOferta) { if (await pqConfirma(p, L.pqOferta.sec, L.id, true, m.pqr === 1)) pqVigila(p, (x) => tmanda(L, Object.assign({ id: L.id }, x))); } else pqClaro(p); L.pqOferta = null; for (const c of L.pendientes) { try { await p.addIceCandidate(c); } catch (_) {} } L.pendientes = []; } catch (_) { tmanda(L, { acto: 'colgar', id: L.id }); quitaPata(L, 'fallo'); }
         return true;
       }
       if (m.acto === 'ice' && m.cand && typeof m.cand === 'object') { if (p.remoteDescription) { try { await p.addIceCandidate(m.cand); } catch (_) {} } else if (L.pendientes.length < 64) L.pendientes.push(m.cand); return true; }
       if (m.acto === 'rerespuesta' && typeof m.sdp === 'string' && m.sdp.length <= 60000) { try { await p.setRemoteDescription({ type: 'answer', sdp: m.sdp }); } catch (_) {} return true; }
       if (m.acto === 'reinicia') { try { const of = await p.createOffer({ iceRestart: true }); await p.setLocalDescription({ type: of.type, sdp: altaFidelidad(of.sdp) }); tmanda(L, { acto: 'reoferta', id: L.id, sdp: p.localDescription.sdp }); } catch (_) {} return true; }
       if (m.acto === 'camara') { L.camOn = !!m.on; pintaGrupo(); reenviaImagenes(); return true; }
+      if (m.acto === 'pq-claro') { pqAClaro(p); return true; }
       if (m.acto === 'colgar') { quitaPata(L, 'colgo'); return true; }
       if (m.acto === 'ocupado') { quitaPata(L, 'ocupado'); return true; }
       return true;
@@ -1705,6 +1803,7 @@
       mic = null; envio = null; cam = null; nodo = null; if (ctx) { try { ctx.close(); } catch (_) {} ctx = null; }
       parados.clear(); { const b = $('#ll-toca'); if (b) b.hidden = true; }
       if (compartiendo) { try { compartiendo.stop(); } catch (_) {} compartiendo = null; }
+      codConfirmado = ''; codPlegado = false; codAbierto = false; codPendiente = ''; clearTimeout(codPendT); clearTimeout(codPlegarT);
       try { if (document.pictureInPictureElement) document.exitPictureInPicture().catch(() => {}); const vr = $('#v-remoto'); if (vr && vr.webkitPresentationMode === 'picture-in-picture') vr.webkitSetPresentationMode('inline'); } catch (_) {}
       $('#a-remoto').srcObject = null; $('#v-remoto').srcObject = null; $('#v-local').srcObject = null; $('#v-local').classList.remove('trasera'); try { mirando = 'user'; } catch (_) {} remotoV = null; suCamara = true; video = false;
       const bc = $('#ll-camara'); if (bc) bc.setAttribute('aria-pressed', 'false');
@@ -1751,6 +1850,7 @@
     { const b = $('#ll-vista'); if (b) b.addEventListener('click', () => { if (caja.classList.contains('tres')) { caja.classList.toggle('tres-yo'); grupoFr = null; colocaTiles(video ? vistas() : []); } else alternaDividida(); pinta(); }); }
     { const b = $('#ll-anadir'); if (b) b.addEventListener('click', botonAnadir); }
     { const b = $('#ll-llevar'); if (b) b.addEventListener('click', () => { if (o.llevar && estado === 'hablando') o.llevar(); }); }
+    { const si = $('#ll-cod-si'), no = $('#ll-cod-no'), chip = $('#ll-cod-chip'); if (si) si.addEventListener('click', codCoincide); if (no) no.addEventListener('click', codNoCoincide); if (chip) chip.addEventListener('click', () => { if (!codigoAhora()) return; codAbierto = true; muestraCod(true); }); }
     { const si = $('#ll-sas-si'), no = $('#ll-sas-no'), mini = $('#ll-sas-mini'); if (si) si.addEventListener('click', sasCoinciden); if (no) no.addEventListener('click', sasNoCoinciden); if (mini) mini.addEventListener('click', () => { if (sas && sas.estado === 'pendiente') { caja.classList.remove('sas-plegado'); pintaSas(); } }); }
     $('#ll-rechazar').addEventListener('click', colgar);
     $('#ll-contestar').addEventListener('click', () => { contestar().catch(() => termina('fallo')); });
@@ -1783,7 +1883,7 @@
       const filas = [['si', t('Encriptada de extremo a extremo: solo los equipos de esta llamada tienen la clave.')]];
       const pqOn = pqActiva();
       filas.push([pqOn ? 'si' : 'no', pqOn ? t('Capa postcuántica activa en el sonido y la imagen.') : t('Capa postcuántica: no disponible en esta llamada.')]);
-      { const c = codigoAhora(); if (c) { filas.push(['si', t('La clave de la capa postcuántica cambia cada minuto. Código de ahora: {c}.').replace('{c}', c.slice(0, 3) + ' ' + c.slice(3))]); filas.push(['nota', t('Compáralo con la otra persona: si coincide, los dos tienen la misma clave. Si no, esperen al siguiente cambio; si sigue sin coincidir, cuelguen.')]); } }
+      { const c = codigoAhora(), xc = pc && pqDe.get(pc), min = Math.max(1, Math.round(((xc && xc.cada) || ROTA_MS) / 60000)); if (c) { filas.push(['si', (min === 1 ? t('La clave de la capa postcuántica cambia cada minuto. Código de ahora: {c}.') : t('La clave de la capa postcuántica cambia cada {m} minutos. Código de ahora: {c}.').replace('{m}', min)).replace('{c}', c.slice(0, 3) + ' ' + c.slice(3))]); filas.push(['nota', t('Compáralo con la otra persona: si coincide, los dos tienen la misma clave. Si no, esperen al siguiente cambio; si sigue sin coincidir, cuelguen.')]); } }
       if (sas && sas.numero) filas.push([sas.estado === 'coinciden' ? 'si' : 'aviso', sas.estado === 'coinciden' ? t('Número de seguridad comprobado.') : t('Número de seguridad sin comprobar.')]);
       // (la calidad de la conexión ya tiene su indicador; aquí, solo la seguridad. Clases con prefijo: «aviso» ya es el aviso flotante)
       l.textContent = ''; for (const [cl, x] of filas) { const li = document.createElement('li'); li.className = 'seg-' + cl; li.textContent = x; l.appendChild(li); }

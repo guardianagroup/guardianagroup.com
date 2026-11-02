@@ -1409,6 +1409,8 @@
       if (!libre && LLAMADA_CONV && LLAMADA_CONV !== c.id) { enviaControl(c, { tipo: 'llamada', acto: 'ocupado', id: j.id }); return; }
       if (libre) LLAMADA_CONV = c.id;
       if (c.efimera) { clearTimeout(c.finT); if ($('#llevar-cortada').dataset.sala === c.id) $('#llevar-cortada').hidden = true; }
+      // la llamada que vuelve a este PC ya está aquí: fuera la pantalla de espera, y la llamada en grande
+      if (c.efimera && c.vueltaPC && llevarEstado === 'vuelve') { clearTimeout(vueltaT); pintaLlevar('llamada'); }
       // el teléfono al que se pasa la llamada: con el servidor de llamadas más cercano ya medido (3 s como mucho)
       if (c.efimera && c.telefono && medidaLlevar) { const m = medidaLlevar; medidaLlevar = null; await Promise.race([m, new Promise((r) => setTimeout(r, 3000))]); }
       await LL.recibe(j); pintaLista();
@@ -4690,9 +4692,13 @@
     if (!n) return;
     n.vueltaPC = true; n.principal = true;
     await mandaEfimeraA(c, v.tel, { tipo: 'volver-ok' });
-    aviso(T('La llamada vuelve a este ordenador…'));
+    // en grande desde el primer momento (dueño, 14:30): la pantalla de «La llamada vuelve a este ordenador» hasta que llega la llamada;
+    // si en 35 s no llega, se quita y se dice (la llamada sigue en el teléfono)
+    pintaLlevar('vuelve'); clearTimeout(vueltaT);
+    vueltaT = setTimeout(() => { if (llevarEstado === 'vuelve') { pintaLlevar('llamada'); aviso(T('La llamada no llegó a este ordenador: sigue en el teléfono.')); } }, 35000);
     setTimeout(() => { sueltaEfimera(c); if (escuchaPc === c) escuchaPc = null; }, 3000);
   }
+  let vueltaT = null;
   // en el teléfono: la sala donde escucha su PC (la del código, aunque la llamada vaya ya por otra)
   const salaPc = () => { const c = llevarConv; return c ? (c.pcId ? c : c.salaPc || null) : null; };
   function pintaVolverPc() {
@@ -4830,6 +4836,8 @@
     permiso: ['Sin acceso a la cámara y al micrófono', 'Permítelos en los ajustes del navegador y vuelve a intentarlo.'],
     // (2 Nov 2026, dueño, 13:34: «a mi amigo en el Android se le queda como pensando») si en 45 s no llega la llamada, se dice
     tarda: ['La llamada no llega', 'Comprueba que el ordenador sigue en la videollamada y vuelve a pulsar «Pasar al teléfono».'],
+    // (en el PC, dueño, 2 Nov 2026, 14:30: «no me sale en grande hasta que mi amigo se conecta… que se vea grande desde un principio»)
+    vuelve: ['La llamada vuelve a este ordenador', 'Conectando… En unos segundos la tienes aquí, en grande.'],
   };
   let llevarEstado = '';
   function pintaLlevar(estado) {

@@ -31,7 +31,8 @@ async function equipo(browser, pc, nombre, sinCapa, ua) {
 const estado = (P) => P.evaluate(() => (window.GuardianaCom && GuardianaCom.llamada ? GuardianaCom.llamada.estado : ''));
 const hasta = async (fn, ms) => { const h = Date.now() + ms; while (Date.now() < h) { if (await fn()) return true; await espera(250); } return false; };
 const codigo = (P) => P.evaluate(() => GuardianaCom.llamada.codigo || '');
-const enPantalla = (P) => P.evaluate(() => { const e = document.querySelector('#ll-codigo'); return e && !e.hidden && e.getClientRects().length ? e.textContent.trim() : ''; });
+// (2 Nov 2026) el código ya no va arriba: en grande en el centro o, plegado, en la píldora de encima de los botones
+const enPantalla = (P) => P.evaluate(() => { const ve = (e) => !!(e && !e.hidden && e.getClientRects().length); const c = document.querySelector('#ll-cod'), p = document.querySelector('#ll-cod-chip'); return ve(c) ? c.querySelector('#ll-cod-num').textContent.trim() : ve(p) ? p.textContent.trim() : ''; });
 const cuenta = (P) => P.evaluate(() => GuardianaCom.llamada.pqCuenta());
 const fotogramas = (P) => P.evaluate(() => { const v = document.querySelector('#v-remoto'); return v && v.getVideoPlaybackQuality ? v.getVideoPlaybackQuality().totalVideoFrames : -1; });
 async function llamada(nombre, A, B, conCapa) {
@@ -47,7 +48,8 @@ async function llamada(nombre, A, B, conCapa) {
   const igual = async () => { const a = await codigo(A), b = await codigo(B); return /^\d{6}$/.test(a) && a === b ? a : ''; };
   let c0 = ''; await hasta(async () => !!(c0 = await igual()), 12000);
   comprueba(!!c0, nombre + ': el mismo código de 6 cifras en las dos pantallas', { A: await codigo(A), B: await codigo(B) });
-  const pa = await enPantalla(A), pb = await enPantalla(B);
+  // sale un momento después del cambio (por si un lado aún no ha cambiado)
+  let pa = '', pb = ''; await hasta(async () => { pa = await enPantalla(A); pb = await enPantalla(B); const ca = await codigo(A); return !!pa && pa.replace(/\D/g, '') === ca && pa === pb; }, 4000); c0 = await codigo(A);
   comprueba(pa && pa === pb && pa.replace(/\D/g, '') === c0, nombre + ': y se ve en la pantalla', { A: pa, B: pb });
   await A.screenshot({ path: path.join(OUT, nombre + '-1-a.png') }); await B.screenshot({ path: path.join(OUT, nombre + '-1-b.png') });
   const f0 = await cuenta(A), g0 = await cuenta(B), va0 = await fotogramas(A), vb0 = await fotogramas(B);
@@ -84,7 +86,9 @@ async function llamada(nombre, A, B, conCapa) {
     await llamada(nombre, C, B, !sinCapa);
   };
   await pcpc('1-pc-pc', false);
-  {
+  // (2 Nov 2026) el teléfono ya no abre Comunicaciones por su cuenta (solo la llamada pasada desde el PC): eso lo prueba
+  // codigo-grande.js (2); aquí la parte 2 queda fuera
+  if (process.env.TELEFONO === '1') {
     const A = await equipo(browser, false, 'A', false, ANDROID), P = await equipo(browser, true, 'P');
     await A.goto(URL0 + '?app=1'); await espera(1500);
     await A.click('#nueva-blindada'); await espera(400); await A.click('#invitar-otra'); await espera(1200);

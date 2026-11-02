@@ -2317,3 +2317,23 @@ body.modo-llevar{background:#06080C}
 .ll-en-flotante:focus-visible{outline:2px solid #9CC3E4;outline-offset:3px}
 .gc-llamada.mini .ll-en-flotante{top:50%;padding:10px 14px;font-size:14px}
 .gc-llamada.mini .ll-en-flotante span{display:none}
+/* El código de la llave, en grande, en rojo y en el centro (dueño, 2 Nov 2026, 14:43) */
+.ll-cod{position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);z-index:13;width:min(90vw,420px);box-sizing:border-box;display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px;padding:22px 22px 20px;border-radius:24px;border:1.5px solid rgba(255,90,82,.55);background:rgba(10,8,10,.9);box-shadow:0 30px 90px -30px rgba(0,0,0,.95),0 0 0 6px rgba(255,90,82,.08)}
+.ll-cod[hidden]{display:none!important}
+.ll-cod-t{font:600 12px/1 var(--texto);letter-spacing:.12em;text-transform:uppercase;color:#FFB3AD}
+.ll-cod-num{display:block;font:700 clamp(52px,14vw,76px)/1 var(--mono);letter-spacing:.06em;color:#FF4D45;font-variant-numeric:tabular-nums;white-space:nowrap;margin:2px 0;text-shadow:0 0 36px rgba(255,77,69,.35)}
+.ll-cod-texto{margin:0;font:500 16px/1.45 var(--texto);color:#F4F6F8;text-wrap:balance}
+.ll-cod-texto small{display:block;margin-top:6px;font:400 13.5px/1.45 var(--texto);color:#C9D3DC}
+.ll-cod-botones{display:flex;gap:10px;width:100%;margin-top:6px}
+.ll-cod-botones .boton{flex:1;min-height:48px;font-size:16px}
+.ll-cod-botones .boton.peligro{background:transparent;border:1.5px solid #FF5A52;color:#FF8A84}
+.ll-cod.cambia .ll-cod-num{animation:llCodNuevo .9s ease}
+@keyframes llCodNuevo{0%{transform:scale(.86);opacity:.2}60%{transform:scale(1.06);opacity:1}100%{transform:scale(1)}}
+.ll-cod-chip{all:unset;cursor:pointer;position:absolute;left:50%;bottom:calc(132px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:12;display:flex;align-items:center;gap:8px;padding:9px 16px;border-radius:999px;border:1.5px solid rgba(255,90,82,.6);background:rgba(10,8,10,.88);color:#FF6B63;font:700 18px/1 var(--mono);letter-spacing:.06em;font-variant-numeric:tabular-nums;white-space:nowrap}
+.ll-cod-chip[hidden]{display:none!important}
+.ll-cod-chip.bien{border-color:rgba(110,214,150,.6);color:#8FE3AE}
+.ll-cod-chip:focus-visible{outline:2px solid #FFB3AD;outline-offset:3px}
+.gc-llamada.mini .ll-cod,.gc-llamada.mini .ll-cod-chip{display:none!important}
+.gc-llamada.con-video.reposo .ll-cod-chip{opacity:0;pointer-events:none}
+@media (max-width:520px){.ll-cod{top:44%;padding:18px 16px 16px}.ll-cod-texto{font-size:15px}.ll-cod-chip{bottom:calc(150px + env(safe-area-inset-bottom));font-size:17px}}
+@media (prefers-reduced-motion:reduce){.ll-cod.cambia .ll-cod-num{animation:none}}

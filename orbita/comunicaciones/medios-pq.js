@@ -19,7 +19,7 @@
 //   · al recibir: «auto» al principio (descifra lo que viene cifrado; lo demás pasa); en cuanto descifra el primer fragmento, pasa
 //     a «estricto» (desde ahí, lo que no se descifre se tira); y «claro» si la otra persona no tiene la capa.
 //
-// La llave cambia cada minuto (dueño, 30 Oct 2026, 14:49: «cada minuto, cada dos minutos, aparezca un código en pantalla de cada
+// La llave cambia cada 2 minutos (antes, cada minuto; el ritmo lo dice quien llama, llamada.js) (dueño, 30 Oct 2026, 14:49: «cada minuto, cada dos minutos, aparezca un código en pantalla de cada
 // uno y los dos deban de ser el mismo código»). Si los dos lo tienen, cada llave sale de la anterior (HKDF-SHA-256, en un solo
 // sentido) y aquí las anteriores se borran a los 10 segundos (ojo: el secreto de la sesión del chat, del que salen todas, sigue en
 // la página mientras dure el chat; esto no se promete en público). Quien llamó cambia su llave al minuto; la otra persona, al
@@ -64,6 +64,7 @@ function avanza(id, e) {
 }
 function suelta(id) { const c = cadenas.get(id); if (!c) return; clearInterval(c.t); clearTimeout(c.borra); for (const r of c.raw.values()) r.fill(0); cadenas.delete(id); }
 const codecs = new Map(); // id → { tipo de carga (payload type) → códec }
+const defectos = new Map(); // id → el códec de imagen negociado (el primero de la respuesta), si el navegador no dice nada (Safari)
 const modos = new Map(); // id → 'claro' | 'cifra' | 'auto' | 'estricto'
 const cuenta = { cifrados: 0, descifrados: 0, fallos: 0, seguidos: 0, claros: 0 };
 
@@ -81,8 +82,8 @@ onmessage = (e) => {
   // el número de seguridad de la llamada (llamada.js, sasCalcula): sin él no hay código
   else if (m.tipo === 'lazo' && m.lazo) { const c = cadenas.get(m.id); if (c) { c.lazo = new Uint8Array(m.lazo); if (c.codigo) codigo(m.id, c); } }
   else if (m.tipo === 'modo') { if (!(modos.get(m.id) === 'estricto' && m.modo === 'auto')) modos.set(m.id, m.modo); }
-  else if (m.tipo === 'codecs') codecs.set(m.id, m.mapa || {});
-  else if (m.tipo === 'olvida') { suelta(m.id); codecs.delete(m.id); modos.delete(m.id); }
+  else if (m.tipo === 'codecs') { codecs.set(m.id, m.mapa || {}); if (m.defecto) defectos.set(m.id, String(m.defecto)); }
+  else if (m.tipo === 'olvida') { suelta(m.id); codecs.delete(m.id); defectos.delete(m.id); modos.delete(m.id); }
   else if (m.tipo === 'cuenta') postMessage({ tipo: 'cuenta', cuenta });
 };
 
@@ -91,7 +92,8 @@ function codecDe(f, k) {
   let md = {}; try { md = f.getMetadata ? f.getMetadata() : {}; } catch (_) {}
   if (md.mimeType) return String(md.mimeType).toLowerCase();
   const m = codecs.get(k) || {};
-  return md.payloadType != null && m[md.payloadType] ? m[md.payloadType] : '';
+  if (md.payloadType != null && m[md.payloadType]) return m[md.payloadType];
+  return defectos.get(k) || '';
 }
 // H.264: el principio del primer trozo de imagen (unidad NAL de tipo 1 o 5) y dos bytes más
 function inicioH264(d) {
