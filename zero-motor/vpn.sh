@@ -167,7 +167,9 @@ table inet guardiana_vpn {
 	}
 	chain salida_nat {
 		type nat hook postrouting priority srcnat; policy accept;
-		ip saddr 10.66.0.0/16 oifname != "wg0" masquerade
+		# solo lo que sale a internet; no lo que va por el túnel ni lo que el servidor se manda a sí mismo (por lo, que
+		# si no tomaría otra dirección del servidor y Unbound la rechazaría)
+		ip saddr 10.66.0.0/16 oifname != { "wg0", "lo" } masquerade
 	}
 }
 EOF
