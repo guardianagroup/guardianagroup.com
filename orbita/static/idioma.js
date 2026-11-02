@@ -3873,6 +3873,8 @@
     "Archivo hosts": ["Hosts file", "Arquivo hosts"],
     "Conexión sin nombre": ["Connection without a name", "Conexão sem nome"],
     "Disfraz": ["Disguise", "Disfarce"],
+    "Credenciales": ["Credentials", "Credenciais"],
+    "Microsoft Defender": ["Microsoft Defender", "Microsoft Defender"],
     "aviso grave": ["serious warning", "aviso grave"],
     "avisos graves": ["serious warnings", "avisos graves"],
     "Todos sus avisos están en el informe, en «Protección».": ["All its warnings are in the report, under “Protection”.", "Todos os avisos estão no relatório, em “Proteção”."],
