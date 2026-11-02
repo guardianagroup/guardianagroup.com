@@ -53,6 +53,10 @@
     const b = document.getElementById('ll-toca'); if (b) b.hidden = true;
   }
   for (const g of ['click', 'touchend', 'pointerup', 'keydown']) document.addEventListener(g, arrancaParados, true);
+  // compartir la pantalla: en el ordenador y en el teléfono que lo traiga (iPhone con iOS 27, según las pruebas de MDN; ronda 90).
+  // Chrome en Android tiene la función pero siempre dice que no (w3c/mediacapture-screen-share#127): allí no se enseña. Si otro
+  // navegador la tiene y dice que no al instante, sin preguntar nada, el botón se quita en ese momento (ver comparte).
+  const PANTALLA = !!(navigator.mediaDevices && typeof navigator.mediaDevices.getDisplayMedia === 'function') && !/Android/i.test(navigator.userAgent || '');
   const PIP = !!(document.pictureInPictureEnabled || (window.HTMLVideoElement && 'webkitSetPresentationMode' in HTMLVideoElement.prototype));
   const reproduce = (v) => {
     try {
@@ -86,6 +90,8 @@
     let inicioYo = false; // quién llamó: el resumen del chat va a mi lado o al suyo (dueño, 28 Oct 2026, 13:29)
     let pantallaEncendida = null; // Wake Lock: la pantalla no se apaga mientras dura la llamada (agencia, ronda 74)
     let cam = null, video = false, suCamara = true, remotoV = null; // videollamada: mi cámara, si la llamada es con imagen, si la otra persona tiene la cámara encendida y su imagen
+    let compartiendo = null; // la pista de la pantalla que se está compartiendo (dueño, 2 Nov 2026, 14:22: «que él vea lo que yo veo en mi pantalla»)
+    let pantallaNo = false; // este navegador tiene la función pero no deja compartir (lo dijo al instante): «Pantalla» ya no sale
     // El número de seguridad de la llamada (dueño, 29 Oct 2026, 10:16: «un número grande en el medio de la pantalla… el otro tiene
     // que ver el mismo número»). Es el esquema de ZRTP (Zimmermann; RFC 6189): cada llamada estrena un acuerdo de claves P-256 con
     // compromiso previo (quien llama manda primero la huella de su clave y la revela cuando ya tiene la de la otra persona), y el
@@ -249,6 +255,7 @@
       caja.setAttribute('aria-label', video ? t('Videollamada') : t('Llamada de voz'));
       $('#ll-camara-caja').hidden = !(video && cam);
       { const f = $('#ll-flotante-caja'); if (f) f.hidden = !(PIP && video && estado === 'hablando' && remotoV); }
+      { const sp = $('#ll-pantalla-caja'); if (sp) { sp.hidden = !(PANTALLA && !pantallaNo && video && estado === 'hablando'); const b = $('#ll-pantalla'); if (b) { b.setAttribute('aria-pressed', String(!!compartiendo)); b.setAttribute('aria-label', compartiendo ? t('Dejar de compartir la pantalla') : t('Compartir la pantalla')); } } }
       { const g = $('#ll-girar-caja'); if (g) g.hidden = !(video && cam && TEL_UA && camaraOn()); }
       // «Pantalla completa», solo en el ordenador y con imagen (dueño, 30 Oct 2026, 09:02: «toda la pantalla del PC»)
       { const f = $('#ll-completa-caja'); if (f) f.hidden = !(video && completaPC()); }
@@ -839,6 +846,7 @@
     // la pista de imagen que sale: protegida («Tu imagen»), aclarada (poca luz) o la cámara tal cual
     const modoImagen = () => (!blindada() ? 'cruda' : imagen !== 'natural' ? 'protegida' : ganancia > 1.001 ? 'aclarada' : 'cruda');
     function pistaImagen() {
+      if (compartiendo && compartiendo.readyState === 'live') return compartiendo; // la pantalla, mientras se comparte
       if (!cam) return null;
       const m = modoImagen();
       if (m === 'cruda') return cam.getVideoTracks()[0] || null;
@@ -1689,6 +1697,7 @@
       clearInterval(medidor); medidor = null; if (vCam) { vCam.srcObject = null; vCam.remove(); vCam = null; } ganancia = 1; ajustes = false;
       mic = null; envio = null; cam = null; nodo = null; if (ctx) { try { ctx.close(); } catch (_) {} ctx = null; }
       parados.clear(); { const b = $('#ll-toca'); if (b) b.hidden = true; }
+      if (compartiendo) { try { compartiendo.stop(); } catch (_) {} compartiendo = null; }
       try { if (document.pictureInPictureElement) document.exitPictureInPicture().catch(() => {}); const vr = $('#v-remoto'); if (vr && vr.webkitPresentationMode === 'picture-in-picture') vr.webkitSetPresentationMode('inline'); } catch (_) {}
       $('#a-remoto').srcObject = null; $('#v-remoto').srcObject = null; $('#v-local').srcObject = null; $('#v-local').classList.remove('trasera'); try { mirando = 'user'; } catch (_) {} remotoV = null; suCamara = true; video = false;
       const bc = $('#ll-camara'); if (bc) bc.setAttribute('aria-pressed', 'false');
@@ -1840,6 +1849,28 @@
       } catch (_) {}
     }
     { const b = $('#ll-flotante'); if (b) b.addEventListener('click', flotante); }
+    // «Pantalla» (dueño, 2 Nov 2026, 14:22–14:23; ronda 90): lo que se envía pasa a ser la pantalla (o la ventana o la pestaña que se
+    // elija en la ventana del propio navegador) en vez de la cámara, sin cortar la llamada; la capa post-cuántica sigue igual. Al
+    // dejar de compartir (aquí o desde el aviso del navegador), vuelve la cámara.
+    async function comparte() {
+      if (!PANTALLA || pantallaNo || !video || estado !== 'hablando') return;
+      if (compartiendo) { const antes = compartiendo; compartiendo = null; try { antes.stop(); } catch (_) {} await aplicaImagen(); pinta(); return; }
+      let s = null; const desde = Date.now();
+      try { s = await navigator.mediaDevices.getDisplayMedia({ video: { frameRate: { ideal: 15, max: 30 } }, audio: false }); } catch (e) {
+        // Un «no» al instante, sin ventana para elegir, es del navegador (quien cierra esa ventana tarda más): el botón se quita y
+        // se dice por qué. Cancelar la ventana de elegir no quita nada.
+        const n = (e && e.name) || '';
+        if (Date.now() - desde < 600 && n !== 'AbortError' && n !== 'InvalidStateError') { pantallaNo = true; pinta(); o.aviso && o.aviso(t('Este navegador no deja compartir la pantalla.')); }
+        return;
+      }
+      const pista = s && s.getVideoTracks()[0]; if (!pista) return;
+      if (estado !== 'hablando') { pista.stop(); return; }
+      try { pista.contentHint = 'detail'; } catch (_) {}
+      compartiendo = pista;
+      pista.addEventListener('ended', () => { if (compartiendo === pista) { compartiendo = null; aplicaImagen(); pinta(); } });
+      await aplicaImagen(); pinta();
+    }
+    { const b = $('#ll-pantalla'); if (b) b.addEventListener('click', comparte); }
     // (ronda 90) Al volver a la página (de otra app, de una llamada de teléfono, de la pantalla bloqueada) o cuando el sistema corta
     // una pista: el audio del navegador se reanuda, lo que se cortó (la cámara o el micrófono, si otra app los tomó) se pide otra vez y
     // se cambia sin cortar la llamada (replaceTrack conserva la capa post-cuántica del emisor), las imágenes arrancan y, si la

@@ -1408,6 +1408,7 @@
       const libre = !LL.ocupado || LL.estado === 'cerrando';
       if (!libre && LLAMADA_CONV && LLAMADA_CONV !== c.id) { enviaControl(c, { tipo: 'llamada', acto: 'ocupado', id: j.id }); return; }
       if (libre) LLAMADA_CONV = c.id;
+      if (c.efimera) { clearTimeout(c.finT); if ($('#llevar-cortada').dataset.sala === c.id) $('#llevar-cortada').hidden = true; }
       // el teléfono al que se pasa la llamada: con el servidor de llamadas más cercano ya medido (3 s como mucho)
       if (c.efimera && c.telefono && medidaLlevar) { const m = medidaLlevar; medidaLlevar = null; await Promise.race([m, new Promise((r) => setTimeout(r, 3000))]); }
       await LL.recibe(j); pintaLista();
@@ -4726,14 +4727,26 @@
     // teléfono (llevarSigue): lo que acaba es solo el tramo con su PC
     if (LLEVAR && LL && LL.estado === 'hablando') return;
     if (LLEVAR && volviendo && volviendo.listo) { volviendo = null; pintaLlevar('en-pc'); borraLlevar(c); return; }
+    // (dueño, 2 Nov 2026, 14:11: «si se corta, desde el móvil se pueda volver a llamar… Incluso si la cuelgo… que pueda volver a
+    // llamar») colgar ya no cierra la sala: durante 15 minutos, con la pantalla abierta, cualquiera de los dos puede volver a llamar.
+    // «Cerrar» la cierra en los dos lados (y en el teléfono borra la llave).
     if (c.telefono || LLEVAR) {
-      if (por === 'fin') { pintaLlevar('terminada'); borraLlevar(c); }
+      if (por === 'fin') { pintaLlevar('colgada'); guardaSala(c); }
       else pintaLlevar(por === 'sin-medios' ? 'permiso' : 'cortada');
       return;
     }
     if (!c.principal) { c.anadido = false; return; } // el teléfono no llegó a contestar: si vuelve a entrar, se le llama otra vez
-    // (un momento después: el «colgar» que acaba de salir por esta sala tiene que llegar antes de salir de ella)
-    if (por === 'fin') setTimeout(() => { if (!LL || LLAMADA_CONV !== c.id) sueltaEfimera(c); }, 1200); else muestraCortada(c, false);
+    if (por === 'fin') { muestraCortada(c, false, true); guardaSala(c); } else muestraCortada(c, false);
+  }
+  // la sala de una llamada colgada: se queda 15 minutos (para volver a llamar) y después se cierra sola en este lado
+  function guardaSala(c) {
+    clearTimeout(c.finT);
+    c.finT = setTimeout(() => {
+      if (LL && LL.ocupado && LLAMADA_CONV === c.id) return;
+      if (LLEVAR && llevarConv === c) { pintaLlevar('terminada'); borraLlevar(c); return; }
+      if ($('#llevar-cortada').dataset.sala === c.id) $('#llevar-cortada').hidden = true;
+      if (!c.vuelta && !c.pcId) sueltaEfimera(c);
+    }, 15 * 60 * 1000);
   }
   // (en el teléfono) la llamada sigue en otra sala efímera: la de la otra persona, que también la pasó a su teléfono. «Volver a llamar»
   // y «Colgar» pasan a esa sala, y su llave sustituye a la anterior en la pestaña (aguanta una recarga como la primera)
@@ -4744,15 +4757,17 @@
     // (la sala donde escucha el PC de este teléfono se conserva de una sala a otra: «Volver al PC» sigue funcionando)
     if (viejo && viejo !== e) { const sp = viejo.pcId ? viejo : viejo.salaPc; if (sp && sp !== e) { e.salaPc = sp; sp.soloPc = true; } if (!viejo.pcId) setTimeout(() => sueltaEfimera(viejo), 1500); }
   }
-  function muestraCortada(c, ausente) {
+  function muestraCortada(c, ausente, colgada) {
     const n = c.nombre || T('la otra persona');
-    $('#llevar-cortada-l').textContent = (ausente ? T('El teléfono de {n} no está conectado ahora mismo. Si su pantalla sigue abierta, podrán volver a llamar en cuanto vuelva.') : T('Se ha perdido la conexión con el teléfono de {n}. Mientras su pantalla siga abierta, pueden volver a llamar.')).replace('{n}', n);
+    $('#llevar-cortada-t').textContent = colgada ? T('Llamada terminada') : T('Llamada cortada');
+    $('#llevar-cortada-l').textContent = (colgada ? T('La llamada con el teléfono de {n} ha terminado. Durante 15 minutos, mientras su pantalla siga abierta, podéis volver a llamar.') : ausente ? T('El teléfono de {n} no está conectado ahora mismo. Si su pantalla sigue abierta, podrán volver a llamar en cuanto vuelva.') : T('Se ha perdido la conexión con el teléfono de {n}. Mientras su pantalla siga abierta, pueden volver a llamar.')).replace('{n}', n);
     $('#llevar-cortada').dataset.sala = c.id; $('#llevar-cortada').hidden = false;
   }
   // «Volver a llamar» (en el teléfono o en el equipo de la otra persona): si la llamada anterior aún se está cerrando, se espera a
   // que acabe; si la otra parte no está en la sala, se dice y se puede volver a intentar.
   function volverALlamar(c) {
     if (!c || !LL) return;
+    clearTimeout(c.finT);
     $('#llevar-cortada').hidden = true;
     let n = 0;
     const intenta = () => {
@@ -4810,6 +4825,7 @@
     ausente: ['Llamada cortada', 'La otra persona no está conectada ahora mismo. Vuelve a intentarlo en unos segundos.'],
     terminada: ['Llamada terminada', 'Puedes cerrar esta pestaña. En este teléfono no queda nada de la llamada.'],
     'en-pc': ['La llamada sigue en el ordenador', 'Puedes cerrar esta pestaña. En este teléfono no queda nada de la llamada.'],
+    colgada: ['Llamada terminada', 'Durante 15 minutos, mientras esta pantalla siga abierta, podéis volver a llamar. «Cerrar» la borra de este teléfono.'],
     invalida: ['Este código ya no sirve', 'Pide que te enseñen un código nuevo en el ordenador.'],
     permiso: ['Sin acceso a la cámara y al micrófono', 'Permítelos en los ajustes del navegador y vuelve a intentarlo.'],
     // (2 Nov 2026, dueño, 13:34: «a mi amigo en el Android se le queda como pensando») si en 45 s no llega la llamada, se dice
@@ -4822,11 +4838,12 @@
     const [tt, ll] = TEXTOS_LLEVAR[estado] || TEXTOS_LLEVAR.conectando;
     $('#llevar-t').textContent = T(tt); $('#llevar-l').textContent = T(ll);
     p.dataset.estado = estado; p.hidden = estado === 'llamada';
-    const recuperable = estado === 'cortada' || estado === 'ausente';
+    const recuperable = estado === 'cortada' || estado === 'ausente' || estado === 'colgada';
     $('#llevar-volver').hidden = !recuperable;
-    $('#llevar-colgar').hidden = !recuperable && estado !== 'conectando';
+    $('#llevar-colgar').hidden = (!recuperable && estado !== 'conectando') || estado === 'colgada';
+    { const b = $('#llevar-cerrar'); if (b) b.hidden = estado !== 'colgada'; }
     $('#llevar-reintentar').hidden = estado !== 'permiso' && estado !== 'tarda';
-    $('#llevar-aviso').hidden = !(estado === 'conectando' || recuperable);
+    $('#llevar-aviso').hidden = !(estado === 'conectando' || recuperable) || estado === 'colgada';
   }
   async function arrancaLlevar() {
     document.body.classList.add('modo-llevar');
@@ -4854,6 +4871,7 @@
     { const b = $('#ll-volver-pc'); if (b) b.addEventListener('click', volverAlPc); }
     $('#llevar-volver').addEventListener('click', () => { pintaLlevar('conectando'); volverALlamar(llevarConv); });
     $('#llevar-colgar').addEventListener('click', () => { if (LL && LL.ocupado) LL.colgar(); pintaLlevar('terminada'); borraLlevar(llevarConv); });
+    { const b = $('#llevar-cerrar'); if (b) b.addEventListener('click', () => { clearTimeout(llevarConv && llevarConv.finT); pintaLlevar('terminada'); borraLlevar(llevarConv); }); }
     $('#llevar-reintentar').addEventListener('click', () => location.reload());
     // el aviso de cierre, abajo y discreto unos segundos al empezar (el de «No molestar» va en la pantalla de «Conectando…»)
     let primera = true;

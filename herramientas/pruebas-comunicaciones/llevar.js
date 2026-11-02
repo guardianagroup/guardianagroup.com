@@ -111,7 +111,10 @@ const hasta = async (fn, ms) => { const h = Date.now() + ms; while (Date.now() <
   }
   // 2. la pantalla del teléfono: solo «Colgar» y nada guardado
   const botones = await T.evaluate(() => [...document.querySelectorAll('#ll-botones .gc-llamada-boton')].filter((b) => getComputedStyle(b).display !== 'none' && !b.hidden).map((b) => (b.querySelector('span') || b).textContent.trim()));
-  comprueba(botones.join(' · ') === 'Girar · Flotante · Volver al PC · Colgar', '2. en el teléfono, cuatro botones: ' + botones.join(' · '));
+  // «Pantalla», solo si el navegador del teléfono tiene con qué (aquí, Chromium con la identidad de un iPhone; en Android no sale)
+  const conPantalla = await T.evaluate(() => !!(navigator.mediaDevices && navigator.mediaDevices.getDisplayMedia) && !/Android/i.test(navigator.userAgent));
+  const esperados = conPantalla ? 'Girar · Pantalla · Flotante · Volver al PC · Colgar' : 'Girar · Flotante · Volver al PC · Colgar';
+  comprueba(botones.join(' · ') === esperados, '2. en el teléfono, los botones: ' + botones.join(' · '));
   // un solo título arriba, con el tiempo de llamada; la otra persona a toda pantalla (sin partir); en horizontal, «gira el teléfono»
   const cab = { capsula: await visible(T, '.gc-llamada-arriba .gc-llamada-cifrado'), nombre: await visible(T, '#ll-nombre') && (await T.textContent('#ll-nombre')).trim(), tiempo: await visible(T, '#ll-tiempo') && (await T.textContent('#ll-tiempo')).trim() };
   comprueba(!cab.capsula && /^Videollamada encriptada( postcuántica)?$/.test(cab.nombre) && /^\d\d:\d\d$/.test(cab.tiempo), '2. un solo título arriba: «Videollamada encriptada» y el tiempo', cab);
@@ -145,13 +148,25 @@ const hasta = async (fn, ms) => { const h = Date.now() + ms; while (Date.now() <
     comprueba(await hasta(async () => (await estado(T)) === 'hablando' && (await estado(B)) === 'hablando', 25000), '3. «Volver a llamar»: la llamada vuelve');
     await espera(1500);
   }
-  // 4. el teléfono cuelga
+  // 4. el teléfono cuelga: la sala se queda (15 minutos) y se puede volver a llamar (dueño, 2 Nov 2026, 14:11)
   await T.evaluate(() => document.querySelector('#ll-colgar').click());
   comprueba(await hasta(async () => (await estado(B)) === 'libre' || (await estado(B)) === 'cerrando', 15000), '4. T cuelga: a B se le termina');
-  comprueba(await hasta(async () => (await T.textContent('#llevar-t')) === 'Llamada terminada' && await visible(T, '#llevar'), 10000), '4. en T: «Llamada terminada»');
+  comprueba(await hasta(async () => (await T.textContent('#llevar-t')) === 'Llamada terminada' && await visible(T, '#llevar') && await visible(T, '#llevar-volver') && await visible(T, '#llevar-cerrar'), 10000), '4. en T: «Llamada terminada» con «Volver a llamar» y «Cerrar»');
+  comprueba(await hasta(() => visible(B, '#llevar-cortada'), 10000) && /ha terminado/.test(await B.textContent('#llevar-cortada-l')), '4. y en B, la tarjeta «Llamada terminada» con «Volver a llamar»');
+  await T.screenshot({ path: path.join(OUT, '4-tel-colgada.png') });
+  // 5. desde el teléfono, «Volver a llamar»: B contesta y vuelven a hablar
+  await T.click('#llevar-volver');
+  if (await hasta(() => visible(B, '#ll-contestar'), 20000)) await B.click('#ll-contestar');
+  comprueba(await hasta(async () => (await estado(T)) === 'hablando' && (await estado(B)) === 'hablando', 25000), '5. tras colgar, «Volver a llamar» desde el teléfono: vuelven a hablar');
+  await espera(1500);
+  // 6. B cuelga y en el teléfono «Cerrar»: se borra todo
+  await B.evaluate(() => document.querySelector('#ll-colgar').click());
+  comprueba(await hasta(() => visible(T, '#llevar-cerrar'), 15000), '6. B cuelga: en T, «Volver a llamar» y «Cerrar»');
+  await T.click('#llevar-cerrar'); await espera(800);
   const queda = await T.evaluate(() => [sessionStorage.getItem('gcom-llevar'), sessionStorage.getItem('gcom-llevar-yo')]);
-  comprueba(!queda[0] && !queda[1], '4. la llave se borra de la pestaña', queda);
-  await T.screenshot({ path: path.join(OUT, '4-tel-terminada.png') });
+  comprueba(!queda[0] && !queda[1], '6. «Cerrar»: la llave se borra de la pestaña', queda);
+  comprueba(await hasta(async () => !(await visible(B, '#llevar-cortada')), 8000), '6. y en B se quita la tarjeta');
+  await T.screenshot({ path: path.join(OUT, '6-tel-cerrada.png') });
   await browser.close();
   console.log(fallos.length ? 'FALLOS: ' + fallos.length + '\n - ' + fallos.join('\n - ') : 'TODO BIEN');
   process.exit(fallos.length ? 1 : 0);

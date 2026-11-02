@@ -2191,7 +2191,7 @@ body.con-pestanas #marcar .marcar-llamar span{position:absolute;width:1px;height
 /* en el teléfono (modo llevar): solo la llamada y esta pantalla */
 body.modo-llevar>*:not(#llamada):not(#llevar):not(#llevar-avisos):not(#aviso):not(.gira):not(script){display:none!important}
 body.modo-llevar{background:#06080C}
-.modo-llevar #ll-botones>.gc-llamada-boton:not(.gc-colgar):not(.ll-volver-pc):not(#ll-girar-caja):not(#ll-flotante-caja),.modo-llevar #ll-entrante,.modo-llevar .ll-mini-b,.modo-llevar #ll-voces,.modo-llevar .ll-ajustes,.modo-llevar #ll-sas-mini,.modo-llevar #ll-sas,.modo-llevar .mi-tam-boton{display:none!important}
+.modo-llevar #ll-botones>.gc-llamada-boton:not(.gc-colgar):not(.ll-volver-pc):not(#ll-girar-caja):not(#ll-flotante-caja):not(#ll-pantalla-caja),.modo-llevar #ll-entrante,.modo-llevar .ll-mini-b,.modo-llevar #ll-voces,.modo-llevar .ll-ajustes,.modo-llevar #ll-sas-mini,.modo-llevar #ll-sas,.modo-llevar .mi-tam-boton{display:none!important}
 .llevar{position:fixed;inset:0;z-index:120;display:grid;place-items:center;padding:max(24px,env(safe-area-inset-top)) max(24px,env(safe-area-inset-right)) max(24px,env(safe-area-inset-bottom)) max(24px,env(safe-area-inset-left));background:radial-gradient(ellipse 80% 55% at 50% 30%,rgba(156,195,228,.09),transparent 70%),#06080C;color:#E8ECF1;text-align:center}
 .llevar[hidden]{display:none}
 .llevar-caja{width:min(360px,100%);display:flex;flex-direction:column;align-items:center}
@@ -2201,7 +2201,7 @@ body.modo-llevar{background:#06080C}
 .llevar-sello circle:first-child{stroke:rgba(156,195,228,.18)}
 .llevar-sello .gira-arco{stroke:#9CC3E4;stroke-dasharray:46 142;transform-origin:32px 32px;animation:llevarGira 1.8s linear infinite}
 .llevar[data-estado="cortada"] .gira-arco,.llevar[data-estado="ausente"] .gira-arco{stroke:#E07A6C;animation-duration:3.2s}
-.llevar[data-estado="terminada"] .gira-arco,.llevar[data-estado="invalida"] .gira-arco,.llevar[data-estado="permiso"] .gira-arco{display:none}
+.llevar[data-estado="terminada"] .gira-arco,.llevar[data-estado="colgada"] .gira-arco,.llevar[data-estado="en-pc"] .gira-arco,.llevar[data-estado="invalida"] .gira-arco,.llevar[data-estado="permiso"] .gira-arco{display:none}
 @keyframes llevarGira{to{transform:rotate(360deg)}}
 .llevar-t{margin:0;font:300 28px/1.2 var(--texto);letter-spacing:-.01em;color:#F4F6F8;text-wrap:balance}
 .llevar-l{margin:12px 0 0;font:400 15px/1.5 var(--texto);color:#B9C6D2;text-wrap:balance}
@@ -2308,3 +2308,5 @@ body.modo-llevar{background:#06080C}
 #ll-volver-pc-caja.apagado button{opacity:.45}
 #ll-girar-caja[hidden]{display:none!important}
 #ll-flotante-caja[hidden]{display:none!important}
+#ll-pantalla-caja[hidden]{display:none!important}
+#ll-pantalla[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-fg)}
