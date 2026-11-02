@@ -77,8 +77,9 @@ if [ ! -x "$BIN" ] || [ "$(cat "$ESTADO/compilado" 2>/dev/null || true)" != "$CO
     git fetch -q --depth 1 "'"$REPO_PROG"'" "'"$COMMIT"'"
     git checkout -q FETCH_HEAD
     [ "$(git rev-parse HEAD)" = "'"$COMMIT"'" ] || { echo "el commit no es el fijado" >&2; exit 1; }
-    CARGO_TARGET_DIR="$HOME/target" "$HOME/.cargo/bin/cargo" build -q --release --locked -j 2 \
-      -p guardiana-tunel-servidor --bin guardiana-tunel-servidor
+    # poca memoria: un hilo, sin LTO y en trozos (los servidores pequeños tienen unos 2 GB y el motor sigue corriendo)
+    CARGO_TARGET_DIR="$HOME/target" CARGO_PROFILE_RELEASE_LTO=false CARGO_PROFILE_RELEASE_CODEGEN_UNITS=16 \
+      "$HOME/.cargo/bin/cargo" build -q --release --locked -j 1 -p guardiana-tunel-servidor --bin guardiana-tunel-servidor
   ' >/var/log/guardiana-vpn-compilacion.log 2>&1; then
     pkill -KILL -u gvpn 2>/dev/null || true
     rojo "vpn.sh: no se pudo compilar (/var/log/guardiana-vpn-compilacion.log)"
