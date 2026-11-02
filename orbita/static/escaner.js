@@ -182,6 +182,7 @@
     ['resumen', 'GET', '/api/vigilancia/resumen', 'Vigilancia continua: resumen', 12000],
     ['detectar', 'GET', '/api/antivirus/detectar', 'Antivirus registrados en Windows', 40000],
     ['antivirus', 'GET', '/api/antivirus', 'Actividad del antivirus', 25000],
+    ['escudo', 'GET', '/api/escudo', 'Escudo de GUARDIANA', 12000],
     ['identificacion', 'GET', '/api/identificacion', 'Identificación de destinos', 25000],
     ['ia', 'GET', '/api/ia', 'Servicios de IA', 20000],
     ['qv', 'GET', '/api/quien-vende', 'Quién vende tus datos', 40000],
@@ -191,7 +192,9 @@
   ];
   const LD = {}; for (const [k, m, r, n, t] of L) LD[k] = { m, r, n, t };
   // the readings the next build of the program adds: an older one does not answer them
-  const NUEVAS = new Set(['vigia', 'qv']);
+  const NUEVAS = new Set(['vigia', 'qv', 'escudo']);
+  // and of those, the ones an older build turns away (403, or 404 from its panel): left out quietly, not «No medido»
+  const OPCIONALES = new Set(['escudo']);
   const MOTIVO = {
     tiempo: 'Sin respuesta del programa',
     plan: 'Forma parte del plan Plus',
@@ -211,6 +214,7 @@
     no_empezo: 'La revisión de Windows no empezó',
     fallo: 'La revisión de Windows falló',
     sin_programa: 'Necesita el programa GUARDIANA para Windows',
+    version: 'La versión instalada del programa aún no ofrece esta lectura',
   };
 
   // ---------- el escaneo ----------
@@ -233,6 +237,7 @@
       if (!vigente(g)) return null;
       st.ms = r.ms; st.estado = r.estado; st.t = Date.now();
       if (r.ok) { st.e = 'medido'; S.d[k] = r.json; S.v[k] = (S.v[k] || 0) + 1; }
+      else if (OPCIONALES.has(k) && (r.estado === 403 || r.estado === 404)) { st.e = 'omitido'; st.motivo = 'version'; }
       else { st.e = 'no_medido'; st.motivo = r.motivo; st.maximo = r.maximo; }
       eventoLectura(k);
       late(); pintaAvanceLuego(); informeLuego();
@@ -259,7 +264,7 @@
     const pPd1 = lee(g, 'pd1').then(() => { if (S && S.g === g) S.tPd1 = Date.now(); });
     const pRev = pRevA.then((r) => (vigente(g) ? revision(g, r) : null));
     const pVig = pVigA.then((r) => (vigente(g) ? vigilancia(g, r) : null));
-    const g3 = ['detectar', 'antivirus', 'identificacion', 'ia', 'qv'].map((k) => lee(g, k));
+    const g3 = ['detectar', 'antivirus', 'escudo', 'identificacion', 'ia', 'qv'].map((k) => lee(g, k));
     // a second take of the connections (the VPNs and the processor's rates need it), at least 8 s after the first
     const pPd2 = Promise.all([pPd1, ...g3]).then(async () => {
       if (!vigente(g)) return;
@@ -684,8 +689,8 @@
   // which section shows each check of the revision: by its id, or else by its group (so new checks appear by themselves)
   const SEC_DE_CHECK = { defender_nube: 'antivirus', camara: 'sensores', microfono: 'sensores', ubicacion: 'sensores', pantalla: 'sensores', fabricante: 'fabrica', aprovisionados: 'fabrica', telemetria: 'telemetria', diagtrack: 'telemetria', publicidad: 'telemetria', certificados: 'certificados', recall: 'ia', usb: 'equipo', bluetooth: 'equipo', bios: 'equipo' };
   const SEC_DE_GRUPO = { proteccion: 'proteccion', acceso: 'acceso', arranque: 'arranque', salida: 'salida', privacidad: 'telemetria', antivirus: 'defender' };
-  const FUENTE_N = { revision: 'Revisión de Windows', vigilancia: 'Vigilancia continua', vigia: 'Vigía de las llamadas', pd: 'Conexiones de las últimas 24 horas', antivirus: 'Actividad del antivirus', detectar: 'Antivirus registrados en Windows', identificacion: 'Identificación de destinos', ia: 'Servicios de IA', qv: 'Quién vende tus datos', estado: 'Estado del programa' };
-  const FUENTES = { estado: ['revision', 'vigilancia', 'vigia', 'pd', 'antivirus', 'identificacion'], proteccion: ['revision', 'detectar', 'vigilancia', 'vigia'], antivirus: ['antivirus', 'pd', 'revision', 'detectar', 'qv'], sensores: ['vigia', 'vigilancia', 'revision'], acceso: ['vigia', 'revision'], arranque: ['revision', 'vigilancia'], fabrica: ['revision', 'qv'], telemetria: ['revision', 'vigilancia', 'pd', 'qv'], salida: ['revision', 'pd', 'estado'], certificados: ['revision'], ia: ['ia', 'qv', 'revision'], extensiones: ['qv'], identidad: ['identificacion', 'pd'], defender: ['revision', 'vigia'], equipo: ['revision', 'estado'], limites: ['estado'] };
+  const FUENTE_N = { revision: 'Revisión de Windows', vigilancia: 'Vigilancia continua', vigia: 'Vigía de las llamadas', pd: 'Conexiones de las últimas 24 horas', antivirus: 'Actividad del antivirus', detectar: 'Antivirus registrados en Windows', identificacion: 'Identificación de destinos', ia: 'Servicios de IA', qv: 'Quién vende tus datos', estado: 'Estado del programa', escudo: 'Escudo de GUARDIANA' };
+  const FUENTES = { estado: ['revision', 'vigilancia', 'vigia', 'pd', 'antivirus', 'identificacion'], proteccion: ['escudo', 'revision', 'detectar', 'vigilancia', 'vigia'], antivirus: ['antivirus', 'pd', 'revision', 'detectar', 'qv'], sensores: ['vigia', 'vigilancia', 'revision'], acceso: ['vigia', 'revision'], arranque: ['revision', 'vigilancia'], fabrica: ['revision', 'qv'], telemetria: ['revision', 'vigilancia', 'pd', 'qv'], salida: ['revision', 'pd', 'estado'], certificados: ['revision'], ia: ['ia', 'qv', 'revision'], extensiones: ['qv'], identidad: ['identificacion', 'pd'], defender: ['revision', 'vigia'], equipo: ['revision', 'estado'], limites: ['estado'] };
   // the state of a source: medido | no_medido | esperando
   function fuente(k) {
     if (!S) return 'esperando';
@@ -912,8 +917,39 @@
       return h('li', null, panel(nombre, null, 'b'), est ? panel(est, 'esc-marca' + (p.activo ? ' verde' : ' fuerte')) : null);
     }))) : null;
     const vivo = vigiaDe(['antivirus']).map(filaAhora);
-    const v = verChecksSi(pr);
-    return { nivel: v.nivel, ver: v.ver, cuerpo: [vivo.length ? bloque('Ahora mismo, según el Vigía de las llamadas', h('div', { class: 'esc-ahora' }, vivo)) : null, bDet, bloque('Comprobaciones de Windows', pr.nodo), bVg, bloque('Historial de la vigilancia', historial('proteccion'))] };
+    const v = verChecksSi(pr), esc = bloqueEscudo();
+    let nivel = v.nivel, ver = v.ver;
+    // what the program's own antivirus saw goes first in the verdict, and can raise it
+    if (esc && esc.nivel) {
+      const [primero, ...resto] = lista(ver);
+      ver = [esc.frase, primero != null ? h('small', null, primero) : null, ...resto];
+      if ((NIVEL[esc.nivel] || 0) > (NIVEL[nivel] || 0)) nivel = esc.nivel;
+    }
+    return { nivel, ver, cuerpo: [vivo.length ? bloque('Ahora mismo, según el Vigía de las llamadas', h('div', { class: 'esc-ahora' }, vivo)) : null, esc ? esc.nodo : null, bDet, bloque('Comprobaciones de Windows', pr.nodo), bVg, bloque('Historial de la vigilancia', historial('proteccion'))] };
+  }
+  // El escudo de GUARDIANA (1.0.52): lo que vio el antivirus del propio programa (GET /api/escudo). Sus avisos llegan
+  // escritos por el programa; los graves primero. Nombres, no rutas. Una versión anterior no lo ofrece: entonces no aparece.
+  const REGLA_ESCUDO = { primera_vez: 'Primera vez', muestra_conocida: 'Muestra conocida', ladron: 'Datos guardados', documento: 'Documento', navegador: 'Navegador', guion: 'Guion', copias: 'Copias de seguridad' };
+  function filaAviso(a) {
+    const grave = a.grave === true, regla = typeof a.regla === 'string' && Object.prototype.hasOwnProperty.call(REGLA_ESCUDO, a.regla) ? REGLA_ESCUDO[a.regla] : null;
+    const sitio = a.regla === 'primera_vez' ? limpia(a.sitio, 120, false) : '';
+    return h('li', null, dato(limpia(a.programa, 80) || '—', null, 'b'), grave ? h('span', { class: 'esc-marca rojo' }, 'Grave') : null,
+      regla ? h('span', { class: 'esc-marca' + (grave ? '' : ' fuerte') }, regla) : null,
+      esHora(a.cuando_ms) ? h('time', { translate: 'no', datetime: iso(a.cuando_ms) }, fecha(a.cuando_ms)) : null,
+      sitio ? dato(sitio, null, 'small') : null, h('small', { lang: 'es' }, limpia(a.texto, 400)));
+  }
+  function bloqueEscudo() {
+    const es = S.d.escudo; if (!es || typeof es !== 'object') return null;
+    const avisos = lista(es.avisos).filter((a) => a && typeof a === 'object' && typeof a.texto === 'string');
+    const graves = avisos.filter((a) => a.grave === true), otros = avisos.filter((a) => a.grave !== true);
+    const aprende = es.aprendiendo === true;
+    const nodo = bloque('El escudo de GUARDIANA',
+      h('p', { class: 'esc-texto' }, aprende ? 'En sus primeros días aprende qué sitios pide este equipo; mientras tanto, la regla «primera vez» solo avisa de programas descargados de internet. Las demás reglas ya vigilan.' : 'Vigilando: ya conoce los sitios que pide este equipo.'),
+      cifras([{ v: num(es.sitios), l: 'Sitios conocidos' }, aprende && esHora(es.aprende_hasta_ms) ? { v: dia(es.aprende_hasta_ms), l: 'Aprende hasta' } : null,
+        { v: num(avisos.length), l: 'Avisos', n: avisos.length ? 'aviso' : '' }, { v: num(graves.length), l: 'Graves', n: graves.length ? 'alerta' : '' }]),
+      avisos.length ? largo([...graves, ...otros].map(filaAviso), 'plana', 8) : h('p', { class: 'esc-texto' }, 'Sin avisos: no ha visto nada de lo que vigila.'));
+    const nivel = graves.length ? 'alerta' : avisos.length ? 'aviso' : null;
+    return { nodo, nivel, frase: nivel === 'alerta' ? 'El escudo de GUARDIANA tiene avisos graves.' : nivel ? 'El escudo de GUARDIANA tiene avisos.' : '' };
   }
   function verChecksSi(pr) {
     if (pr.cs) return verChecks(pr.cs);
@@ -1277,7 +1313,7 @@
       const abiertos = new Set([...sec.querySelectorAll('details[open]')].map((d, j) => j));
       const nivel = r.nivel || 'info';
       sec.dataset.nivel = nivel; sec.textContent = '';
-      const nombres = (FUENTES[id] || []).map((k) => FUENTE_N[k]).filter(Boolean).join(' · ');
+      const nombres = (FUENTES[id] || []).filter((k) => !(S.l[k] && S.l[k].e === 'omitido')).map((k) => FUENTE_N[k]).filter(Boolean).join(' · ');
       const partes = [h('div', { class: 'esc-sec-cab' }, dato(nn(i), 'esc-num'), h('h2', { id: 'esc-h-' + id }, t), chip(nivel === 'medido' ? 'info' : nivel, r.chip || CHIP[nivel])),
         nombres ? h('p', { class: 'esc-fuentes' }, h('span', null, 'Fuentes'), h('span', null, nombres)) : null,
         h('div', { class: 'esc-ver ' + nivel }, lista(r.ver).filter((x) => x != null)), ...lista(r.cuerpo).flat(3)];
