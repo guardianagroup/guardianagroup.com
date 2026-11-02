@@ -8,8 +8,8 @@
 #    internet; y lo que no debe pasar (los servicios del propio servidor, las redes privadas, un equipo a otro).
 # 3. Una segunda ejecución de vpn.sh sin cortes, y un reinicio del alta sin que nadie pierda su túnel ni su dirección.
 # 4. El 443 compartido con la configuración que escribe instalar.sh (nginx reparte por nombre y por ALPN; Caddy con
-#    certificados locales de prueba): el alta con el cliente de verdad, que no manda ALPN, por https; el TURN-TLS sigue
-#    yendo a coturn; y con el alta parada, Caddy responde 503 sin apuntar a nadie en el diario.
+#    certificados locales de prueba): el alta por https sin ALPN, como la pide el programa, llega al alta; el TURN-TLS
+#    sigue yendo a coturn; y con el alta parada, Caddy responde 503 sin apuntar a nadie en el diario.
 #
 # Llaves de prueba, hechas aquí y tiradas con la máquina. Necesita sudo, dig y ncat.
 set -euo pipefail
@@ -189,9 +189,10 @@ c=$(curl -s --no-alpn -o /dev/null -w '%{http_code}' -X POST -H 'Content-Type: a
 [ "$c" = 422 ] || falla "sin ALPN, por el 443 compartido, el alta da $c (se esperaba 422 del alta)"
 c=$(curl -s -o /dev/null -w '%{http_code}' https://vpn.guardianagroup.com/)
 [ "$c" = 404 ] || falla "fuera de /vpn/alta da $c (se esperaba 404)"
-u4=$(equipo e4 https://vpn.guardianagroup.com/vpn/alta 74) || falla "el alta de verdad por https (nginx → Caddy → alta) no salió"
-llega e4 || falla "e4 sin túnel"
-ok "el alta con el cliente del programa (sin ALPN), por https y el 443 compartido: e4 ($u4) con su túnel"
+ok "por el 443 compartido, sin ALPN (como el cliente del programa, que usa ureq) y con el nombre de la VPN, llega al alta"
+# El cliente del programa no puede hacer aquí el alta por https: solo se fía de las raíces públicas que lleva dentro
+# (webpki-roots), no de la autoridad local de prueba de Caddy. Su saludo TLS (con nombre y sin ALPN) es el de curl --no-alpn
+# de arriba; el alta y el túnel de verdad ya los hicieron e1, e2 y e3.
 
 tam() { stat -c %s "$T/coturn.bin"; }
 t0=$(tam)
@@ -219,8 +220,8 @@ if sudo journalctl -u caddy --since "$desde" -o cat --no-pager | grep -E 'http\.
 fi
 sudo systemctl start guardiana-vpn-alta
 alta_responde || falla "el alta no vuelve"
-for e in e1 e2 e3 e4; do llega "$e" || falla "$e sin túnel tras parar y volver a arrancar el alta"; done
-ok "con el alta parada, 503 sin apuntar a nadie; al volver, los cuatro siguen con su túnel"
+for e in e1 e2 e3; do llega "$e" || falla "$e sin túnel tras parar y volver a arrancar el alta"; done
+ok "con el alta parada, 503 sin apuntar a nadie; al volver, los tres siguen con su túnel"
 
 # ── el diario y la salud del alta ──────────────────────────────────────────────────────────────────────────────────
 if sudo journalctl -u guardiana-vpn-alta -o cat --no-pager | grep -E '([0-9]{1,3}\.){3}[0-9]{1,3}'; then
