@@ -129,7 +129,10 @@
   // not open, 413 too large), lets through at most four readings at a time (the fifth gets 429), a new check-up once a
   // minute and a new slow look every 30 s (429 again), and the two orders only right after a real click or key (428).
   // So this page keeps its own queue of four, and sends the two orders inside the person's click on «Escanear».
-  const PEND = new Map(), COLA = [], MAX_A_LA_VEZ = 4;
+  // 2 Nov 2026 (owner, 10:36, «me salen como no medidos»): the program reads its history one reading at a time (one
+  // database), so four at once only made the last ones wait past their limit on a computer with a long history. Two at
+  // a time, more patience for the heavy ones, and a reading turned away for being one too many keeps its place longer.
+  const PEND = new Map(), COLA = [], MAX_A_LA_VEZ = 2;
   let SIG = Math.floor(Math.random() * 1e6) * 1000 + 1, enVuelo = 0;
   const MOTIVO_DE = { 402: 'plan', 401: 'sesion', 403: 'prohibida', 413: 'grande', 428: 'sin_gesto', 429: 'freno', 503: 'sin_panel', 0: 'red' };
   // primero: the polls of a running check-up go ahead of the queue
@@ -148,7 +151,7 @@
     const fin = (r) => {
       if (hecho) return; hecho = true; PEND.delete(n); clearTimeout(reloj0); enVuelo = Math.max(0, enVuelo - 1);
       // a reading turned away only because four were already on their way goes back to the queue a moment later
-      if (r.estado === 429 && job.metodo === 'GET' && job.intentos < 8) { job.intentos++; setTimeout(() => { COLA.unshift(job); bombea(); }, 400 + 200 * job.intentos); bombea(); return; }
+      if (r.estado === 429 && job.metodo === 'GET' && job.intentos < 30) { job.intentos++; setTimeout(() => { COLA.unshift(job); bombea(); }, Math.min(3000, 400 + 200 * job.intentos)); bombea(); return; }
       r.ms = Math.round(performance.now() - t0); job.resolver(r); bombea();
     };
     reloj0 = setTimeout(() => fin({ ok: false, motivo: 'tiempo', maximo: job.maximo }), job.maximo);
@@ -178,17 +181,17 @@
     ['textos', 'GET', '/api/textos', 'Textos del panel', 15000],
     ['estado', 'GET', '/api/estado', 'Estado del programa', 12000],
     ['vigia', 'GET', '/vigia', 'Vigía de las llamadas', 12000],
-    ['pd1', 'GET', '/api/por-dentro', 'Conexiones de 24 horas: primera toma', 25000],
-    ['resumen', 'GET', '/api/vigilancia/resumen', 'Vigilancia continua: resumen', 12000],
+    ['pd1', 'GET', '/api/por-dentro', 'Conexiones de 24 horas: primera toma', 60000],
+    ['resumen', 'GET', '/api/vigilancia/resumen', 'Vigilancia continua: resumen', 30000],
     ['detectar', 'GET', '/api/antivirus/detectar', 'Antivirus registrados en Windows', 40000],
-    ['antivirus', 'GET', '/api/antivirus', 'Actividad del antivirus', 25000],
+    ['antivirus', 'GET', '/api/antivirus', 'Actividad del antivirus', 60000],
     ['escudo', 'GET', '/api/escudo', 'Escudo de GUARDIANA', 12000],
-    ['identificacion', 'GET', '/api/identificacion', 'Identificación de destinos', 25000],
-    ['ia', 'GET', '/api/ia', 'Servicios de IA', 20000],
-    ['qv', 'GET', '/api/quien-vende', 'Quién vende tus datos', 40000],
+    ['identificacion', 'GET', '/api/identificacion', 'Identificación de destinos', 60000],
+    ['ia', 'GET', '/api/ia', 'Servicios de IA', 40000],
+    ['qv', 'GET', '/api/quien-vende', 'Quién vende tus datos', 60000],
     ['revision', 'GET', '/api/revision', 'Revisión de Windows: resultado', 12000],
-    ['vigilancia', 'GET', '/api/vigilancia', 'Vigilancia continua: detalle e historial', 40000],
-    ['pd2', 'GET', '/api/por-dentro', 'Conexiones de 24 horas: segunda toma', 25000],
+    ['vigilancia', 'GET', '/api/vigilancia', 'Vigilancia continua: detalle e historial', 60000],
+    ['pd2', 'GET', '/api/por-dentro', 'Conexiones de 24 horas: segunda toma', 60000],
   ];
   const LD = {}; for (const [k, m, r, n, t] of L) LD[k] = { m, r, n, t };
   // the readings the next build of the program adds: an older one does not answer them
