@@ -2,8 +2,8 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="script-src 'self' 'sha256-69pqhPCr+4TR0Sr3dFoKR2T5mCSMATE5NXL3ITeXpx8=' 'sha256-MlbQMR0Dfgvz3HSY6jnL/XNZWuca2148M35PnSyGzMU='; object-src 'none'; base-uri 'none'; form-action 'none'">
-<script src="/marco/marco.js?v=20261101b"></script>
+<meta http-equiv="Content-Security-Policy" content="script-src 'self' 'sha256-MkAq8H3gj3f+bJWb7dVK4cuS3Q1Z5RKj44XMe8aXLVI=' 'sha256-MlbQMR0Dfgvz3HSY6jnL/XNZWuca2148M35PnSyGzMU='; object-src 'none'; base-uri 'none'; form-action 'none'">
+<script src="/marco/marco.js?v=20261102"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover, interactive-widget=resizes-content">
 <meta name="robots" content="noindex, nofollow">
 <meta name="referrer" content="no-referrer">
@@ -228,6 +228,39 @@ main{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden}
 #p-chat.activa{padding:0;gap:0;position:relative}
 .gc-hoja.si{display:flex}
 .gc-oculto{position:absolute;width:1px;height:1px;overflow:hidden;opacity:0;pointer-events:none;left:-9px;top:0}
+/* 2 Nov 2026 (owner, 08:33: «cuando pasábamos la llamada al teléfono, la llamada no se veía pantalla entera. Quiero que se vea
+   pantalla entera»). A video call fills the phone: the other person edge to edge, your own picture in a corner (it can be
+   dragged), the name on top and the buttons at the foot over a shade. A voice call keeps its own screen. */
+/* only the call (2 Nov 2026, 09:16): no folding it away to a chat, no speaker key (always the loudspeaker; headphones when
+   plugged), no way back to a chat that is not here */
+body.solo-llamada #l-menos{visibility:hidden}
+body.solo-llamada .gc-llamada-boton:has(#altavoz){display:none}
+body.solo-llamada #pastilla,body.solo-llamada .gc-compositor,body.solo-llamada #mensajes,body.solo-llamada #cabecera{display:none}
+.gc-llamada.gc-video{background:#000;padding:0}
+.gc-llamada.gc-video .gc-oculto{position:absolute;inset:0;left:0;top:0;width:auto;height:auto;opacity:1;overflow:hidden;pointer-events:auto;z-index:0}
+.gc-llamada.gc-video .gc-oculto button{display:none}
+.gc-llamada.gc-video #remoto{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#000}
+.gc-llamada.gc-video #local{position:absolute;top:calc(150px + env(safe-area-inset-top));right:12px;bottom:auto;left:auto;width:28vw;max-width:132px;height:auto;aspect-ratio:3/4;border-radius:14px;border:1px solid rgba(255,255,255,.28);object-fit:cover;background:#111;box-shadow:0 6px 20px rgba(0,0,0,.5);transform:translate(var(--dx,0px),var(--dy,0px)) scaleX(-1);touch-action:none;z-index:3}
+.gc-llamada.gc-video #local.trasera{transform:translate(var(--dx,0px),var(--dy,0px))}
+.gc-llamada.gc-video.llamando #local{inset:0;top:0;right:0;width:100%;height:100%;max-width:none;aspect-ratio:auto;border:0;border-radius:0;box-shadow:none;transform:scaleX(-1)}
+.gc-llamada.gc-video.llamando #remoto{display:none}
+.gc-llamada.gc-video::before,.gc-llamada.gc-video::after{content:'';position:absolute;left:0;right:0;z-index:1;pointer-events:none}
+.gc-llamada.gc-video::before{top:0;height:calc(160px + env(safe-area-inset-top));background:linear-gradient(rgba(0,0,0,.62),transparent)}
+.gc-llamada.gc-video::after{bottom:0;height:calc(250px + env(safe-area-inset-bottom));background:linear-gradient(transparent,rgba(0,0,0,.72))}
+.gc-llamada.gc-video>:not(.gc-oculto){position:relative;z-index:2}
+.gc-llamada.gc-video .gc-llamada-arriba{box-sizing:border-box;width:100%;padding:calc(12px + env(safe-area-inset-top)) 16px 0;color:#fff}
+.gc-llamada.gc-video .gc-llamada-centro{justify-content:flex-start;gap:3px;padding:2px 16px 0;text-shadow:0 1px 3px rgba(0,0,0,.8)}
+.gc-llamada.gc-video .gc-avatar-grande{display:none}
+.gc-llamada.gc-video .gc-llamada-nombre{font-size:19px;color:#fff}
+.gc-llamada.gc-video .gc-llamada-tiempo{font-size:15px;color:rgba(255,255,255,.92)}
+.gc-llamada.gc-video .gc-llamada-estado,.gc-llamada.gc-video .gc-llamada-paso,.gc-llamada.gc-video .gc-llamada-cifrado{color:rgba(255,255,255,.85)}
+.gc-llamada.gc-video .gc-llamada-botones{margin:12px 0 12px}
+.gc-llamada.gc-video .gc-llamada-boton{color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.8)}
+.gc-llamada.gc-video .gc-llamada-boton:not(.gc-colgar) button:not([aria-pressed="true"]){background:rgba(255,255,255,.18);border-color:transparent;color:#fff;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+/* «Volver al PC» / «Pasar al móvil»: one clear button under the call's buttons, with what it does drawn on it */
+.gc-texto-boton.gc-relevo{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:50px;padding:0 24px;font-weight:600;font-size:15px;background:rgba(232,236,241,.10);border-color:rgba(232,236,241,.22)}
+.gc-texto-boton.gc-relevo svg{width:20px;height:20px;flex:none;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.gc-llamada.gc-video .gc-texto-boton.gc-relevo{margin-bottom:calc(22px + env(safe-area-inset-bottom));background:rgba(255,255,255,.18);border-color:transparent;color:#fff;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
 .gc-pastilla{flex:none;align-self:center;margin:8px 0 0;white-space:nowrap;display:inline-flex;align-items:center;gap:8px;min-height:36px;padding:0 14px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--ok);font:600 13px/1 var(--texto);cursor:pointer}
 .gc-pastilla[hidden]{display:none}
 </style>
@@ -247,6 +280,7 @@ main{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden}
   <section class="pantalla centro activa" id="p-conectando"><div class="giro"></div><h1 id="t-conectando"></h1><p id="t-conectando-p"></p></section>
   <section class="pantalla centro" id="p-pendiente"><h1 id="t-pendiente"></h1><p class="mi-numero" id="mi-numero" hidden></p><p id="t-pendiente-p"></p></section>
   <section class="pantalla centro" id="p-leer"><h1 id="t-leer"></h1><p id="t-leer-p"></p><div class="lector"><video id="leer-video" autoplay playsinline muted></video><div class="marco"></div></div><canvas id="leer-lienzo" hidden></canvas><p class="aviso-sistema" id="t-leer-nota" hidden></p></section>
+  <section class="pantalla centro" id="p-fin"><h1 id="t-fin"></h1><p id="t-fin-p"></p></section>
   <section class="pantalla centro" id="p-error"><h1 id="t-error"></h1><p id="t-error-p"></p><button class="btn" id="reintentar"></button><button class="btn sec" id="leer"></button></section>
   <section class="pantalla centro" id="p-espera"><div class="giro"></div><h1 id="t-espera"></h1><p id="t-espera-p"></p><div class="codigo" id="codigo-caja" hidden><b id="codigo"></b><div class="fila"><button class="btn" id="codigo-whatsapp"></button><button class="btn sec" id="codigo-copiar"></button></div></div></section>
   <section class="pantalla centro" id="p-nombre"><h1 id="t-nombre"></h1><p id="t-nombre-p"></p><input class="campo" id="mi-nombre" maxlength="40" autocomplete="given-name"><div class="fila"><button class="btn contestar" id="nombre-ok"></button></div></section>
@@ -264,7 +298,7 @@ main{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden}
         <div class="gc-llamada-boton gc-colgar"><button type="button" id="colgar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 13.5c4.7-4.7 12.3-4.7 17 0l-2.4 2.4a2 2 0 0 1-2.4.3l-2-1.3a2 2 0 0 1-.9-1.7v-1.3a11 11 0 0 0-5.6 0v1.3a2 2 0 0 1-.9 1.7l-2 1.3a2 2 0 0 1-2.4-.3z"/></svg></button><span id="colgar-t"></span></div>
         <div class="gc-llamada-boton"><button type="button" id="altavoz" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9z"/><path d="M16 9a4 4 0 0 1 0 6M18.5 6.5a8 8 0 0 1 0 11"/></svg></button><span id="altavoz-t"></span></div>
       </div>
-      <button type="button" class="gc-texto-boton" id="volver-pc" hidden></button>
+      <button type="button" class="gc-texto-boton gc-relevo" id="volver-pc" hidden></button>
       <div class="gc-oculto"><video id="remoto" autoplay playsinline></video><video id="local" autoplay playsinline muted></video><button type="button" id="voz-prot" aria-pressed="false"></button><button type="button" id="camara" hidden></button><button type="button" id="pantalla" hidden></button></div>
     </section>
     <button type="button" class="gc-pastilla" id="pastilla" hidden></button>
@@ -317,7 +351,13 @@ main{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden}
     en: { cab_cifrado: 'End-to-end encrypted', cab_cifrado_ok: 'End-to-end encrypted · verified ✓', cab_cifrado_sin: 'End-to-end encrypted · not verified', escudo_aria: 'Live shield', atras_aria: 'Back to the PC', esc_titulo: 'Live shield', esc_vivo: 'Every line is a real check', esc_hace_s: '{n} s ago', esc_hace_min: '{n} min ago', esc_identidad: 'Identity verified', esc_identidad_ok: 'The numbers matched with {n}', esc_identidad_pendiente: 'Pending: compare the numbers', esc_cifrado: 'Encryption', esc_cifrado_pq: 'Olm + ML-KEM-768, renewed {hace}', esc_cifrado_olm: 'Olm on; the post-quantum layer is not agreed yet', esc_cifrado_abriendo: 'Opening the encryption…', esc_ruta: 'Route', esc_enlace: 'This phone and your PC', esc_enlace_t: 'Sealed with the QR code’s key: the relay cannot read it', esc_equipo: 'The PC’s microphone, camera and screen', esc_equipo_nadie: 'No other program uses them (Windows’ record)', esc_equipo_uso: 'In use by: {q}', esc_equipo_sin: 'Not measured on that system (only Windows records it)', rec_microfono: 'microphone', rec_camara: 'camera', rec_pantalla: 'screen', esc_movil: 'This phone', esc_movil_t: 'The system (Apple or Google) does not let other apps be checked here', esc_integridad: 'Integrity', esc_integridad_t: '{m} messages and {b} pieces verified, {mal} altered', esc_disp: 'Devices in the session: {n}', esc_disp_este_equipo: 'your PC', esc_disp_equipo_del_otro: 'the other person’s computer', esc_disp_movil_del_otro: 'the other person’s phone', esc_disp_mi_movil: 'this phone (verified with the QR)', esc_calidad: 'Voice quality (estimated)', esc_limite: 'Honest limit: we cannot erase what was already saved, copied or photographed on a compromised device.', con_misma: 'Direct over the same network', con_directo: 'Direct between the two computers', con_rele: 'Via relay · {c}', con_rele_sin: 'Via relay', cal_excelente: 'Excellent', cal_buena: 'Good', cal_debil: 'Weak', cal_sin: 'quality not measured', ll_cifrada: 'End-to-end encrypted', paso_pasando: 'Moving the call to this phone…', paso_pc: 'The call is still on the PC', paso_fallo: 'Could not move it — scan again', volviendo: 'Going back to the PC…', volver_pc: 'Back to the PC', pasar_movil: 'Move to the phone', pastilla: 'On a call · {t} · back', atras_t: 'Back to the PC?', atras_p: 'The conversation goes on on the computer and this screen is erased.', atras_si: 'Yes, back to the PC', recibiendo: 'Receiving… {p} %' },
     pt: { cab_cifrado: 'Criptografia de ponta a ponta', cab_cifrado_ok: 'Criptografia de ponta a ponta · verificada ✓', cab_cifrado_sin: 'Criptografia de ponta a ponta · não verificada', escudo_aria: 'Escudo ao vivo', atras_aria: 'Voltar ao PC', esc_titulo: 'Escudo ao vivo', esc_vivo: 'Cada linha é uma verificação real', esc_hace_s: 'há {n} s', esc_hace_min: 'há {n} min', esc_identidad: 'Identidade verificada', esc_identidad_ok: 'Os números bateram com {n}', esc_identidad_pendiente: 'Pendente: comparem os números', esc_cifrado: 'Criptografia', esc_cifrado_pq: 'Olm + ML-KEM-768, renovada {hace}', esc_cifrado_olm: 'Olm ativo; a camada pós-quântica ainda não foi acordada', esc_cifrado_abriendo: 'Abrindo a criptografia…', esc_ruta: 'Rota', esc_enlace: 'Este celular e o seu PC', esc_enlace_t: 'Selado com a chave do código QR: o relé não consegue ler', esc_equipo: 'Microfone, câmera e tela do PC', esc_equipo_nadie: 'Nenhum outro programa os usa (registro do Windows)', esc_equipo_uso: 'Em uso por: {q}', esc_equipo_sin: 'Não medido nesse sistema (só o Windows registra)', rec_microfono: 'microfone', rec_camara: 'câmera', rec_pantalla: 'tela', esc_movil: 'Este celular', esc_movil_t: 'O sistema (Apple ou Google) não deixa verificar outros aplicativos aqui', esc_integridad: 'Integridade', esc_integridad_t: '{m} mensagens e {b} pedaços verificados, {mal} alterados', esc_disp: 'Dispositivos na sessão: {n}', esc_disp_este_equipo: 'o seu PC', esc_disp_equipo_del_otro: 'o computador da outra pessoa', esc_disp_movil_del_otro: 'o celular da outra pessoa', esc_disp_mi_movil: 'este celular (verificado com o QR)', esc_calidad: 'Qualidade da voz (estimada)', esc_limite: 'Limite honesto: não podemos apagar o que já foi guardado, copiado ou fotografado num dispositivo comprometido.', con_misma: 'Direto pela mesma rede', con_directo: 'Direto entre os dois computadores', con_rele: 'Pelo relé · {c}', con_rele_sin: 'Pelo relé', cal_excelente: 'Excelente', cal_buena: 'Boa', cal_debil: 'Fraca', cal_sin: 'qualidade sem medir', ll_cifrada: 'Cifrada de ponta a ponta', paso_pasando: 'Passando a chamada para este celular…', paso_pc: 'A chamada continua no PC', paso_fallo: 'Não foi possível passar — escaneie de novo', volviendo: 'Voltando ao PC…', volver_pc: 'Voltar ao PC', pasar_movil: 'Passar para o celular', pastilla: 'Em chamada · {t} · voltar', atras_t: 'Voltar ao PC?', atras_p: 'A conversa continua no computador e esta tela é apagada.', atras_si: 'Sim, voltar ao PC', recibiendo: 'Recebendo… {p} %' },
   };
-  for (const l of Object.keys(TX)) Object.assign(TX[l], TX2[l]);
+  // 2 Nov 2026 (owner, 09:16): this phone only carries the call of the PC
+  const TX3 = {
+    es: { solo_fin: 'Llamada terminada', solo_fin_p: 'Ya puedes cerrar esta página.', solo_espera: 'Aquí solo se pasa una llamada', solo_espera_p: 'Empieza la llamada en el PC y pulsa «Continuar en el teléfono».' },
+    en: { solo_fin: 'Call ended', solo_fin_p: 'You can close this page now.', solo_espera: 'This page only takes over a call', solo_espera_p: 'Start the call on the PC and press “Continue on phone”.' },
+    pt: { solo_fin: 'Chamada encerrada', solo_fin_p: 'Você já pode fechar esta página.', solo_espera: 'Aqui só se passa uma chamada', solo_espera_p: 'Comece a chamada no PC e toque em “Continuar no celular”.' },
+  };
+  for (const l of Object.keys(TX)) Object.assign(TX[l], TX2[l], TX3[l]);
   const $ = (id) => document.getElementById(id);
   const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   // As an app on the home screen (16 Oct 2026): the icon keeps the address it was made with,
@@ -352,6 +392,13 @@ main{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden}
   // «Sala de casa» (16 Oct 2026): one code for the phones of the house. Four seats, one key
   // each derived from the code's key; this phone remembers its seat and its name.
   const SALA = !!(D && D.sala);
+  // 2 Nov 2026 (owner, 09:16: «cuando estamos en videollamada de PC a PC y la pasamos al móvil, solamente es llamada… no
+  // quiero chat ni nada, ni el botón de altavoz… directamente en altavoz… si la persona conecta unos auriculares, entonces sí»):
+  // with the computer's code this phone only carries the call — full screen, on the loudspeaker (headphones take over when
+  // plugged, as the phone itself decides), and nothing else.
+  const SOLO_LLAMADA = !!D && !SALA;
+  if (SOLO_LLAMADA) document.body.classList.add('solo-llamada');
+  let llamadaVista = false;
   const ASIENTOS = 4;
   let claveSala = null, memoria = {};
   const recuerda = () => { try { localStorage.setItem('guardiana-sala-' + claveSala, JSON.stringify(memoria)); } catch (_) {} };
@@ -779,6 +826,16 @@ main{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden}
     // In the conversation from the start (16 Oct 2026): before the other side is there, the
     // phone shows the code to share, then the wait, then the three numbers to compare.
     const f = m.fase;
+    if (SOLO_LLAMADA) {
+      if (f !== 'lista' || !m.llamada) {
+        pintaLlamada(null);
+        muestra('p-fin'); $('t-fin').textContent = t(llamadaVista ? 'solo_fin' : 'solo_espera'); $('t-fin-p').textContent = t(llamadaVista ? 'solo_fin_p' : 'solo_espera_p');
+        return;
+      }
+      llamadaVista = true; huboConversacion = true;
+      muestra('p-chat'); pintaLlamada(m.llamada); plena(true);
+      return;
+    }
     if (f === 'sola' && (m.mensajes || []).length === 0 && !huboConversacion) { muestra('p-espera'); $('t-espera').textContent = t('sola'); $('t-espera-p').textContent = t('sola_p'); $('codigo-caja').hidden = true; return; }
     if (f === 'escuchando') {
       muestra('p-espera');
@@ -958,7 +1015,13 @@ main{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden}
     el.textContent = paso.fallo_paso ? t('paso_fallo') : paso.relevo === 'pasando' ? t('paso_pasando') : paso.relevo === 'pc' ? (relevoMovil.activo() ? t('volviendo') : t('paso_pc')) : '';
     b.hidden = false;
     b.dataset.accion = paso.relevo === 'pc' ? 'pasar' : 'volver';
-    b.textContent = paso.relevo === 'pc' ? t('pasar_movil') : t('volver_pc');
+    // 2 Nov 2026 (owner, 08:33): a clear button, with a computer or a phone drawn on it
+    const accion = paso.relevo === 'pc' ? 'pasar' : 'volver';
+    if (b.dataset.pinta !== accion) {
+      b.dataset.pinta = accion;
+      b.innerHTML = (accion === 'pasar' ? '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg>' : '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg>') + '<span></span>';
+      b.querySelector('span').textContent = accion === 'pasar' ? t('pasar_movil') : t('volver_pc');
+    }
     const aqui = paso.relevo !== 'pc';
     $('silencio').disabled = !aqui; $('altavoz').disabled = !aqui || !puedeSalida;
   };
@@ -981,12 +1044,20 @@ main{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden}
     alSonar: () => { if (puedeSalida) aplicaSalida(); suena(); },
     alCerrar: () => { if (vozProt) { vozProt.parar(); vozProt = null; } if (local) { local.getTracks().forEach((x) => x.stop()); local = null; } if (wake) { try { wake.release(); } catch (_) {} wake = null; } setTimeout(() => { if (E && E.llamada) pintaPaso(E.llamada, E.movil && E.movil.paso); }, 0); },
   }) : { estado() {}, recibe() {}, silencia() {}, para() {}, activo: () => false };
+  let relevoAntes = null;
   const pintaLlamada = (l) => {
     pintaTimbre(E && E.entrante);
     const caja = $('llamada');
     const paso = (E && E.movil && E.movil.paso) || null;
     caja.classList.toggle('llamando', !!l && l.conectada === false);
     pintaPaso(l, paso);
+    // 2 Nov 2026 (owner, 08:33): when the call comes over from the computer it fills this phone by itself, even if it had
+    // been folded into the pill; and a video call is seen edge to edge (the other person, your own picture in a corner)
+    const donde = l && paso ? paso.relevo || 'pc' : null;
+    if (l && relevoAntes === 'pc' && donde && donde !== 'pc') plena(true);
+    relevoAntes = l ? donde : null;
+    const aqui = !!l && !(paso && paso.relevo === 'pc');
+    caja.classList.toggle('gc-video', aqui && !!l.video && (l.conectada !== false || !!$('local').srcObject));
     if (l && l.conectada === false) {
       if (!caja.classList.contains('activa')) plena(true);
       if (!E || !E.entrante) empiezaTono(tonoLlamando, 4000);
@@ -1002,7 +1073,7 @@ main{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden}
     if (!caja.classList.contains('activa')) plena(true);
     if (llamadaViva !== 'conectada') { paraTono(); tonoConectada(); llamadaViva = 'conectada'; previaCamara(false); }
     caja.classList.add('activa');
-    if (puedeSalida) { pintaAltavoz(); if (!$('altavoz').dataset.listo) { $('altavoz').dataset.listo = '1'; altavoz = !!l.video; pintaAltavoz(); aplicaSalida(); } }
+    if (puedeSalida) { pintaAltavoz(); if (!$('altavoz').dataset.listo) { $('altavoz').dataset.listo = '1'; altavoz = SOLO_LLAMADA || !!l.video; pintaAltavoz(); aplicaSalida(); } }
     $('altavoz').disabled = !puedeSalida || (paso && paso.relevo === 'pc');
     $('l-letra').textContent = letraLlamada();
     $('l-estado').textContent = tiempo(Math.max(0, Math.floor(Date.now() / 1000) - (l.desde || 0)));
@@ -1464,7 +1535,7 @@ main{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden}
   const quitaMini = () => pintaPastilla();
   // Your own picture can be dragged to any corner.
   (() => { const v = $('local'); let p = null, dx = 0, dy = 0;
-    v.addEventListener('pointerdown', (e) => { if (!$('llamada').classList.contains('plena')) return; p = { x: e.clientX - dx, y: e.clientY - dy }; v.setPointerCapture(e.pointerId); });
+    v.addEventListener('pointerdown', (e) => { const c = $('llamada'); if (!c.classList.contains('gc-video') || c.classList.contains('llamando')) return; p = { x: e.clientX - dx, y: e.clientY - dy }; v.setPointerCapture(e.pointerId); });
     v.addEventListener('pointermove', (e) => { if (!p) return; dx = e.clientX - p.x; dy = e.clientY - p.y; v.style.setProperty('--dx', dx + 'px'); v.style.setProperty('--dy', dy + 'px'); });
     v.addEventListener('pointerup', () => { p = null; }); v.addEventListener('pointercancel', () => { p = null; }); })();
   // Speaker / earpiece: only where the browser lets a page choose the output (Android Chrome);

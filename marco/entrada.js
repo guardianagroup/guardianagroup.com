@@ -22,6 +22,16 @@
 
   var ruta = location.pathname;
   if (/^\/((en|pt)\/)?(privacidad|terminos|contacto|politica-firma|privacy|terms|contact|code-signing-policy|privacidade|termos|contato|politica-assinatura)(\.html)?$/.test(ruta)) return;
+  // 2 Nov 2026 (dueño: «Sí, solo desde el QR»; 09:16: «solamente es pasar la llamada»): la página del teléfono (/m/) se abre
+  // solo con el código QR que el programa enseña para pasar al teléfono la llamada del PC (versión 1, viaja en el fragmento;
+  // al recargar, la pestaña lo guarda solo para sí). Las invitaciones y la sala de casa (versión 2) siguen siendo solo del PC.
+  if (/^\/m\/(index\.html)?$/.test(ruta)) {
+    var codigo = location.hash.slice(1);
+    if (!codigo) { try { codigo = sessionStorage.getItem('guardiana-codigo') || ''; } catch (_) {} }
+    var datos = null;
+    try { datos = JSON.parse(atob(codigo.replace(/-/g, '+').replace(/_/g, '/'))); } catch (_) {}
+    if (datos && datos.v === 1 && !datos.sala) return;
+  }
 
   // el idioma del aviso: el de la página; en las de la app, el que se eligió en GUARDIANA o el del aparato
   var l = (document.documentElement.getAttribute('lang') || 'es').toLowerCase();
