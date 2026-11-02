@@ -16,6 +16,8 @@ set -euo pipefail
 cd "$(dirname "$0")/../.."
 T="${RUNNER_TEMP:-$(mktemp -d)}"
 URL_LOCAL=http://127.0.0.1:8793/vpn/alta
+# con pipefail, «orden | grep -q» falla si grep sale antes de que la orden termine de escribir: se lee todo primero
+tiene() { local patron="$1"; shift; grep -qE -- "$patron" <<< "$("$@" 2>&1 || true)"; }
 
 ok() { printf '✓ %s\n' "$*"; }
 falla() { printf '::error title=vpn-servidor::%s\n' "$*"; exit 1; }
@@ -63,12 +65,12 @@ fi
 for s in guardiana-wg0 guardiana-vpn-red unbound guardiana-vpn-alta; do
   systemctl -q is-active "$s" || falla "$s no está activo"
 done
-ip -4 addr show wg0 | grep -q 'inet 10.66.0.1/16' || falla "wg0 sin 10.66.0.1/16"
+tiene 'inet 10\.66\.0\.1/16' ip -4 addr show wg0 || falla "wg0 sin 10.66.0.1/16"
 [ "$(sudo wg show wg0 listen-port)" = 51820 ] || falla "wg0 no escucha en 51820"
 sudo nft list table inet guardiana_vpn > /dev/null || falla "sin la tabla de reglas del túnel"
 ok "vpn.sh: wg0 en 10.66.0.1/16 y UDP 51820, reglas, Unbound y el alta, activos"
 getent hosts github.com > /dev/null || falla "tras vpn.sh, el servidor ya no resuelve nombres"
-if resolvectl dns 2> /dev/null | grep -q '127\.0\.0\.1'; then falla "Unbound se ha puesto de resolutor del propio servidor"; fi
+if tiene '127\.0\.0\.1' resolvectl dns; then falla "Unbound se ha puesto de resolutor del propio servidor"; fi
 ok "el servidor sigue resolviendo como antes (Unbound no se ha metido en su DNS)"
 escucha=$(sudo ss -Hulpn 'sport = :53' | awk '/unbound/ {print $4}' | sort -u | tr '\n' ' ')
 [ "$escucha" = "10.66.0.1:53 " ] || falla "Unbound escucha en: $escucha"
@@ -76,7 +78,7 @@ escucha=$(sudo ss -Hulpn 'sport = :53' | awk '/unbound/ {print $4}' | sort -u | 
 resuelve() {
   local i
   for i in $(seq 1 10); do
-    "$@" +short +time=3 +tries=1 example.com A 2> /dev/null | grep -qE '^[0-9.]+$' && return 0
+    tiene '^[0-9.]+$' "$@" +short +time=3 +tries=1 example.com A && return 0
     sleep 1
   done
   "$@" example.com A >&2 || true
@@ -103,7 +105,7 @@ sudo pkill -KILL -u gvpn 2> /dev/null || true
 
 u1=$(equipo e1 "$URL_LOCAL" 71) || falla "el alta de e1 no salió"
 llega e1 || falla "e1 no llega al servidor por el túnel"
-sudo wg show wg0 preshared-keys | awk '$2 != "(none)"' | grep -q . || falla "el par no tiene llave postcuántica"
+tiene '[[:space:]][A-Za-z0-9+/]{43}=' sudo wg show wg0 preshared-keys || falla "el par no tiene llave postcuántica"
 ok "e1 ($u1): alta postcuántica y túnel"
 resuelve sudo ip netns exec e1 dig @10.66.0.1 || falla "e1 no resuelve por el túnel"
 c=$(sudo ip netns exec e1 curl -sS --max-time 20 -o /dev/null -w '%{http_code}' https://example.com/) || true
@@ -198,11 +200,11 @@ sleep 1
 t1=$(tam)
 [ "$t1" -gt "$t0" ] || falla "el TURN-TLS (sin ALPN, con el nombre del motor) ya no llega a coturn"
 for sni in vpn.guardianagroup.com motor-hel.guardianagroup.com; do
-  timeout 5 openssl s_client -connect 127.0.0.1:443 -servername "$sni" -alpn http/1.1 -verify_return_error < /dev/null 2>&1 \
-    | grep -q 'Verify return code: 0' || falla "con ALPN, $sni no llega a Caddy"
+  tiene 'Verify return code: 0' timeout 5 openssl s_client -connect 127.0.0.1:443 -servername "$sni" -alpn http/1.1 \
+    -verify_return_error < /dev/null || falla "con ALPN, $sni no llega a Caddy"
 done
-timeout 5 openssl s_client -connect 127.0.0.1:443 -servername vpn.guardianagroup.com -verify_return_error < /dev/null 2>&1 \
-  | grep -q 'Verify return code: 0' || falla "sin ALPN, vpn.guardianagroup.com no llega a Caddy"
+tiene 'Verify return code: 0' timeout 5 openssl s_client -connect 127.0.0.1:443 -servername vpn.guardianagroup.com \
+  -verify_return_error < /dev/null || falla "sin ALPN, vpn.guardianagroup.com no llega a Caddy"
 sleep 1
 [ "$(tam)" = "$t1" ] || falla "algo que debía ir a Caddy ha ido a coturn"
 ok "el TURN-TLS sigue yendo a coturn; la web y el alta, a Caddy"
