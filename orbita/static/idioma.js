@@ -3866,6 +3866,8 @@
     "Navegador": ["Browser", "Navegador"],
     "Guion": ["Script", "Script"],
     "Copias de seguridad": ["Backups", "Backups"],
+    "Arranca solo": ["Starts on its own", "Inicia sozinho"],
+    "Secuestro de archivos": ["File hijacking (ransomware)", "Sequestro de arquivos (ransomware)"],
     "La versión instalada del programa aún no ofrece esta lectura": ["The installed version of the program does not offer this reading yet", "A versão instalada do programa ainda não oferece esta leitura"],
     "Identificación de destinos": ["Destination identification", "Identificação de destinos"],
     "Servicios de IA": ["AI services", "Serviços de IA"],

@@ -929,7 +929,7 @@
   }
   // El escudo de GUARDIANA (1.0.52): lo que vio el antivirus del propio programa (GET /api/escudo). Sus avisos llegan
   // escritos por el programa; los graves primero. Nombres, no rutas. Una versión anterior no lo ofrece: entonces no aparece.
-  const REGLA_ESCUDO = { primera_vez: 'Primera vez', muestra_conocida: 'Muestra conocida', ladron: 'Datos guardados', documento: 'Documento', navegador: 'Navegador', guion: 'Guion', copias: 'Copias de seguridad' };
+  const REGLA_ESCUDO = { primera_vez: 'Primera vez', muestra_conocida: 'Muestra conocida', ladron: 'Datos guardados', documento: 'Documento', navegador: 'Navegador', guion: 'Guion', copias: 'Copias de seguridad', arranque: 'Arranca solo', secuestro: 'Secuestro de archivos' };
   function filaAviso(a) {
     const grave = a.grave === true, regla = typeof a.regla === 'string' && Object.prototype.hasOwnProperty.call(REGLA_ESCUDO, a.regla) ? REGLA_ESCUDO[a.regla] : null;
     const sitio = a.regla === 'primera_vez' ? limpia(a.sitio, 120, false) : '';
