@@ -859,5 +859,6 @@ ${doc.secciones.map(tabla).join('')}<p class="nota">${esc(doc.final)}</p></body>
   if (q.get('nucleo') === 'pide' && SALA_ACTIVA) { try { history.replaceState(Object.assign({}, history.state || {}, { nucleo: 'sala' }), ''); } catch (_) {} abreSala(false, vuelta() === 'nucleo' ? camino : null); }
   else if (q.get('nucleo') === '0' || PUERTA_EN_URL) botonInicio(true);
   else muestraInicio(visto);
-  window.GuardianaNucleo = { inicio: () => muestraInicio(true), sala: () => abreSala(), pide: escribe };
+  // cierra: el Escáner PC, cuando lo abre un aviso de Windows con Órbita ya abierta (1 Nov 2026)
+  window.GuardianaNucleo = { inicio: () => muestraInicio(true), sala: () => abreSala(), pide: escribe, cierra: () => cierraTodo() };
 })();

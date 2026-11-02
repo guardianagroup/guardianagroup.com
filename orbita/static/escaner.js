@@ -464,6 +464,30 @@
     ['limites', 'Límites y cómo se midió', 'Duración real, lo que no se midió y las fuentes.'],
   ];
   const nn = (i) => String(i + 1).padStart(2, '0');
+  // The program's antivirus at a glance on the cover (1.0.52; the owner, 1 Nov 2026, 19:29): its grave warnings, read as
+  // soon as this section opens, before any scan (a reading: no click needed). A click on Windows' notice of a grave
+  // warning lands here. Nothing when the installed program does not offer the reading or has no grave warning.
+  let escudoPortada = null, escudoPedido = 0;
+  function miraEscudo() {
+    if (!enPrograma() || Date.now() - escudoPedido < 15000) return;
+    escudoPedido = Date.now();
+    pide('GET', '/api/escudo', 12000).then((r) => {
+      if (!r || !r.ok || !r.json || typeof r.json !== 'object') return;
+      escudoPortada = r.json; pintaEscudoPortada();
+    });
+  }
+  function pintaEscudoPortada() {
+    if (!portada) return;
+    const viejo = portada.querySelector('.esc-escudo-aviso'); if (viejo) viejo.remove();
+    if (!escudoPortada || !enPrograma()) return;
+    const graves = lista(escudoPortada.avisos).filter((a) => a && typeof a === 'object' && a.grave === true && typeof a.texto === 'string');
+    if (!graves.length) return;
+    const caja = h('div', { class: 'esc-escudo-aviso', role: 'status' }, h('p', { class: 'esc-k' }, 'El escudo de GUARDIANA'),
+      h('h2', null, dato(num(graves.length)), ' ', h('span', null, graves.length === 1 ? 'aviso grave' : 'avisos graves')),
+      h('ul', { class: 'esc-lista plana' }, graves.slice(0, 3).map(filaAviso)),
+      h('p', { class: 'esc-nota' }, 'Todos sus avisos están en el informe, en «Protección».'));
+    const lead = portada.querySelector('.esc-lead'); if (lead) lead.after(caja); else portada.prepend(caja);
+  }
   function pintaPortada(prog) {
     const clave = (prog ? 'p' : 'w') + lang();
     if (portada.dataset.clave === clave) return;
@@ -480,6 +504,7 @@
       portada.append(lienzo, h('p', { class: 'esc-k' }, 'Inspección de este equipo'), h('h1', { id: 'esc-titulo' }, 'Examen completo de este equipo'),
         h('p', { class: 'esc-lead' }, 'Protección y antivirus, cámara, micrófono y pantalla, control remoto, lo que arranca solo y lo que vino de fábrica, telemetría y todo lo que este equipo envía fuera. Una sola lectura, con las mediciones del programa GUARDIANA instalado aquí.'),
         b, h('p', { class: 'esc-nota-boton' }, 'La revisión de Windows puede tardar unos minutos; el resto aparece en cuanto llega.'), hechos, examina);
+      pintaEscudoPortada();
     } else {
       const a = h('a', { class: 'esc-boton web', href: DESCARGA, html: I_BAJA }); a.append(h('span', null, 'Descargar GUARDIANA para Windows'));
       portada.append(lienzo, h('p', { class: 'esc-k' }, 'Escáner PC · Para Windows'), h('h1', { id: 'esc-titulo' }, 'Examen completo de este equipo'),
@@ -929,7 +954,7 @@
   }
   // El escudo de GUARDIANA (1.0.52): lo que vio el antivirus del propio programa (GET /api/escudo). Sus avisos llegan
   // escritos por el programa; los graves primero. Nombres, no rutas. Una versión anterior no lo ofrece: entonces no aparece.
-  const REGLA_ESCUDO = { primera_vez: 'Primera vez', muestra_conocida: 'Muestra conocida', ladron: 'Datos guardados', documento: 'Documento', navegador: 'Navegador', guion: 'Guion', copias: 'Copias de seguridad', arranque: 'Arranca solo', secuestro: 'Secuestro de archivos' };
+  const REGLA_ESCUDO = { primera_vez: 'Primera vez', muestra_conocida: 'Muestra conocida', ladron: 'Datos guardados', documento: 'Documento', navegador: 'Navegador', guion: 'Guion', copias: 'Copias de seguridad', arranque: 'Arranca solo', secuestro: 'Secuestro de archivos', lector: 'Lector de PDF o correo', comprimido: 'Archivo comprimido' };
   function filaAviso(a) {
     const grave = a.grave === true, regla = typeof a.regla === 'string' && Object.prototype.hasOwnProperty.call(REGLA_ESCUDO, a.regla) ? REGLA_ESCUDO[a.regla] : null;
     const sitio = a.regla === 'primera_vez' ? limpia(a.sitio, 120, false) : '';
@@ -1415,7 +1440,7 @@
     window.OrbitaTapada = true;
     mueveIdiomas(true);
     if (boton) boton.setAttribute('aria-pressed', 'true');
-    pintaTodo(); rehaceFeed();
+    pintaTodo(); rehaceFeed(); miraEscudo();
     if (op.escanea && !S && enPrograma()) escanea();
     setTimeout(() => { if (!abierto) return; const t = portada.hidden ? C.cabT : portada.querySelector('h1'); if (t) { t.setAttribute('tabindex', '-1'); t.focus({ preventScroll: true }); } else cuerpo.focus({ preventScroll: true }); }, 80);
     return true;
@@ -1447,6 +1472,14 @@
   addEventListener('popstate', (e) => {
     if (e.state && e.state.escaner) { if (!abierto) abre({ apila: false }); }
     else if (abierto) cierra();
+  });
+  // with Órbita already open, a click on Windows' notice of a grave warning (guardiana://escaner) only changes the
+  // address's fragment: it opens this section as an arrival
+  addEventListener('hashchange', () => {
+    if (location.hash !== '#escaner' || abierto) return;
+    try { history.replaceState({ escaner: 1, llegada: 1 }, '', location.pathname + location.search + '#escaner'); } catch (_) {}
+    if (window.GuardianaNucleo && typeof window.GuardianaNucleo.cierra === 'function') try { window.GuardianaNucleo.cierra(); } catch (_) {}
+    abre({ apila: false });
   });
   // the keys: Esc leaves; Tab stays inside; nothing reaches the planet's own keys (the doors' arrows) while this is open
   function teclas(e) {
