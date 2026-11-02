@@ -280,16 +280,17 @@
       const bien = c === codConfirmado, grande = codAbierto || (!bien && !codPlegado), num = c.slice(0, 3) + ' ' + c.slice(3);
       $('#ll-cod-t').textContent = card.dataset.cambio === '1' && !bien ? t('El código ha cambiado') : t('Código de seguridad');
       $('#ll-cod-num').textContent = num; $('#ll-cod-num').setAttribute('aria-label', t('Código de seguridad') + ': ' + c.split('').join(' '));
-      const quien = (o.nombre && o.nombre()) || t('la otra persona');
-      const tx = $('#ll-cod-texto'); tx.textContent = t('Díselo en voz alta a {n}. Tiene que ver el mismo número en su pantalla.').replace('{n}', quien);
-      const sm = document.createElement('small'); sm.textContent = t('Si no coincide, cuelga: puede haber alguien en medio.'); tx.appendChild(sm);
+      // (dueño, 15:56: «díselas en voz alta a la otra persona o comprueba con la otra persona de que los números coinciden, lo más
+      // profesional que puedas»)
+      const tx = $('#ll-cod-texto'); tx.textContent = t('Léelo en voz alta y comprueba con la otra persona que los números coinciden.');
+      const sm = document.createElement('small'); sm.textContent = t('Si no coinciden, cuelga: alguien podría estar interceptando la llamada.'); tx.appendChild(sm);
       $('#ll-cod-si').hidden = bien; $('#ll-cod-no').hidden = bien;
       const eraVisible = !card.hidden;
       if (grande && (anima || !eraVisible)) { card.classList.remove('cambia'); void card.offsetWidth; card.classList.add('cambia'); }
       card.hidden = !grande; chip.hidden = grande;
       chip.classList.toggle('bien', bien);
       chip.textContent = (bien ? '✓ ' : '') + t('Código') + ' ' + num;
-      chip.setAttribute('aria-label', t('Código de seguridad') + ' ' + num + ' · ' + (bien ? t('coincide') : t('Comprobar')));
+      chip.setAttribute('aria-label', t('Código de seguridad') + ' ' + num + ' · ' + (bien ? t('coinciden') : t('Comprobar')));
       // en grande 30 s; si nadie toca, se pliega en la píldora (que lo vuelve a abrir)
       if (!grande) clearTimeout(codPlegarT);
       else if (!eraVisible) { clearTimeout(codPlegarT); codPlegarT = setTimeout(() => { codPlegado = true; codAbierto = false; muestraCod(false); }, 30000); }
@@ -299,11 +300,11 @@
       codConfirmado = c; codPlegado = false; codAbierto = false; clearTimeout(codPlegarT);
       // atado al número de seguridad: si el código coincide, el número también (en el blindado, la conversación queda verificada)
       if (sas && sas.estado === 'pendiente' && sas.numero) sasCoinciden();
-      muestraCod(false); di(t('El código coincide.')); setTimeout(() => { if (paso.textContent === t('El código coincide.')) di(''); }, 3000);
+      muestraCod(false); di(t('Los números coinciden.')); setTimeout(() => { if (paso.textContent === t('Los números coinciden.')) di(''); }, 3000);
     }
     function codNoCoincide() {
       if (estado !== 'hablando') return;
-      const msg = t('Llamada colgada: el código no coincidía. Puede haber alguien en medio: no habléis de nada delicado y volved a llamar.');
+      const msg = t('Llamada colgada: los números no coincidían. Alguien podría estar interceptando la llamada: no habléis de nada delicado y volved a llamar.');
       if (sas && sas.estado === 'pendiente' && sas.numero) sasNoCoinciden(); else colgar();
       o.aviso && o.aviso(msg);
     }

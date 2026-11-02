@@ -2,9 +2,9 @@
 // en el medio de la pantalla… dile este número… en voz alta para ver si coincide. En caso de que no coincida, cortar la llamada… Y que
 // también se pueda hacer desde el móvil»), y la vuelta al cifrado de siempre si un lado no descifra (14:45–14:48, el iPhone).
 // En la prueba la llave cambia cada 8 s.
-//   1. PC ↔ PC: en las dos pantallas, en el centro, el mismo código de 6 cifras con «Díselo en voz alta a…» y «Coincide» /
-//      «No coincide»; arriba ya no sale. «Coincide» lo pliega en una píldora con ✓. Al cambiar la llave vuelve a salir, «El código
-//      ha cambiado», el mismo en los dos. «No coincide» cuelga a los dos y lo explica.
+//   1. PC ↔ PC: en las dos pantallas, en el centro, el mismo código de 6 cifras con «Léelo en voz alta y comprueba…» y
+//      «Coinciden» / «No coinciden»; arriba ya no sale. «Coinciden» lo pliega en una píldora con ✓. Al cambiar la llave vuelve a salir, «El código
+//      ha cambiado», el mismo en los dos. «No coinciden» cuelga a los dos y lo explica.
 //   2. Pasada al teléfono: el teléfono y el PC de la otra persona enseñan el mismo código (sin número de seguridad: va atado a la
 //      llave de la sala) y, al cambiar la llave, otra vez el mismo.
 //   3. Un lado con otra llave (como un navegador que no cuadra): a los pocos segundos, los dos vuelven al cifrado de siempre, se
@@ -60,12 +60,12 @@ async function pcpc(browser, extra) {
     const a = await vista(A), b = await vista(B);
     comprueba(a.tarjeta && b.tarjeta && /^\d{6}$/.test(a.num) && a.num === b.num && a.num === a.codigo, '1. el mismo código, en grande en el centro, en las dos pantallas', { A: a.num, B: b.num });
     comprueba(/rgb\(255, 7\d, 6\d\)/.test(a.color), '1. en rojo', a.color);
-    comprueba(/^Díselo en voz alta a .+\. Tiene que ver el mismo número en su pantalla\./.test(a.texto) && /Si no coincide, cuelga/.test(a.texto), '1. «Díselo en voz alta a…»', a.texto);
+    comprueba(/^Léelo en voz alta y comprueba con la otra persona que los números coinciden\./.test(a.texto) && /Si no coinciden, cuelga/.test(a.texto), '1. «Léelo en voz alta y comprueba con la otra persona…»', a.texto);
     comprueba(!a.arriba && !b.arriba, '1. arriba, en pequeño, ya no sale');
     await A.screenshot({ path: path.join(OUT, '1-a-codigo.png') });
     await A.click('#ll-cod-si'); await espera(400);
     const a2 = await vista(A), b2 = await vista(B);
-    comprueba(!a2.tarjeta && /^✓ Código \d{3} \d{3}$/.test(a2.pildora) && b2.tarjeta, '1. «Coincide» en A: la pliega en la píldora con ✓ (en B sigue)', { A: a2.pildora, B: b2.tarjeta });
+    comprueba(!a2.tarjeta && /^✓ Código \d{3} \d{3}$/.test(a2.pildora) && b2.tarjeta, '1. «Coinciden» en A: la pliega en la píldora con ✓ (en B sigue)', { A: a2.pildora, B: b2.tarjeta });
     await A.screenshot({ path: path.join(OUT, '1-a-coincide.png') });
     await B.click('#ll-cod-si'); await espera(300);
     // cambia la llave: vuelve a salir, el mismo en los dos
@@ -77,7 +77,7 @@ async function pcpc(browser, extra) {
     await B.click('#ll-cod-no');
     const fin = await hasta(async () => (await estado(A)) !== 'hablando' && (await estado(B)) !== 'hablando', 8000);
     const av = await B.evaluate(() => { const e = document.querySelector('#aviso'); return e && !e.hidden ? e.textContent : ''; });
-    comprueba(fin && /el código no coincidía/.test(av), '1. «No coincide»: se cuelga a los dos y lo explica', { av });
+    comprueba(fin && /los números no coincidían/.test(av), '1. «No coinciden»: se cuelga a los dos y lo explica', { av });
     await B.screenshot({ path: path.join(OUT, '1-b-no-coincide.png') });
     await A.context().close(); await B.context().close();
   }
