@@ -1508,6 +1508,8 @@
     if (!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia)) { const b = $('#videollamar'); if (b) b.hidden = true; }
     LL = GuardianaLlamada.crea({
       ice: iceCercano, servidor: servidorLlamada, puede: puedeLlamar, t: T, aviso, suena: LLEVAR ? () => {} : avisaSonido, fin: anotaLlamada, estado: avisaLlamada,
+      // la llamada se ha cortado (2 Nov 2026, wifi y datos): ¿sigue viva la conexión con el relé? Si no contesta en 3 s, se abre otra
+      red: () => { try { if (R && R.despierta) R.despierta(); } catch (_) {} },
       // pasar la llamada al teléfono: el botón (en el PC), la llave que llega de la otra persona, y lo que avisa la otra parte
       llevar: LLEVAR ? null : () => abreLlevar(), sencilla: !!LLEVAR, medios: llaveMedios,
       alLlevar: (k) => alLlevar(k), llevarNo: () => llevarNo(), llevarVisto: () => llevarVisto(), llevarListo: () => llevarListo(),
@@ -1855,6 +1857,7 @@
     };
     // arriba: «Desconectado» hasta que la conversación con la otra persona está establecida; entonces «Conectado» (dueño, 20:21)
     R.on('abierto', () => { pintaBarra(); });
+    R.on('abierto', () => { try { if (LL && LL.red) LL.red(); } catch (_) {} });
     // en cada conexión nueva con el relé, la suscripción de avisos se presenta otra vez (el relé la guarda por conexión; 15:40: «emisor y
     // receptor tienen que estar coordinados»)
     R.on('hola', () => { for (const c of CONVS.values()) pintaCabecera(c); pintaBarra(); avisosFirma = ''; sincronizaAvisos(); alHolaNumero().catch((e) => console.warn('número', e)); });
@@ -4716,6 +4719,8 @@
     terminada: ['Llamada terminada', 'Puedes cerrar esta pestaña. En este teléfono no queda nada de la llamada.'],
     invalida: ['Este código ya no sirve', 'Pide que te enseñen un código nuevo en el ordenador.'],
     permiso: ['Sin acceso a la cámara y al micrófono', 'Permítelos en los ajustes del navegador y vuelve a intentarlo.'],
+    // (2 Nov 2026, dueño, 13:34: «a mi amigo en el Android se le queda como pensando») si en 45 s no llega la llamada, se dice
+    tarda: ['La llamada no llega', 'Comprueba que el ordenador sigue en la videollamada y vuelve a pulsar «Pasar al teléfono».'],
   };
   let llevarEstado = '';
   function pintaLlevar(estado) {
@@ -4727,7 +4732,7 @@
     const recuperable = estado === 'cortada' || estado === 'ausente';
     $('#llevar-volver').hidden = !recuperable;
     $('#llevar-colgar').hidden = !recuperable && estado !== 'conectando';
-    $('#llevar-reintentar').hidden = estado !== 'permiso';
+    $('#llevar-reintentar').hidden = estado !== 'permiso' && estado !== 'tarda';
     $('#llevar-aviso').hidden = !(estado === 'conectando' || recuperable);
   }
   async function arrancaLlevar() {
@@ -4745,7 +4750,12 @@
     $('#llevar-reintentar').addEventListener('click', () => location.reload());
     // el aviso de cierre, abajo y discreto unos segundos al empezar (el de «No molestar» va en la pantalla de «Conectando…»)
     let primera = true;
+    // (2 Nov 2026) con la llamada ya en marcha, la pantalla de «Conectando…» se quita aunque se hubiera perdido el aviso de que
+    // empezó; y si en 45 s no ha llegado ninguna llamada, se dice qué hacer en vez de quedarse pensando
+    setInterval(() => { if (LL && LL.estado === 'hablando' && (llevarEstado === 'conectando' || llevarEstado === 'tarda')) alEstado('hablando'); }, 1000);
+    setTimeout(() => { if (llevarEstado === 'conectando' && (!LL || LL.estado === 'libre')) pintaLlevar('tarda'); }, 45000);
     const alEstado = window.gcomLlevarEstado = (est) => {
+      if ((est === 'entrante' || est === 'conectando') && llevarEstado === 'tarda') pintaLlevar('conectando');
       if (est === 'hablando') {
         pintaLlevar('llamada');
         if (primera) { primera = false; const n = $('#llevar-nota'); n.hidden = false; setTimeout(() => { n.hidden = true; }, 8000); }
