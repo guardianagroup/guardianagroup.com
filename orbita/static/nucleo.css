@@ -335,3 +335,15 @@ a.nuc-multas-b{text-decoration:none}
 @media (prefers-reduced-motion:reduce){.ns-espera .nuc-bt::after{animation:none}.ns-aviso{animation:none}}
 @media (max-width:350px){.ns-opciones.ns-menu-ops{grid-template-columns:1fr}}
 /* Sin NÚCLEO (dueño, 1 Nov 2026, 16:34): en la web, tres tarjetas; en el programa, cuatro con el Antivirus */
+/* 2 Nov 2026 (dueño, 10:39: «que se vea más… el título tiene que ser más grande y abajo la explicación»): las cinco secciones
+   con su dibujo, un título grande y debajo cómo funciona; en una fila en pantallas anchas, tres y dos en las medianas */
+.nuc-op{gap:10px;padding:20px 20px 22px;border-radius:18px;align-content:start}
+.nuc-op .nuc-ico{width:30px;height:30px;color:#9CC3E4;margin-bottom:2px}
+.nuc-op b{font:600 22px/1.2 'IBM Plex Sans',system-ui,sans-serif;letter-spacing:-.005em;color:#F4F6F8}
+.nuc-op small{font-size:14.5px;line-height:1.5;color:#B4C4D3}
+.nuc-op:hover .nuc-ico{color:#CFE4F5}
+@media (min-width:1200px){.nuc-ini .nuc-ops.con-escaner{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px;width:min(1240px,calc(100vw - 64px))}
+  .nuc-ini .nuc-ops.con-escaner>.nuc-op{flex:none}}
+@media (min-width:900px) and (max-width:1199px){.nuc-ini .nuc-ops.con-escaner{gap:14px;width:min(1000px,calc(100vw - 48px))}.nuc-ini .nuc-ops.con-escaner>.nuc-op{flex-basis:calc((100% - 28px) / 3);padding:20px 22px 22px}.nuc-ini .nuc-op b{font-size:20px}}
+@media (min-width:761px) and (max-width:899px){.nuc-ini .nuc-ops.con-escaner{width:min(760px,calc(100vw - 48px))}}
+@media (max-width:760px){.nuc-op b{font-size:20px}.nuc-op small{font-size:14px}}
