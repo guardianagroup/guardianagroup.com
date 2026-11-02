@@ -493,7 +493,7 @@
     if (portada.dataset.clave === clave) return;
     portada.dataset.clave = clave; portada.textContent = '';
     const hechos = h('div', { class: 'esc-hechos' },
-      h('div', { class: 'esc-hecho' }, h('b', null, 'Solo lectura'), h('span', null, 'No cambia ningún ajuste ni instala nada.')),
+      h('div', { class: 'esc-hecho' }, h('b', null, 'Lee; aparta solo si tú lo pides'), h('span', null, 'No cambia ningún ajuste ni instala nada. Lo único que hace, y solo cuando pulsas el botón, es poner en cuarentena un archivo que el escudo señaló; siempre se puede devolver.')),
       h('div', { class: 'esc-hecho' }, h('b', null, 'En este equipo'), h('span', null, 'El informe vive en esta página: no se envía a GUARDIANA ni a nadie.')),
       h('div', { class: 'esc-hecho' }, h('b', null, 'Sin cifras inventadas'), h('span', null, 'Cada dato dice de dónde sale. Lo que no se pudo medir se dice, con su motivo.')));
     const examina = h('div', { class: 'esc-examina' }, h('h2', { class: 'esc-rot' }, 'Qué examina'),
@@ -954,14 +954,38 @@
   }
   // El escudo de GUARDIANA (1.0.52): lo que vio el antivirus del propio programa (GET /api/escudo). Sus avisos llegan
   // escritos por el programa; los graves primero. Nombres, no rutas. Una versión anterior no lo ofrece: entonces no aparece.
-  const REGLA_ESCUDO = { primera_vez: 'Primera vez', muestra_conocida: 'Muestra conocida', ladron: 'Datos guardados', documento: 'Documento', navegador: 'Navegador', guion: 'Guion', copias: 'Copias de seguridad', arranque: 'Arranca solo', secuestro: 'Secuestro de archivos', lector: 'Lector de PDF o correo', comprimido: 'Archivo comprimido', proteccion: 'Protección de Windows', hosts: 'Archivo hosts', sin_nombre: 'Conexión sin nombre', disfraz: 'Disfraz', credenciales: 'Credenciales', defensor: 'Microsoft Defender', engano: 'Engaño' };
+  const REGLA_ESCUDO = { primera_vez: 'Primera vez', muestra_conocida: 'Muestra conocida', ladron: 'Datos guardados', documento: 'Documento', navegador: 'Navegador', guion: 'Guion', copias: 'Copias de seguridad', arranque: 'Arranca solo', secuestro: 'Secuestro de archivos', lector: 'Lector de PDF o correo', comprimido: 'Archivo comprimido', proteccion: 'Protección de Windows', hosts: 'Archivo hosts', sin_nombre: 'Conexión sin nombre', disfraz: 'Disfraz', credenciales: 'Credenciales', defensor: 'Microsoft Defender', engano: 'Engaño', medio: 'Desde un USB o una imagen' };
+  // La cuarentena (1.0.52; el dueño, 1 nov 2026, ronda 88): solo archivos que el propio escudo señaló, nunca dentro de la
+  // carpeta de Windows ni de los programas instalados, y siempre restaurable desde el panel del programa. El programa dice
+  // en cada aviso si se puede («posible») o si ya está («hecha»); la web lo pide por el id del aviso, nunca por una ruta.
+  const ID_AVISO = /^\d{1,6}-\d{1,16}$/;
+  function cuarentenaDe(a) {
+    if (a.cuarentena === 'hecha') return h('span', { class: 'esc-marca' }, 'En cuarentena');
+    if (a.cuarentena !== 'posible' || typeof a.id !== 'string' || !ID_AVISO.test(a.id) || !enPrograma()) return null;
+    const id = a.id, b = h('button', { type: 'button', class: 'esc-cuarentena' }, h('span', null, 'Poner en cuarentena'));
+    const nota = h('small', { class: 'esc-cuarentena-nota', role: 'status' });
+    b.addEventListener('click', () => {
+      b.disabled = true; nota.textContent = 'Apartando…';
+      pide('POST', '/api/escudo/cuarentena/' + id, 20000).then((r) => {
+        const j = r && r.json && typeof r.json === 'object' ? r.json : null;
+        if (r && r.ok && j && j.ok === true) {
+          b.replaceWith(h('span', { class: 'esc-marca' }, 'En cuarentena'));
+          nota.textContent = 'Apartado y encriptado. Se devuelve tal cual desde el panel del programa, en «Escudo».';
+          a.cuarentena = 'hecha'; return;
+        }
+        b.disabled = false;
+        nota.textContent = 'No se pudo. ' + (j && typeof j.motivo === 'string' ? limpia(j.motivo, 200) : (r && r.motivo === 'tiempo' ? 'El programa no respondió a tiempo.' : 'El programa no lo permitió.'));
+      });
+    });
+    return h('span', { class: 'esc-cuarentena-caja' }, b, nota);
+  }
   function filaAviso(a) {
     const grave = a.grave === true, regla = typeof a.regla === 'string' && Object.prototype.hasOwnProperty.call(REGLA_ESCUDO, a.regla) ? REGLA_ESCUDO[a.regla] : null;
     const sitio = a.regla === 'primera_vez' ? limpia(a.sitio, 120, false) : '';
     return h('li', null, dato(limpia(a.programa, 80) || '—', null, 'b'), grave ? h('span', { class: 'esc-marca rojo' }, 'Grave') : null,
       regla ? h('span', { class: 'esc-marca' + (grave ? '' : ' fuerte') }, regla) : null,
       esHora(a.cuando_ms) ? h('time', { translate: 'no', datetime: iso(a.cuando_ms) }, fecha(a.cuando_ms)) : null,
-      sitio ? dato(sitio, null, 'small') : null, h('small', { lang: 'es' }, limpia(a.texto, 400)));
+      sitio ? dato(sitio, null, 'small') : null, h('small', { lang: 'es' }, limpia(a.texto, 400)), cuarentenaDe(a));
   }
   function bloqueEscudo() {
     const es = S.d.escudo; if (!es || typeof es !== 'object') return null;

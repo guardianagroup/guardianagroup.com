@@ -368,3 +368,12 @@ body.dentro .escaner-btn, body.m2 .escaner-btn { display: none; }
   .esc-dir-barra .lleno { transition: none; }
 }
 [dir="rtl"] .esc-volver svg, [dir="rtl"] .esc-boton svg { transform: scaleX(-1); }
+
+/* La cuarentena (1.0.52): un botón pequeño en el aviso, y su respuesta debajo. */
+.esc-cuarentena-caja { display: block; margin-top: 6px; }
+.esc-cuarentena { all: unset; box-sizing: border-box; cursor: pointer; display: inline-flex; align-items: center; height: 28px; padding: 0 12px; border-radius: 999px; border: 1px solid rgba(224,122,108,.45); color: var(--e-alerta); font: 500 12px/1 'IBM Plex Sans', system-ui, sans-serif; background: rgba(224,122,108,.08); }
+.esc-cuarentena:hover { background: rgba(224,122,108,.16); }
+.esc-cuarentena:focus-visible { outline: 2px solid #F4F6F8; outline-offset: 3px; }
+.esc-cuarentena:disabled { cursor: progress; opacity: .6; }
+.esc-cuarentena-nota { display: block; margin-top: 5px; }
+.esc-cuarentena-nota:empty { display: none; }
