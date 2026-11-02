@@ -47,6 +47,9 @@ escribe() {
 }
 
 [ "$(id -u)" = 0 ] || { rojo "vpn.sh: hace falta root"; exit 1; }
+# la carpeta de la VPN, lo primero: con ella, el actualizador de este servidor vuelve a ejecutar vpn.sh cuando cambie, aunque
+# esta primera vez la compilación falle (memoria, la red)
+install -d -m 700 /etc/guardiana/vpn
 
 paso "Paquetes: WireGuard, Unbound, nftables y lo necesario para compilar"
 # el paquete de Unbound se ofrece como resolutor del propio servidor (unbound-resolvconf, con 127.0.0.1): aquí no, que
@@ -54,7 +57,6 @@ paso "Paquetes: WireGuard, Unbound, nftables y lo necesario para compilar"
 systemctl mask unbound-resolvconf.service >/dev/null 2>&1 || true
 DEBIAN_FRONTEND=noninteractive apt-get install -y -q wireguard-tools unbound nftables build-essential pkg-config git curl \
   ca-certificates >/var/log/guardiana-vpn-paquetes.log 2>&1
-if [ -f /etc/default/unbound ]; then sed -i 's/^RESOLVCONF=.*/RESOLVCONF=false/' /etc/default/unbound; fi
 if command -v resolvconf >/dev/null 2>&1; then resolvconf -d lo.unbound >/dev/null 2>&1 || true; fi
 
 paso "El programa del alta (commit ${COMMIT:0:7}), compilado por un usuario sin privilegios"
@@ -84,9 +86,10 @@ if [ ! -x "$BIN" ] || [ "$(cat "$ESTADO/compilado" 2>/dev/null || true)" != "$CO
   fi
   # nada de lo que arrancó la compilación (los guiones de compilación de las dependencias) sigue vivo
   pkill -KILL -u gvpn 2>/dev/null || true
-  # lo compilado se lee como gvpn (si fuera un enlace a otro archivo, gvpn no podría leerlo) y root lo escribe en su sitio
+  # lo compilado se lee como gvpn (si fuera un enlace a otro archivo, gvpn no podría leerlo), con un tope de tamaño, y
+  # root lo escribe en su sitio
   nuevo=$(mktemp /usr/local/bin/.guardiana-tunel-servidor.XXXXXX)
-  if ! sudo -u gvpn cat "$VB/target/release/guardiana-tunel-servidor" > "$nuevo" \
+  if ! sudo -u gvpn cat "$VB/target/release/guardiana-tunel-servidor" | head -c 268435456 > "$nuevo" \
      || [ "$(head -c 4 "$nuevo" | od -An -tx1 | tr -d ' \n')" != "7f454c46" ]; then
     rm -f "$nuevo"
     rojo "vpn.sh: lo compilado no se pudo leer o no es un programa"
