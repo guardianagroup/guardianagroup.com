@@ -128,16 +128,39 @@
     for (let i = desde; i <= hasta; i++) { const q = pts[i]; if (q && prev) cx.lineTo(q[0], q[1]); else if (q) cx.moveTo(q[0], q[1]); prev = !!q; }
     cx.stroke();
   }
+  // 2 Nov 2026 (owner, 16:53: «se nota que hay bastantes datos… y se ralentiza bastante»): with hundreds of connections the
+  // glowing heads of the pulses were a new gradient each, every frame. They are drawn once, at the screen's resolution, and
+  // stamped with their transparency: the same light (a gradient times an opacity is the same gradient at that opacity).
+  const SELLOS = {};
+  function sello(tipo) {
+    const dpr = (P() && P().geo && P().geo.DPR) || 1, k = tipo + dpr; if (SELLOS[k]) return SELLOS[k];
+    const R = tipo === 'd' ? 18 : 5, c = document.createElement('canvas'); c.width = c.height = Math.ceil(2 * R * dpr);
+    const g = c.getContext('2d'); g.scale(c.width / (2 * R), c.height / (2 * R));
+    const gr = g.createRadialGradient(R, R, 0, R, R, R);
+    if (tipo === 'd') { gr.addColorStop(0, `rgba(${ROJO},.95)`); gr.addColorStop(1, `rgba(${ROJO},0)`); }
+    else { gr.addColorStop(0, tipo === 'r' ? 'rgba(255,236,232,.95)' : 'rgba(255,255,255,.92)'); gr.addColorStop(0.4, `rgba(${tipo === 'r' ? ROJO : ACENTO},.65)`); gr.addColorStop(1, `rgba(${tipo === 'r' ? ROJO : ACENTO},0)`); }
+    g.fillStyle = gr; g.beginPath(); g.arc(R, R, R, 0, 7); g.fill();
+    return (SELLOS[k] = c);
+  }
   function cabeza(cx, q, rojo, a) {
-    const R = 5, g = cx.createRadialGradient(q[0], q[1], 0, q[0], q[1], R);
-    g.addColorStop(0, rojo ? `rgba(255,236,232,${(0.95 * a).toFixed(3)})` : `rgba(255,255,255,${(0.92 * a).toFixed(3)})`);
-    g.addColorStop(0.4, `rgba(${rojo ? ROJO : ACENTO},${(0.65 * a).toFixed(3)})`); g.addColorStop(1, `rgba(${rojo ? ROJO : ACENTO},0)`);
-    cx.fillStyle = g; cx.beginPath(); cx.arc(q[0], q[1], R, 0, 7); cx.fill();
+    if (a <= 0) return;
+    cx.globalAlpha = Math.min(1, a); cx.drawImage(sello(rojo ? 'r' : 'a'), q[0] - 5, q[1] - 5, 10, 10); cx.globalAlpha = 1;
   }
   function destello(cx, q, k, a) {
-    const rr = 3 + 9 * k, g = cx.createRadialGradient(q[0], q[1], 0, q[0], q[1], rr + 6);
-    g.addColorStop(0, `rgba(${ROJO},${(0.95 * (1 - k * 0.6) * a).toFixed(3)})`); g.addColorStop(1, `rgba(${ROJO},0)`);
-    cx.fillStyle = g; cx.beginPath(); cx.arc(q[0], q[1], rr + 6, 0, 7); cx.fill();
+    const rr = 3 + 9 * k + 6, al = (1 - k * 0.6) * a; if (al <= 0) return;
+    cx.globalAlpha = Math.min(1, al); cx.drawImage(sello('d'), q[0] - rr, q[1] - rr, 2 * rr, 2 * rr); cx.globalAlpha = 1;
+  }
+  // the tails of the pulses, by brightness: one stroke for all the tails' pieces that share it (the same look, a few
+  // orders to the canvas instead of hundreds)
+  const COLAS = new Map();
+  function colaPon(v, a, x0, y0, x1, y1) { const k = Math.round(v * 7) * 32 + Math.round(a * 20); let c = COLAS.get(k); if (!c) COLAS.set(k, (c = { v, a, xy: [] })); c.xy.push(x0, y0, x1, y1); }
+  function colasPinta(cx) {
+    for (const c of COLAS.values()) {
+      if (!c.xy.length) continue;
+      cx.strokeStyle = `rgba(${ACENTO},${((0.1 + 0.7 * c.v) * c.a).toFixed(3)})`; cx.lineWidth = 0.8 + 1.6 * c.v; cx.beginPath();
+      for (let i = 0; i < c.xy.length; i += 4) { cx.moveTo(c.xy[i], c.xy[i + 1]); cx.lineTo(c.xy[i + 2], c.xy[i + 3]); }
+      cx.stroke(); c.xy.length = 0;
+    }
   }
   function pinta(cx, p, G) {
     if (!E) return;
@@ -181,8 +204,9 @@
     }
     // 2 · the pulses: what leaves your PC reaches its place; what GUARDIANA cut bursts in coral against the ring around you
     cx.globalCompositeOperation = 'lighter';
+    const cabezas = [];
     for (const l of vivos) {
-      const r = l.ruta, fase = semilla(l.key + '·pulso');
+      const r = l.ruta, fase = l.fase != null ? l.fase : (l.fase = semilla(l.key + '·pulso'));
       if (r.cerca) {
         // a server next to you: the pulse is a ring that opens around your PC (in coral, it stops at GUARDIANA's ring)
         if (!casa) continue;
@@ -203,9 +227,9 @@
         for (let i = Math.max(1, cab - cola); i <= cab; i++) {
           const q0 = pts[i - 1], q1 = pts[i]; if (!q0 || !q1) continue;
           const v = 1 - (cab - i) / cola; if (v <= 0) continue;
-          cx.strokeStyle = `rgba(${ACENTO},${((0.1 + 0.7 * v) * l.a).toFixed(3)})`; cx.lineWidth = 0.8 + 1.6 * v; cx.beginPath(); cx.moveTo(q0[0], q0[1]); cx.lineTo(q1[0], q1[1]); cx.stroke();
+          colaPon(v, l.a, q0[0], q0[1], q1[0], q1[1]);
         }
-        if (pts[cab]) cabeza(cx, pts[cab], false, l.a);
+        if (pts[cab]) cabezas.push(pts[cab][0], pts[cab][1], l.a);
       }
       // what GUARDIANA cut: it leaves your PC and stops at the ring
       const nc = tandas(l.corta), tope = Math.max(1, r.sale);
@@ -215,6 +239,8 @@
         const cab = Math.round((f / 0.78) * tope), q = pts[cab]; if (q) cabeza(cx, q, true, l.a);
       }
     }
+    colasPinta(cx);
+    for (let i = 0; i < cabezas.length; i += 3) cabeza(cx, [cabezas[i], cabezas[i + 1]], false, cabezas[i + 2]);
     cx.globalCompositeOperation = 'source-over';
     // 3 · GUARDIANA's ring around your PC, while there is something cut
     if (casa && E.aRing > 0.01) {
@@ -237,7 +263,9 @@
     if (casa) etiqueta(cx, casa[0], casa[1], anilloR + 8, L.aprox || !L.nombre ? T('Tu PC') : T('Tu PC') + ' · ' + corto(String(L.nombre), 28), true, null, G.W);
     if (E.res) {
       const K = G.W >= 1200 ? 5 : G.W >= 760 ? 4 : 3, porLugar = new Map();
-      const top = [...E.res.empresas.values()].sort((a, b) => b.n - a.n || a.nombre.localeCompare(b.nombre)).slice(0, K);
+      // the biggest companies change only with a new answer of the program: sorted once per answer, not once per frame
+      if (E.res.topK !== K) { E.res.top = [...E.res.empresas.values()].sort((a, b) => b.n - a.n || a.nombre.localeCompare(b.nombre)).slice(0, K); E.res.topK = K; }
+      const top = E.res.top;
       for (const em of top) {
         let mejor = null, mv = -1;
         for (const l of vivos) { if (l.t1) continue; const x = l.empresas.get(em.nombre); if (x && x.n > mv) { mv = x.n; mejor = l; } }

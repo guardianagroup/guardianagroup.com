@@ -2579,5 +2579,18 @@
       const listo = () => capas.sub && FT;
       return new Promise((ok) => { const mira = () => listo() ? ok(this.red) : setTimeout(mira, 120); mira(); });
     } };
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', arranca); else arranca();
+  // 2 Nov 2026 (owner, 16:53 and 17:14: «que no vaya a tirones… cuando pasemos de uno a otro»): with GUARDIANA's cover up
+  // (html.con-portada), the planet's data (some megabytes of cables, places and photos to read) wait until the cover has
+  // finished being born, or until the planet is uncovered, whichever comes first: reading them used to stall the cover's
+  // own entrance on a slow computer. Without the cover (?nucleo=0, a section in the address) they load at once, as before.
+  function cuando() {
+    const R = document.documentElement;
+    if (!R.classList.contains('con-portada') || window.GuardianaPortadaQuieta || !window.OrbitaTapada) { arranca(); return; }
+    let ido = false;
+    const va = () => { if (ido) return; ido = true; removeEventListener('guardiana-portada-quieta', va); removeEventListener('orbita-tapada', mira); arranca(); };
+    const mira = () => requestAnimationFrame(() => { if (!window.OrbitaTapada) va(); }); // a section opened from the cover covers it again at once
+    addEventListener('guardiana-portada-quieta', va); addEventListener('orbita-tapada', mira);
+    setTimeout(va, 15000);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', cuando); else cuando();
 })();

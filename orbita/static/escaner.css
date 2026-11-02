@@ -7,6 +7,7 @@
   font: 400 15px/1.5 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; animation: esc-entra .45s cubic-bezier(.2,.7,.2,1); }
 .escaner[hidden] { display: none; }
 .escaner.sale { animation: esc-sale .26s ease forwards; }
+.escaner.sin-entrada { animation: none; } /* 2 Nov 2026: opened from the main cover, whose fade reveals it (static/escaner.js) */
 @keyframes esc-entra { from { opacity: 0; } to { opacity: 1; } }
 @keyframes esc-sale { to { opacity: 0; } }
 .escaner *, .escaner *::before, .escaner *::after { box-sizing: border-box; }

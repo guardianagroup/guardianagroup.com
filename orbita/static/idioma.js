@@ -98,6 +98,10 @@
     'Ajustes': ['Settings', 'Ajustes'],
     'Atrás': ['Back', 'Voltar'],
     'Volver': ['Back', 'Voltar'],
+    // the strip of facts along the bottom of Órbita (2 Nov 2026, owner, 16:53; static/datos-curiosos.js)
+    'Datos curiosos': ['Curious facts', 'Curiosidades'],
+    'Anterior': ['Previous', 'Anterior'],
+    'Siguiente': ['Next', 'Próximo'],
     'Volver a Órbita': ['Back to Orbit', 'Voltar à Órbita'],
     'Idioma': ['Language', 'Idioma'],
     'Vigilando este equipo y la casa': ['Watching this computer and the home', 'Vigiando este computador e a casa'],

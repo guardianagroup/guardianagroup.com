@@ -417,6 +417,9 @@
     get vista() { return { lon: vista.lon, lat: vista.lat }; },
     get geo() { return { W, H, CX, CY, R, R0, U, DPR }; },
     get dentro() { return dentro; },
+    // one frame now, even while something covers the planet: what is about to uncover it (static/nucleo.js) asks for it
+    // first, so the planet is already there in the first frame of the fade (2 Nov 2026, owner, 17:14: «más fluido»)
+    pintaYa() { if (document.hidden || !G) return; const t = (performance.now() - t0) / 1000; pintaTierra(t, dentro ? 0.9 : 1); pintaRutas(t, 0); },
     get centros() { return centros; }, // country centroids for the country labels and cards (22 Oct 2026)
     get pais() { return (LUGAR && LUGAR.pais) || CASA || null; },
     // 22 Oct 2026: used by the automated checks (Playwright) to look at a place at a given zoom.
@@ -736,6 +739,17 @@ void main(){
       const u = {}; ['uC', 'uR', 'uM', 'uL', 'uT', 'uNubOn', 'uAten', 'uLimpio', 'uSiempreDia', 'uDia', 'uLuz', 'uNub', 'uAgua', 'uZona', 'uZonaT', 'uZonaBox', 'uZonaOn', 'uZonaTOn', 'uColorN', 'uColorK', 'uDim', 'uO', 'uOk'].forEach((k) => { u[k] = gl.getUniformLocation(pr, k); });
       G = { pr, u, tex: {}, nubOn: 0 };
       // mipmaps + anisotropic filtering on a freshly loaded map (all are powers of two); if the card refuses, plain linear
+      // 2 Nov 2026 (owner, 16:53: «que no vaya a tirones»): a map is decoded away from the page's thread (createImageBitmap
+      // on the file's bytes) and only then handed to the graphics card. Before, the 4K map was decoded in the middle of the
+      // page's work: about a second without a single frame on a slow computer while the cover was being born. Where the
+      // browser cannot, the image element as before.
+      const decodifica = (url, listo) => {
+        const conImagen = () => { const im = new Image(); im.onload = () => listo(im); im.src = url; };
+        if (!window.createImageBitmap || !window.fetch) { conImagen(); return; }
+        fetch(url).then((r) => { if (!r.ok) throw new Error(r.status); return r.blob(); })
+          .then((b) => createImageBitmap(b, { premultiplyAlpha: 'none' }))
+          .then(listo, conImagen);
+      };
       const mipea = () => {
         if (!MIP) return;
         gl.generateMipmap(gl.TEXTURE_2D);
@@ -750,9 +764,8 @@ void main(){
         gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
         gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
         gl.uniform1i(u[nombre], unidad);
-        const im = new Image();
-        im.onload = () => { gl.activeTexture(gl.TEXTURE0 + unidad); gl.bindTexture(gl.TEXTURE_2D, t); gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, im); mipea(); if (si) si(); };
-        im.src = url;
+        const sube = (fuente) => { gl.activeTexture(gl.TEXTURE0 + unidad); gl.bindTexture(gl.TEXTURE_2D, t); gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, fuente); mipea(); if (fuente.close) fuente.close(); if (si) si(); };
+        decodifica(url, sube);
       };
       tex(0, 'uDia', TIERRA + 'dia.jpg', () => listo());
       tex(1, 'uLuz', TIERRA + 'luces.jpg');
@@ -768,17 +781,16 @@ void main(){
       G.tex8 = null; G.pide8 = () => {
         if (G.tex8 !== null || matchMedia('(pointer: coarse)').matches || gl.getParameter(gl.MAX_TEXTURE_SIZE) < 8192) return;
         G.tex8 = false;
-        const im = new Image();
-        im.onload = () => {
+        decodifica(TIERRA + 'dia-8k.jpg', (im) => {
           const t = gl.createTexture(); gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, t);
           gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
           gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
           gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, im);
+          if (im.close) im.close();
           G.tex8 = gl.getError() === gl.NO_ERROR ? t : false;
           if (G.tex8) mipea();
           gl.bindTexture(gl.TEXTURE_2D, G.tex.dia);
-        };
-        im.src = TIERRA + 'dia-8k.jpg';
+        });
       };
       // 22 Oct 2026 (owner: «un zoom o dos más, sin perder calidad, sobre todo»): past ×2.6 the planet is painted from
       // a 16K map cut in 32 tiles (static/tierra/dia-16k, NASA, public domain; built by herramientas/mapa_16k.py).
@@ -1014,7 +1026,16 @@ void main(){
     const o = new Float32Array(ONDAS * 4), k = new Float32Array(ONDAS);
     ondas.slice(-ONDAS).forEach((x, i) => { const edad = (t - x.t0) / (x.corte ? 2.6 : 1.8); o.set([...x.w, edad], i * 4); k[i] = x.corte ? 1 : 0; });
     gl.uniform4fv(u.uO, o); gl.uniform1fv(u.uOk, k);
+    // 2 Nov 2026 (owner, 16:53: «que se vea fluido en todo tipo de PCs»): the card paints only the square where there can be
+    // colour, the planet and its air, which is exactly nothing beyond 1.3 radii (the shader's two exp() halos fall below
+    // half a step of 8-bit colour there). Outside it every pixel was transparent anyway; at ×1 that was three quarters of
+    // the screen worked out for nothing in every frame. The same picture, pixel for pixel.
+    const rr = R * DPR * 1.36 + 2, px = CX * DPR, py = (H - CY) * DPR;
+    const x0 = Math.max(0, Math.floor(px - rr)), y0 = Math.max(0, Math.floor(py - rr)), x1 = Math.min(cvT.width, Math.ceil(px + rr)), y1 = Math.min(cvT.height, Math.ceil(py + rr));
+    if (x1 <= x0 || y1 <= y0) return;
+    gl.enable(gl.SCISSOR_TEST); gl.scissor(x0, y0, x1 - x0, y1 - y0);
     gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+    gl.disable(gl.SCISSOR_TEST);
   }
 
   // ---------- Flights, cuts and their traces ----------
@@ -1499,18 +1520,57 @@ void main(){
     setTimeout(pregunta, 3600);
   })();
 
+  // ---------- Who covers the planet (the cover of GUARDIANA, a full-screen section): read in every frame, and its
+  // changes told to whoever has something moving over the planet (the strip of facts, static/datos-curiosos.js) ----------
+  { let tapada = !!window.OrbitaTapada;
+    try { Object.defineProperty(window, 'OrbitaTapada', { configurable: true, get: () => tapada, set: (v) => { v = !!v; if (v === tapada) return; tapada = v; try { dispatchEvent(new CustomEvent('orbita-tapada', { detail: v })); } catch (_) {} } }); } catch (_) {} }
+
+  // ---------- A computer with little power (2 Nov 2026, owner, 16:53: «si son de bajos recursos… que no vaya a tirones…
+  // que se vea fluido en todo tipo de PCs») ----------
+  // <html class="ligero"> when the frames show it: more than half of them slower than 24 ms (under about 42 a second) once
+  // the page has settled, or a machine with two cores or 2 GB. Then the planet, while nobody moves it, is drawn in one frame
+  // of every two (it turns 2.6° a second: a third of a pixel per frame, the same to the eye), the network of the cover too,
+  // and the blur behind the panels goes (static/orbita.css): the same look and the same places. Remembered on this
+  // computer for three days, then measured again. ?ligero=1 or ?ligero=0 decide for this visit.
+  const LIGERO = (() => {
+    const K = 'guardiana-ligero', q = new URLSearchParams(location.search).get('ligero');
+    const pon = (si) => { RAIZ.classList.toggle('ligero', !!si); };
+    if (q === '1' || q === '0') { pon(q === '1'); return { fijo: true }; }
+    let previo = null; try { previo = JSON.parse(localStorage.getItem(K) || 'null'); } catch (_) {}
+    const pocos = (navigator.hardwareConcurrency || 8) <= 2 || (navigator.deviceMemory || 8) <= 2;
+    if (pocos || (previo && Date.now() - previo.t < 3 * 864e5)) pon(true);
+    return { fijo: false, K, pon, n: 0, desde: 0, iv: [] };
+  })();
+  const esLigero = () => RAIZ.classList.contains('ligero');
+  function mideRitmo(ms, now) {
+    const L = LIGERO; if (L.fijo || esLigero()) return;
+    if (document.hidden || ms > 250) { L.desde = now + 2000; L.iv.length = 0; return; } // a stop or a hidden window says nothing
+    if (now < L.desde || now - t0 < 6000) return; // the first seconds of the page are its loading, not its pace
+    L.iv.push(ms); if (L.iv.length < 90) return;
+    const s = L.iv.slice().sort((a, b) => a - b), med = s[45]; L.iv.length = 0;
+    if (med > 24) { L.pon(true); try { localStorage.setItem(L.K, JSON.stringify({ t: Date.now(), med: Math.round(med) })); } catch (_) {} }
+  }
+  // the person is moving the planet (or the camera is): every frame, whatever the computer
+  let mano = 0;
+  ['pointermove', 'pointerdown', 'wheel', 'keydown'].forEach((ev) => addEventListener(ev, () => { mano = performance.now(); }, { passive: true, capture: true }));
+  const enMovimiento = (now) => !!arrastre || !!ancla || !!meta || now - mano < 600 || Math.abs(Math.log(ZOOM.zt / ZOOM.z)) > 1e-5 || Math.abs(vista.vlon) + Math.abs(vista.vlat) > 0.02;
+
   // ---------- The loop ----------
-  let t0 = performance.now(), ultimo = t0, impar = false, empezado = false;
+  let t0 = performance.now(), ultimo = t0, impar = false, empezado = false, deuda = 0;
   function listo() { if (empezado) return; empezado = true; requestAnimationFrame(() => document.body.classList.add('listo')); }
   setTimeout(listo, 2500);
   function cuadro(now) {
     requestAnimationFrame(cuadro);
-    const dt = Math.min(0.05, (now - ultimo) / 1000); ultimo = now;
+    const ms = now - ultimo; ultimo = now;
+    mideRitmo(ms, now);
     const t = (now - t0) / 1000;
     impar = !impar;
-    if (document.hidden) return;
-    if (window.OrbitaTapada) return; // NÚCLEO covers the whole screen: no need to draw the planet (27 Oct 2026)
+    if (document.hidden) { deuda = 0; return; }
+    if (window.OrbitaTapada) { deuda = 0; return; } // NÚCLEO covers the whole screen: no need to draw the planet (27 Oct 2026)
     if (dentro && impar) return; // behind glass, half the frames are enough
+    // a computer with little power, and nobody moving the planet: one frame of two, the time of the other one kept
+    if (impar && esLigero() && !enMovimiento(now)) { deuda += ms; return; }
+    const dt = Math.min(0.05 + deuda / 1000, (ms + deuda) / 1000); deuda = 0;
     while (cola.length && cola[0].at <= now / 1000) lanza(cola.shift(), t);
     while (ondas.length && t - ondas[0].t0 > 3) ondas.shift();
     if (Math.abs(Math.log(ZOOM.zt / ZOOM.z)) > 1e-5) { ZOOM.z *= Math.exp(Math.log(ZOOM.zt / ZOOM.z) * Math.min(1, dt * 4.5)); /* eased in log space: the same glide at ×2 and at ×50 000 (22 Oct 2026) */ if (Math.abs(Math.log(ZOOM.zt / ZOOM.z)) < 1e-4) ZOOM.z = ZOOM.zt; R = R0 * ZOOM.z; RAIZ.style.setProperty('--cerca', Math.min(1, (ZOOM.z - 1) / 19).toFixed(3)); document.body.classList.toggle('hondo', ZOOM.z >= 8); document.body.classList.toggle('explorando', ZOOM.z >= 3); /* 22 Oct 2026, 21:51 (owner): past ×3 the section doors on the left go away; they come back on the way out */ /* 22 Oct 2026, 13:54 (owner): deep in, the top layer buttons step back; 21:35: they stay faint and wake under the pointer */ pintaAltura(); }
