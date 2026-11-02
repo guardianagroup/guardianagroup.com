@@ -72,7 +72,21 @@ if resolvectl dns 2> /dev/null | grep -q '127\.0\.0\.1'; then falla "Unbound se 
 ok "el servidor sigue resolviendo como antes (Unbound no se ha metido en su DNS)"
 escucha=$(sudo ss -Hulpn 'sport = :53' | awk '/unbound/ {print $4}' | sort -u | tr '\n' ' ')
 [ "$escucha" = "10.66.0.1:53 " ] || falla "Unbound escucha en: $escucha"
-dig +short +time=3 +tries=2 @10.66.0.1 example.com A | grep -qE '^[0-9.]+$' || falla "Unbound no resuelve"
+# recién arrancado, Unbound tarda un poco en su primera respuesta (la raíz y DNSSEC): hasta 30 segundos
+resuelve() {
+  local i
+  for i in $(seq 1 10); do
+    "$@" +short +time=3 +tries=1 example.com A 2> /dev/null | grep -qE '^[0-9.]+$' && return 0
+    sleep 1
+  done
+  "$@" example.com A >&2 || true
+  return 1
+}
+if ! resuelve dig @10.66.0.1; then
+  ip route get 10.66.0.1 >&2 || true
+  sudo journalctl -u unbound -n 20 --no-pager >&2 || true
+  falla "Unbound no resuelve"
+fi
 ok "Unbound solo en 10.66.0.1:53, y resuelve"
 [ "$(sudo stat -c '%a %U' /etc/guardiana/vpn/servidor.key)" = "600 root" ] || falla "la llave del servidor no es 600 de root"
 [ "$(stat -c '%U %a' /usr/local/bin/guardiana-tunel-servidor)" = "root 755" ] || falla "el programa del alta no es de root"
@@ -91,7 +105,7 @@ u1=$(equipo e1 "$URL_LOCAL" 71) || falla "el alta de e1 no salió"
 llega e1 || falla "e1 no llega al servidor por el túnel"
 sudo wg show wg0 preshared-keys | awk '$2 != "(none)"' | grep -q . || falla "el par no tiene llave postcuántica"
 ok "e1 ($u1): alta postcuántica y túnel"
-sudo ip netns exec e1 dig +short +time=3 +tries=2 @10.66.0.1 example.com A | grep -qE '^[0-9.]+$' || falla "e1 no resuelve por el túnel"
+resuelve sudo ip netns exec e1 dig @10.66.0.1 || falla "e1 no resuelve por el túnel"
 c=$(sudo ip netns exec e1 curl -sS --max-time 20 -o /dev/null -w '%{http_code}' https://example.com/) || true
 [[ "$c" =~ ^(200|30[0-9])$ ]] || falla "e1 no sale a internet por el túnel ($c)"
 sudo ip netns exec e1 curl -sS --max-time 60 -o "$T/grande.html" https://github.com/ || falla "e1: una página grande no llega (¿MTU?)"
