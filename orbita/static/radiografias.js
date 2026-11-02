@@ -198,7 +198,7 @@
     const acc = document.createElement('div'); acc.className = 'acciones';
     const mk = (txt, cls, fn) => { const b = document.createElement('button'); b.type = 'button'; b.className = cls; b.textContent = T(txt); b.addEventListener('click', () => { cierraBienvenida(); empieza(); fn(); }); acc.append(b); return b; };
     const b1 = mk('Explorar el planeta', 'boton principal', () => {});
-    mk('Ver mi conexión', 'boton', () => { const c = document.getElementById('conexion-btn'); if (c) c.click(); });
+    // 2 Nov 2026 (owner, 08:40): «Ver mi conexión» is no longer a button of Órbita
     mk('Qué ven de ti las webs', 'boton', () => { if (window.OrbitaPuertas) window.OrbitaPuertas.abre('radiografias'); else abre(); });
     caja.append(k, h, p, acc); bienv.append(caja); document.body.append(bienv);
     bienv.addEventListener('click', (e) => { if (e.target === bienv) { cierraBienvenida(); empieza(); } });
