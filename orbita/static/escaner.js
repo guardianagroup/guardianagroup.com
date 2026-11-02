@@ -1,4 +1,4 @@
-/* GUARDIANA · Órbita · «Escáner PC» (31 Oct 2026). El dueño, 30 Oct, 23:32: «una nueva sección… que cuando la persona pulse el
+/* GUARDIANA · Órbita · «Antivirus» (31 Oct 2026). El dueño, 30 Oct, 23:32: «una nueva sección… que cuando la persona pulse el
    botón, se analice profundamente todo… desde el antivirus, micrófonos, cualquier cosa que sea medible, programas
    preinstalados, si el computador habla de alguna forma y envía telemetría afuera»; 00:10: «Vigía se cambia por escáner pc».
    Dentro del programa para Windows (data-en-programa en <html>), la web pide al panel de este mismo equipo sus lecturas, por
@@ -414,7 +414,7 @@
     raiz = h('section', { class: 'escaner', id: 'escaner', role: 'dialog', 'aria-modal': 'true', 'aria-labelledby': 'esc-titulo', hidden: true });
     volverBtn = h('button', { type: 'button', class: 'esc-volver', html: I_ATRAS }); volverBtn.append(h('span'));
     volverBtn.addEventListener('click', sal);
-    const marca = h('div', { class: 'esc-logo' }, h('span', { class: 'g', translate: 'no' }, 'GUARDIANA'), h('span', { class: 'sep', 'aria-hidden': 'true', translate: 'no' }, '/'), h('span', { class: 'sub' }, 'Escáner PC'));
+    const marca = h('div', { class: 'esc-logo' }, h('span', { class: 'g', translate: 'no' }, 'GUARDIANA'), h('span', { class: 'sep', 'aria-hidden': 'true', translate: 'no' }, '/'), h('span', { class: 'sub' }, 'Antivirus'));
     cerrarBtn = h('button', { type: 'button', class: 'esc-cerrar', 'aria-label': 'Cerrar', title: 'Cerrar', html: I_X });
     cerrarBtn.addEventListener('click', sal);
     acc = h('div', { class: 'esc-acc' }, cerrarBtn);
@@ -507,9 +507,9 @@
       pintaEscudoPortada();
     } else {
       const a = h('a', { class: 'esc-boton web', href: DESCARGA, html: I_BAJA }); a.append(h('span', null, 'Descargar GUARDIANA para Windows'));
-      portada.append(lienzo, h('p', { class: 'esc-k' }, 'Escáner PC · Para Windows'), h('h1', { id: 'esc-titulo' }, 'Examen completo de este equipo'),
-        h('p', { class: 'esc-lead' }, 'El Escáner PC lee lo que Windows y el programa GUARDIANA saben de este equipo: protección y antivirus, cámara, micrófono y pantalla, control remoto, lo que arranca solo, los programas de fábrica, la telemetría y todo lo que sale a internet. Una web no puede ver nada de esto por sí sola: hace falta el programa instalado.'),
-        a, h('p', { class: 'esc-nota-boton' }, 'Una vez instalado, abre Órbita desde el programa y pulsa «Escáner PC».'), hechos, examina);
+      portada.append(lienzo, h('p', { class: 'esc-k' }, 'Antivirus · Para Windows'), h('h1', { id: 'esc-titulo' }, 'Examen completo de este equipo'),
+        h('p', { class: 'esc-lead' }, 'El Antivirus lee lo que Windows y el programa GUARDIANA saben de este equipo: protección y antivirus, cámara, micrófono y pantalla, control remoto, lo que arranca solo, los programas de fábrica, la telemetría y todo lo que sale a internet. Una web no puede ver nada de esto por sí sola: hace falta el programa instalado.'),
+        a, h('p', { class: 'esc-nota-boton' }, 'Una vez instalado, abre Órbita desde el programa y pulsa «Antivirus».'), hechos, examina);
     }
   }
 
@@ -522,7 +522,7 @@
     C.linea = h('p', { class: 'esc-linea' }, C.vivo, h('span', null, h('span', null, 'Empezó'), ' ', C.ini), h('span', null, C.transR, ' ', C.trans), h('span', null, C.lectR, ' ', C.lect));
     C.otra = h('button', { type: 'button', class: 'esc-otra', hidden: true, html: I_OTRA }); C.otra.append(h('span', null, 'Volver a escanear'));
     C.otra.addEventListener('click', () => { if (S && S.fin) { cuerpo.scrollTo({ top: 0, behavior: reducido() ? 'auto' : 'smooth' }); escanea(); } });
-    cabeza.append(h('div', { class: 'esc-red-caja' }), h('div', null, h('p', { class: 'esc-k' }, 'Escáner PC'), C.cabT, C.linea), C.otra);
+    cabeza.append(h('div', { class: 'esc-red-caja' }), h('div', null, h('p', { class: 'esc-k' }, 'Antivirus'), C.cabT, C.linea), C.otra);
   }
   function pintaCabeza() {
     if (!S) return;
@@ -1334,7 +1334,7 @@
       const f = firma(id); if (sec.dataset.firma === f) return;
       sec.dataset.firma = f;
       let r;
-      try { r = PINTA[id](); } catch (e) { r = { nivel: 'nomedido', ver: ['No se pudo componer este apartado con los datos recibidos.'], cuerpo: [] }; try { console.warn('Escáner PC', id, e); } catch (_) {} }
+      try { r = PINTA[id](); } catch (e) { r = { nivel: 'nomedido', ver: ['No se pudo componer este apartado con los datos recibidos.'], cuerpo: [] }; try { console.warn('Antivirus', id, e); } catch (_) {} }
       const abiertos = new Set([...sec.querySelectorAll('details[open]')].map((d, j) => j));
       const nivel = r.nivel || 'info';
       sec.dataset.nivel = nivel; sec.textContent = '';
@@ -1377,7 +1377,7 @@
     const rs = S.d.revision && S.d.revision.resumen;
     const totales = rs && S.rev.e === 'medido' ? [[T('Para arreglar'), num(rs.alerta || 0)], [T('Para revisar'), num(rs.aviso || 0)], [T('Correcto'), num(rs.ok || 0)], [T('Para saber'), num(rs.info || 0)]] : [];
     const noMed = L.filter(([k]) => S.l[k].e === 'no_medido').map(([k]) => T(LD[k].n) + ': ' + T(MOTIVO[S.l[k].motivo] || MOTIVO.error));
-    return { archivo: 'GUARDIANA-escaner-pc', titulo: T('Escáner PC') + ' · ' + T('Informe de este equipo'), subtitulo: fechaLarga(S.t0),
+    return { archivo: 'GUARDIANA-escaner-pc', titulo: T('Antivirus') + ' · ' + T('Informe de este equipo'), subtitulo: fechaLarga(S.t0),
       lineas: [T('Duración del escaneo') + ': ' + segundos(datos.duracion_ms), ...vigiaDe(null).map((x) => T(TIPO_VIGIA[x.tipo] || 'Aviso') + ': ' + x.texto)],
       totales, columnas: [T('Apartado'), T('Comprobación'), T('Estado'), T('Detalle')], filas: filas.length ? filas : [[T('Revisión de Windows'), '', T(S.rev.e === 'no_medido' ? 'No medido' : 'En curso'), '']],
       notas: [...(noMed.length ? [T('No medido') + ': ' + noMed.join(' · ')] : []), T('Nombres, no rutas: las rutas de archivo, los identificadores internos de las cuentas de Windows y las direcciones no se muestran aquí.'), 'IP Geolocation by DB-IP (https://db-ip.com)'], datos };
@@ -1420,7 +1420,7 @@
     if (tira) delete tira.dataset.clave;
     rehaceFeed();
     if (abierto) pintaTodo();
-    if (boton) pon(boton.querySelector('span'), 'Escáner PC');
+    if (boton) pon(boton.querySelector('span'), 'Antivirus');
   });
 
   // ---------- abrir y cerrar ----------
@@ -1506,7 +1506,7 @@
     const b = raiz.querySelector('.esc-volver'); if (b) b.focus({ preventScroll: true });
   });
 
-  // ---------- la entrada, dentro del programa: «Escáner PC» en la cabecera, junto a «Tu PC» ----------
+  // ---------- la entrada, dentro del programa: «Antivirus» en la cabecera, junto a «Tu PC» ----------
   let boton = null;
   function ponBoton() {
     const marca = document.querySelector('header .izq .marca');
@@ -1514,7 +1514,7 @@
     if (boton || !marca) { if (boton) { const tu = document.getElementById('tupc-btn'); if (tu && boton.previousElementSibling !== tu) tu.after(boton); } return; }
     boton = document.createElement('button'); boton.type = 'button'; boton.id = 'escaner-btn'; boton.className = 'lugar-btn escaner-btn';
     boton.setAttribute('aria-pressed', abierto ? 'true' : 'false'); boton.setAttribute('aria-controls', 'escaner');
-    boton.innerHTML = I_ESCANER_P + '<span></span>'; pon(boton.querySelector('span'), 'Escáner PC');
+    boton.innerHTML = I_ESCANER_P + '<span></span>'; pon(boton.querySelector('span'), 'Antivirus');
     boton.addEventListener('click', () => { if (abierto) sal(); else abre(); });
     const tu = document.getElementById('tupc-btn'); (tu || marca).after(boton);
   }

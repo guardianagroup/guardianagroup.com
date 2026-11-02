@@ -17,7 +17,7 @@
   const sinTildes = (s) => String(s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/\s+/g, ' ').trim();
   const pon = (tpl, ...xs) => xs.reduce((s, x, i) => s.split('{' + (i + 1) + '}').join(x), T(tpl));
   const q = new URLSearchParams(location.search);
-  const PUERTA_EN_URL = /^#(zero|radiografias|comunicaciones|mi-conexion|escaner)$/.test(location.hash); // 31 Oct 2026: y el Escáner PC
+  const PUERTA_EN_URL = /^#(zero|radiografias|comunicaciones|mi-conexion|escaner)$/.test(location.hash); // 31 Oct 2026: y el Antivirus
   const red = (lienzo, op) => (window.RedNucleo ? window.RedNucleo(lienzo, op) : { habla() {}, para() {} });
   // dueño, 10:53: «todas las páginas que se abren tienen que tener un botón de volver a donde estás»: se recuerda de dónde se
   // salió (la portada o la sección de NÚCLEO) y los botones de volver lo dicen («Inicio» o «Regresar a NÚCLEO»).
@@ -70,7 +70,7 @@
   function marcaPortada() {
     const b = ini && ini.querySelector('.nuc-op[data-n="com"]'); if (!b) return;
     if (enPrograma()) b.dataset.producto = 'secure'; else delete b.dataset.producto;
-    // 31 Oct 2026 (coordinación: «en modo programa, añade una tarjeta Escáner PC a ese inicio»): solo dentro del programa
+    // 31 Oct 2026 (coordinación: «en modo programa, añade una tarjeta Antivirus a ese inicio»): solo dentro del programa
     const e = ini.querySelector('.nuc-op[data-n="escaner"]'); if (e) { e.hidden = !enPrograma(); e.parentNode.classList.toggle('con-escaner', enPrograma()); }
   }
   try { new MutationObserver(marcaPortada).observe(document.documentElement, { attributes: true, attributeFilter: ['data-en-programa'] }); } catch (_) {}
@@ -398,8 +398,8 @@ ${doc.secciones.map(tabla).join('')}<p class="nota">${esc(doc.final)}</p></body>
       + '<button type="button" class="nuc-op" data-n="zero"><i>ZERO</i><b>Navegar con ZERO</b><small>Entra en cualquier web y mira qué empresas reciben datos de tu visita.</small></button>'
       + '<button type="button" class="nuc-op" data-n="planeta"><i>ÓRBITA</i><b>Explorar el planeta</b><small>Cables submarinos, cables terrestres, centros de datos, satélites y cortes en directo.</small></button>'
       + '<button type="button" class="nuc-op" data-n="com"><i>COMUNICACIONES</i><b>Chat y archivos encriptados</b><small>Para particulares y profesionales: datos y documentación sensible, encriptados de extremo a extremo.</small></button>'
-      // 31 Oct 2026: el Escáner PC (static/escaner.js), solo dentro del programa para Windows (marcaPortada la enseña)
-      + '<button type="button" class="nuc-op" data-n="escaner" hidden><i>ESCÁNER PC</i><b>Escanear este equipo</b><small>Revisa a fondo antivirus, cámara, micrófono, control remoto y lo que este equipo envía fuera.</small></button>'
+      // 31 Oct 2026: el Antivirus (static/escaner.js), solo dentro del programa para Windows (marcaPortada la enseña)
+      + '<button type="button" class="nuc-op" data-n="escaner" hidden><i>ANTIVIRUS</i><b>Escanear este equipo</b><small>Revisa a fondo antivirus, cámara, micrófono, control remoto y lo que este equipo envía fuera.</small></button>'
       + '</div>'
       // dueño, 12:23: la página del planeta es la portada de la web y su «Empezar» trae aquí; fuera «¿Qué es GUARDIANA?».
       // Arriba a la izquierda, «Volver» a esa portada (dueño, 10:53: «tienes que poder ir y volver»).
@@ -859,6 +859,6 @@ ${doc.secciones.map(tabla).join('')}<p class="nota">${esc(doc.final)}</p></body>
   if (q.get('nucleo') === 'pide' && SALA_ACTIVA) { try { history.replaceState(Object.assign({}, history.state || {}, { nucleo: 'sala' }), ''); } catch (_) {} abreSala(false, vuelta() === 'nucleo' ? camino : null); }
   else if (q.get('nucleo') === '0' || PUERTA_EN_URL) botonInicio(true);
   else muestraInicio(visto);
-  // cierra: el Escáner PC, cuando lo abre un aviso de Windows con Órbita ya abierta (1 Nov 2026)
+  // cierra: el Antivirus, cuando lo abre un aviso de Windows con Órbita ya abierta (1 Nov 2026)
   window.GuardianaNucleo = { inicio: () => muestraInicio(true), sala: () => abreSala(), pide: escribe, cierra: () => cierraTodo() };
 })();
