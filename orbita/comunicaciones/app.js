@@ -3963,7 +3963,35 @@
       if (campoCod.readOnly || (e.inputType !== 'insertFromPaste' && (!nuevas || ya >= 9))) e.preventDefault();
     });
     campoCod.addEventListener('input', (e) => { const d = e.target.value.replace(/\D/g, '').slice(0, 9); e.target.value = d.replace(/(\d{3})(?=\d)/g, '$1-'); try { e.target.setSelectionRange(e.target.value.length, e.target.value.length); } catch (_) {} $('#unir-mal').hidden = true; if (d.length === 9) $('#unir-ok').click(); });
+    // Las nueve casillas (2 Nov 2026, dueño: «Haz esa zona del código profesional»): enseñan lo que tiene el campo, cuál es la
+    // siguiente, si el código está mal y mientras se comprueba. «Entrar» espera a las nueve cifras (antes, con menos, decía «erróneo»).
+    const celdasCod = $('#unir-celdas'), cajasCod = celdasCod ? [...celdasCod.querySelectorAll('.cc')] : [];
+    const pintaCod = () => {
+      const d = campoCod.value.replace(/\D/g, '').slice(0, 9), foco = document.activeElement === campoCod && !campoCod.readOnly;
+      cajasCod.forEach((c, i) => { c.textContent = d[i] || ''; c.classList.toggle('llena', i < d.length); c.classList.toggle('activa', foco && i === d.length); });
+      if (celdasCod) celdasCod.classList.toggle('completa', d.length === 9);
+      const ok = $('#unir-ok'); ok.classList.toggle('falta', d.length < 9); ok.setAttribute('aria-disabled', String(d.length < 9));
+    };
+    for (const ev of ['input', 'focus', 'blur']) campoCod.addEventListener(ev, pintaCod);
+    if (celdasCod) {
+      // (sin conexión con el relé, el código puede estar bien: las casillas no se ponen en rojo, y el aviso va en ámbar)
+      const sinRed = (e) => e.textContent === T('Sin conexión con el relé: espera un momento.');
+      const sigue = (id, clase) => {
+        const e = $('#' + id); if (!e) return;
+        new MutationObserver(() => {
+          celdasCod.classList.remove('mal', 'sin-red', 'comprobando');
+          const cual = clase === 'mal' && sinRed(e) ? 'sin-red' : clase;
+          if (!e.hidden) { void celdasCod.offsetWidth; celdasCod.classList.add(cual); } // otra vez, para que la sacudida se repita
+          if (clase === 'mal') e.classList.toggle('sin-red', !e.hidden && cual === 'sin-red');
+          pintaCod();
+        }).observe(e, { attributes: true, attributeFilter: ['hidden'] });
+      };
+      sigue('unir-mal', 'mal'); sigue('unir-espera', 'comprobando');
+      new MutationObserver(pintaCod).observe($('#paso-entrar'), { attributes: true, attributeFilter: ['hidden'] });
+    }
+    pintaCod();
     $('#unir-ok').addEventListener('click', async () => {
+      if (campoCod.value.replace(/\D/g, '').length < 9) { campoCod.focus(); return; }
       const b = $('#unir-ok'); if (b.disabled) return; b.disabled = true; campoCod.readOnly = true; $('#unir-mal').hidden = true; $('#unir-espera').hidden = false;
       let r = 'no vale'; try { r = await aceptaCodigo($('#unir-codigo').value); } catch (_) { r = 'no vale'; } finally { b.disabled = false; campoCod.readOnly = false; $('#unir-espera').hidden = true; }
       if (r === 'ok') { $('#paso-entrar').hidden = true; $('#paso-inicio').hidden = false; return; }

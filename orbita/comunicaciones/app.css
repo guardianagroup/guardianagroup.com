@@ -243,6 +243,37 @@ svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-l
 .codigo-campo::selection{background:transparent}
 .codigo-campo:-webkit-autofill{-webkit-box-shadow:0 0 0 40px var(--campo) inset;-webkit-text-fill-color:var(--fg)}
 .codigo-campo{font:600 30px/1.2 var(--mono)!important;letter-spacing:.14em;text-align:center;padding:14px!important}
+/* El código de 9 cifras en nueve casillas, en tres grupos como se envía (2 Nov 2026, dueño, 13:19, con una foto: «Haz esa zona del
+   código profesional»). El campo de verdad está encima, invisible, y recibe el teclado, el pegado y el foco; las casillas enseñan
+   lo que tiene, cuál es la siguiente (con su cursor), si el código está mal y mientras se comprueba. */
+#paso-entrar{max-width:540px}
+.codigo-celdas{position:relative;direction:ltr;width:100%;margin:2px 0 0}
+.codigo-celdas .codigo-campo{position:absolute;inset:0;z-index:1;width:100%;height:100%;min-height:0;margin:0;padding:0!important;border:0;border-radius:12px;background:transparent;color:transparent;caret-color:transparent;opacity:0;cursor:text;font-size:16px!important;letter-spacing:0}
+.cc-fila{display:grid;grid-template-columns:repeat(3,minmax(0,1fr)) 22px repeat(3,minmax(0,1fr)) 22px repeat(3,minmax(0,1fr));column-gap:8px;align-items:center}
+.cc{position:relative;display:flex;align-items:center;justify-content:center;height:60px;border-radius:12px;background:var(--campo);border:1px solid var(--line);color:var(--fg);font:600 28px/1 var(--mono);font-variant-numeric:tabular-nums;transition:border-color .15s,box-shadow .15s,background-color .15s}
+.cc-guion{display:block;justify-self:center;width:10px;height:2px;border-radius:2px;background:var(--muted-2)}
+.codigo-celdas:hover .cc:not(.llena):not(.activa){border-color:rgba(156,195,228,.3)}
+.cc.llena{border-color:rgba(156,195,228,.36);background:#111925}
+.cc.activa{border-color:var(--accent);box-shadow:0 0 0 3px rgba(156,195,228,.16)}
+.cc.activa::after{content:'';width:2px;height:28px;border-radius:1px;background:var(--accent);animation:ccCursor 1.06s steps(1) infinite}
+@keyframes ccCursor{50%{opacity:0}}
+.codigo-celdas.completa .cc{border-color:rgba(156,195,228,.55)}
+.codigo-celdas.comprobando .cc{border-color:rgba(156,195,228,.55);animation:ccComprueba 1.1s ease-in-out infinite}
+@keyframes ccComprueba{0%,100%{box-shadow:0 0 0 0 rgba(156,195,228,0)}50%{box-shadow:0 0 0 3px rgba(156,195,228,.2)}}
+.codigo-celdas.mal .cc{border-color:var(--alerta);background:#1B1316}
+.codigo-celdas.mal .cc-fila{animation:ccNo .36s cubic-bezier(.36,.07,.19,.97)}
+@keyframes ccNo{20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
+#paso-entrar #unir-mal{color:var(--alerta);text-align:center}
+#paso-entrar #unir-mal.sin-red{color:var(--aviso)}
+#paso-entrar .t.sutil{text-align:center}
+#unir-ok.falta{opacity:.42;box-shadow:none;filter:none;cursor:default}
+@media (max-width:760px){
+  .cc-fila{grid-template-columns:repeat(3,minmax(0,1fr)) 12px repeat(3,minmax(0,1fr)) 12px repeat(3,minmax(0,1fr));column-gap:5px}
+  .cc{height:clamp(44px,13vw,54px);border-radius:10px;font-size:clamp(19px,6.4vw,26px)}
+  .cc.activa::after{height:clamp(20px,6.4vw,26px)}
+  .cc-guion{width:7px}
+}
+@media (prefers-reduced-motion:reduce){.cc.activa::after,.codigo-celdas.comprobando .cc,.codigo-celdas.mal .cc-fila{animation:none}}
 .caja .movil{font-size:13px;color:var(--muted);margin-top:4px}.caja .movil summary{cursor:pointer;color:var(--accent);list-style:none;display:inline-flex;align-items:center;gap:6px}
 .caja .movil summary::before{content:'';width:5px;height:5px;border-right:1.3px solid currentColor;border-bottom:1.3px solid currentColor;transform:rotate(-45deg)}.caja .movil[open] summary::before{transform:rotate(45deg)}
 .caja .movil>*:not(summary){margin-top:10px}.caja .movil .qr{margin:10px auto}
