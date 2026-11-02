@@ -3874,6 +3874,7 @@
     "Conexión sin nombre": ["Connection without a name", "Conexão sem nome"],
     "Disfraz": ["Disguise", "Disfarce"],
     "Credenciales": ["Credentials", "Credenciais"],
+    "Engaño": ["Deception", "Engano"],
     "Microsoft Defender": ["Microsoft Defender", "Microsoft Defender"],
     "aviso grave": ["serious warning", "aviso grave"],
     "avisos graves": ["serious warnings", "avisos graves"],
