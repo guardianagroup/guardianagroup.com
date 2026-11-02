@@ -317,7 +317,10 @@ body.dentro .escaner-btn, body.m2 .escaner-btn { display: none; }
 .escaner-btn[aria-pressed="true"] { background: rgba(156,195,228,.18); border-color: rgba(156,195,228,.6); color: #F4F6F8; }
 .nuc-op[hidden] { display: none; }
 /* sin NÚCLEO (dueño, 1 Nov 2026, 16:34): cuatro tarjetas en una fila */
-@media (min-width: 1101px) { .nuc-ops.con-escaner { grid-template-columns: repeat(3, minmax(0, 1fr)); width: min(900px, 100%); } } /* 1 nov 2026: cinco tarjetas con la VPN, en tres columnas */
+/* 2 nov 2026: las cinco secciones de la portada, tres arriba y dos centradas debajo */
+@media (min-width: 761px) { .nuc-ops.con-escaner { display: flex; flex-wrap: wrap; justify-content: center; width: min(920px, 100%); }
+  .nuc-ops.con-escaner > .nuc-op { flex: 0 0 calc((100% - 24px) / 3); } }
+@media (min-width: 761px) and (max-width: 1100px) { .nuc-ops.con-escaner > .nuc-op { flex-basis: calc((100% - 12px) / 2); } }
 
 /* ---------- pantallas más estrechas ---------- */
 @media (max-width: 1180px) {

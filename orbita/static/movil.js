@@ -21,7 +21,7 @@
 
   // ---------- the doors: an icon and a short tag each («Gratis», «Demo», «Pronto») ----------
   const PUERTA = [['rx', 'Gratis'], ['zero', 'Demo'], ['com', 'Pronto']];
-  document.querySelectorAll('#puertas .puerta:not(.aparte) button').forEach((b, i) => {
+  document.querySelectorAll('#puertas .puerta:not(.aparte):not(.fuera) button').forEach((b, i) => {
     const p = PUERTA[i]; if (!p) return;
     b.insertAdjacentHTML('afterbegin', SVG[p[0]]);
     const tag = document.createElement('span'); tag.className = 'm2-tag'; tag.textContent = p[1]; b.appendChild(tag);

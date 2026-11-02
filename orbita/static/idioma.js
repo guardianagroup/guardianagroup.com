@@ -3805,6 +3805,8 @@
     "El programa no respondió a tiempo.": ["The program did not answer in time.", "O programa não respondeu a tempo."],
     "El programa no lo permitió.": ["The program did not allow it.", "O programa não permitiu."],
     "Desde un USB o una imagen": ["From a USB drive or an image", "De um USB ou de uma imagem"],
+    "Una vez instalado, abre el programa y elige «VPN» en la portada.": ["Once installed, open the program and choose “VPN” on the home screen.", "Depois de instalar, abra o programa e escolha “VPN” na página inicial."],
+    "Una vez instalado, abre el programa y elige «Antivirus» en la portada.": ["Once installed, open the program and choose “Antivirus” on the home screen.", "Depois de instalar, abra o programa e escolha “Antivírus” na página inicial."],
     "VPN · Para Windows": ["VPN · For Windows", "VPN · Para Windows"],
     "Desconectada": ["Disconnected", "Desconectada"],
     "Conectada": ["Connected", "Conectada"],

@@ -494,19 +494,36 @@
       if (v) v.focus({ preventScroll: true });
     }, 300);
   }
-  // ---------- the way in from the planet, inside the program: «Tu PC» in the header, where the web has «Conocer GUARDIANA»
-  //            (which the program hides; the header keeps its measure). On a computer the ring of doors is hidden since
-  //            NÚCLEO (nucleo.css), so without this the view would only open from /orbita/#radiografias. Outside the program
-  //            there is no button. ----------
-  let boton = null;
+  // ---------- the way in from the planet: «Ver mi PC en directo» in the header (2 Nov 2026, the owner, 08:02: «en órbita
+  //            tiene que haber un botón que diga ver mi PC en tiempo real, y entonces solamente vemos eso en el planeta»).
+  //            Inside the program it opens the view, which draws only this computer's connections on the planet. On the
+  //            web it says what it is and that only the installed program can see it (a website cannot), with the way to
+  //            install it. On a phone there is no button (the program is for Windows). ----------
+  let boton = null, nota = null;
+  function cierraNota() { if (nota) { nota.remove(); nota = null; if (boton) boton.setAttribute('aria-expanded', 'false'); } }
+  function abreNota() {
+    if (nota) { cierraNota(); return; }
+    nota = document.createElement('div'); nota.className = 'tupc-nota'; nota.id = 'tupc-nota'; nota.setAttribute('role', 'dialog'); nota.setAttribute('aria-label', T('Ver mi PC en directo'));
+    const h = document.createElement('b'); pon(h, 'Lo que hace tu PC ahora mismo');
+    const tx = document.createElement('p'); pon(tx, 'Cada conexión de este equipo, en directo: con qué empresa habla, dónde está su servidor y si GUARDIANA la ha cortado. Solo lo ve el programa instalado.');
+    const a = document.createElement('a'); a.href = '/instalar.html#descargar'; a.className = 'tupc-nota-a'; pon(a, 'Instalar GUARDIANA');
+    const x = document.createElement('button'); x.type = 'button'; x.className = 'tupc-nota-x'; x.setAttribute('aria-label', T('Cerrar')); x.innerHTML = X; x.addEventListener('click', cierraNota);
+    nota.append(x, h, tx, a);
+    boton.after(nota); boton.setAttribute('aria-expanded', 'true');
+    // under the button itself, and inside the window
+    nota.style.left = Math.max(0, Math.min(boton.offsetLeft, innerWidth - nota.offsetWidth - 32)) + 'px';
+    setTimeout(() => a.focus({ preventScroll: true }), 30);
+  }
+  document.addEventListener('keydown', (e) => { if (nota && e.key === 'Escape') { e.preventDefault(); cierraNota(); if (boton) boton.focus({ preventScroll: true }); } });
+  document.addEventListener('click', (e) => { if (nota && !nota.contains(e.target) && boton && !boton.contains(e.target)) cierraNota(); }, true);
   function ponBoton() {
     const marca = document.querySelector('header .izq .marca');
-    if (!enPrograma()) { if (boton) { boton.remove(); boton = null; } return; }
-    if (boton || !marca) return;
+    if (boton) { if (!enPrograma()) boton.setAttribute('aria-controls', 'tupc-nota'); else { boton.setAttribute('aria-controls', 'tupc'); cierraNota(); } return; }
+    if (!marca) return;
     boton = document.createElement('button'); boton.type = 'button'; boton.id = 'tupc-btn'; boton.className = 'lugar-btn tupc-btn';
-    boton.setAttribute('aria-pressed', E ? 'true' : 'false'); boton.setAttribute('aria-controls', 'tupc');
-    boton.innerHTML = '<i aria-hidden="true"></i><span></span>'; pon(boton.querySelector('span'), 'Tu PC');
-    boton.addEventListener('click', () => { if (E) cierra(); else abre(); });
+    boton.setAttribute('aria-pressed', E ? 'true' : 'false'); boton.setAttribute('aria-controls', enPrograma() ? 'tupc' : 'tupc-nota');
+    boton.innerHTML = '<i aria-hidden="true"></i><span></span>'; pon(boton.querySelector('span'), 'Ver mi PC en directo');
+    boton.addEventListener('click', () => { if (!enPrograma()) { abreNota(); return; } if (E) cierra(); else abre(); });
     marca.after(boton);
   }
   ponBoton();

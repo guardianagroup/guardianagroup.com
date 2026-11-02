@@ -260,13 +260,12 @@
     const h4 = document.createElement('h3'); h4.textContent = T('Lo que una web no puede medir'); s4.append(h4);
     const p4 = document.createElement('p'); p4.className = 'nota'; p4.textContent = T('Qué programas de tu equipo se conectan a internet, con quién, y la ruta exacta de tus datos no se pueden medir desde una web. Por eso Órbita no lo muestra.'); s4.append(p4);
     cuerpo.append(s4);
-    // 25 Oct 2026 (agency round 39, the three voices: «un puente de la exploración a la acción»): from here to Radiografías
-    // and to the ZERO demonstration, the two doors of the planet
+    // 25 Oct 2026 (agency round 39, the three voices: «un puente de la exploración a la acción»): from here to Radiografías.
+    // 2 Nov 2026 (owner, 08:01: no doors between sections): only the planet's own view, never ZERO.
     if (window.OrbitaPuertas) {
       const s5 = document.createElement('section'); s5.className = 'bloque siguiente';
       const h5 = document.createElement('h3'); h5.textContent = T('Siguiente paso'); s5.append(h5);
-      const p5 = document.createElement('p'); p5.className = 'nota'; p5.textContent = T('Ya has visto por dónde viajan tus datos. Ahora mira qué ven de ti las webs, y cómo ZERO corta cada conexión.'); s5.append(p5);
-      for (const [id, txt] of [['radiografias', 'Qué ven de ti las webs'], ['zero', 'Ver la demostración de ZERO']]) {
+      for (const [id, txt] of [['radiografias', 'Qué ven de ti las webs']]) {
         const b5 = document.createElement('button'); b5.type = 'button'; b5.className = 'medir'; b5.textContent = T(txt);
         b5.addEventListener('click', () => { cierraConVolver(); setTimeout(() => window.OrbitaPuertas.abre(id), 350); });
         s5.append(b5, ' ');

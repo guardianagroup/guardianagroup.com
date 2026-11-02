@@ -79,10 +79,13 @@
     // anyone can look at, free of any installation — then ZERO and Comunicaciones. It opens its own panel over the
     // planet (static/radiografias.js), not a page.
     { id: 'radiografias', n: 'Radiografías', s: 'Lo que ven de ti', d: 'Qué ve de ti cualquier web y a quién habla cada página, dibujado en el planeta.', propia: true },
-    { id: 'zero', n: 'ZERO', s: 'Navegador · demostración', d: 'El navegador que muestra cada corte, en directo. Lo que ves aquí es una demostración.', pagina: 'zero/?orbita=1&entrada=0&v=20261027c' },
+    // 2 Nov 2026 (owner, 08:01: «desde la principal, uno elige en qué sección va a estar… no quiero que haya una conexión ni
+    // puerta entre ellos»): ZERO and Comunicaciones are sections of the main cover, never doors of the planet. They stay in
+    // this list, hidden (`fuera`), only so the cover can open them the same way as before.
+    { id: 'zero', n: 'ZERO', s: 'Navegador · demostración', d: 'El navegador que muestra cada corte, en directo. Lo que ves aquí es una demostración.', pagina: 'zero/?orbita=1&entrada=0&v=20261027c', fuera: true },
     // 26 Oct 2026 (owner: «haz comunicaciones enteras»): the door opens the web app itself, full page (calls need the
     // microphone and the camera, and large files are written straight to disk: none of that belongs in a frame).
-    { id: 'comunicaciones', n: 'Comunicaciones', s: 'Habla sin testigos', d: 'Chat, notas de voz y archivos de cualquier tamaño, encriptados de extremo a extremo entre dos equipos, con un código de 9 cifras. Al terminar, se borra todo.', enlace: 'comunicaciones/' },
+    { id: 'comunicaciones', n: 'Comunicaciones', s: 'Habla sin testigos', d: 'Chat, notas de voz y archivos de cualquier tamaño, encriptados de extremo a extremo entre dos equipos, con un código de 9 cifras. Al terminar, se borra todo.', enlace: 'comunicaciones/', fuera: true },
     // 23 Oct 2026, 15:49 (owner: «dónde va el sistema operativo… y con qué palabra: donde tú lo veas»): GUARDIANA OS, a
     // download rather than a door into the web, sits apart under the three doors and says «En preparación» until a
     // first version runs (then «Próximamente»); it promises only what that version can do, and says what it will not.
@@ -98,10 +101,14 @@
   const enPrograma = () => RAIZ.dataset.enPrograma === '1';
   const nav = $('puertas');
   const NP = PUERTAS.length;
-  PUERTAS.forEach((p, i) => {
-    const a = (NP === 3 ? i : i + 0.5) * 2 * Math.PI / NP, s = Math.sin(a), c = Math.cos(a); // three: ZERO at the top
+  // the doors drawn on the ring: the planet's own (2 Nov 2026: none to another section)
+  const VISIBLES = PUERTAS.filter((p) => !p.fuera), NV = VISIBLES.length;
+  PUERTAS.forEach((p) => {
+    const i = Math.max(0, VISIBLES.indexOf(p));
+    const a = (NV === 3 ? i : i + 0.5) * 2 * Math.PI / NV, s = Math.sin(a), c = Math.cos(a); // three: the first at the top
     const el = document.createElement('div');
-    el.className = 'puerta' + (p.separada ? ' aparte' : '');
+    el.className = 'puerta' + (p.separada ? ' aparte' : '') + (p.fuera ? ' fuera' : '');
+    if (p.fuera) el.hidden = true;
     el.style.left = `calc(50% + var(--anillo) * ${s.toFixed(4)})`;
     el.style.top = `calc(50% - var(--anillo) * ${c.toFixed(4)})`;
     el.style.transitionDelay = (1.3 + i * 0.08).toFixed(2) + 's';
@@ -131,7 +138,7 @@
     nav.appendChild(el);
     p.el = el;
   });
-  { const de = document.querySelector('#ficha .de'); if (de) de.textContent = '/' + String(NP).padStart(2, '0'); }
+  { const de = document.querySelector('#ficha .de'); if (de) de.textContent = '/' + String(NV).padStart(2, '0'); }
   let sel = 0;
   // the doors the program takes (inside it only): the door itself, and the reading card's arrow while it shows that door
   function marcaProductos() {
@@ -148,7 +155,7 @@
     sel = (i + NP) % NP;
     PUERTAS.forEach((p, k) => p.el.classList.toggle('on', k === sel));
     const p = PUERTAS[sel];
-    $('ficha-n').textContent = String(sel + 1).padStart(2, '0');
+    $('ficha-n').textContent = String(Math.max(0, VISIBLES.indexOf(p)) + 1).padStart(2, '0');
     $('ficha-k').textContent = p.s;
     $('ficha-t').textContent = p.n;
     $('ficha-d').textContent = p.d;
@@ -276,8 +283,10 @@
     if (e.key === 'Escape' && dentro) { e.preventDefault(); atras(); return; }
     if (dentro || e.altKey || e.ctrlKey || e.metaKey) return;
     if (e.target && /INPUT|TEXTAREA|SELECT/.test(e.target.tagName)) return;
-    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { e.preventDefault(); elige(sel + 1); PUERTAS[sel].el.querySelector('button').focus(); }
-    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); elige(sel - 1); PUERTAS[sel].el.querySelector('button').focus(); }
+    // the arrows go round the doors on the ring, never to a hidden one (2 Nov 2026)
+    const paso = (d) => { let k = sel; for (let n = 0; n < NP; n++) { k = (k + d + NP) % NP; if (!PUERTAS[k].fuera) return k; } return sel; };
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { e.preventDefault(); elige(paso(1)); PUERTAS[sel].el.querySelector('button').focus(); }
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); elige(paso(-1)); PUERTAS[sel].el.querySelector('button').focus(); }
   });
   { const i = PUERTAS.findIndex((p) => '#' + p.id === location.hash); if (i >= 0) { history.replaceState({ puerta: PUERTAS[i].id, llegada: 1 }, '', location.hash); trasCargar(() => setTimeout(() => abre(i, false), 400)); } }
   // «Empezar» and the other buttons open a door by its name, the same way as a click on it

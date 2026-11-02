@@ -70,8 +70,13 @@
   function marcaPortada() {
     const b = ini && ini.querySelector('.nuc-op[data-n="com"]'); if (!b) return;
     if (enPrograma()) b.dataset.producto = 'secure'; else delete b.dataset.producto;
+    // 2 Nov 2026 (owner, 07:57 and 08:01): inside the program, «Navegar con ZERO» opens the program's own browser (on this
+    // computer and its connection), never the servers' engine; on the web it is the demonstration, as before
+    const z = ini.querySelector('.nuc-op[data-n="zero"]'); if (z) { if (enPrograma()) z.dataset.producto = 'zero'; else delete z.dataset.producto; }
     // 31 Oct 2026 (coordinación: «en modo programa, añade una tarjeta Antivirus a ese inicio»): solo dentro del programa
-    const e = ini.querySelector('.nuc-op[data-n="escaner"]'); if (e) { e.hidden = !enPrograma(); e.parentNode.classList.toggle('con-escaner', enPrograma()); }
+    // 2 Nov 2026 (owner, 08:01): the cover is the only way into each section, so the Antivirus is on it on the web too (there it
+    // says what it does and that it needs the program, and offers it)
+    const e = ini.querySelector('.nuc-op[data-n="escaner"]'); if (e) { e.hidden = false; e.parentNode.classList.add('con-escaner'); }
   }
   try { new MutationObserver(marcaPortada).observe(document.documentElement, { attributes: true, attributeFilter: ['data-en-programa'] }); } catch (_) {}
   // El PDF de una web lo hace ZERO con lo que ha visto en la web abierta.
@@ -399,7 +404,7 @@ ${doc.secciones.map(tabla).join('')}<p class="nota">${esc(doc.final)}</p></body>
       + '<button type="button" class="nuc-op" data-n="planeta"><i>ÓRBITA</i><b>Explorar el planeta</b><small>Cables submarinos, cables terrestres, centros de datos, satélites y cortes en directo.</small></button>'
       + '<button type="button" class="nuc-op" data-n="com"><i>COMUNICACIONES</i><b>Chat y archivos encriptados</b><small>Para particulares y profesionales: datos y documentación sensible, encriptados de extremo a extremo.</small></button>'
       // 31 Oct 2026: el Antivirus (static/escaner.js), solo dentro del programa para Windows (marcaPortada la enseña)
-      + '<button type="button" class="nuc-op" data-n="escaner" hidden><i>ANTIVIRUS</i><b>Escanear este equipo</b><small>Revisa a fondo antivirus, cámara, micrófono, control remoto y lo que este equipo envía fuera.</small></button>'
+      + '<button type="button" class="nuc-op" data-n="escaner"><i>ANTIVIRUS</i><b>Escanear este equipo</b><small>Revisa a fondo antivirus, cámara, micrófono, control remoto y lo que este equipo envía fuera.</small></button>'
       // 1 nov 2026 (el dueño: «VPN como sección propia»): la VPN (static/vpn.js); fuera del programa dice qué es y qué hace falta
       + '<button type="button" class="nuc-op" data-n="vpn"><i>VPN</i><b>Túnel encriptado</b><small>Lo que sale de este equipo, encriptado hasta un servidor de GUARDIANA; si el túnel cae, nada sale.</small></button>'
       + '</div>'

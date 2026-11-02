@@ -41,7 +41,7 @@
   function monta() {
     if (raiz) return raiz;
     raiz = h('section', { class: 'escaner vpn', id: 'vpn', role: 'dialog', 'aria-modal': 'true', 'aria-labelledby': 'vpn-titulo', hidden: true });
-    volverBtn = h('button', { type: 'button', class: 'esc-volver', html: I_ATRAS }); volverBtn.append(pon(h('span'), 'Órbita'));
+    volverBtn = h('button', { type: 'button', class: 'esc-volver', html: I_ATRAS }); volverBtn.append(pon(h('span'), 'Inicio'));
     volverBtn.addEventListener('click', sal);
     const marca = h('div', { class: 'esc-logo' }, h('span', { class: 'g', translate: 'no' }, 'GUARDIANA'), h('span', { class: 'sep', 'aria-hidden': 'true', translate: 'no' }, '/'), h('span', { class: 'sub', translate: 'no' }, 'VPN'));
     cerrarBtn = h('button', { type: 'button', class: 'esc-cerrar', 'aria-label': 'Cerrar', title: 'Cerrar', html: I_X });
@@ -66,7 +66,7 @@
       h('p', null, 'El servidor de GUARDIANA ve adónde va tu tráfico, como en cualquier VPN. Qué guarda y qué no se publicará con su código, dentro del sello; hasta entonces no se promete nada.'),
       h('p', null, 'Incluida en la licencia de GUARDIANA, sin cuenta aparte. La biblioteca de WireGuardNT va firmada por WireGuard LLC, tal cual la publica, y el programa comprueba su huella antes de cargarla.'));
     V.fuera = h('div', { class: 'vpn-fuera', hidden: true },
-      h('p', { class: 'esc-texto' }, 'La VPN va dentro del programa GUARDIANA para Windows: una web no puede abrir un túnel por sí sola. Una vez instalado, abre Órbita desde el programa y pulsa «VPN».'),
+      h('p', { class: 'esc-texto' }, 'La VPN va dentro del programa GUARDIANA para Windows: una web no puede abrir un túnel por sí sola. Una vez instalado, abre el programa y elige «VPN» en la portada.'),
       (() => { const a = h('a', { class: 'esc-boton', href: DESCARGA }); a.append(h('span', null, 'Instalar GUARDIANA')); return a; })());
     V.servidor = h('p', { class: 'vpn-servidor' }, h('span', { class: 'esc-marca' }, 'En preparación'), ' ', h('span', null, 'Primer servidor: Helsinki. Cuando esté dentro del sello, se conecta desde aquí; hasta entonces, «Conectar» dirá que el servidor no contesta.'));
     const hoja = h('div', { class: 'esc-hoja vpn-hoja' }, h('div', { class: 'esc-portada vpn-portada' }, V.anillo, V.k, V.titulo, V.lead, V.boton, V.aviso, V.datos, V.fuera, V.servidor, hechos), limites);
@@ -170,7 +170,9 @@
     mueveIdiomas(false);
     window.OrbitaTapada = false;
     if (boton) boton.setAttribute('aria-pressed', 'false');
-    if (dentro) setTimeout(() => { const v = [antes, boton, document.getElementById('escaner-btn'), document.getElementById('volver')].find((el) => el && el.isConnected && el.getClientRects().length); if (v) v.focus({ preventScroll: true }); }, 300);
+    // 2 Nov 2026 (owner, 08:01: «tiene que volver a la carátula principal»): leaving the VPN shows the main cover
+    if (window.GuardianaNucleo && typeof window.GuardianaNucleo.inicio === 'function') { try { window.GuardianaNucleo.inicio(); } catch (_) {} return; }
+    if (dentro) setTimeout(() => { const v = [antes, document.getElementById('volver')].find((el) => el && el.isConnected && el.getClientRects().length); if (v) v.focus({ preventScroll: true }); }, 300);
   }
   function sal() {
     if (history.state && history.state.vpn && !history.state.llegada) { history.back(); return; }
@@ -181,19 +183,8 @@
   document.addEventListener('keydown', (e) => { if (abierto && e.key === 'Escape' && !document.querySelector('.idioma-menu:not([hidden])')) { e.preventDefault(); e.stopImmediatePropagation(); sal(); } }, true);
   addEventListener('guardiana-idioma', () => { if (abierto) pinta(); });
 
-  // ---------- la entrada, dentro del programa: «VPN» en la cabecera, tras «Antivirus» ----------
-  function ponBoton() {
-    const marca = document.querySelector('header .izq .marca');
-    if (!enPrograma()) { if (boton) { boton.remove(); boton = null; } return; }
-    const tras = document.getElementById('escaner-btn') || document.getElementById('tupc-btn') || marca;
-    if (boton) { if (tras && boton.previousElementSibling !== tras) tras.after(boton); return; }
-    if (!marca) return;
-    boton = document.createElement('button'); boton.type = 'button'; boton.id = 'vpn-btn'; boton.className = 'lugar-btn vpn-btn';
-    boton.setAttribute('aria-pressed', abierto ? 'true' : 'false'); boton.setAttribute('aria-controls', 'vpn');
-    boton.innerHTML = I_VPN + '<span translate="no">VPN</span>';
-    boton.addEventListener('click', () => { if (abierto) sal(); else abre(); });
-    tras.after(boton);
-  }
+  // ---------- la entrada: solo desde la portada principal (2 Nov 2026, el dueño, 08:01: sin puertas entre secciones) ----------
+  function ponBoton() { if (boton) { boton.remove(); boton = null; } }
   function arranca() {
     ponBoton();
     try { new MutationObserver(() => { ponBoton(); if (abierto) { pinta(); mira(); } }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-en-programa'] }); } catch (_) {}

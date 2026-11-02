@@ -509,7 +509,7 @@
       const a = h('a', { class: 'esc-boton web', href: DESCARGA, html: I_BAJA }); a.append(h('span', null, 'Descargar GUARDIANA para Windows'));
       portada.append(lienzo, h('p', { class: 'esc-k' }, 'Antivirus · Para Windows'), h('h1', { id: 'esc-titulo' }, 'Examen completo de este equipo'),
         h('p', { class: 'esc-lead' }, 'El Antivirus lee lo que Windows y el programa GUARDIANA saben de este equipo: protección y antivirus, cámara, micrófono y pantalla, control remoto, lo que arranca solo, los programas de fábrica, la telemetría y todo lo que sale a internet. Una web no puede ver nada de esto por sí sola: hace falta el programa instalado.'),
-        a, h('p', { class: 'esc-nota-boton' }, 'Una vez instalado, abre Órbita desde el programa y pulsa «Antivirus».'), hechos, examina);
+        a, h('p', { class: 'esc-nota-boton' }, 'Una vez instalado, abre el programa y elige «Antivirus» en la portada.'), hechos, examina);
     }
   }
 
@@ -1453,7 +1453,8 @@
   function abre(op) {
     op = op || {};
     monta();
-    volverA = op.volver === 'nucleo' ? 'nucleo' : 'orbita';
+    // 2 Nov 2026 (owner, 08:01: «tiene que volver a la carátula principal»): back always goes to the main cover
+    volverA = window.GuardianaNucleo ? 'nucleo' : 'orbita';
     pintaVolver();
     if (abierto) { pintaTodo(); if (op.escanea && !S) escanea(); return true; }
     abierto = true; antes = document.activeElement;
@@ -1530,18 +1531,10 @@
     const b = raiz.querySelector('.esc-volver'); if (b) b.focus({ preventScroll: true });
   });
 
-  // ---------- la entrada, dentro del programa: «Antivirus» en la cabecera, junto a «Tu PC» ----------
+  // ---------- la entrada: solo desde la portada principal (2 Nov 2026, el dueño, 08:01: «no quiero que haya una conexión
+  //            ni puerta entre ellos»); el botón «Antivirus» de la cabecera de Órbita ya no existe ----------
   let boton = null;
-  function ponBoton() {
-    const marca = document.querySelector('header .izq .marca');
-    if (!enPrograma()) { if (boton) { boton.remove(); boton = null; } return; }
-    if (boton || !marca) { if (boton) { const tu = document.getElementById('tupc-btn'); if (tu && boton.previousElementSibling !== tu) tu.after(boton); } return; }
-    boton = document.createElement('button'); boton.type = 'button'; boton.id = 'escaner-btn'; boton.className = 'lugar-btn escaner-btn';
-    boton.setAttribute('aria-pressed', abierto ? 'true' : 'false'); boton.setAttribute('aria-controls', 'escaner');
-    boton.innerHTML = I_ESCANER_P + '<span></span>'; pon(boton.querySelector('span'), 'Antivirus');
-    boton.addEventListener('click', () => { if (abierto) sal(); else abre(); });
-    const tu = document.getElementById('tupc-btn'); (tu || marca).after(boton);
-  }
+  function ponBoton() { if (boton) { boton.remove(); boton = null; } }
   function arranca() {
     ponBoton();
     try { new MutationObserver(() => { ponBoton(); if (abierto) pintaTodo(); }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-en-programa'] }); } catch (_) {}
