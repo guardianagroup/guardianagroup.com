@@ -41,7 +41,7 @@
 <link rel="canonical" href="https://guardianagroup.com/orbita/comunicaciones/">
 <link rel="icon" href="/favicon.ico">
 <link rel="stylesheet" href="componentes.css?v=20261028m">
-<link rel="stylesheet" href="app.css?v=20261102g">
+<link rel="stylesheet" href="app.css?v=20261102h">
 <link rel="stylesheet" href="diseno.css?v=20261031a">
 <link rel="stylesheet" href="viaje.css?v=20261029b">
 <!-- antes de pintar: como app desde el primer fotograma y, al volver a un chat tras recargar, sin enseñar el inicio entretanto -->
@@ -964,6 +964,8 @@
   <div class="gc-llamada-arriba"><span class="gc-llamada-cifrado"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><span>Encriptada de extremo a extremo</span></span><span class="gc-llamada-estado" id="ll-calidad"></span><button type="button" class="ll-mini-b ll-vista-tel" id="ll-vista-tel" aria-label="Pantalla completa" hidden></button><button type="button" class="ll-mini-b" id="ll-mini" aria-label="Ver el chat"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v10H8l-4 4z"/></svg><span>Ver el chat</span></button></div>
   <!-- Videollamada (dueño, 28 Oct 2026: «máxima calidad de imagen»): la imagen de la otra persona de fondo y la tuya en una esquina -->
   <div class="videos" id="ll-videos" hidden><video id="v-remoto" autoplay playsinline muted></video><video id="v-tercero" autoplay playsinline muted hidden></video><video id="v-local" autoplay playsinline muted></video><span class="ll-tile-n" id="ll-remoto-n" translate="no" hidden></span><span class="ll-tile-n ll-tile-n3" id="ll-tercero-n" translate="no" hidden></span></div>
+  <!-- mientras la otra persona está en la ventana flotante (dueño, 2 Nov 2026, 14:52): en vez del hueco negro, esto; al tocar, vuelve -->
+  <button type="button" class="ll-en-flotante" id="ll-en-flotante" hidden><b>En la ventana flotante</b><span>Toca aquí para traer la imagen</span></button>
   <!-- El número de seguridad de la llamada (dueño, 29 Oct 2026, 10:16): grande, en las dos pantallas; la comparación la hacen las dos
        personas con su voz. «Coinciden» deja la conversación verificada; «No coinciden» cuelga y, en el blindado, destruye -->
   <button type="button" class="ll-sas-mini" id="ll-sas-mini" hidden></button>
@@ -1021,6 +1023,8 @@
     <!-- Altavoz o auricular (dueño, 28 Oct 2026, 17:26): solo en el teléfono, donde el navegador deja elegir la salida -->
     <div class="gc-llamada-boton" id="ll-altavoz-caja" hidden><button type="button" id="ll-altavoz" aria-pressed="false" aria-label="Poner el altavoz"><svg viewBox="0 0 24 24"><path class="relleno" d="M4.2 9h3.1l4.3-3.7c.5-.4 1.2 0 1.2.6v12.2c0 .6-.7 1-1.2.6L7.3 15H4.2a1.2 1.2 0 0 1-1.2-1.2v-3.6A1.2 1.2 0 0 1 4.2 9z"/><path d="M16 9.3a4 4 0 0 1 0 5.4M18.6 6.7a7.7 7.7 0 0 1 0 10.6"/></svg></button><span>Altavoz</span></div>
     <div class="gc-llamada-boton"><button type="button" id="ll-silenciar" aria-pressed="false" aria-label="Silenciar"><svg viewBox="0 0 24 24"><rect class="relleno" x="9" y="2.8" width="6" height="11.2" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21M9 21h6"/><path class="ic-raya" d="M4 4l16 16"/></svg></button><span>Silenciar</span></div>
+    <!-- «Compartir pantalla» (dueño, 2 Nov 2026, 14:22; ronda 90; 14:50: «otro botón al lado de silenciar… que ponga compartir pantalla»): la otra persona ve tu pantalla en vez de tu cámara -->
+    <div class="gc-llamada-boton ll-pantalla" id="ll-pantalla-caja" hidden><button type="button" id="ll-pantalla" aria-pressed="false" aria-label="Compartir la pantalla"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="4" width="19" height="13" rx="2"/><path d="M8 20.5h8M12 17v3.5"/><path d="M12 13.5V7.8M9.3 10.3 12 7.6l2.7 2.7"/></svg></button><span>Compartir pantalla</span></div>
     <div class="gc-llamada-boton" id="ll-camara-caja" hidden><button type="button" id="ll-camara" aria-pressed="false" aria-label="Apagar la cámara"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="M16 10.5l5-3v9l-5-3z"/></svg></button><span>Cámara</span></div>
     <!-- girar la cámara, delantera ↔ trasera, como en WhatsApp (dueño, 29 Oct 2026, 14:49): solo en el teléfono y con imagen -->
     <div class="gc-llamada-boton" id="ll-girar-caja" hidden><button type="button" id="ll-girar" aria-label="Girar la cámara"><svg viewBox="0 0 24 24"><path d="M4 8.5h3l1.6-2.4h6.8L17 8.5h3a1 1 0 0 1 1 1V18a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5a1 1 0 0 1 1-1z"/><path d="M9.2 13.4a2.9 2.9 0 0 1 5-1.9M14.8 13.6a2.9 2.9 0 0 1-5 1.9"/><path d="M14.4 9.9v1.8h-1.8M9.6 17.1v-1.8h1.8"/></svg></button><span>Girar</span></div>
@@ -1035,8 +1039,6 @@
     <div class="gc-llamada-boton" id="ll-completa-caja" hidden><button type="button" id="ll-completa" aria-pressed="false" aria-label="Pantalla completa"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="entra" d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/><path class="sale" d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5"/></svg></button><span>Pantalla completa</span></div>
     <!-- «Más» (ronda 83): lo que se usa poco va en este menú (girar la cámara, voz e imagen, añadir, pantalla completa) -->
     <div class="gc-llamada-boton ll-mas-caja" id="ll-mas-caja" hidden><button type="button" id="ll-mas" aria-haspopup="menu" aria-expanded="false" aria-controls="ll-mas-menu" aria-label="Más opciones"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="5.5" cy="12" r="1.7"/><circle cx="12" cy="12" r="1.7"/><circle cx="18.5" cy="12" r="1.7"/></svg></button><span>Más</span></div>
-    <!-- «Pantalla» (dueño, 2 Nov 2026, 14:22; ronda 90): la otra persona ve tu pantalla en vez de tu cámara -->
-    <div class="gc-llamada-boton ll-pantalla" id="ll-pantalla-caja" hidden><button type="button" id="ll-pantalla" aria-pressed="false" aria-label="Compartir la pantalla"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="4" width="19" height="13" rx="2"/><path d="M8 20.5h8M12 17v3.5"/><path d="M12 13.5V7.8M9.3 10.3 12 7.6l2.7 2.7"/></svg></button><span>Pantalla</span></div>
     <!-- «Flotante» (dueño, 2 Nov 2026, 14:23; ronda 90): la otra persona en la ventana flotante del sistema, movible -->
     <div class="gc-llamada-boton ll-flotante" id="ll-flotante-caja" hidden><button type="button" id="ll-flotante" aria-label="Ventana flotante"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><rect class="relleno" x="12" y="12" width="7.5" height="5.5" rx="1.2"/></svg></button><span>Flotante</span></div>
     <!-- «Volver al PC» (dueño, 2 Nov 2026, 13:27): en el teléfono al que se pasó la llamada, la devuelve al ordenador -->
@@ -1175,7 +1177,7 @@
 
 <!-- En el ordenador, en el chat blindado: la pantalla se tapa con la tecla de captura o si la ventana pierde el foco (29 Oct 2026, 08:02) -->
 <div class="captura-velo" id="captura-velo" role="alert" hidden><div><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><b>Modo blindado</b><span>Pantalla tapada durante la captura</span></div></div>
-<script src="/orbita/static/idioma.js?v=20261102-com5"></script>
+<script src="/orbita/static/idioma.js?v=20261102-com6"></script>
 <script src="pq-mlkem.js?v=20261027a"></script>
 <script src="pq-cnsa.js?v=20261027a"></script>
 <script src="qrhaz.js?v=20261027a"></script>
@@ -1185,7 +1187,7 @@
 <script src="sha256.js?v=20261027a"></script>
 <script src="viaje-datos.js?v=20261031a"></script>
 <script src="viaje.js?v=20261029b"></script>
-<script src="llamada.js?v=20261102h"></script>
+<script src="llamada.js?v=20261102i"></script>
 <script src="app.js?v=20261102g"></script>
 </body>
 </html>

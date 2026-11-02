@@ -42,6 +42,8 @@ const llega = (P) => P.evaluate(async () => { let v = 0, a = 0; for (const p of 
   await espera(3000);
   const pista = () => B.evaluate(() => { const v = document.querySelector('#v-local'); const t = v && v.srcObject && v.srcObject.getVideoTracks()[0]; return t ? { label: t.label, surf: (t.getSettings && t.getSettings().displaySurface) || '' } : null; });
   comprueba(await visible(B, '#ll-pantalla'), '1. en la llamada de B sale «Pantalla»');
+  const junto = await B.evaluate(() => { const c = document.querySelector('#ll-silenciar').closest('.gc-llamada-boton'); let n = c.nextElementSibling; while (n && n.hidden) n = n.nextElementSibling; return n ? { id: n.id, texto: (n.querySelector('span') || n).textContent.trim() } : null; });
+  comprueba(!!junto && junto.id === 'll-pantalla-caja' && junto.texto === 'Compartir pantalla', '1. «Compartir pantalla», al lado de «Silenciar»', junto);
   await B.evaluate(() => document.querySelector('#ll-pantalla').click()); await espera(2500);
   const p1 = await pista();
   comprueba(!!p1 && !!p1.surf, '1. B comparte la pantalla (lo que se envía y su propia imagen)', p1);

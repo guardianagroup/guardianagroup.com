@@ -2310,3 +2310,10 @@ body.modo-llevar{background:#06080C}
 #ll-flotante-caja[hidden]{display:none!important}
 #ll-pantalla-caja[hidden]{display:none!important}
 #ll-pantalla[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-fg)}
+/* mientras la otra persona está en la ventana flotante (dueño, 2 Nov 2026, 14:52: «la pantalla se pone negra… es un error») */
+.ll-en-flotante{position:absolute;left:50%;top:42%;transform:translate(-50%,-50%);z-index:6;display:flex;flex-direction:column;align-items:center;gap:6px;max-width:calc(100% - 48px);padding:18px 24px;border-radius:18px;border:1px solid rgba(156,195,228,.35);background:rgba(6,8,12,.86);color:#E8ECF1;font:500 17px/1.3 var(--texto);text-align:center}
+.ll-en-flotante[hidden]{display:none!important}
+.ll-en-flotante span{font:400 14px/1.35 var(--texto);color:#B9C6D2}
+.ll-en-flotante:focus-visible{outline:2px solid #9CC3E4;outline-offset:3px}
+.gc-llamada.mini .ll-en-flotante{top:50%;padding:10px 14px;font-size:14px}
+.gc-llamada.mini .ll-en-flotante span{display:none}

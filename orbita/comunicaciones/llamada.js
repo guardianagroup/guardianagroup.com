@@ -255,9 +255,13 @@
       $('#ll-avatar').textContent = o.inicial();
       caja.setAttribute('aria-label', video ? t('Videollamada') : t('Llamada de voz'));
       $('#ll-camara-caja').hidden = !(video && cam);
-      { const f = $('#ll-flotante-caja'); if (f) f.hidden = !(PIP && video && estado === 'hablando' && remotoV); }
-      sesionLlamada();
-      { const sp = $('#ll-pantalla-caja'); if (sp) { sp.hidden = !(PANTALLA && !pantallaNo && video && estado === 'hablando'); const b = $('#ll-pantalla'); if (b) { b.setAttribute('aria-pressed', String(!!compartiendo)); b.setAttribute('aria-label', compartiendo ? t('Dejar de compartir la pantalla') : t('Compartir la pantalla')); } } }
+      // «Flotante», solo en el teléfono: en el ordenador la ventana flotante sale sola al cambiar de pestaña (sesionLlamada) y el botón
+      // dejaba la llamada en negro con «Reproduciendo…» (dueño, 2 Nov 2026, 14:50–14:52: «la pantalla se pone negra… es un error»)
+      { const f = $('#ll-flotante-caja'); if (f) f.hidden = !(PIP && TEL_UA && video && estado === 'hablando' && remotoV); }
+      sesionLlamada(); pintaFlotando();
+      { const sp = $('#ll-pantalla-caja'); if (sp) { sp.hidden = !(PANTALLA && !pantallaNo && video && estado === 'hablando'); const b = $('#ll-pantalla'); if (b) { b.setAttribute('aria-pressed', String(!!compartiendo)); b.setAttribute('aria-label', compartiendo ? t('Dejar de compartir la pantalla') : t('Compartir la pantalla')); }
+        // en el ordenador, «Compartir pantalla» (dueño, 14:50); en el teléfono no cabe junto a los demás: «Pantalla»
+        const sl = sp.querySelector('span'); if (sl) sl.textContent = compartiendo ? t('Dejar de compartir') : TEL_UA ? t('Pantalla') : t('Compartir pantalla'); } }
       { const g = $('#ll-girar-caja'); if (g) g.hidden = !(video && cam && TEL_UA && camaraOn()); }
       // «Pantalla completa», solo en el ordenador y con imagen (dueño, 30 Oct 2026, 09:02: «toda la pantalla del PC»)
       { const f = $('#ll-completa-caja'); if (f) f.hidden = !(video && completaPC()); }
@@ -1849,12 +1853,30 @@
         entraFlotante(v);
       } catch (_) {}
     }
+    function flotando(v) { return !!v && (document.pictureInPictureElement === v || v.webkitPresentationMode === 'picture-in-picture'); }
     function entraFlotante(v, alFallar) {
       reproduce(v);
       if (v.requestPictureInPicture) { v.requestPictureInPicture().catch(() => { if (alFallar) alFallar(); try { if (v.webkitSetPresentationMode) v.webkitSetPresentationMode('picture-in-picture'); } catch (_) {} }); return; }
       if (v.webkitSetPresentationMode) v.webkitSetPresentationMode('picture-in-picture');
     }
-    { const b = $('#ll-flotante'); if (b) b.addEventListener('click', () => { flotaSola = false; flotante(); }); }
+    { const b = $('#ll-flotante'); if (b) b.addEventListener('click', () => {
+      flotaSola = false; flotante();
+      // si el teléfono no la abre, se dice (dueño, 2 Nov 2026, 14:51: «en el móvil tampoco [funciona]»)
+      setTimeout(() => { const v = $('#v-remoto'); if (estado === 'hablando' && document.visibilityState === 'visible' && !flotando(v)) o.aviso && o.aviso(t('Este teléfono no deja poner la llamada en una ventana flotante.')); }, 1800);
+    }); }
+    // Mientras la otra persona está en la ventana flotante, la llamada no se queda en negro con «Reproduciendo…» (dueño, 14:52: «la
+    // pantalla se pone negra… es un error»): lo dice, y al tocar, la imagen vuelve aquí.
+    function pintaFlotando() {
+      const v = $('#v-remoto'), e = $('#ll-en-flotante'); if (!v || !e) return;
+      const si = estado === 'hablando' && flotando(v);
+      e.hidden = !si; caja.classList.toggle('flotando', si);
+    }
+    { const v = $('#v-remoto'); if (v) for (const ev of ['enterpictureinpicture', 'leavepictureinpicture', 'webkitpresentationmodechanged']) v.addEventListener(ev, pintaFlotando); }
+    { const e = $('#ll-en-flotante'); if (e) e.addEventListener('click', () => {
+      flotaSola = false;
+      try { if (document.pictureInPictureElement) document.exitPictureInPicture().catch(() => {}); const v = $('#v-remoto'); if (v && v.webkitPresentationMode === 'picture-in-picture') v.webkitSetPresentationMode('inline'); } catch (_) {}
+      setTimeout(pintaFlotando, 300);
+    }); }
     // La ventana flotante sola (dueño, 2 Nov 2026, 13:43–13:53: «que siga funcionando por toda Guardiana… y también por fuera…
     // si mi amigo está visitando una página web normal»; ronda 90): en mitad de una videollamada, al cambiar de pestaña o de
     // programa, Chrome de escritorio (desde la 120) abre solo la ventana flotante con la otra persona, movible y por encima de todo

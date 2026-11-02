@@ -4,7 +4,7 @@
 //      pestaña, y en esa ventana, micrófono, cámara y colgar.
 //   2. «Al cambiar de pestaña» (la acción del navegador): sale la otra persona en la ventana flotante.
 //   3. Al volver a la pestaña, la ventana que se abrió sola se cierra.
-//   4. El micrófono y la cámara desde la ventana flotante: la llamada y la ventana dicen lo mismo.
+//   4. El micrófono y la cámara desde la ventana flotante: la llamada y la ventana dicen lo mismo. En el PC no sale «Flotante».
 //   5. Colgar desde la ventana flotante: se termina para los dos y las acciones se quitan.
 'use strict';
 const { chromium } = require('playwright');
@@ -87,14 +87,8 @@ const visible = (P, s) => P.evaluate((s) => { const e = document.querySelector(s
   await A.evaluate(() => window.__acciones.togglecamera({ action: 'togglecamera' })); await espera(500);
   const c2 = await A.evaluate(() => ({ boton: document.querySelector('#ll-camara').getAttribute('aria-pressed'), dice: window.__cam[window.__cam.length - 1] }));
   comprueba(c2.boton === 'false' && c2.dice === true, '4. otra vez: vuelve la cámara', c2);
-  // 4b. «Flotante» pulsado a mano no se cierra al volver a la pestaña
-  await A.evaluate(() => { window.__vista = 'hidden'; document.dispatchEvent(new Event('visibilitychange')); });
-  await A.evaluate(() => { const b = document.querySelector('#ll-flotante'); if (b) b.click(); }); await espera(400);
-  const aMano = await A.evaluate(() => window.__pip.length);
-  await A.evaluate(() => { window.__vista = 'visible'; document.dispatchEvent(new Event('visibilitychange')); }); await espera(500);
-  const sigue = await A.evaluate(() => ({ abierta: !!document.pictureInPictureElement, cerradas: window.__pipFuera }));
-  comprueba(aMano === 2 && sigue.abierta && sigue.cerradas === 1, '4. la ventana abierta a mano con «Flotante» sigue abierta al volver', { aMano, sigue });
-  await A.evaluate(() => document.exitPictureInPicture());
+  // 4b. en el PC no sale «Flotante» (la ventana sale sola al cambiar de pestaña; el botón dejaba la llamada en negro)
+  comprueba(!(await visible(A, '#ll-flotante')), '4. en el PC no sale el botón «Flotante»');
   // 5. colgar desde la ventana flotante
   await A.screenshot({ path: path.join(OUT, '5-a-antes-de-colgar.png') });
   await A.evaluate(() => window.__acciones.hangup({ action: 'hangup' }));
