@@ -137,6 +137,8 @@
     const j = r && r.json && typeof r.json === 'object' ? r.json : null;
     if (r && r.ok && j && j.ok === true) aviso = '';
     else if (r && r.estado === 428) aviso = 'El programa solo acepta la orden justo después de pulsar: vuelve a pulsar.';
+    // 1.0.55: conectar es de Plus al acabar la prueba; el programa manda su propia línea, ya en el idioma de la persona
+    else if (r && r.estado === 402 && j && j.texto) aviso = String(j.texto);
     else aviso = 'No se pudo. ' + (j && j.motivo ? String(j.motivo) : r && r.motivo === 'tiempo' ? 'El programa no respondió a tiempo.' : 'El programa no lo permitió.');
     await mira();
   }
