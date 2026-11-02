@@ -40,6 +40,6 @@ en `claude.md`.
 
 ## Orden de trabajo
 
-8. Primero lo que ya está en marcha: cuarentena (hecha), DLL en el instalador (en prueba), pantalla VPN (publicada).
+8. Primero lo que ya estaba en marcha: cuarentena (hecha), DLL en el instalador (hecha y probada en un Windows real, candidato 41388567037), pantalla VPN (publicada).
 9. Después, por este orden: radiografía local (subastas y rastreadores) → «IA en tu PC» → 42 idiomas en web y programa.
 10. Revisión final de todo con una segunda voz (un agente que no haya visto el trabajo), como pidió el dueño a las 23:23.
