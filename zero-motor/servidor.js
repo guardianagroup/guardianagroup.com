@@ -65,6 +65,9 @@ const empresas = new Empresas(RAIZ);
 let navegador = null;
 
 const hostDe = (u) => { try { return new URL(u).hostname; } catch (_) { return ''; } };
+// las zonas horarias que conoce este servidor (Node), para aceptar solo un nombre de zona de verdad
+const ZONAS = new Set(typeof Intl.supportedValuesOf === 'function' ? Intl.supportedValuesOf('timeZone') : []);
+function zonaValida(z) { return typeof z === 'string' && z.length < 64 && (z === 'UTC' || ZONAS.has(z)); }
 const ahora = () => new Date().toISOString();
 const esLocal = (h) => h === '127.0.0.1' || h === 'localhost' || h === '::1';
 
@@ -192,16 +195,21 @@ class Sesion {
   pestanaDeReq(req) { try { const f = req.frame(); return f ? this.pestanaDe(f.page()) : null; } catch (_) { return null; } }
   listaPestanas() { return { t: 'pestanas', activa: this.act ? this.act.id : null, lista: this.pestanas.map((p) => ({ id: p.id, titulo: p.titulo || '', url: p.url || '', host: hostDe(p.url || '') })) }; }
 
-  async abre(w, h, idioma) {
+  async abre(w, h, idioma, zona) {
     this.w = Math.max(320, Math.min(1920, w | 0 || 1100)); this.h = Math.max(240, Math.min(1200, h | 0 || 760));
     // 26 Oct 2026: la burbuja habla el idioma de la persona (Accept-Language y navigator.language); antes siempre es-ES.
     const loc = /^[a-z]{2,3}(-[A-Za-z]{2,4})?$/.test(String(idioma || '')) ? String(idioma) : 'es-ES';
     this.idioma = loc;
     if (this.filtro) { this.filtro.cierra(); this.filtro = null; }
     const tor = this.ultra && TOR_PROXY ? TOR_PROXY : '';
+    // 1 Nov 2026: la hora de la persona (su zona, la que dice su navegador), como ya su idioma: con UTC, las webs le enseñaban
+    // horarios de partidos, fechas de noticias y reservas con cinco horas de diferencia en Bogotá. Con Tor, UTC, como el
+    // navegador Tor (la zona diría dónde está la persona).
+    if (zona !== undefined) this.zona = zonaValida(zona) ? String(zona) : 'UTC';
+    const zonaCelda = tor ? 'UTC' : (this.zona || 'UTC');
     if (tor || FILTRO_RED) { this.filtro = new FiltroRed({ tor, permiteLocal: PERMITE_LOCAL, alVetar: (h, motivo) => this.vetada(h, motivo) }); await this.filtro.abre(); }
     this.ctx = await navegador.newContext({
-      viewport: { width: this.w, height: this.h }, deviceScaleFactor: 1, locale: loc, timezoneId: 'UTC', permissions: [],
+      viewport: { width: this.w, height: this.h }, deviceScaleFactor: 1, locale: loc, timezoneId: zonaCelda, permissions: [],
       acceptDownloads: true, serviceWorkers: 'block', extraHTTPHeaders: { 'Sec-GPC': '1', DNT: '1' }, colorScheme: 'light',
       ...(this.filtro ? { proxy: { server: this.filtro.url, bypass: '<-loopback>' } } : {}),
     });
@@ -944,7 +952,7 @@ class Sesion {
   async mensaje(m) {
     let o; try { o = JSON.parse(m); } catch (_) { return; }
     try {
-      if (o.t === 'hola') return await this.abre(o.w, o.h, o.idioma);
+      if (o.t === 'hola') return await this.abre(o.w, o.h, o.idioma, o.zona);
       // 27 Oct 2026 (dueño: «Tor ULTRA tiene que permitir navegar»): lo que llega mientras la burbuja cambia a Tor o vuelve
       // (abrir una web, pestañas, destruir…) espera a la burbuja nueva en vez de perderse. Ratón y teclado no esperan.
       if (this.cambiaUltra && !['raton', 'rueda', 'tecla', 'texto'].includes(o.t)) while (this.cambiaUltra) await this.cambiaUltra;

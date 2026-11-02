@@ -63,7 +63,8 @@
     M.estado = 'conectando'; ponEstado('Conectando con la burbuja remota…');
     ws = new WebSocket(URL_MOTOR + (URL_MOTOR.includes('/sesion') ? '' : '/sesion'));
     ws.binaryType = 'blob';
-    ws.onopen = () => { const t = tam(); env({ t: 'hola', w: t.w, h: t.h, idioma: idiomaCelda() }); };
+    // 1 Nov 2026: y su zona horaria, para que la celda tenga la hora de la persona (el motor la comprueba; con Tor, UTC)
+    ws.onopen = () => { const t = tam(); let zona = ''; try { zona = Intl.DateTimeFormat().resolvedOptions().timeZone || ''; } catch (_) {} env({ t: 'hola', w: t.w, h: t.h, idioma: idiomaCelda(), zona }); };
     ws.onmessage = (ev) => { if (typeof ev.data === 'string') despacha(JSON.parse(ev.data)); else cuadro(ev.data); };
     ws.onclose = () => { M.estado = 'cerrado'; abierto = false; fueraChequeo(); if (!M.acta) ponEstado('Sin conexión con el motor', 'mal'); };
     ws.onerror = () => { M.estado = 'error'; ponEstado('No se pudo conectar con el motor en ' + URL_MOTOR, 'mal'); };
