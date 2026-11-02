@@ -1681,6 +1681,7 @@
     "Puedes cerrar esta pestaña. En este teléfono no queda nada de la llamada.": ["You can close this tab. Nothing from the call is left on this phone.", "Você pode fechar esta aba. Nada da chamada fica neste celular."],
     "Este código ya no sirve": ["This code no longer works", "Este código não vale mais"],
     "La llamada no llega": ["The call is not coming through", "A chamada não está chegando"],
+    "Toca para ver y oír la llamada": ["Tap to see and hear the call", "Toque para ver e ouvir a chamada"],
     "Comprueba que el ordenador sigue en la videollamada y vuelve a pulsar «Pasar al teléfono».": ["Check that the computer is still on the video call and press “Move to phone” again.", "Confira se o computador continua na videochamada e toque de novo em “Passar ao celular”."],
     "Pide que te enseñen un código nuevo en el ordenador.": ["Ask them to show you a new code on the computer.", "Peça para mostrarem um código novo no computador."],
     "Sin acceso a la cámara y al micrófono": ["No access to the camera and microphone", "Sem acesso à câmera e ao microfone"],

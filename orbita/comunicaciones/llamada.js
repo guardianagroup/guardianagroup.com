@@ -39,7 +39,22 @@
   const FILTRO_OK = (() => { try { const c = document.createElement('canvas'); c.width = c.height = 1; const g = c.getContext('2d'); g.filter = 'brightness(2)'; g.fillStyle = '#404040'; g.fillRect(0, 0, 1, 1); return g.getImageData(0, 0, 1, 1).data[0] > 0x60; } catch (_) { return false; } })();
   // una imagen casi negra no es «poca luz»: es que el navegador no deja leer la cámara (28 Oct 2026, 10:41, en teléfonos)
   const LUZ_NEGRA = 0.03;
-  const reproduce = (v) => { try { const p = v.play(); if (p && p.catch) p.catch(() => {}); } catch (_) {} };
+  // (2 Nov 2026, dueño, 13:58–13:59, con una foto de un Android con Brave: «ha tocado la pantalla, sí me escucha… pero no me ve»)
+  // Hay navegadores que no dejan arrancar ni la imagen ni el sonido sin un toque, también con la imagen muda (Brave, el modo de
+  // ahorro del iPhone). Lo que no arranca se apunta y sale «Toca para ver y oír la llamada»; el primer toque arranca todo.
+  const parados = new Set();
+  function arrancaParados() {
+    if (!parados.size) return;
+    for (const v of [...parados]) { parados.delete(v); try { const p = v.play(); if (p && p.catch) p.catch(() => {}); } catch (_) {} }
+    const b = document.getElementById('ll-toca'); if (b) b.hidden = true;
+  }
+  for (const g of ['click', 'touchend', 'pointerup', 'keydown']) document.addEventListener(g, arrancaParados, true);
+  const reproduce = (v) => {
+    try {
+      const p = v.play();
+      if (p && p.catch) p.catch((e) => { if (e && e.name === 'NotAllowedError' && v.srcObject) { parados.add(v); const b = document.getElementById('ll-toca'); if (b) b.hidden = false; } });
+    } catch (_) {}
+  };
   // Teléfono o Safari: códecs que funcionan entre iPhone y Android (H.264 y VP8). VP9 primero solo entre ordenadores
   // (28 Oct 2026, 10:45: entre un iPhone y un Android, con VP9 la imagen llegaba en negro en los dos sentidos).
   const UA = navigator.userAgent || '';
@@ -1056,7 +1071,7 @@
     function suenaRemoto() {
       const ar = $('#a-remoto'); if (!ar || !ar.srcObject) return;
       let p; try { p = ar.play(); } catch (_) { return; }
-      if (p && p.then) p.then(() => { if (paso.textContent === TOCA()) di(''); }).catch(() => { if (estado === 'hablando' || estado === 'conectando') di(TOCA(), true); });
+      if (p && p.then) p.then(() => { if (paso.textContent === TOCA()) di(''); }).catch((e) => { if (estado === 'hablando' || estado === 'conectando') { di(TOCA(), true); if (e && e.name === 'NotAllowedError') { parados.add(ar); const b = $('#ll-toca'); if (b) b.hidden = false; } } });
     }
     const b64u = (b) => btoa(String.fromCharCode(...new Uint8Array(b))).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
     const deB64u = (t) => { const x = atob(String(t).replace(/-/g, '+').replace(/_/g, '/')); const u = new Uint8Array(x.length); for (let i = 0; i < x.length; i++) u[i] = x.charCodeAt(i); return u; };
@@ -1667,6 +1682,7 @@
       if (proc) { proc.parar(); proc = null; }
       clearInterval(medidor); medidor = null; if (vCam) { vCam.srcObject = null; vCam.remove(); vCam = null; } ganancia = 1; ajustes = false;
       mic = null; envio = null; cam = null; nodo = null; if (ctx) { try { ctx.close(); } catch (_) {} ctx = null; }
+      parados.clear(); { const b = $('#ll-toca'); if (b) b.hidden = true; }
       $('#a-remoto').srcObject = null; $('#v-remoto').srcObject = null; $('#v-local').srcObject = null; $('#v-local').classList.remove('trasera'); try { mirando = 'user'; } catch (_) {} remotoV = null; suCamara = true; video = false;
       const bc = $('#ll-camara'); if (bc) bc.setAttribute('aria-pressed', 'false');
       pendientes = []; ofertaEntrante = null; iniciada = 0; partidaPorDefecto = true;

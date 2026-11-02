@@ -13,12 +13,13 @@ const OUT = process.argv[2] || path.join(__dirname, 'llevar');
 fs.mkdirSync(OUT, { recursive: true });
 const URL0 = 'http://127.0.0.1:8080/orbita/comunicaciones/';
 const IPHONE = 'Mozilla/5.0 (iPhone; CPU iPhone OS 18_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.6 Mobile/15E148 Safari/604.1';
+const ANDROID = 'Mozilla/5.0 (Linux; Android 14; SM-S921B) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Mobile Safari/537.36';
 const PC = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36';
 const espera = (ms) => new Promise((r) => setTimeout(r, ms));
 const fallos = [];
 const comprueba = (ok, txt, extra) => { console.log((ok ? 'OK   ' : 'FALLO') + ' ' + txt + (extra !== undefined ? '  ' + JSON.stringify(extra) : '')); if (!ok) fallos.push(txt); };
-async function equipo(browser, pc, nombre, standalone) {
-  const ctx = await browser.newContext({ viewport: pc ? { width: 1280, height: 800 } : { width: 393, height: 852 }, deviceScaleFactor: pc ? 1 : 2, isMobile: !pc, hasTouch: !pc, userAgent: pc ? PC : IPHONE, locale: 'es-CO', permissions: ['microphone', 'camera'] });
+async function equipo(browser, pc, nombre, standalone, ua) {
+  const ctx = await browser.newContext({ viewport: pc ? { width: 1280, height: 800 } : { width: 393, height: 852 }, deviceScaleFactor: pc ? 1 : 2, isMobile: !pc, hasTouch: !pc, userAgent: ua || (pc ? PC : IPHONE), locale: 'es-CO', permissions: ['microphone', 'camera'] });
   await ctx.addInitScript((sa) => { try { sessionStorage.setItem('gcom-sin-numero', '1'); } catch (_) {} window.__compartidos = []; navigator.share = (d) => { window.__compartidos.push(d); return new Promise((r) => setTimeout(r, 300)); }; if (sa) { try { Object.defineProperty(navigator, 'standalone', { get: () => true }); } catch (_) {} }
     // para la prueba 3: poder cortar la conexión de la llamada desde fuera
     const Orig = window.RTCPeerConnection; window.__pcs = []; window.RTCPeerConnection = function (...a) { const p = new Orig(...a); window.__pcs.push(p); return p; }; window.RTCPeerConnection.prototype = Orig.prototype; Object.setPrototypeOf(window.RTCPeerConnection, Orig);
@@ -89,7 +90,7 @@ const hasta = async (fn, ms) => { const h = Date.now() + ms; while (Date.now() <
   comprueba(!/grupo/i.test(nB), '1. B no ve «llamada en grupo»: «' + nB + '»');
   // 6. (AMBOS=1, con B en el PC) los dos pasan la llamada a su teléfono: B también la pasa al suyo (U) y hablan T y U
   if (BPC && process.env.AMBOS === '1') {
-    const { p: U } = await equipo(browser, false, 'U', false);
+    const { p: U } = await equipo(browser, false, 'U', false, process.env.ANDROID_U === '1' ? ANDROID : undefined);
     await espera(1500);
     comprueba(await visible(B, '#ll-llevar'), '6. en el PC de B también sale «Pasar al teléfono»');
     await B.evaluate(() => document.querySelector('#ll-llevar').click()); await espera(800);

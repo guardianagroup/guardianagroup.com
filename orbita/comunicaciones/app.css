@@ -2297,3 +2297,8 @@ body.modo-llevar{background:#06080C}
 @media (min-width:761px){.ll-seg{top:calc(114px + env(safe-area-inset-top))}}
 /* 1.0.50 escondía aquí «‹ Volver» dentro del programa para Windows. 31 Oct 2026: se ve, y lleva a la pestaña de Órbita del
    programa (app.js, data-producto="orbita") */
+
+/* «Toca para ver y oír la llamada» (2 Nov 2026): el navegador no dejó arrancar la imagen o el sonido sin un toque */
+.ll-toca{position:absolute;z-index:60;left:50%;top:50%;transform:translate(-50%,-50%);display:flex;white-space:nowrap;max-width:calc(100vw - 32px);align-items:center;gap:12px;min-height:58px;padding:0 26px 0 20px;border-radius:999px;border:1px solid rgba(156,195,228,.55);background:rgba(8,12,18,.86);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);color:#F4F6F8;font:600 16px/1.2 var(--texto);box-shadow:0 18px 50px -18px #000,0 0 0 6px rgba(156,195,228,.08);cursor:pointer}
+.ll-toca svg{width:22px;height:22px;fill:#9CC3E4}
+.ll-toca[hidden]{display:none}
