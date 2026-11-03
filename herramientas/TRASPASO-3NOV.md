@@ -116,4 +116,33 @@ Dónde está cada cosa, para seguir sin perder nada. Las reglas del dueño está
     - nombres neutros;
     - pánico;
     - medidas del móvil.
-  - **Falta:** terminarlo y pasar las pruebas (las viejas y las nuevas de Ultra), CSP, capturas y una revisión de la criptografía por una segunda voz. Después, enseñárselo al dueño antes de publicar.
+  - **Hecho, según el agente (puntos 1–15 del encargo):**
+    - solo en memoria (ML-DSA sellada y abierta solo para firmar; arrays a cero; se purgan las Ultras guardadas antiguas);
+    - invitación solo por `#b=`;
+    - 4 palabras con una lista propia de 2.048 (`palabras.js`), en el chat y en la llamada, con el número a un toque y la nota de la voz clonada;
+    - sin buzón, dicho en pantalla;
+    - bloques de 1 KB, latido cada 5 s y `cbr=1`/`usedtx=0`;
+    - clave de la llamada cada minuto;
+    - sin rebaja, con «Seguir en la Blindada»;
+    - recibo negable y «Solicitar comprobante firmado»;
+    - mosaico con ruido y sin «difuminada» (el fondo negro por silueta NO: sin aprendizaje automático no es fiable);
+    - voz por formantes (LPC 32), tono al azar y paso banda (`pruebas/voz-ultra.js` en verde);
+    - EXIF fuera y cada imagen recodificada, nombres neutros, aviso en PDF/Office;
+    - velo y Esc dos veces o «Borrar y salir»;
+    - en el móvil, tapar en segundo plano y claves borradas a los 15 s;
+    - el nivel de cada lado;
+    - los textos públicos;
+    - la puerta `GET /api/plan`, con `?plan=plus` solo en local.
+  - **Falta:**
+    - las claves nuevas de idioma.js con su inglés y su portugués (no hay ninguna);
+    - el `?v=` de las 6 páginas;
+    - csp-comprueba;
+    - ejecutar `ultra.js` (la prueba nueva, ya escrita);
+    - adaptar y ejecutar tipos.js, blindado.js y codigo-grande.js, que esperan «próximamente», y ejecutar enviar-llamada.js, llevar.js y rota.js;
+    - capturas de verdad a 1366 y 390 (solo hay las de humo en el scratchpad).
+  - **Para el revisor:**
+    - el SDP pone `cbr=1` solo en la primera línea de audio (la pista «muda» queda sin cbr);
+    - las palabras de la llamada salen de `palabrasDe(sas.lazo)`;
+    - el relleno es `rellena()` a múltiplos de 1 KB más 41+13+16 bytes de cabeceras;
+    - `pidePlan()` va por los eventos guardiana-panel-pide y guardiana-panel.
+  - **Después:** una revisión de la criptografía por una segunda voz, y enseñárselo al dueño antes de publicar.
