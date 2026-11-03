@@ -2681,7 +2681,7 @@
     fila(m.dir === 'mia' ? T('Enviado') : T('Recibido'), cuando(m.t));
     if (m.dir === 'mia') fila(T('Estado'), m.estado === 'pendiente' ? T('Pendiente: saldrá cuando la otra persona entre') : m.estado === 'enviado' ? T('Enviado') : m.estado === 'entregado' ? T('Entregado') : m.estado === 'leido' ? T('Leído') : m.estado === 'fallo' ? T('No se pudo enviar') : m.estado === 'descartado' ? T('Descartado por la otra persona sin mostrarlo') : '');
     if (m.tipo === 'archivo' && m.archivo.tam) fila(T('Tamaño'), tamano(m.archivo.tam));
-    fila(T('Protección'), (esB(c) ? T('Sesión Ultra') : T('Encriptación de extremo a extremo')) + (m.porBuzon ? ' · ' + T('por el buzón cifrado') : ''));
+    fila(T('Protección'), (esB(c) ? T('Sesión Ultra') : T('Encriptación de extremo a extremo')) + (m.porBuzon ? ' · ' + T('por el buzón encriptado') : ''));
     abreHoja('h-info-msg');
   }
   function abreBorrarMsg(m) {

@@ -450,7 +450,7 @@
   // ---------- la portada ----------
   const SECC = [
     ['estado', 'Estado del equipo', 'El veredicto, solo con lo medido.'],
-    ['proteccion', 'Protección', 'Antivirus, cortafuegos, actualizaciones, cifrado y arranque seguro.'],
+    ['proteccion', 'Protección', 'Antivirus, cortafuegos, actualizaciones, encriptación y arranque seguro.'],
     ['antivirus', 'Tu antivirus por dentro y con quién habla', 'Qué envía, a qué países y empresas, y lo que manda a la nube.'],
     ['sensores', 'Cámara, micrófono, pantalla y ubicación', 'Quién los usa ahora y quién los usó.'],
     ['acceso', 'Control remoto, cuentas y quién administra el equipo', 'Sesiones remotas, programas de control, cuentas, puertos y organizaciones.'],
@@ -1351,7 +1351,7 @@
           h('li', null, 'Puntos de arranque menos comunes (Winlogon, AppInit, IFEO, suscripciones WMI): no se revisan.'),
           h('li', null, 'Actualizaciones pendientes: no se buscan, porque la búsqueda la haría el propio Windows Update.'),
           h('li', null, 'Puertos UDP y reglas de entrada del cortafuegos: no se revisan.'),
-          h('li', null, 'DNS cifrado del sistema y reglas NRPT: no se revisan.'),
+          h('li', null, 'DNS encriptado del sistema y reglas NRPT: no se revisan.'),
           h('li', null, 'Credential Guard, reglas ASR y acceso controlado a carpetas: no se revisan.'),
           h('li', null, 'Las cuentas sin sesión iniciada: sus ajustes no se leen.'),
           h('li', null, 'Telemetría de fabricantes de equipos: solo se reconoce la que está en la lista abierta de GUARDIANA.'))),

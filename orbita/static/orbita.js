@@ -64,7 +64,7 @@
     { id: 'defensa', n: 'Defensa', s: 'En desarrollo', d: 'Llegará cuando esté probada. Hasta entonces, no se promete.', url: null, desarrollo: true },
     { id: 'verificacion', n: 'Verificación', s: 'Código original', d: 'Comprueba que lo instalado es exactamente lo publicado.', url: '/verify' },
     { id: 'historial', n: 'Historial', s: 'Cada decisión', d: 'Registradas y encadenadas: si alguien cambia una, se nota.', url: '/extracto' },
-    { id: 'comunicaciones', n: 'Mensajes', s: 'Llamadas cifradas', d: 'Mensajes y llamadas cifrados de extremo a extremo, con GUARDIANA SECURE.', url: null, aparte: 'Se abre en GUARDIANA SECURE, dentro de ZERO; en Linux y macOS, con «guardiana comunicaciones».' },
+    { id: 'comunicaciones', n: 'Mensajes', s: 'Llamadas encriptadas', d: 'Mensajes y llamadas encriptados de extremo a extremo, con GUARDIANA SECURE.', url: null, aparte: 'Se abre en GUARDIANA SECURE, dentro de ZERO; en Linux y macOS, con «guardiana comunicaciones».' },
     { id: 'zero', n: 'ZERO', s: 'Navegador', d: 'El navegador que muestra cada corte, en directo.', url: null, aparte: 'ZERO es un programa aparte: se abre en su propia ventana.' },
     { id: 'ia', n: 'Tu IA', s: 'Qué sabe de ti', d: 'Qué sabe tu IA de ti, con recibo firmado.', url: '/ia' },
   ];
