@@ -70,8 +70,8 @@
   // Spanish in the page; static/idioma.js shows it in the language on screen and keeps the original for the next change
   function pon(el, s) { s = s || ''; if (el.dataset.es !== s) { el.dataset.es = s; el.textContent = s; } return el; }
   // a value that changes every second: only its text changes, so nothing else on the page has to look again
-  function vivo(cls, tr) { const t = document.createTextNode(''); const e = h('span', { class: cls, translate: tr ? null : 'no' }); e.append(t); e.t = t; return e; }
-  const ponVivo = (e, s) => { if (e && e.t && e.t.data !== s) e.t.data = s; };
+  function vivo(cls, tr) { const t = document.createTextNode(''); const e = h('span', { class: cls, translate: tr ? null : 'no' }); e.append(t); e.t = t; e.es = ''; return e; }
+  const ponVivo = (e, s) => { if (e && e.t && e.es !== s) { e.es = s; e.t.data = s; } };
   function bandera(cc, cls) {
     const d = BANDERAS[cc];
     if (!d) return h('span', { class: 'vpn-bandera sin' + (cls ? ' ' + cls : ''), 'aria-hidden': 'true', translate: 'no' }, cc || '');
@@ -158,7 +158,7 @@
     return (i ? v.toLocaleString(loc(), { maximumFractionDigits: v < 10 ? 1 : 0 }) : Math.round(v).toLocaleString(loc())) + ' ' + u[i];
   }
   const reloj = (ms) => { const s = Math.max(0, Math.floor(ms / 1000)); return Math.floor(s / 3600) + ':' + String(Math.floor(s / 60) % 60).padStart(2, '0') + ':' + String(s % 60).padStart(2, '0'); };
-  const hace = (t) => { const s = Math.max(0, Math.round((Date.now() - t) / 1000)); return 'hace ' + (s < 60 ? s + ' s' : s < 3600 ? Math.floor(s / 60) + ' min' : Math.floor(s / 3600) + ' h'); };
+  const hace = (t) => { const s = Math.max(0, Math.round((Date.now() - t) / 1000)); return s < 5 ? 'hace un momento' : 'hace ' + (s < 60 ? s + ' s' : s < 3600 ? Math.floor(s / 60) + ' min' : Math.floor(s / 3600) + ' h'); };
 
   // ---------- la pasarela del programa (o la demostración local) ----------
   const pidePrograma = (m, r, t, primero, cuerpo) => (window.OrbitaEscaner && window.OrbitaEscaner.pide ? window.OrbitaEscaner.pide(m, r, t, primero, cuerpo) : Promise.resolve({ ok: false, motivo: 'tiempo' }));
@@ -214,7 +214,7 @@
     cerrarBtn = h('button', { type: 'button', class: 'esc-cerrar', 'aria-label': 'Cerrar', title: 'Cerrar', html: I_X });
     cerrarBtn.addEventListener('click', sal);
     acc = h('div', { class: 'esc-acc' }, cerrarBtn);
-    const barra = h('div', { class: 'esc-barra' }, volverBtn, marca, DEMO ? h('span', { class: 'esc-marca fuerte vpn-demo' }, 'Demostración local') : null, acc);
+    const barra = h('div', { class: 'esc-barra' }, volverBtn, marca, acc);
 
     // the card: the state on top, what belongs to it in the middle, the orders at the foot
     V.anillo = h('div', { class: 'vpn-anillo', 'aria-hidden': 'true' }, h('i'), h('i'), V.centro = h('b', { html: I_VPN }));
@@ -223,7 +223,8 @@
     V.donde = h('p', { class: 'vpn-donde' });
     V.lead = h('p', { class: 'vpn-lead' });
     V.motivo = h('p', { class: 'vpn-lead vpn-motivo' });
-    const cab = h('header', { class: 'vpn-cab' }, V.anillo, h('div', { class: 'vpn-cab-txt' }, V.k, V.titulo, V.donde, V.lead, V.motivo));
+    // a div, not a <header>: Órbita's own header styles apply to every <header> on the page
+    const cab = h('div', { class: 'vpn-cab' }, V.anillo, h('div', { class: 'vpn-cab-txt' }, V.k, V.titulo, V.donde, V.lead, V.motivo));
     V.cuerpo = h('div', { class: 'vpn-cuerpo' });
     V.interruptor = h('button', { type: 'button', class: 'vpn-interruptor', role: 'switch', 'aria-checked': 'false', 'aria-labelledby': 'vpn-estricto-t', on: { click: cambiaEstricto } });
     V.estrictoValor = h('span', { class: 'vpn-estricto-v' });
@@ -235,11 +236,11 @@
     V.instalar = h('a', { class: 'esc-boton vpn-boton', href: DESCARGA, hidden: true }, h('span', null, 'Instalar GUARDIANA'));
     V.acciones = h('div', { class: 'vpn-acciones' }, V.boton2, V.boton, V.instalar);
     V.aviso = h('p', { class: 'vpn-aviso', role: 'status', 'aria-live': 'polite' });
-    V.pie = h('footer', { class: 'vpn-pie' }, V.estricto, V.acciones);
+    V.pie = h('div', { class: 'vpn-pie' }, V.estricto, V.acciones);
     V.tarjeta = h('article', { class: 'vpn-tarjeta', 'aria-labelledby': 'vpn-titulo' }, cab, V.cuerpo, V.pie, V.aviso);
 
     // what a website sees: a traffic light, and what nobody can promise
-    V.webEstado = h('span', { class: 'vpn-web-estado' });
+    V.webEstado = vivo('vpn-web-estado', true);
     V.webBoton = h('button', { type: 'button', class: 'vpn-comprobar', html: I_OTRA, on: { click: () => comprueba(true) } }); V.webBoton.append(h('span', null, 'Comprobar de nuevo'));
     V.webSub = h('p', { class: 'vpn-web-sub' });
     V.luces = h('ul', { class: 'vpn-luces' });
@@ -256,7 +257,8 @@
       h('p', null, 'No oculta quién eres ante las webs donde inicias sesión, ni frena el phishing ni a quien entrega su contraseña.'),
       h('p', null, 'El servidor de GUARDIANA ve adónde va tu tráfico, como en cualquier VPN. Qué guarda y qué no se publicará con su código, dentro del sello; hasta entonces no se promete nada.'),
       h('p', null, 'Incluida en la licencia de GUARDIANA, sin cuenta aparte. La biblioteca de WireGuardNT va firmada por WireGuard LLC, tal cual la publica, y el programa comprueba su huella antes de cargarla.'));
-    const hoja = h('div', { class: 'esc-hoja vpn-hoja' }, V.tarjeta, V.web, hechos, limites);
+    const demo = DEMO ? h('p', { class: 'vpn-demo' }, h('span', { class: 'esc-marca fuerte' }, 'Demostración local'), ' ', h('span', null, 'Datos de ejemplo, no del programa.')) : null;
+    const hoja = h('div', { class: 'esc-hoja vpn-hoja' }, demo, V.tarjeta, V.web, hechos, limites);
     raiz.append(h('div', { class: 'esc-fondo', 'aria-hidden': 'true' }), barra, h('div', { class: 'esc-cuerpo', tabindex: '-1' }, hoja));
     document.body.appendChild(raiz);
     pinta();
@@ -276,7 +278,7 @@
   function lead(f) {
     switch (f) {
       case 'fuera': return 'Un túnel encriptado desde este equipo hasta un servidor de GUARDIANA, con corte si cae y clave postcuántica. Va dentro del mismo programa que el Antivirus, el navegador y Comunicaciones.';
-      case 'sin_programa': return (MOTIVO_LECTURA[motivoFallo] || 'Esta página no pudo leer el estado de la VPN en el programa.') + ' ' + 'Se vuelve a intentar cada pocos segundos.';
+      case 'sin_programa': return [MOTIVO_LECTURA[motivoFallo] || 'Esta página no pudo leer el estado de la VPN en el programa.', 'Se vuelve a intentar cada pocos segundos.'];
       case 'no_disponible': return motivoFallo === 'version' ? 'La versión instalada del programa aún no trae la VPN.' : E && E.motivo ? '' : 'El programa no puede abrir el túnel aquí.';
       case 'desconectada': return lSoporte === 'si' ? 'Elige el país de salida y conecta: las webs verán la dirección de ese servidor, no la tuya.' : 'Al conectar, lo que salga de este equipo irá encriptado hasta el servidor de GUARDIANA, y las webs verán su dirección, no la tuya.';
       case 'conectando': return 'Llaves nuevas, alta en el servidor, túnel y corte; después, el primer saludo del servidor. Unos segundos.';
@@ -309,7 +311,13 @@
       }
       V.donde.hidden = !V.donde.firstChild;
     }
-    pon(V.lead, lead(f)); V.lead.hidden = !V.lead.textContent;
+    // the lead: one sentence per piece, so that each one is translated whole
+    const frases = [].concat(lead(f) || []).filter(Boolean), firmaLead = frases.join('\n');
+    if (V.lead.dataset.firma !== firmaLead) {
+      V.lead.dataset.firma = firmaLead; V.lead.textContent = '';
+      frases.forEach((x, i) => { if (i) V.lead.append(' '); V.lead.append(h('span', null, x)); });
+      V.lead.hidden = !frases.length;
+    }
     // the program's own words, when it says why
     const motivo = f === 'no_disponible' && E && E.motivo && motivoFallo !== 'version' ? E.motivo : (f === 'error' || f === 'reconectando') && E && E.error ? E.error : '';
     if (V.motivo.dataset.firma !== motivo) {
@@ -349,11 +357,11 @@
   }
   function filaSalida(s, conRadio) {
     const lejos = s.disponible && s.ms != null && s.ms >= LEJOS_MS;
-    const dcha = !s.disponible ? h('span', { class: 'esc-marca' }, 'Próximamente') : s.ms != null ? dato(s.ms + ' ms', 'vpn-ms' + (lejos ? ' lejos' : '')) : h('span', { class: 'vpn-ms nd' }, 'sin medir');
+    const dcha = !conRadio ? null : !s.disponible ? h('span', { class: 'esc-marca' }, 'Próximamente') : s.ms != null ? dato(s.ms + ' ms', 'vpn-ms' + (lejos ? ' lejos' : '')) : h('span', { class: 'vpn-ms nd' }, 'sin medir');
     const sub = h('span', { class: 'vpn-op-sub' });
     if (s.ciudad) sub.append(h('span', null, 'servidor real en ' + T(s.ciudad)));
     if (s.proveedor) sub.append(h('span', { class: 'sep', 'aria-hidden': 'true', translate: 'no' }, '·'), dato(s.proveedor));
-    const cuerpoFila = [bandera(s.pais), h('span', { class: 'vpn-op-txt' }, dato(lugar(s) || s.id, 'vpn-op-nom'), sub, lejos ? h('span', { class: 'vpn-lejos' }, 'Las webs pueden notar por el retraso que estás lejos.') : null), dcha];
+    const cuerpoFila = [bandera(s.pais), h('span', { class: 'vpn-op-txt' }, dato(lugar(s) || s.id, 'vpn-op-nom'), sub, lejos ? h('span', { class: 'vpn-lejos' }, 'Las webs pueden notar por el retraso que estás lejos.') : null), dcha ? h('span', { class: 'vpn-op-dcha' }, dcha) : null];
     if (!conRadio) return h('div', { class: 'vpn-op fija' }, cuerpoFila);
     const input = h('input', { type: 'radio', name: 'vpn-salida', value: s.id, disabled: !s.disponible, on: { change: () => { elegida = s.id; } } });
     return h('label', { class: 'vpn-op' + (s.disponible ? '' : ' no') }, input, h('span', { class: 'vpn-radio', 'aria-hidden': 'true' }), cuerpoFila);
@@ -429,7 +437,7 @@
       pon(W.comprobado, cEnVuelo ? 'Comprobando…' : c ? 'Comprobado desde este equipo' : '');
       W.comprobado.hidden = !W.comprobado.textContent;
     }
-    if (V.webEstado && !V.web.hidden) pon(V.webEstado, cEnVuelo ? 'Comprobando…' : C && C.t ? hace(C.t) : '');
+    if (V.webEstado && !V.web.hidden) ponVivo(V.webEstado, cEnVuelo ? 'Comprobando…' : C && C.t ? hace(C.t) : '');
   }
 
   // the foot of the card: strict mode and the orders
@@ -444,7 +452,7 @@
     }
     let o1 = '', t1 = '', o2 = '';
     if (f === 'desconectada') { o1 = 'conecta'; t1 = 'Conectar'; }
-    else if (f === 'error') { o1 = 'conecta'; t1 = 'Volver a intentar'; if (E && E.estricto === true) o2 = 'desconecta'; }
+    else if (f === 'error') { o1 = 'conecta'; t1 = 'Conectar'; if (E && E.estricto === true) o2 = 'desconecta'; }
     else if (f === 'conectando') { o1 = 'nada'; t1 = 'Conectando…'; }
     else if (CON_TUNEL(f)) { o1 = 'desconecta'; t1 = 'Desconectar'; }
     V.boton.hidden = !o1; V.boton.dataset.orden = o1;
@@ -455,9 +463,12 @@
     V.boton2.hidden = !o2; V.boton2.dataset.orden = o2; pon(V.boton2.querySelector('span'), o2 ? 'Desconectar' : ''); V.boton2.disabled = ocupado;
     V.instalar.hidden = f !== 'fuera';
     V.pie.hidden = V.estricto.hidden && V.boton.hidden && V.boton2.hidden && V.instalar.hidden;
-    V.aviso.textContent = '';
-    if (aviso) { V.aviso.append(h('span', null, aviso.t)); if (aviso.m) V.aviso.append(' ', h('span', { class: 'm', translate: aviso.propio ? 'no' : null }, aviso.m)); }
-    V.aviso.hidden = !aviso;
+    const firmaAviso = aviso ? JSON.stringify(aviso) : '';
+    if (V.aviso.dataset.firma !== firmaAviso) {
+      V.aviso.dataset.firma = firmaAviso; V.aviso.textContent = '';
+      if (aviso) { if (aviso.t) V.aviso.append(h('span', null, aviso.t)); if (aviso.m) V.aviso.append(' ', h('span', { class: 'm', translate: aviso.propio ? 'no' : null }, aviso.m)); }
+      V.aviso.hidden = !aviso;
+    }
   }
 
   // ---------- lo que una web verá ----------
@@ -497,12 +508,12 @@
     else fila('nd', 'Ubicación de Windows', '', 'No se pudo leer.');
     return L1;
   }
-  const NOMBRE_LUZ = { ok: 'Bien', aviso: 'Atención', alerta: 'Fallo', info: 'Información', nd: 'Sin comprobar' };
+  const NOMBRE_LUZ = { ok: 'Bien', aviso: 'Atención', alerta: 'Problema', info: 'Información', nd: 'Sin comprobar' };
   function pintaWeb(f, s) {
     const g = grupo(f);
     V.web.hidden = !g;
     if (!g) return;
-    pon(V.webSub, g === 'on' ? 'Con la VPN conectada, comprobado desde este equipo.' : 'Ahora, sin VPN. Lo que no depende de la VPN, también conectada.');
+    pon(V.webSub, g === 'on' ? 'Con la VPN conectada, comprobado desde este equipo.' : 'Ahora, sin VPN.');
     V.webBoton.hidden = cSoporte !== 'si'; V.webBoton.disabled = cEnVuelo;
     const filas = cSoporte === 'si' ? luces(f, s) : null;
     const firma = g + '|' + lang() + '|' + cSoporte + '|' + cFallo + '|' + cEnVuelo + '|' + JSON.stringify(filas);

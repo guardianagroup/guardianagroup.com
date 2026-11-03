@@ -136,9 +136,10 @@
   let SIG = Math.floor(Math.random() * 1e6) * 1000 + 1, enVuelo = 0;
   const MOTIVO_DE = { 402: 'plan', 401: 'sesion', 403: 'prohibida', 413: 'grande', 428: 'sin_gesto', 429: 'freno', 503: 'sin_panel', 0: 'red' };
   // primero: the polls of a running check-up go ahead of the queue
-  function pide(metodo, ruta, maximo, primero) {
+  // cuerpo (3 Nov 2026, the VPN's choice of exit and its strict mode): an order's JSON body, as text; the program passes it on
+  function pide(metodo, ruta, maximo, primero, cuerpo) {
     return new Promise((resolver) => {
-      const job = { metodo, ruta, maximo, resolver, intentos: 0 };
+      const job = { metodo, ruta, maximo, resolver, intentos: 0, cuerpo: metodo === 'POST' && typeof cuerpo === 'string' ? cuerpo : null };
       if (primero) COLA.unshift(job); else COLA.push(job);
       bombea();
     });
@@ -156,7 +157,8 @@
     };
     reloj0 = setTimeout(() => fin({ ok: false, motivo: 'tiempo', maximo: job.maximo }), job.maximo);
     PEND.set(n, fin);
-    try { document.dispatchEvent(new CustomEvent('guardiana-panel-pide', { detail: JSON.stringify({ n, metodo: job.metodo, ruta: job.ruta }) })); }
+    const pedido = { n, metodo: job.metodo, ruta: job.ruta }; if (job.cuerpo !== null) pedido.cuerpo = job.cuerpo;
+    try { document.dispatchEvent(new CustomEvent('guardiana-panel-pide', { detail: JSON.stringify(pedido) })); }
     catch (_) { fin({ ok: false, motivo: 'tiempo', maximo: job.maximo }); }
   }
   document.addEventListener('guardiana-panel', (e) => {
