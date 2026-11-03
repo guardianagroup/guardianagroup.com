@@ -1516,6 +1516,8 @@ body.con-visor{overflow:hidden}
 .ll-sas-t{font:600 11.5px/1 var(--texto);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
 .ll-sas-num{display:block;font:700 64px/1 var(--mono);letter-spacing:.08em;color:#F4F6F8;font-variant-numeric:tabular-nums;margin:4px 0 2px;text-shadow:0 0 40px rgba(156,195,228,.25)}
 .ll-sas-texto{margin:0;font:400 14px/1.45 var(--texto);color:#dbe9f4;text-wrap:balance}
+.ll-sas-nivel{display:block;margin:0;font:500 12px/1.4 var(--texto);color:#C9D3DC;letter-spacing:.01em;white-space:pre-line}
+.ll-sas-nivel[hidden]{display:none}
 .ll-sas-botones{display:flex;gap:8px;width:100%;margin-top:8px}
 .ll-sas-botones .boton{flex:1;min-height:44px;font-size:15px}
 .ll-sas-mini{all:unset;cursor:pointer;position:absolute;left:50%;top:calc(52px + env(safe-area-inset-top));transform:translateX(-50%);z-index:11;padding:7px 14px;border-radius:999px;border:1px solid rgba(156,195,228,.4);background:rgba(8,12,18,.86);color:#F4F6F8;font:600 15px/1 var(--mono);letter-spacing:.06em;font-variant-numeric:tabular-nums}

@@ -591,7 +591,7 @@
       if (nueva) {
         clearInterval(muestraInvitacion.reloj);
         // en el teléfono, la nota corta de siempre, como WhatsApp (revisión de diseño, 19:15: la larga era jerga); en el ordenador, la de antes
-        await anotaSistema(c, esMovil() ? 'Ultra: encriptado de extremo a extremo. Nada se guarda: al cerrar, desaparece.' : 'Sesión Ultra establecida. Nada se guarda en este navegador ni en el relé: al cerrar la pestaña, desaparece. Lean en voz alta las cuatro palabras de arriba: si coinciden en los dos equipos, nadie está en medio.');
+        await anotaSistema(c, esMovil() ? 'Ultra: encriptado de extremo a extremo. La conversación no se guarda: al cerrar, desaparece.' : 'Sesión Ultra establecida. La conversación no se guarda, ni en este navegador ni en el relé: al cerrar la pestaña, desaparece. Lean en voz alta las cuatro palabras de arriba: si coinciden en los dos equipos, nadie está en medio.');
         if (ACTUAL === c.id) abreConv(c.id);
         // la invitación se mandó desde el inicio sin otra pantalla (19:17): cuando la otra persona entra, su chat se abre solo,
         // salvo si estás en otra conversación o en una llamada (entonces, un aviso que lo abre al tocarlo)
@@ -2634,7 +2634,7 @@
     const ll = $('#llamar'); if (ll) { const si = puedeLlamar() && (R.llamadas || LOCAL); if (!(quieta && !si)) ll.classList.toggle('apagado', !si); ll.title = si ? T('Llamada de voz') : esB(c) && !(c.verificada && c.suVerificada) ? T('Las llamadas se activan cuando los dos hayan comprobado el número de seguridad.') : !R.llamadas && !LOCAL ? T('El servicio de llamadas no está disponible ahora mismo.') : T('La otra persona tiene que estar conectada.'); }
     const vl = $('#videollamar'); if (vl && ll) { vl.classList.toggle('apagado', ll.classList.contains('apagado')); vl.title = ll.classList.contains('apagado') ? ll.title : T('Videollamada'); }
     // contactos (17:33): «Guardar contacto» en «⋯» y, en el teléfono, una tira una vez al empezar
-    { const k = $('#cm-contacto'); if (k) k.hidden = !(c.huella && !c.contacto); const s = $('#ccontacto'); if (s) s.hidden = !(esMovil() && c.huella && !c.contacto && !c.sinContacto) || (iosSafari() && c.id === traspasoConvId()); $('#conv').classList.toggle('es-contacto', !!c.contacto); }
+    { const k = $('#cm-contacto'); if (k) k.hidden = !(c.huella && !c.contacto && !esB(c)); const s = $('#ccontacto'); if (s) s.hidden = !(esMovil() && c.huella && !c.contacto && !c.sinContacto && !esB(c)) || (iosSafari() && c.id === traspasoConvId()); /* en Ultra, no: un contacto se queda para volver a llamar y en Ultra no se queda nada */ $('#conv').classList.toggle('es-contacto', !!c.contacto); }
   }
   // Las 4 palabras de verificación de Ultra (ronda 93), siempre a la vista en el chat, con el nivel de cada lado. Las mismas en los
   // dos equipos: salen de las dos identidades de la conversación (las de la llamada salen de su propio acuerdo, llamada.js).

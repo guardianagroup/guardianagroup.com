@@ -137,6 +137,8 @@ const docPath = path.join(tmp, 'informe de mi nombre.pdf'); fs.writeFileSync(doc
   const pa = await palabrasChat(A), pb = await palabrasChat(B);
   comprueba(pa && pa === pb && pa.split(' · ').length === 4, '3. las cuatro palabras, las mismas en los dos chats', [pa, pb]);
   comprueba(/Tu lado: PC con GUARDIANA · Otro lado: navegador del PC/.test(await nivelChat(A)) && /Tu lado: navegador del PC · Otro lado: PC con GUARDIANA/.test(await nivelChat(B)), '3. el nivel de cada lado, en los dos', [await nivelChat(A), await nivelChat(B)]);
+  // un contacto se queda para volver a llamar: en Ultra, que no guarda nada, no se ofrece
+  comprueba(await A.evaluate(() => document.querySelector('#cm-contacto').hidden && document.querySelector('#ccontacto').hidden) && await B.evaluate(() => document.querySelector('#cm-contacto').hidden && document.querySelector('#ccontacto').hidden), '8. en Ultra no se ofrece «Guardar contacto»');
   // el texto llega; el relé solo ve bloques de 1 KB
   A.tramas.length = 0;
   await A.fill('#texto', 'Hola, esto es Ultra'); await A.click('#enviar'); await espera(1200);
@@ -201,10 +203,11 @@ const docPath = path.join(tmp, 'informe de mi nombre.pdf'); fs.writeFileSync(doc
   // ---- 11. la llamada: palabras iguales, nivel, ritmo constante, clave cada minuto ----
   await llama(A, B, true);
   comprueba((await estadoLl(A)) === 'hablando' && (await estadoLl(B)) === 'hablando', '11. videollamada Ultra en marcha');
-  const palLl = (P) => P.evaluate(() => ({ num: (document.querySelector('#ll-sas-num') || {}).textContent, vis: !document.querySelector('#ll-sas').hidden, t: document.querySelector('#ll-sas-t').textContent, nivel: document.querySelector('#ll-nivel').textContent, nivelVis: !document.querySelector('#ll-nivel').hidden, voz: GuardianaCom.llamada.voz, cambio: GuardianaCom.llamada.cambioActivo, imagen: GuardianaCom.llamada.imagen, pq: GuardianaCom.llamada.pq, cod: !document.querySelector('#ll-cod').hidden }));
+  const palLl = (P) => P.evaluate(() => ({ num: (document.querySelector('#ll-sas-num') || {}).textContent, vis: !document.querySelector('#ll-sas').hidden, t: document.querySelector('#ll-sas-t').textContent, nivel: document.querySelector('#ll-nivel').textContent, nivelVis: !document.querySelector('#ll-nivel').hidden, nivelTarjeta: (document.querySelector('#ll-sas-nivel') || {}).textContent || '', voz: GuardianaCom.llamada.voz, cambio: GuardianaCom.llamada.cambioActivo, imagen: GuardianaCom.llamada.imagen, pq: GuardianaCom.llamada.pq, cod: !document.querySelector('#ll-cod').hidden }));
   const la = await palLl(A), lb = await palLl(B);
   comprueba(la.vis && la.num === lb.num && la.num.split(' · ').length === 4 && la.t === 'Palabras de verificación', '3. en la llamada, las cuatro palabras iguales en las dos pantallas', [la.num, lb.num]);
   comprueba(la.nivelVis && /PC con GUARDIANA/.test(la.nivel) && /navegador del PC/.test(la.nivel), '3. y el nivel de cada lado', la.nivel);
+  comprueba(/^Tu lado: PC con GUARDIANA\nOtro lado: navegador del PC$/.test(la.nivelTarjeta) && /^Tu lado: navegador del PC\nOtro lado: PC con GUARDIANA$/.test(lb.nivelTarjeta), '3. y también dentro de la tarjeta de las palabras, que tapa el de arriba', [la.nivelTarjeta, lb.nivelTarjeta]);
   comprueba(la.voz === 'ultra' && la.cambio && la.imagen === 'mosaico' && la.pq && !la.cod && lb.voz === 'ultra' && lb.cambio, '11. voz cambiada y mosaico puestos, capa postcuántica activa, sin la tarjeta del código', la);
   // cada sección de audio de las dos descripciones: cbr=1 y usedtx=0 en la de Opus; ninguna con la extensión del nivel de audio
   const secciones = await A.evaluate(() => { const pc = GuardianaCom.llamada.pcPrueba; return [pc.localDescription.sdp, pc.remoteDescription.sdp].map((d) => d.split(/\r\n(?=m=)/).filter((x) => /^m=audio /.test(x)).map((x) => ({ fmtp: (x.match(/a=fmtp:111 [^\r\n]*/) || [''])[0], nivel: /ssrc-audio-level/.test(x) }))); });

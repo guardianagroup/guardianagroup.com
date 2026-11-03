@@ -384,7 +384,9 @@
         if (b) { b.classList.toggle('cancela', llamandoT); b.setAttribute('aria-label', llamandoT ? t('Cancelar') : t('Añadir a la llamada')); const sp = $('#ll-anadir-caja > span'); if (sp) sp.textContent = llamandoT ? t('Cancelar') : t('Añadir'); } }
       pintaGrupo();
       // Ultra: el nivel de cada lado, a la vista (ronda 93): el entorno en que corre cada uno, nada más
-      { const nv = $('#ll-nivel'); if (nv) { const n = ultra() && o.nivel && estado === 'hablando' ? o.nivel() : null; nv.hidden = !n; if (n) nv.textContent = t('Tu lado') + ': ' + n.mio + ' · ' + t('Otro lado') + ': ' + n.suyo; } }
+      // (también dentro de la tarjeta de las palabras, que mientras está abierta tapa el de arriba: app.css, .sas-grande)
+      { const n = ultra() && o.nivel && estado === 'hablando' ? o.nivel() : null;
+        for (const [id, sep] of [['#ll-nivel', ' · '], ['#ll-sas-nivel', '\n']]) { const nv = $(id); if (nv) { nv.hidden = !n; if (n) nv.textContent = t('Tu lado') + ': ' + n.mio + sep + t('Otro lado') + ': ' + n.suyo; } } }
       $('#ll-avatar').textContent = o.inicial();
       caja.setAttribute('aria-label', video ? t('Videollamada') : t('Llamada de voz'));
       $('#ll-camara-caja').hidden = !(video && cam);
