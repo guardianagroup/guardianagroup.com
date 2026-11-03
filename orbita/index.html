@@ -2,13 +2,15 @@
 <html lang="es" data-idiomas="es en pt fr de it nl sv da nb fi is pl uk ru tr zh ja ko hi bn id vi th ar fa he ur zh-tw cs ro hu el sk bg hr ms fil sw ta te pt-pt" data-tierra="static/tierra/" data-demo="1" data-cortes="0" data-marco-pestana="orbita" data-marco-cabecera="no">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-YAP7OH4llejjCb+Ek0jUQqdZOg9PY+Hc4fXs5IrNlFA=' 'sha256-t5ZTgNtY7CEDhh/652cGs6xLJySgZigwzJ2FfBCiihE='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self' https://speed.cloudflare.com https://ipinfo.io https://*.amazonaws.com; media-src 'self' blob:; worker-src 'self' blob:; frame-src 'self'; base-uri 'none'; form-action 'none'; upgrade-insecure-requests">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-BvPfyPtNdQTMndaOrXB+r9sGnHGBrW86fl3TAMNTeo0=' 'sha256-t5ZTgNtY7CEDhh/652cGs6xLJySgZigwzJ2FfBCiihE='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self' https://speed.cloudflare.com https://ipinfo.io https://*.amazonaws.com; media-src 'self' blob:; worker-src 'self' blob:; frame-src 'self'; base-uri 'none'; form-action 'none'; upgrade-insecure-requests">
 <link rel="stylesheet" href="/marco/marco.css?v=20261030a">
 <script src="/marco/marco.js?v=20261101b"></script>
 <script>/* (dueño, 2 Nov 2026, 13:16: «primero me aparece la página de órbita y luego me aparece la que tiene que aparecer») la portada
    la pone static/nucleo.js al final de la carga: hasta entonces no se pinta el planeta por debajo (static/nucleo.css). Lo mismo
-   que decide nucleo.js: sin portada con ?nucleo=0 o con una puerta en la dirección. Si nucleo.js no llegara, a los 12 s se ve todo. */
-(function(){try{var q=new URLSearchParams(location.search);if(q.get('nucleo')==='0'||/^#(zero|radiografias|comunicaciones|mi-conexion|escaner|vpn)$/.test(location.hash))return;var h=document.documentElement;h.classList.add('con-portada');setTimeout(function(){h.classList.add('portada-lista');},12000);}catch(e){}})();</script>
+   que decide nucleo.js: sin portada con ?nucleo=0 o con una puerta en la dirección. Si nucleo.js no llegara, a los 12 s se ve todo.
+   (2 Nov 2026, dueño, 16:53 y 17:14: «que no vaya a tirones»): mientras tanto el planeta no se dibuja debajo (OrbitaTapada),
+   y así lo que hay que cargar llega antes a la portada. */
+(function(){try{var q=new URLSearchParams(location.search);if(q.get('nucleo')==='0'||/^#(zero|radiografias|comunicaciones|mi-conexion|escaner|vpn)$/.test(location.hash))return;var h=document.documentElement;h.classList.add('con-portada');window.OrbitaTapada=true;setTimeout(function(){if(h.classList.contains('portada-lista'))return;h.classList.add('portada-lista');window.OrbitaTapada=false;},12000);}catch(e){}})();</script>
 <meta name="robots" content="noindex, nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="referrer" content="no-referrer">
@@ -16,14 +18,16 @@
 <link rel="icon" href="/favicon.ico">
 <title>GUARDIANA · Órbita</title>
 <link rel="stylesheet" href="static/diseno.css?v=20261028a">
-<link rel="preload" href="static/tierra/dia.jpg" as="image">
-<link rel="stylesheet" href="static/orbita.css?v=20261102-mando">
+<link rel="preload" href="static/tierra/dia.jpg" as="fetch" crossorigin>
+<link rel="stylesheet" href="static/orbita.css?v=20261102-fluida">
 <link rel="stylesheet" href="static/movil.css?v=20261025k">
 <link rel="stylesheet" href="/guardiana.css?v=20261028a">
-<link rel="stylesheet" href="static/nucleo.css?v=20261102-sinplaneta">
-<link rel="stylesheet" href="static/escaner.css?v=20261102-secciones">
+<link rel="stylesheet" href="static/nucleo.css?v=20261102-fluida">
+<link rel="stylesheet" href="static/escaner.css?v=20261102-fluida">
 <link rel="stylesheet" href="static/vpn.css?v=20261101a">
-<link rel="stylesheet" href="static/mando.css?v=20261102b">
+<link rel="stylesheet" href="static/mando.css?v=20261102-fluida">
+<!-- la cabecera y el desplazamiento (dueño, 2 nov 2026, 16:55): variante B, la barra que se recoge; ?cabecera=a para la fija -->
+<link rel="stylesheet" href="static/cabecera.css?v=20261102-cab2">
 </head>
 <body class="dock">
 <script>
@@ -137,12 +141,6 @@
 <p id="capa-nota" class="capa-nota" translate="no" aria-live="polite" hidden></p>
 <div id="sat-ficha" class="sat-ficha" translate="no" hidden><b></b><span></span></div>
 <aside id="directo" aria-label="En directo">
-  <section id="dato" class="dato" aria-live="polite" translate="no" title="Toca para ver otro dato · toca los puntos para que se quede fijo" hidden>
-    <div class="dk"><span id="dato-k"></span><span id="dato-e" class="de" hidden></span></div>
-    <div class="dv" id="dato-v"></div>
-    <p class="dt" id="dato-t"></p>
-    <div class="dpie"><small id="dato-f"></small><span class="dpuntos" id="dato-p"></span></div>
-  </section>
   <h2>EN DIRECTO</h2>
   <ul id="lista"></ul>
   <div id="espera">Esperando el primer corte. Cada uno aparecerá aquí y sobre el planeta.</div>
@@ -211,13 +209,13 @@
   </div>
 </section>
 
-<script src="static/idioma.js?v=20261102-com12u"></script>
+<script src="static/idioma.js?v=20261102-com13"></script>
 <script src="static/descargas.js?v=20261025k"></script>
 <script src="static/orbita-secciones.js?v=20261025k"></script>
-<script src="static/orbita.js?v=20261102-mando"></script>
-<script src="static/capas.js?v=20261027a"></script>
+<script src="static/orbita.js?v=20261102-fluida"></script>
+<script src="static/capas.js?v=20261102-fluida"></script>
 <script src="static/ciudades.js?v=20261026b"></script>
-<script src="static/datos-curiosos.js?v=20261025k"></script>
+<script src="static/datos-curiosos.js?v=20261102-fluida"></script>
 <script src="static/red.js?v=20261025k"></script>
 <script src="static/conexion.js?v=20261102-mando"></script>
 <script src="static/movil.js?v=20261102-mando"></script>
@@ -225,14 +223,15 @@
 <script src="static/viaje.js?v=20261025q" defer></script>
 <script src="static/espejo.js?v=20261025l" defer></script>
 <script src="static/radiografias.js?v=20261102b" defer></script>
-<script src="static/tu-pc.js?v=20261102-secciones" defer></script>
-<script src="static/escaner.js?v=20261102c" defer></script>
-<script src="static/vpn.js?v=20261102-vpn3" defer></script>
+<script src="static/tu-pc.js?v=20261102-fluida" defer></script>
+<script src="static/escaner.js?v=20261102-fluida" defer></script>
+<script src="static/vpn.js?v=20261102-fluida2" defer></script>
 <script src="static/frase.js?v=20261025k" defer></script>
-<script src="static/red-nucleo.js?v=20261027b" defer></script>
+<script src="static/red-nucleo.js?v=20261102-fluida" defer></script>
 <script src="static/nucleo-frases.js?v=20261027b" defer></script>
 <script src="static/nucleo-motor.js?v=20261027c" defer></script>
 <script src="zero/pdf.js?v=20261027e" defer></script>
-<script src="static/nucleo.js?v=20261102-sinplaneta" defer></script>
+<script src="static/nucleo.js?v=20261102-fluida" defer></script>
+<script src="static/cabecera.js?v=20261102-cab2" defer></script>
 </body>
 </html>

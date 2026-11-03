@@ -160,6 +160,8 @@
     abierto = true; antes = document.activeElement;
     if (op.apila !== false) { try { history.pushState({ vpn: 1 }, '', location.pathname + location.search + '#vpn'); } catch (_) {} }
     raiz.hidden = false; raiz.classList.remove('sale');
+    // 2 Nov 2026 (owner, 17:14): opened from the main cover, already whole under it while the cover fades out above
+    const portadaEncima = document.getElementById('nuc-ini'); raiz.classList.toggle('sin-entrada', !!(portadaEncima && !portadaEncima.hidden));
     document.body.classList.add('en-escaner', 'en-vpn');
     window.OrbitaTapada = true;
     mueveIdiomas(true);
@@ -172,8 +174,10 @@
     if (!abierto) return;
     abierto = false; clearInterval(reloj);
     const dentro = raiz.contains(document.activeElement);
-    raiz.classList.add('sale');
-    setTimeout(() => { if (!abierto && raiz) { raiz.hidden = true; raiz.classList.remove('sale'); } }, 260);
+    // 2 Nov 2026 (owner, 17:14): back to the main cover, the VPN stays whole underneath while the cover fades in over it, then goes
+    const aPortada = !!(window.GuardianaNucleo && typeof window.GuardianaNucleo.inicio === 'function');
+    if (!aPortada) raiz.classList.add('sale');
+    setTimeout(() => { if (!abierto && raiz) { raiz.hidden = true; raiz.classList.remove('sale'); } }, aPortada ? 320 : 260);
     document.body.classList.remove('en-escaner', 'en-vpn');
     mueveIdiomas(false);
     window.OrbitaTapada = false;

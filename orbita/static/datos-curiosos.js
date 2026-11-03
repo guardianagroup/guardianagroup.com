@@ -1,5 +1,6 @@
-/* GUARDIANA · Órbita · «Ahora mismo» (owner, 22 Oct 2026: «datos curiosos e interesantes, que el cliente diga wow, pero
-   que sean ciertos; del exterior y del propio PC»). One true fact at a time, in the card at the bottom right.
+/* GUARDIANA · Órbita · «Datos curiosos» (owner, 22 Oct 2026: «datos curiosos e interesantes, que el cliente diga wow, pero
+   que sean ciertos; del exterior y del propio PC»). Since 2 Nov 2026, a strip along the bottom of Órbita that keeps them
+   passing, as the news crawls on television; a click opens the whole fact (the strip is at the end of this file).
    Facts about the world are computed here, now, from the same open data the planet draws: CelesTrak's orbital elements
    (SGP4, satellite.js), OpenStreetMap's cables and data centres, GeoNames' cities and the real Sun. Facts about this
    computer come from the panel's own measurements (/api/por-dentro, kept by orbita.js in window.__orbitaPD); outside the
@@ -282,10 +283,9 @@
     return out;
   }
 
-  // ---------- the card ----------
-  const caja = $('dato'); if (!caja) return;
-  let parado = false, temp = 0, cola = [], ultimo = null, vuelta = 0, pos = 0, fijo = false, vistos = [], cursor = -1;
-  // each pass is a fresh shuffle of the world's facts with this computer's facts woven in, so the card never repeats
+  // ---------- the deck: every fact of a pass, worked out once ----------
+  let cola = [], ultimo = null;
+  // each pass is a fresh shuffle of the world's facts with this computer's facts woven in, so the strip never repeats
   // the same sequence (owner, 22 Oct 2026: «se tienen que ir renovando, que no sean siempre los mismos»)
   async function noticia() {
     const N = await noticias(); if (!N || !N.noticias || !N.noticias.length) return null;
@@ -300,73 +300,195 @@
     const eq = equipo(), orden = [], paso = eq.length ? Math.max(1, Math.round(m.length / eq.length)) : 0;
     let e = 0; for (let k = 0; k < m.length; k++) { orden.push(m[k]); if (paso && (k + 1) % paso === 0 && e < eq.length) orden.push(eq[e++]); }
     while (e < eq.length) orden.push(eq[e++]);
-    cola = orden; vuelta = orden.length; pos = 0;
+    cola = orden;
   }
-  // 23 Oct 2026, 09:04 (owner): «las noticias deben de poder ir adelante y atrás… en cuanto la persona toca adelante o
-  // atrás o ahí dentro, ya tiene que parar… y las bolitas, cuando me ponga encima, la pueda ver». Each pass is prepared
-  // whole (one dot per card); it runs by itself until the person touches it, and from then on only they move it.
-  let mazo = [], idx = -1, manual = false, preparando = null;
+  let mazo = [], preparando = null;
   async function preparaMazo() {
     if (preparando) return preparando;
     preparando = (async () => {
       rellena();
       const hechos = await Promise.all(cola.map(async (f) => { try { return typeof f === 'function' ? await f() : f; } catch (_) { return null; } }));
-      const nuevo = hechos.filter(Boolean);
+      const t = tx(), nuevo = hechos.filter(Boolean);
+      // the label of each fact is chosen once, so the strip and the open fact say the same
+      for (const d of nuevo) d.kk = d.k === 'noticia' ? t.k.noticia + ' · ' + t.k.sabias : (d.fijo || (d.k === 'mundo' && Math.random() < 0.5) ? t.k.sabias : t.k[d.k]);
       if (nuevo.length) { mazo = nuevo; ultimo = cola[cola.length - 1]; }
       cola = []; preparando = null;
       return mazo;
     })();
     return preparando;
   }
-  function muestra(j) {
-    if (!mazo.length) return;
-    idx = (j + mazo.length) % mazo.length;
-    pinta(mazo[idx], idx, mazo.length);
+
+  // ---------- the strip (2 Nov 2026, owner, 16:53: «esos datos curiosos tienen que aparecer en la parte de abajo… como una
+  // cinta pequeña… y van pasando. Y si yo con el ratón me paro en uno y le clico, entonces me aparece la información en
+  // pantalla… el botón de cerrar y volver. Y cuando dejo de ponerme encima de esa cinta… él sigue pasando») ----------
+  // A thin strip along the bottom of Órbita, as the news crawls on television: the facts come in from the right and travel
+  // left. The movement is one transform animation that the graphics card runs by itself (Web Animations), so a busy page
+  // never makes it stutter; the facts are written twice in a row and it slides exactly one copy, so the loop has no seam.
+  // The pointer over it (or the keyboard on one of its facts) stops it, gently; leaving lets it go on. A click (or Enter)
+  // opens the whole fact over the planet, with «Volver» and ×, and Esc. With «reduce motion» it does not move: two
+  // arrows step through the facts. It stops while the window is hidden, while something covers the planet, and in the
+  // views that clear the planet (a section, the journey, the mirror, the X-rays). The space it takes is kept for it from
+  // the start (static/orbita.css, --cinta), so nothing on the page moves when it arrives.
+  const T = (s) => { try { return window.GuardianaIdioma ? window.GuardianaIdioma.t(s) : s; } catch (_) { return s; } };
+  const QUIETO = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
+  const VEL = 62; // px a second: a long line of text reads comfortably at this pace
+  const SVG = (d, w) => '<svg width="' + w + '" height="' + w + '" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="' + d + '"/></svg>';
+  const cinta = document.createElement('section');
+  cinta.id = 'cinta'; cinta.className = 'cinta vacia'; cinta.setAttribute('translate', 'no');
+  cinta.innerHTML = '<div class="cinta-k"><i aria-hidden="true"></i><span></span></div>'
+    + '<div class="cinta-ventana"><div class="cinta-pista" role="list"></div></div>'
+    + '<div class="cinta-mando"' + (QUIETO ? '' : ' hidden') + '><button type="button" class="cinta-flecha" data-d="-1">' + SVG('M10 3.5 5.5 8l4.5 4.5', 15) + '</button><button type="button" class="cinta-flecha" data-d="1">' + SVG('M6 3.5 10.5 8 6 12.5', 15) + '</button></div>';
+  document.body.append(cinta);
+  const ventana = cinta.querySelector('.cinta-ventana'), pista = cinta.querySelector('.cinta-pista');
+  let anim = null, ancho = 0, paso = 0, rampa = 0, rate = 1;
+  const motivos = new Set(); // why it is stopped: raton, foco, dialogo, fuera
+
+  // the facts, as buttons: kicker, figure and the first sentence (the whole fact opens on click)
+  const corta = (t) => { if (t.length <= 130) return t; const p = t.indexOf('. ', 50); if (p > 0 && p < 150) return t.slice(0, p + 1); const c = t.lastIndexOf(' ', 125); return t.slice(0, c > 60 ? c : 125) + '…'; };
+  function boton(d, i) {
+    const b = document.createElement('button'); b.type = 'button'; b.className = 'cinta-dato'; b.dataset.i = i;
+    const k = document.createElement('span'); k.className = 'ck'; k.textContent = d.kk || '';
+    b.append(k, ' ');
+    if (d.v) { const v = document.createElement('b'); v.className = 'cv'; v.textContent = d.v; b.append(v, ' '); }
+    const t = document.createElement('span'); t.className = 'ct'; t.textContent = corta(String(d.t || '')); b.append(t);
+    if (d.e) { const e = document.createElement('span'); e.className = 'ce'; e.textContent = tx().k.ejemplo; b.append(' ', e); }
+    const li = document.createElement('div'); li.className = 'cinta-li'; li.setAttribute('role', 'listitem'); li.append(b);
+    return li;
   }
-  function programa() {
-    clearTimeout(temp); if (manual) return;
-    temp = setTimeout(async () => {
-      if (manual) return;
-      if (parado || document.hidden) { programa(); return; }
-      if (idx + 1 >= mazo.length) { await preparaMazo(); if (manual) return; muestra(0); } else muestra(idx + 1);
-      programa();
-    }, 9000);
+  function pintaRotulo() { cinta.setAttribute('aria-label', T('Datos curiosos')); cinta.querySelector('.cinta-k span').textContent = T('Datos curiosos'); for (const b of cinta.querySelectorAll('.cinta-flecha')) { const et = T(b.dataset.d === '1' ? 'Siguiente' : 'Anterior'); b.setAttribute('aria-label', et); b.title = et; } }
+  function monta() {
+    if (anim) { anim.cancel(); anim = null; }
+    cancelAnimationFrame(rampa); rate = 1;
+    pista.textContent = ''; pista.style.transform = '';
+    if (!mazo.length) { cinta.classList.add('vacia'); return; }
+    const a = document.createElement('div'); a.className = 'cinta-copia';
+    mazo.forEach((d, i) => a.append(boton(d, i)));
+    pista.append(a);
+    cinta.classList.remove('vacia');
+    if (QUIETO) { paso = Math.min(paso, mazo.length - 1); colocaPaso(); return; }
+    ancho = a.getBoundingClientRect().width;
+    if (!(ancho > 0)) return;
+    // the repeats are for the eye (and the pointer): hidden from the screen reader and out of the keyboard's way
+    const veces = Math.max(1, Math.ceil(ventana.clientWidth / ancho));
+    for (let r = 0; r < veces; r++) { const c = a.cloneNode(true); c.setAttribute('aria-hidden', 'true'); for (const x of c.querySelectorAll('button')) x.tabIndex = -1; pista.append(c); }
+    anim = pista.animate([{ transform: 'translate3d(0,0,0)' }, { transform: 'translate3d(' + (-ancho) + 'px,0,0)' }], { duration: ancho / VEL * 1000, iterations: Infinity });
+    aplica(true);
   }
-  // the person takes over: from now on the card never moves by itself
-  function toma() { if (manual) return; manual = true; clearTimeout(temp); caja.classList.add('fijo'); }
-  async function siguiente() { if (!mazo.length) await preparaMazo(); muestra(idx + 1); programa(); }
-  function pinta(d, k, n) {
-    const t = tx();
-    caja.classList.remove('entra'); void caja.offsetWidth; caja.classList.add('entra');
-    $('dato-k').textContent = d.k === 'noticia' ? t.k.noticia + ' · ' + t.k.sabias : (d.fijo || (d.k === 'mundo' && Math.random() < 0.5) ? t.k.sabias : t.k[d.k]);
-    const e = $('dato-e'); e.hidden = !d.e; e.textContent = t.k.ejemplo;
-    $('dato-v').textContent = d.v; $('dato-t').textContent = d.t; $('dato-f').textContent = d.f;
-    // 23 Oct 2026, 13:20 (owner): «una flecha a la derecha y otra a la izquierda, de diseño, bien bonita… que al pasar por
-    // encima el mouse cambie a la mano». Built once, so the arrow under the pointer stays lit while the cards change.
-    const p = $('dato-p');
-    if (!p.querySelector('.dpts')) {
-      p.textContent = ''; p.removeAttribute('aria-hidden');
-      const flecha = (cls, d) => { const a = document.createElement('button'); a.type = 'button'; a.className = 'dflecha ' + cls; a.innerHTML = '<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="' + d + '" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>'; return a; };
-      const pts = document.createElement('span'); pts.className = 'dpts'; pts.setAttribute('aria-hidden', 'true');
-      p.append(flecha('datras', 'M10 3.5 5.5 8l4.5 4.5'), pts, flecha('dsig', 'M6 3.5 10.5 8 6 12.5'));
-    }
-    for (const [c, et] of [['.datras', t.k.ant], ['.dsig', t.k.sig]]) { const a = p.querySelector(c); a.setAttribute('aria-label', et); a.title = et; }
-    const pts = p.querySelector('.dpts'); pts.textContent = '';
-    for (let j = 0; j < n; j++) { const b = document.createElement('i'); b.dataset.j = j; if (j === k) b.className = 'on'; pts.append(b); }
-    caja.hidden = false;
+  // reduced motion: the strip shows one fact at its start; the arrows move to the one before or after
+  function colocaPaso() { const li = pista.querySelectorAll('.cinta-li')[paso]; pista.style.transform = li ? 'translate3d(' + (-li.offsetLeft) + 'px,0,0)' : ''; }
+  cinta.querySelector('.cinta-mando').addEventListener('click', (e) => { const b = e.target.closest('.cinta-flecha'); if (!b || !mazo.length) return; paso = (paso + (+b.dataset.d) + mazo.length) % mazo.length; colocaPaso(); });
+  // stopping and going on, with a short ease so the fact under the pointer does not jump away
+  function velocidad(meta, ya) {
+    cancelAnimationFrame(rampa);
+    if (!anim) return;
+    if (ya) { rate = meta; if (meta) { anim.updatePlaybackRate(1); anim.play(); } else anim.pause(); return; }
+    if (meta > 0 && anim.playState === 'paused') { rate = 0; anim.updatePlaybackRate(0.001); anim.play(); }
+    const r0 = rate, t0 = performance.now(), D = meta > r0 ? 450 : 140;
+    const f = (now) => {
+      const k = Math.min(1, (now - t0) / D), e = meta > r0 ? k * k * (3 - 2 * k) : 1 - (1 - k) * (1 - k);
+      rate = r0 + (meta - r0) * e;
+      if (k >= 1) { rate = meta; if (meta) anim.updatePlaybackRate(1); else anim.pause(); return; }
+      anim.updatePlaybackRate(Math.max(0.001, rate)); rampa = requestAnimationFrame(f);
+    };
+    rampa = requestAnimationFrame(f);
   }
-  caja.removeAttribute('title');
-  caja.addEventListener('mouseenter', () => { parado = true; });
-  caja.addEventListener('mouseleave', () => { parado = false; });
-  // a dot under the pointer shows its card (and the person has taken over)
-  caja.addEventListener('mouseover', (e) => { const b = e.target.closest('#dato-p i[data-j]'); if (!b) return; const j = +b.dataset.j; if (j !== idx) { toma(); muestra(j); } });
-  caja.addEventListener('click', (e) => {
-    toma();
-    if (e.target.closest('.datras')) { muestra(idx - 1); return; }
-    if (e.target.closest('.dsig')) { muestra(idx + 1); return; }
-    const b = e.target.closest('#dato-p i[data-j]'); if (b) muestra(+b.dataset.j);
+  const fuera = () => document.hidden || !!window.OrbitaTapada || /\b(dentro|viaje|en-espejo|en-radio|en-escaner|pantalla|imprime-ficha|con-informe)\b/.test(document.body.className);
+  function aplica(ya) {
+    const oculta = /\b(dentro|viaje|en-espejo|en-radio|en-escaner|pantalla|imprime-ficha|con-informe)\b/.test(document.body.className);
+    cinta.classList.toggle('apartada', oculta);
+    if (fuera()) motivos.add('fuera'); else motivos.delete('fuera');
+    velocidad(motivos.size ? 0 : 1, ya || motivos.has('fuera') || motivos.has('dialogo'));
+  }
+  cinta.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse') { motivos.add('raton'); aplica(); } });
+  cinta.addEventListener('pointerleave', (e) => { if (e.pointerType === 'mouse') { motivos.delete('raton'); aplica(); } });
+  cinta.addEventListener('focusin', (e) => {
+    const b = e.target.closest && e.target.closest('.cinta-dato');
+    if (!b || !b.matches(':focus-visible')) return;
+    motivos.add('foco'); aplica(true);
+    // the keyboard on a fact: the strip brings it into view (it may be off the window's edge)
+    const li = b.parentNode;
+    if (QUIETO) { paso = +b.dataset.i || 0; colocaPaso(); return; }
+    if (anim && ancho) anim.currentTime = Math.max(0, li.offsetLeft - 28) / VEL * 1000; // the first copy's own button, near the left edge
   });
-  caja.addEventListener('keydown', (e) => { if (e.key === 'ArrowLeft') { toma(); muestra(idx - 1); } else if (e.key === 'ArrowRight') { toma(); muestra(idx + 1); } });
-  addEventListener('guardiana-idioma', async () => { const j = Math.max(0, idx); mazo = []; await preparaMazo(); muestra(Math.min(j, mazo.length - 1)); });
-  setTimeout(siguiente, 3500);
+  cinta.addEventListener('focusout', (e) => { if (!cinta.contains(e.relatedTarget)) { motivos.delete('foco'); aplica(); } });
+  addEventListener('visibilitychange', () => aplica(true));
+  addEventListener('orbita-tapada', () => { aplica(true); if (window.OrbitaTapada) renueva(); });
+  new MutationObserver(() => aplica(true)).observe(document.body, { attributes: true, attributeFilter: ['class'] });
+  addEventListener('resize', () => { clearTimeout(cinta._r); cinta._r = setTimeout(monta, 250); });
+
+  // ---------- the whole fact, over the page ----------
+  const capa = document.createElement('div');
+  capa.className = 'cinta-capa'; capa.hidden = true; capa.setAttribute('translate', 'no');
+  capa.innerHTML = '<div class="cinta-dialogo" role="dialog" aria-modal="true" aria-labelledby="cinta-dv" aria-describedby="cinta-dt">'
+    + '<div class="cd-cab"><span class="cd-k"></span><span class="cd-e" hidden></span><button type="button" class="cd-x">' + SVG('M4 4l8 8M12 4l-8 8', 16) + '</button></div>'
+    + '<div class="cd-v" id="cinta-dv"></div><p class="cd-t" id="cinta-dt"></p><p class="cd-f"></p>'
+    + '<div class="cd-pie"><button type="button" class="cd-volver">' + SVG('M10 3.5 5.5 8l4.5 4.5', 16) + '<span></span></button></div></div>';
+  document.body.append(capa);
+  const dialogo = capa.querySelector('.cinta-dialogo');
+  let origen = null, cierreT = 0;
+  function abre(i, desde) {
+    const d = mazo[i]; if (!d) return;
+    clearTimeout(cierreT);
+    origen = desde || null;
+    capa.querySelector('.cd-k').textContent = d.kk || '';
+    const e = capa.querySelector('.cd-e'); e.hidden = !d.e; e.textContent = tx().k.ejemplo;
+    capa.querySelector('.cd-v').textContent = d.v || '';
+    capa.querySelector('.cd-v').hidden = !d.v;
+    capa.querySelector('.cd-t').textContent = d.t || '';
+    capa.querySelector('.cd-f').textContent = d.f || '';
+    const x = capa.querySelector('.cd-x'); x.setAttribute('aria-label', T('Cerrar')); x.title = T('Cerrar');
+    capa.querySelector('.cd-volver span').textContent = T('Volver');
+    capa.hidden = false; capa.classList.remove('sale');
+    motivos.add('dialogo'); aplica(true);
+    capa.querySelector('.cd-volver').focus({ preventScroll: true });
+  }
+  function cierra() {
+    if (capa.hidden || capa.classList.contains('sale')) return;
+    capa.classList.add('sale');
+    cierreT = setTimeout(() => { capa.hidden = true; capa.classList.remove('sale'); }, QUIETO ? 0 : 160);
+    const vuelta = origen && origen.isConnected ? origen : null; origen = null;
+    if (vuelta) vuelta.focus({ preventScroll: true });
+    motivos.delete('dialogo');
+    if (!cinta.matches(':hover')) motivos.delete('raton');
+    aplica();
+  }
+  // a fact of a repeat opens the same fact; the focus comes back to the first copy's, the one the keyboard knows
+  pista.addEventListener('click', (e) => { const b = e.target.closest('.cinta-dato'); if (!b) return; const i = +b.dataset.i; abre(i, pista.querySelector('.cinta-copia:not([aria-hidden]) .cinta-dato[data-i="' + i + '"]') || b); });
+  capa.querySelector('.cd-x').addEventListener('click', cierra);
+  capa.querySelector('.cd-volver').addEventListener('click', cierra);
+  capa.addEventListener('click', (e) => { if (e.target === capa) cierra(); });
+  capa.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); cierra(); return; }
+    if (e.key === 'Tab') { // the focus stays inside the open fact
+      const fs = [...dialogo.querySelectorAll('button')]; const i = fs.indexOf(document.activeElement);
+      if (e.shiftKey && i <= 0) { e.preventDefault(); fs[fs.length - 1].focus(); } else if (!e.shiftKey && i === fs.length - 1) { e.preventDefault(); fs[0].focus(); }
+    }
+  });
+
+  // ---------- when the facts are worked out ----------
+  // Some of them are heavy (the position of every data satellite, now): they wait until the cover of GUARDIANA has
+  // finished being born, or until the planet is uncovered, so they never stall an entrance (static/nucleo.js).
+  let primera = true, renovada = Date.now(), idiomaMazo = null;
+  async function llena() { await preparaMazo(); idiomaMazo = lang(); monta(); renovada = Date.now(); }
+  // a new pass, at most every ten minutes, worked out while the cover of GUARDIANA has been still for a while (never
+  // during a section, nor while the strip is in sight: changing it in sight would make it jump)
+  const enPortada = () => { const p = document.getElementById('nuc-ini'); return !!(p && !p.hidden && !p.classList.contains('sale')); };
+  function renueva() {
+    if (primera || preparando || Date.now() - renovada < 6e5) return;
+    setTimeout(async () => { if (!window.OrbitaTapada || !enPortada() || preparando) return; await preparaMazo(); if (window.OrbitaTapada) { monta(); renovada = Date.now(); } }, 3000);
+  }
+  function empieza() { if (!primera) return; primera = false; llena(); }
+  pintaRotulo();
+  // static/idioma.js takes the visit's language when the document has been read: the strip's own words, then
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', () => setTimeout(pintaRotulo, 0));
+  // another language: the facts are worked out again in it (the strip keeps the old ones in sight until they are ready);
+  // the same language told again (the event comes with every choice) changes nothing
+  addEventListener('guardiana-idioma', async () => { pintaRotulo(); if (primera || lang() === idiomaMazo) return; await llena(); });
+  if (!RAIZ.classList.contains('con-portada') || !window.OrbitaTapada) setTimeout(empieza, 1200);
+  else {
+    addEventListener('guardiana-portada-quieta', () => setTimeout(empieza, 2500), { once: true });
+    addEventListener('orbita-tapada', () => requestAnimationFrame(() => { if (!window.OrbitaTapada) empieza(); })); // not for a section opened from the cover
+    setTimeout(empieza, 16000);
+  }
+  aplica(true);
 })();

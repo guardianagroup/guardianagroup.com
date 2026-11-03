@@ -16,7 +16,7 @@ body:not(.m2) #mando {
   --m-mono: var(--mono, 'IBM Plex Mono', ui-monospace, monospace);
   --m-sans: var(--texto, 'IBM Plex Sans', system-ui, sans-serif);
   position: fixed; z-index: 4;
-  right: calc(28px + env(safe-area-inset-right, 0px)); top: 50%; transform: translateY(-50%);
+  right: calc(28px + env(safe-area-inset-right, 0px)); top: calc(50% - var(--cinta, 0px) / 2); transform: translateY(-50%); /* 2 Nov 2026: centred in the space above the strip of facts */
   width: 88px; box-sizing: border-box;
   display: flex; flex-direction: column; align-items: stretch;
   padding: 16px 10px 12px;

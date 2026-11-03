@@ -1492,6 +1492,9 @@
     abierto = true; antes = document.activeElement;
     if (op.apila !== false) { try { history.pushState({ escaner: 1 }, '', location.pathname + location.search + '#escaner'); } catch (_) {} }
     raiz.hidden = false; raiz.classList.remove('sale');
+    // 2 Nov 2026 (owner, 17:14: «sin tirones, nada raro»): opened from the main cover, it is already whole under the cover
+    // while the cover fades out above it; fading both at once let the planet's page show through for a moment
+    const portadaEncima = document.getElementById('nuc-ini'); raiz.classList.toggle('sin-entrada', !!(portadaEncima && !portadaEncima.hidden));
     document.body.classList.add('en-escaner');
     // the planet is covered: it stops drawing while this section is open (and «Tu PC» stops asking)
     window.OrbitaTapada = true;
@@ -1506,8 +1509,12 @@
     if (!abierto) return;
     abierto = false;
     const dentro = raiz.contains(document.activeElement);
-    raiz.classList.add('sale');
-    setTimeout(() => { if (!abierto && raiz) { raiz.hidden = true; raiz.classList.remove('sale'); } }, 260);
+    // 2 Nov 2026 (owner, 17:14: «sin tirones, nada raro»): back to the main cover, this section stays whole underneath while the
+    // cover fades in over it (static/nucleo.js, muestraInicio), and only then goes; fading both at once let the planet show
+    // through for a moment
+    const aPortada = volverA === 'nucleo' && window.GuardianaNucleo && typeof window.GuardianaNucleo.inicio === 'function';
+    if (!aPortada) raiz.classList.add('sale');
+    setTimeout(() => { if (!abierto && raiz) { raiz.hidden = true; raiz.classList.remove('sale'); } }, aPortada ? 320 : 260);
     document.body.classList.remove('en-escaner');
     if (window.GuardianaDescargas) try { window.GuardianaDescargas.cierraMenu(); } catch (_) {}
     mueveIdiomas(false); paraRed();

@@ -1,9 +1,11 @@
 /* GUARDIANA · NÚCLEO, la puerta de entrada (dueño, 27 Oct 2026, 08:42: «pantalla negra y en el medio nace el navegador con el
    cerebro neuronal… buenos días, bienvenido a esta experiencia de tus datos… ¿qué desea hacer?… ella te deriva»). Ronda 52 de la
    agencia: lo que coinciden ChatGPT, Gemini y Astra. Primera versión sin IA generativa: entiende frases y abre cada sección. */
-.nuc-ini{position:fixed;inset:0;z-index:10000;background:#06080C;color:#F4F6F8;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;padding:24px 16px;overflow-y:auto;opacity:1;transition:opacity .7s ease,visibility .7s;font-family:'IBM Plex Sans',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif}
+.nuc-ini{position:fixed;inset:0;z-index:10000;background:#06080C;color:#F4F6F8;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;padding:24px 16px;overflow-y:auto;opacity:1;transition:opacity .45s cubic-bezier(.2,.7,.2,1),visibility .45s;font-family:'IBM Plex Sans',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif}
 .nuc-ini[hidden]{display:none}
 .nuc-ini.sale{opacity:0;visibility:hidden;pointer-events:none}
+/* 2 Nov 2026 (dueño, 17:14: «cuando pasemos de uno a otro, sea todo más fluido»): al volver de una sección la portada entra con
+   un fundido corto por encima (solo opacidad, en la tarjeta gráfica; static/nucleo.js) y no de golpe; al salir, .45 s en vez de .7 s */
 .nuc-ini::before{content:'';position:absolute;inset:0;background:radial-gradient(60% 50% at 50% 38%,rgba(156,195,228,.10),transparent 70%);pointer-events:none}
 .nuc-ini .nuc-lienzo{width:var(--g-red,min(26vh,240px));height:var(--g-red,min(26vh,240px));flex:none;display:block;position:relative}
 .nuc-ini .nuc-k{margin:6px 0 0;font:600 11px/1.4 'IBM Plex Mono',Consolas,monospace;letter-spacing:.32em;color:#9CC3E4;text-transform:uppercase}
@@ -24,6 +26,8 @@
 .nuc-ops{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;width:min(1120px,100%);margin-top:22px}
 .nuc-op{appearance:none;display:grid;gap:6px;align-content:start;text-align:left;padding:16px 18px;border-radius:16px;border:1px solid rgba(156,195,228,.22);background:rgba(12,18,26,.82);color:#F4F6F8;cursor:pointer;font-family:inherit;transition:border-color .2s,background .2s,transform .2s}
 .nuc-op:hover{border-color:rgba(156,195,228,.6);background:rgba(20,32,46,.9);transform:translateY(-2px)}
+/* 2 Nov 2026 (dueño, 17:14: «cuando pasemos de uno a otro, sea todo más fluido»): la tarjeta responde al instante al pulsarla */
+.nuc-op:active{transform:translateY(0) scale(.985);transition-duration:.08s}
 .nuc-op b{font:600 16px/1.25 'IBM Plex Sans',system-ui,sans-serif}
 .nuc-op small{font-size:13px;line-height:1.45;color:#a9bccd}
 .nuc-op i{font-style:normal;font:600 10px/1 'IBM Plex Mono',Consolas,monospace;letter-spacing:.18em;color:#9CC3E4}

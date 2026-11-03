@@ -1,0 +1,38 @@
+/* GUARDIANA · Órbita · la cabecera y el desplazamiento (PROPUESTA, rama orbita-cabecera; static/cabecera.js). A: barra fija con
+   sombra al bajar. B: barra que se recoge y recibe el título. Sin desenfoque detrás (barato en cualquier equipo). */
+.cab-marca { height: 1px; margin-bottom: -1px; flex: none; }
+.cab-barra { --cab-alto: 60px; position: relative; z-index: 3; flex: none; display: flex; align-items: center; gap: 18px; box-sizing: border-box; min-height: var(--cab-alto); background-color: #06080C; border-bottom: 1px solid transparent; transition: box-shadow .25s ease, border-color .25s ease, min-height .28s cubic-bezier(.2,.7,.2,1), background-color .25s ease; }
+.cab-barra.cab-debajo { border-bottom-color: rgba(156,195,228,.14); box-shadow: 0 10px 28px -14px rgba(0,0,0,.95); }
+.cab-barra .esc-logo { flex: none; }
+.cab-titulo { flex: 0 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font: 500 14px/1.2 'IBM Plex Sans', system-ui, sans-serif; color: #C9D3DD; opacity: 0; transform: translateY(4px); transition: opacity .22s ease, transform .22s ease; pointer-events: none; }
+.cab-marca-txt { flex: none; font: 600 12px/1 'IBM Plex Mono', ui-monospace, monospace; letter-spacing: .32em; color: #F4F6F8; white-space: nowrap; transition: opacity .22s ease; }
+
+/* ---------- la portada: barra arriba, el resto se desplaza debajo (con su barra de desplazamiento, fina, solo ahí) ---------- */
+.nuc-ini.con-cabecera { display: flex; flex-direction: column; align-items: stretch; justify-content: flex-start; padding: 0; overflow: hidden; }
+.cab-portada { padding: 0 22px; }
+.cab-portada .cab-izq, .cab-portada .cab-der { display: flex; align-items: center; gap: 16px; min-width: 0; }
+.cab-portada .cab-der { margin-inline-start: auto; }
+.cab-portada .nuc-volver, .cab-portada .nuc-multas-b { position: static; inset: auto; }
+.cab-portada .cab-titulo { font-size: 13.5px; }
+.cab-cuerpo { position: relative; z-index: 1; flex: 1 1 auto; min-height: 0; overflow-y: auto; overflow-x: hidden; display: flex; flex-direction: column; align-items: center; justify-content: safe center; padding: 8px 16px 32px; scrollbar-width: thin; scrollbar-color: rgba(156,195,228,.28) transparent; scrollbar-gutter: stable; overscroll-behavior: contain; }
+
+/* ---------- Antivirus y VPN: la misma barra; su zona de abajo es la única que se desplaza ---------- */
+.escaner .cab-barra { padding: 10px 40px; }
+.escaner .esc-cuerpo { scrollbar-gutter: stable; overscroll-behavior: contain; scrollbar-color: rgba(156,195,228,.28) transparent; }
+.escaner .cab-titulo { max-width: 40%; }
+
+/* ---------- A · la barra no cambia: marca siempre; al bajar, sombra y línea ---------- */
+html[data-cabecera="a"] .cab-titulo { display: none; }
+
+/* ---------- B · arriba del todo la barra es más alta y sin línea; al bajar, se recoge y recibe el título ---------- */
+html[data-cabecera="b"] .cab-barra { --cab-alto: 84px; }
+html[data-cabecera="b"] .cab-barra.cab-debajo { --cab-alto: 56px; }
+html[data-cabecera="b"] .cab-portada .cab-marca-txt { opacity: 0; }
+html[data-cabecera="b"] .cab-portada.cab-debajo .cab-marca-txt, html[data-cabecera="b"] .cab-portada.cab-debajo .cab-titulo, html[data-cabecera="b"] .cab-barra.cab-con-titulo .cab-titulo { opacity: 1; transform: none; }
+html[data-cabecera="b"] .cab-barra .esc-volver, html[data-cabecera="b"] .cab-portada .nuc-volver, html[data-cabecera="b"] .cab-portada .nuc-multas-b { transition: height .28s cubic-bezier(.2,.7,.2,1), background-color .15s, border-color .15s, color .15s; }
+html[data-cabecera="b"] .cab-barra.cab-debajo .esc-volver, html[data-cabecera="b"] .cab-portada.cab-debajo .nuc-volver, html[data-cabecera="b"] .cab-portada.cab-debajo .nuc-multas-b { height: 34px; }
+html[data-cabecera="b"] .cab-barra .esc-logo { transition: font-size .28s cubic-bezier(.2,.7,.2,1), letter-spacing .28s; }
+html[data-cabecera="b"] .cab-barra.cab-debajo .esc-logo { font-size: 12px; letter-spacing: .28em; }
+
+@media (prefers-reduced-motion: reduce) { .cab-barra, .cab-titulo, .cab-marca-txt { transition: none !important; } }
+@media (max-width: 760px) { .escaner .cab-barra { padding: 10px 16px; } .cab-titulo { display: none; } }

@@ -48,6 +48,9 @@
     setTimeout(intenta, 600);
   }
   function alPlaneta(capa, pais) {
+    // 2 Nov 2026 (dueño, 17:14: «cuando pasemos de uno a otro, sea todo más fluido… sin tirones»): el planeta se dibuja una
+    // vez, todavía tapado, y luego se abre la portada: el fundido empieza con el planeta ya en su sitio y no a medio pintar
+    if (ini && !ini.hidden && !ini.classList.contains('sale')) { try { if (window.OrbitaPlaneta && OrbitaPlaneta.pintaYa) OrbitaPlaneta.pintaYa(); } catch (_) {} }
     cierraTodo();
     const v = document.getElementById('volver'); if (document.body.classList.contains('dentro') && v && !v.hidden) { volviendo = Date.now(); v.click(); }
     setTimeout(() => {
@@ -424,17 +427,26 @@ ${doc.secciones.map(tabla).join('')}<p class="nota">${esc(doc.final)}</p></body>
     return d;
   }
   function entra(id) { if (id !== 'nucleo') ponVuelta('portada'); if (id === 'zero') abreZero(); else if (id === 'planeta') alPlaneta(); else if (id === 'com') irComunicaciones(); else if (id === 'nucleo') abreSala(); else if (id === 'escaner') { cierraTodo(); if (window.OrbitaEscaner) window.OrbitaEscaner.abre({ volver: 'nucleo' }); } else if (id === 'vpn') { cierraTodo(); if (window.OrbitaVpn) window.OrbitaVpn.abre(); } }
+  // la portada ya está quieta (terminó de nacer): lo pesado del planeta (sus datos) puede cargarse ahora sin dar tirones a la
+  // entrada (static/capas.js y static/datos-curiosos.js lo esperan; ver «guardiana-portada-quieta»)
+  const quieta = () => { if (window.GuardianaPortadaQuieta) return; window.GuardianaPortadaQuieta = true; try { dispatchEvent(new Event('guardiana-portada-quieta')); } catch (_) {} };
   function revela(d, todo) {
     const pasos = [...d.querySelectorAll('.nuc-paso')];
-    if (todo || matchMedia('(prefers-reduced-motion: reduce)').matches) { pasos.forEach((p) => p.classList.add('ve')); return; }
+    if (todo || matchMedia('(prefers-reduced-motion: reduce)').matches) { pasos.forEach((p) => p.classList.add('ve')); setTimeout(quieta, 400); return; }
     const tiempos = [900, 2100, 2700, 3300];
     pasos.forEach((p, i) => setTimeout(() => p.classList.add('ve'), tiempos[Math.min(i, tiempos.length - 1)]));
+    setTimeout(quieta, 4200); // el último paso aparece a los 3,3 s y tarda 0,8 s
   }
   function muestraInicio(rapido) {
     if (!ini) { ini = construyeInicio(); marcaPortada(); }
+    // 2 Nov 2026 (dueño, 17:14): al volver de una sección la portada entra con un fundido corto, encima de lo que había, en vez
+    // de aparecer de golpe; y la red es la misma de antes, que sigue girando (antes se rehacía entera en cada vuelta)
+    const vuelve = rapido && (ini.hidden || ini.classList.contains('sale'));
     ini.hidden = false; ini.classList.remove('sale'); tapa();
+    // (con la API de animaciones: sin obligar al navegador a recolocar la página para volver a empezarla)
+    if (vuelve && ini.animate && !matchMedia('(prefers-reduced-motion: reduce)').matches) { try { ini.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 240, easing: 'cubic-bezier(.2,.7,.2,1)' }); } catch (_) {} }
     document.documentElement.classList.add('portada-lista'); // ya tapa el planeta (ver el principio de orbita/index.html)
-    if (laRed) laRed.para(); laRed = red(ini.querySelector('.nuc-lienzo'), { nace: !rapido });
+    if (laRed && laRed.sigue) laRed.sigue(); else { if (laRed) laRed.para(); laRed = red(ini.querySelector('.nuc-lienzo'), { nace: !rapido }); }
     revela(ini, !!rapido);
     botonInicio(false);
   }
@@ -442,7 +454,7 @@ ${doc.secciones.map(tabla).join('')}<p class="nota">${esc(doc.final)}</p></body>
     if (!sala || sala.hidden) botonInicio(true);
     if (!ini || ini.hidden) return;
     ini.classList.add('sale'); tapa(sala && !sala.hidden);
-    setTimeout(() => { if (!ini.classList.contains('sale')) return; ini.hidden = true; if (laRed) { laRed.para(); laRed = null; } }, 750);
+    setTimeout(() => { if (!ini.classList.contains('sale')) return; ini.hidden = true; if (laRed) { if (laRed.pausa) laRed.pausa(); else { laRed.para(); laRed = null; } } }, 480);
   }
 
   // ---------- la sección de NÚCLEO: pedirle las cosas (ronda 54) ----------
