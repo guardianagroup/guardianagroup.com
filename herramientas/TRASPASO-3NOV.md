@@ -215,3 +215,26 @@ Dónde está cada cosa, para seguir sin perder nada. Las reglas del dueño está
        - La línea 2475 de `index.html` es un script en línea, así que su hash de CSP cambia.
        - En los términos va con una línea en el historial.
      - **(d)** La revisión independiente de la criptografía: ver al final.
+     - **Revisión independiente de Ultra 1: NO-GO** (completa en `agencia-rondas/ronda93/revision-ultra1.md`). La criptografía es buena, pero dos frases de la pantalla no son verdad.
+       1. **Las 4 palabras del chat se pueden forzar.** Salen del SHA-384 de las dos huellas: 44 bits, sin compromiso previo.
+          - Quien tenga el enlace y controle el relé puede probar identidades hasta que coincidan, en un minuto de CPU.
+          - Arreglo: compromiso y revelación al estilo ZRTP antes de sacar las palabras. Mientras tanto, mandar a la gente al número de 60 cifras.
+          - Las palabras de la **llamada** sí están bien: ya tienen compromiso y revelación.
+       2. **El relé ve cuándo se manda un mensaje de verdad.**
+          - El marcador 0x11 de aviso distingue los mensajes de los latidos.
+          - El latido va además de los mensajes, no en su lugar.
+          - Arreglo: en Ultra, nunca 0x11, y ritmo constante de 1 trama de 1 KB por latido, sea de verdad o de relleno. Si no, quitar las frases sobre el ritmo.
+       - **Should-fix:**
+         - la llamada puede caer a solo DTLS (`pqAClaro`, modo «auto» del receptor);
+         - una oferta sin `sas` deja la llamada sin palabras;
+         - el secreto de la invitación queda en el historial global del navegador;
+         - la puerta de Plus está solo en el cliente;
+         - SVG, vídeo, audio y ZIP salen con sus metadatos;
+         - el nivel de cada lado es el que dice cada uno;
+         - el nombre se manda en cada presentación;
+         - «CNSA 2.0» con P-384 (es de CNSA 1.0) y HKDF-SHA-256 en la llamada;
+         - 23 pares de palabras se distinguen por una sola letra;
+         - el pánico no funciona durante una llamada;
+         - quedan «nadie puede» en `index.html`;
+         - quien recibe firma el recibo sin poder negarse.
+       - **Sin revisar todavía:** la voz (`voz-ultra.js`), el recibo firmado de `viaje.js`, la lectura discreta y la tapa en el PC.
