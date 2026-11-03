@@ -1521,6 +1521,9 @@
       enviar: () => !!salaLlamada(),
       alLlevar: (k, alPc) => alLlevar(k, alPc), llevarNo: () => llevarNo(), llevarVisto: () => llevarVisto(), llevarListo: () => llevarListo(),
       blindada: () => { const c = convLl(); return !!(c && extrasB(c)); },
+      // el código grande y rojo de la llamada, solo en Ultra (dueño, 2 Nov 2026, 17:01: «Esto de los números… quiero que lo dejes para la
+      // versión ultra»); en la Blindada, el código está en «Seguridad de esta llamada» (llamada.js, pintaSegCod)
+      ultra: () => ULTRA,
       sas: () => { const c = convLl(); return !!(c && extrasB(c)); }, // el número de seguridad en la llamada: blindado y Ultra (dueño, 29 Oct 2026, 12:55: «en el modo normal no») // las opciones de imagen, solo en la sesión blindada
       manda: (m) => { const c = convLl(); if (c) enviaControl(c, Object.assign({ tipo: 'llamada' }, m)); },
       // el número grande de la llamada (dueño, 29 Oct 2026, 10:16): si los dos ven el mismo, nadie está en medio; «Coinciden» deja

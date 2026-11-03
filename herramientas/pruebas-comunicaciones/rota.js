@@ -4,6 +4,8 @@
 //      en las dos, y el sonido y la imagen siguen llegando sin fragmentos perdidos; el panel «Seguridad» lo dice.
 //   2. Teléfono Android ↔ PC (sesión blindada): igual.
 //   3. Un lado sin la capa post-cuántica: no hay código (no se enseña nada que no sea verdad).
+// (2 Nov 2026, 17:01: el código en la pantalla es de Ultra, apagada; aquí se enciende con «gcom-ultra», solo en pruebas locales. La
+// Blindada, sin el código en la pantalla, la prueba codigo-grande.js)
 'use strict';
 const { chromium } = require('playwright');
 const path = require('path');
@@ -19,7 +21,7 @@ const comprueba = (ok, txt, extra) => { console.log((ok ? 'OK   ' : 'FALLO') + '
 async function equipo(browser, pc, nombre, sinCapa, ua) {
   const ctx = await browser.newContext({ viewport: pc ? { width: 1280, height: 800 } : { width: 393, height: 852 }, deviceScaleFactor: pc ? 1 : 2, isMobile: !pc, hasTouch: !pc, userAgent: ua || PC, locale: 'es-CO', permissions: ['microphone', 'camera'] });
   await ctx.addInitScript((sin) => {
-    try { sessionStorage.setItem('gcom-sin-numero', '1'); sessionStorage.setItem('gcom-rota-ms', '5000'); } catch (_) {}
+    try { sessionStorage.setItem('gcom-sin-numero', '1'); sessionStorage.setItem('gcom-rota-ms', '5000'); sessionStorage.setItem('gcom-ultra', '1'); } catch (_) {}
     window.__compartidos = []; navigator.share = (d) => { window.__compartidos.push(d); return new Promise((r) => setTimeout(r, 300)); };
     try { Object.defineProperty(navigator, 'standalone', { get: () => true }); } catch (_) {}
     window.__copiados = []; try { navigator.clipboard.writeText = (x) => { window.__copiados.push(String(x)); return Promise.resolve(); }; } catch (_) {}
@@ -68,9 +70,14 @@ async function llamada(nombre, A, B, conCapa) {
   // el panel «Seguridad de esta llamada»
   await A.evaluate(() => document.querySelector('#llamada').dispatchEvent(new PointerEvent('pointermove')));
   await A.click('.gc-llamada-cifrado'); await espera(500);
-  const filas = await A.evaluate(() => [...document.querySelectorAll('#ll-seg li')].map((l) => l.textContent));
-  const ca = await codigo(A);
-  comprueba(filas.some((x) => /cambia cada minuto/.test(x) && x.replace(/\D/g, '').includes(ca)), nombre + ': el panel de seguridad dice que la llave cambia y su código', filas);
+  // (el panel enseña el código cuando ya está igual en las dos pantallas: 1,5 s después de cada cambio)
+  let filas = [], enPanel = '', ca = '';
+  await hasta(async () => {
+    filas = await A.evaluate(() => [...document.querySelectorAll('#ll-seg li')].map((l) => l.textContent));
+    enPanel = await A.evaluate(() => { const b = document.querySelector('#ll-seg-cod'); return b && !b.hidden ? b.querySelector('#ll-seg-cod-num').textContent.replace(/\D/g, '') : ''; });
+    ca = await codigo(A); return filas.some((x) => /cambia cada minuto/.test(x)) && enPanel === ca;
+  }, 6000);
+  comprueba(filas.some((x) => /cambia cada minuto/.test(x)) && enPanel === ca, nombre + ': el panel de seguridad dice que la llave cambia y su código', { filas, enPanel, ca });
   await A.screenshot({ path: path.join(OUT, nombre + '-2-seguridad.png') });
   await A.keyboard.press('Escape');
   await B.evaluate(() => document.querySelector('#ll-colgar').click()); await espera(2500);

@@ -138,6 +138,18 @@
     // de antes no lo dicen y cambian cada minuto
     const ROTA_MS = (() => { try { const v = LOCAL && Number(sessionStorage.getItem('gcom-rota-ms')); if (v >= 2000) return v; } catch (_) {} return 120000; })();
     const pqCada = (m) => { const v = Number(m && m.pqc); return v >= 2 && v <= 600 ? v * 1000 : 60000; };
+    // Dos versiones (dueño, 2 Nov 2026, 17:01: «Esto de los números… quiero que lo dejes para la versión ultra. En la versión…
+    // blindada… no quiero que esté ese servicio»): el código grande y rojo que cambia con la llave sale solo en Ultra (app.js, ULTRA,
+    // apagada hasta que llegue con la suscripción). En la Blindada, la de hoy, el código no sale en la pantalla: está en «Seguridad de
+    // esta llamada», para quien quiera comprobarlo (pintaSegCod). En pruebas locales, «gcom-ultra» enciende Ultra en esa pestaña.
+    const ULTRA_PRUEBA = (() => { try { return LOCAL && sessionStorage.getItem('gcom-ultra') === '1'; } catch (_) { return false; } })();
+    const ultra = () => ULTRA_PRUEBA || !!(o.ultra && o.ultra());
+    // Por qué una llamada de dos va sin la capa postcuántica (dueño, 2 Nov 2026, 18:31: un teléfono la admite y el otro no): este
+    // navegador no la admite, el de la otra persona no la anuncia («pqc» en su oferta o en su respuesta) o se puso y no pudo mantenerse
+    // (pqVigila). Se dice en «Seguridad de esta llamada» y, un momento, en la pantalla (avisaPq). Sin motivo claro (por ejemplo, una
+    // conversación sin clave postcuántica), lo de siempre: «no disponible en esta llamada».
+    const PQ_POR = { aqui: 'Este navegador no admite la capa postcuántica: la llamada va encriptada de extremo a extremo.', suyo: 'El teléfono o navegador de la otra persona no admite la capa postcuántica; si lo actualiza, la tendréis.', caida: 'La capa postcuántica no pudo mantenerse; la llamada sigue encriptada de extremo a extremo.' };
+    let pqPor = '';
     function obreroPq() {
       if (!obrero) {
         obrero = new Worker('medios-pq.js?v=20261102a');
@@ -228,7 +240,7 @@
         clearInterval(x.vigila); pqAClaro(p); try { manda({ acto: 'pq-claro' }); } catch (_) {}
       }, 1000);
     }
-    function pqAClaro(p) { const x = p && pqDe.get(p); if (!x) return; clearInterval(x.vigila); x.confirmada = false; pqClaro(p); pinta(); }
+    function pqAClaro(p) { const x = p && pqDe.get(p); if (!x) return; clearInterval(x.vigila); x.confirmada = false; pqClaro(p); if (p === pc) pqPor = 'caida'; pinta(); if (p === pc) avisaPq(); }
     // la otra persona no tiene la capa: los dos sentidos, en claro (con el cifrado de siempre de la llamada)
     function pqClaro(p) { const x = p && pqDe.get(p); if (!x || !obrero) return; obrero.postMessage({ tipo: 'modo', id: x.tx, modo: 'claro' }); obrero.postMessage({ tipo: 'modo', id: x.rx, modo: 'claro' }); }
     // el código de la llave va atado al número de seguridad de la llamada (con compromiso previo: nadie en medio puede elegirlo)
@@ -279,6 +291,8 @@
     }
     function muestraCod(anima) {
       const card = $('#ll-cod'), chip = $('#ll-cod-chip'), c = card ? card.dataset.cod : ''; if (!c || !chip) return;
+      // en la Blindada, ni la tarjeta ni la píldora: el código se compara en «Seguridad de esta llamada» (pintaSegCod)
+      if (!ultra()) { card.hidden = true; chip.hidden = true; clearTimeout(codPlegarT); repintaSeg(); return; }
       const bien = c === codConfirmado, grande = codAbierto || (!bien && !codPlegado), num = c.slice(0, 3) + ' ' + c.slice(3);
       $('#ll-cod-t').textContent = card.dataset.cambio === '1' && !bien ? t('El código ha cambiado') : t('Código de seguridad');
       $('#ll-cod-num').textContent = num; $('#ll-cod-num').setAttribute('aria-label', t('Código de seguridad') + ': ' + c.split('').join(' '));
@@ -296,6 +310,7 @@
       // en grande 30 s; si nadie toca, se pliega en la píldora (que lo vuelve a abrir)
       if (!grande) clearTimeout(codPlegarT);
       else if (!eraVisible) { clearTimeout(codPlegarT); codPlegarT = setTimeout(() => { codPlegado = true; codAbierto = false; muestraCod(false); }, 30000); }
+      repintaSeg();
     }
     function codCoincide() {
       const c = ($('#ll-cod') || {}).dataset ? $('#ll-cod').dataset.cod : ''; if (!c || c !== codigoAhora()) return;
@@ -408,6 +423,7 @@
       if (pi) { pi.hidden = true; pi.setAttribute('aria-expanded', String(caja.classList.contains('voz-abierta'))); const b = $('#ll-voces [data-voz="' + voz + '"]'), s = pi.querySelector('span'); if (s) s.textContent = t('Tu voz') + ': ' + (b ? b.textContent : t('Natural')); }
       mantenPantalla(estado !== 'libre' && estado !== 'cerrando');
       pintaVoces(); pintaImagenes(); pintaVideo(); pintaAltavoz(); fondo(); if (estado !== 'libre') requestAnimationFrame(escala);
+      repintaSeg(); segTitulo();
       if (o.estado) { try { o.estado(estado, video); } catch (_) {} }
     }
     // La pantalla no se apaga sola mientras dura la llamada (Wake Lock; agencia, ronda 74). Si el navegador no lo permite o lo
@@ -653,6 +669,16 @@
     // En el iPhone y el iPad, la llamada de voz suena por el altavoz: Safari no deja a una web elegir el auricular (dueño, 29 Oct 2026,
     // 09:13: «que avise en pantalla del iPhone una vez iniciada la conversación»). Con auriculares o AirPods, el teléfono los usa.
     const IOS = /iPhone|iPad|iPod/i.test(UA) || (navigator.maxTouchPoints > 1 && /Mac/.test(navigator.platform || ''));
+    // Sin la capa postcuántica en una llamada de dos, por qué (PQ_POR): en una línea un momento (8 s). Si ya hay algo escrito (en el
+    // iPhone, por dónde suena), después.
+    let pqAvisoT = null;
+    const textoPq = () => (pqPor && PQ_POR[pqPor] && totalGrupo() <= 2 ? t(PQ_POR[pqPor]) : '');
+    function avisaPq() {
+      clearTimeout(pqAvisoT);
+      const s = textoPq(); if (!s || estado !== 'hablando' || pqActiva()) return;
+      const pon = () => { if (estado !== 'hablando' || pqActiva() || textoPq() !== s) return; di(s); pqAvisoT = setTimeout(() => { if (paso.textContent === s) di(''); }, 8000); };
+      if (paso.textContent && paso.textContent !== s) pqAvisoT = setTimeout(pon, 9500); else pon();
+    }
     function avisaSalida() {
       if (!IOS || video || salidas) return;
       di(t('Suena por el altavoz. Si conectas auriculares, suena por ellos.'));
@@ -1100,7 +1126,7 @@
       pc.onicecandidate = (e) => { if (e.candidate) o.manda({ acto: 'ice', id: idLlamada, cand: e.candidate.toJSON() }); };
       alEstadoPc = () => {
         if (!pc) return;
-        if (pc.connectionState === 'connected') { paraTono(); refuerzaRuta(); recuperada(); miImagen(); setTimeout(miImagen, 1500); setTimeout(miImagen, 4000); if (estado !== 'hablando') { estado = 'hablando'; iniciada = Date.now(); di(''); avisaSalida(); clearInterval(reloj); reloj = setInterval(() => { tiempo.textContent = mmss(Date.now() - iniciada); }, 500); mideCalidad(); topeAudio(); if (video) topeVideo(); pinta(); suenaRemoto(); sasCalcula(); pintaSas(); pideWake(); } }
+        if (pc.connectionState === 'connected') { paraTono(); refuerzaRuta(); recuperada(); miImagen(); setTimeout(miImagen, 1500); setTimeout(miImagen, 4000); if (estado !== 'hablando') { estado = 'hablando'; iniciada = Date.now(); di(''); avisaSalida(); avisaPq(); clearInterval(reloj); reloj = setInterval(() => { tiempo.textContent = mmss(Date.now() - iniciada); }, 500); mideCalidad(); topeAudio(); if (video) topeVideo(); pinta(); suenaRemoto(); sasCalcula(); pintaSas(); pideWake(); } }
         else if (pc.connectionState === 'failed') { di(t('Conexión interrumpida, intentando recuperarla…'), true); reconecta('fallo'); }
         else if (pc.connectionState === 'disconnected') { di(t('Conexión interrumpida, intentando recuperarla…'), true); reconecta('corte'); }
       };
@@ -1230,7 +1256,7 @@
       const hay = !!(sas && (sas.numero || sas.estado === 'roto') && estado === 'hablando' && (!o.sas || o.sas())) && !(conCodigo && sas.estado !== 'roto');
       const grande = hay && sas.estado === 'pendiente' && !caja.classList.contains('sas-plegado');
       caja2.hidden = !grande; mini.hidden = !(hay && !grande); caja.classList.toggle('sas-grande', grande);
-      if (!hay) { caja.classList.remove('sas-plegado'); clearTimeout(sasPlegadoT); return; }
+      if (!hay) { caja.classList.remove('sas-plegado'); clearTimeout(sasPlegadoT); repintaSeg(); return; }
       const num = sas.numero ? sas.numero.slice(0, 2) + ' ' + sas.numero.slice(2) : '— —';
       $('#ll-sas-num').textContent = num; $('#ll-sas-num').setAttribute('aria-label', t('Número de seguridad') + ': ' + num);
       $('#ll-sas-texto').textContent = sas.estado === 'roto' ? t('No se pudo calcular el número de seguridad de esta llamada: no hables de nada delicado y vuelve a llamar.') : t('La otra persona debe ver este mismo número en su pantalla. Díganlo en voz alta: si no coincide, hay alguien en medio.');
@@ -1240,6 +1266,7 @@
       mini.setAttribute('aria-label', t('Número de seguridad') + ': ' + num + (sas.estado === 'coinciden' ? ' · ' + t('coinciden') : ''));
       // en grande 40 s; si nadie toca, se pliega a la píldora de arriba (se vuelve a abrir tocándola)
       clearTimeout(sasPlegadoT); if (grande) sasPlegadoT = setTimeout(() => { caja.classList.add('sas-plegado'); pintaSas(); }, 40000);
+      repintaSeg();
     }
     function sasCoinciden() { if (!sas || sas.estado !== 'pendiente') return; sas.estado = 'coinciden'; caja.classList.add('sas-plegado'); pintaSas(); if (o.sasOk) { try { o.sasOk(); } catch (_) {} } }
     function sasNoCoinciden() { if (!sas || sas.estado !== 'pendiente') return; sas.estado = 'no'; pintaSas(); const f = o.sasMal; colgar(); if (f) { try { f(); } catch (_) {} } }
@@ -1250,7 +1277,7 @@
       video = !!conVideo && !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia); suCamara = true; remotoV = null;
       efectosPorDefecto();
       desbloquea();
-      PR = null; patas = []; estado = 'saliente'; inicioYo = true; idLlamada = Math.random().toString(36).slice(2, 10); colgoYo = false; tiempo.textContent = '00:00'; calidad.textContent = ''; calidad.classList.remove('ver'); pinta();
+      PR = null; patas = []; estado = 'saliente'; inicioYo = true; idLlamada = Math.random().toString(36).slice(2, 10); colgoYo = false; tiempo.textContent = '00:00'; calidad.textContent = ''; calidad.classList.remove('ver'); pqPor = PQM ? '' : 'aqui'; pinta();
       di(video ? t('Pidiendo la cámara y el micrófono…') : t('Pidiendo el micrófono…'));
       if (video) await salidaDeSiempre(); else await auricularPrevio(); // la salida, antes de que arranque el audio de la llamada
       try { await medios(video); } catch (_) { di(t('Sin permiso para el micrófono.'), true); return termina('sin-medios', 1800); }
@@ -1303,7 +1330,7 @@
       }
       if (m.id && idLlamada && m.id !== idLlamada) return;
       if (m.acto === 'sonando') { if (estado === 'saliente') di(t('Sonando…')); return; }
-      if (m.acto === 'respuesta' && pc && typeof m.sdp === 'string') { suTres = (m.tres | 0) >= 1; suLlevar = m.llevar === 1; suEnvio = m.env === 1; paraTono(); clearTimeout(sinRespuesta); await pc.setRemoteDescription({ type: 'answer', sdp: m.sdp }); if (m.pqm === 1 && pqOferta) { if (await pqConfirma(pc, pqOferta.sec, idLlamada, true, m.pqr === 1)) pqVigila(pc, (x) => o.manda(Object.assign({ id: idLlamada }, x))); } else pqClaro(pc); pqOferta = null; for (const c of pendientes) { try { await pc.addIceCandidate(c); } catch (_) {} } pendientes = []; di(t('Conectando…')); if (video) topeVideo();
+      if (m.acto === 'respuesta' && pc && typeof m.sdp === 'string') { suTres = (m.tres | 0) >= 1; suLlevar = m.llevar === 1; suEnvio = m.env === 1; paraTono(); clearTimeout(sinRespuesta); await pc.setRemoteDescription({ type: 'answer', sdp: m.sdp }); if (m.pqm === 1 && pqOferta) { if (await pqConfirma(pc, pqOferta.sec, idLlamada, true, m.pqr === 1)) pqVigila(pc, (x) => o.manda(Object.assign({ id: idLlamada }, x))); } else { pqClaro(pc); if (pqOferta && typeof m.pqc !== 'number') pqPor = 'suyo'; } pqOferta = null; for (const c of pendientes) { try { await pc.addIceCandidate(c); } catch (_) {} } pendientes = []; di(t('Conectando…')); if (video) topeVideo();
         if (sas && inicioYo) { try { sas.suPub = typeof m.sas === 'string' && m.sas.length < 120 ? deB64u(m.sas) : null; } catch (_) { sas.suPub = null; } if (sas.suPub && sas.suPub.length === 65) { o.manda({ acto: 'sas', id: idLlamada, p: b64u(sas.pub) }); sasCalcula(); } else { sas.estado = 'roto'; pintaSas(); } }
         return; }
       // la clave revelada de quien llama: tiene que ser la del compromiso de la oferta; si no, la comprobación queda rota
@@ -1349,9 +1376,12 @@
       let pqSi = false;
       if (PQM && typeof m.pqm === 'string' && m.pqm.length <= 32 && o.medios) { let ll = null; try { ll = o.medios(null, m.pqm); } catch (_) {} if (ll) pqSi = await pqConfirma(pc, ll.sec, idLlamada, false, m.pqr === 1, pqCada(m)); }
       if (!pqSi) pqClaro(pc); else pqVigila(pc, (x) => o.manda(Object.assign({ id: idLlamada }, x)));
+      // sin la capa: ¿por este navegador, o porque la oferta no la anuncia («pqc»)? Si aquí tampoco hay clave postcuántica, no se sabe
+      pqPor = pqSi ? '' : !PQM ? 'aqui' : typeof m.pqc !== 'number' && pqPide(null) ? 'suyo' : '';
       for (const c of pendientes) { try { await pc.addIceCandidate(c); } catch (_) {} } pendientes = [];
       const an = await pc.createAnswer(); await pc.setLocalDescription({ type: an.type, sdp: altaFidelidad(an.sdp) });
-      o.manda({ acto: 'respuesta', id: idLlamada, sdp: pc.localDescription.sdp, sas: sas ? b64u(sas.pub) : undefined, tres: TRES, llevar: 1, env: 1, pqm: pqSi ? 1 : undefined, pqr: pqSi && m.pqr === 1 ? 1 : undefined });
+      // «pqc» en la respuesta: este equipo admite la capa (aunque esta vez no se ponga); así quien llama sabe si es cosa de este lado
+      o.manda({ acto: 'respuesta', id: idLlamada, sdp: pc.localDescription.sdp, sas: sas ? b64u(sas.pub) : undefined, tres: TRES, llevar: 1, env: 1, pqm: pqSi ? 1 : undefined, pqr: pqSi && m.pqr === 1 ? 1 : undefined, pqc: PQM ? ROTA_MS / 1000 : undefined });
       if (video) { topeVideo(); if (!cam) o.manda({ acto: 'camara', id: idLlamada, on: false }); }
       pinta();
       di(t('Conectando…'));
@@ -1720,7 +1750,7 @@
       reiniciando = false; clearTimeout(reinicioT); reinicioT = null; clearTimeout(reinicioFin); reinicioFin = null;
       pc = P1.pc; idLlamada = P1.id; inicioYo = true; suTres = P1.sabe; suLlevar = !!P1.sabeLlevar; suEnvio = !!P1.sabeEnvio; mudasRemotas = []; pendientes = [];
       // el número de seguridad era de la llamada de antes: el código de esta conexión va atado a la llave de su sala
-      sas = null; pqLazo(); codConfirmado = ''; codPlegado = false;
+      sas = null; pqLazo(); codConfirmado = ''; codPlegado = false; pqPor = ''; segVisto = ''; segCambio = false;
       pc.oniceconnectionstatechange = alIcePc; pc.onnegotiationneeded = alNegociarPc;
       vozSuya = P1.voz;
       const ar = $('#a-remoto'); ar.srcObject = P1.voz ? new MediaStream([P1.voz]) : null; suenaRemoto(); if (salidas) aplicaSalida();
@@ -1814,6 +1844,7 @@
       parados.clear(); { const b = $('#ll-toca'); if (b) b.hidden = true; }
       if (compartiendo) { try { compartiendo.stop(); } catch (_) {} compartiendo = null; }
       codConfirmado = ''; codPlegado = false; codAbierto = false; codPendiente = ''; clearTimeout(codPendT); clearTimeout(codPlegarT);
+      pqPor = ''; clearTimeout(pqAvisoT); segVisto = ''; segCambio = false;
       caja.classList.remove('yo-grande'); toqueGrande = null;
       try { if (document.pictureInPictureElement) document.exitPictureInPicture().catch(() => {}); const vr = $('#v-remoto'); if (vr && vr.webkitPresentationMode === 'picture-in-picture') vr.webkitSetPresentationMode('inline'); } catch (_) {}
       $('#a-remoto').srcObject = null; $('#v-remoto').srcObject = null; $('#v-local').srcObject = null; $('#v-local').classList.remove('trasera'); try { mirando = 'user'; } catch (_) {} remotoV = null; suCamara = true; video = false;
@@ -1893,14 +1924,73 @@
       const l = $('#ll-seg-l'); if (!l) return;
       const filas = [['si', t('Encriptada de extremo a extremo: solo los equipos de esta llamada tienen la clave.')]];
       const pqOn = pqActiva();
-      filas.push([pqOn ? 'si' : 'no', pqOn ? t('Capa postcuántica activa en el sonido y la imagen.') : t('Capa postcuántica: no disponible en esta llamada.')]);
-      { const c = codigoAhora(), xc = pc && pqDe.get(pc), min = Math.max(1, Math.round(((xc && xc.cada) || ROTA_MS) / 60000)); if (c) { filas.push(['si', (min === 1 ? t('La clave de la capa postcuántica cambia cada minuto. Código de ahora: {c}.') : t('La clave de la capa postcuántica cambia cada {m} minutos. Código de ahora: {c}.').replace('{m}', min)).replace('{c}', c.slice(0, 3) + ' ' + c.slice(3))]); filas.push(['nota', t('Compáralo con la otra persona: si coincide, los dos tienen la misma clave. Si no, esperen al siguiente cambio; si sigue sin coincidir, cuelguen.')]); } }
-      if (sas && sas.numero) filas.push([sas.estado === 'coinciden' ? 'si' : 'aviso', sas.estado === 'coinciden' ? t('Número de seguridad comprobado.') : t('Número de seguridad sin comprobar.')]);
+      // sin la capa, por qué, si se sabe (PQ_POR)
+      filas.push([pqOn ? 'si' : 'no', pqOn ? t('Capa postcuántica activa en el sonido y la imagen.') : textoPq() || t('Capa postcuántica: no disponible en esta llamada.')]);
+      { const c = codigoAhora(), xc = pc && pqDe.get(pc), min = Math.max(1, Math.round(((xc && xc.cada) || ROTA_MS) / 60000)); if (c) filas.push(['si', min === 1 ? t('La clave de la capa postcuántica cambia cada minuto.') : t('La clave de la capa postcuántica cambia cada {m} minutos.').replace('{m}', min)]); }
       // (la calidad de la conexión ya tiene su indicador; aquí, solo la seguridad. Clases con prefijo: «aviso» ya es el aviso flotante)
       l.textContent = ''; for (const [cl, x] of filas) { const li = document.createElement('li'); li.className = 'seg-' + cl; li.textContent = x; l.appendChild(li); }
+      pintaSegCod();
     }
-    function abreSeg(on) { const s = $('#ll-seg'); if (!s) return; if (on) pintaSeg(); s.hidden = !on; if (on) { caja.classList.remove('reposo'); clearTimeout(reposo); } else despierta(); }
+    function repintaSeg() { const s = $('#ll-seg'); if (s && !s.hidden) pintaSeg(); }
+    // El código para comparar, dentro del panel (dueño, 2 Nov 2026, 17:01: en la Blindada, ni la tarjeta roja ni números en la
+    // pantalla; ronda 92: la comprobación, discreta, aquí). Es el de la llave de ahora cuando ya está igual en las dos pantallas
+    // (pintaCod lo espera 1,5 s tras cada cambio) o, sin la capa postcuántica, el número de seguridad de la llamada. «Coinciden» y
+    // «No coinciden» hacen lo mismo que en la tarjeta de Ultra: «Coinciden» deja la conversación verificada; «No coinciden» cuelga.
+    // «El código ha cambiado»: solo si en el panel ya se vio otro (abrirlo por primera vez a media llamada no es «ha cambiado»)
+    let segVisto = '', segCambio = false;
+    function segCodigo() {
+      if (estado !== 'hablando' || totalGrupo() > 2) return null;
+      const card = $('#ll-cod'), c = codigoAhora(), xq = pc && pqDe.get(pc);
+      if (c) return card && card.dataset.cod === c ? { tipo: 'cod', num: c.slice(0, 3) + ' ' + c.slice(3), cifras: c, bien: c === codConfirmado } : { tipo: 'espera' };
+      // la capa va (o se está poniendo) y el código está por llegar: no se enseña el número de antes en su lugar
+      if (xq && xq.confirmada && xq.codId && !(sas && sas.estado === 'roto')) return { tipo: 'espera' };
+      if (sas && (sas.numero || sas.estado === 'roto')) return { tipo: 'sas', num: sas.numero ? sas.numero.slice(0, 2) + ' ' + sas.numero.slice(2) : '— —', cifras: sas.numero || '', bien: sas.estado === 'coinciden', roto: sas.estado === 'roto' };
+      return null;
+    }
+    function pintaSegCod() {
+      const b = $('#ll-seg-cod'); if (!b) return;
+      const x = segCodigo(); b.hidden = !x; if (!x) return;
+      const espera = x.tipo === 'espera', sasN = x.tipo === 'sas';
+      if (x.tipo === 'cod' && x.cifras !== segVisto) { segCambio = !!segVisto; segVisto = x.cifras; }
+      b.classList.toggle('bien', !!x.bien); b.classList.toggle('espera', espera);
+      $('#ll-seg-cod-t').textContent = sasN ? t('Número de seguridad') : segCambio && !x.bien ? t('El código ha cambiado') : t('Código de seguridad');
+      const n = $('#ll-seg-cod-num'); n.textContent = espera ? '— — —' : (x.bien ? '✓ ' : '') + x.num;
+      if (espera) n.removeAttribute('aria-label'); else n.setAttribute('aria-label', (sasN ? t('Número de seguridad') : t('Código de seguridad')) + ': ' + x.cifras.split('').join(' '));
+      const tx = $('#ll-seg-cod-texto'); tx.textContent = '';
+      if (x.roto) tx.textContent = t('No se pudo calcular el número de seguridad de esta llamada: no hables de nada delicado y vuelve a llamar.');
+      else if (x.bien) tx.textContent = sasN ? t('Número de seguridad comprobado.') : t('Los números coinciden.');
+      else if (!espera) { tx.textContent = t('Léelo en voz alta y comprueba con la otra persona que los números coinciden.'); const sm = document.createElement('small'); sm.textContent = t('Si no coinciden, cuelga: alguien podría estar interceptando la llamada.'); tx.appendChild(sm); }
+      tx.hidden = !tx.textContent;
+      $('#ll-seg-cod-botones').hidden = espera || !!x.bien || !!x.roto;
+    }
+    function segCoincide() {
+      const x = segCodigo(); if (!x) return;
+      if (x.tipo === 'cod') codCoincide();
+      else if (x.tipo === 'sas' && sas && sas.estado === 'pendiente' && sas.numero) { sasCoinciden(); di(t('Los números coinciden.')); setTimeout(() => { if (paso.textContent === t('Los números coinciden.')) di(''); }, 3000); }
+      repintaSeg();
+    }
+    function segNoCoincide() {
+      const x = segCodigo(); if (!x) return;
+      if (x.tipo === 'cod') codNoCoincide();
+      else if (x.tipo === 'sas' && sas && sas.estado === 'pendiente') sasNoCoinciden();
+    }
+    { const si = $('#ll-seg-si'), no = $('#ll-seg-no'); if (si) si.addEventListener('click', (e) => { e.stopPropagation(); segCoincide(); }); if (no) no.addEventListener('click', (e) => { e.stopPropagation(); segNoCoincide(); }); }
+    function abreSeg(on) { const s = $('#ll-seg'); if (!s) return; if (on) { pintaSeg(); colocaSeg(s); } s.hidden = !on; if (on) { caja.classList.remove('reposo'); clearTimeout(reposo); } else despierta(); }
+    // abierto desde el título (teléfono al que se pasó la llamada), justo debajo de él, sin taparlo
+    function colocaSeg(s) {
+      const ce = $('#ll-centro');
+      if (tituloAbre() && ce && ce.getClientRects().length) { const r = ce.getBoundingClientRect(), c = caja.getBoundingClientRect(); s.style.top = Math.round(r.bottom - c.top + 8) + 'px'; } else s.style.top = '';
+    }
     { const ci = document.querySelector('#gc-llamada .gc-llamada-cifrado') || document.querySelector('.gc-llamada-cifrado'); if (ci) { ci.setAttribute('role', 'button'); ci.setAttribute('tabindex', '0'); ci.setAttribute('aria-controls', 'll-seg'); ci.addEventListener('click', (e) => { e.stopPropagation(); const s = $('#ll-seg'); abreSeg(!!(s && s.hidden)); }); ci.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); ci.click(); } }); } }
+    // En el teléfono al que se pasó la llamada no hay cápsula (un solo título arriba; 30 Oct 2026, 14:54): allí el título abre el
+    // panel, para que el código de la Blindada también se pueda comparar desde el teléfono (antes salía la tarjeta roja)
+    function tituloAbre() { return document.body.classList.contains('modo-llevar'); }
+    function segTitulo() {
+      const ce = $('#ll-centro'); if (!ce) return;
+      const si = tituloAbre(); if (si === (ce.getAttribute('role') === 'button')) return;
+      if (si) { ce.setAttribute('role', 'button'); ce.setAttribute('tabindex', '0'); ce.setAttribute('aria-controls', 'll-seg'); ce.setAttribute('title', t('Seguridad de esta llamada')); } else for (const a of ['role', 'tabindex', 'aria-controls', 'title']) ce.removeAttribute(a);
+    }
+    { const ce = $('#ll-centro'); if (ce) { ce.addEventListener('click', (e) => { if (!tituloAbre() || estado !== 'hablando') return; e.stopPropagation(); const s = $('#ll-seg'); abreSeg(!!(s && s.hidden)); }); ce.addEventListener('keydown', (e) => { if (tituloAbre() && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); ce.click(); } }); } }
     // «Más»: los botones que se usan poco, en un menú encima de la barra; «Más» solo sale si hay algo dentro
     function abreMas(on) {
       const m = $('#ll-mas-menu'), b = $('#ll-mas'); if (!m || !b) return;
