@@ -238,3 +238,16 @@ Dónde está cada cosa, para seguir sin perder nada. Las reglas del dueño está
          - quedan «nadie puede» en `index.html`;
          - quien recibe firma el recibo sin poder negarse.
        - **Sin revisar todavía:** la voz (`voz-ultra.js`), el recibo firmado de `viaje.js`, la lectura discreta y la tapa en el PC.
+   - **Web de la VPN** (rama `vpn-pantalla`, en b3394f4, a medias, subida): solo cambia `orbita/static/vpn.js`, reescrito.
+     - Pasa `node --check`, pero nadie lo ha mirado todavía en un navegador.
+     - **Tiene la lógica y los textos en español de todos los estados:** antes de conectar, conectada, «lo que una web verá», sin respuesta y fuera del programa. Lleva una demostración solo en local (`?demo=…`).
+     - **Falta:**
+       - los estilos (`vpn.css` sigue siendo el viejo);
+       - pasar el cuerpo del POST como `cuerpo` en el `pide` de `escaner.js`;
+       - las claves en `idioma.js` (no hay ninguna) y el `?v=` (`20261103-vpn1`);
+       - huellas, csp-hashes, csp-comprueba y las capturas.
+     - **Lo que tiene que hacer antes el programa** (rama `vpn-estricto`):
+       - que la pasarela de ZERO pase el cuerpo (hoy manda siempre `{}`);
+       - que deje pasar `salida.ip` e `ip_vista` (hoy tapa las direcciones);
+       - añadir a su lista permitida `GET /api/vpn/salidas`, `GET /api/vpn/comprueba` y `POST /api/vpn/estricto`.
+     - ZERO no niega hoy la geolocalización, así que la página no lo afirma.
