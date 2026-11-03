@@ -2426,3 +2426,39 @@ button.ll-env-ico:focus-visible{outline:2px solid #9CC3E4;outline-offset:2px}
 .gc-llamada.mini .ll-envios,.gc-llamada.mini .ll-ver,.gc-llamada.mini .ll-enviar-menu{display:none!important}
 /* el icono de «Enviar», con el trazo de los demás botones de la llamada */
 #ll-enviar svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+/* ===== Ultra 1 (3 Nov 2026; dueño, 00:20: «empezar ya la versión ultra… sobre todo de privacidad»; agencia, ronda 93) ===== */
+/* las cuatro palabras de verificación, siempre a la vista debajo de la cabecera del chat, con el nivel de cada lado */
+.gc-palabras{all:unset;cursor:pointer;display:grid;grid-template-columns:auto 1fr;grid-template-areas:"k txt" "k nivel";align-items:center;column-gap:14px;row-gap:2px;padding:9px 16px;border-bottom:1px solid rgba(218,236,250,.18);background:linear-gradient(180deg,rgba(156,195,228,.08),rgba(156,195,228,.03));color:var(--fg);text-align:left}
+.gc-palabras[hidden]{display:none}
+.gc-palabras:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.gc-palabras .gc-pal-k{grid-area:k;font:600 10.5px/1.2 var(--texto);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);max-width:92px}
+.gc-palabras .gc-pal-txt{grid-area:txt;font:600 17px/1.25 var(--mono);letter-spacing:.02em;color:#F4F6F8;text-wrap:balance}
+.gc-palabras .gc-pal-nivel{grid-area:nivel;font:400 12px/1.35 var(--texto);color:var(--muted)}
+@media (max-width:760px){.gc-palabras{padding:8px 14px;column-gap:10px}.gc-palabras .gc-pal-k{font-size:9.5px;max-width:72px}.gc-palabras .gc-pal-txt{font-size:15px}.gc-palabras .gc-pal-nivel{font-size:11.5px}}
+/* en la llamada: las palabras en la tarjeta del número (más pequeñas que las cifras, en dos líneas) y en la píldora */
+.ll-sas.palabras .ll-sas-num{font-size:clamp(26px,6.2vw,40px);letter-spacing:.02em;line-height:1.2;text-wrap:balance;white-space:normal}
+.ll-sas-mini.palabras{font-size:13px;letter-spacing:.02em;max-width:min(92vw,520px);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gc-llamada.con-video .ll-sas.palabras .ll-sas-num{font-size:clamp(22px,5vw,32px)}
+/* el nivel de cada lado, debajo de la cápsula de arriba */
+.ll-nivel{position:absolute;left:50%;top:calc(50px + env(safe-area-inset-top));transform:translateX(-50%);z-index:9;padding:5px 12px;border-radius:999px;border:1px solid rgba(156,195,228,.28);background:rgba(8,12,18,.72);color:#C9D3DC;font:500 11.5px/1 var(--texto);letter-spacing:.02em;white-space:nowrap;max-width:94vw;overflow:hidden;text-overflow:ellipsis}
+.ll-nivel[hidden]{display:none}
+.gc-llamada.sas-grande .ll-nivel,.gc-llamada.mini .ll-nivel,.gc-llamada.entrando .ll-nivel{display:none}
+.gc-llamada:not(.sas-grande) .ll-sas-mini{top:calc(80px + env(safe-area-inset-top))}
+/* el comprobante firmado, opción explícita al enviar; y las notas del nombre neutro y del autor */
+.envio-opcion{all:unset;cursor:pointer;display:flex;align-items:flex-start;gap:12px;width:100%;box-sizing:border-box;margin:0 0 12px;padding:11px 12px;border-radius:12px;border:1px solid var(--line);background:var(--campo);color:var(--fg);text-align:left}
+.envio-opcion[hidden]{display:none}
+.envio-opcion:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.envio-opcion .interruptor-mini{margin-top:3px;width:26px;height:15px;border-radius:999px;background:var(--line);position:relative;flex:none;transition:background .2s}
+.envio-opcion .interruptor-mini::after{content:'';position:absolute;top:2px;left:2px;width:11px;height:11px;border-radius:50%;background:var(--muted);transition:transform .2s,background .2s}
+.envio-opcion[aria-pressed="true"] .interruptor-mini{background:var(--accent)}
+.envio-opcion[aria-pressed="true"] .interruptor-mini::after{transform:translateX(11px);background:var(--accent-fg)}
+.envio-opcion b{display:block;font:600 14px/1.3 var(--texto)}
+.envio-opcion small{display:block;margin-top:3px;font:400 12.5px/1.45 var(--texto);color:var(--muted)}
+.envio-nota{margin:0 0 10px}
+.envio-nota.aviso-autor{color:var(--aviso)}
+.gc-archivo .sello.firmado{color:var(--accent)}
+/* la pantalla tapada en segundo plano (Ultra): el mismo velo que el de la captura, con su frase */
+.captura-velo .cv-fuera{display:none}
+.captura-velo.fuera .cv-fuera{display:block}
+.captura-velo.fuera .cv-captura{display:none}

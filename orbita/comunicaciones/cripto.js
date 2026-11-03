@@ -290,6 +290,21 @@
   // así el relé no distingue un «ok» de un párrafo.
   const RELLENO = 1024;
   function rellena(bytes) { const n = Math.ceil((bytes.length + 1) / RELLENO) * RELLENO; const o = new Uint8Array(n).fill(0x20); o.set(bytes, 0); return o; }
+  // Palabras de verificación (Ultra; agencia, ronda 93, al estilo de ZRTP): 4 palabras de la lista de 2048 (palabras.js), 11 bits
+  // cada una, sacadas de los 6 primeros bytes de un hash (se usan 44 de los 48 bits). De unos bytes salen siempre las mismas 4 palabras.
+  function palabrasDe(b) {
+    const L = raiz.GuardianaPalabras; b = u8(b);
+    if (!Array.isArray(L) || L.length !== 2048 || b.length < 6) return null;
+    const v = b[0] * 2 ** 40 + b[1] * 2 ** 32 + b[2] * 2 ** 24 + b[3] * 2 ** 16 + b[4] * 2 ** 8 + b[5];
+    return [37, 26, 15, 4].map((d) => L[Math.floor(v / 2 ** d) & 2047]);
+  }
+  // las de una conversación Ultra: de las dos huellas de identidad ordenadas (las mismas en los dos lados, y las mismas mientras dure
+  // la conversación, porque la identidad es de la conversación)
+  async function palabrasB(huellaA, huellaB2) {
+    const a = hex(huellaA), b = hex(huellaB2);
+    const [x, y] = a < b ? [a, b] : [b, a];
+    return palabrasDe(await sha384(te.encode('GUARDIANA palabras de verificación v1\n' + x + '\n' + y)));
+  }
 
   // ---------- Número GUARDIANA (29 Oct 2026; dueño, 20:56–21:55; agencia, ronda 73) ----------
   // 12 cifras: 11 al azar y una de control Damm, que detecta cualquier cifra cambiada y cualquier par de cifras vecinas
@@ -337,7 +352,7 @@
   }
   const N = { damm, numeroValido, conControl, nuevoNumero, numeroBonito, idnDe, citaDe, buzonDe, cierraSobre, abreSobre, datosCita, datosYo, semillaNumeros };
 
-  const B = { sha384, hkdf384, hmac384, hayBlindada, creaIdentidad: creaIdentidadB, abreDsa: abreDsaB, huella: huellaB, numeroSeguridad: numeroSeguridadB, firma: firmaB, verifica: verificaB, firmaPQ, verificaPQ, deSemilla: deSemillaB, efimera: efimeraB, kemPar: kemParB, kemEncapsula: kemEncapsulaB, kemAbre: kemAbreB, datosInicia: datosIniciaB, datosResponde: datosRespondeB, sesion: sesionB, cadena: cadenaB, rellena, RELLENO, EK: B_EK, DK: B_DK, CT: B_CT, DSA_PUB: B_DSA_PUB, DSA_FIRMA: B_DSA_FIRMA, EC: B_EC, CTX: B_CTX };
+  const B = { sha384, hkdf384, hmac384, hayBlindada, creaIdentidad: creaIdentidadB, abreDsa: abreDsaB, huella: huellaB, numeroSeguridad: numeroSeguridadB, firma: firmaB, verifica: verificaB, firmaPQ, verificaPQ, deSemilla: deSemillaB, efimera: efimeraB, kemPar: kemParB, kemEncapsula: kemEncapsulaB, kemAbre: kemAbreB, datosInicia: datosIniciaB, datosResponde: datosRespondeB, sesion: sesionB, cadena: cadenaB, rellena, RELLENO, palabrasDe, palabras: palabrasB, EK: B_EK, DK: B_DK, CT: B_CT, DSA_PUB: B_DSA_PUB, DSA_FIRMA: B_DSA_FIRMA, EC: B_EC, CTX: B_CTX };
 
   // ---- Buzón cifrado (30 Oct 2026; dueño, 00:05: elige el «buzón cifrado», como WhatsApp, Signal o Threema) ----
   // Para quien no está conectado, el mensaje se deja en el relé dentro de un sobre que solo su teléfono abre. Acuerdo híbrido:
