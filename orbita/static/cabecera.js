@@ -18,7 +18,8 @@
   const RAIZ = document.documentElement;
   const q = new URLSearchParams(location.search).get('cabecera');
   if (q === 'a' || q === 'b') RAIZ.dataset.cabecera = q;
-  if (!RAIZ.dataset.cabecera) RAIZ.dataset.cabecera = 'a';
+  // elegida la B (2 nov 2026): la barra se recoge al bajar y dice en qué apartado estás, como las mejores aplicaciones
+  if (!RAIZ.dataset.cabecera) RAIZ.dataset.cabecera = 'b';
   const limpia = (s) => String(s || '').replace(/\s+/g, ' ').trim();
 
   // «hay algo debajo de la barra»: una marca de 1 px al principio de lo que se desplaza
