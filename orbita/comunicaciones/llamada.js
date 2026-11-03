@@ -183,7 +183,10 @@
       try {
         const w = obreroPq(), x = { tx: nuevoId(), rx: nuevoId(), puestos: new WeakSet(), confirmada: false, visto: false };
         pqDe.set(p, x); pqPorRx.set(x.rx, x);
-        w.postMessage({ tipo: 'modo', id: x.tx, modo: 'claro' }); w.postMessage({ tipo: 'modo', id: x.rx, modo: 'auto' });
+        // (Ultra, sin rebaja; revisión independiente, 3 nov 2026: antes, quien recibía empezaba en «auto», que deja pasar lo que llega sin
+        // cifrar hasta descifrar lo primero, y quien llamaba mandaba en claro hasta tener la respuesta. En Ultra, desde el principio, lo que
+        // sale va cifrado, y sin llave no sale nada, y lo que entra solo se acepta cifrado)
+        w.postMessage({ tipo: 'modo', id: x.tx, modo: ultra() ? 'cifra' : 'claro' }); w.postMessage({ tipo: 'modo', id: x.rx, modo: ultra() ? 'estricto' : 'auto' });
         const at = p.addTrack.bind(p), ac = p.addTransceiver.bind(p);
         p.addTrack = (...a) => { const r = at(...a); ponPq(p); return r; };
         p.addTransceiver = (...a) => { const r = ac(...a); ponPq(p); return r; };
@@ -256,11 +259,11 @@
     function pqAClaro(p) {
       const x = p && pqDe.get(p); if (!x) return; clearInterval(x.vigila);
       // Ultra, sin rebaja: si la capa no se mantiene, la llamada no sigue en claro: se cuelga y se dice por qué
-      if (p === pc && ultra() && estado === 'hablando') { try { o.manda({ acto: 'colgar', id: idLlamada }); } catch (_) {} termina('fallo'); if (o.sinRebaja) o.sinRebaja('caida'); return; }
+      if (ultra()) { try { o.manda({ acto: 'colgar', id: idLlamada }); } catch (_) {} pqOferta = null; termina('fallo'); if (o.sinRebaja) o.sinRebaja('caida'); return; }
       x.confirmada = false; pqClaro(p); if (p === pc) pqPor = 'caida'; pinta(); if (p === pc) avisaPq();
     }
     // la otra persona no tiene la capa: los dos sentidos, en claro (con el cifrado de siempre de la llamada)
-    function pqClaro(p) { const x = p && pqDe.get(p); if (!x || !obrero) return; obrero.postMessage({ tipo: 'modo', id: x.tx, modo: 'claro' }); obrero.postMessage({ tipo: 'modo', id: x.rx, modo: 'claro' }); }
+    function pqClaro(p) { const x = p && pqDe.get(p); if (!x || !obrero || ultra()) return; obrero.postMessage({ tipo: 'modo', id: x.tx, modo: 'claro' }); obrero.postMessage({ tipo: 'modo', id: x.rx, modo: 'claro' }); } // (en Ultra, nunca)
     // el código de la llave va atado al número de seguridad de la llamada (con compromiso previo: nadie en medio puede elegirlo)
     function pqLazo() { const x = pc && pqDe.get(pc); if (!x || !x.codId || !obrero) return; const l = sas ? sas.lazo : x.lazoPropio; if (l) obrero.postMessage({ tipo: 'lazo', id: x.codId, lazo: l.slice().buffer }); }
     function olvidaPq(p) { const x = p && pqDe.get(p); if (x) clearInterval(x.vigila); if (x && obrero) { obrero.postMessage({ tipo: 'olvida', id: x.tx }); obrero.postMessage({ tipo: 'olvida', id: x.rx }); pqPorRx.delete(x.rx); if (x.codId) pqPorCod.delete(x.codId); x.codigo = ''; } }
@@ -386,7 +389,7 @@
       // Ultra: el nivel de cada lado, a la vista (ronda 93): el entorno en que corre cada uno, nada más
       // (también dentro de la tarjeta de las palabras, que mientras está abierta tapa el de arriba: app.css, .sas-grande)
       { const n = ultra() && o.nivel && estado === 'hablando' ? o.nivel() : null;
-        for (const [id, sep] of [['#ll-nivel', ' · '], ['#ll-sas-nivel', '\n']]) { const nv = $(id); if (nv) { nv.hidden = !n; if (n) nv.textContent = t('Tu lado') + ': ' + n.mio + sep + t('Otro lado') + ': ' + n.suyo; } } }
+        for (const [id, sep] of [['#ll-nivel', ' · '], ['#ll-sas-nivel', '\n']]) { const nv = $(id); if (nv) { nv.hidden = !n; if (n) nv.textContent = t('Tu lado') + ': ' + n.mio + sep + t('Otro lado') + ': ' + n.suyo + (sep === ' · ' ? ' (' : '\n(') + t('cada uno, según su programa') + ')'; } } }
       $('#ll-avatar').textContent = o.inicial();
       caja.setAttribute('aria-label', video ? t('Videollamada') : t('Llamada de voz'));
       $('#ll-camara-caja').hidden = !(video && cam);
@@ -1354,6 +1357,7 @@
       di(t('Llamando…'));
       const of = await pc.createOffer(); await pc.setLocalDescription({ type: of.type, sdp: altaFidelidad(of.sdp) });
       await sasNuevo();
+      try { if (LOCAL && sessionStorage.getItem('gcom-prueba-sin-sas') === '1') sas = null; } catch (_) {} // prueba local: una oferta sin compromiso (ultra.js)
       pqOferta = pqPide(null);
       ultimaOferta = { acto: 'oferta', id: idLlamada, video: video ? 1 : undefined, equipo: EQUIPO, plat: PLAT, sas: sas ? b64u(sas.compromiso) : undefined, tres: TRES, llevar: 1, env: 1, pqm: pqOferta ? pqOferta.sid : undefined, pqr: pqOferta ? 1 : undefined, pqc: pqOferta ? rotaMs() / 1000 : undefined };
       o.manda({ acto: 'oferta', id: idLlamada, sdp: pc.localDescription.sdp, video: video ? 1 : undefined, equipo: EQUIPO, plat: PLAT, sas: sas ? b64u(sas.compromiso) : undefined, tres: TRES, llevar: 1, env: 1, pqm: pqOferta ? pqOferta.sid : undefined, pqr: pqOferta ? 1 : undefined, pqc: pqOferta ? rotaMs() / 1000 : undefined });
@@ -1392,6 +1396,9 @@
         PR = null; patas = []; suTres = (m.tres | 0) >= 1; suLlevar = m.llevar === 1; suEnvio = m.env === 1; tramoPrincipal().n = Math.max(1, Math.min(8, (m.n | 0) || 1));
         ofertaEntrante = m; idLlamada = String(m.id || '').slice(0, 16); estado = 'entrante'; inicioYo = false; colgoYo = false; tiempo.textContent = '00:00'; calidad.textContent = ''; calidad.classList.remove('ver');
         sas = null; await sasNuevo(); if (sas) { try { sas.suCompromiso = typeof m.sas === 'string' && m.sas.length < 64 ? deB64u(m.sas) : null; } catch (_) { sas.suCompromiso = null; } if (!sas.suCompromiso || sas.suCompromiso.length !== 32) sas = null; }
+        // Ultra (revisión independiente, 3 nov 2026): una oferta sin el compromiso de las palabras dejaría la llamada sin palabras que
+        // comparar (alguien en medio podría quitarlo): como un número roto, no se contesta
+        if (ultra() && !sas) { o.manda({ acto: 'colgar', id: idLlamada, por: 'sin-palabras' }); estado = 'libre'; idLlamada = ''; ofertaEntrante = null; if (o.aviso) o.aviso(t('Llamada Ultra rechazada: llegó sin el compromiso de las palabras de verificación. Alguien podría estar en medio.')); pinta(); return; }
         video = m.video === 1 || /\nm=video /.test(m.sdp); suCamara = true; remotoV = null;
         di(video ? t('Videollamada entrante') : t('Llamada entrante')); pinta(); tono('entrante'); esperaRespuesta(false);
         o.manda({ acto: 'sonando', id: idLlamada }); // a quien llama: «Sonando…» (ya ha llegado a este teléfono), como Telegram y WhatsApp
@@ -1404,6 +1411,7 @@
         if (ultra() && !(m.pqm === 1 && pqOferta)) { const por = typeof m.pqc !== 'number' ? 'suyo' : 'clave'; o.manda({ acto: 'colgar', id: idLlamada }); pqOferta = null; termina('fallo'); if (o.sinRebaja) o.sinRebaja(por); return; }
         await pc.setRemoteDescription({ type: 'answer', sdp: m.sdp }); if (m.pqm === 1 && pqOferta) { if (await pqConfirma(pc, pqOferta.sec, idLlamada, true, m.pqr === 1)) pqVigila(pc, (x) => o.manda(Object.assign({ id: idLlamada }, x))); } else { pqClaro(pc); if (pqOferta && typeof m.pqc !== 'number') pqPor = 'suyo'; } pqOferta = null; for (const c of pendientes) { try { await pc.addIceCandidate(c); } catch (_) {} } pendientes = []; di(t('Conectando…')); if (video) topeVideo();
         if (sas && inicioYo) { try { sas.suPub = typeof m.sas === 'string' && m.sas.length < 120 ? deB64u(m.sas) : null; } catch (_) { sas.suPub = null; } if (sas.suPub && sas.suPub.length === 65) { o.manda({ acto: 'sas', id: idLlamada, p: b64u(sas.pub) }); sasCalcula(); } else { sas.estado = 'roto'; pintaSas(); } }
+        if (ultra() && inicioYo && (!sas || sas.estado === 'roto')) { o.manda({ acto: 'colgar', id: idLlamada }); termina('fallo'); if (o.aviso) o.aviso(t('Llamada Ultra cortada: la respuesta llegó sin las palabras de verificación. Alguien podría estar en medio.')); return; }
         return; }
       // la clave revelada de quien llama: tiene que ser la del compromiso de la oferta; si no, la comprobación queda rota
       if (m.acto === 'sas' && sas && !inicioYo) { let p = null; try { p = typeof m.p === 'string' && m.p.length < 120 ? deB64u(m.p) : null; } catch (_) {} if (p && p.length === 65) { const h = await sha256(p); if (sas.suCompromiso && h.length === 32 && h.every((x, i) => x === sas.suCompromiso[i])) { sas.suPub = p; sasCalcula(); return; } } sas.estado = 'roto'; pintaSas(); return; }
@@ -1425,6 +1433,7 @@
       if (m.acto === 'ice' && m.cand && typeof m.cand === 'object') { if (pc && pc.remoteDescription) { try { await pc.addIceCandidate(m.cand); } catch (_) {} } else if (pendientes.length < 64) pendientes.push(m.cand); return; }
       // la otra persona colgó por falta de la capa postcuántica (Ultra, sin rebaja): aquí también se explica
       if (m.acto === 'colgar' && m.por === 'sin-pq' && ultra()) { if (estado !== 'libre') termina('fallo'); if (o.sinRebaja) o.sinRebaja('suyo'); return; }
+      if (m.acto === 'colgar' && m.por === 'sin-palabras' && ultra()) { if (estado !== 'libre') termina('fallo'); if (o.aviso) o.aviso(t('La llamada Ultra no ha empezado: al otro equipo le llegó sin el compromiso de las palabras de verificación. Alguien podría estar en medio.')); return; }
       if (m.acto === 'colgar') { if (estado !== 'libre') termina(estado === 'hablando' ? 'fin' : 'rechazada'); return; }
       if (m.acto === 'ocupado') { di(t('Ocupado: la otra persona está en otra llamada.'), true); termina('ocupado', 1800); }
     }

@@ -128,6 +128,9 @@
   // latencias recibidas del otro equipo: { min, mediana, max, n } en enteros, o null
   const estadValida = (o) => (o && typeof o === 'object' && ['min', 'mediana', 'max', 'n'].every((k) => Number.isInteger(o[k]) && o[k] >= 0 && o[k] < 600000) ? { min: o.min, mediana: o.mediana, max: o.max, n: o.n } : null);
   const MI_PAIS = (() => { try { return (window.GuardianaViajeDatos && GuardianaViajeDatos.miPais()) || ''; } catch (_) { return ''; } })();
+  // En Ultra nunca sale el país estimado por la zona horaria (decisión, 3 nov 2026): ni en el anuncio de un archivo, ni en los acuses
+  // del envío, ni en el comprobante; y el viaje del archivo no lo usa (el mapa enseña solo el relé)
+  const miPais = (c) => (c && esB(c) ? '' : MI_PAIS || '');
   const regionValida = (x) => (typeof x === 'string' && /^[A-Z]{2}$/.test(x) ? x : '');
   const latValida = (x) => (typeof x === 'number' && isFinite(x) && x >= 0 && x < 60000 ? Math.round(x) : null);
   const limpiaNombre = (n) => String(n || 'archivo').slice(0, 180).replace(/[\\/:*?"<>|]/g, '_');
@@ -162,7 +165,7 @@
   async function guardaNombre(n) {
     YO.nombre = String(n || '').trim().slice(0, 40);
     try { const y = await BD.saca('yo', 'yo'); y.nombre = YO.nombre; await BD.pon('yo', y); } catch (e) { console.warn('nombre', e); }
-    for (const c of CONVS.values()) if (c.sesion) enviaControl(c, { tipo: 'nombre', nombre: YO.nombre });
+    for (const c of CONVS.values()) if (c.sesion && !esB(c)) enviaControl(c, { tipo: 'nombre', nombre: YO.nombre }); // a Ultra, nunca
   }
 
   // ---------- conversaciones ----------
@@ -550,15 +553,51 @@
       ? await C.B.datosResponde(c.id, id.firmaPub, id.acuerdoPub, id.dsaPub, c.ef.pub, c.epoca, resp.epoca, c.huella, resp.ef, pq.ek, pq.ct)
       : await C.B.datosInicia(c.id, id.firmaPub, id.acuerdoPub, id.dsaPub, c.ef.pub, c.epoca, c.ef.kem ? c.ef.kem.ek : new Uint8Array(0));
     const sig = await C.B.firma(id, datos), sigpq = await firmaPQ(c, datos);
-    const j = { v: 4, b: 1, firmaPub: C.b64u(id.firmaPub), acuerdoPub: C.b64u(id.acuerdoPub), dsaPub: C.b64u(id.dsaPub), ef: C.b64u(c.ef.pub), epoca: C.b64u(c.epoca), resp: resp ? C.b64u(resp.epoca) : '', nombre: YO.nombre, sig: C.b64u(sig), sigpq: C.b64u(sigpq) };
+    const j = { v: 4, b: 1, firmaPub: C.b64u(id.firmaPub), acuerdoPub: C.b64u(id.acuerdoPub), dsaPub: C.b64u(id.dsaPub), ef: C.b64u(c.ef.pub), epoca: C.b64u(c.epoca), resp: resp ? C.b64u(resp.epoca) : '', sig: C.b64u(sig), sigpq: C.b64u(sigpq) }; // (sin nombre: en Ultra no se envía el de este navegador, que uniría conversaciones)
     if (c.ef.kem) j.kem = C.b64u(c.ef.kem.ek);
     if (pq) j.kemct = C.b64u(pq.ct);
+    // las 4 palabras, con compromiso previo (cripto.js, compromisoPalabras): hasta que estén, quien inicia se compromete con 32 bytes
+    // al azar en cada inicio y quien responde manda los suyos; quien inicia los revela cuando ya hay sesión (revelaPalabras)
+    if (!c.palabrasN) {
+      if (!resp && c.ef.kem) { const nI = C.azar(32); c.misCompromisos = c.misCompromisos || new Map(); c.misCompromisos.set(C.hex(c.epoca), nI); for (const k of [...c.misCompromisos.keys()].slice(0, -8)) c.misCompromisos.delete(k); j.cw = C.b64u(await C.B.compromisoPalabras(identidadPruebaCompromiso() || c.miHuellaB, nI)); }
+      else if (resp && resp.cw) { const nR = C.azar(32); c.susCompromisos = c.susCompromisos || new Map(); c.susCompromisos.set(C.hex(resp.epoca), { cw: resp.cw, nR }); for (const k of [...c.susCompromisos.keys()].slice(0, -16)) c.susCompromisos.delete(k); j.nr = C.b64u(nR); }
+    }
     const iv = C.azar(12);
     const ct = new Uint8Array(await crypto.subtle.encrypt({ name: 'AES-GCM', iv, additionalData: new Uint8Array([1]) }, c.presentacion, C.B.rellena(C.te.encode(JSON.stringify(j)))));
     R.manda(c.id, c.suId || null, C.cat(new Uint8Array([1]), iv, ct));
     c.presentadoEn = Date.now();
     if (!resp) reintenta(c, 4000 + Math.random() * 1500);
     return pq;
+  }
+  // Prueba local: quien inicia se compromete con otra identidad y luego se presenta con la suya (como haría quien está en medio y
+  // quisiera elegir sus palabras después): quien responde lo detecta al comprobar el compromiso (ultra.js).
+  const identidadPruebaCompromiso = () => { try { return LOCAL && sessionStorage.getItem('gcom-prueba-otra-identidad') === '1' ? C.azar(48) : null; } catch (_) { return null; } };
+  // quien inicia: con la sesión ya hecha, revela su número; desde ese momento enseña las palabras (en local, «gcom-prueba-revela-ms»
+  // retrasa la revelación para ver que antes no sale ninguna)
+  function revelaPalabras(c) {
+    let ms = 0; try { ms = LOCAL ? +sessionStorage.getItem('gcom-prueba-revela-ms') || 0 : 0; } catch (_) {}
+    setTimeout(() => {
+      if (!c.revela || c.palabrasN || c.estado === 'destruida') return;
+      c.palabrasN = { hI: c.miHuellaB, hR: c.huella, nI: c.revela.nI, nR: c.revela.nR }; c.palabras = null;
+      enviaControl(c, { tipo: 'palabras', e: c.revela.e, n: c.revela.n });
+      if (ACTUAL === c.id) pintaCabecera(c);
+    }, ms);
+  }
+  // quien responde: el número revelado tiene que cuadrar con el compromiso que llegó antes que su propio número; si no, alguien ha
+  // cambiado de identidad o de número después de comprometerse, y en Ultra eso es un ataque: alarma (se borra en los dos equipos)
+  async function recibeRevelacion(c, j) {
+    if (!esB(c) || !c.huella || soyInicio(c)) return;
+    if (c.palabrasN) { enviaControl(c, { tipo: 'palabras-ok' }); return; }
+    let e, nI; try { e = C.deB64u(String(j.e || '')); nI = C.deB64u(String(j.n || '')); } catch (_) { return; }
+    const r = c.susCompromisos && c.susCompromisos.get(C.hex(e));
+    if (!r || nI.length !== 32) return;
+    if (C.hex(await C.B.compromisoPalabras(c.huella, nI)) !== C.hex(r.cw)) {
+      vigila(c, T('Las palabras de verificación no cuadraban con el compromiso previo de la otra parte: alguien podía estar en medio.'), 'mal');
+      await alarma(c, 'palabras'); return;
+    }
+    c.palabrasN = { hI: c.huella, hR: c.miHuellaB, nI, nR: r.nR }; c.palabras = null; c.susCompromisos = null;
+    enviaControl(c, { tipo: 'palabras-ok' });
+    if (ACTUAL === c.id) pintaCabecera(c);
   }
   async function recibePresentacionB(c, de, b) {
     if (b.length < 30 || !c.idB) return;
@@ -568,6 +607,8 @@
       if (!j || j.v !== 4 || j.b !== 1) return;
       const firmaPub = C.deB64u(j.firmaPub), acuerdoPub = C.deB64u(j.acuerdoPub), dsaPub = C.deB64u(j.dsaPub), ef = C.deB64u(j.ef), epoca = C.deB64u(j.epoca), sig = C.deB64u(j.sig), sigpq = C.deB64u(j.sigpq), resp = j.resp ? C.deB64u(j.resp) : null;
       const kemEk = j.kem ? C.deB64u(j.kem) : null, kemCt = j.kemct ? C.deB64u(j.kemct) : null;
+      const cw = j.cw ? C.deB64u(j.cw) : null, nr = j.nr ? C.deB64u(j.nr) : null; // el compromiso de las palabras y el número de quien responde
+      if ((cw && cw.length !== 48) || (nr && nr.length !== 32)) return;
       if (firmaPub.length !== C.B.EC || acuerdoPub.length !== C.B.EC || ef.length !== C.B.EC || dsaPub.length !== C.B.DSA_PUB || epoca.length !== 16 || (resp && resp.length !== 16) || sigpq.length !== C.B.DSA_FIRMA) return;
       if ((kemEk && (resp || kemEk.length !== C.B.EK)) || (kemCt && kemCt.length !== C.B.CT) || (!!resp !== !!kemCt)) return;
       const huella = await C.B.huella(firmaPub, acuerdoPub, dsaPub);
@@ -585,8 +626,13 @@
       else if (!c.nombre && j.nombre) c.nombre = String(j.nombre).slice(0, 40);
       c.suId = de; c.miembros.add(de);
       if (nueva || j.nombre !== c.nombreVisto) { c.nombreVisto = j.nombre; await guardaConv(c); }
-      if (!soyInicio(c)) { if (kemEk && !resp) { const pq = await presentaB(c, { epoca, ef, ek: kemEk }); await derivaSesionB(c, ef, c.ef, pq); } }
-      else if (resp) { const pq = { ss: C.B.kemAbre(kemCt, efMia.kem.dk), ek: efMia.kem.ek, ct: kemCt }; efMia.kem.dk.fill(0); efMia.kem = null; await derivaSesionB(c, ef, efMia, pq); }
+      if (!soyInicio(c)) { if (kemEk && !resp) { const pq = await presentaB(c, { epoca, ef, ek: kemEk, cw }); await derivaSesionB(c, ef, c.ef, pq); } }
+      else if (resp) {
+        const pq = { ss: C.B.kemAbre(kemCt, efMia.kem.dk), ek: efMia.kem.ek, ct: kemCt }; efMia.kem.dk.fill(0); efMia.kem = null; await derivaSesionB(c, ef, efMia, pq);
+        // la respuesta a uno de mis inicios, con su número: ya se pueden revelar los míos y sacar las palabras
+        const nI = c.misCompromisos && c.misCompromisos.get(C.hex(resp));
+        if (!c.palabrasN && !c.revela && nI && nr) { c.revela = { e: C.b64u(resp), n: C.b64u(nI), nI, nR: nr }; c.misCompromisos = null; revelaPalabras(c); }
+      }
       else await presentaB(c, null);
       if (nueva) {
         clearInterval(muestraInvitacion.reloj);
@@ -616,9 +662,9 @@
     for (const k of [...c.sesiones.keys()].slice(0, -3)) { const x = c.sesiones.get(k); try { x.envio.borra(); x.recibo.borra(); if (x.medios) x.medios.fill(0); } catch (_) {} c.sesiones.delete(k); }
     pintaCabecera(c); pintaLista();
     enviaControl(c, { tipo: 'ok' });
-    if (YO.nombre) enviaControl(c, { tipo: 'nombre', nombre: YO.nombre });
-    enviaControl(c, { tipo: 'nivel', n: miNivel() }); // el nivel de este lado, a la vista del otro (ronda 93)
+    enviaControl(c, { tipo: 'nivel', n: miNivel() }); // el nivel de este lado, a la vista del otro (ronda 93); en Ultra, sin nombre
     if (c.verificada) enviaControl(c, { tipo: 'verificada', si: 1, n: await hNumero(c) });
+    if (c.revela && c.palabrasN && !c.revelaOk) enviaControl(c, { tipo: 'palabras', e: c.revela.e, n: c.revela.n }); // por si se perdió
     if (LL && LL.ocupado && (LLAMADA_CONV || ACTUAL) === c.id) LL.volvio(); // también en el blindado (revisión, 29 Oct 2026)
     enviaCola(c);
     reenviaCustodias(c);
@@ -698,7 +744,45 @@
     if (esB(c)) clave.fill(0); // la clave de este mensaje ya no sirve: fuera de la memoria
     return C.cat(cab, ct);
   }
-  function enviaControl(c, obj) { if (c && c.efimera) { mandaEfimera(c, obj); return true; } if (!c.sesion || !R.abierto || !c.miembros.has(c.suId)) return false; sella(c, obj).then((b) => b && R.manda(c.id, c.suId, b)); return true; }
+  function enviaControl(c, obj) { if (c && c.efimera) { mandaEfimera(c, obj); return true; } if (!c.sesion || !R.abierto || !c.miembros.has(c.suId)) return false; if (esB(c) && !APARTE_B.has(obj.tipo)) { aTic(c, obj); return true; } sella(c, obj).then((b) => b && R.manda(c.id, c.suId, b)); return true; }
+  // Ultra, a ritmo fijo (revisión independiente, 3 nov 2026: los mensajes y los anuncios salían al momento y con la marca de aviso
+  // 0x11, y los acuses, el «leído» y el «escribiendo…» también al momento; el latido se sumaba a todo eso, así que el relé veía cuándo
+  // se escribía). Ahora, mientras la conversación está abierta (sesión confirmada y los dos en la sala), sale exactamente una trama de
+  // 1 KB por tic (tic): la siguiente que espera (un mensaje o un trozo de él, un acuse, el «leído», el «escribiendo…», el anuncio de un
+  // archivo…) o relleno si no espera ninguna. Nunca con la marca de aviso: Ultra no tiene avisos. Van aparte, también en tramas de
+  // 1 KB y sin marca, la señalización de las llamadas, lo del envío de un archivo (sus trozos son de tamaño fijo y van por su lado),
+  // el acuerdo de claves (y la revelación de las palabras) y las órdenes de borrado.
+  const APARTE_B = new Set(['llamada', 'destruir', 'alarma', 'archivo-ack', 'archivo-cancel', 'paquete', 'viaje', 'custodia', 'custodia-firma', 'custodia-no', 'ok', 'nivel', 'palabras', 'palabras-ok']);
+  const PIEZA_B = 660; // bytes de JSON por trozo: en base64, con su envoltorio, cabe en los 1023 de una trama
+  function trocea(obj) {
+    const b = C.te.encode(JSON.stringify(obj)); if (b.length <= 1000) return [obj];
+    const id = C.hex(C.azar(8)), n = Math.ceil(b.length / PIEZA_B), out = [];
+    for (let i = 0; i < n; i++) out.push({ tipo: 'parte', id, i, n, d: C.b64u(b.subarray(i * PIEZA_B, (i + 1) * PIEZA_B)) });
+    return out;
+  }
+  function aTic(c, obj) {
+    c.tic = c.tic || [];
+    if (obj.tipo === 'escribe') c.tic = c.tic.filter((x) => !(x.obj && x.obj.tipo === 'escribe')); // solo el último estado
+    for (const o of trocea(obj)) c.tic.push({ obj: o });
+  }
+  // un tic de una conversación Ultra abierta: exactamente una trama de 1 KB, la siguiente que espera o relleno
+  async function tic(c) {
+    if (!esB(c) || c.ticando || !enLinea(c) || !c.sesion || !c.sesion.confirmada || c.sinClaves || c.estado === 'destruida') return;
+    c.ticando = true;
+    try {
+      c.tic = c.tic || [];
+      // sin nada de antes a medias, el siguiente mensaje de la cola (un texto o el anuncio de un archivo), en trozos si no cabe
+      if (!c.tic.length && c.cola.length && puedeEnviar(c)) {
+        const m = c.cola[0], carga = m.tipo === 'texto' ? cargaTexto(m) : m.tipo === 'archivo' ? anuncioDe(m, c) : null;
+        if (!carga) c.cola.shift();
+        else { const piezas = trocea(carga); piezas.forEach((o, i) => c.tic.push({ obj: o, m: i === piezas.length - 1 ? m : null })); }
+      }
+      const x = c.tic.length ? c.tic[0] : { obj: { tipo: 'latido' } }, sesU = c.sesion;
+      const b = await sella(c, x.obj); if (!b || !R.manda(c.id, c.suId, b)) return; // sin conexión: queda para el siguiente tic
+      if (c.tic[0] === x) c.tic.shift();
+      if (x.m && c.cola[0] === x.m) { c.cola.shift(); await trasEnviar(c, x.m, sesU); }
+    } catch (e) { console.warn('tic', e); } finally { c.ticando = false; }
+  }
   const enLinea = (c) => !!(c.suId && c.miembros.has(c.suId) && c.sesion && R.abierto);
   // Sin parpadeos de estado (dueño, 29 Oct 2026, 08:38: «cuando la actualizo… arriba me aparece durante un momento desconectado y
   // como que se mueve la parte de arriba. Vigila eso para que no pase»). Tras recargar, al perderse un momento la conexión o cuando
@@ -760,7 +844,7 @@
   }
   // «v: 1» pide el comprobante firmado por los dos equipos (Ultra, solo si quien envía lo marcó: «Solicitar comprobante firmado»); el
   // recibo de siempre, negable y autenticado con la clave de la sesión, no necesita nada
-  const anuncioDe = (m) => ({ tipo: 'archivo', id: m.id, t: m.t, nombre: m.archivo.nombre, tam: m.archivo.tam, mime: m.archivo.mime, clave: m.archivo.clave, trozos: m.archivo.trozos, v: m.archivo.firmado ? 1 : 0, region: MI_PAIS || undefined, voz: m.archivo.voz ? 1 : undefined, vida: m.archivo.vida, dur: m.archivo.dur, paq: m.archivo.paq, w: m.archivo.w, h: m.archivo.h });
+  const anuncioDe = (m, c) => ({ tipo: 'archivo', id: m.id, t: m.t, nombre: m.archivo.nombre, tam: m.archivo.tam, mime: m.archivo.mime, clave: m.archivo.clave, trozos: m.archivo.trozos, v: m.archivo.firmado ? 1 : 0, region: miPais(c) || undefined, voz: m.archivo.voz ? 1 : undefined, vida: m.archivo.vida, dur: m.archivo.dur, paq: m.archivo.paq, w: m.archivo.w, h: m.archivo.h });
   // las medidas de una foto viajan con el anuncio: el otro equipo reserva el hueco antes de que llegue (ronda 76, fase 4: sin saltos)
   const medida = (x) => Number.isInteger(+x) && +x > 0 && +x <= 20000 ? +x : undefined;
   const medidasImagen = (f) => new Promise((res) => { try { if (window.createImageBitmap) { createImageBitmap(f).then((b) => { const d = { w: b.width, h: b.height }; try { b.close(); } catch (_) {} res(d); }, () => res(null)); return; } } catch (_) {} try { const u = URL.createObjectURL(f), i = new Image(); i.onload = () => { res({ w: i.naturalWidth, h: i.naturalHeight }); URL.revokeObjectURL(u); }; i.onerror = () => { res(null); URL.revokeObjectURL(u); }; i.src = u; } catch (_) { res(null); } });
@@ -854,23 +938,29 @@
   async function enviaCola(c) {
     mandaVaciar(c);
     if (enLinea(c) && c.sesion && c.sesion.confirmada) mandaLlaveBuzon(c);
+    if (esB(c)) return; // Ultra: los mensajes salen de uno en uno, al ritmo fijo (tic)
     if (c.enviando) return; c.enviando = true;
     try {
       while (c.cola.length && enLinea(c) && puedeEnviar(c)) {
         const m = c.cola[0];
-        const carga = m.tipo === 'texto' ? cargaTexto(m) : m.tipo === 'archivo' ? anuncioDe(m) : null;
+        const carga = m.tipo === 'texto' ? cargaTexto(m) : m.tipo === 'archivo' ? anuncioDe(m, c) : null;
         if (!carga) { c.cola.shift(); continue; }
         const vj = m.tipo === 'archivo' && VIAJES.get(m.id), sesU = c.sesion; // la clave del archivo viaja en esta sesión
         // el cuarto argumento: esta trama sí merece aviso en el teléfono de la otra persona (un mensaje o un archivo), al revés
         // que los acuses, el «leído» o el «escribiendo…» (dueño, 29 Oct 2026, 16:07: «todo al momento, tiene que estar en orden»)
         const b = await sella(c, carga); if (!b || !R.manda(c.id, c.suId, b, true)) break;
-        if (vj && sesU) { vj.pq = !!sesU.pq; vj.sid = sesU.sid; vj.sesionDesde = sesU.desde; vj.tAnuncio = Date.now(); }
-        if (vj) evento(vj, T('Anuncio enviado al destinatario, encriptado de extremo a extremo; se espera su confirmación.')); // antes de cualquier espera: va antes que la respuesta
-        c.cola.shift(); m.estado = 'enviado'; m.enviadoEn = Date.now(); await guardaMensaje(c, m); pintaEstado(m); if (m.tipo === 'texto') vigilaAcuse(c, m);
-        if (m.tipo === 'archivo') mandaArchivo(c, m);
+        c.cola.shift(); await trasEnviar(c, m, sesU, vj);
       }
     } finally { c.enviando = false; }
     if (!enLinea(c)) depositaCola(c);
+  }
+  // lo que sigue a enviar un mensaje (también desde el tic de Ultra)
+  async function trasEnviar(c, m, sesU, vj) {
+    vj = vj || (m.tipo === 'archivo' && VIAJES.get(m.id));
+    if (vj && sesU) { vj.pq = !!sesU.pq; vj.sid = sesU.sid; vj.sesionDesde = sesU.desde; vj.tAnuncio = Date.now(); }
+    if (vj) evento(vj, T('Anuncio enviado al destinatario, encriptado de extremo a extremo; se espera su confirmación.')); // antes de cualquier espera: va antes que la respuesta
+    m.estado = 'enviado'; m.enviadoEn = Date.now(); await guardaMensaje(c, m); pintaEstado(m); if (m.tipo === 'texto') vigilaAcuse(c, m);
+    if (m.tipo === 'archivo') mandaArchivo(c, m);
   }
   async function recibeMensaje(c, de, b) {
     if (b.length < 13 + 16) return;
@@ -885,11 +975,30 @@
     return trataCarga(c, j, ses);
   }
   // lo que dice cada mensaje, venga por la sesión o por el buzón cifrado (porBuzon: solo textos, fotos y notas de voz, acuses y «leído»)
+  // Ultra: lo que no cabía en una trama de 1 KB llega en trozos (trocea); se junta y se trata como si hubiera llegado entero
+  async function recibeParte(c, j, ses) {
+    if (!esB(c)) return;
+    const id = String(j.id || '').slice(0, 32), n = j.n | 0, i = j.i | 0;
+    if (!id || n < 2 || n > 400 || i < 0 || i >= n) return;
+    let d; try { d = C.deB64u(String(j.d || '')); } catch (_) { return; }
+    if (d.length > PIEZA_B) return;
+    c.partes = c.partes || new Map();
+    for (const [k, v] of c.partes) if (Date.now() - v.t > 5 * 60 * 1000) c.partes.delete(k); // lo que se quedó a medias
+    let p = c.partes.get(id); if (!p) { if (c.partes.size >= 32) return; p = { n, piezas: new Array(n), van: 0, t: Date.now() }; c.partes.set(id, p); }
+    if (p.n !== n || p.piezas[i]) return;
+    p.piezas[i] = d; p.van++;
+    if (p.van < n) return;
+    c.partes.delete(id);
+    let x; try { x = JSON.parse(C.td.decode(C.cat(...p.piezas))); } catch (_) { return; }
+    if (!x || typeof x !== 'object' || x.tipo === 'parte') return;
+    return trataCarga(c, x, ses);
+  }
   async function trataCarga(c, j, ses, porBuzon) {
     if (!j || typeof j !== 'object') return;
     if (porBuzon && !['texto', 'archivo-buzon', 'ack', 'leido'].includes(j.tipo)) return;
     if (j.tipo === 'texto' || j.tipo === 'archivo' || j.tipo === 'archivo-buzon' || j.tipo === 'llamada') { marcaUso(true); c.suVistoT = Date.now(); } // el chat temporal se está usando
     switch (j.tipo) {
+      case 'parte': return recibeParte(c, j, ses);
       case 'buzon-llave': return recibeLlaveBuzon(c, j);
       case 'archivo-buzon': return recibeArchivoBuzon(c, j);
       case 'texto': {
@@ -942,7 +1051,9 @@
       case 'visto': { const m = c.mensajes.find((x) => x.id === j.id && x.dir === 'mia' && x.tipo === 'archivo'); if (m && !m.archivo.vistoBorrado) { m.archivo.vistoBorrado = true; await guardaMensaje(c, m); pintaMensaje(c, m, true); vigila(c, T('Visto y borrado en el otro equipo') + ': ' + m.archivo.nombre, 'ok'); } return; }
       case 'borra': return borraLocal(c, j.id, true);
       case 'paquete': { const a = c.archivos.get(String(j.id || '')); const m = c.mensajes.find((x) => x.id === j.id && x.dir === 'suya' && x.tipo === 'archivo'); if (!a || a.envio || !a.paq || !m || typeof j.t !== 'string') return; try { a.trailer = C.deB64u(j.t); } catch (_) { return; } if (a.trailer.length !== 32) { a.trailer = null; return; } if (a.tengo === a.trozos) await completaRecepcion(c, m, a); return; }
-      case 'alarma': { if (!esB(c)) return; await destruyeLocal(c, true, true); muestraAlarma(j.por === 'numero' ? 'numero' : j.por === 'integridad' ? 'integridad' : 'otro', true); return; }
+      case 'alarma': { if (!esB(c)) return; await destruyeLocal(c, true, true); muestraAlarma(j.por === 'numero' ? 'numero' : j.por === 'integridad' ? 'integridad' : j.por === 'palabras' ? 'palabras' : 'otro', true); return; }
+      case 'palabras': { await recibeRevelacion(c, j); return; }
+      case 'palabras-ok': { if (esB(c) && c.revela) c.revelaOk = true; return; }
       default: return;
     }
   }
@@ -1079,7 +1190,7 @@
     let anunciadoEn = Date.now();
     while (!a.listo) { if (a.cancelado || c.estado === 'destruida') return; if (c.archivos.get(m.id) !== a) return; if (!enLinea(c)) return pierde(c, m, a); if (Date.now() - t0 > 10 * 60 * 1000) return falla(c, m);
       // sin «listo» en 6 s, el anuncio otra vez: tras un corte, la respuesta se podía perder mientras las dos sesiones se rehacían
-      if (Date.now() - anunciadoEn > 6000 && c.sesion && c.sesion.confirmada) { anunciadoEn = Date.now(); sella(c, anuncioDe(m)).then((b) => b && R.manda(c.id, c.suId, b)); }
+      if (Date.now() - anunciadoEn > 6000 && c.sesion && c.sesion.confirmada) { anunciadoEn = Date.now(); if (esB(c)) aTic(c, anuncioDe(m, c)); else sella(c, anuncioDe(m, c)).then((b) => b && R.manda(c.id, c.suId, b)); }
       await new Promise((r) => { a.sigue = r; setTimeout(r, 500); }); }
     const fid = fidDe(m.id); a.t0 = Date.now();
     const v = VIAJES.get(m.id), huella = window.GuardianaSHA256 ? GuardianaSHA256.crea() : null;
@@ -1125,7 +1236,7 @@
     const m = { id: String(j.id).slice(0, 64), conv: c.id, t: Math.min(Date.now(), +j.t || Date.now()), dir: 'suya', estado: 'recibiendo', tipo: 'archivo', archivo: { nombre: limpiaNombre(j.nombre), tam, mime: String(j.mime || 'application/octet-stream').slice(0, 100), trozos, progreso: 0, aDisco: tam > MAX_MEMORIA || (conDisco() && tam > 32 * 1024 * 1024 && !vida), custodia: custodia ? 1 : undefined, voz: voz ? 1 : undefined, vida, dur: Number.isFinite(+j.dur) && +j.dur > 0 ? Math.min(36000, Math.round(+j.dur)) : undefined, paq: paq ? 1 : undefined, w: medida(j.w), h: medida(j.h) }, velado: extrasB(c) && !voz ? true : undefined };
     const a = { envio: false, clave: await C.aes(C.deB64u(j.clave)), partes: null, escritor: null, siguiente: 0, tengo: 0, trozos, m, pendientes: new Map(), huella: window.GuardianaSHA256 ? GuardianaSHA256.crea() : null, hPtr: 0, paq, hPaq: paq ? GuardianaSHA256.crea() : null, trailer: null };
     c.archivos.set(m.id, a);
-    const v = viajeNuevo(c, m, 'recibe'); v.voz = voz; v.custodia = voz ? 'voz' : custodia ? 'si' : 'no'; v.paisSuyo = regionValida(j.region); v.pq = !!(ses && ses.pq); v.sid = ses ? ses.sid : ''; v.sesionDesde = ses ? ses.desde : null;
+    const v = viajeNuevo(c, m, 'recibe'); v.voz = voz; v.custodia = voz ? 'voz' : custodia ? 'si' : 'no'; v.paisSuyo = esB(c) ? '' : regionValida(j.region); v.pq = !!(ses && ses.pq); v.sid = ses ? ses.sid : ''; v.sesionDesde = ses ? ses.desde : null;
     evento(v, T('Anuncio del archivo recibido, encriptado de extremo a extremo') + ': ' + trozos.toLocaleString(LOC()) + ' ' + T('fragmentos') + '.');
     if (!m.archivo.aDisco) { a.partes = new Array(trozos); a.listo = true; }
     else if (!conDisco()) { enviaControl(c, { tipo: 'archivo-cancel', id: m.id }); c.archivos.delete(m.id); m.estado = 'fallo'; m.archivo.motivo = T('Pasa de 300 MB y este navegador no puede escribirlo al disco según llega (Chrome o Edge sí).'); v.estado = 'fallo'; evento(v, m.archivo.motivo, 'mal'); }
@@ -1134,7 +1245,7 @@
     if (a.listo) { enviaControl(c, listoCarga(c, m.id, v)); evento(v, T('Listo para recibir: aviso enviado al remitente.')); }
     else if (m.estado !== 'fallo') { v.eligeDestino = true; evento(v, T('Elige dónde guardarlo para empezar la recepción.')); avisaSonido(); if (ACTUAL !== c.id) aviso(T('Te están mandando un archivo grande: elige dónde guardarlo.')); }
   }
-  const listoCarga = (c, id, v) => ({ tipo: 'archivo-listo', id, v: esB(c) ? 1 : 0, region: MI_PAIS || undefined, lat: v ? VJ() && VJ().minima(v.latMia) : undefined }); // v: 1, este equipo sabe firmar comprobantes
+  const listoCarga = (c, id, v) => ({ tipo: 'archivo-listo', id, v: esB(c) ? 1 : 0, region: miPais(c) || undefined, lat: v ? VJ() && VJ().minima(v.latMia) : undefined }); // v: 1, este equipo sabe firmar comprobantes
   // «Guardar en…» (archivos grandes): la persona elige el destino y, desde ahí, cada trozo se escribe según llega.
   async function eligeDestino(c, m) {
     const a = c.archivos.get(m.id); if (!a || a.listo) return;
@@ -1224,7 +1335,7 @@
     vigila(c, ok ? T('Archivo recibido') + ': ' + m.archivo.nombre + ' · ' + a.trozos + ' ' + T('trozos autenticados, completo.') : T('Archivo incompleto: ') + m.archivo.nombre, ok ? 'bien' : 'mal');
     // lo que este equipo ha medido: entra en el comprobante y se comprueba antes de firmarlo (se guarda con el mensaje)
     const sha = ok && a.huella && a.hPtr === a.trozos ? C.hex(a.huella.cierra()) : null;
-    const obs = sha ? { sha256: sha, llegada: new Date().toISOString(), primero: iso(a.t0), anuncio: v ? iso(v.tCreado) : null, lat: v && VJ() ? VJ().estad(v.latMia) : null, verificada: !!c.verificada, nombre: YO.nombre || '', region: MI_PAIS || '', version: VERSION_APP, tipo: (v && v.tipoReal) || null, mutua: esB(c) ? !!(c.verificada && c.suVerificada) : undefined, pq: !!(v && v.pq), sid: (v && v.sid) || '', rele: v && v.rele ? v.rele.host || '' : '', rele_region: R.region || '' } : null;
+    const obs = sha ? { sha256: sha, llegada: new Date().toISOString(), primero: iso(a.t0), anuncio: v ? iso(v.tCreado) : null, lat: v && VJ() ? VJ().estad(v.latMia) : null, verificada: !!c.verificada, nombre: esB(c) ? '' : YO.nombre || '', region: miPais(c), version: VERSION_APP, tipo: (v && v.tipoReal) || null, mutua: esB(c) ? !!(c.verificada && c.suVerificada) : undefined, pq: !!(v && v.pq), sid: (v && v.sid) || '', rele: v && v.rele ? v.rele.host || '' : '', rele_region: R.region || '' } : null;
     if (obs && m.archivo.custodia) m.archivo.obs = obs;
     await guardaMensaje(c, m); pintaMensaje(c, m, true); pintaRadio(c);
     const fin = { tipo: 'archivo-fin', id: m.id, ok, seg: Math.round(seg * 10) / 10, trozos: a.trozos };
@@ -1262,7 +1373,7 @@
   const MIN_VIAJE = 1024 * 1024; // el viaje se abre solo a partir de 1 MB (nunca con notas de voz)
   function viajeNuevo(c, m, rol) {
     const r = window.GuardianaViajeDatos ? GuardianaViajeDatos.rele(R.url || '') : {};
-    const v = { id: m.id, conv: c.id, rol, tCreado: Date.now(), mime: m.archivo.mime, nombre: m.archivo.nombre, tam: m.archivo.tam, trozos: m.archivo.trozos, estado: 'espera', confirmados: 0, enCamino: 0, verificados: 0, muestras: [], latMia: R.latencia != null ? [R.latencia] : [], latSuya: [], paisMio: MI_PAIS, paisSuyo: '', rele: r, pq: !!(c.sesion && c.sesion.pq), verificada: !!c.verificada, otro: c.nombre || '', eventos: [], incidencias: [] };
+    const v = { id: m.id, conv: c.id, rol, tCreado: Date.now(), mime: m.archivo.mime, nombre: m.archivo.nombre, tam: m.archivo.tam, trozos: m.archivo.trozos, estado: 'espera', confirmados: 0, enCamino: 0, verificados: 0, muestras: [], latMia: R.latencia != null ? [R.latencia] : [], latSuya: [], paisMio: miPais(c), paisSuyo: '', rele: r, pq: !!(c.sesion && c.sesion.pq), verificada: !!c.verificada, otro: c.nombre || '', eventos: [], incidencias: [] };
     VIAJES.set(m.id, v);
     return v;
   }
@@ -1306,7 +1417,7 @@
   function listoViaje(c, j) {
     const v = VIAJES.get(j.id); if (!v) return;
     v.custodia = v.voz ? 'voz' : j.v === 1 ? 'si' : 'no'; v.tListo = Date.now();
-    v.paisSuyo = regionValida(j.region) || v.paisSuyo; const l = latValida(j.lat); if (l != null) v.latSuya.push(l);
+    if (!esB(c)) v.paisSuyo = regionValida(j.region) || v.paisSuyo; const l = latValida(j.lat); if (l != null) v.latSuya.push(l);
     evento(v, T('El equipo del destinatario está listo: empieza el envío.'));
     const mm = c.mensajes.find((x) => x.id === j.id);
     if (v.custodia === 'no' && esB(c) && mm && mm.archivo && mm.archivo.firmado) evento(v, T('El otro equipo usa una versión anterior de Comunicaciones: el envío sigue, sin comprobante firmado.'), 'info');
@@ -1348,8 +1459,8 @@
       modo: B ? 'blindada' : undefined, suite: B ? 'CNSA 2.0: ECDSA y ECDH P-384, ML-KEM-1024, ML-DSA-87, AES-256-GCM, SHA-384' : undefined,
       verificacion_mutua: B ? !!(c.verificada && c.suVerificada && j.mutua === true) : undefined,
       archivo: { nombre: m.archivo.nombre, bytes: m.archivo.tam, sha256: a.sha256, tipo_declarado: m.archivo.mime || null, tipo_real: v.tipoReal || null, fragmentos: m.archivo.trozos, tam_fragmento: TROZO },
-      emisor: { ...mio, nombre: YO.nombre || '', region: MI_PAIS || '', verifico_al_otro: !!c.verificada, version: VERSION_APP },
-      receptor: { ...suyo, nombre: String(j.nombre || '').slice(0, 40), region: regionValida(j.region), verifico_al_otro: j.verificada === true, version: typeof j.version === 'string' ? j.version.slice(0, 60) : null },
+      emisor: { ...mio, nombre: B ? '' : YO.nombre || '', region: miPais(c), verifico_al_otro: !!c.verificada, version: VERSION_APP },
+      receptor: { ...suyo, nombre: B ? '' : String(j.nombre || '').slice(0, 40), region: B ? '' : regionValida(j.region), verifico_al_otro: j.verificada === true, version: typeof j.version === 'string' ? j.version.slice(0, 60) : null },
       sesion: { id: v.sid || null, pq: !!v.pq, establecida: iso(v.sesionDesde), blindada: B || undefined },
       transporte: {
         rele: rel.host || '', rele_ciudad: rel.prueba ? '' : rel.ciudad || '', rele_pais: rel.prueba ? '' : rel.cc || '', rele_region: R.region || '', conexion: /^wss:/.test(R.url || '') ? 'wss' : 'ws',
@@ -1411,6 +1522,12 @@
       && mios.length === esperados.length && esperados.every(([que, hora]) => mios.some((x) => x.que === que && x.t === hora))
       && typeof t.salida === 'string' && Number.isFinite(t.duracion_s) && t.duracion_s > 0;
     if (!ok) return no('no coincide');
+    // Ultra: quien recibe decide (decideFirma); si ya dijo que no, se repite el no; si aún no ha dicho nada, se le pregunta
+    if (B && !m.archivo.firmaSi) {
+      if (m.archivo.firmaNo) { enviaControl(c, { tipo: 'custodia-no', id: m.id, por: 'persona' }); return; }
+      if (!m.archivo.pideFirma) { m.archivo.pideFirma = { reg: j.reg, firma: j.firma, firmapq: j.firmapq }; pintaMensaje(c, m, true); if (v) evento(v, T('El remitente pide un comprobante firmado: decides tú si tu equipo lo firma.')); }
+      return;
+    }
     if (v) evento(v, T('Comprobante recibido del remitente: coincide con lo medido en tu equipo.'));
     const firma = B ? C.b64u(await C.B.firma(c.idB, VJ().aFirmarB(j.reg))) : C.b64u(await C.firma(YO, VJ().aFirmar(j.reg)));
     const firmapq = B ? C.b64u(await firmaPQ(c, VJ().aFirmarB(j.reg), VJ().CTX_B)) : undefined;
@@ -1420,6 +1537,15 @@
     await guardaCustodia(c, m.id, comp, 'firmado');
     if (v) { v.comprobante = comp; v.comprobanteValido = true; v.coincide = true; evento(v, T('Comprobante firmado por tu equipo: firmado por los dos equipos.'), 'bien'); }
     vigila(c, T('Comprobante de entrega firmado por los dos') + ': ' + m.archivo.nombre, 'bien');
+  }
+  // Ultra: la respuesta de quien recibe a «Te piden un comprobante firmado»
+  async function decideFirma(c, m, si) {
+    if (!c || !m || !m.archivo || !m.archivo.pideFirma) return;
+    const p = m.archivo.pideFirma; m.archivo.pideFirma = null;
+    if (si) { m.archivo.firmaSi = true; pintaMensaje(c, m, true); await recibeCustodia(c, { id: m.id, reg: p.reg, firma: p.firma, firmapq: p.firmapq }); return; }
+    m.archivo.firmaNo = true; pintaMensaje(c, m, true);
+    enviaControl(c, { tipo: 'custodia-no', id: m.id, por: 'persona' });
+    const v = VIAJES.get(m.id); if (v) evento(v, T('No has firmado el comprobante que te pidieron.'));
   }
   // Quien envía: la firma del destinatario, comprobada con su clave de identidad
   async function firmaCustodia(c, j) {
@@ -1440,8 +1566,9 @@
   async function rechazoCustodia(c, j) {
     if (!c.cargados) await cargaMensajes(c);
     const cm = c.mensajes.find((x) => x.id === 'cu-' + j.id && x.tipo === 'custodia'); if (!cm || cm.estado === 'firmado') return;
-    await guardaCustodia(c, j.id, cm.custodia, 'rechazado', 'Su equipo no ha podido comprobar el registro.');
-    const v = VIAJES.get(j.id); if (v) evento(v, T('El destinatario no ha firmado el comprobante: su equipo no ha podido comprobar el registro.'), 'mal');
+    const persona = j.por === 'persona';
+    await guardaCustodia(c, j.id, cm.custodia, 'rechazado', persona ? 'La otra persona ha decidido no firmarlo.' : 'Su equipo no ha podido comprobar el registro.');
+    const v = VIAJES.get(j.id); if (v) evento(v, persona ? T('El destinatario ha decidido no firmar el comprobante.') : T('El destinatario no ha firmado el comprobante: su equipo no ha podido comprobar el registro.'), 'mal');
     const m = c.mensajes.find((x) => x.id === j.id && x.tipo === 'archivo'); if (m) await recibo(c, m, v && v.tFin && v.t0 ? (v.tFin - v.t0) / 1000 : 0, m.archivo.trozos, true);
   }
   // en cada sesión nueva, los comprobantes aún sin la firma del destinatario se le vuelven a mandar
@@ -2004,7 +2131,7 @@
     R.on('limitada', () => { aviso(T('Tu red está limitando la conexión con GUARDIANA: los mensajes llegan, pero las fotos y las llamadas pueden fallar. Prueba con otra red (wifi o datos) o con una VPN.')); });
     // al perder la conexión se olvida también si la otra persona estaba «fuera»: al volver, el relé solo reenvía la presencia de
     // quien sigue fuera, y sin esto se quedaba «No conectado» para siempre (revisión, 29 Oct 2026)
-    R.on('cerrado', () => { quietoTodas(4000); pintaBarra(); for (const c of CONVS.values()) { c.miembros.clear(); c.sesion = null; c.salaSabida = false; c.suFuera = false; for (const [id, a] of c.archivos || []) { if (a && a.envio) { const m = c.mensajes.find((x) => x.id === id); if (m && m.estado !== 'pendiente') pierde(c, m, a, T('Se perdió la conexión.')); } } if (c.archivos) { for (const [id, a] of [...c.archivos]) if (!(a && a.envio)) c.archivos.delete(id); } pintaCabecera(c); } pintaLista(); });
+    R.on('cerrado', () => { quietoTodas(4000); pintaBarra(); for (const c of CONVS.values()) { c.miembros.clear(); c.tic = []; c.sesion = null; c.salaSabida = false; c.suFuera = false; for (const [id, a] of c.archivos || []) { if (a && a.envio) { const m = c.mensajes.find((x) => x.id === id); if (m && m.estado !== 'pendiente') pierde(c, m, a, T('Se perdió la conexión.')); } } if (c.archivos) { for (const [id, a] of [...c.archivos]) if (!(a && a.envio)) c.archivos.delete(id); } pintaCabecera(c); } pintaLista(); });
     setInterval(() => { if (R.abierto && R.caduca && R.caduca * 1000 - Date.now() < 2 * 3600 * 1000) R.pideIce(); }, 10 * 60 * 1000);
     // con la otra persona en la sala, el tiempo de acordar las claves, quieta; sin ella (y si no se acaba de ir), «No conectado» ya
     R.on('sala', (sala, miembros) => { const c = CONVS.get(sala); if (!c) return; c.miembros = new Set(miembros); c.sesion = null; c.salaSabida = true; c.suFuera = false; if (c.suId && miembros.includes(c.suId)) quietoConv(c, 6000); if (miembros.length && (!c.suId || miembros.includes(c.suId))) enCola(c, () => presentaX(c, null, true)); else setTimeout(() => depositaCola(c), 300); pintaCabecera(c); pintaLista(); pintaContactos(); }); // sin la otra persona en la sala, lo pendiente, al buzón
@@ -2638,14 +2765,16 @@
   }
   // Las 4 palabras de verificación de Ultra (ronda 93), siempre a la vista en el chat, con el nivel de cada lado. Las mismas en los
   // dos equipos: salen de las dos identidades de la conversación (las de la llamada salen de su propio acuerdo, llamada.js).
-  const palabrasDe = async (c) => { if (!esB(c) || !c.huella || !c.miHuellaB) return null; if (!c.palabras) c.palabras = await C.B.palabras(c.miHuellaB, c.huella); return c.palabras; };
+  // (con compromiso previo: hasta que quien inicia revela su número y quien responde lo comprueba, no hay palabras que enseñar)
+  const palabrasDe = async (c) => { if (!esB(c) || !c.palabrasN) return null; if (!c.palabras) { const p = c.palabrasN; c.palabras = await C.B.palabras(p.hI, p.hR, p.nI, p.nR); } return c.palabras; };
   function pintaPalabras(c) {
     const caja = $('#cpalabras'); if (!caja) return;
     const ver = !!(extrasB(c) && c.huella && ACTUAL === c.id);
     caja.hidden = !ver; $('#conv').classList.toggle('con-palabras', ver);
     if (!ver) return;
-    const niv = $('#cpalabras-nivel'); if (niv) niv.textContent = T('Tu lado') + ': ' + nombreNivel(miNivel()) + ' · ' + T('Otro lado') + ': ' + (c.suNivel ? nombreNivel(c.suNivel) : T('aún sin decir'));
-    palabrasDe(c).then((p) => { const el = $('#cpalabras-txt'); if (!el || ACTUAL !== c.id) return; el.textContent = p ? p.join(' · ') : '—'; el.setAttribute('aria-label', T('Palabras de verificación') + ': ' + (p ? p.join(', ') : '')); });
+    // (el del otro lado lo dice su propio programa: así se rotula, también el mío; revisión independiente, 3 nov 2026)
+    const niv = $('#cpalabras-nivel'); if (niv) niv.textContent = T('Tu lado') + ': ' + nombreNivel(miNivel()) + ' · ' + T('Otro lado') + ': ' + (c.suNivel ? nombreNivel(c.suNivel) : T('aún sin decir')) + ' (' + T('cada uno, según su programa') + ')';
+    palabrasDe(c).then((p) => { const el = $('#cpalabras-txt'); if (!el || ACTUAL !== c.id) return; el.textContent = p ? p.join(' · ') : T('comprobando…'); el.classList.toggle('esperando', !p); el.setAttribute('aria-label', T('Palabras de verificación') + ': ' + (p ? p.join(', ') : T('comprobando…'))); });
   }
   // Vigilancia a la derecha (dueño, 26 Oct 20:22): anota cada comprobación real según ocurre y mantiene la última a la vista.
   const hms = (t) => new Date(t || Date.now()).toLocaleTimeString(LOC(), { hour: '2-digit', minute: '2-digit', second: '2-digit' });
@@ -2917,7 +3046,15 @@
     else if (extrasB(CONVS.get(m.conv)) && !m.archivo.voz && (m.estado === 'recibido' || m.estado === 'entregado' || m.estado === 'leido')) { const se = document.createElement('span'); se.className = 'sello'; se.textContent = '✓ ' + T('Completo y autenticado: encriptado de extremo a extremo') + (m.archivo.paq ? ' · ' + T('paquete «todo o nada»') : ''); d.append(se); }
     else if (m.estado === 'fallo' && /alterados/.test(m.archivo.motivo || '')) { const se = document.createElement('span'); se.className = 'sello mal'; se.textContent = '✕ ' + T('Detenido: no superó la autenticación'); d.append(se); }
     // el comprobante firmado pedido en este envío, a la vista de los dos (ronda 93): quien lo pide y quien recibe lo ven antes de firmar
-    if ((m.archivo.firmado || m.archivo.custodia) && !m.archivo.voz && m.estado !== 'fallo') { const se = document.createElement('span'); se.className = 'sello firmado'; se.textContent = '✍ ' + (m.dir === 'mia' ? T('Comprobante firmado solicitado') : T('Te piden un comprobante firmado por los dos equipos (ECDSA P-384 y ML-DSA-87)')); d.append(se); }
+    if ((m.archivo.firmado || m.archivo.custodia) && !m.archivo.voz && m.estado !== 'fallo') { const se = document.createElement('span'); se.className = 'sello firmado'; se.textContent = '✍ ' + (m.dir === 'mia' ? T('Comprobante firmado solicitado') : m.archivo.firmaNo ? T('No has firmado el comprobante que te pidieron') : T('Te piden un comprobante firmado por los dos equipos (ECDSA P-384 y ML-DSA-87)')); d.append(se);
+      // Ultra (revisión independiente, 3 nov 2026): quien recibe decide si su equipo firma; hasta entonces, nada se firma
+      if (m.dir !== 'mia' && m.archivo.pideFirma) {
+        const fb = document.createElement('div'); fb.className = 'fila firma-pide';
+        const si = document.createElement('button'); si.type = 'button'; si.className = 'boton principal firma-si'; si.textContent = T('Firmar');
+        const no = document.createElement('button'); no.type = 'button'; no.className = 'boton firma-no'; no.textContent = T('No firmar');
+        si.addEventListener('click', () => decideFirma(CONVS.get(m.conv), m, true)); no.addEventListener('click', () => decideFirma(CONVS.get(m.conv), m, false));
+        fb.append(si, no); d.append(fb);
+      } }
     const fila = document.createElement('div'); fila.className = 'fila';
     if (m.dir === 'suya' && m.estado === 'recibiendo' && m.archivo.aDisco && !m.archivo.enDisco) { const g = document.createElement('button'); g.type = 'button'; g.className = 'boton principal'; g.textContent = T('Guardar en…'); g.addEventListener('click', () => { const c = CONVS.get(m.conv); if (c) eligeDestino(c, m); }); fila.append(g); }
     if (temporalVivo) { const g = document.createElement('button'); g.type = 'button'; g.className = 'boton principal'; g.textContent = T('Ver'); g.addEventListener('click', () => { const c = CONVS.get(m.conv); if (c) veTemporal(c, m); }); fila.append(g); }
@@ -3182,7 +3319,7 @@
   }
   function muestraAlarma(por, porElla) {
     const a = $('#alarma'); if (!a) return;
-    $('#alarma-por').textContent = por === 'numero' ? T('El número de seguridad de la llamada no coincidía en los dos equipos: alguien podía estar en medio.') : por === 'integridad' ? T('Llegaron mensajes o piezas manipulados: alguien intentó alterar la conversación o entrar en ella.') : T('El otro equipo detectó un ataque.');
+    $('#alarma-por').textContent = por === 'numero' ? T('El número de seguridad de la llamada no coincidía en los dos equipos: alguien podía estar en medio.') : por === 'palabras' ? T('Las palabras de verificación no cuadraban con el compromiso previo de la otra parte: alguien podía estar en medio.') : por === 'integridad' ? T('Llegaron mensajes o piezas manipulados: alguien intentó alterar la conversación o entrar en ella.') : T('El otro equipo detectó un ataque.');
     $('#alarma-donde').textContent = porElla ? T('El otro equipo dio la alarma. Esta conversación se ha borrado aquí también: claves, mensajes y archivos.') : T('Por precaución, esta conversación se ha borrado en los dos equipos: claves, mensajes y archivos.');
     a.hidden = false; try { $('#alarma-ok').focus(); } catch (_) {}
   }
@@ -3222,6 +3359,33 @@
       const nf = new File([blob], base + (tipo === 'image/png' ? '.png' : '.jpg'), { type: tipo, lastModified: Date.now() }); nf.__limpia = true;
       return nf;
     } catch (_) { return todo ? null : f; }
+  }
+  // Ultra (revisión independiente, 3 nov 2026): lo que se puede limpiar aquí, se limpia. De un SVG, el bloque <metadata>, los comentarios
+  // y lo que añaden los programas de dibujo (Inkscape, Sodipodi, Sketch, Illustrator…); de un MP3, sus etiquetas ID3 (v2 al principio,
+  // v1 y v1.1 «TAG+» al final: título, autor, fechas y a veces una foto). Lo demás va como está, con aviso (revisaEnvio).
+  async function limpiaMetaB(f) {
+    if (!f || f.__limpia) return f;
+    const mime = String(f.type || '').toLowerCase(), nombre = String(f.name || '');
+    try {
+      if (mime === 'image/svg+xml' || /\.svg$/i.test(nombre)) {
+        const doc = new DOMParser().parseFromString(await f.text(), 'image/svg+xml');
+        if (doc.getElementsByTagName('parsererror').length || !doc.documentElement || doc.documentElement.nodeName.toLowerCase() !== 'svg') return f;
+        for (const n of [...doc.getElementsByTagName('metadata')]) n.remove();
+        { const w = doc.createTreeWalker(doc, NodeFilter.SHOW_COMMENT), fuera = []; while (w.nextNode()) fuera.push(w.currentNode); for (const n of fuera) n.remove(); }
+        const EDITOR = /^(inkscape|sodipodi|sketch|serif|i|x|graph):|^xmlns:(inkscape|sodipodi|sketch|serif|dc|cc|rdf|i|x|graph)$|^data-name$/i;
+        for (const el of [...doc.getElementsByTagName('*')]) { if (/^(inkscape|sodipodi|sketch|serif):/i.test(el.nodeName)) { el.remove(); continue; } for (const a of [...el.attributes]) if (EDITOR.test(a.name)) el.removeAttribute(a.name); }
+        const nf = new File([new XMLSerializer().serializeToString(doc)], nombre || 'dibujo.svg', { type: 'image/svg+xml', lastModified: Date.now() }); nf.__limpia = true; return nf;
+      }
+      if (mime === 'audio/mpeg' || mime === 'audio/mp3' || /\.mp3$/i.test(nombre)) {
+        let b = new Uint8Array(await f.arrayBuffer());
+        while (b.length > 10 && b[0] === 0x49 && b[1] === 0x44 && b[2] === 0x33) { const t = ((b[6] & 127) << 21) | ((b[7] & 127) << 14) | ((b[8] & 127) << 7) | (b[9] & 127); b = b.subarray(Math.min(b.length, 10 + t + (b[5] & 0x10 ? 10 : 0))); }
+        const es = (k, txt) => b.length >= k && [...txt].every((ch, i) => b[b.length - k + i] === ch.charCodeAt(0));
+        if (es(128, 'TAG')) b = b.subarray(0, b.length - 128);
+        if (es(227, 'TAG+')) b = b.subarray(0, b.length - 227);
+        const nf = new File([b], nombre || 'audio.mp3', { type: 'audio/mpeg', lastModified: Date.now() }); nf.__limpia = true; return nf;
+      }
+    } catch (_) {}
+    return f;
   }
   // La ubicación, solo al pulsar: exacta (5 decimales) o aproximada (2 decimales, unos 1 km). Va como un mensaje encriptado más,
   // con el enlace al mapa; el mapa solo se abre si la otra persona lo toca.
@@ -3268,12 +3432,12 @@
       fila(c.verificada && c.suVerificada ? 'gc-ok' : 'gc-aviso', T('Palabras de verificación'), (pal ? pal.join(' · ') + '. ' : '') + T('Léanlas en voz alta: si coinciden en los dos equipos, nadie se ha puesto en medio. Una voz clonada con IA debilita esta comprobación de oído; el número de 60 cifras de abajo sirve igual.'));
       fila('gc-ok', T('Nada guardado'), T('Esta conversación vive solo en la memoria de esta pestaña: al cerrarla, desaparece. El relé no tiene buzón para Ultra: los mensajes solo pasan si los dos están conectados.'));
       fila('gc-ok', T('Tamaño y ritmo'), T('Mensajes en bloques de 1 KB con un latido de relleno cada 5 s; el último trozo de cada archivo, completo; en la llamada, voz a ritmo constante (Opus cbr=1, usedtx=0).'));
-      fila('gc-info', T('Nivel de cada lado'), T('Tu lado') + ': ' + nombreNivel(miNivel()) + ' · ' + T('Otro lado') + ': ' + (c.suNivel ? nombreNivel(c.suNivel) : T('aún sin decir')) + '. ' + T('Es el entorno en que corre cada uno, no una garantía sobre el equipo.'));
+      fila('gc-info', T('Nivel de cada lado'), T('Tu lado') + ': ' + nombreNivel(miNivel()) + ' · ' + T('Otro lado') + ': ' + (c.suNivel ? nombreNivel(c.suNivel) : T('aún sin decir')) + ' (' + T('cada uno, según su programa') + '). ' + T('Es el entorno en que corre cada uno, según lo dice su propio programa: no una garantía sobre el equipo.'));
     } else fila(c.sesion ? 'gc-ok' : 'gc-info', T('Encriptación de extremo a extremo'), T('AES-256-GCM con una clave distinta por mensaje; la sesión se renueva en cada conexión (ECDH P-256 con firma ECDSA).'));
     fila('gc-info', T('Servidor de GUARDIANA'), T('encamina tramas encriptadas que no puede leer; ve conexión y volumen, no contenido; no guarda historial'));
     fila(c.incidencias ? 'gc-alerta' : 'gc-ok', T('Verificación'), c.incidencias ? (c.incidencias + ' ' + (c.incidencias === 1 ? T('incidencia') : T('incidencias')) + ': ' + T('datos que no superaron la autenticación, descartados y anotados en la conversación.')) : T('Cada mensaje y cada trozo de archivo se autentica al llegar; hasta ahora, todos superaron la verificación.'));
     fila(c.verificada ? 'gc-ok' : 'gc-aviso', c.verificada ? T('Identidad verificada') : T('Identidad sin verificar'), c.verificada ? T('Los dos comprobaron el número de seguridad.') : T('Hasta que los dos comprueben el número, confías en que el enlace llegó a la persona correcta.'));
-    fila('gc-aviso', T('Límites'), T('No es anonimato: el relé ve tu dirección IP, la sala y el volumen de tráfico, no el contenido.') + ' ' + (esB(c) ? T('La identidad de esta conversación vive solo en la memoria de esta pestaña: al cerrarla, desaparece.') + ' ' + T('Lo recibido está solo en la memoria de esta pestaña; lo que guardes en un disco queda fuera de GUARDIANA y «Destruir» no lo alcanza.') : T('Tu identidad vive en este navegador: se pierde si borras los datos del sitio o cambias de equipo.') + ' ' + T('Los archivos recibidos quedan en este navegador sin nuestra encriptación; «Destruir» no alcanza lo ya guardado en un disco.')) + ' ' + T('Ninguna encriptación protege un equipo o navegador comprometido.') + ' ' + T('El viaje de cada archivo y su comprobante muestran a la otra persona el país de tu equipo, estimado por la zona horaria del navegador; nunca la zona horaria ni la dirección IP.'));
+    fila('gc-aviso', T('Límites'), T('No es anonimato: el relé ve tu dirección IP, la sala y el volumen de tráfico, no el contenido.') + ' ' + (esB(c) ? T('La identidad de esta conversación vive solo en la memoria de esta pestaña: al cerrarla, desaparece.') + ' ' + T('Lo recibido está solo en la memoria de esta pestaña; lo que guardes en un disco queda fuera de GUARDIANA y «Destruir» no lo alcanza.') : T('Tu identidad vive en este navegador: se pierde si borras los datos del sitio o cambias de equipo.') + ' ' + T('Los archivos recibidos quedan en este navegador sin nuestra encriptación; «Destruir» no alcanza lo ya guardado en un disco.')) + ' ' + T('Ninguna encriptación protege un equipo o navegador comprometido.') + ' ' + (esB(c) ? T('En Ultra no se envían ni el país de tu equipo ni tu nombre.') + ' ' + T('El enlace de una invitación Ultra lleva su secreto y puede quedar en el historial del navegador: ábrelo en una ventana privada, o pégalo en «Tengo un código» en vez de abrirlo.') : T('El viaje de cada archivo y su comprobante muestran a la otra persona el país de tu equipo, estimado por la zona horaria del navegador; nunca la zona horaria ni la dirección IP.')));
     $('#numero').textContent = c.huella ? await numeroDe(c) : T('Aparecerá cuando la otra persona entre.');
     $('#verificada').checked = !!c.verificada; $('#verificada').disabled = !c.huella;
     $('#destruir-nota').hidden = true;
@@ -4394,6 +4558,7 @@
       // una foto lleva dentro dónde y con qué se hizo: se quita siempre, venga de donde venga (Documento, pegar o arrastrar; antes
       // solo se limpiaba la de «Foto» y «Cámara»; revisión, 29 Oct 2026)
       try { fs = await Promise.all(fs.map((f) => sinDatosOcultos(f, extrasB(c)))); } catch (_) {}
+      if (extrasB(c)) { try { fs = await Promise.all(fs.map((f) => (f ? limpiaMetaB(f) : f))); } catch (_) {} }
       { const n = fs.filter((f) => !f).length; if (n) { fs = fs.filter(Boolean); aviso(n === 1 ? T('Esta foto no se puede limpiar de datos ocultos en este navegador: en Ultra no se envía.') : T('{n} fotos no se pueden limpiar de datos ocultos en este navegador: en Ultra no se envían.').replace('{n}', n)); if (!fs.length) return; } }
       // chat fuerte (el normal): la foto o el archivo se envía directo, sin hoja ni «Tapar» (dueño, 29 Oct 2026, 15:29: «cuando se envía
       // una foto, se envía directa… elimínalo… normal, clásico y sencillo»). La hoja con «Tapar» y el tiempo, solo en el blindado
@@ -4427,7 +4592,9 @@
       // Ultra (ronda 93): el comprobante firmado por los dos equipos es una opción explícita en cada envío (de entrada, el recibo
       // negable); y el aviso de que un PDF o un documento de Office puede llevar dentro el nombre de quien lo hizo
       { const ef = $('#envio-firmado'); if (ef) { ef.hidden = !extrasB(c); ef.setAttribute('aria-pressed', 'false'); } }
-      { const au = $('#envio-autor'); if (au) au.hidden = !(extrasB(c) && fs.some((f) => /\.(pdf|docx?|xlsx?|pptx?|odt|ods|odp|rtf)$/i.test(f.name || '') || /pdf|msword|officedocument|opendocument|ms-excel|ms-powerpoint|rtf/i.test(f.type || ''))); }
+      // Ultra (revisión independiente, 3 nov 2026): lo que no se ha podido limpiar (un vídeo, otro audio, un ZIP, un PDF, un documento
+      // de Office…) no sale sin un toque más: el aviso y «Enviarlo así»; sin marcarlo, «Enviar» queda apagado
+      { const sucio = extrasB(c) && fs.some((f) => !f.__limpia), au = $('#envio-autor'), asi = $('#envio-asi'); if (au) au.hidden = !sucio; if (asi) { asi.hidden = !sucio; asi.setAttribute('aria-pressed', 'false'); } $('#envio-si').disabled = sucio; }
       { const nn = $('#envio-neutro'); if (nn) nn.hidden = !extrasB(c); }
       if (VJ() && VJ().abierto()) VJ().cierra(); // la hoja del viaje quedaría encima y taparía «Enviar»
       $('#h-envio').classList.toggle('discreta', discreto);
@@ -4435,6 +4602,7 @@
       setTimeout(() => { try { $('#envio-si').focus(); } catch (_) {} }, 60);
     };
     $('#envio-si').addEventListener('click', () => {
+      { const asi = $('#envio-asi'); if (asi && !asi.hidden && asi.getAttribute('aria-pressed') !== 'true') return; } // (Ultra: falta «Enviarlo así»)
       const p = porEnviar; cierraHoja('h-envio'); if (!p) return;
       const fs = p.fs; sueltaEnvio();
       const el = $('#envio-tiempo [aria-pressed="true"]'), vida = el && el.dataset.vida ? (el.dataset.vida === 'una' ? 'una' : +el.dataset.vida) : undefined;
@@ -4442,6 +4610,7 @@
       const c = CONVS.get(p.conv); if (c && c.id === ACTUAL) enviaArchivos(c, fs, { vida: vida || undefined, firmado });
     });
     { const ef = $('#envio-firmado'); if (ef) ef.addEventListener('click', () => ef.setAttribute('aria-pressed', String(ef.getAttribute('aria-pressed') !== 'true'))); }
+    { const asi = $('#envio-asi'); if (asi) asi.addEventListener('click', () => { const si = asi.getAttribute('aria-pressed') !== 'true'; asi.setAttribute('aria-pressed', String(si)); $('#envio-si').disabled = !si; }); }
     // tiempo en pantalla (dueño, 29 Oct 2026, 10:08): sin límite, una vez, 30 s, 1 min, 5 min; de entrada, sin límite
     for (const b of document.querySelectorAll('#envio-tiempo button')) b.addEventListener('click', () => { for (const x of document.querySelectorAll('#envio-tiempo button')) x.setAttribute('aria-pressed', String(x === b)); });
     $('#visor-cerrar').addEventListener('click', () => cierraVisor(false));
@@ -4630,11 +4799,10 @@
     campoCod.addEventListener('paste', async (e) => { const t = (e.clipboardData && e.clipboardData.getData('text')) || ''; if (!/#[ib]=[A-Za-z0-9_-]{43}/.test(t)) return; e.preventDefault(); const ok = await aceptaInvitacion(t); if (ok) $('#paso-entrar').hidden = true; else { $('#unir-mal').textContent = T('Ese enlace no es una invitación de GUARDIANA.'); $('#unir-mal').hidden = false; } });
     // renovación de claves de la blindada: cada 5 minutos, quien inicia se presenta otra vez (efímeras y ML-KEM nuevos)
     setInterval(() => { for (const c of CONVS.values()) { if (!esB(c) || c.renovando || !c.sesion || !c.sesion.confirmada || !enLinea(c) || !soyInicio(c) || Date.now() - c.sesion.desde < renuevaMs()) continue; c.renovando = true; enCola(c, () => presentaB(c, null, true)).finally(() => setTimeout(() => { c.renovando = false; }, 20000)); } }, 15000);
-    // Ultra, tamaño y ritmo (ronda 93): mientras los dos están conectados, un latido de relleno cada 5 s (un mensaje de control de
-    // 1 KB, como todos los de Ultra), así el relé no sabe cuándo se escribe ni distingue el «escribiendo…» de un mensaje. En pruebas
-    // locales, «?latido=N» lo pone a N segundos.
-    const LATIDO_MS = (LOCAL && +new URLSearchParams(location.search).get('latido') * 1000) || 5000;
-    setInterval(() => { for (const c of CONVS.values()) { if (!esB(c) || !c.sesion || !c.sesion.confirmada || !enLinea(c) || c.sinClaves) continue; enviaControl(c, { tipo: 'latido' }); } }, LATIDO_MS);
+    // Ultra, a ritmo fijo (revisión independiente, 3 nov 2026; ver tic): una trama de 1 KB por segundo en cada conversación Ultra
+    // abierta. En pruebas locales, «?latido=N» pone el tic a N segundos.
+    const TIC_MS = (LOCAL && +new URLSearchParams(location.search).get('latido') * 1000) || 1000;
+    setInterval(() => { for (const c of CONVS.values()) if (esB(c)) tic(c); }, TIC_MS);
     // Ultra en segundo plano (ronda 93): al pasar la app o la pestaña a segundo plano fuera de una llamada, la pantalla se tapa al
     // momento (la miniatura de la multitarea sale tapada). En una pantalla táctil (la entrada principal es el dedo: un teléfono o una
     // tableta), si no se vuelve en 15 s, las claves de la sesión se borran de la memoria y, mientras tanto, no se acuerdan otras: al
@@ -4667,6 +4835,7 @@
     // «Borrar y salir» en el menú ⋯ hace lo mismo.
     let panicoT = 0;
     async function panico() {
+      try { if (LL && LL.ocupado) LL.colgar(); } catch (_) {} // en una llamada: primero se cuelga
       const xs = [...CONVS.values()].filter((c) => esB(c));
       for (const c of xs) { try { if (enLinea(c)) enviaControl(c, { tipo: 'destruir' }); } catch (_) {} }
       await new Promise((r) => setTimeout(r, 120));
@@ -4676,8 +4845,12 @@
       location.replace('/');
     }
     document.addEventListener('keydown', (e) => {
-      if (e.key !== 'Escape' || !ultraAbierta()) return;
-      if (document.querySelector('.gc-hoja.gc-abierta, .gc-menu:not([hidden]), .adjuntos:not([hidden]), #visor:not([hidden]), #tapar:not([hidden])') || document.body.classList.contains('en-llamada')) return;
+      if (e.key !== 'Escape') return;
+      // también en una llamada Ultra (revisión independiente, 3 nov 2026: antes, en la llamada no hacía nada): cuelga, borra y sale
+      const enLl = document.body.classList.contains('en-llamada') && !!(LL && LL.ocupado);
+      const cLl = enLl ? CONVS.get(LLAMADA_CONV || ACTUAL) : null;
+      if (enLl ? !(cLl && extrasB(cLl)) : !ultraAbierta()) return;
+      if (!enLl && document.querySelector('.gc-hoja.gc-abierta, .gc-menu:not([hidden]), .adjuntos:not([hidden]), #visor:not([hidden]), #tapar:not([hidden])')) return;
       const ahora = Date.now();
       if (ahora - panicoT < 1200) { panicoT = 0; panico(); return; }
       panicoT = ahora; aviso(T('Pulsa Esc otra vez para borrar esta conversación de la memoria y salir.'));

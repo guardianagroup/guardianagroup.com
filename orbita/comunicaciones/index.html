@@ -117,7 +117,7 @@
       <p class="porque-k">¿Sabías que…?</p>
       <p class="porque-cifra" translate="no">6,8 M</p>
       <p class="porque-dato">En el primer semestre de 2025, WhatsApp cerró más de 6,8 millones de cuentas ligadas a centros de estafas.</p>
-      <p class="porque-por"><b>Por eso</b> en GUARDIANA no hay cuentas que crear ni buscar. Solo puede escribirte quien tenga tu invitación o a quien tú hayas añadido, y nadie puede encontrarte por tu teléfono.</p>
+      <p class="porque-por"><b>Por eso</b> en GUARDIANA no hay cuentas que crear ni buscar. Solo puede escribirte quien tenga tu invitación o a quien tú hayas añadido, y GUARDIANA no te pide el teléfono, así que tampoco sirve para encontrarte.</p>
     </article>
 
     <!-- dueño, 29 Oct 2026, 21:42: «llamadas de extorsión, estafas… cifras globales… en el apartado de por qué». Dos fuentes por cifra (agencia, ronda 73) -->
@@ -125,7 +125,7 @@
       <p class="porque-k">¿Sabías que…?</p>
       <p class="porque-cifra" translate="no">57 %</p>
       <p class="porque-dato">En 2025, el 57 % de los adultos de 42 países sufrió al menos un intento de estafa en doce meses, y el 23 % perdió dinero (encuesta de GASA y Feedzai a 46.000 personas). En Sudamérica, el 72 %.</p>
-      <p class="porque-por"><b>Por eso</b> nadie puede llamarte ni escribirte por saber tu Número GUARDIANA: para hablar, los dos tienen que añadirse. Un número marcado al azar no llega a nadie, ni dice siquiera si existe.</p>
+      <p class="porque-por"><b>Por eso</b> saber tu Número GUARDIANA no basta para llamarte ni para escribirte: para hablar, los dos tienen que añadirse. Un número marcado al azar no llega a nadie, ni dice siquiera si existe.</p>
     </article>
 
     <article class="porque-bloque">
@@ -216,7 +216,7 @@
         <h3>Tu Número GUARDIANA</h3>
         <p><b>Un número tuyo, creado en tu teléfono.</b> Al abrir GUARDIANA desde la pantalla de inicio, te propone un número de 12 cifras (puedes pedir otro o elegir el tuyo). No es un número de teléfono y no está ligado a tu nombre, tu correo ni tu línea.</p>
         <p><b>Para hablar, los dos os añadís.</b> Toca «Llamar», escribe el número de la otra persona y ponle el nombre que quieras. Cuando ella añada también el tuyo, el chat se abre solo en los dos teléfonos y desde ahí escribís, llamáis y hacéis videollamadas. Si tiene GUARDIANA cerrada, le llega el aviso «Nuevo contacto».</p>
-        <p><b>Nadie puede escribirte por saber tu número.</b> Quien teclee un número al azar, o el tuyo sin que tú lo hayas añadido, no consigue nada: ni un mensaje, ni una llamada, ni saber si ese número existe. Así no hay llamadas de desconocidos ni publicidad.</p>
+        <p><b>Saber tu número no basta para escribirte.</b> Quien teclee un número al azar, o el tuyo sin que tú lo hayas añadido, no consigue nada: ni un mensaje, ni una llamada, ni saber si ese número existe. Así no hay llamadas de desconocidos ni publicidad.</p>
         <p><b>Cómo pasar tu número.</b> Tu número no es una llave: con él nadie lee nada ni te contacta. Lo seguro es dárselo en persona o de viva voz; por escrito también vale (WhatsApp, correo…). Si alguien te dice «guarda mi nuevo número», llámalo antes a su número de siempre: es una estafa habitual.</p>
         <p><b>Qué sabe GUARDIANA de tu número.</b> El número nunca sale de tu teléfono: a nuestro servidor llega una huella (un cálculo del que no sale el número) junto con tus claves públicas. Mientras los dos os añadís, el servidor guarda una «cita» cerrada que ninguno de los dos puede leer por separado y que se borra cuando el chat se abre. No guardamos nombres, teléfonos ni correos. Para avisarte con la app cerrada, el servidor guarda la dirección de avisos de tu teléfono y las salas de tus chats (identificadores al azar, sin nombres ni contenido). Y, como cualquier servidor, ve tu dirección de conexión y la hora mientras estás conectado.</p>
         <p><b>Buzón cifrado.</b> Si la otra persona tiene GUARDIANA cerrada, tu mensaje no espera en tu teléfono: se cierra en un sobre que solo el suyo puede abrir y queda en nuestro servidor hasta que lo recoge (7 días como mucho); después se borra. Verás ✓ cuando está guardado, ✓✓ cuando le llega y ✓✓ en verde cuando lo lee.</p>
@@ -300,7 +300,7 @@
     <p class="movil-app-nota" id="movil-app-nota">Tu Número GUARDIANA y «Llamar» están en la app: añádela a tu pantalla de inicio y ábrela desde su icono.</p>
     <div class="grandes" id="paso-inicio">
       <!-- Número GUARDIANA (dueño, 29 Oct 2026, 20:56–21:55; agencia, ronda 73): en la app del teléfono, tu número y «Llamar», que
-           abre un teclado (21:42: «ya no pondrá invitar al chat… llamar»). Nadie puede escribirte por saber tu número: solo hablan
+           abre un teclado (21:42: «ya no pondrá invitar al chat… llamar»). Saber tu número no basta para escribirte: solo hablan
            los que se han añadido los dos. El número se crea aquí; al servidor solo le llega una huella -->
       <div class="mi-numero" id="mi-numero" hidden>
         <div class="mi-numero-nuevo" id="mi-numero-nuevo">
@@ -1181,8 +1181,9 @@
     <!-- Ultra (3 Nov 2026, ronda 93): el comprobante firmado por los dos equipos, opción explícita en cada envío (de entrada, el recibo
          negable); el nombre neutro; y el aviso de los PDF y documentos de Office -->
     <button type="button" class="envio-opcion" id="envio-firmado" aria-pressed="false" hidden><i class="interruptor-mini" aria-hidden="true"></i><span><b>Solicitar comprobante firmado</b><small>Los dos equipos firman el registro de la entrega (ECDSA P-384 y ML-DSA-87): un tercero puede comprobar las firmas, y la otra persona lo ve antes de firmar. Sin marcarlo, el recibo va autenticado solo con la clave de la sesión: negable.</small></span></button>
-    <p class="t nota envio-nota" id="envio-neutro" hidden>Las fotos salen sin datos ocultos (ubicación, aparato, fecha, perfil de color ni miniatura) y todo con un nombre neutro, sin fechas.</p>
-    <p class="t nota envio-nota aviso-autor" id="envio-autor" hidden>Un PDF o un documento de Office puede llevar dentro el nombre de quien lo hizo y otras propiedades: esta app no los limpia.</p>
+    <p class="t nota envio-nota" id="envio-neutro" hidden>Las fotos salen sin datos ocultos (ubicación, aparato, fecha, perfil de color ni miniatura); de un SVG se quitan los metadatos, los comentarios y los datos del programa de dibujo, y de un MP3, sus etiquetas ID3; y todo sale con un nombre neutro, sin fechas.</p>
+    <p class="t nota envio-nota aviso-autor" id="envio-autor" hidden>Este archivo puede llevar dentro datos que la app no limpia: el nombre de quien lo hizo, fechas, la ubicación de un vídeo o lo que lleve cada archivo de un ZIP. Si lo envías, va como está.</p>
+    <button type="button" class="envio-opcion" id="envio-asi" aria-pressed="false" hidden><i class="interruptor-mini" aria-hidden="true"></i><span><b>Enviarlo así</b><small>Sin marcarlo, no se envía.</small></span></button>
     <div class="fila"><button type="button" class="boton" id="envio-no">Cancelar</button><button type="button" class="boton principal" id="envio-si">Enviar</button></div>
   </div>
 </div>

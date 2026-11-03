@@ -8,6 +8,7 @@ Escribe orbita/comunicaciones/palabras.js a partir del POOL de abajo, aplicando 
   - sin ambigüedad al oído: se calcula una «clave fonética» (sin tildes; b = v; z, ce, ci = s; c, qu = k; ll = y; sin h; ge, gi = je, ji;
     gue, gui = ge, gi; y final = i) y no entran dos palabras con la misma clave ni con claves que difieran en una sola letra
     (casa / caza, gato / pato, hola / ola, callo / cayo…), ni dos con la misma raíz de 4 letras y el mismo largo (gato / gata);
+  - y tampoco escritas a una letra de otra (sin tildes: cesta / costa, gema / goma, ocho / ocio; revisión independiente, 3 nov 2026);
   - si sobran, se quedan las más cortas; la lista sale en orden alfabético.
 La lista es nuestra (no es la de BIP-39: aquí no hay acceso a ella) y va con la licencia del resto del código (AGPL-3.0).
 
@@ -344,13 +345,17 @@ def main():
         pool.append(w)
     # orden de preferencia: las más cortas primero (se leen mejor), luego alfabético
     pool.sort(key=lambda w: (len(w), sin_tildes(w)))
-    elegidas, claves, raices = [], [], set()
+    elegidas, claves, raices, letras = [], [], set(), []
     for w in pool:
         k = clave(w)
         r = (sin_tildes(w)[:4], len(w))
         if k in claves or r in raices: continue
         if any(lev1(k, k2) for k2 in claves): continue
-        elegidas.append(w); claves.append(k); raices.add(r)
+        # y tampoco por escrito (revisión independiente, 3 nov 2026: cesta/costa, gema/goma, caja/ceja u ocho/ocio pasaban porque
+        # su clave fonética difiere en dos letras, pero escritas se quedan a una)
+        e = sin_tildes(w)
+        if e in letras or any(lev1(e, e2) for e2 in letras): continue
+        elegidas.append(w); claves.append(k); raices.add(r); letras.append(e)
     print('candidatas', len(pool), '→ sin ambigüedad', len(elegidas))
     if len(elegidas) < 2048:
         print('FALTAN', 2048 - len(elegidas), 'palabras: amplía el POOL'); sys.exit(1)
