@@ -146,3 +146,72 @@ Dónde está cada cosa, para seguir sin perder nada. Las reglas del dueño está
     - el relleno es `rellena()` a múltiplos de 1 KB más 41+13+16 bytes de cabeceras;
     - `pidePlan()` va por los eventos guardiana-panel-pide y guardiana-panel.
   - **Después:** una revisión de la criptografía por una segunda voz, y enseñárselo al dueño antes de publicar.
+
+---
+
+# Actualización · 3 nov 2026, 09:50 (el dueño para otra vez: «Guarda aquí y seguimos más tarde»)
+
+## Publicado esta mañana
+- **1.0.55 publicada:**
+  - instaladores en `descargas/1.0.55/` (6bd237f);
+  - páginas de descarga actualizadas y MSI de la 1.0.54 quitados (9b7b279).
+  - Fotos de la actualización 1.0.54 → 1.0.55 bien: se ve «Cerrando GUARDIANA ZERO para actualizarlo…» y no sale «Archivos en uso» (ejecución 41593255450, con el arreglo de `fotos_instalador.ps1` en 3c043b7).
+- **«Encriptado» en toda la web** (cad14f7). No queda ningún «cifrado» visible y las traducciones están re-enlazadas.
+- **Antivirus para la 1.0.56:** unido en `antivirus-vpn`, en 33e432b y 80f1342, con GO del revisor en cuatro rondas.
+  - Queda una cosa baja: aplicar la regla de las 24 h también en la comprobación de cada minuto (tarea 78).
+
+## Peticiones del dueño de esta mañana, y dónde quedan
+1. **«Arregla la VPN para que se pueda utilizar… explícame cómo va a funcionar»** (08:49): ya se le explicó la VPN por países y continentes, en qué se distingue de las demás y lo que falta.
+2. **El instalador sin «Finalizar»** (09:21), **con una pantalla de instalación bonita** (09:23): rama `candidato-auto`, en d6e656e (a medias, todavía no compila).
+   - **Hecho**, solo en `build/wix/guardiana.wxs`:
+     - GUARDIANA se abre sola al terminar: `LaunchPanel` después de `ExecuteAction`, con la condición `NOT Installed AND NOT REMOVE`.
+     - La última pantalla no sale: la fila de ExitDialog se queda con una condición que nunca se cumple, porque quitarla rompe ICE20.
+     - Página de «Instalando» con la marca.
+   - **Falta:**
+     - los textos en es/en/pt (también quitar «Pulsa «Finalizar»»);
+     - `instalando.bmp` desde `imagenes.py`;
+     - lo mismo en `zero.wxs`;
+     - la regla de éxito nueva en `fotos_instalador.ps1`;
+     - `instalador.yml`;
+     - comprobar que una instalación silenciosa no abre nada.
+   - El candidato 41657392922 se canceló (iba a fallar).
+3. **La parte de arriba más fina, y la barra de Windows integrada** (09:24): sin código todavía. El diseño elegido:
+   - se quita la barra de título nativa con WM_NCCALCSIZE, conservando los bordes para cambiar el tamaño;
+   - el programa dibuja minimizar, maximizar y cerrar en una ventana hija con capas, arriba a la derecha, de 46 px cada botón, para que Windows 11 siga ofreciendo sus diseños de ventana;
+   - una franja invisible arriba sirve para cambiar el tamaño;
+   - las zonas vacías mueven la ventana con `app-region: drag` (IsNonClientRegionSupportEnabled);
+   - la página avisa con `data-barra-titulo` y responde con una variable CSS; si no responde, ZERO pone su fila de 44 px;
+   - la cabecera web, dentro del programa, mide 44 px fijos y deja 138 px libres a la derecha; la ✕ de la sección se esconde.
+   - **Hoy:** la cabecera web mide 84 px (52 en Comunicaciones), más unos 32 px de la barra de Windows.
+   - Las capturas de antes están en el scratchpad (`cabecera-fina/`). Las ramas vacías se borraron: se rehacen desde `antivirus-vpn` y `main`.
+4. **La VPN con información de verdad: dónde estás, países y «lo que una web verá»** (09:25).
+   - **Programa** (rama `vpn-estricto`, en 8ab3ed6, a medias, subida):
+     - el modo estricto está escrito, pero CI todavía no lo ha compilado: bloqueo persistente y de arranque, salidas y reconexión sin soltar el bloqueo, `POST /api/vpn/estricto`, `guardiana vpn apaga | estado`, y la desinstalación quita el bloqueo;
+     - **falta:** el JS de la barra de ZERO y sus textos, la prueba de la pasarela, el paso de desinstalación del WiX y la entrada del menú Inicio, los trabajos de `vpn.yml` (un servidor «agujero negro»), `docs/VPN.md` con la decisión sobre el Modo Hogar, y CI en verde;
+     - **la API de salidas, sin empezar.** El contrato está más abajo. Ojo: la pasarela de ZERO siempre manda `{}` como cuerpo del POST, así que antes hay que cambiarla.
+     - Para el revisor: si Windows rechaza los filtros de arranque en la subcapa propia, se usa la universal. Sin probar.
+   - **Web** (rama `vpn-pantalla`): ver la línea de su agente al final de este archivo.
+   - **Contrato de la API** (los dos lados lo usan tal cual):
+     - `GET /api/vpn`, con los campos de hoy más:
+       - `salida{id,pais,ciudad,continente,proveedor,nombre,ip}`;
+       - `desde`, `saludo` (ms);
+       - `subidos`, `bajados` (bytes);
+       - `postcuantica`, `dns_tunel`, `estricto` (bool).
+     - `GET /api/vpn/salidas` → `{salidas:[{id,pais,ciudad,continente,proveedor,nombre,disponible,ms}],mas_rapida}`.
+       - Salidas: `hel` (vpn.guardianagroup.com, FI), `nbg` (vpn-nbg.guardianagroup.com, DE) y `mia` (vpn-mia.guardianagroup.com, US).
+     - `POST /api/vpn/conecta`, con `{"salida":"hel"|"rapida"}`.
+     - `GET /api/vpn/comprueba` → `{ip_vista,pais_ip,dns,ipv6,zona{equipo,salida,coincide},idioma,ubicacion_windows}`.
+   - **Servidores:**
+     - `zero-motor/instalar.sh` y `vpn.sh` ya admiten `VPN_NOMBRE`, pero Caddy tiene escrito a mano `vpn.guardianagroup.com`: hay que hacerlo por servidor.
+     - Para Núremberg y Miami, el dueño pega una orden en la consola de cada servidor, y crea `vpn-nbg` y `vpn-mia` en Porkbun.
+5. **Ultra** (rama `ultra-1`, en 79df286, subida y terminada):
+   - Pruebas: ultra 55/55, tipos 22/22, blindado 31/31, codigo-grande 41/41, voz-ultra 14/14, enviar-llamada 57/57, llevar 35/35, rota 11/11, CSP 0/0.
+   - 113 claves nuevas con su inglés y su portugués.
+   - Las capturas se le enseñaron al dueño (`ultra1-resumen.jpg`).
+   - **Falta antes de publicar:**
+     - **(a)** Ultra no debe mandar el país sacado de la zona horaria. Ahora lo manda en el anuncio de cada archivo, en los avisos «listo» y «fin», en `viajeNuevo` y en los dos registros del recibo.
+     - **(b)** No existe ningún campo para que la persona escriba su nombre (`guardaNombre` no se llama desde ningún sitio), así que Ultra no manda nombre. Que «Límites» lo diga así.
+     - **(c)** Cambiar todo «suite CNSA 2.0» visible por los nombres de los algoritmos. Sale en la cabecera del chat, en los mensajes de vigilancia, en la fila «Suite» del recibo, y en la portada, los términos y «Cómo funciona» en es/en/pt.
+       - La línea 2475 de `index.html` es un script en línea, así que su hash de CSP cambia.
+       - En los términos va con una línea en el historial.
+     - **(d)** La revisión independiente de la criptografía: ver al final.
