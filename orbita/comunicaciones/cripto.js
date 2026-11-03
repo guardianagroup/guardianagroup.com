@@ -201,7 +201,9 @@
     const { publicKey, secretKey } = d.keygen();
     const iv = azar(12), dsaSecSellada = new Uint8Array(await sub.encrypt({ name: 'AES-GCM', iv, additionalData: te.encode('GUARDIANA ML-DSA-87') }, reposo, secretKey));
     const id = { firma, acuerdo, firmaPub: new Uint8Array(await sub.exportKey('raw', firma.publicKey)), acuerdoPub: new Uint8Array(await sub.exportKey('raw', acuerdo.publicKey)), dsaPub: new Uint8Array(publicKey), dsaIv: iv, dsaSecSellada, creado: Date.now() };
-    return { guardar: id, dsaSec: new Uint8Array(secretKey) };
+    const out = { guardar: id, dsaSec: new Uint8Array(secretKey) };
+    secretKey.fill(0); // el array original de keygen, también con ceros (queda solo la copia, que app.js borra al momento)
+    return out;
   }
   async function abreDsaB(idB, reposo) {
     return new Uint8Array(await sub.decrypt({ name: 'AES-GCM', iv: u8(idB.dsaIv), additionalData: te.encode('GUARDIANA ML-DSA-87') }, reposo, u8(idB.dsaSecSellada)));
