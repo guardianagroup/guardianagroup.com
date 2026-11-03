@@ -99,4 +99,21 @@ Dónde está cada cosa, para seguir sin perder nada. Las reglas del dueño está
   - Términos y privacidad no tenían «cifrado», así que no se tocaron.
   - Quedan 2 claves «…sin cifrar» porque las usa la extensión del navegador.
   - **Falta:** csp-comprueba en las páginas cambiadas, el recuento de «cifr…» que quedan, mirar las traducciones en inglés en el navegador, y las capturas. Después, publicar.
-- **`ultra-1`:** el agente estaba guardando al parar. Ver la línea siguiente o `git log` de la rama.
+- **`ultra-1` (169f91f, subida, «a medias»), 3 commits:**
+  - La voz cambiada de verdad: formantes, tono al azar y paso banda, medida en Node (5c0cd68).
+  - Las 2.048 palabras de verificación, con una lista propia (329fdb5).
+  - Lo demás en un commit «a medias» (169f91f):
+    - la puerta por el programa con Plus;
+    - solo en memoria;
+    - las 4 palabras;
+    - sin buzón;
+    - bloques de 1 KB con latido;
+    - cbr=1;
+    - clave nueva cada minuto;
+    - sin rebaja;
+    - recibo negable;
+    - mosaico con ruido;
+    - nombres neutros;
+    - pánico;
+    - medidas del móvil.
+  - **Falta:** terminarlo y pasar las pruebas (las viejas y las nuevas de Ultra), CSP, capturas y una revisión de la criptografía por una segunda voz. Después, enseñárselo al dueño antes de publicar.
