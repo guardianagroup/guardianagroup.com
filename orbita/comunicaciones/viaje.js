@@ -222,7 +222,7 @@
     const mono = (x, n) => { const s = el('span', n ? 'cu-mono cu-agr' : 'cu-mono', n ? grupos(x, n) : String(x || '—')); s.setAttribute('translate', 'no'); return s; };
     // cabecera: marca, título, número y fecha de emisión
     const cab = el('header', 'cu-doc-cab'), marca = el('div', 'cu-marca'), mt = el('div');
-    marca.innerHTML = ESCUDO; const g = el('b', null, 'GUARDIANA'); g.setAttribute('translate', 'no'); mt.append(g, el('span', null, BL ? T('Sesión blindada') + ' · ' + T('Entrega custodiada') : T('Entrega custodiada'))); marca.append(mt);
+    marca.innerHTML = ESCUDO; const g = el('b', null, 'GUARDIANA'); g.setAttribute('translate', 'no'); mt.append(g, el('span', null, BL ? T('Sesión Ultra') + ' · ' + T('Entrega custodiada') : T('Entrega custodiada'))); marca.append(mt);
     const ti = el('div', 'cu-doc-ti'); ti.append(el('h2', null, T('Comprobante de entrega')));
     const n1 = el('p', 'cu-ref'); n1.append(el('span', null, T('Nº de comprobante')), mono(ref || '—'));
     const n2 = el('p', 'cu-ref'); n2.append(el('span', null, T('Emitido')), el('b', null, fechaHora(reg.emitido)));
@@ -276,7 +276,7 @@
     fila(T('Relé de GUARDIANA'), [[tr.rele_ciudad, pais(tr.rele_pais)].filter(Boolean).join(', '), tr.rele, tr.rele_region].filter(Boolean).join(' · ') + ' · ' + (tr.conexion === 'wss' ? T('conexión TLS') : T('conexión sin TLS (prueba local)')) + ' · ' + T('transporta fragmentos encriptados que no puede leer'));
     fila = seccion(T('Protección'));
     fila(T('Encriptación del archivo'), T('AES-256-GCM en cada fragmento, con una clave propia del archivo y una etiqueta de autenticación de 128 bits.'));
-    if (BL) fila(T('Suite'), T('Sesión blindada con los algoritmos de la suite CNSA 2.0, en híbrido con criptografía clásica.'));
+    if (BL) fila(T('Suite'), T('Sesión Ultra con los algoritmos de la suite CNSA 2.0, en híbrido con criptografía clásica.'));
     fila(T('Acuerdo de claves'), BL ? T('Híbrido postcuántico: ML-KEM-1024 y ECDH P-384, combinados con HKDF-SHA-384.') : se.pq ? T('Híbrido postcuántico: ML-KEM-768 y ECDH P-256, combinados con HKDF-SHA-256.') : T('ECDH P-256, combinado con HKDF-SHA-256 (sin la capa postcuántica).'));
     if (se.id) { const d = el('div', 'cu-lineas'); d.append(mono(se.id, 4)); if (se.establecida) d.append(el('span', null, T('establecida') + ' ' + fechaHora(se.establecida))); filaTec(T('Sesión'), d); }
     fila(T('Firma del comprobante'), BL ? T('Doble firma de cada equipo: ECDSA P-384 sobre SHA-384 y ML-DSA-87 (FIPS 204). Las dos tienen que ser válidas.') : T('ECDSA P-256 sobre SHA-256, con la clave de identidad de cada equipo.'));

@@ -318,9 +318,10 @@
       </div>
       <button type="button" class="grande principal" id="nueva"><b>Crear invitación</b><small>Te sale un código de 9 cifras para dárselo a la otra persona</small></button>
       <button type="button" class="grande" id="unir"><b>Tengo un código</b><small>Escribe las 9 cifras que te han enviado</small></button>
-      <!-- dueño, 27 Oct 2026, 22:01–23:12: la blindada, «de la máxima»; algoritmos de la suite CNSA 2.0 -->
-      <!-- 29 Oct 2026, 12:55–12:59 (dueño): el blindado, «próximamente»; en el ordenador, el botón queda como aviso -->
-      <button type="button" class="grande blindada" id="nueva-blindada"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg><b><span class="solo-pc">Sesión blindada · próximamente</span><span class="solo-movil">Invitar a chat</span></b><small><span class="solo-pc">Algoritmos de la suite CNSA 2.0 y claves que se renuevan cada 5 minutos. Mientras llega, usa «Crear invitación».</span><span class="solo-movil">Mensajes y llamadas encriptados de extremo a extremo.</span></small></button>
+      <!-- dueño, 27 Oct 2026, 22:01–23:12: la sesión de la suite CNSA 2.0, «de la máxima»; 29 Oct 2026, 12:55–12:59: «próximamente»,
+           y en el ordenador el botón queda como aviso. 2 Nov 2026, 17:01 («Solo hay dos modelos, el blindado y el ultra»): esa sesión
+           es la de Ultra, con la suscripción Plus; la gratuita, la de hoy, es la Blindada (el id y el modo guardado, «blindada», siguen) -->
+      <button type="button" class="grande blindada" id="nueva-blindada"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg><b><span class="solo-pc">Ultra · próximamente</span><span class="solo-movil">Invitar a chat</span></b><small><span class="solo-pc">Con la suscripción Plus: claves más fuertes, el código de la llamada siempre a la vista, mosaico y voz distorsionada. Mientras llega, usa «Crear invitación».</span><span class="solo-movil">Mensajes y llamadas encriptados de extremo a extremo.</span></small></button>
       <!-- dueño, 29 Oct 2026, 15:36: «es mejor que diga chats, porque son los chats que tenemos ahí archivados» -->
       <button type="button" class="grande" id="ver-contactos-inicio"><b>Mis chats</b></button>
       <!-- dueño, 29 Oct 2026, 08:24 y 08:41: «¿Cómo funciona?», un botón igual que «Contactos», debajo, con su propia pantalla -->
@@ -346,7 +347,8 @@
       <p class="t nota">Si la otra persona está en el móvil, mándale el enlace: lo abre y acepta.</p>
     </div>
 
-    <!-- Invitación blindada: solo por enlace o QR (la semilla entera, 256 bits, tras «#b=»: no llega a ningún servidor) -->
+    <!-- Invitación por enlace o QR (la semilla entera, 256 bits, en el fragmento: no llega a ningún servidor). La de Ultra («#b=») dice
+         «Sesión Ultra» e «Invitación Ultra» (app.js, al abrirla) -->
     <div class="paso enlace-b" id="paso-enlace" hidden>
       <!-- dueño, 28 Oct 2026, 15:31–15:32: el enlace ya copiado al abrir esta página; en el móvil, solo «Compartir»; y al compartir,
            la pantalla entera dice que se espera a la otra persona, con «Volver a compartir» -->
@@ -355,8 +357,8 @@
       <!-- En el teléfono, como la espera: el candado, un título corto, una frase, el botón grande y «Cancelar» discreto (dueño, 28 Oct
            2026, 19:03: «ahí también se ve todo apiñado, rediseña todo y más minimalista») -->
       <div class="espera-anillos quieto enlace-icono" aria-hidden="true"><span></span><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></div>
-      <p class="pq-k">Sesión blindada</p>
-      <h2><span class="solo-pc">Invitación blindada</span><span class="solo-movil">Invita a una persona</span></h2>
+      <p class="pq-k" id="enlace-k">Chat blindado</p>
+      <h2><span class="solo-pc" id="enlace-t-pc">Invitación blindada</span><span class="solo-movil">Invita a una persona</span></h2>
       <!-- 28 Oct 2026 (dueño): de PC a PC, el QR estorba; primero el enlace y el QR plegado, por si alguien entra con el móvil -->
       <!-- sin frase debajo del título (dueño, 28 Oct 2026, 19:06: «la frase que hay debajo de invitación blindada, también quítala») -->
       <p class="t enlace-copiado" id="enlace-copiado" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"/></svg><span>Enlace copiado</span></p>
@@ -413,13 +415,13 @@
       <h2>Escribe las 9 cifras que te han enviado</h2>
       <!-- 2 Nov 2026 (dueño, 13:19, con una foto: «Haz esa zona del código profesional»): nueve casillas en tres grupos, como
            el código que se envía. El campo de verdad sigue siendo uno solo y está encima, invisible: el teclado numérico del
-           teléfono, pegar el código o el enlace de una sesión blindada y los lectores de pantalla funcionan como antes. -->
+           teléfono, pegar el código o el enlace de una invitación y los lectores de pantalla funcionan como antes. -->
       <div class="codigo-celdas" id="unir-celdas" translate="no">
         <input class="campo codigo-campo" id="unir-codigo" inputmode="numeric" autocomplete="off" maxlength="11" aria-label="Código de invitación" translate="no" spellcheck="false">
         <div class="cc-fila" aria-hidden="true"><span class="cc"></span><span class="cc"></span><span class="cc"></span><i class="cc-guion"></i><span class="cc"></span><span class="cc"></span><span class="cc"></span><i class="cc-guion"></i><span class="cc"></span><span class="cc"></span><span class="cc"></span></div>
       </div>
       <p class="t alerta" id="unir-mal" hidden>Código erróneo o caducado.</p>
-      <p class="t sutil">¿Te han enviado un enlace de sesión blindada? Ábrelo directamente o pégalo aquí.</p>
+      <p class="t sutil">¿Te han enviado un enlace de invitación? Ábrelo directamente o pégalo aquí.</p>
       <p class="t" id="unir-espera" hidden>Comprobando…</p>
       <div class="fila centro"><button type="button" class="boton" id="unir-cerrar">Cancelar</button><button type="button" class="boton principal" id="unir-ok">Entrar</button></div>
     </div>
@@ -439,7 +441,7 @@
           <div>
             <h3>Encriptación postcuántica</h3>
             <p>Cuando los dos equipos usan la versión actual, Comunicaciones combina ML-KEM-768, un algoritmo postcuántico estandarizado (FIPS 203), con ECDH P-256 para acordar las claves de cada conversación. Cada mensaje y cada archivo se encriptan con AES-256-GCM y una clave distinta.</p>
-            <p class="pro-nota">En la sesión normal, las firmas de identidad son clásicas; la sesión blindada añade una firma postcuántica. Si la otra persona usa una versión anterior, te lo decimos y no seguimos sin tu permiso.</p>
+            <p class="pro-nota">En la Blindada, las firmas de identidad son clásicas; Ultra (próximamente) añadirá una firma postcuántica. Si la otra persona usa una versión anterior, te lo decimos y no seguimos sin tu permiso.</p>
           </div>
         </article>
         <article class="pro-tarjeta">
@@ -454,31 +456,32 @@
         </article>
       </div>
 
-      <!-- 28 Oct 2026, ronda 71 (ChatGPT, Gemini y Astra): la blindada y las llamadas, con lo que hacen y lo que no. Sin
-           «conformidad CNSA 2.0» (P-384 viene de la suite anterior), sin «recuperación tras compromiso» y sin decir que el
-           audio sea postcuántico: va con DTLS-SRTP, el cifrado estándar de las llamadas del navegador. -->
-      <p class="pro-antetitulo">Para lo más sensible</p>
-      <h2 id="pro-t1">Sesión blindada, llamadas y videollamadas</h2>
+      <!-- 28 Oct 2026, ronda 71 (ChatGPT, Gemini y Astra): las llamadas y la sesión de la suite CNSA 2.0, con lo que hacen y lo que no.
+           Sin «conformidad CNSA 2.0» (P-384 viene de la suite anterior) y sin «recuperación tras compromiso». 2 Nov 2026, 17:01 (dueño:
+           «Solo hay dos modelos, el blindado y el ultra»; ronda 92): las llamadas de hoy son la Blindada; la sesión de la suite CNSA 2.0,
+           el mosaico y la voz distorsionada son de Ultra, que llegará con la suscripción Plus. -->
+      <p class="pro-antetitulo">Blindada y Ultra</p>
+      <h2 id="pro-t1">Llamadas, videollamadas y Ultra</h2>
       <div class="pro-rejilla pro-tres">
         <article class="pro-tarjeta destacada">
-          <span class="pro-icono" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg></span>
+          <span class="pro-icono" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="13" height="12" rx="2.5"/><path d="M16 10l5-3v10l-5-3z"/></svg></span>
           <div>
-            <h3>Sesión blindada</h3>
-            <p>Usa los algoritmos de la suite CNSA 2.0: el acuerdo de claves combina ML-KEM-1024 con ECDH P-384, y cada equipo firma toda la negociación con ECDSA P-384 y con ML-DSA-87. La invitación es un enlace o un código QR con un secreto de 256 bits que no pasa por nuestro servidor.</p>
-            <p class="pro-nota">El número de seguridad se puede comparar cuando queráis en «Seguridad y verificación». Las claves se renuevan cada 5 minutos y, al terminar, un informe dice qué se ha borrado y qué no se puede garantizar.</p>
+            <h3>Llamadas y videollamadas</h3>
+            <p>En la Blindada, desde la conversación. El audio y el vídeo van encriptados de extremo a extremo y siempre por el relé de GUARDIANA: ninguno de los dos ve la dirección IP del otro. Si los dos navegadores la admiten, llevan además una capa postcuántica con una clave que cambia cada 2 minutos.</p>
+            <p class="pro-nota">El código de seguridad no sale en la pantalla: para compararlo con la otra persona, toca «Encriptada de extremo a extremo» durante la llamada. Si es el mismo en las dos pantallas, nadie se ha puesto en medio.</p>
           </div>
         </article>
         <article class="pro-tarjeta">
-          <span class="pro-icono" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="9" r="5.5"/><path d="M9.2 13.8 7.5 21l4.5-2.4 4.5 2.4-1.7-7.2"/><path d="M9.8 9l1.5 1.5 3-3"/></svg></span>
-          <h3>Comprobante con doble firma</h3>
-          <p>En la sesión blindada, cada equipo firma el comprobante de entrega dos veces: con ECDSA P-384 y con ML-DSA-87, una firma postcuántica. Las dos se comprueban en esta web, sin enviar nada.</p>
-          <p class="pro-nota">Acredita que esos dos equipos firmaron el registro del envío; no acredita la identidad legal de las personas ni el contenido del archivo.</p>
+          <span class="pro-icono" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg></span>
+          <h3>Ultra (próximamente)</h3>
+          <p>Con la suscripción Plus. El acuerdo de claves combinará ML-KEM-1024 con ECDH P-384, y cada equipo firmará toda la negociación con ECDSA P-384 y con ML-DSA-87. En la llamada, el código de seguridad estará siempre a la vista; mosaico, difuminado y voz distorsionada se harán en tu equipo antes de encriptar.</p>
+          <p class="pro-nota">La voz distorsionada dificulta que te reconozcan de oído quienes no saben qué filtro usas. No engaña a un sistema de reconocimiento automático preparado para ello, ni oculta tu acento, tu ritmo ni lo que dices.</p>
         </article>
         <article class="pro-tarjeta">
-          <span class="pro-icono" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="13" height="12" rx="2.5"/><path d="M16 10l5-3v10l-5-3z"/></svg></span>
-          <h3>Llamadas y videollamadas</h3>
-          <p>Desde la conversación, en la sesión normal y en la blindada. El audio y el vídeo van encriptados de extremo a extremo y siempre por el relé de GUARDIANA: ninguno de los dos ve la dirección IP del otro. En el iPhone, la llamada de voz suena por el altavoz o por los auriculares.</p>
-          <p class="pro-nota">En la videollamada blindada, «Voz grave» y «Mosaico» se aplican en tu equipo antes de enviar: cambian el tono y la imagen, no ocultan el acento ni lo que dices. Usan la encriptación estándar de las llamadas del navegador, no la capa postcuántica.</p>
+          <span class="pro-icono" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="9" r="5.5"/><path d="M9.2 13.8 7.5 21l4.5-2.4 4.5 2.4-1.7-7.2"/><path d="M9.8 9l1.5 1.5 3-3"/></svg></span>
+          <h3>Comprobante con doble firma (Ultra, próximamente)</h3>
+          <p>En Ultra, cada equipo firmará el comprobante de entrega dos veces: con ECDSA P-384 y con ML-DSA-87, una firma postcuántica. Las dos se comprobarán en esta web, sin enviar nada.</p>
+          <p class="pro-nota">Acredita que esos dos equipos firmaron el registro del envío; no acredita la identidad legal de las personas ni el contenido del archivo.</p>
         </article>
       </div>
 
@@ -541,8 +544,8 @@
               <li><b>Archivos</b><span>Trozos de 192 KB encriptados uno a uno; quien envía nunca carga el archivo entero y, con Chrome o Edge, quien recibe lo escribe en disco según llega.</span></li>
               <li><b>Invitación</b><span>Código de 9 cifras, un solo uso, 10 minutos e intentos limitados. El relé solo guarda un sobre cerrado con una clave derivada del código en el navegador (PBKDF2, 300.000 iteraciones).</span></li>
               <li><b>Relé y verificación</b><span>El relé no guarda nombres ni claves y solo sabe qué conexiones comparten una sala y cuántos bytes mueven; para quien no está conectado, guarda el mensaje en un buzón cifrado (sobre híbrido ECDH P-256 + ML-KEM-768, firmado) hasta entregarlo, 7 días como mucho. Número de seguridad de 60 cifras para comprobar fuera de banda.</span></li>
-              <li><b>Sesión blindada</b><span>Acuerdo híbrido ECDH P-384 + ML-KEM-1024 (FIPS 203) con HKDF-SHA-384; firmas ECDSA P-384 sobre SHA-384 y ML-DSA-87 (FIPS 204) sobre toda la negociación; identidad nueva en cada sesión; invitación de 256 bits solo por enlace o QR; número de seguridad para comparar en cualquier momento; claves renovadas cada 5 minutos; mensajes rellenos a múltiplos de 1 KB y último trozo de cada archivo completo.</span></li>
-              <li><b>Llamadas</b><span>WebRTC solo a través del servidor TURN de GUARDIANA; la oferta, la respuesta y la huella DTLS viajan dentro del canal encriptado de extremo a extremo; audio con DTLS-SRTP; cambio de voz procesado en el navegador (AudioWorklet).</span></li>
+              <li><b>Ultra (próximamente)</b><span>Acuerdo híbrido ECDH P-384 + ML-KEM-1024 (FIPS 203) con HKDF-SHA-384; firmas ECDSA P-384 sobre SHA-384 y ML-DSA-87 (FIPS 204) sobre toda la negociación; identidad nueva en cada sesión; invitación de 256 bits solo por enlace o QR; número de seguridad para comparar en cualquier momento; claves renovadas cada 5 minutos; mensajes rellenos a múltiplos de 1 KB y último trozo de cada archivo completo.</span></li>
+              <li><b>Llamadas</b><span>WebRTC solo a través del servidor TURN de GUARDIANA; la oferta, la respuesta y la huella DTLS viajan dentro del canal encriptado de extremo a extremo; audio y vídeo con DTLS-SRTP y, si los dos navegadores la admiten, una capa postcuántica encima (AES-256-GCM, con una clave de la sesión del chat que cambia cada 2 minutos). En Ultra (próximamente), cambio de voz y mosaico procesados en el navegador.</span></li>
             </ul>
           </details>
         </div>
@@ -701,11 +704,13 @@
      entera con la invitación ya escrita, y el mensaje sale al momento; «Otras apps», el menú de compartir del teléfono, con las que tenga cada persona (Telegram, Signal, el correo…): 07:52. -->
 <div class="gc-hoja hoja-invitar" id="h-invitar" role="dialog" aria-modal="true" aria-label="Invitar a chat">
   <div class="gc-hoja-caja caja">
-    <!-- 29 Oct 2026, 07:49: «chat normal o blindado… el blindado… en otro color… tipo espejo más bonito» -->
+    <!-- 29 Oct 2026, 07:49: «chat normal o blindado… el blindado… en otro color… tipo espejo más bonito». 2 Nov 2026, 17:01 («Solo hay
+         dos modelos, el blindado y el ultra. El blindado es el gratis… La ultra ya tiene que ser con la suscripción»): el de siempre se
+         llama «Chat blindado»; el del espejo, Ultra. Los id y el modo guardado («normal», «blindada») no cambian -->
     <div class="inv-tipos" role="radiogroup" aria-label="Tipo de chat">
-      <button type="button" class="inv-tipo" id="tipo-normal" role="radio" aria-checked="true"><span class="inv-tipo-marca" aria-hidden="true"></span><b>Chat fuerte</b><small>Para el día a día</small></button>
+      <button type="button" class="inv-tipo" id="tipo-normal" role="radio" aria-checked="true"><span class="inv-tipo-marca" aria-hidden="true"></span><b>Chat blindado</b><small>Gratis</small></button>
       <!-- 29 Oct 2026, 12:55–12:59 (dueño): «el modo blindado en la aplicación pon próximamente y que solamente se puede utilizar el modo normal» -->
-      <button type="button" class="inv-tipo blindado pronto" id="tipo-blindado" role="radio" aria-checked="false" aria-disabled="true"><span class="inv-tipo-marca" aria-hidden="true"></span><b>Chat blindado</b><small>Próximamente</small></button>
+      <button type="button" class="inv-tipo blindado pronto" id="tipo-blindado" role="radio" aria-checked="false" aria-disabled="true"><span class="inv-tipo-marca" aria-hidden="true"></span><b>Ultra</b><small>Con la suscripción Plus · próximamente</small></button>
     </div>
     <div class="inv-sep" aria-hidden="true"></div>
     <!-- el glifo oficial de WhatsApp (Brand Resource Center de Meta, tal cual, blanco sobre su verde; marca de WhatsApp LLC) -->
@@ -1221,8 +1226,8 @@
 <div class="gira" id="gira" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6.5" y="2.5" width="11" height="19" rx="2.4"/><path d="M12 18.2h.01"/></svg><p>Pon el teléfono en vertical</p></div>
 
 <!-- En el ordenador, en el chat blindado: la pantalla se tapa con la tecla de captura o si la ventana pierde el foco (29 Oct 2026, 08:02) -->
-<div class="captura-velo" id="captura-velo" role="alert" hidden><div><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><b>Modo blindado</b><span>Pantalla tapada durante la captura</span></div></div>
-<script src="/orbita/static/idioma.js?v=20261102-com11u"></script>
+<div class="captura-velo" id="captura-velo" role="alert" hidden><div><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><b>Modo Ultra</b><span>Pantalla tapada durante la captura</span></div></div>
+<script src="/orbita/static/idioma.js?v=20261102-com12u"></script>
 <script src="pq-mlkem.js?v=20261027a"></script>
 <script src="pq-cnsa.js?v=20261027a"></script>
 <script src="qrhaz.js?v=20261027a"></script>
@@ -1231,8 +1236,8 @@
 <script src="rele.js?v=20261102c"></script>
 <script src="sha256.js?v=20261027a"></script>
 <script src="viaje-datos.js?v=20261031a"></script>
-<script src="viaje.js?v=20261029b"></script>
+<script src="viaje.js?v=20261102u2"></script>
 <script src="llamada.js?v=20261102u1"></script>
-<script src="app.js?v=20261102u1"></script>
+<script src="app.js?v=20261102u2"></script>
 </body>
 </html>

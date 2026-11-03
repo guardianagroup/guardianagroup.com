@@ -34,9 +34,9 @@ async function invita(A) {
   if (await A.$('#h-invitar.gc-abierta')) {
     // la hoja: el blindado, apagado y «próximamente»; se sigue con «Otras apps»
     const pronto = await A.evaluate(() => { const b = document.querySelector('#tipo-blindado'); return { texto: b.textContent, apagado: b.getAttribute('aria-disabled') === 'true' }; });
-    comprueba(/Próximamente/.test(pronto.texto) && pronto.apagado, 'Hoja de invitar: «Chat blindado · Próximamente», sin poder elegirlo');
+    comprueba(/^Ultra/.test(pronto.texto) && /próximamente/i.test(pronto.texto) && pronto.apagado, 'Hoja de invitar: «Ultra · próximamente» (con la suscripción Plus), sin poder elegirlo');
     await A.evaluate(() => document.querySelector('#tipo-blindado').click()); await espera(300);
-    comprueba(await A.evaluate(() => document.querySelector('#tipo-normal').getAttribute('aria-checked') === 'true'), 'Al tocar el blindado sigue marcado el normal');
+    comprueba(await A.evaluate(() => document.querySelector('#tipo-normal').getAttribute('aria-checked') === 'true'), 'Al tocar Ultra sigue marcado el chat blindado');
     await foto(A, '60-hoja-invitar');
     await A.click('#invitar-otra');
   }

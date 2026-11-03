@@ -233,7 +233,7 @@
     const sinPantalla = !!(opc && opc.sinPantalla);
     if (!R.abierto && !sinPantalla) { aviso(T('Sin conexión: espera un momento.')); return; }
     if (esMovil()) await borraAnteriores();
-    if (!C.B.hayBlindada()) { aviso(T('Este navegador no puede abrir una sesión blindada: hace falta uno actual.')); return; }
+    if (!C.B.hayBlindada()) { aviso(T('Este navegador no puede abrir una sesión Ultra: hace falta uno actual.')); return; }
     if (!caben()) return;
     await limpiaInvitaciones();
     const semilla = semillaDada || C.nuevaSemilla();
@@ -260,7 +260,7 @@
   }
   const creaInvitacionEnlace = (semilla, modo) => (modo === 'blindada' ? creaInvitacionB(semilla, { sinPantalla: true }) : creaInvitacionN(semilla));
   // corto (13:14): la frase mínima y el enlace
-  const textoInvitacion = (modo) => (modo === 'blindada' ? T('Invitación a un chat blindado de GUARDIANA') : T('Invitación a GUARDIANA'));
+  const textoInvitacion = (modo) => (modo === 'blindada' ? T('Invitación a un chat Ultra de GUARDIANA') : T('Invitación a GUARDIANA'));
   function muestraEnlace(c) {
     const u = enlaceB(c); $('#enlace-b').value = u;
     const q = $('#enlace-qr'); if (q && window.qrSvg && q.dataset.u !== u) { q.innerHTML = window.qrSvg(u); q.dataset.u = u; }
@@ -289,7 +289,7 @@
   }
   async function aceptaSemilla(semilla, modo) {
     const B = modo === 'blindada';
-    if (B && !C.B.hayBlindada()) { aviso(T('Este navegador no puede abrir una sesión blindada: hace falta uno actual.')); return false; }
+    if (B && !C.B.hayBlindada()) { aviso(T('Este navegador no puede abrir una sesión Ultra: hace falta uno actual.')); return false; }
     const d = B ? await C.B.deSemilla(semilla) : await C.deSemilla(semilla);
     if (CONVS.has(d.sala)) { abreConv(d.sala); return true; }
     if (esMovil()) await borraAnteriores(d.sala);
@@ -520,7 +520,7 @@
       if (nueva) {
         clearInterval(muestraInvitacion.reloj);
         // en el teléfono, la nota corta de siempre, como WhatsApp (revisión de diseño, 19:15: la larga era jerga); en el ordenador, la de antes
-        await anotaSistema(c, esMovil() ? 'Mensajes y llamadas encriptados de extremo a extremo.' : 'Sesión blindada establecida. Si quieren, comparen el número de seguridad en «⋯» → «Seguridad y verificación».');
+        await anotaSistema(c, esMovil() ? 'Mensajes y llamadas encriptados de extremo a extremo.' : 'Sesión Ultra establecida. Si quieren, comparen el número de seguridad en «⋯» → «Seguridad y verificación».');
         if (ACTUAL === c.id) abreConv(c.id);
         // la invitación se mandó desde el inicio sin otra pantalla (19:17): cuando la otra persona entra, su chat se abre solo,
         // salvo si estás en otra conversación o en una llamada (entonces, un aviso que lo abre al tocarlo)
@@ -1936,18 +1936,18 @@
     if (c.nombre) return c.nombre;
     if (c.numero) return C.N.numeroBonito(c.numero);
     // en el teléfono, «Chat blindado» o «Chat» (29 Oct 2026, 07:49: «chat normal o blindado»), sin número: allí hay uno a la vez
-    if (esMovil()) return esB(c) ? T('Chat blindado') : T('Chat');
-    const base = esB(c) ? T('Sesión blindada') : corto ? T('Conversación') : T('Conversación encriptada');
+    if (esMovil()) return esB(c) ? T('Chat Ultra') : T('Chat');
+    const base = esB(c) ? T('Sesión Ultra') : corto ? T('Conversación') : T('Conversación encriptada');
     return (c.num || 1) > 1 ? (esB(c) ? base : T('Conversación')) + ' ' + c.num : base;
   }
   const horaLista = (t) => { const d = new Date(t || Date.now()), h = new Date(); return d.toDateString() === h.toDateString() ? hora(t) : d.toLocaleDateString(LOC(), { day: 'numeric', month: 'short' }); };
   function estadoLista(c) {
-    if (c.estado === 'invitacion' && !c.huella) return esB(c) ? T('Invitación blindada · esperando') : T('Invitación · esperando a la otra persona');
+    if (c.estado === 'invitacion' && !c.huella) return esB(c) ? T('Invitación Ultra · esperando') : T('Invitación · esperando a la otra persona');
     if (LL && LL.ocupado && LLAMADA_CONV === c.id) return T('En llamada');
     if (c.noLeidos) return c.noLeidos === 1 ? T('Mensaje nuevo') : T('{n} mensajes nuevos').replace('{n}', c.noLeidos);
     if (c.perdida) return T('Llamada perdida');
     if (!pareceEnLinea(c)) return T('No está conectada');
-    return esB(c) ? T('Sesión blindada') : T('Encriptada de extremo a extremo');
+    return esB(c) ? T('Sesión Ultra') : T('Encriptada de extremo a extremo');
   }
   async function pintaLista() {
     sincronizaAvisos(); pintaInsignia();
@@ -2442,6 +2442,8 @@
     $('#inicio').classList.toggle('con-invitacion', inv); // sin la presentación de la página: solo la invitación (15:32)
     if (inv) { verContactos = false; $('#inicio').classList.remove('ver-contactos'); $('#contactos').hidden = true; }
     if (inv) { $('#paso-inicio').hidden = true; $('#paso-entrar').hidden = true; $('#paso-codigo').hidden = porEnlace(c); $('#paso-enlace').hidden = !porEnlace(c); }
+    // (2 Nov 2026: la gratuita es la Blindada; la de la suite CNSA 2.0, Ultra)
+    if (inv && porEnlace(c)) { const k = $('#enlace-k'), tp = $('#enlace-t-pc'); if (k) k.textContent = esB(c) ? T('Sesión Ultra') : T('Chat blindado'); if (tp) tp.textContent = esB(c) ? T('Invitación Ultra') : T('Invitación blindada'); }
     pintaCabecera(c); pintaTodos(c); pintaRadio(c); pintaLista();
     if (esperaEnChat(c)) document.body.classList.remove('esperando-enlace');
     else if (c.estado === 'invitacion' && c.rol === 'invita') { if (porEnlace(c)) muestraEnlace(c); else { muestraInvitacion(c); if (!c.huella && (!c.codigo || Date.now() > c.codigoCaduca)) publicaCodigo(c); } }
@@ -2679,7 +2681,7 @@
     fila(m.dir === 'mia' ? T('Enviado') : T('Recibido'), cuando(m.t));
     if (m.dir === 'mia') fila(T('Estado'), m.estado === 'pendiente' ? T('Pendiente: saldrá cuando la otra persona entre') : m.estado === 'enviado' ? T('Enviado') : m.estado === 'entregado' ? T('Entregado') : m.estado === 'leido' ? T('Leído') : m.estado === 'fallo' ? T('No se pudo enviar') : m.estado === 'descartado' ? T('Descartado por la otra persona sin mostrarlo') : '');
     if (m.tipo === 'archivo' && m.archivo.tam) fila(T('Tamaño'), tamano(m.archivo.tam));
-    fila(T('Protección'), (esB(c) ? T('Sesión blindada') : T('Encriptación de extremo a extremo')) + (m.porBuzon ? ' · ' + T('por el buzón cifrado') : ''));
+    fila(T('Protección'), (esB(c) ? T('Sesión Ultra') : T('Encriptación de extremo a extremo')) + (m.porBuzon ? ' · ' + T('por el buzón cifrado') : ''));
     abreHoja('h-info-msg');
   }
   function abreBorrarMsg(m) {
@@ -3109,7 +3111,7 @@
     const ul = $('#escudo-lista'); ul.textContent = '';
     const fila = (cls, b, s) => { const li = document.createElement('li'); li.className = cls; const i = document.createElement('i'); const bb = document.createElement('b'); bb.textContent = b; const ss = document.createElement('span'); ss.textContent = s; li.append(i, bb, ss); ul.append(li); };
     if (esB(c)) {
-      fila(c.sesion ? 'gc-ok' : 'gc-info', T('Sesión blindada'), T('Algoritmos de la suite CNSA 2.0: ML-KEM-1024 y ECDH P-384 para las claves, ML-DSA-87 y ECDSA P-384 para las firmas, AES-256-GCM y SHA-384.'));
+      fila(c.sesion ? 'gc-ok' : 'gc-info', T('Sesión Ultra'), T('Algoritmos de la suite CNSA 2.0: ML-KEM-1024 y ECDH P-384 para las claves, ML-DSA-87 y ECDSA P-384 para las firmas, AES-256-GCM y SHA-384.'));
       fila('gc-ok', T('Renovación de claves'), T('Claves nuevas cada 5 minutos y en cada reconexión: lo anterior deja de poder leerse con lo nuevo.'));
       fila(c.verificada && c.suVerificada ? 'gc-ok' : 'gc-aviso', T('Verificación mutua'), c.verificada && c.suVerificada ? T('Los dos han comprobado el número de seguridad.') : T('Sin verificar: compara el número de seguridad con la otra persona.'));
     } else fila(c.sesion ? 'gc-ok' : 'gc-info', T('Encriptación de extremo a extremo'), T('AES-256-GCM con una clave distinta por mensaje; la sesión se renueva en cada conexión (ECDH P-256 con firma ECDSA).'));
@@ -4109,7 +4111,7 @@
       const enBlindado = () => { const c = CONVS.get(ACTUAL); return !!(c && extrasB(c) && !$('#conv').hidden); };
       const ordenador = !!(matchMedia('(hover: hover) and (pointer: fine)').matches);
       if (tapa) {
-        addEventListener('keyup', (e) => { if (e.key !== 'PrintScreen' || !enBlindado()) return; tapa.hidden = false; clearTimeout(capT); capT = setTimeout(() => { tapa.hidden = true; }, 3000); try { navigator.clipboard.writeText(T('Modo blindado: la pantalla se tapó durante la captura.')).catch(() => {}); } catch (_) {} });
+        addEventListener('keyup', (e) => { if (e.key !== 'PrintScreen' || !enBlindado()) return; tapa.hidden = false; clearTimeout(capT); capT = setTimeout(() => { tapa.hidden = true; }, 3000); try { navigator.clipboard.writeText(T('Modo Ultra: la pantalla se tapó durante la captura.')).catch(() => {}); } catch (_) {} });
         if (ordenador) { addEventListener('blur', () => { if (enBlindado()) { clearTimeout(capT); tapa.hidden = false; } }); addEventListener('focus', () => { tapa.hidden = true; }); }
       } }
     $('#velo-pista').addEventListener('keydown', (e) => { if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); descubre(e); } });
@@ -4344,7 +4346,7 @@
       if (esMovil() && navigator.share && C.B.hayBlindada()) {
         const semilla = semillaLista || C.nuevaSemilla(); semillaLista = null; setTimeout(preparaSemilla, 0);
         const url = ORIGEN_INV + '#b=' + C.b64u(semilla);
-        let compartido = null; try { compartido = navigator.share({ title: 'GUARDIANA', text: T('Invitación a una sesión blindada de GUARDIANA Comunicaciones'), url }); } catch (e) { compartido = Promise.reject(e); }
+        let compartido = null; try { compartido = navigator.share({ title: 'GUARDIANA', text: T('Invitación a una sesión Ultra de GUARDIANA Comunicaciones'), url }); } catch (e) { compartido = Promise.reject(e); }
         const hecha = creaInvitacionB(semilla, { sinPantalla: true });
         Promise.resolve(compartido).then(async () => {
           const c = await hecha; if (!c) return; c.compartido = true;
@@ -4377,11 +4379,11 @@
       if (esMovil() && navigator.share) { tipoInv = 'normal'; pintaTipo(); abreHoja('h-invitar'); return; }
       // el blindado, «próximamente» (dueño, 29 Oct 2026, 12:55–12:59): en el teléfono sin menú de compartir, la invitación normal con
       // su enlace; en el ordenador, el aviso y «Crear invitación»
-      if (!BLINDADO_ACTIVO) { if (esMovil()) invitaConMenu('normal'); else { aviso(T('El chat blindado llegará próximamente. Mientras, «Crear invitación».')); $('#nueva').focus(); } return; }
+      if (!BLINDADO_ACTIVO) { if (esMovil()) invitaConMenu('normal'); else { aviso(T('Ultra llegará próximamente, con la suscripción Plus. Mientras, «Crear invitación».')); $('#nueva').focus(); } return; }
       nuevaBlindadaConCopia();
     }
     $('#tipo-normal').addEventListener('click', () => { tipoInv = 'normal'; pintaTipo(); });
-    $('#tipo-blindado').addEventListener('click', () => { if (!BLINDADO_ACTIVO) { aviso(T('El chat blindado llegará próximamente. De momento, el chat fuerte.')); return; } if (!C.B.hayBlindada()) { aviso(T('Este navegador no puede abrir una sesión blindada: hace falta uno actual.')); return; } tipoInv = 'blindada'; pintaTipo(); });
+    $('#tipo-blindado').addEventListener('click', () => { if (!BLINDADO_ACTIVO) { aviso(T('Ultra llegará próximamente, con la suscripción Plus. De momento, el chat blindado.')); return; } if (!C.B.hayBlindada()) { aviso(T('Este navegador no puede abrir una sesión Ultra: hace falta uno actual.')); return; } tipoInv = 'blindada'; pintaTipo(); });
     // «Otras apps»: el menú de compartir del teléfono, dentro del mismo toque (la invitación se crea a la vez)
     function invitaConMenu(modo) {
       const semilla = semillaLista || C.nuevaSemilla(); semillaLista = null; setTimeout(preparaSemilla, 0);
