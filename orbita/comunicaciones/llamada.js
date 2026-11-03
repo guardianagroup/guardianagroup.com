@@ -15,7 +15,7 @@
   const VOZ_JS = 'voz.js?v=20261027a';
   // La voz cambiada de Ultra (3 Nov 2026; agencia, ronda 93): formantes deformados, tono y paso banda de 300 a 3000 Hz, con parámetros al
   // azar en cada llamada (voz-ultra.js). El cambio de tono simple de «Voz grave» se deshace en segundos y por eso no entra en Ultra.
-  const VOZ_ULTRA_JS = 'voz-ultra.js?v=20261103a';
+  const VOZ_ULTRA_JS = 'voz-ultra.js?v=20261103-ultra1';
   let vozUltra = null; // { alfa, tono } de esta llamada
   const sorteaVozUltra = () => { const r = crypto.getRandomValues(new Uint32Array(3)); const alfa = (0.10 + 0.10 * (r[0] / 4294967296)) * (r[1] & 1 ? 1 : -1); const tono = r[2] & 1 ? 0.80 + 0.12 * (r[2] / 4294967296) : 1.09 + 0.16 * (r[2] / 4294967296); return { alfa: Math.round(alfa * 1000) / 1000, tono: Math.round(tono * 1000) / 1000 }; };
   // Videollamada (dueño, 28 Oct 2026: «máxima calidad de imagen»): hasta 1080p a 30 imágenes por segundo, con un tope
