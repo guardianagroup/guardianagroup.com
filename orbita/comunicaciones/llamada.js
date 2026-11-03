@@ -151,8 +151,12 @@
     // blindada… no quiero que esté ese servicio»): el código grande y rojo que cambia con la llave sale solo en Ultra (app.js, ULTRA,
     // apagada hasta que llegue con la suscripción). En la Blindada, la de hoy, el código no sale en la pantalla: está en «Seguridad de
     // esta llamada», para quien quiera comprobarlo (pintaSegCod). En pruebas locales, «gcom-ultra» enciende Ultra en esa pestaña.
+    // (3 Nov 2026, ronda 93) Ultra es la conversación Ultra de verdad (app.js, o.ultra). La tarjeta roja del código ya no sale en Ultra:
+    // allí se leen las 4 palabras (pintaSas) y el código de la clave está en «Seguridad de esta llamada». TARJETA_CODIGO la vuelve a
+    // encender; en pruebas locales, «gcom-ultra» la enseña sin tocar nada más de la llamada (rota.js la usa para comparar el código).
+    const TARJETA_CODIGO = false;
     const ULTRA_PRUEBA = (() => { try { return LOCAL && sessionStorage.getItem('gcom-ultra') === '1'; } catch (_) { return false; } })();
-    const ultra = () => ULTRA_PRUEBA || !!(o.ultra && o.ultra());
+    const ultra = () => !!(o.ultra && o.ultra());
     // Por qué una llamada de dos va sin la capa postcuántica (dueño, 2 Nov 2026, 18:31: un teléfono la admite y el otro no): este
     // navegador no la admite, el de la otra persona no la anuncia («pqc» en su oferta o en su respuesta) o se puso y no pudo mantenerse
     // (pqVigila). Se dice en «Seguridad de esta llamada» y, un momento, en la pantalla (avisaPq). Sin motivo claro (por ejemplo, una
@@ -308,7 +312,7 @@
       // ni en la Blindada ni en Ultra sale la tarjeta: en Ultra se leen las 4 palabras de la llamada (pintaSas, ronda 93) y el código de la
       // clave, que en Ultra cambia cada minuto, se compara en «Seguridad de esta llamada» (pintaSegCod). En pruebas locales, «gcom-ultra»
       // la enseña, para probarla.
-      if (!ULTRA_PRUEBA) { card.hidden = true; chip.hidden = true; clearTimeout(codPlegarT); repintaSeg(); return; }
+      if (!(ULTRA_PRUEBA || (TARJETA_CODIGO && ultra()))) { card.hidden = true; chip.hidden = true; clearTimeout(codPlegarT); repintaSeg(); return; }
       const bien = c === codConfirmado, grande = codAbierto || (!bien && !codPlegado), num = c.slice(0, 3) + ' ' + c.slice(3);
       $('#ll-cod-t').textContent = card.dataset.cambio === '1' && !bien ? t('El código ha cambiado') : t('Código de seguridad');
       $('#ll-cod-num').textContent = num; $('#ll-cod-num').setAttribute('aria-label', t('Código de seguridad') + ': ' + c.split('').join(' '));
@@ -380,7 +384,7 @@
         if (b) { b.classList.toggle('cancela', llamandoT); b.setAttribute('aria-label', llamandoT ? t('Cancelar') : t('Añadir a la llamada')); const sp = $('#ll-anadir-caja > span'); if (sp) sp.textContent = llamandoT ? t('Cancelar') : t('Añadir'); } }
       pintaGrupo();
       // Ultra: el nivel de cada lado, a la vista (ronda 93): el entorno en que corre cada uno, nada más
-      { const nv = $('#ll-nivel'); if (nv) { const n = ultra() && o.nivel && estado === 'hablando' ? o.nivel() : null; nv.hidden = !n; if (n) nv.textContent = t('Tú') + ': ' + n.mio + ' · ' + t('Otro lado') + ': ' + n.suyo; } }
+      { const nv = $('#ll-nivel'); if (nv) { const n = ultra() && o.nivel && estado === 'hablando' ? o.nivel() : null; nv.hidden = !n; if (n) nv.textContent = t('Tu lado') + ': ' + n.mio + ' · ' + t('Otro lado') + ': ' + n.suyo; } }
       $('#ll-avatar').textContent = o.inicial();
       caja.setAttribute('aria-label', video ? t('Videollamada') : t('Llamada de voz'));
       $('#ll-camara-caja').hidden = !(video && cam);
@@ -398,7 +402,8 @@
       // en el ordenador, partir la pantalla o dejarte en pequeño se hace con un botón con su nombre, abajo con los demás
       { const v = $('#ll-vista-caja'), fino = !!(raiz.matchMedia && raiz.matchMedia('(hover: hover) and (pointer: fine)').matches); if (v) v.hidden = !(fino && video && cam && estado === 'hablando' && (caja.classList.contains('tres') || (remotoV && suCamara))); }
       // «Pasar al teléfono» (dueño, 30 Oct 2026, 12:56): en el ordenador, en una videollamada de dos, si el otro equipo lo entiende
-      { const v = $('#ll-llevar-caja'), fino = !!(raiz.matchMedia && raiz.matchMedia('(hover: hover) and (pointer: fine)').matches); if (v) v.hidden = !(o.llevar && fino && video && estado === 'hablando' && suLlevar && !patas.length && !enGrupo() && !caja.classList.contains('mini')); }
+      // (no en Ultra: la página del teléfono no es una conversación Ultra y la llamada perdería el mosaico, la voz cambiada y el resto)
+      { const v = $('#ll-llevar-caja'), fino = !!(raiz.matchMedia && raiz.matchMedia('(hover: hover) and (pointer: fine)').matches); if (v) v.hidden = !(o.llevar && fino && video && estado === 'hablando' && suLlevar && !patas.length && !enGrupo() && !caja.classList.contains('mini') && !ultra()); }
       // «Enviar» (dueño, 2 Nov 2026, 16:37: «incluye también lo de enviar la foto, la ubicación y archivos en la llamada del móvil»): una
       // foto, la ubicación o un archivo, sin colgar. Solo en una llamada de dos que va por la sala encriptada de la llamada (la del teléfono
       // al que se pasó, en el teléfono y en el equipo de la otra persona); lo hace app.js, que dice si se puede (o.enviar)
@@ -1106,17 +1111,32 @@
       return sdp;
     }
     function altaFidelidad(sdp) { return arranqueVideo(altaFidelidadAudio(sdp)); }
-    // Ultra (ronda 93): además, «cbr=1»: Opus a ritmo constante, con todos los paquetes del mismo tamaño también en los silencios (usedtx=0),
-    // así el tamaño y el ritmo de los paquetes no delatan lo que se dice. El codificador de cada lado lee estos parámetros en la
-    // descripción de la otra persona; los dos los ponen, así valen para los dos sentidos.
+    // Ultra (ronda 93): además, en CADA sección de audio de la descripción (la voz y la pista muda de agregaMuda), «cbr=1» y «usedtx=0»:
+    // Opus a ritmo constante, con todos los paquetes del mismo tamaño también en los silencios, así el tamaño y el ritmo de los paquetes
+    // no delatan lo que se dice. La pista muda, a 8 kb/s (solo lleva silencio: a 96 kb/s constantes costaría lo mismo que la voz). Y
+    // sin la extensión de cabecera «ssrc-audio-level» (RFC 6464), que manda en claro, en cada paquete, el volumen de lo que se dice.
+    // El codificador de cada lado lee estos parámetros en la descripción de la otra persona; los dos los ponen, así valen para los dos
+    // sentidos. La Blindada sigue como estaba: solo la primera sección de audio (la voz) lleva la alta fidelidad.
+    const NIVEL_AUDIO = /^a=extmap:\d+(?:\/\w+)? urn:ietf:params:rtp-hdrext:ssrc-audio-level(?: .*)?$/;
     function altaFidelidadAudio(sdp) {
-      const r = /a=rtpmap:(\d+) opus\/48000\/2/i.exec(sdp || ''); if (!r) return sdp;
-      const pt = r[1], quiero = { maxaveragebitrate: String(MAX_BPS_AUDIO), useinbandfec: '1', usedtx: '0', stereo: '0', 'sprop-stereo': '0', maxplaybackrate: '48000', 'sprop-maxcapturerate': '48000' };
-      if (ultra()) quiero.cbr = '1';
-      const linea = (o) => 'a=fmtp:' + pt + ' ' + Object.entries(o).map(([k, v]) => k + '=' + v).join(';');
-      const re = new RegExp('a=fmtp:' + pt + ' ([^\\r\\n]*)');
-      if (re.test(sdp)) return sdp.replace(re, (_, ps) => { const o = {}; for (const kv of ps.split(';')) { const i = kv.indexOf('='); const k = (i < 0 ? kv : kv.slice(0, i)).trim(); if (k) o[k] = i < 0 ? '' : kv.slice(i + 1).trim(); } return linea(Object.assign(o, quiero)); });
-      return sdp.replace(r[0], r[0] + '\r\n' + linea(quiero));
+      if (!/a=rtpmap:\d+ opus\/48000\/2/i.test(sdp || '')) return sdp;
+      const U = ultra(), fin = /\r\n$/.test(sdp) ? '\r\n' : '';
+      const partes = String(sdp).replace(/\r\n$/, '').split(/\r\n(?=m=)/);
+      let audio = 0;
+      return partes.map((sec) => {
+        if (!/^m=audio /.test(sec)) return sec;
+        const r = /a=rtpmap:(\d+) opus\/48000\/2/i.exec(sec); audio++;
+        let lineas = sec.split('\r\n');
+        if (U) lineas = lineas.filter((l) => !NIVEL_AUDIO.test(l));
+        if (!r || (audio > 1 && !U)) return lineas.join('\r\n');
+        const pt = r[1], quiero = audio === 1 ? { maxaveragebitrate: String(MAX_BPS_AUDIO), useinbandfec: '1', usedtx: '0', stereo: '0', 'sprop-stereo': '0', maxplaybackrate: '48000', 'sprop-maxcapturerate': '48000' } : { maxaveragebitrate: '8000', usedtx: '0' };
+        if (U) quiero.cbr = '1';
+        const linea = (x) => 'a=fmtp:' + pt + ' ' + Object.entries(x).map(([k, v]) => k + '=' + v).join(';');
+        const i = lineas.findIndex((l) => l.startsWith('a=fmtp:' + pt + ' '));
+        if (i >= 0) { const x = {}; for (const kv of lineas[i].slice(('a=fmtp:' + pt + ' ').length).split(';')) { const j = kv.indexOf('='); const k = (j < 0 ? kv : kv.slice(0, j)).trim(); if (k) x[k] = j < 0 ? '' : kv.slice(j + 1).trim(); } lineas[i] = linea(Object.assign(x, quiero)); }
+        else { const k = lineas.findIndex((l) => l.startsWith('a=rtpmap:' + pt + ' ')); lineas.splice(k + 1, 0, linea(quiero)); }
+        return lineas.join('\r\n');
+      }).join('\r\n') + fin;
     }
     // y el audio va por delante de la imagen cuando la red se aprieta
     async function topeAudio() {
@@ -1390,7 +1410,7 @@
       if (m.acto === 'pausa') { di(m.on ? t('La otra persona ha puesto la llamada en pausa.') : ''); return; }
       // pasar la llamada al teléfono: la otra persona me da la llave de la sala de su teléfono (yo añado el teléfono), me dice que
       // lo deja (cancelar), o yo le digo que su teléfono ya está dentro / ya habla (ella cuelga)
-      if (m.acto === 'llevar' && typeof m.k === 'string' && /^[A-Za-z0-9_-]{43}$/.test(m.k)) { if (estado === 'hablando' && o.alLlevar) o.alLlevar(m.k, m.pc === 1); return; }
+      if (m.acto === 'llevar' && typeof m.k === 'string' && /^[A-Za-z0-9_-]{43}$/.test(m.k)) { if (estado === 'hablando' && o.alLlevar && !ultra()) o.alLlevar(m.k, m.pc === 1); return; } // (en Ultra, no: ver pinta)
       if (m.acto === 'llevar-no') { for (const L of patas.slice()) if (L.llevar && L.estado !== 'hablando') { tmanda(L, { acto: 'colgar', id: L.id }); quitaPata(L, 'yo'); } if (o.llevarNo) o.llevarNo(); return; }
       if (m.acto === 'llevar-visto') { if (o.llevarVisto) o.llevarVisto(); return; }
       if (m.acto === 'llevar-listo') { if (o.llevarListo) o.llevarListo(); return; }

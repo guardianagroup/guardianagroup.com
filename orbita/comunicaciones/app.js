@@ -24,7 +24,8 @@
   const renuevaMs = () => (LOCAL && +new URLSearchParams(location.search).get('renueva') * 1000) || RENUEVA_B_MS;
   // Quién puede CREAR una invitación Ultra (decisión de producto, ronda 93): solo dentro del programa GUARDIANA para Windows (ZERO
   // marca la página con data-en-programa y abre la pasarela al servicio: GET /api/plan, que contesta {"nivel":"plus"|"gratis"}; la
-  // prueba de 7 días cuenta como Plus). Quien recibe la invitación la acepta gratis desde cualquier navegador. Fuera del programa o
+  // prueba de 7 días cuenta como Plus). Quien recibe la invitación la acepta gratis desde su navegador, sin el programa (en el ordenador:
+  // desde el 1 Nov 2026 marco.js lleva los teléfonos a /solo-pc/). Fuera del programa o
   // en el nivel gratis, el botón Ultra lo explica y ofrece la Blindada. En pruebas locales, «?plan=plus» hace de programa con Plus.
   const enPrograma = () => document.documentElement.dataset.enPrograma === '1';
   // (función y no constante: LOCAL se define más abajo)
@@ -59,7 +60,7 @@
     const p = await pidePlan();
     return p && p.nivel === 'plus' ? 'si' : 'gratis';
   }
-  const MOTIVO_ULTRA = { fuera: 'Ultra se crea desde el programa GUARDIANA para Windows, con la suscripción Plus; quien recibe la invitación entra gratis desde cualquier navegador. Aquí puedes usar la Blindada.', gratis: 'Ultra va con la suscripción Plus (la prueba de 7 días cuenta). Mientras, la Blindada.', 'sin-pq': 'Este navegador no puede abrir una sesión Ultra: hace falta uno actual con ML-KEM-1024 y ML-DSA-87. Puedes usar la Blindada.' };
+  const MOTIVO_ULTRA = { fuera: 'Ultra se crea desde el programa GUARDIANA para Windows, con la suscripción Plus; quien recibe la invitación entra gratis desde su navegador. Aquí puedes usar la Blindada.', gratis: 'Ultra va con la suscripción Plus (la prueba de 7 días cuenta). Mientras, la Blindada.', 'sin-pq': 'Este navegador no puede abrir una sesión Ultra: hace falta uno actual con ML-KEM-1024 y ML-DSA-87. Puedes usar la Blindada.' };
   // El nivel de cada lado, a la vista en el chat y en la llamada (ronda 93): solo lo que es cierto hoy, el entorno en que corre cada uno
   const miNivel = () => (enPrograma() ? 'pc-guardiana' : /Android|iPhone|iPad|iPod/i.test(navigator.userAgent || '') || (navigator.maxTouchPoints > 1 && /Mac/.test(navigator.platform || '')) ? 'movil' : 'pc-navegador');
   const nombreNivel = (n) => (n === 'pc-guardiana' ? T('PC con GUARDIANA') : n === 'movil' ? T('navegador del móvil') : n === 'pc-navegador' ? T('navegador del PC') : T('sin datos'));
@@ -357,7 +358,7 @@
   }
   async function aceptaSemilla(semilla, modo) {
     const B = modo === 'blindada';
-    // aceptar una invitación Ultra es gratis desde cualquier navegador actual; sin ML-KEM-1024 y ML-DSA-87 no hay sesión Ultra (sin rebaja)
+    // aceptar una invitación Ultra es gratis desde el navegador, sin el programa; sin ML-KEM-1024 y ML-DSA-87 no hay sesión Ultra (sin rebaja)
     if (B && !C.B.hayBlindada()) { aviso(T('Este navegador no puede abrir una sesión Ultra: hace falta uno actual con ML-KEM-1024 y ML-DSA-87. Pide a la otra persona una invitación Blindada.')); return false; }
     const d = B ? await C.B.deSemilla(semilla) : await C.deSemilla(semilla);
     if (CONVS.has(d.sala)) { abreConv(d.sala); return true; }
@@ -536,6 +537,7 @@
   // presentación a la que le falte cualquiera de las dos firmas, o el ML-KEM, se descarta sin más.
   async function presentaB(c, resp, forzar) {
     if (c.estado === 'destruida' || !R.abierto || !c.idB) return null;
+    if (c.sinClaves) return null; // claves borradas en segundo plano (más abajo): no se acuerdan otras hasta volver a la app
     if (!resp && !forzar && c.presentadoEn && Date.now() - c.presentadoEn < 1200) { reintenta(c, 1400); return null; }
     if (resp && !resp.ek) return null; // sin la clave ML-KEM de quien inicia no hay respuesta posible
     c.ef = await C.B.efimera(); c.epoca = C.azar(16);
@@ -1657,8 +1659,8 @@
   function muestraSinRebaja(c, por) {
     sinRebajaConv = c.id;
     const t = $('#sinrebaja-por'); if (t) t.textContent = T(SIN_REBAJA[por] || SIN_REBAJA.suyo);
-    anotaSistema(c, 'Llamada Ultra no iniciada: ' + (SIN_REBAJA[por] || SIN_REBAJA.suyo)).catch(() => {});
-    vigila(c, T('Llamada Ultra no iniciada: sin la capa postcuántica no hay rebaja.'), 'mal');
+    anotaSistema(c, 'Llamada Ultra no iniciada: sin la capa postcuántica del sonido y la imagen no hay rebaja.').catch(() => {});
+    vigila(c, T('Llamada Ultra no iniciada: sin la capa postcuántica del sonido y la imagen no hay rebaja.'), 'mal');
     abreHoja('h-sinrebaja');
   }
   async function sigueEnBlindada() {
@@ -2017,6 +2019,9 @@
     R.on('buzon', (sala, de, id, sobre) => { const c = CONVS.get(sala); if (!c) return; c.proc = (c.proc || Promise.resolve()).then(() => recibeBuzon(c, de, id, sobre)).catch((e) => console.warn('buzón', e)); });
     R.on('trama', (sala, de, b) => {
       const c = CONVS.get(sala); if (!c || !b.length) return;
+      // Ultra con las claves borradas en segundo plano: lo que llega no se puede leer y no se pide otra presentación (eso volvería a
+      // poner claves en la memoria con la app aún fuera); al volver, una sesión nueva. La otra persona lo ve sin acuse.
+      if (c.sinClaves && esB(c)) return;
       c.proc = (c.proc || Promise.resolve()).then(async () => {
         try {
           if (b[0] === 1) await (esB(c) ? recibePresentacionB(c, de, b) : recibePresentacion(c, de, b));
@@ -2639,7 +2644,7 @@
     const ver = !!(extrasB(c) && c.huella && ACTUAL === c.id);
     caja.hidden = !ver; $('#conv').classList.toggle('con-palabras', ver);
     if (!ver) return;
-    const niv = $('#cpalabras-nivel'); if (niv) niv.textContent = T('Tú') + ': ' + nombreNivel(miNivel()) + ' · ' + T('Otro lado') + ': ' + (c.suNivel ? nombreNivel(c.suNivel) : T('aún sin decir'));
+    const niv = $('#cpalabras-nivel'); if (niv) niv.textContent = T('Tu lado') + ': ' + nombreNivel(miNivel()) + ' · ' + T('Otro lado') + ': ' + (c.suNivel ? nombreNivel(c.suNivel) : T('aún sin decir'));
     palabrasDe(c).then((p) => { const el = $('#cpalabras-txt'); if (!el || ACTUAL !== c.id) return; el.textContent = p ? p.join(' · ') : '—'; el.setAttribute('aria-label', T('Palabras de verificación') + ': ' + (p ? p.join(', ') : '')); });
   }
   // Vigilancia a la derecha (dueño, 26 Oct 20:22): anota cada comprobación real según ocurre y mantiene la última a la vista.
@@ -3089,7 +3094,7 @@
     const ic = document.createElement('span'); ic.className = 'gc-velo-icono'; ic.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3l18 18M10.6 10.6a2 2 0 0 0 2.8 2.8M9.9 5.1A10.4 10.4 0 0 1 12 4.9c5 0 8.6 4.1 9.6 7.1-.4 1.1-1.1 2.3-2.1 3.3M6.6 6.6C4.4 8 2.9 10.1 2.4 12c1 3 4.6 7.1 9.6 7.1 1.5 0 2.9-.4 4.1-1"/></svg>';
     const tx = document.createElement('div'); tx.className = 'gc-velo-texto';
     const b = document.createElement('b'); b.textContent = m.tipo === 'texto' ? T('Mensaje nuevo') : tipoArchivo(m);
-    const sm = document.createElement('small'); sm.textContent = m.tipo === 'texto' ? T('Velado hasta que lo muestres') : tamano(m.archivo.tam) + (m.estado === 'recibiendo' ? ' · ' + Math.round((m.archivo.progreso || 0) * 100) + ' %' : m.estado === 'fallo' ? ' · ' + (m.archivo.motivo || T('no se completó')) : m.archivo.vida ? ' · ' + (m.archivo.vida === 'una' ? T('se ve una vez') : T('se ve {s}').replace('{s}', m.archivo.vida >= 60 ? (m.archivo.vida / 60) + ' min' : m.archivo.vida + ' s')) : '');
+    const sm = document.createElement('small'); sm.textContent = m.tipo === 'texto' ? T('Velado hasta que lo muestres') : tamano(m.archivo.tam) + (m.archivo.custodia ? ' · ' + T('con comprobante firmado') : '') + (m.estado === 'recibiendo' ? ' · ' + Math.round((m.archivo.progreso || 0) * 100) + ' %' : m.estado === 'fallo' ? ' · ' + (m.archivo.motivo || T('no se completó')) : m.archivo.vida ? ' · ' + (m.archivo.vida === 'una' ? T('se ve una vez') : T('se ve {s}').replace('{s}', m.archivo.vida >= 60 ? (m.archivo.vida / 60) + ' min' : m.archivo.vida + ' s')) : '');
     tx.append(b, sm); d.append(ic, tx);
     const fila = document.createElement('div'); fila.className = 'gc-velo-botones';
     const si = document.createElement('button'); si.type = 'button'; si.className = 'boton principal'; si.textContent = T('Mostrar'); si.addEventListener('click', () => muestraVelado(c, m));
@@ -3201,7 +3206,10 @@
   // fecha que lleva el archivo. Los vídeos van como están (sus datos no se pueden limpiar aquí).
   // En Ultra («todo»), cualquier imagen que no sea SVG se vuelve a dibujar (también GIF, BMP, AVIF o TIFF; un GIF animado pierde la
   // animación): lo que sale es un JPEG o un PNG nuevo, sin EXIF, GPS, perfil ICC, miniatura ni comentarios, porque el lienzo no los copia.
+  // Si no se puede volver a dibujar (un formato que este navegador no abre, como HEIC fuera de Safari, o un archivo dañado), en Ultra
+  // devuelve null y la foto no sale (el original llevaría sus datos); en la Blindada sale como está, como hasta ahora.
   async function sinDatosOcultos(f, todo) {
+    if (f && f.__limpia) return f;
     const mime = String(f.type || '').toLowerCase();
     if (!(/^image\/(jpeg|png|webp|heic|heif)$/.test(mime) || (todo && /^image\/(?!svg)[\w.+-]+$/.test(mime)))) return f;
     try {
@@ -3209,10 +3217,11 @@
       const k = Math.min(1, 4096 / Math.max(bmp.width, bmp.height)), w = Math.round(bmp.width * k), h = Math.round(bmp.height * k);
       const cv = document.createElement('canvas'); cv.width = w; cv.height = h; cv.getContext('2d').drawImage(bmp, 0, 0, w, h); if (bmp.close) bmp.close();
       const tipo = /png|gif|bmp/.test(mime) ? 'image/png' : 'image/jpeg';
-      const blob = await new Promise((r) => cv.toBlob(r, tipo, 0.92)); if (!blob) return f;
+      const blob = await new Promise((r) => cv.toBlob(r, tipo, 0.92)); if (!blob) return todo ? null : f;
       const base = String(f.name || 'foto').replace(/\.[a-z0-9]{2,5}$/i, '') || 'foto';
-      return new File([blob], base + (tipo === 'image/png' ? '.png' : '.jpg'), { type: tipo, lastModified: Date.now() });
-    } catch (_) { return f; }
+      const nf = new File([blob], base + (tipo === 'image/png' ? '.png' : '.jpg'), { type: tipo, lastModified: Date.now() }); nf.__limpia = true;
+      return nf;
+    } catch (_) { return todo ? null : f; }
   }
   // La ubicación, solo al pulsar: exacta (5 decimales) o aproximada (2 decimales, unos 1 km). Va como un mensaje encriptado más,
   // con el enlace al mapa; el mapa solo se abre si la otra persona lo toca.
@@ -3259,7 +3268,7 @@
       fila(c.verificada && c.suVerificada ? 'gc-ok' : 'gc-aviso', T('Palabras de verificación'), (pal ? pal.join(' · ') + '. ' : '') + T('Léanlas en voz alta: si coinciden en los dos equipos, nadie se ha puesto en medio. Una voz clonada con IA debilita esta comprobación de oído; el número de 60 cifras de abajo sirve igual.'));
       fila('gc-ok', T('Nada guardado'), T('Esta conversación vive solo en la memoria de esta pestaña: al cerrarla, desaparece. El relé no tiene buzón para Ultra: los mensajes solo pasan si los dos están conectados.'));
       fila('gc-ok', T('Tamaño y ritmo'), T('Mensajes en bloques de 1 KB con un latido de relleno cada 5 s; el último trozo de cada archivo, completo; en la llamada, voz a ritmo constante (Opus cbr=1, usedtx=0).'));
-      fila('gc-info', T('Nivel de cada lado'), T('Tú') + ': ' + nombreNivel(miNivel()) + ' · ' + T('Otro lado') + ': ' + (c.suNivel ? nombreNivel(c.suNivel) : T('aún sin decir')) + '. ' + T('Es el entorno en que corre cada uno, no una garantía sobre el equipo.'));
+      fila('gc-info', T('Nivel de cada lado'), T('Tu lado') + ': ' + nombreNivel(miNivel()) + ' · ' + T('Otro lado') + ': ' + (c.suNivel ? nombreNivel(c.suNivel) : T('aún sin decir')) + '. ' + T('Es el entorno en que corre cada uno, no una garantía sobre el equipo.'));
     } else fila(c.sesion ? 'gc-ok' : 'gc-info', T('Encriptación de extremo a extremo'), T('AES-256-GCM con una clave distinta por mensaje; la sesión se renueva en cada conexión (ECDH P-256 con firma ECDSA).'));
     fila('gc-info', T('Servidor de GUARDIANA'), T('encamina tramas encriptadas que no puede leer; ve conexión y volumen, no contenido; no guarda historial'));
     fila(c.incidencias ? 'gc-alerta' : 'gc-ok', T('Verificación'), c.incidencias ? (c.incidencias + ' ' + (c.incidencias === 1 ? T('incidencia') : T('incidencias')) + ': ' + T('datos que no superaron la autenticación, descartados y anotados en la conversación.')) : T('Cada mensaje y cada trozo de archivo se autentica al llegar; hasta ahora, todos superaron la verificación.'));
@@ -3535,7 +3544,9 @@
   }
   const claveServidor = () => { try { return R && R.avisos ? C.deB64u(R.avisos) : null; } catch (_) { return null; } };
   // el «buzón» del Número GUARDIANA va primero: por él llega «alguien que añadiste también te ha añadido» con la app cerrada
-  const salasAvisos = () => (MI_NUM && /^[0-9a-f]{64}$/.test(MI_NUM.buzon || '') ? [MI_NUM.buzon] : []).concat(vivas().filter((c) => c.huella && /^[0-9a-f]{64}$/.test(c.id)).map((c) => c.id).sort()).slice(0, 64);
+  // (las salas Ultra, no: el relé no apunta para qué salas avisar a este equipo, y Ultra no pasa por los servicios de avisos de
+  // Google o Apple; con la app abierta en segundo plano, el aviso sin contenido lo da el propio navegador, avisaFuera)
+  const salasAvisos = () => (MI_NUM && /^[0-9a-f]{64}$/.test(MI_NUM.buzon || '') ? [MI_NUM.buzon] : []).concat(vivas().filter((c) => c.huella && !esB(c) && /^[0-9a-f]{64}$/.test(c.id)).map((c) => c.id).sort()).slice(0, 64);
   const igualesBytes = (a, b) => !!(a && b && a.length === b.length && a.every((x, i) => x === b[i]));
   async function suscripcionActual() { try { const reg = swReg || (await navigator.serviceWorker.ready); return await reg.pushManager.getSubscription(); } catch (_) { return null; } }
   // suscribe este equipo en el relé (o renueva sus salas); devuelve si pudo
@@ -3601,6 +3612,7 @@
   // despertar a la otra persona cuando no está conectada: una vez por minuto y conversación como mucho (el relé también limita)
   function despierta(c, tipo, aunque) { // aunque: también con la otra persona conectada pero con la app en segundo plano (14:38)
     if (!c || !c.huella || !R || !R.abierto || (enLinea(c) && !aunque)) return false;
+    if (esB(c)) return false; // Ultra: sin avisos a través del relé (ver salasAvisos); con la app cerrada, la conversación ya no existe
     // cada mensaje avisa (el aviso cuenta 1, 2, 3…; dueño, 29 Oct 2026, 23:41), también con la app de la otra persona en segundo plano
     // (23:47: «a mi mujer le están llegando notificaciones, pero a mí no»: con su app en segundo plano y aún conectada, no se avisaba)
     const ahora = Date.now(); if (tipo === 'mensaje' && c.despertadoEn && ahora - c.despertadoEn < 2500) return false;
@@ -4382,6 +4394,7 @@
       // una foto lleva dentro dónde y con qué se hizo: se quita siempre, venga de donde venga (Documento, pegar o arrastrar; antes
       // solo se limpiaba la de «Foto» y «Cámara»; revisión, 29 Oct 2026)
       try { fs = await Promise.all(fs.map((f) => sinDatosOcultos(f, extrasB(c)))); } catch (_) {}
+      { const n = fs.filter((f) => !f).length; if (n) { fs = fs.filter(Boolean); aviso(n === 1 ? T('Esta foto no se puede limpiar de datos ocultos en este navegador: en Ultra no se envía.') : T('{n} fotos no se pueden limpiar de datos ocultos en este navegador: en Ultra no se envían.').replace('{n}', n)); if (!fs.length) return; } }
       // chat fuerte (el normal): la foto o el archivo se envía directo, sin hoja ni «Tapar» (dueño, 29 Oct 2026, 15:29: «cuando se envía
       // una foto, se envía directa… elimínalo… normal, clásico y sencillo»). La hoja con «Tapar» y el tiempo, solo en el blindado
       if (!extrasB(c)) { enviaArchivos(c, fs); return; }
@@ -4622,10 +4635,13 @@
     // locales, «?latido=N» lo pone a N segundos.
     const LATIDO_MS = (LOCAL && +new URLSearchParams(location.search).get('latido') * 1000) || 5000;
     setInterval(() => { for (const c of CONVS.values()) { if (!esB(c) || !c.sesion || !c.sesion.confirmada || !enLinea(c) || c.sinClaves) continue; enviaControl(c, { tipo: 'latido' }); } }, LATIDO_MS);
-    // Ultra en el teléfono (ronda 93): al pasar la app a segundo plano fuera de una llamada, la pantalla se tapa al momento (la
-    // miniatura de la multitarea sale tapada) y, si no se vuelve en 15 s, las claves de la sesión se borran: al volver se acuerdan
-    // otras (quien inicia se presenta de nuevo). Lo que la otra persona mandara en ese rato con las claves viejas no se puede leer: lo
-    // verá sin acuse y lo repetirá si hace falta. En el ordenador la pantalla también se tapa al cambiar de ventana (captura-velo).
+    // Ultra en segundo plano (ronda 93): al pasar la app o la pestaña a segundo plano fuera de una llamada, la pantalla se tapa al
+    // momento (la miniatura de la multitarea sale tapada). En una pantalla táctil (la entrada principal es el dedo: un teléfono o una
+    // tableta), si no se vuelve en 15 s, las claves de la sesión se borran de la memoria y, mientras tanto, no se acuerdan otras: al
+    // volver, sí (quien inicia se presenta de nuevo). Lo que la otra persona mandara en ese rato no se puede leer: lo verá sin acuse.
+    // Con ratón no (cambiar de pestaña es lo normal). (Hoy marco.js lleva los teléfonos a /solo-pc/: esto vale para cuando vuelvan, y
+    // para las tabletas con Windows.)
+    const telefono = () => { try { return matchMedia('(pointer: coarse)').matches; } catch (_) { return false; } };
     let fueraT = null;
     const ultraAbierta = () => { const c = CONVS.get(ACTUAL); return !!(c && extrasB(c)); };
     const tapaUltra = (si) => { const t = $('#captura-velo'); if (!t) return; if (si && [...CONVS.values()].some((c) => extrasB(c))) { t.hidden = false; t.classList.add('fuera'); } else if (!si && t.classList.contains('fuera')) { t.hidden = true; t.classList.remove('fuera'); } };
@@ -4640,7 +4656,7 @@
       if (document.visibilityState !== 'visible') {
         if (!enLlamada) tapaUltra(true);
         clearTimeout(fueraT);
-        if (esMovil() && !enLlamada) fueraT = setTimeout(() => { if (document.visibilityState === 'visible' || (LL && LL.ocupado)) return; for (const c of CONVS.values()) if (extrasB(c) && c.sesion) sueltaClaves(c); }, 15000);
+        if (telefono() && !enLlamada) fueraT = setTimeout(() => { if (document.visibilityState === 'visible' || (LL && LL.ocupado)) return; for (const c of CONVS.values()) if (extrasB(c) && c.sesion) sueltaClaves(c); }, 15000);
         return;
       }
       clearTimeout(fueraT); tapaUltra(false);
@@ -5178,7 +5194,7 @@
   const finoEnv = () => !!(window.matchMedia && matchMedia('(hover: hover) and (pointer: fine)').matches);
   const responde = (c, obj) => (c && c.suId ? mandaEfimeraA(c, c.suId, obj).catch(() => false) : Promise.resolve(false));
   // La foto, sin datos ocultos: se dibuja de nuevo en un lienzo (con la orientación ya aplicada) y sale como un JPEG o PNG nuevo, sin el
-  // GPS, el modelo ni la fecha del archivo original. Si no se puede volver a dibujar, no sale (en el chat, sinDatosOcultos manda el original).
+  // GPS, el modelo ni la fecha del archivo original. Si no se puede volver a dibujar, no sale (en el chat, sinDatosOcultos manda el original en la Blindada; en Ultra, tampoco sale).
   async function fotoLimpia(f) {
     let fuente = null, w = 0, h = 0, suelta = () => {};
     try { const b = await createImageBitmap(f, { imageOrientation: 'from-image' }); fuente = b; w = b.width; h = b.height; suelta = () => { try { b.close(); } catch (_) {} }; }

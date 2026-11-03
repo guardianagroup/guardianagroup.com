@@ -15,10 +15,12 @@
 //      tarjeta firmada por los dos; el nombre del archivo sale neutro; una foto con EXIF llega sin EXIF.
 //   8. Nada guardado: al recargar, la conversación Ultra ya no está (ni en IndexedDB) y el otro lado la ve desconectada.
 //   9. La tecla de pánico: Esc dos veces borra y sale a la portada; el otro equipo recibe la orden de borrado.
-//  10. En el teléfono: la pantalla se tapa al pasar a segundo plano y, a los 15 s fuera de una llamada, las claves de la sesión se borran
-//      y al volver se acuerdan otras.
-//  11. Opus a ritmo constante: en la llamada Ultra, los paquetes de audio que salen tienen todos el mismo tamaño; en «Seguridad de esta
-//      llamada», la clave cambia «cada minuto».
+//  10. En una pantalla táctil estrecha (desde el 1 Nov 2026 marco.js lleva los teléfonos a /solo-pc/: aquí, una ventana de 390 px táctil
+//      con el navegador del PC, como tipos.js): la pantalla se tapa al pasar a segundo plano y, a los 15 s fuera de una llamada, las
+//      claves de la sesión se borran y al volver se acuerdan otras.
+//  11. Opus a ritmo constante: en cada sección de audio de la descripción, cbr=1 y usedtx=0, y sin la extensión «ssrc-audio-level»;
+//      los paquetes de la voz que salen miden lo mismo; en «Seguridad de esta llamada», la clave cambia «cada minuto»; y en Ultra no se
+//      ofrece «Pasar al teléfono».
 // Uso: node ultra.js [carpeta de capturas]
 'use strict';
 const { chromium } = require('playwright');
@@ -29,7 +31,6 @@ const OUT = process.argv[2] || path.join(__dirname, 'ultra');
 fs.mkdirSync(OUT, { recursive: true });
 const URL0 = 'http://127.0.0.1:8080/orbita/comunicaciones/';
 const PC = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36';
-const IPHONE = 'Mozilla/5.0 (iPhone; CPU iPhone OS 18_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.6 Mobile/15E148 Safari/604.1';
 const espera = (ms) => new Promise((r) => setTimeout(r, ms));
 const fallos = [];
 const comprueba = (ok, txt, extra) => { console.log((ok ? 'OK   ' : 'FALLO') + ' ' + txt + (extra !== undefined ? '  ' + JSON.stringify(extra) : '')); if (!ok) fallos.push(txt); };
@@ -40,7 +41,7 @@ const local = (u) => u.replace('https://guardianagroup.com', 'http://127.0.0.1:8
 // x: { plan: 'plus'|'gratis'|'' (en la dirección), programa: 'plus'|'gratis' (data-en-programa y la pasarela simulada), sinCapa, movil, latido }
 async function equipo(browser, nombre, x) {
   x = x || {};
-  const ctx = await browser.newContext({ viewport: x.movil ? { width: 390, height: 844 } : { width: 1366, height: 820 }, deviceScaleFactor: x.movil ? 2 : 1, isMobile: !!x.movil, hasTouch: !!x.movil, userAgent: x.movil ? IPHONE : PC, locale: 'es-CO', permissions: ['microphone', 'camera'] });
+  const ctx = await browser.newContext({ viewport: x.movil ? { width: 390, height: 844 } : { width: 1366, height: 820 }, deviceScaleFactor: x.movil ? 2 : 1, hasTouch: !!x.movil, userAgent: PC, locale: 'es-CO', permissions: ['microphone', 'camera'] });
   await ctx.addInitScript((x) => {
     try { sessionStorage.setItem('gcom-sin-numero', '1'); if (x.rota) sessionStorage.setItem('gcom-rota-ms', String(x.rota)); } catch (_) {}
     if (x.sinCapa) { try { delete window.RTCRtpScriptTransform; window.RTCRtpScriptTransform = undefined; } catch (_) {} }
@@ -69,7 +70,8 @@ async function invitaUltra(A) {
   return A.evaluate(() => (window.gcomPrueba && window.gcomPrueba.enlace()) || '');
 }
 async function acepta(B, enlace) { await B.goto(local(enlace)); await espera(1500); if (await B.$('#aceptar-si:visible')) await B.click('#aceptar-si'); }
-const enChat = (P) => hasta(() => P.evaluate(() => /postcuántica|Postcuántica/.test(document.querySelector('#cconfianza').textContent)), 15000);
+// en la sesión Ultra: el PC lo dice en la línea de confianza; el teléfono la deja vacía (el puntito verde), así que ahí, la sesión
+const enChat = (P) => hasta(() => P.evaluate(() => /postcuántica|Postcuántica/.test(document.querySelector('#cconfianza').textContent) || [...GuardianaCom.convs.values()].some((c) => c.modo === 'blindada' && c.huella && c.sesion && c.sesion.confirmada && c.sesion.pq)), 15000);
 async function llama(A, B, video) {
   await A.evaluate((v) => document.querySelector(v ? '#videollamar' : '#llamar').click(), !!video);
   for (let i = 0; i < 40; i++) { await espera(250); if (await B.$('#ll-contestar:visible')) { await B.click('#ll-contestar'); break; } }
@@ -77,19 +79,25 @@ async function llama(A, B, video) {
   await espera(3000);
 }
 const estadoLl = (P) => P.evaluate(() => GuardianaCom.llamada.estado);
-// una foto JPEG mínima (1×1) con un segmento APP1 «Exif» con GPS, para ver que no llega
-const JPEG_BASE = Buffer.from('/9j/4AAQSkZJRgABAQEASABIAAD/2wBDAAMCAgICAgMCAgIDAwMDBAYEBAQEBAgGBgUGCQgKCgkICQkKDA8MCgsOCwkJDRENDg8QEBEQCgwSExIQEw8QEBD/yQALCAABAAEBAREA/8QAFAABAAAAAAAAAAAAAAAAAAAACf/EABQQAQAAAAAAAAAAAAAAAAAAAAD/2gAIAQEAAD8AVN//2Q==', 'base64');
-function jpegConExif() {
+// una foto JPEG de verdad (la dibuja el navegador, 64×48) con un segmento APP1 «Exif» con GPS detrás del SOI, para ver que no llega
+async function jpegConExif(browser) {
+  const p = await browser.newPage();
+  const b64 = await p.evaluate(() => { const cv = document.createElement('canvas'); cv.width = 64; cv.height = 48; const g = cv.getContext('2d'); g.fillStyle = '#2a6'; g.fillRect(0, 0, 64, 48); g.fillStyle = '#fc3'; g.fillRect(8, 8, 30, 20); return cv.toDataURL('image/jpeg', 0.9).split(',')[1]; });
+  await p.close();
+  const base = Buffer.from(b64, 'base64');
   const exif = Buffer.concat([Buffer.from('Exif\0\0'), Buffer.from('MM\0\x2a\0\0\0\x08\0\x01\x88\x25\0\x04\0\0\0\x01\0\0\0\x1a\0\0\0\0GPS LATITUDE 40.4168 N, 3.7038 W, hecho con un telefono concreto')]);
   const app1 = Buffer.concat([Buffer.from([0xff, 0xe1, (exif.length + 2) >> 8, (exif.length + 2) & 255]), exif]);
-  return Buffer.concat([JPEG_BASE.subarray(0, 2), app1, JPEG_BASE.subarray(2)]);
+  return Buffer.concat([base.subarray(0, 2), app1, base.subarray(2)]);
 }
 const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'gcom-ultra-'));
-const fotoPath = path.join(tmp, 'IMG_20261103_mi-nombre.jpg'); fs.writeFileSync(fotoPath, jpegConExif());
+const fotoPath = path.join(tmp, 'IMG_20261103_mi-nombre.jpg');
+// y una «foto» dañada (con su Exif) que ningún navegador puede volver a dibujar
+const rotaPath = path.join(tmp, 'IMG_roto.jpg'); fs.writeFileSync(rotaPath, Buffer.concat([Buffer.from([0xff, 0xd8, 0xff, 0xe1, 0, 20]), Buffer.from('Exif\0\0GPS 40.4168 N\0'), Buffer.alloc(400, 0x55)]));
 const docPath = path.join(tmp, 'informe de mi nombre.pdf'); fs.writeFileSync(docPath, Buffer.concat([Buffer.from('%PDF-1.4\n% GUARDIANA prueba\n'), Buffer.alloc(300 * 1024, 7)]));
 
 (async () => {
   const browser = await chromium.launch({ args: ['--use-fake-ui-for-media-stream', '--use-fake-device-for-media-stream', '--autoplay-policy=no-user-gesture-required'] });
+  fs.writeFileSync(fotoPath, await jpegConExif(browser));
 
   // ---- 1. la puerta ----
   { const F = await equipo(browser, 'fuera');
@@ -128,7 +136,7 @@ const docPath = path.join(tmp, 'informe de mi nombre.pdf'); fs.writeFileSync(doc
   await espera(1500);
   const pa = await palabrasChat(A), pb = await palabrasChat(B);
   comprueba(pa && pa === pb && pa.split(' · ').length === 4, '3. las cuatro palabras, las mismas en los dos chats', [pa, pb]);
-  comprueba(/Tú: PC con GUARDIANA · Otro lado: navegador del PC/.test(await nivelChat(A)) && /Tú: navegador del PC · Otro lado: PC con GUARDIANA/.test(await nivelChat(B)), '3. el nivel de cada lado, en los dos', [await nivelChat(A), await nivelChat(B)]);
+  comprueba(/Tu lado: PC con GUARDIANA · Otro lado: navegador del PC/.test(await nivelChat(A)) && /Tu lado: navegador del PC · Otro lado: PC con GUARDIANA/.test(await nivelChat(B)), '3. el nivel de cada lado, en los dos', [await nivelChat(A), await nivelChat(B)]);
   // el texto llega; el relé solo ve bloques de 1 KB
   A.tramas.length = 0;
   await A.fill('#texto', 'Hola, esto es Ultra'); await A.click('#enviar'); await espera(1200);
@@ -148,7 +156,7 @@ const docPath = path.join(tmp, 'informe de mi nombre.pdf'); fs.writeFileSync(doc
   // «Seguridad y verificación»: las palabras, nada guardado, sin buzón
   await A.evaluate(() => document.querySelector('#cpalabras').click()); await espera(700);
   const hojaSeg = await A.evaluate(() => document.querySelector('#escudo-lista').textContent);
-  comprueba(/Palabras de verificación/.test(hojaSeg) && /sin buzón/i.test(hojaSeg) && /Nada guardado/.test(hojaSeg) && /PC con GUARDIANA/.test(hojaSeg) && /cbr=1/.test(hojaSeg), '3. «Seguridad y verificación» dice las palabras, nada guardado, sin buzón, cbr y el nivel');
+  comprueba(/Palabras de verificación/.test(hojaSeg) && /no tiene buzón/.test(hojaSeg) && /Nada guardado/.test(hojaSeg) && /PC con GUARDIANA/.test(hojaSeg) && /cbr=1/.test(hojaSeg), '3. «Seguridad y verificación» dice las palabras, nada guardado, sin buzón, cbr y el nivel');
   await foto(A, '04-pc-seguridad');
   await A.click('#escudo-cerrar'); await espera(400);
 
@@ -167,6 +175,12 @@ const docPath = path.join(tmp, 'informe de mi nombre.pdf'); fs.writeFileSync(doc
     const recibida = await B.evaluate((id) => window.gcomPrueba.archivo(id), fB.id);
     const bytes = recibida ? Buffer.from(recibida.b64.replace(/-/g, '+').replace(/_/g, '/'), 'base64') : Buffer.alloc(0);
     comprueba(recibida && bytes.length > 0 && !bytes.toString('latin1').includes('Exif') && !bytes.toString('latin1').includes('GPS') && bytes[0] === 0xff && bytes[1] === 0xd8, '7. la foto llega sin el segmento EXIF (ni el GPS) y sigue siendo un JPEG', { bytes: bytes.length, nombre: recibida && recibida.nombre });
+    // la foto que no se puede volver a dibujar: en Ultra no sale (el original llevaría sus datos), y lo dice
+    { const antes = (await A.evaluate(() => window.gcomPrueba.mensajes())).length;
+      const [ch3] = await Promise.all([A.waitForEvent('filechooser'), A.evaluate(() => document.querySelector('#archivo').click())]);
+      await ch3.setFiles(rotaPath); await espera(1500);
+      const av3 = await aviso(A), abierta = await A.evaluate(() => document.querySelector('#h-envio').classList.contains('gc-abierta')), despues = (await A.evaluate(() => window.gcomPrueba.mensajes())).length;
+      comprueba(/no se puede limpiar/.test(av3) && !abierta && despues === antes, '7. una foto que no se puede limpiar no sale en Ultra, y lo dice', av3); }
     // comprobante firmado a petición, con un documento (y el aviso del autor)
     const [ch2] = await Promise.all([A.waitForEvent('filechooser'), A.evaluate(() => document.querySelector('#archivo').click())]);
     await ch2.setFiles(docPath); await espera(1500);
@@ -175,7 +189,8 @@ const docPath = path.join(tmp, 'informe de mi nombre.pdf'); fs.writeFileSync(doc
     comprueba(await A.evaluate(() => document.querySelector('#envio-firmado').getAttribute('aria-pressed') === 'true'), '7. «Solicitar comprobante firmado» se marca');
     await foto(A, '06-pc-enviar-pdf-firmado');
     await A.click('#envio-si'); await espera(1500);
-    comprueba(await hasta(() => B.evaluate(() => [...document.querySelectorAll('.sello.firmado')].some((s) => /comprobante firmado/.test(s.textContent))), 6000), '7. la otra persona ve que se pide un comprobante firmado');
+    // velado (lectura discreta), lo dice debajo del velo; al mostrarlo, el sello
+    comprueba(await hasta(() => B.evaluate(() => [...document.querySelectorAll('.gc-velada small')].some((s) => /con comprobante firmado/.test(s.textContent)) || [...document.querySelectorAll('.sello.firmado')].some((s) => /comprobante firmado/.test(s.textContent))), 6000), '7. la otra persona ve que se pide un comprobante firmado');
     comprueba(await hasta(() => A.evaluate(() => window.gcomPrueba.mensajes().some((m) => m.tipo === 'custodia' && m.estado === 'firmado')), 20000) && await hasta(() => B.evaluate(() => window.gcomPrueba.mensajes().some((m) => m.tipo === 'custodia' && m.estado === 'firmado')), 8000), '7. el comprobante queda firmado por los dos equipos');
     const d = (await A.evaluate(() => window.gcomPrueba.mensajes())).find((m) => m.tipo === 'archivo' && m.firmado);
     comprueba(d && d.nombre === 'documento-1.pdf', '7. el documento también sale con nombre neutro', d && d.nombre);
@@ -191,11 +206,14 @@ const docPath = path.join(tmp, 'informe de mi nombre.pdf'); fs.writeFileSync(doc
   comprueba(la.vis && la.num === lb.num && la.num.split(' · ').length === 4 && la.t === 'Palabras de verificación', '3. en la llamada, las cuatro palabras iguales en las dos pantallas', [la.num, lb.num]);
   comprueba(la.nivelVis && /PC con GUARDIANA/.test(la.nivel) && /navegador del PC/.test(la.nivel), '3. y el nivel de cada lado', la.nivel);
   comprueba(la.voz === 'ultra' && la.cambio && la.imagen === 'mosaico' && la.pq && !la.cod && lb.voz === 'ultra' && lb.cambio, '11. voz cambiada y mosaico puestos, capa postcuántica activa, sin la tarjeta del código', la);
-  const sdp = await A.evaluate(() => { const pc = GuardianaCom.llamada.pcPrueba; return (pc.remoteDescription.sdp.match(/a=fmtp:\d+ [^\r\n]*/) || [''])[0]; });
-  comprueba(/cbr=1/.test(sdp) && /usedtx=0/.test(sdp), '11. Opus con cbr=1 y usedtx=0 en la descripción', sdp);
-  // el tamaño de los paquetes de audio que salen: el mismo en cada ventana de 2 s
+  // cada sección de audio de las dos descripciones: cbr=1 y usedtx=0 en la de Opus; ninguna con la extensión del nivel de audio
+  const secciones = await A.evaluate(() => { const pc = GuardianaCom.llamada.pcPrueba; return [pc.localDescription.sdp, pc.remoteDescription.sdp].map((d) => d.split(/\r\n(?=m=)/).filter((x) => /^m=audio /.test(x)).map((x) => ({ fmtp: (x.match(/a=fmtp:111 [^\r\n]*/) || [''])[0], nivel: /ssrc-audio-level/.test(x) }))); });
+  const todas = secciones.flat();
+  comprueba(todas.length >= 4 && todas.every((x) => /cbr=1/.test(x.fmtp) && /usedtx=0/.test(x.fmtp) && !x.nivel), '11. Opus con cbr=1 y usedtx=0 en cada sección de audio (voz y pista muda), sin «ssrc-audio-level»', todas);
+  comprueba(!(await visible(A, '#ll-llevar')) && !(await visible(B, '#ll-llevar')), '11. en Ultra no se ofrece «Pasar al teléfono»');
+  // el tamaño de los paquetes de la voz que salen: el mismo en cada ventana de 2 s
   const muestras = [];
-  for (let i = 0; i < 4; i++) { muestras.push(await A.evaluate(async () => { const pc = GuardianaCom.llamada.pcPrueba; const st = await pc.getStats(); let r = null; st.forEach((x) => { if (x.type === 'outbound-rtp' && x.kind === 'audio' && !r) r = { b: x.bytesSent, p: x.packetsSent }; }); return r; })); await espera(2000); }
+  for (let i = 0; i < 4; i++) { muestras.push(await A.evaluate(async () => { const pc = GuardianaCom.llamada.pcPrueba; const s = pc.getSenders().find((x) => x.track && x.track.kind === 'audio' && x.track.enabled); if (!s) return null; const st = await s.getStats(); let r = null; st.forEach((x) => { if (x.type === 'outbound-rtp' && x.kind === 'audio') r = { b: x.bytesSent, p: x.packetsSent }; }); return r; })); await espera(2000); }
   const porPaquete = []; for (let i = 1; i < muestras.length; i++) if (muestras[i] && muestras[i - 1] && muestras[i].p > muestras[i - 1].p) porPaquete.push((muestras[i].b - muestras[i - 1].b) / (muestras[i].p - muestras[i - 1].p));
   comprueba(porPaquete.length >= 2 && Math.max(...porPaquete) - Math.min(...porPaquete) < 2, '11. los paquetes de audio que salen miden lo mismo (ritmo constante)', porPaquete.map((x) => +x.toFixed(1)));
   await A.evaluate(() => document.querySelector('.gc-llamada-cifrado').click()); await espera(600);
