@@ -140,7 +140,7 @@ async function guarda(P, accion) {
 
   const { p: A } = await equipo(browser, 'pc', 'A'), { p: B, ctx: ctxB } = await equipo(browser, 'pc', 'B');
   await B.goto(URL0); await espera(1500);
-  await B.click('#nueva'); await espera(2500); await B.click('#codigo-enlace'); await espera(600);
+  await B.click('#nueva'); await espera(2500); await B.evaluate(() => window.__copiados.push(window.gcomPrueba.enlaceI())); await espera(600);
   const url = String(await B.evaluate(() => window.__copiados[window.__copiados.length - 1] || '')).replace('https://guardianagroup.com', 'http://127.0.0.1:8080');
   await A.goto(url); await espera(1500); if (await A.$('#aceptar-si:visible')) await A.click('#aceptar-si'); await espera(5000);
   await A.evaluate(() => document.querySelector('#videollamar').click()); await espera(2500);
