@@ -903,10 +903,22 @@ body::before{background:#06080C}
 .btn-bajar:focus-visible{outline:2px solid #F4F6F8;outline-offset:3px}
 .btn-bajar svg{flex:none}
 .btn-bajar.btn-sm{gap:6px}
-@media (max-width:1180px){.nav-links .bajar-app{display:none}}
+/* 5 Nov 2026 (auditoría de la web): «Descargar GUARDIANA» de la cabecera es un solo texto, para que cada idioma lo diga en su orden
+   («GUARDIANA herunterladen»); con menos de 1180 px, solo «Descargar» */
+.nav-links .bajar-corto{display:none}
+@media (max-width:1180px){.nav-links .bajar-app{display:none}.nav-links .bajar-corto{display:inline}}
 @media (max-width:440px){.nav-links .btn-bajar{display:inline-flex;background:#9CC3E4;color:#06080C;box-shadow:none;padding:0 13px;font-size:14px;gap:5px}
   .nav-in{gap:10px}.nav-links{gap:8px}.nav-links .idi{margin-inline-start:0}.idi-b{gap:5px;padding:0 10px}.idi-b .idi-v{display:none}}
 @media (max-width:380px){.idi-b .idi-c{display:none}}
+/* 5 Nov 2026 (auditoría de la web): por debajo de 440 px el botón de idioma pisaba la última letra de «GUARDIANA» (y en alemán,
+   con «Herunterladen», más): menos margen a los lados, solo el globo en el idioma y un poco menos de aire entre las letras del
+   nombre; y si aun así un idioma no cupiera, el nombre se recorta por su final en lugar de quedar debajo del botón */
+@media (max-width:440px){
+  .nav-in{padding-inline-start:max(16px,env(safe-area-inset-left,0px));padding-inline-end:max(16px,env(safe-area-inset-right,0px))}
+  .idi-b .idi-c{display:none}
+  .wm{letter-spacing:.08em}
+  .izq .logo{min-width:0;overflow:hidden}
+}
 /* En el teléfono no hay nada que descargar (dueño, 30 Oct 2026, 15:16: «cuando una persona entra desde el móvil, que no le aparezca
    el descargar, solamente que le aparezca entrar»): sin «Descargar» ni «Programa para Windows»; arriba, «Entrar» en su lugar.
    La regla de CSS vale desde el primer fotograma; la clase es-movil (abajo, por el navegador) cubre los iPad que se presentan como Mac. */
@@ -1004,7 +1016,7 @@ html.es-movil .dl{display:none!important}
       <a class="btn btn-sm" href="/orbita/">Entrar</a>
       <!-- 30 Oct 2026, 20:27 (dueño): en el PC, arriba solo la marca, el idioma y «Descargar GUARDIANA», que descarga el programa:
            un menú pequeño ahí mismo (Windows · macOS) y empieza la descarga. «Entrar» queda solo en pantallas táctiles (tabletas). -->
-      <div class="dl"><button type="button" class="btn btn-sm btn-bajar dl-b" aria-haspopup="true" aria-expanded="false"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7.5 10.5 12 15l4.5-4.5"/><path d="M5 19.5h14"/></svg><span>Descargar</span><span class="bajar-app"> GUARDIANA</span><svg class="dl-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button></div>
+      <div class="dl"><button type="button" class="btn btn-sm btn-bajar dl-b" aria-haspopup="true" aria-expanded="false"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7.5 10.5 12 15l4.5-4.5"/><path d="M5 19.5h14"/></svg><span class="bajar-corto">Descargar</span><span class="bajar-app">Descargar GUARDIANA</span><svg class="dl-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button></div>
     </nav>
   </div>
 </header>
