@@ -657,7 +657,7 @@
     const ses = { sid, hash: s.hash, envio: C.B.cadena(s.envio), recibo: C.B.cadena(s.recibo), medios: s.medios || null, desde: Date.now(), confirmada: false, pq: true, blindada: true };
     c.sesiones.set(sid, ses); c.sesion = ses; clearTimeout(c.reintento); c.encuentros = (c.encuentros || 0) + 1;
     if (!c.pqVisto) { c.pqVisto = true; guardaConv(c); }
-    vigila(c, renovada ? T('Claves renovadas (algoritmos de la suite CNSA 2.0): lo anterior ya no se puede leer con las claves nuevas.') : T('Claves acordadas con la otra persona: algoritmos de la suite CNSA 2.0 (ML-KEM-1024 y ECDH P-384).'), 'info');
+    vigila(c, renovada ? T('Claves renovadas (ML-KEM-1024 y ECDH P-384): lo anterior ya no se puede leer con las claves nuevas.') : T('Claves acordadas con la otra persona: ML-KEM-1024 y ECDH P-384, con firmas ML-DSA-87 y ECDSA P-384.'), 'info');
     // de las sesiones anteriores quedan las dos últimas (por los mensajes en vuelo); las demás se borran de la memoria
     for (const k of [...c.sesiones.keys()].slice(0, -3)) { const x = c.sesiones.get(k); try { x.envio.borra(); x.recibo.borra(); if (x.medios) x.medios.fill(0); } catch (_) {} c.sesiones.delete(k); }
     pintaCabecera(c); pintaLista();
@@ -1456,7 +1456,7 @@
     const suyo = B ? { clave: C.b64u(c.firmaPub), acuerdo: C.b64u(c.acuerdoPub), clave_pq: C.b64u(c.dsaPub), huella: C.hex(c.huella) } : { clave: C.b64u(c.firmaPub), acuerdo: C.b64u(c.acuerdoPub), huella: C.hex(c.huella) };
     const reg = {
       v: B ? 2 : 1, tipo: B ? 'entrega-integridad-blindada' : 'custodia-digital', id: m.id, emitido,
-      modo: B ? 'blindada' : undefined, suite: B ? 'CNSA 2.0: ECDSA y ECDH P-384, ML-KEM-1024, ML-DSA-87, AES-256-GCM, SHA-384' : undefined,
+      modo: B ? 'blindada' : undefined, suite: B ? 'ECDSA y ECDH P-384, ML-KEM-1024, ML-DSA-87, AES-256-GCM, SHA-384' : undefined, // (los algoritmos, sin «CNSA 2.0»: P-384 es de la suite anterior)
       verificacion_mutua: B ? !!(c.verificada && c.suVerificada && j.mutua === true) : undefined,
       archivo: { nombre: m.archivo.nombre, bytes: m.archivo.tam, sha256: a.sha256, tipo_declarado: m.archivo.mime || null, tipo_real: v.tipoReal || null, fragmentos: m.archivo.trozos, tam_fragmento: TROZO },
       emisor: { ...mio, nombre: B ? '' : YO.nombre || '', region: miPais(c), verifico_al_otro: !!c.verificada, version: VERSION_APP },
@@ -2733,7 +2733,7 @@
     else if (!R.abierto) txt = T('Sin conexión con el relé');
     else if (!c.miembros.has(c.suId)) txt = T('No está conectada ahora: lo que escribas saldrá cuando entre');
     else if (!c.sesion || !c.sesion.confirmada) txt = T('Estableciendo la encriptación…');
-    else if (esB(c)) txt = (movil ? T('Postcuántica') : T('Algoritmos de la suite CNSA 2.0') + ' · ' + T('postcuántica')) + ' · ' + (c.verificada && c.suVerificada ? T('verificada por los dos') : movil ? T('pendiente de verificar') : T('pendiente de la verificación mutua'));
+    else if (esB(c)) txt = (movil ? T('Postcuántica') : T('ML-KEM-1024 y ML-DSA-87') + ' · ' + T('postcuántica')) + ' · ' + (c.verificada && c.suVerificada ? T('verificada por los dos') : movil ? T('pendiente de verificar') : T('pendiente de la verificación mutua'));
     else txt = (movil ? T('Encriptada') : T('Encriptada de extremo a extremo')) + ' · ' + (c.sesion.pq ? T('postcuántica') + ' · ' : T('sin protección postcuántica') + ' · ') + (c.verificada ? T('verificada') : T('sin verificar'));
     const pqa = $('#cpq');
     if (pqa) {
@@ -3428,7 +3428,7 @@
     const ul = $('#escudo-lista'); ul.textContent = '';
     const fila = (cls, b, s) => { const li = document.createElement('li'); li.className = cls; const i = document.createElement('i'); const bb = document.createElement('b'); bb.textContent = b; const ss = document.createElement('span'); ss.textContent = s; li.append(i, bb, ss); ul.append(li); };
     if (esB(c)) {
-      fila(c.sesion ? 'gc-ok' : 'gc-info', T('Sesión Ultra'), T('ML-KEM-1024 (FIPS 203) y ECDH P-384 para las claves, ML-DSA-87 (FIPS 204) y ECDSA P-384 para las firmas, AES-256-GCM y HKDF-SHA-384. Identidad nueva en esta conversación, solo en memoria.'));
+      fila(c.sesion ? 'gc-ok' : 'gc-info', T('Sesión Ultra'), T('ML-KEM-1024 (FIPS 203) y ECDH P-384 para las claves, ML-DSA-87 (FIPS 204) y ECDSA P-384 para las firmas, AES-256-GCM y HKDF-SHA-384. Identidad nueva en esta conversación, solo en memoria.') + ' ' + T('En las llamadas, la capa postcuántica saca su clave de esta sesión con HKDF-SHA-256, y las palabras de la llamada salen de un acuerdo ECDH P-256 con compromiso previo (SHA-256).'));
       fila('gc-ok', T('Renovación de claves'), T('Claves nuevas cada 5 minutos y en cada reconexión: lo anterior deja de poder leerse con lo nuevo. En la llamada, la clave del sonido y la imagen cambia cada minuto.'));
       const pal = await palabrasDe(c);
       fila(c.verificada && c.suVerificada ? 'gc-ok' : 'gc-aviso', T('Palabras de verificación'), (pal ? pal.join(' · ') + '. ' : '') + T('Léanlas en voz alta: si coinciden en los dos equipos, nadie se ha puesto en medio. Una voz clonada con IA debilita esta comprobación de oído; el número de 60 cifras de abajo sirve igual.'));

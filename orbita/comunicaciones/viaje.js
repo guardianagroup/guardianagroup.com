@@ -276,7 +276,7 @@
     fila(T('Relé de GUARDIANA'), [[tr.rele_ciudad, pais(tr.rele_pais)].filter(Boolean).join(', '), tr.rele, tr.rele_region].filter(Boolean).join(' · ') + ' · ' + (tr.conexion === 'wss' ? T('conexión TLS') : T('conexión sin TLS (prueba local)')) + ' · ' + T('transporta fragmentos encriptados que no puede leer'));
     fila = seccion(T('Protección'));
     fila(T('Encriptación del archivo'), T('AES-256-GCM en cada fragmento, con una clave propia del archivo y una etiqueta de autenticación de 128 bits.'));
-    if (BL) fila(T('Suite'), T('Sesión Ultra con los algoritmos de la suite CNSA 2.0, en híbrido con criptografía clásica.'));
+    if (BL) fila(T('Suite'), T('Sesión Ultra: ML-KEM-1024 y ML-DSA-87, en híbrido con ECDH y ECDSA P-384.'));
     fila(T('Acuerdo de claves'), BL ? T('Híbrido postcuántico: ML-KEM-1024 y ECDH P-384, combinados con HKDF-SHA-384.') : se.pq ? T('Híbrido postcuántico: ML-KEM-768 y ECDH P-256, combinados con HKDF-SHA-256.') : T('ECDH P-256, combinado con HKDF-SHA-256 (sin la capa postcuántica).'));
     if (se.id) { const d = el('div', 'cu-lineas'); d.append(mono(se.id, 4)); if (se.establecida) d.append(el('span', null, T('establecida') + ' ' + fechaHora(se.establecida))); filaTec(T('Sesión'), d); }
     fila(T('Firma del comprobante'), BL ? T('Doble firma de cada equipo: ECDSA P-384 sobre SHA-384 y ML-DSA-87 (FIPS 204). Las dos tienen que ser válidas.') : T('ECDSA P-256 sobre SHA-256, con la clave de identidad de cada equipo.'));
