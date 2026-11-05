@@ -9,6 +9,7 @@
 #   curl -fsSL https://raw.githubusercontent.com/guardianagroup/guardianagroup.com/main/zero-motor/instalar.sh | bash -s -- motor.guardianagroup.com
 # Con la VPN de GUARDIANA en ese servidor (5 Nov 2026), su nombre delante (zero-motor/LEEME-VPN.md):
 #   curl -fsSL …/zero-motor/instalar.sh | VPN_NOMBRE=vpn-nbg.guardianagroup.com bash -s -- motor.guardianagroup.com
+# (En motor.guardianagroup.com y motor-am.guardianagroup.com ya no hace falta: la monta sola la actualización automática.)
 #
 # Antes: el registro DNS A del dominio debe apuntar a la IP pública del servidor y los puertos 80 y 443 deben estar libres.
 # Es idempotente: se puede volver a ejecutar para actualizar. No toca /etc/guardiana/zero.env si ya existe.
@@ -44,7 +45,17 @@ fi
 # del programa, crates/tunel/src/salidas.rs): VPN_NOMBRE si viene con la orden (y entonces la VPN se instala aquí); si
 # no, el que quedó guardado al instalarla (/etc/guardiana/vpn/nombre); si no, el de Helsinki.
 VPN_PEDIDA="${VPN_NOMBRE:-}"
-VPN_NOMBRE="${VPN_NOMBRE:-$(cat /etc/guardiana/vpn/nombre 2>/dev/null || true)}"
+# 5 Nov 2026 (dueño, 10:57: la consola del servidor no le dejaba entrar): Núremberg y Miami montan su VPN solos, con su
+# nombre, la primera vez que la actualización automática de cada 15 minutos vuelve a ejecutar este instalador; nadie
+# tiene que pegar nada en su consola. Solo mientras el servidor no tenga aún el nombre de su VPN guardado: después manda
+# ese nombre, como en Helsinki.
+if [ -z "$VPN_PEDIDA" ] && [ ! -s /etc/guardiana/vpn/nombre ]; then
+  case "$DOMINIO" in
+    motor.guardianagroup.com) VPN_PEDIDA=vpn-nbg.guardianagroup.com ;;
+    motor-am.guardianagroup.com) VPN_PEDIDA=vpn-mia.guardianagroup.com ;;
+  esac
+fi
+VPN_NOMBRE="${VPN_PEDIDA:-$(cat /etc/guardiana/vpn/nombre 2>/dev/null || true)}"
 VPN_NOMBRE="${VPN_NOMBRE:-vpn.guardianagroup.com}"
 [[ "$VPN_NOMBRE" =~ ^vpn(-[a-z0-9]+)?\.guardianagroup\.com$ ]] || { rojo "Nombre de la VPN no válido: $VPN_NOMBRE"; exit 1; }
 
@@ -348,11 +359,12 @@ ProtectHome=true
 WantedBy=multi-user.target
 EOF
 
-# 2 Nov 2026 (dueño, 10:40: «Utilizamos el de Helsinki. Conéctalo ya»): la VPN de GUARDIANA, solo en el servidor de Helsinki (o
-# donde exista la carpeta /etc/guardiana/vpn, que deja vpn.sh): zero-motor/vpn.sh, con 50 minutos como mucho (compila el alta
-# la primera vez). Si no se puede montar, el motor sigue como siempre. En Caddy, si el alta no contesta (un instante, al
-# reiniciarse), handle_errors responde 503 y el error queda en el nivel de depuración, que no se escribe: así el diario no
-# guarda la dirección de quien pedía el alta.
+# 2 Nov 2026 (dueño, 10:40: «Utilizamos el de Helsinki. Conéctalo ya»): la VPN de GUARDIANA, en el servidor de Helsinki, donde
+# se pida (VPN_NOMBRE en la orden, o por su dominio en Núremberg y Miami, 5 Nov 2026) o donde exista la carpeta
+# /etc/guardiana/vpn, que deja vpn.sh: zero-motor/vpn.sh, con 50 minutos como mucho (compila el alta la primera vez). Si no
+# se puede montar, el motor sigue como siempre. En Caddy, si el alta no contesta (un instante, al reiniciarse), handle_errors
+# responde 503 y el error queda en el nivel de depuración, que no se escribe: así el diario no guarda la dirección de quien
+# pedía el alta.
 VPN_CADDY=""
 if [ -n "$VPN_PEDIDA" ] || [ "$DOMINIO" = "motor-hel.guardianagroup.com" ] || [ -d /etc/guardiana/vpn ]; then
   paso "VPN ($VPN_NOMBRE): WireGuard, el alta de GUARDIANA y su resolutor (zero-motor/vpn.sh)"
@@ -360,7 +372,18 @@ if [ -n "$VPN_PEDIDA" ] || [ "$DOMINIO" = "motor-hel.guardianagroup.com" ] || [ 
   install -d -m 700 /etc/guardiana/vpn
   printf '%s\n' "$VPN_NOMBRE" > /etc/guardiana/vpn/nombre
   chmod 600 /etc/guardiana/vpn/nombre
+  VPN_SITIO=0
   if VPN_NOMBRE="$VPN_NOMBRE" timeout 50m bash "$DIR/zero-motor/vpn.sh"; then
+    VPN_SITIO=1
+  # 5 Nov 2026 (revisión): si vpn.sh falla al volver a ejecutarse (el cerrojo de apt un momento, la red) pero el alta que ya
+  # había sigue contestando, su sitio se queda en Caddy; si no, el alta dejaría de responder hasta el siguiente cambio.
+  elif [ "$(curl -s -o /dev/null -m 5 -w '%{http_code}' http://127.0.0.1:8793/vpn/alta 2>/dev/null || true)" != "000" ]; then
+    VPN_SITIO=1
+    rojo "  vpn.sh no terminó bien, pero el alta que ya había sigue contestando: se queda como estaba. Registro: /var/log/guardiana-vpn-*.log"
+  else
+    rojo "  La VPN no se pudo montar; el motor sigue. Registro: /var/log/guardiana-vpn-*.log y journalctl -u guardiana-vpn-alta"
+  fi
+  if [ "$VPN_SITIO" = 1 ]; then
     VPN_CADDY="
 $VPN_NOMBRE {
 	header -Server
@@ -372,8 +395,6 @@ $VPN_NOMBRE {
 		respond 503
 	}
 }"
-  else
-    rojo "  La VPN no se pudo montar; el motor sigue. Registro: /var/log/guardiana-vpn-*.log y journalctl -u guardiana-vpn-alta"
   fi
 fi
 

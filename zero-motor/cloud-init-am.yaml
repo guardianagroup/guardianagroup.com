@@ -1,6 +1,7 @@
 #cloud-config
 # GUARDIANA ZERO · motor de América (Miami): pega este texto como «user data» / cloud-init al (re)instalar el servidor
-# (Ubuntu 24.04). Antes: registro DNS A de motor-am.guardianagroup.com → IP del servidor. Se instala solo (5–8 min) y se
+# (Ubuntu 24.04). Antes: registros DNS A de motor-am.guardianagroup.com y vpn-mia.guardianagroup.com → IP del servidor.
+# Se instala solo (5–8 min, y unos 45 con la VPN vpn-mia, que desde el 5 Nov 2026 se monta sola en este motor) y se
 # mantiene actualizado desde el repositorio. Registro: /var/log/zero-instalacion.log
 runcmd:
   - [bash, -c, "curl -fsSL https://raw.githubusercontent.com/guardianagroup/guardianagroup.com/main/zero-motor/instalar.sh | bash -s -- motor-am.guardianagroup.com 'América · Miami' > /var/log/zero-instalacion.log 2>&1"]
