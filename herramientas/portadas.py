@@ -44,7 +44,9 @@ SOLO_VER = '--solo-ver' in sys.argv
 DOM = 'https://guardianagroup.com/'
 FUENTE = 'index.html'
 
-# Lo que no está en el diccionario de la página (metadatos para los buscadores; «encriptado», nunca «cifrado»).
+# Lo que no está en el diccionario de la página (metadatos para los buscadores). En portugués, la portada dice «criptografado»
+# (las doce frases traducidas del cuerpo, y pt/como-funciona y pt/privacidade): aquí lo mismo, por coherencia de la página;
+# el programa en portugués dice «encriptado»; una sola forma es decisión del dueño. Nunca «cifrado».
 META = {
     'en': {
         'description': "Explore the internet's infrastructure, see what each website connects to in the ZERO browser and send encrypted messages and files. Windows, no account.",
@@ -54,10 +56,10 @@ META = {
         'offer': 'Free download with a 7-day trial of all its features. Nothing is charged today.',
     },
     'pt': {
-        'description': 'Explore a infraestrutura da internet, veja as conexões de cada site no navegador ZERO e envie mensagens e arquivos encriptados. Windows, sem conta.',
-        'og_description': 'Explore a infraestrutura da internet, veja as conexões de cada site no navegador ZERO e envie mensagens e arquivos encriptados. Español · English · Português.',
+        'description': 'Explore a infraestrutura da internet, veja as conexões de cada site no navegador ZERO e envie mensagens e arquivos criptografados. Windows, sem conta.',
+        'og_description': 'Explore a infraestrutura da internet, veja as conexões de cada site no navegador ZERO e envie mensagens e arquivos criptografados. Español · English · Português.',
         'og_image_alt': 'O planeta Terra visto do espaço sob as palavras: Veja as conexões. Decida o que cortar.',
-        'app': 'Um programa para Windows: o navegador ZERO, que abre cada site longe do seu computador e mostra as suas conexões; o Comunicações, com mensagens, chamadas e arquivos encriptados de ponta a ponta; e a Órbita, o mapa da infraestrutura da internet. Sem conta. Inclui 7 dias de teste com todas as funções.',
+        'app': 'Um programa para Windows: o navegador ZERO, que abre cada site longe do seu computador e mostra as suas conexões; o Comunicações, com mensagens, chamadas e arquivos criptografados de ponta a ponta; e a Órbita, o mapa da infraestrutura da internet. Sem conta. Inclui 7 dias de teste com todas as funções.',
         'offer': 'Download gratuito com 7 dias de teste de todas as funções. Hoje não se cobra nada.',
     },
 }
