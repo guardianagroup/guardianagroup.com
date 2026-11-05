@@ -26,6 +26,10 @@ EXCLUIDAS = {'zero.html', 'en/zero.html', 'pt/zero.html', 'es/por-dentro.html', 
              'verificar.html', 'en/verify.html', 'pt/verificar.html', 'index-anterior.html'}
 EXCLUIDAS_CARPETAS = ('guias/', 'en/guides/', 'pt/guias/')
 
+OPCIONES = {'--solo-ver'}
+raras = [a for a in sys.argv[1:] if a.startswith('--') and a not in OPCIONES]
+if raras:
+    sys.exit('opción desconocida: ' + ' '.join(raras) + ' (solo --solo-ver)')
 ARGS = [a for a in sys.argv[1:] if not a.startswith('--')]
 REF = ARGS[0] if ARGS else 'HEAD'
 SOLO_VER = '--solo-ver' in sys.argv
