@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <!-- 27 Oct 2026, 12:23 (dueño): «la página web principal va a ser la del planeta que se desliza hacia abajo; arriba, «Empezar»
      abre la de NÚCLEO (ZERO, Órbita, Comunicaciones y NÚCLEO)». Esta es la portada de guardianagroup.com; /conocer.html lleva aquí. -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-70EMgXFb9f6c+bHFbdqisUgttTr9HYDY6II53ZsjdNA=' 'sha256-zasOcNPoEvcMFgBA+0OHu0TsTUWXM8HBKcYkep6iB08=' 'sha256-WNDhUcqfJPY4Q/LiJ+LMKJcbOSKZ8RKfHmKSL6EWU1o=' 'sha256-4oxR1kcmI8IIouZuF1y/k1H54ycRLioBh/pG6nvCxWo=' 'sha256-QR47Ix1kwGP7dnVM+e7moPRH8uIuzJqjw72+lyhXYZk=' 'sha256-5n3CUlZykSUXtEEPpYoaP8WYwhnU5DbLQpy/5Qzn6hc=' 'sha256-R2R8uxWP86lyC3i9IeuTc5SLJhyNMj4fhd7CtUIa8nM=' 'sha256-8AwL2BktHjNjQeyquSewHHo5Bq/AEEEnT4zzNUGGfWo=' 'sha256-vg5Tg+u1xfRg4ugEJhRuZvyxN3iDRb46PwVC0/093Ys=' 'sha256-nBZ43g113Q/+KsjE4iyWgO+z+fC5FpDVzuQMnKAwClM=' 'sha256-jbYr+vlk8Or4YSqEi4cg/TWye6Ui0fFkrFWoguUaqPw=' 'sha256-X566HVoXc9XTTBOnxk5exB8d9y15lrXKD7hn9/vXdJE='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-ij4Wl5CCB8F1RN/H7aOxuKOhPvOGSaqRhBtnizi2o7E=' 'sha256-zasOcNPoEvcMFgBA+0OHu0TsTUWXM8HBKcYkep6iB08=' 'sha256-WNDhUcqfJPY4Q/LiJ+LMKJcbOSKZ8RKfHmKSL6EWU1o=' 'sha256-4oxR1kcmI8IIouZuF1y/k1H54ycRLioBh/pG6nvCxWo=' 'sha256-QR47Ix1kwGP7dnVM+e7moPRH8uIuzJqjw72+lyhXYZk=' 'sha256-5n3CUlZykSUXtEEPpYoaP8WYwhnU5DbLQpy/5Qzn6hc=' 'sha256-R2R8uxWP86lyC3i9IeuTc5SLJhyNMj4fhd7CtUIa8nM=' 'sha256-8AwL2BktHjNjQeyquSewHHo5Bq/AEEEnT4zzNUGGfWo=' 'sha256-vg5Tg+u1xfRg4ugEJhRuZvyxN3iDRb46PwVC0/093Ys=' 'sha256-nBZ43g113Q/+KsjE4iyWgO+z+fC5FpDVzuQMnKAwClM=' 'sha256-jbYr+vlk8Or4YSqEi4cg/TWye6Ui0fFkrFWoguUaqPw=' 'sha256-X566HVoXc9XTTBOnxk5exB8d9y15lrXKD7hn9/vXdJE='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'none'">
 <script src="/marco/entrada.js?v=20261101b"></script>
 <meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -841,6 +841,12 @@ body::before{background:#06080C}
 .foot small{opacity:1;color:#8fa3b6}
 .hero .wip-note{width:fit-content;margin-inline:auto;padding:6px 14px;border-radius:999px;background:rgba(6,8,12,.78);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
 @media (pointer: fine){.pin-in{top:61px;height:calc(100vh - 61px);height:calc(100svh - 61px)}}
+/* Escenas fijadas más altas que la ventana (5 Nov 2026, auditoría de la web: en un portátil la subasta y los servicios cortaban
+   texto que no se llegaba a ver): con la clase alta (la pone midePines, abajo) el contenido toma su altura natural, empieza arriba
+   y se desliza dentro de la escena con el desplazamiento. Las tarjetas de servicios crecen con su texto en lugar de cortarlo. */
+.pin-in.alta{align-items:flex-start}
+.pin-in.alta>.au,.pin-in.alta>.gal{height:auto}
+@media (min-width:981px){.svc{height:auto;min-height:min(74vh,640px)}}
 #final > p.r:not(.kick){max-width:62ch;margin-inline:auto;text-wrap:balance}
 /* letras: las de NÚCLEO, finas en los titulares */
 .phrase p{font-weight:300;font-size:clamp(38px,5.8vw,92px);line-height:1.06;letter-spacing:-.02em}
@@ -1650,6 +1656,47 @@ let barraB = null;
 function barraAbajo() { if (barraB == null) { const n = document.querySelector('.nav'); barraB = n ? n.getBoundingClientRect().bottom : 60; } return barraB; }
 addEventListener('resize', () => { barraB = null; });
 function pinProgress(el) { const r = rectDe(el); return clamp(-r.top / Math.max(1, r.height - vh)); }
+// 5 Nov 2026 (auditoría de la web: «la subasta y los servicios no caben en la altura de un portátil… cortan texto que nunca se
+// ve»): una escena fijada más alta que lo que queda bajo la cabecera ya no se recorta. Su contenido toma su altura natural (clase
+// alta) y, mientras la escena está fijada, se desliza dentro de ella con el desplazamiento: primero se ve lo de arriba (en la
+// subasta, el título y la ficha entera, si caben juntos) y, antes de que se enciendan los pasos o de que empiece la galería, baja
+// hasta el final. Nunca deja una línea a medias bajo la cabecera: si el corte cae dentro de un bloque de texto, sale el bloque
+// entero. Si la escena cabe, nada cambia. Se mide al cargar, al cambiar el tamaño, el idioma o el contenido; nunca al desplazar.
+const PINES = [
+  { sec: 'auction', hijo: '.au', bloques: [['.kick'], ['h2', '.au-lead']], fin: '.au-src', medio: '.au-mid', d1: 0, d2: 0 },
+  { sec: 'services', hijo: '.gal', bloques: [['.gal-head .kick'], ['.gal-head h2']], fin: '.track', d1: 0, d2: 0 },
+];
+PINES.forEach(P => { P.el = document.querySelector('#' + P.sec + ' ' + P.hijo); P.pin = P.el && P.el.closest('.pin-in'); });
+function midePines() {
+  for (const P of PINES) {
+    const pin = P.pin, hijo = P.el; if (!hijo) continue;
+    pin.classList.add('alta');
+    const t0 = hijo.getBoundingClientRect().top;
+    const caja = (sel) => { const e = hijo.querySelector(sel); if (!e) return null; const r = e.getBoundingClientRect(); return r.height ? [r.top - t0, r.bottom - t0] : null; };
+    const grupo = (g) => { const rs = g.map(caja).filter(Boolean); return rs.length ? [Math.min(...rs.map(r => r[0])), Math.max(...rs.map(r => r[1]))] : null; };
+    const disp = pin.clientHeight, fin = caja(P.fin), nat = fin ? fin[1] + 8 : hijo.offsetHeight;
+    P.d1 = P.d2 = 0;
+    if (nat <= disp) { pin.classList.remove('alta'); hijo.style.transform = ''; continue; }
+    const gs = P.bloques.map(grupo).filter(Boolean);
+    // the end of the scene in view; the cut goes below any block of text it would leave halfway
+    let d2 = nat - disp; for (const [a, b] of gs) if (d2 > a && d2 < b) d2 = b;
+    // the start: from the top; in the auction, the title with the whole ficha when both fit (else the title stays whole)
+    let d1 = 0;
+    if (P.medio) { const m = caja(P.medio); if (m) d1 = Math.max(0, m[1] + 8 - disp); for (const [a, b] of gs) if (d1 > a && d1 < b) d1 = Math.max(0, a - 8); }
+    if (gs.length && d2 <= gs[0][0]) d1 = d2; // only the empty margin on top has to go: the scene stays still
+    P.d1 = Math.min(d1, d2); P.d2 = d2;
+  }
+}
+// the glide, from the scene's own progress (a: where it starts to go down, b: where it reaches the end)
+function deslizaPin(P, p, a, b) { if (P.d2) pon1(P.el.style, 'transform', `translate3d(0,${(-(P.d1 + (P.d2 - P.d1) * smooth(a, b, p))).toFixed(1)}px,0)`); }
+{
+  let pend = 0; const otraVez = () => { if (!pend) pend = requestAnimationFrame(() => { pend = 0; midePines(); }); };
+  midePines();
+  addEventListener('resize', otraVez); addEventListener('load', otraVez);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(otraVez);
+  document.addEventListener('guardiana:lang', () => setTimeout(otraVez, 60));
+  if ('ResizeObserver' in window) { const ro = new ResizeObserver(otraVez); ['.au-mid', '.au-src', '.gal-head', '#track'].forEach(s => { const e = $(s); if (e) ro.observe(e); }); }
+}
 let S = { intro: 0, story: 0, ch: chapters.map(() => 0), auction: 0, ms: 0, mode: 'intro' };
 
 // writes a value only when it changes: an unchanged text rewritten every frame still makes the browser lay out the page again
@@ -1689,6 +1736,8 @@ function update() {
   dots.forEach((d, i) => { d.classList.toggle('on', i < lit); d.classList.toggle('win', ms >= 100 && i === 37); });
   const sold = $('#sold'), so = smooth(0.84, 0.9, pa) * (1 - smooth(0.97, 1, pa) * 0.0);
   sold.style.opacity = so; sold.style.transform = `translate(-50%,-50%) rotate(-6deg) scale(${1.6 - 0.6 * so})`;
+  // taller than the window: down to the steps once the ficha is full (28 ms) and before the bids (70 ms)
+  deslizaPin(PINES[0], pa, 0.30, 0.40);
 
   // word light
   const pl = secs.light ? pinProgress(secs.light) : 0;
@@ -1703,6 +1752,8 @@ function update() {
   trX = COARSE && trX != null ? trX + (trMeta - trX) * (1 - Math.pow(0.78, dtG * 60)) : trMeta;
   if (Math.abs(trMeta - trX) < 0.3) trX = trMeta;
   tr.style.transform = `translate3d(${trX.toFixed(1)}px,0,0)`;
+  // taller than the window: down to the whole cards before the gallery starts to move
+  deslizaPin(PINES[1], ps, 0, 0.07);
 
   // fines ticker
   const tk = $('#tk'), tkr = tk ? rectDe(tk.parentElement) : null;
