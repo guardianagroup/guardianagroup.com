@@ -177,7 +177,10 @@ async function descifra(f, ctl, o) {
   if (nueva) avanza(o.k, e);
   const out = new Uint8Array(n + pt.length); out.set(d.subarray(0, n), 0); out.set(pt, n);
   f.data = out.buffer; cuenta.descifrados++; cuenta.seguidos = 0; ctl.enqueue(f);
-  if (!estricto) { modos.set(o.k, 'estricto'); if (!vistos.has(o.k)) { vistos.add(o.k); postMessage({ tipo: 'visto', id: o.k }); } }
+  // «visto»: lo primero que descifra este sentido, también si ya empezó en «estricto» (Ultra, sin rebaja: desde el principio solo se
+  // acepta cifrado; sin este aviso, la vigilancia de la capa creía a los 4 s que no se mantenía y colgaba; ultra-2, 5 nov 2026)
+  if (!estricto) modos.set(o.k, 'estricto');
+  if (!vistos.has(o.k)) { vistos.add(o.k); postMessage({ tipo: 'visto', id: o.k }); }
 }
 
 onrtctransform = (e) => {

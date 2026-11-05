@@ -21,6 +21,17 @@
 //  11. Opus a ritmo constante: en cada sección de audio de la descripción, cbr=1 y usedtx=0, y sin la extensión «ssrc-audio-level»;
 //      los paquetes de la voz que salen miden lo mismo; en «Seguridad de esta llamada», la clave cambia «cada minuto»; y en Ultra no se
 //      ofrece «Pasar al teléfono».
+// Y lo de la revisión independiente (3 nov 2026; ultra-2, 5 nov 2026):
+//  R1. Las palabras del chat, con compromiso previo: «comprobando…» hasta que quien inicia revela su número (aquí, 4 s después) y,
+//      luego, las mismas en los dos; si quien inicia se comprometió con otra identidad, alarma y borrado en los dos.
+//  R2. Ritmo fijo: una trama de 1 KB por tic (aquí, 2 s), con mensajes o sin ellos, nunca dos seguidas antes de tiempo; y nunca la
+//      marca de aviso 0x11.
+//  R3. Una llamada Ultra cuya capa postcuántica no se mantiene se cuelga en los dos lados (no sigue en claro) y lo explica.
+//  R4. Una oferta de llamada sin el compromiso de las palabras se rechaza en los dos lados.
+//  R5/R8/R9. «Límites» dice lo del historial, que el nivel lo dice el programa de cada uno y que no se envían ni el país ni el nombre.
+//  R7. SVG y MP3, limpios; lo demás (un PDF) no sale sin «Enviarlo así».
+//  R12. Esc dos veces también durante una llamada Ultra: cuelga, borra en los dos y sale.
+//  R13. Quien recibe decide «Firmar» o «No firmar» el comprobante.
 // Uso: node ultra.js [carpeta de capturas]
 'use strict';
 const { chromium } = require('playwright');
@@ -43,7 +54,7 @@ async function equipo(browser, nombre, x) {
   x = x || {};
   const ctx = await browser.newContext({ viewport: x.movil ? { width: 390, height: 844 } : { width: 1366, height: 820 }, deviceScaleFactor: x.movil ? 2 : 1, hasTouch: !!x.movil, userAgent: PC, locale: 'es-CO', permissions: ['microphone', 'camera'] });
   await ctx.addInitScript((x) => {
-    try { sessionStorage.setItem('gcom-sin-numero', '1'); if (x.rota) sessionStorage.setItem('gcom-rota-ms', String(x.rota)); } catch (_) {}
+    try { sessionStorage.setItem('gcom-sin-numero', '1'); if (x.rota) sessionStorage.setItem('gcom-rota-ms', String(x.rota)); if (x.revela) sessionStorage.setItem('gcom-prueba-revela-ms', String(x.revela)); if (x.otraIdentidad) sessionStorage.setItem('gcom-prueba-otra-identidad', '1'); } catch (_) {}
     if (x.sinCapa) { try { delete window.RTCRtpScriptTransform; window.RTCRtpScriptTransform = undefined; } catch (_) {} }
     if (x.movil) { try { Object.defineProperty(navigator, 'standalone', { get: () => true }); } catch (_) {} }
     window.__compartidos = []; navigator.share = (d) => { window.__compartidos.push(d); return new Promise((r) => setTimeout(r, 300)); };
@@ -56,7 +67,7 @@ async function equipo(browser, nombre, x) {
   }, x);
   const p = await ctx.newPage();
   p.tramas = []; // lo que esta página manda al relé: { bin, len, b0 } o { txt }
-  p.on('websocket', (ws) => { if (!/\/com$/.test(ws.url())) return; ws.on('framesent', (f) => { const d = f.payload; if (typeof d === 'string') p.tramas.push({ txt: d }); else p.tramas.push({ bin: true, len: d.length, b0: d[0], d }); }); });
+  p.on('websocket', (ws) => { if (!/\/com$/.test(ws.url())) return; ws.on('framesent', (f) => { const d = f.payload; if (typeof d === 'string') p.tramas.push({ txt: d, t: Date.now() }); else p.tramas.push({ bin: true, len: d.length, b0: d[0], d, t: Date.now() }); }); });
   p.on('pageerror', (e) => { console.log('[' + nombre + '] pageerror', String(e).slice(0, 300)); fallos.push('pageerror ' + nombre); });
   p.on('console', (m) => { if (m.type() === 'error') console.log('[' + nombre + '] error: ' + m.text().slice(0, 200)); });
   await p.goto(URL0 + (x.plan ? '?plan=' + x.plan : '') + (x.latido ? (x.plan ? '&' : '?') + 'latido=' + x.latido : '')); await espera(1500);
@@ -94,6 +105,15 @@ const fotoPath = path.join(tmp, 'IMG_20261103_mi-nombre.jpg');
 // y una «foto» dañada (con su Exif) que ningún navegador puede volver a dibujar
 const rotaPath = path.join(tmp, 'IMG_roto.jpg'); fs.writeFileSync(rotaPath, Buffer.concat([Buffer.from([0xff, 0xd8, 0xff, 0xe1, 0, 20]), Buffer.from('Exif\0\0GPS 40.4168 N\0'), Buffer.alloc(400, 0x55)]));
 const docPath = path.join(tmp, 'informe de mi nombre.pdf'); fs.writeFileSync(docPath, Buffer.concat([Buffer.from('%PDF-1.4\n% GUARDIANA prueba\n'), Buffer.alloc(300 * 1024, 7)]));
+const doc2Path = path.join(tmp, 'otro informe.pdf'); fs.writeFileSync(doc2Path, Buffer.concat([Buffer.from('%PDF-1.4\n% GUARDIANA prueba 2\n'), Buffer.alloc(40 * 1024, 9)]));
+const svgPath = path.join(tmp, 'dibujo de mi nombre.svg'); fs.writeFileSync(svgPath, '<?xml version="1.0" encoding="UTF-8"?>\n<!-- hecho por Fulano Prueba en su equipo -->\n<svg xmlns="http://www.w3.org/2000/svg" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" width="40" height="40" inkscape:version="1.3 (Fulano Prueba)" sodipodi:docname="dibujo de Fulano Prueba.svg"><metadata><rdf:RDF><cc:Work><dc:creator><cc:Agent><dc:title>Fulano Prueba</dc:title></cc:Agent></dc:creator></cc:Work></rdf:RDF></metadata><sodipodi:namedview id="nv" inkscape:window-width="1920"/><rect width="40" height="40" fill="#2a6" inkscape:label="capa de Fulano Prueba"/></svg>\n');
+// un MP3 con etiquetas ID3v2 (al principio) e ID3v1 (al final, «TAG»): título y autor
+const mp3Path = path.join(tmp, 'grabacion de mi nombre.mp3');
+{ const txt = Buffer.from('\0Cancion de Fulano Prueba'), fr = Buffer.concat([Buffer.from('TIT2'), Buffer.from([0, 0, 0, txt.length, 0, 0]), txt]);
+  const tam = fr.length, cab = Buffer.from([0x49, 0x44, 0x33, 3, 0, 0, (tam >> 21) & 127, (tam >> 14) & 127, (tam >> 7) & 127, tam & 127]);
+  const mpeg = Buffer.alloc(4 * 1024, 0x55); for (let i = 0; i < mpeg.length; i += 418) { mpeg[i] = 0xff; mpeg[i + 1] = 0xfb; mpeg[i + 2] = 0x90; mpeg[i + 3] = 0x64; }
+  const v1 = Buffer.alloc(128, 0); Buffer.from('TAG').copy(v1, 0); Buffer.from('Fulano Prueba').copy(v1, 33);
+  fs.writeFileSync(mp3Path, Buffer.concat([cab, fr, mpeg, v1])); }
 
 (async () => {
   const browser = await chromium.launch({ args: ['--use-fake-ui-for-media-stream', '--use-fake-device-for-media-stream', '--autoplay-policy=no-user-gesture-required'] });
@@ -123,7 +143,7 @@ const docPath = path.join(tmp, 'informe de mi nombre.pdf'); fs.writeFileSync(doc
   }
 
   // ---- 2–4. dos PCs: A en el programa con Plus (pasarela simulada), B fuera ----
-  const A = await equipo(browser, 'A', { programa: 'plus', latido: 2, rota: 8000 }), B = await equipo(browser, 'B', { latido: 2, rota: 8000 });
+  const A = await equipo(browser, 'A', { programa: 'plus', latido: 2, rota: 8000, revela: 4000 }), B = await equipo(browser, 'B', { latido: 2, rota: 8000, revela: 4000 });
   const enlace = await invitaUltra(A);
   comprueba(/\/chat\/#b=[A-Za-z0-9_-]{43}$/.test(enlace), '2. la invitación Ultra: solo el fragmento «#b=» con 256 bits', enlace.slice(-50));
   comprueba(await A.evaluate(() => (window.__pedidos || []).includes('/api/plan')), '1. para crearla, el programa contestó GET /api/plan con «plus»');
@@ -133,22 +153,37 @@ const docPath = path.join(tmp, 'informe de mi nombre.pdf'); fs.writeFileSync(doc
   await acepta(B, enlace);
   comprueba(await enChat(A) && await enChat(B), '3. los dos en la sesión Ultra');
   comprueba(!lleva(A) && !lleva(B), '2. ninguna trama hacia el relé lleva el secreto ni un código de invitación', A.tramas.filter((t) => t.txt).map((t) => t.txt.slice(0, 30)));
-  await espera(1500);
+  // R1: antes de la revelación (quien inicia la retrasa 4 s), ninguna palabra: «comprobando…» en los dos
+  { const qa = await palabrasChat(A), qb = await palabrasChat(B);
+    comprueba(qa === 'comprobando…' && qb === 'comprobando…', 'R1. hasta que quien inicia revela su número, «comprobando…» en los dos (ninguna palabra)', [qa, qb]);
+    await foto(A, '03a-pc-chat-comprobando'); }
+  await hasta(async () => (await palabrasChat(A)).split(' · ').length === 4 && (await palabrasChat(B)).split(' · ').length === 4, 12000);
   const pa = await palabrasChat(A), pb = await palabrasChat(B);
-  comprueba(pa && pa === pb && pa.split(' · ').length === 4, '3. las cuatro palabras, las mismas en los dos chats', [pa, pb]);
+  comprueba(pa && pa === pb && pa.split(' · ').length === 4, '3. las cuatro palabras, las mismas en los dos chats (tras comprobar el compromiso)', [pa, pb]);
   comprueba(/Tu lado: PC con GUARDIANA · Otro lado: navegador del PC/.test(await nivelChat(A)) && /Tu lado: navegador del PC · Otro lado: PC con GUARDIANA/.test(await nivelChat(B)), '3. el nivel de cada lado, en los dos', [await nivelChat(A), await nivelChat(B)]);
   // un contacto se queda para volver a llamar: en Ultra, que no guarda nada, no se ofrece
   comprueba(await A.evaluate(() => document.querySelector('#cm-contacto').hidden && document.querySelector('#ccontacto').hidden) && await B.evaluate(() => document.querySelector('#cm-contacto').hidden && document.querySelector('#ccontacto').hidden), '8. en Ultra no se ofrece «Guardar contacto»');
   // el texto llega; el relé solo ve bloques de 1 KB
   A.tramas.length = 0;
   await A.fill('#texto', 'Hola, esto es Ultra'); await A.click('#enviar'); await espera(1200);
-  await A.fill('#texto', 'x'.repeat(1500)); await A.click('#enviar'); await espera(1200);
+  await A.fill('#texto', 'x'.repeat(1500)); await A.click('#enviar');
+  await hasta(async () => A.tramas.filter((t) => t.bin && t.d[41] === 2).length >= 4, 12000); // (a ritmo fijo: un mensaje o un trozo por tic)
   const msgs = A.tramas.filter((t) => t.bin && t.d[41] === 2);
   const tam = msgs.map((t) => t.len);
   comprueba(msgs.length >= 2 && tam.every((n) => (n - 41 - 13 - 16) % 1024 === 0 && n > 41 + 29), '4. cada mensaje sale al relé en bloques de 1 KB (41 de cabecera de relé + 13 + 16 + k·1024)', tam);
-  comprueba(await B.evaluate(() => !!document.querySelector('.gc-velada')), '4. en el otro lado llega velado (lectura discreta)');
+  comprueba(await hasta(() => B.evaluate(() => document.querySelectorAll('.gc-velada').length >= 2), 15000), '4. en el otro lado llega velado (lectura discreta)');
   await B.evaluate(() => document.querySelectorAll('.gc-velada .gc-velo-botones .boton.principal').forEach((b) => b.click())); await espera(800);
-  comprueba(await B.evaluate(() => document.body.textContent.includes('Hola, esto es Ultra')), '4. y se lee al mostrarlo');
+  comprueba(await B.evaluate(() => document.body.textContent.includes('Hola, esto es Ultra') && document.body.textContent.includes('x'.repeat(1500))), '4. y se lee al mostrarlo (también el de 1.500 letras, que fue en trozos)');
+  // R2: ritmo fijo. Durante 12 s se escribe y se mandan tres mensajes: lo que sale hacia el relé son tramas de 1 KB, una por tic
+  // (2 s aquí), nunca dos antes de tiempo, y ninguna con la marca de aviso
+  { await espera(4000); A.tramas.length = 0;
+    await A.fill('#texto', 'uno'); await A.click('#enviar'); await espera(700);
+    await A.type('#texto', 'escribiendo', { delay: 60 }); await espera(300); await A.fill('#texto', ''); await A.fill('#texto', 'dos'); await A.click('#enviar'); await espera(400);
+    await A.fill('#texto', 'tres'); await A.click('#enviar'); await espera(10000);
+    const ts = A.tramas.filter((t) => t.bin && t.d[41] === 2), dif = ts.slice(1).map((t, i) => t.t - ts[i].t);
+    comprueba(ts.length >= 5 && ts.length <= 8 && ts.every((t) => t.len === 41 + 13 + 16 + 1024) && dif.every((d) => d >= 1500 && d <= 2700), 'R2. al escribir y mandar tres mensajes, una trama de 1 KB por tic y ninguna de más', { n: ts.length, ms: dif });
+    comprueba(await hasta(() => B.evaluate(() => { document.querySelectorAll('.gc-velada .gc-velo-botones .boton.principal').forEach((b) => b.click()); const t = document.body.textContent; return t.includes('uno') && t.includes('dos') && t.includes('tres'); }), 8000), 'R2. y los tres llegan, cada uno en su tic'); }
+  comprueba(!A.tramas.some((t) => t.bin && t.b0 === 0x11) && !B.tramas.some((t) => t.bin && t.b0 === 0x11), 'R2. ninguna trama de Ultra lleva la marca de aviso 0x11');
   // el latido: sin escribir nadie, siguen saliendo tramas de 1 KB
   A.tramas.length = 0; await espera(7000);
   const latidos = A.tramas.filter((t) => t.bin && t.d[41] === 2);
@@ -159,6 +194,9 @@ const docPath = path.join(tmp, 'informe de mi nombre.pdf'); fs.writeFileSync(doc
   await A.evaluate(() => document.querySelector('#cpalabras').click()); await espera(700);
   const hojaSeg = await A.evaluate(() => document.querySelector('#escudo-lista').textContent);
   comprueba(/Palabras de verificación/.test(hojaSeg) && /no tiene buzón/.test(hojaSeg) && /Nada guardado/.test(hojaSeg) && /PC con GUARDIANA/.test(hojaSeg) && /cbr=1/.test(hojaSeg), '3. «Seguridad y verificación» dice las palabras, nada guardado, sin buzón, cbr y el nivel');
+  comprueba(/una trama de 1 KB por segundo/.test(hojaSeg) && !/latido de relleno cada 5 s/.test(hojaSeg), 'R2. y el ritmo que de verdad lleva: una trama de 1 KB por segundo', (hojaSeg.match(/Tamaño y ritmo.{0,160}/) || [''])[0]);
+  comprueba(/historial del navegador/.test(hojaSeg) && /según lo dice su propio programa/.test(hojaSeg) && /no se envían ni el país de tu equipo ni tu nombre/.test(hojaSeg), 'R5/R8/R9. «Límites»: el historial, el nivel según cada programa, ni país ni nombre');
+  comprueba(!/CNSA/.test(hojaSeg) && !(await A.evaluate(() => /CNSA/.test(document.body.innerText + ' ' + document.querySelector('#cconfianza').textContent))), '10. sin «CNSA» en «Seguridad y verificación», en la cabecera del chat ni en nada visible');
   await foto(A, '04-pc-seguridad');
   await A.click('#escudo-cerrar'); await espera(400);
 
@@ -183,20 +221,50 @@ const docPath = path.join(tmp, 'informe de mi nombre.pdf'); fs.writeFileSync(doc
       await ch3.setFiles(rotaPath); await espera(1500);
       const av3 = await aviso(A), abierta = await A.evaluate(() => document.querySelector('#h-envio').classList.contains('gc-abierta')), despues = (await A.evaluate(() => window.gcomPrueba.mensajes())).length;
       comprueba(/no se puede limpiar/.test(av3) && !abierta && despues === antes, '7. una foto que no se puede limpiar no sale en Ultra, y lo dice', av3); }
-    // comprobante firmado a petición, con un documento (y el aviso del autor)
+    // R7: un SVG y un MP3 salen limpios (metadatos, comentarios, datos del programa de dibujo; etiquetas ID3), sin pedir nada más
+    const recibe = async (nombreRe) => { await hasta(() => B.evaluate((re) => window.gcomPrueba.mensajes().some((m) => m.tipo === 'archivo' && m.dir === 'suya' && new RegExp(re).test(m.nombre) && ['recibido', 'entregado', 'leido'].includes(m.estado)), nombreRe), 20000);
+      await B.evaluate(() => document.querySelectorAll('.gc-velada .gc-velo-botones .boton.principal').forEach((b) => b.click())); await espera(500);
+      const m = (await B.evaluate(() => window.gcomPrueba.mensajes())).filter((x) => x.tipo === 'archivo' && x.dir === 'suya' && new RegExp(nombreRe).test(x.nombre)).pop();
+      const r = m ? await B.evaluate((id) => window.gcomPrueba.archivo(id), m.id) : null;
+      return r ? Buffer.from(r.b64.replace(/-/g, '+').replace(/_/g, '/'), 'base64') : Buffer.alloc(0); };
+    for (const [ruta, re, mira, txt] of [[svgPath, '\\.svg$', (b) => { const x = b.toString('utf8'); return /<rect/.test(x) && !/Fulano/.test(x) && !/<metadata/i.test(x) && !/<!--/.test(x) && !/inkscape|sodipodi/i.test(x); }, 'R7. un SVG llega sin metadatos, comentarios ni datos del programa de dibujo'],
+      [mp3Path, '\\.mp3$', (b) => b.length > 1000 && b[0] === 0xff && b[1] === 0xfb && !b.toString('latin1').includes('Fulano') && !b.toString('latin1').includes('ID3') && b.toString('latin1', b.length - 128, b.length - 125) !== 'TAG', 'R7. un MP3 llega sin sus etiquetas ID3 (ni la del principio ni la del final)']]) {
+      const [chx] = await Promise.all([A.waitForEvent('filechooser'), A.evaluate(() => document.querySelector('#archivo').click())]);
+      await chx.setFiles(ruta); await espera(1500);
+      const h = await A.evaluate(() => ({ autor: document.querySelector('#envio-autor').hidden, asi: document.querySelector('#envio-asi').hidden, enviar: !document.querySelector('#envio-si').disabled }));
+      comprueba(h.autor && h.asi && h.enviar, txt.replace(/ llega.*/, '') + ': sin aviso y «Enviar» a punto (ya está limpio)', h);
+      await A.click('#envio-si');
+      const b = await recibe(re);
+      comprueba(b.length > 0 && mira(b), txt, { bytes: b.length, inicio: b.toString('latin1', 0, 40) });
+    }
+    // un documento (PDF): el aviso de lo que puede llevar dentro, y «Enviar» apagado hasta marcar «Enviarlo así»
     const [ch2] = await Promise.all([A.waitForEvent('filechooser'), A.evaluate(() => document.querySelector('#archivo').click())]);
     await ch2.setFiles(docPath); await espera(1500);
-    comprueba(!(await A.evaluate(() => document.querySelector('#envio-autor').hidden)), '7. con un PDF, el aviso de que puede llevar el nombre del autor');
+    { const h = await A.evaluate(() => ({ autor: !document.querySelector('#envio-autor').hidden, asi: !document.querySelector('#envio-asi').hidden, apagado: document.querySelector('#envio-si').disabled, txt: document.querySelector('#envio-autor').textContent }));
+      comprueba(h.autor && h.asi && h.apagado && /nombre de quien lo hizo/.test(h.txt), 'R7. con un PDF, el aviso de lo que puede llevar dentro, y «Enviar» apagado hasta «Enviarlo así»', h); }
+    await A.click('#envio-asi'); await espera(200);
+    comprueba(await A.evaluate(() => !document.querySelector('#envio-si').disabled && document.querySelector('#envio-asi').getAttribute('aria-pressed') === 'true'), 'R7. «Enviarlo así» enciende «Enviar»');
     await A.click('#envio-firmado'); await espera(200);
     comprueba(await A.evaluate(() => document.querySelector('#envio-firmado').getAttribute('aria-pressed') === 'true'), '7. «Solicitar comprobante firmado» se marca');
     await foto(A, '06-pc-enviar-pdf-firmado');
     await A.click('#envio-si'); await espera(1500);
-    // velado (lectura discreta), lo dice debajo del velo; al mostrarlo, el sello
-    comprueba(await hasta(() => B.evaluate(() => [...document.querySelectorAll('.gc-velada small')].some((s) => /con comprobante firmado/.test(s.textContent)) || [...document.querySelectorAll('.sello.firmado')].some((s) => /comprobante firmado/.test(s.textContent))), 6000), '7. la otra persona ve que se pide un comprobante firmado');
-    comprueba(await hasta(() => A.evaluate(() => window.gcomPrueba.mensajes().some((m) => m.tipo === 'custodia' && m.estado === 'firmado')), 20000) && await hasta(() => B.evaluate(() => window.gcomPrueba.mensajes().some((m) => m.tipo === 'custodia' && m.estado === 'firmado')), 8000), '7. el comprobante queda firmado por los dos equipos');
+    // velado (lectura discreta), lo dice debajo del velo; al mostrarlo, el sello y, R13, «Firmar» / «No firmar»: nada se firma solo
+    comprueba(await hasta(() => B.evaluate(() => [...document.querySelectorAll('.gc-velada small')].some((s) => /con comprobante firmado/.test(s.textContent)) || [...document.querySelectorAll('.sello.firmado')].some((s) => /comprobante firmado/.test(s.textContent))), 8000), '7. la otra persona ve que se pide un comprobante firmado');
+    comprueba(await hasta(() => B.evaluate(() => { document.querySelectorAll('.gc-velada .gc-velo-botones .boton.principal').forEach((b) => b.click()); return !!document.querySelector('.firma-pide .firma-si'); }), 25000), 'R13. quien recibe ve «Firmar» y «No firmar»');
+    await espera(2500);
+    comprueba(!(await A.evaluate(() => window.gcomPrueba.mensajes().some((m) => m.tipo === 'custodia' && m.estado === 'firmado'))), 'R13. mientras no decide, nada se firma');
+    await foto(B, '07a-pc-te-piden-firma');
+    await B.click('.firma-pide .firma-si');
+    comprueba(await hasta(() => A.evaluate(() => window.gcomPrueba.mensajes().some((m) => m.tipo === 'custodia' && m.estado === 'firmado')), 20000) && await hasta(() => B.evaluate(() => window.gcomPrueba.mensajes().some((m) => m.tipo === 'custodia' && m.estado === 'firmado')), 8000), '7. con «Firmar», el comprobante queda firmado por los dos equipos');
     const d = (await A.evaluate(() => window.gcomPrueba.mensajes())).find((m) => m.tipo === 'archivo' && m.firmado);
     comprueba(d && d.nombre === 'documento-1.pdf', '7. el documento también sale con nombre neutro', d && d.nombre);
-    await B.evaluate(() => document.querySelectorAll('.gc-velada .gc-velo-botones .boton.principal').forEach((b) => b.click())); await espera(600);
+    // R13: y con «No firmar», quien lo pidió lo ve como decisión de la otra persona
+    { const [ch4] = await Promise.all([A.waitForEvent('filechooser'), A.evaluate(() => document.querySelector('#archivo').click())]);
+      await ch4.setFiles(doc2Path); await espera(1200); await A.click('#envio-asi'); await A.click('#envio-firmado'); await A.click('#envio-si');
+      await hasta(() => B.evaluate(() => { document.querySelectorAll('.gc-velada .gc-velo-botones .boton.principal').forEach((b) => b.click()); return !!document.querySelector('.firma-pide .firma-no'); }), 25000);
+      await B.click('.firma-pide .firma-no');
+      comprueba(await hasta(() => A.evaluate(() => window.gcomPrueba.mensajes().some((m) => m.tipo === 'custodia' && m.estado === 'rechazado' && /decidido no firmarlo/.test(m.texto + ' ' + JSON.stringify(m)))), 12000), 'R13. con «No firmar», quien lo pidió ve que la otra persona decidió no firmarlo');
+      comprueba(await B.evaluate(() => [...document.querySelectorAll('.sello.firmado')].some((s) => /No has firmado/.test(s.textContent))), 'R13. y quien recibe lo ve en su mensaje'); }
     await foto(B, '07-pc-recibido');
   }
 
@@ -207,7 +275,7 @@ const docPath = path.join(tmp, 'informe de mi nombre.pdf'); fs.writeFileSync(doc
   const la = await palLl(A), lb = await palLl(B);
   comprueba(la.vis && la.num === lb.num && la.num.split(' · ').length === 4 && la.t === 'Palabras de verificación', '3. en la llamada, las cuatro palabras iguales en las dos pantallas', [la.num, lb.num]);
   comprueba(la.nivelVis && /PC con GUARDIANA/.test(la.nivel) && /navegador del PC/.test(la.nivel), '3. y el nivel de cada lado', la.nivel);
-  comprueba(/^Tu lado: PC con GUARDIANA\nOtro lado: navegador del PC$/.test(la.nivelTarjeta) && /^Tu lado: navegador del PC\nOtro lado: PC con GUARDIANA$/.test(lb.nivelTarjeta), '3. y también dentro de la tarjeta de las palabras, que tapa el de arriba', [la.nivelTarjeta, lb.nivelTarjeta]);
+  comprueba(/^Tu lado: PC con GUARDIANA\nOtro lado: navegador del PC\n\(cada uno, según su programa\)$/.test(la.nivelTarjeta) && /^Tu lado: navegador del PC\nOtro lado: PC con GUARDIANA\n\(cada uno, según su programa\)$/.test(lb.nivelTarjeta), '3. y también dentro de la tarjeta de las palabras, que tapa el de arriba (R8: según el programa de cada uno)', [la.nivelTarjeta, lb.nivelTarjeta]);
   comprueba(la.voz === 'ultra' && la.cambio && la.imagen === 'mosaico' && la.pq && !la.cod && lb.voz === 'ultra' && lb.cambio, '11. voz cambiada y mosaico puestos, capa postcuántica activa, sin la tarjeta del código', la);
   // cada sección de audio de las dos descripciones: cbr=1 y usedtx=0 en la de Opus; ninguna con la extensión del nivel de audio
   const secciones = await A.evaluate(() => { const pc = GuardianaCom.llamada.pcPrueba; return [pc.localDescription.sdp, pc.remoteDescription.sdp].map((d) => d.split(/\r\n(?=m=)/).filter((x) => /^m=audio /.test(x)).map((x) => ({ fmtp: (x.match(/a=fmtp:111 [^\r\n]*/) || [''])[0], nivel: /ssrc-audio-level/.test(x) }))); });
@@ -227,6 +295,24 @@ const docPath = path.join(tmp, 'informe de mi nombre.pdf'); fs.writeFileSync(doc
   await A.evaluate(() => document.querySelector('#ll-sas-si').click()); await espera(800);
   comprueba(await A.evaluate(() => document.querySelector('#ll-sas-mini').textContent.startsWith('✓')), '3. «Sí, coinciden» pliega las palabras arriba con ✓');
   await A.evaluate(() => document.querySelector('#ll-colgar').click()); await espera(1500);
+  // R4: una oferta sin el compromiso de las palabras (aquí la quita la propia prueba, como haría quien está en medio): no se contesta
+  { await A.evaluate(() => sessionStorage.setItem('gcom-prueba-sin-sas', '1'));
+    const avisos = (P) => P.evaluate(() => { window.__avisos = window.__avisos || []; const e = document.querySelector('#aviso'); if (e && !e.hidden && !window.__avisos.includes(e.textContent)) window.__avisos.push(e.textContent); return window.__avisos.join(' | '); });
+    await A.evaluate(() => document.querySelector('#llamar').click());
+    const vio = await hasta(async () => /compromiso de las palabras/.test(await avisos(B)) && /compromiso de las palabras/.test(await avisos(A)), 10000);
+    const libres = await hasta(async () => (await estadoLl(A)) === 'libre' && (await estadoLl(B)) === 'libre', 8000); // (tras «cerrando»)
+    comprueba(vio && libres, 'R4. una oferta Ultra sin el compromiso de las palabras se rechaza y los dos lo ven', [await avisos(A), await avisos(B)]);
+    await A.evaluate(() => sessionStorage.removeItem('gcom-prueba-sin-sas')); await espera(1500); }
+  // R3: la capa postcuántica que no se mantiene (aquí, B con otra llave): la llamada se cuelga en los dos, nunca sigue en claro
+  { await B.evaluate(() => sessionStorage.setItem('gcom-pq-roto', '1'));
+    await llama(A, B, false);
+    const fin = await hasta(async () => (await estadoLl(A)) === 'libre' && (await estadoLl(B)) === 'libre', 20000);
+    const h = (P) => P.evaluate(() => ({ abierta: document.querySelector('#h-sinrebaja').classList.contains('gc-abierta'), por: document.querySelector('#sinrebaja-por').textContent }));
+    const ha = await h(A), hb = await h(B);
+    comprueba(fin && ha.abierta && hb.abierta && /no pudo mantenerse/.test(ha.por) && /no pudo mantenerse/.test(hb.por), 'R3. si la capa postcuántica no se mantiene, la llamada Ultra se cuelga en los dos y lo explica', { A: ha, B: hb });
+    await foto(A, '08b-pc-capa-caida');
+    for (const P of [A, B]) { try { await P.click('#sinrebaja-ok', { timeout: 3000 }); } catch (_) {} }
+    await B.evaluate(() => sessionStorage.removeItem('gcom-pq-roto')); await espera(1000); }
 
   // ---- 5. sin buzón ----
   { await B.context().close(); await espera(1500);
@@ -266,6 +352,17 @@ const docPath = path.join(tmp, 'informe de mi nombre.pdf'); fs.writeFileSync(doc
     await C.context().close(); await D.context().close();
   }
 
+  // ---- R1. quien inicia se compromete con otra identidad (como quien está en medio y quisiera elegir las palabras después) ----
+  { const X = await equipo(browser, 'X', { plan: 'plus', otraIdentidad: true }), Y = await equipo(browser, 'Y', { otraIdentidad: true });
+    const e4 = await invitaUltra(X); await acepta(Y, e4);
+    const al = (P) => P.evaluate(() => ({ vis: !document.querySelector('#alarma').hidden, por: document.querySelector('#alarma-por').textContent, n: window.gcomPrueba.cuantas() }));
+    await hasta(async () => (await al(X)).vis && (await al(Y)).vis, 20000);
+    const ax = await al(X), ay = await al(Y);
+    comprueba(ax.vis && ay.vis && /compromiso previo/.test(ax.por) && /compromiso previo/.test(ay.por) && ax.n === 0 && ay.n === 0, 'R1. si el compromiso no cuadra con lo revelado: alarma en los dos y la conversación borrada', { X: ax, Y: ay });
+    await foto(Y, '10b-pc-alarma-palabras');
+    await X.context().close(); await Y.context().close();
+  }
+
   // ---- 9 y 10. teléfono: tapar al salir, claves borradas en segundo plano, pánico en el PC ----
   { const E = await equipo(browser, 'E', { plan: 'plus' }), M = await equipo(browser, 'M', { movil: true });
     const e3 = await invitaUltra(E); await acepta(M, e3); comprueba(await enChat(E) && await enChat(M), '10. el teléfono entra en Ultra');
@@ -297,6 +394,20 @@ const docPath = path.join(tmp, 'informe de mi nombre.pdf'); fs.writeFileSync(doc
     comprueba(await hasta(() => M.evaluate(() => window.gcomPrueba.cuantas() === 0), 6000), '9. el otro equipo recibe la orden de borrado');
     await foto(M, '13-movil-borrado');
     await E.context().close(); await M.context().close();
+  }
+
+  // ---- R12. pánico durante una llamada Ultra: Esc dos veces cuelga, borra en los dos y sale ----
+  { const G = await equipo(browser, 'G', { plan: 'plus' }), H = await equipo(browser, 'H');
+    const e5 = await invitaUltra(G); await acepta(H, e5); comprueba(await enChat(G) && await enChat(H), 'R12. G y H en Ultra');
+    await hasta(async () => (await palabrasChat(G)).split(' · ').length === 4, 10000);
+    await llama(G, H, false);
+    comprueba((await estadoLl(G)) === 'hablando', 'R12. llamada Ultra en marcha');
+    await G.keyboard.press('Escape'); await espera(300);
+    comprueba(/Esc otra vez/.test(await aviso(G)) && (await estadoLl(G)) === 'hablando', 'R12. en la llamada, el primer Esc avisa y no corta nada');
+    await G.keyboard.press('Escape'); await espera(3000);
+    comprueba(/127\.0\.0\.1:8080\/$/.test(G.url()) || /\/$/.test(new URL(G.url()).pathname), 'R12. el segundo Esc cuelga, borra y sale a la portada', G.url());
+    comprueba(await hasta(async () => (await estadoLl(H)) === 'libre' && (await H.evaluate(() => window.gcomPrueba.cuantas())) === 0, 8000), 'R12. el otro equipo ve la llamada colgada y la conversación borrada');
+    await G.context().close(); await H.context().close();
   }
 
   await browser.close();

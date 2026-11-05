@@ -1786,8 +1786,10 @@
   function muestraSinRebaja(c, por) {
     sinRebajaConv = c.id;
     const t = $('#sinrebaja-por'); if (t) t.textContent = T(SIN_REBAJA[por] || SIN_REBAJA.suyo);
-    anotaSistema(c, 'Llamada Ultra no iniciada: sin la capa postcuántica del sonido y la imagen no hay rebaja.').catch(() => {});
-    vigila(c, T('Llamada Ultra no iniciada: sin la capa postcuántica del sonido y la imagen no hay rebaja.'), 'mal');
+    // (si la capa se cayó con la llamada ya en marcha, la llamada no «no se inició»: se cortó)
+    const nota = por === 'caida' ? 'Llamada Ultra cortada: la capa postcuántica del sonido y la imagen no se mantuvo, y sin ella no hay rebaja.' : 'Llamada Ultra no iniciada: sin la capa postcuántica del sonido y la imagen no hay rebaja.';
+    anotaSistema(c, nota).catch(() => {});
+    vigila(c, T(nota), 'mal');
     abreHoja('h-sinrebaja');
   }
   async function sigueEnBlindada() {

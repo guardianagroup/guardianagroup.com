@@ -165,7 +165,7 @@
     let pqPor = '';
     function obreroPq() {
       if (!obrero) {
-        obrero = new Worker('medios-pq.js?v=20261102a');
+        obrero = new Worker('medios-pq.js?v=20261105-ultra2');
         obrero.onmessage = (e) => {
           const m = e.data || {}; if (m.cuenta) pqCuenta = m.cuenta;
           if (m.tipo === 'visto') { const x = pqPorRx.get(m.id); if (x) { x.visto = true; pinta(); } }
@@ -259,7 +259,8 @@
     function pqAClaro(p) {
       const x = p && pqDe.get(p); if (!x) return; clearInterval(x.vigila);
       // Ultra, sin rebaja: si la capa no se mantiene, la llamada no sigue en claro: se cuelga y se dice por qué
-      if (ultra()) { try { o.manda({ acto: 'colgar', id: idLlamada }); } catch (_) {} pqOferta = null; termina('fallo'); if (o.sinRebaja) o.sinRebaja('caida'); return; }
+      // (con el motivo, para que el otro lado también lo explique en vez de ver una llamada terminada sin más; ultra-2, 5 nov 2026)
+      if (ultra()) { try { o.manda({ acto: 'colgar', id: idLlamada, por: 'pq-caida' }); } catch (_) {} pqOferta = null; termina('fallo'); if (o.sinRebaja) o.sinRebaja('caida'); return; }
       x.confirmada = false; pqClaro(p); if (p === pc) pqPor = 'caida'; pinta(); if (p === pc) avisaPq();
     }
     // la otra persona no tiene la capa: los dos sentidos, en claro (con el cifrado de siempre de la llamada)
@@ -1433,6 +1434,7 @@
       if (m.acto === 'ice' && m.cand && typeof m.cand === 'object') { if (pc && pc.remoteDescription) { try { await pc.addIceCandidate(m.cand); } catch (_) {} } else if (pendientes.length < 64) pendientes.push(m.cand); return; }
       // la otra persona colgó por falta de la capa postcuántica (Ultra, sin rebaja): aquí también se explica
       if (m.acto === 'colgar' && m.por === 'sin-pq' && ultra()) { if (estado !== 'libre') termina('fallo'); if (o.sinRebaja) o.sinRebaja('suyo'); return; }
+      if (m.acto === 'colgar' && m.por === 'pq-caida' && ultra()) { if (estado !== 'libre') termina('fallo'); if (o.sinRebaja) o.sinRebaja('caida'); return; }
       if (m.acto === 'colgar' && m.por === 'sin-palabras' && ultra()) { if (estado !== 'libre') termina('fallo'); if (o.aviso) o.aviso(t('La llamada Ultra no ha empezado: al otro equipo le llegó sin el compromiso de las palabras de verificación. Alguien podría estar en medio.')); return; }
       if (m.acto === 'colgar') { if (estado !== 'libre') termina(estado === 'hablando' ? 'fin' : 'rechazada'); return; }
       if (m.acto === 'ocupado') { di(t('Ocupado: la otra persona está en otra llamada.'), true); termina('ocupado', 1800); }

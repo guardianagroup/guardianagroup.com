@@ -64,7 +64,8 @@ const crypto = require('crypto'); const shaGrande = crypto.createHash('sha256').
   comprueba(await hasta(A, enSesion, 10000) && await hasta(B, enSesion, 10000), 'los dos en la sesión Ultra');
 
   // 1) lo que llega va velado: «Mensaje nuevo» + Mostrar / Descartar
-  await A.tap('#texto'); await A.fill('#texto', 'Hola, esto llega velado'); await A.click('#enviar'); await espera(1200);
+  // (Ultra va a ritmo fijo desde el 3 nov: cada mensaje sale en el siguiente tic, así que se espera a que llegue)
+  await A.tap('#texto'); await A.fill('#texto', 'Hola, esto llega velado'); await A.click('#enviar'); await hasta(B, () => !!document.querySelector('.gc-burbuja.gc-velada'), 6000); await espera(300);
   const vB = await caja(B, '.gc-burbuja.gc-velada');
   comprueba(vB && vB.vis, 'B: el mensaje llega velado');
   const tB = await B.evaluate(() => (document.querySelector('.gc-velada .gc-velo-texto b') || {}).textContent);
@@ -77,7 +78,7 @@ const crypto = require('crypto'); const shaGrande = crypto.createHash('sha256').
   comprueba(await B.evaluate(() => document.body.textContent.includes('esto llega velado') && !document.querySelector('.gc-velada')), 'B: «Mostrar» abre el mensaje');
   comprueba(await hasta(A, () => document.querySelector('.gc-mia .gc-ticks').title === 'Leído', 4000), 'A: al mostrarlo, pasa a leído');
   // 2) Descartar: se borra sin abrirse y quien lo envió lo ve
-  await B.tap('#texto'); await B.fill('#texto', 'Esto se descarta'); await B.click('#enviar'); await espera(1200);
+  await B.tap('#texto'); await B.fill('#texto', 'Esto se descarta'); await B.click('#enviar'); await hasta(A, () => !!document.querySelector('.gc-burbuja.gc-velada'), 6000); await espera(300);
   comprueba((await caja(A, '.gc-burbuja.gc-velada') || {}).vis, 'A: el mensaje de B llega velado');
   await A.evaluate(() => document.querySelectorAll('.gc-velada .gc-velo-botones .boton')[1].click()); await espera(900);
   comprueba(!(await A.evaluate(() => document.body.textContent.includes('Esto se descarta'))) && !(await caja(A, '.gc-burbuja.gc-velada')), 'A: «Descartar» lo borra sin abrirlo');
@@ -107,7 +108,8 @@ const crypto = require('crypto'); const shaGrande = crypto.createHash('sha256').
 
   // 4) archivo de 4 piezas: paquete «todo o nada», completo y con la huella correcta
   const [ch2] = await Promise.all([A.waitForEvent('filechooser'), A.evaluate(() => document.querySelector('#archivo').click())]);
-  await ch2.setFiles(grandePath); await espera(1000); await A.click('#envio-si');
+  // (Ultra, revisión independiente, 3 nov: lo que la app no puede limpiar no sale sin «Enviarlo así»)
+  await ch2.setFiles(grandePath); await espera(1000); await A.click('#envio-asi'); await A.click('#envio-si');
   comprueba(await hasta(B, () => !!document.querySelector('.gc-velada'), 8000), 'B: el documento llega velado');
   await B.evaluate(() => document.querySelector('.gc-velada .gc-velo-botones .boton.principal').click());
   comprueba(await hasta(B, () => [...document.querySelectorAll('.gc-archivo .sello')].some((s) => /todo o nada/.test(s.textContent)), 15000), 'B: archivo completo, autenticado y como paquete «todo o nada»');
