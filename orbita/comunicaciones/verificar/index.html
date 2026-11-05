@@ -15,7 +15,7 @@
 <link rel="stylesheet" href="../viaje.css?v=20261029a">
 <style>
 body.verificar{height:auto;min-height:100dvh;overflow:visible;display:block}
-.vf{box-sizing:border-box;width:min(760px,100%);margin:0 auto;padding:36px 16px 64px;display:grid;gap:22px}
+.vf{box-sizing:border-box;width:min(760px,100%);margin:0 auto;padding:36px 16px 64px;display:grid;gap:22px;grid-template-columns:minmax(0,1fr)} /* 5 Nov 2026: la columna no se ensancha con el bloque de comandos (que se desliza dentro de su caja); a 390 px la página se salía 137 px por la derecha */
 .vf-cab h1{margin:8px 0 0;font:300 clamp(28px,4vw,40px)/1.15 var(--texto);letter-spacing:-.015em;color:#F4F6F8}
 .vf-cab .t{margin:12px 0 0;max-width:660px;color:var(--muted);font-size:15px;line-height:1.6}
 .vf-zona{display:grid;justify-items:center;gap:8px;padding:30px 20px;border-radius:18px;border:1.5px dashed rgba(156,195,228,.35);background:rgba(12,18,26,.6);text-align:center;transition:border-color .15s,background .15s}
