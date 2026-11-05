@@ -8,7 +8,8 @@
      GET  /api/vpn             en qué está; desde la versión con salidas, también salida, desde, saludo, subidos, bajados,
                                postcuantica, dns_tunel y estricto;
      GET  /api/vpn/salidas     las salidas, con su retraso y la más rápida;
-     GET  /api/vpn/comprueba   lo que ve una web: dirección, DNS, IPv6, hora, idioma y permiso de ubicación de Windows;
+     GET  /api/vpn/comprueba   lo que ve una web: dirección, DNS, IPv6, hora y permiso de ubicación de Windows (la zona horaria
+                               y el idioma del equipo, si el programa no los dice, los lee esta página, que está en él);
      POST /api/vpn/conecta     {"salida": "<id>" | "rapida"}, POST /api/vpn/desconecta y POST /api/vpn/estricto
                                {"estricto": true|false}: solo tras un clic de verdad (el cuerpo va en «cuerpo»).
    Con el programa de hoy, que solo tiene GET /api/vpn y sus campos de antes, se enseña lo que hay y nada más: su único servidor
@@ -115,12 +116,16 @@
     const rapida = typeof j.mas_rapida === 'string' && salidas.some((s) => s.id === j.mas_rapida && s.disponible) ? j.mas_rapida : null;
     return { salidas, rapida };
   }
+  // 5 Nov 2026: the program (1.0.56) says the computer's time zone and language as null: this page, on the same computer, reads
+  // them itself (the time zone of Windows and the language a website is told), exactly what a website would read
+  const zonaLocal = () => { try { return Intl.DateTimeFormat().resolvedOptions().timeZone || ''; } catch (_) { return ''; } };
+  const idiomaLocal = () => (typeof navigator !== 'undefined' && typeof navigator.language === 'string' ? navigator.language : '');
   function compruebaDe(j) {
     if (!j || typeof j !== 'object') return null;
     const z = j.zona && typeof j.zona === 'object' ? j.zona : {};
     const de = (v, ok) => (ok.includes(v) ? v : '');
     return { ip: esIP(j.ip_vista) ? j.ip_vista : '', pais: cc(j.pais_ip), dns: de(j.dns, ['tunel', 'fuera', 'desconocido']), ipv6: de(j.ipv6, ['bloqueado', 'fuga', 'sin_ipv6']),
-      zona: texto(z.equipo, 60), coincide: typeof z.coincide === 'boolean' ? z.coincide : null, idioma: texto(j.idioma, 40),
+      zona: texto(z.equipo, 60) || texto(zonaLocal(), 60), coincide: typeof z.coincide === 'boolean' ? z.coincide : null, idioma: texto(j.idioma, 40) || texto(idiomaLocal(), 40),
       ubicacion: de(j.ubicacion_windows, ['permitida', 'denegada', 'desconocida']) };
   }
 
