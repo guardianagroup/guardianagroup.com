@@ -262,8 +262,8 @@
       h('p', { class: 'vpn-honesto' }, 'Con la VPN conectada, las webs ven la dirección del servidor de GUARDIANA, no la tuya; lo que sí pueden notar, por el retraso, es que usas una VPN.'));
 
     const hechos = h('div', { class: 'esc-hechos vpn-hechos' },
-      h('div', { class: 'esc-hecho' }, h('b', null, 'Encriptado hasta el servidor'), h('span', null, 'Lo que sale de este equipo viaja encriptado con WireGuard hasta el servidor de GUARDIANA; las webs ven la dirección del servidor, no la tuya.')),
-      h('div', { class: 'esc-hecho' }, h('b', null, 'Corte en el propio Windows'), h('span', null, 'Fuera del túnel no sale nada, salvo los paquetes encriptados hacia el servidor y lo imprescindible de la red local, como DHCP o el Modo Hogar de tu casa. Lo corta Windows (Filtering Platform).')),
+      h('div', { class: 'esc-hecho' }, h('b', null, 'Encriptado hasta el servidor'), h('span', null, 'Lo que sale de tus programas de Windows viaja encriptado con WireGuard hasta el servidor de GUARDIANA; las webs ven la dirección del servidor, no la tuya.')),
+      h('div', { class: 'esc-hecho' }, h('b', null, 'Corte en el propio Windows'), h('span', null, 'De tus programas de Windows no sale nada fuera del túnel, salvo los paquetes encriptados hacia el servidor y lo imprescindible de la red local, como DHCP o el Modo Hogar de tu casa. Lo corta Windows (Filtering Platform). WSL y las máquinas virtuales van aparte.')),
       h('div', { class: 'esc-hecho' }, h('b', null, 'Clave postcuántica'), h('span', null, 'Además de la clave clásica de WireGuard, una clave compartida acordada con ML-KEM-768, nueva en cada conexión.')));
     const limites = h('div', { class: 'vpn-limites' }, h('h2', { class: 'esc-rot' }, 'Lo que no hace'),
       h('p', null, 'No oculta quién eres ante las webs donde inicias sesión, ni frena el phishing ni a quien entrega su contraseña.'),
@@ -292,9 +292,9 @@
       case 'fuera': return 'Un túnel encriptado desde este equipo hasta un servidor de GUARDIANA, con corte si cae y clave postcuántica. Va dentro del mismo programa que el Antivirus, el navegador y Comunicaciones.';
       case 'sin_programa': return [MOTIVO_LECTURA[motivoFallo] || 'Esta página no pudo leer el estado de la VPN en el programa.', 'Se vuelve a intentar cada pocos segundos.'];
       case 'no_disponible': return motivoFallo === 'version' ? 'La versión instalada del programa aún no trae la VPN.' : E && E.motivo ? '' : 'El programa no puede abrir el túnel aquí.';
-      case 'desconectada': return lSoporte === 'si' ? 'Elige el país de salida y conecta: las webs verán la dirección de ese servidor, no la tuya.' : 'Al conectar, lo que salga de este equipo irá encriptado hasta el servidor de GUARDIANA, y las webs verán su dirección, no la tuya.';
+      case 'desconectada': return E && E.desconectar === true ? 'El bloqueo sigue puesto en Windows: no sale nada de tus programas de Windows fuera del túnel. «Desconectar» lo quita y vuelve a tu conexión normal.' : lSoporte === 'si' ? 'Elige el país de salida y conecta: las webs verán la dirección de ese servidor, no la tuya.' : 'Al conectar, lo que salga de tus programas de Windows irá encriptado hasta el servidor de GUARDIANA, y las webs verán su dirección, no la tuya.';
       case 'conectando': return 'Llaves nuevas, alta en el servidor, túnel y corte; después, el primer saludo del servidor. Unos segundos.';
-      case 'conectada': return 'Lo que sale de este equipo hacia internet va por el túnel, encriptado hasta el servidor.';
+      case 'conectada': return 'Lo que sale de tus programas de Windows hacia internet va por el túnel, encriptado hasta el servidor.';
       case 'sin_respuesta': return E && E.estricto === true ? 'Modo estricto: no sale nada de tus programas de Windows fuera del túnel hasta que el servidor vuelva o desconectes la VPN.' : 'Mientras tanto, no sale nada de tus programas de Windows fuera del túnel. Para volver a tu conexión normal, desconecta; cuando el servidor vuelva, podrás conectar de nuevo.';
       case 'reconectando': return 'El servidor dejó de contestar: GUARDIANA pide un alta nueva y rehace el túnel. Mientras tanto, no sale nada de tus programas de Windows fuera de él. Si prefieres volver a tu conexión normal, desconecta.';
       case 'error': return E && E.estricto === true ? 'Modo estricto: no sale nada de tus programas de Windows fuera del túnel hasta que la VPN conecte o la desconectes.' : E && E.desconectar === true ? 'El bloqueo sigue puesto en Windows: no sale nada de tus programas de Windows fuera del túnel. «Desconectar» lo quita y vuelve a tu conexión normal.' : 'El equipo quedó como estaba: sin túnel y sin corte.';
@@ -463,7 +463,7 @@
       V.estricto.classList.toggle('on', E.estricto);
     }
     let o1 = '', t1 = '', o2 = '';
-    if (f === 'desconectada') { o1 = 'conecta'; t1 = 'Conectar'; }
+    if (f === 'desconectada') { o1 = 'conecta'; t1 = 'Conectar'; if (E && E.desconectar === true) o2 = 'desconecta'; }
     else if (f === 'error') { o1 = 'conecta'; t1 = 'Conectar'; if (E && (E.estricto === true || E.desconectar === true)) o2 = 'desconecta'; }
     else if (f === 'conectando') { o1 = 'nada'; t1 = 'Conectando…'; }
     else if (CON_TUNEL(f)) { o1 = 'desconecta'; t1 = 'Desconectar'; }
@@ -499,14 +499,14 @@
     // DNS and IPv6: about the tunnel, so only with it up
     if (!on) { fila('nd', 'DNS', '', 'Se comprueba con la VPN conectada.'); fila('nd', 'IPv6', '', 'Se comprueba con la VPN conectada.'); }
     else {
-      const segun = (m, t) => (m ? t : 'Según la configuración de la VPN: ' + t.charAt(0).toLowerCase() + t.slice(1));
+      // whole sentences, never composed: each one has its translation (revisión web, 5 nov 2026)
       const md = !!(C.medido && C.medido.dns), m6 = !!(C.medido && C.medido.ipv6);
-      if (C.dns === 'tunel') fila('ok', 'DNS', 'Dentro del túnel', segun(md, 'Los nombres de las webs se resuelven en el servidor, no en tu proveedor de internet.'), true);
-      else if (C.dns === 'fuera') fila('alerta', 'DNS', 'Fuera del túnel', segun(md, 'Tu proveedor de internet podría ver qué webs visitas.'), true);
+      if (C.dns === 'tunel') fila('ok', 'DNS', 'Dentro del túnel', md ? 'Los nombres de las webs se resuelven en el servidor, no en tu proveedor de internet.' : 'Según la configuración de la VPN: los nombres de las webs se resuelven en el servidor, no en tu proveedor de internet.', true);
+      else if (C.dns === 'fuera') fila('alerta', 'DNS', 'Fuera del túnel', md ? 'Tu proveedor de internet podría ver qué webs visitas.' : 'Según la configuración de la VPN: tu proveedor de internet podría ver qué webs visitas.', true);
       else fila('nd', 'DNS', '', 'No se pudo comprobar.');
-      if (C.ipv6 === 'bloqueado') fila('ok', 'IPv6', 'Bloqueado', segun(m6, 'Tus programas no sacan nada por IPv6 fuera del túnel.'), true);
+      if (C.ipv6 === 'bloqueado') fila('ok', 'IPv6', 'Bloqueado', m6 ? 'Tus programas de Windows no sacan nada por IPv6 fuera del túnel.' : 'Según la configuración de la VPN: tus programas de Windows no sacan nada por IPv6 fuera del túnel.', true);
       else if (C.ipv6 === 'sin_ipv6') fila('ok', 'IPv6', 'Tu red no usa IPv6', '', true);
-      else if (C.ipv6 === 'fuga') fila('alerta', 'IPv6', 'Sale fuera del túnel', segun(m6, 'Una web podría ver tu dirección IPv6 real.'), true);
+      else if (C.ipv6 === 'fuga') fila('alerta', 'IPv6', 'Sale fuera del túnel', m6 ? 'Una web podría ver tu dirección IPv6 real.' : 'Según la configuración de la VPN: una web podría ver tu dirección IPv6 real.', true);
       else fila('nd', 'IPv6', '', 'No se pudo comprobar.');
     }
     // the computer's clock and language: the VPN does not change them
@@ -621,7 +621,7 @@
       ocupado = true; pedida = { id: id || 'rapida' }; aviso = { t: 'Abriendo el túnel…' }; pinta();
       const r = await pide('POST', '/api/vpn/conecta', 15000, true, JSON.stringify({ salida: id || 'rapida' }));
       ocupado = false; resultado(r);
-    } else if (o === 'desconecta' && (CON_TUNEL(f) || f === 'error')) {
+    } else if (o === 'desconecta' && (CON_TUNEL(f) || f === 'error' || (f === 'desconectada' && E && E.desconectar === true))) {
       ocupado = true; aviso = { t: 'Cerrando el túnel…' }; pinta();
       // closing while the program reconnects can wait for the attempt under way (up to some 25 seconds)
       const r = await pide('POST', '/api/vpn/desconecta', 40000, true);
