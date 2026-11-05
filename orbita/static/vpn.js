@@ -252,7 +252,7 @@
     V.web = h('section', { class: 'vpn-web', 'aria-labelledby': 'esc-h-vpn-web', hidden: true },
       h('div', { class: 'vpn-web-cab' }, h('div', null, h('h2', { id: 'esc-h-vpn-web' }, 'Lo que una web verá'), V.webSub), h('div', { class: 'vpn-web-acc' }, V.webEstado, V.webBoton)),
       V.luces,
-      h('p', { class: 'vpn-honesto' }, 'Nadie puede impedir que una web note que usas una VPN si mide el retraso. Lo que sí garantizamos, con la VPN conectada, es que no vea tu dirección real.'));
+      h('p', { class: 'vpn-honesto' }, 'Con la VPN conectada, las webs ven la dirección del servidor de GUARDIANA, no la tuya; lo que sí pueden notar, por el retraso, es que usas una VPN.'));
 
     const hechos = h('div', { class: 'esc-hechos vpn-hechos' },
       h('div', { class: 'esc-hecho' }, h('b', null, 'Encriptado hasta el servidor'), h('span', null, 'Lo que sale de este equipo viaja encriptado con WireGuard hasta el servidor de GUARDIANA; las webs ven la dirección del servidor, no la tuya.')),
