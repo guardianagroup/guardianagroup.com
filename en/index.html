@@ -5,7 +5,7 @@
 <!-- GENERADA por herramientas/portadas.py a partir de index.html (la fuente única): no editar a mano. Portada de GUARDIANA en inglés para quien la lee y para los buscadores. -->
 <!-- 27 Oct 2026, 12:23 (dueño): «la página web principal va a ser la del planeta que se desliza hacia abajo; arriba, «Empezar»
      abre la de NÚCLEO (ZERO, Órbita, Comunicaciones y NÚCLEO)». Esta es la portada de guardianagroup.com; /conocer.html lleva aquí. -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-E7JWDyzi95A/vFAzNjvBViO9iLOn4IwdldrSfEjNwak=' 'sha256-y1k81f2Fieq3b0YNv61frn/9JJJ8Y3RZD4hnT42vBrA=' 'sha256-zasOcNPoEvcMFgBA+0OHu0TsTUWXM8HBKcYkep6iB08=' 'sha256-WNDhUcqfJPY4Q/LiJ+LMKJcbOSKZ8RKfHmKSL6EWU1o=' 'sha256-4oxR1kcmI8IIouZuF1y/k1H54ycRLioBh/pG6nvCxWo=' 'sha256-QR47Ix1kwGP7dnVM+e7moPRH8uIuzJqjw72+lyhXYZk=' 'sha256-5n3CUlZykSUXtEEPpYoaP8WYwhnU5DbLQpy/5Qzn6hc=' 'sha256-PlNxU6lHsokn8x2Py22BYREYQu5X8FUW2Nhytb7bVME=' 'sha256-8AwL2BktHjNjQeyquSewHHo5Bq/AEEEnT4zzNUGGfWo=' 'sha256-vg5Tg+u1xfRg4ugEJhRuZvyxN3iDRb46PwVC0/093Ys=' 'sha256-nBZ43g113Q/+KsjE4iyWgO+z+fC5FpDVzuQMnKAwClM=' 'sha256-jbYr+vlk8Or4YSqEi4cg/TWye6Ui0fFkrFWoguUaqPw=' 'sha256-Wcc2f/B9jJAbiQ25BzS9txFebkckagsP95kT0puw6nM='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-E7JWDyzi95A/vFAzNjvBViO9iLOn4IwdldrSfEjNwak=' 'sha256-y1k81f2Fieq3b0YNv61frn/9JJJ8Y3RZD4hnT42vBrA=' 'sha256-zasOcNPoEvcMFgBA+0OHu0TsTUWXM8HBKcYkep6iB08=' 'sha256-WNDhUcqfJPY4Q/LiJ+LMKJcbOSKZ8RKfHmKSL6EWU1o=' 'sha256-4oxR1kcmI8IIouZuF1y/k1H54ycRLioBh/pG6nvCxWo=' 'sha256-QR47Ix1kwGP7dnVM+e7moPRH8uIuzJqjw72+lyhXYZk=' 'sha256-5n3CUlZykSUXtEEPpYoaP8WYwhnU5DbLQpy/5Qzn6hc=' 'sha256-AywWwzIWqwEELRG5gTgrJBGQxBYTfSRrte7S/zD5sOs=' 'sha256-8AwL2BktHjNjQeyquSewHHo5Bq/AEEEnT4zzNUGGfWo=' 'sha256-vg5Tg+u1xfRg4ugEJhRuZvyxN3iDRb46PwVC0/093Ys=' 'sha256-nBZ43g113Q/+KsjE4iyWgO+z+fC5FpDVzuQMnKAwClM=' 'sha256-jbYr+vlk8Or4YSqEi4cg/TWye6Ui0fFkrFWoguUaqPw=' 'sha256-Wcc2f/B9jJAbiQ25BzS9txFebkckagsP95kT0puw6nM='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'none'">
 <script src="/marco/entrada.js?v=20261101b"></script>
 <!-- 5 Nov 2026 (SEO, decisión 2): la portada en inglés y en portugués son páginas propias, /en/ y /pt/, que herramientas/portadas.py
      genera a partir de esta (fuente única). Los enlaces antiguos «/?lang=en» y «/?lang=pt» siguen valiendo: llevan allí; también
@@ -2628,7 +2628,7 @@ function aviso(l){
   try{ if(sessionStorage.getItem('guardiana-franja')==='1') return; }catch(_){}
   const h=document.querySelector('header.nav'); if(!h) return;
   const d=document.createElement('div'); d.className='franja'; d.id='franja'; d.lang=DATO[l].tag; d.setAttribute('role','note');
-  const a=document.createElement('a'); a.href=PAG[l]; a.setAttribute('aria-label',T[1]); a.textContent='→ '+PAG[l];
+  const a=document.createElement('a'); a.href=PAG[l]; a.textContent=T[1]+' →';
   a.addEventListener('click',()=>{ try{ localStorage.setItem('guardiana-lang',l); localStorage.setItem('guardiana-lang-chosen','1'); }catch(_){} });
   const x=document.createElement('button'); x.type='button'; x.setAttribute('aria-label',T[2]); x.textContent='×';
   x.addEventListener('click',()=>{ try{ sessionStorage.setItem('guardiana-franja','1'); }catch(_){} d.remove(); });
