@@ -19,12 +19,13 @@ from xml.sax.saxutils import escape
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DOM = 'https://guardianagroup.com/'
 FUERA = ('herramientas/', 'marca/', 'descargas/', 'extension/', 'zero-motor/', '.git/', 'node_modules/', 'v/')
-# Decisión del dueño (28 Oct 2026, commit 8d0c3c70): fuera del sitemap las guías del DNS (huérfanas: ninguna página las
-# enlaza), las páginas del programa de escritorio (por dentro, comprobar un recibo, zero.html) e instalar. Son indexables y
-# Google puede llegar a ellas por los enlaces; si deben quedar fuera de verdad, necesitan «noindex» en la página.
-EXCLUIDAS = {'zero.html', 'en/zero.html', 'pt/zero.html', 'es/por-dentro.html', 'en/inside.html', 'pt/por-dentro.html',
-             'verificar.html', 'en/verify.html', 'pt/verificar.html', 'index-anterior.html'}
-EXCLUIDAS_CARPETAS = ('guias/', 'en/guides/', 'pt/guias/')
+# Decisión del dueño (5 Nov 2026, tras la auditoría SEO; PLAN.md, decisión 3): el índice y el sitemap dicen lo mismo.
+# Las guías del DNS (18 páginas huérfanas del producto anterior) llevan «noindex» en la página y por eso no entran;
+# zero.html, «por dentro» y «comprobar un recibo» entran (es/en/pt), e instalar también (la 1.0.56 ya se descarga desde la
+# portada). Antes (28 Oct 2026, commit 8d0c3c70) todas esas páginas quedaban fuera del sitemap sin «noindex», y Google
+# podía indexarlas igual por los enlaces. Aquí solo queda lo que no es una página de verdad.
+EXCLUIDAS = {'index-anterior.html'}
+EXCLUIDAS_CARPETAS = ()
 
 ARGS = [a for a in sys.argv[1:] if not a.startswith('--')]
 REF = ARGS[0] if ARGS else 'HEAD'
