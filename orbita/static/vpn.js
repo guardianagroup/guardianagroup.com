@@ -107,6 +107,7 @@
     e.bajados = num(f.bajados) != null ? f.bajados : num(f.recibidos);
     e.postcuantica = f.postcuantica === true; e.dnsTunel = f.dns_tunel === true;
     e.estricto = typeof f.estricto === 'boolean' ? f.estricto : null;
+    e.desconectar = f.desconectar === true; // 1.0.56: the block is still in Windows (also after an error)
     return e;
   }
   function listaDe(j) {
@@ -240,7 +241,8 @@
     V.estrictoValor = h('span', { class: 'vpn-estricto-v' });
     V.estricto = h('div', { class: 'vpn-estricto', hidden: true }, V.interruptor,
       h('div', null, h('p', { class: 'vpn-estricto-t' }, h('span', { id: 'vpn-estricto-t' }, 'Modo estricto'), V.estrictoValor),
-        h('p', { class: 'vpn-estricto-d' }, 'Si la VPN se cae, no sale nada de este PC hasta que vuelva o la desconectes.')));
+        h('p', { class: 'vpn-estricto-d' }, 'Si la VPN se cae, no sale nada de tus programas de Windows fuera del túnel hasta que vuelva o la desconectes.'),
+        h('p', { class: 'vpn-estricto-d vpn-estricto-limite' }, 'WSL y las máquinas virtuales (Hyper-V, Windows Sandbox, Docker) pueden sacar su tráfico fuera del túnel, también con el modo estricto.')));
     V.boton = h('button', { type: 'button', class: 'esc-boton vpn-boton', on: { click: () => orden(V.boton.dataset.orden) } }, h('span'));
     V.boton2 = h('button', { type: 'button', class: 'esc-otra vpn-boton2', hidden: true, on: { click: () => orden(V.boton2.dataset.orden) } }, h('span'));
     V.instalar = h('a', { class: 'esc-boton vpn-boton', href: DESCARGA, hidden: true }, h('span', null, 'Instalar GUARDIANA'));
@@ -293,9 +295,9 @@
       case 'desconectada': return lSoporte === 'si' ? 'Elige el país de salida y conecta: las webs verán la dirección de ese servidor, no la tuya.' : 'Al conectar, lo que salga de este equipo irá encriptado hasta el servidor de GUARDIANA, y las webs verán su dirección, no la tuya.';
       case 'conectando': return 'Llaves nuevas, alta en el servidor, túnel y corte; después, el primer saludo del servidor. Unos segundos.';
       case 'conectada': return 'Lo que sale de este equipo hacia internet va por el túnel, encriptado hasta el servidor.';
-      case 'sin_respuesta': return E && E.estricto === true ? 'Modo estricto: no sale nada de este PC hasta que el servidor vuelva o desconectes la VPN.' : 'Mientras tanto, nada sale fuera del túnel. Para volver a tu conexión normal, desconecta; cuando el servidor vuelva, podrás conectar de nuevo.';
-      case 'reconectando': return 'El servidor dejó de contestar: GUARDIANA pide un alta nueva y rehace el túnel. Mientras tanto, nada sale fuera de él. Si prefieres volver a tu conexión normal, desconecta.';
-      case 'error': return E && E.estricto === true ? 'Modo estricto: no sale nada de este PC hasta que la VPN conecte o la desconectes.' : 'El equipo quedó como estaba: sin túnel y sin corte.';
+      case 'sin_respuesta': return E && E.estricto === true ? 'Modo estricto: no sale nada de tus programas de Windows fuera del túnel hasta que el servidor vuelva o desconectes la VPN.' : 'Mientras tanto, no sale nada de tus programas de Windows fuera del túnel. Para volver a tu conexión normal, desconecta; cuando el servidor vuelva, podrás conectar de nuevo.';
+      case 'reconectando': return 'El servidor dejó de contestar: GUARDIANA pide un alta nueva y rehace el túnel. Mientras tanto, no sale nada de tus programas de Windows fuera de él. Si prefieres volver a tu conexión normal, desconecta.';
+      case 'error': return E && E.estricto === true ? 'Modo estricto: no sale nada de tus programas de Windows fuera del túnel hasta que la VPN conecte o la desconectes.' : E && E.desconectar === true ? 'El bloqueo sigue puesto en Windows: no sale nada de tus programas de Windows fuera del túnel. «Desconectar» lo quita y vuelve a tu conexión normal.' : 'El equipo quedó como estaba: sin túnel y sin corte.';
       default: return '';
     }
   }
@@ -462,7 +464,7 @@
     }
     let o1 = '', t1 = '', o2 = '';
     if (f === 'desconectada') { o1 = 'conecta'; t1 = 'Conectar'; }
-    else if (f === 'error') { o1 = 'conecta'; t1 = 'Conectar'; if (E && E.estricto === true) o2 = 'desconecta'; }
+    else if (f === 'error') { o1 = 'conecta'; t1 = 'Conectar'; if (E && (E.estricto === true || E.desconectar === true)) o2 = 'desconecta'; }
     else if (f === 'conectando') { o1 = 'nada'; t1 = 'Conectando…'; }
     else if (CON_TUNEL(f)) { o1 = 'desconecta'; t1 = 'Desconectar'; }
     V.boton.hidden = !o1; V.boton.dataset.orden = o1;

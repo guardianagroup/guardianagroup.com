@@ -129,6 +129,7 @@
 .vpn-estricto-v { font: 500 10px/1 'IBM Plex Mono', ui-monospace, monospace; letter-spacing: .14em; text-transform: uppercase; color: #8A95A2; }
 .vpn-estricto.on .vpn-estricto-v { color: var(--e-ok); }
 .vpn-estricto-d { margin: 4px 0 0; max-width: 470px; font-size: 13px; line-height: 1.5; color: #A9B3BE; }
+.vpn-estricto-limite { font-size: 12px; color: #8A95A2; }
 .vpn-interruptor { all: unset; box-sizing: border-box; cursor: pointer; position: relative; flex: none; width: 46px; height: 26px; border-radius: 999px; border: 1px solid rgba(156,195,228,.4); background: rgba(156,195,228,.1); transition: background .2s, border-color .2s; }
 .vpn-interruptor::after { content: ''; position: absolute; top: 3px; inset-inline-start: 3px; width: 18px; height: 18px; border-radius: 50%; background: #A9B3BE; transition: transform .2s ease, background .2s; }
 .vpn-interruptor[aria-checked="true"] { border-color: rgba(108,203,165,.75); background: rgba(108,203,165,.24); }
