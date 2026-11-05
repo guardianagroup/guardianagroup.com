@@ -356,3 +356,12 @@ a.nuc-multas-b{text-decoration:none}
 html.con-portada:not(.portada-lista),html.con-portada:not(.portada-lista) body{background:#06080C}
 /* un velo por encima de todo (lo que se esconde con visibility puede volver a verse si una regla lo pide) */
 html.con-portada:not(.portada-lista)::after{content:"";position:fixed;inset:0;z-index:2147483647;background:#06080C;pointer-events:none}
+/* 5 Nov 2026 (auditoría de la web): entre 900 y 1199 px las cinco tarjetas van en dos filas (tres y dos) y, en una pantalla baja
+   (1024x768), la segunda fila (Antivirus y VPN) se cortaba por abajo. Ahí las tarjetas son algo más compactas; la esfera, la misma. */
+@media (min-width:900px) and (max-width:1199px) and (max-height:820px){
+  .nuc-ini .nuc-ops.con-escaner{gap:12px;margin-top:16px}
+  .nuc-ini .nuc-ops.con-escaner>.nuc-op{padding:14px 18px 16px;gap:6px}
+  .nuc-ini .nuc-op .nuc-ico{width:24px;height:24px}
+  .nuc-ini .nuc-op b{font-size:18px}
+  .nuc-ini .nuc-op small{font-size:13.5px;line-height:1.42}
+}
