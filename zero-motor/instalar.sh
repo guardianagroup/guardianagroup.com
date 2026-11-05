@@ -7,6 +7,8 @@
 #
 # Uso (en la consola del servidor, como root):
 #   curl -fsSL https://raw.githubusercontent.com/guardianagroup/guardianagroup.com/main/zero-motor/instalar.sh | bash -s -- motor.guardianagroup.com
+# Con la VPN de GUARDIANA en ese servidor (5 Nov 2026), su nombre delante (zero-motor/LEEME-VPN.md):
+#   curl -fsSL …/zero-motor/instalar.sh | VPN_NOMBRE=vpn-nbg.guardianagroup.com bash -s -- motor.guardianagroup.com
 #
 # Antes: el registro DNS A del dominio debe apuntar a la IP pública del servidor y los puertos 80 y 443 deben estar libres.
 # Es idempotente: se puede volver a ejecutar para actualizar. No toca /etc/guardiana/zero.env si ya existe.
@@ -31,6 +33,20 @@ paso() { printf '\n\033[36m▸ %s\033[0m\n' "$*"; }
 [ "$(id -u)" -eq 0 ] || { rojo "Ejecuta como root (sudo -i)."; exit 1; }
 command -v apt-get >/dev/null || { rojo "Este instalador es para Ubuntu/Debian (apt)."; exit 1; }
 [[ "$DOMINIO" =~ ^[a-z0-9.-]+$ ]] || { rojo "Dominio no válido: $DOMINIO"; exit 1; }
+# 5 Nov 2026: una orden pegada en el servidor equivocado no cambia nada. Cada servidor sabe quién es desde que se instaló
+# (/etc/guardiana/dominio); si la orden nombra otro, era para otro servidor.
+if [ -s /etc/guardiana/dominio ] && [ "$(cat /etc/guardiana/dominio)" != "$DOMINIO" ]; then
+  rojo "Este servidor es $(cat /etc/guardiana/dominio), no $DOMINIO: esta orden es para otro servidor. No se ha cambiado nada."
+  exit 1
+fi
+# 5 Nov 2026 (dueño, 3 nov: «Todas las VPN te dicen a dónde… Haz una VPN de verdad y de calidad»): el nombre de la VPN de
+# este servidor, uno por salida (vpn.guardianagroup.com en Helsinki, vpn-nbg… en Núremberg, vpn-mia… en Miami; la tabla
+# del programa, crates/tunel/src/salidas.rs): VPN_NOMBRE si viene con la orden (y entonces la VPN se instala aquí); si
+# no, el que quedó guardado al instalarla (/etc/guardiana/vpn/nombre); si no, el de Helsinki.
+VPN_PEDIDA="${VPN_NOMBRE:-}"
+VPN_NOMBRE="${VPN_NOMBRE:-$(cat /etc/guardiana/vpn/nombre 2>/dev/null || true)}"
+VPN_NOMBRE="${VPN_NOMBRE:-vpn.guardianagroup.com}"
+[[ "$VPN_NOMBRE" =~ ^vpn(-[a-z0-9]+)?\.guardianagroup\.com$ ]] || { rojo "Nombre de la VPN no válido: $VPN_NOMBRE"; exit 1; }
 
 paso "Comprobando puertos 80 y 443"
 if [ -z "${ZERO_SIN_PROXY:-}" ] && ! dpkg -s caddy >/dev/null 2>&1; then
@@ -338,11 +354,15 @@ EOF
 # reiniciarse), handle_errors responde 503 y el error queda en el nivel de depuración, que no se escribe: así el diario no
 # guarda la dirección de quien pedía el alta.
 VPN_CADDY=""
-if [ "$DOMINIO" = "motor-hel.guardianagroup.com" ] || [ -d /etc/guardiana/vpn ]; then
-  paso "VPN: WireGuard, el alta de GUARDIANA y su resolutor (zero-motor/vpn.sh)"
-  if timeout 50m bash "$DIR/zero-motor/vpn.sh"; then
-    VPN_CADDY='
-vpn.guardianagroup.com {
+if [ -n "$VPN_PEDIDA" ] || [ "$DOMINIO" = "motor-hel.guardianagroup.com" ] || [ -d /etc/guardiana/vpn ]; then
+  paso "VPN ($VPN_NOMBRE): WireGuard, el alta de GUARDIANA y su resolutor (zero-motor/vpn.sh)"
+  # el nombre se guarda antes: con él, el actualizador de este servidor vuelve a montar la misma VPN
+  install -d -m 700 /etc/guardiana/vpn
+  printf '%s\n' "$VPN_NOMBRE" > /etc/guardiana/vpn/nombre
+  chmod 600 /etc/guardiana/vpn/nombre
+  if VPN_NOMBRE="$VPN_NOMBRE" timeout 50m bash "$DIR/zero-motor/vpn.sh"; then
+    VPN_CADDY="
+$VPN_NOMBRE {
 	header -Server
 	handle /vpn/alta {
 		reverse_proxy 127.0.0.1:8793
@@ -351,7 +371,7 @@ vpn.guardianagroup.com {
 	handle_errors {
 		respond 503
 	}
-}'
+}"
   else
     rojo "  La VPN no se pudo montar; el motor sigue. Registro: /var/log/guardiana-vpn-*.log y journalctl -u guardiana-vpn-alta"
   fi
@@ -377,6 +397,7 @@ EOF
   # la web (hoteles, empresas, algunos países). nginx no abre el TLS: mira si el saludo trae ALPN. El TURN-TLS de los navegadores
   # no lo trae (comprobado con Chromium); la web, el WebSocket y la validación del certificado, sí. 2 Nov 2026: antes que el
   # ALPN, el nombre: el alta de la VPN (vpn.guardianagroup.com) va siempre a Caddy, porque su cliente (ureq) no manda ALPN.
+  # 5 Nov 2026: con el nombre de la VPN de este servidor (__VPN_NOMBRE__ se cambia por él al escribir la configuración).
   puerta_443() {
     printf '#!/bin/sh\nexit 101\n' > /usr/sbin/policy-rc.d; chmod 755 /usr/sbin/policy-rc.d
     DEBIAN_FRONTEND=noninteractive apt-get install -y -q nginx libnginx-mod-stream > /var/log/guardiana-nginx-instalacion.log 2>&1; local r=$?
@@ -395,7 +416,7 @@ stream {
 	access_log off;
 	# el alta de la VPN → Caddy (su cliente no manda ALPN); lo demás, por el ALPN
 	map $ssl_preread_server_name $guardiana_destino {
-		vpn.guardianagroup.com 127.0.0.1:8443;
+		__VPN_NOMBRE__ 127.0.0.1:8443;
 		default                $guardiana_alpn;
 	}
 	# sin ALPN: el TURN-TLS del navegador → coturn; con ALPN: la web, el WebSocket y el certificado → Caddy
@@ -418,6 +439,7 @@ stream {
 	}
 }
 EOF
+    sed -i "s/__VPN_NOMBRE__/$VPN_NOMBRE/" /etc/nginx/nginx.conf
     nginx -t -q 2>/dev/null || return 1
     cat > /etc/caddy/Caddyfile <<EOF
 {
@@ -516,6 +538,22 @@ if [ -z "${ZERO_SIN_PROXY:-}" ]; then
   else
     rojo "  https://$DOMINIO todavía no responde: comprueba que el DNS A de $DOMINIO apunta a este servidor y que los puertos 80/443 están abiertos."
     rojo "  Registro de Caddy: journalctl -u caddy -n 50"
+  fi
+  # 5 Nov 2026: la VPN, como la pide el programa (sin ALPN, por su nombre): su alta contesta 422 a un pedido vacío
+  if [ -n "$VPN_CADDY" ]; then
+    paso "Comprobando la VPN: https://$VPN_NOMBRE/vpn/alta (puede tardar hasta un minuto)"
+    ok=
+    for i in $(seq 1 30); do
+      c=$(curl -s --no-alpn --max-time 5 -o /dev/null -w '%{http_code}' -X POST -H 'Content-Type: application/json' -d '{}' "https://$VPN_NOMBRE/vpn/alta" || true)
+      if [ "$c" = 422 ] || [ "$c" = 400 ]; then ok=1; break; fi
+      sleep 2
+    done
+    if [ -n "$ok" ]; then
+      echo "  La VPN responde en https://$VPN_NOMBRE/vpn/alta."
+    else
+      rojo "  https://$VPN_NOMBRE/vpn/alta todavía no responde: comprueba que el DNS A de $VPN_NOMBRE apunta a este servidor."
+      rojo "  Registros: journalctl -u caddy -n 50 y journalctl -u guardiana-vpn-alta -n 50"
+    fi
   fi
 fi
 
