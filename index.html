@@ -4,8 +4,12 @@
 <meta charset="utf-8">
 <!-- 27 Oct 2026, 12:23 (dueño): «la página web principal va a ser la del planeta que se desliza hacia abajo; arriba, «Empezar»
      abre la de NÚCLEO (ZERO, Órbita, Comunicaciones y NÚCLEO)». Esta es la portada de guardianagroup.com; /conocer.html lleva aquí. -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-70EMgXFb9f6c+bHFbdqisUgttTr9HYDY6II53ZsjdNA=' 'sha256-zasOcNPoEvcMFgBA+0OHu0TsTUWXM8HBKcYkep6iB08=' 'sha256-WNDhUcqfJPY4Q/LiJ+LMKJcbOSKZ8RKfHmKSL6EWU1o=' 'sha256-4oxR1kcmI8IIouZuF1y/k1H54ycRLioBh/pG6nvCxWo=' 'sha256-QR47Ix1kwGP7dnVM+e7moPRH8uIuzJqjw72+lyhXYZk=' 'sha256-5n3CUlZykSUXtEEPpYoaP8WYwhnU5DbLQpy/5Qzn6hc=' 'sha256-1Ccq9VA3fd3S4TGXD25Mx0wfFLOplnu9rpi7sTuMi/Y=' 'sha256-8AwL2BktHjNjQeyquSewHHo5Bq/AEEEnT4zzNUGGfWo=' 'sha256-vg5Tg+u1xfRg4ugEJhRuZvyxN3iDRb46PwVC0/093Ys=' 'sha256-nBZ43g113Q/+KsjE4iyWgO+z+fC5FpDVzuQMnKAwClM=' 'sha256-jbYr+vlk8Or4YSqEi4cg/TWye6Ui0fFkrFWoguUaqPw=' 'sha256-Wcc2f/B9jJAbiQ25BzS9txFebkckagsP95kT0puw6nM='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-BT7dx7gFXQrbeCSdnkPRSTGCwuGtSrLPCs2MxApq0IU=' 'sha256-70EMgXFb9f6c+bHFbdqisUgttTr9HYDY6II53ZsjdNA=' 'sha256-zasOcNPoEvcMFgBA+0OHu0TsTUWXM8HBKcYkep6iB08=' 'sha256-WNDhUcqfJPY4Q/LiJ+LMKJcbOSKZ8RKfHmKSL6EWU1o=' 'sha256-4oxR1kcmI8IIouZuF1y/k1H54ycRLioBh/pG6nvCxWo=' 'sha256-QR47Ix1kwGP7dnVM+e7moPRH8uIuzJqjw72+lyhXYZk=' 'sha256-5n3CUlZykSUXtEEPpYoaP8WYwhnU5DbLQpy/5Qzn6hc=' 'sha256-h6kTgzywLbp16YM6dkWpXVx+WE+X0gmBD8mpDC0hep8=' 'sha256-8AwL2BktHjNjQeyquSewHHo5Bq/AEEEnT4zzNUGGfWo=' 'sha256-vg5Tg+u1xfRg4ugEJhRuZvyxN3iDRb46PwVC0/093Ys=' 'sha256-nBZ43g113Q/+KsjE4iyWgO+z+fC5FpDVzuQMnKAwClM=' 'sha256-jbYr+vlk8Or4YSqEi4cg/TWye6Ui0fFkrFWoguUaqPw=' 'sha256-Wcc2f/B9jJAbiQ25BzS9txFebkckagsP95kT0puw6nM='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'none'">
 <script src="/marco/entrada.js?v=20261101b"></script>
+<!-- 5 Nov 2026 (SEO, decisión 2): la portada en inglés y en portugués son páginas propias, /en/ y /pt/, que herramientas/portadas.py
+     genera a partir de esta (fuente única). Los enlaces antiguos «/?lang=en» y «/?lang=pt» siguen valiendo: llevan allí; también
+     quien eligió ese idioma a mano en una visita anterior. Los buscadores ven esta página en español. -->
+<script>(function(){try{var P={en:'/en/',pt:'/pt/'},q=new URLSearchParams(location.search).get('lang'),l=q||(localStorage.getItem('guardiana-lang-chosen')&&localStorage.getItem('guardiana-lang'));if(P[l]){try{window.stop();}catch(_){}location.replace(P[l]+location.hash);}}catch(e){}})();</script>
 <meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>GUARDIANA · Mira las conexiones. Decide qué cortar.</title>
@@ -26,6 +30,10 @@
 <meta name="twitter:description" content="Explora la infraestructura de internet, mira las conexiones de cada web en el navegador ZERO y envía mensajes y archivos encriptados. Windows, sin cuenta.">
 <meta name="twitter:image" content="https://guardianagroup.com/og-conocer.jpg">
 <link rel="canonical" href="https://guardianagroup.com/">
+<link rel="alternate" hreflang="es" href="https://guardianagroup.com/">
+<link rel="alternate" hreflang="en" href="https://guardianagroup.com/en/">
+<link rel="alternate" hreflang="pt" href="https://guardianagroup.com/pt/">
+<link rel="alternate" hreflang="x-default" href="https://guardianagroup.com/">
 <meta name="theme-color" content="#000000">
 <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48">
 <link rel="icon" href="/icon-192.png" type="image/png" sizes="192x192">
@@ -2572,8 +2580,12 @@ function aplica(l, first){
   H.classList.remove('i18n-espera');
   document.dispatchEvent(new CustomEvent('guardiana:lang',{detail:l}));
 }
+// 5 Nov 2026 (SEO): inglés y portugués tienen portada propia (/en/, /pt/; herramientas/portadas.py). Elegirlos en el selector
+// lleva allí; el idioma del navegador, como siempre, se aplica aquí mismo.
+const PAG={en:'/en/',pt:'/pt/'};
 function setLang(l, first){
   if(!ok(l)) l='en';
+  if(!first&&PAG[l]){ try{ localStorage.setItem('guardiana-lang',l); }catch(_){} location.assign(PAG[l]+location.hash); return; }
   if(IX[l]!=null||l==='es') return aplica(l, first);
   const H=document.documentElement; if(first) H.classList.add('i18n-espera');
   const t=setTimeout(()=>H.classList.remove('i18n-espera'),2500);
