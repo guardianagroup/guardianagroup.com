@@ -184,6 +184,10 @@ section{padding:64px 0;border-top:1px solid var(--linea)}
 .ia{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:28px;align-items:start}
 .ia .tarjeta .k{color:var(--azul)}
 .ia .tarjeta p{color:var(--gris);font-size:15px;margin-top:10px}
+/* 5 Nov 2026 (auditoría de la web): el panel de los cuatro pasos tocaba las tarjetas de debajo (0 px) y las dos tarjetas de cada
+   fila tenían alturas distintas */
+.pasos+.ia{margin-top:20px}
+.ia{align-items:stretch}
 .pasos{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;border:1px solid var(--linea);border-radius:10px;background:var(--hoja);overflow:hidden}
 .paso{padding:26px 24px 30px;border-right:1px solid var(--linea);display:grid;gap:12px;align-content:start}
 .paso:last-child{border-right:0}
