@@ -82,7 +82,7 @@
     // 2 Nov 2026 (owner, 08:01: «desde la principal, uno elige en qué sección va a estar… no quiero que haya una conexión ni
     // puerta entre ellos»): ZERO and Comunicaciones are sections of the main cover, never doors of the planet. They stay in
     // this list, hidden (`fuera`), only so the cover can open them the same way as before.
-    { id: 'zero', n: 'ZERO', s: 'Navegador · demostración', d: 'El navegador que muestra cada corte, en directo. Lo que ves aquí es una demostración.', pagina: 'zero/?orbita=1&entrada=0&v=20261027c', fuera: true },
+    { id: 'zero', n: 'ZERO', s: 'Navegador · demostración', d: 'El navegador que muestra cada corte, en directo. Lo que ves aquí es una demostración.', pagina: 'zero/?orbita=1&entrada=0&v=20261105-apin', fuera: true },
     // 26 Oct 2026 (owner: «haz comunicaciones enteras»): the door opens the web app itself, full page (calls need the
     // microphone and the camera, and large files are written straight to disk: none of that belongs in a frame).
     { id: 'comunicaciones', n: 'Comunicaciones', s: 'Habla sin testigos', d: 'Chat, notas de voz y archivos de cualquier tamaño, encriptados de extremo a extremo entre dos equipos, con un código de 9 cifras. Al terminar, se borra todo.', enlace: 'comunicaciones/', fuera: true },
@@ -1602,6 +1602,11 @@ void main(){
     const W = innerWidth, a = izq.getBoundingClientRect().right, b = der.getBoundingClientRect().left;
     const choca = W > 1100 && (W / 2 - natural / 2 - 16 < a || W / 2 + natural / 2 + 16 > b);
     document.body.classList.toggle('capas-abajo', choca);
+    // 5 Nov 2026 (auditoría de la web): where the header's pieces end (with the bar on its own line, about 121 px; the header's
+    // own box, transparent, reaches 147): Radiografías and Mi conexión start below it (orbita.css, --cab-b)
+    let fondo = 0;
+    for (const e of bar.parentElement.children) { if (e.id === 'sat-vista' || e.id === 'sat-fase' || e.hidden) continue; const r = e.getBoundingClientRect(); if (r.height && r.bottom > fondo) fondo = r.bottom; }
+    document.documentElement.style.setProperty('--cab-b', Math.round(fondo) + 'px');
   }
   addEventListener('resize', mide);
   addEventListener('guardiana-idioma', () => setTimeout(mide, 0));
