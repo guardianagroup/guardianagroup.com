@@ -28,6 +28,9 @@ body:not(.m2) #mando {
   opacity: 0; transition: opacity .8s 1.6s;
 }
 body.listo:not(.m2) #mando { opacity: 1; }
+/* 5 Nov 2026 (auditoría de la web): up to 1100 px the layer bar runs the header's whole width; the instrument starts below it
+   (--cab-b and --mando-h, measured in orbita.js) instead of under the bar, where «Altura» was hidden */
+@media (max-width: 1100px) { body:not(.m2) #mando { top: max(calc(50% - var(--cinta, 0px) / 2), calc(var(--cab-b, 0px) + 12px + var(--mando-h, 0px) / 2)); } }
 /* gone when a section opens over the planet, during a trip (back at its end), behind «Mi conexión» and behind a card */
 body.dentro:not(.m2) #mando, body.viaje:not(.m2):not(.viaje-fin) #mando, body.con-conexion:not(.m2) #mando, body.con-ficha:not(.m2) #mando { opacity: 0; transition: opacity .3s; }
 body.dentro:not(.m2) #mando, body.dentro:not(.m2) #mando *, body.viaje:not(.m2):not(.viaje-fin) #mando, body.viaje:not(.m2):not(.viaje-fin) #mando *,
