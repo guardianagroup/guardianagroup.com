@@ -304,7 +304,7 @@
   // medio podía probar identidades hasta que las 4 palabras de los dos lados coincidieran, unos 2^22 intentos por lado). Como en la
   // llamada y en ZRTP: quien inicia manda primero el compromiso, SHA-384(etiqueta ‖ su huella ‖ 32 bytes al azar); quien responde manda
   // sus 32 bytes al azar ya sabiendo solo el compromiso; quien inicia revela los suyos y quien responde comprueba el compromiso. Las
-  // palabras salen de las dos huellas y de los dos números, en el orden de los papeles: nadie puede elegirlas después de ver las del otro.
+  // palabras salen de las dos huellas y de los dos números, en el orden de los papeles: quien esté en medio ya no puede elegirlas después de ver las del otro.
   async function compromisoPalabras(huellaI, nI) { return sha384(cat(te.encode('GUARDIANA compromiso de las palabras v1\n'), u8(huellaI), u8(nI))); }
   async function palabrasB(huellaI, huellaR, nI, nR) { return palabrasDe(await sha384(cat(te.encode('GUARDIANA palabras de verificación v2\n'), u8(huellaI), u8(huellaR), u8(nI), u8(nR)))); }
 
