@@ -23,7 +23,7 @@
 <!-- el icono de la app, con profundidad (dueño, 28 Oct 2026, 18:00: «efectos de sombra, difuminado… más profesional»): el de
      180 × 180 sin esquinas (las pone el iPhone); marca/guardiana-icono-app.svg es su original -->
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=2">
-<meta name="description" content="GUARDIANA Comunicaciones, para particulares y profesionales con clientes: chat, llamadas y envío de datos y documentación sensible, encriptados de extremo a extremo entre dos navegadores, con un código de 9 cifras o un enlace. Los servidores no guardan archivos; los mensajes para quien no está conectado esperan encriptados, 7 días como mucho.">
+<meta name="description" content="GUARDIANA Comunicaciones: chat, llamadas y archivos encriptados de extremo a extremo entre dos navegadores, con un código de 9 cifras o un enlace.">
 <title>GUARDIANA</title>
 <!-- la tarjeta que ven WhatsApp, iMessage y los demás al compartir el enlace o el marcador de la app (dueño, 29 Oct 2026, 10:00) -->
 <meta property="og:type" content="website">
@@ -41,7 +41,7 @@
 <link rel="canonical" href="https://guardianagroup.com/orbita/comunicaciones/">
 <link rel="icon" href="/favicon.ico">
 <link rel="stylesheet" href="componentes.css?v=20261028m">
-<link rel="stylesheet" href="app.css?v=20261103-ultra1">
+<link rel="stylesheet" href="app.css?v=20261105-ultra2">
 <link rel="stylesheet" href="diseno.css?v=20261031a">
 <link rel="stylesheet" href="viaje.css?v=20261029b">
 <!-- antes de pintar: como app desde el primer fotograma y, al volver a un chat tras recargar, sin enseñar el inicio entretanto -->
@@ -219,7 +219,7 @@
         <p><b>Saber tu número no basta para escribirte.</b> Quien teclee un número al azar, o el tuyo sin que tú lo hayas añadido, no consigue nada: ni un mensaje, ni una llamada, ni saber si ese número existe. Así no hay llamadas de desconocidos ni publicidad.</p>
         <p><b>Cómo pasar tu número.</b> Tu número no es una llave: con él nadie lee nada ni te contacta. Lo seguro es dárselo en persona o de viva voz; por escrito también vale (WhatsApp, correo…). Si alguien te dice «guarda mi nuevo número», llámalo antes a su número de siempre: es una estafa habitual.</p>
         <p><b>Qué sabe GUARDIANA de tu número.</b> El número nunca sale de tu teléfono: a nuestro servidor llega una huella (un cálculo del que no sale el número) junto con tus claves públicas. Mientras los dos os añadís, el servidor guarda una «cita» cerrada que ninguno de los dos puede leer por separado y que se borra cuando el chat se abre. No guardamos nombres, teléfonos ni correos. Para avisarte con la app cerrada, el servidor guarda la dirección de avisos de tu teléfono y las salas de tus chats (identificadores al azar, sin nombres ni contenido). Y, como cualquier servidor, ve tu dirección de conexión y la hora mientras estás conectado.</p>
-        <p><b>Buzón cifrado.</b> Si la otra persona tiene GUARDIANA cerrada, tu mensaje no espera en tu teléfono: se cierra en un sobre que solo el suyo puede abrir y queda en nuestro servidor hasta que lo recoge (7 días como mucho); después se borra. Verás ✓ cuando está guardado, ✓✓ cuando le llega y ✓✓ en verde cuando lo lee.</p>
+        <p><b>Buzón encriptado.</b> Si la otra persona tiene GUARDIANA cerrada, tu mensaje no espera en tu teléfono: se cierra en un sobre que solo el suyo puede abrir y queda en nuestro servidor hasta que lo recoge (7 días como mucho); después se borra. Verás ✓ cuando está guardado, ✓✓ cuando le llega y ✓✓ en verde cuando lo lee.</p>
 
         <h3>En tu pantalla de inicio</h3>
         <p><b>iPhone.</b> Abre guardianagroup.com en Safari, toca «Descargar GUARDIANA», luego el botón Compartir (el cuadrado con la flecha) y «Añadir a pantalla de inicio». Los avisos con la app cerrada solo llegan desde ese icono (iOS 16.4 o posterior).</p>
@@ -351,9 +351,7 @@
       <p class="t validez" id="validez">Es válido durante 10 minutos y para un solo uso; después deja de funcionar.</p>
       <p class="t" id="invita-estado" hidden></p>
       <div class="fila centro"><button type="button" class="boton" id="invita-nuevo" hidden>Nuevo código</button></div>
-      <!-- también como enlace, para quien está en el móvil (allí ya no se escriben códigos; dueño, 28 Oct 2026, 15:42) -->
-      <div class="fila centro"><button type="button" class="boton principal" id="codigo-enlace">Copiar el enlace</button></div>
-      <p class="t nota">Si la otra persona está en el móvil, mándale el enlace: lo abre y acepta.</p>
+      <!-- dueño, 4 Nov 2026, 12:18: «Borra copiar enlace y la frase de debajo»; el enlace sigue en «Invitar» (#paso-enlace) -->
     </div>
 
     <!-- Invitación por enlace o QR (la semilla entera, 256 bits, en el fragmento: no llega a ningún servidor). La de Ultra («#b=») dice
@@ -552,7 +550,7 @@
               <li><b>Contenido</b><span>AES-256-GCM, con una clave por mensaje derivada con cadenas HMAC-SHA256; la anterior se descarta.</span></li>
               <li><b>Archivos</b><span>Trozos de 192 KB encriptados uno a uno; quien envía nunca carga el archivo entero y, con Chrome o Edge, quien recibe lo escribe en disco según llega.</span></li>
               <li><b>Invitación</b><span>Código de 9 cifras, un solo uso, 10 minutos e intentos limitados. El relé solo guarda un sobre cerrado con una clave derivada del código en el navegador (PBKDF2, 300.000 iteraciones).</span></li>
-              <li><b>Relé y verificación</b><span>El relé no guarda nombres ni claves y solo sabe qué conexiones comparten una sala y cuántos bytes mueven; para quien no está conectado, guarda el mensaje en un buzón cifrado (sobre híbrido ECDH P-256 + ML-KEM-768, firmado) hasta entregarlo, 7 días como mucho. Número de seguridad de 60 cifras para comprobar fuera de banda.</span></li>
+              <li><b>Relé y verificación</b><span>El relé no guarda nombres ni claves y solo sabe qué conexiones comparten una sala y cuántos bytes mueven; para quien no está conectado, guarda el mensaje en un buzón encriptado (sobre híbrido ECDH P-256 + ML-KEM-768, firmado) hasta entregarlo, 7 días como mucho. Número de seguridad de 60 cifras para comprobar fuera de banda.</span></li>
               <li><b>Ultra</b><span>Acuerdo híbrido ECDH P-384 + ML-KEM-1024 (FIPS 203) con HKDF-SHA-384; firmas ECDSA P-384 sobre SHA-384 y ML-DSA-87 (FIPS 204) sobre toda la negociación; identidad nueva en cada conversación, solo en memoria (claves Web Crypto no exportables; la clave privada ML-DSA-87 vive sellada con AES-256-GCM y se abre solo para firmar; los arrays postcuánticos se borran con ceros tras usarse); nada de la conversación en IndexedDB ni en localStorage; invitación de 256 bits solo en el fragmento del enlace o en QR; cuatro palabras de verificación (11 bits cada una, de una lista de 2048) derivadas con SHA-384 de las dos identidades, y las de la llamada, de su propio acuerdo con compromiso previo (al estilo de ZRTP); número de seguridad de 60 cifras; claves renovadas cada 5 minutos; mensajes rellenos a múltiplos de 1 KB con un latido de relleno cada 5 s; último trozo de cada archivo completo; sin buzón en el relé; recibo autenticado con la clave de la sesión y comprobante firmado solo a petición; fotos recodificadas sin EXIF, GPS, ICC ni miniaturas, y archivos con nombre neutro; avisos sin contenido y solo del propio navegador (las salas Ultra no se registran en el relé para avisos).</span></li>
               <li><b>Llamadas</b><span>WebRTC solo a través del servidor TURN de GUARDIANA; la oferta, la respuesta y la huella DTLS viajan dentro del canal encriptado de extremo a extremo; audio y vídeo con DTLS-SRTP y, si los dos navegadores la admiten, una capa postcuántica encima (AES-256-GCM, con una clave de la sesión del chat que cambia cada 2 minutos). En Ultra, esa capa es obligatoria (sin ella la llamada no empieza), su clave cambia cada minuto, Opus va a ritmo constante (cbr=1, usedtx=0) sin la extensión de cabecera que manda el volumen de cada paquete (ssrc-audio-level, RFC 6464), no se puede pasar al teléfono y el mosaico (rejilla de 24 bloques de ancho, color medio con ruido por fotograma, bordes duros) y la voz cambiada (predicción lineal de orden 32 con deformación bilineal de los formantes, cambio de tono y paso banda de 300 a 3000 Hz, parámetros al azar por llamada) se procesan en el navegador antes de encriptar.</span></li>
             </ul>
@@ -1263,7 +1261,7 @@
 <!-- En el ordenador, en el chat blindado: la pantalla se tapa con la tecla de captura o si la ventana pierde el foco (29 Oct 2026, 08:02) -->
 <!-- y, en Ultra, al pasar la app a segundo plano o perder el foco (3 Nov 2026, ronda 93): la miniatura de la multitarea sale tapada -->
 <div class="captura-velo" id="captura-velo" role="alert" hidden><div><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><b>Modo Ultra</b><span class="cv-captura">Pantalla tapada durante la captura</span><span class="cv-fuera">Pantalla tapada mientras la app está en segundo plano</span></div></div>
-<script src="/orbita/static/idioma.js?v=20261103-ultra1"></script>
+<script src="/orbita/static/idioma.js?v=20261105-ultra2"></script>
 <script src="pq-mlkem.js?v=20261027a"></script>
 <script src="pq-cnsa.js?v=20261027a"></script>
 <script src="qrhaz.js?v=20261027a"></script>
@@ -1274,7 +1272,7 @@
 <script src="sha256.js?v=20261027a"></script>
 <script src="viaje-datos.js?v=20261031a"></script>
 <script src="viaje.js?v=20261102u2"></script>
-<script src="llamada.js?v=20261103-ultra1"></script>
-<script src="app.js?v=20261103-ultra1"></script>
+<script src="llamada.js?v=20261105-ultra2"></script>
+<script src="app.js?v=20261105-ultra2"></script>
 </body>
 </html>

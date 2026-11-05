@@ -2468,3 +2468,10 @@ button.ll-env-ico:focus-visible{outline:2px solid #9CC3E4;outline-offset:2px}
 .captura-velo .cv-fuera{display:none}
 .captura-velo.fuera .cv-fuera{display:block}
 .captura-velo.fuera .cv-captura{display:none}
+/* 5 Nov 2026 (auditoría de la web): en un portátil de pantalla baja (1366x657, 1280x720, 1024x768) «Tengo un código» quedaba por
+   debajo del borde, sin nada que lo sugiriera. En pantallas anchas y bajas, los dos botones principales van uno al lado del otro y
+   lo demás (Ultra), debajo, a lo ancho de los dos. La esfera mide lo mismo que siempre. */
+@media (min-width:900px) and (max-height:820px){
+  #paso-inicio{grid-template-columns:repeat(2,minmax(0,1fr));max-width:894px}
+  #paso-inicio>:not(#nueva):not(#unir){grid-column:1/-1}
+}

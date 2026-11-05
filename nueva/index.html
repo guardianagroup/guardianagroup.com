@@ -2,7 +2,7 @@
 <html lang="es" data-idiomas="es,en">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-8FosdWHctw6RBej9gmDF+b2BytiU0RVLJSrEEHtFKoU=' 'sha256-bU6rNlfMfcPD2gA+HebsmJmbWxiCH2IgrL0nt6lPxOw='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-8FosdWHctw6RBej9gmDF+b2BytiU0RVLJSrEEHtFKoU=' 'sha256-WPjOAgeeOi3UK7uhd+8HNtNtCgFGKXnjwYQZbxWIwkU='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'none'">
 <script src="/marco/marco.js?v=20261101b"></script>
 <meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -636,7 +636,7 @@ body{caret-color:transparent;-webkit-user-select:none;user-select:none;-webkit-t
     <p class="lead r">El código de GUARDIANA es abierto, con licencia AGPL-3.0: cualquiera puede leerlo, auditarlo y comprobar que hace lo que dice.</p>
     <div class="fila r"><a class="btn fant" href="https://github.com/guardianagroup/guardianagroup.com" rel="noopener">Ver el código <span aria-hidden="true">↗</span></a></div>
     <ul class="lista-estado r">
-      <li><b>Comunicaciones</b><span class="estado">En construcción</span><p>Chat, llamadas y archivos cifrados de extremo a extremo. Llegará cuando esté terminada y probada.</p></li>
+      <li><b>Comunicaciones</b><span class="estado">En construcción</span><p>Chat, llamadas y archivos encriptados de extremo a extremo. Llegará cuando esté terminada y probada.</p></li>
       <li><b>GUARDIANA OS</b><span class="estado">En preparación</span><p>Un sistema operativo de código abierto que se descargará desde aquí: verás y podrás cortar cada conexión de tu equipo, programa por programa.</p></li>
     </ul>
   </div>
@@ -696,7 +696,7 @@ body{caret-color:transparent;-webkit-user-select:none;user-select:none;-webkit-t
   document.querySelectorAll('[aria-label],[alt],[title]').forEach((el) => ['aria-label', 'alt', 'title'].forEach((a) => { const v = el.getAttribute(a); if (v) attrs.push({ el, a, es: v }); }));
   const h1 = document.getElementById('titular'), h1es = h1.innerHTML, tit0 = document.title, meta = document.querySelector('meta[name="description"]'), meta0 = meta ? meta.content : '';
   const CACHE = {}; let J = null;
-  const carga = (l) => CACHE[l] || (CACHE[l] = fetch('/i18n/nueva/' + l + '.json?v=20261023e').then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); }));
+  const carga = (l) => CACHE[l] || (CACHE[l] = fetch('/i18n/nueva/' + l + '.json?v=20261103-enc1').then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); }));
   window.__t = (es) => { const v = J && J.t[norm(es)]; return v != null ? v : es; };
   const titular = () => { if (!J) { h1.innerHTML = h1es; return; } h1.textContent = ''; const sep = J.titular.sep != null ? J.titular.sep : ' '; let d = 0.3;
     J.titular.w.forEach((w, i) => { const s = document.createElement('span'); s.className = 'w'; s.style.animationDelay = d.toFixed(2) + 's'; d += 0.12; s.textContent = w; h1.append(s); if (J.titular.br === i) h1.append(document.createElement('br')); if (sep) h1.append(document.createTextNode(sep)); });

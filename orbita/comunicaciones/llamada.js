@@ -170,7 +170,7 @@
           const m = e.data || {}; if (m.cuenta) pqCuenta = m.cuenta;
           if (m.tipo === 'visto') { const x = pqPorRx.get(m.id); if (x) { x.visto = true; pinta(); } }
           if (m.tipo === 'codigo') { const x = pqPorCod.get(m.id); if (x && /^\d{6}$/.test(m.codigo)) { x.codigo = m.codigo; x.llaveN = m.n | 0; pintaCodigo(true); } }
-          if (m.tipo === 'fallo' && estado === 'hablando' && m.cuenta && m.cuenta.seguidos > 40) di(t('No se puede descifrar el sonido o la imagen de la otra persona.'), true);
+          if (m.tipo === 'fallo' && estado === 'hablando' && m.cuenta && m.cuenta.seguidos > 40) di(t('No se puede desencriptar el sonido o la imagen de la otra persona.'), true);
         };
       }
       return obrero;

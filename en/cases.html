@@ -22,6 +22,9 @@
 <meta name="twitter:description" content="Public privacy fines and rulings — Google, SHEIN, TikTok, Kochava, Free — with amount, date and a link to the case file, and the 44 sources of this site.">
 <meta name="twitter:image" content="https://guardianagroup.com/og-2-en.png">
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-GRnbe5xsWeye68UtIl3Buj2pyLE2pzTNrogV8k7NGhw=' 'sha256-hel2rjE3qhn3o5Knn3vU7CxZJIqRaqiKuyD97s5uYBc=' 'sha256-bU2DpsE0Cm6QLD/1DjyiujyAAM9aqMeE0fMUgE/Ul7c=' 'sha256-MlbQMR0Dfgvz3HSY6jnL/XNZWuca2148M35PnSyGzMU='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'none'">
+<link rel="preload" href="/fonts/SchibstedGrotesk-var.woff" as="font" type="font/woff" crossorigin>
+<link rel="preload" href="/fonts/HankenGrotesk-var.woff" as="font" type="font/woff" crossorigin>
+<link rel="preload" href="/fonts/InstrumentSerif-Regular.woff" as="font" type="font/woff" crossorigin>
 <link rel="stylesheet" href="/marco/marco.css?v=20261030a">
 <script src="/marco/marco.js?v=20261101b"></script>
 <meta name="theme-color" content="#06080C">
@@ -123,14 +126,17 @@ header.top .descargar{display:inline-flex;align-items:center;margin-left:auto;bo
 .caja h2{font:700 21px/1.2 'Schibsted Grotesk',system-ui,sans-serif;margin:0}
 .caja>header span{color:#8E99A6;font-size:13px;white-space:nowrap}
 .fila{border-top:1px solid #161D26}
-.fila summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:minmax(6.4em,auto) 1fr auto;align-items:center;gap:12px;padding:11px 2px}
+.fila summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:minmax(6.4em,auto) minmax(0,1fr);align-items:center;gap:4px 12px;padding:11px 2px}
 .fila summary::-webkit-details-marker{display:none}
 .fila summary:focus-visible{outline:2px solid #9CC3E4;outline-offset:2px;border-radius:6px}
 .fila .imp{font:700 17px/1.1 'Schibsted Grotesk',system-ui,sans-serif;color:#E07A6C;white-space:nowrap}
 .fila .imp.anulada{color:#8E99A6;text-decoration:line-through;text-decoration-thickness:1px}
 .fila .dato{min-width:0;display:flex;flex-direction:column;gap:2px}
-.fila .dato b{font-weight:500;font-size:13px;color:#E8ECF1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.fila .dato small{color:#8E99A6;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fila .dato b{font-weight:500;font-size:13px;color:#E8ECF1;overflow-wrap:break-word}
+.fila .dato small{color:#8E99A6;font-size:12px;overflow-wrap:break-word}
+/* 5 Nov 2026 (auditoría de la web): la autoridad y la empresa de cada multa, que es lo que la identifica, se cortaban con «…»;
+   ahora se parten en las líneas que hagan falta y el sello (Acuerdo, Recurrida, Firme) va debajo del texto, no a su lado */
+.fila summary .est{grid-column:2;justify-self:start}
 .est{font:600 11px/1 'Hanken Grotesk',sans-serif;color:var(--e);border:1px solid var(--e);border-radius:999px;padding:4px 8px;white-space:nowrap;opacity:.9}
 .fila[open] summary{padding-bottom:4px}
 .det{padding:4px 2px 14px}

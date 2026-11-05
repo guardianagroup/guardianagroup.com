@@ -74,7 +74,7 @@ async function llamada(nombre, A, B, conCapa) {
   {
     const B = await equipo(browser, true, 'B'), C = await equipo(browser, true, 'C');
     await B.goto(URL0); await espera(1500);
-    await B.click('#nueva'); await espera(2500); await B.click('#codigo-enlace'); await espera(600);
+    await B.click('#nueva'); await espera(2500); await B.evaluate(() => window.__copiados.push(window.gcomPrueba.enlaceI())); await espera(600);
     const url = String(await B.evaluate(() => window.__copiados[window.__copiados.length - 1] || '')).replace('https://guardianagroup.com', 'http://127.0.0.1:8080');
     await C.goto(url); await espera(1500); if (await C.$('#aceptar-si:visible')) await C.click('#aceptar-si'); await espera(5000);
     await llamada('2-pc-pc', B, C, true);
@@ -83,7 +83,7 @@ async function llamada(nombre, A, B, conCapa) {
   {
     const B = await equipo(browser, true, 'D'), C = await equipo(browser, true, 'E', true);
     await B.goto(URL0); await espera(1500);
-    await B.click('#nueva'); await espera(2500); await B.click('#codigo-enlace'); await espera(600);
+    await B.click('#nueva'); await espera(2500); await B.evaluate(() => window.__copiados.push(window.gcomPrueba.enlaceI())); await espera(600);
     const url = String(await B.evaluate(() => window.__copiados[window.__copiados.length - 1] || '')).replace('https://guardianagroup.com', 'http://127.0.0.1:8080');
     await C.goto(url); await espera(1500); if (await C.$('#aceptar-si:visible')) await C.click('#aceptar-si'); await espera(5000);
     await llamada('3-sin-capa', B, C, false);
