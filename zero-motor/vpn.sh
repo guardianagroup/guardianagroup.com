@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 # GUARDIANA · la VPN en este servidor (2 Nov 2026; dueño, 10:40: «Utilizamos el de Helsinki. Conéctalo ya»).
-# La llama instalar.sh en el servidor de Helsinki (o donde exista /etc/guardiana/vpn), como root. Idempotente y sin
+# La llama instalar.sh, como root, en cada servidor con VPN: Helsinki y, desde el 5 Nov 2026, cada salida con su nombre
+# (VPN_NOMBRE: vpn.guardianagroup.com en Helsinki, vpn-nbg.guardianagroup.com en Núremberg, vpn-mia.guardianagroup.com
+# en Miami; zero-motor/LEEME-VPN.md). Idempotente y sin
 # cortes: al volver a ejecutarse no toca la llave del servidor ni la interfaz wg0 con sus equipos conectados, y solo
 # reinicia lo que ha cambiado (el alta, si cambia su programa o su servicio; Unbound, si cambia su configuración). Las
 # reglas de red se vuelven a cargar de una vez, sin un momento sin ellas.
@@ -8,7 +10,7 @@
 # - WireGuard del núcleo: wg0, UDP 51820, red 10.66.0.0/16; el servidor y su resolutor en 10.66.0.1. La llave privada se
 #   genera aquí la primera vez y no sale de esta máquina.
 # - El alta de GUARDIANA (crates/tunel-servidor del programa, compilado aquí desde el commit fijado abajo, del repositorio
-#   público): escucha solo en 127.0.0.1:8793, detrás de Caddy en https://vpn.guardianagroup.com/vpn/alta. Sin registros: los
+#   público): escucha solo en 127.0.0.1:8793, detrás de Caddy en https://<nombre>/vpn/alta. Sin registros: los
 #   equipos viven en la memoria del núcleo y se quitan tras 24 horas sin uso; el servicio no escribe nada en disco. Al
 #   arrancar toma los equipos que wg0 ya tiene, así que un reinicio no deja a nadie sin túnel ni da su dirección a otro.
 #   Con lo mínimo: solo puede cambiar los pares de WireGuard y hablar con este mismo servidor.
@@ -24,8 +26,9 @@ set -euo pipefail
 
 NOMBRE="${VPN_NOMBRE:-vpn.guardianagroup.com}"
 REPO_PROG="https://github.com/guardianagroup/guardiana.git"
-# el programa del servidor: este commit exacto de la rama antivirus-vpn (docs/VPN.md del programa)
-COMMIT="44397927a202cbf7ab9d0358da778c18b150b4c8"
+# el programa del servidor: este commit exacto (docs/VPN.md del programa). 5 Nov 2026: e1ae8e4, de la rama vpn-estricto,
+# con el eco (GET /vpn/alta: la dirección que ve el servidor, para «lo que una web verá»; no guarda nada)
+COMMIT="e1ae8e4fa6e17aa574c534a9c39f3d2b7c3e5970"
 VB=/opt/guardiana-vpn
 ESTADO=/var/lib/guardiana-vpn
 BIN=/usr/local/bin/guardiana-tunel-servidor

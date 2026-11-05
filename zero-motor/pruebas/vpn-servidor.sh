@@ -9,7 +9,9 @@
 # 3. Una segunda ejecución de vpn.sh sin cortes, y un reinicio del alta sin que nadie pierda su túnel ni su dirección.
 # 4. El 443 compartido con la configuración que escribe instalar.sh (nginx reparte por nombre y por ALPN; Caddy con
 #    certificados locales de prueba): el alta por https sin ALPN, como la pide el programa, llega al alta; el TURN-TLS
-#    sigue yendo a coturn; y con el alta parada, Caddy responde 503 sin apuntar a nadie en el diario.
+#    sigue yendo a coturn; y con el alta parada, Caddy responde 503 sin apuntar a nadie en el diario. Desde el 5 Nov 2026,
+#    con el nombre de la VPN de cada servidor (el de Helsinki y el de Núremberg; la prueba de verdad, con el segundo) y
+#    el eco (GET /vpn/alta: la dirección que ve el servidor).
 #
 # Llaves de prueba, hechas aquí y tiradas con la máquina. Necesita sudo, dig y ncat.
 set -euo pipefail
@@ -153,25 +155,36 @@ curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/debian.deb.txt' | sudo 
 sudo apt-get update -qq && sudo apt-get install -y -qq caddy > /dev/null
 sudo rm -f /usr/sbin/policy-rc.d /etc/nginx/sites-enabled/default
 
-# nginx.conf tal cual lo escribe instalar.sh
-awk '/^    cat > \/etc\/nginx\/nginx.conf <<.EOF.$/{f=1;next} f&&/^EOF$/{exit} f' zero-motor/instalar.sh | sudo tee /etc/nginx/nginx.conf > /dev/null
+# nginx.conf y los dos Caddyfile (Caddy directo y el 443 compartido) tal cual los escribe instalar.sh, con el nombre de la
+# VPN del servidor $1, en $T/$1/
+plantillas() {
+  local VPN_NOMBRE="$1" d="$T/$1" n VPN_CADDY SITIOS=motor-hel.guardianagroup.com PUERTO=8792
+  mkdir -p "$d"
+  awk '/^    cat > \/etc\/nginx\/nginx.conf <<.EOF.$/{f=1;next} f&&/^EOF$/{exit} f' zero-motor/instalar.sh \
+    | sed "s/__VPN_NOMBRE__/$VPN_NOMBRE/" > "$d/nginx.conf"
+  grep -qF -- "$(printf '\t\t%s 127.0.0.1:8443;' "$VPN_NOMBRE")" "$d/nginx.conf" || falla "nginx.conf no manda $VPN_NOMBRE a Caddy"
+  if grep -q '__VPN_NOMBRE__' "$d/nginx.conf"; then falla "nginx.conf con el nombre de la VPN sin poner"; fi
+  VPN_CADDY=$(awk '/^    VPN_CADDY=.$/{f=1;next} f&&/^}.$/{print "}";exit} f' zero-motor/instalar.sh)
+  VPN_CADDY=${VPN_CADDY//\$VPN_NOMBRE/$VPN_NOMBRE}
+  for n in 1 2; do
+    awk -v n="$n" '/cat > \/etc\/caddy\/Caddyfile <<EOF$/{k++; if(k==n){f=1;next}} f&&/^EOF$/{exit} f' zero-motor/instalar.sh > "$d/plantilla$n"
+    eval "cat <<FIN
+$(cat "$d/plantilla$n")
+FIN" > "$d/Caddyfile$n"
+    grep -qxF "$VPN_NOMBRE {" "$d/Caddyfile$n" || falla "el Caddyfile $n no lleva el bloque de la VPN de $VPN_NOMBRE"
+    caddy validate --config "$d/Caddyfile$n" --adapter caddyfile > /dev/null 2>&1 \
+      || falla "Caddy no acepta el Caddyfile $n de instalar.sh ($VPN_NOMBRE)"
+  done
+}
+plantillas vpn.guardianagroup.com
+VPN=vpn-nbg.guardianagroup.com
+plantillas "$VPN"
+sudo cp "$T/$VPN/nginx.conf" /etc/nginx/nginx.conf
 sudo nginx -t -q || falla "nginx no acepta la configuración de instalar.sh"
-# los dos Caddyfile de instalar.sh (Caddy directo y el 443 compartido), con el bloque de la VPN; el segundo, con certificados
-# locales de prueba en lugar de los de Let's Encrypt
-VPN_CADDY=$(awk '/^    VPN_CADDY=.$/{f=1;next} f&&/^}.$/{print "}";exit} f' zero-motor/instalar.sh)
-SITIOS=motor-hel.guardianagroup.com
-PUERTO=8792
-for n in 1 2; do
-  awk -v n="$n" '/cat > \/etc\/caddy\/Caddyfile <<EOF$/{k++; if(k==n){f=1;next}} f&&/^EOF$/{exit} f' zero-motor/instalar.sh > "$T/plantilla$n"
-  eval "cat <<FIN
-$(cat "$T/plantilla$n")
-FIN" > "$T/Caddyfile$n"
-  grep -q 'vpn.guardianagroup.com {' "$T/Caddyfile$n" || falla "el Caddyfile $n no lleva el bloque de la VPN"
-  caddy validate --config "$T/Caddyfile$n" --adapter caddyfile > /dev/null 2>&1 || falla "Caddy no acepta el Caddyfile $n de instalar.sh"
-done
-ok "nginx y los dos Caddyfile de instalar.sh, aceptados"
-sed '0,/^{$/s//{\n\tlocal_certs/' "$T/Caddyfile2" | sudo tee /etc/caddy/Caddyfile > /dev/null
-echo "127.0.0.1 vpn.guardianagroup.com motor-hel.guardianagroup.com" | sudo tee -a /etc/hosts > /dev/null
+ok "nginx y los dos Caddyfile de instalar.sh, aceptados, con el nombre de la VPN de Helsinki y con el de Núremberg"
+# el segundo Caddyfile, con certificados locales de prueba en lugar de los de Let's Encrypt
+sed '0,/^{$/s//{\n\tlocal_certs/' "$T/$VPN/Caddyfile2" | sudo tee /etc/caddy/Caddyfile > /dev/null
+echo "127.0.0.1 $VPN motor-hel.guardianagroup.com" | sudo tee -a /etc/hosts > /dev/null
 # coturn de mentira en 5349: apunta lo que le llega
 ncat -lk 127.0.0.1 5349 > "$T/coturn.bin" &
 sudo systemctl restart caddy
@@ -181,15 +194,23 @@ for _ in $(seq 1 30); do sudo test -f "$raiz" && break; sleep 1; done
 sudo cp "$raiz" /usr/local/share/ca-certificates/caddy-prueba.crt
 sudo update-ca-certificates > /dev/null 2>&1
 for _ in $(seq 1 30); do
-  [ "$(curl -s --no-alpn -o /dev/null -w '%{http_code}' https://vpn.guardianagroup.com/)" = 404 ] && break
+  [ "$(curl -s --no-alpn -o /dev/null -w '%{http_code}' "https://$VPN/")" = 404 ] && break
   sleep 1
 done
 
-c=$(curl -s --no-alpn -o /dev/null -w '%{http_code}' -X POST -H 'Content-Type: application/json' -d '{}' https://vpn.guardianagroup.com/vpn/alta)
+c=$(curl -s --no-alpn -o /dev/null -w '%{http_code}' -X POST -H 'Content-Type: application/json' -d '{}' "https://$VPN/vpn/alta")
 [ "$c" = 422 ] || falla "sin ALPN, por el 443 compartido, el alta da $c (se esperaba 422 del alta)"
-c=$(curl -s -o /dev/null -w '%{http_code}' https://vpn.guardianagroup.com/)
+c=$(curl -s -o /dev/null -w '%{http_code}' "https://$VPN/")
 [ "$c" = 404 ] || falla "fuera de /vpn/alta da $c (se esperaba 404)"
-ok "por el 443 compartido, sin ALPN (como el cliente del programa, que usa ureq) y con el nombre de la VPN, llega al alta"
+ok "por el 443 compartido, sin ALPN (como el cliente del programa, que usa ureq) y con el nombre de la VPN ($VPN), llega al alta"
+# el eco: la dirección que ve el servidor, la que le da Caddy (por el 443 compartido, la que vio nginx: esta máquina)
+e=$(curl -s --no-alpn "https://$VPN/vpn/alta")
+[ "$e" = '{"v":1,"ip":"127.0.0.1"}' ] || falla "el eco, por el 443 compartido, dice $e"
+e=$(curl -s -H 'X-Forwarded-For: 203.0.113.9' "$URL_LOCAL")
+[ "$e" = '{"v":1,"ip":"203.0.113.9"}' ] || falla "el eco dice $e (se esperaba la dirección que le pasa Caddy)"
+e=$(curl -s "$URL_LOCAL")
+[ "$e" = '{"v":1,"ip":null}' ] || falla "el eco sin Caddy delante dice $e (se esperaba ninguna dirección)"
+ok "el eco dice la dirección que ve el servidor, sin guardar nada"
 # El cliente del programa no puede hacer aquí el alta por https: solo se fía de las raíces públicas que lleva dentro
 # (webpki-roots), no de la autoridad local de prueba de Caddy. Su saludo TLS (con nombre y sin ALPN) es el de curl --no-alpn
 # de arriba; el alta y el túnel de verdad ya los hicieron e1, e2 y e3.
@@ -200,19 +221,19 @@ timeout 5 openssl s_client -connect 127.0.0.1:443 -servername motor-hel.guardian
 sleep 1
 t1=$(tam)
 [ "$t1" -gt "$t0" ] || falla "el TURN-TLS (sin ALPN, con el nombre del motor) ya no llega a coturn"
-for sni in vpn.guardianagroup.com motor-hel.guardianagroup.com; do
+for sni in "$VPN" motor-hel.guardianagroup.com; do
   tiene 'Verify return code: 0' timeout 5 openssl s_client -connect 127.0.0.1:443 -servername "$sni" -alpn http/1.1 \
     -verify_return_error < /dev/null || falla "con ALPN, $sni no llega a Caddy"
 done
-tiene 'Verify return code: 0' timeout 5 openssl s_client -connect 127.0.0.1:443 -servername vpn.guardianagroup.com \
-  -verify_return_error < /dev/null || falla "sin ALPN, vpn.guardianagroup.com no llega a Caddy"
+tiene 'Verify return code: 0' timeout 5 openssl s_client -connect 127.0.0.1:443 -servername "$VPN" \
+  -verify_return_error < /dev/null || falla "sin ALPN, $VPN no llega a Caddy"
 sleep 1
 [ "$(tam)" = "$t1" ] || falla "algo que debía ir a Caddy ha ido a coturn"
 ok "el TURN-TLS sigue yendo a coturn; la web y el alta, a Caddy"
 
 desde=$(date '+%Y-%m-%d %H:%M:%S')
 sudo systemctl stop guardiana-vpn-alta
-c=$(curl -s -o /dev/null -w '%{http_code}' -X POST -H 'Content-Type: application/json' -d '{}' https://vpn.guardianagroup.com/vpn/alta)
+c=$(curl -s -o /dev/null -w '%{http_code}' -X POST -H 'Content-Type: application/json' -d '{}' "https://$VPN/vpn/alta")
 [ "$c" = 503 ] || falla "con el alta parada da $c (se esperaba 503)"
 sleep 2
 if sudo journalctl -u caddy --since "$desde" -o cat --no-pager | grep -E 'http\.log\.error|remote_ip|client_ip'; then
