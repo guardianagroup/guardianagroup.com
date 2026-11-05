@@ -107,9 +107,9 @@ PARCHES = [
      "  if(l!=='{l}'){ try{ localStorage.setItem('guardiana-lang',l); localStorage.setItem('guardiana-lang-chosen','1'); }catch(_){} location.assign((PAG[l]||'/?lang='+l)+location.hash); return; }\n"
      "  return aplica(l, first);\n"
      "}\n"),
-    ("let l0='en';", "let l0='{l}';"),
-    ("  if(q&&ok(q)) l0=q; else if(chosen&&st&&ok(st)) l0=st; else if(nav==='en'&&porZona) l0=porZona; else if(nav) l0=nav; else if(porZona) l0=porZona;\n",
-     "  // portada en {nombre}: el idioma es el de la dirección; con «?lang=» de otro idioma, el <head> ya ha salido hacia su portada\n"),
+    ("let l0='en', franja=null;", "let l0='{l}', franja=null;"),
+    ("  if(q&&ok(q)) l0=q; else if(chosen&&st&&ok(st)) l0=st; else { l0=(nav==='en'&&porZona)?porZona:(nav||porZona||'en'); if(PAG[l0]){ franja=l0; l0='es'; } }\n",
+     "  // portada en {nombre}: el idioma es el de la dirección (sin franja); con «?lang=» de otro idioma, el <head> ya ha salido hacia su portada\n"),
 ]
 # El guion del <head> de index.html (/?lang=en → /en/, también el idioma elegido a mano) y el de la portada generada.
 CABEZA_ES = re.compile(r"<script>\(function\(\)\{try\{var P=\{en:'/en/',pt:'/pt/'\},q=new URLSearchParams\(location\.search\)\.get\('lang'\)[^<]*</script>")

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <!-- 27 Oct 2026, 12:23 (dueño): «la página web principal va a ser la del planeta que se desliza hacia abajo; arriba, «Empezar»
      abre la de NÚCLEO (ZERO, Órbita, Comunicaciones y NÚCLEO)». Esta es la portada de guardianagroup.com; /conocer.html lleva aquí. -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-BT7dx7gFXQrbeCSdnkPRSTGCwuGtSrLPCs2MxApq0IU=' 'sha256-70EMgXFb9f6c+bHFbdqisUgttTr9HYDY6II53ZsjdNA=' 'sha256-zasOcNPoEvcMFgBA+0OHu0TsTUWXM8HBKcYkep6iB08=' 'sha256-WNDhUcqfJPY4Q/LiJ+LMKJcbOSKZ8RKfHmKSL6EWU1o=' 'sha256-4oxR1kcmI8IIouZuF1y/k1H54ycRLioBh/pG6nvCxWo=' 'sha256-QR47Ix1kwGP7dnVM+e7moPRH8uIuzJqjw72+lyhXYZk=' 'sha256-5n3CUlZykSUXtEEPpYoaP8WYwhnU5DbLQpy/5Qzn6hc=' 'sha256-qMMswNkUiyNys7luFw85S1x95PuThrySd6KZW0Mb42M=' 'sha256-8AwL2BktHjNjQeyquSewHHo5Bq/AEEEnT4zzNUGGfWo=' 'sha256-vg5Tg+u1xfRg4ugEJhRuZvyxN3iDRb46PwVC0/093Ys=' 'sha256-nBZ43g113Q/+KsjE4iyWgO+z+fC5FpDVzuQMnKAwClM=' 'sha256-jbYr+vlk8Or4YSqEi4cg/TWye6Ui0fFkrFWoguUaqPw=' 'sha256-Wcc2f/B9jJAbiQ25BzS9txFebkckagsP95kT0puw6nM='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-BT7dx7gFXQrbeCSdnkPRSTGCwuGtSrLPCs2MxApq0IU=' 'sha256-70EMgXFb9f6c+bHFbdqisUgttTr9HYDY6II53ZsjdNA=' 'sha256-zasOcNPoEvcMFgBA+0OHu0TsTUWXM8HBKcYkep6iB08=' 'sha256-WNDhUcqfJPY4Q/LiJ+LMKJcbOSKZ8RKfHmKSL6EWU1o=' 'sha256-4oxR1kcmI8IIouZuF1y/k1H54ycRLioBh/pG6nvCxWo=' 'sha256-QR47Ix1kwGP7dnVM+e7moPRH8uIuzJqjw72+lyhXYZk=' 'sha256-5n3CUlZykSUXtEEPpYoaP8WYwhnU5DbLQpy/5Qzn6hc=' 'sha256-bMpNJLdVjqPbA1QJgfOpRiz9vRXYsccL8hNK5uiVTII=' 'sha256-8AwL2BktHjNjQeyquSewHHo5Bq/AEEEnT4zzNUGGfWo=' 'sha256-vg5Tg+u1xfRg4ugEJhRuZvyxN3iDRb46PwVC0/093Ys=' 'sha256-nBZ43g113Q/+KsjE4iyWgO+z+fC5FpDVzuQMnKAwClM=' 'sha256-jbYr+vlk8Or4YSqEi4cg/TWye6Ui0fFkrFWoguUaqPw=' 'sha256-Wcc2f/B9jJAbiQ25BzS9txFebkckagsP95kT0puw6nM='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'none'">
 <script src="/marco/entrada.js?v=20261101b"></script>
 <!-- 5 Nov 2026 (SEO, decisión 2): la portada en inglés y en portugués son páginas propias, /en/ y /pt/, que herramientas/portadas.py
      genera a partir de esta (fuente única). Los enlaces antiguos «/?lang=en» y «/?lang=pt» siguen valiendo: llevan allí; también
@@ -594,6 +594,13 @@ body{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
 a,button,[role="button"],label,summary{cursor:pointer}
 input,textarea,[contenteditable]{-webkit-user-select:text;user-select:text;caret-color:auto;cursor:auto}
 /* language picker (21 Oct 2026): one button, every language written in its own script */
+/* 5 Nov 2026: la franja «esta página también está en inglés / portugués», bajo la cabecera, en el flujo (no tapa nada) */
+.franja{position:relative;z-index:3;display:flex;align-items:center;justify-content:center;gap:14px;padding:8px var(--gutter);font-size:13px;line-height:1.4;color:var(--ink-2);background:rgba(10,12,16,.82);border-bottom:1px solid var(--hair)}
+.franja a{color:var(--steel);text-decoration:none;font-family:var(--mono);font-size:12px;letter-spacing:.04em;white-space:nowrap}
+.franja a:hover{text-decoration:underline}
+.franja button{appearance:none;border:0;background:none;color:var(--ink-3);font-size:18px;line-height:1;padding:0 4px;cursor:pointer}
+.franja button:hover{color:var(--ink)}
+@media (max-width:640px){.franja{gap:10px;font-size:12px;text-align:center}}
 .idi{position:relative;flex:none}
 .idi-b{display:inline-flex;align-items:center;gap:8px;min-height:36px;padding:0 13px 0 11px;border-radius:999px;border:0;background:rgba(232,238,245,.04);box-shadow:inset 0 0 0 1px var(--hair-2);color:var(--ink-2);font:500 11px/1 var(--mono);letter-spacing:.08em;cursor:pointer;transition:color .2s,background .2s,box-shadow .2s}
 .idi-b:hover,.idi-b[aria-expanded="true"]{color:var(--ink);background:rgba(156,195,228,.08);box-shadow:inset 0 0 0 1px rgba(156,195,228,.35)}
@@ -2596,7 +2603,11 @@ function mapa(x){ x=String(x||'').toLowerCase(); if(/^zh-(tw|hk|mo|hant)/.test(x
   const b=x.slice(0,2); if(b==='nn'||b==='no') return 'nb'; if(b==='tl') return 'fil'; if(x.startsWith('fil')) return 'fil'; return b; }
 // Language (20 Oct 2026, owner's request): the page opens in the browser's own language when we have it,
 // otherwise in English. A language picked by hand (the picker or ?lang=) wins and is remembered.
-let l0='en';
+// 5 Nov 2026 (SEO, decisión 2): inglés y portugués tienen portada propia, así que esta página ya no se traduce sola a
+// esos dos idiomas (los buscadores, que leen en inglés, verían aquí la misma página que en /en/): se queda en español y
+// enseña, bajo la cabecera, una franja en el idioma del navegador que lleva a /en/ o a /pt/ (se cierra con ×, y la pestaña
+// lo recuerda). Nunca se redirige por el idioma del navegador ni se distingue a los robots. Los otros 39 idiomas, como antes.
+let l0='en', franja=null;
 try{
   const q=new URLSearchParams(location.search).get('lang');
   const st=localStorage.getItem('guardiana-lang'), chosen=localStorage.getItem('guardiana-lang-chosen');
@@ -2608,9 +2619,24 @@ try{
   const ZES=/^(America\/(Bogota|Mexico_City|Monterrey|Merida|Cancun|Chihuahua|Ciudad_Juarez|Hermosillo|Mazatlan|Tijuana|Bahia_Banderas|Matamoros|Ojinaga|Lima|Santiago|Punta_Arenas|Buenos_Aires|Argentina\/.+|Caracas|Guayaquil|La_Paz|Asuncion|Montevideo|Panama|Costa_Rica|Managua|Tegucigalpa|El_Salvador|Guatemala|Havana|Santo_Domingo|Puerto_Rico)|Europe\/Madrid|Atlantic\/Canary|Africa\/(Ceuta|Malabo)|Pacific\/Galapagos)$/;
   const ZPT=/^(America\/(Sao_Paulo|Bahia|Fortaleza|Recife|Belem|Manaus|Cuiaba|Campo_Grande|Porto_Velho|Boa_Vista|Rio_Branco|Araguaina|Maceio|Noronha|Santarem|Eirunepe)|Europe\/Lisbon|Atlantic\/(Azores|Madeira)|Africa\/(Luanda|Maputo|Bissau|Sao_Tome)|Asia\/Dili)$/;
   const porZona = ZES.test(zona)?'es':ZPT.test(zona)?'pt':null;
-  if(q&&ok(q)) l0=q; else if(chosen&&st&&ok(st)) l0=st; else if(nav==='en'&&porZona) l0=porZona; else if(nav) l0=nav; else if(porZona) l0=porZona;
+  if(q&&ok(q)) l0=q; else if(chosen&&st&&ok(st)) l0=st; else { l0=(nav==='en'&&porZona)?porZona:(nav||porZona||'en'); if(PAG[l0]){ franja=l0; l0='es'; } }
 }catch(e){}
 setLang(l0,true);
+// la franja «This page is also available in English → /en/» (solo cuando el idioma lo pone el navegador, no la persona)
+function aviso(l){
+  const T={en:['This page is also available in English','Open the English version','Close'],
+           pt:['Esta página também está em português','Abrir a versão em português','Fechar']}[l]; if(!T) return;
+  try{ if(sessionStorage.getItem('guardiana-franja')==='1') return; }catch(_){}
+  const h=document.querySelector('header.nav'); if(!h) return;
+  const d=document.createElement('div'); d.className='franja'; d.id='franja'; d.lang=DATO[l].tag; d.setAttribute('role','note');
+  const a=document.createElement('a'); a.href=PAG[l]; a.setAttribute('aria-label',T[1]); a.textContent='→ '+PAG[l];
+  a.addEventListener('click',()=>{ try{ localStorage.setItem('guardiana-lang',l); localStorage.setItem('guardiana-lang-chosen','1'); }catch(_){} });
+  const x=document.createElement('button'); x.type='button'; x.setAttribute('aria-label',T[2]); x.textContent='×';
+  x.addEventListener('click',()=>{ try{ sessionStorage.setItem('guardiana-franja','1'); }catch(_){} d.remove(); });
+  const t=document.createElement('span'); t.textContent=T[0];
+  d.append(t,a,x); h.insertAdjacentElement('afterend',d);
+}
+if(franja) aviso(franja);
 // the picker
 (function(){
   const b=document.getElementById('idi-b'), p=document.getElementById('idi-p'), g=document.getElementById('idi-g'); if(!b||!p||!g) return;
