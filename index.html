@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <!-- 27 Oct 2026, 12:23 (dueño): «la página web principal va a ser la del planeta que se desliza hacia abajo; arriba, «Empezar»
      abre la de NÚCLEO (ZERO, Órbita, Comunicaciones y NÚCLEO)». Esta es la portada de guardianagroup.com; /conocer.html lleva aquí. -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-WZsRRuIEeP95giI3k5OTo8lOh9nF01djdBR2o73Tr3E=' 'sha256-zasOcNPoEvcMFgBA+0OHu0TsTUWXM8HBKcYkep6iB08=' 'sha256-WNDhUcqfJPY4Q/LiJ+LMKJcbOSKZ8RKfHmKSL6EWU1o=' 'sha256-4oxR1kcmI8IIouZuF1y/k1H54ycRLioBh/pG6nvCxWo=' 'sha256-QR47Ix1kwGP7dnVM+e7moPRH8uIuzJqjw72+lyhXYZk=' 'sha256-5n3CUlZykSUXtEEPpYoaP8WYwhnU5DbLQpy/5Qzn6hc=' 'sha256-R2R8uxWP86lyC3i9IeuTc5SLJhyNMj4fhd7CtUIa8nM=' 'sha256-8AwL2BktHjNjQeyquSewHHo5Bq/AEEEnT4zzNUGGfWo=' 'sha256-vg5Tg+u1xfRg4ugEJhRuZvyxN3iDRb46PwVC0/093Ys=' 'sha256-nBZ43g113Q/+KsjE4iyWgO+z+fC5FpDVzuQMnKAwClM=' 'sha256-jbYr+vlk8Or4YSqEi4cg/TWye6Ui0fFkrFWoguUaqPw=' 'sha256-Wcc2f/B9jJAbiQ25BzS9txFebkckagsP95kT0puw6nM='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-t2NqHXGQoFcNLrwaX0ol/Yh18hgI5dnAFFtsPL13PaE=' 'sha256-zasOcNPoEvcMFgBA+0OHu0TsTUWXM8HBKcYkep6iB08=' 'sha256-WNDhUcqfJPY4Q/LiJ+LMKJcbOSKZ8RKfHmKSL6EWU1o=' 'sha256-4oxR1kcmI8IIouZuF1y/k1H54ycRLioBh/pG6nvCxWo=' 'sha256-QR47Ix1kwGP7dnVM+e7moPRH8uIuzJqjw72+lyhXYZk=' 'sha256-5n3CUlZykSUXtEEPpYoaP8WYwhnU5DbLQpy/5Qzn6hc=' 'sha256-R2R8uxWP86lyC3i9IeuTc5SLJhyNMj4fhd7CtUIa8nM=' 'sha256-8AwL2BktHjNjQeyquSewHHo5Bq/AEEEnT4zzNUGGfWo=' 'sha256-vg5Tg+u1xfRg4ugEJhRuZvyxN3iDRb46PwVC0/093Ys=' 'sha256-nBZ43g113Q/+KsjE4iyWgO+z+fC5FpDVzuQMnKAwClM=' 'sha256-jbYr+vlk8Or4YSqEi4cg/TWye6Ui0fFkrFWoguUaqPw=' 'sha256-Wcc2f/B9jJAbiQ25BzS9txFebkckagsP95kT0puw6nM='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'none'">
 <script src="/marco/entrada.js?v=20261101b"></script>
 <meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -1497,10 +1497,12 @@ function initGL() {
   // 5 Nov 2026: the 8K maps (6 MB as JPEG, 4,4 MB as WebP) are asked for only once the person has moved (scroll, pointer,
   // touch or a key) or after 3 s of rest, and never before the light maps have arrived: what is seen first is the 4K map,
   // which was already what the first seconds showed; the 8K one takes its place in a single frame once it is decoded,
-  // uploaded in an idle moment so the move that asked for it is not the one that pays for it.
+  // uploaded in an idle moment so the move that asked for it is not the one that pays for it. On a touch screen without a
+  // fine pointer (COARSE, the same test Órbita uses) the 8K maps are never asked for: at a phone's width they add nothing
+  // to the eye and cost 4,4 MB.
   let ligeras = false, reposo = false, pedido8k = false;
   const pide8k = () => {
-    if (pedido8k || !reposo || !ligeras || max < 8192) return;
+    if (pedido8k || !reposo || !ligeras || max < 8192 || COARSE) return;
     pedido8k = true;
     const sube = (t) => (im) => { const ya = () => upload(im, t); if (window.requestIdleCallback) requestIdleCallback(ya, { timeout: 2000 }); else setTimeout(ya, 0); };
     load('earth-8k', sube(tex), () => {}); load('earth-day-8k', sube(dayTex), () => {});
