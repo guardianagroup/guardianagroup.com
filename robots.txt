@@ -1,5 +1,22 @@
+# GUARDIANA · guardianagroup.com
+# Todo lo público se puede rastrear, también el CSS, el JS, las letras y las imágenes (Google necesita verlos para pintar la
+# página). Fuera del rastreo: la marca, las herramientas de la web, el motor de ZERO y los instaladores (63 MB cada uno;
+# no son páginas y gastan el ancho de banda de GitHub Pages). Lo que no debe salir en los buscadores lleva «noindex» en
+# la propia página, no aquí: una página bloqueada en robots.txt no puede decirle «noindex» al buscador.
+
 User-agent: *
 Allow: /
 Disallow: /marca/
 Disallow: /herramientas/
+Disallow: /zero-motor/
+Disallow: /descargas/
+
+# Las imágenes de la web (capturas, planeta, tarjetas) pueden salir en Google Imágenes; la marca, no.
+User-agent: Googlebot-Image
+Allow: /
+Disallow: /marca/
+Disallow: /herramientas/
+Disallow: /zero-motor/
+Disallow: /descargas/
+
 Sitemap: https://guardianagroup.com/sitemap.xml
