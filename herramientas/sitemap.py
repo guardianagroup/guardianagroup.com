@@ -24,7 +24,11 @@ FUERA = ('herramientas/', 'marca/', 'descargas/', 'extension/', 'zero-motor/', '
 # zero.html, «por dentro» y «comprobar un recibo» entran (es/en/pt), e instalar también (la 1.0.56 ya se descarga desde la
 # portada). Antes (28 Oct 2026, commit 8d0c3c70) todas esas páginas quedaban fuera del sitemap sin «noindex», y Google
 # podía indexarlas igual por los enlaces. Aquí solo queda lo que no es una página de verdad.
-EXCLUIDAS = {'index-anterior.html'}
+# La aplicación (lo que se USA, no se LEE) va a /solo-pc/ en el teléfono (marco/marco.js) y el rastreador principal de
+# Google es el móvil: fuera del sitemap, para que no salgan como «página con redirección». Se entra por zero.html,
+# como-funciona.html y la portada (5 nov 2026).
+EXCLUIDAS = {'index-anterior.html', 'orbita/index.html', 'orbita/zero/index.html', 'orbita/comunicaciones/index.html',
+             'orbita/comunicaciones/verificar/index.html'}
 EXCLUIDAS_CARPETAS = ()
 
 ARGS = [a for a in sys.argv[1:] if not a.startswith('--')]

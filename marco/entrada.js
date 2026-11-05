@@ -31,7 +31,7 @@
 
   var ruta = location.pathname;
   // La aplicación: lo que se USA. Todo lo demás se LEE. Las multas de Órbita (/orbita/multas/) son una página de lectura.
-  var APP = /^\/(orbita\/(?!multas\/)|m\/|e\/|chat\/|inicio\/)/;
+  var APP = /^\/(orbita\/(?!multas\/|zero\/privacidad-extension\.html)|m\/|e\/|chat\/|inicio\/)/;
   if (!APP.test(ruta)) { lectura(); return; }
 
   // 2 Nov 2026 (dueño: «Sí, solo desde el QR»; 09:16: «solamente es pasar la llamada»): la página del teléfono (/m/) se abre
@@ -69,7 +69,7 @@
     var cerrada = false;
     try { cerrada = sessionStorage.getItem('guardiana-franja') === 'cerrada'; } catch (_) {}
     if (cerrada) return;
-    var V = '20261105a';
+    var V = '20261105b';
     // texto · enlace · destino del enlace · nombre de la × (para el lector de pantalla)
     var T = {
       es: ['GUARDIANA se usa en el PC. Aquí puedes leer qué hace.', 'Ver cómo instalarla', '/instalar.html', 'Cerrar este aviso'],
