@@ -1607,6 +1607,8 @@ void main(){
     let fondo = 0;
     for (const e of bar.parentElement.children) { if (e.id === 'sat-vista' || e.id === 'sat-fase' || e.hidden) continue; const r = e.getBoundingClientRect(); if (r.height && r.bottom > fondo) fondo = r.bottom; }
     document.documentElement.style.setProperty('--cab-b', Math.round(fondo) + 'px');
+    const mando = document.getElementById('mando'); // …and the instrument on the right keeps below it (mando.css)
+    if (mando && mando.offsetHeight) document.documentElement.style.setProperty('--mando-h', mando.offsetHeight + 'px');
   }
   addEventListener('resize', mide);
   addEventListener('guardiana-idioma', () => setTimeout(mide, 0));
