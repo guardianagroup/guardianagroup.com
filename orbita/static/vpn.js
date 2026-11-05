@@ -124,7 +124,12 @@
     if (!j || typeof j !== 'object') return null;
     const z = j.zona && typeof j.zona === 'object' ? j.zona : {};
     const de = (v, ok) => (ok.includes(v) ? v : '');
-    return { ip: esIP(j.ip_vista) ? j.ip_vista : '', pais: cc(j.pais_ip), dns: de(j.dns, ['tunel', 'fuera', 'desconocido']), ipv6: de(j.ipv6, ['bloqueado', 'fuga', 'sin_ipv6']),
+    // 5 Nov 2026 (revisión de la 1.0.56): qué se mide de verdad y qué se deduce de la configuración del programa
+    // («comprobado»: {ip, dns, ipv6}). Sin ese dato (una versión anterior del programa), el DNS y el IPv6 no se dan por
+    // medidos: la pantalla dice «según la configuración», nunca «comprobado» de algo que no se comprobó.
+    const k = j.comprobado && typeof j.comprobado === 'object' ? j.comprobado : {};
+    const medido = { dns: k.dns === true, ipv6: k.ipv6 === true };
+    return { medido, ip: esIP(j.ip_vista) ? j.ip_vista : '', pais: cc(j.pais_ip), dns: de(j.dns, ['tunel', 'fuera', 'desconocido']), ipv6: de(j.ipv6, ['bloqueado', 'fuga', 'sin_ipv6']),
       zona: texto(z.equipo, 60) || texto(zonaLocal(), 60), coincide: typeof z.coincide === 'boolean' ? z.coincide : null, idioma: texto(j.idioma, 40) || texto(idiomaLocal(), 40),
       ubicacion: de(j.ubicacion_windows, ['permitida', 'denegada', 'desconocida']) };
   }
@@ -492,12 +497,14 @@
     // DNS and IPv6: about the tunnel, so only with it up
     if (!on) { fila('nd', 'DNS', '', 'Se comprueba con la VPN conectada.'); fila('nd', 'IPv6', '', 'Se comprueba con la VPN conectada.'); }
     else {
-      if (C.dns === 'tunel') fila('ok', 'DNS', 'Dentro del túnel', 'Los nombres de las webs se resuelven en el servidor, no en tu proveedor de internet.', true);
-      else if (C.dns === 'fuera') fila('alerta', 'DNS', 'Fuera del túnel', 'Tu proveedor de internet podría ver qué webs visitas.', true);
+      const segun = (m, t) => (m ? t : 'Según la configuración de la VPN: ' + t.charAt(0).toLowerCase() + t.slice(1));
+      const md = !!(C.medido && C.medido.dns), m6 = !!(C.medido && C.medido.ipv6);
+      if (C.dns === 'tunel') fila('ok', 'DNS', 'Dentro del túnel', segun(md, 'Los nombres de las webs se resuelven en el servidor, no en tu proveedor de internet.'), true);
+      else if (C.dns === 'fuera') fila('alerta', 'DNS', 'Fuera del túnel', segun(md, 'Tu proveedor de internet podría ver qué webs visitas.'), true);
       else fila('nd', 'DNS', '', 'No se pudo comprobar.');
-      if (C.ipv6 === 'bloqueado') fila('ok', 'IPv6', 'Bloqueado', 'Fuera del túnel no sale nada por IPv6.', true);
+      if (C.ipv6 === 'bloqueado') fila('ok', 'IPv6', 'Bloqueado', segun(m6, 'Tus programas no sacan nada por IPv6 fuera del túnel.'), true);
       else if (C.ipv6 === 'sin_ipv6') fila('ok', 'IPv6', 'Tu red no usa IPv6', '', true);
-      else if (C.ipv6 === 'fuga') fila('alerta', 'IPv6', 'Sale fuera del túnel', 'Una web podría ver tu dirección IPv6 real.', true);
+      else if (C.ipv6 === 'fuga') fila('alerta', 'IPv6', 'Sale fuera del túnel', segun(m6, 'Una web podría ver tu dirección IPv6 real.'), true);
       else fila('nd', 'IPv6', '', 'No se pudo comprobar.');
     }
     // the computer's clock and language: the VPN does not change them
@@ -518,7 +525,8 @@
     const g = grupo(f);
     V.web.hidden = !g;
     if (!g) return;
-    pon(V.webSub, g === 'on' ? 'Con la VPN conectada, comprobado desde este equipo.' : 'Ahora, sin VPN.');
+    const todoMedido = !!(C && C.medido && C.medido.dns && C.medido.ipv6);
+    pon(V.webSub, g === 'on' ? (todoMedido ? 'Con la VPN conectada, comprobado desde este equipo.' : 'Con la VPN conectada: la dirección, comprobada desde este equipo; el DNS y el IPv6, según la configuración.') : 'Ahora, sin VPN.');
     V.webBoton.hidden = cSoporte !== 'si'; V.webBoton.disabled = cEnVuelo;
     const filas = cSoporte === 'si' ? luces(f, s) : null;
     const firma = g + '|' + lang() + '|' + cSoporte + '|' + cFallo + '|' + cEnVuelo + '|' + JSON.stringify(filas);
@@ -718,7 +726,7 @@
     }
     function vista() {
       const on = st.fase === 'conectada';
-      return { ip_vista: on ? '62.238.17.121' : '203.0.113.24', pais_ip: on ? 'FI' : 'CO', dns: on ? 'tunel' : 'fuera', ipv6: on ? 'bloqueado' : 'sin_ipv6',
+      return { comprobado: { ip: true, dns: false, ipv6: false }, ip_vista: on ? '62.238.17.121' : '203.0.113.24', pais_ip: on ? 'FI' : 'CO', dns: on ? 'tunel' : 'fuera', ipv6: on ? 'bloqueado' : 'sin_ipv6',
         zona: { equipo: 'America/Bogota', salida: on ? 'Europe/Helsinki' : null, coincide: on ? false : null }, idioma: 'es-CO', ubicacion_windows: 'permitida' };
     }
     return (m, r, t, primero, cuerpo) => {
