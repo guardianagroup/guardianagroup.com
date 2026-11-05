@@ -40,7 +40,7 @@ async function equipo(browser, nombre, vigia) {
   const browser = await chromium.launch({ args: ['--use-fake-ui-for-media-stream', '--use-fake-device-for-media-stream', '--autoplay-policy=no-user-gesture-required'] });
   const B = await equipo(browser, 'B', true), C = await equipo(browser, 'C', false);
   await B.goto(URL0); await espera(1500);
-  await B.click('#nueva'); await espera(2500); await B.click('#codigo-enlace'); await espera(600);
+  await B.click('#nueva'); await espera(2500); await B.evaluate(() => window.__copiados.push(window.gcomPrueba.enlaceI())); await espera(600);
   const url = String(await B.evaluate(() => window.__copiados[window.__copiados.length - 1] || '')).replace('https://guardianagroup.com', 'http://127.0.0.1:8080');
   await C.goto(url); await espera(1500); if (await C.$('#aceptar-si:visible')) await C.click('#aceptar-si'); await espera(5000);
   await B.evaluate(() => document.querySelector('#videollamar').click()); await espera(2200);
