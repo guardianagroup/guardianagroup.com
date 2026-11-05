@@ -895,6 +895,10 @@ body::before{background:#06080C}
 .win{background:#090E15}
 .wb{background:linear-gradient(180deg,#121A24,#0C121A)}
 @media (max-width:980px){.ch-card{background:rgba(12,18,26,.88);border-color:rgba(156,195,228,.22)}}
+/* 5 Nov 2026 (auditoría de la web): entre 981 y 1180 px el planeta del relato llega hasta la columna de texto y los párrafos se
+   leían encima de su borde iluminado y de los cables; ahí el texto va en la misma tarjeta oscura que por debajo de 980 px */
+@media (min-width:981px) and (max-width:1180px){.ch-card{background:rgba(12,18,26,.88);border:1px solid rgba(156,195,228,.22);border-radius:22px;padding:24px 26px;-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}}
+@media (min-width:981px) and (max-width:1180px) and (pointer:coarse){.ch-card{-webkit-backdrop-filter:none;backdrop-filter:none}}
 @media (prefers-reduced-motion:reduce){.stp:hover{transform:none}}
 /* «Descargar GUARDIANA» (dueño, 29 Oct 2026, 19:36): arriba del todo y junto a «Entrar». En el ordenador, al lado y en línea; en el
    móvil, delante y relleno, que es donde se instala la app (el chat). En la cabecera del móvil sustituye a «Empezar». */
