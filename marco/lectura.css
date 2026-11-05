@@ -17,3 +17,6 @@ html.gf-lectura{padding-top:var(--gf-alto,0px);scroll-padding-top:calc(var(--gf-
 .gf-franja button:active{background:rgba(156,195,228,.12);color:#E8ECF1}
 .gf-franja button svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round}
 @media print{.gf-franja{display:none}html.gf-lectura{padding-top:0}}
+/* Las cabeceras pegajosas se pegan debajo de la franja, no debajo del borde (revisión, 5 nov 2026: tras desplazar, la franja
+   tapaba el logo, el idioma y «Empezar» en las páginas de oscuro.css y «← Volver» en las multas de Órbita). */
+html.gf-lectura header.top,html.gf-lectura .nm-cab{top:var(--gf-alto,0px)}

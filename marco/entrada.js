@@ -69,7 +69,7 @@
     var cerrada = false;
     try { cerrada = sessionStorage.getItem('guardiana-franja') === 'cerrada'; } catch (_) {}
     if (cerrada) return;
-    var V = '20261105b';
+    var V = '20261105c';
     // texto · enlace · destino del enlace · nombre de la × (para el lector de pantalla)
     var T = {
       es: ['GUARDIANA se usa en el PC. Aquí puedes leer qué hace.', 'Ver cómo instalarla', '/instalar.html', 'Cerrar este aviso'],
