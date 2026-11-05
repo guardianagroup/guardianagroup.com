@@ -195,6 +195,11 @@ class Portada:
         self.enlaces = {}   # href español → href del idioma
         self.avisos = []
         self.cache = {}
+        # nombres (con y sin extensión) de las imágenes que viven en la raíz de la web: las texturas del planeta y el globo
+        self.raiz_imagenes = set()
+        for f in os.listdir(RAIZ):
+            if re.search(r'\.(?:jpe?g|png|webp|avif)$', f) and re.match(r'^(earth|globo)\b', f):
+                self.raiz_imagenes.update({f, f.rsplit('.', 1)[0]})
 
     # ---- textos ----
     def tr(self, es):
@@ -290,6 +295,11 @@ class Portada:
             v = a.get(at)
             if v and not re.match(r'^(?:/|#|[a-z]+:)', v, re.I):
                 tag = pon_attr(tag, at, '/' + v)
+        if a.get('srcset'):
+            partes = [x.strip() for x in a['srcset'].split(',')]
+            nuevas = [('/' + x if x and not re.match(r'^(?:/|[a-z]+:)', x, re.I) else x) for x in partes]
+            if nuevas != partes:
+                tag = pon_attr(tag, 'srcset', ', '.join(nuevas))
         return tag
 
     def frase(self):
@@ -305,7 +315,8 @@ class Portada:
     # ---- scripts y estilos ----
     def script(self, bloque):
         bloque = re.sub(r'''(['"`])([A-Za-z0-9_\-]+\.%s)\1''' % EXT_RECURSOS, r'\1/\2\1', bloque)
-        return bloque
+        # los mapas del planeta se piden también por su nombre sin extensión (load('earth', …) pide earth.webp y earth.jpg)
+        return re.sub(r'''(['"`])(%s)\1''' % '|'.join(map(re.escape, sorted(self.raiz_imagenes, key=len, reverse=True))), r'\1/\2\1', bloque) if self.raiz_imagenes else bloque
 
     def estilo(self, bloque):
         return re.sub(r'url\((\s*[\'"]?)(?!\s*[\'"]?(?:/|#|[a-z]+:))', r'url(\1/', bloque, flags=re.I)
@@ -395,6 +406,10 @@ class Portada:
                 raise SystemExit('el punto de anclaje del guion de idioma no aparece exactamente una vez en index.html (actualizar PARCHES):\n' + antes[:160])
             cuerpo = cuerpo.replace(antes, despues)
         out = html_tag + cab + cuerpo
+        for mm in re.finditer(r'''(?:src|srcset|poster|href)="([^"/#][^"]*)"|url\(\s*['"]?([A-Za-z0-9_\-][^'")]*)''', out):
+            v = (mm.group(1) or mm.group(2) or '').split('?')[0].split(',')[0].strip()
+            if v and not re.match(r'^[a-z]+:', v) and v not in ('install',) and os.path.exists(os.path.join(RAIZ, v)):
+                self.avisos.append('ruta relativa a un archivo de la raíz, que desde /%s/ no se encontraría: %s' % (self.l, mm.group(0)[:80]))
         # la política: los hashes de los scripts de ESTA página (los de index.html no valen: el guion de idioma cambia)
         hashes, av = self.csp.hashes_de(out)
         self.avisos += av
@@ -451,10 +466,16 @@ class Portada:
 
 
 def pon_meta(head, attr, nombre, valor):
+    """Cambia una <meta> de la cabecera; si index.html no la lleva, la pone tras el <title> (y lo dice)."""
     pat = re.compile(r'<meta %s="%s" content="[^"]*">' % (attr, re.escape(nombre)))
-    nuevo, k = pat.subn('<meta %s="%s" content="%s">' % (attr, nombre, esc_attr(valor)), head)
-    if k != 1:
+    linea = '<meta %s="%s" content="%s">' % (attr, nombre, esc_attr(valor))
+    nuevo, k = pat.subn(linea, head)
+    if k > 1:
         raise SystemExit('meta %s: aparece %d veces en index.html' % (nombre, k))
+    if k == 0:
+        print('   aviso: index.html no lleva <meta %s="%s">: se añade tras el <title>' % (attr, nombre))
+        i = head.index('</title>') + len('</title>')
+        nuevo = head[:i] + '\n' + linea + head[i:]
     return nuevo
 
 
