@@ -1,0 +1,19 @@
+/* GUARDIANA · la franja «se usa en el PC» (5 Nov 2026, decisión del dueño tras la auditoría SEO: «leer sí, usar no»).
+   La pone marco/marco.js (y marco/entrada.js en la portada) solo en un teléfono o una tableta, y solo en las páginas de
+   lectura: una franja fija arriba, discreta, que no tapa nada (la página baja lo que mide la franja: --gf-alto) y que se
+   puede cerrar con la ×. Nada de pantallas que cubran el contenido: Google las penaliza en el móvil. En un PC no se carga. */
+html.gf-lectura{padding-top:var(--gf-alto,0px);scroll-padding-top:calc(var(--gf-alto,0px) + 12px)}
+.gf-franja{position:fixed;top:0;left:0;right:0;z-index:1200;display:flex;align-items:center;gap:6px;box-sizing:border-box;
+  margin:0;padding:8px 6px 8px 16px;padding-top:calc(8px + env(safe-area-inset-top,0px));
+  background:rgba(6,8,12,.96);color:#E8ECF1;border-bottom:1px solid rgba(156,195,228,.22);
+  font-family:inherit;font-size:13px;line-height:1.4;font-weight:400;letter-spacing:0;text-align:start;
+  -webkit-font-smoothing:antialiased;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+.gf-franja p{margin:0;flex:1 1 auto;min-width:0;font:inherit;color:inherit}
+.gf-franja a{color:#9CC3E4;text-decoration:underline;text-underline-offset:3px;text-decoration-color:rgba(156,195,228,.5);white-space:nowrap;font-weight:500}
+.gf-franja a:hover,.gf-franja a:active{color:#C9DFF2}
+.gf-franja a:focus-visible,.gf-franja button:focus-visible{outline:2px solid #9CC3E4;outline-offset:2px;border-radius:6px}
+.gf-franja button{flex:none;display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;margin:-6px 0;padding:0;
+  border:0;border-radius:10px;background:none;color:#A9B3BE;cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+.gf-franja button:active{background:rgba(156,195,228,.12);color:#E8ECF1}
+.gf-franja button svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round}
+@media print{.gf-franja{display:none}html.gf-lectura{padding-top:0}}
