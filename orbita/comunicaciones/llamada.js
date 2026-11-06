@@ -926,6 +926,9 @@
         return envioVoz;
       } catch (_) {
         nodo = null; envioVoz = null; if (ctx) { try { ctx.close(); } catch (e) {} ctx = null; }
+        // (segunda revisión independiente, 5 nov 2026, S1) la voz cambiada no se ha podido poner: lo que sale es la voz natural, y así
+        // lo dicen el botón y su descripción («Voz cambiada · desactivado»), además del aviso
+        voz = 'natural'; try { pinta(); } catch (e) {}
         o.aviso && o.aviso(t('Este navegador no permite cambiar la voz: la llamada sigue con tu voz natural.'));
         return null;
       }
