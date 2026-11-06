@@ -53,9 +53,13 @@
       try { document.dispatchEvent(new CustomEvent('guardiana-panel-pide', { detail: JSON.stringify({ n, metodo: 'GET', ruta: '/api/plan' }) })); } catch (_) { fin(null); }
     });
   }
+  // 6 Nov 2026 (dueño, 09:32): Ultra abierta y gratis en la web por un tiempo, para probarla; cuando él avise, vuelve a «con Plus»
+  // poniendo false. Abierta, la crea cualquiera cuyo navegador tenga la capa postcuántica, dentro o fuera del programa.
+  const ULTRA_ABIERTA = true;
   // ¿puede este equipo crear una invitación Ultra ahora? 'si' | 'gratis' (en el programa, sin Plus) | 'fuera' (sin el programa) | 'sin-pq'
   async function puedeUltra() {
     if (!C.B.hayBlindada()) return 'sin-pq';
+    if (ULTRA_ABIERTA) return 'si';
     if (!(enPrograma() || planPrueba())) return 'fuera';
     const p = await pidePlan();
     return p && p.nivel === 'plus' ? 'si' : 'gratis';
