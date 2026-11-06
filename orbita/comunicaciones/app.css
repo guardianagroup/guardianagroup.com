@@ -2271,6 +2271,7 @@ body.modo-llevar{background:#06080C}
 .ll-mas-menu .gc-llamada-boton button{width:40px!important;height:40px!important;min-width:40px;flex:none;margin:0}
 .ll-mas-menu .gc-llamada-boton button svg{width:18px;height:18px}
 .ll-mas-menu .gc-llamada-boton span{display:block;margin:0;font:500 15px/1.25 var(--texto);color:#E8ECF1;text-shadow:none;white-space:nowrap}
+.ll-mas-menu .gc-llamada-boton span i{margin-left:8px} /* «Voz cambiada  ACTIVADO», no pegados (ultra-2, 5 nov 2026) */
 .ll-mas-caja button svg{fill:currentColor;stroke:none}
 /* «Colgar», aparte (como Meet y Teams) */
 @media (min-width:761px){.gc-llamada:not(.mini) .gc-llamada-botones .gc-colgar{margin-left:22px}}
@@ -2447,6 +2448,12 @@ button.ll-env-ico:focus-visible{outline:2px solid #9CC3E4;outline-offset:2px}
 .ll-nivel[hidden]{display:none}
 .gc-llamada.sas-grande .ll-nivel,.gc-llamada.mini .ll-nivel,.gc-llamada.entrando .ll-nivel{display:none}
 .gc-llamada:not(.sas-grande) .ll-sas-mini{top:calc(80px + env(safe-area-inset-top))}
+/* (ultra-2, 5 nov 2026) en la videollamada del ordenador, el título («Videollamada encriptada postcuántica · 00:10») queda a esa
+   altura y las dos píldoras lo tapaban (más desde que el nivel dice «cada uno, según su programa»): las palabras y el nivel, debajo */
+@media (min-width:761px){
+  .gc-llamada.con-video:not(.mini):not(.sas-grande) .ll-sas-mini{top:calc(108px + env(safe-area-inset-top))}
+  .gc-llamada.con-video:not(.mini) .ll-nivel{top:calc(146px + env(safe-area-inset-top))}
+}
 /* el comprobante firmado, opción explícita al enviar; y las notas del nombre neutro y del autor */
 .envio-opcion{all:unset;cursor:pointer;display:flex;align-items:flex-start;gap:12px;width:100%;box-sizing:border-box;margin:0 0 12px;padding:11px 12px;border-radius:12px;border:1px solid var(--line);background:var(--campo);color:var(--fg);text-align:left}
 .envio-opcion[hidden]{display:none}
