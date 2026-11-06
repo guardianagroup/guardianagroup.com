@@ -16,14 +16,14 @@
    (vpn.guardianagroup.com, Helsinki; docs/VPN.md), sin lista, sin retrasos, sin direcciones y sin semáforo.
    Fuera del programa dice qué es y qué hace falta. Nada se inventa: cada cifra y cada dirección son del programa.
    Demostración local, para el diseño y las capturas (solo servida desde 127.0.0.1 o localhost, como las pruebas locales de
-   Comunicaciones; nunca en la web publicada ni dentro del programa): ?demo=apagada|conectando|conectada|sin_respuesta|error|antigua.
+   Comunicaciones; nunca en la web publicada ni dentro del programa): ?demo=apagada|bloqueada|conectando|conectada|sin_respuesta|error|antigua.
    Español en la página; static/idioma.js lo enseña en el idioma de la pantalla. */
 (() => {
   'use strict';
   const RAIZ = document.documentElement;
   const Q = new URLSearchParams(location.search);
   const LOCAL = /^(127\.0\.0\.1|localhost)$/.test(location.hostname) && location.port !== '7443';
-  const DEMO = LOCAL && /^(apagada|conectando|conectada|sin_respuesta|error|antigua)$/.test(Q.get('demo') || '') ? Q.get('demo') : '';
+  const DEMO = LOCAL && /^(apagada|bloqueada|conectando|conectada|sin_respuesta|error|antigua)$/.test(Q.get('demo') || '') ? Q.get('demo') : '';
   const enPrograma = () => DEMO !== '' || RAIZ.dataset.enPrograma === '1';
   const T = (s) => (window.GuardianaIdioma ? window.GuardianaIdioma.t(s) : s);
   const lang = () => (window.GuardianaIdioma && window.GuardianaIdioma.lang) || 'es';
@@ -285,6 +285,8 @@
   function titulo(f, s) {
     if (f === 'conectada' && s) return 'Conectada a ' + lugar(s);
     if (f === 'conectando') return s ? 'Conectando a ' + lugar(s) + '…' : pedida && pedida.id === 'rapida' ? 'Conectando a la salida más rápida…' : 'Conectando…';
+    // 6 Nov 2026: as the icon next to the clock says it («VPN parada, con su bloqueo puesto»)
+    if (f === 'desconectada' && E && E.desconectar === true) return 'Parada, con su bloqueo puesto';
     return TITULO[f] || 'Desconectada';
   }
   function lead(f) {
@@ -305,6 +307,9 @@
     if (!raiz) return;
     const f = fase(), s = salidaVista(), conTunel = CON_TUNEL(f);
     raiz.dataset.fase = f; V.tarjeta.dataset.fase = f;
+    // 6 Nov 2026: red whenever nothing of the computer's programs goes out (its server silent, or the block still in Windows),
+    // as the icon next to the clock and ZERO's chip paint it
+    V.tarjeta.dataset.bloqueo = f === 'sin_respuesta' || f === 'reconectando' || (E && E.desconectar === true && f !== 'conectada' && f !== 'conectando') ? '1' : '';
     // the ring: the exit's flag once there is one, the tunnel before
     const centro = s && f !== 'desconectada' ? 'b:' + s.pais : 'vpn';
     if (V.centro.dataset.de !== centro) { V.centro.dataset.de = centro; V.centro.textContent = ''; if (centro === 'vpn') V.centro.innerHTML = I_VPN; else V.centro.append(bandera(s.pais, 'grande')); }
@@ -702,6 +707,13 @@
     }
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', arranca, { once: true }); else arranca();
+  // 6 Nov 2026: the icon next to the clock opens «guardiana://vpn» also with Órbita already open in ZERO; the page does not
+  // load again, only its address gains «#vpn»
+  addEventListener('hashchange', () => {
+    if (location.hash !== '#vpn' || abierto) return;
+    try { history.replaceState({ vpn: 1, llegada: 1 }, '', location.pathname + location.search + '#vpn'); } catch (_) {}
+    abre({ apila: false });
+  });
   window.OrbitaVpn = { abre, cierra: sal, get abierto() { return abierto; } };
 
   // ---------- la demostración local (?demo=…; solo en 127.0.0.1 o localhost) ----------
@@ -713,7 +725,7 @@
       { id: 'nbg', pais: 'DE', ciudad: 'Núremberg', continente: 'europa', proveedor: 'Hetzner', nombre: '', disponible: false, ms: null },
       { id: 'mia', pais: 'US', ciudad: 'Miami', continente: 'america', proveedor: 'Vultr', nombre: '', disponible: false, ms: null },
     ];
-    const st = { fase: antigua ? 'apagada' : DEMO, salida: null, desde: null, saludo: null, subidos: 0, bajados: 0, estricto: true, error: '' };
+    const st = { fase: antigua || DEMO === 'bloqueada' ? 'apagada' : DEMO, salida: null, desde: null, saludo: null, subidos: 0, bajados: 0, estricto: true, error: '', bloqueo: DEMO === 'bloqueada' };
     if (st.fase !== 'apagada') st.salida = SALIDAS[0];
     if (st.fase === 'conectada') Object.assign(st, { desde: ahora - 754000, saludo: ahora - 14000, subidos: 1843200, bajados: 12634000 });
     if (st.fase === 'sin_respuesta') Object.assign(st, { desde: ahora - 1520000, saludo: ahora - 95000, subidos: 3120000, bajados: 41200000 });
@@ -724,7 +736,8 @@
       if (antigua) return { disponible: true, motivo: null, fase: st.fase, servidor: st.fase === 'apagada' ? '' : 'vpn.guardianagroup.com', desde_ms: st.desde || 0, direccion: st.fase === 'apagada' ? '' : '·', error: st.error, enviados: st.fase === 'conectada' ? st.subidos : null, recibidos: st.fase === 'conectada' ? st.bajados : null, ultimo_saludo_ms: st.saludo };
       const on = st.fase !== 'apagada';
       return { disponible: true, motivo: null, fase: st.fase, servidor: on ? 'vpn.guardianagroup.com' : '', salida: on ? st.salida : null, desde: on ? st.desde : null, saludo: on ? st.saludo : null,
-        subidos: on ? st.subidos : 0, bajados: on ? st.bajados : 0, postcuantica: on, dns_tunel: on, estricto: st.estricto, error: st.error };
+        subidos: on ? st.subidos : 0, bajados: on ? st.bajados : 0, postcuantica: on, dns_tunel: on, estricto: st.estricto, error: st.error,
+        desconectar: (on && st.fase !== 'error') || st.bloqueo };
     }
     function vista() {
       const on = st.fase === 'conectada';
@@ -741,7 +754,7 @@
         setTimeout(() => { if (st.fase === 'conectando') Object.assign(st, { fase: 'conectada', desde: Date.now(), saludo: Date.now() }); }, 2600);
         return respuesta(200, { ok: true }, 200);
       }
-      if (m === 'POST' && r === '/api/vpn/desconecta') { Object.assign(st, { fase: 'apagada', salida: null, desde: null, saludo: null, error: '' }); return respuesta(200, { ok: true }, 500); }
+      if (m === 'POST' && r === '/api/vpn/desconecta') { Object.assign(st, { fase: 'apagada', salida: null, desde: null, saludo: null, error: '', bloqueo: false }); return respuesta(200, { ok: true }, 500); }
       if (m === 'POST' && r === '/api/vpn/estricto' && !antigua) { try { st.estricto = JSON.parse(cuerpo).estricto === true; } catch (_) {} return respuesta(200, { ok: true }, 220); }
       return respuesta(403, null, 20);
     };

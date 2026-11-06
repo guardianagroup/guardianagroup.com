@@ -3971,6 +3971,7 @@
     "Una vez instalado, abre el programa y elige «Antivirus» en la portada.": ["Once installed, open the program and choose “Antivirus” on the home screen.", "Depois de instalar, abra o programa e escolha “Antivírus” na página inicial."],
     "VPN · Para Windows": ["VPN · For Windows", "VPN · Para Windows"],
     "Desconectada": ["Disconnected", "Desconectada"],
+    "Parada, con su bloqueo puesto": ["Stopped, its block still on", "Parada, com o bloqueio ainda ativo"],
     "Conectada": ["Connected", "Conectada"],
     "La VPN de GUARDIANA": ["GUARDIANA's VPN", "A VPN da GUARDIANA"],
     "No disponible en este equipo": ["Not available on this computer", "Não disponível neste computador"],
