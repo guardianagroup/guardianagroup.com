@@ -967,7 +967,7 @@
 "Pregunta sobre lo que ves":"詢問你看到的內容",
 "Preguntar":"詢問",
 "Preguntas rápidas":"快速提問",
-"Comprobante":"收據",
+"Comprobante":"憑證",
 "Sede":"總部",
 "Qué hace":"它做什麼",
 "Primera vez":"第一次",
@@ -3924,7 +3924,8 @@
 "El código de seguridad no sale en la pantalla: para compararlo con la otra persona, toca «Encriptada de extremo a extremo» durante la llamada. Si es el mismo en las dos pantallas, nadie se ha puesto en medio.":"安全代碼不會顯示在螢幕上：要與對方核對，請在通話中輕觸「已端對端加密」。如果兩個螢幕上的代碼相同，就沒有人介入。",
 "Cada equipo firma el registro con su clave de identidad: ECDSA P-256 sobre SHA-256 en la Blindada; en Ultra, ECDSA P-384 sobre SHA-384 y, además, ML-DSA-87. Si se cambia un solo carácter del registro, las firmas dejan de ser válidas.":"每台裝置都以自己的身分金鑰簽署紀錄：加固模式中使用 ECDSA P-256（基於 SHA-256）；Ultra 中使用 ECDSA P-384（基於 SHA-384），另加 ML-DSA-87。只要紀錄中有任何一個字元遭到更改，簽章就會失效。",
 "La huella de identidad de cada equipo resume sus claves públicas (SHA-256 en la Blindada; SHA-384 en Ultra), y el número de seguridad que aparece es el mismo que vieron las dos personas en la conversación.":"每台裝置的身分指紋是其公開金鑰的摘要（加固模式中為 SHA-256；Ultra 中為 SHA-384），而顯示的安全碼與雙方在對話中看到的安全碼相同。",
-"Cada mensaje, foto, archivo y llamada se cierra con claves que solo tienen los dos equipos: nuestro servidor no puede abrirlo. Comparar el número de seguridad del chat o el código de la llamada confirma que nadie se ha interpuesto.":"每則訊息、照片、檔案與通話，都以只有雙方裝置才持有的金鑰鎖住：我們的伺服器無法開啟。比對聊天的安全碼或通話的安全代碼，即可確認沒有人介入。"
+"Cada mensaje, foto, archivo y llamada se cierra con claves que solo tienen los dos equipos: nuestro servidor no puede abrirlo. Comparar el número de seguridad del chat o el código de la llamada confirma que nadie se ha interpuesto.":"每則訊息、照片、檔案與通話，都以只有雙方裝置才持有的金鑰鎖住：我們的伺服器無法開啟。比對聊天的安全碼或通話的安全代碼，即可確認沒有人介入。",
+"Qué tiene cada versión":"各版本包含的內容"
 },
 "p":{
 "intento":"今天嘗試最多的：{1}，{2} {2?次|次}。",

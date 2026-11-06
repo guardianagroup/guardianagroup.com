@@ -3924,7 +3924,8 @@
 "El código de seguridad no sale en la pantalla: para compararlo con la otra persona, toca «Encriptada de extremo a extremo» durante la llamada. Si es el mismo en las dos pantallas, nadie se ha puesto en medio.":"安全代码不会显示在屏幕上：要和对方核对，请在通话中轻触“已端到端加密”。如果两块屏幕上的代码相同，就没有人插在中间。",
 "Cada equipo firma el registro con su clave de identidad: ECDSA P-256 sobre SHA-256 en la Blindada; en Ultra, ECDSA P-384 sobre SHA-384 y, además, ML-DSA-87. Si se cambia un solo carácter del registro, las firmas dejan de ser válidas.":"每台设备都用自己的身份密钥对记录进行签名：防护模式中使用 ECDSA P-256（基于 SHA-256）；Ultra 中使用 ECDSA P-384（基于 SHA-384），另加 ML-DSA-87。只要记录中有一个字符被更改，签名就会失效。",
 "La huella de identidad de cada equipo resume sus claves públicas (SHA-256 en la Blindada; SHA-384 en Ultra), y el número de seguridad que aparece es el mismo que vieron las dos personas en la conversación.":"每台设备的身份指纹是其公钥的摘要（防护模式中为 SHA-256；Ultra 中为 SHA-384），显示的安全码与双方在对话中看到的安全码相同。",
-"Cada mensaje, foto, archivo y llamada se cierra con claves que solo tienen los dos equipos: nuestro servidor no puede abrirlo. Comparar el número de seguridad del chat o el código de la llamada confirma que nadie se ha interpuesto.":"每条消息、每张照片、每个文件和每次通话，都用只有双方设备才有的密钥封住：我们的服务器无法打开。比对聊天的安全码或通话的安全代码，即可确认没有人插在中间。"
+"Cada mensaje, foto, archivo y llamada se cierra con claves que solo tienen los dos equipos: nuestro servidor no puede abrirlo. Comparar el número de seguridad del chat o el código de la llamada confirma que nadie se ha interpuesto.":"每条消息、每张照片、每个文件和每次通话，都用只有双方设备才有的密钥封住：我们的服务器无法打开。比对聊天的安全码或通话的安全代码，即可确认没有人插在中间。",
+"Qué tiene cada versión":"各版本包含的内容"
 },
 "p":{
 "intento":"今天尝试最多的：{1}，{2} {2?次|次}。",
