@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <!-- 27 Oct 2026, 12:23 (dueño): «la página web principal va a ser la del planeta que se desliza hacia abajo; arriba, «Empezar»
      abre la de NÚCLEO (ZERO, Órbita, Comunicaciones y NÚCLEO)». Esta es la portada de guardianagroup.com; /conocer.html lleva aquí. -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-BT7dx7gFXQrbeCSdnkPRSTGCwuGtSrLPCs2MxApq0IU=' 'sha256-t2NqHXGQoFcNLrwaX0ol/Yh18hgI5dnAFFtsPL13PaE=' 'sha256-zasOcNPoEvcMFgBA+0OHu0TsTUWXM8HBKcYkep6iB08=' 'sha256-WNDhUcqfJPY4Q/LiJ+LMKJcbOSKZ8RKfHmKSL6EWU1o=' 'sha256-4oxR1kcmI8IIouZuF1y/k1H54ycRLioBh/pG6nvCxWo=' 'sha256-QR47Ix1kwGP7dnVM+e7moPRH8uIuzJqjw72+lyhXYZk=' 'sha256-5n3CUlZykSUXtEEPpYoaP8WYwhnU5DbLQpy/5Qzn6hc=' 'sha256-9wS/BrUefli5lFV6K1F6/QMsxEEKxHwOrGyDw6w60q4=' 'sha256-8AwL2BktHjNjQeyquSewHHo5Bq/AEEEnT4zzNUGGfWo=' 'sha256-vg5Tg+u1xfRg4ugEJhRuZvyxN3iDRb46PwVC0/093Ys=' 'sha256-nBZ43g113Q/+KsjE4iyWgO+z+fC5FpDVzuQMnKAwClM=' 'sha256-jbYr+vlk8Or4YSqEi4cg/TWye6Ui0fFkrFWoguUaqPw=' 'sha256-Wcc2f/B9jJAbiQ25BzS9txFebkckagsP95kT0puw6nM='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-BT7dx7gFXQrbeCSdnkPRSTGCwuGtSrLPCs2MxApq0IU=' 'sha256-t2NqHXGQoFcNLrwaX0ol/Yh18hgI5dnAFFtsPL13PaE=' 'sha256-zasOcNPoEvcMFgBA+0OHu0TsTUWXM8HBKcYkep6iB08=' 'sha256-WNDhUcqfJPY4Q/LiJ+LMKJcbOSKZ8RKfHmKSL6EWU1o=' 'sha256-4oxR1kcmI8IIouZuF1y/k1H54ycRLioBh/pG6nvCxWo=' 'sha256-QR47Ix1kwGP7dnVM+e7moPRH8uIuzJqjw72+lyhXYZk=' 'sha256-5n3CUlZykSUXtEEPpYoaP8WYwhnU5DbLQpy/5Qzn6hc=' 'sha256-SMEv7YEwBCmQiTidUFnq3bW+0Niu/0IY5o+HczyfZPw=' 'sha256-8AwL2BktHjNjQeyquSewHHo5Bq/AEEEnT4zzNUGGfWo=' 'sha256-vg5Tg+u1xfRg4ugEJhRuZvyxN3iDRb46PwVC0/093Ys=' 'sha256-nBZ43g113Q/+KsjE4iyWgO+z+fC5FpDVzuQMnKAwClM=' 'sha256-jbYr+vlk8Or4YSqEi4cg/TWye6Ui0fFkrFWoguUaqPw=' 'sha256-Wcc2f/B9jJAbiQ25BzS9txFebkckagsP95kT0puw6nM='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'none'">
 <script src="/marco/entrada.js?v=20261105b"></script>
 <!-- 5 Nov 2026 (SEO, decisión 2): la portada en inglés y en portugués son páginas propias, /en/ y /pt/, que herramientas/portadas.py
      genera a partir de esta (fuente única). Los enlaces antiguos «/?lang=en» y «/?lang=pt» siguen valiendo: llevan allí; también
@@ -2706,7 +2706,7 @@ function mapa(x){ x=String(x||'').toLowerCase(); if(/^zh-(tw|hk|mo|hant)/.test(x
 let l0='en', franja=null;
 try{
   const q=new URLSearchParams(location.search).get('lang');
-  const st=localStorage.getItem('guardiana-lang'), chosen=localStorage.getItem('guardiana-lang-chosen');
+  let st=null, chosen=null; try{ st=localStorage.getItem('guardiana-lang'); chosen=localStorage.getItem('guardiana-lang-chosen'); }catch(_){}
   const nav=(navigator.languages&&navigator.languages.length?navigator.languages:[navigator.language||'']).map(mapa).find(ok);
   // 20 Oct 2026 (owner): many computers in Latin America and Spain come with the browser in English. If the
   // browser's first language we have is English and the computer's time zone is in a Spanish- or Portuguese-speaking
@@ -2722,13 +2722,13 @@ setLang(l0,true);
 function aviso(l){
   const T={en:['This page is also available in English','Open the English version','Close'],
            pt:['Esta página também está em português','Abrir a versão em português','Fechar']}[l]; if(!T) return;
-  try{ if(sessionStorage.getItem('guardiana-franja')==='1') return; }catch(_){}
+  try{ if(sessionStorage.getItem('guardiana-franja-idioma')==='1') return; }catch(_){}
   const h=document.querySelector('header.nav'); if(!h) return;
   const d=document.createElement('div'); d.className='franja'; d.id='franja'; d.lang=DATO[l].tag; d.setAttribute('role','note');
   const a=document.createElement('a'); a.href=PAG[l]; a.textContent=T[1]+' →';
   a.addEventListener('click',()=>{ try{ localStorage.setItem('guardiana-lang',l); localStorage.setItem('guardiana-lang-chosen','1'); }catch(_){} });
   const x=document.createElement('button'); x.type='button'; x.setAttribute('aria-label',T[2]); x.textContent='×';
-  x.addEventListener('click',()=>{ try{ sessionStorage.setItem('guardiana-franja','1'); }catch(_){} d.remove(); });
+  x.addEventListener('click',()=>{ try{ sessionStorage.setItem('guardiana-franja-idioma','1'); }catch(_){} d.remove(); });
   const t=document.createElement('span'); t.textContent=T[0];
   d.append(t,a,x); h.insertAdjacentElement('afterend',d);
 }

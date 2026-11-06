@@ -73,7 +73,7 @@ IX = {'en': 0, 'pt': 1}
 
 # Los mismos saltos que hace la página en el navegador (walk() del guion de idioma).
 SALTA_ETIQUETAS = {'script', 'style', 'svg', 'canvas', 'noscript'}
-SALTA_IDS = {'phrase', 'lightp', 'ms-cap', 'rec-n'}
+SALTA_IDS = {'phrase', 'lightp', 'rec-n'}
 VACIAS = {'area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta', 'param', 'source', 'track', 'wbr'}
 ATRIBUTOS = ('aria-label', 'alt', 'title')
 EXT_RECURSOS = r'(?:jpe?g|png|webp|avif|gif|svg|json|mp4|webm|woff2?|css|js|ico|webmanifest)'
@@ -382,6 +382,8 @@ class Portada:
             elif t == 'SoftwareApplication':
                 g['description'] = m['app']
                 g['installUrl'] = self.I['install'].get(l) or g.get('installUrl')
+                if g.get('downloadUrl', '').endswith('-windows-x64.msi'):
+                    g['downloadUrl'] = g['downloadUrl'][:-4] + '-' + l + '.msi'
                 if 'offers' in g and 'description' in g['offers']:
                     g['offers']['description'] = m['offer']
                 for campo in ('softwareHelp',):

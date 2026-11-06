@@ -96,7 +96,7 @@ A partir de ahora, cada publicación que añada o cambie páginas debería avisa
 2. Pulsa **«+ Add site»** (o el botón «Add site» de la portada), escribe `https://guardianagroup.com` y pulsa **«Add»**.
 3. Verificación: elige la pestaña **«Meta tag»**: te enseña una línea `<meta name="yandex-verification" content="…">`. Dime esa línea (el contenido es un identificador público) y la añado a la portada; cuando esté publicada, pulsa **«Check»**. (La pestaña «HTML file» también vale: dime el nombre del archivo.)
 4. Menú de la izquierda → **«Indexing»** → **«Sitemap files»** → pega `https://guardianagroup.com/sitemap.xml` → **«Add»**.
-5. Yandex también lee IndexNow (punto 3): no hace falta nada más. Los avisos de Yandex sobre «mobile» se refieren al mismo problema de la decisión 1.
+5. Yandex también lee IndexNow (punto 3): no hace falta nada más.
 
 ---
 
@@ -111,5 +111,5 @@ A partir de ahora, cada publicación que añada o cambie páginas debería avisa
 
 ## 6. Cómo saber que ha funcionado
 - A los 2–3 días: en Search Console › Sitemaps, «Páginas descubiertas: 230». En Bing › Mapas del sitio, «Procesado».
-- A las 2–4 semanas: en Google, buscar `site:guardianagroup.com` debe listar páginas de la web (hoy no lista ninguna). Si la decisión 1 no se ha tomado, lo normal es que solo salgan las legales.
+- A las 2–4 semanas: en Google, buscar `site:guardianagroup.com` debe listar páginas de la web (el 5 nov no listaba ninguna).
 - A las 6 semanas: Search Console › Rendimiento › Consultas con las primeras búsquedas reales. Es el momento de revisar las palabras clave (AUDITORIA.md §7) con datos y no con suposiciones.

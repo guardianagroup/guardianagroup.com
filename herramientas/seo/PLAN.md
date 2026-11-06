@@ -49,7 +49,7 @@ GUARDIANA GROUP S.A.S. tiene sede publicada (Bocagrande, Cartagena). Una ficha d
 Hay cuatro vídeos en `/v/` (qué es, web, «mientras dormía»). Un canal propio (YouTube o PeerTube, con el vídeo también en la web con `VideoObject` en JSON-LD) da una segunda puerta de entrada y resultados de vídeo en Google. Decisión: ¿se publican en YouTube con la cuenta de la empresa? Coste: 0 €, una hora por vídeo (título, descripción, subtítulos en es/en/pt). Nota: la regla «nada de terceros en la web» se respeta si el vídeo se sirve desde la propia web y YouTube solo es otra copia.
 
 ## Calendario de los 90 primeros días (si se aprueban las decisiones 1 y 2)
-- **Semana 1**: fundir la rama `seo` (dos voces); decisión 1 aplicada; Search Console verificada, sitemap enviado, 10 direcciones pedidas a mano; Bing Webmaster importado de Search Console; IndexNow con las 219 direcciones (`GUIA-DUENO.md`); Yandex Webmaster si se quiere Rusia.
+- **Semana 1**: fundir la rama `seo` (dos voces); decisión 1 aplicada; Search Console verificada, sitemap enviado, 10 direcciones pedidas a mano; Bing Webmaster importado de Search Console; IndexNow con las 230 direcciones (`GUIA-DUENO.md`); Yandex Webmaster si se quiere Rusia.
 - **Semanas 2–3**: portadas `/en/` y `/pt/` pre-renderizadas con hreflang; guías del DNS fuera; `instalar.html` indexable si la descarga es pública; texturas del planeta en WebP.
 - **Semanas 3–6**: primera radiografía nueva (y cada dos semanas una); README de GitHub con enlace y descripción; fichas en directorios de software libre; vídeos publicados.
 - **Semana 6**: primera lectura de Search Console («Páginas»: cuántas indexadas, cuántas «con redirección» o «excluidas»; «Rendimiento»: consultas reales) y corrección de lo que salga.
