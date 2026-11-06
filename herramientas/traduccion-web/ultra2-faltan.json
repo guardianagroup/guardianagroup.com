@@ -928,5 +928,11 @@
   "es": "Por precaución, esta conversación se ha borrado en este equipo: claves, mensajes y archivos. El otro equipo no ha podido recibir el aviso.",
   "en": "As a precaution, this conversation has been erased on this computer: keys, messages and files. The other computer could not receive the warning.",
   "donde": "orbita/comunicaciones/app.js"
+ },
+ {
+  "id": "u2-156",
+  "es": "Recibo de entrega (versión Ultra).",
+  "en": "Delivery receipt (Ultra version).",
+  "donde": "index.html (portada; i18n/portada, clave por FNV del español: antes «Recibo de entrega (versión Ultra, próximamente).»)"
  }
 ]
