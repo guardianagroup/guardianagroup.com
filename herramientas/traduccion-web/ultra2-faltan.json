@@ -259,8 +259,8 @@
  },
  {
   "id": "u2-044",
-  "es": "Léanlas en voz alta: si coinciden en los dos equipos, la conversación es directa entre los dos. Salen de las dos identidades y de un número al azar de cada lado, con compromiso previo: quien se pusiera en medio tendría que acertar las cuatro a ciegas, una posibilidad entre más de 17 billones. Una voz clonada con IA debilita esta comprobación de oído; el número de 60 cifras de abajo sirve igual.",
-  "en": "Read them out loud: if they match on both devices, the conversation is direct between the two of you. They come from both identities and from a random number on each side, with a prior commitment: someone in the middle would have to guess all four blindly, a chance of one in more than 17 trillion. A voice cloned with AI weakens this check by ear; the 60-digit number below works just as well.",
+  "es": "Léanlas en voz alta: si coinciden en los dos equipos, las claves son las mismas en los dos. Salen de las dos identidades y de un número al azar de cada lado, con compromiso previo: quien se pusiera en medio tendría que acertar las cuatro a ciegas, una posibilidad entre más de 17 billones. Una voz clonada con IA debilita esta comprobación de oído; el número de 60 cifras de abajo sirve igual.",
+  "en": "Read them out loud: if they match on both devices, the keys are the same on both. They come from both identities and from a random number on each side, with a prior commitment: someone in the middle would have to guess all four blindly, a chance of one in more than 17 trillion. A voice cloned with AI weakens this check by ear; the 60-digit number below works just as well.",
   "donde": "orbita/static/idioma.js (clave = el español)"
  },
  {
