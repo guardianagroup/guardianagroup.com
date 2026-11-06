@@ -152,7 +152,7 @@ async function videollamada(A, B) {
   const de = await invita(F, true);
   await E.goto(de.url.replace('https://guardianagroup.com', 'http://127.0.0.1:8080')); await espera(1500); if (await E.$('#aceptar-si:visible')) await E.click('#aceptar-si'); await espera(6000);
   await E.keyboard.press('PrintScreen'); await espera(200);
-  comprueba(await visible(E, '#captura-velo'), 'ordenador: con la tecla de captura, «Modo Ultra · Pantalla tapada durante la captura»');
+  comprueba(await visible(E, '#captura-velo') && /una web no puede impedir capturas/.test(await E.evaluate(() => document.querySelector('#captura-velo').textContent)), 'ordenador: con la tecla de captura, «Captura detectada: se vació el portapapeles; una web no puede impedir capturas»');
   await E.screenshot({ path: path.join(OUT, '7-pc-captura.png') });
 
   await browser.close();
