@@ -1,5 +1,22 @@
 # Pruebas de GUARDIANA Comunicaciones (teléfono simulado)
 
+**Desde el 1 nov 2026, el teléfono va a /solo-pc/.** GUARDIANA funciona solo en el PC (marco/marco.js): en un teléfono o una
+tableta, la página se para y lleva al aviso /solo-pc/; solo se abre allí lo que trae la llave de «Pasar al teléfono» (`#llevar=`).
+Por eso, las pruebas que abren Comunicaciones en un teléfono simulado (iPhone o Android) acaban en ese aviso en el primer paso y
+quedan fuera de la batería hasta que se pasen al PC o se retiren (comprobado el 5 nov 2026: con cada una, el servidor sirve
+/solo-pc/ y la prueba no llega a ninguna comprobación):
+acabados, actualiza, altavoz, avisos, avisos-precision, buzon, contactos, cuatro, dos, eliminar, enviar, idiomas, instalar, iphone,
+llamada-corte, llamando, mismo-chat, numero-llamada, onda-fotos, pc-grupo, pc-menu, pc-vista, pq, recarga, reenvio, responder,
+revision2, temporal, tirar, traspaso, tres, viaje-movil, voz, voz-gestos, voz-grabar y whatsapp. Y en parte (algunas
+comprobaciones sí pasan, las del teléfono no): descargar, numero, ruta y web.
+
+`llevar.js` se pasa con `B_PC=1` (B en un PC; sin eso, B es un iPhone y acaba en /solo-pc/): `B_PC=1 node llevar.js`.
+
+La batería que vale hoy, en el PC: ultra, blindado, tipos, codigo-grande, rota, llevar (con `B_PC=1`), enviar-llamada, voz-ultra,
+vigia, recupera, flotante-sola, portada, volver-pc y pantalla (compartir pantalla en el PC; su último paso, con un Android, sigue
+pasando), llevar-orden y volver-ut (estas dos, pasar la llamada a teléfonos con cuatro navegadores: con la máquina muy cargada
+pueden agotar el tiempo o tirar Chromium; repetidas con menos carga, el 5 nov, 10/10 y 8/8).
+
 Playwright + Chromium emulando un iPhone (393 × 793, táctil, «instalada» con navigator.standalone).
 Desde la raíz del repositorio, en dos terminales:
 
