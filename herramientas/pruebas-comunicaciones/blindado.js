@@ -121,7 +121,7 @@ const crypto = require('crypto'); const shaGrande = crypto.createHash('sha256').
   await fotoDestapada(B, '26-B-paquete');
   // «Borrar en los dos»
   await A.evaluate(() => { const b = [...document.querySelectorAll('.gc-mia .gc-archivo .boton')].find((x) => x.textContent === 'Borrar en los dos'); if (b) b.click(); }); await espera(1200);
-  comprueba(await hasta(B, () => ![...document.querySelectorAll('.gc-archivo b')].some((b) => b.textContent === 'documento-1.bin') && /borrado un archivo/.test(document.body.textContent), 5000), 'B: «Borrar en los dos» lo quita también en B');
+  comprueba(await hasta(B, () => ![...document.querySelectorAll('.gc-archivo b')].some((b) => b.textContent === 'documento-1.bin') && /borrado un archivo/.test(document.body.textContent), 15000), 'B: «Borrar en los dos» lo quita también en B'); // (a ritmo fijo: la orden sale en su tic, detrás de lo que espere)
 
   // 5) la llamada: las 4 palabras de verificación, iguales en las dos pantallas; «Sí, coinciden» verifica
   await A.evaluate(() => document.querySelector('#llamar').click()); await espera(2500);
