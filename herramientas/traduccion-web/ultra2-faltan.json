@@ -1,0 +1,860 @@
+[
+ {
+  "id": "u2-001",
+  "es": "saber tu Número GUARDIANA no basta para llamarte ni para escribirte: para hablar, los dos tienen que añadirse. Un número marcado al azar no llega a nadie, ni dice siquiera si existe.",
+  "en": "knowing your GUARDIANA Number is not enough to call you or write to you: to talk, you both have to add each other. A randomly dialled number reaches nobody, and does not even reveal whether it exists.",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-002",
+  "es": "en GUARDIANA no hay cuentas que crear ni buscar. Solo puede escribirte quien tenga tu invitación o a quien tú hayas añadido, y GUARDIANA no te pide el teléfono, así que tampoco sirve para encontrarte.",
+  "en": "in GUARDIANA there are no accounts to create or search for. Only someone who has your invitation, or someone you have added, can write to you, and GUARDIANA does not ask for your phone number, so it cannot be used to find you either.",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-003",
+  "es": "Sesión Ultra: ML-KEM-1024 y ML-DSA-87, en híbrido con ECDH y ECDSA P-384.",
+  "en": "Ultra session: ML-KEM-1024 and ML-DSA-87, in hybrid with ECDH and ECDSA P-384.",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-004",
+  "es": "Las palabras de verificación no cuadraban con el compromiso previo de la otra parte: alguien podía estar en medio.",
+  "en": "The verification words did not match the other side's prior commitment: someone could have been in the middle.",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-005",
+  "es": "comprobando…",
+  "en": "checking…",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-006",
+  "es": "cada uno, según su programa",
+  "en": "each one, as its program states",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-007",
+  "es": "En Ultra no se envían ni el país de tu equipo ni tu nombre.",
+  "en": "In Ultra, neither your device’s country nor your name is sent.",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-008",
+  "es": "El enlace de una invitación Ultra lleva su secreto y puede quedar en el historial del navegador: ábrelo en una ventana privada, o pégalo en «Tengo un código» en vez de abrirlo.",
+  "en": "An Ultra invitation link carries its secret and may stay in the browser history: open it in a private window, or paste it into “I have a code” instead of opening it.",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-009",
+  "es": "En las llamadas, la capa postcuántica saca su clave de esta sesión con HKDF-SHA-256, y las palabras de la llamada salen de un acuerdo ECDH P-256 con compromiso previo (SHA-256).",
+  "en": "In calls, the post-quantum layer takes its key from this session with HKDF-SHA-256, and the call words come from an ECDH P-256 agreement with a prior commitment (SHA-256).",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-010",
+  "es": "Llamada Ultra rechazada: llegó sin el compromiso de las palabras de verificación. Alguien podría estar en medio.",
+  "en": "Ultra call rejected: it arrived without the commitment to the verification words. Someone could be in the middle.",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-011",
+  "es": "Llamada Ultra cortada: la respuesta llegó sin las palabras de verificación. Alguien podría estar en medio.",
+  "en": "Ultra call cut off: the answer arrived without the verification words. Someone could be in the middle.",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-012",
+  "es": "La llamada Ultra no ha empezado: al otro equipo le llegó sin el compromiso de las palabras de verificación. Alguien podría estar en medio.",
+  "en": "The Ultra call has not started: it reached the other device without the commitment to the verification words. Someone could be in the middle.",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-013",
+  "es": "Llamada Ultra cortada: la capa postcuántica del sonido y la imagen no se mantuvo, y sin ella no hay rebaja.",
+  "en": "Ultra call cut off: the post-quantum layer for sound and picture did not hold, and without it there is no downgrade.",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-014",
+  "es": "El remitente pide un comprobante firmado: decides tú si tu equipo lo firma.",
+  "en": "The sender is asking for a signed receipt: you decide whether your device signs it.",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-015",
+  "es": "Firmar",
+  "en": "Sign",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-016",
+  "es": "No firmar",
+  "en": "Don’t sign",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-017",
+  "es": "No has firmado el comprobante que te pidieron.",
+  "en": "You have not signed the receipt you were asked for.",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-018",
+  "es": "No has firmado el comprobante que te pidieron",
+  "en": "You have not signed the receipt you were asked for",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-019",
+  "es": "El destinatario ha decidido no firmar el comprobante.",
+  "en": "The recipient has decided not to sign the receipt.",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-020",
+  "es": "La otra persona ha decidido no firmarlo.",
+  "en": "The other person has decided not to sign it.",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-021",
+  "es": "Enviarlo así",
+  "en": "Send it as it is",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-022",
+  "es": "Sin marcarlo, no se envía.",
+  "en": "Unless you tick this, it is not sent.",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-023",
+  "es": "La comprobación de Plus la hace esta página, no el relé: con conocimientos técnicos se puede abrir una conversación Ultra sin el programa. Eso no rebaja su encriptación, que es la misma para los dos lados.",
+  "en": "Plus is checked by this page, not by the relay: with technical knowledge, an Ultra conversation can be opened without the program. That does not weaken its encryption, which is the same for both sides.",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-024",
+  "es": "App en segundo plano: las claves de la sesión se han borrado de la memoria; al volver se acuerdan otras.",
+  "en": "App in the background: the session keys have been wiped from memory; new ones are agreed when you come back.",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-025",
+  "es": "Claves nuevas cada 5 minutos y en cada reconexión: lo anterior deja de poder leerse con lo nuevo. En la llamada, la clave del sonido y la imagen cambia cada minuto.",
+  "en": "New keys every 5 minutes and on every reconnection: what came before can no longer be read with the new ones. In the call, the key for sound and video changes every minute.",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-026",
+  "es": "Comprobante firmado solicitado",
+  "en": "Signed receipt requested",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-027",
+  "es": "Con la suscripción Plus",
+  "en": "With the Plus subscription",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-028",
+  "es": "El navegador de la otra persona no admite la capa postcuántica del sonido y la imagen. En Ultra la llamada no empieza sin ella.",
+  "en": "The other person's browser does not support the post-quantum layer for sound and video. In Ultra the call does not start without it.",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-029",
+  "es": "El otro equipo usa una versión anterior de Comunicaciones: el envío sigue, sin comprobante firmado.",
+  "en": "The other device uses an earlier version of Communications: the transfer continues, without a signed receipt.",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-030",
+  "es": "En el relé de GUARDIANA no queda nada: solo pasaron fragmentos encriptados y Ultra no usa buzón.",
+  "en": "Nothing is left on GUARDIANA's relay: only encrypted fragments passed through it, and Ultra uses no mailbox.",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-031",
+  "es": "En este equipo: el secreto de la invitación, la identidad de esta sesión, todas sus claves, los mensajes, los archivos y los comprobantes, que solo estaban en la memoria de esta pestaña.",
+  "en": "On this device: the invitation secret, this session's identity, all its keys, the messages, the files and the receipts, which were only in this tab's memory.",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-032",
+  "es": "Es el entorno en que corre cada uno, según lo dice su propio programa: no una garantía sobre el equipo.",
+  "en": "It is the environment each side runs in, as its own program states it: not a guarantee about the device.",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-033",
+  "es": "Esta conversación aún no tiene la clave postcuántica de la llamada: espera a que la sesión esté establecida.",
+  "en": "This conversation does not have the call's post-quantum key yet: wait until the session is established.",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-034",
+  "es": "Esta conversación vive solo en la memoria de esta pestaña: al cerrarla, desaparece. El relé no tiene buzón para Ultra: los mensajes solo pasan si los dos están conectados.",
+  "en": "This conversation lives only in this tab's memory: when you close it, it disappears. The relay has no mailbox for Ultra: messages only go through if both of you are connected.",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-035",
+  "es": "Esta foto no se puede limpiar de datos ocultos en este navegador: en Ultra no se envía.",
+  "en": "This photo cannot be cleaned of hidden data in this browser: in Ultra it is not sent.",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-036",
+  "es": "Este navegador no admite la capa postcuántica del sonido y la imagen (Encoded Transforms). En Ultra la llamada no empieza sin ella.",
+  "en": "This browser does not support the post-quantum layer for sound and video (Encoded Transforms). In Ultra the call does not start without it.",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-037",
+  "es": "Este navegador no puede abrir una sesión Ultra: hace falta uno actual con ML-KEM-1024 y ML-DSA-87. Pide a la otra persona una invitación Blindada.",
+  "en": "This browser cannot open an Ultra session: a current one with ML-KEM-1024 and ML-DSA-87 is needed. Ask the other person for a Shielded invitation.",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-038",
+  "es": "Este navegador no puede abrir una sesión Ultra: hace falta uno actual con ML-KEM-1024 y ML-DSA-87. Puedes usar la Blindada.",
+  "en": "This browser cannot open an Ultra session: a current one with ML-KEM-1024 and ML-DSA-87 is needed. You can use Shielded.",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-039",
+  "es": "Hace falta un navegador actual",
+  "en": "A current browser is needed",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-040",
+  "es": "Invitación Blindada enviada por este chat. Cuando la otra persona la abra, el chat nuevo aparece en tu lista.",
+  "en": "Shielded invitation sent through this chat. When the other person opens it, the new chat appears in your list.",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-041",
+  "es": "La capa postcuántica del sonido y la imagen no pudo mantenerse entre los dos equipos. En Ultra la llamada no sigue sin ella.",
+  "en": "The post-quantum layer for sound and video could not be kept up between the two devices. In Ultra the call does not continue without it.",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-042",
+  "es": "La otra persona tiene que estar conectada para mandarle la invitación.",
+  "en": "The other person has to be connected to send them the invitation.",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-043",
+  "es": "Llamada Ultra no iniciada: sin la capa postcuántica del sonido y la imagen no hay rebaja.",
+  "en": "Ultra call not started: without the post-quantum layer for sound and video there is no downgrade.",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-044",
+  "es": "Léanlas en voz alta: si coinciden en los dos equipos, la conversación es directa entre los dos. Salen de las dos identidades y de un número al azar de cada lado, con compromiso previo: quien se pusiera en medio tendría que acertar las cuatro a ciegas, una posibilidad entre más de 17 billones. Una voz clonada con IA debilita esta comprobación de oído; el número de 60 cifras de abajo sirve igual.",
+  "en": "Read them out loud: if they match on both devices, the conversation is direct between the two of you. They come from both identities and from a random number on each side, with a prior commitment: someone in the middle would have to guess all four blindly, a chance of one in more than 17 trillion. A voice cloned with AI weakens this check by ear; the 60-digit number below works just as well.",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-045",
+  "es": "ML-KEM-1024 (FIPS 203) y ECDH P-384 para las claves, ML-DSA-87 (FIPS 204) y ECDSA P-384 para las firmas, AES-256-GCM y HKDF-SHA-384. Identidad nueva en esta conversación, solo en memoria.",
+  "en": "ML-KEM-1024 (FIPS 203) and ECDH P-384 for the keys, ML-DSA-87 (FIPS 204) and ECDSA P-384 for the signatures, AES-256-GCM and HKDF-SHA-384. A new identity in this conversation, in memory only.",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-046",
+  "es": "Mientras los dos están conectados, sale una trama de 1 KB por segundo: un mensaje o un trozo de él, un acuse o el «escribiendo…» si hay alguno, y relleno si no; nunca con marca de aviso. Así el relé no distingue cuándo escribes ni cuándo sale un mensaje; un archivo o una llamada sí se notan por su volumen. El último trozo de cada archivo va completo; en la llamada, voz a ritmo constante (Opus cbr=1, usedtx=0).",
+  "en": "While both of you are connected, one 1 KB frame goes out per second: a message or a piece of one, an acknowledgement or the “typing…” if there is one, and padding if not; never with an alert mark. So the relay cannot tell when you write or when a message goes out; a file or a call does show through its volume. The last chunk of each file is full-size; in the call, voice at a constant rate (Opus cbr=1, usedtx=0).",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-047",
+  "es": "Nada guardado",
+  "en": "Nothing stored",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-048",
+  "es": "Nivel de cada lado",
+  "en": "Each side's level",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-049",
+  "es": "Otro lado",
+  "en": "Other side",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-050",
+  "es": "PC con GUARDIANA",
+  "en": "PC with GUARDIANA",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-051",
+  "es": "Palabras de verificación",
+  "en": "Verification words",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-052",
+  "es": "Para llamarnos, sigamos en la Blindada: abre este enlace.",
+  "en": "To call each other, let's continue in Shielded: open this link.",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-053",
+  "es": "Pulsa Esc otra vez para borrar esta conversación de la memoria y salir.",
+  "en": "Press Esc again to wipe this conversation from memory and leave.",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-054",
+  "es": "Solo desde el programa GUARDIANA, con Plus",
+  "en": "Only from the GUARDIANA program, with Plus",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-055",
+  "es": "Tamaño y ritmo",
+  "en": "Size and rhythm",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-056",
+  "es": "Te piden un comprobante firmado por los dos equipos (ECDSA P-384 y ML-DSA-87)",
+  "en": "You are asked for a receipt signed by both devices (ECDSA P-384 and ML-DSA-87)",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-057",
+  "es": "Tu lado",
+  "en": "Your side",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-058",
+  "es": "Ultra se crea desde el programa GUARDIANA para Windows, con la suscripción Plus; quien recibe la invitación entra gratis desde su navegador. Aquí puedes usar la Blindada.",
+  "en": "Ultra is created from the GUARDIANA program for Windows, with the Plus subscription; whoever receives the invitation joins for free from their browser. Here you can use Shielded.",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-059",
+  "es": "Ultra va con la suscripción Plus (la prueba de 7 días cuenta). Mientras, la Blindada.",
+  "en": "Ultra comes with the Plus subscription (the 7-day trial counts). Meanwhile, Shielded.",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-060",
+  "es": "autenticado con la clave de la sesión, sin firma: negable",
+  "en": "authenticated with the session key, unsigned: deniable",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-061",
+  "es": "aún sin decir",
+  "en": "not stated yet",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-062",
+  "es": "cada mensaje sale en tramas de 1 KB y, mientras los dos están conectados, una por segundo, con relleno si no hay nada que enviar y nunca con marca de aviso: el relé no distingue un «sí» de un párrafo ni cuándo escribes",
+  "en": "each message goes out in 1 KB frames and, while both of you are connected, one per second, with padding if there is nothing to send and never with an alert mark: the relay does not tell a “yes” from a paragraph, nor when you are writing",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-063",
+  "es": "con comprobante firmado",
+  "en": "with a signed receipt",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-064",
+  "es": "navegador del PC",
+  "en": "PC browser",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-065",
+  "es": "navegador del móvil",
+  "en": "phone browser",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-066",
+  "es": "sin datos",
+  "en": "no data",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-067",
+  "es": "transporta contenido encriptado y no guarda nada: sin buzón, los mensajes solo pasan si los dos están conectados",
+  "en": "carries encrypted content and stores nothing: no mailbox, messages only go through if both of you are connected",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-068",
+  "es": "{n} fotos no se pueden limpiar de datos ocultos en este navegador: en Ultra no se envían.",
+  "en": "{n} photos cannot be cleaned of hidden data in this browser: in Ultra they are not sent.",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-069",
+  "es": "Léanlas en voz alta, por turnos. Si coinciden en las dos pantallas, nadie se ha puesto en medio. Una voz clonada con IA debilita esta comprobación de oído.",
+  "en": "Read them out loud, taking turns. If they match on both screens, nobody has got in the middle. A voice cloned with AI weakens this check by ear.",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-070",
+  "es": "Voz cambiada",
+  "en": "Changed voice",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-071",
+  "es": "(sin fecha): en el programa de Windows, la ventana fuera de las capturas de pantalla, el aviso si otra app usa el micrófono o la cámara, el perfil sin disco, la comprobación antes de llamar y el código sellado; la voz sin el ruido de fondo; el fondo negro recortando la silueta; dos relés de operadores y países distintos; y una llave nueva con un intercambio nuevo en cada mensaje.",
+  "en": "(no date): in the Windows program, the window kept out of screenshots, the warning if another app uses the microphone or the camera, the diskless profile, the check before calling and the sealed code; the voice without background noise; the black background cutting out the silhouette; two relays from different operators and countries; and a new key with a new exchange in every message.",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-072",
+  "es": "Acuerdo híbrido ECDH P-384 + ML-KEM-1024 (FIPS 203) con HKDF-SHA-384; firmas ECDSA P-384 sobre SHA-384 y ML-DSA-87 (FIPS 204) sobre toda la negociación; identidad nueva en cada conversación, solo en memoria (claves Web Crypto no exportables; la clave privada ML-DSA-87 vive sellada con AES-256-GCM y se abre solo para firmar; los arrays postcuánticos se borran con ceros tras usarse); nada de la conversación en IndexedDB ni en localStorage; invitación de 256 bits solo en el fragmento del enlace o en QR; cuatro palabras de verificación (11 bits cada una, de una lista de 2048) derivadas con SHA-384 de las dos identidades y de 32 bytes al azar de cada lado, con compromiso previo de quien inicia (al estilo de ZRTP), y las de la llamada, de su propio acuerdo, también con compromiso previo; número de seguridad de 60 cifras; claves renovadas cada 5 minutos; mensajes a ritmo fijo, una trama de 1 KB por segundo mientras los dos están conectados (un mensaje o un trozo, un acuse, el «leído», el «escribiendo…» o relleno), nunca con marca de aviso; último trozo de cada archivo completo; sin buzón en el relé; recibo autenticado con la clave de la sesión y comprobante firmado solo a petición; fotos recodificadas sin EXIF, GPS, ICC ni miniaturas, y archivos con nombre neutro; avisos sin contenido y solo del propio navegador (las salas Ultra no se registran en el relé para avisos).",
+  "en": "Hybrid agreement ECDH P-384 + ML-KEM-1024 (FIPS 203) with HKDF-SHA-384; ECDSA P-384 signatures over SHA-384 and ML-DSA-87 (FIPS 204) over the whole negotiation; a new identity in every conversation, in memory only (non-exportable Web Crypto keys; the ML-DSA-87 private key stays sealed with AES-256-GCM and is opened only to sign; the post-quantum arrays are zeroed after use); nothing of the conversation in IndexedDB or localStorage; 256-bit invitation only in the link fragment or in a QR code; four verification words (11 bits each, from a list of 2048) derived with SHA-384 from both identities and from 32 random bytes on each side, with a prior commitment by whoever starts (ZRTP-style), and those of the call from its own agreement, also with a prior commitment; 60-digit safety number; keys renewed every 5 minutes; messages at a fixed rate, one 1 KB frame per second while both of you are connected (a message or a piece of one, an acknowledgement, the “read”, the “typing…” or padding), never with an alert mark; last chunk of each file full-size; no mailbox on the relay; receipt authenticated with the session key and signed receipt only on request; photos re-encoded without EXIF, GPS, ICC or thumbnails, and files with a neutral name; alerts without content and only from the browser itself (Ultra rooms are not registered on the relay for alerts).",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-073",
+  "es": "Ante mensajes o piezas manipulados, «No coinciden» en las palabras de la llamada o la alarma del otro equipo, la conversación borra claves, mensajes y archivos en los dos equipos y te lo dice en pantalla.",
+  "en": "Faced with tampered messages or pieces, “They don’t match” on the call's words or the other device's alarm, the conversation deletes keys, messages and files on both devices and tells you on screen.",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-074",
+  "es": "Archivos «todo o nada» (Ultra).",
+  "en": "“All-or-nothing” files (Ultra).",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-075",
+  "es": "Borrar y salir (pánico)",
+  "en": "Wipe and leave (panic)",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-076",
+  "es": "Cada archivo viaja en piezas cerradas como un paquete único (Rivest, MIT, 1997): sin todas las piezas no se puede desencriptar ni un byte, ni con la clave. Si falta una, no se muestra nada y lo recibido se borra.",
+  "en": "Each file travels in sealed pieces as a single package (Rivest, MIT, 1997): without all the pieces not a single byte can be decrypted, not even with the key. If one is missing, nothing is shown and what was received is deleted.",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-077",
+  "es": "Capa postcuántica en el sonido y la imagen",
+  "en": "Post-quantum layer on sound and video",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-078",
+  "es": "Comprobante con doble firma (Ultra, si lo pides)",
+  "en": "Receipt with a double signature (Ultra, if you ask for it)",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-079",
+  "es": "Comprobar que nadie se ha puesto en medio",
+  "en": "Check that nobody has got in the middle",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-080",
+  "es": "Con la suscripción Plus, desde el programa GUARDIANA para Windows; quien recibe la invitación entra gratis desde su navegador, sin el programa. El acuerdo de claves combina ML-KEM-1024 con ECDH P-384 y cada equipo firma toda la negociación con ECDSA P-384 y con ML-DSA-87. Nada de la conversación se guarda, ni en el navegador ni en el relé. En la llamada, cuatro palabras de verificación siempre a la vista, la clave cambia cada minuto y, sin la capa postcuántica, la llamada no empieza; el mosaico y la voz cambiada se hacen en tu equipo antes de encriptar.",
+  "en": "With the Plus subscription, from the GUARDIANA program for Windows; whoever receives the invitation joins for free from their browser, without the program. The key agreement combines ML-KEM-1024 with ECDH P-384 and each device signs the whole negotiation with ECDSA P-384 and with ML-DSA-87. Nothing of the conversation is stored, neither in the browser nor on the relay. In the call, four verification words always in view, the key changes every minute and, without the post-quantum layer, the call does not start; the mosaic and the changed voice are done on your device before encryption.",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-081",
+  "es": "Con la suscripción Plus, desde el programa GUARDIANA: identidad nueva en cada conversación, que no se guarda, cuatro palabras de verificación, mosaico y voz cambiada. Quien recibe la invitación entra gratis desde su navegador, sin el programa.",
+  "en": "With the Plus subscription, from the GUARDIANA program: a new identity in every conversation, which is not stored, four verification words, mosaic and changed voice. Whoever receives the invitation joins for free from their browser, without the program.",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-082",
+  "es": "Cuando el archivo llega completo al otro equipo, en el chat aparece un recibo con los trozos autenticados y el tiempo. Va autenticado con la clave de la sesión, sin ninguna firma sobre el contenido: vale entre los dos y no sirve de prueba ante terceros (negable). Confirma la recepción, no que la otra persona lo haya abierto o leído.",
+  "en": "When the file arrives complete on the other device, a receipt with the authenticated chunks and the time appears in the chat. It is authenticated with the session key, with no signature over the content: it is valid between the two of you and is no proof for third parties (deniable). It confirms receipt, not that the other person has opened or read it.",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-083",
+  "es": "El nivel de cada lado a la vista: «PC con GUARDIANA» o «navegador del PC»",
+  "en": "Each side's level in view: “PC with GUARDIANA” or “PC browser”",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-084",
+  "es": "En Ultra, cuatro palabras para leer en voz alta.",
+  "en": "In Ultra, four words to read out loud.",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-085",
+  "es": "En Ultra, la conversación no se guarda.",
+  "en": "In Ultra, the conversation is not stored.",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-086",
+  "es": "En Ultra, nada se muestra solo.",
+  "en": "In Ultra, nothing shows by itself.",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-087",
+  "es": "En Ultra, si al enviar marcas «Solicitar comprobante firmado», cada equipo firma el registro de la entrega dos veces: con ECDSA P-384 y con ML-DSA-87, una firma postcuántica. La otra persona lo ve antes de firmar. Las dos firmas se comprueban en esta web, sin enviar nada. Sin marcarlo, el recibo es negable.",
+  "en": "In Ultra, if you tick “Request signed receipt” when sending, each device signs the delivery record twice: with ECDSA P-384 and with ML-DSA-87, a post-quantum signature. The other person sees it before signing. Both signatures are checked on this website, without sending anything. Without ticking it, the receipt is deniable.",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-088",
+  "es": "En el PC, GUARDIANA se abre con una invitación (un código de 9 cifras o un enlace) y está pensada para profesionales que envían documentación: archivos grandes, fotos y documentos con tiempo, y el código de seguridad de la llamada. Ultra se crea desde el programa GUARDIANA para Windows; próximamente, más capas de seguridad en el PC que no caben en un navegador: la ventana fuera de las capturas de pantalla y el aviso si otra app usa el micrófono o la cámara.",
+  "en": "On the PC, GUARDIANA opens with an invitation (a 9-digit code or a link) and is designed for professionals who send documents: large files, timed photos and documents, and the call's security code. Ultra is created from the GUARDIANA program for Windows; coming soon, more layers of security on the PC than a browser allows: the window kept out of screenshots and the warning if another app uses the microphone or the camera.",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-089",
+  "es": "En el chat y en cada llamada, siempre a la vista: cuatro palabras del español, sacadas de las claves de los dos equipos y de un número al azar de cada lado con compromiso previo: quien se pusiera en medio tendría que acertarlas a ciegas. Las leen en voz alta y listo; el número de 60 cifras sigue ahí, al tocarlas. Una voz clonada con IA debilita la comprobación de oído: por eso el número no se va.",
+  "en": "In the chat and in every call, always in view: four Spanish words, taken from both devices' keys and from a random number on each side with a prior commitment: someone in the middle would have to guess them blindly. You read them out loud and that's it; the 60-digit number is still there when you tap them. A voice cloned with AI weakens the check by ear: that is why the number stays.",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-090",
+  "es": "En el programa de Windows: la ventana fuera de las capturas y aviso si otra app usa el micrófono o la cámara",
+  "en": "In the Windows program: the window kept out of screenshots and a warning if another app uses the microphone or the camera",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-091",
+  "es": "En la Blindada no sale en la pantalla: si quieres comprobar que nadie se ha puesto en medio, ni siquiera nuestro servidor, toca «Encriptada de extremo a extremo» durante la llamada y comparad de viva voz el código que aparece. Si es el mismo en las dos pantallas, nadie se ha interpuesto. Es el método que creó el autor de PGP (ZRTP, RFC 6189) y no exige enviar nada por otro sitio.",
+  "en": "In Shielded it is not shown on screen: if you want to check that nobody has got in the middle, not even our server, tap “End-to-end encrypted” during the call and compare out loud the code that appears. If it is the same on both screens, nobody has come between you. It is the method created by the author of PGP (ZRTP, RFC 6189) and it does not require sending anything through another channel.",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-092",
+  "es": "En la Blindada, las firmas de identidad son clásicas (ECDSA P-256); en Ultra, cada equipo firma toda la negociación con ECDSA P-384 y con ML-DSA-87 (FIPS 204). Si la otra persona usa una versión anterior, te lo decimos y no seguimos sin tu permiso.",
+  "en": "In Shielded, identity signatures are classical (ECDSA P-256); in Ultra, each device signs the whole negotiation with ECDSA P-384 and with ML-DSA-87 (FIPS 204). If the other person uses an earlier version, we tell you and do not continue without your permission.",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-093",
+  "es": "En las videollamadas Ultra tu cara sale en mosaico: una rejilla de pocos bloques con el color medio de cada uno y un poco de ruido distinto en cada fotograma, de la que no se recupera el detalle (un desenfoque normal sí se puede revertir, por eso ya no se ofrece). La voz pasa por un cambio de formantes, de tono y un paso banda de 300 a 3000 Hz, con parámetros al azar en cada llamada. Todo se hace en tu equipo, antes de encriptar: tu imagen y tu voz originales no salen de él. No se distinguen los rasgos de tu cara ni tus ojos; sí tu silueta, tus gestos y lo que hay detrás de ti. La voz cambiada dificulta que te reconozcan de oído quienes no saben qué filtro usas; no engaña a un sistema de reconocimiento de voz entrenado para ello, ni oculta tu acento, tu vocabulario, tus muletillas ni tu ritmo.",
+  "en": "In Ultra video calls your face goes out as a mosaic: a grid of a few blocks with the average colour of each one and a little different noise in every frame, from which the detail cannot be recovered (an ordinary blur can be reversed, which is why it is no longer offered). The voice goes through a change of formants and pitch and a 300 to 3000 Hz band-pass, with random parameters in every call. Everything is done on your device, before encryption: your original image and voice do not leave it. The features of your face and your eyes cannot be made out; your silhouette, your gestures and what is behind you can. The changed voice makes it harder for people who do not know which filter you use to recognise you by ear; it does not fool a voice recognition system trained for it, nor does it hide your accent, your vocabulary, your verbal tics or your rhythm.",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-094",
+  "es": "Firmas sobre toda la negociación",
+  "en": "Signatures over the whole negotiation",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-095",
+  "es": "Fotos sin datos ocultos (ubicación, aparato, fecha)",
+  "en": "Photos without hidden data (location, device, date)",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-096",
+  "es": "Fotos sin datos ocultos y archivos con nombre neutro (Ultra).",
+  "en": "Photos without hidden data and files with a neutral name (Ultra).",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-097",
+  "es": "La Blindada es gratis. Ultra va con la suscripción Plus: se crea desde el programa GUARDIANA para Windows y quien recibe la invitación entra gratis desde su navegador, sin el programa. Lo marcado «próximamente» llegará después, sin fecha.",
+  "en": "Shielded is free. Ultra comes with the Plus subscription: it is created from the GUARDIANA program for Windows and whoever receives the invitation joins for free from their browser, without the program. What is marked “coming soon” will come later, with no date.",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-098",
+  "es": "La conversación no se guarda, ni en el navegador ni en el relé (sin buzón); al cerrar la pestaña, desaparece",
+  "en": "The conversation is not stored, neither in the browser nor on the relay (no mailbox); when you close the tab, it disappears",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-099",
+  "es": "La conversación vive solo en la memoria de la pestaña: al cerrarla, desaparece, también la identidad, que es nueva en cada conversación. El relé no tiene buzón para Ultra: los mensajes pasan solo si los dos están conectados. Fuera de una llamada, la pantalla se tapa al cambiar de app o de pestaña y, en una pantalla táctil, las claves de la sesión se borran de la memoria si la app se queda 15 segundos en segundo plano (al volver se acuerdan otras).",
+  "en": "The conversation lives only in the tab's memory: when you close it, it disappears, and so does the identity, which is new in every conversation. The relay has no mailbox for Ultra: messages only go through if both of you are connected. Outside a call, the screen is covered when you switch app or tab and, on a touch screen, the session keys are wiped from memory if the app stays in the background for 15 seconds (new ones are agreed when you come back).",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-100",
+  "es": "La llamada Ultra no empieza",
+  "en": "The Ultra call does not start",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-101",
+  "es": "La voz cambiada dificulta que te reconozcan de oído quienes no saben qué filtro usas. No engaña a un sistema de reconocimiento de voz entrenado para ello, ni oculta tu acento, tu vocabulario, tus muletillas ni tu ritmo.",
+  "en": "The changed voice makes it harder for people who do not know which filter you use to recognise you by ear. It does not fool a voice recognition system trained for it, nor does it hide your accent, your vocabulary, your verbal tics or your rhythm.",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-102",
+  "es": "Las fotos salen sin datos ocultos (ubicación, aparato, fecha, perfil de color ni miniatura); de un SVG se quitan los metadatos, los comentarios y los datos del programa de dibujo, y de un MP3, sus etiquetas ID3; y todo sale con un nombre neutro, sin fechas.",
+  "en": "Photos go out without hidden data (location, device, date, colour profile or thumbnail); from an SVG the metadata, comments and drawing-program data are removed, and from an MP3 its ID3 tags; and everything goes out with a neutral name, without dates.",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-103",
+  "es": "Las fotos se vuelven a codificar sin ubicación, aparato, fecha, perfil de color ni miniatura, y todo sale con un nombre neutro, sin fechas. Un PDF o un documento de Office puede llevar dentro el nombre de quien lo hizo: se avisa, porque la app no lo limpia.",
+  "en": "Photos are re-encoded without location, device, date, colour profile or thumbnail, and everything goes out with a neutral name, without dates. A PDF or an Office document may carry inside the name of whoever made it: you are warned, because the app does not clean it.",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-104",
+  "es": "Llave nueva con un intercambio nuevo en cada mensaje (ratchet continuo)",
+  "en": "A new key with a new exchange in every message (continuous ratchet)",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-105",
+  "es": "Lo que llega aparece velado, con lo que es y su tamaño. Tú decides «Mostrar» o «Descartar»; lo descartado se borra sin abrirse y la otra persona lo sabe. El chat se ve borroso hasta que lo mantienes pulsado, y Esc dos veces (o «Borrar y salir» en el menú) borra la conversación de la memoria y sale.",
+  "en": "Whatever arrives appears veiled, with what it is and its size. You decide “Show” or “Discard”; what you discard is deleted unopened and the other person knows. The chat looks blurred until you press and hold it, and Esc twice (or “Wipe and leave” in the menu) wipes the conversation from memory and leaves.",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-106",
+  "es": "Lo que llega no se muestra solo (Mostrar / Descartar) · lectura discreta · tecla de pánico",
+  "en": "Nothing shows by itself (Show / Discard) · discreet reading · panic key",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-107",
+  "es": "Lo que llegará",
+  "en": "What is coming",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-108",
+  "es": "Los dos equipos firman el registro de la entrega (ECDSA P-384 y ML-DSA-87): un tercero puede comprobar las firmas, y la otra persona lo ve antes de firmar. Sin marcarlo, el recibo va autenticado solo con la clave de la sesión: negable.",
+  "en": "Both devices sign the delivery record (ECDSA P-384 and ML-DSA-87): a third party can check the signatures, and the other person sees it before signing. Without ticking it, the receipt is authenticated only with the session key: deniable.",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-109",
+  "es": "Los estándares pensados para resistir a los ordenadores cuánticos del futuro: en la Blindada, ML-KEM-768 (FIPS 203) junto a ECDH P-256; en Ultra, ML-KEM-1024 junto a ECDH P-384, con firmas ML-DSA-87 (FIPS 204) y ECDSA P-384 sobre toda la negociación.",
+  "en": "The standards designed to withstand the quantum computers of the future: in Shielded, ML-KEM-768 (FIPS 203) together with ECDH P-256; in Ultra, ML-KEM-1024 together with ECDH P-384, with ML-DSA-87 (FIPS 204) and ECDSA P-384 signatures over the whole negotiation.",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-110",
+  "es": "Mosaico irreversible y voz cambiada (formantes, tono y paso banda), en tu equipo antes de encriptar",
+  "en": "Irreversible mosaic and changed voice (formants, pitch and band-pass), on your device before encryption",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-111",
+  "es": "Mosaico y voz cambiada (Ultra).",
+  "en": "Mosaic and changed voice (Ultra).",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-112",
+  "es": "No guarda nombres ni claves. En la Blindada, si la otra persona no está conectada, guarda tu mensaje encriptado hasta entregarlo (7 días como mucho); en Ultra no guarda nada: los mensajes pasan solo si los dos están conectados. Cuando los dos salen, la sala desaparece.",
+  "en": "It does not store names or keys. In Shielded, if the other person is not connected, it keeps your encrypted message until it is delivered (7 days at most); in Ultra it stores nothing: messages only go through if both of you are connected. When both of you leave, the room disappears.",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-113",
+  "es": "No impide que la otra persona guarde lo que envías sin tiempo, ni que haga una captura o una foto de la pantalla. No puede saber si alguien copió un paquete por el camino: una copia no deja huella; por eso todo viaja encriptado y la copia no sirve. No protege un teléfono que ya esté infectado por otra vía. Si nadie compara el número de seguridad del chat, las palabras ni el código de la llamada, no hay forma de saber si alguien se ha puesto en medio. En Ultra, el mosaico oculta los rasgos de la cara y los ojos, no la silueta ni los gestos; la voz cambiada no engaña a un sistema de reconocimiento de voz entrenado para ello ni oculta tu acento, tu vocabulario, tus muletillas ni tu ritmo; y nada impide que la otra persona grabe con otro aparato.",
+  "en": "It does not stop the other person from saving what you send without a time limit, or from taking a screenshot or a photo of the screen. It cannot know whether someone copied a packet along the way: a copy leaves no trace; that is why everything travels encrypted and the copy is useless. It does not protect a phone already infected by other means. If nobody compares the chat's safety number, the words or the call's code, there is no way to know whether someone has got in the middle. In Ultra, the mosaic hides the features of the face and the eyes, not the silhouette or the gestures; the changed voice does not fool a voice recognition system trained for it, nor does it hide your accent, your vocabulary, your verbal tics or your rhythm; and nothing stops the other person from recording with another device.",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-114",
+  "es": "Pantalla tapada mientras la app está en segundo plano",
+  "en": "Screen covered while the app is in the background",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-115",
+  "es": "Para el día a día. Mensajes, notas de voz, llamadas, videollamadas y archivos de hasta 4 GB, encriptados de extremo a extremo con protección postcuántica. Las llamadas van siempre por los relés de GUARDIANA, así que ninguno de los dos ve la dirección IP del otro, y, si los dos navegadores la admiten, el sonido y la imagen llevan además una capa postcuántica con una clave que cambia cada 2 minutos. El código de seguridad no sale en la pantalla: para comprobarlo, toca «Encriptada de extremo a extremo» durante la llamada.",
+  "en": "For everyday use. Messages, voice notes, calls, video calls and files up to 4 GB, end-to-end encrypted with post-quantum protection. Calls always go through GUARDIANA's relays, so neither of you sees the other's IP address, and, if both browsers support it, sound and video also carry a post-quantum layer with a key that changes every 2 minutes. The security code is not shown on screen: to check it, tap “End-to-end encrypted” during the call.",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-116",
+  "es": "Para los casos de máxima exigencia. Se crea desde el programa GUARDIANA para Windows; quien recibe la invitación entra gratis desde su navegador, sin el programa. Todo lo de la Blindada y, además: ML-KEM-1024 con ECDH P-384 para las claves y ML-DSA-87 con ECDSA P-384 para las firmas; identidad nueva en cada conversación, y nada de la conversación se guarda, ni en el navegador ni en el relé (sin buzón: los mensajes pasan solo si los dos están conectados; al cerrar la pestaña, desaparece); invitación de 256 bits solo por enlace o QR; cuatro palabras de verificación siempre a la vista en el chat y en la llamada; mensajes a ritmo fijo (una trama de 1 KB por segundo, con relleno si no hay nada) y voz a ritmo constante; la clave de la llamada cambia cada minuto y sin la capa postcuántica la llamada no empieza; mosaico irreversible y voz cambiada, hechos en tu equipo antes de encriptar; fotos sin datos ocultos y archivos con nombre neutro; lectura discreta, tecla de pánico y el nivel de cada lado a la vista; recibo negable y, si lo pides, comprobante firmado por los dos equipos.",
+  "en": "For the most demanding cases. It is created from the GUARDIANA program for Windows; whoever receives the invitation joins for free from their browser, without the program. Everything in Shielded, plus: ML-KEM-1024 with ECDH P-384 for the keys and ML-DSA-87 with ECDSA P-384 for the signatures; a new identity in every conversation, and nothing of the conversation is stored, neither in the browser nor on the relay (no mailbox: messages only go through if both of you are connected; when you close the tab, it disappears); 256-bit invitation only by link or QR code; four verification words always in view in the chat and in the call; messages at a fixed rate (one 1 KB frame per second, with padding if there is nothing) and voice at a constant rate; the call key changes every minute and without the post-quantum layer the call does not start; irreversible mosaic and changed voice, done on your device before encryption; photos without hidden data and files with a neutral name; discreet reading, a panic key and each side's level in view; a deniable receipt and, if you ask for it, a receipt signed by both devices.",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-117",
+  "es": "Recibo de entrega (Ultra)",
+  "en": "Delivery receipt (Ultra)",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-118",
+  "es": "Recibo negable por defecto; comprobante firmado por los dos equipos si lo pides",
+  "en": "Deniable receipt by default; receipt signed by both devices if you ask for it",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-119",
+  "es": "Seguir en la Blindada",
+  "en": "Continue in Shielded",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-120",
+  "es": "Si detecta un ataque, se destruye (Ultra).",
+  "en": "If it detects an attack, it self-destructs (Ultra).",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-121",
+  "es": "Solicitar comprobante firmado",
+  "en": "Request signed receipt",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-122",
+  "es": "Tamaño y ritmo que no delatan cuándo escribes: una trama de 1 KB por segundo, con relleno si no hay mensaje, y voz a ritmo constante (Opus CBR)",
+  "en": "Size and rhythm that do not give away when you write: one 1 KB frame per second, with padding if there is no message, and voice at a constant rate (Opus CBR)",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-123",
+  "es": "Ultra no rebaja la protección: o va completa o no va. La Blindada, gratis, se adapta a cada navegador: lleva la capa postcuántica cuando los dos la admiten y, si no, sigue encriptada de extremo a extremo.",
+  "en": "Ultra does not downgrade protection: either it is complete or it does not go ahead. Shielded, which is free, adapts to each browser: it carries the post-quantum layer when both support it and, if not, it stays end-to-end encrypted.",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-124",
+  "es": "Este archivo puede llevar dentro datos que la app no limpia: el nombre de quien lo hizo, fechas, la ubicación de un vídeo o lo que lleve cada archivo de un ZIP. Si lo envías, va como está.",
+  "en": "This file may carry data inside that the app does not clean: the name of whoever made it, dates, the location of a video or whatever each file in a ZIP carries. If you send it, it goes as it is.",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-125",
+  "es": "WebRTC solo a través del servidor TURN de GUARDIANA; la oferta, la respuesta y la huella DTLS viajan dentro del canal encriptado de extremo a extremo; audio y vídeo con DTLS-SRTP y, si los dos navegadores la admiten, una capa postcuántica encima (AES-256-GCM, con una clave sacada de la sesión del chat con HKDF-SHA-256, que cambia cada 2 minutos). En Ultra, esa capa es obligatoria (sin ella la llamada no empieza), su clave cambia cada minuto, las palabras de verificación de la llamada salen de un acuerdo ECDH P-256 con compromiso previo (SHA-256), Opus va a ritmo constante (cbr=1, usedtx=0) sin la extensión de cabecera que manda el volumen de cada paquete (ssrc-audio-level, RFC 6464), no se puede pasar al teléfono y el mosaico (rejilla de 24 bloques de ancho, color medio con ruido por fotograma, bordes duros) y la voz cambiada (predicción lineal de orden 32 con deformación bilineal de los formantes, cambio de tono y paso banda de 300 a 3000 Hz, parámetros al azar por llamada) se procesan en el navegador antes de encriptar.",
+  "en": "WebRTC only through GUARDIANA's TURN server; the offer, the answer and the DTLS fingerprint travel inside the end-to-end encrypted channel; audio and video with DTLS-SRTP and, if both browsers support it, a post-quantum layer on top (AES-256-GCM, with a key taken from the chat session with HKDF-SHA-256, which changes every 2 minutes). In Ultra, that layer is mandatory (without it the call does not start), its key changes every minute, the call verification words come from an ECDH P-256 agreement with a prior commitment (SHA-256), Opus runs at a constant rate (cbr=1, usedtx=0) without the header extension that sends the volume of each packet (ssrc-audio-level, RFC 6464), the call cannot be passed to the phone, and the mosaic (a grid 24 blocks wide, average colour with per-frame noise, hard edges) and the changed voice (order-32 linear prediction with bilinear warping of the formants, pitch shift and a 300 to 3000 Hz band-pass, random parameters per call) are processed in the browser before encryption.",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-126",
+  "es": "cuatro palabras para leer en voz alta, siempre a la vista; el número de 60 cifras, al tocarlas",
+  "en": "four words to read out loud, always in view; the 60-digit number, when you tap them",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-127",
+  "es": "el código, al tocar el candado",
+  "en": "the code, by tapping the padlock",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-128",
+  "es": "en las videollamadas Ultra puedes poner tu cara en mosaico y cambiar tu voz antes de que salga nada de tu equipo, para que lo que viaje sirva mucho menos para imitarte. Tú decides, con un toque, cuándo mostrarte.",
+  "en": "in Ultra video calls you can put your face in mosaic and change your voice before anything leaves your device, so that what travels is far less useful for imitating you. You decide, with one tap, when to show yourself.",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-129",
+  "es": "obligatoria: sin ella la llamada no empieza; clave nueva cada minuto",
+  "en": "mandatory: without it the call does not start; a new key every minute",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-130",
+  "es": "si los dos navegadores la admiten; clave nueva cada 2 minutos",
+  "en": "if both browsers support it; a new key every 2 minutes",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-131",
+  "es": "y archivos con nombre neutro, sin fechas",
+  "en": "and files with a neutral name, without dates",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-132",
+  "es": "con tiempo; sin avisos con la app cerrada (la sala Ultra no se registra en el relé)",
+  "en": "timed; no alerts with the app closed (the Ultra room is not registered on the relay)",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-133",
+  "es": "La identidad de esta conversación vive solo en la memoria de esta pestaña: al cerrarla, desaparece.",
+  "en": "This conversation's identity lives only in this tab's memory: when you close it, it disappears.",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-134",
+  "es": "Lo recibido está solo en la memoria de esta pestaña; lo que guardes en un disco queda fuera de GUARDIANA y «Destruir» no lo alcanza.",
+  "en": "What you receive is only in this tab's memory; whatever you save to a disk is outside GUARDIANA and “Destroy” does not reach it.",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-135",
+  "es": "Ultra: encriptado de extremo a extremo. La conversación no se guarda: al cerrar, desaparece.",
+  "en": "Ultra: end-to-end encrypted. The conversation is not stored: when you close it, it disappears.",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-136",
+  "es": "Sesión Ultra establecida. La conversación no se guarda, ni en este navegador ni en el relé: al cerrar la pestaña, desaparece. Lean en voz alta las cuatro palabras de arriba: si coinciden en los dos equipos, nadie está en medio.",
+  "en": "Ultra session established. The conversation is not stored, neither in this browser nor on the relay: when you close the tab, it disappears. Read the four words above out loud: if they match on both devices, nobody is in the middle.",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-137",
+  "es": "Saber tu número no basta para escribirte.",
+  "en": "Knowing your number is not enough to write to you.",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-138",
+  "es": "Claves renovadas (ML-KEM-1024 y ECDH P-384): lo anterior ya no se puede leer con las claves nuevas.",
+  "en": "Keys renewed (ML-KEM-1024 and ECDH P-384): what came before can no longer be read with the new keys.",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-139",
+  "es": "Claves acordadas con la otra persona: ML-KEM-1024 y ECDH P-384, con firmas ML-DSA-87 y ECDSA P-384.",
+  "en": "Keys agreed with the other person: ML-KEM-1024 and ECDH P-384, with ML-DSA-87 and ECDSA P-384 signatures.",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-140",
+  "es": "ML-KEM-1024 y ML-DSA-87",
+  "en": "ML-KEM-1024 and ML-DSA-87",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-141",
+  "es": "Lo que sale de tus programas de Windows va encriptado hasta un servidor de GUARDIANA. Con el modo estricto, si el túnel cae, no sale nada de ellos fuera del túnel.",
+  "en": "What leaves your Windows programs travels encrypted to a GUARDIANA server. With strict mode, if the tunnel drops, nothing from them leaves outside the tunnel.",
+  "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-142",
+  "es": "Ultra (con Plus).",
+  "en": "Ultra (with Plus).",
+  "donde": "portada: i18n/portada/<código>.json (clave = huella del español)"
+ },
+ {
+  "id": "u2-143",
+  "es": "Para lo más sensible: ML-KEM-1024 y ML-DSA-87 en híbrido con P-384, un enlace de 256 bits, cuatro palabras para leer en voz alta y el número de seguridad, que se puede comparar en cualquier momento.",
+  "en": "For the most sensitive matters: ML-KEM-1024 and ML-DSA-87 in hybrid with P-384, a 256-bit link, four words to read aloud and the safety number, which can be compared at any time.",
+  "donde": "portada: i18n/portada/<código>.json (clave = huella del español)"
+ }
+]
