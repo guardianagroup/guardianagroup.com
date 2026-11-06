@@ -51,7 +51,10 @@ estas, del 5 nov:
   `?v=` de app.js y `huellas.py`.
 
 ## Pendiente
-- **`traduccion-ultra`** (01eae9ae): los arreglos de la segunda voz ya están aplicados.
+- **Publicadas las traducciones de Ultra (6 nov):** `traduccion-ultra` hasta c510be6a, fundida con main; idioma.js con
+  `?v=20261106-trad3`. Segunda voz: GO con condiciones sobre 01eae9ae, aplicadas en c510be6a y confirmadas (GO sin
+  condiciones). Lo que sigue es lo que se hizo en la rama:
+- **`traduccion-ultra`** (01eae9ae y c510be6a): los arreglos de la segunda voz ya están aplicados.
   - Qué lleva:
     - 9 frases corregidas;
     - 31 claves en los 39 idiomas;
@@ -61,8 +64,6 @@ estas, del 5 nov:
     - el coreano nuevo en 해요체;
     - el lema traducido;
     - fuera las claves «Nadie puede escribirte…».
-  - Revisión final en curso.
-  - Al fundir con main hay que poner un `?v=` nuevo a idioma.js (choca con `20261106-vpn5`) y pasar `huellas.py`.
   - Dudas:
     - tamil «கவச முறை» o el existente «கவசப் பயன்முறை»;
     - chino simplificado «插在中间» o «居中介入»;
