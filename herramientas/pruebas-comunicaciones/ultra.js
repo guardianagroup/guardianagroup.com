@@ -109,15 +109,18 @@ const rotaPath = path.join(tmp, 'IMG_roto.jpg'); fs.writeFileSync(rotaPath, Buff
 const docPath = path.join(tmp, 'informe de mi nombre.pdf'); fs.writeFileSync(docPath, Buffer.concat([Buffer.from('%PDF-1.4\n% GUARDIANA prueba\n'), Buffer.alloc(300 * 1024, 7)]));
 const doc2Path = path.join(tmp, 'otro informe.pdf'); fs.writeFileSync(doc2Path, Buffer.concat([Buffer.from('%PDF-1.4\n% GUARDIANA prueba 2\n'), Buffer.alloc(40 * 1024, 9)]));
 const svgPath = path.join(tmp, 'dibujo de mi nombre.svg'); fs.writeFileSync(svgPath, '<?xml version="1.0" encoding="UTF-8"?>\n<!-- hecho por Fulano Prueba en su equipo -->\n<svg xmlns="http://www.w3.org/2000/svg" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" width="40" height="40" inkscape:version="1.3 (Fulano Prueba)" sodipodi:docname="dibujo de Fulano Prueba.svg"><metadata><rdf:RDF><cc:Work><dc:creator><cc:Agent><dc:title>Fulano Prueba</dc:title></cc:Agent></dc:creator></cc:Work></rdf:RDF></metadata><sodipodi:namedview id="nv" inkscape:window-width="1920"/><rect width="40" height="40" fill="#2a6" inkscape:label="capa de Fulano Prueba"/></svg>\n');
-// un MP3 con etiquetas ID3v2 (al principio) e ID3v1 (al final, «TAG»): título y autor
 // un SVG con una foto incrustada (data:), que conservaría sus datos: no se puede limpiar aquí (revisión independiente 2, S4)
 const svg2Path = path.join(tmp, 'plano con foto.svg'); fs.writeFileSync(svg2Path, '<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"><title>Plano de Fulano</title><image href="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/wAALCAABAAEBAREA/8QAFAABAAAAAAAAAAAAAAAAAAAACf/EABQQAQAAAAAAAAAAAAAAAAAAAAD/2gAIAQEAAD8AKp//2Q==" width="40" height="40"/></svg>\n');
+// un MP3 con etiquetas ID3v2 (al principio) y, al final, APEv2 con cabecera, Lyrics3 v2 e ID3v1 («TAG»): título y autor (M6)
 const mp3Path = path.join(tmp, 'grabacion de mi nombre.mp3');
 { const txt = Buffer.from('\0Cancion de Fulano Prueba'), fr = Buffer.concat([Buffer.from('TIT2'), Buffer.from([0, 0, 0, txt.length, 0, 0]), txt]);
   const tam = fr.length, cab = Buffer.from([0x49, 0x44, 0x33, 3, 0, 0, (tam >> 21) & 127, (tam >> 14) & 127, (tam >> 7) & 127, tam & 127]);
   const mpeg = Buffer.alloc(4 * 1024, 0x55); for (let i = 0; i < mpeg.length; i += 418) { mpeg[i] = 0xff; mpeg[i + 1] = 0xfb; mpeg[i + 2] = 0x90; mpeg[i + 3] = 0x64; }
   const v1 = Buffer.alloc(128, 0); Buffer.from('TAG').copy(v1, 0); Buffer.from('Fulano Prueba').copy(v1, 33);
-  fs.writeFileSync(mp3Path, Buffer.concat([cab, fr, mpeg, v1])); }
+  const it = Buffer.concat([Buffer.alloc(8), Buffer.from('Artist\0'), Buffer.from('Fulano Prueba')]); it.writeUInt32LE(13, 0);
+  const apeP = (cabecera) => { const x = Buffer.alloc(32); x.write('APETAGEX', 0, 'latin1'); x.writeUInt32LE(2000, 8); x.writeUInt32LE(it.length + 32, 12); x.writeUInt32LE(1, 16); x.writeUInt32LE((0x80000000 | (cabecera ? 0x20000000 : 0)) >>> 0, 20); return x; };
+  const lyr = Buffer.from('LYRICSBEGIN' + 'IND0000210' + 'LYR00013Fulano Prueba'), ly = Buffer.concat([lyr, Buffer.from(String(lyr.length).padStart(6, '0') + 'LYRICS200')]);
+  fs.writeFileSync(mp3Path, Buffer.concat([cab, fr, mpeg, apeP(true), it, apeP(false), ly, v1])); }
 
 (async () => {
   const browser = await chromium.launch({ args: ['--use-fake-ui-for-media-stream', '--use-fake-device-for-media-stream', '--autoplay-policy=no-user-gesture-required'] });
@@ -237,7 +240,7 @@ const mp3Path = path.join(tmp, 'grabacion de mi nombre.mp3');
       const r = m ? await B.evaluate((id) => window.gcomPrueba.archivo(id), m.id) : null;
       return r ? Buffer.from(r.b64.replace(/-/g, '+').replace(/_/g, '/'), 'base64') : Buffer.alloc(0); };
     for (const [ruta, re, mira, txt] of [[svgPath, '\\.svg$', (b) => { const x = b.toString('utf8'); return /<rect/.test(x) && !/Fulano/.test(x) && !/<metadata/i.test(x) && !/<!--/.test(x) && !/inkscape|sodipodi/i.test(x); }, 'R7. un SVG llega sin metadatos, comentarios ni datos del programa de dibujo'],
-      [mp3Path, '\\.mp3$', (b) => b.length > 1000 && b[0] === 0xff && b[1] === 0xfb && !b.toString('latin1').includes('Fulano') && !b.toString('latin1').includes('ID3') && b.toString('latin1', b.length - 128, b.length - 125) !== 'TAG', 'R7. un MP3 llega sin sus etiquetas ID3 (ni la del principio ni la del final)']]) {
+      [mp3Path, '\\.mp3$', (b) => b.length > 1000 && b[0] === 0xff && b[1] === 0xfb && !b.toString('latin1').includes('Fulano') && !b.toString('latin1').includes('ID3') && !b.toString('latin1').includes('APETAGEX') && !b.toString('latin1').includes('LYRICS') && b.length === 4096 && b.toString('latin1', b.length - 128, b.length - 125) !== 'TAG', 'R7. un MP3 llega sin sus etiquetas ID3, APEv2 ni Lyrics3 (ni las del principio ni las del final)']]) {
       const [chx] = await Promise.all([A.waitForEvent('filechooser'), A.evaluate(() => document.querySelector('#archivo').click())]);
       await chx.setFiles(ruta); await espera(1500);
       const h = await A.evaluate(() => ({ autor: document.querySelector('#envio-autor').hidden, asi: document.querySelector('#envio-asi').hidden, enviar: !document.querySelector('#envio-si').disabled }));

@@ -120,7 +120,7 @@
     let s = ''; for (let i = 0; i < 12; i++) { const n = ((h[i * 2] << 8) | h[i * 2 + 1]) % 100000; s += String(n).padStart(5, '0') + (i % 4 === 3 ? '\n' : ' '); }
     return s.trim();
   }
-  // ---- comprobante de la sesión blindada (suite CNSA 2.0): ECDSA P-384 sobre SHA-384 y ML-DSA-87, las dos obligatorias ----
+  // ---- comprobante de la sesión Ultra: ECDSA P-384 sobre SHA-384 y ML-DSA-87, las dos obligatorias ----
   const FORMATO_B = 'GUARDIANA comprobante de entrega e integridad v2 blindada';
   const ETIQUETA_B = FORMATO_B + '\n';
   const CTX_B = te.encode('GUARDIANA comprobante v2'); // contexto de la firma ML-DSA-87 (FIPS 204)

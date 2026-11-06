@@ -8,7 +8,7 @@
   // ventana de envío (dueño, 29 Oct 2026, 09:26: «el máximo de ancho aprovechable… a la máxima velocidad posible»): 24 trozos en
   // vuelo en el chat normal (4,5 MB) y 48 en el blindado (9 MB); el relé y la línea de cada persona ponen el techo real
   const TROZO = 192 * 1024, VENTANA = 24, VENTANA_B = 48;
-  // Sesión blindada (dueño, 27 Oct 2026, 22:01–23:12): suite CNSA 2.0, invitación por enlace de 256 bits, verificación mutua
+  // Sesión blindada (dueño, 27 Oct 2026, 22:01–23:12): ML-KEM-1024, ML-DSA-87 y P-384, invitación por enlace de 256 bits, verificación mutua
   // obligatoria, identidad nueva en cada sesión, renovación de claves cada 5 minutos, relleno e informe de cierre.
   // Desde el 2 Nov 2026 (dueño, 17:01: «Solo hay dos modelos, el blindado y el ultra») esa sesión es la que la pantalla llama ULTRA; el
   // chat de siempre (modo guardado «normal») es la BLINDADA, la gratuita. Los ids y los valores guardados no cambian.
@@ -534,7 +534,7 @@
     if (ACTUAL === c.id && document.visibilityState === 'visible') marcaLeidos(c);
   }
 
-  // ---------- sesión blindada (suite CNSA 2.0) ----------
+  // ---------- sesión blindada (Ultra: ML-KEM-1024, ML-DSA-87 y P-384) ----------
   // La misma coreografía que la normal (quien tiene la huella menor inicia; quien responde contesta a una época concreta),
   // con P-384, ML-KEM-1024 obligatorio y dos firmas (ECDSA P-384 y ML-DSA-87) sobre exactamente los mismos bytes. Una
   // presentación a la que le falte cualquiera de las dos firmas, o el ML-KEM, se descarta sin más.
@@ -662,7 +662,7 @@
       if (nueva) {
         clearInterval(muestraInvitacion.reloj);
         // en el teléfono, la nota corta de siempre, como WhatsApp (revisión de diseño, 19:15: la larga era jerga); en el ordenador, la de antes
-        await anotaSistema(c, esMovil() ? 'Ultra: encriptado de extremo a extremo. La conversación no se guarda: al cerrar, desaparece.' : 'Sesión Ultra establecida. La conversación no se guarda, ni en este navegador ni en el relé: al cerrar la pestaña, desaparece. Lean en voz alta las cuatro palabras de arriba: si coinciden en los dos equipos, nadie está en medio.');
+        await anotaSistema(c, esMovil() ? 'Ultra: encriptado de extremo a extremo. La conversación no se guarda: al cerrar, desaparece.' : 'Sesión Ultra establecida. La conversación no se guarda, ni en este navegador ni en el relé: al cerrar la pestaña, desaparece. Lean en voz alta las cuatro palabras de arriba: si coinciden en los dos equipos, las claves son las mismas en los dos, y quien se pusiera en medio tendría que haber acertado las palabras a ciegas.');
         if (ACTUAL === c.id) abreConv(c.id);
         // la invitación se mandó desde el inicio sin otra pantalla (19:17): cuando la otra persona entra, su chat se abre solo,
         // salvo si estás en otra conversación o en una llamada (entonces, un aviso que lo abre al tocarlo)
@@ -2721,7 +2721,7 @@
     $('#inicio').classList.toggle('con-invitacion', inv); // sin la presentación de la página: solo la invitación (15:32)
     if (inv) { verContactos = false; $('#inicio').classList.remove('ver-contactos'); $('#contactos').hidden = true; }
     if (inv) { $('#paso-inicio').hidden = true; $('#paso-entrar').hidden = true; $('#paso-codigo').hidden = porEnlace(c); $('#paso-enlace').hidden = !porEnlace(c); }
-    // (2 Nov 2026: la gratuita es la Blindada; la de la suite CNSA 2.0, Ultra)
+    // (2 Nov 2026: la gratuita es la Blindada; la de ML-KEM-1024 y ML-DSA-87, Ultra)
     if (inv && porEnlace(c)) { const k = $('#enlace-k'), tp = $('#enlace-t-pc'); if (k) k.textContent = esB(c) ? T('Sesión Ultra') : T('Chat blindado'); if (tp) tp.textContent = esB(c) ? T('Invitación Ultra') : T('Invitación blindada'); }
     pintaCabecera(c); pintaTodos(c); pintaRadio(c); pintaLista();
     if (esperaEnChat(c)) document.body.classList.remove('esperando-enlace');
@@ -3389,7 +3389,8 @@
   }
   // Ultra (revisión independiente, 3 nov 2026): lo que se puede limpiar aquí, se limpia. De un SVG, el bloque <metadata>, los comentarios
   // y lo que añaden los programas de dibujo (Inkscape, Sodipodi, Sketch, Illustrator…); de un MP3, sus etiquetas ID3 (v2 al principio,
-  // v1 y v1.1 «TAG+» al final: título, autor, fechas y a veces una foto). Lo demás va como está, con aviso (revisaEnvio).
+  // v1 y v1.1 «TAG+» al final: título, autor, fechas y a veces una foto) y las APE, Lyrics3 e ID3v2.4 del final. Lo demás va como
+  // está, con aviso (revisaEnvio).
   async function limpiaMetaB(f) {
     if (!f || f.__limpia) return f;
     const mime = String(f.type || '').toLowerCase(), nombre = String(f.name || '');
@@ -3413,8 +3414,20 @@
         let b = new Uint8Array(await f.arrayBuffer());
         while (b.length > 10 && b[0] === 0x49 && b[1] === 0x44 && b[2] === 0x33) { const t = ((b[6] & 127) << 21) | ((b[7] & 127) << 14) | ((b[8] & 127) << 7) | (b[9] & 127); b = b.subarray(Math.min(b.length, 10 + t + (b[5] & 0x10 ? 10 : 0))); }
         const es = (k, txt) => b.length >= k && [...txt].every((ch, i) => b[b.length - k + i] === ch.charCodeAt(0));
-        if (es(128, 'TAG')) b = b.subarray(0, b.length - 128);
-        if (es(227, 'TAG+')) b = b.subarray(0, b.length - 227);
+        // (segunda revisión independiente, 5 nov 2026, M6) al final, además de ID3v1 y «TAG+», pueden ir APEv2 (o APEv1), Lyrics3 (v1
+        // o v2) y un ID3v2.4 con pie («3DI»), en cualquier orden: se quitan mientras quede alguno que se reconozca entero
+        const tiene = (pos, txt) => pos >= 0 && [...txt].every((ch, i) => b[pos + i] === ch.charCodeAt(0));
+        const le32 = (k) => (b[b.length - k] | (b[b.length - k + 1] << 8) | (b[b.length - k + 2] << 16) | (b[b.length - k + 3] << 24)) >>> 0;
+        for (let vuelta = 0; vuelta < 16; vuelta++) {
+          const antes = b.length;
+          if (es(128, 'TAG')) b = b.subarray(0, b.length - 128);
+          else if (es(227, 'TAG+')) b = b.subarray(0, b.length - 227);
+          else if (es(32, 'APETAGEX')) { const t = le32(20), cab = (le32(12) & 0x80000000) && tiene(b.length - t - 32, 'APETAGEX') ? 32 : 0; if (t >= 32 && t + cab <= b.length) b = b.subarray(0, b.length - t - cab); }
+          else if (es(9, 'LYRICS200')) { const d = String.fromCharCode(...b.subarray(b.length - 15, b.length - 9)), t = /^\d{6}$/.test(d) ? Number(d) : -1; if (t >= 11 && tiene(b.length - 15 - t, 'LYRICSBEGIN')) b = b.subarray(0, b.length - 15 - t); }
+          else if (es(9, 'LYRICSEND')) { for (let j = b.length - 20; j >= Math.max(0, b.length - 5120); j--) if (tiene(j, 'LYRICSBEGIN')) { b = b.subarray(0, j); break; } }
+          else if (es(10, '3DI')) { const t = ((b[b.length - 4] & 127) << 21) | ((b[b.length - 3] & 127) << 14) | ((b[b.length - 2] & 127) << 7) | (b[b.length - 1] & 127); if (tiene(b.length - 20 - t, 'ID3')) b = b.subarray(0, b.length - 20 - t); }
+          if (b.length === antes) break;
+        }
         const nf = new File([b], nombre || 'audio.mp3', { type: 'audio/mpeg', lastModified: Date.now() }); nf.__limpia = true; return nf;
       }
     } catch (_) {}
@@ -3470,7 +3483,7 @@
     fila('gc-info', T('Servidor de GUARDIANA'), T('encamina tramas encriptadas que no puede leer; ve conexión y volumen, no contenido; no guarda historial'));
     fila(c.incidencias ? 'gc-alerta' : 'gc-ok', T('Verificación'), c.incidencias ? (c.incidencias + ' ' + (c.incidencias === 1 ? T('incidencia') : T('incidencias')) + ': ' + T('datos que no superaron la autenticación, descartados y anotados en la conversación.')) : T('Cada mensaje y cada trozo de archivo se autentica al llegar; hasta ahora, todos superaron la verificación.'));
     fila(c.verificada ? 'gc-ok' : 'gc-aviso', c.verificada ? T('Identidad verificada') : T('Identidad sin verificar'), c.verificada ? T('Los dos comprobaron el número de seguridad.') : T('Hasta que los dos comprueben el número, confías en que el enlace llegó a la persona correcta.'));
-    fila('gc-aviso', T('Límites'), T('No es anonimato: el relé ve tu dirección IP, la sala y el volumen de tráfico, no el contenido.') + ' ' + (esB(c) ? T('La identidad de esta conversación vive solo en la memoria de esta pestaña: al cerrarla, desaparece.') + ' ' + T('Lo recibido está solo en la memoria de esta pestaña; lo que guardes en un disco queda fuera de GUARDIANA y «Destruir» no lo alcanza.') : T('Tu identidad vive en este navegador: se pierde si borras los datos del sitio o cambias de equipo.') + ' ' + T('Los archivos recibidos quedan en este navegador sin nuestra encriptación; «Destruir» no alcanza lo ya guardado en un disco.')) + ' ' + T('Ninguna encriptación protege un equipo o navegador comprometido.') + ' ' + (esB(c) ? T('En Ultra no se envían ni el país de tu equipo ni tu nombre.') + ' ' + T('El enlace de una invitación Ultra lleva su secreto y puede quedar en el historial del navegador: ábrelo en una ventana privada, o pégalo en «Tengo un código» en vez de abrirlo.') + ' ' + T('La comprobación de Plus la hace esta página, no el relé: con conocimientos técnicos se puede abrir una conversación Ultra sin el programa. Eso no rebaja su encriptación, que es la misma para los dos lados.') : T('El viaje de cada archivo y su comprobante muestran a la otra persona el país de tu equipo, estimado por la zona horaria del navegador; nunca la zona horaria ni la dirección IP.')));
+    fila('gc-aviso', T('Límites'), T('No es anonimato: el relé ve tu dirección IP, la sala y el volumen de tráfico, no el contenido.') + ' ' + (esB(c) ? T('La identidad de esta conversación vive solo en la memoria de esta pestaña: al cerrarla, desaparece.') + ' ' + T('Lo recibido está solo en la memoria de esta pestaña; lo que guardes en un disco queda fuera de GUARDIANA y «Destruir» no lo alcanza.') : T('Tu identidad vive en este navegador: se pierde si borras los datos del sitio o cambias de equipo.') + ' ' + T('Los archivos recibidos quedan en este navegador sin nuestra encriptación; «Destruir» no alcanza lo ya guardado en un disco.')) + ' ' + T('Ninguna encriptación protege un equipo o navegador comprometido.') + ' ' + (esB(c) ? T('En Ultra no se envían ni el país de tu equipo ni tu nombre.') + ' ' + T('El enlace de una invitación Ultra lleva su secreto y puede quedar en el historial del navegador: ábrelo en una ventana privada, o pégalo en «Tengo un código» en vez de abrirlo.') + ' ' + T('El relé también sabe cuándo tienes esta página delante o en segundo plano, y se lo pasa a la otra persona.') + ' ' + T('La comprobación de Plus la hace esta página, no el relé: con conocimientos técnicos se puede abrir una conversación Ultra sin el programa. Eso no rebaja su encriptación, que es la misma para los dos lados.') : T('El viaje de cada archivo y su comprobante muestran a la otra persona el país de tu equipo, estimado por la zona horaria del navegador; nunca la zona horaria ni la dirección IP.')));
     $('#numero').textContent = c.huella ? await numeroDe(c) : T('Aparecerá cuando la otra persona entre.');
     $('#verificada').checked = !!c.verificada; $('#verificada').disabled = !c.huella;
     $('#destruir-nota').hidden = true;

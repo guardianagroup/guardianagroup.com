@@ -1,4 +1,4 @@
-/*! GUARDIANA · Comunicaciones · ML-KEM-1024 (FIPS 203) y ML-DSA-87 (FIPS 204) para la sesión blindada (suite CNSA 2.0, en híbrido con ECDH/ECDSA P-384).
+/*! GUARDIANA · Comunicaciones · ML-KEM-1024 (FIPS 203) y ML-DSA-87 (FIPS 204) para la sesión Ultra (en híbrido con ECDH/ECDSA P-384).
  * Archivo generado: no se edita a mano. Expone solo window.GuardianaMLKEM1024 = { keygen, encapsulate, decapsulate } y window.GuardianaMLDSA87 = { keygen, sign, verify }.
  * Construido con esbuild 0.28.2 (IIFE, minimizado) desde el código fuente etiquetado, sin cambios:
  *   @noble/post-quantum 0.7.1 · github.com/paulmillr/noble-post-quantum · commit a23736036d4d5b34dd3a9e0ee312fd43d00154ac

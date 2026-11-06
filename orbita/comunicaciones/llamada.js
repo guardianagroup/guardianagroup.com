@@ -1331,7 +1331,7 @@
       const etq = pal ? t('Palabras de verificación') : t('Número de seguridad');
       $('#ll-sas-t').textContent = etq;
       $('#ll-sas-num').textContent = num; $('#ll-sas-num').setAttribute('aria-label', etq + ': ' + (pal ? pal.join(', ') : num));
-      $('#ll-sas-texto').textContent = sas.estado === 'roto' ? t('No se pudo calcular el número de seguridad de esta llamada: no hables de nada delicado y vuelve a llamar.') : pal ? t('Léanlas en voz alta, por turnos. Si coinciden en las dos pantallas, nadie se ha puesto en medio. Una voz clonada con IA debilita esta comprobación de oído.') : t('La otra persona debe ver este mismo número en su pantalla. Díganlo en voz alta: si no coincide, hay alguien en medio.');
+      $('#ll-sas-texto').textContent = sas.estado === 'roto' ? t('No se pudo calcular el número de seguridad de esta llamada: no hables de nada delicado y vuelve a llamar.') : pal ? t('Léanlas en voz alta, por turnos. Si coinciden en las dos pantallas, las claves de la llamada son las mismas en los dos equipos, y quien se pusiera en medio tendría que haber acertado las palabras a ciegas. Una voz clonada con IA debilita esta comprobación de oído.') : t('La otra persona debe ver este mismo número en su pantalla. Díganlo en voz alta: si no coincide, hay alguien en medio.');
       $('#ll-sas-si').hidden = sas.estado === 'roto';
       mini.textContent = (sas.estado === 'coinciden' ? '✓ ' : sas.estado === 'roto' ? '! ' : '') + num;
       mini.classList.toggle('bien', sas.estado === 'coinciden'); mini.classList.toggle('mal', sas.estado === 'roto');

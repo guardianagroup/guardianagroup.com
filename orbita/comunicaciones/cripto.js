@@ -169,7 +169,7 @@
 
   // ======================================================================================================================
   // SESIÓN BLINDADA (27 Oct 2026, dueño: «la blindada debe ser de la máxima»; «tecnología de grado militar»).
-  // Los algoritmos y tamaños de la suite CNSA 2.0 de la NSA, en híbrido con criptografía clásica:
+  // Los algoritmos y tamaños de Ultra (ML-KEM-1024, ML-DSA-87, P-384, AES-256 y SHA-384), en híbrido con criptografía clásica:
   //   identidad: ECDSA P-384 + ECDH P-384 (Web Crypto, no exportables) + ML-DSA-87 (FIPS 204; su clave privada se guarda
   //   encriptada con la clave local no exportable); huella SHA-384 de las tres públicas.
   //   sesión: tres ECDH P-384 + ML-KEM-1024 (FIPS 203) + el secreto de la invitación, con HKDF-SHA-384.
