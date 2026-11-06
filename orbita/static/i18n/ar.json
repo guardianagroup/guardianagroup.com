@@ -3925,7 +3925,19 @@
 "Cada equipo firma el registro con su clave de identidad: ECDSA P-256 sobre SHA-256 en la Blindada; en Ultra, ECDSA P-384 sobre SHA-384 y, además, ML-DSA-87. Si se cambia un solo carácter del registro, las firmas dejan de ser válidas.":"يوقّع كل جهاز السجل بمفتاح هويته: ECDSA P-256 على SHA-256 في الوضع المحصّن؛ وفي Ultra، ECDSA P-384 على SHA-384، وإضافةً إلى ذلك ML-DSA-87. وإذا تغيّر حرف واحد فقط في السجل، لم تعد التوقيعات صالحة.",
 "La huella de identidad de cada equipo resume sus claves públicas (SHA-256 en la Blindada; SHA-384 en Ultra), y el número de seguridad que aparece es el mismo que vieron las dos personas en la conversación.":"تلخّص بصمة الهوية لكل جهاز مفاتيحه العامة (SHA-256 في الوضع المحصّن؛ SHA-384 في Ultra)، ورقم الأمان المعروض هو نفسه الذي رآه الشخصان في المحادثة.",
 "Cada mensaje, foto, archivo y llamada se cierra con claves que solo tienen los dos equipos: nuestro servidor no puede abrirlo. Comparar el número de seguridad del chat o el código de la llamada confirma que nadie se ha interpuesto.":"كل رسالة وصورة وملف ومكالمة تُغلق بمفاتيح لا يملكها سوى الجهازين: خادمنا لا يستطيع فتحها. ومقارنة رقم الأمان في الدردشة أو رمز المكالمة تؤكد أن أحدًا لم يتدخّل بينكما.",
-"Qué tiene cada versión":"ما تتضمنه كل نسخة"
+"Qué tiene cada versión":"ما تتضمنه كل نسخة",
+"Usar un código":"استخدم رمزًا",
+"Código Ultra":"رمز Ultra",
+"Vale 10 minutos y una sola vez.":"صالح لمدة 10 دقائق ولاستخدام واحد فقط.",
+"Con el código, la llave de la conversación viaja cerrada con ese código, que el servidor de GUARDIANA no conoce.":"مع الرمز، ينتقل مفتاح المحادثة مُقفَلًا بهذا الرمز، الذي لا يعرفه خادم GUARDIANA.",
+"Cancelar el código":"إلغاء الرمز",
+"Se cortó la conexión con el relé: pide un código nuevo.":"انقطع الاتصال بالمُرحِّل: اطلب رمزًا جديدًا.",
+"Código erróneo, caducado o ya usado.":"رمز خاطئ أو منتهي الصلاحية أو مُستخدَم من قبل.",
+"9 cifras, o el código Ultra de 16 caracteres":"9 أرقام، أو رمز Ultra المكوّن من 16 حرفًا",
+"Escribe el código que te han enviado":"اكتب الرمز الذي أُرسل إليك",
+"Sesión Ultra":"جلسة Ultra",
+"Invitación Ultra":"دعوة Ultra",
+"Invitación Ultra · esperando":"دعوة Ultra · في الانتظار"
 },
 "p":{
 "intento":"الأكثر محاولةً اليوم: {1}، {2} {2?مرة|مرات}.",

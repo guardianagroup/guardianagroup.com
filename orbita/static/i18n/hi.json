@@ -3925,7 +3925,19 @@
 "Cada equipo firma el registro con su clave de identidad: ECDSA P-256 sobre SHA-256 en la Blindada; en Ultra, ECDSA P-384 sobre SHA-384 y, además, ML-DSA-87. Si se cambia un solo carácter del registro, las firmas dejan de ser válidas.":"हर डिवाइस अपनी पहचान कुंजी से रिकॉर्ड पर हस्ताक्षर करता है: कवच मोड में SHA-256 पर ECDSA P-256; Ultra में SHA-384 पर ECDSA P-384 और, इसके अलावा, ML-DSA-87। अगर रिकॉर्ड का एक भी अक्षर बदला जाए, तो हस्ताक्षर मान्य नहीं रहते।",
 "La huella de identidad de cada equipo resume sus claves públicas (SHA-256 en la Blindada; SHA-384 en Ultra), y el número de seguridad que aparece es el mismo que vieron las dos personas en la conversación.":"हर डिवाइस का पहचान फ़िंगरप्रिंट उसकी सार्वजनिक कुंजियों का सार है (कवच मोड में SHA-256; Ultra में SHA-384), और दिखाया गया सुरक्षा नंबर वही है जो दोनों व्यक्तियों ने बातचीत में देखा था।",
 "Cada mensaje, foto, archivo y llamada se cierra con claves que solo tienen los dos equipos: nuestro servidor no puede abrirlo. Comparar el número de seguridad del chat o el código de la llamada confirma que nadie se ha interpuesto.":"हर संदेश, फ़ोटो, फ़ाइल और कॉल ऐसी कुंजियों से बंद होती है जो केवल दोनों डिवाइस के पास होती हैं: हमारा सर्वर उसे नहीं खोल सकता। चैट के सुरक्षा नंबर या कॉल के कोड का मिलान पुष्टि करता है कि कोई आपके बीच नहीं आया है।",
-"Qué tiene cada versión":"हर संस्करण में क्या शामिल है"
+"Qué tiene cada versión":"हर संस्करण में क्या शामिल है",
+"Usar un código":"कोड का उपयोग करें",
+"Código Ultra":"Ultra कोड",
+"Vale 10 minutos y una sola vez.":"10 मिनट और केवल एक बार उपयोग के लिए मान्य।",
+"Con el código, la llave de la conversación viaja cerrada con ese código, que el servidor de GUARDIANA no conoce.":"कोड के साथ, बातचीत की कुंजी उसी कोड से बंद होकर जाती है, जिसे GUARDIANA का सर्वर नहीं जानता।",
+"Cancelar el código":"कोड रद्द करें",
+"Se cortó la conexión con el relé: pide un código nuevo.":"रिले से कनेक्शन टूट गया: नया कोड माँगें।",
+"Código erróneo, caducado o ya usado.":"कोड गलत है, समाप्त हो चुका है या पहले ही इस्तेमाल हो चुका है।",
+"9 cifras, o el código Ultra de 16 caracteres":"9 अंक, या 16 अक्षरों का Ultra कोड",
+"Escribe el código que te han enviado":"आपको भेजा गया कोड लिखें",
+"Sesión Ultra":"Ultra सत्र",
+"Invitación Ultra":"Ultra निमंत्रण",
+"Invitación Ultra · esperando":"Ultra निमंत्रण · प्रतीक्षा में"
 },
 "p":{
 "intento":"आज सबसे ज़्यादा कोशिश: {1}, {2} {2?बार|बार}।",

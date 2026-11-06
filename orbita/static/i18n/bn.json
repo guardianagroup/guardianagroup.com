@@ -3925,7 +3925,19 @@
 "Cada equipo firma el registro con su clave de identidad: ECDSA P-256 sobre SHA-256 en la Blindada; en Ultra, ECDSA P-384 sobre SHA-384 y, además, ML-DSA-87. Si se cambia un solo carácter del registro, las firmas dejan de ser válidas.":"প্রতিটি ডিভাইস তার পরিচয় কী দিয়ে রেকর্ডে স্বাক্ষর করে: রক্ষাকবচ মোডে SHA-256-এর উপর ECDSA P-256; Ultra-তে SHA-384-এর উপর ECDSA P-384 এবং সেই সঙ্গে ML-DSA-87। রেকর্ডের একটি অক্ষরও বদলালে স্বাক্ষরগুলো আর বৈধ থাকে না।",
 "La huella de identidad de cada equipo resume sus claves públicas (SHA-256 en la Blindada; SHA-384 en Ultra), y el número de seguridad que aparece es el mismo que vieron las dos personas en la conversación.":"প্রতিটি ডিভাইসের পরিচয়ের ফিঙ্গারপ্রিন্ট তার পাবলিক কীগুলোর সারসংক্ষেপ (রক্ষাকবচ মোডে SHA-256; Ultra-তে SHA-384), এবং দেখানো নিরাপত্তা নম্বরটি সেটিই যা দুজন ব্যক্তি কথোপকথনে দেখেছিলেন।",
 "Cada mensaje, foto, archivo y llamada se cierra con claves que solo tienen los dos equipos: nuestro servidor no puede abrirlo. Comparar el número de seguridad del chat o el código de la llamada confirma que nadie se ha interpuesto.":"প্রতিটি বার্তা, ছবি, ফাইল ও কল এমন চাবি দিয়ে বন্ধ করা হয় যা কেবল দুটি ডিভাইসের কাছেই আছে: আমাদের সার্ভার তা খুলতে পারে না। চ্যাটের নিরাপত্তা নম্বর বা কলের কোড মিলিয়ে দেখলে নিশ্চিত হওয়া যায় যে কেউ আপনাদের মাঝে ঢোকেনি।",
-"Qué tiene cada versión":"প্রতিটি সংস্করণে কী আছে"
+"Qué tiene cada versión":"প্রতিটি সংস্করণে কী আছে",
+"Usar un código":"কোড ব্যবহার করুন",
+"Código Ultra":"Ultra কোড",
+"Vale 10 minutos y una sola vez.":"10 মিনিট এবং মাত্র একবার ব্যবহারের জন্য বৈধ।",
+"Con el código, la llave de la conversación viaja cerrada con ese código, que el servidor de GUARDIANA no conoce.":"কোড ব্যবহার করলে কথোপকথনের চাবি সেই কোড দিয়ে বন্ধ অবস্থায় যায়, আর GUARDIANA-র সার্ভার সেই কোড জানে না।",
+"Cancelar el código":"কোড বাতিল করুন",
+"Se cortó la conexión con el relé: pide un código nuevo.":"রিলের সাথে সংযোগ বিচ্ছিন্ন হয়েছে: নতুন কোড চান।",
+"Código erróneo, caducado o ya usado.":"কোডটি ভুল, মেয়াদোত্তীর্ণ বা আগেই ব্যবহৃত।",
+"9 cifras, o el código Ultra de 16 caracteres":"9টি অঙ্ক, অথবা 16 অক্ষরের Ultra কোড",
+"Escribe el código que te han enviado":"আপনাকে পাঠানো কোডটি লিখুন",
+"Sesión Ultra":"Ultra সেশন",
+"Invitación Ultra":"Ultra আমন্ত্রণ",
+"Invitación Ultra · esperando":"Ultra আমন্ত্রণ · অপেক্ষায়"
 },
 "p":{
 "intento":"আজ সবচেয়ে বেশি চেষ্টা: {1}, {2} {2?বার|বার}।",

@@ -3925,7 +3925,19 @@
 "Cada equipo firma el registro con su clave de identidad: ECDSA P-256 sobre SHA-256 en la Blindada; en Ultra, ECDSA P-384 sobre SHA-384 y, además, ML-DSA-87. Si se cambia un solo carácter del registro, las firmas dejan de ser válidas.":"Chaque appareil signe l’enregistrement avec sa clé d’identité : ECDSA P-256 sur SHA-256 dans la Blindée ; dans Ultra, ECDSA P-384 sur SHA-384 et, en plus, ML-DSA-87. Si un seul caractère de l’enregistrement est modifié, les signatures ne sont plus valides.",
 "La huella de identidad de cada equipo resume sus claves públicas (SHA-256 en la Blindada; SHA-384 en Ultra), y el número de seguridad que aparece es el mismo que vieron las dos personas en la conversación.":"L’empreinte d’identité de chaque appareil résume ses clés publiques (SHA-256 dans la Blindée ; SHA-384 dans Ultra), et le numéro de sécurité affiché est celui que les deux personnes ont vu dans la conversation.",
 "Cada mensaje, foto, archivo y llamada se cierra con claves que solo tienen los dos equipos: nuestro servidor no puede abrirlo. Comparar el número de seguridad del chat o el código de la llamada confirma que nadie se ha interpuesto.":"Chaque message, photo, fichier et appel est scellé avec des clés que seuls les deux appareils possèdent : notre serveur ne peut pas l’ouvrir. Comparer le numéro de sécurité de la discussion ou le code de l’appel confirme que personne ne s’est interposé.",
-"Qué tiene cada versión":"Ce que comprend chaque version"
+"Qué tiene cada versión":"Ce que comprend chaque version",
+"Usar un código":"Utiliser un code",
+"Código Ultra":"Code Ultra",
+"Vale 10 minutos y una sola vez.":"Valable 10 minutes et pour une seule utilisation.",
+"Con el código, la llave de la conversación viaja cerrada con ese código, que el servidor de GUARDIANA no conoce.":"Avec le code, la clé de la conversation voyage verrouillée par ce code, que le serveur de GUARDIANA ne connaît pas.",
+"Cancelar el código":"Annuler le code",
+"Se cortó la conexión con el relé: pide un código nuevo.":"La connexion au relais a été coupée : demandez un nouveau code.",
+"Código erróneo, caducado o ya usado.":"Code erroné, expiré ou déjà utilisé.",
+"9 cifras, o el código Ultra de 16 caracteres":"9 chiffres, ou le code Ultra de 16 caractères",
+"Escribe el código que te han enviado":"Saisissez le code qu’on vous a envoyé",
+"Sesión Ultra":"Session Ultra",
+"Invitación Ultra":"Invitation Ultra",
+"Invitación Ultra · esperando":"Invitation Ultra · en attente"
 },
 "p":{
 "intento":"Celle qui a le plus insisté aujourd'hui : {1}, {2} {2?fois|fois}.",

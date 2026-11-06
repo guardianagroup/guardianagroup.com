@@ -3925,7 +3925,19 @@
 "Cada equipo firma el registro con su clave de identidad: ECDSA P-256 sobre SHA-256 en la Blindada; en Ultra, ECDSA P-384 sobre SHA-384 y, además, ML-DSA-87. Si se cambia un solo carácter del registro, las firmas dejan de ser válidas.":"Ogni dispositivo firma il registro con la propria chiave di identità: ECDSA P-256 su SHA-256 nella Blindata; in Ultra, ECDSA P-384 su SHA-384 e, in più, ML-DSA-87. Se si modifica anche un solo carattere del registro, le firme non sono più valide.",
 "La huella de identidad de cada equipo resume sus claves públicas (SHA-256 en la Blindada; SHA-384 en Ultra), y el número de seguridad que aparece es el mismo que vieron las dos personas en la conversación.":"L’impronta di identità di ogni dispositivo riassume le sue chiavi pubbliche (SHA-256 nella Blindata; SHA-384 in Ultra), e il numero di sicurezza mostrato è lo stesso che le due persone hanno visto nella conversazione.",
 "Cada mensaje, foto, archivo y llamada se cierra con claves que solo tienen los dos equipos: nuestro servidor no puede abrirlo. Comparar el número de seguridad del chat o el código de la llamada confirma que nadie se ha interpuesto.":"Ogni messaggio, foto, file e chiamata viene chiuso con chiavi che hanno solo i due dispositivi: il nostro server non può aprirlo. Confrontare il numero di sicurezza della chat o il codice della chiamata conferma che nessuno si è messo in mezzo.",
-"Qué tiene cada versión":"Cosa include ogni versione"
+"Qué tiene cada versión":"Cosa include ogni versione",
+"Usar un código":"Usa un codice",
+"Código Ultra":"Codice Ultra",
+"Vale 10 minutos y una sola vez.":"Vale 10 minuti e per un solo utilizzo.",
+"Con el código, la llave de la conversación viaja cerrada con ese código, que el servidor de GUARDIANA no conoce.":"Con il codice, la chiave della conversazione viaggia chiusa con quel codice, che il server di GUARDIANA non conosce.",
+"Cancelar el código":"Annulla il codice",
+"Se cortó la conexión con el relé: pide un código nuevo.":"La connessione con il relay si è interrotta: richiedi un nuovo codice.",
+"Código erróneo, caducado o ya usado.":"Codice errato, scaduto o già usato.",
+"9 cifras, o el código Ultra de 16 caracteres":"9 cifre, o il codice Ultra di 16 caratteri",
+"Escribe el código que te han enviado":"Inserisci il codice che ti hanno inviato",
+"Sesión Ultra":"Sessione Ultra",
+"Invitación Ultra":"Invito Ultra",
+"Invitación Ultra · esperando":"Invito Ultra · in attesa"
 },
 "p":{
 "intento":"Quella che ci ha provato di più oggi: {1}, {2} {2?volta|volte}.",

@@ -3925,7 +3925,19 @@
 "Cada equipo firma el registro con su clave de identidad: ECDSA P-256 sobre SHA-256 en la Blindada; en Ultra, ECDSA P-384 sobre SHA-384 y, además, ML-DSA-87. Si se cambia un solo carácter del registro, las firmas dejan de ser válidas.":"อุปกรณ์แต่ละเครื่องลงนามในบันทึกด้วยคีย์ตัวตนของตนเอง: ECDSA P-256 โดยใช้ SHA-256 ในโหมดหุ้มเกราะ และใน Ultra ใช้ ECDSA P-384 โดยใช้ SHA-384 พร้อม ML-DSA-87 เพิ่มเติม หากอักขระในบันทึกเปลี่ยนไปแม้เพียงตัวเดียว ลายเซ็นจะไม่ถูกต้องอีกต่อไป",
 "La huella de identidad de cada equipo resume sus claves públicas (SHA-256 en la Blindada; SHA-384 en Ultra), y el número de seguridad que aparece es el mismo que vieron las dos personas en la conversación.":"ลายนิ้วมือตัวตนของอุปกรณ์แต่ละเครื่องเป็นค่าสรุปของคีย์สาธารณะของอุปกรณ์นั้น (SHA-256 ในโหมดหุ้มเกราะ; SHA-384 ใน Ultra) และหมายเลขความปลอดภัยที่แสดงคือหมายเลขเดียวกับที่ทั้งสองคนเห็นในการสนทนา",
 "Cada mensaje, foto, archivo y llamada se cierra con claves que solo tienen los dos equipos: nuestro servidor no puede abrirlo. Comparar el número de seguridad del chat o el código de la llamada confirma que nadie se ha interpuesto.":"ทุกข้อความ ภาพ ไฟล์ และการโทร ถูกล็อกด้วยคีย์ที่มีเฉพาะอุปกรณ์ทั้งสองเครื่องเท่านั้น: เซิร์ฟเวอร์ของเราเปิดไม่ได้ การเทียบหมายเลขความปลอดภัยของแชทหรือรหัสของการโทรช่วยยืนยันว่าไม่มีผู้ใดเข้ามาแทรกกลาง",
-"Qué tiene cada versión":"แต่ละเวอร์ชันมีอะไรบ้าง"
+"Qué tiene cada versión":"แต่ละเวอร์ชันมีอะไรบ้าง",
+"Usar un código":"ใช้รหัส",
+"Código Ultra":"รหัส Ultra",
+"Vale 10 minutos y una sola vez.":"ใช้ได้ 10 นาทีและใช้ได้ครั้งเดียว",
+"Con el código, la llave de la conversación viaja cerrada con ese código, que el servidor de GUARDIANA no conoce.":"เมื่อใช้รหัส กุญแจของการสนทนาจะถูกส่งไปโดยปิดไว้ด้วยรหัสนั้น ซึ่งเซิร์ฟเวอร์ของ GUARDIANA ไม่รู้",
+"Cancelar el código":"ยกเลิกรหัส",
+"Se cortó la conexión con el relé: pide un código nuevo.":"การเชื่อมต่อกับรีเลย์ขาดหาย: โปรดขอรหัสใหม่",
+"Código erróneo, caducado o ya usado.":"รหัสไม่ถูกต้อง หมดอายุ หรือถูกใช้ไปแล้ว",
+"9 cifras, o el código Ultra de 16 caracteres":"ตัวเลข 9 หลัก หรือรหัส Ultra 16 ตัวอักษร",
+"Escribe el código que te han enviado":"พิมพ์รหัสที่คุณได้รับ",
+"Sesión Ultra":"เซสชัน Ultra",
+"Invitación Ultra":"คำเชิญ Ultra",
+"Invitación Ultra · esperando":"คำเชิญ Ultra · กำลังรอ"
 },
 "p":{
 "intento":"พยายามมากที่สุดวันนี้: {1}, {2} {2?ครั้ง|ครั้ง}",

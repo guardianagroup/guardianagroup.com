@@ -3925,7 +3925,19 @@
 "Cada equipo firma el registro con su clave de identidad: ECDSA P-256 sobre SHA-256 en la Blindada; en Ultra, ECDSA P-384 sobre SHA-384 y, además, ML-DSA-87. Si se cambia un solo carácter del registro, las firmas dejan de ser válidas.":"Každé zařízení podepisuje záznam svým klíčem identity: v Pancéřovaném režimu ECDSA P-256 se SHA-256; v Ultra ECDSA P-384 se SHA-384 a navíc ML-DSA-87. Pokud se v záznamu změní jediný znak, podpisy přestanou být platné.",
 "La huella de identidad de cada equipo resume sus claves públicas (SHA-256 en la Blindada; SHA-384 en Ultra), y el número de seguridad que aparece es el mismo que vieron las dos personas en la conversación.":"Otisk identity každého zařízení shrnuje jeho veřejné klíče (SHA-256 v Pancéřovaném režimu; SHA-384 v Ultra) a zobrazené bezpečnostní číslo je stejné, jaké obě osoby viděly v konverzaci.",
 "Cada mensaje, foto, archivo y llamada se cierra con claves que solo tienen los dos equipos: nuestro servidor no puede abrirlo. Comparar el número de seguridad del chat o el código de la llamada confirma que nadie se ha interpuesto.":"Každá zpráva, fotka, soubor a hovor se uzavírá klíči, které mají jen obě zařízení: náš server to nemůže otevřít. Porovnání bezpečnostního čísla chatu nebo kódu hovoru potvrdí, že se mezi vás nikdo nevložil.",
-"Qué tiene cada versión":"Co obsahuje každá verze"
+"Qué tiene cada versión":"Co obsahuje každá verze",
+"Usar un código":"Použít kód",
+"Código Ultra":"Kód Ultra",
+"Vale 10 minutos y una sola vez.":"Platí 10 minut a jen pro jedno použití.",
+"Con el código, la llave de la conversación viaja cerrada con ese código, que el servidor de GUARDIANA no conoce.":"S kódem putuje klíč konverzace uzamčený tímto kódem, který server GUARDIANA nezná.",
+"Cancelar el código":"Zrušit kód",
+"Se cortó la conexión con el relé: pide un código nuevo.":"Spojení s relé se přerušilo: požádejte o nový kód.",
+"Código erróneo, caducado o ya usado.":"Kód je chybný, vypršel nebo už byl použit.",
+"9 cifras, o el código Ultra de 16 caracteres":"9 číslic, nebo kód Ultra o 16 znacích",
+"Escribe el código que te han enviado":"Zadejte kód, který vám poslali",
+"Sesión Ultra":"Relace Ultra",
+"Invitación Ultra":"Pozvánka Ultra",
+"Invitación Ultra · esperando":"Pozvánka Ultra · čeká se"
 },
 "p":{
 "intento":"Nejvíc se dnes snažila: {1}, {2}{2?krát|krát}.",

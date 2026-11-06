@@ -3925,7 +3925,19 @@
 "Cada equipo firma el registro con su clave de identidad: ECDSA P-256 sobre SHA-256 en la Blindada; en Ultra, ECDSA P-384 sobre SHA-384 y, además, ML-DSA-87. Si se cambia un solo carácter del registro, las firmas dejan de ser válidas.":"Hver enhet signerer registreringen med sin identitetsnøkkel: ECDSA P-256 med SHA-256 i Pansret; i Ultra ECDSA P-384 med SHA-384 og i tillegg ML-DSA-87. Endres ett eneste tegn i registreringen, er signaturene ikke lenger gyldige.",
 "La huella de identidad de cada equipo resume sus claves públicas (SHA-256 en la Blindada; SHA-384 en Ultra), y el número de seguridad que aparece es el mismo que vieron las dos personas en la conversación.":"Hver enhets identitetsfingeravtrykk oppsummerer enhetens offentlige nøkler (SHA-256 i Pansret; SHA-384 i Ultra), og sikkerhetsnummeret som vises, er det samme som de to personene så i samtalen.",
 "Cada mensaje, foto, archivo y llamada se cierra con claves que solo tienen los dos equipos: nuestro servidor no puede abrirlo. Comparar el número de seguridad del chat o el código de la llamada confirma que nadie se ha interpuesto.":"Hver melding, hvert bilde, hver fil og hvert anrop låses med nøkler som bare de to enhetene har: serveren vår kan ikke åpne det. Å sammenligne sikkerhetsnummeret i chatten eller koden i anropet bekrefter at ingen har stilt seg imellom.",
-"Qué tiene cada versión":"Hva hver versjon inneholder"
+"Qué tiene cada versión":"Hva hver versjon inneholder",
+"Usar un código":"Bruk en kode",
+"Código Ultra":"Ultra-kode",
+"Vale 10 minutos y una sola vez.":"Gjelder i 10 minutter og kan bare brukes én gang.",
+"Con el código, la llave de la conversación viaja cerrada con ese código, que el servidor de GUARDIANA no conoce.":"Med koden reiser samtalens nøkkel låst med den koden, som GUARDIANAs server ikke kjenner.",
+"Cancelar el código":"Avbryt koden",
+"Se cortó la conexión con el relé: pide un código nuevo.":"Forbindelsen med reléet ble brutt: be om en ny kode.",
+"Código erróneo, caducado o ya usado.":"Feil, utløpt eller allerede brukt kode.",
+"9 cifras, o el código Ultra de 16 caracteres":"9 sifre, eller Ultra-koden på 16 tegn",
+"Escribe el código que te han enviado":"Skriv inn koden du har fått tilsendt",
+"Sesión Ultra":"Ultra-økt",
+"Invitación Ultra":"Ultra-invitasjon",
+"Invitación Ultra · esperando":"Ultra-invitasjon · venter"
 },
 "p":{
 "intento":"Den som prøvde mest i dag: {1}, {2} {2?gang|ganger}.",

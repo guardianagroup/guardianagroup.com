@@ -3925,7 +3925,19 @@
 "Cada equipo firma el registro con su clave de identidad: ECDSA P-256 sobre SHA-256 en la Blindada; en Ultra, ECDSA P-384 sobre SHA-384 y, además, ML-DSA-87. Si se cambia un solo carácter del registro, las firmas dejan de ser válidas.":"ஒவ்வொரு சாதனமும் தனது அடையாளச் சாவியால் பதிவில் கையொப்பமிடுகிறது: கவச முறையில் SHA-256 மீது ECDSA P-256; Ultra-வில் SHA-384 மீது ECDSA P-384, அத்துடன் ML-DSA-87. பதிவில் ஒரே ஒரு எழுத்து மாற்றப்பட்டாலும், கையொப்பங்கள் செல்லாதவையாகிவிடும்.",
 "La huella de identidad de cada equipo resume sus claves públicas (SHA-256 en la Blindada; SHA-384 en Ultra), y el número de seguridad que aparece es el mismo que vieron las dos personas en la conversación.":"ஒவ்வொரு சாதனத்தின் அடையாளக் கைரேகையும் அதன் பொதுச் சாவிகளின் சுருக்கம் (கவச முறையில் SHA-256; Ultra-வில் SHA-384); இங்கே காட்டப்படும் பாதுகாப்பு எண், உரையாடலில் இருவரும் பார்த்த அதே எண்தான்.",
 "Cada mensaje, foto, archivo y llamada se cierra con claves que solo tienen los dos equipos: nuestro servidor no puede abrirlo. Comparar el número de seguridad del chat o el código de la llamada confirma que nadie se ha interpuesto.":"ஒவ்வொரு செய்தியும் படமும் கோப்பும் அழைப்பும், இரு சாதனங்களிடம் மட்டுமே உள்ள சாவிகளால் பூட்டப்படுகிறது: எங்கள் சேவையகத்தால் அதைத் திறக்க முடியாது. அரட்டையின் பாதுகாப்பு எண்ணையோ அழைப்பின் குறியீட்டையோ ஒப்பிடுவது, உங்களுக்கு இடையே யாரும் நுழையவில்லை என்பதை உறுதிப்படுத்துகிறது.",
-"Qué tiene cada versión":"ஒவ்வொரு பதிப்பிலும் என்ன உள்ளது"
+"Qué tiene cada versión":"ஒவ்வொரு பதிப்பிலும் என்ன உள்ளது",
+"Usar un código":"குறியீட்டைப் பயன்படுத்து",
+"Código Ultra":"Ultra குறியீடு",
+"Vale 10 minutos y una sola vez.":"10 நிமிடங்களுக்கு, ஒரே ஒரு முறை மட்டுமே செல்லுபடியாகும்.",
+"Con el código, la llave de la conversación viaja cerrada con ese código, que el servidor de GUARDIANA no conoce.":"குறியீட்டுடன், உரையாடலின் சாவி அந்தக் குறியீட்டால் பூட்டப்பட்டுச் செல்கிறது; அந்தக் குறியீடு GUARDIANA சேவையகத்துக்குத் தெரியாது.",
+"Cancelar el código":"குறியீட்டை ரத்து செய்",
+"Se cortó la conexión con el relé: pide un código nuevo.":"ரிலேயுடனான இணைப்பு துண்டிக்கப்பட்டது: புதிய குறியீட்டைக் கேளுங்கள்.",
+"Código erróneo, caducado o ya usado.":"குறியீடு தவறானது, காலாவதியானது அல்லது ஏற்கெனவே பயன்படுத்தப்பட்டது.",
+"9 cifras, o el código Ultra de 16 caracteres":"9 இலக்கங்கள், அல்லது 16 எழுத்துகள் கொண்ட Ultra குறியீடு",
+"Escribe el código que te han enviado":"உங்களுக்கு அனுப்பப்பட்ட குறியீட்டை உள்ளிடவும்",
+"Sesión Ultra":"Ultra அமர்வு",
+"Invitación Ultra":"Ultra அழைப்பு",
+"Invitación Ultra · esperando":"Ultra அழைப்பு · காத்திருக்கிறது"
 },
 "p":{
 "intento":"இன்று அதிகம் முயன்றது: {1}, {2} {2?முறை|முறை}.",

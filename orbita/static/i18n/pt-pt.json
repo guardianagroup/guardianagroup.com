@@ -3925,7 +3925,19 @@
 "Cada equipo firma el registro con su clave de identidad: ECDSA P-256 sobre SHA-256 en la Blindada; en Ultra, ECDSA P-384 sobre SHA-384 y, además, ML-DSA-87. Si se cambia un solo carácter del registro, las firmas dejan de ser válidas.":"Cada dispositivo assina o registo com a sua chave de identidade: ECDSA P-256 sobre SHA-256 na Blindada; na Ultra, ECDSA P-384 sobre SHA-384 e, além disso, ML-DSA-87. Se um único carácter do registo for alterado, as assinaturas deixam de ser válidas.",
 "La huella de identidad de cada equipo resume sus claves públicas (SHA-256 en la Blindada; SHA-384 en Ultra), y el número de seguridad que aparece es el mismo que vieron las dos personas en la conversación.":"A impressão digital de identidade de cada dispositivo resume as suas chaves públicas (SHA-256 na Blindada; SHA-384 na Ultra), e o número de segurança apresentado é o mesmo que as duas pessoas viram na conversa.",
 "Cada mensaje, foto, archivo y llamada se cierra con claves que solo tienen los dos equipos: nuestro servidor no puede abrirlo. Comparar el número de seguridad del chat o el código de la llamada confirma que nadie se ha interpuesto.":"Cada mensagem, foto, ficheiro e chamada é fechado com chaves que só os dois dispositivos têm: o nosso servidor não o consegue abrir. Comparar o número de segurança do chat ou o código da chamada confirma que ninguém se interpôs.",
-"Qué tiene cada versión":"O que inclui cada versão"
+"Qué tiene cada versión":"O que inclui cada versão",
+"Usar un código":"Usar um código",
+"Código Ultra":"Código Ultra",
+"Vale 10 minutos y una sola vez.":"Vale 10 minutos e uma única utilização.",
+"Con el código, la llave de la conversación viaja cerrada con ese código, que el servidor de GUARDIANA no conoce.":"Com o código, a chave da conversa viaja fechada com esse código, que o servidor da GUARDIANA não conhece.",
+"Cancelar el código":"Cancelar o código",
+"Se cortó la conexión con el relé: pide un código nuevo.":"A ligação ao relé foi cortada: pede um código novo.",
+"Código erróneo, caducado o ya usado.":"Código errado, expirado ou já usado.",
+"9 cifras, o el código Ultra de 16 caracteres":"9 algarismos, ou o código Ultra de 16 caracteres",
+"Escribe el código que te han enviado":"Escreve o código que te enviaram",
+"Sesión Ultra":"Sessão Ultra",
+"Invitación Ultra":"Convite Ultra",
+"Invitación Ultra · esperando":"Convite Ultra · à espera"
 },
 "p":{
 "intento":"A que mais tentou hoje: {1}, {2} {2?vez|vezes}.",

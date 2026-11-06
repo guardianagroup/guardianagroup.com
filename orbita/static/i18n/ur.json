@@ -3925,7 +3925,19 @@
 "Cada equipo firma el registro con su clave de identidad: ECDSA P-256 sobre SHA-256 en la Blindada; en Ultra, ECDSA P-384 sobre SHA-384 y, además, ML-DSA-87. Si se cambia un solo carácter del registro, las firmas dejan de ser válidas.":"ہر ڈیوائس اپنی شناختی کلید سے ریکارڈ پر دستخط کرتی ہے: بکتربند موڈ میں SHA-256 پر ECDSA P-256؛ Ultra میں SHA-384 پر ECDSA P-384 اور اس کے علاوہ ML-DSA-87۔ اگر ریکارڈ کا ایک بھی حرف بدلا جائے تو دستخط معتبر نہیں رہتے۔",
 "La huella de identidad de cada equipo resume sus claves públicas (SHA-256 en la Blindada; SHA-384 en Ultra), y el número de seguridad que aparece es el mismo que vieron las dos personas en la conversación.":"ہر ڈیوائس کا شناختی فنگر پرنٹ اس کی عوامی کلیدوں کا خلاصہ ہے (بکتربند موڈ میں SHA-256؛ Ultra میں SHA-384)، اور دکھایا گیا سیفٹی نمبر وہی ہے جو دونوں افراد نے گفتگو میں دیکھا تھا۔",
 "Cada mensaje, foto, archivo y llamada se cierra con claves que solo tienen los dos equipos: nuestro servidor no puede abrirlo. Comparar el número de seguridad del chat o el código de la llamada confirma que nadie se ha interpuesto.":"ہر پیغام، تصویر، فائل اور کال ایسی کلیدوں سے بند کی جاتی ہے جو صرف دونوں ڈیوائسز کے پاس ہوتی ہیں: ہمارا سرور اسے نہیں کھول سکتا۔ چیٹ کے سیفٹی نمبر یا کال کے کوڈ کا موازنہ تصدیق کرتا ہے کہ کوئی آپ کے بیچ نہیں آیا۔",
-"Qué tiene cada versión":"ہر ورژن میں کیا شامل ہے"
+"Qué tiene cada versión":"ہر ورژن میں کیا شامل ہے",
+"Usar un código":"کوڈ استعمال کریں",
+"Código Ultra":"Ultra کوڈ",
+"Vale 10 minutos y una sola vez.":"10 منٹ کے لیے اور صرف ایک بار استعمال کے لیے درست۔",
+"Con el código, la llave de la conversación viaja cerrada con ese código, que el servidor de GUARDIANA no conoce.":"کوڈ کے ساتھ، گفتگو کی چابی اسی کوڈ سے بند ہو کر جاتی ہے، جسے GUARDIANA کا سرور نہیں جانتا۔",
+"Cancelar el código":"کوڈ منسوخ کریں",
+"Se cortó la conexión con el relé: pide un código nuevo.":"ریلے سے کنکشن ٹوٹ گیا: نیا کوڈ مانگیں۔",
+"Código erróneo, caducado o ya usado.":"کوڈ غلط ہے، اس کی میعاد ختم ہو چکی ہے یا یہ پہلے ہی استعمال ہو چکا ہے۔",
+"9 cifras, o el código Ultra de 16 caracteres":"9 ہندسے، یا 16 حروف کا Ultra کوڈ",
+"Escribe el código que te han enviado":"آپ کو بھیجا گیا کوڈ لکھیں",
+"Sesión Ultra":"Ultra سیشن",
+"Invitación Ultra":"Ultra دعوت",
+"Invitación Ultra · esperando":"Ultra دعوت · انتظار جاری"
 },
 "p":{
 "intento":"آج سب سے زیادہ کوشش: {1}، {2} {2?بار|بار}۔",

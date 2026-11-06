@@ -3925,7 +3925,19 @@
 "Cada equipo firma el registro con su clave de identidad: ECDSA P-256 sobre SHA-256 en la Blindada; en Ultra, ECDSA P-384 sobre SHA-384 y, además, ML-DSA-87. Si se cambia un solo carácter del registro, las firmas dejan de ser válidas.":"Her cihaz kaydı kendi kimlik anahtarıyla imzalar: Zırhlı modda SHA-256 üzerinde ECDSA P-256; Ultra'da SHA-384 üzerinde ECDSA P-384 ve ayrıca ML-DSA-87. Kayıtta tek bir karakter bile değişirse imzalar geçersiz olur.",
 "La huella de identidad de cada equipo resume sus claves públicas (SHA-256 en la Blindada; SHA-384 en Ultra), y el número de seguridad que aparece es el mismo que vieron las dos personas en la conversación.":"Her cihazın kimlik parmak izi, açık anahtarlarının özetidir (Zırhlı modda SHA-256; Ultra'da SHA-384); görünen güvenlik numarası da iki kişinin sohbette gördüğü numaranın aynısıdır.",
 "Cada mensaje, foto, archivo y llamada se cierra con claves que solo tienen los dos equipos: nuestro servidor no puede abrirlo. Comparar el número de seguridad del chat o el código de la llamada confirma que nadie se ha interpuesto.":"Her mesaj, fotoğraf, dosya ve arama, yalnızca iki cihazda bulunan anahtarlarla kilitlenir: sunucumuz onları açamaz. Sohbetin güvenlik numarasını ya da aramanın kodunu karşılaştırmak, araya kimsenin girmediğini doğrular.",
-"Qué tiene cada versión":"Her sürümde neler var"
+"Qué tiene cada versión":"Her sürümde neler var",
+"Usar un código":"Kod kullan",
+"Código Ultra":"Ultra kodu",
+"Vale 10 minutos y una sola vez.":"10 dakika geçerlidir ve tek kullanımlıktır.",
+"Con el código, la llave de la conversación viaja cerrada con ese código, que el servidor de GUARDIANA no conoce.":"Kodla, sohbetin anahtarı bu kodla kilitlenmiş olarak gider; GUARDIANA sunucusu bu kodu bilmez.",
+"Cancelar el código":"Kodu iptal et",
+"Se cortó la conexión con el relé: pide un código nuevo.":"Aktarıcıyla bağlantı kesildi: yeni bir kod isteyin.",
+"Código erróneo, caducado o ya usado.":"Kod hatalı, süresi dolmuş veya zaten kullanılmış.",
+"9 cifras, o el código Ultra de 16 caracteres":"9 hane veya 16 karakterlik Ultra kodu",
+"Escribe el código que te han enviado":"Size gönderilen kodu girin",
+"Sesión Ultra":"Ultra oturumu",
+"Invitación Ultra":"Ultra daveti",
+"Invitación Ultra · esperando":"Ultra daveti · bekleniyor"
 },
 "p":{
 "intento":"Bugün en çok deneyen: {1}, {2} {2?kez|kez}.",

@@ -41,7 +41,7 @@
 <link rel="canonical" href="https://guardianagroup.com/orbita/comunicaciones/">
 <link rel="icon" href="/favicon.ico">
 <link rel="stylesheet" href="componentes.css?v=20261028m">
-<link rel="stylesheet" href="app.css?v=20261105-ultra2">
+<link rel="stylesheet" href="app.css?v=20261106-ucod">
 <link rel="stylesheet" href="diseno.css?v=20261031a">
 <link rel="stylesheet" href="viaje.css?v=20261029b">
 <!-- antes de pintar: como app desde el primer fotograma y, al volver a un chat tras recargar, sin enseñar el inicio entretanto -->
@@ -324,7 +324,7 @@
         </div>
       </div>
       <button type="button" class="grande principal" id="nueva"><b>Crear invitación</b><small>Te sale un código de 9 cifras para dárselo a la otra persona</small></button>
-      <button type="button" class="grande" id="unir"><b>Tengo un código</b><small>Escribe las 9 cifras que te han enviado</small></button>
+      <button type="button" class="grande" id="unir"><b>Tengo un código</b><small>9 cifras, o el código Ultra de 16 caracteres</small></button>
       <!-- dueño, 27 Oct 2026, 22:01–23:12: la sesión de ML-KEM-1024 y ML-DSA-87, «de la máxima»; 29 Oct 2026, 12:55–12:59: «próximamente»,
            y en el ordenador el botón queda como aviso. 2 Nov 2026, 17:01 («Solo hay dos modelos, el blindado y el ultra»): esa sesión
            es la de Ultra, con la suscripción Plus; la gratuita, la de hoy, es la Blindada (el id y el modo guardado, «blindada», siguen) -->
@@ -371,6 +371,22 @@
       <p class="t enlace-copiado" id="enlace-copiado" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"/></svg><span>Enlace copiado</span></p>
       <div class="enlace-fila"><input class="campo" id="enlace-b" readonly translate="no" spellcheck="false" aria-label="Enlace de la invitación"><button type="button" class="boton principal" id="enlace-copiar">Copiar enlace</button><button type="button" class="boton" id="enlace-compartir" hidden>Compartir enlace</button></div>
       <details class="qr-plegado"><summary>Mostrar el código QR (para abrirlo con un móvil)</summary><div class="qr" id="enlace-qr" role="img" aria-label="Código QR de la invitación"></div></details>
+      <!-- Código Ultra (6 nov 2026; el dueño lo eligió así): la misma invitación, también con un código de 16 caracteres (80 bits) que
+           el servidor no conoce. Solo al pulsar «Usar un código» se deja en el relé el sobre (la llave cerrada con una clave que sale del
+           código) bajo un buzón de 9 cifras que también sale del código (cripto.js, cierraSobreU; app.js, publicaCodigoU). Con el enlace
+           solo, el relé no guarda nada. Únicamente en las invitaciones Ultra. -->
+      <div class="ucod" id="ucod" hidden>
+        <button type="button" class="ucod-pide" id="ucod-pide"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 9h14M5 15h14M10 4L8 20M16 4l-2 16"/></svg><span>Usar un código</span></button>
+        <div class="ucod-caja" id="ucod-caja" hidden>
+          <p class="pq-k">Código Ultra</p>
+          <div class="codigo codigo-u" id="ucod-codigo" translate="no" aria-live="polite">····-····-····-····</div>
+          <p class="t">Comunica este código a la otra persona por llamada o por cualquier aplicación de mensajería. Ella pulsa «Tengo un código», lo escribe y empieza la conversación.</p>
+          <p class="t">Con el código, la llave de la conversación viaja cerrada con ese código, que el servidor de GUARDIANA no conoce.</p>
+          <p class="t validez" id="ucod-validez">Vale 10 minutos y una sola vez.</p>
+          <p class="t ucod-estado" id="ucod-estado" role="status" hidden></p>
+          <div class="fila centro"><button type="button" class="boton" id="ucod-nuevo" hidden>Nuevo código</button><button type="button" class="boton" id="ucod-quita">Cancelar el código</button></div>
+        </div>
+      </div>
       <!-- solo si hay un problema (la invitación ya la usó otra persona); sin «Esperando…» (dueño, 28 Oct 2026, 19:05) -->
       <p class="t estado" id="enlace-estado" role="status" hidden></p>
       <div class="fila centro"><button type="button" class="boton" id="enlace-cancelar"><span class="solo-pc">Cancelar la invitación</span><span class="solo-movil">Cancelar</span></button></div>
@@ -419,14 +435,18 @@
 
     <div class="paso" id="paso-entrar" hidden>
       <div class="contactos-cab seccion-cab"><button type="button" class="contactos-atras" id="entrar-atras" aria-label="Volver"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button><h2 class="contactos-t">Tengo un código</h2></div>
-      <h2>Escribe las 9 cifras que te han enviado</h2>
+      <h2>Escribe el código que te han enviado</h2>
       <!-- 2 Nov 2026 (dueño, 13:19, con una foto: «Haz esa zona del código profesional»): nueve casillas en tres grupos, como
-           el código que se envía. El campo de verdad sigue siendo uno solo y está encima, invisible: el teclado numérico del
-           teléfono, pegar el código o el enlace de una invitación y los lectores de pantalla funcionan como antes. -->
+           el código que se envía. El campo de verdad sigue siendo uno solo y está encima, invisible: el teclado del teléfono, pegar
+           el código o el enlace de una invitación y los lectores de pantalla funcionan como antes.
+           6 nov 2026: también el código Ultra (16 caracteres, letras y cifras): con letras o con más de 9, las 16 casillas en cuatro
+           grupos (app.js, pintaCod). Por eso el campo admite letras (inputmode text, hasta 19 caracteres con los guiones, sin pattern). -->
       <div class="codigo-celdas" id="unir-celdas" translate="no">
-        <input class="campo codigo-campo" id="unir-codigo" inputmode="numeric" autocomplete="off" maxlength="11" aria-label="Código de invitación" translate="no" spellcheck="false">
+        <input class="campo codigo-campo" id="unir-codigo" inputmode="text" autocapitalize="characters" autocorrect="off" autocomplete="off" maxlength="19" aria-label="Código de invitación" aria-describedby="unir-pista" translate="no" spellcheck="false">
         <div class="cc-fila" aria-hidden="true"><span class="cc"></span><span class="cc"></span><span class="cc"></span><i class="cc-guion"></i><span class="cc"></span><span class="cc"></span><span class="cc"></span><i class="cc-guion"></i><span class="cc"></span><span class="cc"></span><span class="cc"></span></div>
+        <div class="cc-fila cc-u" aria-hidden="true"><span class="cc"></span><span class="cc"></span><span class="cc"></span><span class="cc"></span><i class="cc-guion"></i><span class="cc"></span><span class="cc"></span><span class="cc"></span><span class="cc"></span><i class="cc-guion"></i><span class="cc"></span><span class="cc"></span><span class="cc"></span><span class="cc"></span><i class="cc-guion"></i><span class="cc"></span><span class="cc"></span><span class="cc"></span><span class="cc"></span></div>
       </div>
+      <p class="t sutil pista" id="unir-pista">9 cifras, o el código Ultra de 16 caracteres</p>
       <p class="t alerta" id="unir-mal" hidden>Código erróneo o caducado.</p>
       <p class="t sutil">¿Te han enviado un enlace de invitación? Ábrelo directamente o pégalo aquí.</p>
       <p class="t" id="unir-espera" hidden>Comprobando…</p>
@@ -1261,18 +1281,18 @@
 <!-- En el ordenador, en el chat blindado: la pantalla se tapa con la tecla de captura o si la ventana pierde el foco (29 Oct 2026, 08:02) -->
 <!-- y, en Ultra, al pasar la app a segundo plano o perder el foco (3 Nov 2026, ronda 93): la miniatura de la multitarea sale tapada -->
 <div class="captura-velo" id="captura-velo" role="alert" hidden><div><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><b>Modo Ultra</b><span class="cv-captura">Captura detectada: se vació el portapapeles; una web no puede impedir capturas</span><span class="cv-fuera">Pantalla tapada mientras la app está en segundo plano</span></div></div>
-<script src="/orbita/static/idioma.js?v=20261106-trad3"></script>
+<script src="/orbita/static/idioma.js?v=20261106-ucod"></script>
 <script src="pq-mlkem.js?v=20261027a"></script>
 <script src="pq-cnsa.js?v=20261027a"></script>
 <script src="qrhaz.js?v=20261027a"></script>
 <script src="palabras.js?v=20261105-ultra2-pal"></script>
-<script src="cripto.js?v=20261105-ultra2"></script>
+<script src="cripto.js?v=20261106-ucod"></script>
 <script src="/orbita/static/red-nucleo.js?v=20261105-ultra2"></script>
 <script src="rele.js?v=20261102c"></script>
 <script src="sha256.js?v=20261027a"></script>
 <script src="viaje-datos.js?v=20261031a"></script>
 <script src="viaje.js?v=20261105-ultra2"></script>
 <script src="llamada.js?v=20261105-ultra2"></script>
-<script src="app.js?v=20261106-ultra-abierta"></script>
+<script src="app.js?v=20261106-ucod"></script>
 </body>
 </html>

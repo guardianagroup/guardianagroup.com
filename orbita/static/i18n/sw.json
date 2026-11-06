@@ -3925,7 +3925,19 @@
 "Cada equipo firma el registro con su clave de identidad: ECDSA P-256 sobre SHA-256 en la Blindada; en Ultra, ECDSA P-384 sobre SHA-384 y, además, ML-DSA-87. Si se cambia un solo carácter del registro, las firmas dejan de ser válidas.":"Kila kifaa hutia sahihi rekodi kwa ufunguo wake wa utambulisho: ECDSA P-256 pamoja na SHA-256 katika hali ya Deraya; katika Ultra, ECDSA P-384 pamoja na SHA-384 na, zaidi ya hayo, ML-DSA-87. Herufi moja tu ya rekodi ikibadilishwa, sahihi hazitakuwa halali tena.",
 "La huella de identidad de cada equipo resume sus claves públicas (SHA-256 en la Blindada; SHA-384 en Ultra), y el número de seguridad que aparece es el mismo que vieron las dos personas en la conversación.":"Alama ya utambulisho ya kila kifaa ni muhtasari wa funguo zake za umma (SHA-256 katika hali ya Deraya; SHA-384 katika Ultra), na nambari ya usalama inayoonyeshwa ni ileile ambayo watu wote wawili waliiona kwenye mazungumzo.",
 "Cada mensaje, foto, archivo y llamada se cierra con claves que solo tienen los dos equipos: nuestro servidor no puede abrirlo. Comparar el número de seguridad del chat o el código de la llamada confirma que nadie se ha interpuesto.":"Kila ujumbe, picha, faili na simu hufungwa kwa funguo ambazo vifaa viwili tu vinazo: seva yetu haiwezi kuvifungua. Kulinganisha nambari ya usalama ya gumzo au msimbo wa simu kunathibitisha kwamba hakuna aliyejiingiza kati yenu.",
-"Qué tiene cada versión":"Kilichomo katika kila toleo"
+"Qué tiene cada versión":"Kilichomo katika kila toleo",
+"Usar un código":"Tumia msimbo",
+"Código Ultra":"Msimbo wa Ultra",
+"Vale 10 minutos y una sola vez.":"Ni halali kwa dakika 10 na kwa matumizi mara moja tu.",
+"Con el código, la llave de la conversación viaja cerrada con ese código, que el servidor de GUARDIANA no conoce.":"Ukitumia msimbo, ufunguo wa mazungumzo husafiri ukiwa umefungwa kwa msimbo huo, ambao seva ya GUARDIANA haiujui.",
+"Cancelar el código":"Ghairi msimbo",
+"Se cortó la conexión con el relé: pide un código nuevo.":"Muunganisho na relay umekatika: omba msimbo mpya.",
+"Código erróneo, caducado o ya usado.":"Msimbo si sahihi, muda wake umeisha au umeshatumika.",
+"9 cifras, o el código Ultra de 16 caracteres":"Tarakimu 9, au msimbo wa Ultra wa herufi 16",
+"Escribe el código que te han enviado":"Andika msimbo uliotumiwa",
+"Sesión Ultra":"Kipindi cha Ultra",
+"Invitación Ultra":"Mwaliko wa Ultra",
+"Invitación Ultra · esperando":"Mwaliko wa Ultra · inasubiri"
 },
 "p":{
 "intento":"Iliyojaribu zaidi leo: {1}, {2?mara|mara} {2}.",

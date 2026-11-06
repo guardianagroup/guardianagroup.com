@@ -3925,7 +3925,19 @@
 "Cada equipo firma el registro con su clave de identidad: ECDSA P-256 sobre SHA-256 en la Blindada; en Ultra, ECDSA P-384 sobre SHA-384 y, además, ML-DSA-87. Si se cambia un solo carácter del registro, las firmas dejan de ser válidas.":"Кожен пристрій підписує запис своїм ключем ідентичності: ECDSA P-256 із SHA-256 у Броньованому режимі; в Ultra — ECDSA P-384 із SHA-384 і, крім того, ML-DSA-87. Якщо змінити бодай один символ запису, підписи перестануть бути дійсними.",
 "La huella de identidad de cada equipo resume sus claves públicas (SHA-256 en la Blindada; SHA-384 en Ultra), y el número de seguridad que aparece es el mismo que vieron las dos personas en la conversación.":"Відбиток ідентичності кожного пристрою — це хеш його відкритих ключів (SHA-256 у Броньованому режимі; SHA-384 в Ultra), а показаний номер безпеки — той самий, який обидві людини бачили в розмові.",
 "Cada mensaje, foto, archivo y llamada se cierra con claves que solo tienen los dos equipos: nuestro servidor no puede abrirlo. Comparar el número de seguridad del chat o el código de la llamada confirma que nadie se ha interpuesto.":"Кожне повідомлення, фото, файл і дзвінок замикаються ключами, які є лише на двох пристроях: наш сервер не може їх відкрити. Звіряння номера безпеки чату або коду дзвінка підтверджує, що ніхто не втрутився.",
-"Qué tiene cada versión":"Що входить до кожної версії"
+"Qué tiene cada versión":"Що входить до кожної версії",
+"Usar un código":"Використати код",
+"Código Ultra":"Код Ultra",
+"Vale 10 minutos y una sola vez.":"Дійсний 10 хвилин і лише для одного використання.",
+"Con el código, la llave de la conversación viaja cerrada con ese código, que el servidor de GUARDIANA no conoce.":"З кодом ключ розмови передається закритим цим кодом, якого сервер GUARDIANA не знає.",
+"Cancelar el código":"Скасувати код",
+"Se cortó la conexión con el relé: pide un código nuevo.":"З’єднання з реле перервалося: попросіть новий код.",
+"Código erróneo, caducado o ya usado.":"Неправильний, прострочений або вже використаний код.",
+"9 cifras, o el código Ultra de 16 caracteres":"9 цифр або 16-символьний код Ultra",
+"Escribe el código que te han enviado":"Введіть код, який вам надіслали",
+"Sesión Ultra":"Сеанс Ultra",
+"Invitación Ultra":"Запрошення Ultra",
+"Invitación Ultra · esperando":"Запрошення Ultra · очікування"
 },
 "p":{
 "intento":"Найнаполегливіша сьогодні: {1}, {2} {2?раз|разів}.",

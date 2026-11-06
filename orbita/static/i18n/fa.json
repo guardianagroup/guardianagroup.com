@@ -3925,7 +3925,19 @@
 "Cada equipo firma el registro con su clave de identidad: ECDSA P-256 sobre SHA-256 en la Blindada; en Ultra, ECDSA P-384 sobre SHA-384 y, además, ML-DSA-87. Si se cambia un solo carácter del registro, las firmas dejan de ser válidas.":"هر دستگاه رکورد را با کلید هویت خود امضا می‌کند: ECDSA P-256 روی SHA-256 در حالت محافظت‌شده؛ در Ultra، ECDSA P-384 روی SHA-384 و افزون بر آن ML-DSA-87. اگر حتی یک نویسه از رکورد تغییر کند، امضاها دیگر معتبر نیستند.",
 "La huella de identidad de cada equipo resume sus claves públicas (SHA-256 en la Blindada; SHA-384 en Ultra), y el número de seguridad que aparece es el mismo que vieron las dos personas en la conversación.":"اثر انگشت هویت هر دستگاه چکیده‌ای از کلیدهای عمومی آن است (SHA-256 در حالت محافظت‌شده؛ SHA-384 در Ultra) و شمارهٔ امنیتی نمایش‌داده‌شده همان است که هر دو نفر در گفتگو دیدند.",
 "Cada mensaje, foto, archivo y llamada se cierra con claves que solo tienen los dos equipos: nuestro servidor no puede abrirlo. Comparar el número de seguridad del chat o el código de la llamada confirma que nadie se ha interpuesto.":"هر پیام، عکس، فایل و تماس با کلیدهایی بسته می‌شود که فقط دو دستگاه آن‌ها را دارند: سرور ما نمی‌تواند بازش کند. مقایسهٔ شمارهٔ امنیتی چت یا کد تماس تأیید می‌کند که کسی میان شما قرار نگرفته است.",
-"Qué tiene cada versión":"آنچه هر نسخه دارد"
+"Qué tiene cada versión":"آنچه هر نسخه دارد",
+"Usar un código":"استفاده از کد",
+"Código Ultra":"کد Ultra",
+"Vale 10 minutos y una sola vez.":"به مدت ۱۰ دقیقه و فقط برای یک بار معتبر است.",
+"Con el código, la llave de la conversación viaja cerrada con ese código, que el servidor de GUARDIANA no conoce.":"با کد، کلید گفتگو قفل‌شده با همان کد منتقل می‌شود؛ کدی که سرور GUARDIANA آن را نمی‌داند.",
+"Cancelar el código":"لغو کد",
+"Se cortó la conexión con el relé: pide un código nuevo.":"اتصال به رله قطع شد: کد جدیدی بخواهید.",
+"Código erróneo, caducado o ya usado.":"کد اشتباه است، منقضی شده یا قبلاً استفاده شده است.",
+"9 cifras, o el código Ultra de 16 caracteres":"۹ رقم، یا کد Ultra با ۱۶ نویسه",
+"Escribe el código que te han enviado":"کدی را که برایتان فرستاده‌اند وارد کنید",
+"Sesión Ultra":"نشست Ultra",
+"Invitación Ultra":"دعوت Ultra",
+"Invitación Ultra · esperando":"دعوت Ultra · در انتظار"
 },
 "p":{
 "intento":"بیشترین تلاش امروز: {1}، {2} {2?بار|بار}.",

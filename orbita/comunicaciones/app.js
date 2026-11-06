@@ -65,6 +65,10 @@
     return p && p.nivel === 'plus' ? 'si' : 'gratis';
   }
   const MOTIVO_ULTRA = { fuera: 'Ultra se crea desde el programa GUARDIANA para Windows, con la suscripción Plus; quien recibe la invitación entra gratis desde su navegador. Aquí puedes usar la Blindada.', gratis: 'Ultra va con la suscripción Plus (la prueba de 7 días cuenta). Mientras, la Blindada.', 'sin-pq': 'Este navegador no puede abrir una sesión Ultra: hace falta uno actual con ML-KEM-1024 y ML-DSA-87. Puedes usar la Blindada.' };
+  // quien recibe una invitación Ultra en un navegador sin la capa postcuántica: el mismo aviso con el enlace «#b=» y con el código Ultra
+  const SIN_PQ_ACEPTA = 'Este navegador no puede abrir una sesión Ultra: hace falta uno actual con ML-KEM-1024 y ML-DSA-87. Pide a la otra persona una invitación Blindada.';
+  // (6 nov 2026: al aceptar un enlace «#b=» en un navegador así, «Ese enlace no es una invitación…» tapaba ese aviso al momento)
+  const enlaceUltraSinPQ = (enlace) => /#b=/.test(String(enlace || '')) && !C.B.hayBlindada();
   // El nivel de cada lado, a la vista en el chat y en la llamada (ronda 93): solo lo que es cierto hoy, el entorno en que corre cada uno
   const miNivel = () => (enPrograma() ? 'pc-guardiana' : /Android|iPhone|iPad|iPod/i.test(navigator.userAgent || '') || (navigator.maxTouchPoints > 1 && /Mac/.test(navigator.platform || '')) ? 'movil' : 'pc-navegador');
   const nombreNivel = (n) => (n === 'pc-guardiana' ? T('PC con GUARDIANA') : n === 'movil' ? T('navegador del móvil') : n === 'pc-navegador' ? T('navegador del PC') : T('sin datos'));
@@ -255,6 +259,52 @@
     }
     c.codigo = null; pintaCodigo(c); aviso(T('No se pudo crear el código: inténtalo otra vez.')); return false;
   }
+  // Código Ultra (6 nov 2026; el dueño lo eligió así): la invitación Ultra (enlace y QR) también se puede dar con un código de 16
+  // caracteres (80 bits) que el servidor no conoce. Solo al pulsar «Usar un código» se deja en el relé el sobre (la semilla cerrada con
+  // una clave que sale del código) bajo un buzón de 9 cifras que también sale del código (cripto.js, cierraSobreU): el relé lo guarda
+  // 10 minutos, lo da una sola vez y avisa con «codigo-usado», como el de la Blindada; el código no lo recibe. Con el enlace solo, el
+  // relé no guarda nada. Como todo Ultra, vive solo en la memoria de esta pestaña. c.ucod = { codigo, buzon, caduca, usado, perdido }.
+  async function publicaCodigoU(c) {
+    if (!c || !esB(c) || c.huella || c.estado !== 'invitacion' || c.ucodPidiendo) return false;
+    if (!R.abierto) { aviso(T('Sin conexión: espera un momento.')); return false; }
+    c.ucodPidiendo = true; pintaCodigoU(c);
+    try {
+      for (let intento = 0; intento < 3; intento++) {
+        const codigo = C.nuevoCodigoU(), t0 = Date.now();
+        const x = await C.cierraSobreU(codigo, c.semilla);
+        const r = await R.invita(x.buzon, x.sobre, x.sal);
+        // terminada o ya con la otra persona mientras tanto: el sobre fuera del relé
+        if (c.estado !== 'invitacion' || c.huella || !CONVS.has(c.id)) { if (r && r.ok) R.retira(x.buzon); return false; }
+        // (la cuenta atrás, desde antes de pedirlo: el relé empieza sus 10 minutos un poco después)
+        if (r && r.ok) { c.ucod = { codigo, buzon: x.buzon, caduca: t0 + 10 * 60 * 1000, usado: false, perdido: false }; return true; }
+        if (!r || r.por !== 'repetido') break; // (otro buzón igual en el relé: otro código)
+      }
+    } finally { c.ucodPidiendo = false; pintaCodigoU(c); }
+    aviso(T('No se pudo crear el código: inténtalo otra vez.')); return false;
+  }
+  // fuera del relé (si aún lo tiene) y de la pantalla
+  function quitaCodigoU(c) { if (!c || !c.ucod) return; const b = c.ucod.buzon; c.ucod = null; try { R.retira(b); } catch (_) {} }
+  const codigoUVivo = (c) => !!(c && c.ucod && !c.ucod.usado && !c.ucod.perdido && Date.now() <= c.ucod.caduca);
+  function pintaCodigoU(c) {
+    const caja = $('#ucod'); if (!caja || !c || ACTUAL !== c.id) return;
+    caja.hidden = !esB(c); if (!esB(c)) return;
+    const u = c.ucod, ahora = Date.now();
+    // a los 10 minutos: caducado aquí y fuera del relé (que también lo borra solo)
+    if (u && !u.caducado && ahora > u.caduca) { u.caducado = true; try { R.retira(u.buzon); } catch (_) {} }
+    const pide = $('#ucod-pide'); pide.hidden = !!u; pide.disabled = !!c.ucodPidiendo; pide.setAttribute('aria-busy', String(!!c.ucodPidiendo));
+    $('#ucod-caja').hidden = !u;
+    if (!u) { $('#ucod-codigo').textContent = '····-····-····-····'; return; } // (el código ya no se queda en la página)
+    const fuera = u.caducado || u.perdido;
+    const e = $('#ucod-codigo'); e.textContent = C.codigoUBonito(u.codigo); e.className = 'codigo codigo-u' + (u.usado ? ' usado' : fuera ? ' caducado' : '');
+    const est = u.usado ? T('La otra persona ha escrito el código: conectando…') : u.perdido ? T('Se cortó la conexión con el relé: pide un código nuevo.') : u.caducado ? T('Este código ha caducado (10 minutos). Pide uno nuevo.') : '';
+    $('#ucod-estado').textContent = est; $('#ucod-estado').hidden = !est;
+    const v = $('#ucod-validez'); v.hidden = u.usado || fuera;
+    if (!v.hidden) { const q = Math.max(0, Math.round((u.caduca - ahora) / 1000)); v.textContent = ''; v.append(document.createTextNode(T('Vale 10 minutos y una sola vez.') + ' ' + T('Le quedan') + ' ')); const b = document.createElement('b'); b.textContent = Math.floor(q / 60) + ':' + String(q % 60).padStart(2, '0'); v.append(b); v.append(document.createTextNode('.')); }
+    $('#ucod-quita').hidden = u.usado || fuera;
+    $('#ucod-nuevo').hidden = !(fuera && !c.huella);
+    // la cuenta atrás, cada segundo, mientras se ve esta invitación con su código
+    if (!pintaCodigoU.reloj && !fuera) pintaCodigoU.reloj = setInterval(() => { const x = CONVS.get(ACTUAL); if (!x || !x.ucod || $('#paso-enlace').hidden || x.ucod.caducado || x.ucod.perdido) { clearInterval(pintaCodigoU.reloj); pintaCodigoU.reloj = null; } if (x && x.ucod && !$('#paso-enlace').hidden) pintaCodigoU(x); }, 1000);
+  }
   // Invitación blindada: solo por enlace o QR, con la semilla entera (256 bits) en el fragmento «#b=»: el navegador no la
   // manda a ningún servidor y el relé no guarda ningún sobre. Se guarda aquí hasta que la otra persona entre o se termine.
   const esMovil = () => matchMedia('(max-width: 760px)').matches;
@@ -345,11 +395,17 @@
     const movil = matchMedia('(pointer: coarse)').matches, comparte = !!navigator.share;
     $('#enlace-copiar').hidden = movil && comparte; $('#enlace-compartir').hidden = !comparte; $('#enlace-compartir').classList.toggle('principal', movil && comparte);
     $('#enlace-copiado').hidden = !c.copiado;
-    $('#enlace-vista').hidden = !!c.compartido; $('#enlace-espera').hidden = !c.compartido;
-    document.body.classList.toggle('esperando-enlace', !!c.compartido && ACTUAL === c.id);
+    // con un código Ultra vivo, la invitación sigue a la vista (con el código) aunque el enlace ya se haya compartido
+    const espera = !!c.compartido && !codigoUVivo(c);
+    $('#enlace-vista').hidden = espera; $('#enlace-espera').hidden = !espera;
+    document.body.classList.toggle('esperando-enlace', espera && ACTUAL === c.id);
+    pintaCodigoU(c);
   }
   const codigoBonito = (k) => k ? k.replace(/(\d{3})(?=\d)/g, '$1-') : '···-···-···';
   async function aceptaCodigo(texto) {
+    // el código Ultra (16 símbolos, cripto.js normalizaCodigoU) va por su camino; el de 9 cifras, como siempre
+    const u = C.normalizaCodigoU(texto);
+    if (u) return aceptaCodigoU(u);
     const codigo = String(texto || '').replace(/\D/g, '');
     if (codigo.length !== 9) return 'formato';
     const r = await R.busca(codigo);
@@ -363,10 +419,23 @@
     if (semilla.length !== 32) return 'no vale';
     return (await aceptaSemilla(semilla)) ? 'ok' : 'no vale';
   }
+  // Entrar con un código Ultra (6 nov 2026): del código salen el buzón, lo único que se pide al relé, y la clave del sobre; con la
+  // semilla se entra igual que al abrir el enlace «#b=» (aceptaSemilla, modo «blindada»). Sin la capa postcuántica ni se pide el sobre,
+  // que el relé da una sola vez. Un sobre que no abre dice lo mismo que un código que no existe: «no vale u».
+  async function aceptaCodigoU(codigo) {
+    if (!C.B.hayBlindada()) return 'sin-pq';
+    if (!esMovil() && !caben()) return 'lleno';
+    const { buzon } = await C.derivaCodigoU(codigo);
+    const r = await R.busca(buzon);
+    if (!r || !r.ok) return r && /^(demasiados intentos|sin relé|sin respuesta)$/.test(r.por || '') ? r.por : 'no vale u';
+    const semilla = await C.abreSobreU(codigo, buzon, r.sobre, r.sal);
+    if (!semilla) return 'no vale u';
+    return (await aceptaSemilla(semilla, 'blindada')) ? 'ok' : 'no vale u';
+  }
   async function aceptaSemilla(semilla, modo) {
     const B = modo === 'blindada';
     // aceptar una invitación Ultra es gratis desde el navegador, sin el programa; sin ML-KEM-1024 y ML-DSA-87 no hay sesión Ultra (sin rebaja)
-    if (B && !C.B.hayBlindada()) { aviso(T('Este navegador no puede abrir una sesión Ultra: hace falta uno actual con ML-KEM-1024 y ML-DSA-87. Pide a la otra persona una invitación Blindada.')); return false; }
+    if (B && !C.B.hayBlindada()) { aviso(T(SIN_PQ_ACEPTA)); return false; }
     const d = B ? await C.B.deSemilla(semilla) : await C.deSemilla(semilla);
     if (CONVS.has(d.sala)) { abreConv(d.sala); return true; }
     if (esMovil()) await borraAnteriores(d.sala);
@@ -665,6 +734,7 @@
       else await presentaB(c, null);
       if (nueva) {
         clearInterval(muestraInvitacion.reloj);
+        quitaCodigoU(c); // ya está la otra persona: si entró por el enlace, el código Ultra (si lo había) sale del relé
         // en el teléfono, la nota corta de siempre, como WhatsApp (revisión de diseño, 19:15: la larga era jerga); en el ordenador, la de antes
         await anotaSistema(c, esMovil() ? 'Ultra: encriptado de extremo a extremo. La conversación no se guarda: al cerrar, desaparece.' : 'Sesión Ultra establecida. La conversación no se guarda, ni en este navegador ni en el relé: al cerrar la pestaña, desaparece. Lean en voz alta las cuatro palabras de arriba: si coinciden en los dos equipos, las claves son las mismas en los dos, y quien se pusiera en medio tendría que haber acertado las palabras a ciegas.');
         if (ACTUAL === c.id) abreConv(c.id);
@@ -2110,6 +2180,7 @@
     c.estado = 'destruida'; sueltaVoces(c);
     if (LL && LL.ocupado && (LLAMADA_CONV || ACTUAL) === c.id) LL.colgar();
     if (esB(c)) borraClavesB(c);
+    quitaCodigoU(c); // un código Ultra sin usar, fuera del relé
     R.sale(c.id); for (const [k, v] of [...MEM]) if (v.conv === c.id) MEM.delete(k); CONVS.delete(c.id);
     if (!esB(c)) { await BD.borraConv('msg', c.id); await BD.borraConv('arch', c.id); await BD.borra('conv', c.id); }
     if (ACTUAL === c.id) { cierraConv(); }
@@ -4345,29 +4416,47 @@
     { const e = $('#entrar-atras'); if (e) e.addEventListener('click', () => $('#unir-cerrar').click()); }
     { const e = $('#enlace-atras'); if (e) e.addEventListener('click', () => $('#enlace-cancelar').click()); }
     { const e = $('#codigo-atras'); if (e) e.addEventListener('click', async () => { const c = CONVS.get(ACTUAL); if (c && !c.huella) await destruye(c, true); else cierraConv(); }); }
-    // Campo del código: solo cifras, nueve como mucho (lo que pase de nueve no entra), guiones automáticos y sin selección azul
+    // Campo del código: las 9 cifras de la Blindada o, desde el 6 nov 2026, el código Ultra de 16 caracteres. Lo escrito se limpia al
+    // momento como lo lee cripto.js (normalizaCodigoU): mayúsculas; fuera espacios, guiones y puntos; O → 0 e I/L → 1; y solo los símbolos
+    // del código (lo demás no entra). Solo cifras, hasta 9: en tres grupos; con letras o con más de 9: el código Ultra, en cuatro grupos
+    // de cuatro. Entero (9 cifras o 16 símbolos), entra solo. Sin selección azul.
     const campoCod = $('#unir-codigo');
+    const limpiaCod = (v) => String(v || '').toUpperCase().replace(/[\s\-\u2010-\u2015\u2212.\u00B7]/g, '').replace(/O/g, '0').replace(/[IL]/g, '1').replace(/[^0-9A-HJKMNP-TV-Z]/g, '').slice(0, 16);
+    const esCodU = (s) => s.length > 9 || /\D/.test(s);
+    const leeCod = () => { const s = limpiaCod(campoCod.value), u = esCodU(s); return { s, u, lleno: u ? s.length === 16 : s.length === 9 }; };
+    const ponCod = (s) => { campoCod.value = esCodU(s) ? s.replace(/(.{4})(?=.)/g, '$1-') : s.replace(/(\d{3})(?=\d)/g, '$1-'); try { campoCod.setSelectionRange(campoCod.value.length, campoCod.value.length); } catch (_) {} };
+    // un código entero dentro de lo pegado (también en medio de un mensaje): el Ultra, en cuatro grupos o seguido, o las 9 cifras
+    const codigoEn = (t) => {
+      t = String(t || ''); const g = '[0-9A-Za-z]{4}', s = '[\\s\\-\\u2010-\\u2015\\u2212.\\u00B7]?';
+      for (const m of t.matchAll(new RegExp('(?:^|[^0-9A-Za-z])(' + g + s + g + s + g + s + g + ')(?=$|[^0-9A-Za-z])', 'g'))) { const k = C.normalizaCodigoU(m[1]); if (k) return k; }
+      const n = t.match(/(?:^|\D)(\d{3}[\s\-.]?\d{3}[\s\-.]?\d{3})(?!\d)/);
+      return n ? n[1].replace(/\D/g, '') : null;
+    };
     campoCod.addEventListener('beforeinput', (e) => {
       if (!e.inputType || !e.inputType.startsWith('insert')) return;
-      const nuevas = String(e.data || '').replace(/\D/g, '');
+      if (campoCod.readOnly) { e.preventDefault(); return; }
+      if (e.inputType === 'insertFromPaste' || e.inputType === 'insertFromDrop') return; // (lo pegado lo trata «paste», más abajo)
       const sel = campoCod.selectionEnd - campoCod.selectionStart;
-      const ya = campoCod.value.replace(/\D/g, '').length - (sel > 0 ? campoCod.value.slice(campoCod.selectionStart, campoCod.selectionEnd).replace(/\D/g, '').length : 0);
-      if (campoCod.readOnly || (e.inputType !== 'insertFromPaste' && (!nuevas || ya >= 9))) e.preventDefault();
+      const ya = limpiaCod(campoCod.value).length - (sel > 0 ? limpiaCod(campoCod.value.slice(campoCod.selectionStart, campoCod.selectionEnd)).length : 0);
+      if (!limpiaCod(e.data) || ya >= 16) e.preventDefault();
     });
-    campoCod.addEventListener('input', (e) => { const d = e.target.value.replace(/\D/g, '').slice(0, 9); e.target.value = d.replace(/(\d{3})(?=\d)/g, '$1-'); try { e.target.setSelectionRange(e.target.value.length, e.target.value.length); } catch (_) {} $('#unir-mal').hidden = true; if (d.length === 9) $('#unir-ok').click(); });
-    // Las nueve casillas (2 Nov 2026, dueño: «Haz esa zona del código profesional»): enseñan lo que tiene el campo, cuál es la
-    // siguiente, si el código está mal y mientras se comprueba. «Entrar» espera a las nueve cifras (antes, con menos, decía «erróneo»).
-    const celdasCod = $('#unir-celdas'), cajasCod = celdasCod ? [...celdasCod.querySelectorAll('.cc')] : [];
+    campoCod.addEventListener('input', () => { const k = leeCod(); ponCod(k.s); $('#unir-mal').hidden = true; if (k.lleno) $('#unir-ok').click(); });
+    // Las casillas (2 Nov 2026, dueño: «Haz esa zona del código profesional»): enseñan lo que tiene el campo, cuál es la siguiente, si el
+    // código está mal y mientras se comprueba; nueve en tres grupos o, con el código Ultra, dieciséis en cuatro (6 nov 2026). «Entrar»
+    // espera al código entero (antes, con menos, decía «erróneo»).
+    const celdasCod = $('#unir-celdas');
+    const cajasN = celdasCod ? [...celdasCod.querySelectorAll('.cc-fila:not(.cc-u) .cc')] : [], cajasU = celdasCod ? [...celdasCod.querySelectorAll('.cc-u .cc')] : [];
     const pintaCod = () => {
-      const d = campoCod.value.replace(/\D/g, '').slice(0, 9), foco = document.activeElement === campoCod && !campoCod.readOnly;
-      cajasCod.forEach((c, i) => { c.textContent = d[i] || ''; c.classList.toggle('llena', i < d.length); c.classList.toggle('activa', foco && i === d.length); });
-      if (celdasCod) celdasCod.classList.toggle('completa', d.length === 9);
-      const ok = $('#unir-ok'); ok.classList.toggle('falta', d.length < 9); ok.setAttribute('aria-disabled', String(d.length < 9));
+      const k = leeCod(), foco = document.activeElement === campoCod && !campoCod.readOnly;
+      if (celdasCod) { celdasCod.classList.toggle('ultra', k.u); celdasCod.classList.toggle('completa', k.lleno); }
+      for (const [cajas, mias] of [[cajasN, !k.u], [cajasU, k.u]]) cajas.forEach((c, i) => { const x = (mias && k.s[i]) || ''; c.textContent = x; c.classList.toggle('llena', !!x); c.classList.toggle('activa', mias && foco && i === k.s.length); });
+      const ok = $('#unir-ok'); ok.classList.toggle('falta', !k.lleno); ok.setAttribute('aria-disabled', String(!k.lleno));
     };
     for (const ev of ['input', 'focus', 'blur']) campoCod.addEventListener(ev, pintaCod);
     if (celdasCod) {
-      // (sin conexión con el relé, el código puede estar bien: las casillas no se ponen en rojo, y el aviso va en ámbar)
-      const sinRed = (e) => e.textContent === T('Sin conexión con el relé: espera un momento.');
+      // (sin conexión con el relé, sin la capa postcuántica o con demasiadas conversaciones, el código puede estar bien: las casillas no
+      // se ponen en rojo, y el aviso va en ámbar)
+      const sinRed = (e) => [T('Sin conexión con el relé: espera un momento.'), T(SIN_PQ_ACEPTA), T('Ya tienes {n} conversaciones abiertas: termina alguna para empezar otra.').replace('{n}', MAX_CONVS)].includes(e.textContent);
       const sigue = (id, clase) => {
         const e = $('#' + id); if (!e) return;
         new MutationObserver(() => {
@@ -4383,11 +4472,12 @@
     }
     pintaCod();
     $('#unir-ok').addEventListener('click', async () => {
-      if (campoCod.value.replace(/\D/g, '').length < 9) { campoCod.focus(); return; }
+      if (!leeCod().lleno) { campoCod.focus(); return; }
       const b = $('#unir-ok'); if (b.disabled) return; b.disabled = true; campoCod.readOnly = true; $('#unir-mal').hidden = true; $('#unir-espera').hidden = false;
       let r = 'no vale'; try { r = await aceptaCodigo($('#unir-codigo').value); } catch (_) { r = 'no vale'; } finally { b.disabled = false; campoCod.readOnly = false; $('#unir-espera').hidden = true; }
-      if (r === 'ok') { $('#paso-entrar').hidden = true; $('#paso-inicio').hidden = false; return; }
-      $('#unir-mal').textContent = r === 'demasiados intentos' ? T('Demasiados intentos: espera un minuto.') : r === 'sin relé' || r === 'sin respuesta' ? T('Sin conexión con el relé: espera un momento.') : T('Código erróneo o caducado.');
+      if (r === 'ok') { campoCod.value = ''; pintaCod(); $('#paso-entrar').hidden = true; $('#paso-inicio').hidden = false; return; } // (el código ya no se queda en el campo)
+      if (r === 'sin-pq') aviso(T(SIN_PQ_ACEPTA)); // el mismo aviso que al abrir un enlace «#b=» en este navegador
+      $('#unir-mal').textContent = r === 'sin-pq' ? T(SIN_PQ_ACEPTA) : r === 'lleno' ? T('Ya tienes {n} conversaciones abiertas: termina alguna para empezar otra.').replace('{n}', MAX_CONVS) : r === 'demasiados intentos' ? T('Demasiados intentos: espera un minuto.') : r === 'sin relé' || r === 'sin respuesta' ? T('Sin conexión con el relé: espera un momento.') : r === 'no vale u' ? T('Código erróneo, caducado o ya usado.') : T('Código erróneo o caducado.');
       $('#unir-mal').hidden = false; campoCod.focus(); try { campoCod.setSelectionRange(campoCod.value.length, campoCod.value.length); } catch (_) {}
     });
     $('#unir-codigo').addEventListener('keydown', (e) => { if (e.key === 'Enter') $('#unir-ok').click(); });
@@ -4395,8 +4485,22 @@
     // navegador no sale en algunos navegadores integrados (el de la app de Claude, vistas web de otras apps) y el botón no hacía nada.
     $('#terminar').addEventListener('click', () => { const c = CONVS.get(ACTUAL); if (c) muestraCierre(c); });
     $('#invita-nuevo').addEventListener('click', async () => { const c = CONVS.get(ACTUAL); if (c) { c.codigoUsado = false; await publicaCodigo(c); } });
-    R.on('codigo-usado', (codigo) => { for (const c of CONVS.values()) if (c.codigo === codigo) { c.codigoUsado = true; pintaCodigo(c); } });
-    R.on('abierto', () => { for (const c of CONVS.values()) if (c.estado === 'invitacion' && c.rol === 'invita' && !c.huella && (!c.codigo || Date.now() > c.codigoCaduca)) publicaCodigo(c); });
+    // «codigo-usado»: el de 9 cifras de la Blindada o el buzón de un código Ultra
+    R.on('codigo-usado', (codigo) => { for (const c of CONVS.values()) { if (c.codigo === codigo) { c.codigoUsado = true; pintaCodigo(c); } else if (c.ucod && c.ucod.buzon === codigo) { c.ucod.usado = true; pintaCodigoU(c); } } });
+    // Tras un corte con el relé: el código de 9 cifras de una invitación por código, nuevo si hace falta. Nunca para una invitación por
+    // enlace (Ultra, o la Blindada del teléfono): hasta el 6 nov 2026 aquí también se dejaba en el relé, al reconectar, un sobre de 9 cifras
+    // con la semilla de una invitación Ultra que solo iba por enlace. Un código Ultra de antes del corte lo borra el relé con la conexión
+    // vieja: se da por perdido y se pide otro (volver a dejar el mismo sobre podría hacerlo valer una segunda vez).
+    R.on('abierto', () => {
+      for (const c of CONVS.values()) {
+        if (c.estado !== 'invitacion' || c.rol !== 'invita' || c.huella) continue;
+        if (c.ucod && !c.ucod.usado && Date.now() <= c.ucod.caduca) { c.ucod.perdido = true; pintaCodigoU(c); }
+        if (!porEnlace(c) && (!c.codigo || Date.now() > c.codigoCaduca)) publicaCodigo(c);
+      }
+    });
+    { const b = $('#ucod-pide'); if (b) b.addEventListener('click', () => { const c = CONVS.get(ACTUAL); if (c && esB(c)) publicaCodigoU(c); }); }
+    { const b = $('#ucod-nuevo'); if (b) b.addEventListener('click', () => { const c = CONVS.get(ACTUAL); if (!c || !esB(c)) return; quitaCodigoU(c); publicaCodigoU(c); }); }
+    { const b = $('#ucod-quita'); if (b) b.addEventListener('click', () => { const c = CONVS.get(ACTUAL); if (!c || !esB(c)) return; quitaCodigoU(c); muestraEnlace(c); }); }
     $('#escudo').addEventListener('click', () => { const c = CONVS.get(ACTUAL); if (c) muestraEscudo(c); });
     $('#escudo-cerrar').addEventListener('click', () => cierraHoja('h-escudo'));
     $('#verificada').addEventListener('change', async (e) => { const c = CONVS.get(ACTUAL); if (!c) return; await marcaVerificada(c, e.target.checked); muestraEscudo(c); });
@@ -4834,7 +4938,7 @@
     $('#vaciar').addEventListener('click', () => { const c = CONVS.get(ACTUAL); if (!c) return; $('#vaciar-nota').hidden = false; abreHoja('h-vaciar'); });
     $('#vaciar-no').addEventListener('click', () => cierraHoja('h-vaciar'));
     $('#vaciar-si').addEventListener('click', async () => { cierraHoja('h-vaciar'); await vacia(CONVS.get(ACTUAL)); });
-    $('#aceptar-si').addEventListener('click', async () => { const e = invitacionPendiente; invitacionPendiente = null; muestraAceptar(false); if (!e) return; marcaInvitado(); const ok = await aceptaInvitacion(e); if (!ok) aviso(T('Ese enlace no es una invitación de GUARDIANA.')); else setTimeout(preguntaInstalar, 2500); });
+    $('#aceptar-si').addEventListener('click', async () => { const e = invitacionPendiente; invitacionPendiente = null; muestraAceptar(false); if (!e) return; marcaInvitado(); const ok = await aceptaInvitacion(e); if (!ok) aviso(T(enlaceUltraSinPQ(e) ? SIN_PQ_ACEPTA : 'Ese enlace no es una invitación de GUARDIANA.')); else setTimeout(preguntaInstalar, 2500); });
     $('#aceptar-no').addEventListener('click', () => { invitacionPendiente = null; muestraAceptar(false); aviso(T('Invitación rechazada.')); });
     $('#enlace-cancelar-2').addEventListener('click', async () => { const c = CONVS.get(ACTUAL); if (c) await destruye(c, true); });
     $('#enlace-copiar').addEventListener('click', async () => { const c = CONVS.get(ACTUAL); if (!c || !esB(c)) return; try { await navigator.clipboard.writeText(enlaceB(c)); c.copiado = true; c.compartido = true; muestraEnlace(c); aviso(T('Enlace copiado: envíalo por un canal de confianza.')); } catch (_) { $('#enlace-b').select(); } });
@@ -4847,8 +4951,16 @@
     $('#cierre-no').addEventListener('click', () => cierraHoja('h-cierre'));
     { const b = $('#sinrebaja-blindada'); if (b) b.addEventListener('click', () => sigueEnBlindada()); }
     { const b = $('#sinrebaja-ok'); if (b) b.addEventListener('click', () => cierraHoja('h-sinrebaja')); }
-    // un enlace blindado pegado en el campo del código también vale
-    campoCod.addEventListener('paste', async (e) => { const t = (e.clipboardData && e.clipboardData.getData('text')) || ''; if (!/#[ib]=[A-Za-z0-9_-]{43}/.test(t)) return; e.preventDefault(); const ok = await aceptaInvitacion(t); if (ok) $('#paso-entrar').hidden = true; else { $('#unir-mal').textContent = T('Ese enlace no es una invitación de GUARDIANA.'); $('#unir-mal').hidden = false; } });
+    // un enlace de invitación pegado en el campo del código también vale; y un código, también dentro de un mensaje, sin que lo corte el
+    // máximo de caracteres del campo (6 nov 2026: con el código Ultra; antes, el pegado lo cortaba a 11 caracteres)
+    campoCod.addEventListener('paste', async (e) => {
+      const t = (e.clipboardData && e.clipboardData.getData('text')) || ''; e.preventDefault();
+      if (/#[ib]=[A-Za-z0-9_-]{43}/.test(t)) { const ok = await aceptaInvitacion(t); if (ok) $('#paso-entrar').hidden = true; else { $('#unir-mal').textContent = T(enlaceUltraSinPQ(t) ? SIN_PQ_ACEPTA : 'Ese enlace no es una invitación de GUARDIANA.'); $('#unir-mal').hidden = false; } return; }
+      if (campoCod.readOnly) return;
+      const k = codigoEn(t), v = campoCod.value, a = campoCod.selectionStart, z = campoCod.selectionEnd;
+      ponCod(k || limpiaCod(v.slice(0, a) + t + v.slice(z)));
+      campoCod.dispatchEvent(new Event('input'));
+    });
     // renovación de claves de la blindada: cada 5 minutos, quien inicia se presenta otra vez (efímeras y ML-KEM nuevos)
     setInterval(() => { for (const c of CONVS.values()) { if (!esB(c) || c.renovando || !c.sesion || !c.sesion.confirmada || !enLinea(c) || !soyInicio(c) || Date.now() - c.sesion.desde < renuevaMs()) continue; c.renovando = true; enCola(c, () => presentaB(c, null, true)).finally(() => setTimeout(() => { c.renovando = false; }, 20000)); } }, 15000);
     // Ultra, a ritmo fijo (revisión independiente, 3 nov 2026; ver tic): una trama de 1 KB por segundo en cada conversación Ultra
@@ -5898,7 +6010,7 @@
     else if (/#t=/.test(location.hash)) { history.replaceState(null, '', location.pathname); }
     // la app recién añadida a la pantalla de inicio desde una invitación (arranca con «?app=1#i=…»): el chat se abre solo, sin «¿Aceptas?»
     // (dueño, 29 Oct 2026, 18:01–18:54: «el mínimo de pasos»; ya aceptó al añadirla)
-    else if (/#[ib]=/.test(location.hash) && comoApp() && new URLSearchParams(location.search).get('app') === '1') { const ok = await aceptaInvitacion(location.href); history.replaceState(null, '', location.pathname + location.search); if (!ok) aviso(T('Ese enlace no es una invitación de GUARDIANA.')); }
+    else if (/#[ib]=/.test(location.hash) && comoApp() && new URLSearchParams(location.search).get('app') === '1') { const h = location.href, ok = await aceptaInvitacion(h); history.replaceState(null, '', location.pathname + location.search); if (!ok) aviso(T(enlaceUltraSinPQ(h) ? SIN_PQ_ACEPTA : 'Ese enlace no es una invitación de GUARDIANA.')); }
     else if (/#[ib]=/.test(location.hash)) { const ok = await preguntaInvitacion(location.href); history.replaceState(null, '', location.pathname + location.search); if (!ok) aviso(T('Ese enlace no es una invitación de GUARDIANA.')); }
     else {
       // tras recargar (tirar para actualizar o actualizarse sola), a la misma pantalla: el mismo chat o los contactos

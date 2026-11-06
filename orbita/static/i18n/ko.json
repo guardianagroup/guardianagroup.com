@@ -3925,7 +3925,19 @@
 "Cada equipo firma el registro con su clave de identidad: ECDSA P-256 sobre SHA-256 en la Blindada; en Ultra, ECDSA P-384 sobre SHA-384 y, además, ML-DSA-87. Si se cambia un solo carácter del registro, las firmas dejan de ser válidas.":"각 기기는 자신의 신원 키로 기록에 서명합니다. 방탄 모드에서는 SHA-256 기반 ECDSA P-256, Ultra에서는 SHA-384 기반 ECDSA P-384와 함께 ML-DSA-87을 사용합니다. 기록에서 글자 하나만 바뀌어도 서명은 더 이상 유효하지 않습니다.",
 "La huella de identidad de cada equipo resume sus claves públicas (SHA-256 en la Blindada; SHA-384 en Ultra), y el número de seguridad que aparece es el mismo que vieron las dos personas en la conversación.":"각 기기의 신원 지문은 해당 기기의 공개 키를 요약한 값이며(방탄 모드에서는 SHA-256, Ultra에서는 SHA-384), 표시되는 안전 번호는 두 사람이 대화에서 본 것과 같습니다.",
 "Cada mensaje, foto, archivo y llamada se cierra con claves que solo tienen los dos equipos: nuestro servidor no puede abrirlo. Comparar el número de seguridad del chat o el código de la llamada confirma que nadie se ha interpuesto.":"모든 메시지, 사진, 파일, 통화는 두 기기만 가진 키로 잠겨요. 저희 서버는 열 수 없어요. 채팅의 안전 번호나 통화의 보안 코드를 비교하면 중간에 아무도 끼어들지 않았음을 확인할 수 있어요.",
-"Qué tiene cada versión":"각 버전에 포함된 기능"
+"Qué tiene cada versión":"각 버전에 포함된 기능",
+"Usar un código":"코드 사용",
+"Código Ultra":"Ultra 코드",
+"Vale 10 minutos y una sola vez.":"10분 동안 한 번만 쓸 수 있어요.",
+"Con el código, la llave de la conversación viaja cerrada con ese código, que el servidor de GUARDIANA no conoce.":"코드를 쓰면 대화의 열쇠가 그 코드로 잠긴 채 전달돼요. GUARDIANA 서버는 그 코드를 알지 못해요.",
+"Cancelar el código":"코드 취소",
+"Se cortó la conexión con el relé: pide un código nuevo.":"릴레이 연결이 끊겼어요. 새 코드를 요청해 주세요.",
+"Código erróneo, caducado o ya usado.":"코드가 틀렸거나 만료되었거나 이미 사용되었어요.",
+"9 cifras, o el código Ultra de 16 caracteres":"9자리 숫자 또는 16자리 Ultra 코드",
+"Escribe el código que te han enviado":"전달받은 코드를 입력하세요",
+"Sesión Ultra":"Ultra 세션",
+"Invitación Ultra":"Ultra 초대",
+"Invitación Ultra · esperando":"Ultra 초대 · 대기 중"
 },
 "p":{
 "intento":"오늘 가장 많이 시도한 곳: {1}, {2}{2?회|회}.",

@@ -3925,7 +3925,19 @@
 "Cada equipo firma el registro con su clave de identidad: ECDSA P-256 sobre SHA-256 en la Blindada; en Ultra, ECDSA P-384 sobre SHA-384 y, además, ML-DSA-87. Si se cambia un solo carácter del registro, las firmas dejan de ser válidas.":"每台设备都用自己的身份密钥对记录进行签名：防护模式中使用 ECDSA P-256（基于 SHA-256）；Ultra 中使用 ECDSA P-384（基于 SHA-384），另加 ML-DSA-87。只要记录中有一个字符被更改，签名就会失效。",
 "La huella de identidad de cada equipo resume sus claves públicas (SHA-256 en la Blindada; SHA-384 en Ultra), y el número de seguridad que aparece es el mismo que vieron las dos personas en la conversación.":"每台设备的身份指纹是其公钥的摘要（防护模式中为 SHA-256；Ultra 中为 SHA-384），显示的安全码与双方在对话中看到的安全码相同。",
 "Cada mensaje, foto, archivo y llamada se cierra con claves que solo tienen los dos equipos: nuestro servidor no puede abrirlo. Comparar el número de seguridad del chat o el código de la llamada confirma que nadie se ha interpuesto.":"每条消息、每张照片、每个文件和每次通话，都用只有双方设备才有的密钥封住：我们的服务器无法打开。比对聊天的安全码或通话的安全代码，即可确认没有人插在中间。",
-"Qué tiene cada versión":"各版本包含的内容"
+"Qué tiene cada versión":"各版本包含的内容",
+"Usar un código":"使用代码",
+"Código Ultra":"Ultra 代码",
+"Vale 10 minutos y una sola vez.":"有效期 10 分钟，仅可使用一次。",
+"Con el código, la llave de la conversación viaja cerrada con ese código, que el servidor de GUARDIANA no conoce.":"使用代码时，对话的钥匙会以该代码封存后传送，而 GUARDIANA 服务器不知道这个代码。",
+"Cancelar el código":"取消代码",
+"Se cortó la conexión con el relé: pide un código nuevo.":"与中继的连接已中断：请重新获取一个代码。",
+"Código erróneo, caducado o ya usado.":"代码错误、已过期或已被使用。",
+"9 cifras, o el código Ultra de 16 caracteres":"9 位数字，或 16 个字符的 Ultra 代码",
+"Escribe el código que te han enviado":"输入发给你的代码",
+"Sesión Ultra":"Ultra 会话",
+"Invitación Ultra":"Ultra 邀请",
+"Invitación Ultra · esperando":"Ultra 邀请 · 等待中"
 },
 "p":{
 "intento":"今天尝试最多的：{1}，{2} {2?次|次}。",

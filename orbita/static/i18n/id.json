@@ -3925,7 +3925,19 @@
 "Cada equipo firma el registro con su clave de identidad: ECDSA P-256 sobre SHA-256 en la Blindada; en Ultra, ECDSA P-384 sobre SHA-384 y, además, ML-DSA-87. Si se cambia un solo carácter del registro, las firmas dejan de ser válidas.":"Setiap perangkat menandatangani catatan dengan kunci identitasnya: ECDSA P-256 atas SHA-256 di mode Berperisai; di Ultra, ECDSA P-384 atas SHA-384 dan, sebagai tambahan, ML-DSA-87. Jika satu karakter saja dalam catatan diubah, tanda tangannya tidak lagi valid.",
 "La huella de identidad de cada equipo resume sus claves públicas (SHA-256 en la Blindada; SHA-384 en Ultra), y el número de seguridad que aparece es el mismo que vieron las dos personas en la conversación.":"Sidik jari identitas setiap perangkat merangkum kunci publiknya (SHA-256 di mode Berperisai; SHA-384 di Ultra), dan nomor keamanan yang ditampilkan sama dengan yang dilihat kedua orang dalam percakapan.",
 "Cada mensaje, foto, archivo y llamada se cierra con claves que solo tienen los dos equipos: nuestro servidor no puede abrirlo. Comparar el número de seguridad del chat o el código de la llamada confirma que nadie se ha interpuesto.":"Setiap pesan, foto, file, dan panggilan dikunci dengan kunci yang hanya dimiliki kedua perangkat: server kami tidak dapat membukanya. Membandingkan nomor keamanan chat atau kode panggilan memastikan bahwa tidak ada pihak yang menyusup di antara kalian.",
-"Qué tiene cada versión":"Apa saja isi setiap versi"
+"Qué tiene cada versión":"Apa saja isi setiap versi",
+"Usar un código":"Gunakan kode",
+"Código Ultra":"Kode Ultra",
+"Vale 10 minutos y una sola vez.":"Berlaku 10 menit dan hanya sekali pakai.",
+"Con el código, la llave de la conversación viaja cerrada con ese código, que el servidor de GUARDIANA no conoce.":"Dengan kode, kunci percakapan dikirim dalam keadaan terkunci dengan kode itu, yang tidak diketahui server GUARDIANA.",
+"Cancelar el código":"Batalkan kode",
+"Se cortó la conexión con el relé: pide un código nuevo.":"Koneksi ke relay terputus: mintalah kode baru.",
+"Código erróneo, caducado o ya usado.":"Kode salah, kedaluwarsa, atau sudah dipakai.",
+"9 cifras, o el código Ultra de 16 caracteres":"9 digit, atau kode Ultra 16 karakter",
+"Escribe el código que te han enviado":"Ketik kode yang dikirimkan kepada Anda",
+"Sesión Ultra":"Sesi Ultra",
+"Invitación Ultra":"Undangan Ultra",
+"Invitación Ultra · esperando":"Undangan Ultra · menunggu"
 },
 "p":{
 "intento":"Paling gigih mencoba hari ini: {1}, {2} {2?kali|kali}.",

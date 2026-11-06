@@ -3925,7 +3925,19 @@
 "Cada equipo firma el registro con su clave de identidad: ECDSA P-256 sobre SHA-256 en la Blindada; en Ultra, ECDSA P-384 sobre SHA-384 y, además, ML-DSA-87. Si se cambia un solo carácter del registro, las firmas dejan de ser válidas.":"ప్రతి పరికరం తన గుర్తింపు కీతో రికార్డుపై సంతకం చేస్తుంది: కవచ మోడ్‌లో SHA-256పై ECDSA P-256; Ultra లో SHA-384పై ECDSA P-384, దానికి అదనంగా ML-DSA-87. రికార్డులో ఒక్క అక్షరం మారినా, సంతకాలు చెల్లవు.",
 "La huella de identidad de cada equipo resume sus claves públicas (SHA-256 en la Blindada; SHA-384 en Ultra), y el número de seguridad que aparece es el mismo que vieron las dos personas en la conversación.":"ప్రతి పరికరం గుర్తింపు వేలిముద్ర దాని పబ్లిక్ కీల సారాంశం (కవచ మోడ్‌లో SHA-256; Ultra లో SHA-384); ఇక్కడ కనిపించే భద్రతా సంఖ్య, సంభాషణలో ఇద్దరూ చూసిన సంఖ్యే.",
 "Cada mensaje, foto, archivo y llamada se cierra con claves que solo tienen los dos equipos: nuestro servidor no puede abrirlo. Comparar el número de seguridad del chat o el código de la llamada confirma que nadie se ha interpuesto.":"ప్రతి సందేశం, ఫోటో, ఫైల్, కాల్ రెండు పరికరాల వద్ద మాత్రమే ఉండే కీలతో లాక్ చేయబడుతుంది: మా సర్వర్ దాన్ని తెరవలేదు. చాట్ భద్రతా సంఖ్యను గానీ కాల్ కోడ్‌ను గానీ పోల్చడం మీ మధ్యలోకి ఎవరూ రాలేదని నిర్ధారిస్తుంది.",
-"Qué tiene cada versión":"ప్రతి వెర్షన్‌లో ఏమి ఉంది"
+"Qué tiene cada versión":"ప్రతి వెర్షన్‌లో ఏమి ఉంది",
+"Usar un código":"కోడ్ ఉపయోగించు",
+"Código Ultra":"Ultra కోడ్",
+"Vale 10 minutos y una sola vez.":"10 నిమిషాల పాటు, ఒక్కసారి వాడటానికి మాత్రమే చెల్లుతుంది.",
+"Con el código, la llave de la conversación viaja cerrada con ese código, que el servidor de GUARDIANA no conoce.":"కోడ్‌తో, సంభాషణ తాళంచెవి ఆ కోడ్‌తో మూసివేయబడి ప్రయాణిస్తుంది; ఆ కోడ్ GUARDIANA సర్వర్‌కు తెలియదు.",
+"Cancelar el código":"కోడ్‌ను రద్దు చేయి",
+"Se cortó la conexión con el relé: pide un código nuevo.":"రిలేతో కనెక్షన్ తెగిపోయింది: కొత్త కోడ్ అడగండి.",
+"Código erróneo, caducado o ya usado.":"కోడ్ తప్పు, గడువు ముగిసింది లేదా ఇప్పటికే వాడబడింది.",
+"9 cifras, o el código Ultra de 16 caracteres":"9 అంకెలు, లేదా 16 అక్షరాల Ultra కోడ్",
+"Escribe el código que te han enviado":"మీకు పంపిన కోడ్‌ను టైప్ చేయండి",
+"Sesión Ultra":"Ultra సెషన్",
+"Invitación Ultra":"Ultra ఆహ్వానం",
+"Invitación Ultra · esperando":"Ultra ఆహ్వానం · వేచి ఉంది"
 },
 "p":{
 "intento":"ఈరోజు ఎక్కువగా ప్రయత్నించింది: {1}, {2} {2?సారి|సార్లు}.",

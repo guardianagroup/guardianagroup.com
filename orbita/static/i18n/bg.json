@@ -3925,7 +3925,19 @@
 "Cada equipo firma el registro con su clave de identidad: ECDSA P-256 sobre SHA-256 en la Blindada; en Ultra, ECDSA P-384 sobre SHA-384 y, además, ML-DSA-87. Si se cambia un solo carácter del registro, las firmas dejan de ser válidas.":"Всяко устройство подписва записа със своя ключ за самоличност: ECDSA P-256 със SHA-256 в Брониран режим; в Ultra — ECDSA P-384 със SHA-384 и освен това ML-DSA-87. Ако се промени дори един знак от записа, подписите престават да са валидни.",
 "La huella de identidad de cada equipo resume sus claves públicas (SHA-256 en la Blindada; SHA-384 en Ultra), y el número de seguridad que aparece es el mismo que vieron las dos personas en la conversación.":"Отпечатъкът на самоличността на всяко устройство обобщава публичните му ключове (SHA-256 в Брониран режим; SHA-384 в Ultra), а показаният номер за сигурност е същият, който двамата души са видели в разговора.",
 "Cada mensaje, foto, archivo y llamada se cierra con claves que solo tienen los dos equipos: nuestro servidor no puede abrirlo. Comparar el número de seguridad del chat o el código de la llamada confirma que nadie se ha interpuesto.":"Всяко съобщение, снимка, файл и обаждане се заключва с ключове, които имат само двете устройства: нашият сървър не може да го отвори. Сравняването на номера за сигурност в чата или на кода в обаждането потвърждава, че никой не е застанал между вас.",
-"Qué tiene cada versión":"Какво включва всяка версия"
+"Qué tiene cada versión":"Какво включва всяка версия",
+"Usar un código":"Използвай код",
+"Código Ultra":"Код Ultra",
+"Vale 10 minutos y una sola vez.":"Валиден е 10 минути и за еднократна употреба.",
+"Con el código, la llave de la conversación viaja cerrada con ese código, que el servidor de GUARDIANA no conoce.":"С кода ключът на разговора пътува заключен с този код, който сървърът на GUARDIANA не знае.",
+"Cancelar el código":"Отмени кода",
+"Se cortó la conexión con el relé: pide un código nuevo.":"Връзката с релето прекъсна: поискай нов код.",
+"Código erróneo, caducado o ya usado.":"Грешен, изтекъл или вече използван код.",
+"9 cifras, o el código Ultra de 16 caracteres":"9 цифри или кодът Ultra от 16 знака",
+"Escribe el código que te han enviado":"Въведете кода, който са ви изпратили",
+"Sesión Ultra":"Сесия Ultra",
+"Invitación Ultra":"Покана Ultra",
+"Invitación Ultra · esperando":"Покана Ultra · изчакване"
 },
 "p":{
 "intento":"Най-настойчивата днес: {1}, {2} {2?път|пъти}.",

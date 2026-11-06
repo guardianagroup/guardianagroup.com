@@ -273,6 +273,20 @@ svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-l
   .cc.activa::after{height:clamp(20px,6.4vw,26px)}
   .cc-guion{width:7px}
 }
+/* El código Ultra (6 nov 2026): 16 casillas en cuatro grupos de cuatro, en el mismo sitio; salen al escribir una letra o una décima cifra */
+.codigo-celdas .cc-u,.codigo-celdas.ultra .cc-fila:not(.cc-u){display:none}
+.codigo-celdas.ultra .cc-u{display:grid}
+.cc-u{grid-template-columns:repeat(4,minmax(0,1fr)) 12px repeat(4,minmax(0,1fr)) 12px repeat(4,minmax(0,1fr)) 12px repeat(4,minmax(0,1fr));column-gap:4px}
+.cc-u .cc{height:50px;border-radius:9px;font-size:21px}
+.cc-u .cc.activa::after{height:22px}
+.cc-u .cc-guion{width:8px}
+#paso-entrar .pista{margin-top:-4px}
+@media (max-width:760px){
+  .cc-u{grid-template-columns:repeat(4,minmax(0,1fr)) 7px repeat(4,minmax(0,1fr)) 7px repeat(4,minmax(0,1fr)) 7px repeat(4,minmax(0,1fr));column-gap:3px}
+  .cc-u .cc{height:clamp(36px,10.5vw,46px);border-radius:7px;font-size:clamp(14px,4.4vw,19px)}
+  .cc-u .cc.activa::after{height:clamp(15px,4.4vw,19px)}
+  .cc-u .cc-guion{width:5px}
+}
 @media (prefers-reduced-motion:reduce){.cc.activa::after,.codigo-celdas.comprobando .cc,.codigo-celdas.mal .cc-fila{animation:none}}
 .caja .movil{font-size:13px;color:var(--muted);margin-top:4px}.caja .movil summary{cursor:pointer;color:var(--accent);list-style:none;display:inline-flex;align-items:center;gap:6px}
 .caja .movil summary::before{content:'';width:5px;height:5px;border-right:1.3px solid currentColor;border-bottom:1.3px solid currentColor;transform:rotate(-45deg)}.caja .movil[open] summary::before{transform:rotate(45deg)}
@@ -446,6 +460,20 @@ svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-l
 .paso.enlace-b .estado{color:var(--accent)}
 .paso.enlace-b .estado.mal{color:var(--alerta)}
 .paso.enlace-b .nota{font-size:13px}
+/* Código Ultra en la invitación Ultra (6 nov 2026): «Usar un código» y, al pulsarlo, el código en grande con su validez y su estado */
+.ucod{display:grid;justify-items:center;gap:10px;margin:14px 0 6px}
+.ucod[hidden],.ucod-pide[hidden],.ucod-caja[hidden]{display:none}
+.ucod-pide{appearance:none;display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:8px 18px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--fg);font:600 14px/1.2 var(--texto);cursor:pointer;touch-action:manipulation}
+.ucod-pide:hover{border-color:rgba(156,195,228,.45);background:rgba(156,195,228,.06)}
+.ucod-pide:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.ucod-pide[disabled]{opacity:.55;cursor:default}
+.ucod-pide svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round}
+.ucod-caja{display:grid;gap:10px;width:100%;padding:16px 16px 10px;border-radius:16px;background:var(--card);border:1px solid var(--line);text-align:center}
+.ucod-caja .pq-k{margin:0}
+.ucod-caja .t{font-size:13px}
+.codigo.codigo-u{font-size:28px;letter-spacing:.08em;padding:14px 8px;white-space:nowrap}
+.paso.enlace-b .ucod-estado{color:var(--accent)}
+@media (max-width:760px){.codigo.codigo-u{font-size:clamp(17px,5.6vw,24px);letter-spacing:.04em}}
 .paso .t.sutil{font-size:12.5px;color:var(--muted-2)}
 .bl-puerta{display:grid;gap:10px;margin:10px 14px 0;padding:14px 16px;border-radius:14px;border:1px solid rgba(224,182,106,.45);background:linear-gradient(180deg,rgba(224,182,106,.08),rgba(12,17,24,.92))}
 .bl-puerta b{font:600 15px/1.3 var(--texto);color:#F4F6F8}

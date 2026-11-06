@@ -3925,7 +3925,19 @@
 "Cada equipo firma el registro con su clave de identidad: ECDSA P-256 sobre SHA-256 en la Blindada; en Ultra, ECDSA P-384 sobre SHA-384 y, además, ML-DSA-87. Si se cambia un solo carácter del registro, las firmas dejan de ser válidas.":"Pinipirmahan ng bawat device ang record gamit ang key ng pagkakakilanlan nito: ECDSA P-256 sa SHA-256 sa mode na May Kalasag; sa Ultra, ECDSA P-384 sa SHA-384 at, dagdag pa, ML-DSA-87. Kapag nabago kahit isang character ng record, hindi na wasto ang mga pirma.",
 "La huella de identidad de cada equipo resume sus claves públicas (SHA-256 en la Blindada; SHA-384 en Ultra), y el número de seguridad que aparece es el mismo que vieron las dos personas en la conversación.":"Ang fingerprint ng pagkakakilanlan ng bawat device ay buod ng mga public key nito (SHA-256 sa mode na May Kalasag; SHA-384 sa Ultra), at ang safety number na lumalabas ay ang parehong nakita ng dalawang tao sa usapan.",
 "Cada mensaje, foto, archivo y llamada se cierra con claves que solo tienen los dos equipos: nuestro servidor no puede abrirlo. Comparar el número de seguridad del chat o el código de la llamada confirma que nadie se ha interpuesto.":"Ang bawat mensahe, larawan, file at tawag ay ikinakandado gamit ang mga susing ang dalawang device lang ang may hawak: hindi ito mabubuksan ng aming server. Kinukumpirma ng paghahambing ng safety number ng chat o ng code ng tawag na walang nakasingit sa pagitan ninyo.",
-"Qué tiene cada versión":"Ano ang kasama sa bawat bersyon"
+"Qué tiene cada versión":"Ano ang kasama sa bawat bersyon",
+"Usar un código":"Gumamit ng code",
+"Código Ultra":"Ultra code",
+"Vale 10 minutos y una sola vez.":"Valid nang 10 minuto at isang beses lang magagamit.",
+"Con el código, la llave de la conversación viaja cerrada con ese código, que el servidor de GUARDIANA no conoce.":"Sa code, ang susi ng usapan ay ipinapadalang nakakandado sa code na iyon, na hindi alam ng server ng GUARDIANA.",
+"Cancelar el código":"Kanselahin ang code",
+"Se cortó la conexión con el relé: pide un código nuevo.":"Naputol ang koneksyon sa relay: humingi ng bagong code.",
+"Código erróneo, caducado o ya usado.":"Mali, paso na, o nagamit na ang code.",
+"9 cifras, o el código Ultra de 16 caracteres":"9 na digit, o ang 16-character na Ultra code",
+"Escribe el código que te han enviado":"I-type ang code na ipinadala sa iyo",
+"Sesión Ultra":"Ultra session",
+"Invitación Ultra":"Imbitasyon sa Ultra",
+"Invitación Ultra · esperando":"Imbitasyon sa Ultra · naghihintay"
 },
 "p":{
 "intento":"Pinakamadalas sumubok ngayon: {1}, {2} {2?beses|beses}.",
