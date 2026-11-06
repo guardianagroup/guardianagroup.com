@@ -263,7 +263,7 @@
     const huellaDe = (p) => { const d = el('div', 'cu-parte'); d.append(el('small', null, BL ? T('Huella de identidad (SHA-384)') : T('Huella de identidad (SHA-256)')), mono(p.huella, 4)); return d; };
     filaTec(T('Remitente'), huellaDe(e)); filaTec(T('Destinatario'), huellaDe(r));
     if (res.numero) filaTec(T('Número de seguridad'), res.numero, 'cu-numero', true);
-    if (BL) fila(T('Verificación mutua'), reg.verificacion_mutua ? T('Los dos equipos comprobaron el número de seguridad antes de enviar nada.') : T('No consta la comprobación mutua del número de seguridad.'), reg.verificacion_mutua ? 'cu-bien' : 'cu-mal');
+    if (BL) fila(T('Verificación mutua'), reg.verificacion_mutua ? T('Los dos equipos habían marcado la conversación como comprobada antes de emitir este comprobante.') : T('No consta la comprobación mutua del número de seguridad.'), reg.verificacion_mutua ? 'cu-bien' : 'cu-mal');
     fila = seccion(T('Envío'));
     fila(T('Salida del remitente'), fechaHora(tr.salida) + ' · ' + T('según el reloj de su equipo'));
     fila(T('Llegada al destinatario'), fechaHora(tr.llegada) + ' · ' + T('según el reloj de su equipo'));
@@ -279,6 +279,8 @@
     if (BL) fila(T('Suite'), T('Sesión Ultra: ML-KEM-1024 y ML-DSA-87, en híbrido con ECDH y ECDSA P-384.'));
     fila(T('Acuerdo de claves'), BL ? T('Híbrido postcuántico: ML-KEM-1024 y ECDH P-384, combinados con HKDF-SHA-384.') : se.pq ? T('Híbrido postcuántico: ML-KEM-768 y ECDH P-256, combinados con HKDF-SHA-256.') : T('ECDH P-256, combinado con HKDF-SHA-256 (sin la capa postcuántica).'));
     if (se.id) { const d = el('div', 'cu-lineas'); d.append(mono(se.id, 4)); if (se.establecida) d.append(el('span', null, T('establecida') + ' ' + fechaHora(se.establecida))); filaTec(T('Sesión'), d); }
+    // (segunda revisión independiente, 5 nov 2026, S3) en Ultra, las claves son de la conversación: se dice quién firma y qué prueba
+    if (BL) fila(T('Quién firma'), T('Las claves de esta conversación, una de cada equipo: nacen con ella y no dicen quién es nadie. Las firmas prueban que este registro no ha cambiado desde que lo firmaron esas claves; no prueban quién las tenía, y cualquiera podría fabricar otro comprobante con firmas válidas de claves suyas. Para que sirva ante otros, apuntad los dos el número de seguridad de arriba.'));
     fila(T('Firma del comprobante'), BL ? T('Doble firma de cada equipo: ECDSA P-384 sobre SHA-384 y ML-DSA-87 (FIPS 204). Las dos tienen que ser válidas.') : T('ECDSA P-256 sobre SHA-256, con la clave de identidad de cada equipo.'));
     fila = seccion(T('Integridad'));
     fila(T('Resultado'), ig.coincide ? T('La huella SHA-256 coincide en los dos equipos') : T('La huella SHA-256 no coincide'), ig.coincide ? 'cu-bien' : 'cu-mal');
