@@ -41,6 +41,15 @@ estas, del 5 nov:
 - **Prueba a mano del dueño:** `herramientas/PRUEBA-1.0.57-ICONO-VPN.md`. Tiene 22 pasos; el 22, opcional, con el
   servicio parado.
 
+## Ultra abierta y gratis en la web, por un tiempo (dueño, 6 nov, 09:32)
+- Commit ec6713f6, `ULTRA_ABIERTA = true` en `orbita/comunicaciones/app.js`: cualquiera crea Ultra desde un navegador de
+  PC, dentro o fuera del programa, para que el dueño la pruebe con un amigo. Revisión rápida: GO.
+- Los letreros siguen diciendo «Con la suscripción Plus».
+- Mientras esté abierta, `herramientas/pruebas-comunicaciones/ultra.js` (apartado 1) y `tipos.js` (apartado 0) fallan:
+  comprueban que Ultra está cerrada.
+- **Cerrarla cuando el dueño avise:** `git revert ec6713f6` deja los tres archivos como estaban. A mano: `false`, otro
+  `?v=` de app.js y `huellas.py`.
+
 ## Pendiente
 - **`traduccion-ultra`** (01eae9ae): los arreglos de la segunda voz ya están aplicados.
   - Qué lleva:
