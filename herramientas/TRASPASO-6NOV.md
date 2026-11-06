@@ -1,4 +1,48 @@
-# Traspaso · 6 nov 2026, 09:20 (Bogotá) · la 1.0.57 publicada
+# Traspaso · 6 nov 2026, 12:10 (Bogotá) · la 1.0.57 publicada; el código Ultra, a falta de su confirmación
+
+## Dónde quedó todo al parar (6 nov, 12:05; el dueño: «paramos aquí»)
+- **Publicado hoy en main:**
+  - la 1.0.57 (2376c576);
+  - la pantalla de la VPN como el icono (vpn-web-3);
+  - las traducciones de Ultra en los 39 idiomas (427febf9);
+  - la frase de la VPN de las páginas de descarga, en es, en y pt (7969a2c1 y a2078e0f): «tus programas de Windows» y, con
+    el modo estricto, el bloqueo hasta que apagues la VPN;
+  - Ultra abierta y gratis (ec6713f6, temporal: ver su sección);
+  - el arreglo de la fuga al reconectar (b15e413e): una invitación por enlace ya no deja un sobre de 9 cifras en el relé.
+- **`ultra-codigo` (0075dde4), sin publicar: el código Ultra de 16 caracteres** que eligió el dueño («Código Ultra largo»).
+  - El relé recibe un buzón de 9 cifras derivado y un sobre que no puede abrir sin el código.
+  - M = PBKDF2-SHA256(código, 300 000); de M salen, con HKDF, el buzón y la clave del sobre.
+  - Diseño en `herramientas/pruebas-comunicaciones/ULTRA-CODIGO.md` y prueba en `ultra-codigo.js` (de esa rama).
+  - Revisión criptográfica independiente: GO con condiciones (M1, M2, B1-B5, S1, S3, E2, E3 y dos textos). Todas
+    aplicadas en 0075dde4.
+  - Pruebas: ultra-codigo, blindado (31/31) y codigo-grande (41/41) bien. A `ultra.js` le faltó el final (hasta el apartado
+    9, solo los fallos esperados del apartado 1) y `tipos.js` no llegó a ejecutarse.
+  - **Siguiente:**
+    1. Pasar `ultra.js` y `tipos.js` enteros.
+    2. Que la misma revisión confirme las condiciones.
+    3. Fundir con main: chocan el bloque `R.on('abierto')`, el principio de `publicaCodigo` (main ya trae su parte desde
+       b15e413e; la de la rama es más completa), el `?v=` y `huellas.txt`.
+    4. Publicar y comprobarlo en la web con dos navegadores.
+    5. **Avisar al dueño**, que lo quiere usar con un amigo.
+  - Para otra tanda: E1 (las casillas del código no se ponen en rojo), E4 (ventana estrecha) y E5 (límite de búsquedas por
+    IP en el relé).
+- **`llamada-pantalla` (sin cambios todavía): tres fallos de la videollamada que vio el dueño compartiendo pantalla.** La
+  primera lectura del código (sin medir aún):
+  1. **Espejo en quien comparte:** `app.css` ~297 pone `#v-local` siempre en espejo, y `aplicaImagen()` (`llamada.js`
+     ~1037) mete ahí la pista de la pantalla; `comparte()` no cambia ninguna clase (solo lo hace `.trasera`, en
+     `giraCamara`). En grupo, `colocaTiles()` (~1690) fuerza el espejo con `!important`. El espejo tiene que depender de
+     lo que se manda.
+  2. **«Ampliar» cortado:** en la llamada en pequeño (`.gc-llamada.mini`, como mucho 340 px con `overflow:hidden`) caben
+     justos Silenciar, Compartir pantalla, Cámara, Más, Colgar y Ampliar (`#ll-volver`). Hay que medirlo y que la fila
+     quepa, sin saltos. Mirar también `#ll-tam` en la vista grande.
+  3. **La lupa no amplía:** `cursor:zoom-in` (app.css ~307), pero el arrastre de la tarjeta captura el puntero
+     (`llamada.js` ~2293) y el clic no llega a `#ll-videos`; se ve la mano de `cursor:grab` (~2125).
+     - Arreglo: un clic sin arrastre amplía (en `sueltaMini`), la mano para mover, y fuera la lupa.
+     - Zoom de verdad sobre la pantalla compartida en la llamada grande (Ctrl+rueda o pellizco, + y −, «Ajustar», doble
+       clic, arrastrar con zoom).
+     - Para eso hace falta que quien recibe sepa que le llega una pantalla: un aviso nuevo `acto: 'pantalla'` por el canal
+       encriptado; hay que comprobar que las versiones antiguas lo ignoran.
+- **El dueño** prueba la 1.0.57 con `herramientas/PRUEBA-1.0.57-ICONO-VPN.md`: falta su resultado.
 
 Para seguir sin perder nada. Las reglas del dueño están en `TRASPASO.md` y `TRASPASO-5NOV.md`, y no cambian. Se añaden
 estas, del 5 nov:
