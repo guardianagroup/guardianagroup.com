@@ -47,10 +47,17 @@ añaden estas, del 5 nov:
   - abrir con `#vpn` aunque Órbita ya esté abierta (`hashchange`);
   - la clave nueva en `idioma.js` (en y pt);
   - subir el `?v=` de vpn.js, vpn.css e idioma.js, de acuerdo con `traduccion-ultra`.
-- **`traduccion-ultra`** (beb091a0): los 156 textos de Ultra en los 39 idiomas restantes.
-  - La segunda voz seguía en curso al guardar.
-  - Después hay que aplicar sus arreglos, resolver las dudas de términos y fundir con main.
-  - Luego se pasan `portadas.py`, `csp-hashes.py`, `huellas.py` y `sitemap.py`, y se publica.
+- **`traduccion-ultra`** (a9397f40): los 156 textos de Ultra en los 39 idiomas restantes.
+  - Segunda voz: GO con condiciones. El informe está en la rama, en `herramientas/traduccion-web/REVISION-ULTRA2.md`, con
+    su propuesta para las 10 dudas de términos.
+  - Antes de publicar:
+    - corregir 8 frases en de, bg, fr y ro;
+    - dar a «Blindada» y «Blindada y Ultra» en los 39 idiomas el mismo nombre que usan las frases (hoy caen al inglés,
+      «Shielded»), y traducir en la misma subida las otras 24 claves de esa página;
+    - usar un solo término de «comprobante» en ja, zh-tw, ko y th.
+  - Después se funde con main, se pasan `portadas.py`, `csp-hashes.py`, `huellas.py` y `sitemap.py`, y se publica.
+  - Fuera de la tanda: el lema de Comunicaciones sale en español en todos los idiomas, porque la clave de `idioma.js` es de
+    una versión anterior del texto.
   - Al fundir, se quitan las claves viejas con «Nadie puede escribirte…» de `orbita/static/i18n/*.json`, que ya no se
     muestran porque el texto en español cambió.
 - **Guardado sin publicar:** trabajos viejos que solo estaban en la copia de la sesión.
