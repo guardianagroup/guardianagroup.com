@@ -309,7 +309,7 @@
     raiz.dataset.fase = f; V.tarjeta.dataset.fase = f;
     // 6 Nov 2026: red whenever nothing of the computer's programs goes out (its server silent, or the block still in Windows),
     // as the icon next to the clock and ZERO's chip paint it
-    V.tarjeta.dataset.bloqueo = f === 'sin_respuesta' || f === 'reconectando' || (E && E.desconectar === true && f !== 'conectada' && f !== 'conectando') ? '1' : '';
+    V.tarjeta.dataset.bloqueo = f === 'sin_respuesta' || f === 'reconectando' || (E && E.desconectar === true && f !== 'conectada' && f !== 'conectando' && f !== 'sin_programa') ? '1' : '';
     // the ring: the exit's flag once there is one, the tunnel before
     const centro = s && f !== 'desconectada' ? 'b:' + s.pais : 'vpn';
     if (V.centro.dataset.de !== centro) { V.centro.dataset.de = centro; V.centro.textContent = ''; if (centro === 'vpn') V.centro.innerHTML = I_VPN; else V.centro.append(bandera(s.pais, 'grande')); }
@@ -693,7 +693,12 @@
     if (location.hash === '#vpn') { try { history.replaceState(null, '', location.pathname + location.search); } catch (_) {} }
     cierra();
   }
-  addEventListener('popstate', (e) => { if (e.state && e.state.vpn) { if (!abierto) abre({ apila: false }); } else if (abierto) cierra(); });
+  const sinPortada = () => { if (window.GuardianaNucleo && typeof window.GuardianaNucleo.cierra === 'function') try { window.GuardianaNucleo.cierra(); } catch (_) {} };
+  addEventListener('popstate', (e) => {
+    if (e.state && e.state.vpn) { if (!abierto) { sinPortada(); abre({ apila: false }); } return; }
+    if (location.hash === '#vpn') { try { history.replaceState({ vpn: 1, llegada: 1 }, '', location.pathname + location.search + '#vpn'); } catch (_) {} if (!abierto) { sinPortada(); abre({ apila: false }); } return; }
+    if (abierto) cierra();
+  });
   document.addEventListener('keydown', (e) => { if (abierto && e.key === 'Escape' && !document.querySelector('.idioma-menu:not([hidden])')) { e.preventDefault(); e.stopImmediatePropagation(); sal(); } }, true);
   addEventListener('guardiana-idioma', () => { if (abierto) pinta(); });
   document.addEventListener('visibilitychange', () => { if (abierto && !document.hidden) mira(); });
@@ -712,6 +717,7 @@
   addEventListener('hashchange', () => {
     if (location.hash !== '#vpn' || abierto) return;
     try { history.replaceState({ vpn: 1, llegada: 1 }, '', location.pathname + location.search + '#vpn'); } catch (_) {}
+    sinPortada();
     abre({ apila: false });
   });
   window.OrbitaVpn = { abre, cierra: sal, get abierto() { return abierto; } };
