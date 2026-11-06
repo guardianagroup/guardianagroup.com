@@ -378,7 +378,7 @@ const mp3Path = path.join(tmp, 'grabacion de mi nombre.mp3');
   // ---- R1. quien inicia se compromete con otra identidad (como quien está en medio y quisiera elegir las palabras después) ----
   { const X = await equipo(browser, 'X', { plan: 'plus', otraIdentidad: true }), Y = await equipo(browser, 'Y', { otraIdentidad: true });
     const e4 = await invitaUltra(X); await acepta(Y, e4);
-    const al = (P) => P.evaluate(() => ({ vis: !document.querySelector('#alarma').hidden, por: document.querySelector('#alarma-por').textContent, n: window.gcomPrueba.cuantas() }));
+    const al = (P) => P.evaluate(() => ({ vis: !document.querySelector('#alarma').hidden, por: document.querySelector('#alarma-por').textContent, n: window.gcomPrueba.cuantas(), t: window.GuardianaCom.convs.size }));
     await hasta(async () => (await al(X)).vis && (await al(Y)).vis, 20000);
     const ax = await al(X), ay = await al(Y);
     comprueba(ax.vis && ay.vis && /compromiso previo/.test(ax.por) && /compromiso previo/.test(ay.por) && ax.n === 0 && ay.n === 0, 'R1. si el compromiso no cuadra con lo revelado: alarma en los dos y la conversación borrada', { X: ax, Y: ay });
@@ -391,10 +391,10 @@ const mp3Path = path.join(tmp, 'grabacion de mi nombre.mp3');
   { const X = await equipo(browser, 'X2', { plan: 'plus', sinCw: true }), Y = await equipo(browser, 'Y2', { sinCw: true });
     const e6 = await invitaUltra(X); await acepta(Y, e6);
     let vioPalabras = false;
-    const al = (P) => P.evaluate(() => ({ vis: !document.querySelector('#alarma').hidden, por: document.querySelector('#alarma-por').textContent, n: window.gcomPrueba.cuantas() }));
+    const al = (P) => P.evaluate(() => ({ vis: !document.querySelector('#alarma').hidden, por: document.querySelector('#alarma-por').textContent, n: window.gcomPrueba.cuantas(), t: window.GuardianaCom.convs.size }));
     await hasta(async () => { if ((await palabrasChat(X)).split(' · ').length === 4 || (await palabrasChat(Y)).split(' · ').length === 4) vioPalabras = true; return (await al(X)).vis || (await al(Y)).vis; }, 25000);
     const ax = await al(X), ay = await al(Y), a = ax.vis ? ax : ay;
-    comprueba(!vioPalabras && (ax.vis || ay.vis) && /palabras de verificación/.test(a.por) && a.n === 0, 'A. sin el compromiso de las palabras: alarma y conversación borrada, nunca palabras', { X: ax, Y: ay, vioPalabras });
+    comprueba(!vioPalabras && (ax.vis || ay.vis) && /palabras de verificación/.test(a.por) && a.n === 0 && a.t === 0, 'A. sin el compromiso de las palabras: alarma y conversación borrada (sin lápida: ni identidad, ni semilla, ni clave en memoria), nunca palabras', { X: ax, Y: ay, vioPalabras });
     await foto(ax.vis ? X : Y, '10c-pc-alarma-sin-compromiso');
     await X.context().close(); await Y.context().close();
   }
@@ -404,10 +404,10 @@ const mp3Path = path.join(tmp, 'grabacion de mi nombre.mp3');
   { const X = await equipo(browser, 'X3', { plan: 'plus', recompromete: true, revela: 6000 }), Y = await equipo(browser, 'Y3', { recompromete: true, revela: 6000 });
     const e7 = await invitaUltra(X); await acepta(Y, e7);
     let vioPalabras = false;
-    const al = (P) => P.evaluate(() => ({ vis: !document.querySelector('#alarma').hidden, por: document.querySelector('#alarma-por').textContent, n: window.gcomPrueba.cuantas() }));
+    const al = (P) => P.evaluate(() => ({ vis: !document.querySelector('#alarma').hidden, por: document.querySelector('#alarma-por').textContent, n: window.gcomPrueba.cuantas(), t: window.GuardianaCom.convs.size }));
     await hasta(async () => { if ((await palabrasChat(X)).split(' · ').length === 4 || (await palabrasChat(Y)).split(' · ').length === 4) vioPalabras = true; return (await al(X)).vis && (await al(Y)).vis; }, 25000);
     const ax = await al(X), ay = await al(Y);
-    comprueba(!vioPalabras && ax.vis && ay.vis && /compromiso previo/.test(ax.por) && /compromiso previo/.test(ay.por) && ax.n === 0 && ay.n === 0, 'B. otro compromiso antes de revelar: alarma y conversación borrada en los dos, nunca palabras', { X: ax, Y: ay, vioPalabras });
+    comprueba(!vioPalabras && ax.vis && ay.vis && /compromiso previo/.test(ax.por) && /compromiso previo/.test(ay.por) && ax.n === 0 && ay.n === 0 && ax.t === 0 && ay.t === 0, 'B. otro compromiso antes de revelar: alarma y conversación borrada en los dos (sin lápida), nunca palabras', { X: ax, Y: ay, vioPalabras });
     await X.context().close(); await Y.context().close();
   }
 
@@ -455,7 +455,7 @@ const mp3Path = path.join(tmp, 'grabacion de mi nombre.mp3');
     await S.evaluate(() => document.querySelector('#ll-colgar').click()); await hasta(async () => (await estadoLl(S)) === 'libre' && (await estadoLl(U)) === 'libre', 8000); await espera(1500);
     await S.evaluate(() => sessionStorage.setItem('gcom-prueba-sin-revela', '1'));
     await llama(S, U, false);
-    const al = (P) => P.evaluate(() => ({ vis: !document.querySelector('#alarma').hidden, por: document.querySelector('#alarma-por').textContent, n: window.gcomPrueba.cuantas() }));
+    const al = (P) => P.evaluate(() => ({ vis: !document.querySelector('#alarma').hidden, por: document.querySelector('#alarma-por').textContent, n: window.gcomPrueba.cuantas(), t: window.GuardianaCom.convs.size }));
     await hasta(async () => (await al(U)).vis, 25000);
     const au = await al(U), as = await al(S);
     const libres = await hasta(async () => (await estadoLl(U)) === 'libre' && (await estadoLl(S)) === 'libre', 5000); // (tras colgar, «cerrando» dura 0,7–1,5 s)

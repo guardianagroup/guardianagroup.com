@@ -3340,14 +3340,17 @@
   async function alarma(c, por) {
     if (!extrasB(c) || c.estado === 'destruida' || c.alarmada) return; c.alarmada = true;
     if (c.codigo) R.retira(c.codigo);
-    if (enviaControl(c, { tipo: 'alarma', por })) { await new Promise((r) => setTimeout(r, 300)); await destruyeLocal(c, false, true); }
-    else await destruye(c, true); // con la otra persona ausente: se borra aquí y la orden de borrado le llega en cuanto entre
-    muestraAlarma(por, false);
+    const enviada = enviaControl(c, { tipo: 'alarma', por });
+    if (enviada) await new Promise((r) => setTimeout(r, 300));
+    // también sin la otra persona o sin sesión: aquí no queda nada, ni la lápida (que guardaría la identidad, la semilla y la
+    // clave para mandar el borrado después) (revisión independiente de Ultra, 5 nov 2026)
+    await destruyeLocal(c, false, true);
+    muestraAlarma(por, false, enviada);
   }
-  function muestraAlarma(por, porElla) {
+  function muestraAlarma(por, porElla, enviada) {
     const a = $('#alarma'); if (!a) return;
     $('#alarma-por').textContent = por === 'numero' ? T('El número de seguridad de la llamada no coincidía en los dos equipos: alguien podía estar en medio.') : por === 'palabras' ? T('Las palabras de verificación no cuadraban con el compromiso previo de la otra parte: alguien podía estar en medio.') : por === 'sin-palabras' ? T('No han llegado las palabras de verificación: alguien podía estar en medio.') : por === 'integridad' ? T('Llegaron mensajes o piezas manipulados: alguien intentó alterar la conversación o entrar en ella.') : T('El otro equipo detectó un ataque.');
-    $('#alarma-donde').textContent = porElla ? T('El otro equipo dio la alarma. Esta conversación se ha borrado aquí también: claves, mensajes y archivos.') : T('Por precaución, esta conversación se ha borrado en los dos equipos: claves, mensajes y archivos.');
+    $('#alarma-donde').textContent = porElla ? T('El otro equipo dio la alarma. Esta conversación se ha borrado aquí también: claves, mensajes y archivos.') : enviada === false ? T('Por precaución, esta conversación se ha borrado en este equipo: claves, mensajes y archivos. El otro equipo no ha podido recibir el aviso.') : T('Por precaución, esta conversación se ha borrado en los dos equipos: claves, mensajes y archivos.');
     a.hidden = false; try { $('#alarma-ok').focus(); } catch (_) {}
   }
   // Cortar un archivo a medias (dueño, 28 Oct 2026: «por si alguien quiere cortar, que lo pueda cortar»): desde los dos
@@ -4479,7 +4482,7 @@
       const enBlindado = () => { const c = CONVS.get(ACTUAL); return !!(c && extrasB(c) && !$('#conv').hidden); };
       const ordenador = !!(matchMedia('(hover: hover) and (pointer: fine)').matches);
       if (tapa) {
-        addEventListener('keyup', (e) => { if (e.key !== 'PrintScreen' || !enBlindado()) return; tapa.hidden = false; clearTimeout(capT); capT = setTimeout(() => { tapa.hidden = true; }, 3000); try { navigator.clipboard.writeText(T('Modo Ultra: se vació el portapapeles tras una captura.')).catch(() => {}); } catch (_) {} });
+        addEventListener('keyup', (e) => { if (e.key !== 'PrintScreen' || !enBlindado()) return; tapa.hidden = false; clearTimeout(capT); capT = setTimeout(() => { tapa.hidden = true; }, 3000); const dice = (vacio) => { const s = tapa.querySelector('.cv-captura'); if (s) s.textContent = vacio ? T('Captura detectada: se vació el portapapeles; una web no puede impedir capturas') : T('Captura detectada: una web no puede impedir capturas'); }; dice(false); try { navigator.clipboard.writeText(T('Modo Ultra: se vació el portapapeles tras una captura.')).then(() => dice(true), () => dice(false)); } catch (_) { dice(false); } });
         if (ordenador) { addEventListener('blur', () => { if (enBlindado()) { clearTimeout(capT); tapa.hidden = false; } }); addEventListener('focus', () => { tapa.hidden = true; }); }
       } }
     $('#velo-pista').addEventListener('keydown', (e) => { if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); descubre(e); } });

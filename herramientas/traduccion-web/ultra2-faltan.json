@@ -475,8 +475,8 @@
  },
  {
   "id": "u2-080",
-  "es": "Con la suscripción Plus, desde el programa GUARDIANA para Windows; quien recibe la invitación entra gratis desde su navegador, sin el programa. El acuerdo de claves combina ML-KEM-1024 con ECDH P-384 y cada equipo firma toda la negociación con ECDSA P-384 y con ML-DSA-87. Nada de la conversación se guarda, ni en el navegador ni en el relé. En la llamada, cuatro palabras de verificación (si no llegan, alarma y se cuelga), la clave cambia cada minuto y, sin la capa postcuántica, la llamada no empieza; el mosaico y la voz cambiada se hacen en tu equipo antes de encriptar.",
-  "en": "With the Plus subscription, from the GUARDIANA program for Windows; whoever receives the invitation joins for free from their browser, without the program. The key agreement combines ML-KEM-1024 with ECDH P-384 and each device signs the whole negotiation with ECDSA P-384 and with ML-DSA-87. Nothing of the conversation is stored, neither in the browser nor on the relay. In the call, four verification words (if they do not arrive, an alarm and the call is hung up), the key changes every minute and, without the post-quantum layer, the call does not start; the mosaic and the changed voice are done on your device before encryption.",
+  "es": "Con la suscripción Plus, desde el programa GUARDIANA para Windows; quien recibe la invitación entra gratis desde su navegador, sin el programa. El acuerdo de claves combina ML-KEM-1024 con ECDH P-384 y cada equipo firma toda la negociación con ECDSA P-384 y con ML-DSA-87. Nada de la conversación se guarda, ni en el navegador ni en el relé. En la llamada, cuatro palabras de verificación (si no llegan, se cuelga y se avisa), la clave cambia cada minuto y, sin la capa postcuántica, la llamada no empieza; el mosaico y la voz cambiada se hacen en tu equipo antes de encriptar.",
+  "en": "With the Plus subscription, from the GUARDIANA program for Windows; whoever receives the invitation joins for free from their browser, without the program. The key agreement combines ML-KEM-1024 with ECDH P-384 and each device signs the whole negotiation with ECDSA P-384 and with ML-DSA-87. Nothing of the conversation is stored, neither in the browser nor on the relay. In the call, four verification words (if they do not arrive, the call is hung up with a warning), the key changes every minute and, without the post-quantum layer, the call does not start; the mosaic and the changed voice are done on your device before encryption.",
   "donde": "orbita/static/idioma.js (clave = el español)"
  },
  {
@@ -916,5 +916,17 @@
   "es": "Los dos equipos habían marcado la conversación como comprobada antes de emitir este comprobante.",
   "en": "Both devices had marked the conversation as checked before this receipt was issued.",
   "donde": "orbita/static/idioma.js (clave = el español)"
+ },
+ {
+  "id": "u2-154",
+  "es": "Captura detectada: una web no puede impedir capturas",
+  "en": "Screenshot detected: a website cannot prevent screenshots",
+  "donde": "orbita/comunicaciones/app.js"
+ },
+ {
+  "id": "u2-155",
+  "es": "Por precaución, esta conversación se ha borrado en este equipo: claves, mensajes y archivos. El otro equipo no ha podido recibir el aviso.",
+  "en": "As a precaution, this conversation has been erased on this computer: keys, messages and files. The other computer could not receive the warning.",
+  "donde": "orbita/comunicaciones/app.js"
  }
 ]
