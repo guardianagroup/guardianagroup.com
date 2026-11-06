@@ -245,6 +245,7 @@
     muestraInvitacion(c); await publicaCodigo(c);
   }
   async function publicaCodigo(c) {
+    if (!c || porEnlace(c)) return false; // una invitación por enlace no deja nunca un sobre de 9 cifras en el relé
     for (let intento = 0; intento < 3; intento++) {
       const codigo = C.nuevoCodigo(), sal = C.azar(16), iv = C.azar(12);
       const k = await C.claveDeCodigo(codigo, sal);
@@ -4396,7 +4397,10 @@
     $('#terminar').addEventListener('click', () => { const c = CONVS.get(ACTUAL); if (c) muestraCierre(c); });
     $('#invita-nuevo').addEventListener('click', async () => { const c = CONVS.get(ACTUAL); if (c) { c.codigoUsado = false; await publicaCodigo(c); } });
     R.on('codigo-usado', (codigo) => { for (const c of CONVS.values()) if (c.codigo === codigo) { c.codigoUsado = true; pintaCodigo(c); } });
-    R.on('abierto', () => { for (const c of CONVS.values()) if (c.estado === 'invitacion' && c.rol === 'invita' && !c.huella && (!c.codigo || Date.now() > c.codigoCaduca)) publicaCodigo(c); });
+    // Tras un corte con el relé, el código de 9 cifras de una invitación por código, nuevo si hace falta; nunca para una invitación por
+    // enlace (Ultra, o la Blindada del teléfono): hasta el 6 nov 2026 aquí también se dejaba en el relé, al reconectar, un sobre de 9 cifras
+    // con la semilla de una invitación Ultra que solo iba por enlace (revisión criptográfica del código Ultra, hallazgo a).
+    R.on('abierto', () => { for (const c of CONVS.values()) if (c.estado === 'invitacion' && c.rol === 'invita' && !c.huella && !porEnlace(c) && (!c.codigo || Date.now() > c.codigoCaduca)) publicaCodigo(c); });
     $('#escudo').addEventListener('click', () => { const c = CONVS.get(ACTUAL); if (c) muestraEscudo(c); });
     $('#escudo-cerrar').addEventListener('click', () => cierraHoja('h-escudo'));
     $('#verificada').addEventListener('change', async (e) => { const c = CONVS.get(ACTUAL); if (!c) return; await marcaVerificada(c, e.target.checked); muestraEscudo(c); });
