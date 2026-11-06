@@ -401,7 +401,7 @@
   const C = {}; // the progress console's parts
   function monta() {
     if (raiz) return raiz;
-    raiz = h('section', { class: 'escaner', id: 'escaner', role: 'dialog', 'aria-modal': 'true', 'aria-labelledby': 'esc-titulo', hidden: true });
+    raiz = h('section', { class: 'esc-raiz', id: 'escaner', role: 'dialog', 'aria-modal': 'true', 'aria-labelledby': 'esc-titulo', hidden: true });
     volverBtn = h('button', { type: 'button', class: 'esc-volver', html: I_ATRAS }); volverBtn.append(h('span'));
     volverBtn.addEventListener('click', sal);
     const marca = h('div', { class: 'esc-logo' }, h('span', { class: 'g', translate: 'no' }, 'GUARDIANA'), h('span', { class: 'sep', 'aria-hidden': 'true', translate: 'no' }, '/'), h('span', { class: 'sub' }, 'Escáner PC'));
@@ -472,7 +472,7 @@
         b, h('p', { class: 'esc-nota-boton' }, 'La revisión de Windows puede tardar unos minutos; el resto aparece en cuanto llega.'), hechos, examina);
     } else {
       const a = h('a', { class: 'esc-boton web', href: DESCARGA, html: I_BAJA }); a.append(h('span', null, 'Descargar GUARDIANA para Windows'));
-      portada.append(lienzo, h('p', { class: 'esc-k' }, 'Escáner PC · Para Windows'), h('h1', { id: 'esc-titulo' }, 'Examen completo de este equipo'),
+      portada.append(lienzo, h('p', { class: 'esc-k' }, h('span', null, 'Escáner PC'), ' · ', h('span', null, 'Para Windows')),h('h1', { id: 'esc-titulo' }, 'Examen completo de este equipo'),
         h('p', { class: 'esc-lead' }, 'El Escáner PC lee lo que Windows y el programa GUARDIANA saben de este equipo: protección y antivirus, cámara, micrófono y pantalla, control remoto, lo que arranca solo, los programas de fábrica, la telemetría y todo lo que sale a internet. Una web no puede ver nada de esto por sí sola: hace falta el programa instalado.'),
         a, h('p', { class: 'esc-nota-boton' }, 'Una vez instalado, abre Órbita desde el programa y pulsa «Escáner PC».'), hechos, examina);
     }
@@ -555,7 +555,10 @@
       C.vigE.dataset.clave = ve; C.vigE.textContent = ''; C.lentas.textContent = '';
       if (v.e === 'no_medido') C.vigE.append(h('span', null, 'No medido'), h('small', null, MOTIVO[v.motivo] || MOTIVO.error));
       else if (v.e === 'esperando') C.vigE.append(h('span', null, 'Esperando la lectura…'));
-      else {
+      else if (v.e === 'sin_orden') {
+        C.vigE.append(h('span', null, 'La mirada nueva no se pudo pedir'), h('small', null, h('span', null, MOTIVO[v.motivo] || MOTIVO.error), ' · ', h('span', null, 'Se usa la última mirada que respondió.')));
+        for (const id of Object.keys(v.lentas)) C.lentas.append(h('li', { class: v.lentas[id] ? 'hecha' : '' }, h('i'), h('span', null, { arranque: 'Arranque', privacidad: 'Privacidad', proteccion: 'Protección' }[id])));
+      } else {
         C.vigE.append(h('span', null, v.e === 'hecha' ? 'Mirada nueva hecha' : v.e === 'caduco' ? 'La mirada nueva no terminó a tiempo' : 'Mirada nueva pedida'),
           h('small', null, v.e === 'caduco' ? 'Se usa la última mirada que respondió.' : 'Arranque, privacidad y protección, leídos ahora por el programa.'));
         for (const id of Object.keys(v.lentas)) C.lentas.append(h('li', { class: v.lentas[id] ? 'hecha' : v.e === 'mirando' ? 'esperando' : '' }, h('i'), h('span', null, { arranque: 'Arranque', privacidad: 'Privacidad', proteccion: 'Protección' }[id])));
@@ -588,7 +591,21 @@
     } else {
       tira.append(h('i', { class: 'esc-vivo quieto', 'aria-hidden': 'true' }), h('b', null, 'Escaneo terminado'), h('span', null, 'Duración'), dato(segundos(S.tFin - S.t0), 'mono'),
         h('span', null, 'Medidas'), dato(String(medidas), 'mono'), h('span', null, 'No medidas'), dato(String(no), 'mono'));
+      const r = medidas ? '' : remedio();
+      if (r) tira.append(h('span', { class: 'esc-tira-nota' }, r));
     }
+  }
+  // when nothing answered, the strip says what to do about the most common reason (only reasons with a known remedy)
+  const REMEDIO = {
+    sin_panel: 'Abre la pestaña «Radiografías» del programa, espera a que cargue y pulsa «Volver a escanear».',
+    tiempo: 'El programa no contestó. Comprueba que el programa GUARDIANA está al día y pulsa «Volver a escanear».',
+    prohibida: 'El programa no dejó pasar las lecturas. Comprueba que el programa GUARDIANA está al día y pulsa «Volver a escanear».',
+  };
+  function remedio() {
+    const n = {};
+    for (const [k] of L) { const st = S.l[k]; if (st.e === 'no_medido' && REMEDIO[st.motivo]) n[st.motivo] = (n[st.motivo] || 0) + 1; }
+    const m = Object.keys(n).sort((a, b) => n[b] - n[a])[0];
+    return m ? REMEDIO[m] : '';
   }
 
   // ---------- el reloj de la página mientras escanea ----------
@@ -626,6 +643,16 @@
     const e = S.l[k] && S.l[k].e; return e === 'medido' ? 'medido' : e === 'no_medido' ? 'no_medido' : 'esperando';
   }
   const leyKey = (k) => (k === 'vigilancia' ? (S.l.resumen.e === 'no_medido' ? 'resumen' : 'vigilancia') : k === 'pd' ? (S.l.pd2.e === 'no_medido' && S.l.pd1.e === 'no_medido' ? 'pd1' : 'pd2') : k);
+  // the program now hands only this computer's (independent review) and takes the device ids out: an item with no id is
+  // this computer's; one with another device's id never shows
+  const esteEquipo = (x) => !!(x && typeof x === 'object' && (x.device_id === undefined || x.device_id === null || x.device_id === 'self'));
+  // what this computer sent in 24 h: the programs' own totals (the program hands the destinations of telemetry,
+  // advertising and tracking, and those of the antivirus, not every one)
+  function enviado24(p) {
+    const progs = lista(p && p.programas).filter((x) => x && numero(x.enviados) != null);
+    if (progs.length) return { total: progs.reduce((a, x) => a + numero(x.enviados), 0), parcial: !!numero(p.programas_omitidos) };
+    return null;
+  }
   const pd = () => { const p = S && (S.d.pd2 || S.d.pd1); return p && typeof p === 'object' && Array.isArray(p.destinos) ? p : null; };
   function checksDe(sec) {
     const j = S && S.d.revision; if (!j || !Array.isArray(j.grupos)) return [];
@@ -778,15 +805,27 @@
   }
 
   // ---- 1 · Estado del equipo
+  // the check-up's conclusion in the page's own words, with its singulars (the panel's sentence says «1 problemas»)
+  function conclusion(a, w) {
+    const p = [];
+    if (a) {
+      p.push(a === 1 ? h('span', null, 'La revisión encontró un problema que hay que arreglar.')
+        : h('span', null, h('span', null, 'La revisión encontró'), ' ', dato(num(a)), ' ', h('span', null, 'problemas que hay que arreglar.')));
+      if (w) p.push(' ', w === 1 ? h('span', null, 'Conviene revisar además una cosa.') : h('span', null, h('span', null, 'Conviene revisar además'), ' ', dato(num(w)), ' ', h('span', null, 'cosas.')));
+      p.push(' ', h('span', null, 'Empieza por lo marcado en rojo.'));
+    } else if (w) {
+      p.push(h('span', null, 'No hay nada grave.'), ' ', w === 1 ? h('span', null, 'Conviene revisar una cosa; lo demás está bien o es solo informativo.')
+        : h('span', null, h('span', null, 'Conviene revisar'), ' ', dato(num(w)), ' ', h('span', null, 'cosas; lo demás está bien o es solo informativo.')));
+    } else p.push(h('span', null, 'En lo revisado no hay nada grave ni nada que revisar.'));
+    return h('span', { class: 'esc-conclusion' }, p);
+  }
   function secEstado() {
     const rv = S.d.revision, rs = rv && rv.resumen && typeof rv.resumen === 'object' ? rv.resumen : null;
     let nivel, ver;
     if (S.rev.e === 'medido' && rs) {
       const a = numero(rs.alerta) || 0, w = numero(rs.aviso) || 0;
-      const clave = a ? 'rv_conclusion_alerta' : w ? 'rv_conclusion_aviso' : 'rv_conclusion_ok';
       nivel = a ? 'alerta' : w ? 'aviso' : numero(rs.info) ? 'info' : 'ok';
-      const f = tp(clave);
-      ver = [f ? panel(rellena(f, { alerta: a, aviso: w, ok: rs.ok || 0, info: rs.info || 0 })) : null,
+      ver = [conclusion(a, w),
         h('small', null, 'Veredicto sobre lo que Windows y el programa pudieron medir en este escaneo. Lo que no se midió figura en «Límites y cómo se midió».')];
     } else if (S.rev.e === 'no_medido') { nivel = 'nomedido'; ver = ['Sin veredicto: la revisión de Windows no se pudo completar.']; }
     else { nivel = 'curso'; ver = ['El veredicto llegará cuando termine la revisión de Windows.']; }
@@ -815,9 +854,10 @@
     if (fuente('vigia') === 'medido' || (res && Array.isArray(res.en_uso))) xs.push({ v: num(usos.length), l: 'En uso ahora (cámara, micrófono, pantalla)', n: usos.length ? 'aviso' : '', s: fuente('vigia') === 'medido' ? 'Vigía de las llamadas' : 'Vigilancia continua' });
     const p = pd();
     if (p && p.mide_bytes !== false) {
-      let total = 0, tel = 0; for (const d of p.destinos) { const e = numero(d && d.enviados) || 0; total += e; if (d && /^(telemetria|publicidad|rastreador)$/.test(d.categoria)) tel += e; }
-      xs.push({ v: bytes(total), l: 'Enviado en 24 h', s: numero(p.destinos_omitidos) ? 'Suma parcial' : 'Conexiones de las últimas 24 horas' });
-      xs.push({ v: bytes(tel), l: 'Telemetría, publicidad y rastreo (24 h)', n: tel ? 'aviso' : '', s: 'Conexiones de las últimas 24 horas' });
+      let tel = 0; for (const d of p.destinos) { if (d && /^(telemetria|publicidad|rastreador)$/.test(d.categoria)) tel += numero(d.enviados) || 0; }
+      const tot = enviado24(p);
+      if (tot) xs.push({ v: bytes(tot.total), l: 'Enviado en 24 h', s: tot.parcial ? 'Suma parcial' : 'Conexiones de las últimas 24 horas' });
+      xs.push({ v: bytes(tel), l: 'Telemetría, publicidad y rastreo (24 h)', n: tel ? 'aviso' : '', s: numero(p.destinos_omitidos) ? 'Suma parcial' : 'Conexiones de las últimas 24 horas' });
     }
     const av = S.d.antivirus; if (av && av.resumen && numero(av.resumen.subidos) != null) xs.push({ v: bytes(av.resumen.subidos), l: 'Enviado por tu antivirus (24 h)', s: 'Actividad del antivirus' });
     const idn = S.d.identificacion; if (idn && idn.cobertura && numero(idn.cobertura.pct_identificada) != null) xs.push({ v: num(idn.cobertura.pct_identificada) + ' %', l: 'Consultas con empresa identificada (7 días)', s: 'Identificación de destinos' });
@@ -861,9 +901,9 @@
       if (!nada) cuerpo.push(bloque('En las últimas 24 horas', cifras([{ v: bytes(r.subidos), l: 'Datos enviados' }, { v: bytes(r.bajados), l: 'Datos recibidos' }, { v: num(r.destinos), l: 'Destinos' }, { v: num(r.paises), l: 'Países' }, { v: bytes(r.subidos_noche), l: 'Enviado de madrugada (00–06 h)', n: numero(r.subidos_noche) ? 'aviso' : '' }])));
       // each product on this computer (never the other devices of the house)
       const p = pd();
-      for (const x of lista(av.vistos).filter((x) => x && x.device_id === 'self')) {
+      for (const x of lista(av.vistos).filter(esteEquipo)) {
         const prod = limpia(x.producto, 80), traf = lista(av.trafico).find((t) => t && t.producto === x.producto);
-        const progs = lista(x.programas).filter((g) => g && typeof g === 'object').map((g) => h('li', null, dato(limpia(g.nombre, 80), null, 'b'), g.firma ? dato(limpia(g.firma, 80), null, 'small') : null, h('span', { class: 'der' }, panel((tpn('av_consultas', g.consultas) || '{n}').replace('{n}', num(g.consultas))))));
+        const progs = lista(x.programas).filter((g) => g && typeof g === 'object').map((g) => h('li', null, dato(limpia(g.nombre, 80), null, 'b'), h('span', { class: 'der' }, panel((tpn('av_consultas', g.consultas) || '{n}').replace('{n}', num(g.consultas)))), g.firma ? dato(limpia(g.firma, 80), null, 'small') : null));
         const dest = lista(x.destinos).filter((d) => d && typeof d === 'object').slice(0, 8).map((d) => {
           const uso = d.uso ? tp('av_uso_' + d.uso) : tp('av_no_documentado'), f = httpsDe(d.fuente);
           return h('li', null, dato(limpia(d.qname, 120, false), null, 'b'), uso ? panel(uso, 'esc-marca' + (d.uso ? '' : ' fuerte')) : null, h('span', { class: 'der' }, panel((tpn('av_consultas', d.consultas) || '{n}').replace('{n}', num(d.consultas)))), f ? h('small', null, enlace(f, 'Fuente')) : null);
@@ -883,7 +923,7 @@
           dentro ? bloque('Dentro del equipo', dentro) : null));
       }
       // official sanctions of the products installed here (the catalogue the panel keeps, with its sources)
-      const inst = new Set([...lista(av.vistos).filter((x) => x && x.device_id === 'self').map((x) => String(x.producto).toLowerCase()), ...lista(S.d.detectar && S.d.detectar.detectados).map((d) => String(d && d.nombre).toLowerCase())]);
+      const inst = new Set([...lista(av.vistos).filter(esteEquipo).map((x) => String(x.producto).toLowerCase()), ...lista(S.d.detectar && S.d.detectar.detectados).map((d) => String(d && d.nombre).toLowerCase())]);
       const sanc = [];
       for (const f of lista(av.catalogo)) {
         if (!f || !lista(f.sanciones).length) continue;
@@ -971,11 +1011,11 @@
     const pr = parteRev('telemetria'), cuerpo = [], p = pd();
     let nivel = nivelRev(pr), ver;
     if (p && p.mide_bytes !== false) {
-      const suma = { total: 0, telemetria: 0, publicidad: 0, rastreador: 0 };
-      for (const d of p.destinos) { if (!d) continue; const e = numero(d.enviados) || 0; suma.total += e; if (CATS.includes(d.categoria)) suma[d.categoria] += e; }
+      const suma = { telemetria: 0, publicidad: 0, rastreador: 0 }, tot = enviado24(p);
+      for (const d of p.destinos) { if (!d) continue; if (CATS.includes(d.categoria)) suma[d.categoria] += numero(d.enviados) || 0; }
       ver = [h('span', null, 'Lo que este equipo envió en las últimas 24 horas, por categoría.')];
       // the categories' names are the panel's, in its language
-      cuerpo.push(cifras([{ v: bytes(suma.total), l: 'Total enviado', s: numero(p.destinos_omitidos) ? 'Suma parcial' : null },
+      cuerpo.push(cifras([tot ? { v: bytes(tot.total), l: 'Total enviado', s: tot.parcial ? 'Suma parcial' : null } : null,
         ...CATS.map((c) => ({ v: bytes(suma[c]), lp: tp('rg_cat_' + c), l: humano(c), n: suma[c] ? 'aviso' : '' }))]));
       if (numero(p.destinos_omitidos)) cuerpo.push(h('p', { class: 'esc-nota' }, 'Suma parcial: el programa atribuyó solo los destinos principales.'));
       const filas = p.destinos.filter((d) => d && CATS.includes(d.categoria)).sort((a, b) => (numero(b.enviados) || 0) - (numero(a.enviados) || 0)).slice(0, 14).map((d) => h('tr', null,
@@ -989,7 +1029,7 @@
     } else if (p && p.mide_bytes === false) { cuerpo.push(panel(tp('pd_sin_bytes') || '', 'esc-texto', 'p')); }
     else if (fuente('pd') === 'no_medido') cuerpo.push(bloque(null, nmFuente('pd')));
     if (!ver) { const v = verChecksSi(pr); nivel = v.nivel; ver = v.ver; }
-    cuerpo.unshift(bloque('Comprobaciones de Windows', pr.nodo));
+    cuerpo.push(bloque('Comprobaciones de Windows', pr.nodo));
     // the system's advertising and diagnostics settings, as GUARDIANA reads them
     const qv = S.d.qv;
     if (qv && lista(qv.ajustes).length) cuerpo.push(bloque('Ajustes de publicidad y diagnóstico', h('ul', { class: 'esc-lista plana' }, lista(qv.ajustes).filter((a) => a && typeof a === 'object').map((a) => h('li', null,
@@ -1024,7 +1064,7 @@
     const ia = S.d.ia, qv = S.d.qv, cuerpo = [];
     let nivel = 'info', ver;
     if (ia && typeof ia === 'object') {
-      const sv = lista(ia.servicios).filter((s) => s && s.device_id === 'self');
+      const sv = lista(ia.servicios).filter(esteEquipo);
       const total = sv.reduce((a, s) => a + (numero(s.consultas) || 0), 0);
       ver = [sv.length ? 'Este equipo habló con servicios de IA en los últimos 7 días.' : 'Este equipo no habló con ningún servicio de IA de la lista en los últimos 7 días.'];
       cuerpo.push(cifras([{ v: num(sv.length), l: 'Servicios de IA con los que habló este equipo' }, { v: num(total), l: 'Consultas (7 días)' }]));
@@ -1088,23 +1128,24 @@
       const fil = (x) => (x && typeof x === 'object' ? h('li', null, dato(limpia(x.qname, 120, false) || '—', null, 'b'), h('span', { class: 'der' }, panel((tp('id_consultas') || '{n}').replace('{n}', num(x.consultas)))),
         x.identidad && x.identidad.frase ? panel(limpia(x.identidad.frase, 200), null, 'small') : null, lista(x.identidad && x.identidad.pruebas_texto).slice(0, 2).map((t) => panel(limpia(t, 160), null, 'small'))) : null);
       const pro = lista(idn.probables).slice(0, 10).map(fil), sin = lista(idn.sin_identificar).slice(0, 10).map(fil);
+      if (numero(idn.n_probables) != null || numero(idn.n_sin_identificar) != null) cuerpo.push(cifras([numero(idn.n_probables) != null ? { v: num(idn.n_probables), l: 'Nombres probables' } : null, numero(idn.n_sin_identificar) != null ? { v: num(idn.n_sin_identificar), l: 'Nombres sin identificar', n: numero(idn.n_sin_identificar) ? 'aviso' : '' } : null]));
       if (pro.length || sin.length) cuerpo.push(h('div', { class: 'esc-dos' }, h('div', null, h('h5', null, panel(tp('id_probables_titulo') || '')), pro.length ? h('ul', { class: 'esc-lista plana' }, pro) : panel(tp('id_lista_vacia') || '', 'esc-nota', 'p')),
         h('div', null, h('h5', null, panel(tp('id_sin_titulo') || '')), sin.length ? h('ul', { class: 'esc-lista plana' }, sin) : panel(tp('id_lista_vacia') || '', 'esc-nota', 'p'))));
       const pf = Object.entries(idn.por_fuente && typeof idn.por_fuente === 'object' ? idn.por_fuente : {}).filter(([, n]) => numero(n)).sort((a, b) => b[1] - a[1]);
       if (pf.length) cuerpo.push(bloque('Quién lo decidió', h('ul', { class: 'esc-lista plana' }, pf.map(([k, n]) => h('li', null, panel(tp('id_fuente_' + k) || humano(k), null, 'b'), h('span', { class: 'der' }, dato(num(n))))))));
       const ed = idn.ediciones; if (ed && tp('id_ediciones')) cuerpo.push(panel(rellena(tp('id_ediciones'), { mundo: ed.empresas_mundo, redes: ed.redes, listas: ed.listas, base: ed.base_red_fuente, base_fecha: ed.base_red }), 'esc-nota', 'p'));
     } else { nivel = fuente('identificacion') === 'no_medido' ? 'nomedido' : 'esperando'; ver = [nivel === 'nomedido' ? 'No se pudo medir quién está detrás de los destinos.' : 'Esperando la lectura…']; cuerpo.push(nmFuente('identificacion')); }
-    // the companies that receive the most from this computer, in the last 24 hours
+    // the companies that receive this computer's telemetry, advertising and tracking, in the last 24 hours
     if (p && p.mide_bytes !== false) {
       const em = new Map();
       for (const d of p.destinos) {
-        if (!d) continue; const k = limpia(d.empresa, 60) || '';
+        if (!d || !CATS.includes(d.categoria)) continue; const k = limpia(d.empresa, 60) || '';
         const x = em.get(k) || { n: k, env: 0, cons: 0, paises: new Set(), progs: new Set() };
         x.env += numero(d.enviados) || 0; x.cons += numero(d.consultas) || 0; if (paisNombre(d.pais)) x.paises.add(paisNombre(d.pais)); if (d.programa) x.progs.add(limpia(d.programa, 40));
         em.set(k, x);
       }
       const top = [...em.values()].sort((a, b) => b.env - a.env).slice(0, 10);
-      if (top.length) cuerpo.push(bloque('Empresas que más reciben de este equipo (24 h)', h('div', { class: 'esc-tabla-caja' }, h('table', { class: 'esc-tabla' },
+      if (top.length) cuerpo.push(bloque('Empresas que reciben telemetría, publicidad o rastreo de este equipo (24 h)', h('div', { class: 'esc-tabla-caja' }, h('table', { class: 'esc-tabla' },
         h('thead', null, h('tr', null, h('th', null, 'Empresa'), h('th', null, 'Países'), h('th', { class: 'num' }, 'Enviado'), h('th', { class: 'num' }, 'Consultas'))),
         h('tbody', null, top.map((x) => h('tr', null, h('td', null, x.n ? dato(x.n, null, 'b') : h('b', null, 'Sin empresa identificada'), dato([...x.progs].slice(0, 4).join(', '), null, 'small')), h('td', null, dato([...x.paises].join(', ') || '—')),
           h('td', { class: 'num' }, dato(bytes(x.env))), h('td', { class: 'num' }, dato(num(x.cons))))))))));
