@@ -381,6 +381,18 @@ const mp3Path = path.join(tmp, 'grabacion de mi nombre.mp3');
     await X.context().close(); await Y.context().close();
   }
 
+  // ---- B (revisión independiente 2). Quien inicia manda otra presentación con otro compromiso antes de revelar (como quien está
+  // en medio y quisiera elegir entre varios): un solo compromiso por conversación, así que salta la alarma. Nunca «verificado» ----
+  { const X = await equipo(browser, 'X3', { plan: 'plus', recompromete: true, revela: 6000 }), Y = await equipo(browser, 'Y3', { recompromete: true, revela: 6000 });
+    const e7 = await invitaUltra(X); await acepta(Y, e7);
+    let vioPalabras = false;
+    const al = (P) => P.evaluate(() => ({ vis: !document.querySelector('#alarma').hidden, por: document.querySelector('#alarma-por').textContent, n: window.gcomPrueba.cuantas() }));
+    await hasta(async () => { if ((await palabrasChat(X)).split(' · ').length === 4 || (await palabrasChat(Y)).split(' · ').length === 4) vioPalabras = true; return (await al(X)).vis && (await al(Y)).vis; }, 25000);
+    const ax = await al(X), ay = await al(Y);
+    comprueba(!vioPalabras && ax.vis && ay.vis && /compromiso previo/.test(ax.por) && /compromiso previo/.test(ay.por) && ax.n === 0 && ay.n === 0, 'B. otro compromiso antes de revelar: alarma y conversación borrada en los dos, nunca palabras', { X: ax, Y: ay, vioPalabras });
+    await X.context().close(); await Y.context().close();
+  }
+
   // ---- 9 y 10. teléfono: tapar al salir, claves borradas en segundo plano, pánico en el PC ----
   { const E = await equipo(browser, 'E', { plan: 'plus' }), M = await equipo(browser, 'M', { movil: true });
     const e3 = await invitaUltra(E); await acepta(M, e3); comprueba(await enChat(E) && await enChat(M), '10. el teléfono entra en Ultra');

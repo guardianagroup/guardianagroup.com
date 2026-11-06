@@ -545,33 +545,43 @@
     if (resp && !resp.ek) return null; // sin la clave ML-KEM de quien inicia no hay respuesta posible
     c.ef = await C.B.efimera(); c.epoca = C.azar(16);
     if (!resp && soyInicio(c)) c.ef.kem = C.B.kemPar();
+    // las 4 palabras, con compromiso previo (cripto.js, compromisoPalabras), uno solo por conversación (segunda revisión, B): quien
+    // inicia saca su número y su compromiso una vez y los repite iguales en cada presentación que inicia, también en las renovaciones
+    // (A); quien responde saca un solo número y lo repite igual en cada respuesta. Los dos van dentro de lo firmado. Quien inicia los
+    // revela cuando ya hay sesión (revelaPalabras). En local, «gcom-prueba-sin-cw» quita el compromiso y «gcom-prueba-recompromete»
+    // manda una presentación más con otro, como haría quien está en medio.
+    const cw = !resp && c.ef.kem && !sinCwPrueba() ? await compromisoMio(c) : null;
+    if (resp && !c.nRMio) c.nRMio = C.azar(32);
     let pq = null;
     if (resp) { const k = C.B.kemEncapsula(resp.ek); pq = { ss: k.ss, ek: resp.ek, ct: k.ct }; }
     c.efs = c.efs || new Map(); c.efs.set(C.hex(c.epoca), c.ef); for (const k of [...c.efs.keys()].slice(0, -4)) { const v = c.efs.get(k); if (v && v.kem) { v.kem.dk.fill(0); v.kem = null; } c.efs.delete(k); }
     const id = c.idB;
     const datos = resp
-      ? await C.B.datosResponde(c.id, id.firmaPub, id.acuerdoPub, id.dsaPub, c.ef.pub, c.epoca, resp.epoca, c.huella, resp.ef, pq.ek, pq.ct)
-      : await C.B.datosInicia(c.id, id.firmaPub, id.acuerdoPub, id.dsaPub, c.ef.pub, c.epoca, c.ef.kem ? c.ef.kem.ek : new Uint8Array(0));
+      ? await C.B.datosResponde(c.id, id.firmaPub, id.acuerdoPub, id.dsaPub, c.ef.pub, c.epoca, resp.epoca, c.huella, resp.ef, pq.ek, pq.ct, c.nRMio)
+      : await C.B.datosInicia(c.id, id.firmaPub, id.acuerdoPub, id.dsaPub, c.ef.pub, c.epoca, c.ef.kem ? c.ef.kem.ek : new Uint8Array(0), cw);
     const sig = await C.B.firma(id, datos), sigpq = await firmaPQ(c, datos);
-    const j = { v: 4, b: 1, firmaPub: C.b64u(id.firmaPub), acuerdoPub: C.b64u(id.acuerdoPub), dsaPub: C.b64u(id.dsaPub), ef: C.b64u(c.ef.pub), epoca: C.b64u(c.epoca), resp: resp ? C.b64u(resp.epoca) : '', sig: C.b64u(sig), sigpq: C.b64u(sigpq) }; // (sin nombre: en Ultra no se envía el de este navegador, que uniría conversaciones)
+    const j = { v: 5, b: 1, firmaPub: C.b64u(id.firmaPub), acuerdoPub: C.b64u(id.acuerdoPub), dsaPub: C.b64u(id.dsaPub), ef: C.b64u(c.ef.pub), epoca: C.b64u(c.epoca), resp: resp ? C.b64u(resp.epoca) : '', sig: C.b64u(sig), sigpq: C.b64u(sigpq) }; // (sin nombre: en Ultra no se envía el de este navegador, que uniría conversaciones)
     if (c.ef.kem) j.kem = C.b64u(c.ef.kem.ek);
     if (pq) j.kemct = C.b64u(pq.ct);
-    // las 4 palabras, con compromiso previo (cripto.js, compromisoPalabras): quien inicia se compromete con 32 bytes al azar y quien
-    // responde manda los suyos; quien inicia los revela cuando ya hay sesión (revelaPalabras). Sin ellos no hay sesión Ultra: una
-    // presentación que inicia sin compromiso, o una respuesta sin número, es alarma (revisión independiente 2, 5 nov 2026, A); y el
-    // compromiso va en todas las que inician, también en las renovaciones, para que nunca falte (en local, «gcom-prueba-sin-cw» lo
-    // quita, como haría quien está en medio)
-    if (!resp && c.ef.kem && !sinCwPrueba()) { const nI = C.azar(32); c.misCompromisos = c.misCompromisos || new Map(); c.misCompromisos.set(C.hex(c.epoca), nI); for (const k of [...c.misCompromisos.keys()].slice(0, -8)) c.misCompromisos.delete(k); j.cw = C.b64u(await C.B.compromisoPalabras(identidadPruebaCompromiso() || c.miHuellaB, nI)); }
-    else if (resp && resp.cw) { const nR = C.azar(32); c.susCompromisos = c.susCompromisos || new Map(); c.susCompromisos.set(C.hex(resp.epoca), { cw: resp.cw, nR }); for (const k of [...c.susCompromisos.keys()].slice(0, -16)) c.susCompromisos.delete(k); j.nr = C.b64u(nR); }
+    if (cw) j.cw = C.b64u(cw);
+    if (resp) j.nr = C.b64u(c.nRMio);
     const iv = C.azar(12);
     const ct = new Uint8Array(await crypto.subtle.encrypt({ name: 'AES-GCM', iv, additionalData: new Uint8Array([1]) }, c.presentacion, C.B.rellena(C.te.encode(JSON.stringify(j)))));
     R.manda(c.id, c.suId || null, C.cat(new Uint8Array([1]), iv, ct));
     c.presentadoEn = Date.now();
     if (!resp) reintenta(c, 4000 + Math.random() * 1500);
+    if (cw && recompromete() && !c.recompromisoHecho) { c.recompromisoHecho = true; setTimeout(() => presentaB(c, null, true), 1500); } // (solo en local)
     return pq;
+  }
+  // el compromiso de quien inicia: uno solo por conversación (con «gcom-prueba-recompromete», en local, la segunda vez otro)
+  async function compromisoMio(c) {
+    if (c.cwMio && recompromete() && c.recompromisoHecho && !c.recomprometido) { c.recomprometido = true; c.cwMio = null; }
+    if (!c.cwMio) { c.nIMio = C.azar(32); c.cwMio = await C.B.compromisoPalabras(identidadPruebaCompromiso() || c.miHuellaB, c.nIMio); }
+    return c.cwMio;
   }
   // Prueba local: quien inicia se compromete con otra identidad y luego se presenta con la suya (como haría quien está en medio y
   // quisiera elegir sus palabras después): quien responde lo detecta al comprobar el compromiso (ultra.js).
+  const recompromete = () => { try { return LOCAL && sessionStorage.getItem('gcom-prueba-recompromete') === '1'; } catch (_) { return false; } };
   const sinCwPrueba = () => { try { return LOCAL && sessionStorage.getItem('gcom-prueba-sin-cw') === '1'; } catch (_) { return false; } };
   const identidadPruebaCompromiso = () => { try { return LOCAL && sessionStorage.getItem('gcom-prueba-otra-identidad') === '1' ? C.azar(48) : null; } catch (_) { return null; } };
   // Las palabras tienen plazo (revisión independiente 2, 5 nov 2026, A): si a los 15 s de confirmar la sesión no las hay, alguien
@@ -588,7 +598,7 @@
     setTimeout(() => {
       if (!c.revela || c.palabrasN || c.estado === 'destruida') return;
       c.palabrasN = { hI: c.miHuellaB, hR: c.huella, nI: c.revela.nI, nR: c.revela.nR }; c.palabras = null;
-      enviaControl(c, { tipo: 'palabras', e: c.revela.e, n: c.revela.n });
+      enviaControl(c, { tipo: 'palabras', n: c.revela.n });
       if (ACTUAL === c.id) pintaCabecera(c);
     }, ms);
   }
@@ -597,14 +607,13 @@
   async function recibeRevelacion(c, j) {
     if (!esB(c) || !c.huella || soyInicio(c)) return;
     if (c.palabrasN) { enviaControl(c, { tipo: 'palabras-ok' }); return; }
-    let e, nI; try { e = C.deB64u(String(j.e || '')); nI = C.deB64u(String(j.n || '')); } catch (_) { return; }
-    const r = c.susCompromisos && c.susCompromisos.get(C.hex(e));
-    if (!r || nI.length !== 32) return;
-    if (C.hex(await C.B.compromisoPalabras(c.huella, nI)) !== C.hex(r.cw)) {
+    let nI; try { nI = C.deB64u(String(j.n || '')); } catch (_) { return; }
+    if (!c.cwSuyo || !c.nRMio || nI.length !== 32) return; // (el único compromiso de quien inicia y el único número de este lado)
+    if (C.hex(await C.B.compromisoPalabras(c.huella, nI)) !== C.hex(c.cwSuyo)) {
       vigila(c, T('Las palabras de verificación no cuadraban con el compromiso previo de la otra parte: alguien podía estar en medio.'), 'mal');
       await alarma(c, 'palabras'); return;
     }
-    c.palabrasN = { hI: c.huella, hR: c.miHuellaB, nI, nR: r.nR }; c.palabras = null; c.susCompromisos = null;
+    c.palabrasN = { hI: c.huella, hR: c.miHuellaB, nI, nR: c.nRMio }; c.palabras = null;
     enviaControl(c, { tipo: 'palabras-ok' });
     if (ACTUAL === c.id) pintaCabecera(c);
   }
@@ -613,7 +622,7 @@
     let j;
     try { j = JSON.parse(C.td.decode(await crypto.subtle.decrypt({ name: 'AES-GCM', iv: b.subarray(1, 13), additionalData: new Uint8Array([1]) }, c.presentacion, b.subarray(13)))); } catch (_) { return; }
     try {
-      if (!j || j.v !== 4 || j.b !== 1) return;
+      if (!j || j.v !== 5 || j.b !== 1) return;
       const firmaPub = C.deB64u(j.firmaPub), acuerdoPub = C.deB64u(j.acuerdoPub), dsaPub = C.deB64u(j.dsaPub), ef = C.deB64u(j.ef), epoca = C.deB64u(j.epoca), sig = C.deB64u(j.sig), sigpq = C.deB64u(j.sigpq), resp = j.resp ? C.deB64u(j.resp) : null;
       const kemEk = j.kem ? C.deB64u(j.kem) : null, kemCt = j.kemct ? C.deB64u(j.kemct) : null;
       const cw = j.cw ? C.deB64u(j.cw) : null, nr = j.nr ? C.deB64u(j.nr) : null; // el compromiso de las palabras y el número de quien responde
@@ -627,8 +636,8 @@
       const efMia = resp && c.efs ? c.efs.get(C.hex(resp)) : null;
       if (resp && (!efMia || !efMia.kem)) return; // respuesta a una época que no es de las últimas mías (o ya usada): fuera
       const datos = resp
-        ? await C.B.datosResponde(c.id, firmaPub, acuerdoPub, dsaPub, ef, epoca, resp, c.miHuellaB, efMia.pub, efMia.kem.ek, kemCt)
-        : await C.B.datosInicia(c.id, firmaPub, acuerdoPub, dsaPub, ef, epoca, kemEk || new Uint8Array(0));
+        ? await C.B.datosResponde(c.id, firmaPub, acuerdoPub, dsaPub, ef, epoca, resp, c.miHuellaB, efMia.pub, efMia.kem.ek, kemCt, nr)
+        : await C.B.datosInicia(c.id, firmaPub, acuerdoPub, dsaPub, ef, epoca, kemEk || new Uint8Array(0), cw);
       if (!(await C.B.verifica(firmaPub, sig, datos)) || !C.B.verificaPQ(dsaPub, sigpq, datos)) return; // las dos firmas, o nada
       const nueva = !c.huella;
       if (nueva) { c.firmaPub = firmaPub; c.acuerdoPub = acuerdoPub; c.dsaPub = dsaPub; c.huella = huella; c.estado = 'activa'; if (!c.nombre) c.nombre = String(j.nombre || '').slice(0, 40); }
@@ -638,12 +647,16 @@
       // sin el compromiso de las palabras (al iniciar con ML-KEM) o sin el número (al responder) no hay sesión Ultra: alguien lo ha
       // quitado (las que inician sin ML-KEM solo piden que el otro se presente: no llevan compromiso ni hacen sesión)
       if ((!resp && kemEk && !cw) || (resp && !nr)) { vigila(c, T('Llegó una presentación sin el compromiso de las palabras de verificación: alguien podía estar en medio.'), 'mal'); await alarma(c, 'sin-palabras'); return; }
-      if (!soyInicio(c)) { if (kemEk && !resp) { const pq = await presentaB(c, { epoca, ef, ek: kemEk, cw }); await derivaSesionB(c, ef, c.ef, pq); } }
+      // uno solo de cada por conversación (segunda revisión, B): quien responde se queda con el primer compromiso de quien inicia y
+      // quien inicia con el primer número de quien responde; otro distinto, antes o después de la revelación, es alarma
+      const otro = (a, b) => C.hex(a) !== C.hex(b);
+      if (!resp && kemEk && !soyInicio(c)) { if (!c.cwSuyo) c.cwSuyo = cw; else if (otro(cw, c.cwSuyo)) { vigila(c, T('La otra parte cambió su compromiso de las palabras de verificación: alguien podía estar en medio.'), 'mal'); await alarma(c, 'palabras'); return; } }
+      if (resp && soyInicio(c)) { if (!c.nRSuyo) c.nRSuyo = nr; else if (otro(nr, c.nRSuyo)) { vigila(c, T('La otra parte cambió su compromiso de las palabras de verificación: alguien podía estar en medio.'), 'mal'); await alarma(c, 'palabras'); return; } }
+      if (!soyInicio(c)) { if (kemEk && !resp) { const pq = await presentaB(c, { epoca, ef, ek: kemEk }); await derivaSesionB(c, ef, c.ef, pq); } }
       else if (resp) {
         const pq = { ss: C.B.kemAbre(kemCt, efMia.kem.dk), ek: efMia.kem.ek, ct: kemCt }; efMia.kem.dk.fill(0); efMia.kem = null; await derivaSesionB(c, ef, efMia, pq);
-        // la respuesta a uno de mis inicios, con su número: ya se pueden revelar los míos y sacar las palabras
-        const nI = c.misCompromisos && c.misCompromisos.get(C.hex(resp));
-        if (!c.palabrasN && !c.revela && nI && nr) { c.revela = { e: C.b64u(resp), n: C.b64u(nI), nI, nR: nr }; c.misCompromisos = null; revelaPalabras(c); }
+        // la respuesta a uno de mis inicios, con su número: ya se puede revelar el mío y sacar las palabras
+        if (!c.palabrasN && !c.revela && c.nIMio && c.nRSuyo) { c.revela = { n: C.b64u(c.nIMio), nI: c.nIMio, nR: c.nRSuyo }; revelaPalabras(c); }
       }
       else await presentaB(c, null);
       if (nueva) {
@@ -676,7 +689,7 @@
     enviaControl(c, { tipo: 'ok' });
     enviaControl(c, { tipo: 'nivel', n: miNivel() }); // el nivel de este lado, a la vista del otro (ronda 93); en Ultra, sin nombre
     if (c.verificada) enviaControl(c, { tipo: 'verificada', si: 1, n: await hNumero(c) });
-    if (c.revela && c.palabrasN && !c.revelaOk) enviaControl(c, { tipo: 'palabras', e: c.revela.e, n: c.revela.n }); // por si se perdió
+    if (c.revela && c.palabrasN && !c.revelaOk) enviaControl(c, { tipo: 'palabras', n: c.revela.n }); // por si se perdió
     if (LL && LL.ocupado && (LLAMADA_CONV || ACTUAL) === c.id) LL.volvio(); // también en el blindado (revisión, 29 Oct 2026)
     enviaCola(c);
     reenviaCustodias(c);

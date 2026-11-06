@@ -240,14 +240,16 @@
   function kemParB() { const k = kem1024(); if (!k) throw new Error('ML-KEM-1024 no disponible'); const { publicKey, secretKey } = k.keygen(); return { ek: new Uint8Array(publicKey), dk: new Uint8Array(secretKey) }; }
   function kemEncapsulaB(ek) { const k = kem1024(); if (!k || u8(ek).length !== B_EK) throw new Error('ML-KEM-1024 no disponible'); const { cipherText, sharedSecret } = k.encapsulate(u8(ek)); return { ct: new Uint8Array(cipherText), ss: new Uint8Array(sharedSecret) }; }
   function kemAbreB(ct, dk) { const k = kem1024(); if (!k || u8(ct).length !== B_CT || u8(dk).length !== B_DK) throw new Error('ML-KEM-1024 no disponible'); return new Uint8Array(k.decapsulate(u8(ct), u8(dk))); }
-  // Lo que firman las presentaciones blindadas (las dos firmas sobre los mismos bytes): quien inicia, su identidad, su
-  // efímera, su época y la huella de su clave ML-KEM; quien responde, además, la época, la huella y la efímera de quien
-  // inicia y el texto cifrado ML-KEM entero.
-  async function datosIniciaB(sala, firmaPub, acuerdoPub, dsaPub, ef, epoca, ek) {
-    return cat(te.encode('GUARDIANA v4 BLINDADA INICIA\n' + sala + '\n'), u8(firmaPub), u8(acuerdoPub), await sha384(dsaPub), u8(ef), u8(epoca), await sha384(ek));
+  // Lo que firman las presentaciones de Ultra (las dos firmas sobre los mismos bytes): quien inicia, su identidad, su efímera, su
+  // época, la huella de su clave ML-KEM y el compromiso de las palabras (48 bytes; vacío en las que solo piden que el otro se
+  // presente); quien responde, además, la época, la huella y la efímera de quien inicia, el texto encriptado ML-KEM entero y su
+  // número para las palabras (32 bytes). El compromiso y el número van firmados desde la v5 (segunda revisión independiente,
+  // 5 nov 2026, B: antes solo los cubría el sobre AES-GCM de la invitación).
+  async function datosIniciaB(sala, firmaPub, acuerdoPub, dsaPub, ef, epoca, ek, cw) {
+    return cat(te.encode('GUARDIANA v5 ULTRA INICIA\n' + sala + '\n'), u8(firmaPub), u8(acuerdoPub), await sha384(dsaPub), u8(ef), u8(epoca), await sha384(ek), u8(cw || new Uint8Array(0)));
   }
-  async function datosRespondeB(sala, firmaPub, acuerdoPub, dsaPub, ef, epoca, respEpoca, suHuella, suEf, ek, ct) {
-    return cat(te.encode('GUARDIANA v4 BLINDADA RESPONDE\n' + sala + '\n'), u8(firmaPub), u8(acuerdoPub), await sha384(dsaPub), u8(ef), u8(epoca), u8(respEpoca), u8(suHuella), u8(suEf), await sha384(ek), u8(ct));
+  async function datosRespondeB(sala, firmaPub, acuerdoPub, dsaPub, ef, epoca, respEpoca, suHuella, suEf, ek, ct, nr) {
+    return cat(te.encode('GUARDIANA v5 ULTRA RESPONDE\n' + sala + '\n'), u8(firmaPub), u8(acuerdoPub), await sha384(dsaPub), u8(ef), u8(epoca), u8(respEpoca), u8(suHuella), u8(suEf), await sha384(ek), u8(ct), u8(nr || new Uint8Array(0)));
   }
   // Secreto de la sesión blindada: DH(efA,efB) ‖ DH(idA,efB) ‖ DH(efA,idB) ‖ ss ML-KEM-1024 ‖ psk, sal = sala, info = la
   // transcripción (huellas SHA-384, efímeras, huellas de ek y ct). Salen 128 bytes: cadena A→B (48), cadena B→A (48) y el
@@ -305,6 +307,8 @@
   // llamada y en ZRTP: quien inicia manda primero el compromiso, SHA-384(etiqueta ‖ su huella ‖ 32 bytes al azar); quien responde manda
   // sus 32 bytes al azar ya sabiendo solo el compromiso; quien inicia revela los suyos y quien responde comprueba el compromiso. Las
   // palabras salen de las dos huellas y de los dos números, en el orden de los papeles: quien esté en medio ya no puede elegirlas después de ver las del otro.
+  // Un solo compromiso y un solo número por conversación, como el Commit único de ZRTP (segunda revisión, B: con uno nuevo en cada
+  // época, quien estaba en medio podía elegir entre varios): uno distinto antes o después es alarma (app.js).
   async function compromisoPalabras(huellaI, nI) { return sha384(cat(te.encode('GUARDIANA compromiso de las palabras v1\n'), u8(huellaI), u8(nI))); }
   async function palabrasB(huellaI, huellaR, nI, nR) { return palabrasDe(await sha384(cat(te.encode('GUARDIANA palabras de verificación v2\n'), u8(huellaI), u8(huellaR), u8(nI), u8(nR)))); }
 
