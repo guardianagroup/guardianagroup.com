@@ -46,6 +46,11 @@
 .vpn-tarjeta[data-fase="sin_respuesta"] .vpn-anillo b, .vpn-tarjeta[data-fase="reconectando"] .vpn-anillo b { border-color: rgba(224,182,106,.55); box-shadow: 0 0 40px rgba(224,182,106,.14); }
 .vpn-tarjeta[data-fase="error"] .vpn-anillo, .vpn-tarjeta[data-fase="no_disponible"] .vpn-anillo, .vpn-tarjeta[data-fase="sin_programa"] .vpn-anillo { color: var(--e-alerta); }
 .vpn-tarjeta[data-fase="error"] .vpn-anillo i, .vpn-tarjeta[data-fase="no_disponible"] .vpn-anillo i, .vpn-tarjeta[data-fase="sin_programa"] .vpn-anillo i { border-color: rgba(224,122,108,.38); }
+/* 6 Nov 2026: nothing of the computer's programs goes out (its server silent, or the block still in Windows): red, as the icon next to the clock */
+.vpn-tarjeta[data-bloqueo="1"] { border-color: rgba(224,122,108,.45); background: radial-gradient(760px 240px at 0% 0%, rgba(224,122,108,.08), transparent 70%), linear-gradient(180deg, rgba(20,15,16,.94), rgba(8,12,18,.94)); }
+.vpn-tarjeta[data-bloqueo="1"] .vpn-anillo { color: var(--e-alerta); }
+.vpn-tarjeta[data-bloqueo="1"] .vpn-anillo i { border-color: rgba(224,122,108,.42); }
+.vpn-tarjeta[data-bloqueo="1"] .vpn-anillo b { border-color: rgba(224,122,108,.55); box-shadow: 0 0 40px rgba(224,122,108,.14); }
 @keyframes vpn-gira { to { transform: rotate(360deg); } }
 @media (prefers-reduced-motion: reduce) { .vpn-anillo i { animation: none !important; } }
 
