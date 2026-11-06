@@ -3401,7 +3401,13 @@
         { const w = doc.createTreeWalker(doc, NodeFilter.SHOW_COMMENT), fuera = []; while (w.nextNode()) fuera.push(w.currentNode); for (const n of fuera) n.remove(); }
         const EDITOR = /^(inkscape|sodipodi|sketch|serif|i|x|graph):|^xmlns:(inkscape|sodipodi|sketch|serif|dc|cc|rdf|i|x|graph)$|^data-name$/i;
         for (const el of [...doc.getElementsByTagName('*')]) { if (/^(inkscape|sodipodi|sketch|serif):/i.test(el.nodeName)) { el.remove(); continue; } for (const a of [...el.attributes]) if (EDITOR.test(a.name)) el.removeAttribute(a.name); }
-        const nf = new File([new XMLSerializer().serializeToString(doc)], nombre || 'dibujo.svg', { type: 'image/svg+xml', lastModified: Date.now() }); nf.__limpia = true; return nf;
+        // (segunda revisión independiente, 5 nov 2026, S4) el título y la descripción también fuera (pueden llevar nombres); y lo que
+        // lleve dentro otra cosa (una imagen incrustada, que conserva sus datos, o un enlace a un archivo o una ruta del equipo, que
+        // puede llevar el nombre de usuario) no se puede limpiar aquí: ese SVG no sale «limpio» y pide «Enviarlo así»
+        for (const n of [...doc.getElementsByTagName('title'), ...doc.getElementsByTagName('desc')]) n.remove();
+        const RUTA_EQUIPO = /^\s*(data:|file:|[a-z]:[\\/]|\\\\|\/)/i, URLR = /url\(\s*['"]?\s*(data:|file:)/i;
+        const dentro = [...doc.getElementsByTagName('*')].some((el) => /^(image|feimage|foreignobject|script)$/i.test(el.localName) || (el.localName.toLowerCase() === 'style' && URLR.test(el.textContent || '')) || [...el.attributes].some((x) => (/(^|:)href$/i.test(x.name) && RUTA_EQUIPO.test(x.value)) || URLR.test(x.value)));
+        const nf = new File([new XMLSerializer().serializeToString(doc)], nombre || 'dibujo.svg', { type: 'image/svg+xml', lastModified: Date.now() }); if (!dentro) nf.__limpia = true; return nf;
       }
       if (mime === 'audio/mpeg' || mime === 'audio/mp3' || /\.mp3$/i.test(nombre)) {
         let b = new Uint8Array(await f.arrayBuffer());

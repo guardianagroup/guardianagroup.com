@@ -110,6 +110,8 @@ const docPath = path.join(tmp, 'informe de mi nombre.pdf'); fs.writeFileSync(doc
 const doc2Path = path.join(tmp, 'otro informe.pdf'); fs.writeFileSync(doc2Path, Buffer.concat([Buffer.from('%PDF-1.4\n% GUARDIANA prueba 2\n'), Buffer.alloc(40 * 1024, 9)]));
 const svgPath = path.join(tmp, 'dibujo de mi nombre.svg'); fs.writeFileSync(svgPath, '<?xml version="1.0" encoding="UTF-8"?>\n<!-- hecho por Fulano Prueba en su equipo -->\n<svg xmlns="http://www.w3.org/2000/svg" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" width="40" height="40" inkscape:version="1.3 (Fulano Prueba)" sodipodi:docname="dibujo de Fulano Prueba.svg"><metadata><rdf:RDF><cc:Work><dc:creator><cc:Agent><dc:title>Fulano Prueba</dc:title></cc:Agent></dc:creator></cc:Work></rdf:RDF></metadata><sodipodi:namedview id="nv" inkscape:window-width="1920"/><rect width="40" height="40" fill="#2a6" inkscape:label="capa de Fulano Prueba"/></svg>\n');
 // un MP3 con etiquetas ID3v2 (al principio) e ID3v1 (al final, «TAG»): título y autor
+// un SVG con una foto incrustada (data:), que conservaría sus datos: no se puede limpiar aquí (revisión independiente 2, S4)
+const svg2Path = path.join(tmp, 'plano con foto.svg'); fs.writeFileSync(svg2Path, '<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"><title>Plano de Fulano</title><image href="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/wAALCAABAAEBAREA/8QAFAABAAAAAAAAAAAAAAAAAAAACf/EABQQAQAAAAAAAAAAAAAAAAAAAAD/2gAIAQEAAD8AKp//2Q==" width="40" height="40"/></svg>\n');
 const mp3Path = path.join(tmp, 'grabacion de mi nombre.mp3');
 { const txt = Buffer.from('\0Cancion de Fulano Prueba'), fr = Buffer.concat([Buffer.from('TIT2'), Buffer.from([0, 0, 0, txt.length, 0, 0]), txt]);
   const tam = fr.length, cab = Buffer.from([0x49, 0x44, 0x33, 3, 0, 0, (tam >> 21) & 127, (tam >> 14) & 127, (tam >> 7) & 127, tam & 127]);
@@ -244,6 +246,12 @@ const mp3Path = path.join(tmp, 'grabacion de mi nombre.mp3');
       const b = await recibe(re);
       comprueba(b.length > 0 && mira(b), txt, { bytes: b.length, inicio: b.toString('latin1', 0, 40) });
     }
+    // S4: un SVG con una foto incrustada no sale «limpio»: el aviso y «Enviarlo así», como un documento
+    { const [chs] = await Promise.all([A.waitForEvent('filechooser'), A.evaluate(() => document.querySelector('#archivo').click())]);
+      await chs.setFiles(svg2Path); await espera(1500);
+      const h = await A.evaluate(() => ({ autor: !document.querySelector('#envio-autor').hidden, asi: !document.querySelector('#envio-asi').hidden, apagado: document.querySelector('#envio-si').disabled }));
+      comprueba(h.autor && h.asi && h.apagado, 'S4. un SVG con una imagen incrustada no sale limpio: aviso y «Enviar» apagado hasta «Enviarlo así»', h);
+      await A.click('#envio-no'); await espera(500); }
     // un documento (PDF): el aviso de lo que puede llevar dentro, y «Enviar» apagado hasta marcar «Enviarlo así»
     const [ch2] = await Promise.all([A.waitForEvent('filechooser'), A.evaluate(() => document.querySelector('#archivo').click())]);
     await ch2.setFiles(docPath); await espera(1500);
