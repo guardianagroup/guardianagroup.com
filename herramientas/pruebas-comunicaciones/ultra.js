@@ -196,6 +196,7 @@ const mp3Path = path.join(tmp, 'grabacion de mi nombre.mp3');
   comprueba(/Palabras de verificación/.test(hojaSeg) && /no tiene buzón/.test(hojaSeg) && /Nada guardado/.test(hojaSeg) && /PC con GUARDIANA/.test(hojaSeg) && /cbr=1/.test(hojaSeg), '3. «Seguridad y verificación» dice las palabras, nada guardado, sin buzón, cbr y el nivel');
   comprueba(/una trama de 1 KB por segundo/.test(hojaSeg) && !/latido de relleno cada 5 s/.test(hojaSeg), 'R2. y el ritmo que de verdad lleva: una trama de 1 KB por segundo', (hojaSeg.match(/Tamaño y ritmo.{0,160}/) || [''])[0]);
   comprueba(/historial del navegador/.test(hojaSeg) && /según lo dice su propio programa/.test(hojaSeg) && /no se envían ni el país de tu equipo ni tu nombre/.test(hojaSeg), 'R5/R8/R9. «Límites»: el historial, el nivel según cada programa, ni país ni nombre');
+  comprueba(/la hace esta página, no el relé/.test(hojaSeg), 'R6. «Límites» dice que la puerta de Plus está en la página, no en el relé');
   comprueba(!/CNSA/.test(hojaSeg) && !(await A.evaluate(() => /CNSA/.test(document.body.innerText + ' ' + document.querySelector('#cconfianza').textContent))), '10. sin «CNSA» en «Seguridad y verificación», en la cabecera del chat ni en nada visible');
   await foto(A, '04-pc-seguridad');
   await A.click('#escudo-cerrar'); await espera(400);
@@ -215,6 +216,10 @@ const mp3Path = path.join(tmp, 'grabacion de mi nombre.mp3');
     const recibida = await B.evaluate((id) => window.gcomPrueba.archivo(id), fB.id);
     const bytes = recibida ? Buffer.from(recibida.b64.replace(/-/g, '+').replace(/_/g, '/'), 'base64') : Buffer.alloc(0);
     comprueba(recibida && bytes.length > 0 && !bytes.toString('latin1').includes('Exif') && !bytes.toString('latin1').includes('GPS') && bytes[0] === 0xff && bytes[1] === 0xd8, '7. la foto llega sin el segmento EXIF (ni el GPS) y sigue siendo un JPEG', { bytes: bytes.length, nombre: recibida && recibida.nombre });
+    // en Ultra, el viaje del archivo no lleva país en ningún lado (ni el de la zona horaria propia ni el que diga el otro)
+    { const pa = (P) => P.evaluate(() => [...GuardianaCom.viajes.values()].map((v) => [v.paisMio || '', v.paisSuyo || '']));
+      const xa = await pa(A), xb = await pa(B);
+      comprueba(xa.length && xb.length && [...xa, ...xb].every(([m, s]) => !m && !s), 'fc5. en Ultra, el viaje del archivo no lleva país en ningún lado', { A: xa, B: xb }); }
     // la foto que no se puede volver a dibujar: en Ultra no sale (el original llevaría sus datos), y lo dice
     { const antes = (await A.evaluate(() => window.gcomPrueba.mensajes())).length;
       const [ch3] = await Promise.all([A.waitForEvent('filechooser'), A.evaluate(() => document.querySelector('#archivo').click())]);
