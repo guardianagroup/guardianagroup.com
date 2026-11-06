@@ -3931,13 +3931,14 @@
 "Vale 10 minutos y una sola vez.":"有效期 10 分钟，仅可使用一次。",
 "Con el código, la llave de la conversación viaja cerrada con ese código, que el servidor de GUARDIANA no conoce.":"使用代码时，对话的钥匙会以该代码封存后传送，而 GUARDIANA 服务器不知道这个代码。",
 "Cancelar el código":"取消代码",
-"Se cortó la conexión con el relé: pide un código nuevo.":"与中继的连接已中断：请重新获取一个代码。",
+"Se cortó la conexión con el relé: crea uno nuevo.":"与中继的连接已中断：请新建一个。",
 "Código erróneo, caducado o ya usado.":"代码错误、已过期或已被使用。",
 "9 cifras, o el código Ultra de 16 caracteres":"9 位数字，或 16 个字符的 Ultra 代码",
 "Escribe el código que te han enviado":"输入发给你的代码",
 "Sesión Ultra":"Ultra 会话",
 "Invitación Ultra":"Ultra 邀请",
-"Invitación Ultra · esperando":"Ultra 邀请 · 等待中"
+"Invitación Ultra · esperando":"Ultra 邀请 · 等待中",
+"Alguien ha escrito el código: conectando…":"有人已输入代码：正在连接…"
 },
 "p":{
 "intento":"今天尝试最多的：{1}，{2} {2?次|次}。",

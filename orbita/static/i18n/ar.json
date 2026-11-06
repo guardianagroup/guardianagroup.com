@@ -3931,13 +3931,14 @@
 "Vale 10 minutos y una sola vez.":"صالح لمدة 10 دقائق ولاستخدام واحد فقط.",
 "Con el código, la llave de la conversación viaja cerrada con ese código, que el servidor de GUARDIANA no conoce.":"مع الرمز، ينتقل مفتاح المحادثة مُقفَلًا بهذا الرمز، الذي لا يعرفه خادم GUARDIANA.",
 "Cancelar el código":"إلغاء الرمز",
-"Se cortó la conexión con el relé: pide un código nuevo.":"انقطع الاتصال بالمُرحِّل: اطلب رمزًا جديدًا.",
+"Se cortó la conexión con el relé: crea uno nuevo.":"انقطع الاتصال بالمُرحِّل: أنشئ رمزًا جديدًا.",
 "Código erróneo, caducado o ya usado.":"رمز خاطئ أو منتهي الصلاحية أو مُستخدَم من قبل.",
 "9 cifras, o el código Ultra de 16 caracteres":"9 أرقام، أو رمز Ultra المكوّن من 16 حرفًا",
 "Escribe el código que te han enviado":"اكتب الرمز الذي أُرسل إليك",
 "Sesión Ultra":"جلسة Ultra",
 "Invitación Ultra":"دعوة Ultra",
-"Invitación Ultra · esperando":"دعوة Ultra · في الانتظار"
+"Invitación Ultra · esperando":"دعوة Ultra · في الانتظار",
+"Alguien ha escrito el código: conectando…":"كتب أحدهم الرمز: جارٍ الاتصال…"
 },
 "p":{
 "intento":"الأكثر محاولةً اليوم: {1}، {2} {2?مرة|مرات}.",

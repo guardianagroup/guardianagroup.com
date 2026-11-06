@@ -3931,13 +3931,14 @@
 "Vale 10 minutos y una sola vez.":"10 నిమిషాల పాటు, ఒక్కసారి వాడటానికి మాత్రమే చెల్లుతుంది.",
 "Con el código, la llave de la conversación viaja cerrada con ese código, que el servidor de GUARDIANA no conoce.":"కోడ్‌తో, సంభాషణ తాళంచెవి ఆ కోడ్‌తో మూసివేయబడి ప్రయాణిస్తుంది; ఆ కోడ్ GUARDIANA సర్వర్‌కు తెలియదు.",
 "Cancelar el código":"కోడ్‌ను రద్దు చేయి",
-"Se cortó la conexión con el relé: pide un código nuevo.":"రిలేతో కనెక్షన్ తెగిపోయింది: కొత్త కోడ్ అడగండి.",
+"Se cortó la conexión con el relé: crea uno nuevo.":"రిలేతో కనెక్షన్ తెగిపోయింది: కొత్త కోడ్ సృష్టించండి.",
 "Código erróneo, caducado o ya usado.":"కోడ్ తప్పు, గడువు ముగిసింది లేదా ఇప్పటికే వాడబడింది.",
 "9 cifras, o el código Ultra de 16 caracteres":"9 అంకెలు, లేదా 16 అక్షరాల Ultra కోడ్",
 "Escribe el código que te han enviado":"మీకు పంపిన కోడ్‌ను టైప్ చేయండి",
 "Sesión Ultra":"Ultra సెషన్",
 "Invitación Ultra":"Ultra ఆహ్వానం",
-"Invitación Ultra · esperando":"Ultra ఆహ్వానం · వేచి ఉంది"
+"Invitación Ultra · esperando":"Ultra ఆహ్వానం · వేచి ఉంది",
+"Alguien ha escrito el código: conectando…":"ఎవరో కోడ్ టైప్ చేశారు: కనెక్ట్ చేస్తోంది…"
 },
 "p":{
 "intento":"ఈరోజు ఎక్కువగా ప్రయత్నించింది: {1}, {2} {2?సారి|సార్లు}.",

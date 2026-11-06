@@ -3931,13 +3931,14 @@
 "Vale 10 minutos y una sola vez.":"10 நிமிடங்களுக்கு, ஒரே ஒரு முறை மட்டுமே செல்லுபடியாகும்.",
 "Con el código, la llave de la conversación viaja cerrada con ese código, que el servidor de GUARDIANA no conoce.":"குறியீட்டுடன், உரையாடலின் சாவி அந்தக் குறியீட்டால் பூட்டப்பட்டுச் செல்கிறது; அந்தக் குறியீடு GUARDIANA சேவையகத்துக்குத் தெரியாது.",
 "Cancelar el código":"குறியீட்டை ரத்து செய்",
-"Se cortó la conexión con el relé: pide un código nuevo.":"ரிலேயுடனான இணைப்பு துண்டிக்கப்பட்டது: புதிய குறியீட்டைக் கேளுங்கள்.",
+"Se cortó la conexión con el relé: crea uno nuevo.":"ரிலேயுடனான இணைப்பு துண்டிக்கப்பட்டது: புதிய குறியீட்டை உருவாக்குங்கள்.",
 "Código erróneo, caducado o ya usado.":"குறியீடு தவறானது, காலாவதியானது அல்லது ஏற்கெனவே பயன்படுத்தப்பட்டது.",
 "9 cifras, o el código Ultra de 16 caracteres":"9 இலக்கங்கள், அல்லது 16 எழுத்துகள் கொண்ட Ultra குறியீடு",
 "Escribe el código que te han enviado":"உங்களுக்கு அனுப்பப்பட்ட குறியீட்டை உள்ளிடவும்",
 "Sesión Ultra":"Ultra அமர்வு",
 "Invitación Ultra":"Ultra அழைப்பு",
-"Invitación Ultra · esperando":"Ultra அழைப்பு · காத்திருக்கிறது"
+"Invitación Ultra · esperando":"Ultra அழைப்பு · காத்திருக்கிறது",
+"Alguien ha escrito el código: conectando…":"யாரோ குறியீட்டை உள்ளிட்டுவிட்டார்: இணைக்கிறது…"
 },
 "p":{
 "intento":"இன்று அதிகம் முயன்றது: {1}, {2} {2?முறை|முறை}.",

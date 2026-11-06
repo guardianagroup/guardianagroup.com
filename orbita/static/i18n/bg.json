@@ -3931,13 +3931,14 @@
 "Vale 10 minutos y una sola vez.":"Валиден е 10 минути и за еднократна употреба.",
 "Con el código, la llave de la conversación viaja cerrada con ese código, que el servidor de GUARDIANA no conoce.":"С кода ключът на разговора пътува заключен с този код, който сървърът на GUARDIANA не знае.",
 "Cancelar el código":"Отмени кода",
-"Se cortó la conexión con el relé: pide un código nuevo.":"Връзката с релето прекъсна: поискай нов код.",
+"Se cortó la conexión con el relé: crea uno nuevo.":"Връзката с релето прекъсна: създай нов.",
 "Código erróneo, caducado o ya usado.":"Грешен, изтекъл или вече използван код.",
 "9 cifras, o el código Ultra de 16 caracteres":"9 цифри или кодът Ultra от 16 знака",
 "Escribe el código que te han enviado":"Въведете кода, който са ви изпратили",
 "Sesión Ultra":"Сесия Ultra",
 "Invitación Ultra":"Покана Ultra",
-"Invitación Ultra · esperando":"Покана Ultra · изчакване"
+"Invitación Ultra · esperando":"Покана Ultra · изчакване",
+"Alguien ha escrito el código: conectando…":"Някой въведе кода: свързване…"
 },
 "p":{
 "intento":"Най-настойчивата днес: {1}, {2} {2?път|пъти}.",

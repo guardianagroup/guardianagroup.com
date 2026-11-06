@@ -3931,13 +3931,14 @@
 "Vale 10 minutos y una sola vez.":"Có hiệu lực trong 10 phút và chỉ dùng được một lần.",
 "Con el código, la llave de la conversación viaja cerrada con ese código, que el servidor de GUARDIANA no conoce.":"Với mã này, chìa khóa của cuộc trò chuyện được gửi đi khi đã khóa bằng chính mã đó, và máy chủ GUARDIANA không biết mã đó.",
 "Cancelar el código":"Hủy mã",
-"Se cortó la conexión con el relé: pide un código nuevo.":"Kết nối với relay đã bị ngắt: hãy xin mã mới.",
+"Se cortó la conexión con el relé: crea uno nuevo.":"Kết nối với relay đã bị ngắt: hãy tạo mã mới.",
 "Código erróneo, caducado o ya usado.":"Mã sai, đã hết hạn hoặc đã được dùng.",
 "9 cifras, o el código Ultra de 16 caracteres":"9 chữ số, hoặc mã Ultra gồm 16 ký tự",
 "Escribe el código que te han enviado":"Nhập mã bạn được gửi",
 "Sesión Ultra":"Phiên Ultra",
 "Invitación Ultra":"Lời mời Ultra",
-"Invitación Ultra · esperando":"Lời mời Ultra · đang chờ"
+"Invitación Ultra · esperando":"Lời mời Ultra · đang chờ",
+"Alguien ha escrito el código: conectando…":"Có người đã nhập mã: đang kết nối…"
 },
 "p":{
 "intento":"Cố gắng nhiều nhất hôm nay: {1}, {2} {2?lần|lần}.",

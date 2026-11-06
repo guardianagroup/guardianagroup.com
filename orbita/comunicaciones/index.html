@@ -41,7 +41,7 @@
 <link rel="canonical" href="https://guardianagroup.com/orbita/comunicaciones/">
 <link rel="icon" href="/favicon.ico">
 <link rel="stylesheet" href="componentes.css?v=20261028m">
-<link rel="stylesheet" href="app.css?v=20261106-ucod">
+<link rel="stylesheet" href="app.css?v=20261106-ucod2">
 <link rel="stylesheet" href="diseno.css?v=20261031a">
 <link rel="stylesheet" href="viaje.css?v=20261029b">
 <!-- antes de pintar: como app desde el primer fotograma y, al volver a un chat tras recargar, sin enseñar el inicio entretanto -->
@@ -371,10 +371,15 @@
       <p class="t enlace-copiado" id="enlace-copiado" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"/></svg><span>Enlace copiado</span></p>
       <div class="enlace-fila"><input class="campo" id="enlace-b" readonly translate="no" spellcheck="false" aria-label="Enlace de la invitación"><button type="button" class="boton principal" id="enlace-copiar">Copiar enlace</button><button type="button" class="boton" id="enlace-compartir" hidden>Compartir enlace</button></div>
       <details class="qr-plegado"><summary>Mostrar el código QR (para abrirlo con un móvil)</summary><div class="qr" id="enlace-qr" role="img" aria-label="Código QR de la invitación"></div></details>
+      <!-- solo si hay un problema (la invitación ya la usó otra persona); sin «Esperando…» (dueño, 28 Oct 2026, 19:05) -->
+      <p class="t estado" id="enlace-estado" role="status" hidden></p>
+      <div class="fila centro"><button type="button" class="boton" id="enlace-cancelar"><span class="solo-pc">Cancelar la invitación</span><span class="solo-movil">Cancelar</span></button></div>
+      </div>
       <!-- Código Ultra (6 nov 2026; el dueño lo eligió así): la misma invitación, también con un código de 16 caracteres (80 bits) que
            el servidor no conoce. Solo al pulsar «Usar un código» se deja en el relé el sobre (la llave cerrada con una clave que sale del
            código) bajo un buzón de 9 cifras que también sale del código (cripto.js, cierraSobreU; app.js, publicaCodigoU). Con el enlace
-           solo, el relé no guarda nada. Únicamente en las invitaciones Ultra. -->
+           solo, el relé no guarda nada. Únicamente en las invitaciones Ultra. Fuera de #enlace-vista (revisión independiente, M2): tras
+           «Copiar enlace» sigue a la vista, debajo de la espera (app.css, order) -->
       <div class="ucod" id="ucod" hidden>
         <button type="button" class="ucod-pide" id="ucod-pide"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 9h14M5 15h14M10 4L8 20M16 4l-2 16"/></svg><span>Usar un código</span></button>
         <div class="ucod-caja" id="ucod-caja" hidden>
@@ -386,10 +391,6 @@
           <p class="t ucod-estado" id="ucod-estado" role="status" hidden></p>
           <div class="fila centro"><button type="button" class="boton" id="ucod-nuevo" hidden>Nuevo código</button><button type="button" class="boton" id="ucod-quita">Cancelar el código</button></div>
         </div>
-      </div>
-      <!-- solo si hay un problema (la invitación ya la usó otra persona); sin «Esperando…» (dueño, 28 Oct 2026, 19:05) -->
-      <p class="t estado" id="enlace-estado" role="status" hidden></p>
-      <div class="fila centro"><button type="button" class="boton" id="enlace-cancelar"><span class="solo-pc">Cancelar la invitación</span><span class="solo-movil">Cancelar</span></button></div>
       </div>
       <div class="enlace-espera" id="enlace-espera" hidden>
         <div class="espera-anillos" aria-hidden="true"><span></span><span></span><span></span><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></div>
@@ -1281,18 +1282,18 @@
 <!-- En el ordenador, en el chat blindado: la pantalla se tapa con la tecla de captura o si la ventana pierde el foco (29 Oct 2026, 08:02) -->
 <!-- y, en Ultra, al pasar la app a segundo plano o perder el foco (3 Nov 2026, ronda 93): la miniatura de la multitarea sale tapada -->
 <div class="captura-velo" id="captura-velo" role="alert" hidden><div><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><b>Modo Ultra</b><span class="cv-captura">Captura detectada: se vació el portapapeles; una web no puede impedir capturas</span><span class="cv-fuera">Pantalla tapada mientras la app está en segundo plano</span></div></div>
-<script src="/orbita/static/idioma.js?v=20261106-ucod"></script>
+<script src="/orbita/static/idioma.js?v=20261106-ucod2"></script>
 <script src="pq-mlkem.js?v=20261027a"></script>
 <script src="pq-cnsa.js?v=20261027a"></script>
 <script src="qrhaz.js?v=20261027a"></script>
 <script src="palabras.js?v=20261105-ultra2-pal"></script>
-<script src="cripto.js?v=20261106-ucod"></script>
+<script src="cripto.js?v=20261106-ucod2"></script>
 <script src="/orbita/static/red-nucleo.js?v=20261105-ultra2"></script>
 <script src="rele.js?v=20261102c"></script>
 <script src="sha256.js?v=20261027a"></script>
 <script src="viaje-datos.js?v=20261031a"></script>
 <script src="viaje.js?v=20261105-ultra2"></script>
 <script src="llamada.js?v=20261105-ultra2"></script>
-<script src="app.js?v=20261106-ucod"></script>
+<script src="app.js?v=20261106-ucod2"></script>
 </body>
 </html>

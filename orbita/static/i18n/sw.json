@@ -3931,13 +3931,14 @@
 "Vale 10 minutos y una sola vez.":"Ni halali kwa dakika 10 na kwa matumizi mara moja tu.",
 "Con el código, la llave de la conversación viaja cerrada con ese código, que el servidor de GUARDIANA no conoce.":"Ukitumia msimbo, ufunguo wa mazungumzo husafiri ukiwa umefungwa kwa msimbo huo, ambao seva ya GUARDIANA haiujui.",
 "Cancelar el código":"Ghairi msimbo",
-"Se cortó la conexión con el relé: pide un código nuevo.":"Muunganisho na relay umekatika: omba msimbo mpya.",
+"Se cortó la conexión con el relé: crea uno nuevo.":"Muunganisho na relay umekatika: tengeneza msimbo mpya.",
 "Código erróneo, caducado o ya usado.":"Msimbo si sahihi, muda wake umeisha au umeshatumika.",
 "9 cifras, o el código Ultra de 16 caracteres":"Tarakimu 9, au msimbo wa Ultra wa herufi 16",
 "Escribe el código que te han enviado":"Andika msimbo uliotumiwa",
 "Sesión Ultra":"Kipindi cha Ultra",
 "Invitación Ultra":"Mwaliko wa Ultra",
-"Invitación Ultra · esperando":"Mwaliko wa Ultra · inasubiri"
+"Invitación Ultra · esperando":"Mwaliko wa Ultra · inasubiri",
+"Alguien ha escrito el código: conectando…":"Mtu ameandika msimbo: inaunganisha…"
 },
 "p":{
 "intento":"Iliyojaribu zaidi leo: {1}, {2?mara|mara} {2}.",

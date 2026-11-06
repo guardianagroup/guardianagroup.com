@@ -3931,13 +3931,14 @@
 "Vale 10 minutos y una sola vez.":"Gjelder i 10 minutter og kan bare brukes én gang.",
 "Con el código, la llave de la conversación viaja cerrada con ese código, que el servidor de GUARDIANA no conoce.":"Med koden reiser samtalens nøkkel låst med den koden, som GUARDIANAs server ikke kjenner.",
 "Cancelar el código":"Avbryt koden",
-"Se cortó la conexión con el relé: pide un código nuevo.":"Forbindelsen med reléet ble brutt: be om en ny kode.",
+"Se cortó la conexión con el relé: crea uno nuevo.":"Forbindelsen med reléet ble brutt: lag en ny.",
 "Código erróneo, caducado o ya usado.":"Feil, utløpt eller allerede brukt kode.",
 "9 cifras, o el código Ultra de 16 caracteres":"9 sifre, eller Ultra-koden på 16 tegn",
 "Escribe el código que te han enviado":"Skriv inn koden du har fått tilsendt",
 "Sesión Ultra":"Ultra-økt",
 "Invitación Ultra":"Ultra-invitasjon",
-"Invitación Ultra · esperando":"Ultra-invitasjon · venter"
+"Invitación Ultra · esperando":"Ultra-invitasjon · venter",
+"Alguien ha escrito el código: conectando…":"Noen har skrevet inn koden: kobler til…"
 },
 "p":{
 "intento":"Den som prøvde mest i dag: {1}, {2} {2?gang|ganger}.",

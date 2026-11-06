@@ -3931,13 +3931,14 @@
 "Vale 10 minutos y una sola vez.":"Gilt 10 Minuten und nur einmal.",
 "Con el código, la llave de la conversación viaja cerrada con ese código, que el servidor de GUARDIANA no conoce.":"Mit dem Code reist der Schlüssel der Unterhaltung verschlossen mit diesem Code, den der GUARDIANA-Server nicht kennt.",
 "Cancelar el código":"Code zurückziehen",
-"Se cortó la conexión con el relé: pide un código nuevo.":"Die Verbindung zum Relay wurde unterbrochen: Fordere einen neuen Code an.",
+"Se cortó la conexión con el relé: crea uno nuevo.":"Die Verbindung zum Relay wurde unterbrochen: Erstelle einen neuen.",
 "Código erróneo, caducado o ya usado.":"Falscher, abgelaufener oder bereits verwendeter Code.",
 "9 cifras, o el código Ultra de 16 caracteres":"9 Ziffern oder der Ultra-Code mit 16 Zeichen",
 "Escribe el código que te han enviado":"Gib den Code ein, den du erhalten hast",
 "Sesión Ultra":"Ultra-Sitzung",
 "Invitación Ultra":"Ultra-Einladung",
-"Invitación Ultra · esperando":"Ultra-Einladung · wartet"
+"Invitación Ultra · esperando":"Ultra-Einladung · wartet",
+"Alguien ha escrito el código: conectando…":"Jemand hat den Code eingegeben: Verbindung wird hergestellt…"
 },
 "p":{
 "intento":"Hat es heute am häufigsten versucht: {1}, {2} {2?Mal|Mal}.",

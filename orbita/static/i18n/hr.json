@@ -3931,13 +3931,14 @@
 "Vale 10 minutos y una sola vez.":"Vrijedi 10 minuta i samo za jednu upotrebu.",
 "Con el código, la llave de la conversación viaja cerrada con ese código, que el servidor de GUARDIANA no conoce.":"S kodom ključ razgovora putuje zaključan tim kodom, koji poslužitelj GUARDIANA ne zna.",
 "Cancelar el código":"Otkaži kod",
-"Se cortó la conexión con el relé: pide un código nuevo.":"Veza s relejem je prekinuta: zatražite novi kod.",
+"Se cortó la conexión con el relé: crea uno nuevo.":"Veza s relejem je prekinuta: izradite novi.",
 "Código erróneo, caducado o ya usado.":"Pogrešan, istekao ili već iskorišten kod.",
 "9 cifras, o el código Ultra de 16 caracteres":"9 znamenki ili Ultra kod od 16 znakova",
 "Escribe el código que te han enviado":"Upišite kod koji su vam poslali",
 "Sesión Ultra":"Ultra sesija",
 "Invitación Ultra":"Ultra pozivnica",
-"Invitación Ultra · esperando":"Ultra pozivnica · čeka se"
+"Invitación Ultra · esperando":"Ultra pozivnica · čeka se",
+"Alguien ha escrito el código: conectando…":"Netko je upisao kod: povezivanje…"
 },
 "p":{
 "intento":"Najupornija danas: {1}, {2} {2?put|puta}.",

@@ -3931,13 +3931,14 @@
 "Vale 10 minutos y una sola vez.":"Geldig voor 10 minuten en eenmalig te gebruiken.",
 "Con el código, la llave de la conversación viaja cerrada con ese código, que el servidor de GUARDIANA no conoce.":"Met de code reist de sleutel van het gesprek afgesloten met die code, die de GUARDIANA-server niet kent.",
 "Cancelar el código":"Code intrekken",
-"Se cortó la conexión con el relé: pide un código nuevo.":"De verbinding met de relay is verbroken: vraag een nieuwe code aan.",
+"Se cortó la conexión con el relé: crea uno nuevo.":"De verbinding met de relay is verbroken: maak een nieuwe aan.",
 "Código erróneo, caducado o ya usado.":"Onjuiste, verlopen of al gebruikte code.",
 "9 cifras, o el código Ultra de 16 caracteres":"9 cijfers, of de Ultra-code van 16 tekens",
 "Escribe el código que te han enviado":"Voer de code in die je hebt ontvangen",
 "Sesión Ultra":"Ultra-sessie",
 "Invitación Ultra":"Ultra-uitnodiging",
-"Invitación Ultra · esperando":"Ultra-uitnodiging · in afwachting"
+"Invitación Ultra · esperando":"Ultra-uitnodiging · in afwachting",
+"Alguien ha escrito el código: conectando…":"Iemand heeft de code ingevoerd: verbinden…"
 },
 "p":{
 "intento":"Probeerde het vandaag het vaakst: {1}, {2} {2?keer|keer}.",

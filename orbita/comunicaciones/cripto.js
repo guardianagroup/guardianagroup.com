@@ -89,30 +89,38 @@
 
   // ---- código Ultra (6 nov 2026; el dueño eligió compartir Ultra también con un código, largo y que el relé no recibe) ----
   // 16 símbolos del alfabeto Crockford base32 (80 bits), con crypto.getRandomValues: «byte & 31» no tiene sesgo (256 = 8 · 32).
-  // Se muestra en 4 grupos (K7QM-2XRP-9DTA-H4WN). El código no sale del navegador; de él salen, con HKDF-SHA256 e
-  // ikm = «GUARDIANA código Ultra\n» + el código normalizado:
+  // Nunca empieza por 9 cifras: ese se descarta y se saca otro (1 de cada ~35 000), para que la casilla no lo tome por un código
+  // de la Blindada y mande esos 9 símbolos al relé (revisión independiente, M1). Se muestra en 4 grupos (K7QM-2XRP-9DTA-H4WN).
+  // El código no sale del navegador. Del código normalizado sale M = PBKDF2-SHA256(código, sal fija «GUARDIANA código Ultra v1»,
+  // 300 000 vueltas, 32 bytes), lenta a propósito: cada intento de adivinar el código pasa por esas vueltas (revisión, S1). De M,
+  // con HKDF-SHA256:
   //   - el buzón del relé: 8 bytes (sin sal, info «GUARDIANA Ultra · buzón») como número big-endian módulo 10^9, con ceros
   //     delante. Es lo único del código que llega al relé, con el mismo formato que el código de 9 cifras de la Blindada;
   //   - la clave del sobre: 32 bytes (sal = 16 bytes al azar que viajan con el sobre, info «GUARDIANA Ultra · sobre») → AES-256-GCM.
   // Sobre = b64u(iv de 12 bytes ‖ AES-GCM(semilla de 32 bytes)), con datos asociados «GUARDIANA Ultra sobre\n» + buzón.
   // Diseño y lo que ve el relé: herramientas/pruebas-comunicaciones/ULTRA-CODIGO.md.
   const CROCKFORD = '0123456789ABCDEFGHJKMNPQRSTVWXYZ';
-  const nuevoCodigoU = () => { const b = azar(16); let s = ''; for (const x of b) s += CROCKFORD[x & 31]; b.fill(0); return s; };
-  // Al leerlo: mayúsculas; fuera espacios, guiones y puntos; O → 0, I y L → 1. Con otra cosa que 16 símbolos del alfabeto, null.
+  function nuevoCodigoU() { for (;;) { const b = azar(16); let s = ''; for (const x of b) s += CROCKFORD[x & 31]; b.fill(0); if (!/^\d{9}/.test(s)) return s; } }
+  // Al leerlo: NFKC (teclados de ancho completo: Ｋ７ → K7), mayúsculas; fuera espacios, guiones y puntos; O → 0, I y L → 1. Con otra
+  // cosa que 16 símbolos del alfabeto, null.
   function normalizaCodigoU(texto) {
-    const s = String(texto == null ? '' : texto).toUpperCase().replace(/[\s\-\u2010-\u2015\u2212.\u00B7]/g, '').replace(/O/g, '0').replace(/[IL]/g, '1');
+    const s = String(texto == null ? '' : texto).normalize('NFKC').toUpperCase().replace(/[\s\-\u2010-\u2015\u2212.\u00B7]/g, '').replace(/O/g, '0').replace(/[IL]/g, '1');
     return /^[0-9A-HJKMNP-TV-Z]{16}$/.test(s) ? s : null;
   }
   const codigoUBonito = (s) => String(s || '').replace(/(.{4})(?=.)/g, '$1-');
-  const ikmU = (codigo) => te.encode('GUARDIANA código Ultra\n' + codigo);
-  // { buzon } y, con la sal del sobre, también { clave } (AES-256-GCM, no exportable). «codigo», ya normalizado.
-  async function derivaCodigoU(codigo, sal) {
-    const b = await hkdf(ikmU(codigo), null, 'GUARDIANA Ultra · buzón', 8);
+  // M, el secreto del que sale todo: PBKDF2-SHA256 con la misma primitiva que el Número GUARDIANA y el código de la Blindada (pbkdf2, más abajo)
+  const maestroCodigoU = (codigo) => pbkdf2(codigo, 'GUARDIANA código Ultra v1', 300000, 256);
+  async function buzonDeM(m) {
+    const b = await hkdf(m, null, 'GUARDIANA Ultra · buzón', 8);
     let n = 0; for (const x of b) n = (n * 256 + x) % 1000000000; // exacto: nunca pasa de 2^53
     b.fill(0);
-    const r = { buzon: String(n).padStart(9, '0') };
-    if (sal) { const k = await hkdf(ikmU(codigo), sal, 'GUARDIANA Ultra · sobre', 32); r.clave = await aes(k); k.fill(0); }
-    return r;
+    return String(n).padStart(9, '0');
+  }
+  async function claveDeM(m, sal) { const k = await hkdf(m, sal, 'GUARDIANA Ultra · sobre', 32); try { return await aes(k); } finally { k.fill(0); } }
+  // { buzon } y, con la sal del sobre, también { clave } (AES-256-GCM, no exportable). «codigo», ya normalizado.
+  async function derivaCodigoU(codigo, sal) {
+    const m = await maestroCodigoU(codigo);
+    try { const r = { buzon: await buzonDeM(m) }; if (sal) r.clave = await claveDeM(m, sal); return r; } finally { m.fill(0); }
   }
   const adSobreU = (buzon) => te.encode('GUARDIANA Ultra sobre\n' + buzon);
   // quien invita: { buzon, sobre, sal } para el relé (formato de «invita»: 9 cifras, sobre de 80 caracteres y sal de 22)
@@ -122,15 +130,23 @@
     const ct = new Uint8Array(await sub.encrypt({ name: 'AES-GCM', iv, additionalData: adSobreU(buzon) }, clave, u8(semilla)));
     return { buzon, sobre: b64u(cat(iv, ct)), sal: b64u(sal) };
   }
-  // quien entra: la semilla de 32 bytes, o null si el sobre no abre con este código (sin decir por qué)
+  const leeSobreU = (sobre, sal) => { const b = deB64u(sobre), s = deB64u(sal); return b.length === 12 + 32 + 16 && s.length === 16 ? { b, s } : null; };
+  async function abreConClaveU(clave, buzon, b) {
+    const semilla = new Uint8Array(await sub.decrypt({ name: 'AES-GCM', iv: b.subarray(0, 12), additionalData: adSobreU(buzon) }, clave, b.subarray(12)));
+    return semilla.length === 32 ? semilla : null;
+  }
+  // la semilla de 32 bytes, o null si el sobre no abre con este código (sin decir por qué)
   async function abreSobreU(codigo, buzon, sobre, sal) {
-    try {
-      const b = deB64u(sobre), s = deB64u(sal);
-      if (b.length !== 12 + 32 + 16 || s.length !== 16) return null;
-      const { clave } = await derivaCodigoU(codigo, s);
-      const semilla = new Uint8Array(await sub.decrypt({ name: 'AES-GCM', iv: b.subarray(0, 12), additionalData: adSobreU(buzon) }, clave, b.subarray(12)));
-      return semilla.length === 32 ? semilla : null;
-    } catch (_) { return null; }
+    try { const x = leeSobreU(sobre, sal); if (!x) return null; const { clave } = await derivaCodigoU(codigo, x.s); return await abreConClaveU(clave, buzon, x.b); } catch (_) { return null; }
+  }
+  // quien entra, con un solo PBKDF2: el buzón (lo que se pide al relé) y, con el sobre que dé el relé, la semilla; «olvida» borra M
+  async function preparaCodigoU(codigo) {
+    const m = await maestroCodigoU(codigo), buzon = await buzonDeM(m);
+    return {
+      buzon,
+      async abre(sobre, sal) { try { const x = leeSobreU(sobre, sal); if (!x) return null; return await abreConClaveU(await claveDeM(m, x.s), buzon, x.b); } catch (_) { return null; } },
+      olvida() { m.fill(0); },
+    };
   }
 
   // ---- sesión ----
@@ -446,5 +462,5 @@
   }
   const BZ = { cierra: buzonCierra, abre: buzonAbre, llave: () => { const p = kemPar(); return p ? { kid: hex(azar(8)), ek: p.ek, dk: p.dk, t: Date.now() } : null; } };
 
-  raiz.GuardianaCripto = { te, td, u8, cat, b64u, deB64u, hex, deHex, azar, sha256, hkdf, hmac, aes, sella, abre, nonce, creaIdentidad, huella, numeroSeguridad, firma, verifica, deSemilla, nuevaSemilla, efimera, sesion, cadena, claveDeCodigo, nuevoCodigo, nuevoCodigoU, normalizaCodigoU, codigoUBonito, derivaCodigoU, cierraSobreU, abreSobreU, CROCKFORD, hayPQ, kemPar, kemEncapsula, kemAbre, datosInicia, datosResponde, KEM_EK, KEM_DK, KEM_CT, B, N, BZ };
+  raiz.GuardianaCripto = { te, td, u8, cat, b64u, deB64u, hex, deHex, azar, sha256, hkdf, hmac, aes, sella, abre, nonce, creaIdentidad, huella, numeroSeguridad, firma, verifica, deSemilla, nuevaSemilla, efimera, sesion, cadena, claveDeCodigo, nuevoCodigo, nuevoCodigoU, normalizaCodigoU, codigoUBonito, derivaCodigoU, cierraSobreU, abreSobreU, preparaCodigoU, CROCKFORD, hayPQ, kemPar, kemEncapsula, kemAbre, datosInicia, datosResponde, KEM_EK, KEM_DK, KEM_CT, B, N, BZ };
 })(typeof window !== 'undefined' ? window : globalThis);

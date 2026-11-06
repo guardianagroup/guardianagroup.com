@@ -3931,13 +3931,14 @@
 "Vale 10 minutos y una sola vez.":"Ważny przez 10 minut i jednorazowy.",
 "Con el código, la llave de la conversación viaja cerrada con ese código, que el servidor de GUARDIANA no conoce.":"Z kodem klucz rozmowy podróżuje zamknięty tym kodem, którego serwer GUARDIANA nie zna.",
 "Cancelar el código":"Anuluj kod",
-"Se cortó la conexión con el relé: pide un código nuevo.":"Połączenie z przekaźnikiem zostało przerwane: poproś o nowy kod.",
+"Se cortó la conexión con el relé: crea uno nuevo.":"Połączenie z przekaźnikiem zostało przerwane: utwórz nowy.",
 "Código erróneo, caducado o ya usado.":"Błędny, wygasły lub już użyty kod.",
 "9 cifras, o el código Ultra de 16 caracteres":"9 cyfr albo 16-znakowy kod Ultra",
 "Escribe el código que te han enviado":"Wpisz otrzymany kod",
 "Sesión Ultra":"Sesja Ultra",
 "Invitación Ultra":"Zaproszenie Ultra",
-"Invitación Ultra · esperando":"Zaproszenie Ultra · oczekiwanie"
+"Invitación Ultra · esperando":"Zaproszenie Ultra · oczekiwanie",
+"Alguien ha escrito el código: conectando…":"Ktoś wpisał kod: łączenie…"
 },
 "p":{
 "intento":"Najwięcej prób dziś: {1}, {2} {2?raz|razy}.",

@@ -3931,13 +3931,14 @@
 "Vale 10 minutos y una sola vez.":"Ισχύει για 10 λεπτά και για μία μόνο χρήση.",
 "Con el código, la llave de la conversación viaja cerrada con ese código, que el servidor de GUARDIANA no conoce.":"Με τον κωδικό, το κλειδί της συνομιλίας ταξιδεύει κλειδωμένο με αυτόν τον κωδικό, τον οποίο ο διακομιστής της GUARDIANA δεν γνωρίζει.",
 "Cancelar el código":"Ακύρωση του κωδικού",
-"Se cortó la conexión con el relé: pide un código nuevo.":"Η σύνδεση με τον αναμεταδότη διακόπηκε: ζητήστε νέο κωδικό.",
+"Se cortó la conexión con el relé: crea uno nuevo.":"Η σύνδεση με τον αναμεταδότη διακόπηκε: δημιουργήστε νέο.",
 "Código erróneo, caducado o ya usado.":"Λάθος, ληγμένος ή ήδη χρησιμοποιημένος κωδικός.",
 "9 cifras, o el código Ultra de 16 caracteres":"9 ψηφία ή ο κωδικός Ultra των 16 χαρακτήρων",
 "Escribe el código que te han enviado":"Πληκτρολογήστε τον κωδικό που σας έστειλαν",
 "Sesión Ultra":"Συνεδρία Ultra",
 "Invitación Ultra":"Πρόσκληση Ultra",
-"Invitación Ultra · esperando":"Πρόσκληση Ultra · αναμονή"
+"Invitación Ultra · esperando":"Πρόσκληση Ultra · αναμονή",
+"Alguien ha escrito el código: conectando…":"Κάποιος πληκτρολόγησε τον κωδικό: σύνδεση…"
 },
 "p":{
 "intento":"Η πιο επίμονη σήμερα: {1}, {2} {2?φορά|φορές}.",

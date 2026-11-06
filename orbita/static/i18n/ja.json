@@ -3931,13 +3931,14 @@
 "Vale 10 minutos y una sola vez.":"有効期間は10分で、使えるのは1回だけです。",
 "Con el código, la llave de la conversación viaja cerrada con ese código, que el servidor de GUARDIANA no conoce.":"コードを使うと、会話の鍵はそのコードで閉じられた状態で送られます。GUARDIANAのサーバーはそのコードを知りません。",
 "Cancelar el código":"コードを取り消す",
-"Se cortó la conexión con el relé: pide un código nuevo.":"リレーとの接続が切れました：新しいコードを取得してください。",
+"Se cortó la conexión con el relé: crea uno nuevo.":"リレーとの接続が切れました：新しいコードを作成してください。",
 "Código erróneo, caducado o ya usado.":"コードが間違っているか、期限切れか、使用済みです。",
 "9 cifras, o el código Ultra de 16 caracteres":"9桁の数字、または16文字の Ultra コード",
 "Escribe el código que te han enviado":"送られてきたコードを入力",
 "Sesión Ultra":"Ultra セッション",
 "Invitación Ultra":"Ultra への招待",
-"Invitación Ultra · esperando":"Ultra への招待 · 待機中"
+"Invitación Ultra · esperando":"Ultra への招待 · 待機中",
+"Alguien ha escrito el código: conectando…":"誰かがコードを入力しました。接続中…"
 },
 "p":{
 "intento":"今日最も多く試みたのは {1}、{2} {2?回|回}。",

@@ -3931,13 +3931,14 @@
 "Vale 10 minutos y una sola vez.":"10분 동안 한 번만 쓸 수 있어요.",
 "Con el código, la llave de la conversación viaja cerrada con ese código, que el servidor de GUARDIANA no conoce.":"코드를 쓰면 대화의 열쇠가 그 코드로 잠긴 채 전달돼요. GUARDIANA 서버는 그 코드를 알지 못해요.",
 "Cancelar el código":"코드 취소",
-"Se cortó la conexión con el relé: pide un código nuevo.":"릴레이 연결이 끊겼어요. 새 코드를 요청해 주세요.",
+"Se cortó la conexión con el relé: crea uno nuevo.":"릴레이 연결이 끊겼어요. 새 코드를 만들어 주세요.",
 "Código erróneo, caducado o ya usado.":"코드가 틀렸거나 만료되었거나 이미 사용되었어요.",
 "9 cifras, o el código Ultra de 16 caracteres":"9자리 숫자 또는 16자리 Ultra 코드",
 "Escribe el código que te han enviado":"전달받은 코드를 입력하세요",
 "Sesión Ultra":"Ultra 세션",
 "Invitación Ultra":"Ultra 초대",
-"Invitación Ultra · esperando":"Ultra 초대 · 대기 중"
+"Invitación Ultra · esperando":"Ultra 초대 · 대기 중",
+"Alguien ha escrito el código: conectando…":"누군가 코드를 입력했어요. 연결 중…"
 },
 "p":{
 "intento":"오늘 가장 많이 시도한 곳: {1}, {2}{2?회|회}.",

@@ -3931,13 +3931,14 @@
 "Vale 10 minutos y una sola vez.":"Valid nang 10 minuto at isang beses lang magagamit.",
 "Con el código, la llave de la conversación viaja cerrada con ese código, que el servidor de GUARDIANA no conoce.":"Sa code, ang susi ng usapan ay ipinapadalang nakakandado sa code na iyon, na hindi alam ng server ng GUARDIANA.",
 "Cancelar el código":"Kanselahin ang code",
-"Se cortó la conexión con el relé: pide un código nuevo.":"Naputol ang koneksyon sa relay: humingi ng bagong code.",
+"Se cortó la conexión con el relé: crea uno nuevo.":"Naputol ang koneksyon sa relay: gumawa ng bago.",
 "Código erróneo, caducado o ya usado.":"Mali, paso na, o nagamit na ang code.",
 "9 cifras, o el código Ultra de 16 caracteres":"9 na digit, o ang 16-character na Ultra code",
 "Escribe el código que te han enviado":"I-type ang code na ipinadala sa iyo",
 "Sesión Ultra":"Ultra session",
 "Invitación Ultra":"Imbitasyon sa Ultra",
-"Invitación Ultra · esperando":"Imbitasyon sa Ultra · naghihintay"
+"Invitación Ultra · esperando":"Imbitasyon sa Ultra · naghihintay",
+"Alguien ha escrito el código: conectando…":"May nag-type ng code: kumokonekta…"
 },
 "p":{
 "intento":"Pinakamadalas sumubok ngayon: {1}, {2} {2?beses|beses}.",

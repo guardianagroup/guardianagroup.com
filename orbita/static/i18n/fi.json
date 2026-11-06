@@ -3931,13 +3931,14 @@
 "Vale 10 minutos y una sola vez.":"Voimassa 10 minuuttia ja kertakäyttöinen.",
 "Con el código, la llave de la conversación viaja cerrada con ese código, que el servidor de GUARDIANA no conoce.":"Koodia käytettäessä keskustelun avain kulkee lukittuna tällä koodilla, jota GUARDIANAn palvelin ei tiedä.",
 "Cancelar el código":"Peru koodi",
-"Se cortó la conexión con el relé: pide un código nuevo.":"Yhteys välityspalvelimeen katkesi: pyydä uusi koodi.",
+"Se cortó la conexión con el relé: crea uno nuevo.":"Yhteys välityspalvelimeen katkesi: luo uusi.",
 "Código erróneo, caducado o ya usado.":"Väärä, vanhentunut tai jo käytetty koodi.",
 "9 cifras, o el código Ultra de 16 caracteres":"9 numeroa tai 16 merkin Ultra-koodi",
 "Escribe el código que te han enviado":"Kirjoita sinulle lähetetty koodi",
 "Sesión Ultra":"Ultra-istunto",
 "Invitación Ultra":"Ultra-kutsu",
-"Invitación Ultra · esperando":"Ultra-kutsu · odottaa"
+"Invitación Ultra · esperando":"Ultra-kutsu · odottaa",
+"Alguien ha escrito el código: conectando…":"Joku on kirjoittanut koodin: yhdistetään…"
 },
 "p":{
 "intento":"Eniten yrittänyt tänään: {1}, {2} {2?kerta|kertaa}.",

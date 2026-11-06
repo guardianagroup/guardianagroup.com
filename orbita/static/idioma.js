@@ -1898,7 +1898,8 @@
     "Vale 10 minutos y una sola vez.": ["Valid for 10 minutes and a single use.", "Vale por 10 minutos e um único uso."],
     "Con el código, la llave de la conversación viaja cerrada con ese código, que el servidor de GUARDIANA no conoce.": ["With the code, the conversation key travels sealed with that code, which the GUARDIANA server does not know.", "Com o código, a chave da conversa viaja fechada com esse código, que o servidor da GUARDIANA não conhece."],
     "Cancelar el código": ["Cancel the code", "Cancelar o código"],
-    "Se cortó la conexión con el relé: pide un código nuevo.": ["The connection to the relay was cut: get a new code.", "A conexão com o relé caiu: peça um código novo."],
+    "Se cortó la conexión con el relé: crea uno nuevo.": ["The connection to the relay was cut: create a new one.", "A conexão com o relé caiu: crie um novo."],
+    "Alguien ha escrito el código: conectando…": ["Someone typed the code: connecting…", "Alguém digitou o código: conectando…"], // quien recoge el sobre puede no ser la otra persona
     "Código erróneo, caducado o ya usado.": ["Wrong, expired or already used code.", "Código errado, expirado ou já usado."],
     "9 cifras, o el código Ultra de 16 caracteres": ["9 digits, or the 16-character Ultra code", "9 dígitos, ou o código Ultra de 16 caracteres"],
     "Escribe el código que te han enviado": ["Type the code you were sent", "Digite o código que te enviaram"],

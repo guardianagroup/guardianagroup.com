@@ -3931,13 +3931,14 @@
 "Vale 10 minutos y una sola vez.":"به مدت ۱۰ دقیقه و فقط برای یک بار معتبر است.",
 "Con el código, la llave de la conversación viaja cerrada con ese código, que el servidor de GUARDIANA no conoce.":"با کد، کلید گفتگو قفل‌شده با همان کد منتقل می‌شود؛ کدی که سرور GUARDIANA آن را نمی‌داند.",
 "Cancelar el código":"لغو کد",
-"Se cortó la conexión con el relé: pide un código nuevo.":"اتصال به رله قطع شد: کد جدیدی بخواهید.",
+"Se cortó la conexión con el relé: crea uno nuevo.":"اتصال به رله قطع شد: یک کد جدید بسازید.",
 "Código erróneo, caducado o ya usado.":"کد اشتباه است، منقضی شده یا قبلاً استفاده شده است.",
 "9 cifras, o el código Ultra de 16 caracteres":"۹ رقم، یا کد Ultra با ۱۶ نویسه",
 "Escribe el código que te han enviado":"کدی را که برایتان فرستاده‌اند وارد کنید",
 "Sesión Ultra":"نشست Ultra",
 "Invitación Ultra":"دعوت Ultra",
-"Invitación Ultra · esperando":"دعوت Ultra · در انتظار"
+"Invitación Ultra · esperando":"دعوت Ultra · در انتظار",
+"Alguien ha escrito el código: conectando…":"کسی کد را وارد کرد: در حال اتصال…"
 },
 "p":{
 "intento":"بیشترین تلاش امروز: {1}، {2} {2?بار|بار}.",

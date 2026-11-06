@@ -462,6 +462,9 @@ svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-l
 .paso.enlace-b .nota{font-size:13px}
 /* Código Ultra en la invitación Ultra (6 nov 2026): «Usar un código» y, al pulsarlo, el código en grande con su validez y su estado */
 .ucod{display:grid;justify-items:center;gap:10px;margin:14px 0 6px}
+/* fuera de la vista del enlace (revisión, M2): después de ella y, tras «Copiar enlace», después de la espera */
+.paso.enlace-b>.ucod{order:1}
+.paso.enlace-b:has(>.ucod:not([hidden]))>.enlace-espera{min-height:0;padding-bottom:0}
 .ucod[hidden],.ucod-pide[hidden],.ucod-caja[hidden]{display:none}
 .ucod-pide{appearance:none;display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:8px 18px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--fg);font:600 14px/1.2 var(--texto);cursor:pointer;touch-action:manipulation}
 .ucod-pide:hover{border-color:rgba(156,195,228,.45);background:rgba(156,195,228,.06)}
