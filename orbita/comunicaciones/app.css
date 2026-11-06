@@ -2458,6 +2458,9 @@ button.ll-env-ico:focus-visible{outline:2px solid #9CC3E4;outline-offset:2px}
 .envio-opcion{all:unset;cursor:pointer;display:flex;align-items:flex-start;gap:12px;width:100%;box-sizing:border-box;margin:0 0 12px;padding:11px 12px;border-radius:12px;border:1px solid var(--line);background:var(--campo);color:var(--fg);text-align:left}
 .envio-opcion[hidden]{display:none}
 #envio-si:disabled{opacity:.45;cursor:not-allowed;filter:saturate(.4)}
+/* (ultra-2, 5 nov 2026) en una pantalla baja (1366×657), con las notas y las opciones de Ultra la hoja «Revisa antes de enviar» pasa
+   del alto de la pantalla y «Enviar» quedaba abajo, sin verse: «Cancelar» y «Enviar», siempre a la vista (como en la guía, .guia>.fila) */
+#h-envio .gc-hoja-caja>.fila:last-child{position:sticky;bottom:-20px;z-index:2;margin:0 -20px -20px;padding:10px 20px 20px;background:linear-gradient(to bottom,rgba(12,17,24,0),var(--gc-tarjeta,#0C1118) 12px)}
 .gc-pal-txt.esperando{font-weight:500;opacity:.7;font-size:.82em;letter-spacing:.02em}
 .firma-pide{display:flex;gap:8px;margin-top:8px}
 .firma-pide .boton{min-height:36px;padding:6px 14px;font-size:13.5px}
