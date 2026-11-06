@@ -1,8 +1,9 @@
 # Guía clic a clic para el dueño · dar de alta guardianagroup.com en los buscadores
 
-Todo lo de esta guía lo haces tú con tu sesión; nadie más necesita tus claves. Antes de empezar, la rama `seo` tiene que estar fundida en `main` y publicada (si no, Google verá el sitemap antiguo). Orden recomendado: 1 → 2 → 3 → 4; el 5 solo si quieres Rusia. Tiempo total: unos 40 minutos.
-
-**Aviso previo, para que no te lleves un susto**: mientras siga la redirección del móvil al aviso «solo PC» (AUDITORIA.md §1.1, PLAN.md decisión 1), Search Console marcará casi todas las páginas como «Página con redirección» y no las indexará. Date de alta igual (así tendrás los datos), pero la cifra de páginas indexadas no subirá hasta que se decida eso.
+Todo lo de esta guía lo haces tú con tu sesión; nadie más necesita tus claves. La web ya está lista para los buscadores
+(5 nov 2026): datos técnicos de SEO, portadas propias en inglés (/en/) y portugués (/pt/), y las páginas de lectura se
+leen en el teléfono (con la franja «GUARDIANA se usa en el PC»), así que el rastreador móvil de Google ya ve su contenido.
+Orden recomendado: 1 → 2 → 3 → 4; el 5 solo si quieres Rusia. Tiempo total: unos 40 minutos.
 
 ---
 
@@ -25,7 +26,7 @@ Todo lo de esta guía lo haces tú con tu sesión; nadie más necesita tus clave
 ### 1.3 Enviar el sitemap
 1. Menú de la izquierda → **«Sitemaps»** (dentro de «Indexación»).
 2. En «Añadir un sitemap» escribe `sitemap.xml` (solo eso; la dirección completa queda `https://guardianagroup.com/sitemap.xml`) y pulsa **«Enviar»**.
-3. En la tabla de abajo debe aparecer con «Estado: Correcto» y «Páginas descubiertas: 219». Si pone «No se ha podido obtener», espera una hora y recarga; si sigue así, dímelo.
+3. En la tabla de abajo debe aparecer con «Estado: Correcto» y «Páginas descubiertas: 230». Si pone «No se ha podido obtener», espera una hora y recarga; si sigue así, dímelo.
 
 ### 1.4 Pedir la indexación de las 10 páginas principales (una a una)
 1. Arriba del todo hay una barra «Inspeccionar cualquier URL de https://guardianagroup.com/». Pega la primera dirección y pulsa Intro.
@@ -35,20 +36,22 @@ Todo lo de esta guía lo haces tú con tu sesión; nadie más necesita tus clave
 
 Las 10 direcciones, por orden:
 1. `https://guardianagroup.com/`
-2. `https://guardianagroup.com/como-funciona.html`
-3. `https://guardianagroup.com/orbita/zero/`
-4. `https://guardianagroup.com/orbita/comunicaciones/`
-5. `https://guardianagroup.com/casos.html`
-6. `https://guardianagroup.com/radiografias/`
-7. `https://guardianagroup.com/negocio-de-tus-datos.html`
-8. `https://guardianagroup.com/empresas/`
-9. `https://guardianagroup.com/en/cases.html`
-10. `https://guardianagroup.com/pt/casos.html`
+2. `https://guardianagroup.com/en/`
+3. `https://guardianagroup.com/pt/`
+4. `https://guardianagroup.com/zero.html`
+5. `https://guardianagroup.com/como-funciona.html`
+6. `https://guardianagroup.com/instalar.html`
+7. `https://guardianagroup.com/casos.html`
+8. `https://guardianagroup.com/radiografias/`
+9. `https://guardianagroup.com/negocio-de-tus-datos.html`
+10. `https://guardianagroup.com/empresas/`
 
-Al inspeccionar la portada, pulsa también **«Probar URL publicada»** y luego **«Ver página probada»** → pestaña **«Captura de pantalla»**: si ves la pantalla «GUARDIANA solamente está disponible en versión PC» en lugar del planeta, es la prueba, en tu pantalla, del hallazgo 1.1 de la auditoría (Google prueba con el rastreador móvil).
+(Al día siguiente, si quieres: `https://guardianagroup.com/en/cases.html` y `https://guardianagroup.com/pt/casos.html`.)
+
+Al inspeccionar la portada, pulsa también **«Probar URL publicada»** y luego **«Ver página probada»** → pestaña **«Captura de pantalla»**: debe verse la portada con el planeta y, arriba, la franja «GUARDIANA se usa en el PC. Aquí puedes leer qué hace.» (Google prueba con el rastreador móvil). Si ves en su lugar la pantalla «GUARDIANA solamente está disponible en versión PC», dímelo.
 
 ### 1.5 Qué mirar cada semana
-- **«Páginas»** (Indexación › Páginas): arriba, «Indexadas» frente a «No indexadas». En la tabla de abajo, las razones: «Página con redirección» (hoy será la mayoría: es la redirección del móvil), «Excluida por la etiqueta noindex» (correcto: son gracias, activar, comprar, instalar, Órbita, redirecciones de idioma), «Rastreada: actualmente sin indexar» (Google la vio y aún no la considera; normal las primeras semanas), «Descubierta: actualmente sin indexar» (la conoce por el sitemap y aún no la ha visitado).
+- **«Páginas»** (Indexación › Páginas): arriba, «Indexadas» frente a «No indexadas». En la tabla de abajo, las razones: «Página con redirección» (las pantallas de la aplicación —Órbita, ZERO, Comunicaciones— y las direcciones antiguas de idioma; es lo esperado), «Excluida por la etiqueta noindex» (correcto: son gracias, activar, comprar, las guías del DNS antiguo, Órbita y las redirecciones de idioma), «Rastreada: actualmente sin indexar» (Google la vio y aún no la considera; normal las primeras semanas), «Descubierta: actualmente sin indexar» (la conoce por el sitemap y aún no la ha visitado).
 - **«Experiencia»** → **«Métricas web principales»**: aparece vacío hasta que haya suficientes visitas reales de Chrome (puede tardar meses en una web nueva). Mientras, mide tú con `https://pagespeed.web.dev/` pegando `https://guardianagroup.com/`: mira LCP, CLS e INP en «Diagnosticar problemas de rendimiento» (es lo que no he podido medir desde aquí).
 - **«Rendimiento»**: a partir de la cuarta semana, pestaña «Consultas»: qué escribe la gente para llegar. Es el único dato de palabras clave real; con él se revisan las propuestas de AUDITORIA.md §7.
 - **«Mejoras»** (abajo a la izquierda): «Rutas de exploración» (las migas de pan) y «Datos estructurados» deben salir sin errores. Si sale algún aviso, copia el texto y dímelo.
@@ -93,7 +96,7 @@ A partir de ahora, cada publicación que añada o cambie páginas debería avisa
 2. Pulsa **«+ Add site»** (o el botón «Add site» de la portada), escribe `https://guardianagroup.com` y pulsa **«Add»**.
 3. Verificación: elige la pestaña **«Meta tag»**: te enseña una línea `<meta name="yandex-verification" content="…">`. Dime esa línea (el contenido es un identificador público) y la añado a la portada; cuando esté publicada, pulsa **«Check»**. (La pestaña «HTML file» también vale: dime el nombre del archivo.)
 4. Menú de la izquierda → **«Indexing»** → **«Sitemap files»** → pega `https://guardianagroup.com/sitemap.xml` → **«Add»**.
-5. Yandex también lee IndexNow (punto 3): no hace falta nada más. Los avisos de Yandex sobre «mobile» se refieren al mismo problema de la decisión 1.
+5. Yandex también lee IndexNow (punto 3): no hace falta nada más.
 
 ---
 
@@ -107,6 +110,6 @@ A partir de ahora, cada publicación que añada o cambie páginas debería avisa
 ---
 
 ## 6. Cómo saber que ha funcionado
-- A los 2–3 días: en Search Console › Sitemaps, «Páginas descubiertas: 219». En Bing › Mapas del sitio, «Procesado».
-- A las 2–4 semanas: en Google, buscar `site:guardianagroup.com` debe listar páginas de la web (hoy no lista ninguna). Si la decisión 1 no se ha tomado, lo normal es que solo salgan las legales.
+- A los 2–3 días: en Search Console › Sitemaps, «Páginas descubiertas: 230». En Bing › Mapas del sitio, «Procesado».
+- A las 2–4 semanas: en Google, buscar `site:guardianagroup.com` debe listar páginas de la web (el 5 nov no listaba ninguna).
 - A las 6 semanas: Search Console › Rendimiento › Consultas con las primeras búsquedas reales. Es el momento de revisar las palabras clave (AUDITORIA.md §7) con datos y no con suposiciones.

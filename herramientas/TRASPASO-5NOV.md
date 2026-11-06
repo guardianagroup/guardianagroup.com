@@ -59,5 +59,20 @@ Dónde está cada cosa, para seguir sin perder nada. Las reglas del dueño está
   máquinas virtuales; «Desconectar» tras un error con el bloqueo puesto). Se publica con la 1.0.56.
 - **apinamientos (agente, worktree wt-apinamientos):** arreglos de lo amontonado en ZERO, portada, Órbita, cabecera
   estrecha, tablas, NÚCLEO, Comunicaciones, casos, «Cómo funciona». Falta la segunda voz y publicar.
+- **movil-lectura (agente, worktree wt-movil-lectura, parte de `seo`):** «leer sí, usar no» (decisión 1 de PLAN.md, opción A,
+  dueño 5 nov): `marco/marco.js` y `marco/entrada.js` solo mandan a /solo-pc/ la aplicación (/orbita/ salvo /orbita/multas/,
+  /m/, /e/, /chat/, /inicio/); las páginas de lectura se leen en el teléfono con la franja «GUARDIANA se usa en el PC. Aquí
+  puedes leer qué hace.» (`marco/lectura.css`, × recordada en sessionStorage; portada: `--gf-alto` en el bloque táctil).
+  Googlebot Smartphone ya ve el contenido; nunca se distingue al robot de las personas. Decisión 3: guías del DNS con
+  «noindex»; zero.html, «por dentro», «comprobar un recibo» e instalar (sin «noindex», description a 155) en el sitemap
+  (`herramientas/sitemap.py`). Segunda voz: GO con condiciones, aplicadas (cabeceras pegajosas bajo la franja; la
+  privacidad de la extensión con su franja); la aplicación sale del sitemap.
+- **portadas-idiomas:** portadas reales en /en/ y /pt/ (`herramientas/portadas.py <web>` las genera desde index.html: repetir
+  tras cada cambio de la portada, y después csp-hashes, huellas, sitemap); `/` ya no se traduce sola a en/pt: franja «This page
+  is also available in English» / «Esta página também está em português»; 515 enlaces interiores a /en/ y /pt/.
+- **planeta-webp:** texturas del planeta en WebP (calidad 90, misma resolución; JPEG de reserva), 8K tras el primer
+  movimiento o 3 s, y nunca en pantallas táctiles.
+- **Fusión de las tres (rama publica-web-3):** 230 direcciones en el sitemap, `herramientas/seo/indexnow.json` al día
+  (`herramientas/indexnow.py`).
 - **Pendiente anotado:** Comunicaciones dice «Nadie puede escribirte…» en 42 idiomas (regla del dueño): redactar sin
   absolutos, encargo de traducción (`herramientas/traduccion-web/encargo.md`), `fusiona.py`, dos voces, publicar.
