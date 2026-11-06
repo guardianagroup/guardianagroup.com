@@ -15,7 +15,8 @@ En cada paso, mira también el chip de la VPN en la barra de ZERO, si ZERO está
 
 ## Antes de empezar
 
-1. Instala el instalador de la 1.0.57 que te pasemos, con su ventana normal.
+1. Descarga la 1.0.57 de la web (guardianagroup.com → Instalar) e instálala con su ventana normal. Si ya tienes la 1.0.56, se
+   actualiza encima sin perder nada.
    - **Qué debe pasar:** al terminar se abre GUARDIANA y el icono aparece (gris si la VPN está apagada).
 
 ## Lo básico
@@ -100,10 +101,9 @@ En cada paso, mira también el chip de la VPN en la barra de ZERO, si ZERO está
 19. Solo si ya usas la escala de pantalla a 125, 150 o 200 % (no la cambies para esto): mira el icono de cerca.
     - **Qué debe verse:** el candado y el punto, nítidos, no borrosos.
 
-## Actualizar con el instalador
+## Actualizar con el instalador (cuando salga la versión siguiente)
 
-20. Con el icono a la vista (mejor con la VPN conectada), instala encima el instalador nuevo que te pasemos, con su
-    ventana normal.
+20. Con el icono a la vista (mejor con la VPN conectada), instala encima la versión siguiente, con su ventana normal.
     - **Qué debe pasar:**
       - no sale ninguna ventana de «archivos en uso» ni nada en inglés;
       - al terminar se abre GUARDIANA y el icono vuelve con su color;
@@ -114,6 +114,17 @@ En cada paso, mira también el chip de la VPN en la barra de ZERO, si ZERO está
 21. Abre el Bloc de notas, escribe cualquier cosa y no guardes. Ve a Inicio → Apagar. Cuando Windows diga que el Bloc de
     notas impide apagar, pulsa **«Cancelar»** (no «Apagar de todos modos»).
     - **Qué debe verse:** el icono sigue junto al reloj. Después cierra el Bloc de notas sin guardar.
+
+## Con el servicio de GUARDIANA parado (opcional; pide permisos de administrador)
+
+22. Con la VPN **desconectada**, pulsa Win + R, escribe `services.msc` y pulsa Intro. Busca «GUARDIANA», botón derecho →
+    «Detener».
+    - **Qué debe verse:** en unos segundos el icono pasa a gris. Al pasar el ratón dice «El servicio de GUARDIANA está
+      parado en este equipo» (mientras se para puede decir «aún no contesta»). Su menú ofrece «Apagar la VPN de GUARDIANA».
+    - Si pulsas «Apagar la VPN de GUARDIANA», Windows pide permisos de administrador y una ventana dice lo que hizo; con la
+      VPN desconectada no hay nada que apagar.
+    - Después, en la misma ventana de servicios, botón derecho en «GUARDIANA» → «Iniciar». **Qué debe verse:** el icono
+      vuelve a su estado.
 
 ## Lo que hay que apuntar
 
