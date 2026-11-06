@@ -76,3 +76,18 @@ Dónde está cada cosa, para seguir sin perder nada. Las reglas del dueño está
   (`herramientas/indexnow.py`).
 - **Pendiente anotado:** Comunicaciones dice «Nadie puede escribirte…» en 42 idiomas (regla del dueño): redactar sin
   absolutos, encargo de traducción (`herramientas/traduccion-web/encargo.md`), `fusiona.py`, dos voces, publicar.
+
+## Comunicaciones Ultra (5 nov 2026, noche)
+- **Publicado en main (51d52f99)**, «disponible con Plus» (dueño, 21:40): Plus incluye los 7 días de prueba del programa, como la
+  VPN; la suscripción, cuando salga a la venta. Rama `ultra-2` (desde `ultra-1`): MUST-FIX 1 y 2 de la revisión del 3 nov
+  (palabras con compromiso previo, ritmo fijo de 1 KB por segundo sin marca 0x11), y en la segunda revisión A y B (sin
+  compromiso o sin número no hay sesión; un solo compromiso y un solo número por conversación, firmados), S1–S6, menores, y la
+  alarma sin lápida. Revisión criptográfica independiente: GO definitivo (informe en el scratchpad de la sesión,
+  `revision-ultra2.md`). Pruebas: ultra 87/87, blindado 31/31, codigo-grande 41/41, tipos 22/22, rota, llevar (B_PC=1),
+  enviar-llamada, voz-ultra, vigia, recupera.
+- **Pendiente:** la puerta de Plus en el relé (propuesta con fichas de un solo uso y firma ciega, para cuando haya pasarela de
+  pagos); la traducción a los 39 idiomas restantes de 156 textos (`herramientas/traduccion-web/ultra2-faltan.json`, rama
+  `traduccion-ultra`); las pruebas de teléfono que acaban en /solo-pc/ (ver herramientas/pruebas-comunicaciones/README.md).
+- **Despliegue:** los dos intentos de GitHub Pages de 51d52f99 agotaron el tiempo en «syncing_files» (lado de GitHub; el
+  sitio pesa lo mismo que el anterior, 459 MB); se publica de nuevo con este commit.
+
