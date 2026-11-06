@@ -56,6 +56,8 @@ async function equipo(browser, nombre, x) {
   await ctx.addInitScript((x) => {
     try { sessionStorage.setItem('gcom-sin-numero', '1'); if (x.rota) sessionStorage.setItem('gcom-rota-ms', String(x.rota)); if (x.revela) sessionStorage.setItem('gcom-prueba-revela-ms', String(x.revela)); if (x.otraIdentidad) sessionStorage.setItem('gcom-prueba-otra-identidad', '1'); if (x.sinCw) sessionStorage.setItem('gcom-prueba-sin-cw', '1'); if (x.recompromete) sessionStorage.setItem('gcom-prueba-recompromete', '1'); } catch (_) {}
     if (x.sinCapa) { try { delete window.RTCRtpScriptTransform; window.RTCRtpScriptTransform = undefined; } catch (_) {} }
+    if (x.rompeVoz) { try { if (window.AudioWorklet) AudioWorklet.prototype.addModule = function () { return Promise.reject(new Error('prueba')); }; } catch (_) {} }
+    setInterval(() => { const e = document.querySelector('#aviso'); if (e && !e.hidden && e.textContent && !(window.__av || []).includes(e.textContent)) (window.__av = window.__av || []).push(e.textContent); }, 100);
     if (x.movil) { try { Object.defineProperty(navigator, 'standalone', { get: () => true }); } catch (_) {} }
     window.__compartidos = []; navigator.share = (d) => { window.__compartidos.push(d); return new Promise((r) => setTimeout(r, 300)); };
     window.__copiados = []; try { navigator.clipboard.writeText = (y) => { window.__copiados.push(String(y)); return Promise.resolve(); }; navigator.clipboard.write = (items) => Promise.all(items.map(async (it) => { const b = await it.getType('text/plain'); window.__copiados.push(await b.text()); })); } catch (_) {}
@@ -424,6 +426,26 @@ const mp3Path = path.join(tmp, 'grabacion de mi nombre.mp3');
     comprueba(await hasta(() => M.evaluate(() => window.gcomPrueba.cuantas() === 0), 6000), '9. el otro equipo recibe la orden de borrado');
     await foto(M, '13-movil-borrado');
     await E.context().close(); await M.context().close();
+  }
+
+  // ---- S1 y S6 (revisión independiente 2). S1: si el procesador de la voz cambiada no carga, la llamada sigue con la voz natural
+  // y el botón lo dice. S6: si quien llama no revela su clave, quien contesta cuelga a los 10 s con la alarma, como en el chat ----
+  { const S = await equipo(browser, 'S', { plan: 'plus', rompeVoz: true }), U = await equipo(browser, 'U');
+    const e8 = await invitaUltra(S); await acepta(U, e8); await enChat(S); await enChat(U);
+    await hasta(async () => (await palabrasChat(S)).split(' · ').length === 4, 12000);
+    await llama(S, U, false);
+    const v = await S.evaluate(() => ({ voz: GuardianaCom.llamada.voz, cambio: GuardianaCom.llamada.cambioActivo, boton: document.querySelector('#ll-grave').getAttribute('aria-pressed'), etiqueta: document.querySelector('#ll-grave').getAttribute('aria-label'), avisos: window.__av || [] }));
+    comprueba(v.voz === 'natural' && !v.cambio && v.boton === 'false' && /desactivado/.test(v.etiqueta) && v.avisos.some((a) => /voz natural/.test(a)), 'S1. sin el procesador de la voz: sale la natural, el botón dice «desactivado» y avisa', v);
+    await S.evaluate(() => document.querySelector('#ll-colgar').click()); await hasta(async () => (await estadoLl(S)) === 'libre' && (await estadoLl(U)) === 'libre', 8000); await espera(1500);
+    await S.evaluate(() => sessionStorage.setItem('gcom-prueba-sin-revela', '1'));
+    await llama(S, U, false);
+    const al = (P) => P.evaluate(() => ({ vis: !document.querySelector('#alarma').hidden, por: document.querySelector('#alarma-por').textContent, n: window.gcomPrueba.cuantas() }));
+    await hasta(async () => (await al(U)).vis, 25000);
+    const au = await al(U), as = await al(S);
+    const libres = await hasta(async () => (await estadoLl(U)) === 'libre' && (await estadoLl(S)) === 'libre', 5000); // (tras colgar, «cerrando» dura 0,7–1,5 s)
+    comprueba(au.vis && /palabras de verificación/.test(au.por) && au.n === 0 && libres, 'S6. sin la revelación de quien llama, quien contesta cuelga a los 10 s con la alarma y la conversación se borra', { U: au, S: as });
+    await foto(U, '14-pc-llamada-sin-palabras');
+    await S.context().close(); await U.context().close();
   }
 
   // ---- R12. pánico durante una llamada Ultra: Esc dos veces cuelga, borra en los dos y sale ----

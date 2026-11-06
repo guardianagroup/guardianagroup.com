@@ -1780,7 +1780,7 @@
       // el número grande de la llamada (dueño, 29 Oct 2026, 10:16): si los dos ven el mismo, nadie está en medio; «Coinciden» deja
       // la conversación como verificada; «No coinciden» cuelga y, en el blindado, destruye la conversación en los dos equipos
       sasOk: async () => { const c = convLl(); if (c && !c.verificada) await marcaVerificada(c, true); },
-      sasMal: async () => { const c = convLl(); if (!c) return; if (esB(c)) await alarma(c, 'numero'); else { await anotaSistema(c, 'El número de seguridad de la llamada no coincidía: llamada cortada. No envíes nada por aquí.'); vigila(c, T('El número de seguridad de la llamada no coincidía: llamada cortada. No envíes nada por aquí.'), 'mal'); aviso(T('El número no coincidía: llamada cortada. No envíes nada por aquí.')); } },
+      sasMal: async (por) => { const c = convLl(); if (!c) return; if (esB(c)) await alarma(c, por === 'sin-palabras' || por === 'palabras' ? por : 'numero'); else { await anotaSistema(c, 'El número de seguridad de la llamada no coincidía: llamada cortada. No envíes nada por aquí.'); vigila(c, T('El número de seguridad de la llamada no coincidía: llamada cortada. No envíes nada por aquí.'), 'mal'); aviso(T('El número no coincidía: llamada cortada. No envíes nada por aquí.')); } },
       // el nombre que la otra persona se puso o el que le pusiste tú; sin ninguno, «Llamada encriptada» o «Videollamada encriptada»
       // sin nombre, «Videollamada encriptada» (dueño, 30 Oct 2026, 11:04: «lo de conversación 2… hacerlo más profesional»)
       nombre: () => { const c = convLl(); return (c && (c.alias || c.nombre)) || ''; },

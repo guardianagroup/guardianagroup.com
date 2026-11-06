@@ -1190,7 +1190,7 @@
       pc.onicecandidate = (e) => { if (e.candidate) o.manda({ acto: 'ice', id: idLlamada, cand: e.candidate.toJSON() }); };
       alEstadoPc = () => {
         if (!pc) return;
-        if (pc.connectionState === 'connected') { paraTono(); refuerzaRuta(); recuperada(); miImagen(); setTimeout(miImagen, 1500); setTimeout(miImagen, 4000); if (estado !== 'hablando') { estado = 'hablando'; iniciada = Date.now(); di(''); avisaSalida(); avisaPq(); clearInterval(reloj); reloj = setInterval(() => { tiempo.textContent = mmss(Date.now() - iniciada); }, 500); mideCalidad(); topeAudio(); if (video) topeVideo(); pinta(); suenaRemoto(); sasCalcula(); pintaSas(); pideWake(); } }
+        if (pc.connectionState === 'connected') { paraTono(); refuerzaRuta(); recuperada(); miImagen(); setTimeout(miImagen, 1500); setTimeout(miImagen, 4000); if (estado !== 'hablando') { estado = 'hablando'; iniciada = Date.now(); di(''); avisaSalida(); avisaPq(); clearInterval(reloj); reloj = setInterval(() => { tiempo.textContent = mmss(Date.now() - iniciada); }, 500); mideCalidad(); topeAudio(); if (video) topeVideo(); pinta(); suenaRemoto(); sasCalcula(); pintaSas(); sasPlazoUltra(); pideWake(); } }
         else if (pc.connectionState === 'failed') { di(t('Conexión interrumpida, intentando recuperarla…'), true); reconecta('fallo'); }
         else if (pc.connectionState === 'disconnected') { di(t('Conexión interrumpida, intentando recuperarla…'), true); reconecta('corte'); }
       };
@@ -1341,6 +1341,14 @@
       repintaSeg();
     }
     function sasCoinciden() { if (!sas || sas.estado !== 'pendiente') return; sas.estado = 'coinciden'; caja.classList.add('sas-plegado'); pintaSas(); if (o.sasOk) { try { o.sasOk(); } catch (_) {} } }
+    // Ultra (segunda revisión independiente, 5 nov 2026, S6): quien contesta necesita la revelación de quien llama para tener sus
+    // palabras; si no llega a los 10 s de «hablando», o si no cuadra con el compromiso de la oferta, la llamada se cuelga con la
+    // alarma, como en el chat (la conversación se borra en los dos equipos). En local, «gcom-prueba-sin-revela» hace que quien llama
+    // no revele, como haría quien está en medio.
+    let sasPlazo = 0;
+    const sinRevelaPrueba = () => { try { return LOCAL && sessionStorage.getItem('gcom-prueba-sin-revela') === '1'; } catch (_) { return false; } };
+    function sasPlazoUltra() { clearTimeout(sasPlazo); if (!ultra() || inicioYo || !sas) return; sasPlazo = setTimeout(() => { if (estado === 'hablando' && ultra() && !inicioYo && sas && !sas.numero) sasFalla('sin-palabras'); }, 10000); }
+    function sasFalla(por) { if (!ultra() || estado === 'libre') return; clearTimeout(sasPlazo); const f = o.sasMal; colgar(); if (f) { try { f(por); } catch (_) {} } }
     function sasNoCoinciden() { if (!sas || sas.estado !== 'pendiente') return; sas.estado = 'no'; pintaSas(); const f = o.sasMal; colgar(); if (f) { try { f(); } catch (_) {} } }
     async function llamar(conVideo) {
       if (ocupado()) return;
@@ -1414,11 +1422,11 @@
         // Ultra, sin rebaja: si la otra persona contesta sin la capa postcuántica, la llamada no sigue (y se dice por qué)
         if (ultra() && !(m.pqm === 1 && pqOferta)) { const por = typeof m.pqc !== 'number' ? 'suyo' : 'clave'; o.manda({ acto: 'colgar', id: idLlamada }); pqOferta = null; termina('fallo'); if (o.sinRebaja) o.sinRebaja(por); return; }
         await pc.setRemoteDescription({ type: 'answer', sdp: m.sdp }); if (m.pqm === 1 && pqOferta) { if (await pqConfirma(pc, pqOferta.sec, idLlamada, true, m.pqr === 1)) pqVigila(pc, (x) => o.manda(Object.assign({ id: idLlamada }, x))); } else { pqClaro(pc); if (pqOferta && typeof m.pqc !== 'number') pqPor = 'suyo'; } pqOferta = null; for (const c of pendientes) { try { await pc.addIceCandidate(c); } catch (_) {} } pendientes = []; di(t('Conectando…')); if (video) topeVideo();
-        if (sas && inicioYo) { try { sas.suPub = typeof m.sas === 'string' && m.sas.length < 120 ? deB64u(m.sas) : null; } catch (_) { sas.suPub = null; } if (sas.suPub && sas.suPub.length === 65) { o.manda({ acto: 'sas', id: idLlamada, p: b64u(sas.pub) }); sasCalcula(); } else { sas.estado = 'roto'; pintaSas(); } }
+        if (sas && inicioYo) { try { sas.suPub = typeof m.sas === 'string' && m.sas.length < 120 ? deB64u(m.sas) : null; } catch (_) { sas.suPub = null; } if (sas.suPub && sas.suPub.length === 65) { if (!sinRevelaPrueba()) o.manda({ acto: 'sas', id: idLlamada, p: b64u(sas.pub) }); sasCalcula(); } else { sas.estado = 'roto'; pintaSas(); } }
         if (ultra() && inicioYo && (!sas || sas.estado === 'roto')) { o.manda({ acto: 'colgar', id: idLlamada }); termina('fallo'); if (o.aviso) o.aviso(t('Llamada Ultra cortada: la respuesta llegó sin las palabras de verificación. Alguien podría estar en medio.')); return; }
         return; }
       // la clave revelada de quien llama: tiene que ser la del compromiso de la oferta; si no, la comprobación queda rota
-      if (m.acto === 'sas' && sas && !inicioYo) { let p = null; try { p = typeof m.p === 'string' && m.p.length < 120 ? deB64u(m.p) : null; } catch (_) {} if (p && p.length === 65) { const h = await sha256(p); if (sas.suCompromiso && h.length === 32 && h.every((x, i) => x === sas.suCompromiso[i])) { sas.suPub = p; sasCalcula(); return; } } sas.estado = 'roto'; pintaSas(); return; }
+      if (m.acto === 'sas' && sas && !inicioYo) { let p = null; try { p = typeof m.p === 'string' && m.p.length < 120 ? deB64u(m.p) : null; } catch (_) {} if (p && p.length === 65) { const h = await sha256(p); if (sas.suCompromiso && h.length === 32 && h.every((x, i) => x === sas.suCompromiso[i])) { sas.suPub = p; sasCalcula(); return; } } sas.estado = 'roto'; pintaSas(); if (ultra()) sasFalla('palabras'); return; }
       if (m.acto === 'camara') { suCamara = !!m.on; pintaVideo(); reenviaImagenes(); return; }
       if (m.acto === 'pq-claro') { if (pc) pqAClaro(pc); return; }
       if (m.acto === 'pausa') { di(m.on ? t('La otra persona ha puesto la llamada en pausa.') : ''); return; }
@@ -1911,6 +1919,7 @@
     // llamada en el chat y «Llamada perdida» por duplicado; revisión, 29 Oct 2026)
     function colgar() { if (estado === 'libre' || estado === 'cerrando') return; colgoYo = true; o.manda({ acto: 'colgar', id: idLlamada }); termina(estado === 'hablando' ? 'fin' : estado === 'entrante' ? 'rechazada' : 'cancelada'); }
     function termina(por, espera) {
+      clearTimeout(sasPlazo);
       if (estado === 'libre' || estado === 'cerrando') return;
       if (patas.some((L) => L.estado === 'hablando') && !colgoYo && (por === 'fin' || por === 'fallo')) { asciende(); return; }
       for (const L of patas.slice()) { tmanda(L, { acto: 'colgar', id: L.id }); quitaPata(L, 'yo', true); }
