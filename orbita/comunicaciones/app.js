@@ -556,12 +556,13 @@
     const j = { v: 4, b: 1, firmaPub: C.b64u(id.firmaPub), acuerdoPub: C.b64u(id.acuerdoPub), dsaPub: C.b64u(id.dsaPub), ef: C.b64u(c.ef.pub), epoca: C.b64u(c.epoca), resp: resp ? C.b64u(resp.epoca) : '', sig: C.b64u(sig), sigpq: C.b64u(sigpq) }; // (sin nombre: en Ultra no se envía el de este navegador, que uniría conversaciones)
     if (c.ef.kem) j.kem = C.b64u(c.ef.kem.ek);
     if (pq) j.kemct = C.b64u(pq.ct);
-    // las 4 palabras, con compromiso previo (cripto.js, compromisoPalabras): hasta que estén, quien inicia se compromete con 32 bytes
-    // al azar en cada inicio y quien responde manda los suyos; quien inicia los revela cuando ya hay sesión (revelaPalabras)
-    if (!c.palabrasN) {
-      if (!resp && c.ef.kem) { const nI = C.azar(32); c.misCompromisos = c.misCompromisos || new Map(); c.misCompromisos.set(C.hex(c.epoca), nI); for (const k of [...c.misCompromisos.keys()].slice(0, -8)) c.misCompromisos.delete(k); j.cw = C.b64u(await C.B.compromisoPalabras(identidadPruebaCompromiso() || c.miHuellaB, nI)); }
-      else if (resp && resp.cw) { const nR = C.azar(32); c.susCompromisos = c.susCompromisos || new Map(); c.susCompromisos.set(C.hex(resp.epoca), { cw: resp.cw, nR }); for (const k of [...c.susCompromisos.keys()].slice(0, -16)) c.susCompromisos.delete(k); j.nr = C.b64u(nR); }
-    }
+    // las 4 palabras, con compromiso previo (cripto.js, compromisoPalabras): quien inicia se compromete con 32 bytes al azar y quien
+    // responde manda los suyos; quien inicia los revela cuando ya hay sesión (revelaPalabras). Sin ellos no hay sesión Ultra: una
+    // presentación que inicia sin compromiso, o una respuesta sin número, es alarma (revisión independiente 2, 5 nov 2026, A); y el
+    // compromiso va en todas las que inician, también en las renovaciones, para que nunca falte (en local, «gcom-prueba-sin-cw» lo
+    // quita, como haría quien está en medio)
+    if (!resp && c.ef.kem && !sinCwPrueba()) { const nI = C.azar(32); c.misCompromisos = c.misCompromisos || new Map(); c.misCompromisos.set(C.hex(c.epoca), nI); for (const k of [...c.misCompromisos.keys()].slice(0, -8)) c.misCompromisos.delete(k); j.cw = C.b64u(await C.B.compromisoPalabras(identidadPruebaCompromiso() || c.miHuellaB, nI)); }
+    else if (resp && resp.cw) { const nR = C.azar(32); c.susCompromisos = c.susCompromisos || new Map(); c.susCompromisos.set(C.hex(resp.epoca), { cw: resp.cw, nR }); for (const k of [...c.susCompromisos.keys()].slice(0, -16)) c.susCompromisos.delete(k); j.nr = C.b64u(nR); }
     const iv = C.azar(12);
     const ct = new Uint8Array(await crypto.subtle.encrypt({ name: 'AES-GCM', iv, additionalData: new Uint8Array([1]) }, c.presentacion, C.B.rellena(C.te.encode(JSON.stringify(j)))));
     R.manda(c.id, c.suId || null, C.cat(new Uint8Array([1]), iv, ct));
@@ -571,7 +572,15 @@
   }
   // Prueba local: quien inicia se compromete con otra identidad y luego se presenta con la suya (como haría quien está en medio y
   // quisiera elegir sus palabras después): quien responde lo detecta al comprobar el compromiso (ultra.js).
+  const sinCwPrueba = () => { try { return LOCAL && sessionStorage.getItem('gcom-prueba-sin-cw') === '1'; } catch (_) { return false; } };
   const identidadPruebaCompromiso = () => { try { return LOCAL && sessionStorage.getItem('gcom-prueba-otra-identidad') === '1' ? C.azar(48) : null; } catch (_) { return null; } };
+  // Las palabras tienen plazo (revisión independiente 2, 5 nov 2026, A): si a los 15 s de confirmar la sesión no las hay, alguien
+  // las ha parado por el camino, y en Ultra eso es alarma (no «comprobando…» para siempre)
+  const PLAZO_PALABRAS_MS = 15000;
+  function plazoPalabras(c) {
+    if (c.palabrasN || c.plazoPalabras) return;
+    c.plazoPalabras = setTimeout(() => { if (!c.palabrasN && c.estado !== 'destruida' && CONVS.get(c.id) === c) { vigila(c, T('No han llegado las palabras de verificación: alguien podía estar en medio.'), 'mal'); alarma(c, 'sin-palabras'); } }, PLAZO_PALABRAS_MS);
+  }
   // quien inicia: con la sesión ya hecha, revela su número; desde ese momento enseña las palabras (en local, «gcom-prueba-revela-ms»
   // retrasa la revelación para ver que antes no sale ninguna)
   function revelaPalabras(c) {
@@ -626,6 +635,9 @@
       else if (!c.nombre && j.nombre) c.nombre = String(j.nombre).slice(0, 40);
       c.suId = de; c.miembros.add(de);
       if (nueva || j.nombre !== c.nombreVisto) { c.nombreVisto = j.nombre; await guardaConv(c); }
+      // sin el compromiso de las palabras (al iniciar con ML-KEM) o sin el número (al responder) no hay sesión Ultra: alguien lo ha
+      // quitado (las que inician sin ML-KEM solo piden que el otro se presente: no llevan compromiso ni hacen sesión)
+      if ((!resp && kemEk && !cw) || (resp && !nr)) { vigila(c, T('Llegó una presentación sin el compromiso de las palabras de verificación: alguien podía estar en medio.'), 'mal'); await alarma(c, 'sin-palabras'); return; }
       if (!soyInicio(c)) { if (kemEk && !resp) { const pq = await presentaB(c, { epoca, ef, ek: kemEk, cw }); await derivaSesionB(c, ef, c.ef, pq); } }
       else if (resp) {
         const pq = { ss: C.B.kemAbre(kemCt, efMia.kem.dk), ek: efMia.kem.ek, ct: kemCt }; efMia.kem.dk.fill(0); efMia.kem = null; await derivaSesionB(c, ef, efMia, pq);
@@ -971,7 +983,7 @@
     try { const k = await ses.recibo.para(n); j = JSON.parse(C.td.decode(await C.abre(k, n, b.subarray(13), C.cat(b.subarray(0, 13), ses.hash)))); } catch (e) { if (!/repetido|saltados/.test(e.message)) { c.incidencias = (c.incidencias || 0) + 1; await anotaSistema(c, 'Un mensaje no superó la comprobación de integridad y se ha descartado.'); vigila(c, T('Un mensaje no superó la autenticación: descartado.'), 'mal'); pintaRadio(c); await alarmaSiToca(c); } return; }
     if (c.suId !== de) return;
     c.ultimaVerificacion = Date.now();
-    if (!ses.confirmada) { ses.confirmada = true; if (c.sesion === ses) { pintaCabecera(c); mandaLlaveBuzon(c); } vigila(c, T('Confirmación de clave recibida: la otra persona tiene la misma clave.'), 'bien'); } // la otra persona tiene la misma clave: sesión confirmada
+    if (!ses.confirmada) { ses.confirmada = true; if (esB(c)) plazoPalabras(c); if (c.sesion === ses) { pintaCabecera(c); mandaLlaveBuzon(c); } vigila(c, T('Confirmación de clave recibida: la otra persona tiene la misma clave.'), 'bien'); } // la otra persona tiene la misma clave: sesión confirmada
     return trataCarga(c, j, ses);
   }
   // lo que dice cada mensaje, venga por la sesión o por el buzón cifrado (porBuzon: solo textos, fotos y notas de voz, acuses y «leído»)
@@ -1051,7 +1063,7 @@
       case 'visto': { const m = c.mensajes.find((x) => x.id === j.id && x.dir === 'mia' && x.tipo === 'archivo'); if (m && !m.archivo.vistoBorrado) { m.archivo.vistoBorrado = true; await guardaMensaje(c, m); pintaMensaje(c, m, true); vigila(c, T('Visto y borrado en el otro equipo') + ': ' + m.archivo.nombre, 'ok'); } return; }
       case 'borra': return borraLocal(c, j.id, true);
       case 'paquete': { const a = c.archivos.get(String(j.id || '')); const m = c.mensajes.find((x) => x.id === j.id && x.dir === 'suya' && x.tipo === 'archivo'); if (!a || a.envio || !a.paq || !m || typeof j.t !== 'string') return; try { a.trailer = C.deB64u(j.t); } catch (_) { return; } if (a.trailer.length !== 32) { a.trailer = null; return; } if (a.tengo === a.trozos) await completaRecepcion(c, m, a); return; }
-      case 'alarma': { if (!esB(c)) return; await destruyeLocal(c, true, true); muestraAlarma(j.por === 'numero' ? 'numero' : j.por === 'integridad' ? 'integridad' : j.por === 'palabras' ? 'palabras' : 'otro', true); return; }
+      case 'alarma': { if (!esB(c)) return; await destruyeLocal(c, true, true); muestraAlarma(j.por === 'numero' ? 'numero' : j.por === 'integridad' ? 'integridad' : j.por === 'palabras' ? 'palabras' : j.por === 'sin-palabras' ? 'sin-palabras' : 'otro', true); return; }
       case 'palabras': { await recibeRevelacion(c, j); return; }
       case 'palabras-ok': { if (esB(c) && c.revela) c.revelaOk = true; return; }
       default: return;
@@ -3321,7 +3333,7 @@
   }
   function muestraAlarma(por, porElla) {
     const a = $('#alarma'); if (!a) return;
-    $('#alarma-por').textContent = por === 'numero' ? T('El número de seguridad de la llamada no coincidía en los dos equipos: alguien podía estar en medio.') : por === 'palabras' ? T('Las palabras de verificación no cuadraban con el compromiso previo de la otra parte: alguien podía estar en medio.') : por === 'integridad' ? T('Llegaron mensajes o piezas manipulados: alguien intentó alterar la conversación o entrar en ella.') : T('El otro equipo detectó un ataque.');
+    $('#alarma-por').textContent = por === 'numero' ? T('El número de seguridad de la llamada no coincidía en los dos equipos: alguien podía estar en medio.') : por === 'palabras' ? T('Las palabras de verificación no cuadraban con el compromiso previo de la otra parte: alguien podía estar en medio.') : por === 'sin-palabras' ? T('No han llegado las palabras de verificación: alguien podía estar en medio.') : por === 'integridad' ? T('Llegaron mensajes o piezas manipulados: alguien intentó alterar la conversación o entrar en ella.') : T('El otro equipo detectó un ataque.');
     $('#alarma-donde').textContent = porElla ? T('El otro equipo dio la alarma. Esta conversación se ha borrado aquí también: claves, mensajes y archivos.') : T('Por precaución, esta conversación se ha borrado en los dos equipos: claves, mensajes y archivos.');
     a.hidden = false; try { $('#alarma-ok').focus(); } catch (_) {}
   }

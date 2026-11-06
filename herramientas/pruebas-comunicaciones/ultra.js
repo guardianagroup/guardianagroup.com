@@ -54,7 +54,7 @@ async function equipo(browser, nombre, x) {
   x = x || {};
   const ctx = await browser.newContext({ viewport: x.movil ? { width: 390, height: 844 } : { width: 1366, height: 820 }, deviceScaleFactor: x.movil ? 2 : 1, hasTouch: !!x.movil, userAgent: PC, locale: 'es-CO', permissions: ['microphone', 'camera'] });
   await ctx.addInitScript((x) => {
-    try { sessionStorage.setItem('gcom-sin-numero', '1'); if (x.rota) sessionStorage.setItem('gcom-rota-ms', String(x.rota)); if (x.revela) sessionStorage.setItem('gcom-prueba-revela-ms', String(x.revela)); if (x.otraIdentidad) sessionStorage.setItem('gcom-prueba-otra-identidad', '1'); } catch (_) {}
+    try { sessionStorage.setItem('gcom-sin-numero', '1'); if (x.rota) sessionStorage.setItem('gcom-rota-ms', String(x.rota)); if (x.revela) sessionStorage.setItem('gcom-prueba-revela-ms', String(x.revela)); if (x.otraIdentidad) sessionStorage.setItem('gcom-prueba-otra-identidad', '1'); if (x.sinCw) sessionStorage.setItem('gcom-prueba-sin-cw', '1'); if (x.recompromete) sessionStorage.setItem('gcom-prueba-recompromete', '1'); } catch (_) {}
     if (x.sinCapa) { try { delete window.RTCRtpScriptTransform; window.RTCRtpScriptTransform = undefined; } catch (_) {} }
     if (x.movil) { try { Object.defineProperty(navigator, 'standalone', { get: () => true }); } catch (_) {} }
     window.__compartidos = []; navigator.share = (d) => { window.__compartidos.push(d); return new Promise((r) => setTimeout(r, 300)); };
@@ -365,6 +365,19 @@ const mp3Path = path.join(tmp, 'grabacion de mi nombre.mp3');
     const ax = await al(X), ay = await al(Y);
     comprueba(ax.vis && ay.vis && /compromiso previo/.test(ax.por) && /compromiso previo/.test(ay.por) && ax.n === 0 && ay.n === 0, 'R1. si el compromiso no cuadra con lo revelado: alarma en los dos y la conversación borrada', { X: ax, Y: ay });
     await foto(Y, '10b-pc-alarma-palabras');
+    await X.context().close(); await Y.context().close();
+  }
+
+  // ---- A (revisión independiente 2, 5 nov 2026). Quien inicia no manda el compromiso de las palabras (como quien está en medio
+  // y quisiera quitarlas): no hay sesión ni palabras; salta la alarma y la conversación se borra. Nunca «verificado» ----
+  { const X = await equipo(browser, 'X2', { plan: 'plus', sinCw: true }), Y = await equipo(browser, 'Y2', { sinCw: true });
+    const e6 = await invitaUltra(X); await acepta(Y, e6);
+    let vioPalabras = false;
+    const al = (P) => P.evaluate(() => ({ vis: !document.querySelector('#alarma').hidden, por: document.querySelector('#alarma-por').textContent, n: window.gcomPrueba.cuantas() }));
+    await hasta(async () => { if ((await palabrasChat(X)).split(' · ').length === 4 || (await palabrasChat(Y)).split(' · ').length === 4) vioPalabras = true; return (await al(X)).vis || (await al(Y)).vis; }, 25000);
+    const ax = await al(X), ay = await al(Y), a = ax.vis ? ax : ay;
+    comprueba(!vioPalabras && (ax.vis || ay.vis) && /palabras de verificación/.test(a.por) && a.n === 0, 'A. sin el compromiso de las palabras: alarma y conversación borrada, nunca palabras', { X: ax, Y: ay, vioPalabras });
+    await foto(ax.vis ? X : Y, '10c-pc-alarma-sin-compromiso');
     await X.context().close(); await Y.context().close();
   }
 
