@@ -5,6 +5,9 @@ lista de 2.048 palabras en español sin ambigüedad»).
 Escribe orbita/comunicaciones/palabras.js a partir del POOL de abajo, aplicando estas reglas, y falla si no quedan exactamente 2048:
   - solo letras (con tildes y ñ), de 4 a 8 letras, en minúsculas; sustantivos comunes, adjetivos y verbos del español corriente;
   - sin nombres propios, marcas, palabrotas ni palabras cargadas (enfermedad, muerte, armas, religión, sexo, política);
+  - y sin nada que incomode al leerlo en voz alta en un despacho o una clínica (FUERA_LECTURA, coordinación, 5 nov 2026: revisadas
+    una a una, también con los sentidos de Colombia, México, el Caribe, el Cono Sur y España), ni términos de la propia pantalla
+    (número, código, nivel, firma…), ni palabras extranjeras de pronunciación rara;
   - sin ambigüedad al oído: se calcula una «clave fonética» (sin tildes; b = v; z, ce, ci = s; c, qu = k; ll = y; sin h; ge, gi = je, ji;
     gue, gui = ge, gi; y final = i) y no entran dos palabras con la misma clave ni con claves que difieran en una sola letra
     (casa / caza, gato / pato, hola / ola, callo / cayo…), ni dos con la misma raíz de 4 letras y el mismo largo (gato / gata);
@@ -333,6 +336,50 @@ PROHIBIDAS = set('aborto arma armadura armas asalto ataque atacar ataúd batalla
                  ' angustia ansia ansiedad lamento sollozo quejido gemir agonía pesadilla amenaza odioso rencor cobarde traidor hostil'
                  ' impostor secuestro tortura veneno envenenar deprimir deplorar atrofia luto fúnebre tétrico macabro difunto'.split())
 
+# Fuera también (coordinación, 5 nov 2026: «fuera "canalla", "cerdo", "basura" y cualquier otra palabra insultante, vulgar, violenta,
+# sexual, de enfermedad o muerte, política, religiosa, de marca o que pueda incomodar a un abogado o una clínica al leerla en voz alta:
+# solo palabras neutras y fáciles de pronunciar y de distinguir por teléfono»). Revisadas una a una, también con los sentidos de
+# Colombia, México, el Caribe, el Cono Sur y España; y las que se confunden con la propia pantalla (número, código, nivel, firma…),
+# las extranjeras de pronunciación rara y las que son sobre todo nombres propios.
+FUERA_LECTURA = set("""
+canalla cerdo puerco basura bestia besugo bicho borrego bruja buitre cabra camello ganso golfo gorila gusano flojo foca gallina inútil
+ingrato lacayo melón morsa obtuso orondo payaso pellejo pelota plebe pluma terco vulgar chato chorizo víbora madre criado novio pareja
+almeja amante beso caricia celo chupar cola conejo desear deseo desliz dominar empinar enagua encaje follaje fregar gozar íntimo jadear
+lamer leche macizo masaje menear miembro mojar mojado pájaro palpar pandero papaya paquete pepino pico picante piropo polvo poseer
+precoz pudor sostén tentar tocar tragar vibrar viril tetera labio agujero humedad húmedo alcoba adulto higo nupcias
+abrasar acechar afilar apresar arsenal atizar atracar atraco aturdir blandir botín brigada cartel combate convoy coyote dañar defensa
+detener disparo escolta espía fuga gatillo granada herir impacto invadir legión marcial mecha mina morder ojiva plomo ráfaga rapiña
+reja rendir saeta tajo tanque tregua acusar demanda decreto edicto fiscal indulto juez juicio jurado junta leyes multa notario objetar
+penal tutela sujeto prueba indagar eludir evadir falsear falso fingido fingir pirata tahúr truco urdir trama ocultar oculto turbio
+husmear pinchar fuego choque colgar garfio clan untar lucro capote faena lidiar celador
+benigno bulto caída cicuta colapso cráneo crónica delirio duelo fármaco faringe fatiga fémur fiambre ganglio gasa germen gota grave
+guadaña hongo incubar inerte injerto inmóvil jaqueca jarabe jeringa lápida legado lejía letargo lombriz lóbulo lumbar lunar lúcido
+matriz médula miope moho muestra muela nasal nervio nocivo nodriza ojera operar padecer pálido pañal píldora plagar pulga pulmón
+rabia regla rigor sufrir sutura tieso tórax torcer tripa trompa urna vejez cerebro ceniza cortejo encía ayuno fumar alcohol licor
+ginebra jerez tasca juerga sobrio látex eterno susto aterrar sequía inundar huracán oxígeno axila sobaco gargajo grano hincha
+alcalde alianza altar alteza amuleto beato boicot cabildo cacique califa cáliz capilla cruz derecha divino dogma electo ermita éxodo
+exilio facha falange fraile gloria gurú hechizo himno huelga ídolo imán limbo limosna mandato mestizo migrar milagro militar monarca
+moreno nación nativo navidad oráculo oprimir orgullo pacto padrino paraíso patria pesebre piadoso prior reina rito rojo seglar senado
+sotana templo trance tribu trono venial general liberar líder fervor oblea
+adobe jaguar corona clarín pinocho diana ecuador damasco jacinto narciso iceberg beige jazz jersey kiwi clip
+absurdo abrumar aburrir altivo apenar apuesta bajeza banda caos cizaña codicia crisis crítica débil demoler derrota desecho embuste
+enemigo enfado enojo envidia error exceso farsa fiasco gritar chillar huir lástima lágrima lodazal mofarse negar recelo rifa lotería
+tedio suceso cogollo colocar perico yerba grabar
+nadie ninguno nulo número mensaje llamar palabra código firma nivel núcleo órbita mosaico escudo blindar cifra orden
+adivino alabanza alucinar alumbrar amígdala aplastar apropiar arcángel arrebato asamblea avaricia bastión bendecir berbiquí bloquear
+camuflar cero colonia concejo cuartel culto derecho emigrar erguir hacha hembra hierba hinchar huella lecho minar nicho obeso padre
+patrón pegar piquete podrido popular presión profeta pulso quinqué rabieta radical raza rebajar rebelde receta recluir redimir
+reforma refugio regañar régimen relleno renacer rescate retablo retener romance rosario salvaje secreto secuela señuelo sesenta sidra
+simular socavar socorro sofocar soledad soltero someter súbdito súplica tacto temblar terapia testigo tímpano tiritar trailla trasero
+tratado tributo tropa tuétano tumbar tumulto ulcerar ultraje untuoso urgente vampiro vanidad varonil vello venado venda vendaje venerar
+verruga vértigo vicario vidente vigilar viscoso zángano zodíaco zozobra
+cardenal cartucho censurar chinchón cicatriz claustro codiciar colegial colmillo conejera confesar contagio corsario costilla custodia
+defender deglutir dentista derramar desalojo diputado discutir divulgar doctrina doncella quemar sebo
+cláusula conforme ejecutar embajada embestir emisario empeorar encierro encuesta engordar enmendar sello
+ensuciar entrañas escombro escuadra esconder ácido anónimo auxilio célula esposa fecundo fértil indemne intriga jauría joroba latente
+liga manchar peligro géneros asilo espectro espíritu estómago estrecho eufórico ligar fanático fantasma farmacia flacidez flaqueza
+""".split())
+
 def main():
     pool = []
     vistos = set()
@@ -341,7 +388,7 @@ def main():
         if not w or w in vistos: continue
         vistos.add(w)
         if not re.fullmatch(r'[a-záéíóúñü]{4,8}', w): continue
-        if w in PROHIBIDAS: continue
+        if w in PROHIBIDAS or w in FUERA_LECTURA: continue
         pool.append(w)
     # orden de preferencia: las más cortas primero (se leen mejor), luego alfabético
     pool.sort(key=lambda w: (len(w), sin_tildes(w)))
@@ -364,8 +411,9 @@ def main():
     cuerpo = ',\n'.join('  ' + ', '.join("'" + w + "'" for w in lista[i:i + 12]) for i in range(0, 2048, 12))
     js = ("// GUARDIANA · Comunicaciones · las 2048 palabras de verificación de Ultra (3 Nov 2026; agencia, ronda 93). Cuatro de ellas, sacadas de\n"
           "// las claves de los dos equipos (cripto.js, palabrasDe: 11 bits cada una), se leen en voz alta en el chat y en cada llamada; si\n"
-          "// coinciden en las dos pantallas, nadie se ha puesto en medio. Lista propia, generada por herramientas/palabras-ultra.py con estas\n"
-          "// reglas: palabras corrientes del español de 4 a 8 letras, sin nombres propios ni palabras cargadas, y sin ambigüedad al oído (ninguna\n"
+          "// coinciden en las dos pantallas, la conversación es directa entre los dos. Lista propia, generada por herramientas/palabras-ultra.py\n"
+          "// con estas reglas: palabras neutras del español de 4 a 8 letras, sin nombres propios, sin palabras cargadas ni nada que incomode al\n"
+          "// leerlo en voz alta (5 nov 2026), y sin ambigüedad al oído (ninguna\n"
           "// comparte su sonido con otra ni se queda a una letra de otra: casa/caza, gato/pato, hola/ola…). No cambiarla: cambiaría las\n"
           "// palabras de todas las conversaciones. Misma licencia que el resto del código (AGPL-3.0).\n"
           "'use strict';\n"
