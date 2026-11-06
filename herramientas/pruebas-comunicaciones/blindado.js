@@ -120,6 +120,8 @@ const crypto = require('crypto'); const shaGrande = crypto.createHash('sha256').
   comprueba(shaB === shaGrande && recB.nombre === 'documento-1.bin', 'B: el archivo abierto es idéntico al enviado (SHA-256), con nombre neutro «' + (recB && recB.nombre) + '» · ' + shaB.slice(0, 16));
   await fotoDestapada(B, '26-B-paquete');
   // «Borrar en los dos»
+  // (en Ultra, «Borrar en los dos» sale cuando llega el «archivo-fin» del otro equipo, que va a ritmo fijo, detrás de su «leído»)
+  await hasta(A, () => !![...document.querySelectorAll('.gc-mia .gc-archivo .boton')].find((x) => x.textContent === 'Borrar en los dos'), 10000);
   await A.evaluate(() => { const b = [...document.querySelectorAll('.gc-mia .gc-archivo .boton')].find((x) => x.textContent === 'Borrar en los dos'); if (b) b.click(); }); await espera(1200);
   comprueba(await hasta(B, () => ![...document.querySelectorAll('.gc-archivo b')].some((b) => b.textContent === 'documento-1.bin') && /borrado un archivo/.test(document.body.textContent), 15000), 'B: «Borrar en los dos» lo quita también en B'); // (a ritmo fijo: la orden sale en su tic, detrás de lo que espere)
 
