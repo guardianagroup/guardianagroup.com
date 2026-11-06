@@ -274,6 +274,11 @@ const mp3Path = path.join(tmp, 'grabacion de mi nombre.mp3');
     await foto(B, '07a-pc-te-piden-firma');
     await B.click('.firma-pide .firma-si');
     comprueba(await hasta(() => A.evaluate(() => window.gcomPrueba.mensajes().some((m) => m.tipo === 'custodia' && m.estado === 'firmado')), 20000) && await hasta(() => B.evaluate(() => window.gcomPrueba.mensajes().some((m) => m.tipo === 'custodia' && m.estado === 'firmado')), 8000), '7. con «Firmar», el comprobante queda firmado por los dos equipos');
+    // S3 (revisión independiente 2): el comprobante dice quién firma (las claves de la conversación), qué prueba y qué no
+    { await A.evaluate(() => { const b = [...document.querySelectorAll('button')].filter((x) => x.textContent === 'Ver comprobante').pop(); if (b) b.click(); });
+      let tx = ''; await hasta(async () => { tx = await A.evaluate(() => { const h = document.querySelector('#h-custodia.gc-abierta'); return h ? h.textContent : ''; }); return /Quién firma/.test(tx); }, 10000);
+      comprueba(/Quién firma/.test(tx) && /no dicen quién es nadie/.test(tx) && /no prueban quién las tenía/.test(tx) && !/antes de enviar nada/.test(tx), 'S3. el comprobante dice quién firma, qué prueba y qué no', tx.slice(0, 160));
+      await A.evaluate(() => { const x = document.querySelector('#h-custodia .vj-x'); if (x) x.click(); }); await espera(400); }
     const d = (await A.evaluate(() => window.gcomPrueba.mensajes())).find((m) => m.tipo === 'archivo' && m.firmado);
     comprueba(d && d.nombre === 'documento-1.pdf', '7. el documento también sale con nombre neutro', d && d.nombre);
     // R13: y con «No firmar», quien lo pidió lo ve como decisión de la otra persona
