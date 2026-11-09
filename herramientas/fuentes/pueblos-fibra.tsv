@@ -324,7 +324,7 @@ stolac	BA	43.084	17.95995	7733	Stolac
 tomislavgrad	BA	43.71849	17.22515	7737	Tomislavgrad
 travnik	BA	44.22637	17.66583	31127	Travnik
 tuzla	BA	44.53842	18.66709	142486	Tuzla
-ugljevik	BA	44.67771	19.03384	3452	Ugljevik
+ugljevik	BA	44.6929	18.9944	3922	Ugljevik
 visoko	BA	43.98889	18.17806	17890	Visoko
 zenica	BA	44.20169	17.90397	164423	Zenica
 zepce	BA	44.42667	18.03778	8502	Žepče
@@ -704,7 +704,7 @@ salluit	CA	62.20411	-75.64344	1075	Salluit
 sudbury	CA	46.49	-80.99001	166004	Greater Sudbury
 swiftcurrent	CA	50.28337	-107.80135	16604	Swift Current
 thunderbay	CA	48.38202	-89.25018	108843	Thunder Bay
-toronto	CA	43.70643	-79.39864	2794356	Toronto
+toronto	CA	43.65333	-79.38389	2794356	Toronto
 umiujaq	CA	56.55305	-76.54947	541	Umiujaq
 vancouver	CA	49.24966	-123.11934	662248	Vancouver
 windsor	CA	42.30008	-83.01654	229660	Windsor
@@ -1750,7 +1750,7 @@ ancol	ID	-7.4599	107.9856	0	Ancol
 baa	ID	-10.7263	123.0492	1263	Baa
 balikpapan	ID	-1.26753	116.82887	695287	Balikpapan
 bandaaceh	ID	5.54167	95.33333	267962	Banda Aceh
-bandarlampung	ID	-5.42917	105.26111	1166066	Bandar Lampung
+bandarlampung	ID	-5.42917	105.26111	1088200	Bandar Lampung
 bandung	ID	-6.92222	107.60694	2528163	Bandung
 banjarmasin	ID	-3.31987	114.59075	657663	Banjarmasin
 banyuurip	ID	-7.0629	111.6975	0	Banyuurip
@@ -1876,15 +1876,15 @@ portmarnock	IE	53.42306	-6.1375	9285	Portmarnock
 portrane	IE	53.49667	-6.11111	1372	Portraine
 sandymount	IE	53.32815	-6.22224	8967	Sandymount
 beersheba	IL	31.25181	34.7913	186600	Beersheba
-dimona	IL	31.07079	35.03269	36192	Dimona
-eilat	IL	29.55805	34.94821	52299	Eilat
-hadera	IL	32.44192	34.9039	97335	Hadera
+dimona	IL	31.07079	35.03269	39590	Dimona
+eilat	IL	29.55805	34.94821	56004	Eilat
+hadera	IL	32.44192	34.9039	107974	Hadera
 haifa	IL	32.81303	34.99928	285316	Haifa
 jerusalem	IL	31.76904	35.21633	971800	Jerusalem
 metula	IL	33.27929	35.5787	1615	Metula
 netanya	IL	32.33294	34.85917	228204	Netanya
 telaviv	IL	32.08088	34.78057	432892	Tel Aviv
-tiratcarmel	IL	32.76025	34.96874	27822	Tirat Karmel
+tiratcarmel	IL	32.76025	34.96874	32167	Tirat Karmel
 ballasalla	IM	54.0959	-4.62962	0	Ballasalla
 castletown	IM	54.07445	-4.65365	3100	Castletown
 crosby	IM	54.18333	-4.56667	0	Crosby
