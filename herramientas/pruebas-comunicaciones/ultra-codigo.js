@@ -8,10 +8,11 @@
 // que guarda y todo lo que recibe, y abre las páginas con «?rele=ws://127.0.0.1:8795». Solo hace falta la web, desde la raíz:
 //     python3 -m http.server 8080 --bind 127.0.0.1
 // y, desde esta carpeta: node ultra-codigo.js [carpeta de capturas]
-//   1. A crea Ultra (enlace y QR); tras «Copiar enlace», en la espera, sigue «Usar un código» (revisión, M2). El código: 4 grupos de 4
-//      del alfabeto. El relé guarda un buzón de 9 cifras distinto del código, el que sale en Node con PBKDF2 y HKDF, y su sobre, abierto
-//      en Node con el código, es la semilla del enlace «#b=» (y con otro buzón no abre). «Cancelar el código» lo quita del relé. El
-//      código no aparece en nada de lo que recibe el relé, ni en lo que mandan las páginas, ni en las direcciones que piden.
+//   1. A crea Ultra en el PC y sale ya el código, como en la invitación normal (dueño, 15 nov 2026): «Sesión Ultra», «Tu código de
+//      invitación», sin enlace, QR ni «Usar un código», y nada copiado al portapapeles. El código: 4 grupos de 4 del alfabeto. El relé
+//      guarda un buzón de 9 cifras distinto del código, el que sale en Node con PBKDF2 y HKDF, y su sobre, abierto en Node con el
+//      código, es la semilla de la invitación (y con otro buzón no abre). «‹ Invitar» cancela la invitación y quita el código del relé.
+//      El código no aparece en nada de lo que recibe el relé, ni en lo que mandan las páginas, ni en las direcciones que piden.
 //   2. B lo escribe con minúsculas, espacios y una O en lugar de 0 (y una l en lugar de 1, si la hay): las 16 casillas, la sesión Ultra,
 //      las cuatro palabras iguales en los dos y mensajes en los dos sentidos; A vio «Alguien ha escrito el código» y el relé ya no
 //      guarda nada.
@@ -25,9 +26,11 @@
 //   7. Un código Ultra que empieza por 9 cifras (forzado: nuevoCodigoU ya no los da) no manda esas 9 cifras al relé, se escriba
 //      despacio o deprisa (revisión, M1); y lo que se escribe mientras se comprueba no se pierde: un error corregido entonces entra solo.
 //   8. A los 10 minutos (aquí, adelantado): caducado, «Nuevo código» y fuera del relé; al cancelar la invitación, fuera del relé; tras un
-//      corte, perdido («crea uno nuevo») y no se vuelve a dejar solo; si alguien recoge el sobre y no entra, a los 30 s (adelantados)
-//      «Nuevo código» (B3); y dos invitaciones que piden código a la vez tienen las dos el suyo (B4).
-//   9. Solo con el enlace, el relé no recibe ningún «invita», tampoco si quien invita se reconecta (antes del 6 nov 2026 se colaba uno).
+//      corte, el de antes fuera del relé y uno nuevo en pantalla, como la invitación normal (el mismo sobre nunca se vuelve a dejar); si
+//      alguien recoge el sobre y no entra, a los 30 s (adelantados) «Nuevo código» (B3); y dos invitaciones Ultra creadas a la vez
+//      tienen las dos el suyo (B4).
+//   9. Una invitación Ultra solo por enlace (la del teléfono; en el PC ya no se crea), el relé no recibe ningún «invita», tampoco si
+//      quien invita se reconecta (antes del 6 nov 2026 se colaba uno).
 'use strict';
 process.env.COM_PRUEBAS = '1';
 const { chromium } = require('playwright');
@@ -110,17 +113,20 @@ const pulsa = (P, s) => P.evaluate((s) => document.querySelector(s).click(), s);
 const enUltra = (P, ms) => hasta(() => P.evaluate(() => [...GuardianaCom.convs.values()].some((c) => c.modo === 'blindada' && c.huella && c.sesion && c.sesion.confirmada && c.sesion.pq)), ms || 20000);
 const enBlindada = (P) => hasta(() => P.evaluate(() => [...GuardianaCom.convs.values()].some((c) => c.modo === 'normal' && c.huella && c.sesion && c.sesion.confirmada)), 20000);
 const palabras = (P) => P.evaluate(() => { const e = document.querySelector('#cpalabras'); return e && !e.hidden ? document.querySelector('#cpalabras-txt').textContent : ''; });
+// crear Ultra en el PC: la invitación sale ya con su código (15 nov 2026); devuelve el enlace «#b=» que sigue saliendo de su semilla
 async function creaUltra(P) {
+  const antes = await P.evaluate(() => { const c = window.gcomPrueba.conv(); return c ? c.id : ''; });
   await pulsa(P, '#nueva-blindada');
-  await hasta(() => visible(P, '#paso-enlace'), 8000); await espera(300);
+  await hasta(async () => (await P.evaluate((a) => { const c = window.gcomPrueba.conv(); return !!(c && c.id !== a); }, antes)) && await visible(P, '#paso-enlace'), 8000);
+  await codigoDe(P);
   return P.evaluate(() => window.gcomPrueba.enlace() || '');
 }
-async function pideCodigo(P) {
-  const antes = await texto(P, '#ucod-codigo');
-  await P.click('#ucod-pide');
-  await hasta(async () => { const t = await texto(P, '#ucod-codigo'); return t !== antes && FORMATO.test(t) && await visible(P, '#ucod-caja'); }, 8000);
+// el código que enseña la invitación Ultra que está a la vista (espera a que esté)
+async function codigoDe(P) {
+  await hasta(async () => FORMATO.test(await texto(P, '#ucod-codigo')) && await visible(P, '#ucod-caja'), 10000);
   return texto(P, '#ucod-codigo');
 }
+const pideCodigo = codigoDe;
 async function abreEntrar(P) {
   if (!(await visible(P, '#paso-entrar'))) { await pulsa(P, '#unir'); await hasta(() => visible(P, '#paso-entrar'), 4000); }
   await P.fill('#unir-codigo', ''); await P.focus('#unir-codigo');
@@ -147,34 +153,32 @@ const llevaAlgo = (lista, fs) => lista.some((x) => fs.some((f) => (x.txt !== und
   const paginas = [];
   const nuevo = async (nombre, x) => { const p = await equipo(browser, nombre, x); paginas.push(p); return p; };
   try {
-    // ---- 1. A: la invitación Ultra, «Copiar enlace» y el código ----
+    // ---- 1. A: la invitación Ultra, ya con su código (15 nov 2026: como la invitación normal) ----
     const A = await nuevo('A');
-    const enlace = await creaUltra(A);
-    const semillaA = Buffer.from((enlace.split('#b=')[1] || ''), 'base64url');
-    comprueba(/\/chat\/#b=[A-Za-z0-9_-]{43}$/.test(enlace) && semillaA.length === 32, '1. A crea Ultra: el enlace «#b=» con la semilla de 256 bits', enlace.slice(-50));
-    comprueba(await visible(A, '#ucod-pide') && !(await visible(A, '#ucod-caja')) && (await texto(A, '#ucod-pide')) === 'Usar un código', '1. en la pantalla de la invitación Ultra (enlace y QR), «Usar un código»; ningún código hasta pulsarlo');
-    comprueba(mensajes('invita').length === 0 && RELE.codigos.size === 0, '9. hasta pulsarlo, el relé no ha recibido ningún «invita» ni guarda nada');
-    await foto(A, '01-a-invitacion-ultra');
-    await A.click('#enlace-copiar'); await espera(500);
-    comprueba(await visible(A, '#enlace-espera') && !(await visible(A, '#enlace-vista')) && await visible(A, '#ucod-pide'), '1. tras «Copiar enlace», en la espera, sigue «Usar un código» (revisión, M2)');
-    await foto(A, '02-a-espera-con-usar-un-codigo');
-    // el código; hasta que tenga un 0 (para escribirlo con una O): los que no lo tienen se cancelan (así se prueba «Cancelar el código»,
-    // que vuelve a la espera con «Usar un código»)
-    let codigo = '', cancelados = 0, cancelOk = true, desdeEspera = null;
+    comprueba(mensajes('invita').length === 0 && RELE.codigos.size === 0, '1. antes de crear nada, el relé no ha recibido ningún «invita» ni guarda nada');
+    // hasta que el código tenga un 0 (para escribirlo con una O): los que no lo tienen se cancelan con «‹ Invitar»
+    let codigo = '', enlace = '', cancelados = 0, cancelOk = true, pantalla = null;
     for (let i = 0; i < 24; i++) {
-      codigo = await pideCodigo(A); codigos.push(codigo);
-      if (desdeEspera === null) desdeEspera = await visible(A, '#enlace-vista') && await visible(A, '#ucod-caja');
+      enlace = await creaUltra(A);
+      codigo = await codigoDe(A); codigos.push(codigo);
+      if (pantalla === null) {
+        pantalla = await A.evaluate(() => { const v = (s) => { const e = document.querySelector(s); return !!(e && e.getClientRects().length && getComputedStyle(e).visibility !== 'hidden' && !e.closest('[hidden]')); }; return { caja: v('#ucod-caja'), pide: v('#ucod-pide'), quita: v('#ucod-quita'), fila: v('.enlace-fila'), qr: v('.qr-plegado'), titulo: v('.ucod-t') ? document.querySelector('.ucod-t').textContent.trim() : '', k: v('#enlace-k') ? document.querySelector('#enlace-k').textContent.trim() : '', copiados: window.__copiados.length, texto: document.querySelector('#paso-enlace').innerText }; });
+        await foto(A, '01-a-invitacion-ultra-con-codigo');
+      }
       if (codigo.includes('0')) break;
-      await A.click('#ucod-quita');
-      cancelOk = cancelOk && await hasta(async () => RELE.codigos.size === 0 && await visible(A, '#ucod-pide') && !(await visible(A, '#ucod-caja')), 4000);
+      await pulsa(A, '#enlace-atras');
+      cancelOk = cancelOk && await hasta(async () => RELE.codigos.size === 0 && (await A.evaluate(() => window.gcomPrueba.cuantas())) === 0, 4000);
       cancelados++;
     }
-    comprueba(desdeEspera, '1. pedido desde la espera, la invitación vuelve a verse entera: el enlace y el código');
+    const semillaA = Buffer.from((enlace.split('#b=')[1] || ''), 'base64url');
+    comprueba(/\/chat\/#b=[A-Za-z0-9_-]{43}$/.test(enlace) && semillaA.length === 32, '1. A crea Ultra: su semilla de 256 bits (la misma del enlace «#b=», que ya no se enseña)', enlace.slice(-50));
+    comprueba(!!pantalla && pantalla.caja && !pantalla.pide && !pantalla.quita && !pantalla.fila && !pantalla.qr && pantalla.titulo === 'Tu código de invitación' && pantalla.k === 'Sesión Ultra' && pantalla.copiados === 0, '1. en el PC sale ya el código, como en la invitación normal: «Sesión Ultra», «Tu código de invitación», sin enlace, QR, «Usar un código» ni «Cancelar el código», y nada copiado al portapapeles', pantalla && Object.assign({}, pantalla, { texto: undefined }));
+    comprueba(!!pantalla && !/Copiar enlace|#b=|Usar un código|Mostrar el código QR/.test(pantalla.texto), '1. ningún enlace a la vista en la pantalla de la invitación', pantalla && pantalla.texto.replace(/\s+/g, ' ').slice(0, 160));
     const k = codigo.replace(/-/g, '');
     comprueba(FORMATO.test(codigo) && k.length === 16 && [...k].every((ch) => ALF.includes(ch)) && !/^\d{9}/.test(k), '1. el código: 16 símbolos del alfabeto Crockford base32, en 4 grupos de 4 (y no empieza por 9 cifras)', codigo);
-    if (cancelados) comprueba(cancelOk, '1. «Cancelar el código» lo quita del relé y vuelve «Usar un código» (' + cancelados + ' veces)');
-    const caja = await texto(A, '#ucod-caja');
-    comprueba(/Vale 10 minutos y una sola vez\. Le quedan (10:00|[0-9]:[0-5][0-9])\./.test(caja) && caja.includes('Código Ultra') && caja.includes('Con el código, la llave de la conversación viaja cerrada con ese código, que el servidor de GUARDIANA no conoce.') && await visible(A, '#ucod-quita'), '1. en grande, con «Vale 10 minutos y una sola vez.», la cuenta atrás, la línea del servidor y «Cancelar el código»', caja.slice(0, 60));
+    if (cancelados) comprueba(cancelOk, '1. «‹ Invitar» cancela la invitación y su código sale del relé (' + cancelados + ' veces)');
+    const caja = await A.evaluate(() => document.querySelector('#ucod-caja').innerText.replace(/\s+/g, ' ').trim());
+    comprueba(/Vale 10 minutos y una sola vez\. Le quedan (10:00|[0-9]:[0-5][0-9])\./.test(caja) && caja.includes('Comunica este código a la otra persona') && !caja.includes('Código Ultra'), '1. en grande, con cómo darlo, «Vale 10 minutos y una sola vez.» y la cuenta atrás', caja.slice(0, 80));
     const guardados = [...RELE.codigos.entries()];
     const [buzon, reg] = guardados[0] || [];
     comprueba(guardados.length === 1 && /^\d{9}$/.test(buzon) && !k.includes(buzon), '1. el relé guarda un solo sobre, bajo un buzón de 9 cifras distinto del código', buzon);
@@ -185,7 +189,7 @@ const llevaAlgo = (lista, fs) => lista.some((x) => fs.some((f) => (x.txt !== und
     let conOtroCodigo = true; try { abreNode(inventa(), buzon, reg.sobre, reg.sal); } catch (_) { conOtroCodigo = false; }
     comprueba(!conOtro && !conOtroCodigo, '1. el sobre va atado a su buzón (datos asociados) y no abre con otro código');
     const invs = mensajes('invita');
-    comprueba(invs.length === cancelados + 1 && invs.every((m) => /^\d{9}$/.test(m.codigo)) && invs[invs.length - 1].codigo === buzon && mensajes('retira').length === cancelados, '1. A mandó un «invita» por código pedido (buzón de 9 cifras) y un «retira» por cada uno cancelado', invs.map((m) => m.codigo));
+    comprueba(invs.length === cancelados + 1 && invs.every((m) => /^\d{9}$/.test(m.codigo)) && invs[invs.length - 1].codigo === buzon && mensajes('retira').length >= cancelados, '1. A mandó un «invita» por invitación (buzón de 9 cifras) y un «retira» por cada una cancelada', invs.map((m) => m.codigo));
     await foto(A, '03-a-codigo-ultra');
 
     // ---- 2. B lo escribe con minúsculas, espacios y una O en lugar de 0 ----
@@ -292,9 +296,9 @@ const llevaAlgo = (lista, fs) => lista.some((x) => fs.some((f) => (x.txt !== und
 
     // ---- 7. un código Ultra que empieza por 9 cifras (forzado) y lo que se escribe mientras se comprueba ----
     const G = await nuevo('G');
-    await creaUltra(G);
     await G.evaluate(() => { window.GuardianaCripto.nuevoCodigoU = () => '123456789ABCDEFG'; });
-    const codG = await pideCodigo(G); codigos.push(codG);
+    await creaUltra(G);
+    const codG = await codigoDe(G); codigos.push(codG);
     comprueba(codG === '1234-5678-9ABC-DEFG', '7. G tiene, forzado, un código que empieza por 9 cifras', codG);
     const H = await nuevo('H');
     const n7 = RECIBIDO.length;
@@ -302,9 +306,9 @@ const llevaAlgo = (lista, fs) => lista.some((x) => fs.some((f) => (x.txt !== und
     const bus7 = mensajes('busca', n7).map((m) => m.codigo);
     comprueba(r7 === 'ok' && await enUltra(H) && !bus7.includes('123456789') && bus7.length === 1 && bus7[0] === buzonNode('123456789ABCDEFG'), '7. escrito despacio (300 ms por tecla): ningún «busca» con esas 9 cifras; solo el buzón, y entra (revisión, M1)', bus7);
     const G2 = await nuevo('G2');
-    await creaUltra(G2);
     await G2.evaluate(() => { window.GuardianaCripto.nuevoCodigoU = () => '987654321KMNPQRS'; });
-    const codG2 = await pideCodigo(G2); codigos.push(codG2);
+    await creaUltra(G2);
+    const codG2 = await codigoDe(G2); codigos.push(codG2);
     const busca0 = RELE.busca.bind(RELE); RELE.busca = (c, m) => setTimeout(() => busca0(c, m), 1500); // un relé lento
     const H2 = await nuevo('H2');
     const n7b = RECIBIDO.length;
@@ -338,14 +342,13 @@ const llevaAlgo = (lista, fs) => lista.some((x) => fs.some((f) => (x.txt !== und
     const nCorte = RECIBIDO.length;
     await F.evaluate(() => window.gcomPrueba.corta());
     await hasta(() => F.evaluate(() => GuardianaCom.rele.abierto), 10000);
-    const PERDIDO = 'Se cortó la conexión con el relé: crea uno nuevo.';
-    await hasta(async () => (await texto(F, '#ucod-estado')) === PERDIDO, 6000);
-    comprueba((await texto(F, '#ucod-estado')) === PERDIDO && await visible(F, '#ucod-nuevo') && await hasta(() => !RELE.codigos.has(buzonF3), 4000) && mensajes('invita', nCorte).length === 0, '8. tras un corte con el relé: «' + PERDIDO + '», el relé lo borra con la conexión vieja y no se vuelve a dejar solo');
-    await foto(F, '14-f-codigo-perdido');
-    // B3: alguien recoge el sobre con el buzón (sin poder abrirlo) y no entra
-    await F.click('#ucod-nuevo');
-    await hasta(async () => FORMATO.test(await texto(F, '#ucod-codigo')) && (await texto(F, '#ucod-codigo')) !== codF3 && !(await visible(F, '#ucod-nuevo')), 8000);
+    // tras un corte: el de antes fuera del relé y, como la invitación normal, uno nuevo en pantalla y en el relé (nunca el mismo sobre)
+    await hasta(async () => { const t = await texto(F, '#ucod-codigo'); return FORMATO.test(t) && t !== codF3; }, 10000);
     const codF4 = await texto(F, '#ucod-codigo'); codigos.push(codF4);
+    const invCorte = mensajes('invita', nCorte);
+    comprueba(codF4 !== codF3 && await hasta(() => !RELE.codigos.has(buzonF3), 4000) && RELE.codigos.has(buzonNode(codF4.replace(/-/g, ''))) && invCorte.length === 1 && invCorte[0].codigo !== buzonF3 && !(await visible(F, '#ucod-nuevo')), '8. tras un corte con el relé: el código de antes, fuera del relé; uno nuevo en pantalla y en el relé, como la invitación normal (el mismo sobre no se vuelve a dejar)', invCorte.map((m) => m.codigo));
+    await foto(F, '14-f-codigo-nuevo-tras-corte');
+    // B3: alguien recoge el sobre con el buzón (sin poder abrirlo) y no entra
     const buzonF4 = buzonNode(codF4.replace(/-/g, ''));
     const X = await nuevo('X');
     const robo = await X.evaluate((b) => GuardianaCom.rele.busca(b), buzonF4);
@@ -359,24 +362,24 @@ const llevaAlgo = (lista, fs) => lista.some((x) => fs.some((f) => (x.txt !== und
     await hasta(async () => FORMATO.test(await texto(F, '#ucod-codigo')) && (await texto(F, '#ucod-codigo')) !== codF4, 8000);
     const codF5 = await texto(F, '#ucod-codigo'); codigos.push(codF5);
     comprueba(codF5 !== codF4 && RELE.codigos.has(buzonNode(codF5.replace(/-/g, ''))), '8. y con él, otro código en el relé');
-    // B4: dos invitaciones Ultra piden código a la vez (la primera, sin el suyo: «Cancelar el código»)
-    await F.click('#ucod-quita');
-    await hasta(async () => !RELE.codigos.has(buzonNode(codF5.replace(/-/g, ''))) && await visible(F, '#ucod-pide'), 4000);
-    const c1 = await F.evaluate(() => window.gcomPrueba.conv().id);
-    await F.evaluate(() => document.querySelector('#nueva-blindada').click()); await espera(2500);
-    const c2 = await F.evaluate(() => window.gcomPrueba.conv().id);
-    await F.evaluate(async ([a, b]) => { await window.gcomPrueba.abre(a); document.querySelector('#ucod-pide').click(); await window.gcomPrueba.abre(b); document.querySelector('#ucod-pide').click(); }, [c1, c2]);
-    await hasta(() => F.evaluate(([a, b]) => [a, b].every((id) => { const c = GuardianaCom.convs.get(id); return c && c.ucod && !c.ucodPidiendo; }), [c1, c2]), 10000);
+    // B4: dos invitaciones Ultra creadas a la vez, cada una con su código
+    await pulsa(F, '#enlace-cancelar');
+    await hasta(async () => !RELE.codigos.has(buzonNode(codF5.replace(/-/g, ''))) && (await F.evaluate(() => window.gcomPrueba.cuantas())) === 0, 4000);
+    await F.evaluate(() => { const b = document.querySelector('#nueva-blindada'); b.click(); b.click(); });
+    await hasta(() => F.evaluate(() => [...GuardianaCom.convs.values()].filter((c) => c.modo === 'blindada' && c.estado === 'invitacion' && c.ucod && !c.ucodPidiendo).length === 2), 12000);
+    const [c1, c2] = await F.evaluate(() => [...GuardianaCom.convs.values()].filter((c) => c.modo === 'blindada' && c.estado === 'invitacion').map((c) => c.id));
     const dos = await F.evaluate(([a, b]) => [a, b].map((id) => { const c = GuardianaCom.convs.get(id); return c && c.ucod ? { codigo: c.ucod.codigo, buzon: c.ucod.buzon } : null; }), [c1, c2]);
     for (const x of dos) if (x) codigos.push(x.codigo);
-    comprueba(c1 !== c2 && dos.every((x) => x && RELE.codigos.has(x.buzon)) && dos[0].buzon !== dos[1].buzon, '8. dos invitaciones que piden código a la vez: las dos tienen el suyo, en el relé (revisión, B4)', dos.map((x) => x && x.buzon));
+    comprueba(!!c1 && !!c2 && c1 !== c2 && dos.every((x) => x && RELE.codigos.has(x.buzon)) && dos[0].buzon !== dos[1].buzon, '8. dos invitaciones Ultra creadas a la vez: las dos tienen su código, en el relé (revisión, B4)', dos.map((x) => x && x.buzon));
 
     // ---- 9. solo con el enlace ----
     for (const P of paginas.splice(0)) { try { await P.context().close(); } catch (_) {} }
     await espera(800);
     const n9 = RECIBIDO.length, guardados9 = RELE.codigos.size;
     const G3 = await nuevo('G3'), H3 = await nuevo('H3');
-    const enlaceG = await creaUltra(G3);
+    await G3.evaluate(async () => { const c = await window.gcomPrueba.ultraPorEnlace(); await window.gcomPrueba.abre(c.id); });
+    await hasta(() => visible(G3, '#paso-enlace'), 6000);
+    const enlaceG = await G3.evaluate(() => window.gcomPrueba.enlace() || '');
     await G3.evaluate(() => window.gcomPrueba.corta());
     await hasta(() => G3.evaluate(() => GuardianaCom.rele.abierto), 10000); await espera(1500);
     comprueba(mensajes('invita', n9).length === 0 && RELE.codigos.size === guardados9, '9. invitación Ultra por enlace: ningún «invita», tampoco tras reconectarse quien invita');

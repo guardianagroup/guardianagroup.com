@@ -476,6 +476,16 @@ svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-l
 .ucod-caja .t{font-size:13px}
 .codigo.codigo-u{font-size:28px;letter-spacing:.08em;padding:14px 8px;white-space:nowrap}
 .paso.enlace-b .ucod-estado{color:var(--accent)}
+/* Ultra por código en el PC (dueño, 15 nov 2026: «al igual que en la versión normal»): de la invitación por enlace quedan solo «‹ Invitar»,
+   «Sesión Ultra» y, si pasa, «Esta invitación ya la usó otra persona»; debajo, el código como en #paso-codigo, sin caja alrededor */
+.ucod-t{display:none}
+#paso-enlace.por-codigo .enlace-vista>:not(.seccion-cab):not(.pq-k):not(#enlace-estado){display:none}
+#paso-enlace.por-codigo #enlace-estado[hidden]{display:none}
+#paso-enlace.por-codigo>.ucod{margin:0}
+#paso-enlace.por-codigo .ucod-caja{padding:0;background:none;border:0;border-radius:0;gap:14px}
+#paso-enlace.por-codigo .ucod-caja>.pq-k,#paso-enlace.por-codigo .ucod-nota{display:none}
+#paso-enlace.por-codigo .ucod-t{display:block}
+#paso-enlace.por-codigo .ucod-caja .t{font-size:inherit}
 @media (max-width:760px){.codigo.codigo-u{font-size:clamp(17px,5.6vw,24px);letter-spacing:.04em}}
 .paso .t.sutil{font-size:12.5px;color:var(--muted-2)}
 .bl-puerta{display:grid;gap:10px;margin:10px 14px 0;padding:14px 16px;border-radius:14px;border:1px solid rgba(224,182,106,.45);background:linear-gradient(180deg,rgba(224,182,106,.08),rgba(12,17,24,.92))}

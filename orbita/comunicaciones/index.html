@@ -384,9 +384,11 @@
         <button type="button" class="ucod-pide" id="ucod-pide"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 9h14M5 15h14M10 4L8 20M16 4l-2 16"/></svg><span>Usar un código</span></button>
         <div class="ucod-caja" id="ucod-caja" hidden>
           <p class="pq-k">Código Ultra</p>
+          <!-- la invitación Ultra del PC, ya por código (dueño, 15 nov 2026): el mismo título que la normal (#paso-codigo) -->
+          <h2 class="ucod-t">Tu código de invitación</h2>
           <div class="codigo codigo-u" id="ucod-codigo" translate="no" aria-live="polite">····-····-····-····</div>
           <p class="t">Comunica este código a la otra persona por llamada o por cualquier aplicación de mensajería. Ella pulsa «Tengo un código», lo escribe y empieza la conversación.</p>
-          <p class="t">Con el código, la llave de la conversación viaja cerrada con ese código, que el servidor de GUARDIANA no conoce.</p>
+          <p class="t ucod-nota">Con el código, la llave de la conversación viaja cerrada con ese código, que el servidor de GUARDIANA no conoce.</p>
           <p class="t validez" id="ucod-validez">Vale 10 minutos y una sola vez.</p>
           <p class="t ucod-estado" id="ucod-estado" role="status" hidden></p>
           <div class="fila centro"><button type="button" class="boton" id="ucod-nuevo" hidden>Nuevo código</button><button type="button" class="boton" id="ucod-quita">Cancelar el código</button></div>

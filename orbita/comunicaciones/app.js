@@ -277,7 +277,7 @@
   async function publicaCodigoU(c) {
     if (!c || !esB(c) || c.huella || c.estado !== 'invitacion' || c.ucodPidiendo) return false;
     if (!R.abierto) { aviso(T('Sin conexión: espera un momento.')); return false; }
-    c.ucodPidiendo = true; pintaCodigoU(c);
+    c.ucodPidiendo = true; c.ucodFallo = false; pintaCodigoU(c);
     try {
       for (let intento = 0; intento < 3; intento++) {
         const codigo = C.nuevoCodigoU(), t0 = Date.now();
@@ -290,6 +290,7 @@
         if (!r || r.por !== 'repetido') break; // (otro buzón igual en el relé: otro código)
       }
     } finally { c.ucodPidiendo = false; pintaCodigoU(c); }
+    c.ucodFallo = true; pintaCodigoU(c);
     aviso(T('No se pudo crear el código: inténtalo otra vez.')); return false;
   }
   // fuera del relé (si aún lo tiene) y de la pantalla
@@ -298,12 +299,23 @@
   function pintaCodigoU(c) {
     const caja = $('#ucod'); if (!caja || !c || ACTUAL !== c.id) return;
     caja.hidden = !esB(c); if (!esB(c)) return;
+    // por código (porCodigo): como la invitación normal, solo el código, sin «Usar un código» ni «Cancelar el código» (atrás cancela)
+    const pc = !!c.porCodigo; $('#paso-enlace').classList.toggle('por-codigo', pc);
     const u = c.ucod, ahora = Date.now();
     // a los 10 minutos: caducado aquí y fuera del relé (que también lo borra solo)
     if (u && !u.caducado && ahora > u.caduca) { u.caducado = true; try { R.retira(u.buzon); } catch (_) {} }
-    const pide = $('#ucod-pide'); pide.hidden = !!u; pide.disabled = !!c.ucodPidiendo; pide.setAttribute('aria-busy', String(!!c.ucodPidiendo));
-    $('#ucod-caja').hidden = !u;
-    if (!u) { $('#ucod-codigo').textContent = '····-····-····-····'; return; } // (el código ya no se queda en la página)
+    const pide = $('#ucod-pide'); pide.hidden = !!u || pc; pide.disabled = !!c.ucodPidiendo; pide.setAttribute('aria-busy', String(!!c.ucodPidiendo));
+    $('#ucod-caja').hidden = !u && !pc;
+    if (!u) {
+      const e = $('#ucod-codigo'); e.textContent = '····-····-····-····'; e.className = 'codigo codigo-u'; // (el código ya no se queda en la página)
+      if (pc) { // aún pidiéndolo, o no se pudo
+        const est = c.ucodFallo && !c.ucodPidiendo ? T('No se pudo crear el código: inténtalo otra vez.') : '';
+        $('#ucod-estado').textContent = est; $('#ucod-estado').hidden = !est;
+        $('#ucod-validez').hidden = true; $('#ucod-quita').hidden = true;
+        $('#ucod-nuevo').hidden = !(c.ucodFallo && !c.ucodPidiendo && !c.huella);
+      }
+      return;
+    }
     const fuera = u.caducado || u.perdido;
     const e = $('#ucod-codigo'); e.textContent = C.codigoUBonito(u.codigo); e.className = 'codigo codigo-u' + (u.usado ? ' usado' : fuera ? ' caducado' : '');
     // (usado: quien recogió el sobre puede no ser la otra persona, que no lo abre sin el código; revisión independiente, B3)
@@ -311,7 +323,7 @@
     $('#ucod-estado').textContent = est; $('#ucod-estado').hidden = !est;
     const v = $('#ucod-validez'); v.hidden = u.usado || fuera;
     if (!v.hidden) { const q = Math.max(0, Math.round((u.caduca - ahora) / 1000)); v.textContent = ''; v.append(document.createTextNode(T('Vale 10 minutos y una sola vez.') + ' ' + T('Le quedan') + ' ')); const b = document.createElement('b'); b.textContent = Math.floor(q / 60) + ':' + String(q % 60).padStart(2, '0'); v.append(b); v.append(document.createTextNode('.')); }
-    $('#ucod-quita').hidden = u.usado || fuera;
+    $('#ucod-quita').hidden = u.usado || fuera || pc;
     // «Nuevo código»: caducado, perdido o recogido hace 30 s sin que nadie haya entrado
     $('#ucod-nuevo').hidden = !((fuera || (u.usado && ahora - (u.usadoEn || ahora) > 30000)) && !c.huella);
     // la cuenta atrás, cada segundo, mientras se ve esta invitación con su código
@@ -377,8 +389,13 @@
     const semilla = semillaDada || C.nuevaSemilla();
     const d = await C.B.deSemilla(semilla);
     const c = convNueva(d.sala, semilla, 'invita', 'blindada'); c.num = siguienteNum();
+    // Ultra por código (dueño, 15 nov 2026: «no quiero que sea un enlace, quiero que también sea un código, al igual que en la versión
+    // normal»): en el PC, la invitación Ultra sale ya con su código de 16 caracteres, como la normal con el de 9 cifras, sin enlace a la
+    // vista ni copiado. El código y lo que el relé guarda son los de «Usar un código» (publicaCodigoU; ULTRA-CODIGO.md)
+    if (opc && opc.porCodigo) c.porCodigo = true;
     await preparaConv(c); // (Ultra no se guarda: vive en esta pestaña)
     if (sinPantalla) { if (ACTUAL && !CONVS.has(ACTUAL)) cierraConv(); pintaLista(); } else abreConv(c.id);
+    if (c.porCodigo) publicaCodigoU(c);
     return c;
   }
   // el enlace de la invitación: «#b=» la blindada y «#i=» la normal (29 Oct 2026, 07:49: «chat normal o blindado»)
@@ -1837,7 +1854,7 @@
   const puedeLlamar = () => { const e = EFI.get(LLAMADA_CONV); if (e) return !!(e.suId && R && R.abierto); const c = CONVS.get(ACTUAL); return !!(c && enLinea(c) && c.sesion && c.sesion.confirmada && puedeEnviar(c)); };
   // solo en local (pruebas): simular un mensaje manipulado y ver la alarma sin tocar el relé
   if (LOCAL) window.gcomPruebaTemporal = { estado: () => ({ en: enTemporal(), uso: ultimoUso(), convs: [...CONVS.values()].filter((c) => c.estado !== 'destruida').map((c) => ({ id: c.id, temporal: temporalConv(c), su: c.suTemporal || 0, dije: !!c.dijeTemporal })) }), envejece: (ms) => { try { localStorage.setItem('gcom-temporal-uso', String(Date.now() - ms)); } catch (_) {} usoT = 0; }, caduca: (op) => caducaChatTemporal(op), envejeceSuyos: (ms) => { for (const c of CONVS.values()) if (c.suTemporal) { c.suVistoT = Date.now() - ms; c.ultimo = Date.now() - ms; c.suTemporal = Date.now() - ms; } }, caducaSuyos: () => caducaSuyos(true) };
-  if (LOCAL) window.gcomPrueba = { ponNombre: async (sala, n) => { const c = CONVS.get(sala); if (!c) return false; c.alias = n; await guardaConv(c); pintaLista(); return true; }, abre: (sala) => abreConv(sala), traspaso: () => ({ llave: llaveTraspaso(), conv: traspasoConvId(), ocultas: [...CONVS.values()].filter((c) => c.traspasoDe && !c.huella).length, total: CONVS.size, vivas: vivas().length, nombres: vivas().map((c) => nombreConv(c, true)) }), avisos: () => ({ firma: avisosFirma, ultimo: ultimoAvisos, despierta: ultimoDespierta, sw: !!swReg, puede: puedePush(), permiso: permisoAvisos() }), activa: () => activaAvisos(), incidencia: async (id) => { const c = CONVS.get(id || ACTUAL); if (!c) return; c.incidencias = (c.incidencias || 0) + 1; await anotaSistema(c, 'Un mensaje no superó la comprobación de integridad y se ha descartado.'); vigila(c, T('Un mensaje no superó la autenticación: descartado.'), 'mal'); return alarmaSiToca(c); }, conv: () => CONVS.get(ACTUAL), corta: () => R.corta(), llamada: () => (LL ? LL.estado : ''), enlace: () => { const c = CONVS.get(ACTUAL); return c && c.semilla ? enlaceB(c) : null; }, enlaceI: () => { const c = CONVS.get(ACTUAL); return c && c.semilla ? ORIGEN_INV + '#i=' + C.b64u(c.semilla) : null; }, cuantas: () => [...CONVS.values()].filter((x) => x.estado !== 'destruida' && x.estado !== 'destruida_pendiente').length,
+  if (LOCAL) window.gcomPrueba = { ponNombre: async (sala, n) => { const c = CONVS.get(sala); if (!c) return false; c.alias = n; await guardaConv(c); pintaLista(); return true; }, abre: (sala) => abreConv(sala), traspaso: () => ({ llave: llaveTraspaso(), conv: traspasoConvId(), ocultas: [...CONVS.values()].filter((c) => c.traspasoDe && !c.huella).length, total: CONVS.size, vivas: vivas().length, nombres: vivas().map((c) => nombreConv(c, true)) }), avisos: () => ({ firma: avisosFirma, ultimo: ultimoAvisos, despierta: ultimoDespierta, sw: !!swReg, puede: puedePush(), permiso: permisoAvisos() }), activa: () => activaAvisos(), incidencia: async (id) => { const c = CONVS.get(id || ACTUAL); if (!c) return; c.incidencias = (c.incidencias || 0) + 1; await anotaSistema(c, 'Un mensaje no superó la comprobación de integridad y se ha descartado.'); vigila(c, T('Un mensaje no superó la autenticación: descartado.'), 'mal'); return alarmaSiToca(c); }, conv: () => CONVS.get(ACTUAL), corta: () => R.corta(), llamada: () => (LL ? LL.estado : ''), enlace: () => { const c = CONVS.get(ACTUAL); return c && c.semilla ? enlaceB(c) : null; }, ultraPorEnlace: () => creaInvitacionB(), enlaceI: () => { const c = CONVS.get(ACTUAL); return c && c.semilla ? ORIGEN_INV + '#i=' + C.b64u(c.semilla) : null; }, cuantas: () => [...CONVS.values()].filter((x) => x.estado !== 'destruida' && x.estado !== 'destruida_pendiente').length,
     // Ultra (pruebas): un archivo recibido o enviado, en base64, con su nombre; cuántos archivos hay en memoria; los mensajes del chat abierto
     archivo: async (id) => { const c = CONVS.get(ACTUAL); const m = c && c.mensajes.find((x) => x.id === id); if (!m) return null; const r = await archSaca(m); return r ? { nombre: r.nombre, mime: r.mime, b64: C.b64u(new Uint8Array(await r.blob.arrayBuffer())) } : null; },
     enMemoria: () => MEM.size,
@@ -2843,7 +2860,7 @@
     const conf = $('#cconfianza'); conf.classList.remove('gc-sin-verificar');
     let txt;
     if (c.ocupada && !c.huella) txt = T('Esta invitación ya la usó otra persona.');
-    else if (!c.huella) txt = c.miembros.size ? T('Estableciendo la encriptación…') : esperaEnChat(c) ? '' : c.rol === 'acepta' ? T('Conectando con la otra persona…') : esB(c) ? T('Esperando a que la otra persona abra el enlace…') : T('Esperando a que la otra persona escriba el código…');
+    else if (!c.huella) txt = c.miembros.size ? T('Estableciendo la encriptación…') : esperaEnChat(c) ? '' : c.rol === 'acepta' ? T('Conectando con la otra persona…') : esB(c) && !c.porCodigo ? T('Esperando a que la otra persona abra el enlace…') : T('Esperando a que la otra persona escriba el código…');
     else if (!R.abierto) txt = T('Sin conexión con el relé');
     else if (!c.miembros.has(c.suId)) txt = T('No está conectada ahora: lo que escribas saldrá cuando entre');
     else if (!c.sesion || !c.sesion.confirmada) txt = T('Estableciendo la encriptación…');
@@ -4523,6 +4540,8 @@
       for (const c of CONVS.values()) {
         if (c.estado !== 'invitacion' || c.rol !== 'invita' || c.huella) continue;
         if (c.ucod && !c.ucod.usado && Date.now() <= c.ucod.caduca) { c.ucod.perdido = true; pintaCodigoU(c); }
+        // por código: otro código nuevo al volver la conexión, como la normal tras un corte (15 nov 2026); el de antes ya no vale
+        if (esB(c) && c.porCodigo && (!c.ucod || c.ucod.perdido) && !c.ucodPidiendo) { quitaCodigoU(c); publicaCodigoU(c); }
         if (!porEnlace(c) && !c.codigoUsado) { c.codigo = null; publicaCodigo(c); }
       }
     });
@@ -4880,9 +4899,9 @@
         });
         return;
       }
-      let dale = null; const listo = new Promise((r) => { dale = r; });
-      try { if (window.ClipboardItem && navigator.clipboard && navigator.clipboard.write) navigator.clipboard.write([new ClipboardItem({ 'text/plain': listo.then((c) => { if (!c) throw new Error('sin enlace'); return new Blob([enlaceB(c)], { type: 'text/plain' }); }) })]).then(() => listo.then((c) => { if (c) { c.copiado = true; if (ACTUAL === c.id) muestraEnlace(c); } })).catch(() => {}); } catch (_) {}
-      creaInvitacionB().then((c) => dale(c || null)).catch(() => dale(null));
+      // En el PC, el código de 16 caracteres, como la invitación normal (dueño, 15 nov 2026). Hasta entonces se copiaba el enlace «#b=»
+      // al portapapeles y se enseñaba; el enlace sigue valiendo para quien lo reciba de una invitación de antes.
+      creaInvitacionB(null, { porCodigo: true }).catch(() => {});
     }
     // «Invitar a chat» en el iPhone (dueño, 28 Oct 2026, 20:52–20:56: «las invitaciones llegan como 5 minutos tarde… si yo, que le he
     // enviado el enlace, entro a WhatsApp, llega al momento. Esto hay que arreglarlo»). Desde el menú de compartir del iPhone, WhatsApp
