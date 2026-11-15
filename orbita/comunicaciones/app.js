@@ -123,6 +123,7 @@
   let NUEVOS_ABAJO = 0;     // mensajes llegados con el chat desplazado hacia arriba («↓ nuevos»)
   let REENVIA_MSG = null, BORRAR_MSG = null;
   let HAPTICO = () => {};   // el toque que se nota (se fija en eventos(), donde vive haptico)
+  let REVISA_ENVIO = null;  // «Revisa antes de enviar» (se fija en eventos(), donde vive revisaEnvio)
   let R = null;
   let LL = null; // llamadas de voz (llamada.js)
   let ponDiscretoConv = () => {}; // el modo discreto según el chat: siempre en el blindado, nunca en el normal (eventos())
@@ -142,6 +143,9 @@
   const regionValida = (x) => (typeof x === 'string' && /^[A-Z]{2}$/.test(x) ? x : '');
   const latValida = (x) => (typeof x === 'number' && isFinite(x) && x >= 0 && x < 60000 ? Math.round(x) : null);
   const limpiaNombre = (n) => String(n || 'archivo').slice(0, 180).replace(/[\\/:*?"<>|]/g, '_');
+  // el comentario que va debajo de una foto o de un archivo (15 nov 2026): texto, como mucho 1024 caracteres
+  const limpiaPie = (p) => { const s = typeof p === 'string' ? p.replace(/\u0000/g, '').slice(0, 1024).replace(/\s+$/, '') : ''; return s || undefined; };
+  const esFotoMsg = (m) => !!(m && m.tipo === 'archivo' && m.archivo && !m.archivo.voz && /^image\//.test(m.archivo.mime || ''));
   // Ultra: nombre neutro para lo que se envía (ronda 93: «nombres neutros y sin fechas»): «foto-3.jpg», «documento-2.pdf», «audio-1.webm»…
   // Solo la extensión del original (en minúsculas) sobrevive; el nombre, que puede llevar fechas o el nombre de una persona, no.
   const EXT_MIME = { 'image/jpeg': 'jpg', 'image/png': 'png', 'image/webp': 'webp', 'image/gif': 'gif', 'image/heic': 'heic', 'image/heif': 'heif', 'image/avif': 'avif', 'video/mp4': 'mp4', 'video/quicktime': 'mov', 'video/webm': 'webm', 'audio/webm': 'webm', 'audio/mp4': 'm4a', 'audio/ogg': 'ogg', 'audio/mpeg': 'mp3', 'application/pdf': 'pdf', 'text/plain': 'txt' };
@@ -251,7 +255,16 @@
   // Las preguntas «invita» al relé, de una en una: el cliente del relé guarda una sola respuesta pendiente por tipo (rele.js, pregunta),
   // y dos a la vez dejaban una sin contestar (revisión independiente del código Ultra, 6 nov 2026, B4)
   let colaInvita = Promise.resolve();
-  const invitaEnCola = (codigo, sobre, sal) => { const p = colaInvita.then(() => R.invita(codigo, sobre, sal)); colaInvita = p.catch(() => {}); return p; };
+  // (revisión independiente, 15 nov 2026: una respuesta tardía de otra petición no vale para esta; sin respuesta, el sobre se retira por si
+  // el relé llegó a guardarlo)
+  const invitaEnCola = (codigo, sobre, sal) => {
+    const p = colaInvita.then(() => R.invita(codigo, sobre, sal)).then((r) => {
+      if (r && r.codigo !== undefined && r.codigo !== codigo) r = { ok: false, por: 'otra respuesta' };
+      if (r && !r.ok && (r.por === 'sin respuesta' || r.por === 'otra respuesta')) { try { R.retira(codigo); } catch (_) {} }
+      return r;
+    });
+    colaInvita = p.catch(() => {}); return p;
+  };
   async function publicaCodigo(c) {
     // solo la invitación por código de la Blindada, nunca una por enlace (Ultra, o la Blindada del teléfono): revisión, B5. Y un código
     // a la vez: creaInvitacion y abreConv lo pedían los dos y quedaban dos en el relé, uno sin enseñar (revisión, E2)
@@ -286,7 +299,7 @@
         // terminada o ya con la otra persona mientras tanto: el sobre fuera del relé
         if (c.estado !== 'invitacion' || c.huella || !CONVS.has(c.id)) { if (r && r.ok) R.retira(x.buzon); return false; }
         // (la cuenta atrás, desde antes de pedirlo: el relé empieza sus 10 minutos un poco después)
-        if (r && r.ok) { c.ucod = { codigo, buzon: x.buzon, caduca: t0 + 10 * 60 * 1000, usado: false, perdido: false }; return true; }
+        if (r && r.ok) { c.ucod = { codigo, buzon: x.buzon, caduca: t0 + 10 * 60 * 1000, usado: false, perdido: false, renovado: !!c.ucodRenovado }; c.ucodRenovado = false; return true; }
         if (!r || r.por !== 'repetido') break; // (otro buzón igual en el relé: otro código)
       }
     } finally { c.ucodPidiendo = false; pintaCodigoU(c); }
@@ -294,7 +307,10 @@
     aviso(T('No se pudo crear el código: inténtalo otra vez.')); return false;
   }
   // fuera del relé (si aún lo tiene) y de la pantalla
-  function quitaCodigoU(c) { if (!c || !c.ucod) return; const b = c.ucod.buzon; c.ucod = null; try { R.retira(b); } catch (_) {} }
+  function quitaCodigoU(c) {
+    if (!c || !c.ucod) return; const b = c.ucod.buzon; c.ucod = null; try { R.retira(b); } catch (_) {}
+    if (ACTUAL === c.id) { const e = $('#ucod-codigo'); if (e) e.textContent = '····-····-····-····'; }
+  }
   const codigoUVivo = (c) => !!(c && c.ucod && !c.ucod.usado && !c.ucod.perdido && Date.now() <= c.ucod.caduca);
   function pintaCodigoU(c) {
     const caja = $('#ucod'); if (!caja || !c || ACTUAL !== c.id) return;
@@ -317,9 +333,10 @@
       return;
     }
     const fuera = u.caducado || u.perdido;
-    const e = $('#ucod-codigo'); e.textContent = C.codigoUBonito(u.codigo); e.className = 'codigo codigo-u' + (u.usado ? ' usado' : fuera ? ' caducado' : '');
+    const e = $('#ucod-codigo'); e.textContent = C.codigoUBonito(u.codigo); e.className = 'codigo codigo-u' + (fuera ? ' caducado' : u.usado ? ' usado' : '');
     // (usado: quien recogió el sobre puede no ser la otra persona, que no lo abre sin el código; revisión independiente, B3)
-    const est = u.usado ? T('Alguien ha escrito el código: conectando…') : u.perdido ? T('Se cortó la conexión con el relé: crea uno nuevo.') : u.caducado ? T('Este código ha caducado (10 minutos). Pide uno nuevo.') : '';
+    const sinNadie = u.usado && ahora - (u.usadoEn || ahora) > 30000;
+    const est = u.caducado ? T('Este código ha caducado (10 minutos). Pide uno nuevo.') : u.perdido ? T('Se cortó la conexión con el relé: crea uno nuevo.') : sinNadie ? T('Nadie ha entrado con ese código: crea uno nuevo.') : u.usado ? T('Alguien ha escrito el código: conectando…') : u.renovado ? T('Se cortó la conexión con el relé: este es un código nuevo.') : '';
     $('#ucod-estado').textContent = est; $('#ucod-estado').hidden = !est;
     const v = $('#ucod-validez'); v.hidden = u.usado || fuera;
     if (!v.hidden) { const q = Math.max(0, Math.round((u.caduca - ahora) / 1000)); v.textContent = ''; v.append(document.createTextNode(T('Vale 10 minutos y una sola vez.') + ' ' + T('Le quedan') + ' ')); const b = document.createElement('b'); b.textContent = Math.floor(q / 60) + ':' + String(q % 60).padStart(2, '0'); v.append(b); v.append(document.createTextNode('.')); }
@@ -417,8 +434,10 @@
   // corto (13:14): la frase mínima y el enlace
   const textoInvitacion = (modo) => (modo === 'blindada' ? T('Invitación a un chat Ultra de GUARDIANA') : T('Invitación a GUARDIANA'));
   function muestraEnlace(c) {
-    const u = enlaceB(c); $('#enlace-b').value = u;
-    const q = $('#enlace-qr'); if (q && window.qrSvg && q.dataset.u !== u) { q.innerHTML = window.qrSvg(u); q.dataset.u = u; }
+    // por código (Ultra en el PC): ni el enlace ni el QR en la página, ni escondidos (revisión independiente, 15 nov 2026)
+    const q = $('#enlace-qr');
+    if (c.porCodigo) { $('#enlace-b').value = ''; if (q) { q.textContent = ''; delete q.dataset.u; } }
+    else { const u = enlaceB(c); $('#enlace-b').value = u; if (q && window.qrSvg && q.dataset.u !== u) { q.innerHTML = window.qrSvg(u); q.dataset.u = u; } }
     const est = $('#enlace-estado'); est.textContent = c.ocupada ? T('Esta invitación ya la usó otra persona.') : ''; est.hidden = !c.ocupada; est.classList.toggle('mal', !!c.ocupada);
     // en el móvil, solo «Compartir enlace» (el enlace ya está copiado); al compartir, la pantalla de espera
     const movil = matchMedia('(pointer: coarse)').matches, comparte = !!navigator.share;
@@ -974,7 +993,7 @@
   }
   // «v: 1» pide el comprobante firmado por los dos equipos (Ultra, solo si quien envía lo marcó: «Solicitar comprobante firmado»); el
   // recibo de siempre, negable y autenticado con la clave de la sesión, no necesita nada
-  const anuncioDe = (m, c) => ({ tipo: 'archivo', id: m.id, t: m.t, nombre: m.archivo.nombre, tam: m.archivo.tam, mime: m.archivo.mime, clave: m.archivo.clave, trozos: m.archivo.trozos, v: m.archivo.firmado ? 1 : 0, region: miPais(c) || undefined, voz: m.archivo.voz ? 1 : undefined, vida: m.archivo.vida, dur: m.archivo.dur, paq: m.archivo.paq, w: m.archivo.w, h: m.archivo.h });
+  const anuncioDe = (m, c) => ({ tipo: 'archivo', id: m.id, t: m.t, nombre: m.archivo.nombre, tam: m.archivo.tam, mime: m.archivo.mime, clave: m.archivo.clave, trozos: m.archivo.trozos, v: m.archivo.firmado ? 1 : 0, region: miPais(c) || undefined, voz: m.archivo.voz ? 1 : undefined, vida: m.archivo.vida, dur: m.archivo.dur, paq: m.archivo.paq, w: m.archivo.w, h: m.archivo.h, pie: m.archivo.pie || undefined });
   // las medidas de una foto viajan con el anuncio: el otro equipo reserva el hueco antes de que llegue (ronda 76, fase 4: sin saltos)
   const medida = (x) => Number.isInteger(+x) && +x > 0 && +x <= 20000 ? +x : undefined;
   const medidasImagen = (f) => new Promise((res) => { try { if (window.createImageBitmap) { createImageBitmap(f).then((b) => { const d = { w: b.width, h: b.height }; try { b.close(); } catch (_) {} res(d); }, () => res(null)); return; } } catch (_) {} try { const u = URL.createObjectURL(f), i = new Image(); i.onload = () => { res({ w: i.naturalWidth, h: i.naturalHeight }); URL.revokeObjectURL(u); }; i.onerror = () => { res(null); URL.revokeObjectURL(u); }; i.src = u; } catch (_) { res(null); } });
@@ -1023,7 +1042,7 @@
           if (!f) { try { const r = await archSaca(m); if (r && r.blob) f = r.blob; } catch (_) {} }
           if (!f) break;
           const datos = new Uint8Array(await f.arrayBuffer());
-          carga = { tipo: 'archivo-buzon', id: m.id, t: m.t, nombre: m.archivo.nombre, tam: datos.length, mime: m.archivo.mime, voz: m.archivo.voz ? 1 : undefined, dur: m.archivo.dur, w: m.archivo.w, h: m.archivo.h, datos: C.b64u(datos) };
+          carga = { tipo: 'archivo-buzon', id: m.id, t: m.t, nombre: m.archivo.nombre, tam: datos.length, mime: m.archivo.mime, voz: m.archivo.voz ? 1 : undefined, dur: m.archivo.dur, w: m.archivo.w, h: m.archivo.h, pie: m.archivo.pie || undefined, datos: C.b64u(datos) };
         }
         if (!carga) break; // lo grande espera a que estéis los dos (y conserva el orden)
         const r = await R.buzonDeja(c.id, c.suId, await idBuzon(m.id), await cierraBuzon(c, carga), true);
@@ -1057,7 +1076,7 @@
     let datos; try { datos = C.deB64u(String(j.datos || '')); } catch (_) { return; }
     if (!datos.length || datos.length > BZ_ARCHIVO) return;
     const voz = j.voz === 1, tipo = mimeAbrible(mime) ? mime : 'application/octet-stream';
-    const m = { id: String(j.id).slice(0, 64), conv: c.id, t: Math.min(Date.now(), +j.t || Date.now()), dir: 'suya', estado: 'recibido', tipo: 'archivo', archivo: { nombre: limpiaNombre(j.nombre), tam: datos.length, mime: tipo, trozos: 1, progreso: 1, voz: voz || undefined, dur: Number.isFinite(+j.dur) ? +j.dur : undefined, w: medida(j.w), h: medida(j.h) } };
+    const m = { id: String(j.id).slice(0, 64), conv: c.id, t: Math.min(Date.now(), +j.t || Date.now()), dir: 'suya', estado: 'recibido', tipo: 'archivo', archivo: { nombre: limpiaNombre(j.nombre), tam: datos.length, mime: tipo, trozos: 1, progreso: 1, voz: voz || undefined, dur: Number.isFinite(+j.dur) ? +j.dur : undefined, w: medida(j.w), h: medida(j.h), pie: limpiaPie(j.pie) } };
     await archPon(c, { id: m.id, conv: c.id, blob: new Blob([datos], { type: tipo }), nombre: m.archivo.nombre, mime: tipo, tam: datos.length });
     await guardaMensaje(c, m); c.mensajes.push(m); pintaMensaje(c, m); actualizaUltimo(c, m, true);
     acusa(c, { tipo: 'ack', ids: [m.id] });
@@ -1271,7 +1290,8 @@
       // comprobante firmado por los dos equipos; si no, el recibo negable de siempre
       const nombre = extrasB(c) ? nombreNeutro(c, f, voz) : (f.name || 'archivo').slice(0, 180);
       const firmado = extrasB(c) && opc && opc.firmado && !voz ? 1 : undefined;
-      const m = { id: uuid(), conv: c.id, t: Date.now(), dir: 'mia', estado: 'pendiente', tipo: 'archivo', archivo: { nombre, tam: f.size, mime: f.type || 'application/octet-stream', clave: C.b64u(clave), trozos, progreso: 0, voz: voz || undefined, vida, dur, paq: paq ? 1 : undefined, firmado } };
+      const pie = voz ? undefined : limpiaPie(f.__pie);
+      const m = { id: uuid(), conv: c.id, t: Date.now(), dir: 'mia', estado: 'pendiente', tipo: 'archivo', archivo: { nombre, tam: f.size, mime: f.type || 'application/octet-stream', clave: C.b64u(clave), trozos, progreso: 0, voz: voz || undefined, vida, dur, paq: paq ? 1 : undefined, firmado, pie } };
       if (/^image\//.test(m.archivo.mime)) { const d = await medidasImagen(f); if (d) { m.archivo.w = d.w; m.archivo.h = d.h; } }
       c.archivos.set(m.id, { envio: true, f, clave: await C.aes(clave), ack: 0, trozos, listo: false, enviados: 0, paq, paqClave: paq ? await claveCtr(paq) : null });
       if (f.size <= MAX_MEMORIA && /^(image|audio)\//.test(m.archivo.mime)) await archPon(c, { id: m.id, conv: c.id, blob: f, nombre: m.archivo.nombre, mime: m.archivo.mime, tam: f.size });
@@ -1363,7 +1383,7 @@
     if (!tam || trozos !== (Math.ceil(tam / TROZO) || 1) || !j.clave) { enviaControl(c, { tipo: 'archivo-cancel', id: j.id }); return; }
     const voz = j.voz === 1, custodia = esB(c) && j.v === 1 && !voz; // el comprobante firmado, en Ultra y solo si quien envía lo pidió (ronda 93)
     const vida = j.vida === 'una' ? 'una' : [30, 60, 300].includes(+j.vida) ? +j.vida : undefined, paq = esB(c) && j.paq === 1;
-    const m = { id: String(j.id).slice(0, 64), conv: c.id, t: Math.min(Date.now(), +j.t || Date.now()), dir: 'suya', estado: 'recibiendo', tipo: 'archivo', archivo: { nombre: limpiaNombre(j.nombre), tam, mime: String(j.mime || 'application/octet-stream').slice(0, 100), trozos, progreso: 0, aDisco: tam > MAX_MEMORIA || (conDisco() && tam > 32 * 1024 * 1024 && !vida), custodia: custodia ? 1 : undefined, voz: voz ? 1 : undefined, vida, dur: Number.isFinite(+j.dur) && +j.dur > 0 ? Math.min(36000, Math.round(+j.dur)) : undefined, paq: paq ? 1 : undefined, w: medida(j.w), h: medida(j.h) }, velado: extrasB(c) && !voz ? true : undefined };
+    const m = { id: String(j.id).slice(0, 64), conv: c.id, t: Math.min(Date.now(), +j.t || Date.now()), dir: 'suya', estado: 'recibiendo', tipo: 'archivo', archivo: { nombre: limpiaNombre(j.nombre), tam, mime: String(j.mime || 'application/octet-stream').slice(0, 100), trozos, progreso: 0, aDisco: tam > MAX_MEMORIA || (conDisco() && tam > 32 * 1024 * 1024 && !vida), custodia: custodia ? 1 : undefined, voz: voz ? 1 : undefined, vida, dur: Number.isFinite(+j.dur) && +j.dur > 0 ? Math.min(36000, Math.round(+j.dur)) : undefined, paq: paq ? 1 : undefined, w: medida(j.w), h: medida(j.h), pie: limpiaPie(j.pie) }, velado: extrasB(c) && !voz ? true : undefined };
     const a = { envio: false, clave: await C.aes(C.deB64u(j.clave)), partes: null, escritor: null, siguiente: 0, tengo: 0, trozos, m, pendientes: new Map(), huella: window.GuardianaSHA256 ? GuardianaSHA256.crea() : null, hPtr: 0, paq, hPaq: paq ? GuardianaSHA256.crea() : null, trailer: null };
     c.archivos.set(m.id, a);
     const v = viajeNuevo(c, m, 'recibe'); v.voz = voz; v.custodia = voz ? 'voz' : custodia ? 'si' : 'no'; v.paisSuyo = esB(c) ? '' : regionValida(j.region); v.pq = !!(ses && ses.pq); v.sid = ses ? ses.sid : ''; v.sesionDesde = ses ? ses.desde : null;
@@ -2804,7 +2824,7 @@
   // Quien invita, en el teléfono, entra en el chat en cuanto envía la invitación y espera ahí a la otra persona (dueño, 28 Oct 2026,
   // 21:51: «ya tiene que entrar en la sala del chat… No puede esperar desde fuera»). Lo que escriba sale cuando ella entre.
   // (29 Oct 2026, 14:33: también tras recargar o si el menú de compartir falló: nunca la pantalla «Invitar · Compartir enlace»)
-  const esperaEnChat = (c) => !!(c && esMovil() && porEnlace(c) && c.rol === 'invita' && !c.huella);
+  const esperaEnChat = (c) => !!(c && esMovil() && porEnlace(c) && !c.porCodigo && c.rol === 'invita' && !c.huella);
   // en cuanto hay una conversación establecida y se está en ella, la pregunta (una vez por sesión, y «Ahora no» se recuerda)
   function avisosCuandoToque() { setTimeout(preguntaAvisos, 1500); }
   // los avisos de ese chat, retirados de la bandeja (y el número del icono, recalculado). El primer arranque tras instalar el
@@ -2970,7 +2990,7 @@
   // ---------- Responder, reenviar, información y borrar (agencia, ronda 76, fase 3; dueño, 00:34: «aplica todo a vuestro gusto») ----------
   // Mantener pulsado un mensaje (o el botón derecho) abre un menú junto a la burbuja: Responder · Reenviar · Información · Borrar.
   // Sin «Copiar» (dueño, 28 Oct 2026, 15:17: «que no se pueda copiar nada»). Deslizar un mensaje a la derecha también responde.
-  const etiquetaMsg = (m) => !m ? '' : m.tipo === 'texto' ? String(m.texto || '').replace(/\s+/g, ' ').trim() : m.tipo === 'archivo' ? (m.archivo.voz ? '🎤 ' + T('Nota de voz') : /^image\//.test(m.archivo.mime || '') ? '📷 ' + T('Foto') : /^video\//.test(m.archivo.mime || '') ? '🎬 ' + T('Vídeo') : '📎 ' + (m.archivo.nombre || T('Archivo'))) : m.tipo === 'llamada' ? '📞 ' + T('Llamada') : String(m.texto || '');
+  const etiquetaMsg = (m) => !m ? '' : m.tipo === 'texto' ? String(m.texto || '').replace(/\s+/g, ' ').trim() : m.tipo === 'archivo' ? (m.archivo.voz ? '🎤 ' + T('Nota de voz') : /^image\//.test(m.archivo.mime || '') ? '📷 ' + (m.archivo.pie ? String(m.archivo.pie).replace(/\s+/g, ' ').trim() : T('Foto')) : /^video\//.test(m.archivo.mime || '') ? '🎬 ' + (m.archivo.pie ? String(m.archivo.pie).replace(/\s+/g, ' ').trim() : T('Vídeo')) : '📎 ' + (m.archivo.nombre || T('Archivo'))) : m.tipo === 'llamada' ? '📞 ' + T('Llamada') : String(m.texto || '');
   // quién escribió lo citado, visto desde este equipo: «de: yo» lo puso quien envió el mensaje que cita
   const nombreCita = (c, m) => (m.dir === 'mia') === (m.cita.de === 'yo') ? T('Tú') : nombreConv(c, true);
   const sePuedeReenviar = (m) => !!m && !m.velado && m.estado !== 'fallo' && m.estado !== 'descartado' && (m.tipo === 'texto' || (m.tipo === 'archivo' && !m.archivo.vida && !m.archivo.caducado && !m.archivo.vistoBorrado && (m.dir === 'mia' || m.estado === 'recibido' || m.estado === 'leido')));
@@ -3000,6 +3020,7 @@
   function abreMenuMsg(m, li) {
     const mn = $('#mmenu'), c = CONVS.get(ACTUAL); if (!mn || !c || !m || !li || m.velado) return;
     cierraMenuMsg(); MENU_MSG = m; li.classList.add('gc-elegida'); $('#conv').classList.add('con-menu-msg');
+    $('#mm-responder').hidden = esFotoMsg(m); // en una foto, sin «Responder» (dueño, 15 nov 2026, 17:12: «esa quítala»)
     $('#mm-reenviar').hidden = !sePuedeReenviar(m) || !vivas().some((x) => x.id !== c.id && x.huella);
     $('#mm-guardar').hidden = !(m.tipo === 'archivo' && m.dir === 'suya' && !m.archivo.voz && !m.archivo.vida && !m.archivo.enDisco && (m.estado === 'recibido' || m.estado === 'leido'));
     mn.hidden = false;
@@ -3072,6 +3093,7 @@
       try { const r = await archSaca(m); if (r && r.blob) f = new File([r.blob], m.archivo.nombre || 'archivo', { type: m.archivo.mime || 'application/octet-stream' }); } catch (_) {}
       if (!f) { const co = CONVS.get(m.conv), a = co && co.archivos.get(m.id); if (a && a.f) f = a.f; }
       if (!f) { aviso(T('Este archivo ya no está en este navegador.')); return; }
+      if (m.archivo.pie) { try { f.__pie = m.archivo.pie; } catch (_) {} }
       await enviaArchivos(destino, [f], { voz: !!m.archivo.voz, dur: m.archivo.dur });
     } else return;
     aviso(T('Reenviado a {n}').replace('{n}', nombreConv(destino, true)));
@@ -3201,6 +3223,7 @@
         const caja = document.createElement('div'); caja.className = 'gc-foto'; caja.style.gridColumn = '1 / -1';
         const med = cajaFoto(m.archivo.w, m.archivo.h); if (med) { caja.style.width = med.w + 'px'; caja.style.height = med.h + 'px'; } else caja.classList.add('sin-medida');
         d.prepend(caja);
+        if (m.archivo.pie) { const pe = document.createElement('span'); pe.className = 'gc-texto gc-pie'; pe.append(...enlaza(m.archivo.pie)); caja.after(pe); }
         // la foto recibida se guarda con el símbolo de descarga, dentro de la foto, abajo a la izquierda (dueño, 30 Oct 2026, 08:05–08:07)
         if (m.dir === 'suya' && recibido && !m.archivo.vida && !m.archivo.enDisco) { const g = document.createElement('button'); g.type = 'button'; g.className = 'gc-foto-bajar'; g.setAttribute('aria-label', T('Guardar')); g.title = T('Guardar'); g.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4.5v10.5M7.5 10.5 12 15l4.5-4.5M5.5 19.5h13"/></svg>'; g.addEventListener('click', (e) => { e.stopPropagation(); abreArchivo(m, true); }); caja.append(g); d.classList.add('con-bajar'); }
         archSaca(m).then((r) => { if (!r) { caja.remove(); return; } const img = document.createElement('img'); img.className = 'imagen'; img.alt = m.archivo.nombre; img.decoding = 'async'; img.src = URL.createObjectURL(r.blob); img.addEventListener('load', () => caja.classList.add('lista')); img.addEventListener('click', () => veArchivo(m)); img.addEventListener('contextmenu', (e) => e.preventDefault()); caja.prepend(img); });
@@ -3214,6 +3237,8 @@
     // quien lo envió puede borrarlo en los dos equipos (dueño, 29 Oct 2026, 10:08: «que la persona también lo pueda borrar si quiere»)
     if (extrasB(CONVS.get(m.conv)) && m.dir === 'mia' && !m.archivo.voz && !sePuedeCortar(m) && !m.archivo.vistoBorrado && m.estado !== 'fallo' && m.estado !== 'descartado') { const x = document.createElement('button'); x.type = 'button'; x.className = 'boton borrar-dos'; x.textContent = T('Borrar en los dos'); x.addEventListener('click', () => { const c = CONVS.get(m.conv); if (c) borraEnLosDos(c, m); }); fila.append(x); }
     if (fila.childNodes.length) d.append(fila);
+    // el comentario de un archivo que no es una foto a la vista: debajo del nombre (15 nov 2026)
+    if (m.archivo.pie && !m.archivo.voz && !d.querySelector('.gc-pie')) { const pe = document.createElement('span'); pe.className = 'gc-texto gc-pie'; pe.append(...enlaza(m.archivo.pie)); s.after(pe); }
     return d;
   }
   // ---------- notas de voz: el reproductor propio (dueño, 29 Oct 2026, 12:03: «los segundos van como raros y la barra va a
@@ -3245,7 +3270,18 @@
     else { el = document.createElement('video'); el.src = visorUrl; el.controls = true; el.autoplay = true; el.playsInline = true; el.setAttribute('controlsList', 'nodownload'); }
     el.addEventListener('contextmenu', (e) => e.preventDefault()); cuerpo.append(el);
     $('#visor-nombre').textContent = hora(m.t); const cu = $('#visor-cuenta'); cu.hidden = true; cu.textContent = '';
+    // «Editar»: escribir o dibujar encima y enviarla (dueño, 15 nov 2026, 17:12: «o pueda tocar la foto que le han enviado, pueda escribir encima»)
+    { const ed = $('#visor-editar'); if (ed) { ed.hidden = !(window.GuardianaEditorFoto && GuardianaEditorFoto.editable({ type: mime, size: r.blob.size }) && !m.archivo.vida); visorEditar = ed.hidden ? null : { m, blob: r.blob }; } }
     vis.classList.add('sin-tiempo'); vis.hidden = false; document.body.classList.add('con-visor');
+  }
+  let visorEditar = null;
+  async function editaDesdeVisor() {
+    const v = visorEditar; if (!v || !window.GuardianaEditorFoto) return;
+    const c = CONVS.get(v.m.conv); if (!c) return;
+    const f = new File([v.blob], v.m.archivo.nombre || 'foto.jpg', { type: v.m.archivo.mime || v.blob.type || 'image/jpeg' });
+    await cierraVisor(true);
+    if (!extrasB(c)) GuardianaEditorFoto.abre({ archivos: [f], modo: 'envio', alEnviar: (fs) => { const cc = CONVS.get(c.id); if (cc) enviaArchivos(cc, fs); } });
+    else GuardianaEditorFoto.abre({ archivos: [f], modo: 'listo', tapar: true, textoListo: T('Continuar'), alListo: (nf) => { const cc = CONVS.get(c.id); if (cc && cc.id === ACTUAL) revisaEnvio(cc, [nf]); } });
   }
   // la onda de una nota de voz: 44 alturas (0–255) sacadas del audio una sola vez y guardadas con el mensaje; si el navegador no
   // puede decodificarlo, barras planas. Decodifica un contexto «offline», que no cuenta como audio en marcha
@@ -3408,6 +3444,7 @@
     const mime = m.archivo.mime || '', dentro = mimeAbrible(mime) && mime !== 'text/plain';
     if (!dentro) { abreArchivo(m, false); await caducaTemporal(c, m); aviso(T('Abierto fuera de GUARDIANA y borrado aquí.')); return; }
     const vis = $('#visor'), cuerpo = $('#visor-cuerpo'); cuerpo.textContent = '';
+    { const ed = $('#visor-editar'); if (ed) ed.hidden = true; } visorEditar = null; // lo que tiene tiempo en pantalla no se edita
     visorUrl = URL.createObjectURL(r.blob); visorDe = m.id;
     let el;
     if (/^image\//.test(mime)) { el = document.createElement('img'); el.alt = ''; el.src = visorUrl; }
@@ -3427,6 +3464,7 @@
   async function cierraVisor(sinCaducar) {
     const vis = $('#visor'); if (!vis || vis.hidden) return;
     clearInterval(visorT); visorT = null; vis.hidden = true; vis.classList.remove('sin-tiempo'); document.body.classList.remove('con-visor');
+    { const ed = $('#visor-editar'); if (ed) ed.hidden = true; } visorEditar = null;
     const cuerpo = $('#visor-cuerpo'); for (const x of cuerpo.querySelectorAll('video, audio')) { try { x.pause(); x.src = ''; } catch (_) {} } cuerpo.textContent = '';
     if (visorUrl) { try { URL.revokeObjectURL(visorUrl); } catch (_) {} visorUrl = null; }
     const f = visorFin; visorFin = null; visorDe = null;
@@ -4370,7 +4408,7 @@
       ul.addEventListener('pointermove', (e) => {
         if (!pulsa) return;
         const dx = e.clientX - pulsa.x, dy = e.clientY - pulsa.y;
-        if (!pulsa.desliza) { if (Math.abs(dy) > 10) { suelta(); return; } if (pulsa.tacto && dx > 14) { pulsa.desliza = true; clearTimeout(pulsa.t); pulsa.li.style.transition = 'none'; } else if (Math.abs(dx) > 10) { suelta(); return; } }
+        if (!pulsa.desliza) { if (Math.abs(dy) > 10) { suelta(); return; } if (pulsa.tacto && dx > 14 && !esFotoMsg(pulsa.m)) { pulsa.desliza = true; clearTimeout(pulsa.t); pulsa.li.style.transition = 'none'; } else if (Math.abs(dx) > 10) { suelta(); return; } }
         if (pulsa.desliza) { pulsa.dx = Math.max(0, Math.min(dx - 14, 88)); pulsa.li.style.transform = 'translateX(' + pulsa.dx + 'px)'; pulsa.li.classList.toggle('gc-responde-lista', pulsa.dx >= 56); }
       }, { passive: true });
       ul.addEventListener('pointerup', () => { if (!pulsa) return; const m = pulsa.desliza && pulsa.dx >= 56 ? pulsa.m : null; suelta(); if (m) { HAPTICO(10); ponResponde(m); } });
@@ -4541,7 +4579,13 @@
         if (c.estado !== 'invitacion' || c.rol !== 'invita' || c.huella) continue;
         if (c.ucod && !c.ucod.usado && Date.now() <= c.ucod.caduca) { c.ucod.perdido = true; pintaCodigoU(c); }
         // por código: otro código nuevo al volver la conexión, como la normal tras un corte (15 nov 2026); el de antes ya no vale
-        if (esB(c) && c.porCodigo && (!c.ucod || c.ucod.perdido) && !c.ucodPidiendo) { quitaCodigoU(c); publicaCodigoU(c); }
+        // (revisión independiente, 15 nov 2026: cada código nuevo es otro sobre de la misma semilla; un relé que corte a propósito se
+        // llevaría uno por corte. Como mucho 2 renovaciones solas por invitación y nunca dos en menos de 60 s; después, «Nuevo código»)
+        if (esB(c) && c.porCodigo && (!c.ucod || c.ucod.perdido) && !c.ucodPidiendo) {
+          const ahora = Date.now(), puede = (c.ucodAuto || 0) < 2 && ahora - (c.ucodAutoEn || 0) > 60000;
+          if (puede) { c.ucodAuto = (c.ucodAuto || 0) + 1; c.ucodAutoEn = ahora; c.ucodRenovado = true; quitaCodigoU(c); publicaCodigoU(c); }
+          else if (!c.ucod) { c.ucodFallo = true; pintaCodigoU(c); }
+        }
         if (!porEnlace(c) && !c.codigoUsado) { c.codigo = null; publicaCodigo(c); }
       }
     });
@@ -4590,7 +4634,7 @@
     $('#adj-doc').addEventListener('click', () => { cierraAdj(); $('#archivo').click(); });
     $('#adj-foto').addEventListener('click', () => { cierraAdj(); $('#archivo-foto').click(); });
     $('#adj-camara').addEventListener('click', () => { cierraAdj(); $('#archivo-camara').click(); });
-    for (const id of ['#archivo-foto', '#archivo-camara']) $(id).addEventListener('change', async (e) => { const c = CONVS.get(ACTUAL); const fs = [...e.target.files]; e.target.value = ''; if (!c || !fs.length) return; const limpios = []; for (const f of fs) limpios.push(await sinDatosOcultos(f)); revisaEnvio(c, limpios); });
+    for (const id of ['#archivo-foto', '#archivo-camara']) $(id).addEventListener('change', async (e) => { const c = CONVS.get(ACTUAL); const fs = [...e.target.files]; e.target.value = ''; if (!c || !fs.length) return; const limpios = []; for (const f of fs) limpios.push(await sinDatosOcultos(f)); revisaEnvio(c, limpios, { editor: true }); });
     $('#adj-ubicacion').addEventListener('click', () => { cierraAdj(); abreHoja('h-ubicacion'); });
     $('#ubi-no').addEventListener('click', () => cierraHoja('h-ubicacion'));
     for (const [id, aprox] of [['#ubi-exacta', false], ['#ubi-aprox', true]]) $(id).addEventListener('click', () => { cierraHoja('h-ubicacion'); mandaUbicacion(aprox); });
@@ -4758,31 +4802,58 @@
     // Las notas de voz no pasan por aquí: ya se envían con su propio botón.
     let porEnviar = null; // { conv, fs, urls }
     const sueltaEnvio = () => { if (porEnviar) porEnviar.urls.forEach((u) => URL.revokeObjectURL(u)); porEnviar = null; $('#envio-lista').textContent = ''; };
-    const revisaEnvio = async (c, fs) => {
+    const revisaEnvio = async (c, fs, opc) => {
       fs = fs.filter((f) => f && f.size);
       if (!c || !fs.length) return;
+      const pies = fs.map((f) => (typeof f.__pie === 'string' ? f.__pie : undefined)); // el comentario sigue a su archivo al limpiarlo
       // una foto lleva dentro dónde y con qué se hizo: se quita siempre, venga de donde venga (Documento, pegar o arrastrar; antes
       // solo se limpiaba la de «Foto» y «Cámara»; revisión, 29 Oct 2026)
       try { fs = await Promise.all(fs.map((f) => sinDatosOcultos(f, extrasB(c)))); } catch (_) {}
       if (extrasB(c)) { try { fs = await Promise.all(fs.map((f) => (f ? limpiaMetaB(f) : f))); } catch (_) {} }
+      fs.forEach((f, i) => { if (f && pies[i] !== undefined) { try { f.__pie = pies[i]; } catch (_) {} } });
       { const n = fs.filter((f) => !f).length; if (n) { fs = fs.filter(Boolean); aviso(n === 1 ? T('Esta foto no se puede limpiar de datos ocultos en este navegador: en Ultra no se envía.') : T('{n} fotos no se pueden limpiar de datos ocultos en este navegador: en Ultra no se envían.').replace('{n}', n)); if (!fs.length) return; } }
       // chat fuerte (el normal): la foto o el archivo se envía directo, sin hoja ni «Tapar» (dueño, 29 Oct 2026, 15:29: «cuando se envía
       // una foto, se envía directa… elimínalo… normal, clásico y sencillo»). La hoja con «Tapar» y el tiempo, solo en el blindado
-      if (!extrasB(c)) { enviaArchivos(c, fs); return; }
+      // Foto, Cámara, pegar o arrastrar una foto: el editor, como en las apps de mensajería (dueño, 15 nov 2026, 17:12: «pueda escribir
+      // encima o enviar la foto con el texto abajo… tipo WhatsApp»). «Documento» sigue saliendo directo, tal cual
+      if (!extrasB(c)) {
+        const ED = window.GuardianaEditorFoto, vistas = opc && opc.editor && ED ? fs.filter((f) => ED.admite(f)) : [];
+        if (vistas.length) {
+          const otros = fs.filter((f) => !vistas.includes(f)); if (otros.length) enviaArchivos(c, otros);
+          ED.abre({ archivos: vistas, modo: 'envio', alEnviar: (listos) => { const cc = CONVS.get(c.id); if (cc) enviaArchivos(cc, listos); } });
+          return;
+        }
+        enviaArchivos(c, fs); return;
+      }
       sueltaEnvio();
       const urls = [], lista = $('#envio-lista');
       for (const f of fs) {
         const li = document.createElement('li');
+        const i = fs.indexOf(f); li.dataset.i = String(i);
         if (/^image\//.test(f.type) && f.size <= 50 * 1024 * 1024) {
           const u = URL.createObjectURL(f); urls.push(u);
+          const caja = document.createElement('div'); caja.className = 'envio-foto';
           const img = document.createElement('img'); img.alt = ''; img.decoding = 'async'; img.src = u;
-          img.addEventListener('error', () => { img.remove(); li.classList.remove('foto'); });
+          img.addEventListener('error', () => { caja.remove(); li.classList.remove('foto'); });
           // en modo discreto, la imagen sale borrosa y se ve mientras se mantiene pulsada
           img.addEventListener('pointerdown', () => img.classList.add('ver'));
           for (const ev of ['pointerup', 'pointerleave', 'pointercancel']) img.addEventListener(ev, () => img.classList.remove('ver'));
           img.addEventListener('contextmenu', (e) => e.preventDefault());
-          li.classList.add('foto'); li.append(img);
-          { const i = fs.indexOf(f), bt = document.createElement('button'); bt.type = 'button'; bt.className = 'tapar-b'; bt.textContent = T('Tapar'); bt.title = T('Tapar partes de la foto'); bt.addEventListener('click', (e) => { e.stopPropagation(); abreTapar(i, img); }); li.append(bt); }
+          li.classList.add('foto'); caja.append(img); li.append(caja);
+          // «Editar» (15 nov 2026): el editor de fotos, con «Texto», «Dibujar» y «Tapar» (antes, solo «Tapar»)
+          if (window.GuardianaEditorFoto && GuardianaEditorFoto.editable(f)) {
+            const bt = document.createElement('button'); bt.type = 'button'; bt.className = 'tapar-b'; bt.title = T('Escribir, dibujar o tapar partes de la foto');
+            bt.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l4.4-1L18.6 8.8a2.2 2.2 0 0 0-3.1-3.1L5.3 15.9z"/><path d="M14 7.2l2.8 2.8"/></svg>'; bt.append(document.createTextNode(T('Editar')));
+            bt.addEventListener('click', (e) => {
+              e.stopPropagation(); if (!porEnviar || !porEnviar.fs[i]) return;
+              GuardianaEditorFoto.abre({ archivos: [porEnviar.fs[i]], modo: 'listo', tapar: true, alListo: (nf) => {
+                if (!porEnviar || !porEnviar.fs[i]) return;
+                const pie = porEnviar.fs[i].__pie; porEnviar.fs[i] = nf; if (pie !== undefined) { try { nf.__pie = pie; } catch (_) {} }
+                if (nf.__editada) { const u2 = URL.createObjectURL(nf); porEnviar.urls.push(u2); img.src = u2; const sm = li.querySelector('small'); if (sm) sm.textContent = tamano(nf.size) + ' · ' + T('editada'); }
+              } });
+            });
+            caja.append(bt);
+          }
         } else {
           const ico = document.createElement('span'); ico.className = 'ico'; ico.setAttribute('aria-hidden', 'true');
           const ext = /\.([A-Za-z0-9]{1,5})$/.exec(f.name || ''); ico.textContent = ext ? ext[1].toUpperCase() : '•';
@@ -4790,6 +4861,8 @@
         }
         const txt = document.createElement('div'), b = document.createElement('b'), s = document.createElement('small');
         b.textContent = f.name || T('archivo'); s.textContent = tamano(f.size); txt.append(b, s); li.append(txt);
+        // el comentario, que va debajo de la foto o del archivo, encriptado con él (15 nov 2026)
+        { const pi = document.createElement('input'); pi.type = 'text'; pi.className = 'campo envio-pie'; pi.maxLength = 1024; pi.autocomplete = 'off'; pi.placeholder = T('Añade un comentario…'); pi.setAttribute('aria-label', T('Comentario de la foto')); if (typeof f.__pie === 'string') pi.value = f.__pie; pi.addEventListener('keydown', (e) => { if (e.key === 'Enter' && !e.isComposing) { e.preventDefault(); $('#envio-si').click(); } }); li.append(pi); }
         lista.append(li);
       }
       porEnviar = { conv: c.id, fs, urls };
@@ -4809,7 +4882,9 @@
     };
     $('#envio-si').addEventListener('click', () => {
       { const asi = $('#envio-asi'); if (asi && !asi.hidden && asi.getAttribute('aria-pressed') !== 'true') return; } // (Ultra: falta «Enviarlo así»)
-      const p = porEnviar; cierraHoja('h-envio'); if (!p) return;
+      const p = porEnviar; if (!p) { cierraHoja('h-envio'); return; }
+      for (const li of document.querySelectorAll('#envio-lista li[data-i]')) { const f = p.fs[+li.dataset.i], pi = li.querySelector('.envio-pie'); if (f && pi) { try { f.__pie = pi.value; } catch (_) {} } }
+      cierraHoja('h-envio');
       const fs = p.fs; sueltaEnvio();
       const el = $('#envio-tiempo [aria-pressed="true"]'), vida = el && el.dataset.vida ? (el.dataset.vida === 'una' ? 'una' : +el.dataset.vida) : undefined;
       const ef = $('#envio-firmado'), firmado = !!(ef && !ef.hidden && ef.getAttribute('aria-pressed') === 'true');
@@ -4820,45 +4895,17 @@
     // tiempo en pantalla (dueño, 29 Oct 2026, 10:08): sin límite, una vez, 30 s, 1 min, 5 min; de entrada, sin límite
     for (const b of document.querySelectorAll('#envio-tiempo button')) b.addEventListener('click', () => { for (const x of document.querySelectorAll('#envio-tiempo button')) x.setAttribute('aria-pressed', String(x === b)); });
     $('#visor-cerrar').addEventListener('click', () => cierraVisor(false));
+    { const ed = $('#visor-editar'); if (ed) ed.addEventListener('click', () => { editaDesdeVisor(); }); }
     $('#alarma-ok').addEventListener('click', () => { $('#alarma').hidden = true; });
     $('#envio-no').addEventListener('click', () => { cierraHoja('h-envio'); sueltaEnvio(); });
-    // «Tapar»: un mosaico de bloques grandes donde pasa el dedo (no se puede deshacer en la foto que se envía)
-    let taparIdx = -1, taparImg = null, taparOrig = null, taparMos = null, dibuja = null;
-    async function abreTapar(i, img) {
-      const f = porEnviar && porEnviar.fs[i]; if (!f) return;
-      let bmp; try { bmp = await createImageBitmap(f, { imageOrientation: 'from-image' }); } catch (_) { aviso(T('Esta foto no se puede editar aquí.')); return; }
-      const k = Math.min(1, 2560 / Math.max(bmp.width, bmp.height)), w = Math.round(bmp.width * k), h = Math.round(bmp.height * k);
-      const cv = $('#tapar-cv'); cv.width = w; cv.height = h; cv.getContext('2d').drawImage(bmp, 0, 0, w, h);
-      taparOrig = document.createElement('canvas'); taparOrig.width = w; taparOrig.height = h; taparOrig.getContext('2d').drawImage(bmp, 0, 0, w, h);
-      const b = Math.max(14, Math.round(Math.max(w, h) / 36)), peq = document.createElement('canvas'); peq.width = Math.max(1, Math.round(w / b)); peq.height = Math.max(1, Math.round(h / b)); peq.getContext('2d').drawImage(bmp, 0, 0, peq.width, peq.height);
-      taparMos = document.createElement('canvas'); taparMos.width = w; taparMos.height = h; const m = taparMos.getContext('2d'); m.imageSmoothingEnabled = false; m.drawImage(peq, 0, 0, w, h);
-      if (bmp.close) bmp.close();
-      taparIdx = i; taparImg = img; $('#tapar').hidden = false;
-    }
-    const cierraTapar = () => { $('#tapar').hidden = true; taparIdx = -1; taparOrig = null; taparMos = null; dibuja = null; };
-    const puntoTapar = (e) => { const cv = $('#tapar-cv'), r = cv.getBoundingClientRect(); return { x: (e.clientX - r.left) * cv.width / r.width, y: (e.clientY - r.top) * cv.height / r.height }; };
-    const tapaEn = (p) => { const cv = $('#tapar-cv'), R = Math.max(22, Math.round(Math.max(cv.width, cv.height) / 16)), ctx = cv.getContext('2d'); ctx.save(); ctx.beginPath(); ctx.arc(p.x, p.y, R, 0, Math.PI * 2); ctx.clip(); ctx.drawImage(taparMos, 0, 0); ctx.restore(); return R; };
-    $('#tapar-cv').addEventListener('pointerdown', (e) => { if (!taparMos) return; e.preventDefault(); try { e.currentTarget.setPointerCapture(e.pointerId); } catch (_) {} const p = puntoTapar(e); tapaEn(p); dibuja = p; });
-    $('#tapar-cv').addEventListener('pointermove', (e) => { if (!dibuja || !taparMos) return; const p = puntoTapar(e), d = Math.hypot(p.x - dibuja.x, p.y - dibuja.y), R = tapaEn(p), n = Math.ceil(d / (R / 2)); for (let j = 1; j < n; j++) tapaEn({ x: dibuja.x + (p.x - dibuja.x) * j / n, y: dibuja.y + (p.y - dibuja.y) * j / n }); dibuja = p; });
-    for (const ev of ['pointerup', 'pointercancel', 'pointerleave']) $('#tapar-cv').addEventListener(ev, () => { dibuja = null; });
-    $('#tapar-otra').addEventListener('click', () => { if (taparOrig) $('#tapar-cv').getContext('2d').drawImage(taparOrig, 0, 0); });
-    $('#tapar-no').addEventListener('click', cierraTapar);
-    $('#tapar-si').addEventListener('click', async () => {
-      const i = taparIdx, img = taparImg; if (i < 0 || !porEnviar) { cierraTapar(); return; }
-      const blob = await new Promise((r) => $('#tapar-cv').toBlob(r, 'image/jpeg', 0.92)); if (!blob) { cierraTapar(); return; }
-      const viejo = porEnviar.fs[i], base = String((viejo && viejo.name) || 'foto').replace(/\.[a-z0-9]{2,5}$/i, '') || 'foto';
-      porEnviar.fs[i] = new File([blob], base + '.jpg', { type: 'image/jpeg', lastModified: Date.now() });
-      if (img) { const u = URL.createObjectURL(porEnviar.fs[i]); porEnviar.urls.push(u); img.src = u; const s = img.parentElement && img.parentElement.querySelector('small'); if (s) s.textContent = tamano(blob.size) + ' · ' + T('tapada'); }
-      cierraTapar();
-    });
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !$('#tapar').hidden) { e.stopImmediatePropagation(); cierraTapar(); } }, true);
+    REVISA_ENVIO = revisaEnvio;
     $('#h-envio').addEventListener('click', (e) => { if (e.target === e.currentTarget) sueltaEnvio(); });
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && porEnviar) { cierraHoja('h-envio'); sueltaEnvio(); } });
-    ta.addEventListener('paste', (e) => { const fs = [...((e.clipboardData && e.clipboardData.files) || [])]; const c = CONVS.get(ACTUAL); if (c && fs.length) { e.preventDefault(); revisaEnvio(c, fs.map((f, i) => (f.name && f.name !== 'image.png') ? f : new File([f], 'imagen-' + new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19) + (i ? '-' + i : '') + '.' + ((f.type || '').split('/')[1] || 'png'), { type: f.type }))); } });
+    ta.addEventListener('paste', (e) => { const fs = [...((e.clipboardData && e.clipboardData.files) || [])]; const c = CONVS.get(ACTUAL); if (c && fs.length) { e.preventDefault(); revisaEnvio(c, fs.map((f, i) => (f.name && f.name !== 'image.png') ? f : new File([f], 'imagen-' + new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19) + (i ? '-' + i : '') + '.' + ((f.type || '').split('/')[1] || 'png'), { type: f.type })), { editor: true }); } });
     $('#archivo').addEventListener('change', async (e) => { const c = CONVS.get(ACTUAL); const fs = [...e.target.files]; e.target.value = ''; if (c && fs.length) revisaEnvio(c, fs); });
     const zona = $('#conv');
     zona.addEventListener('dragover', (e) => { e.preventDefault(); });
-    zona.addEventListener('drop', (e) => { e.preventDefault(); const c = CONVS.get(ACTUAL); const fs = [...(e.dataTransfer && e.dataTransfer.files) || []]; if (c && fs.length) revisaEnvio(c, fs); });
+    zona.addEventListener('drop', (e) => { e.preventDefault(); const c = CONVS.get(ACTUAL); const fs = [...(e.dataTransfer && e.dataTransfer.files) || []]; if (c && fs.length) revisaEnvio(c, fs, { editor: true }); });
     document.querySelectorAll('.gc-hoja').forEach((h) => h.addEventListener('click', (e) => { if (e.target === h) h.classList.remove('gc-abierta'); }));
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') document.querySelectorAll('.gc-hoja.gc-abierta').forEach((h) => h.classList.remove('gc-abierta')); });
     addEventListener('hashchange', () => { if (/#[ib]=/.test(location.hash)) { preguntaInvitacion(location.href); history.replaceState(null, '', location.pathname + location.search); } });

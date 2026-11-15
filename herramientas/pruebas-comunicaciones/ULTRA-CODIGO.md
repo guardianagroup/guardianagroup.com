@@ -20,7 +20,16 @@ invitación con `creaInvitacionB(null, { porCodigo: true })` y, en el mismo paso
 - Si no se pudo crear (sin relé, o tres «repetido»), «No se pudo crear el código: inténtalo otra vez.» y «Nuevo código».
 - Tras un corte con el relé, como la invitación normal (E3), otro código nuevo en pantalla y en el relé. Sigue la regla de la revisión:
   el mismo sobre nunca se vuelve a dejar (podría valer una segunda vez); el código nuevo es otro sobre, con otro código, de la misma
-  semilla. Dos sobres de una semilla bajo dos códigos de 80 bits: a quien guarde los dos le basta acertar uno (un bit menos).
+  semilla. N sobres de una semilla bajo N códigos de 80 bits: a quien los guarde todos le basta acertar uno (log2 N bits menos).
+  Revisión independiente del 15 nov: el relé es justo quien guarda los sobres y puede cortar a propósito, así que la renovación sola
+  tiene tope: como mucho 2 por invitación y nunca dos en menos de 60 s (`c.ucodAuto`, `c.ucodAutoEn`); pasado el tope, «Se cortó la
+  conexión con el relé: crea uno nuevo.» y «Nuevo código» a mano. Con el tope, una invitación deja como mucho 3 sobres solos (1,6 bits
+  menos en el peor caso). El código renovado lo dice: «Se cortó la conexión con el relé: este es un código nuevo.»
+- Más de la revisión del 15 nov: sin relé, las peticiones «invita» y «busca» pendientes se contestan al momento (rele.js, onclose);
+  una respuesta solo vale para su buzón (`invitaEnCola`), y sin respuesta el sobre se retira por si el relé llegó a guardarlo; con
+  el código, el enlace de 256 bits y el QR no se ponen en la página; en una ventana estrecha la invitación por código sigue a la
+  vista; un código recogido que a los 30 s nadie ha usado dice «Nadie ha entrado con ese código: crea uno nuevo.», y lo caducado va
+  delante; el código no se queda escrito en la página al entrar o cancelar; y los textos dicen «la llave de la invitación».
 - Qué cambia en lo que ve el relé: ahora cada invitación Ultra del PC le deja un sobre (antes, solo si se pulsaba «Usar un código»).
   La capa de la semilla (psk) queda en 80 bits con PBKDF2 delante frente a quien tenga el sobre (S2), para todas las invitaciones
   Ultra del PC, no solo las que pedían código. Las claves de la sesión siguen saliendo además de tres ECDH P-384 y ML-KEM-1024
@@ -56,7 +65,7 @@ invitación con `creaInvitacionB(null, { porCodigo: true })` y, en el mismo paso
 
 ## El flujo (`orbita/comunicaciones/app.js`)
 
-- **Quien invita**: la invitación Ultra sale como hoy (enlace y QR). Solo al pulsar «Usar un código» (`publicaCodigoU`) se crea
+- **Quien invita** (hasta el 15 nov; desde entonces, en el PC, el código sale solo, ver arriba): la invitación Ultra salía con enlace y QR. Solo al pulsar «Usar un código» (`publicaCodigoU`) se crea
   el código y se deja el sobre. El botón sigue en la espera que sale tras «Copiar enlace» y, con un código vivo, la invitación se
   ve entera. El código se ve en grande, con «Vale 10 minutos y una sola vez», la cuenta atrás, «Alguien ha escrito el código:
   conectando…» (`codigo-usado`: quien recogió el sobre puede no ser la otra persona) y «Cancelar el código» (`retira`). Si a los

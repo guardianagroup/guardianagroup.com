@@ -82,6 +82,8 @@ const bonito = (k) => k.replace(/(.{4})(?=.)/g, '$1-');
 const SIN_PQ = 'Este navegador no puede abrir una sesión Ultra: hace falta uno actual con ML-KEM-1024 y ML-DSA-87. Pide a la otra persona una invitación Blindada.';
 const MAL_U = 'Código erróneo, caducado o ya usado.';
 const ALGUIEN = 'Alguien ha escrito el código: conectando…';
+const RENOVADO = 'Se cortó la conexión con el relé: este es un código nuevo.';
+const PERDIDO = 'Se cortó la conexión con el relé: crea uno nuevo.';
 const contextos = [];
 async function equipo(browser, nombre, x) {
   x = x || {};
@@ -114,6 +116,13 @@ const enUltra = (P, ms) => hasta(() => P.evaluate(() => [...GuardianaCom.convs.v
 const enBlindada = (P) => hasta(() => P.evaluate(() => [...GuardianaCom.convs.values()].some((c) => c.modo === 'normal' && c.huella && c.sesion && c.sesion.confirmada)), 20000);
 const palabras = (P) => P.evaluate(() => { const e = document.querySelector('#cpalabras'); return e && !e.hidden ? document.querySelector('#cpalabras-txt').textContent : ''; });
 // crear Ultra en el PC: la invitación sale ya con su código (15 nov 2026); devuelve el enlace «#b=» que sigue saliendo de su semilla
+// corta la conexión con el relé y espera a que se cierre y vuelva a abrirse (y un momento para lo que haga la página al volver)
+async function cortaYVuelve(P) {
+  await P.evaluate(() => window.gcomPrueba.corta());
+  await hasta(async () => !(await P.evaluate(() => GuardianaCom.rele.abierto)), 5000);
+  await hasta(() => P.evaluate(() => GuardianaCom.rele.abierto), 20000);
+  await espera(300);
+}
 async function creaUltra(P) {
   const antes = await P.evaluate(() => { const c = window.gcomPrueba.conv(); return c ? c.id : ''; });
   await pulsa(P, '#nueva-blindada');
@@ -174,6 +183,10 @@ const llevaAlgo = (lista, fs) => lista.some((x) => fs.some((f) => (x.txt !== und
     comprueba(/\/chat\/#b=[A-Za-z0-9_-]{43}$/.test(enlace) && semillaA.length === 32, '1. A crea Ultra: su semilla de 256 bits (la misma del enlace «#b=», que ya no se enseña)', enlace.slice(-50));
     comprueba(!!pantalla && pantalla.caja && !pantalla.pide && !pantalla.quita && !pantalla.fila && !pantalla.qr && pantalla.titulo === 'Tu código de invitación' && pantalla.k === 'Sesión Ultra' && pantalla.copiados === 0, '1. en el PC sale ya el código, como en la invitación normal: «Sesión Ultra», «Tu código de invitación», sin enlace, QR, «Usar un código» ni «Cancelar el código», y nada copiado al portapapeles', pantalla && Object.assign({}, pantalla, { texto: undefined }));
     comprueba(!!pantalla && !/Copiar enlace|#b=|Usar un código|Mostrar el código QR/.test(pantalla.texto), '1. ningún enlace a la vista en la pantalla de la invitación', pantalla && pantalla.texto.replace(/\s+/g, ' ').slice(0, 160));
+    // (revisión independiente, 15 nov 2026, 4: ni escondido: el enlace y su QR no se ponen en la página)
+    { const sem = (enlace.split('#b=')[1] || '').slice(0, 43);
+      const dom = await A.evaluate((s) => ({ campo: document.querySelector('#enlace-b').value, qr: document.querySelector('#enlace-qr').innerHTML.length, html: !!s && document.documentElement.outerHTML.includes(s) }), sem);
+      comprueba(sem.length === 43 && dom.campo === '' && dom.qr === 0 && !dom.html, '1. y tampoco escondido: ni el campo del enlace ni el QR ni la semilla en el HTML de la página', dom); }
     const k = codigo.replace(/-/g, '');
     comprueba(FORMATO.test(codigo) && k.length === 16 && [...k].every((ch) => ALF.includes(ch)) && !/^\d{9}/.test(k), '1. el código: 16 símbolos del alfabeto Crockford base32, en 4 grupos de 4 (y no empieza por 9 cifras)', codigo);
     if (cancelados) comprueba(cancelOk, '1. «‹ Invitar» cancela la invitación y su código sale del relé (' + cancelados + ' veces)');
@@ -372,6 +385,34 @@ const llevaAlgo = (lista, fs) => lista.some((x) => fs.some((f) => (x.txt !== und
     for (const x of dos) if (x) codigos.push(x.codigo);
     comprueba(!!c1 && !!c2 && c1 !== c2 && dos.every((x) => x && RELE.codigos.has(x.buzon)) && dos[0].buzon !== dos[1].buzon, '8. dos invitaciones Ultra creadas a la vez: las dos tienen su código, en el relé (revisión, B4)', dos.map((x) => x && x.buzon));
 
+    // ---- 8b. la renovación sola tiene tope (revisión independiente, 15 nov 2026, 2): una por corte, nunca dos en menos de 60 s y como
+    // mucho 2 por invitación; después, «Nuevo código» a mano ----
+    await F.reload(); await espera(2500); // (las dos de antes, en la memoria de la pestaña, se van con ella)
+    await creaUltra(F); const codR1 = await pideCodigo(F); codigos.push(codR1);
+    await cortaYVuelve(F);
+    await hasta(async () => { const t = await texto(F, '#ucod-codigo'); return FORMATO.test(t) && t !== codR1; }, 10000);
+    const codR2 = await texto(F, '#ucod-codigo'); codigos.push(codR2);
+    comprueba(codR2 !== codR1 && (await texto(F, '#ucod-estado')) === RENOVADO, '8b. tras el primer corte, un código nuevo que lo dice: «' + RENOVADO + '»');
+    const nAntes = RECIBIDO.length;
+    await cortaYVuelve(F); await espera(1500);
+    const tras2 = { codigo: await texto(F, '#ucod-codigo'), estado: await texto(F, '#ucod-estado'), nuevo: await visible(F, '#ucod-nuevo'), invita: mensajes('invita', nAntes).length };
+    comprueba(tras2.codigo === codR2 && tras2.estado === PERDIDO && tras2.nuevo && tras2.invita === 0 && !RELE.codigos.has(buzonNode(codR2.replace(/-/g, ''))), '8b. otro corte antes de 60 s: no se renueva solo; «' + PERDIDO + '» y «Nuevo código», y el de antes fuera del relé', tras2);
+    await F.evaluate(() => { const c = window.gcomPrueba.conv(); c.ucodAutoEn = Date.now() - 61000; });
+    await cortaYVuelve(F);
+    await hasta(async () => { const t = await texto(F, '#ucod-codigo'); return FORMATO.test(t) && t !== codR2; }, 10000);
+    const codR3 = await texto(F, '#ucod-codigo'); codigos.push(codR3);
+    comprueba(codR3 !== codR2 && RELE.codigos.has(buzonNode(codR3.replace(/-/g, ''))), '8b. pasado el minuto, la segunda renovación sola');
+    await F.evaluate(() => { const c = window.gcomPrueba.conv(); c.ucodAutoEn = Date.now() - 61000; });
+    const nAntes3 = RECIBIDO.length;
+    await cortaYVuelve(F); await espera(1500);
+    const tras3 = { codigo: await texto(F, '#ucod-codigo'), estado: await texto(F, '#ucod-estado'), nuevo: await visible(F, '#ucod-nuevo'), invita: mensajes('invita', nAntes3).length };
+    comprueba(tras3.codigo === codR3 && tras3.estado === PERDIDO && tras3.nuevo && tras3.invita === 0, '8b. la tercera, no: como mucho 2 solas por invitación; después, «Nuevo código» a mano', tras3);
+    await F.click('#ucod-nuevo');
+    await hasta(async () => { const t = await texto(F, '#ucod-codigo'); return FORMATO.test(t) && t !== codR3; }, 8000);
+    const codR4 = await texto(F, '#ucod-codigo'); codigos.push(codR4);
+    comprueba(codR4 !== codR3 && RELE.codigos.has(buzonNode(codR4.replace(/-/g, ''))) && (await texto(F, '#ucod-estado')) === '', '8b. y a mano, otro código, sin aviso');
+    await pulsa(F, '#enlace-atras');
+    comprueba(await hasta(async () => !RELE.codigos.has(buzonNode(codR4.replace(/-/g, ''))), 4000) && (await texto(F, '#ucod-codigo')) === '····-····-····-····', '8b. al cancelar, el código sale del relé y de la página');
     // ---- 9. solo con el enlace ----
     for (const P of paginas.splice(0)) { try { await P.context().close(); } catch (_) {} }
     await espera(800);

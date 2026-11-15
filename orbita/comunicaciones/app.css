@@ -922,14 +922,12 @@ body.invitado-fin #app,body.invitado-fin .barra{display:none!important}
 .gc-ubi-abrir{justify-self:start;margin-top:4px;padding:6px 12px;border-radius:999px;border:1px solid rgba(156,195,228,.35);color:#9CC3E4;text-decoration:none;font-weight:600;font-size:13.5px}
 .rele[hidden]{display:none!important}
 /* «Tapar» en la foto antes de enviarla */
-.tapar-b{position:absolute;right:6px;bottom:6px;padding:5px 10px;border-radius:999px;border:1px solid rgba(218,236,250,.3);background:rgba(6,8,12,.72);color:#F4F6F8;font:600 12.5px/1 'IBM Plex Sans',system-ui,sans-serif;cursor:pointer}
-#envio-lista li.foto{position:relative}
-.tapar{position:fixed;inset:0;z-index:200;background:#06080C;display:grid;grid-template-rows:auto 1fr auto;padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)}
-.tapar[hidden]{display:none}
-.tapar-cab{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 12px}.tapar-cab b{font-size:15.5px;text-align:center}
-.tapar-lienzo{min-height:0;display:grid;place-items:center;padding:8px}
-#tapar-cv{max-width:100%;max-height:100%;touch-action:none;cursor:crosshair;border-radius:8px}
-.tapar-pie{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 14px 14px}.tapar-pie small{color:#9fb3c4;line-height:1.35}
+/* «Editar» en la foto antes de enviarla (abre el editor: texto, dibujo y «Tapar»), y su comentario */
+.envio-foto{position:relative;justify-self:center;max-width:100%}
+.tapar-b{position:absolute;right:8px;bottom:8px;display:inline-flex;align-items:center;gap:6px;padding:7px 12px 7px 10px;border-radius:999px;border:1px solid rgba(218,236,250,.3);background:rgba(6,8,12,.76);color:#F4F6F8;font:600 12.5px/1 'IBM Plex Sans',system-ui,sans-serif;cursor:pointer}
+.tapar-b svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.tapar-b:focus-visible{outline:2px solid #F4F6F8;outline-offset:2px}
+.envio-lista .envio-pie{grid-column:1/-1;width:100%;box-sizing:border-box;margin:0}
 /* Recorrido en modo espectador (28 Oct 2026, 16:40): texto oscuro sobre el botón claro; al aceptar, sin la barra de la web;
    «Aceptar» a la derecha en el ordenador y arriba en el móvil */
 #paso-inicio #nueva-blindada b,#paso-inicio #nueva-blindada .solo-movil{color:inherit}
@@ -2029,9 +2027,9 @@ body.con-pestanas #marcar .mi-numero-n{font-size:26px}
 .gc-burbuja:has(.gc-archivo-foto) .gc-foto{margin:0}
 .gc-burbuja:has(.gc-archivo-foto)>.gc-meta{margin-right:6px}
 /* sin nada más debajo, la hora va sobre la esquina de la foto, en una pastilla oscura */
-.gc-burbuja:has(.gc-archivo-foto):not(:has(.sello,.fila))::after{display:none}
-.gc-burbuja:has(.gc-archivo-foto):not(:has(.sello,.fila))>.gc-meta{position:absolute;right:10px;bottom:10px;float:none;margin:0;padding:2px 7px;border-radius:9px;background:rgba(6,8,12,.58);color:#F4F6F8}
-.gc-burbuja:has(.gc-archivo-foto):not(:has(.sello,.fila))>.gc-meta .gc-ticks:not(.gc-leido){color:#F4F6F8}
+.gc-burbuja:has(.gc-archivo-foto):not(:has(.sello,.fila,.gc-pie))::after{display:none}
+.gc-burbuja:has(.gc-archivo-foto):not(:has(.sello,.fila,.gc-pie))>.gc-meta{position:absolute;right:10px;bottom:10px;float:none;margin:0;padding:2px 7px;border-radius:9px;background:rgba(6,8,12,.58);color:#F4F6F8}
+.gc-burbuja:has(.gc-archivo-foto):not(:has(.sello,.fila,.gc-pie))>.gc-meta .gc-ticks:not(.gc-leido){color:#F4F6F8}
 /* «Llamar» sin título arriba: la pestaña ya lo dice (dueño, 30 Oct 2026, 08:04: «quita la palabra llamar de ahí arriba») */
 body.con-pestanas #marcar .contactos-cab{display:none}
 /* el teclado de «Llamar», a la medida del alto que queda (--k la pone ajustaTeclado) */
@@ -2530,3 +2528,84 @@ button.ll-env-ico:focus-visible{outline:2px solid #9CC3E4;outline-offset:2px}
   #paso-inicio{grid-template-columns:repeat(2,minmax(0,1fr));max-width:894px}
   #paso-inicio>:not(#nueva):not(#unir){grid-column:1/-1}
 }
+
+/* Editor de fotos (dueño, 15 nov 2026, 17:12: «escribir encima o enviar la foto con el texto abajo… tipo WhatsApp»): la foto a
+   pantalla completa; arriba «Deshacer», «Tapar» (en el blindado), «Dibujar» y «Texto»; abajo el comentario y «Enviar» */
+.fe{position:fixed;inset:0;z-index:9100;display:flex;flex-direction:column;background:#06080C;color:#F4F6F8;overscroll-behavior:contain;-webkit-user-select:none;user-select:none}
+html.con-teclado .fe{bottom:auto;top:var(--arriba-vv,0);height:var(--alto-vv,100%)}
+.fe-cab,.fe-escribe-cab{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:calc(10px + env(safe-area-inset-top)) calc(12px + env(safe-area-inset-right)) 8px calc(12px + env(safe-area-inset-left))}
+.fe-herr{display:flex;align-items:center;gap:8px}
+.fe-b{all:unset;box-sizing:border-box;flex:none;cursor:pointer;width:42px;height:42px;border-radius:50%;display:inline-grid;place-items:center;color:#F4F6F8;background:rgba(16,22,30,.8);border:1px solid rgba(156,195,228,.24);transition:background .15s,border-color .15s,color .15s,transform .12s;-webkit-tap-highlight-color:transparent}
+.fe-b:hover{background:rgba(28,38,51,.92);border-color:rgba(156,195,228,.45)}
+.fe-b:active{transform:scale(.94)}
+.fe-b:focus-visible{outline:2px solid #F4F6F8;outline-offset:2px}
+.fe-b[aria-pressed="true"]{background:#9CC3E4;border-color:#9CC3E4;color:#06080C}
+.fe-b:disabled{opacity:.36;cursor:default;transform:none}
+.fe-b svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.fe-aa span{font:600 15.5px/1 var(--texto);letter-spacing:.01em}
+.fe-colores{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:12px;padding:2px 12px 10px}
+.fe-color{all:unset;box-sizing:border-box;flex:none;cursor:pointer;width:28px;height:28px;border-radius:50%;background:var(--c);box-shadow:0 0 0 2px #06080C,0 0 0 3.5px rgba(244,246,248,.32);transition:transform .12s,box-shadow .12s;-webkit-tap-highlight-color:transparent}
+.fe-color[aria-checked="true"]{transform:scale(1.12);box-shadow:0 0 0 2px #06080C,0 0 0 4.5px #F4F6F8}
+.fe-color:focus-visible{outline:2px solid #9CC3E4;outline-offset:4px}
+.fe-pista{margin:0 auto;padding:0 18px 8px;max-width:560px;text-align:center;font:400 12.5px/1.4 var(--texto);color:#A9B3BE}
+.fe-lienzo{position:relative;flex:1;min-height:0;display:grid;place-items:center;overflow:hidden;padding:8px 12px;touch-action:none}
+.fe-marco{position:relative;touch-action:none;-webkit-touch-callout:none;border-radius:6px;overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,.45)}
+.fe-marco img{display:block;width:100%;height:100%;object-fit:fill;pointer-events:none;-webkit-user-drag:none}
+.fe-marco canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.fe.con-herramienta .fe-marco{cursor:crosshair}
+.fe-textos{position:absolute;inset:0}
+.fe-t{position:absolute;white-space:pre;line-height:1.2;text-align:center;font-family:var(--texto);font-weight:600;padding:.18em .32em;border-radius:.3em;cursor:grab;touch-action:none;transform-origin:50% 50%;will-change:transform}
+.fe-t.moviendo{cursor:grabbing}
+.fe-t:focus-visible{outline:2px dashed #9CC3E4;outline-offset:3px}
+.fe.con-herramienta .fe-t{pointer-events:none}
+.fe-video{max-width:100%;max-height:100%;border-radius:8px;background:#000}
+.fe-ficha{display:grid;justify-items:center;gap:8px;padding:28px 26px;border:1px solid rgba(156,195,228,.2);border-radius:16px;background:#0C1118;max-width:min(86vw,360px);text-align:center}
+.fe-ficha svg{width:34px;height:34px;fill:none;stroke:#9CC3E4;stroke-width:1.6;stroke-linejoin:round}
+.fe-ficha b{font:500 14.5px/1.35 var(--texto);overflow-wrap:anywhere}
+.fe-ficha small{font:400 12.5px/1.4 var(--texto);color:#A9B3BE}
+.fe-papelera{all:unset;box-sizing:border-box;position:absolute;left:50%;bottom:16px;width:56px;height:56px;margin-left:-28px;border-radius:50%;display:grid;place-items:center;background:rgba(6,8,12,.74);border:1.5px solid rgba(224,122,108,.75);color:#E07A6C;transition:transform .15s,background .15s,color .15s;pointer-events:none}
+.fe-papelera.sobre{transform:scale(1.18);background:#E07A6C;border-color:#E07A6C;color:#06080C}
+.fe-papelera svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.fe-pie{padding:8px calc(12px + env(safe-area-inset-right)) calc(12px + env(safe-area-inset-bottom)) calc(12px + env(safe-area-inset-left))}
+html.con-teclado .fe-pie{padding-bottom:10px}
+.fe-tira{list-style:none;margin:0 auto 10px;padding:8px 8px 2px;display:flex;gap:10px;justify-content:center;overflow-x:auto;max-width:760px;scrollbar-width:none}
+.fe-tira::-webkit-scrollbar{display:none}
+.fe-tira li{position:relative;flex:none}
+.fe-mini{all:unset;box-sizing:border-box;position:relative;cursor:pointer;display:grid;place-items:center;width:52px;height:52px;border-radius:10px;overflow:hidden;background:#10161E;border:1.5px solid rgba(156,195,228,.22);opacity:.7;transition:opacity .15s,border-color .15s}
+.fe-mini img{width:100%;height:100%;object-fit:cover;display:block}
+.fe-mini[aria-current="true"]{opacity:1;border-color:#9CC3E4}
+.fe-mini:focus-visible{outline:2px solid #F4F6F8;outline-offset:2px}
+.fe-mini.editada::after{content:"";position:absolute;left:5px;top:5px;width:8px;height:8px;border-radius:50%;background:#9CC3E4;box-shadow:0 0 0 1.5px #06080C}
+.fe-mini svg{width:20px;height:20px;fill:#F4F6F8}
+.fe-mini.es-archivo::before{content:"";width:16px;height:20px;border:1.6px solid #A9B3BE;border-radius:3px}
+.fe-mini-quita{all:unset;box-sizing:border-box;cursor:pointer;position:absolute;right:-7px;top:-7px;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;background:#1C2633;border:1px solid rgba(156,195,228,.4);color:#F4F6F8}
+.fe-mini-quita svg{width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round}
+.fe-envio{display:flex;align-items:flex-end;gap:10px;max-width:760px;margin:0 auto}
+.fe-comentario{flex:1;min-width:0;box-sizing:border-box;resize:none;height:46px;max-height:132px;margin:0;padding:12px 16px;border-radius:23px;border:1px solid rgba(156,195,228,.26);background:#10161E;color:#F4F6F8;font:400 16px/1.35 var(--texto);outline:none;-webkit-user-select:text;user-select:text}
+.fe-comentario::placeholder{color:#7F8C99}
+.fe-comentario:focus{border-color:rgba(156,195,228,.62)}
+.fe-enviar{all:unset;box-sizing:border-box;flex:none;cursor:pointer;width:48px;height:48px;border-radius:50%;display:grid;place-items:center;background:#9CC3E4;color:#06080C;transition:transform .12s,filter .15s;-webkit-tap-highlight-color:transparent}
+.fe-enviar:hover{filter:brightness(1.06)}
+.fe-enviar:active{transform:scale(.94)}
+.fe-enviar:disabled{opacity:.55;cursor:default}
+.fe-enviar:focus-visible{outline:2px solid #F4F6F8;outline-offset:3px}
+.fe-enviar svg{width:21px;height:21px;fill:currentColor;transform:translateX(-1px)}
+.fe-listo-fila{display:none;justify-content:flex-end;gap:10px;max-width:760px;margin:0 auto}
+.fe.modo-listo .fe-envio,.fe.modo-listo .fe-tira{display:none}
+.fe.modo-listo .fe-listo-fila{display:flex}
+.fe[aria-busy="true"] .fe-enviar,.fe[aria-busy="true"] #fe-listo{animation:feLate 1s ease-in-out infinite}
+@keyframes feLate{50%{opacity:.55}}
+.fe-escribe{position:absolute;inset:0;z-index:5;display:flex;flex-direction:column;background:rgba(6,8,12,.68);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}
+.fe-escribe-cab .fe-colores{padding:0;gap:10px}
+.fe-escribe-zona{flex:1;min-height:0;display:grid;place-items:center;padding:16px;overflow:auto}
+.fe-escribe-in{box-sizing:border-box;display:inline-block;min-width:1.4em;max-width:min(92vw,760px);white-space:pre-wrap;overflow-wrap:anywhere;text-align:center;font:600 clamp(26px,7vw,40px)/1.2 var(--texto);padding:.18em .32em;border-radius:.3em;outline:none;caret-color:#9CC3E4;-webkit-user-select:text;user-select:text}
+@media (max-width:400px){.fe-color{width:24px;height:24px}.fe-colores,.fe-escribe-cab .fe-colores{gap:9px}.fe-herr{gap:6px}.fe-b{width:40px;height:40px}}
+@media (prefers-reduced-motion:reduce){.fe-b,.fe-color,.fe-papelera,.fe-enviar{transition:none}.fe[aria-busy="true"] .fe-enviar{animation:none}}
+/* «Editar» en el visor de fotos, junto a «Cerrar» */
+.visor-editar{all:unset;box-sizing:border-box;cursor:pointer;display:inline-flex;align-items:center;gap:7px;height:40px;padding:0 15px 0 12px;border-radius:999px;border:1px solid rgba(156,195,228,.35);color:#F4F6F8;background:rgba(10,14,20,.72);font:600 13.5px/1 var(--texto)}
+.visor-editar:hover{border-color:rgba(156,195,228,.6)}
+.visor-editar:focus-visible{outline:2px solid #F4F6F8;outline-offset:2px}
+.visor-editar svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+/* el comentario de una foto o de un archivo, debajo, como un mensaje */
+.gc-pie{display:block;grid-column:1/-1;margin:7px 2px 0;white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.38;text-align:start;-webkit-user-select:text;user-select:text}
+.gc-burbuja:has(.gc-archivo-foto) .gc-pie{margin:7px 7px 1px}

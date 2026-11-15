@@ -142,7 +142,7 @@
         const sala = hex(b.subarray(1, 33)), de = hex(b.subarray(33, 41));
         emite('trama', sala, de, b.subarray(41));
       };
-      ws.onclose = () => { const estaba = abierto; abierto = false; marca = false; reto = ''; clearInterval(ping); ws = null; for (const [q, f] of esperasQ) { esperasQ.delete(q); try { f({ ok: false, por: 'sin relé' }); } catch (_) {} } if (estaba) emite('cerrado'); reintenta(); };
+      ws.onclose = () => { const estaba = abierto; abierto = false; marca = false; reto = ''; clearInterval(ping); ws = null; for (const [q, f] of esperasQ) { esperasQ.delete(q); try { f({ ok: false, por: 'sin relé' }); } catch (_) {} } for (const k of Object.keys(esperas)) { const f = esperas[k]; delete esperas[k]; try { f({ ok: false, por: 'sin relé' }); } catch (_) {} } if (estaba) emite('cerrado'); reintenta(); };
       ws.onerror = () => {};
     }
     // la prueba de la ruta, en segundo plano y una vez: si la de ahora se corta y la del puente pasa, se cambia (la conexión se
