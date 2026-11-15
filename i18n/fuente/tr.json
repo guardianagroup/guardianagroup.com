@@ -603,6 +603,7 @@
 "616": "Ultra (yakında).",
 "617": "Teslim makbuzu (Ultra sürümü).",
 "618": "En hassas konular için: P-384 ile hibrit ML-KEM-1024 ve ML-DSA-87, 256 bitlik bir bağlantı, yüksek sesle okunacak dört kelime ve her an karşılaştırılabilen güvenlik numarası.",
+"620": "En hassas konular için: P-384 ile hibrit ML-KEM-1024 ve ML-DSA-87, sunucunun bilmediği 16 karakterlik bir kod, yüksek sesle okunacak dört kelime ve her an karşılaştırılabilen güvenlik numarası.",
 "619": "Ultra (Plus ile)."
 }
 }

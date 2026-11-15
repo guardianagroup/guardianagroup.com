@@ -8,6 +8,28 @@ La revisión criptográfica independiente del primer commit dio «GO con condici
 final: «Tras la revisión independiente»). Lo más importante: la derivación pasa por PBKDF2 (S1) y el código nunca empieza por 9
 cifras (M1).
 
+## 15 nov 2026: en el PC, la invitación Ultra sale ya con su código
+
+El dueño: «Ultra en llamadas está configurado para pasar un enlace. Y no quiero que sea un enlace, quiero que también sea un código,
+al igual que en la versión normal». Desde entonces, al pulsar Ultra en el PC (`nuevaBlindadaConCopia`, rama del PC) se crea la
+invitación con `creaInvitacionB(null, { porCodigo: true })` y, en el mismo paso, su código (`publicaCodigoU`, el de «Usar un código»):
+
+- La pantalla es la de la invitación normal: «‹ Invitar», «Sesión Ultra», «Tu código de invitación», el código en 4 grupos, cómo darlo
+  y «Vale 10 minutos y una sola vez» con la cuenta atrás. No hay enlace, QR, «Usar un código» ni «Cancelar el código» a la vista,
+  y no se copia nada al portapapeles. «‹ Invitar» cancela la invitación y su código sale del relé (como antes «Cancelar»).
+- Si no se pudo crear (sin relé, o tres «repetido»), «No se pudo crear el código: inténtalo otra vez.» y «Nuevo código».
+- Tras un corte con el relé, como la invitación normal (E3), otro código nuevo en pantalla y en el relé. Sigue la regla de la revisión:
+  el mismo sobre nunca se vuelve a dejar (podría valer una segunda vez); el código nuevo es otro sobre, con otro código, de la misma
+  semilla. Dos sobres de una semilla bajo dos códigos de 80 bits: a quien guarde los dos le basta acertar uno (un bit menos).
+- Qué cambia en lo que ve el relé: ahora cada invitación Ultra del PC le deja un sobre (antes, solo si se pulsaba «Usar un código»).
+  La capa de la semilla (psk) queda en 80 bits con PBKDF2 delante frente a quien tenga el sobre (S2), para todas las invitaciones
+  Ultra del PC, no solo las que pedían código. Las claves de la sesión siguen saliendo además de tres ECDH P-384 y ML-KEM-1024
+  efímeros, y las cuatro palabras con compromiso previo siguen descubriendo a quien se ponga en medio.
+- El enlace «#b=» sigue: lo abre quien lo reciba (invitaciones de antes) y lo crea el teléfono (que hoy va a /solo-pc/). Una
+  invitación solo por enlace sigue sin dejar nada en el relé (`ultra-codigo.js`, apartado 9, con `gcomPrueba.ultraPorEnlace`).
+- Los textos de la web que decían «invitación de 256 bits solo por enlace o QR» (cuadro de las versiones, ficha técnica, portada y
+  términos) dicen ahora el código de 16 caracteres, en los 42 idiomas.
+
 ## El código y la derivación (`orbita/comunicaciones/cripto.js`)
 
 - **Código** (`nuevoCodigoU`): 16 símbolos del alfabeto Crockford base32 `0123456789ABCDEFGHJKMNPQRSTVWXYZ`, de

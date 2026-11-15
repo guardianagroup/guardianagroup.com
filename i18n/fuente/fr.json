@@ -603,6 +603,7 @@
 "616": "Ultra (bientôt disponible).",
 "617": "Accusé de remise (version Ultra).",
 "618": "Pour ce qu’il y a de plus sensible : ML-KEM-1024 et ML-DSA-87 en hybride avec P-384, un lien de 256 bits, quatre mots à lire à voix haute et le numéro de sécurité, qui peut être comparé à tout moment.",
+"620": "Pour ce qu’il y a de plus sensible : ML-KEM-1024 et ML-DSA-87 en hybride avec P-384, un code de 16 caractères que le serveur ne connaît pas, quatre mots à lire à voix haute et le numéro de sécurité, qui peut être comparé à tout moment.",
 "619": "Ultra (avec Plus)."
 }
 }

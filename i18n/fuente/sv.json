@@ -605,6 +605,7 @@
 "616": "Ultra (kommer snart).",
 "617": "Leveranskvitto (version Ultra).",
 "618": "För det känsligaste: ML-KEM-1024 och ML-DSA-87 i hybrid med P-384, en länk på 256 bitar, fyra ord att läsa upp högt och säkerhetsnumret, som kan jämföras när som helst.",
+"620": "För det känsligaste: ML-KEM-1024 och ML-DSA-87 i hybrid med P-384, en kod på 16 tecken som servern inte känner till, fyra ord att läsa upp högt och säkerhetsnumret, som kan jämföras när som helst.",
 "619": "Ultra (med Plus)."
 }
 }

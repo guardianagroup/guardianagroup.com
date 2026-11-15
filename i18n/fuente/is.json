@@ -603,6 +603,7 @@
 "616": "Ultra (væntanleg).",
 "617": "Afhendingarkvittun (Ultra-útgáfa).",
 "618": "Fyrir það viðkvæmasta: ML-KEM-1024 og ML-DSA-87 í blendingi með P-384, 256 bita hlekkur, fjögur orð til að lesa upphátt og öryggisnúmerið, sem hægt er að bera saman hvenær sem er.",
+"620": "Fyrir það viðkvæmasta: ML-KEM-1024 og ML-DSA-87 í blendingi með P-384, 16 stafa kóði sem þjónninn þekkir ekki, fjögur orð til að lesa upphátt og öryggisnúmerið, sem hægt er að bera saman hvenær sem er.",
 "619": "Ultra (með Plus)."
 }
 }

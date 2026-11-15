@@ -607,6 +607,7 @@
 "616": "Ultra (malapit na).",
 "617": "Resibo ng paghahatid (bersyong Ultra).",
 "618": "Para sa pinakasensitibo: ML-KEM-1024 at ML-DSA-87 na hybrid kasama ang P-384, link na 256 bit, apat na salitang babasahin nang malakas at ang safety number, na maaaring ikumpara anumang oras.",
+"620": "Para sa pinakasensitibo: ML-KEM-1024 at ML-DSA-87 na hybrid kasama ang P-384, code na 16 na karakter na hindi alam ng server, apat na salitang babasahin nang malakas at ang safety number, na maaaring ikumpara anumang oras.",
 "619": "Ultra (kasama ang Plus)."
 }
 }
