@@ -1832,7 +1832,7 @@
   function panel() {
     let p = $('ficha-panel'); if (p) return p;
     p = document.createElement('aside'); p.id = 'ficha-panel'; p.className = 'ficha-panel'; p.hidden = true; p.setAttribute('aria-label', T('Ficha'));
-    p.innerHTML = '<div class="asa" aria-hidden="true"></div><div class="cab"><span class="tipo"></span><span class="botones"><button type="button" class="atras" hidden>‹</button><button type="button" class="cerrar" aria-label="' + T('Cerrar') + '">×</button></span></div><figure class="foto" hidden><img alt="" decoding="async"><figcaption></figcaption></figure><h2 class="tit"></h2><p class="sub"></p><dl class="sat-dl resumen"></dl><div class="secs"></div><figure class="foto mapa" hidden><canvas width="804" height="280" aria-hidden="true"></canvas></figure><div class="acciones"><button type="button" class="ir" hidden>' + T('Verla en Órbita') + '</button><button type="button" class="copiar">' + T('Copiar ficha') + '</button><button type="button" class="pdf">' + T('Guardar PDF') + '</button></div><p class="pie"></p>';
+    p.innerHTML = '<div class="asa" aria-hidden="true"></div><div class="cab"><span class="tipo"></span><span class="botones"><button type="button" class="atras" hidden>‹</button><button type="button" class="cerrar" aria-label="' + T('Cerrar') + '">×</button></span></div><figure class="foto" hidden><img alt="" decoding="async"><figcaption></figcaption></figure><h2 class="tit"></h2><p class="sub"></p><dl class="sat-dl resumen"></dl><div class="secs"></div><figure class="foto mapa" hidden><canvas width="804" height="280" aria-hidden="true"></canvas></figure><div class="acciones"><button type="button" class="ir" hidden>' + T('Ver en el planeta') + '</button><button type="button" class="copiar">' + T('Copiar ficha') + '</button><button type="button" class="pdf">' + T('Guardar PDF') + '</button></div><p class="pie"></p>';
     document.body.append(p);
     p.querySelector('.cerrar').addEventListener('click', cierraPanel);
     p.querySelector('.asa').addEventListener('click', () => p.classList.toggle('alta'));
@@ -1957,7 +1957,20 @@
     if (plan.para) secciones.push({ t: T('En la práctica'), /* 22 Oct 2026, 22:23 (owner): instead of «Qué significa para ti», more professional */ texto: plan.para, abierta: true });
     for (const sec of plan.secciones || []) { const fs = []; for (const k of sec.claves) for (const f of toma(k)) if (!quitar.has(f)) { fs.push(f); quitar.add(f); } if (fs.length || sec.texto) secciones.push({ t: sec.t, filas: fs, texto: sec.texto, abierta: !!sec.abierta }); }
     const resto = filas.filter((f) => f[1] && !quitar.has(f)); if (resto.length) secciones.push({ t: T('Más datos'), filas: resto });
-    return { tipo, titulo, sub: plan.sub || '', resumen, secciones, pie, color: plan.color || '', foto: plan.foto || null };
+    return { tipo, titulo, sub: plan.sub || '', resumen, secciones, pie, color: plan.color || '', foto: plan.foto || null, ir: plan.ir || null };
+  }
+  // 15 Nov 2026 (owner: «toco cualquier cable… abajo del todo hay un botón que dice verlo en órbita. Le doy y no hace nada»): the
+  // cable card's button frames the whole cable on the planet. Centre: the mean of its landings on the sphere; zoom: so that the
+  // farthest landing fits with room around it (the nominal view is 40 000 km / zoom, orbita.js ZOOM).
+  function irCable(sitios) {
+    const ps = (sitios || []).filter((q) => Number.isFinite(q[2]) && Number.isFinite(q[3]));
+    if (!ps.length) return null;
+    const rad = Math.PI / 180; let x = 0, y = 0, z = 0;
+    for (const q of ps) { const la = q[3] * rad, lo = q[2] * rad; x += Math.cos(la) * Math.cos(lo); y += Math.cos(la) * Math.sin(lo); z += Math.sin(la); }
+    const h = Math.hypot(x, y, z); if (!(h > 1e-9)) return null;
+    const lat = Math.asin(z / h) / rad, lon = Math.atan2(y, x) / rad;
+    const lejos = Math.max(25, ...ps.map((q) => kmLL([lon, lat], [q[2], q[3]])));
+    return { lon, lat, z: Math.max(1, Math.min(400, 40000 / (2.6 * lejos))) };
   }
   // ---------- photos in the cards (owner, 24 Oct 2026: «cuando toquemos centro de datos… que aparezca una foto, si es que
   // la hay… en los cables, en los satélites también»). Only real photos of that very element, reviewed one by one, with a
@@ -2177,6 +2190,7 @@
           para: (lados.length >= 2 ? T('Une') + ' ' + lados[0] + ' ' + T('con') + ' ' + lados[lados.length - 1] + ' ' + T('por el fondo del mar.') + ' ' : '') + T('Cuando tus datos cruzan entre esos dos lados —un vídeo, un correo, una copia de seguridad— pueden ir por este cable o por otros paralelos; si uno se corta, el tráfico se reparte por los demás y lo notas como lentitud, no como apagón.') + (toca ? ' ' + T('Llega a tu país por') + ' ' + toca[0] + '.' : '') + (cp && cp.tbps >= 100 ? ' ' + T('Es una de las grandes autopistas: por él cabe el tráfico de decenas de millones de personas a la vez.') : ''),
           secciones: [{ t: T('Recorrido y profundidad'), claves: [T('Paradas'), T('Trazado'), T('De punto a punto, en línea recta'), T('Profundidad del fondo bajo este tramo'), T('Longitud en el mapa')], abierta: true }, { t: T('Datos'), claves: [T('Dueños'), T('Operador'), T('Capacidad'), T('Longitud'), T('En servicio desde')] }, { t: T('Cómo lo sabemos'), claves: [T('Fuentes'), T('Comprobado')] }, { t: T('Incidencias y estado'), claves: [T('Incidencias conocidas'), T('Estado')] }],
           color: colorSub(i),
+          ir: irCable(sitios),
         }), x, y);
         return;
       }

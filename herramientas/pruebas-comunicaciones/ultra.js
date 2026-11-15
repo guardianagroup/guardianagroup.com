@@ -3,7 +3,8 @@
 //   1. La puerta: fuera del programa, el botón Ultra explica en una línea y no crea nada; dentro del programa (data-en-programa y la
 //      pasarela GET /api/plan simulada) con nivel «gratis», lo mismo; con «plus», crea la invitación. En la hoja del teléfono, Ultra
 //      sale apagada fuera del programa. (En local, «?plan=plus» hace de programa con Plus.)
-//   2. La invitación va solo en el fragmento («#b=», 43 caracteres): ninguna trama hacia el relé lleva el secreto ni un «invita» (código).
+//   2. Ninguna trama hacia el relé lleva el secreto (la semilla, la misma del fragmento «#b=», 43 caracteres) ni el código Ultra; desde el
+//      15 nov 2026 la invitación del PC sale con su código y el relé recibe un «invita» con el buzón de 9 cifras (ULTRA-CODIGO.md).
 //   3. Las cuatro palabras de verificación, las mismas en los dos chats y, en la llamada, las mismas en las dos pantallas; el nivel de
 //      cada lado («navegador del PC»; con el programa, «PC con GUARDIANA»).
 //   4. Relleno: cada trama de mensaje que sale hacia el relé mide 41 + 13 + 16 + k·1024 bytes; y el latido de relleno (aquí cada 2 s)
@@ -156,10 +157,14 @@ const mp3Path = path.join(tmp, 'grabacion de mi nombre.mp3');
   comprueba(await A.evaluate(() => (window.__pedidos || []).includes('/api/plan')), '1. para crearla, el programa contestó GET /api/plan con «plus»');
   await foto(A, '02-pc-invitacion');
   const secreto = enlace.split('#b=')[1];
-  const lleva = (P) => P.tramas.some((t) => (t.txt && (t.txt.includes(secreto) || /"t":"invita"/.test(t.txt))) || (t.bin && Buffer.from(t.d).toString('latin1').includes(secreto)));
+  // el código Ultra que enseña la invitación (15 nov 2026: sale ya al crearla); al relé solo puede ir su buzón de 9 cifras
+  const codU = await A.evaluate(() => { const c = window.gcomPrueba.conv(); return c && c.ucod ? c.ucod.codigo : ''; });
+  const formasU = codU ? [codU, codU.replace(/(.{4})(?=.)/g, '$1-'), codU.toLowerCase()] : [];
+  const invitaMala = (txt) => { if (!/"t":"invita"/.test(txt)) return false; try { const m = JSON.parse(txt); return !/^\d{9}$/.test(String(m.codigo || '')); } catch (_) { return true; } };
+  const lleva = (P) => P.tramas.some((t) => (t.txt && (t.txt.includes(secreto) || formasU.some((f) => t.txt.includes(f)) || invitaMala(t.txt))) || (t.bin && (Buffer.from(t.d).toString('latin1').includes(secreto) || formasU.some((f) => Buffer.from(t.d).toString('latin1').includes(f)))));
   await acepta(B, enlace);
   comprueba(await enChat(A) && await enChat(B), '3. los dos en la sesión Ultra');
-  comprueba(!lleva(A) && !lleva(B), '2. ninguna trama hacia el relé lleva el secreto ni un código de invitación', A.tramas.filter((t) => t.txt).map((t) => t.txt.slice(0, 30)));
+  comprueba(!lleva(A) && !lleva(B), '2. ninguna trama hacia el relé lleva el secreto ni el código Ultra (solo, al crearla, su buzón de 9 cifras)', A.tramas.filter((t) => t.txt).map((t) => t.txt.slice(0, 30)));
   // R1: antes de la revelación (quien inicia la retrasa 4 s), ninguna palabra: «comprobando…» en los dos
   { const qa = await palabrasChat(A), qb = await palabrasChat(B);
     comprueba(qa === 'comprobando…' && qb === 'comprobando…', 'R1. hasta que quien inicia revela su número, «comprobando…» en los dos (ninguna palabra)', [qa, qb]);
