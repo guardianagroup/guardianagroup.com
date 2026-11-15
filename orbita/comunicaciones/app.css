@@ -315,7 +315,7 @@ svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-l
 .ll-mini-b svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linejoin:round}
 .gc-llamada:not(.mini) .ll-volver{display:none}
 /* La llamada en pequeño, con el chat libre (dueño, 28 Oct 2026): una tarjeta abajo a la derecha */
-.gc-llamada.mini{inset:auto 16px calc(92px + env(safe-area-inset-bottom)) auto;width:min(340px,calc(100vw - 32px));max-height:calc(100vh - 32px);padding:10px 12px 12px;border-radius:18px;border:1px solid var(--line);background:#0C1118;box-shadow:0 24px 60px -18px rgba(0,0,0,.8);gap:8px;text-align:left;overflow:hidden}
+.gc-llamada.mini{inset:auto 16px calc(92px + env(safe-area-inset-bottom)) auto;width:min(400px,calc(100vw - 32px));max-height:calc(100vh - 32px);padding:12px 12px 14px;border-radius:18px;border:1px solid var(--line);background:#0C1118;box-shadow:0 24px 60px -18px rgba(0,0,0,.8);gap:8px;text-align:left;overflow:hidden}
 .gc-llamada.mini.con-video{background:#0C1118}
 .gc-llamada.mini .gc-llamada-arriba,.gc-llamada.mini .ll-voces,.gc-llamada.mini .gc-llamada-paso,.gc-llamada.mini.solo-mia .videos{display:none}
 .gc-llamada.mini .videos{position:relative;inset:auto;z-index:auto;width:100%;aspect-ratio:16/9;border-radius:12px;overflow:hidden;cursor:zoom-in;flex:0 0 auto}
@@ -325,7 +325,11 @@ svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-l
 .gc-llamada.mini.con-video .gc-avatar-grande{display:none}
 .gc-llamada.mini .gc-llamada-nombre{font-size:15px;text-shadow:none}
 .gc-llamada.mini .gc-llamada-tiempo{font-size:13px;margin-left:auto;text-shadow:none}
-.gc-llamada.mini .gc-llamada-botones{margin:2px 0 0;gap:12px}
+.gc-llamada.mini .gc-llamada-botones{margin:2px 0 0;gap:10px;flex-wrap:wrap;justify-content:center;row-gap:8px;padding:0 4px}
+/* 15 nov 2026 (dueño: «a la derecha y a la izquierda los márgenes no están bien… se comen parte de los botones»): en la videollamada
+   en pequeño van siete botones (Silenciar, Compartir pantalla, Cámara, Pasar al teléfono, Más, Colgar y Ampliar), 358 px, y la
+   ventana tenía 340: se cortaban Silenciar y Ampliar. Ahora 400 de ancho, 16 de margen a cada lado y, si un día hay más, bajan a
+   otra fila en vez de cortarse (mini-llamada.js) */
 .gc-llamada.mini .gc-llamada-boton span{display:none}
 .gc-llamada.mini .gc-llamada-boton button{width:42px;height:42px}
 .gc-llamada.mini .gc-llamada-boton.gc-colgar button{width:46px;height:46px}
