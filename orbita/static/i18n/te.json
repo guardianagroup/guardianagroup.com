@@ -4008,7 +4008,13 @@
 "Clave nº {n} activa":"కీ సంఖ్య {n} సక్రియం",
 "La página ha bloqueado un intento de cargar código ajeno.":"బయటి కోడ్‌ను లోడ్ చేసే ప్రయత్నాన్ని పేజీ నిరోధించింది.",
 "La huella de la conexión no coincide con la que llegó encriptada.":"కనెక్షన్ వేలిముద్ర ఎన్‌క్రిప్ట్ అయి వచ్చినదానితో సరిపోలడం లేదు.",
-"Alguien más ha entrado en la sala del relé.":"వేరొకరు రిలే గదిలోకి ప్రవేశించారు."
+"Alguien más ha entrado en la sala del relé.":"వేరొకరు రిలే గదిలోకి ప్రవేశించారు.",
+"Recorrido de los datos":"డేటా మార్గం",
+"Tu dispositivo":"మీ పరికరం",
+"Su ubicación no se muestra":"స్థానం చూపబడదు",
+"Envío {v} · recepción {w} · ida y vuelta {ms}":"పంపడం {v} · స్వీకరణ {w} · రాకపోకలు {ms}",
+"Sin servidores en medio: los paquetes van encriptados de un equipo al otro.":"మధ్యలో సర్వర్లు లేవు: ప్యాకెట్లు ఎన్‌క్రిప్ట్ అయి ఒక పరికరం నుంచి మరో పరికరానికి వెళ్తాయి.",
+"El servidor solo reenvía paquetes encriptados: no tiene las claves para abrirlos.":"సర్వర్ ఎన్‌క్రిప్ట్ చేసిన ప్యాకెట్లను ముందుకు పంపుతుంది మాత్రమే: వాటిని తెరిచే కీలు దాని దగ్గర లేవు."
 },
 "p":{
 "intento":"ఈరోజు ఎక్కువగా ప్రయత్నించింది: {1}, {2} {2?సారి|సార్లు}.",

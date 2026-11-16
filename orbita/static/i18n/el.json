@@ -4008,7 +4008,13 @@
 "Clave nº {n} activa":"Κλειδί αρ. {n} ενεργό",
 "La página ha bloqueado un intento de cargar código ajeno.":"Η σελίδα απέκλεισε μια απόπειρα φόρτωσης ξένου κώδικα.",
 "La huella de la conexión no coincide con la que llegó encriptada.":"Το αποτύπωμα της σύνδεσης δεν ταιριάζει με αυτό που ήρθε κρυπτογραφημένο.",
-"Alguien más ha entrado en la sala del relé.":"Κάποιος άλλος μπήκε στο δωμάτιο του αναμεταδότη."
+"Alguien más ha entrado en la sala del relé.":"Κάποιος άλλος μπήκε στο δωμάτιο του αναμεταδότη.",
+"Recorrido de los datos":"Διαδρομή των δεδομένων",
+"Tu dispositivo":"Η συσκευή σας",
+"Su ubicación no se muestra":"Η τοποθεσία δεν εμφανίζεται",
+"Envío {v} · recepción {w} · ida y vuelta {ms}":"Αποστολή {v} · λήψη {w} · μετ’ επιστροφής {ms}",
+"Sin servidores en medio: los paquetes van encriptados de un equipo al otro.":"Χωρίς διακομιστές στη μέση: τα πακέτα ταξιδεύουν κρυπτογραφημένα από τη μία συσκευή στην άλλη.",
+"El servidor solo reenvía paquetes encriptados: no tiene las claves para abrirlos.":"Ο διακομιστής απλώς προωθεί κρυπτογραφημένα πακέτα: δεν έχει τα κλειδιά για να τα ανοίξει."
 },
 "p":{
 "intento":"Η πιο επίμονη σήμερα: {1}, {2} {2?φορά|φορές}.",

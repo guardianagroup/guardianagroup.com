@@ -4008,7 +4008,13 @@
 "Clave nº {n} activa":"কী নং {n} সক্রিয়",
 "La página ha bloqueado un intento de cargar código ajeno.":"পৃষ্ঠাটি বাইরের কোড লোড করার একটি চেষ্টা আটকে দিয়েছে।",
 "La huella de la conexión no coincide con la que llegó encriptada.":"সংযোগের ফিঙ্গারপ্রিন্ট এনক্রিপ্ট করে আসাটির সঙ্গে মেলে না।",
-"Alguien más ha entrado en la sala del relé.":"অন্য কেউ রিলের কক্ষে ঢুকেছে।"
+"Alguien más ha entrado en la sala del relé.":"অন্য কেউ রিলের কক্ষে ঢুকেছে।",
+"Recorrido de los datos":"ডেটার পথ",
+"Tu dispositivo":"আপনার ডিভাইস",
+"Su ubicación no se muestra":"অবস্থান দেখানো হয় না",
+"Envío {v} · recepción {w} · ida y vuelta {ms}":"পাঠানো {v} · গ্রহণ {w} · আসা-যাওয়া {ms}",
+"Sin servidores en medio: los paquetes van encriptados de un equipo al otro.":"মাঝখানে কোনো সার্ভার নেই: প্যাকেটগুলো এনক্রিপ্ট হয়ে এক ডিভাইস থেকে অন্যটিতে যায়।",
+"El servidor solo reenvía paquetes encriptados: no tiene las claves para abrirlos.":"সার্ভার শুধু এনক্রিপ্ট করা প্যাকেট পাঠিয়ে দেয়: সেগুলো খোলার চাবি তার কাছে নেই।"
 },
 "p":{
 "intento":"আজ সবচেয়ে বেশি চেষ্টা: {1}, {2} {2?বার|বার}।",

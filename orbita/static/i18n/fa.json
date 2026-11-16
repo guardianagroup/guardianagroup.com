@@ -4008,7 +4008,13 @@
 "Clave nº {n} activa":"کلید شمارهٔ {n} فعال است",
 "La página ha bloqueado un intento de cargar código ajeno.":"صفحه تلاشی برای بارگذاری کد بیگانه را مسدود کرد.",
 "La huella de la conexión no coincide con la que llegó encriptada.":"اثر انگشت اتصال با نسخهٔ رمزگذاری‌شدهٔ دریافتی مطابقت ندارد.",
-"Alguien más ha entrado en la sala del relé.":"شخص دیگری وارد اتاق رله شده است."
+"Alguien más ha entrado en la sala del relé.":"شخص دیگری وارد اتاق رله شده است.",
+"Recorrido de los datos":"مسیر داده‌ها",
+"Tu dispositivo":"دستگاه شما",
+"Su ubicación no se muestra":"مکان نمایش داده نمی‌شود",
+"Envío {v} · recepción {w} · ida y vuelta {ms}":"ارسال {v} · دریافت {w} · رفت و برگشت {ms}",
+"Sin servidores en medio: los paquetes van encriptados de un equipo al otro.":"بدون سرور در میانه: بسته‌ها رمزگذاری‌شده از یک دستگاه به دستگاه دیگر می‌روند.",
+"El servidor solo reenvía paquetes encriptados: no tiene las claves para abrirlos.":"سرور فقط بسته‌های رمزگذاری‌شده را جابه‌جا می‌کند: کلیدی برای باز کردن آن‌ها ندارد."
 },
 "p":{
 "intento":"بیشترین تلاش امروز: {1}، {2} {2?بار|بار}.",

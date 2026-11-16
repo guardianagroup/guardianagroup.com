@@ -4008,7 +4008,13 @@
 "Clave nº {n} activa":"กุญแจหมายเลข {n} ใช้งานอยู่",
 "La página ha bloqueado un intento de cargar código ajeno.":"หน้านี้บล็อกความพยายามโหลดโค้ดจากภายนอก",
 "La huella de la conexión no coincide con la que llegó encriptada.":"ลายนิ้วมือของการเชื่อมต่อไม่ตรงกับที่ได้รับแบบเข้ารหัส",
-"Alguien más ha entrado en la sala del relé.":"มีคนอื่นเข้ามาในห้องของรีเลย์"
+"Alguien más ha entrado en la sala del relé.":"มีคนอื่นเข้ามาในห้องของรีเลย์",
+"Recorrido de los datos":"เส้นทางของข้อมูล",
+"Tu dispositivo":"อุปกรณ์ของคุณ",
+"Su ubicación no se muestra":"ไม่แสดงตำแหน่ง",
+"Envío {v} · recepción {w} · ida y vuelta {ms}":"ส่ง {v} · รับ {w} · ไป-กลับ {ms}",
+"Sin servidores en medio: los paquetes van encriptados de un equipo al otro.":"ไม่มีเซิร์ฟเวอร์คั่นกลาง: แพ็กเก็ตเดินทางแบบเข้ารหัสจากอุปกรณ์หนึ่งไปยังอีกเครื่อง",
+"El servidor solo reenvía paquetes encriptados: no tiene las claves para abrirlos.":"เซิร์ฟเวอร์ทำหน้าที่ส่งต่อแพ็กเก็ตที่เข้ารหัสเท่านั้น: ไม่มีกุญแจสำหรับเปิดอ่าน"
 },
 "p":{
 "intento":"พยายามมากที่สุดวันนี้: {1}, {2} {2?ครั้ง|ครั้ง}",

@@ -4008,7 +4008,13 @@
 "Clave nº {n} activa":"Cheia nr. {n} activă",
 "La página ha bloqueado un intento de cargar código ajeno.":"Pagina a blocat o încercare de a încărca cod străin.",
 "La huella de la conexión no coincide con la que llegó encriptada.":"Amprenta conexiunii nu coincide cu cea primită criptat.",
-"Alguien más ha entrado en la sala del relé.":"Altcineva a intrat în camera releului."
+"Alguien más ha entrado en la sala del relé.":"Altcineva a intrat în camera releului.",
+"Recorrido de los datos":"Traseul datelor",
+"Tu dispositivo":"Dispozitivul dvs.",
+"Su ubicación no se muestra":"Locația nu este afișată",
+"Envío {v} · recepción {w} · ida y vuelta {ms}":"Trimitere {v} · primire {w} · dus-întors {ms}",
+"Sin servidores en medio: los paquetes van encriptados de un equipo al otro.":"Fără servere la mijloc: pachetele circulă criptate de la un dispozitiv la celălalt.",
+"El servidor solo reenvía paquetes encriptados: no tiene las claves para abrirlos.":"Serverul doar redirecționează pachete criptate: nu are cheile pentru a le deschide."
 },
 "p":{
 "intento":"Cea care a încercat cel mai mult azi: {1}, {2} {2?dată|ori}.",

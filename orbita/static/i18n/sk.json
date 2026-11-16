@@ -4008,7 +4008,13 @@
 "Clave nº {n} activa":"Kľúč č. {n} je aktívny",
 "La página ha bloqueado un intento de cargar código ajeno.":"Stránka zablokovala pokus o načítanie cudzieho kódu.",
 "La huella de la conexión no coincide con la que llegó encriptada.":"Odtlačok spojenia sa nezhoduje s odtlačkom doručeným šifrovane.",
-"Alguien más ha entrado en la sala del relé.":"Do miestnosti prenosového servera vstúpil niekto ďalší."
+"Alguien más ha entrado en la sala del relé.":"Do miestnosti prenosového servera vstúpil niekto ďalší.",
+"Recorrido de los datos":"Cesta dát",
+"Tu dispositivo":"Vaše zariadenie",
+"Su ubicación no se muestra":"Poloha sa nezobrazuje",
+"Envío {v} · recepción {w} · ida y vuelta {ms}":"Odosielanie {v} · príjem {w} · odozva {ms}",
+"Sin servidores en medio: los paquetes van encriptados de un equipo al otro.":"Bez serverov uprostred: pakety putujú šifrované z jedného zariadenia do druhého.",
+"El servidor solo reenvía paquetes encriptados: no tiene las claves para abrirlos.":"Server len preposiela šifrované pakety: nemá kľúče, aby ich otvoril."
 },
 "p":{
 "intento":"Najviac sa dnes snažila: {1}, {2}{2?-krát|-krát}.",

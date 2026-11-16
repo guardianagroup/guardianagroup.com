@@ -4008,7 +4008,13 @@
 "Clave nº {n} activa":"第 {n} 鍵が有効",
 "La página ha bloqueado un intento de cargar código ajeno.":"ページが外部コードの読み込みの試みをブロックしました。",
 "La huella de la conexión no coincide con la que llegó encriptada.":"接続のフィンガープリントが、暗号化されて届いたものと一致しません。",
-"Alguien más ha entrado en la sala del relé.":"ほかの誰かが中継サーバーのルームに入りました。"
+"Alguien más ha entrado en la sala del relé.":"ほかの誰かが中継サーバーのルームに入りました。",
+"Recorrido de los datos":"データの経路",
+"Tu dispositivo":"あなたの端末",
+"Su ubicación no se muestra":"位置は表示されません",
+"Envío {v} · recepción {w} · ida y vuelta {ms}":"送信 {v} · 受信 {w} · 往復 {ms}",
+"Sin servidores en medio: los paquetes van encriptados de un equipo al otro.":"間にサーバーはありません。パケットは暗号化されたまま端末から端末へ届きます。",
+"El servidor solo reenvía paquetes encriptados: no tiene las claves para abrirlos.":"サーバーは暗号化されたパケットを中継するだけで、開くための鍵を持っていません。"
 },
 "p":{
 "intento":"今日最も多く試みたのは {1}、{2} {2?回|回}。",

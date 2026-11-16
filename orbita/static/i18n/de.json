@@ -4008,7 +4008,13 @@
 "Clave nº {n} activa":"Schlüssel Nr. {n} aktiv",
 "La página ha bloqueado un intento de cargar código ajeno.":"Die Seite hat einen Versuch blockiert, fremden Code zu laden.",
 "La huella de la conexión no coincide con la que llegó encriptada.":"Der Fingerabdruck der Verbindung stimmt nicht mit dem verschlüsselt empfangenen überein.",
-"Alguien más ha entrado en la sala del relé.":"Jemand anderes hat den Raum des Relays betreten."
+"Alguien más ha entrado en la sala del relé.":"Jemand anderes hat den Raum des Relays betreten.",
+"Recorrido de los datos":"Weg der Daten",
+"Tu dispositivo":"Ihr Gerät",
+"Su ubicación no se muestra":"Standort wird nicht angezeigt",
+"Envío {v} · recepción {w} · ida y vuelta {ms}":"Senden {v} · Empfangen {w} · Hin und zurück {ms}",
+"Sin servidores en medio: los paquetes van encriptados de un equipo al otro.":"Keine Server dazwischen: Die Pakete gehen verschlüsselt von einem Gerät zum anderen.",
+"El servidor solo reenvía paquetes encriptados: no tiene las claves para abrirlos.":"Der Server leitet nur verschlüsselte Pakete weiter: Er hat nicht die Schlüssel, um sie zu öffnen."
 },
 "p":{
 "intento":"Hat es heute am häufigsten versucht: {1}, {2} {2?Mal|Mal}.",

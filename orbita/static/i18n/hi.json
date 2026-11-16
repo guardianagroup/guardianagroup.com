@@ -4008,7 +4008,13 @@
 "Clave nº {n} activa":"कुंजी क्र. {n} सक्रिय",
 "La página ha bloqueado un intento de cargar código ajeno.":"पेज ने बाहरी कोड लोड करने का एक प्रयास रोक दिया।",
 "La huella de la conexión no coincide con la que llegó encriptada.":"कनेक्शन का फ़िंगरप्रिंट एन्क्रिप्टेड रूप में आए से मेल नहीं खाता।",
-"Alguien más ha entrado en la sala del relé.":"कोई और रिले रूम में आया है।"
+"Alguien más ha entrado en la sala del relé.":"कोई और रिले रूम में आया है।",
+"Recorrido de los datos":"डेटा का रास्ता",
+"Tu dispositivo":"आपका डिवाइस",
+"Su ubicación no se muestra":"स्थान नहीं दिखाया जाता",
+"Envío {v} · recepción {w} · ida y vuelta {ms}":"भेजना {v} · पाना {w} · आना-जाना {ms}",
+"Sin servidores en medio: los paquetes van encriptados de un equipo al otro.":"बीच में कोई सर्वर नहीं: पैकेट एन्क्रिप्टेड होकर एक डिवाइस से दूसरे तक जाते हैं।",
+"El servidor solo reenvía paquetes encriptados: no tiene las claves para abrirlos.":"सर्वर केवल एन्क्रिप्टेड पैकेट आगे भेजता है: उन्हें खोलने की कुंजियाँ उसके पास नहीं हैं।"
 },
 "p":{
 "intento":"आज सबसे ज़्यादा कोशिश: {1}, {2} {2?बार|बार}।",

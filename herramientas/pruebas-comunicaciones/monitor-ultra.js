@@ -43,6 +43,7 @@ const vista = (P) => P.evaluate(() => {
     filas: m ? Object.fromEntries([...m.querySelectorAll('#ll-mon-l li')].map((l) => [l.dataset.k, [l.className.replace(/^mon-/, ''), l.querySelector('b').textContent, l.querySelector('span').textContent]])) : {},
     eventos: m ? [...m.querySelectorAll('#ll-mon-ev li')].map((l) => l.textContent) : [],
     filasVisibles: m ? ve(m.querySelector('#ll-mon-l')) : false,
+    ruta: (() => { const r = m && m.querySelector('#ll-mon-ruta'); return r ? { r: r.dataset.ruta, ve: ve(r), dato: r.querySelector('#ll-mon-ruta-dato').textContent, nota: r.querySelector('#ll-mon-ruta-nota').textContent, serv: ve(r.querySelector('.mr-serv')), pies: [...r.querySelectorAll('.mr-pie')].filter(ve).map((x) => x.textContent) } : null; })(),
     choque: (() => { const a = document.querySelector('#ll-cod-chip'), b = document.querySelector('#ll-efectos'); if (!ve(a) || !ve(b)) return null; const r = a.getBoundingClientRect(), q = b.getBoundingClientRect(); return !(r.right <= q.left || q.right <= r.left || r.bottom <= q.top || q.bottom <= r.top); })(),
   };
 });
@@ -83,7 +84,7 @@ const vista = (P) => P.evaluate(() => {
   console.log('     color del número:', colorTarjeta);
 
   // 3. el monitor
-  ok = await hasta(async () => { const x = await vista(A); return x.mon && x.filas.huella && x.filas.huella[0] === 'ok' && x.filas.frag && x.filas.ruta; }, 12000);
+  ok = await hasta(async () => { const x = await vista(A); return x.mon && x.filas.huella && x.filas.huella[0] === 'ok' && x.filas.frag && x.ruta && x.ruta.r && !/—/.test(x.ruta.dato); }, 12000);
   a = await vista(A); b = await vista(B);
   await A.screenshot({ path: path.join(OUT, '1-pc-monitor-tarjeta.png') });
   comprueba(ok && a.mon && b.mon && !a.plegado && a.filasVisibles, '3. el monitor, a la vista y abierto en el PC (A y B)', { A: [a.mon, a.plegado], B: [b.mon, b.plegado] });
@@ -98,7 +99,10 @@ const vista = (P) => P.evaluate(() => {
   comprueba(F.huella && F.huella[0] === 'ok' && F.huella[2] === 'Coincide con la que llegó encriptada', '3. la huella de la conexión coincide con la que llegó encriptada', F.huella);
   comprueba(F.sala && F.sala[0] === 'ok' && F.sala[2] === 'Solo los dos', '3. la sala del relé: solo los dos', F.sala);
   comprueba(F.frag && F.frag[0] === 'ok' && /^Fragmentos: [\d.]+ · rechazados: 0$/.test(F.frag[2]) && Number(F.frag[2].split(' ')[1].replace(/\D/g, '')) > 10, '3. voz e imagen verificadas, ninguna rechazada', F.frag);
-  comprueba(F.ruta && F.ruta[2] === 'Directa entre los dos equipos', '3. la ruta (aquí, directa)', F.ruta);
+  // el recorrido de los datos (dueño, 15 nov 2026, 22:20): aquí la conexión es directa (en el relé de verdad pasa por el servidor)
+  const R = a.ruta, DATO = /^Envío [\d.,]+ (kbit|Mbit)\/s · recepción [\d.,]+ (kbit|Mbit)\/s · ida y vuelta [\d.,]+ ms$/;
+  comprueba(R && R.ve && R.r === 'directa' && !R.serv && R.pies.length === 2 && R.pies[0] === 'Tu dispositivo' && /^La otra persona/.test(R.pies[1]) && DATO.test(R.dato) && /^Sin servidores en medio/.test(R.nota), '3. el recorrido de los datos (aquí, directo): tu dispositivo y la otra persona, sin su ubicación; envío, recepción e ida y vuelta medidos', R);
+  comprueba(!('ruta' in F), '3. la ruta ya no va repetida en una fila aparte', Object.keys(F));
   comprueba(F.pagina && F.pagina[0] === 'ok' && F.pagina[2] === 'Solo el de GUARDIANA', '3. el código de la página: solo el de GUARDIANA', F.pagina);
   comprueba(a.eventos.some((e) => /Monitor en marcha$/.test(e)), '3. el registro empieza con «Monitor en marcha»', a.eventos);
   // los segundos corren
@@ -126,6 +130,13 @@ const vista = (P) => P.evaluate(() => {
   comprueba(pleg && abre, '3. la cápsula de arriba lo pliega; su cabecera lo vuelve a abrir', { pleg, abre });
   const segAbierto = await A.evaluate(() => !document.querySelector('#ll-seg').hidden);
   comprueba(!segAbierto, '3. en Ultra la cápsula ya no abre «Seguridad de esta llamada» (lo tiene el monitor)');
+  // con la llamada pasando por un servidor (como en el relé de verdad, que fuerza el paso por él): aquí, sin relé, se hace pasar el
+  // candidato propio por «relay» en lo que lee el monitor. Tres puntos, la nota del servidor y nada de la ubicación de la otra persona
+  await A.evaluate(() => { const orig = RTCPeerConnection.prototype.getStats; window.__statsOrig = orig; RTCPeerConnection.prototype.getStats = async function (...x) { const st = await orig.apply(this, x), m = new Map(); st.forEach((r, k) => m.set(k, r.type === 'local-candidate' ? Object.assign({}, r, { candidateType: 'relay' }) : r)); return m; }; });
+  let Rs = null; await hasta(async () => { Rs = (await vista(A)).ruta; return Rs && Rs.r === 'mio' && !/—/.test(Rs.dato); }, 8000);
+  comprueba(Rs && Rs.r === 'mio' && Rs.serv && Rs.pies.length === 3 && /^Servidor de GUARDIANA/.test(Rs.pies[1]) && /Su ubicación no se muestra$/.test(Rs.pies[2]) && DATO.test(Rs.dato) && Rs.nota === 'El servidor solo reenvía paquetes encriptados: no tiene las claves para abrirlos.', '3. por un servidor: tu dispositivo, el servidor de GUARDIANA y la otra persona (sin su ubicación), con la nota del servidor', Rs);
+  await (await A.$('#ll-mon')).screenshot({ path: path.join(OUT, '2b-pc-recorrido-servidor.png') });
+  await A.evaluate(() => { RTCPeerConnection.prototype.getStats = window.__statsOrig; });
 
   await A.evaluate(() => document.querySelector('#ll-colgar').click()); await espera(1500);
   comprueba(!(await vista(A)).mon && !(await vista(B)).mon, '5. al colgar, el monitor se va');

@@ -4008,7 +4008,13 @@
 "Clave nº {n} activa":"Avain nro {n} käytössä",
 "La página ha bloqueado un intento de cargar código ajeno.":"Sivu esti yrityksen ladata vierasta koodia.",
 "La huella de la conexión no coincide con la que llegó encriptada.":"Yhteyden sormenjälki ei täsmää salattuna saapuneeseen.",
-"Alguien más ha entrado en la sala del relé.":"Joku muu on tullut välityspalvelimen huoneeseen."
+"Alguien más ha entrado en la sala del relé.":"Joku muu on tullut välityspalvelimen huoneeseen.",
+"Recorrido de los datos":"Tietojen reitti",
+"Tu dispositivo":"Laitteesi",
+"Su ubicación no se muestra":"Sijaintia ei näytetä",
+"Envío {v} · recepción {w} · ida y vuelta {ms}":"Lähetys {v} · vastaanotto {w} · edestakainen viive {ms}",
+"Sin servidores en medio: los paquetes van encriptados de un equipo al otro.":"Ei palvelimia välissä: paketit kulkevat salattuina laitteelta toiselle.",
+"El servidor solo reenvía paquetes encriptados: no tiene las claves para abrirlos.":"Palvelin vain välittää salattuja paketteja: sillä ei ole avaimia niiden avaamiseen."
 },
 "p":{
 "intento":"Eniten yrittänyt tänään: {1}, {2} {2?kerta|kertaa}.",

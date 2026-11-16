@@ -4008,7 +4008,13 @@
 "Clave nº {n} activa":"Ключ № {n} е активен",
 "La página ha bloqueado un intento de cargar código ajeno.":"Страницата блокира опит за зареждане на чужд код.",
 "La huella de la conexión no coincide con la que llegó encriptada.":"Отпечатъкът на връзката не съвпада с получения шифрован.",
-"Alguien más ha entrado en la sala del relé.":"Някой друг влезе в стаята на релето."
+"Alguien más ha entrado en la sala del relé.":"Някой друг влезе в стаята на релето.",
+"Recorrido de los datos":"Маршрут на данните",
+"Tu dispositivo":"Вашето устройство",
+"Su ubicación no se muestra":"Местоположението не се показва",
+"Envío {v} · recepción {w} · ida y vuelta {ms}":"Изпращане {v} · получаване {w} · отиване и връщане {ms}",
+"Sin servidores en medio: los paquetes van encriptados de un equipo al otro.":"Без сървъри по средата: пакетите пътуват шифровани от едното устройство до другото.",
+"El servidor solo reenvía paquetes encriptados: no tiene las claves para abrirlos.":"Сървърът само препраща шифровани пакети: няма ключовете, за да ги отвори."
 },
 "p":{
 "intento":"Най-настойчивата днес: {1}, {2} {2?път|пъти}.",

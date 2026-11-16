@@ -4008,7 +4008,13 @@
 "Clave nº {n} activa":"Sleutel nr. {n} actief",
 "La página ha bloqueado un intento de cargar código ajeno.":"De pagina heeft een poging geblokkeerd om vreemde code te laden.",
 "La huella de la conexión no coincide con la que llegó encriptada.":"De vingerafdruk van de verbinding komt niet overeen met de versleuteld ontvangen.",
-"Alguien más ha entrado en la sala del relé.":"Iemand anders is de ruimte van de relay binnengekomen."
+"Alguien más ha entrado en la sala del relé.":"Iemand anders is de ruimte van de relay binnengekomen.",
+"Recorrido de los datos":"Route van de gegevens",
+"Tu dispositivo":"Jouw apparaat",
+"Su ubicación no se muestra":"Locatie wordt niet getoond",
+"Envío {v} · recepción {w} · ida y vuelta {ms}":"Verzenden {v} · ontvangen {w} · heen en terug {ms}",
+"Sin servidores en medio: los paquetes van encriptados de un equipo al otro.":"Geen servers ertussen: de pakketten gaan versleuteld van het ene apparaat naar het andere.",
+"El servidor solo reenvía paquetes encriptados: no tiene las claves para abrirlos.":"De server stuurt alleen versleutelde pakketten door: hij heeft de sleutels niet om ze te openen."
 },
 "p":{
 "intento":"Probeerde het vandaag het vaakst: {1}, {2} {2?keer|keer}.",

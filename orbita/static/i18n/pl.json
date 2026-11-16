@@ -4008,7 +4008,13 @@
 "Clave nº {n} activa":"Klucz nr {n} aktywny",
 "La página ha bloqueado un intento de cargar código ajeno.":"Strona zablokowała próbę wczytania obcego kodu.",
 "La huella de la conexión no coincide con la que llegó encriptada.":"Odcisk połączenia nie zgadza się z otrzymanym w postaci zaszyfrowanej.",
-"Alguien más ha entrado en la sala del relé.":"Ktoś jeszcze wszedł do pokoju przekaźnika."
+"Alguien más ha entrado en la sala del relé.":"Ktoś jeszcze wszedł do pokoju przekaźnika.",
+"Recorrido de los datos":"Trasa danych",
+"Tu dispositivo":"Twoje urządzenie",
+"Su ubicación no se muestra":"Lokalizacja nie jest pokazywana",
+"Envío {v} · recepción {w} · ida y vuelta {ms}":"Wysyłanie {v} · odbiór {w} · w obie strony {ms}",
+"Sin servidores en medio: los paquetes van encriptados de un equipo al otro.":"Bez serwerów pośrodku: pakiety płyną zaszyfrowane z jednego urządzenia do drugiego.",
+"El servidor solo reenvía paquetes encriptados: no tiene las claves para abrirlos.":"Serwer tylko przekazuje zaszyfrowane pakiety: nie ma kluczy, by je otworzyć."
 },
 "p":{
 "intento":"Najwięcej prób dziś: {1}, {2} {2?raz|razy}.",

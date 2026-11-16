@@ -4008,7 +4008,13 @@
 "Clave nº {n} activa":"A(z) {n}. kulcs aktív",
 "La página ha bloqueado un intento de cargar código ajeno.":"Az oldal letiltott egy idegen kód betöltésére irányuló kísérletet.",
 "La huella de la conexión no coincide con la que llegó encriptada.":"A kapcsolat ujjlenyomata nem egyezik a titkosítva érkezettel.",
-"Alguien más ha entrado en la sala del relé.":"Valaki más is belépett a továbbító szobába."
+"Alguien más ha entrado en la sala del relé.":"Valaki más is belépett a továbbító szobába.",
+"Recorrido de los datos":"Az adatok útja",
+"Tu dispositivo":"Az Ön eszköze",
+"Su ubicación no se muestra":"A hely nem látható",
+"Envío {v} · recepción {w} · ida y vuelta {ms}":"Küldés {v} · fogadás {w} · oda-vissza {ms}",
+"Sin servidores en medio: los paquetes van encriptados de un equipo al otro.":"Nincs szerver közöttük: a csomagok titkosítva mennek egyik eszközről a másikra.",
+"El servidor solo reenvía paquetes encriptados: no tiene las claves para abrirlos.":"A szerver csak továbbítja a titkosított csomagokat: nincsenek meg a kulcsai a megnyitásukhoz."
 },
 "p":{
 "intento":"Ma a legtöbbször próbálkozott: {1}, {2} {2?alkalommal|alkalommal}.",

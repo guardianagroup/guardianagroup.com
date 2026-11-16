@@ -139,7 +139,7 @@
     let obrero = null, pqCuenta = null, pqOferta = null;
     // el Monitor de seguridad de Ultra («Monitor de seguridad», más abajo): su estado y lo que la política de la página (CSP) bloqueó
     let cspBloqueos = 0;
-    const mon = { stats: null, t: 0, eventos: [], abierto: null, tic: null, vueltas: 0, empezo: 0, ruta: '', huella: '', mal: 0, malT: 0, extra: 0, intrusos: -1, seq: 0, pqSeq: 0, base: null, ultima: null };
+    const mon = { stats: null, t: 0, eventos: [], abierto: null, tic: null, vueltas: 0, empezo: 0, ruta: '', huella: '', mal: 0, malT: 0, extra: 0, intrusos: -1, seq: 0, pqSeq: 0, base: null, ultima: null, bytes: null };
     document.addEventListener('securitypolicyviolation', () => { cspBloqueos++; if (monVivo()) monEvento(t('La página ha bloqueado un intento de cargar código ajeno.'), 'aviso'); });
     const pqDe = new WeakMap(); // conexión → { tx, rx, puestos, confirmada, visto }
     const pqPorRx = new Map(); // id de la llave de recibir → su contexto (para el aviso «visto» del obrero)
@@ -2087,7 +2087,7 @@
     function monNum(n) { try { return Number(n).toLocaleString(monLoc()); } catch (_) { return String(n); } }
     function monLimpia() {
       clearInterval(mon.tic);
-      Object.assign(mon, { stats: null, t: 0, eventos: [], abierto: null, tic: null, vueltas: 0, empezo: 0, ruta: '', huella: '', mal: 0, malT: 0, extra: 0, intrusos: -1, pqSeq: 0, base: null, ultima: null });
+      Object.assign(mon, { stats: null, t: 0, eventos: [], abierto: null, tic: null, vueltas: 0, empezo: 0, ruta: '', huella: '', mal: 0, malT: 0, extra: 0, intrusos: -1, pqSeq: 0, base: null, ultima: null, bytes: null });
       const el = $('#ll-mon'); if (el) el.hidden = true; caja.classList.remove('con-monitor');
     }
     // abierto de entrada en un PC con sitio; plegado en el teléfono y en ventanas estrechas (la tarjeta roja va en el centro)
@@ -2121,6 +2121,17 @@
         let par = tr && tr.selectedCandidatePairId ? st.get(tr.selectedCandidatePairId) : null;
         if (!par) st.forEach((r) => { if (!par && r.type === 'candidate-pair' && r.nominated && r.state === 'succeeded') par = r; });
         if (par) { const lc = st.get(par.localCandidateId), rc = st.get(par.remoteCandidateId); s.ruta = (lc && lc.candidateType === 'relay') || (rc && rc.candidateType === 'relay') ? ((lc && lc.candidateType === 'relay') ? 'mio' : 'servidor') : 'directa'; }
+        // (15 Nov 2026) el recorrido de los datos: lo que mide el propio navegador en el par de candidatos elegido (ida y vuelta,
+        // y el caudal como diferencia de bytes entre dos sondeos; si cambia el par, se empieza de nuevo)
+        if (par) {
+          if (typeof par.currentRoundTripTime === 'number' && par.currentRoundTripTime >= 0) s.rtt = Math.round(par.currentRoundTripTime * 1000);
+          const ahora = performance.now(), bs = par.bytesSent, br = par.bytesReceived, b0 = mon.bytes;
+          if (typeof bs === 'number' && typeof br === 'number') {
+            if (b0 && b0.id === par.id && ahora - b0.t > 400 && bs >= b0.s && br >= b0.r) { const dt = (ahora - b0.t) / 1000; s.envio = (bs - b0.s) * 8 / dt; s.recep = (br - b0.r) * 8 / dt; }
+            else if (b0 && b0.id === par.id && mon.stats) { s.envio = mon.stats.envio; s.recep = mon.stats.recep; }
+            mon.bytes = { id: par.id, t: ahora, s: bs, r: br };
+          }
+        }
         if (!monVivo()) return;
         if (s.ruta && mon.ruta && s.ruta !== mon.ruta) monEvento(t('Ruta') + ': ' + monRuta(s.ruta));
         if (s.ruta) mon.ruta = s.ruta;
@@ -2128,6 +2139,25 @@
         if (s.huella) mon.huella = s.huella;
         mon.stats = s; mon.t = Date.now();
       } catch (_) {}
+    }
+    // El recorrido de los datos (15 Nov 2026): «directa» son dos puntos; «mio», por el servidor de GUARDIANA de este lado, con su
+    // ciudad; «servidor», por el de la otra persona, sin ciudad (diría dónde está). De la otra persona nunca se dice dónde está.
+    function monTasa(b) {
+      if (typeof b !== 'number' || !isFinite(b)) return '—';
+      const nf = (x, d) => { try { return new Intl.NumberFormat(monLoc(), { maximumFractionDigits: d }).format(x); } catch (_) { return String(Math.round(x)); } };
+      return b >= 1e6 ? nf(b / 1e6, 1) + ' Mbit/s' : nf(Math.round(b / 1e3), 0) + ' kbit/s';
+    }
+    function pintaRuta() {
+      const el = $('#ll-mon-ruta'); if (!el) return;
+      const s = mon.stats || {}, r = s.ruta || '';
+      if (el.dataset.ruta !== r) el.dataset.ruta = r;
+      const ciudad = r === 'mio' && o.servidor ? String(o.servidor() || '') : '';
+      const sv = $('#ll-mon-ruta-serv'); if (sv && sv.textContent !== ciudad) sv.textContent = ciudad;
+      let ms = '—'; if (typeof s.rtt === 'number') { try { ms = new Intl.NumberFormat(monLoc()).format(s.rtt) + ' ms'; } catch (_) { ms = s.rtt + ' ms'; } }
+      const dato = r ? t('Envío {v} · recepción {w} · ida y vuelta {ms}').replace('{v}', monTasa(s.envio)).replace('{w}', monTasa(s.recep)).replace('{ms}', ms) : t('Comprobando…');
+      const d = $('#ll-mon-ruta-dato'); if (d && d.textContent !== dato) d.textContent = dato;
+      const nota = r === 'directa' ? t('Sin servidores en medio: los paquetes van encriptados de un equipo al otro.') : r ? t('El servidor solo reenvía paquetes encriptados: no tiene las claves para abrirlos.') : '';
+      const n = $('#ll-mon-ruta-nota'); if (n && n.textContent !== nota) n.textContent = nota;
     }
     function monRuta(r) { return r === 'directa' ? t('Directa entre los dos equipos') : t('Por un servidor de GUARDIANA') + (r === 'mio' && o.servidor && o.servidor() ? ' · ' + o.servidor() : ''); }
     function monFilas() {
@@ -2163,7 +2193,6 @@
         mon.mal = mal;
         f.push(['frag', mal ? 'aviso' : 'ok', t('Voz e imagen verificadas'), txt]);
       }
-      if (s.ruta) f.push(['ruta', 'ok', t('Ruta'), monRuta(s.ruta)]);
       f.push(['pagina', cspBloqueos ? 'aviso' : 'ok', t('Código de la página'), cspBloqueos ? t('{n} intentos bloqueados').replace('{n}', monNum(cspBloqueos)) : t('Solo el de GUARDIANA')]);
       if (M.vigia) f.push(['vigia', M.vigia === 'limpio' ? 'ok' : M.vigia === 'alerta' ? 'alerta' : 'neutro', t('Vigía de este ordenador'), M.vigia === 'limpio' ? t('Ningún otro programa usa el micrófono, la cámara ni la pantalla') : M.vigia === 'alerta' ? t('Otro programa usa el micrófono, la cámara o la pantalla') : COMP]);
       return f;
@@ -2181,6 +2210,7 @@
       if (nv && nv.textContent !== tx) nv.textContent = tx;
       const ha = $('#ll-mon-hace'), hace = mon.t ? Math.max(0, Math.round((Date.now() - mon.t) / 1000)) : null;
       if (ha) { const h = hace == null ? '' : ' · ' + t('comprobado hace {s} s').replace('{s}', String(hace)); if (ha.textContent !== h) ha.textContent = h; }
+      pintaRuta();
       const ul = $('#ll-mon-l'); if (!ul) return;
       const vistos = new Set();
       for (const [k, nivel, et, val] of filas) {

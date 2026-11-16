@@ -4008,7 +4008,13 @@
 "Clave nº {n} activa":"第 {n} 把金鑰已啟用",
 "La página ha bloqueado un intento de cargar código ajeno.":"頁面已封鎖一次載入外部程式碼的嘗試。",
 "La huella de la conexión no coincide con la que llegó encriptada.":"連線指紋與加密收到的不一致。",
-"Alguien más ha entrado en la sala del relé.":"有其他人進入了中繼房間。"
+"Alguien más ha entrado en la sala del relé.":"有其他人進入了中繼房間。",
+"Recorrido de los datos":"資料路徑",
+"Tu dispositivo":"你的裝置",
+"Su ubicación no se muestra":"不顯示位置",
+"Envío {v} · recepción {w} · ida y vuelta {ms}":"傳送 {v} · 接收 {w} · 往返 {ms}",
+"Sin servidores en medio: los paquetes van encriptados de un equipo al otro.":"中間沒有伺服器：封包加密後從一台裝置直接傳到另一台。",
+"El servidor solo reenvía paquetes encriptados: no tiene las claves para abrirlos.":"伺服器只轉送加密的封包：它沒有開啟封包的金鑰。"
 },
 "p":{
 "intento":"今天嘗試最多的：{1}，{2} {2?次|次}。",

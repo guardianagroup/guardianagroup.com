@@ -4008,7 +4008,13 @@
 "Clave nº {n} activa":"{n}번 키 활성",
 "La página ha bloqueado un intento de cargar código ajeno.":"페이지가 외부 코드를 불러오려는 시도를 차단했습니다.",
 "La huella de la conexión no coincide con la que llegó encriptada.":"연결 지문이 암호화되어 받은 것과 일치하지 않습니다.",
-"Alguien más ha entrado en la sala del relé.":"다른 사람이 릴레이 방에 들어왔습니다."
+"Alguien más ha entrado en la sala del relé.":"다른 사람이 릴레이 방에 들어왔습니다.",
+"Recorrido de los datos":"데이터 경로",
+"Tu dispositivo":"내 기기",
+"Su ubicación no se muestra":"위치는 표시되지 않음",
+"Envío {v} · recepción {w} · ida y vuelta {ms}":"송신 {v} · 수신 {w} · 왕복 {ms}",
+"Sin servidores en medio: los paquetes van encriptados de un equipo al otro.":"중간에 서버가 없습니다. 패킷은 암호화된 채로 한 기기에서 다른 기기로 갑니다.",
+"El servidor solo reenvía paquetes encriptados: no tiene las claves para abrirlos.":"서버는 암호화된 패킷을 전달만 하며, 이를 열 키가 없습니다."
 },
 "p":{
 "intento":"오늘 가장 많이 시도한 곳: {1}, {2}{2?회|회}.",

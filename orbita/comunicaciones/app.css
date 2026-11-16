@@ -2710,3 +2710,49 @@ body.modo-llevar .ll-mon{top:calc(130px + env(safe-area-inset-top))}
 .gc-llamada:not(.mini):not(.con-video) .gc-llamada-centro{transition:opacity .2s ease}
 .gc-llamada:not(.mini):not(.con-video):has(#ll-cod:not([hidden])) .gc-llamada-centro{opacity:0}
 @media (max-width:760px){.gc-llamada:not(.mini):not(.con-video):has(#ll-mon:not([hidden]):not(.plegado)) .gc-llamada-centro{opacity:0}}
+/* ==== El recorrido de los datos, dentro del Monitor de seguridad de Ultra (dueño, 15 Nov 2026, 22:20) ====
+   Tu equipo, el servidor de GUARDIANA (si la llamada pasa por uno) y la otra persona, sin su ubicación. Los puntos que circulan
+   son los paquetes encriptados, en los dos sentidos; debajo, lo medido en la conexión: envío, recepción e ida y vuelta. */
+.ll-mon-ruta{padding:10px 14px 12px;border-bottom:1px solid rgba(156,195,228,.10);margin:0 0 6px}
+.ll-mon-ruta-t{display:block;margin:0 0 11px;font:600 10px/1.3 var(--texto);letter-spacing:.14em;text-transform:uppercase;color:rgba(156,195,228,.82)}
+.ll-mon-ruta-mapa{display:flex;align-items:center;padding:0 2px}
+.mr-nodo{flex:none;display:grid;place-items:center;width:34px;height:34px;box-sizing:border-box;border-radius:50%;border:1px solid rgba(156,195,228,.42);background:radial-gradient(circle at 50% 35%,rgba(156,195,228,.16),rgba(156,195,228,.04));color:#9CC3E4}
+.mr-nodo svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.mr-yo{border-color:rgba(156,195,228,.7);box-shadow:0 0 0 4px rgba(156,195,228,.07)}
+.mr-tramo{position:relative;flex:1;min-width:34px;height:26px;margin:0 7px}
+.mr-tramo::before,.mr-tramo::after{content:"";position:absolute;left:0;right:0;height:1.5px;border-radius:2px;background:linear-gradient(90deg,rgba(156,195,228,.22),rgba(156,195,228,.5) 50%,rgba(156,195,228,.22))}
+.mr-tramo::before{top:calc(50% - 3px)}
+.mr-tramo::after{top:calc(50% + 2px)}
+.mr-candado{position:absolute;left:50%;top:-7px;width:12px;height:12px;margin-left:-6px;fill:none;stroke:#5CC98A;stroke-width:2.1;stroke-linecap:round;stroke-linejoin:round}
+.mr-tramo b{position:absolute;left:0;width:5px;height:5px;border-radius:50%;opacity:0;pointer-events:none}
+.mr-va{top:calc(50% - 5px);background:#9CC3E4;box-shadow:0 0 7px rgba(156,195,228,.9);animation:mrVa 2.2s linear infinite}
+.mr-viene{top:calc(50% + 0px);background:#5CC98A;box-shadow:0 0 7px rgba(92,201,138,.85);animation:mrViene 2.2s linear infinite}
+.mr-tramo b.mr-2{animation-delay:-1.1s}
+.mr-tramo-2 .mr-va{animation-delay:-.55s}.mr-tramo-2 .mr-va.mr-2{animation-delay:-1.65s}
+.mr-tramo-2 .mr-viene{animation-delay:-.35s}.mr-tramo-2 .mr-viene.mr-2{animation-delay:-1.45s}
+@keyframes mrVa{0%{left:0;opacity:0}14%{opacity:1}86%{opacity:1}100%{left:calc(100% - 5px);opacity:0}}
+@keyframes mrViene{0%{left:calc(100% - 5px);opacity:0}14%{opacity:1}86%{opacity:1}100%{left:0;opacity:0}}
+.ll-mon-ruta-pies{display:flex;justify-content:space-between;gap:8px;margin-top:8px}
+.mr-pie{display:flex;flex-direction:column;gap:1px;min-width:0;flex:1 1 0;font:400 10.5px/1.3 var(--texto);color:rgba(244,246,248,.56)}
+.mr-pie b{font:500 11.5px/1.3 var(--texto);color:#F4F6F8}
+.mr-pie small{font:inherit;color:inherit}
+.mr-pie small:empty{display:none}
+.mr-pie-yo{text-align:left;align-items:flex-start}
+.mr-pie-serv{text-align:center;align-items:center}
+.mr-pie-otro{text-align:right;align-items:flex-end}
+.ll-mon-ruta-dato{margin:10px 0 0;font:500 11.5px/1.4 var(--texto);color:rgba(244,246,248,.8);font-variant-numeric:tabular-nums}
+.ll-mon-ruta-nota{margin:3px 0 0;font:400 11.5px/1.45 var(--texto);color:rgba(244,246,248,.56)}
+.ll-mon-ruta-nota:empty,.ll-mon-ruta-dato:empty{display:none}
+/* sin servidor en medio: dos puntos; aún sin saber la ruta: el trazo en espera, sin paquetes */
+.ll-mon-ruta[data-ruta="directa"] .mr-serv,.ll-mon-ruta[data-ruta="directa"] .mr-tramo-2,.ll-mon-ruta[data-ruta="directa"] .mr-pie-serv{display:none}
+.ll-mon-ruta[data-ruta=""] .mr-tramo::before,.ll-mon-ruta[data-ruta=""] .mr-tramo::after{background:repeating-linear-gradient(90deg,rgba(156,195,228,.35) 0 4px,transparent 4px 8px)}
+.ll-mon-ruta[data-ruta=""] .mr-tramo b,.ll-mon-ruta[data-ruta=""] .mr-candado{display:none}
+.ll-mon.plegado .mr-tramo b{animation-play-state:paused}
+[dir="rtl"] .mr-pie-yo{text-align:right;align-items:flex-end}
+[dir="rtl"] .mr-pie-otro{text-align:left;align-items:flex-start}
+@media (prefers-reduced-motion:reduce){.mr-tramo b{animation:none;opacity:0}}
+[dir="rtl"] .mr-va{animation-name:mrViene}
+[dir="rtl"] .mr-viene{animation-name:mrVa}
+/* tu dispositivo: el ordenador o, en el teléfono, el teléfono */
+.mr-yo .mr-tel{display:none}
+@media (max-width:760px){.mr-yo .mr-pc{display:none}.mr-yo .mr-tel{display:block}}

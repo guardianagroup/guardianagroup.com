@@ -4008,7 +4008,13 @@
 "Clave nº {n} activa":"Kunci no. {n} aktif",
 "La página ha bloqueado un intento de cargar código ajeno.":"Halaman memblokir upaya memuat kode asing.",
 "La huella de la conexión no coincide con la que llegó encriptada.":"Sidik jari koneksi tidak cocok dengan yang diterima terenkripsi.",
-"Alguien más ha entrado en la sala del relé.":"Orang lain telah masuk ke ruang relai."
+"Alguien más ha entrado en la sala del relé.":"Orang lain telah masuk ke ruang relai.",
+"Recorrido de los datos":"Rute data",
+"Tu dispositivo":"Perangkat Anda",
+"Su ubicación no se muestra":"Lokasi tidak ditampilkan",
+"Envío {v} · recepción {w} · ida y vuelta {ms}":"Kirim {v} · terima {w} · pulang-pergi {ms}",
+"Sin servidores en medio: los paquetes van encriptados de un equipo al otro.":"Tanpa server di tengah: paket berjalan terenkripsi dari satu perangkat ke perangkat lain.",
+"El servidor solo reenvía paquetes encriptados: no tiene las claves para abrirlos.":"Server hanya meneruskan paket terenkripsi: server tidak punya kunci untuk membukanya."
 },
 "p":{
 "intento":"Paling gigih mencoba hari ini: {1}, {2} {2?kali|kali}.",

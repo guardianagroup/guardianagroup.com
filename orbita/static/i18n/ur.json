@@ -4008,7 +4008,13 @@
 "Clave nº {n} activa":"کلید نمبر {n} فعال",
 "La página ha bloqueado un intento de cargar código ajeno.":"صفحے نے بیرونی کوڈ لوڈ کرنے کی ایک کوشش روک دی۔",
 "La huella de la conexión no coincide con la que llegó encriptada.":"کنکشن کا فنگر پرنٹ انکرپٹڈ موصول ہونے والے سے نہیں ملتا۔",
-"Alguien más ha entrado en la sala del relé.":"کوئی اور ریلے کے کمرے میں داخل ہوا ہے۔"
+"Alguien más ha entrado en la sala del relé.":"کوئی اور ریلے کے کمرے میں داخل ہوا ہے۔",
+"Recorrido de los datos":"ڈیٹا کا راستہ",
+"Tu dispositivo":"آپ کا آلہ",
+"Su ubicación no se muestra":"مقام نہیں دکھایا جاتا",
+"Envío {v} · recepción {w} · ida y vuelta {ms}":"بھیجنا {v} · وصول {w} · آنا جانا {ms}",
+"Sin servidores en medio: los paquetes van encriptados de un equipo al otro.":"درمیان میں کوئی سرور نہیں: پیکٹ انکرپٹ ہو کر ایک آلے سے دوسرے تک جاتے ہیں۔",
+"El servidor solo reenvía paquetes encriptados: no tiene las claves para abrirlos.":"سرور صرف انکرپٹ شدہ پیکٹ آگے بھیجتا ہے: اس کے پاس انہیں کھولنے کی چابیاں نہیں ہیں۔"
 },
 "p":{
 "intento":"آج سب سے زیادہ کوشش: {1}، {2} {2?بار|بار}۔",

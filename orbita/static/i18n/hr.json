@@ -4008,7 +4008,13 @@
 "Clave nº {n} activa":"Ključ br. {n} aktivan",
 "La página ha bloqueado un intento de cargar código ajeno.":"Stranica je blokirala pokušaj učitavanja tuđeg koda.",
 "La huella de la conexión no coincide con la que llegó encriptada.":"Otisak veze ne podudara se s onim primljenim šifrirano.",
-"Alguien más ha entrado en la sala del relé.":"Netko drugi ušao je u sobu releja."
+"Alguien más ha entrado en la sala del relé.":"Netko drugi ušao je u sobu releja.",
+"Recorrido de los datos":"Put podataka",
+"Tu dispositivo":"Vaš uređaj",
+"Su ubicación no se muestra":"Lokacija se ne prikazuje",
+"Envío {v} · recepción {w} · ida y vuelta {ms}":"Slanje {v} · primanje {w} · povratno vrijeme {ms}",
+"Sin servidores en medio: los paquetes van encriptados de un equipo al otro.":"Bez poslužitelja u sredini: paketi putuju šifrirani s jednog uređaja na drugi.",
+"El servidor solo reenvía paquetes encriptados: no tiene las claves para abrirlos.":"Poslužitelj samo prosljeđuje šifrirane pakete: nema ključeve da ih otvori."
 },
 "p":{
 "intento":"Najupornija danas: {1}, {2} {2?put|puta}.",

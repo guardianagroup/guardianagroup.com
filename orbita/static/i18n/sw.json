@@ -4008,7 +4008,13 @@
 "Clave nº {n} activa":"Ufunguo Na. {n} umewashwa",
 "La página ha bloqueado un intento de cargar código ajeno.":"Ukurasa umezuia jaribio la kupakia msimbo wa nje.",
 "La huella de la conexión no coincide con la que llegó encriptada.":"Alama ya kidole ya muunganisho hailingani na iliyopokelewa ikiwa imesimbwa.",
-"Alguien más ha entrado en la sala del relé.":"Mtu mwingine ameingia kwenye chumba cha relei."
+"Alguien más ha entrado en la sala del relé.":"Mtu mwingine ameingia kwenye chumba cha relei.",
+"Recorrido de los datos":"Njia ya data",
+"Tu dispositivo":"Kifaa chako",
+"Su ubicación no se muestra":"Mahali hapaonyeshwi",
+"Envío {v} · recepción {w} · ida y vuelta {ms}":"Kutuma {v} · kupokea {w} · kwenda na kurudi {ms}",
+"Sin servidores en medio: los paquetes van encriptados de un equipo al otro.":"Hakuna seva katikati: pakiti husafiri zikiwa zimesimbwa kutoka kifaa kimoja hadi kingine.",
+"El servidor solo reenvía paquetes encriptados: no tiene las claves para abrirlos.":"Seva inapitisha tu pakiti zilizosimbwa: haina funguo za kuzifungua."
 },
 "p":{
 "intento":"Iliyojaribu zaidi leo: {1}, {2?mara|mara} {2}.",

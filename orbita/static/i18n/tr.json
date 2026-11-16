@@ -4008,7 +4008,13 @@
 "Clave nº {n} activa":"{n} numaralı anahtar etkin",
 "La página ha bloqueado un intento de cargar código ajeno.":"Sayfa, dışarıdan kod yükleme girişimini engelledi.",
 "La huella de la conexión no coincide con la que llegó encriptada.":"Bağlantı parmak izi şifreli gelenle eşleşmiyor.",
-"Alguien más ha entrado en la sala del relé.":"Aktarıcı odasına başka biri girdi."
+"Alguien más ha entrado en la sala del relé.":"Aktarıcı odasına başka biri girdi.",
+"Recorrido de los datos":"Verilerin yolu",
+"Tu dispositivo":"Cihazınız",
+"Su ubicación no se muestra":"Konum gösterilmez",
+"Envío {v} · recepción {w} · ida y vuelta {ms}":"Gönderim {v} · alım {w} · gidiş-dönüş {ms}",
+"Sin servidores en medio: los paquetes van encriptados de un equipo al otro.":"Arada sunucu yok: paketler bir cihazdan diğerine şifreli gider.",
+"El servidor solo reenvía paquetes encriptados: no tiene las claves para abrirlos.":"Sunucu yalnızca şifreli paketleri iletir: onları açacak anahtarlara sahip değildir."
 },
 "p":{
 "intento":"Bugün en çok deneyen: {1}, {2} {2?kez|kez}.",

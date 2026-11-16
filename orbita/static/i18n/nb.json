@@ -4008,7 +4008,13 @@
 "Clave nº {n} activa":"Nøkkel nr. {n} aktiv",
 "La página ha bloqueado un intento de cargar código ajeno.":"Siden blokkerte et forsøk på å laste inn fremmed kode.",
 "La huella de la conexión no coincide con la que llegó encriptada.":"Tilkoblingens fingeravtrykk stemmer ikke med det som kom kryptert.",
-"Alguien más ha entrado en la sala del relé.":"Noen andre har kommet inn i reléets rom."
+"Alguien más ha entrado en la sala del relé.":"Noen andre har kommet inn i reléets rom.",
+"Recorrido de los datos":"Dataenes rute",
+"Tu dispositivo":"Enheten din",
+"Su ubicación no se muestra":"Posisjon vises ikke",
+"Envío {v} · recepción {w} · ida y vuelta {ms}":"Sender {v} · mottar {w} · tur-retur {ms}",
+"Sin servidores en medio: los paquetes van encriptados de un equipo al otro.":"Ingen servere imellom: pakkene går kryptert fra den ene enheten til den andre.",
+"El servidor solo reenvía paquetes encriptados: no tiene las claves para abrirlos.":"Serveren videresender bare krypterte pakker: den har ikke nøklene til å åpne dem."
 },
 "p":{
 "intento":"Den som prøvde mest i dag: {1}, {2} {2?gang|ganger}.",

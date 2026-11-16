@@ -4008,7 +4008,13 @@
 "Clave nº {n} activa":"Chave n.º {n} ativa",
 "La página ha bloqueado un intento de cargar código ajeno.":"A página bloqueou uma tentativa de carregar código externo.",
 "La huella de la conexión no coincide con la que llegó encriptada.":"A impressão digital da ligação não coincide com a recebida encriptada.",
-"Alguien más ha entrado en la sala del relé.":"Outra pessoa entrou na sala do relé."
+"Alguien más ha entrado en la sala del relé.":"Outra pessoa entrou na sala do relé.",
+"Recorrido de los datos":"Percurso dos dados",
+"Tu dispositivo":"O seu dispositivo",
+"Su ubicación no se muestra":"Localização não mostrada",
+"Envío {v} · recepción {w} · ida y vuelta {ms}":"Envio {v} · receção {w} · ida e volta {ms}",
+"Sin servidores en medio: los paquetes van encriptados de un equipo al otro.":"Sem servidores pelo meio: os pacotes seguem encriptados de um dispositivo para o outro.",
+"El servidor solo reenvía paquetes encriptados: no tiene las claves para abrirlos.":"O servidor só reencaminha pacotes encriptados: não tem as chaves para os abrir."
 },
 "p":{
 "intento":"A que mais tentou hoje: {1}, {2} {2?vez|vezes}.",

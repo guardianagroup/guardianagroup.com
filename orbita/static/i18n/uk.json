@@ -4008,7 +4008,13 @@
 "Clave nº {n} activa":"Ключ № {n} активний",
 "La página ha bloqueado un intento de cargar código ajeno.":"Сторінка заблокувала спробу завантажити чужий код.",
 "La huella de la conexión no coincide con la que llegó encriptada.":"Відбиток з'єднання не збігається з отриманим у зашифрованому вигляді.",
-"Alguien más ha entrado en la sala del relé.":"До кімнати ретранслятора увійшов хтось іще."
+"Alguien más ha entrado en la sala del relé.":"До кімнати ретранслятора увійшов хтось іще.",
+"Recorrido de los datos":"Маршрут даних",
+"Tu dispositivo":"Ваш пристрій",
+"Su ubicación no se muestra":"Місцезнаходження не показується",
+"Envío {v} · recepción {w} · ida y vuelta {ms}":"Надсилання {v} · отримання {w} · туди й назад {ms}",
+"Sin servidores en medio: los paquetes van encriptados de un equipo al otro.":"Без серверів посередині: пакети йдуть зашифрованими з одного пристрою на інший.",
+"El servidor solo reenvía paquetes encriptados: no tiene las claves para abrirlos.":"Сервер лише пересилає зашифровані пакети: у нього немає ключів, щоб їх відкрити."
 },
 "p":{
 "intento":"Найнаполегливіша сьогодні: {1}, {2} {2?раз|разів}.",

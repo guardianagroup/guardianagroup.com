@@ -4008,7 +4008,13 @@
 "Clave nº {n} activa":"Lykill nr. {n} virkur",
 "La página ha bloqueado un intento de cargar código ajeno.":"Síðan stöðvaði tilraun til að hlaða inn utanaðkomandi kóða.",
 "La huella de la conexión no coincide con la que llegó encriptada.":"Fingrafar tengingarinnar passar ekki við það sem barst dulkóðað.",
-"Alguien más ha entrado en la sala del relé.":"Einhver annar kom inn í herbergi miðlarans."
+"Alguien más ha entrado en la sala del relé.":"Einhver annar kom inn í herbergi miðlarans.",
+"Recorrido de los datos":"Leið gagnanna",
+"Tu dispositivo":"Tækið þitt",
+"Su ubicación no se muestra":"Staðsetning er ekki sýnd",
+"Envío {v} · recepción {w} · ida y vuelta {ms}":"Sent {v} · móttekið {w} · fram og til baka {ms}",
+"Sin servidores en medio: los paquetes van encriptados de un equipo al otro.":"Engir þjónar á milli: pakkarnir fara dulkóðaðir frá einu tæki til annars.",
+"El servidor solo reenvía paquetes encriptados: no tiene las claves para abrirlos.":"Þjónninn áframsendir aðeins dulkóðaða pakka: hann hefur ekki lyklana til að opna þá."
 },
 "p":{
 "intento":"Sá sem reyndi mest í dag: {1}, {2} {2?sinni|sinnum}.",

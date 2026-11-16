@@ -4008,7 +4008,13 @@
 "Clave nº {n} activa":"Khóa số {n} đang hoạt động",
 "La página ha bloqueado un intento de cargar código ajeno.":"Trang đã chặn một lần thử tải mã lạ.",
 "La huella de la conexión no coincide con la que llegó encriptada.":"Dấu vân tay của kết nối không khớp với dấu nhận được đã mã hóa.",
-"Alguien más ha entrado en la sala del relé.":"Có người khác đã vào phòng chuyển tiếp."
+"Alguien más ha entrado en la sala del relé.":"Có người khác đã vào phòng chuyển tiếp.",
+"Recorrido de los datos":"Đường đi của dữ liệu",
+"Tu dispositivo":"Thiết bị của bạn",
+"Su ubicación no se muestra":"Không hiển thị vị trí",
+"Envío {v} · recepción {w} · ida y vuelta {ms}":"Gửi {v} · nhận {w} · khứ hồi {ms}",
+"Sin servidores en medio: los paquetes van encriptados de un equipo al otro.":"Không có máy chủ ở giữa: các gói tin được mã hóa đi thẳng từ thiết bị này sang thiết bị kia.",
+"El servidor solo reenvía paquetes encriptados: no tiene las claves para abrirlos.":"Máy chủ chỉ chuyển tiếp các gói tin đã mã hóa: nó không có khóa để mở chúng."
 },
 "p":{
 "intento":"Cố gắng nhiều nhất hôm nay: {1}, {2} {2?lần|lần}.",

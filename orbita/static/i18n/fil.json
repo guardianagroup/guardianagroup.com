@@ -4008,7 +4008,13 @@
 "Clave nº {n} activa":"Aktibo ang susi blg. {n}",
 "La página ha bloqueado un intento de cargar código ajeno.":"Hinarang ng pahina ang pagtatangkang mag-load ng code mula sa labas.",
 "La huella de la conexión no coincide con la que llegó encriptada.":"Hindi tugma ang fingerprint ng koneksyon sa dumating nang naka-encrypt.",
-"Alguien más ha entrado en la sala del relé.":"May ibang pumasok sa kuwarto ng relay."
+"Alguien más ha entrado en la sala del relé.":"May ibang pumasok sa kuwarto ng relay.",
+"Recorrido de los datos":"Daan ng data",
+"Tu dispositivo":"Ang iyong device",
+"Su ubicación no se muestra":"Hindi ipinapakita ang lokasyon",
+"Envío {v} · recepción {w} · ida y vuelta {ms}":"Pagpapadala {v} · pagtanggap {w} · balikan {ms}",
+"Sin servidores en medio: los paquetes van encriptados de un equipo al otro.":"Walang server sa gitna: naka-encrypt na dumadaan ang mga packet mula sa isang device papunta sa isa pa.",
+"El servidor solo reenvía paquetes encriptados: no tiene las claves para abrirlos.":"Ipinapasa lang ng server ang mga naka-encrypt na packet: wala itong mga susi para buksan ang mga ito."
 },
 "p":{
 "intento":"Pinakamadalas sumubok ngayon: {1}, {2} {2?beses|beses}.",

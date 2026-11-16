@@ -4008,7 +4008,13 @@
 "Clave nº {n} activa":"מפתח מס׳ {n} פעיל",
 "La página ha bloqueado un intento de cargar código ajeno.":"הדף חסם ניסיון לטעון קוד זר.",
 "La huella de la conexión no coincide con la que llegó encriptada.":"טביעת האצבע של החיבור לא תואמת לזו שהגיעה מוצפנת.",
-"Alguien más ha entrado en la sala del relé.":"מישהו נוסף נכנס לחדר הממסר."
+"Alguien más ha entrado en la sala del relé.":"מישהו נוסף נכנס לחדר הממסר.",
+"Recorrido de los datos":"מסלול הנתונים",
+"Tu dispositivo":"המכשיר שלך",
+"Su ubicación no se muestra":"המיקום לא מוצג",
+"Envío {v} · recepción {w} · ida y vuelta {ms}":"שליחה {v} · קבלה {w} · הלוך ושוב {ms}",
+"Sin servidores en medio: los paquetes van encriptados de un equipo al otro.":"אין שרתים באמצע: החבילות עוברות מוצפנות ממכשיר אחד לשני.",
+"El servidor solo reenvía paquetes encriptados: no tiene las claves para abrirlos.":"השרת רק מעביר חבילות מוצפנות: אין לו את המפתחות כדי לפתוח אותן."
 },
 "p":{
 "intento":"ניסתה הכי הרבה היום: {1}, {2} {2?פעם|פעמים}.",

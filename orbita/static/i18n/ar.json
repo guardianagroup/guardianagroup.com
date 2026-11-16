@@ -4008,7 +4008,13 @@
 "Clave nº {n} activa":"المفتاح رقم {n} نشط",
 "La página ha bloqueado un intento de cargar código ajeno.":"حظرت الصفحة محاولة لتحميل شيفرة خارجية.",
 "La huella de la conexión no coincide con la que llegó encriptada.":"بصمة الاتصال لا تطابق البصمة التي وصلت مشفّرة.",
-"Alguien más ha entrado en la sala del relé.":"دخل شخص آخر إلى غرفة المُرحِّل."
+"Alguien más ha entrado en la sala del relé.":"دخل شخص آخر إلى غرفة المُرحِّل.",
+"Recorrido de los datos":"مسار البيانات",
+"Tu dispositivo":"جهازك",
+"Su ubicación no se muestra":"الموقع غير معروض",
+"Envío {v} · recepción {w} · ida y vuelta {ms}":"الإرسال {v} · الاستقبال {w} · ذهابًا وإيابًا {ms}",
+"Sin servidores en medio: los paquetes van encriptados de un equipo al otro.":"لا خوادم في المنتصف: تنتقل الحزم مشفّرة من جهاز إلى الآخر.",
+"El servidor solo reenvía paquetes encriptados: no tiene las claves para abrirlos.":"الخادم يعيد توجيه الحزم المشفّرة فقط: لا يملك المفاتيح لفتحها."
 },
 "p":{
 "intento":"الأكثر محاولةً اليوم: {1}، {2} {2?مرة|مرات}.",
