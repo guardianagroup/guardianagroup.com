@@ -2389,7 +2389,7 @@
       if (!ver) return;
       const filas = monFilas(), peor = filas.some((r) => r[1] === 'alerta') ? 'alerta' : filas.some((r) => r[1] === 'aviso') ? 'aviso' : 'ok';
       if (el.dataset.nivel !== peor) el.dataset.nivel = peor;
-      const abierto = monAbierto(); el.classList.toggle('plegado', !abierto);
+      const abierto = monAbierto(); el.classList.toggle('plegado', !abierto); recolocaMon();
       const cab = $('#ll-mon-cab'); if (cab) cab.setAttribute('aria-expanded', String(abierto));
       const nv = $('#ll-mon-nivel'), tx = peor === 'alerta' ? t('Alerta: revisa el monitor') : peor === 'aviso' ? t('Hay avisos') : t('Todo en orden');
       if (nv && nv.textContent !== tx) nv.textContent = tx;
@@ -2417,7 +2417,77 @@
         }
       }
     }
-    { const cab = $('#ll-mon-cab'); if (cab) cab.addEventListener('click', (e) => { e.stopPropagation(); monAbre(!monAbierto()); }); }
+    { const cab = $('#ll-mon-cab'); if (cab) cab.addEventListener('click', (e) => { e.stopPropagation(); if (sinClicMon) return; monAbre(!monAbierto()); }); }
+    // El monitor, donde lo deje la persona (16 Nov 2026; dueño, 12:42: «se puede minimizar, pero se queda en el mismo sitio… me está
+    // tapando un poco la cara de mi amigo. Pon para que se pueda poner donde la persona lo quiera poner, en cualquier parte de la
+    // pantalla»): se lleva con el ratón (o el dedo) por su cabecera o su línea de estado a cualquier sitio de la llamada; un clic sin
+    // arrastrar lo sigue plegando y abriendo, y con el teclado lo mueven las flechas de la cabecera (con Mayúsculas, más). Se queda
+    // ahí también en las llamadas siguientes (en proporción a la pantalla). Abierto, si no cabe donde está, sube lo justo; plegado,
+    // vuelve a su sitio.
+    const MON_POS = 'gcom-mon-pos', MON_MARGEN = 8;
+    var monPos = null, arrMon = null, sinClicMon = false; // (var: pintaMon puede correr antes de llegar aquí)
+    try { const p = JSON.parse(localStorage.getItem(MON_POS) || 'null'); if (p && Number.isFinite(p.fx) && Number.isFinite(p.fy)) monPos = { fx: p.fx, fy: p.fy }; } catch (_) {}
+    const escalaMon = () => { try { return escalaYa > 0 ? escalaYa : 1; } catch (_) { return 1; } }; // (escalaYa se pone más abajo)
+    function colocaMon(x, y) {
+      const el = $('#ll-mon'); if (!el || el.hidden) return null;
+      const CW = caja.clientWidth, CH = caja.clientHeight, W = el.offsetWidth, H = el.offsetHeight;
+      if (!CW || !CH || !W) return null;
+      x = Math.max(MON_MARGEN, Math.min(CW - W - MON_MARGEN, x)); y = Math.max(MON_MARGEN, Math.min(CH - H - MON_MARGEN, y));
+      const px = Math.round(x) + 'px', py = Math.round(y) + 'px';
+      if (el.style.getPropertyValue('--mon-x') !== px) el.style.setProperty('--mon-x', px);
+      if (el.style.getPropertyValue('--mon-y') !== py) el.style.setProperty('--mon-y', py);
+      if (!el.classList.contains('movido')) el.classList.add('movido');
+      return { x: Math.round(x), y: Math.round(y), CW, CH };
+    }
+    function recolocaMon() {
+      const el = $('#ll-mon'); if (!el || arrMon) return;
+      if (!monPos) { if (el.classList.contains('movido')) el.classList.remove('movido'); return; }
+      if (!el.hidden) colocaMon(monPos.fx * caja.clientWidth, monPos.fy * caja.clientHeight);
+    }
+    function guardaMon(p) {
+      if (!p) return;
+      monPos = { fx: p.x / p.CW, fy: p.y / p.CH };
+      try { localStorage.setItem(MON_POS, JSON.stringify(monPos)); } catch (_) {}
+    }
+    { const el = $('#ll-mon'), cab = $('#ll-mon-cab');
+      if (el && cab) {
+        const asa = (t) => !!(t && t.closest && (t.closest('#ll-mon-cab') || t.closest('.ll-mon-estado')));
+        // (el puntero se coge solo al empezar a arrastrar: cogido desde el principio, el clic iría al monitor y no a su cabecera)
+        const mueve = (e) => {
+          if (!arrMon || e.pointerId !== arrMon.id) return;
+          if (!arrMon.movido) {
+            if (Math.hypot(e.clientX - arrMon.x0, e.clientY - arrMon.y0) < 5) return;
+            arrMon.movido = true; el.classList.add('arrastrando');
+            try { el.setPointerCapture(e.pointerId); } catch (_) {}
+          }
+          const s = escalaMon(), c = caja.getBoundingClientRect();
+          arrMon.ultimo = colocaMon((e.clientX - c.left) / s - arrMon.dx, (e.clientY - c.top) / s - arrMon.dy) || arrMon.ultimo;
+        };
+        const suelta = (e) => {
+          if (!arrMon || e.pointerId !== arrMon.id) return;
+          const a = arrMon; arrMon = null; el.classList.remove('arrastrando');
+          removeEventListener('pointermove', mueve); removeEventListener('pointerup', suelta); removeEventListener('pointercancel', suelta);
+          try { if (el.hasPointerCapture(e.pointerId)) el.releasePointerCapture(e.pointerId); } catch (_) {}
+          if (!a.movido) return;
+          // el clic que sale al soltar (en la misma tanda que el soltar) no pliega ni abre; el siguiente, sí
+          sinClicMon = true; setTimeout(() => { sinClicMon = false; }, 0);
+          guardaMon(a.ultimo);
+        };
+        el.addEventListener('pointerdown', (e) => {
+          if (e.button > 0 || !e.isPrimary || !asa(e.target) || arrMon) return;
+          const r = el.getBoundingClientRect(), s = escalaMon();
+          arrMon = { id: e.pointerId, dx: (e.clientX - r.left) / s, dy: (e.clientY - r.top) / s, x0: e.clientX, y0: e.clientY, movido: false, ultimo: null };
+          addEventListener('pointermove', mueve); addEventListener('pointerup', suelta); addEventListener('pointercancel', suelta);
+        });
+        cab.addEventListener('keydown', (e) => {
+          const d = { ArrowLeft: [-1, 0], ArrowRight: [1, 0], ArrowUp: [0, -1], ArrowDown: [0, 1] }[e.key];
+          if (!d || e.altKey || e.ctrlKey || e.metaKey) return;
+          e.preventDefault(); e.stopPropagation();
+          const paso = e.shiftKey ? 80 : 20;
+          guardaMon(colocaMon(el.offsetLeft + d[0] * paso, el.offsetTop + d[1] * paso));
+        });
+        addEventListener('resize', () => recolocaMon(), { passive: true });
+      } }
     // El código para comparar, dentro del panel (dueño, 2 Nov 2026, 17:01: en la Blindada, ni la tarjeta roja ni números en la
     // pantalla; ronda 92: la comprobación, discreta, aquí). Es el de la llave de ahora cuando ya está igual en las dos pantallas
     // (pintaCod lo espera 1,5 s tras cada cambio) o, sin la capa postcuántica, el número de seguridad de la llamada. «Coinciden» y

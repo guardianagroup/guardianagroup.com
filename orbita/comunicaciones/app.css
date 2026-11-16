@@ -2667,7 +2667,7 @@ html.con-teclado .fe-pie{padding-bottom:10px}
 .ll-mon[data-nivel="alerta"]{--mon:#E07A6C;border-color:rgba(224,122,108,.75);box-shadow:0 0 0 3px rgba(224,122,108,.18),0 18px 50px rgba(0,0,0,.45)}
 .ll-mon::before{content:"";position:absolute;left:0;top:0;height:2px;width:38%;background:linear-gradient(90deg,transparent,var(--mon),transparent);animation:llMonBarre 2.6s linear infinite}
 @keyframes llMonBarre{from{transform:translateX(-100%)}to{transform:translateX(265%)}}
-.ll-mon-cab{display:flex;align-items:center;gap:11px;width:100%;margin:0;padding:12px 14px 2px;border:0;background:none;color:inherit;font:inherit;text-align:left;cursor:pointer}
+.ll-mon-cab{display:flex;align-items:center;gap:11px;width:100%;margin:0;padding:12px 14px 2px;border:0;background:none;color:inherit;font:inherit;text-align:left;cursor:grab;touch-action:none}
 .ll-mon-cab:focus-visible{outline:2px solid #9CC3E4;outline-offset:-3px;border-radius:14px}
 .ll-mon-pulso{position:relative;width:10px;height:10px;flex:none;border-radius:50%;background:var(--mon)}
 .ll-mon-pulso::after{content:"";position:absolute;inset:-5px;border-radius:50%;border:2px solid var(--mon);opacity:0;animation:llMonPulso 1.8s ease-out infinite}
@@ -2707,6 +2707,16 @@ html.con-teclado .fe-pie{padding-bottom:10px}
 @media (max-width:520px){.gc-llamada.con-efectos .ll-cod-chip{bottom:calc(206px + env(safe-area-inset-bottom))}}
 /* en el teléfono al que se pasó la llamada, el título va arriba en grande: el monitor, justo debajo */
 body.modo-llevar .ll-mon{top:calc(130px + env(safe-area-inset-top))}
+/* (16 Nov 2026; dueño, 12:42) el monitor, donde lo deja la persona: se lleva por su cabecera o su línea de estado (llamada.js,
+   colocaMon); el asa de puntos lo dice sin palabras */
+.ll-mon.movido{left:var(--mon-x)!important;top:var(--mon-y)!important;right:auto!important;bottom:auto!important}
+.ll-mon-estado{cursor:grab;touch-action:none;-webkit-user-select:none;user-select:none}
+.ll-mon-asa{width:12px;height:16px;flex:none;fill:rgba(156,195,228,.38);transition:fill .15s}
+.ll-mon-cab:hover .ll-mon-asa,.ll-mon-cab:focus-visible .ll-mon-asa,.ll-mon.arrastrando .ll-mon-asa{fill:#9CC3E4}
+.ll-mon.arrastrando{box-shadow:0 0 0 1px rgba(156,195,228,.38),0 26px 64px rgba(0,0,0,.6);-webkit-user-select:none;user-select:none}
+.ll-mon.arrastrando,.ll-mon.arrastrando *{cursor:grabbing!important}
+/* los botones de la llamada, siempre por encima del monitor: llevado abajo, nunca tapa «Colgar» (por debajo de la tarjeta del código) */
+.gc-llamada:not(.mini) .gc-llamada-botones{position:relative;z-index:11}
 /* (15 Nov 2026) con «Voz cambiada» y «Mosaico» a la vista, la imagen propia y las notas del teléfono suben por encima de ellos:
    abajo, a la altura de los botones de los efectos, los tapaban; en el teléfono, la imagen propia, también por encima del
    código plegado */

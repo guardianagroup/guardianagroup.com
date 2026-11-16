@@ -18,7 +18,9 @@ const estado = (P) => P.evaluate(() => (window.GuardianaCom && GuardianaCom.llam
 const visible = (P, s) => P.evaluate((s) => { const e = document.querySelector(s); return !!(e && e.getClientRects().length && getComputedStyle(e).display !== 'none' && !e.closest('[hidden]')); }, s);
 async function equipo(browser, nombre, ancho) {
   const ctx = await browser.newContext({ viewport: { width: ancho || 1280, height: 800 }, userAgent: PC, locale: 'es-CO', permissions: ['microphone', 'camera'] });
-  await ctx.addInitScript(() => { try { sessionStorage.setItem('gcom-sin-numero', '1'); } catch (_) {} });
+  // (16 nov 2026) donde hay ventana flotante del sistema (Chrome y Edge), «Ver el chat» lleva la llamada a ella: aquí se mide la
+  // tarjeta pequeña de siempre, la de los navegadores sin esa ventana
+  await ctx.addInitScript(() => { try { sessionStorage.setItem('gcom-sin-numero', '1'); } catch (_) {} try { Object.defineProperty(window, 'documentPictureInPicture', { value: undefined, configurable: true }); } catch (_) {} });
   const p = await ctx.newPage(); p.on('pageerror', (e) => { console.log('[' + nombre + '] pageerror', String(e).slice(0, 200)); fallos.push('pageerror ' + nombre); });
   return p;
 }
