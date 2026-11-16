@@ -1276,7 +1276,7 @@
       sondeo = setInterval(async () => {
         if (!pc || estado !== 'hablando') return;
         try {
-          let rtt = null, perd = 0, rec = 0, vw = 0, vh = 0, fps = 0;
+          let perd = 0, rec = 0, vw = 0, vh = 0, fps = 0;
           const st = await pc.getStats(), diag = {};
           st.forEach((r) => {
             if (r.type === 'candidate-pair' && r.nominated && r.state === 'succeeded') { diag.salidaBps = r.availableOutgoingBitrate; const lc = st.get(r.localCandidateId); if (lc) diag.ruta = (lc.candidateType || '') + '/' + (lc.relayProtocol || lc.protocol || ''); }
@@ -1285,18 +1285,19 @@
           });
           diag.luz = Math.round(ganancia * 100) / 100; diag.modo = modoImagen();
           calidad.dataset.diag = JSON.stringify(diag);
-          st.forEach((r) => { if (r.type === 'candidate-pair' && r.state === 'succeeded' && r.currentRoundTripTime != null) rtt = Math.round(r.currentRoundTripTime * 1000); if (r.type === 'inbound-rtp' && r.kind === 'audio') { perd += r.packetsLost || 0; rec += r.packetsReceived || 0; } if (r.type === 'inbound-rtp' && r.kind === 'video') { vw = r.frameWidth || vw; vh = r.frameHeight || vh; fps = r.framesPerSecond || fps; } });
-          const p = rec + perd ? perd / (rec + perd) : 0, nivel = p < 0.01 && (rtt == null || rtt < 250) ? t('excelente') : p < 0.05 ? t('buena') : t('débil');
+          st.forEach((r) => { if (r.type === 'inbound-rtp' && r.kind === 'audio') { perd += r.packetsLost || 0; rec += r.packetsReceived || 0; } if (r.type === 'inbound-rtp' && r.kind === 'video') { vw = r.frameWidth || vw; vh = r.frameHeight || vh; fps = r.framesPerSecond || fps; } });
+          const p = rec + perd ? perd / (rec + perd) : 0, nivel = p < 0.01 ? t('excelente') : p < 0.05 ? t('buena') : t('débil');
           // con imagen, la resolución y las imágenes por segundo que llegan de verdad
           // si la imagen de la otra persona no llega, se dice (antes, en el teléfono, solo se veía su inicial o negro)
           const vr = $('#v-remoto'), NO_LLEGA = t('La imagen de la otra persona no llega.');
           if (video && suCamara && iniciada && Date.now() - iniciada > 8000 && !(vr && vr.videoWidth)) di(NO_LLEGA, true); else if (paso.textContent === NO_LLEGA) di('');
-          // agencia, ronda 74: en la pantalla, solo «Conexión: excelente» con un punto de color; los milisegundos, la resolución y
-          // las imágenes por segundo, al tocarlo (o al pasar el ratón), para quien quiera verlos
+          // agencia, ronda 74: en la pantalla, solo «Conexión: excelente» con un punto de color; la resolución y las imágenes por
+          // segundo, al tocarlo (o al pasar el ratón), para quien quiera verlos. Sin los milisegundos de ida y vuelta (dueño, 16 Nov
+          // 2026, 01:35): ese tiempo recorre el camino hasta la otra persona y deja intuir a qué distancia está
           const serv = o.servidor ? o.servidor() : '';
           // con imagen, al tocar el indicador se ve también qué formato va y viene (dueño, 29 Oct 2026, 13:09 y 14:13: del iPhone al Android, imagen en negro)
-          const largo = t('Calidad estimada') + ': ' + nivel + (rtt != null ? ' · ' + rtt + ' ms' : '') + (video && vw && suCamara ? ' · ' + t('imagen') + ' ' + vw + '×' + vh + (fps ? ' · ' + Math.round(fps) + ' fps' : '') : '') + (video ? ' · ' + t('envío') + ' ' + (diag.envia || '–') + (diag.codec ? ' ' + diag.codec : '') + ' · ' + t('recibo') + ' ' + (diag.recibe || '–') + (diag.codecRecibe ? ' ' + diag.codecRecibe : '') : '') + (serv ? ' · ' + t('servidor de llamadas') + ': ' + serv : '');
-          calidad.dataset.nivel = p < 0.01 && (rtt == null || rtt < 250) ? 'alta' : p < 0.05 ? 'media' : 'baja';
+          const largo = t('Calidad estimada') + ': ' + nivel + (video && vw && suCamara ? ' · ' + t('imagen') + ' ' + vw + '×' + vh + (fps ? ' · ' + Math.round(fps) + ' fps' : '') : '') + (video ? ' · ' + t('envío') + ' ' + (diag.envia || '–') + (diag.codec ? ' ' + diag.codec : '') + ' · ' + t('recibo') + ' ' + (diag.recibe || '–') + (diag.codecRecibe ? ' ' + diag.codecRecibe : '') : '') + (serv ? ' · ' + t('servidor de llamadas') + ': ' + serv : '');
+          calidad.dataset.nivel = p < 0.01 ? 'alta' : p < 0.05 ? 'media' : 'baja';
           const corto = t('Conexión') + ': ' + nivel;
           // sin los datos técnicos al pasar el ratón (dueño, 30 Oct 2026, 12:06: «esos datos, quítalos de ahí»)
           calidad.dataset.largo = largo; calidad.dataset.corto = corto; calidad.removeAttribute('title');
@@ -2134,10 +2135,10 @@
           let pol = ''; try { pol = String((pc.getConfiguration() || {}).iceTransportPolicy || ''); } catch (_) {}
           s.ruta = tl === 'relay' ? 'mio' : tr2 === 'relay' ? 'servidor' : (deEquipo(tl) && deEquipo(tr2) && pol !== 'relay') ? 'directa' : '';
         }
-        // (15 Nov 2026) el recorrido de los datos: lo que mide el propio navegador en el par de candidatos elegido (ida y vuelta,
-        // y el caudal como diferencia de bytes entre dos sondeos; si cambia el par, se empieza de nuevo)
+        // (15 Nov 2026) el recorrido de los datos: lo que mide el propio navegador en el par de candidatos elegido (el caudal, como
+        // diferencia de bytes entre dos sondeos; si cambia el par, se empieza de nuevo). Sin la ida y vuelta (dueño, 16 Nov 2026,
+        // 01:35): recorre el camino hasta la otra persona y deja intuir a qué distancia está
         if (par) {
-          if (typeof par.currentRoundTripTime === 'number' && par.currentRoundTripTime >= 0) s.rtt = Math.round(par.currentRoundTripTime * 1000);
           const ahora = performance.now(), bs = par.bytesSent, br = par.bytesReceived, b0 = mon.bytes;
           if (typeof bs === 'number' && typeof br === 'number') {
             if (b0 && b0.id === par.id && ahora - b0.t > 400 && bs >= b0.s && br >= b0.r) { const dt = (ahora - b0.t) / 1000; s.envio = (bs - b0.s) * 8 / dt; s.recep = (br - b0.r) * 8 / dt; }
@@ -2168,8 +2169,7 @@
       const nomServ = releGuardiana() ? t('Servidor de GUARDIANA') : t('Servidor'), ns = el.querySelector('.mr-pie-serv b');
       if (ns && ns.textContent !== nomServ) ns.textContent = nomServ;
       const sv = $('#ll-mon-ruta-serv'); if (sv && sv.textContent !== ciudad) sv.textContent = ciudad;
-      let ms = '—'; if (typeof s.rtt === 'number') { try { ms = new Intl.NumberFormat(monLoc()).format(s.rtt) + ' ms'; } catch (_) { ms = s.rtt + ' ms'; } }
-      const dato = r ? t('Envío {v} · recepción {w} · ida y vuelta {ms}').replace('{v}', monTasa(s.envio)).replace('{w}', monTasa(s.recep)).replace('{ms}', ms) : t('Comprobando…');
+      const dato = r ? t('Envío {v} · recepción {w}').replace('{v}', monTasa(s.envio)).replace('{w}', monTasa(s.recep)) : t('Comprobando…');
       const d = $('#ll-mon-ruta-dato'); if (d && d.textContent !== dato) d.textContent = dato;
       const nota = r === 'directa' ? t('Sin servidores en medio: los paquetes van encriptados de un equipo al otro.') : r ? t('El servidor solo reenvía paquetes encriptados: no tiene las claves para abrirlos.') : '';
       const n = $('#ll-mon-ruta-nota'); if (n && n.textContent !== nota) n.textContent = nota;

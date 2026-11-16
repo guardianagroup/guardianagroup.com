@@ -4025,7 +4025,8 @@
 "Esperando los datos de la llamada…":"அழைப்பின் தரவுக்காகக் காத்திருக்கிறது…",
 "La llamada ha terminado.":"அழைப்பு முடிந்தது.",
 "Sin datos de la llamada desde hace {s} s":"{s} வினாடிகளாக அழைப்புத் தரவு இல்லை",
-"El satélite es solo un símbolo: no indica por dónde va la llamada ni dónde está la otra persona.":"செயற்கைக்கோள் ஒரு குறியீடு மட்டுமே: அழைப்பு எந்த வழியில் செல்கிறது என்பதையோ மற்றவர் எங்கே இருக்கிறார் என்பதையோ அது காட்டாது."
+"El satélite es solo un símbolo: no indica por dónde va la llamada ni dónde está la otra persona.":"செயற்கைக்கோள் ஒரு குறியீடு மட்டுமே: அழைப்பு எந்த வழியில் செல்கிறது என்பதையோ மற்றவர் எங்கே இருக்கிறார் என்பதையோ அது காட்டாது.",
+"Envío {v} · recepción {w}":"அனுப்புதல் {v} · பெறுதல் {w}"
 },
 "p":{
 "intento":"இன்று அதிகம் முயன்றது: {1}, {2} {2?முறை|முறை}.",

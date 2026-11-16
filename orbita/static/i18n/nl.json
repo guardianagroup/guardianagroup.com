@@ -4025,7 +4025,8 @@
 "Esperando los datos de la llamada…":"Wachten op de gegevens van het gesprek…",
 "La llamada ha terminado.":"Het gesprek is beëindigd.",
 "Sin datos de la llamada desde hace {s} s":"Al {s} s geen gegevens van het gesprek",
-"El satélite es solo un símbolo: no indica por dónde va la llamada ni dónde está la otra persona.":"De satelliet is alleen een symbool: hij laat niet zien welke weg het gesprek neemt of waar de ander is."
+"El satélite es solo un símbolo: no indica por dónde va la llamada ni dónde está la otra persona.":"De satelliet is alleen een symbool: hij laat niet zien welke weg het gesprek neemt of waar de ander is.",
+"Envío {v} · recepción {w}":"Verzenden {v} · ontvangen {w}"
 },
 "p":{
 "intento":"Probeerde het vandaag het vaakst: {1}, {2} {2?keer|keer}.",

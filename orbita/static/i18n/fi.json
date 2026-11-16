@@ -4025,7 +4025,8 @@
 "Esperando los datos de la llamada…":"Odotetaan puhelun tietoja…",
 "La llamada ha terminado.":"Puhelu on päättynyt.",
 "Sin datos de la llamada desde hace {s} s":"Ei puhelun tietoja {s} s:iin",
-"El satélite es solo un símbolo: no indica por dónde va la llamada ni dónde está la otra persona.":"Satelliitti on vain symboli: se ei kerro, mitä kautta puhelu kulkee tai missä toinen henkilö on."
+"El satélite es solo un símbolo: no indica por dónde va la llamada ni dónde está la otra persona.":"Satelliitti on vain symboli: se ei kerro, mitä kautta puhelu kulkee tai missä toinen henkilö on.",
+"Envío {v} · recepción {w}":"Lähetys {v} · vastaanotto {w}"
 },
 "p":{
 "intento":"Eniten yrittänyt tänään: {1}, {2} {2?kerta|kertaa}.",

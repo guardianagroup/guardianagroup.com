@@ -4025,7 +4025,8 @@
 "Esperando los datos de la llamada…":"কলের তথ্যের অপেক্ষায়…",
 "La llamada ha terminado.":"কলটি শেষ হয়েছে।",
 "Sin datos de la llamada desde hace {s} s":"{s} সেকেন্ড ধরে কলের কোনো তথ্য নেই",
-"El satélite es solo un símbolo: no indica por dónde va la llamada ni dónde está la otra persona.":"স্যাটেলাইটটি কেবল একটি প্রতীক: কলটি কোন পথে যায় বা অন্য ব্যক্তি কোথায় আছেন, তা এটি দেখায় না।"
+"El satélite es solo un símbolo: no indica por dónde va la llamada ni dónde está la otra persona.":"স্যাটেলাইটটি কেবল একটি প্রতীক: কলটি কোন পথে যায় বা অন্য ব্যক্তি কোথায় আছেন, তা এটি দেখায় না।",
+"Envío {v} · recepción {w}":"পাঠানো {v} · গ্রহণ {w}"
 },
 "p":{
 "intento":"আজ সবচেয়ে বেশি চেষ্টা: {1}, {2} {2?বার|বার}।",

@@ -4025,7 +4025,8 @@
 "Esperando los datos de la llamada…":"Arama verileri bekleniyor…",
 "La llamada ha terminado.":"Arama sona erdi.",
 "Sin datos de la llamada desde hace {s} s":"{s} sn’dir arama verisi yok",
-"El satélite es solo un símbolo: no indica por dónde va la llamada ni dónde está la otra persona.":"Uydu yalnızca bir simgedir: aramanın hangi yoldan gittiğini de karşı tarafın nerede olduğunu da göstermez."
+"El satélite es solo un símbolo: no indica por dónde va la llamada ni dónde está la otra persona.":"Uydu yalnızca bir simgedir: aramanın hangi yoldan gittiğini de karşı tarafın nerede olduğunu da göstermez.",
+"Envío {v} · recepción {w}":"Gönderim {v} · alım {w}"
 },
 "p":{
 "intento":"Bugün en çok deneyen: {1}, {2} {2?kez|kez}.",

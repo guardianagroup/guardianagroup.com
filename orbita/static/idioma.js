@@ -1615,6 +1615,7 @@
     "Tu dispositivo": ["Your device", "Seu dispositivo"],
     "Su ubicación no se muestra": ["Location not shown", "Localização não exibida"],
     "Envío {v} · recepción {w} · ida y vuelta {ms}": ["Sending {v} · receiving {w} · round trip {ms}", "Envio {v} · recepção {w} · ida e volta {ms}"],
+    "Envío {v} · recepción {w}": ["Sending {v} · receiving {w}", "Envio {v} · recepção {w}"],
     "Sin servidores en medio: los paquetes van encriptados de un equipo al otro.": ["No servers in between: the packets travel encrypted from one device to the other.", "Sem servidores no meio: os pacotes vão criptografados de um dispositivo ao outro."],
     "Listo": ["Done", "Pronto"],
     "Pasa el dedo o el ratón por lo que quieras tapar: caras, matrículas, datos. Se envía ya tapado.": ["Run your finger or mouse over what you want to cover: faces, plates, data. It's sent already covered.", "Passe o dedo ou o mouse sobre o que quiser tapar: rostos, placas, dados. É enviado já tapado."],

@@ -4025,7 +4025,8 @@
 "Esperando los datos de la llamada…":"กำลังรอข้อมูลการโทร…",
 "La llamada ha terminado.":"การโทรสิ้นสุดแล้ว",
 "Sin datos de la llamada desde hace {s} s":"ไม่มีข้อมูลการโทรมา {s} วินาที",
-"El satélite es solo un símbolo: no indica por dónde va la llamada ni dónde está la otra persona.":"ดาวเทียมเป็นเพียงสัญลักษณ์ ไม่ได้บอกว่าสายผ่านทางใดหรืออีกฝ่ายอยู่ที่ใด"
+"El satélite es solo un símbolo: no indica por dónde va la llamada ni dónde está la otra persona.":"ดาวเทียมเป็นเพียงสัญลักษณ์ ไม่ได้บอกว่าสายผ่านทางใดหรืออีกฝ่ายอยู่ที่ใด",
+"Envío {v} · recepción {w}":"ส่ง {v} · รับ {w}"
 },
 "p":{
 "intento":"พยายามมากที่สุดวันนี้: {1}, {2} {2?ครั้ง|ครั้ง}",

@@ -4025,7 +4025,8 @@
 "Esperando los datos de la llamada…":"Αναμονή για τα δεδομένα της κλήσης…",
 "La llamada ha terminado.":"Η κλήση τελείωσε.",
 "Sin datos de la llamada desde hace {s} s":"Χωρίς δεδομένα κλήσης εδώ και {s} s",
-"El satélite es solo un símbolo: no indica por dónde va la llamada ni dónde está la otra persona.":"Ο δορυφόρος είναι μόνο σύμβολο: δεν δείχνει από πού περνά η κλήση ούτε πού βρίσκεται το άλλο άτομο."
+"El satélite es solo un símbolo: no indica por dónde va la llamada ni dónde está la otra persona.":"Ο δορυφόρος είναι μόνο σύμβολο: δεν δείχνει από πού περνά η κλήση ούτε πού βρίσκεται το άλλο άτομο.",
+"Envío {v} · recepción {w}":"Αποστολή {v} · λήψη {w}"
 },
 "p":{
 "intento":"Η πιο επίμονη σήμερα: {1}, {2} {2?φορά|φορές}.",

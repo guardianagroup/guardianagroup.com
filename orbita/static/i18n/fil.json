@@ -4025,7 +4025,8 @@
 "Esperando los datos de la llamada…":"Hinihintay ang data ng tawag…",
 "La llamada ha terminado.":"Natapos na ang tawag.",
 "Sin datos de la llamada desde hace {s} s":"Walang data ng tawag sa loob ng {s} s",
-"El satélite es solo un símbolo: no indica por dónde va la llamada ni dónde está la otra persona.":"Simbolo lang ang satellite: hindi nito ipinapakita kung saan dumadaan ang tawag o kung nasaan ang kausap mo."
+"El satélite es solo un símbolo: no indica por dónde va la llamada ni dónde está la otra persona.":"Simbolo lang ang satellite: hindi nito ipinapakita kung saan dumadaan ang tawag o kung nasaan ang kausap mo.",
+"Envío {v} · recepción {w}":"Pagpapadala {v} · pagtanggap {w}"
 },
 "p":{
 "intento":"Pinakamadalas sumubok ngayon: {1}, {2} {2?beses|beses}.",

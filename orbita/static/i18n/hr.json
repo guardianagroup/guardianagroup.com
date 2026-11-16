@@ -4025,7 +4025,8 @@
 "Esperando los datos de la llamada…":"Čeka se na podatke poziva…",
 "La llamada ha terminado.":"Poziv je završio.",
 "Sin datos de la llamada desde hace {s} s":"Nema podataka poziva već {s} s",
-"El satélite es solo un símbolo: no indica por dónde va la llamada ni dónde está la otra persona.":"Satelit je samo simbol: ne pokazuje kojim putem ide poziv ni gdje je druga osoba."
+"El satélite es solo un símbolo: no indica por dónde va la llamada ni dónde está la otra persona.":"Satelit je samo simbol: ne pokazuje kojim putem ide poziv ni gdje je druga osoba.",
+"Envío {v} · recepción {w}":"Slanje {v} · primanje {w}"
 },
 "p":{
 "intento":"Najupornija danas: {1}, {2} {2?put|puta}.",

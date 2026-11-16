@@ -4025,7 +4025,8 @@
 "Esperando los datos de la llamada…":"Изчакване на данните от разговора…",
 "La llamada ha terminado.":"Разговорът приключи.",
 "Sin datos de la llamada desde hace {s} s":"Няма данни от разговора от {s} s",
-"El satélite es solo un símbolo: no indica por dónde va la llamada ni dónde está la otra persona.":"Сателитът е само символ: не показва откъде минава разговорът, нито къде е другият човек."
+"El satélite es solo un símbolo: no indica por dónde va la llamada ni dónde está la otra persona.":"Сателитът е само символ: не показва откъде минава разговорът, нито къде е другият човек.",
+"Envío {v} · recepción {w}":"Изпращане {v} · получаване {w}"
 },
 "p":{
 "intento":"Най-настойчивата днес: {1}, {2} {2?път|пъти}.",

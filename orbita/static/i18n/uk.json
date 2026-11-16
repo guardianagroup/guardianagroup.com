@@ -4025,7 +4025,8 @@
 "Esperando los datos de la llamada…":"Очікування даних дзвінка…",
 "La llamada ha terminado.":"Дзвінок завершено.",
 "Sin datos de la llamada desde hace {s} s":"Немає даних дзвінка вже {s} с",
-"El satélite es solo un símbolo: no indica por dónde va la llamada ni dónde está la otra persona.":"Супутник — лише символ: він не показує, яким шляхом іде дзвінок і де перебуває співрозмовник."
+"El satélite es solo un símbolo: no indica por dónde va la llamada ni dónde está la otra persona.":"Супутник — лише символ: він не показує, яким шляхом іде дзвінок і де перебуває співрозмовник.",
+"Envío {v} · recepción {w}":"Надсилання {v} · отримання {w}"
 },
 "p":{
 "intento":"Найнаполегливіша сьогодні: {1}, {2} {2?раз|разів}.",

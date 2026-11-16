@@ -4025,7 +4025,8 @@
 "Esperando los datos de la llamada…":"ממתין לנתוני השיחה…",
 "La llamada ha terminado.":"השיחה הסתיימה.",
 "Sin datos de la llamada desde hace {s} s":"אין נתוני שיחה כבר {s} שניות",
-"El satélite es solo un símbolo: no indica por dónde va la llamada ni dónde está la otra persona.":"הלוויין הוא רק סמל: הוא לא מראה באיזו דרך עוברת השיחה ולא איפה נמצא האדם השני."
+"El satélite es solo un símbolo: no indica por dónde va la llamada ni dónde está la otra persona.":"הלוויין הוא רק סמל: הוא לא מראה באיזו דרך עוברת השיחה ולא איפה נמצא האדם השני.",
+"Envío {v} · recepción {w}":"שליחה {v} · קבלה {w}"
 },
 "p":{
 "intento":"ניסתה הכי הרבה היום: {1}, {2} {2?פעם|פעמים}.",

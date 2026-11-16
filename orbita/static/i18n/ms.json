@@ -4025,7 +4025,8 @@
 "Esperando los datos de la llamada…":"Menunggu data panggilan…",
 "La llamada ha terminado.":"Panggilan telah tamat.",
 "Sin datos de la llamada desde hace {s} s":"Tiada data panggilan sejak {s} s",
-"El satélite es solo un símbolo: no indica por dónde va la llamada ni dónde está la otra persona.":"Satelit hanyalah simbol: ia tidak menunjukkan laluan panggilan atau lokasi orang lain."
+"El satélite es solo un símbolo: no indica por dónde va la llamada ni dónde está la otra persona.":"Satelit hanyalah simbol: ia tidak menunjukkan laluan panggilan atau lokasi orang lain.",
+"Envío {v} · recepción {w}":"Hantar {v} · terima {w}"
 },
 "p":{
 "intento":"Paling banyak mencuba hari ini: {1}, {2} {2?kali|kali}.",

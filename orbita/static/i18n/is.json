@@ -4025,7 +4025,8 @@
 "Esperando los datos de la llamada…":"Bíð eftir gögnum símtalsins…",
 "La llamada ha terminado.":"Símtalinu er lokið.",
 "Sin datos de la llamada desde hace {s} s":"Engin gögn frá símtalinu í {s} s",
-"El satélite es solo un símbolo: no indica por dónde va la llamada ni dónde está la otra persona.":"Gervihnötturinn er aðeins tákn: hann sýnir hvorki leið símtalsins né hvar hinn aðilinn er."
+"El satélite es solo un símbolo: no indica por dónde va la llamada ni dónde está la otra persona.":"Gervihnötturinn er aðeins tákn: hann sýnir hvorki leið símtalsins né hvar hinn aðilinn er.",
+"Envío {v} · recepción {w}":"Sent {v} · móttekið {w}"
 },
 "p":{
 "intento":"Sá sem reyndi mest í dag: {1}, {2} {2?sinni|sinnum}.",

@@ -4025,7 +4025,8 @@
 "Esperando los datos de la llamada…":"通話のデータを待っています…",
 "La llamada ha terminado.":"通話は終了しました。",
 "Sin datos de la llamada desde hace {s} s":"{s} 秒間、通話のデータがありません",
-"El satélite es solo un símbolo: no indica por dónde va la llamada ni dónde está la otra persona.":"衛星は記号にすぎません。通話の経路も、相手の居場所も示していません。"
+"El satélite es solo un símbolo: no indica por dónde va la llamada ni dónde está la otra persona.":"衛星は記号にすぎません。通話の経路も、相手の居場所も示していません。",
+"Envío {v} · recepción {w}":"送信 {v} · 受信 {w}"
 },
 "p":{
 "intento":"今日最も多く試みたのは {1}、{2} {2?回|回}。",

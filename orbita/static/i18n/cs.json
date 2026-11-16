@@ -4025,7 +4025,8 @@
 "Esperando los datos de la llamada…":"Čeká se na data hovoru…",
 "La llamada ha terminado.":"Hovor skončil.",
 "Sin datos de la llamada desde hace {s} s":"Žádná data hovoru už {s} s",
-"El satélite es solo un símbolo: no indica por dónde va la llamada ni dónde está la otra persona.":"Satelit je jen symbol: neukazuje, kudy hovor vede, ani kde je druhá osoba."
+"El satélite es solo un símbolo: no indica por dónde va la llamada ni dónde está la otra persona.":"Satelit je jen symbol: neukazuje, kudy hovor vede, ani kde je druhá osoba.",
+"Envío {v} · recepción {w}":"Odesílání {v} · příjem {w}"
 },
 "p":{
 "intento":"Nejvíc se dnes snažila: {1}, {2}{2?krát|krát}.",

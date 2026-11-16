@@ -4025,7 +4025,8 @@
 "Esperando los datos de la llamada…":"في انتظار بيانات المكالمة…",
 "La llamada ha terminado.":"انتهت المكالمة.",
 "Sin datos de la llamada desde hace {s} s":"لا بيانات من المكالمة منذ {s} ث",
-"El satélite es solo un símbolo: no indica por dónde va la llamada ni dónde está la otra persona.":"القمر الصناعي مجرد رمز: لا يبيّن الطريق الذي تسلكه المكالمة ولا مكان الشخص الآخر."
+"El satélite es solo un símbolo: no indica por dónde va la llamada ni dónde está la otra persona.":"القمر الصناعي مجرد رمز: لا يبيّن الطريق الذي تسلكه المكالمة ولا مكان الشخص الآخر.",
+"Envío {v} · recepción {w}":"الإرسال {v} · الاستقبال {w}"
 },
 "p":{
 "intento":"الأكثر محاولةً اليوم: {1}، {2} {2?مرة|مرات}.",

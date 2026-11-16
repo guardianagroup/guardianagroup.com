@@ -100,7 +100,7 @@ const vista = (P) => P.evaluate(() => {
   comprueba(F.sala && F.sala[0] === 'ok' && F.sala[2] === 'Solo los dos', '3. la sala del relé: solo los dos', F.sala);
   comprueba(F.frag && F.frag[0] === 'ok' && /^Fragmentos: [\d.]+ · rechazados: 0$/.test(F.frag[2]) && Number(F.frag[2].split(' ')[1].replace(/\D/g, '')) > 10, '3. voz e imagen verificadas, ninguna rechazada', F.frag);
   // el recorrido de los datos (dueño, 15 nov 2026, 22:20): aquí la conexión es directa (en el relé de verdad pasa por el servidor)
-  const R = a.ruta, DATO = /^Envío [\d.,]+ (kbit|Mbit)\/s · recepción [\d.,]+ (kbit|Mbit)\/s · ida y vuelta [\d.,]+ ms$/;
+  const R = a.ruta, DATO = /^Envío [\d.,]+ (kbit|Mbit)\/s · recepción [\d.,]+ (kbit|Mbit)\/s$/; // sin «ida y vuelta» (dueño, 16 Nov 2026)
   comprueba(R && R.ve && R.r === 'directa' && !R.serv && R.pies.length === 2 && R.pies[0] === 'Tu dispositivo' && /^La otra persona/.test(R.pies[1]) && DATO.test(R.dato) && /^Sin servidores en medio/.test(R.nota), '3. el recorrido de los datos (aquí, directo): tu dispositivo y la otra persona, sin su ubicación; envío, recepción e ida y vuelta medidos', R);
   comprueba(!('ruta' in F), '3. la ruta ya no va repetida en una fila aparte', Object.keys(F));
   comprueba(F.pagina && F.pagina[0] === 'ok' && F.pagina[2] === 'Solo el de GUARDIANA', '3. el código de la página: solo el de GUARDIANA', F.pagina);

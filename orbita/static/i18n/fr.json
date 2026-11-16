@@ -4025,7 +4025,8 @@
 "Esperando los datos de la llamada…":"En attente des données de l’appel…",
 "La llamada ha terminado.":"L’appel est terminé.",
 "Sin datos de la llamada desde hace {s} s":"Aucune donnée de l’appel depuis {s} s",
-"El satélite es solo un símbolo: no indica por dónde va la llamada ni dónde está la otra persona.":"Le satellite n’est qu’un symbole : il n’indique ni par où passe l’appel ni où se trouve l’autre personne."
+"El satélite es solo un símbolo: no indica por dónde va la llamada ni dónde está la otra persona.":"Le satellite n’est qu’un symbole : il n’indique ni par où passe l’appel ni où se trouve l’autre personne.",
+"Envío {v} · recepción {w}":"Envoi {v} · réception {w}"
 },
 "p":{
 "intento":"Celle qui a le plus insisté aujourd'hui : {1}, {2} {2?fois|fois}.",

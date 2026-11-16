@@ -4025,7 +4025,8 @@
 "Esperando los datos de la llamada…":"통화 데이터를 기다리는 중…",
 "La llamada ha terminado.":"통화가 종료되었습니다.",
 "Sin datos de la llamada desde hace {s} s":"{s}초 동안 통화 데이터 없음",
-"El satélite es solo un símbolo: no indica por dónde va la llamada ni dónde está la otra persona.":"위성은 상징일 뿐입니다. 통화가 어느 길로 가는지도, 상대방이 어디에 있는지도 나타내지 않습니다."
+"El satélite es solo un símbolo: no indica por dónde va la llamada ni dónde está la otra persona.":"위성은 상징일 뿐입니다. 통화가 어느 길로 가는지도, 상대방이 어디에 있는지도 나타내지 않습니다.",
+"Envío {v} · recepción {w}":"송신 {v} · 수신 {w}"
 },
 "p":{
 "intento":"오늘 가장 많이 시도한 곳: {1}, {2}{2?회|회}.",
