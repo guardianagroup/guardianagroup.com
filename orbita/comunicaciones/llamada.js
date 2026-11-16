@@ -77,6 +77,9 @@
   // toda la pantalla; esta página la llena igual que la de Chrome. Un programa anterior la abriría como pestaña: sin la marca, no.
   const VENTANA_NOMBRE = 'guardiana-flotante';
   const VENTANA_PROGRAMA = () => !!(document.documentElement && document.documentElement.dataset.ventanaLlamada === '1');
+  // (1.0.61) y esa ventana hace lo que su página le pide al final de su título (#volver, #grande, #normal): traer delante la
+  // ventana del programa, agrandarse y volver a su tamaño
+  const VENTANA_ORDENES = () => VENTANA_PROGRAMA() && document.documentElement.dataset.ventanaOrdenes === '1';
   // dentro del programa GUARDIANA (su página marcada): Órbita y Comunicaciones son sus propias pestañas, sin barra
   const EN_PROGRAMA = () => !!(document.documentElement && document.documentElement.dataset.enPrograma === '1');
   const docPip = () => DOC_PIP && !EN_WEBVIEW && !EN_PROGRAMA() && !VENTANA_PROGRAMA();
@@ -2688,7 +2691,7 @@
       // derecha, la ventana pasa de pequeña a grande (media pantalla) y vuelve; también se agranda desde su borde. Donde la página
       // puede hacerlo: la ventana flotante del sistema, en Chrome y Edge.
       let bTam = null;
-      if (pip) { bTam = el('button', 'vf-b vf-tam'); bTam.type = 'button'; bTam.addEventListener('click', () => tamVentana()); }
+      if (pip || VENTANA_ORDENES()) { bTam = el('button', 'vf-b vf-tam'); bTam.type = 'button'; bTam.addEventListener('click', () => tamVentana()); }
       marco.append(rem, ini, yo, arriba, barra); if (bTam) marco.append(bTam); d.body.append(marco);
       vf = { w, sola: !!sola, pip: !!pip, rem, yo, ini, reloj, bMic, bCam, bColgar, bVolver, bTam, tic: 0 };
       // un doble clic en la imagen, lo mismo
@@ -2727,9 +2730,14 @@
     }
     // grande: más de 560 px de ancho por dentro (con el botón, o desde el borde); pequeña: la de siempre, 400 × 260
     function vfGrande() { try { return !!vf && vf.w.innerWidth > 560; } catch (_) { return false; } }
+    // a la ventana del programa (1.0.61), por su título; se deja como estaba enseguida, para que la siguiente orden también cuente
+    function ordenVentana(w, o) {
+      try { w.document.title = 'GUARDIANA #' + o; setTimeout(() => { try { if (!w.closed && / #/.test(w.document.title)) w.document.title = 'GUARDIANA'; } catch (_) {} }, 500); } catch (_) {}
+    }
     function tamVentana() {
       if (!vf) return;
       const w = vf.w;
+      if (!vf.pip) { if (VENTANA_ORDENES()) ordenVentana(w, vfGrande() ? 'normal' : 'grande'); setTimeout(pintaVf, 300); setTimeout(pintaVf, 900); return; }
       try {
         const dw = Math.max(0, w.outerWidth - w.innerWidth), dh = Math.max(0, w.outerHeight - w.innerHeight);
         let W = 400, H = 260;
@@ -2745,6 +2753,8 @@
       if (estado !== 'hablando') { cierraVentana(); return; }
       pequena(false);
       if (EN_PROGRAMA()) irAlProducto('secure'); else { try { raiz.focus(); } catch (_) {} }
+      // (1.0.61) el programa trae su ventana delante, también si estaba minimizada; la de la llamada se cierra justo después
+      if (vf && !vf.pip && VENTANA_ORDENES()) { const w = vf.w; ordenVentana(w, 'volver'); setTimeout(() => { if (vf && vf.w === w) cierraVentana(); }, 250); return; }
       cierraVentana();
     }
     function cierraVentana() {

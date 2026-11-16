@@ -39,7 +39,7 @@ async function equipo(browser, nombre, programa) {
     Object.defineProperty(Document.prototype, 'visibilityState', { configurable: true, get: () => window.__vista });
     Object.defineProperty(Document.prototype, 'hidden', { configurable: true, get: () => window.__vista !== 'visible' });
     // la marca del programa (crates/zero/src/paginas.rs, 1.0.60), como la pone su guion al crearse la página
-    if (programa) new MutationObserver((_, o) => { if (document.documentElement) { if (programa === 'webview') document.documentElement.dataset.enPrograma = '1'; else document.documentElement.dataset.ventanaLlamada = '1'; o.disconnect(); } }).observe(document, { childList: true });
+    if (programa) new MutationObserver((_, o) => { if (document.documentElement) { if (programa === 'webview') document.documentElement.dataset.enPrograma = '1'; else { document.documentElement.dataset.ventanaLlamada = '1'; document.documentElement.dataset.ventanaOrdenes = '1'; } o.disconnect(); } }).observe(document, { childList: true });
     window.__abiertas = [];
     const abre = window.open;
     window.open = function (u, n, f) { window.__abiertas.push(String(n || '')); return abre.call(window, u, n, f); };
@@ -82,7 +82,7 @@ async function llamada(browser, programa) {
   let v = V ? await lee(V) : null;
   comprueba(!!v && v.nombre === 'guardiana-flotante', '1. al dejar la pestaña, la página pide la ventana de la llamada por su nombre', v && v.nombre);
   comprueba(!!v && v.rem && v.remAncho > 0 && v.yo && v.yoAncho > 0, '1. con la otra persona y tu imagen, en movimiento', v);
-  comprueba(!!v && /^\d\d:\d\d$/.test(v.tiempo) && v.botones.join(',') === 'vf-mic,vf-cam,vf-colgar,vf-volver', '1. con el tiempo y micrófono, cámara, colgar y «Volver a la llamada»', v && { tiempo: v.tiempo, botones: v.botones });
+  comprueba(!!v && /^\d\d:\d\d$/.test(v.tiempo) && v.botones.join(',') === 'vf-mic,vf-cam,vf-colgar,vf-volver,vf-tam', '1. con el tiempo y micrófono, cámara, colgar, «Volver a la llamada» y «Agrandar» (1.0.61)', v && { tiempo: v.tiempo, botones: v.botones });
   if (V) { await V.setViewportSize({ width: 400, height: 260 }).catch(() => {}); await espera(400); await V.mouse.move(200, 130); await espera(400); await V.screenshot({ path: path.join(OUT, '1-ventana-de-la-llamada.png') }); }
   if (V) { await V.evaluate(() => document.querySelector('.vf-mic').click()); await espera(500); }
   const mic = await A.evaluate(() => document.querySelector('#ll-silenciar').getAttribute('aria-pressed'));
@@ -90,7 +90,7 @@ async function llamada(browser, programa) {
   if (V) { await V.evaluate(() => document.querySelector('.vf-mic').click()); await espera(400); }
   // 1b. su página, cambiada por otra en blanco
   if (V) {
-    const llena = async () => { const x = await lee(V).catch(() => null); return !!(x && x.rem && x.remAncho > 0 && x.botones.length === 4); };
+    const llena = async () => { const x = await lee(V).catch(() => null); return !!(x && x.rem && x.remAncho > 0 && x.botones.length === 5); };
     await V.evaluate(() => { document.open(); document.close(); }).catch(() => {});
     comprueba(!(await llena()), '1b. (vaciada)');
     comprueba(await hasta(llena, 5000), '1b. vaciada, se vuelve a llenar sola');
@@ -104,6 +104,23 @@ async function llamada(browser, programa) {
     const mic2 = await A.evaluate(() => document.querySelector('#ll-silenciar').getAttribute('aria-pressed'));
     comprueba(mic2 === 'true', '1b. y sus botones vuelven a mandar en la llamada', mic2);
     if (V) { await V.evaluate(() => document.querySelector('.vf-mic').click()).catch(() => {}); await espera(400); }
+  }
+  // 1c. (1.0.61) «Agrandar» y «Reducir»: la página se lo pide al programa por el título de la ventana; aquí la prueba hace de programa
+  if (V) {
+    const titulos = async (ms) => { const vistos = new Set(); const h = Date.now() + ms; while (Date.now() < h) { vistos.add(await V.title().catch(() => '')); await espera(40); } return [...vistos]; };
+    const etiqueta = () => V.evaluate(() => { const b = document.querySelector('.vf-tam'); return b ? b.getAttribute('aria-label') : null; }).catch(() => null);
+    await V.setViewportSize({ width: 400, height: 260 }).catch(() => {}); await espera(500);
+    comprueba((await etiqueta()) === 'Agrandar', '1c. la ventana del programa lleva «Agrandar»', await etiqueta());
+    await V.evaluate(() => document.querySelector('.vf-tam').click());
+    const t1 = await titulos(700);
+    comprueba(t1.includes('GUARDIANA #grande'), '1c. «Agrandar» se lo pide al programa (#grande)', t1);
+    await V.setViewportSize({ width: 768, height: 476 }).catch(() => {}); await espera(900);
+    comprueba((await etiqueta()) === 'Reducir' && (await V.title()) === 'GUARDIANA', '1c. agrandada, el botón dice «Reducir» y el título vuelve a ser el de siempre', { e: await etiqueta(), t: await V.title() });
+    await V.evaluate(() => document.querySelector('.vf-tam').click());
+    const t2 = await titulos(700);
+    comprueba(t2.includes('GUARDIANA #normal'), '1c. «Reducir» se lo pide al programa (#normal)', t2);
+    await V.setViewportSize({ width: 400, height: 260 }).catch(() => {}); await espera(900);
+    comprueba((await etiqueta()) === 'Agrandar', '1c. y vuelve «Agrandar»');
   }
   // 2. vuelve
   await oculta(A, false); await espera(1500);
@@ -123,7 +140,19 @@ async function llamada(browser, programa) {
   const vuelta = await A.evaluate(() => { const e = document.querySelector('#llamada'); return { tarjeta: !!(e.getClientRects().length && getComputedStyle(e).display !== 'none'), mini: e.classList.contains('mini') }; });
   comprueba(vuelta.tarjeta && vuelta.mini, '3. al cerrarla con su ×, vuelve la tarjeta pequeña', vuelta);
   comprueba((await estado(A)) === 'hablando', '3. y la llamada sigue');
-  await A.evaluate(() => document.querySelector('#ll-videos').click()); await espera(600);
+  // 3b. (1.0.61) «Volver a la llamada» en la ventana: la página le pide al programa su ventana delante (#volver), la llamada vuelve en
+  //     grande y la ventana se cierra
+  [V] = await Promise.all([ctx.waitForEvent('page', { timeout: 8000 }).catch(() => null), A.evaluate(() => document.querySelector('#ll-mini').click())]);
+  await espera(2000);
+  if (V) {
+    const vistos = new Set();
+    await V.evaluate(() => document.querySelector('.vf-volver').click()).catch(() => {});
+    const h = Date.now() + 700; while (Date.now() < h && !V.isClosed()) { vistos.add(await V.title().catch(() => '')); await espera(30); }
+    await espera(800);
+    const grande = await A.evaluate(() => { const e = document.querySelector('#llamada'); return !e.classList.contains('mini') && !e.classList.contains('en-ventana'); });
+    comprueba([...vistos].includes('GUARDIANA #volver') && V.isClosed() && grande, '3b. «Volver a la llamada»: #volver al programa, la llamada en grande y la ventana cerrada', { titulos: [...vistos], cerrada: V.isClosed(), grande });
+  } else comprueba(false, '3b. (la ventana de «Ver el chat»)');
+  await A.evaluate(() => { const e = document.querySelector('#llamada'); if (e.classList.contains('mini')) document.querySelector('#ll-videos').click(); }); await espera(600);
 
   // 4. colgar desde la ventana
   [V] = await Promise.all([ctx.waitForEvent('page', { timeout: 8000 }).catch(() => null), oculta(A, true)]);
