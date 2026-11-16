@@ -4024,7 +4024,8 @@
 "De la otra persona nunca se muestra dónde está.":"L’endroit où se trouve l’autre personne n’est jamais affiché.",
 "Esperando los datos de la llamada…":"En attente des données de l’appel…",
 "La llamada ha terminado.":"L’appel est terminé.",
-"Sin datos de la llamada desde hace {s} s":"Aucune donnée de l’appel depuis {s} s"
+"Sin datos de la llamada desde hace {s} s":"Aucune donnée de l’appel depuis {s} s",
+"El satélite es solo un símbolo: no indica por dónde va la llamada ni dónde está la otra persona.":"Le satellite n’est qu’un symbole : il n’indique ni par où passe l’appel ni où se trouve l’autre personne."
 },
 "p":{
 "intento":"Celle qui a le plus insisté aujourd'hui : {1}, {2} {2?fois|fois}.",

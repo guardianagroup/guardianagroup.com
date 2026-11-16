@@ -4024,7 +4024,8 @@
 "De la otra persona nunca se muestra dónde está.":"Mahali alipo mtu mwingine hapaonyeshwi kamwe.",
 "Esperando los datos de la llamada…":"Inasubiri data ya simu…",
 "La llamada ha terminado.":"Simu imekwisha.",
-"Sin datos de la llamada desde hace {s} s":"Hakuna data ya simu kwa sekunde {s}"
+"Sin datos de la llamada desde hace {s} s":"Hakuna data ya simu kwa sekunde {s}",
+"El satélite es solo un símbolo: no indica por dónde va la llamada ni dónde está la otra persona.":"Setilaiti ni ishara tu: haionyeshi simu inapitia wapi wala mtu mwingine yuko wapi."
 },
 "p":{
 "intento":"Iliyojaribu zaidi leo: {1}, {2?mara|mara} {2}.",

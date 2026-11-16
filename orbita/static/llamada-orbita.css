@@ -3,6 +3,8 @@ body.en-llamada-orbita #directo, body.en-llamada-orbita #puertas, body.en-llamad
 body.en-llamada-orbita #sat-fase, body.en-llamada-orbita #capa-nota, body.en-llamada-orbita #ficha, body.en-llamada-orbita .sat-ficha,
 body.en-llamada-orbita .ficha-panel, body.en-llamada-orbita .altura, body.en-llamada-orbita .empezar, body.en-llamada-orbita .cinta { opacity: 0 !important; pointer-events: none !important; transition: opacity .4s; }
 body.en-llamada-orbita #estado { opacity: .35; }
+/* segunda voz, C3: «Inicio» y «Ver mi PC en directo» no se mezclan con la vista de la llamada (la cierran su ✕ y «Volver a la llamada») */
+body.en-llamada-orbita #volver, body.en-llamada-orbita #tupc-btn { display: none !important; }
 .llorb-hud { position: fixed; z-index: 25; left: calc(40px + env(safe-area-inset-left, 0px)); top: max(104px, calc(50% - 330px)); width: 336px; box-sizing: border-box; max-height: calc(100vh - max(104px, 50vh - 330px) - 28px); overflow: hidden; display: flex; flex-direction: column; gap: 12px; padding: 16px 18px 16px; border-radius: 18px; border: 1px solid rgba(156,195,228,.2); background: rgba(9,13,19,.82); backdrop-filter: blur(14px) saturate(1.1); -webkit-backdrop-filter: blur(14px) saturate(1.1); box-shadow: 0 24px 60px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.03); color: var(--fg); animation: radio-entra .55s cubic-bezier(.2,.7,.2,1); scrollbar-width: thin; scrollbar-color: rgba(156,195,228,.25) transparent; }
 .llorb-hud .cab { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: -2px -4px -2px 0; }
 .llorb-hud .k { margin: 0; display: flex; align-items: center; gap: 8px; min-width: 0; font: 500 10px/1 var(--mono); letter-spacing: .16em; text-transform: uppercase; color: #8A95A2; }
@@ -17,17 +19,21 @@ body.en-llamada-orbita #estado { opacity: .35; }
 .llorb-est b.aviso { color: #F0C77F; }
 .llorb-est b.alerta { color: #E07A6C; }
 .llorb-hud.mudo .vivo { background: #4A5664; box-shadow: none; animation: none; }
+.llorb-hud.fin .llorb-directo { display: none; }
+.llorb-hud.mudo .llorb-l li { opacity: .5; }
+.llorb-hud.mudo .llorb-l li i { background: #4A5664 !important; box-shadow: none !important; }
+.llorb-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
 /* la ruta: tres puntos unidos por una línea, como en el planeta */
 .llorb-ruta { list-style: none; margin: 0; padding: 10px 12px; border-radius: 12px; border: 1px solid rgba(156,195,228,.14); background: rgba(156,195,228,.05); display: flex; flex-direction: column; gap: 9px; }
 .llorb-ruta li { position: relative; display: grid; grid-template-columns: 12px 1fr; column-gap: 11px; align-items: center; }
 .llorb-ruta li i { width: 9px; height: 9px; border-radius: 50%; background: #9CC3E4; box-shadow: 0 0 8px rgba(156,195,228,.8); grid-row: 1 / span 2; justify-self: center; align-self: start; margin-top: 4px; }
 .llorb-ruta li.serv i { background: #5CC98A; box-shadow: 0 0 8px rgba(92,201,138,.8); }
 .llorb-ruta li.otro i { background: transparent; border: 1.5px dashed #9CC3E4; box-shadow: none; width: 8px; height: 8px; }
-.llorb-ruta li:not(:last-child)::after { content: ""; position: absolute; left: 5.5px; top: 15px; bottom: -8px; width: 1.5px; background: linear-gradient(180deg, rgba(156,195,228,.6), rgba(156,195,228,.2)); }
+.llorb-ruta li:not(:last-child)::after { content: ""; position: absolute; inset-inline-start: 5.5px; top: 15px; bottom: -8px; width: 1.5px; background: linear-gradient(180deg, rgba(156,195,228,.6), rgba(156,195,228,.2)); }
 .llorb-ruta li b { font: 500 12.5px/1.3 var(--texto); color: #F4F6F8; }
 .llorb-ruta li span { grid-column: 2; font: 400 11px/1.3 var(--texto); color: rgba(244,246,248,.58); }
 .llorb-ruta li span:empty { display: none; }
-.llorb-cifras { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; padding: 12px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.llorb-cifras { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; padding: 12px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
 .llorb-cifras div { display: flex; flex-direction: column; gap: 7px; min-width: 0; }
 .llorb-cifras b { font: 600 19px/1 var(--texto); font-variant-numeric: tabular-nums; letter-spacing: -.01em; color: var(--fg); white-space: nowrap; }
 .llorb-cifras span { font: 500 8.5px/1.3 var(--mono); letter-spacing: .06em; text-transform: uppercase; color: #8A95A2; }

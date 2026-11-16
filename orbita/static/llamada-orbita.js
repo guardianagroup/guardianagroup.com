@@ -31,6 +31,9 @@
   // lo que llega de la otra pestaña se lee como texto, recortado; nunca como HTML
   const RARO = /[\u0000-\u001f\u007f-\u009f​-‏‪-‮⁦-⁩﻿]/g;
   const tx = (x, max) => (typeof x === 'string' ? x.replace(RARO, '').trim().slice(0, max || 120) : '');
+  // solo las claves propias («constructor» o «__proto__» no son un servidor ni un nivel: segunda voz, C4)
+  const tiene = (o, k) => typeof k === 'string' && Object.prototype.hasOwnProperty.call(o, k);
+  const servidorDe = (k) => (tiene(SERVIDORES, k) ? SERVIDORES[k] : null);
 
   // ---------- el estado ----------
   // L = { datos (lo último de la llamada, limpio), t (cuándo llegó), fin, w (el arco), lk }
@@ -39,11 +42,13 @@
   function limpia(d) {
     if (!d || typeof d !== 'object' || d.v !== 1) return null;
     const NIV = { ok: 1, aviso: 1, alerta: 1, neutro: 1 };
-    const filas = Array.isArray(d.filas) ? d.filas.slice(0, 14).filter((f) => Array.isArray(f) && f.length === 4).map((f) => [tx(f[0], 20), NIV[f[1]] ? f[1] : 'neutro', tx(f[2], 80), tx(f[3], 120)]) : [];
+    const filas = Array.isArray(d.filas) ? d.filas.slice(0, 14).filter((f) => Array.isArray(f) && f.length === 4).map((f) => [tx(f[0], 20), tiene(NIV, f[1]) ? f[1] : 'neutro', tx(f[2], 80), tx(f[3], 120)]) : [];
+    // sin «ida y vuelta»: el tiempo de ida y vuelta de la llamada recorre el camino hasta la otra persona y deja intuir a
+    // qué distancia está (segunda voz, C1); la vista no lo enseña
     return {
-      nivel: NIV[d.nivel] ? d.nivel : 'neutro', estado: tx(d.estado, 60), hace: Number.isFinite(d.hace) ? Math.max(0, Math.min(999, Math.round(d.hace))) : null,
-      filas, ruta: ['mio', 'servidor', 'directa'].includes(d.ruta) ? d.ruta : '', servidor: SERVIDORES[d.servidor] ? d.servidor : '',
-      ciudad: tx(d.ciudad, 60), guardiana: d.guardiana !== false, envio: tx(d.envio, 24), recep: tx(d.recep, 24), ida: tx(d.ida, 16),
+      nivel: tiene(NIV, d.nivel) ? d.nivel : 'neutro', estado: tx(d.estado, 60), hace: Number.isFinite(d.hace) ? Math.max(0, Math.min(999, Math.round(d.hace))) : null,
+      filas, ruta: ['mio', 'servidor', 'directa'].includes(d.ruta) ? d.ruta : '', servidor: servidorDe(d.servidor) ? d.servidor : '',
+      ciudad: tx(d.ciudad, 60), guardiana: d.guardiana !== false, envio: tx(d.envio, 24), recep: tx(d.recep, 24),
     };
   }
 
@@ -91,6 +96,51 @@
     for (let i = 1; i < pts.length; i++) cx.lineTo(pts[i].x, pts[i].y);
     cx.stroke(); cx.restore();
   }
+  // el satélite, en el estilo de los satélites de Órbita (cuerpo claro, dos paneles solares con sus celdas), con las alas
+  // cruzadas a la línea y el plato hacia ella. Es un símbolo: no dice por dónde va la llamada (el panel lo aclara).
+  function satelite(cx, x, y, dir, t, vivo) {
+    const L = 62, wb = L * 0.12, hb = L * 0.15, hp = L * 0.14, br = L * 0.07;
+    cx.save(); cx.globalCompositeOperation = 'source-over';
+    const g = cx.createRadialGradient(x, y, 0, x, y, L * 0.8); g.addColorStop(0, `rgba(${ACENTO},${vivo ? '.34' : '.18'})`); g.addColorStop(1, `rgba(${ACENTO},0)`);
+    cx.fillStyle = g; cx.beginPath(); cx.arc(x, y, L * 0.8, 0, Math.PI * 2); cx.fill();
+    cx.translate(x, y); cx.rotate(dir + Math.PI / 2 + (vivo && !reducido() ? Math.sin(t * 0.7) * 0.06 : 0));
+    const paneles = [[-L / 2, -wb - br], [wb + br, L / 2]];
+    // un borde oscuro debajo: se lee igual sobre el espacio que sobre el planeta
+    cx.shadowColor = 'rgba(6,8,12,.9)'; cx.shadowBlur = 5;
+    for (const [x0, x1] of paneles) {
+      const gp = cx.createLinearGradient(0, -hp, 0, hp); gp.addColorStop(0, 'rgb(176,210,238)'); gp.addColorStop(0.5, `rgb(${ACENTO})`); gp.addColorStop(1, 'rgb(98,140,180)');
+      cx.fillStyle = gp; cx.fillRect(x0, -hp, x1 - x0, 2 * hp);
+    }
+    cx.shadowBlur = 0;
+    cx.strokeStyle = 'rgba(6,8,12,.55)'; cx.lineWidth = 0.8; cx.beginPath();
+    for (const [x0, x1] of paneles) { for (let k = 1; k < 4; k++) { const xx = x0 + (x1 - x0) * k / 4; cx.moveTo(xx, -hp); cx.lineTo(xx, hp); } cx.moveTo(x0, 0); cx.lineTo(x1, 0); }
+    cx.stroke();
+    cx.fillStyle = 'rgba(200,214,228,.95)'; cx.fillRect(-wb - br, -0.7, br, 1.4); cx.fillRect(wb, -0.7, br, 1.4);
+    const gb = cx.createLinearGradient(-wb, -hb, wb, hb); gb.addColorStop(0, `rgb(${BLANCO})`); gb.addColorStop(1, 'rgb(196,206,216)');
+    cx.fillStyle = gb; cx.fillRect(-wb, -hb, 2 * wb, 2 * hb);
+    // el plato, mirando a la línea (hacia el planeta)
+    cx.fillStyle = `rgb(${BLANCO})`; cx.fillRect(-0.7, hb, 1.4, 3.2);
+    cx.strokeStyle = `rgb(${BLANCO})`; cx.lineWidth = 1.6; cx.beginPath(); cx.arc(0, hb + 7.5, 4.6, Math.PI * 1.15, Math.PI * 1.85); cx.stroke();
+    // la luz de posición, viva mientras llegan datos
+    if (vivo) { const e = reducido() ? 1 : 0.5 + 0.5 * Math.sin(t * 3); cx.fillStyle = `rgba(${VERDE},${(0.45 + 0.55 * e).toFixed(3)})`; cx.beginPath(); cx.arc(0, -hb + 3, 1.8, 0, Math.PI * 2); cx.fill(); }
+    cx.restore();
+  }
+  // la otra persona: una figura pequeña junto al satélite, en un círculo discontinuo (su lugar no se muestra)
+  function persona(cx, x, y) {
+    cx.save(); cx.globalCompositeOperation = 'source-over';
+    cx.fillStyle = 'rgba(9,13,19,.82)'; cx.beginPath(); cx.arc(x, y, 11, 0, Math.PI * 2); cx.fill();
+    cx.strokeStyle = `rgba(${ACENTO},.8)`; cx.lineWidth = 1.4; cx.setLineDash([3, 3.5]); cx.beginPath(); cx.arc(x, y, 11, 0, Math.PI * 2); cx.stroke(); cx.setLineDash([]);
+    cx.fillStyle = `rgba(${ACENTO},.95)`; cx.beginPath(); cx.arc(x, y - 2.6, 3, 0, Math.PI * 2); cx.fill();
+    cx.beginPath(); cx.arc(x, y + 6, 5.2, Math.PI, 0); cx.fill();
+    cx.restore();
+  }
+  // dibuja solo dentro del disco del planeta (dentro) o solo fuera de él
+  function recorte(cx, G, dentro, fn) {
+    cx.save(); cx.beginPath();
+    if (!dentro) cx.rect(-1e5, -1e5, 2e5, 2e5);
+    cx.moveTo(G.CX + G.R, G.CY); cx.arc(G.CX, G.CY, G.R, 0, Math.PI * 2); cx.closePath();
+    cx.clip('evenodd'); fn(); cx.restore();
+  }
   // del punto `s` (en pantalla) hacia fuera del planeta: del centro a través de él, un poco hacia arriba; acaba en el espacio
   function subida(G, s) {
     let dx = s.x - G.CX, dy = s.y - G.CY; const dl = Math.hypot(dx, dy);
@@ -105,7 +155,7 @@
     if (!L) return;
     const yo = p.lugar; if (!yo) return;
     const d = L.datos, vivo = !!d && !L.fin && performance.now() - L.t < MUDO;
-    const S = d && d.servidor ? SERVIDORES[d.servidor] : null;
+    const S = d ? servidorDe(d.servidor) : null;
     cx.save(); cx.globalCompositeOperation = 'lighter'; cx.lineCap = 'round'; cx.lineJoin = 'round';
     const a = punto(p, G, vec(yo.lon, yo.lat).map((c) => c * 1.004));
     let s = null, desde = a;
@@ -122,14 +172,19 @@
     let o = null;
     if (d && desde.ve) {
       const sb = subida(G, desde);
-      trazo(cx, sb.ruta, ACENTO, vivo ? 0.12 : 0.06, 6); trazo(cx, sb.ruta, ACENTO, vivo ? 0.55 : 0.25, 1.4, [3, 6]);
-      if (vivo) { paquetes(cx, sb.ruta, ACENTO, t, 3, 0.4, false, -3); paquetes(cx, sb.ruta, VERDE, t, 3, 0.4, true, 3); }
+      // sobre el planeta, apenas un trazo y sin paquetes: no señala ningún país (segunda voz); fuera, en el espacio, entera
+      recorte(cx, G, true, () => trazo(cx, sb.ruta, ACENTO, vivo ? 0.34 : 0.16, 1.1, [2, 6]));
+      recorte(cx, G, false, () => {
+        trazo(cx, sb.ruta, ACENTO, vivo ? 0.12 : 0.06, 6); trazo(cx, sb.ruta, ACENTO, vivo ? 0.55 : 0.25, 1.4, [3, 6]);
+        if (vivo) { paquetes(cx, sb.ruta, ACENTO, t, 3, 0.4, false, -3); paquetes(cx, sb.ruta, VERDE, t, 3, 0.4, true, 3); }
+      });
       o = sb.o;
-      cx.save(); cx.globalCompositeOperation = 'source-over';
-      cx.strokeStyle = `rgba(${ACENTO},.8)`; cx.lineWidth = 1.5; cx.setLineDash([3, 4]); cx.beginPath(); cx.arc(o.x, o.y, 12, 0, 7); cx.stroke(); cx.setLineDash([]);
-      cx.fillStyle = `rgba(${ACENTO},.9)`; cx.beginPath(); cx.arc(o.x, o.y - 2.5, 3.2, 0, 7); cx.fill();
-      cx.beginPath(); cx.arc(o.x, o.y + 6.5, 5.5, Math.PI, 0); cx.fill();
-      cx.restore();
+      // al final de la línea, el satélite (dueño, 16 Nov 2026, 00:26) y, a su lado, la otra persona
+      const pa = sb.ruta[sb.ruta.length - 2], dir = Math.atan2(o.y - pa.y, o.x - pa.x);
+      satelite(cx, o.x, o.y, dir, t, vivo);
+      const lado = o.x < G.CX ? -1 : 1;
+      persona(cx, o.x + lado * 50, o.y + 2);
+      o.lado = lado;
     }
     // 3 · los puntos y sus rótulos
     if (a.ve) nodo(cx, a.x, a.y, 4.5, ACENTO, t, 0, vivo);
@@ -137,28 +192,31 @@
     cx.restore();
     if (a.ve) etiqueta(cx, a.x, a.y, T('Tu dispositivo'), yo.aprox ? T('Ubicación aproximada') : (yo.nombre || ''), a.x < (s && s.ve ? s.x : G.CX) ? -1 : 1);
     if (s && s.ve) etiqueta(cx, s.x, s.y + 30, d.guardiana ? T('Servidor de GUARDIANA') : T('Servidor'), d.ciudad, s.x >= (a.ve ? a.x : G.CX) ? 1 : -1);
-    if (o) etiqueta(cx, o.x, o.y, T('La otra persona'), T('Su ubicación no se muestra'), o.x < G.CX ? -1 : 1);
+    if (o) etiqueta(cx, o.x + o.lado * 58, o.y + 2, T('La otra persona'), T('Su ubicación no se muestra'), o.lado);
   }
 
   // ---------- el panel ----------
   function pintaHud() {
     if (!hud || !L) return;
     const d = L.datos, yo = P() && P().lugar, mudo = !!d && !L.fin && performance.now() - L.t >= MUDO;
-    hud.classList.toggle('mudo', !d || mudo || L.fin);
+    hud.classList.toggle('mudo', !d || mudo || L.fin); hud.classList.toggle('fin', !!L.fin);
     const nv = hud.querySelector('.llorb-nivel'), ha = hud.querySelector('.llorb-hace');
     nv.className = 'llorb-nivel' + (d && !mudo && !L.fin ? ' ' + d.nivel : '');
-    if (L.fin) { nv.textContent = T('La llamada ha terminado.'); ha.textContent = ''; }
+    if (L.fin) { nv.textContent = T(L.fin === 'telefono' ? 'La llamada continúa en tu teléfono.' : 'La llamada ha terminado.'); ha.textContent = ''; }
     else if (!d) { nv.textContent = T('Esperando los datos de la llamada…'); ha.textContent = ''; }
     else if (mudo) { nv.textContent = T('Sin datos de la llamada desde hace {s} s').replace('{s}', String(Math.round((performance.now() - L.t) / 1000))); ha.textContent = ''; }
     else { nv.textContent = d.estado || ''; ha.textContent = d.hace != null ? ' · ' + T('comprobado hace {s} s').replace('{s}', String(d.hace)) : ''; }
+    // al lector de pantalla, solo cuando cambia el estado (no cada segundo: segunda voz)
+    const sr = hud.querySelector('.llorb-sr'), dice = L.fin ? nv.textContent : !d ? nv.textContent : mudo ? 'mudo' : d.nivel + '|' + d.estado;
+    if (sr && sr.dataset.k !== dice) { sr.dataset.k = dice; sr.textContent = nv.textContent; }
     // la ruta: tres puntos (o dos, si no hay servidor de este lado)
     const r = hud.querySelector('.llorb-ruta'); r.textContent = '';
     const pasos = [['yo', 'Tu dispositivo', yo ? (yo.aprox ? T('{p}, aproximado').replace('{p}', yo.nombre || '') : yo.nombre || '') : '']];
     if (d && d.servidor) pasos.push(['serv', d.guardiana ? 'Servidor de GUARDIANA' : 'Servidor', d.ciudad]);
     pasos.push(['otro', 'La otra persona', T('Su ubicación no se muestra')]);
     for (const [cls, b, s] of pasos) { const li = crea('li', cls); const i = crea('i'); i.setAttribute('aria-hidden', 'true'); li.append(i, crea('b', null, b)); const sp = document.createElement('span'); sp.textContent = s; li.append(sp); r.append(li); }
-    const c = hud.querySelector('.llorb-cifras'); c.textContent = ''; c.hidden = !d;
-    if (d) for (const [v, k] of [[d.envio || '—', 'Enviando'], [d.recep || '—', 'Recibiendo'], [d.ida || '—', 'Ida y vuelta']]) { const div = crea('div'); const b = document.createElement('b'); b.textContent = v; div.append(b, crea('span', null, k)); c.append(div); }
+    const c = hud.querySelector('.llorb-cifras'); c.textContent = ''; c.hidden = !d || !!L.fin;
+    if (d && !L.fin) for (const [v, k] of [[d.envio || '—', 'Enviando'], [d.recep || '—', 'Recibiendo']]) { const div = crea('div'); const b = document.createElement('b'); b.textContent = v; div.append(b, crea('span', null, k)); c.append(div); }
     const ul = hud.querySelector('.llorb-l'); ul.textContent = ''; ul.hidden = !d || L.fin;
     if (d) for (const [, nivel, b, s] of d.filas) { const li = crea('li', 'llorb-' + nivel); const i = crea('i'); i.setAttribute('aria-hidden', 'true'); const bb = document.createElement('b'); bb.textContent = b; const sp = document.createElement('span'); sp.textContent = s; li.append(i, bb, sp); ul.append(li); }
     const ns = hud.querySelector('.llorb-nota-serv'); if (ns) ns.hidden = !(d && d.servidor); // sin servidor de este lado, la nota del servidor sobra
@@ -168,15 +226,17 @@
     if (hud) return;
     hud = crea('section', 'llorb-hud'); hud.id = 'llorb'; hud.setAttribute('aria-labelledby', 'llorb-t');
     const cab = crea('div', 'cab'), k = crea('p', 'k'), vivo = crea('i', 'vivo'); vivo.setAttribute('aria-hidden', 'true');
-    k.append(vivo, crea('span', null, 'Llamada Ultra'), crea('span', 'sep', '·'), crea('span', null, 'En directo'));
+    k.append(vivo, crea('span', null, 'Llamada Ultra'), crea('span', 'sep llorb-directo', '·'), crea('span', 'llorb-directo', 'En directo'));
     const x = crea('button', 'llorb-x'); x.type = 'button'; x.setAttribute('aria-label', T('Cerrar')); x.innerHTML = '<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8"/></svg>';
     x.addEventListener('click', () => cierra(true));
     cab.append(k, x);
     const titulo = crea('h2', 't', 'Tu llamada en Órbita'); titulo.id = 'llorb-t'; titulo.tabIndex = -1;
-    const est = crea('p', 'llorb-est'); est.setAttribute('role', 'status'); est.append(crea('b', 'llorb-nivel'), crea('span', 'llorb-hace'));
+    const est = crea('p', 'llorb-est'); est.append(crea('b', 'llorb-nivel'), crea('span', 'llorb-hace'));
+    const sr = crea('span', 'llorb-sr'); sr.setAttribute('role', 'status'); est.append(sr);
     const ruta = crea('ol', 'llorb-ruta'), cifras = crea('div', 'llorb-cifras'), ul = crea('ul', 'llorb-l');
     const notas = crea('div', 'llorb-notas');
-    notas.append(crea('p', 'llorb-nota-serv', 'La línea une tu dispositivo con el servidor que reenvía la llamada; no es el camino exacto de los cables.'), crea('p', null, 'De la otra persona nunca se muestra dónde está.'));
+    notas.append(crea('p', 'llorb-nota-serv', 'La línea une tu dispositivo con el servidor que reenvía la llamada; no es el camino exacto de los cables.'), crea('p', null, 'De la otra persona nunca se muestra dónde está.'),
+      crea('p', null, 'El satélite es solo un símbolo: no indica por dónde va la llamada ni dónde está la otra persona.'));
     const volver = crea('button', 'llorb-volver', 'Volver a la llamada'); volver.type = 'button';
     volver.addEventListener('click', () => cierra(true));
     hud.append(cab, titulo, est, ruta, cifras, ul, notas, volver);
@@ -187,7 +247,7 @@
   let canal = null;
   // el encuadre: tu lugar y el servidor a la vista (un poco al sur del punto medio, para que el arco se vea levantado)
   function encuadra(clave) {
-    const p = P(), yo = p && p.lugar, S = SERVIDORES[clave]; if (!yo) return;
+    const p = P(), yo = p && p.lugar, S = servidorDe(clave); if (!yo) return;
     if (!S) { p.ir(yo.lon, yo.lat - 10, 1.08); return; }
     const m = slerp(vec(yo.lon, yo.lat), vec(S.lon, S.lat), 0.5);
     p.ir(Math.atan2(m[0], m[2]) / RAD, Math.asin(Math.max(-1, Math.min(1, m[1]))) / RAD - 14, 1.08);
@@ -200,7 +260,7 @@
     montaHud(); pintaHud();
     document.body.classList.add('en-llamada-orbita');
     window.OrbitaCapas.soloTu(true, pinta);
-    encuadra('eu');
+    encuadra('');
     reloj = setInterval(pintaHud, 1000);
     try { if (canal) canal.postMessage({ v: 1, tipo: 'pide' }); } catch (_) {}
     setTimeout(() => { const h = hud && hud.querySelector('.t'); if (h) h.focus({ preventScroll: true }); }, 400);
@@ -227,7 +287,7 @@
     canal = new BroadcastChannel('guardiana-llamada');
     canal.onmessage = (e) => {
       const m = e && e.data; if (!m || m.v !== 1) return;
-      if (m.tipo === 'fin') { if (L) { L.fin = true; pintaHud(); } return; }
+      if (m.tipo === 'fin') { if (L) { L.fin = m.motivo === 'telefono' ? 'telefono' : true; pintaHud(); } return; }
       if (m.tipo === 'estado') { const d = limpia(m); if (d) recibe(d); }
     };
   } catch (_) { canal = null; }

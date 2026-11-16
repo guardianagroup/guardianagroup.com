@@ -4024,7 +4024,8 @@
 "De la otra persona nunca se muestra dónde está.":"A másik fél helye soha nem látható.",
 "Esperando los datos de la llamada…":"Várakozás a hívás adataira…",
 "La llamada ha terminado.":"A hívás véget ért.",
-"Sin datos de la llamada desde hace {s} s":"{s} másodperce nincs adat a hívásról"
+"Sin datos de la llamada desde hace {s} s":"{s} másodperce nincs adat a hívásról",
+"El satélite es solo un símbolo: no indica por dónde va la llamada ni dónde está la otra persona.":"A műhold csak jelkép: nem mutatja, merre halad a hívás, sem azt, hol van a másik fél."
 },
 "p":{
 "intento":"Ma a legtöbbször próbálkozott: {1}, {2} {2?alkalommal|alkalommal}.",

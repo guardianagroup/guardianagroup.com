@@ -4024,7 +4024,8 @@
 "De la otra persona nunca se muestra dónde está.":"అవతలి వ్యక్తి ఎక్కడ ఉన్నారో ఎప్పుడూ చూపబడదు.",
 "Esperando los datos de la llamada…":"కాల్ డేటా కోసం వేచి ఉంది…",
 "La llamada ha terminado.":"కాల్ ముగిసింది.",
-"Sin datos de la llamada desde hace {s} s":"{s} సెకన్లుగా కాల్ డేటా లేదు"
+"Sin datos de la llamada desde hace {s} s":"{s} సెకన్లుగా కాల్ డేటా లేదు",
+"El satélite es solo un símbolo: no indica por dónde va la llamada ni dónde está la otra persona.":"ఉపగ్రహం కేవలం ఒక గుర్తు మాత్రమే: కాల్ ఏ దారిలో వెళ్తుందో, అవతలి వ్యక్తి ఎక్కడ ఉన్నారో అది చూపదు."
 },
 "p":{
 "intento":"ఈరోజు ఎక్కువగా ప్రయత్నించింది: {1}, {2} {2?సారి|సార్లు}.",

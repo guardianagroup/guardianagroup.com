@@ -4024,7 +4024,8 @@
 "De la otra persona nunca se muestra dónde está.":"Lokasi orang lain tidak pernah dipaparkan.",
 "Esperando los datos de la llamada…":"Menunggu data panggilan…",
 "La llamada ha terminado.":"Panggilan telah tamat.",
-"Sin datos de la llamada desde hace {s} s":"Tiada data panggilan sejak {s} s"
+"Sin datos de la llamada desde hace {s} s":"Tiada data panggilan sejak {s} s",
+"El satélite es solo un símbolo: no indica por dónde va la llamada ni dónde está la otra persona.":"Satelit hanyalah simbol: ia tidak menunjukkan laluan panggilan atau lokasi orang lain."
 },
 "p":{
 "intento":"Paling banyak mencuba hari ini: {1}, {2} {2?kali|kali}.",

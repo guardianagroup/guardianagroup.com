@@ -4024,7 +4024,8 @@
 "De la otra persona nunca se muestra dónde está.":"絕不顯示對方的位置。",
 "Esperando los datos de la llamada…":"正在等待通話資料…",
 "La llamada ha terminado.":"通話已結束。",
-"Sin datos de la llamada desde hace {s} s":"已有 {s} 秒沒有通話資料"
+"Sin datos de la llamada desde hace {s} s":"已有 {s} 秒沒有通話資料",
+"El satélite es solo un símbolo: no indica por dónde va la llamada ni dónde está la otra persona.":"衛星只是一個象徵：不代表通話經過的路線，也不代表對方所在的位置。"
 },
 "p":{
 "intento":"今天嘗試最多的：{1}，{2} {2?次|次}。",

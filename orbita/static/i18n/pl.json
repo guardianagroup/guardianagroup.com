@@ -4024,7 +4024,8 @@
 "De la otra persona nunca se muestra dónde está.":"Miejsce, w którym jest druga osoba, nigdy nie jest pokazywane.",
 "Esperando los datos de la llamada…":"Oczekiwanie na dane połączenia…",
 "La llamada ha terminado.":"Połączenie zostało zakończone.",
-"Sin datos de la llamada desde hace {s} s":"Brak danych połączenia od {s} s"
+"Sin datos de la llamada desde hace {s} s":"Brak danych połączenia od {s} s",
+"El satélite es solo un símbolo: no indica por dónde va la llamada ni dónde está la otra persona.":"Satelita to tylko symbol: nie pokazuje, którędy biegnie połączenie ani gdzie jest druga osoba."
 },
 "p":{
 "intento":"Najwięcej prób dziś: {1}, {2} {2?raz|razy}.",

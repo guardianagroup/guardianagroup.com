@@ -1598,6 +1598,7 @@
     "La página ha bloqueado un intento de cargar código ajeno.": ["The page blocked an attempt to load outside code.", "A página bloqueou uma tentativa de carregar código externo."],
     "La huella de la conexión no coincide con la que llegó encriptada.": ["The connection fingerprint does not match the one received encrypted.", "A impressão digital da conexão não coincide com a recebida criptografada."],
     "Alguien más ha entrado en la sala del relé.": ["Someone else has entered the relay room.", "Outra pessoa entrou na sala do relé."],
+    "El satélite es solo un símbolo: no indica por dónde va la llamada ni dónde está la otra persona.": ["The satellite is only a symbol: it does not show which way the call goes or where the other person is.", "O satélite é só um símbolo: não indica por onde a chamada passa nem onde a outra pessoa está."],
     "Ver en Órbita": ["View in Orbit", "Ver na Órbita"],
     "Llamada Ultra": ["Ultra call", "Chamada Ultra"],
     "Tu llamada en Órbita": ["Your call in Orbit", "Sua chamada na Órbita"],

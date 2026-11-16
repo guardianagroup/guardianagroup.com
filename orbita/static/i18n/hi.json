@@ -4024,7 +4024,8 @@
 "De la otra persona nunca se muestra dónde está.":"दूसरा व्यक्ति कहाँ है, यह कभी नहीं दिखाया जाता।",
 "Esperando los datos de la llamada…":"कॉल के डेटा की प्रतीक्षा…",
 "La llamada ha terminado.":"कॉल समाप्त हो गई है।",
-"Sin datos de la llamada desde hace {s} s":"{s} सेकंड से कॉल का कोई डेटा नहीं"
+"Sin datos de la llamada desde hace {s} s":"{s} सेकंड से कॉल का कोई डेटा नहीं",
+"El satélite es solo un símbolo: no indica por dónde va la llamada ni dónde está la otra persona.":"उपग्रह केवल एक प्रतीक है: यह नहीं बताता कि कॉल किस रास्ते से जाती है या दूसरा व्यक्ति कहाँ है।"
 },
 "p":{
 "intento":"आज सबसे ज़्यादा कोशिश: {1}, {2} {2?बार|बार}।",

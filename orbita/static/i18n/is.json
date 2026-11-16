@@ -4024,7 +4024,8 @@
 "De la otra persona nunca se muestra dónde está.":"Hvar hinn aðilinn er birtist aldrei.",
 "Esperando los datos de la llamada…":"Bíð eftir gögnum símtalsins…",
 "La llamada ha terminado.":"Símtalinu er lokið.",
-"Sin datos de la llamada desde hace {s} s":"Engin gögn frá símtalinu í {s} s"
+"Sin datos de la llamada desde hace {s} s":"Engin gögn frá símtalinu í {s} s",
+"El satélite es solo un símbolo: no indica por dónde va la llamada ni dónde está la otra persona.":"Gervihnötturinn er aðeins tákn: hann sýnir hvorki leið símtalsins né hvar hinn aðilinn er."
 },
 "p":{
 "intento":"Sá sem reyndi mest í dag: {1}, {2} {2?sinni|sinnum}.",

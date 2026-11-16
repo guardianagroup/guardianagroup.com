@@ -5472,7 +5472,7 @@
     llevarK = null; llevarV = null;
     if (k && v) escuchaVuelta(k, v, nombre, llevarU);
     $('#llevar-estado').textContent = T('El teléfono ya tiene la llamada.'); $('#llevar-estado').className = 'llevar-estado listo';
-    setTimeout(() => { cierraHoja('h-llevar'); const q = $('#llevar-qr'); if (q) { q.textContent = ''; delete q.dataset.url; } if (LL && LL.estado !== 'libre') LL.colgar(); aviso(T('La llamada continúa en tu teléfono.')); }, 900);
+    setTimeout(() => { cierraHoja('h-llevar'); const q = $('#llevar-qr'); if (q) { q.textContent = ''; delete q.dataset.url; } if (LL && LL.estado !== 'libre') LL.colgar('telefono'); aviso(T('La llamada continúa en tu teléfono.')); }, 900);
   }
   // ----- en el equipo de la otra persona: la llave llega por el canal cifrado de la llamada; el teléfono se añade en cuanto entra -----
   async function alLlevar(k, alPc, u) {

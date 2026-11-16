@@ -4024,7 +4024,8 @@
 "De la otra persona nunca se muestra dónde está.":"Var den andra personen är visas aldrig.",
 "Esperando los datos de la llamada…":"Väntar på samtalets data…",
 "La llamada ha terminado.":"Samtalet har avslutats.",
-"Sin datos de la llamada desde hace {s} s":"Inga data från samtalet på {s} s"
+"Sin datos de la llamada desde hace {s} s":"Inga data från samtalet på {s} s",
+"El satélite es solo un símbolo: no indica por dónde va la llamada ni dónde está la otra persona.":"Satelliten är bara en symbol: den visar inte vilken väg samtalet tar eller var den andra personen är."
 },
 "p":{
 "intento":"Den som försökte mest i dag: {1}, {2} {2?gång|gånger}.",

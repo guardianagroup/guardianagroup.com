@@ -4024,7 +4024,8 @@
 "De la otra persona nunca se muestra dónde está.":"Vị trí của người kia không bao giờ được hiển thị.",
 "Esperando los datos de la llamada…":"Đang chờ dữ liệu cuộc gọi…",
 "La llamada ha terminado.":"Cuộc gọi đã kết thúc.",
-"Sin datos de la llamada desde hace {s} s":"Không có dữ liệu cuộc gọi trong {s} giây"
+"Sin datos de la llamada desde hace {s} s":"Không có dữ liệu cuộc gọi trong {s} giây",
+"El satélite es solo un símbolo: no indica por dónde va la llamada ni dónde está la otra persona.":"Vệ tinh chỉ là một biểu tượng: nó không cho biết cuộc gọi đi qua đâu hay người kia đang ở đâu."
 },
 "p":{
 "intento":"Cố gắng nhiều nhất hôm nay: {1}, {2} {2?lần|lần}.",

@@ -32,6 +32,9 @@ const panel = (O) => O.evaluate(() => {
     filas: [...h.querySelectorAll('.llorb-l li')].map((l) => l.className + ' ' + l.querySelector('b').textContent),
     boton: (h.querySelector('.llorb-volver') || {}).textContent, portada: document.documentElement.classList.contains('con-portada'),
     soloTu: document.body.classList.contains('solo-tu'), clase: document.body.classList.contains('en-llamada-orbita'),
+    // segunda voz: «Inicio» y «Ver mi PC en directo» no se ven en la vista de la llamada; sin opener hacia la llamada
+    inicio: ve(document.querySelector('#volver')), tupc: ve(document.querySelector('#tupc-btn')), opener: window.opener !== null,
+    directo: ve(h.querySelector('.llorb-directo')), vivoSr: (h.querySelector('.llorb-sr[role="status"]') || {}).textContent || '',
   };
 });
 (async () => {
@@ -55,11 +58,24 @@ const panel = (O) => O.evaluate(() => {
   const O = await nueva; O.on('pageerror', (e) => { console.log('[Órbita] pageerror', String(e).slice(0, 300)); fallos.push('pageerror Órbita'); });
   await O.waitForLoadState('load');
   comprueba(/\/orbita\/#llamada$/.test(O.url()), '2. se abre Órbita con #llamada', O.url());
-  let p = null; const llega = await hasta(async () => { p = await panel(O); return p && p.cifras.length === 3 && /^Todo en orden$/.test(p.nivel); }, 25000);
+  let p = null; const llega = await hasta(async () => { p = await panel(O); return p && p.cifras.length === 2 && /bit\/s/.test(p.cifras[0]) && /bit\/s/.test(p.cifras[1]) && /^Todo en orden$/.test(p.nivel); }, 25000);
   comprueba(llega && p.titulo === 'Tu llamada en Órbita' && !p.portada && p.soloTu && p.clase, '2. sin la portada, el planeta solo con la llamada y el panel «Tu llamada en Órbita»', p);
   comprueba(p && /comprobado hace \d s$/.test(p.hace), '2. «Todo en orden · comprobado hace N s», como el monitor', p && p.hace);
   comprueba(p && p.ruta.length === 2 && /^Tu dispositivo · Colombia, aproximado$/.test(p.ruta[0]) && p.ruta[1] === 'La otra persona · Su ubicación no se muestra', '2. la ruta (aquí, directa): tu dispositivo y la otra persona, sin su ubicación', p && p.ruta);
-  comprueba(p && /kbit\/s|Mbit\/s/.test(p.cifras[0]) && /Enviando$/.test(p.cifras[0]) && /Recibiendo$/.test(p.cifras[1]) && /ms\s*Ida y vuelta$/.test(p.cifras[2]), '2. envío, recepción e ida y vuelta, medidos', p && p.cifras);
+  // segunda voz, C1: sin «ida y vuelta» (recorre el camino hasta la otra persona y deja intuir la distancia)
+  comprueba(p && p.cifras.length === 2 && /kbit\/s|Mbit\/s/.test(p.cifras[0]) && /Enviando$/.test(p.cifras[0]) && /Recibiendo$/.test(p.cifras[1]), '2. envío y recepción, medidos; sin «ida y vuelta»', p && p.cifras);
+  comprueba(p && !p.inicio && !p.tupc && !p.opener, '2. sin «Inicio» ni «Ver mi PC en directo» en la vista, y sin acceso a la ventana de la llamada (noopener)', p && { inicio: p.inicio, tupc: p.tupc, opener: p.opener });
+  comprueba(p && p.vivoSr === 'Todo en orden', '2. el lector de pantalla oye el estado, no el contador de segundos', p && p.vivoSr);
+  // segunda voz, C4: un mensaje con «constructor» como servidor no se toma por un servidor (antes, la cámara en NaN)
+  const raro = await O.evaluate(async () => {
+    const c = new BroadcastChannel('guardiana-llamada');
+    c.postMessage({ v: 1, tipo: 'estado', nivel: 'toString', estado: 'x', filas: [], ruta: 'mio', servidor: 'constructor', ciudad: 'X', guardiana: true, envio: '1 kbit/s', recep: '1 kbit/s' });
+    await new Promise((r) => setTimeout(r, 400));
+    const ruta = [...document.querySelectorAll('#llorb .llorb-ruta li')].map((l) => l.className);
+    const nivel = document.querySelector('#llorb .llorb-nivel').className;
+    c.close(); return { ruta, nivel };
+  });
+  comprueba(raro && !raro.ruta.includes('serv') && !/toString/.test(raro.nivel), '2. lo que no es un servidor ni un nivel de la lista no se dibuja', raro);
   comprueba(p && p.filas.length >= 7 && p.filas.some((f) => /Capa postcuántica$/.test(f)) && p.filas.some((f) => /Huella de la conexión$/.test(f)), '2. las comprobaciones del monitor, las mismas', p && p.filas);
   await espera(2500);
   await O.screenshot({ path: path.join(OUT, '1-orbita-llamada.png') });
@@ -70,7 +86,8 @@ const panel = (O) => O.evaluate(() => {
   await A.bringToFront();
   await A.evaluate(() => document.querySelector('#ll-colgar').click());
   const fin = await hasta(async () => { const x = await panel(O); return x && x.nivel === 'La llamada ha terminado.' && x.boton === 'Cerrar'; }, 6000);
-  comprueba(fin, '3. al colgar, «La llamada ha terminado.» y «Cerrar»', await panel(O));
+  const pf = await panel(O);
+  comprueba(fin && pf.cifras.length === 0 && !pf.directo, '3. al colgar, «La llamada ha terminado.» y «Cerrar», sin cifras ni «En directo»', pf);
   await O.screenshot({ path: path.join(OUT, '2-orbita-terminada.png') });
   // 4. en el teléfono (tamaño), el botón no sale
   await O.close();

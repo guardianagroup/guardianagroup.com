@@ -4024,7 +4024,8 @@
 "De la otra persona nunca se muestra dónde está.":"Waar de ander is, wordt nooit getoond.",
 "Esperando los datos de la llamada…":"Wachten op de gegevens van het gesprek…",
 "La llamada ha terminado.":"Het gesprek is beëindigd.",
-"Sin datos de la llamada desde hace {s} s":"Al {s} s geen gegevens van het gesprek"
+"Sin datos de la llamada desde hace {s} s":"Al {s} s geen gegevens van het gesprek",
+"El satélite es solo un símbolo: no indica por dónde va la llamada ni dónde está la otra persona.":"De satelliet is alleen een symbool: hij laat niet zien welke weg het gesprek neemt of waar de ander is."
 },
 "p":{
 "intento":"Probeerde het vandaag het vaakst: {1}, {2} {2?keer|keer}.",

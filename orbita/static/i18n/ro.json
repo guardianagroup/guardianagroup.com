@@ -4024,7 +4024,8 @@
 "De la otra persona nunca se muestra dónde está.":"Locul în care se află cealaltă persoană nu este afișat niciodată.",
 "Esperando los datos de la llamada…":"Se așteaptă datele apelului…",
 "La llamada ha terminado.":"Apelul s-a încheiat.",
-"Sin datos de la llamada desde hace {s} s":"Fără date de la apel de {s} s"
+"Sin datos de la llamada desde hace {s} s":"Fără date de la apel de {s} s",
+"El satélite es solo un símbolo: no indica por dónde va la llamada ni dónde está la otra persona.":"Satelitul este doar un simbol: nu arată pe unde trece apelul și nici unde se află cealaltă persoană."
 },
 "p":{
 "intento":"Cea care a încercat cel mai mult azi: {1}, {2} {2?dată|ori}.",

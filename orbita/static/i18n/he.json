@@ -4024,7 +4024,8 @@
 "De la otra persona nunca se muestra dónde está.":"המיקום של הצד השני לעולם אינו מוצג.",
 "Esperando los datos de la llamada…":"ממתין לנתוני השיחה…",
 "La llamada ha terminado.":"השיחה הסתיימה.",
-"Sin datos de la llamada desde hace {s} s":"אין נתוני שיחה כבר {s} שניות"
+"Sin datos de la llamada desde hace {s} s":"אין נתוני שיחה כבר {s} שניות",
+"El satélite es solo un símbolo: no indica por dónde va la llamada ni dónde está la otra persona.":"הלוויין הוא רק סמל: הוא לא מראה באיזו דרך עוברת השיחה ולא איפה נמצא האדם השני."
 },
 "p":{
 "intento":"ניסתה הכי הרבה היום: {1}, {2} {2?פעם|פעמים}.",
