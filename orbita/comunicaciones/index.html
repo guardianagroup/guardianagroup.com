@@ -41,7 +41,7 @@
 <link rel="canonical" href="https://guardianagroup.com/orbita/comunicaciones/">
 <link rel="icon" href="/favicon.ico">
 <link rel="stylesheet" href="componentes.css?v=20261028m">
-<link rel="stylesheet" href="app.css?v=20261116-vf1">
+<link rel="stylesheet" href="app.css?v=20261116-cod1">
 <link rel="stylesheet" href="diseno.css?v=20261031a">
 <link rel="stylesheet" href="viaje.css?v=20261029b">
 <!-- antes de pintar: como app desde el primer fotograma y, al volver a un chat tras recargar, sin enseñar el inicio entretanto -->
@@ -1040,6 +1040,7 @@
     <strong class="ll-cod-num" id="ll-cod-num" translate="no">— — —</strong>
     <p class="ll-cod-texto" id="ll-cod-texto"></p>
     <div class="ll-cod-botones"><button type="button" class="boton principal" id="ll-cod-si">Coinciden</button><button type="button" class="boton peligro" id="ll-cod-no">No coinciden</button></div>
+    <label class="ll-cod-cada" for="ll-cod-cada"><span id="ll-cod-cada-t">Volver a comprobar</span><select id="ll-cod-cada"><option value="0">Solo al empezar</option><option value="2" selected>Cada 2 minutos</option><option value="5">Cada 5 minutos</option><option value="15">Cada 15 minutos</option><option value="30">Cada 30 minutos</option><option value="60">Cada hora</option></select></label>
   </div>
   <button type="button" class="ll-cod-chip" id="ll-cod-chip" hidden></button>
   <!-- El Vigía: la llamada en pausa porque algo de este ordenador puede estar escuchando o mirando -->
@@ -1368,7 +1369,7 @@
 <!-- En el ordenador, en el chat blindado: la pantalla se tapa con la tecla de captura o si la ventana pierde el foco (29 Oct 2026, 08:02) -->
 <!-- y, en Ultra, al pasar la app a segundo plano o perder el foco (3 Nov 2026, ronda 93): la miniatura de la multitarea sale tapada -->
 <div class="captura-velo" id="captura-velo" role="alert" hidden><div><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><b>Modo Ultra</b><span class="cv-captura">Captura detectada: se vació el portapapeles; una web no puede impedir capturas</span><span class="cv-fuera">Pantalla tapada mientras la app está en segundo plano</span></div></div>
-<script src="/orbita/static/idioma.js?v=20261116-ms1"></script>
+<script src="/orbita/static/idioma.js?v=20261116-cod1"></script>
 <script src="pq-mlkem.js?v=20261027a"></script>
 <script src="pq-cnsa.js?v=20261027a"></script>
 <script src="qrhaz.js?v=20261027a"></script>
@@ -1379,7 +1380,7 @@
 <script src="sha256.js?v=20261027a"></script>
 <script src="viaje-datos.js?v=20261031a"></script>
 <script src="viaje.js?v=20261105-ultra2"></script>
-<script src="llamada.js?v=20261116-vf2"></script>
+<script src="llamada.js?v=20261116-cod1"></script>
 <script src="editor-foto.js?v=20261115-foto1"></script>
 <script src="app.js?v=20261116-vu1"></script>
 </body>

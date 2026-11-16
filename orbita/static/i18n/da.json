@@ -4026,7 +4026,14 @@
 "La llamada ha terminado.":"Opkaldet er afsluttet.",
 "Sin datos de la llamada desde hace {s} s":"Ingen data fra opkaldet i {s} s",
 "El satélite es solo un símbolo: no indica por dónde va la llamada ni dónde está la otra persona.":"Satellitten er kun et symbol: den viser ikke, hvilken vej opkaldet går, eller hvor den anden person er.",
-"Envío {v} · recepción {w}":"Sender {v} · modtager {w}"
+"Envío {v} · recepción {w}":"Sender {v} · modtager {w}",
+"Volver a comprobar":"Tjek igen",
+"Solo al empezar":"Kun i starten",
+"Cada 2 minutos":"Hvert 2. minut",
+"Cada 5 minutos":"Hvert 5. minut",
+"Cada 15 minutos":"Hvert 15. minut",
+"Cada 30 minutos":"Hvert 30. minut",
+"Cada hora":"Hver time"
 },
 "p":{
 "intento":"Den, der prøvede mest i dag: {1}, {2} {2?gang|gange}.",

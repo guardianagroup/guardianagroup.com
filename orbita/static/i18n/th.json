@@ -4026,7 +4026,14 @@
 "La llamada ha terminado.":"การโทรสิ้นสุดแล้ว",
 "Sin datos de la llamada desde hace {s} s":"ไม่มีข้อมูลการโทรมา {s} วินาที",
 "El satélite es solo un símbolo: no indica por dónde va la llamada ni dónde está la otra persona.":"ดาวเทียมเป็นเพียงสัญลักษณ์ ไม่ได้บอกว่าสายผ่านทางใดหรืออีกฝ่ายอยู่ที่ใด",
-"Envío {v} · recepción {w}":"ส่ง {v} · รับ {w}"
+"Envío {v} · recepción {w}":"ส่ง {v} · รับ {w}",
+"Volver a comprobar":"ตรวจสอบอีกครั้ง",
+"Solo al empezar":"เฉพาะตอนเริ่ม",
+"Cada 2 minutos":"ทุก 2 นาที",
+"Cada 5 minutos":"ทุก 5 นาที",
+"Cada 15 minutos":"ทุก 15 นาที",
+"Cada 30 minutos":"ทุก 30 นาที",
+"Cada hora":"ทุกชั่วโมง"
 },
 "p":{
 "intento":"พยายามมากที่สุดวันนี้: {1}, {2} {2?ครั้ง|ครั้ง}",

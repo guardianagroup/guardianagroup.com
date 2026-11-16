@@ -4026,7 +4026,14 @@
 "La llamada ha terminado.":"Panggilan telah berakhir.",
 "Sin datos de la llamada desde hace {s} s":"Tidak ada data panggilan selama {s} dtk",
 "El satélite es solo un símbolo: no indica por dónde va la llamada ni dónde está la otra persona.":"Satelit hanya simbol: tidak menunjukkan jalur panggilan atau keberadaan orang lain.",
-"Envío {v} · recepción {w}":"Kirim {v} · terima {w}"
+"Envío {v} · recepción {w}":"Kirim {v} · terima {w}",
+"Volver a comprobar":"Periksa lagi",
+"Solo al empezar":"Hanya di awal",
+"Cada 2 minutos":"Setiap 2 menit",
+"Cada 5 minutos":"Setiap 5 menit",
+"Cada 15 minutos":"Setiap 15 menit",
+"Cada 30 minutos":"Setiap 30 menit",
+"Cada hora":"Setiap jam"
 },
 "p":{
 "intento":"Paling gigih mencoba hari ini: {1}, {2} {2?kali|kali}.",

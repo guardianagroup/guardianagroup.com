@@ -4026,7 +4026,14 @@
 "La llamada ha terminado.":"통화가 종료되었습니다.",
 "Sin datos de la llamada desde hace {s} s":"{s}초 동안 통화 데이터 없음",
 "El satélite es solo un símbolo: no indica por dónde va la llamada ni dónde está la otra persona.":"위성은 상징일 뿐입니다. 통화가 어느 길로 가는지도, 상대방이 어디에 있는지도 나타내지 않습니다.",
-"Envío {v} · recepción {w}":"송신 {v} · 수신 {w}"
+"Envío {v} · recepción {w}":"송신 {v} · 수신 {w}",
+"Volver a comprobar":"다시 확인",
+"Solo al empezar":"시작할 때만",
+"Cada 2 minutos":"2분마다",
+"Cada 5 minutos":"5분마다",
+"Cada 15 minutos":"15분마다",
+"Cada 30 minutos":"30분마다",
+"Cada hora":"1시간마다"
 },
 "p":{
 "intento":"오늘 가장 많이 시도한 곳: {1}, {2}{2?회|회}.",

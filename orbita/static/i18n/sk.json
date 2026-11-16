@@ -4026,7 +4026,14 @@
 "La llamada ha terminado.":"Hovor sa skončil.",
 "Sin datos de la llamada desde hace {s} s":"Žiadne údaje hovoru už {s} s",
 "El satélite es solo un símbolo: no indica por dónde va la llamada ni dónde está la otra persona.":"Satelit je iba symbol: neukazuje, kade vedie hovor, ani kde je druhá osoba.",
-"Envío {v} · recepción {w}":"Odosielanie {v} · príjem {w}"
+"Envío {v} · recepción {w}":"Odosielanie {v} · príjem {w}",
+"Volver a comprobar":"Znova overiť",
+"Solo al empezar":"Len na začiatku",
+"Cada 2 minutos":"Každé 2 minúty",
+"Cada 5 minutos":"Každých 5 minút",
+"Cada 15 minutos":"Každých 15 minút",
+"Cada 30 minutos":"Každých 30 minút",
+"Cada hora":"Každú hodinu"
 },
 "p":{
 "intento":"Najviac sa dnes snažila: {1}, {2}{2?-krát|-krát}.",

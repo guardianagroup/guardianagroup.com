@@ -4026,7 +4026,14 @@
 "La llamada ha terminado.":"تماس پایان یافت.",
 "Sin datos de la llamada desde hace {s} s":"{s} ثانیه است داده‌ای از تماس نرسیده",
 "El satélite es solo un símbolo: no indica por dónde va la llamada ni dónde está la otra persona.":"ماهواره فقط یک نماد است: نشان نمی‌دهد تماس از کجا می‌گذرد یا طرف مقابل کجاست.",
-"Envío {v} · recepción {w}":"ارسال {v} · دریافت {w}"
+"Envío {v} · recepción {w}":"ارسال {v} · دریافت {w}",
+"Volver a comprobar":"بررسی دوباره",
+"Solo al empezar":"فقط در شروع",
+"Cada 2 minutos":"هر ۲ دقیقه",
+"Cada 5 minutos":"هر ۵ دقیقه",
+"Cada 15 minutos":"هر ۱۵ دقیقه",
+"Cada 30 minutos":"هر ۳۰ دقیقه",
+"Cada hora":"هر ساعت"
 },
 "p":{
 "intento":"بیشترین تلاش امروز: {1}، {2} {2?بار|بار}.",

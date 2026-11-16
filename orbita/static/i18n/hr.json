@@ -4026,7 +4026,14 @@
 "La llamada ha terminado.":"Poziv je završio.",
 "Sin datos de la llamada desde hace {s} s":"Nema podataka poziva već {s} s",
 "El satélite es solo un símbolo: no indica por dónde va la llamada ni dónde está la otra persona.":"Satelit je samo simbol: ne pokazuje kojim putem ide poziv ni gdje je druga osoba.",
-"Envío {v} · recepción {w}":"Slanje {v} · primanje {w}"
+"Envío {v} · recepción {w}":"Slanje {v} · primanje {w}",
+"Volver a comprobar":"Ponovna provjera",
+"Solo al empezar":"Samo na početku",
+"Cada 2 minutos":"Svake 2 minute",
+"Cada 5 minutos":"Svakih 5 minuta",
+"Cada 15 minutos":"Svakih 15 minuta",
+"Cada 30 minutos":"Svakih 30 minuta",
+"Cada hora":"Svaki sat"
 },
 "p":{
 "intento":"Najupornija danas: {1}, {2} {2?put|puta}.",

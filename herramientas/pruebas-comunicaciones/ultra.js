@@ -304,9 +304,10 @@ const mp3Path = path.join(tmp, 'grabacion de mi nombre.mp3');
   comprueba((await estadoLl(A)) === 'hablando' && (await estadoLl(B)) === 'hablando', '11. videollamada Ultra en marcha');
   const palLl = (P) => P.evaluate(() => ({ num: (document.querySelector('#ll-sas-num') || {}).textContent, vis: !document.querySelector('#ll-sas').hidden, mini: (document.querySelector('#ll-sas-mini') || {}).textContent || '', miniVis: !document.querySelector('#ll-sas-mini').hidden, t: document.querySelector('#ll-sas-t').textContent, nivel: document.querySelector('#ll-nivel').textContent, nivelVis: !document.querySelector('#ll-nivel').hidden, nivelTarjeta: (document.querySelector('#ll-sas-nivel') || {}).textContent || '', voz: GuardianaCom.llamada.voz, cambio: GuardianaCom.llamada.cambioActivo, imagen: GuardianaCom.llamada.imagen, pq: GuardianaCom.llamada.pq, cod: !document.querySelector('#ll-cod').hidden }));
   const la = await palLl(A), lb = await palLl(B);
-  // (15 nov 2026, dueño, 20:32) en el centro, la tarjeta roja del código; las 4 palabras, plegadas en la píldora de arriba
-  comprueba(!la.vis && la.miniVis && lb.miniVis && la.mini === lb.mini && la.mini.split(' · ').length === 4 && la.num === la.mini, '3. en la llamada, las cuatro palabras iguales en las dos pantallas, plegadas arriba', [la.mini, lb.mini]);
-  comprueba(la.nivelVis && /PC con GUARDIANA/.test(la.nivel) && /navegador del PC/.test(la.nivel), '3. y el nivel de cada lado', la.nivel);
+  // (15 nov 2026, dueño, 20:32) en el centro, la tarjeta roja del código; (16 nov 2026, 11:04: «que tampoco aparezcan las letras de
+  // arriba… las palabras quítalas») arriba, ni las palabras ni la línea de cada lado (esa sigue en el chat)
+  comprueba(!la.vis && !la.miniVis && !lb.vis && !lb.miniVis && la.cod && lb.cod, '3. en la llamada, la tarjeta del código y, arriba, sin las palabras', { A: [la.vis, la.miniVis, la.cod], B: [lb.vis, lb.miniVis, lb.cod] });
+  comprueba(!la.nivelVis && !lb.nivelVis, '3. ni la línea de cada lado arriba', [la.nivelVis, lb.nivelVis]);
   comprueba(/^Tu lado: PC con GUARDIANA\nOtro lado: navegador del PC\n\(cada uno, según su programa\)$/.test(la.nivelTarjeta) && /^Tu lado: navegador del PC\nOtro lado: PC con GUARDIANA\n\(cada uno, según su programa\)$/.test(lb.nivelTarjeta), '3. y también dentro de la tarjeta de las palabras, que tapa el de arriba (R8: según el programa de cada uno)', [la.nivelTarjeta, lb.nivelTarjeta]);
   comprueba(la.voz === 'ultra' && la.cambio && la.imagen === 'mosaico' && la.pq && lb.voz === 'ultra' && lb.cambio, '11. voz cambiada y mosaico puestos, capa postcuántica activa', la);
   // cada sección de audio de las dos descripciones: cbr=1 y usedtx=0 en la de Opus; ninguna con la extensión del nivel de audio
@@ -326,8 +327,8 @@ const mp3Path = path.join(tmp, 'grabacion de mi nombre.mp3');
   comprueba(/^nº \d+ · cambia en [0-2]:\d\d$/.test(llave) && !(await A.evaluate(() => document.querySelector('#ll-mon').hidden)), '11. el Monitor de seguridad, a la vista: la clave y cuándo cambia (cada 2 minutos)', llave);
   await A.mouse.move(683, 400); await espera(300);
   await foto(A, '08-pc-llamada');
-  await A.evaluate(() => document.querySelector('#ll-sas-si').click()); await espera(800);
-  comprueba(await A.evaluate(() => document.querySelector('#ll-sas-mini').textContent.startsWith('✓')), '3. «Sí, coinciden» pliega las palabras arriba con ✓');
+  await A.evaluate(() => document.querySelector('#ll-cod-si').click()); await espera(800);
+  comprueba(await A.evaluate(() => ['#ll-cod', '#ll-cod-chip', '#ll-sas', '#ll-sas-mini'].every((s) => document.querySelector(s).hidden)), '3. «Coinciden»: nada en pantalla (ni la tarjeta, ni su píldora, ni las palabras)');
   await A.evaluate(() => document.querySelector('#ll-colgar').click()); await espera(1500);
   // R4: una oferta sin el compromiso de las palabras (aquí la quita la propia prueba, como haría quien está en medio): no se contesta
   { await A.evaluate(() => sessionStorage.setItem('gcom-prueba-sin-sas', '1'));

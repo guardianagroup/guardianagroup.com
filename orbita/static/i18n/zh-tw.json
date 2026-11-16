@@ -4026,7 +4026,14 @@
 "La llamada ha terminado.":"通話已結束。",
 "Sin datos de la llamada desde hace {s} s":"已有 {s} 秒沒有通話資料",
 "El satélite es solo un símbolo: no indica por dónde va la llamada ni dónde está la otra persona.":"衛星只是一個象徵：不代表通話經過的路線，也不代表對方所在的位置。",
-"Envío {v} · recepción {w}":"傳送 {v} · 接收 {w}"
+"Envío {v} · recepción {w}":"傳送 {v} · 接收 {w}",
+"Volver a comprobar":"再次核對",
+"Solo al empezar":"只在開始時",
+"Cada 2 minutos":"每 2 分鐘",
+"Cada 5 minutos":"每 5 分鐘",
+"Cada 15 minutos":"每 15 分鐘",
+"Cada 30 minutos":"每 30 分鐘",
+"Cada hora":"每小時"
 },
 "p":{
 "intento":"今天嘗試最多的：{1}，{2} {2?次|次}。",

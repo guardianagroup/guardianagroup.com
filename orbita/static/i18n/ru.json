@@ -4026,7 +4026,14 @@
 "La llamada ha terminado.":"Звонок завершён.",
 "Sin datos de la llamada desde hace {s} s":"Нет данных звонка уже {s} с",
 "El satélite es solo un símbolo: no indica por dónde va la llamada ni dónde está la otra persona.":"Спутник — лишь символ: он не показывает, каким путём идёт звонок и где находится собеседник.",
-"Envío {v} · recepción {w}":"Отправка {v} · приём {w}"
+"Envío {v} · recepción {w}":"Отправка {v} · приём {w}",
+"Volver a comprobar":"Проверять снова",
+"Solo al empezar":"Только в начале",
+"Cada 2 minutos":"Каждые 2 минуты",
+"Cada 5 minutos":"Каждые 5 минут",
+"Cada 15 minutos":"Каждые 15 минут",
+"Cada 30 minutos":"Каждые 30 минут",
+"Cada hora":"Каждый час"
 },
 "p":{
 "intento":"Настойчивее всех сегодня: {1}, {2} {2?раз|раз}.",

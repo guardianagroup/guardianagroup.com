@@ -339,6 +339,35 @@
     // coincidir un instante). «Coincide» lo quita hasta el próximo cambio; «No coincide» cuelga. Si nadie toca, a los 30 s se pliega en
     // una píldora roja encima de los botones, que lo vuelve a abrir.
     let codConfirmado = '', codPlegado = false, codAbierto = false, codPendiente = '', codPendT = null, codPlegarT = null;
+    // Cada cuánto vuelve el código (16 Nov 2026; dueño, 11:04: «una vez que lo decimos, ya no quiero que aparezca más en pantalla… y que
+    // aparezca cada 2 minutos, cada 5, o incluso que lo podamos nosotros decir… cada una vez, cada 5 minutos, cada hora, cada 15, 30
+    // minutos»). Dicho el código («Coinciden»), nada en pantalla hasta que toque volver a comprobarlo: 0, solo al empezar; 2, con cada
+    // cambio de la clave (cada 2 minutos); si no, pasados esos minutos, con el cambio siguiente. Lo elige cualquiera de los dos en la
+    // tarjeta, se le dice a la otra persona y se queda para las próximas llamadas.
+    const VERIFICA = [0, 2, 5, 15, 30, 60];
+    let verificaCada = (() => { try { const g = localStorage.getItem('gcom-verifica-cada'); const v = g === null ? 2 : Number(g); return VERIFICA.includes(v) ? v : 2; } catch (_) { return 2; } })();
+    let verificadoEn = 0, codHasta = 0;
+    function hastaCuando(desde) {
+      if (!verificaCada) return Infinity;
+      if (verificaCada <= 2) return desde;
+      const xq = pc && pqDe.get(pc), per = (xq && xq.cada) || rotaMs();
+      return desde + verificaCada * 60000 - per / 2;
+    }
+    function ponVerifica(v, mia) {
+      v = Number(v); if (!VERIFICA.includes(v)) return;
+      verificaCada = v; try { localStorage.setItem('gcom-verifica-cada', String(v)); } catch (_) {}
+      if (codConfirmado) codHasta = hastaCuando(verificadoEn);
+      if (mia && idLlamada && estado === 'hablando') { try { o.manda({ acto: 'verifica', id: idLlamada, cada: v }); } catch (_) {} }
+      pintaCada();
+    }
+    function pintaCada() {
+      const sel = $('#ll-cod-cada'), et = $('#ll-cod-cada-t'); if (!sel) return;
+      const nombres = { 0: t('Solo al empezar'), 2: t('Cada 2 minutos'), 5: t('Cada 5 minutos'), 15: t('Cada 15 minutos'), 30: t('Cada 30 minutos'), 60: t('Cada hora') };
+      for (const op of sel.options) { const n = nombres[op.value]; if (n && op.textContent !== n) op.textContent = n; }
+      if (et) et.textContent = t('Volver a comprobar');
+      if (sel.value !== String(verificaCada)) sel.value = String(verificaCada);
+    }
+    { const sel = $('#ll-cod-cada'); if (sel) sel.addEventListener('change', () => ponVerifica(sel.value, true)); }
     function pintaCod() {
       const card = $('#ll-cod'), chip = $('#ll-cod-chip'); if (!card || !chip) return;
       const c = estado === 'hablando' ? codigoAhora() : '';
@@ -362,7 +391,9 @@
       // clave, que en Ultra cambia cada minuto, se compara en «Seguridad de esta llamada» (pintaSegCod). En pruebas locales, «gcom-ultra»
       // la enseña, para probarla.
       if (!(ULTRA_PRUEBA || (TARJETA_CODIGO && ultra()))) { card.hidden = true; chip.hidden = true; clearTimeout(codPlegarT); repintaSeg(); return; }
-      const bien = c === codConfirmado, grande = codAbierto || (!bien && !codPlegado), num = c.slice(0, 3) + ' ' + c.slice(3);
+      // dicho el código (este o uno reciente, según «Volver a comprobar»): ni la tarjeta ni la píldora
+      const bien = c === codConfirmado, calla = !!codConfirmado && Date.now() < codHasta && !codAbierto;
+      const grande = codAbierto || (!bien && !calla && !codPlegado), num = c.slice(0, 3) + ' ' + c.slice(3);
       $('#ll-cod-t').textContent = card.dataset.cambio === '1' && !bien ? t('El código ha cambiado') : t('Código de seguridad');
       $('#ll-cod-num').textContent = num; $('#ll-cod-num').setAttribute('aria-label', t('Código de seguridad') + ': ' + c.split('').join(' '));
       // (dueño, 15:56: «díselas en voz alta a la otra persona o comprueba con la otra persona de que los números coinciden, lo más
@@ -372,7 +403,8 @@
       $('#ll-cod-si').hidden = bien; $('#ll-cod-no').hidden = bien;
       const eraVisible = !card.hidden;
       if (grande && (anima || !eraVisible)) { card.classList.remove('cambia'); void card.offsetWidth; card.classList.add('cambia'); }
-      card.hidden = !grande; chip.hidden = grande;
+      pintaCada();
+      card.hidden = !grande; chip.hidden = grande || bien || calla;
       chip.classList.toggle('bien', bien);
       chip.textContent = (bien ? '✓ ' : '') + t('Código') + ' ' + num;
       chip.setAttribute('aria-label', t('Código de seguridad') + ' ' + num + ' · ' + (bien ? t('coinciden') : t('Comprobar')));
@@ -383,7 +415,7 @@
     }
     function codCoincide() {
       const c = ($('#ll-cod') || {}).dataset ? $('#ll-cod').dataset.cod : ''; if (!c || c !== codigoAhora()) return;
-      codConfirmado = c; codPlegado = false; codAbierto = false; clearTimeout(codPlegarT); if (monVivo()) monEvento(t('Los números coinciden.'));
+      codConfirmado = c; verificadoEn = Date.now(); codHasta = hastaCuando(verificadoEn); codPlegado = false; codAbierto = false; clearTimeout(codPlegarT); if (monVivo()) monEvento(t('Los números coinciden.'));
       // atado al número de seguridad: si el código coincide, el número también (en el blindado, la conversación queda verificada)
       if (sas && sas.estado === 'pendiente' && sas.numero) sasCoinciden();
       muestraCod(false); di(t('Los números coinciden.')); setTimeout(() => { if (paso.textContent === t('Los números coinciden.')) di(''); }, 3000);
@@ -434,8 +466,11 @@
       pintaGrupo();
       // Ultra: el nivel de cada lado, a la vista (ronda 93): el entorno en que corre cada uno, nada más
       // (también dentro de la tarjeta de las palabras, que mientras está abierta tapa el de arriba: app.css, .sas-grande)
+      // (16 Nov 2026; dueño, 11:04: «que tampoco aparezcan las letras de arriba») ya no arriba en la llamada; sigue en la tarjeta de las
+      // palabras, donde aún salen (en grupo)
+      { const nv0 = $('#ll-nivel'); if (nv0) nv0.hidden = true; }
       { const n = ultra() && o.nivel && estado === 'hablando' ? o.nivel() : null;
-        for (const [id, sep] of [['#ll-nivel', ' · '], ['#ll-sas-nivel', '\n']]) { const nv = $(id); if (nv) { nv.hidden = !n; if (n) nv.textContent = t('Tu lado') + ': ' + n.mio + sep + t('Otro lado') + ': ' + n.suyo + (sep === ' · ' ? ' (' : '\n(') + t('cada uno, según su programa') + ')'; } } }
+        for (const [id, sep] of [['#ll-sas-nivel', '\n']]) { const nv = $(id); if (nv) { nv.hidden = !n; if (n) nv.textContent = t('Tu lado') + ': ' + n.mio + sep + t('Otro lado') + ': ' + n.suyo + (sep === ' · ' ? ' (' : '\n(') + t('cada uno, según su programa') + ')'; } } }
       $('#ll-avatar').textContent = o.inicial();
       caja.setAttribute('aria-label', video ? t('Videollamada') : t('Llamada de voz'));
       $('#ll-camara-caja').hidden = !(video && cam);
@@ -1432,6 +1467,10 @@
     const palabrasLlamada = () => { try { return sas && sas.lazo && raiz.GuardianaCripto ? raiz.GuardianaCripto.B.palabrasDe(sas.lazo) : null; } catch (_) { return null; } };
     function pintaSas() {
       const caja2 = $('#ll-sas'), mini = $('#ll-sas-mini'); if (!caja2 || !mini) return;
+      // Ultra (16 Nov 2026; dueño, 11:04: «que tampoco aparezcan las letras de arriba. Es más, las palabras quítalas, no quiero que
+      // salga»): en la llamada de dos no salen las palabras; se comprueba el código rojo, que sale del mismo lazo (si el código coincide,
+      // las palabras también, y «Coinciden» las da por buenas: codCoincide).
+      if (ultra() && TARJETA_CODIGO && totalGrupo() <= 2) { caja2.hidden = true; mini.hidden = true; caja.classList.remove('sas-grande', 'sas-plegado'); clearTimeout(sasPlegadoT); repintaSeg(); return; }
       // el número solo se enseña donde toca (app.js, o.sas: blindado y Ultra; dueño, 29 Oct 2026, 12:55: «en el modo normal no»)
       const xq = pc && pqDe.get(pc), conCodigo = !!(xq && xq.confirmada && xq.codId) && totalGrupo() <= 2;
       const pal = ultra() && sas && sas.estado !== 'roto' ? palabrasLlamada() : null;
@@ -1543,6 +1582,7 @@
       // la clave revelada de quien llama: tiene que ser la del compromiso de la oferta; si no, la comprobación queda rota
       if (m.acto === 'sas' && sas && !inicioYo) { let p = null; try { p = typeof m.p === 'string' && m.p.length < 120 ? deB64u(m.p) : null; } catch (_) {} if (p && p.length === 65) { const h = await sha256(p); if (sas.suCompromiso && h.length === 32 && h.every((x, i) => x === sas.suCompromiso[i])) { sas.suPub = p; sasCalcula(); return; } } sas.estado = 'roto'; pintaSas(); if (ultra()) sasFalla('palabras'); return; }
       if (m.acto === 'camara') { suCamara = !!m.on; pintaVideo(); reenviaImagenes(); return; }
+      if (m.acto === 'verifica') { ponVerifica(m.cada, false); muestraCod(false); return; }
       if (m.acto === 'pq-claro') { if (pc) pqAClaro(pc); return; }
       if (m.acto === 'pausa') { di(m.on ? t('La otra persona ha puesto la llamada en pausa.') : ''); return; }
       // pasar la llamada al teléfono: la otra persona me da la llave de la sala de su teléfono (yo añado el teléfono), me dice que
@@ -2059,7 +2099,7 @@
       mic = null; envio = null; cam = null; nodo = null; if (ctx) { try { ctx.close(); } catch (_) {} ctx = null; }
       parados.clear(); { const b = $('#ll-toca'); if (b) b.hidden = true; }
       if (compartiendo) { try { compartiendo.stop(); } catch (_) {} compartiendo = null; }
-      codConfirmado = ''; codPlegado = false; codAbierto = false; codPendiente = ''; clearTimeout(codPendT); clearTimeout(codPlegarT);
+      codConfirmado = ''; verificadoEn = 0; codHasta = 0; codPlegado = false; codAbierto = false; codPendiente = ''; clearTimeout(codPendT); clearTimeout(codPlegarT);
       pqPor = ''; clearTimeout(pqAvisoT); segVisto = ''; segCambio = false;
       caja.classList.remove('yo-grande'); toqueGrande = null;
       cierraVentana();

@@ -1,8 +1,8 @@
 // La llamada Ultra del 15 nov 2026 (dueño, 20:32 y 20:33), PC ↔ PC, en videollamada:
 //   1. «Voz cambiada» y «Mosaico» puestos de serie y a la vista, encima de la barra (no dentro de «Más»); un toque los quita y otro
 //      los pone, y cada píldora dice su estado.
-//   2. El código rojo en el centro, en las dos pantallas, al empezar: el mismo en los dos, con «Léelo en voz alta…»; las 4 palabras,
-//      plegadas en la píldora de arriba. Al cambiar la llave (aquí, cada 8 s; en la llamada de verdad, cada 2 minutos) vuelve a salir
+//   2. El código rojo en el centro, en las dos pantallas, al empezar: el mismo en los dos, con «Léelo en voz alta…»; arriba, sin
+//      las palabras (16 nov 2026). Al cambiar la llave (aquí, cada 8 s; en la llamada de verdad, cada 2 minutos) vuelve a salir
 //      con «El código ha cambiado», el mismo en los dos.
 //   3. El Monitor de seguridad, siempre a la vista en los dos: «Todo en orden», comprobado hace pocos segundos, con sus filas reales
 //      (encriptado activo, capa postcuántica ML-KEM-1024 · AES-256-GCM, la clave y cuándo cambia, el código, la huella de la conexión
@@ -79,7 +79,8 @@ const vista = (P) => P.evaluate(() => {
   let ok = await hasta(async () => { const x = await vista(A), y = await vista(B); return x.tarjeta && y.tarjeta && /^\d{6}$/.test(x.num) && x.num === y.num; }, 15000);
   a = await vista(A); b = await vista(B);
   comprueba(ok && /^(Código de seguridad|El código ha cambiado)$/.test(a.titulo) && /^Léelo en voz alta y comprueba con la otra persona que los números coinciden\./.test(a.texto), '2. la tarjeta roja en el centro de las dos pantallas, con el mismo código y «Léelo en voz alta…»', { A: [a.num, a.titulo], B: [b.num] });
-  comprueba(!a.palabrasGrande && !b.palabrasGrande && a.palabrasMini && b.palabrasMini, '2. las 4 palabras, plegadas en la píldora de arriba', { A: [a.palabrasGrande, a.palabrasMini], B: [b.palabrasGrande, b.palabrasMini] });
+  // (16 Nov 2026; dueño, 11:04: «que tampoco aparezcan las letras de arriba… las palabras quítalas»)
+  comprueba(!a.palabrasGrande && !b.palabrasGrande && !a.palabrasMini && !b.palabrasMini, '2. sin las palabras arriba', { A: [a.palabrasGrande, a.palabrasMini], B: [b.palabrasGrande, b.palabrasMini] });
   const colorTarjeta = await A.evaluate(() => getComputedStyle(document.querySelector('#ll-cod-num')).color);
   console.log('     color del número:', colorTarjeta);
 
@@ -164,7 +165,7 @@ const vista = (P) => P.evaluate(() => {
     comprueba(t.tarjeta && /^\d{6}$/.test(t.num), '4. la tarjeta roja también en el teléfono', t.num);
     await T.click('#ll-cod-si'); await espera(600);
     const tc = await vista(T);
-    comprueba(tc.choque === false, '4. la píldora del código plegado no se monta encima de «Voz cambiada»', tc.choque);
+    comprueba(tc.choque !== true, '4. dicho el código, su píldora ni queda ni se monta encima de «Voz cambiada»', tc.choque);
     await hasta(async () => { const x = await vista(T); return x.filas.frag; }, 8000);
     const tf = await vista(T);
     comprueba(tf.filas.frag && /rechazados: 0$/.test(tf.filas.frag[2]) && tf.nivel === 'ok', '4. al empezar no salta ningún aviso falso: ningún fragmento rechazado y «Todo en orden»', { frag: tf.filas.frag, nivel: tf.nivel, estado: tf.estado });

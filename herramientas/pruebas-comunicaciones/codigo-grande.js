@@ -11,7 +11,7 @@
 //      dice arriba «Los números coinciden.» y lo marca; al cambiar la llave el panel enseña el nuevo, el mismo en los dos, y la tarjeta
 //      sigue sin salir. «No coinciden» cuelga a los dos y lo explica.
 //   2. Ultra, PC ↔ PC (15 nov 2026): la tarjeta roja del código en el centro de las dos pantallas, al empezar y cada vez que cambia
-//      la llave; las 4 palabras, plegadas en la píldora de arriba. «Coinciden» la pliega con ✓; «No coinciden» cuelga a los dos y la
+//      la llave; sin las palabras arriba (16 nov 2026). «Coinciden» la quita del todo; «No coinciden» cuelga a los dos y la
 //      conversación Ultra se borra en los dos equipos.
 //   3. Pasada al teléfono. Blindada: ni el teléfono ni el PC de la otra persona enseñan la tarjeta; en el teléfono no hay cápsula
 //      arriba, así que el título abre «Seguridad de esta llamada», debajo de él, con el mismo código que el PC. Ultra: «Pasar al
@@ -141,8 +141,8 @@ const hablan = (A, B, ms) => hasta(async () => (await estado(A)) === 'hablando' 
   }
   // 2. Ultra, PC ↔ PC (desde el 15 nov 2026; dueño, 20:32: «en el modo ultra… al empezar la llamada, aparezca un código en rojo en el
   //    medio de la pantalla para mí y para la otra persona… y quiero que eso pase cada 2 minutos»): la tarjeta roja del código en el
-  //    centro de las dos pantallas, al empezar y cada vez que cambia la llave; las 4 palabras, plegadas en la píldora de arriba, las
-  //    mismas en los dos. «Coinciden» pliega la tarjeta con ✓ y deja las palabras comprobadas; «No coinciden» cuelga a los dos y la
+  //    centro de las dos pantallas, al empezar y cada vez que cambia la llave, el mismo en los dos; sin las palabras arriba (16 nov
+  //    2026). «Coinciden» la quita del todo (por dentro, las palabras quedan comprobadas); «No coinciden» cuelga a los dos y la
   //    conversación Ultra se borra en los dos equipos.
   {
     const { A, B } = await pcpcUltra(browser);
@@ -150,11 +150,13 @@ const hablan = (A, B, ms) => hasta(async () => (await estado(A)) === 'hablando' 
     let a = {}, b = {}; await hasta(async () => { a = await vista(A); b = await vista(B); return a.tarjeta && b.tarjeta && /^\d{6}$/.test(a.num) && a.num === b.num; }, 15000);
     comprueba(a.tarjeta && b.tarjeta && /^\d{6}$/.test(a.num) && a.num === b.num && /^Léelo en voz alta/.test(a.texto), '2. la tarjeta roja, en el centro de las dos pantallas, con el mismo código', { A: a.num, B: b.num });
     let pa = await palabras(A), pb = await palabras(B);
-    comprueba(!pa.caja && !pb.caja && !!pa.mini && pa.mini === pb.mini && pa.mini.split(' · ').length === 4, '2. las 4 palabras, plegadas arriba, las mismas en las dos pantallas', { A: pa.mini, B: pb.mini });
+    // (16 Nov 2026; dueño, 11:04: «que tampoco aparezcan las letras de arriba… las palabras quítalas»)
+    comprueba(!pa.caja && !pb.caja && !pa.mini && !pb.mini, '2. sin las palabras arriba: ni plegadas ni en grande', { A: pa.mini, B: pb.mini });
     await A.screenshot({ path: path.join(OUT, '2-a-tarjeta.png') });
     await A.click('#ll-cod-si'); await espera(600);
     pa = await palabras(A); a = await vista(A);
-    comprueba(!a.tarjeta && /^✓/.test(a.pildora) && /^✓/.test(pa.mini), '2. «Coinciden» en A: la tarjeta se pliega en su píldora con ✓ y las palabras quedan comprobadas', { pildora: a.pildora, palabras: pa.mini });
+    // (16 Nov 2026; dueño, 11:04: «una vez que se haya dicho el código, desaparezca y ya está»)
+    comprueba(!a.tarjeta && !a.pildora && !pa.mini, '2. «Coinciden» en A: nada en pantalla, ni la tarjeta ni su píldora', { pildora: a.pildora, palabras: pa.mini });
     await A.screenshot({ path: path.join(OUT, '2-a-coinciden.png') });
     const c0 = a.codigo;
     const ok = await hasta(async () => { const x = await vista(A), y = await vista(B); return x.tarjeta && y.tarjeta && /^\d{6}$/.test(x.num) && x.num !== c0 && x.num === y.num; }, 16000);

@@ -4026,7 +4026,14 @@
 "La llamada ha terminado.":"Разговорът приключи.",
 "Sin datos de la llamada desde hace {s} s":"Няма данни от разговора от {s} s",
 "El satélite es solo un símbolo: no indica por dónde va la llamada ni dónde está la otra persona.":"Сателитът е само символ: не показва откъде минава разговорът, нито къде е другият човек.",
-"Envío {v} · recepción {w}":"Изпращане {v} · получаване {w}"
+"Envío {v} · recepción {w}":"Изпращане {v} · получаване {w}",
+"Volver a comprobar":"Повторна проверка",
+"Solo al empezar":"Само в началото",
+"Cada 2 minutos":"На всеки 2 минути",
+"Cada 5 minutos":"На всеки 5 минути",
+"Cada 15 minutos":"На всеки 15 минути",
+"Cada 30 minutos":"На всеки 30 минути",
+"Cada hora":"На всеки час"
 },
 "p":{
 "intento":"Най-настойчивата днес: {1}, {2} {2?път|пъти}.",

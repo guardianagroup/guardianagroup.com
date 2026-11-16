@@ -4026,7 +4026,14 @@
 "La llamada ha terminado.":"Samtalet har avslutats.",
 "Sin datos de la llamada desde hace {s} s":"Inga data från samtalet på {s} s",
 "El satélite es solo un símbolo: no indica por dónde va la llamada ni dónde está la otra persona.":"Satelliten är bara en symbol: den visar inte vilken väg samtalet tar eller var den andra personen är.",
-"Envío {v} · recepción {w}":"Skickar {v} · tar emot {w}"
+"Envío {v} · recepción {w}":"Skickar {v} · tar emot {w}",
+"Volver a comprobar":"Kontrollera igen",
+"Solo al empezar":"Bara i början",
+"Cada 2 minutos":"Var 2:a minut",
+"Cada 5 minutos":"Var 5:e minut",
+"Cada 15 minutos":"Var 15:e minut",
+"Cada 30 minutos":"Var 30:e minut",
+"Cada hora":"Varje timme"
 },
 "p":{
 "intento":"Den som försökte mest i dag: {1}, {2} {2?gång|gånger}.",

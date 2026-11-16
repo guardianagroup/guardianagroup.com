@@ -4026,7 +4026,14 @@
 "La llamada ha terminado.":"Der Anruf ist beendet.",
 "Sin datos de la llamada desde hace {s} s":"Seit {s} s keine Daten vom Anruf",
 "El satélite es solo un símbolo: no indica por dónde va la llamada ni dónde está la otra persona.":"Der Satellit ist nur ein Symbol: Er zeigt weder, welchen Weg der Anruf nimmt, noch wo die andere Person ist.",
-"Envío {v} · recepción {w}":"Senden {v} · Empfangen {w}"
+"Envío {v} · recepción {w}":"Senden {v} · Empfangen {w}",
+"Volver a comprobar":"Erneut prüfen",
+"Solo al empezar":"Nur zu Beginn",
+"Cada 2 minutos":"Alle 2 Minuten",
+"Cada 5 minutos":"Alle 5 Minuten",
+"Cada 15 minutos":"Alle 15 Minuten",
+"Cada 30 minutos":"Alle 30 Minuten",
+"Cada hora":"Jede Stunde"
 },
 "p":{
 "intento":"Hat es heute am häufigsten versucht: {1}, {2} {2?Mal|Mal}.",

@@ -4026,7 +4026,14 @@
 "La llamada ha terminado.":"কলটি শেষ হয়েছে।",
 "Sin datos de la llamada desde hace {s} s":"{s} সেকেন্ড ধরে কলের কোনো তথ্য নেই",
 "El satélite es solo un símbolo: no indica por dónde va la llamada ni dónde está la otra persona.":"স্যাটেলাইটটি কেবল একটি প্রতীক: কলটি কোন পথে যায় বা অন্য ব্যক্তি কোথায় আছেন, তা এটি দেখায় না।",
-"Envío {v} · recepción {w}":"পাঠানো {v} · গ্রহণ {w}"
+"Envío {v} · recepción {w}":"পাঠানো {v} · গ্রহণ {w}",
+"Volver a comprobar":"আবার যাচাই",
+"Solo al empezar":"শুধু শুরুতে",
+"Cada 2 minutos":"প্রতি ২ মিনিটে",
+"Cada 5 minutos":"প্রতি ৫ মিনিটে",
+"Cada 15 minutos":"প্রতি ১৫ মিনিটে",
+"Cada 30 minutos":"প্রতি ৩০ মিনিটে",
+"Cada hora":"প্রতি ঘণ্টায়"
 },
 "p":{
 "intento":"আজ সবচেয়ে বেশি চেষ্টা: {1}, {2} {2?বার|বার}।",

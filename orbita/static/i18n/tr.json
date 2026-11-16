@@ -4026,7 +4026,14 @@
 "La llamada ha terminado.":"Arama sona erdi.",
 "Sin datos de la llamada desde hace {s} s":"{s} sn’dir arama verisi yok",
 "El satélite es solo un símbolo: no indica por dónde va la llamada ni dónde está la otra persona.":"Uydu yalnızca bir simgedir: aramanın hangi yoldan gittiğini de karşı tarafın nerede olduğunu da göstermez.",
-"Envío {v} · recepción {w}":"Gönderim {v} · alım {w}"
+"Envío {v} · recepción {w}":"Gönderim {v} · alım {w}",
+"Volver a comprobar":"Yeniden doğrula",
+"Solo al empezar":"Yalnızca başta",
+"Cada 2 minutos":"2 dakikada bir",
+"Cada 5 minutos":"5 dakikada bir",
+"Cada 15 minutos":"15 dakikada bir",
+"Cada 30 minutos":"30 dakikada bir",
+"Cada hora":"Saatte bir"
 },
 "p":{
 "intento":"Bugün en çok deneyen: {1}, {2} {2?kez|kez}.",
