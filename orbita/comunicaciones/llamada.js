@@ -69,6 +69,11 @@
   const POR_FOTOGRAMA = typeof window.MediaStreamTrackProcessor === 'function' && typeof window.MediaStreamTrackGenerator === 'function' && typeof window.VideoFrame === 'function' && typeof window.OffscreenCanvas === 'function';
   // la ventana flotante del sistema con la llamada (Chrome y Edge del ordenador; ver abreVentana)
   const DOC_PIP = !!(window.documentPictureInPicture && typeof window.documentPictureInPicture.requestWindow === 'function');
+  // En el programa GUARDIANA (desde la 1.0.60, que marca la página con data-ventana-llamada), la ventana la hace el propio programa
+  // cuando esta página la pide con este nombre (sesion::VENTANA_LLAMADA): pequeña, siempre delante, fuera de capturas y movible por
+  // toda la pantalla; esta página la llena igual que la de Chrome. Un programa anterior la abriría como pestaña: sin la marca, no.
+  const VENTANA_NOMBRE = 'guardiana-flotante';
+  const VENTANA_PROGRAMA = () => !!(document.documentElement && document.documentElement.dataset.ventanaLlamada === '1');
   // su aspecto: la otra persona a toda la ventana, tu imagen pequeña en la esquina, el tiempo arriba y los tres botones abajo, que
   // con ratón salen al pasar por encima (los colores de GUARDIANA; el rojo de colgar, el coral de la casa)
   const CSS_VF = "@font-face{font-family:'IBM Plex Sans';font-weight:100 700;font-display:swap;src:url(__ORIGEN__/fonts/IBMPlexSans-400-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}"
@@ -2499,8 +2504,16 @@
     var vf = null; // la ventana abierta: { w, sola, … } (var: «pinta» puede correr antes de llegar aquí)
     function ventanaAbierta() { return !!(vf && vf.w && !vf.w.closed); }
     function abreVentana(sola) {
-      if (!DOC_PIP || !video || estado !== 'hablando') return Promise.resolve(false);
+      if (!video || estado !== 'hablando') return Promise.resolve(false);
       if (ventanaAbierta()) { if (!sola) vf.sola = false; return Promise.resolve(true); }
+      if (VENTANA_PROGRAMA()) {
+        let w = null;
+        try { w = raiz.open('', VENTANA_NOMBRE, 'popup=yes,width=400,height=260'); } catch (_) { w = null; }
+        if (!w) return Promise.resolve(false);
+        try { montaVentana(w, sola); } catch (_) { try { w.close(); } catch (__) {} return Promise.resolve(false); }
+        return Promise.resolve(true);
+      }
+      if (!DOC_PIP) return Promise.resolve(false);
       let pide = null;
       try { pide = raiz.documentPictureInPicture.requestWindow({ width: 400, height: 260 }); } catch (_) { return Promise.resolve(false); }
       return Promise.resolve(pide).then((w) => {
@@ -2531,7 +2544,7 @@
       barra.append(bMic, bCam, bColgar);
       marco.append(rem, ini, yo, arriba, barra); d.body.append(marco);
       vf = { w, sola: !!sola, rem, yo, ini, reloj, bMic, bCam, bColgar, tic: 0 };
-      w.addEventListener('pagehide', () => { if (vf && vf.w === w) { const era = vf; vf = null; cierreVentana(era); } });
+      w.addEventListener('pagehide', () => setTimeout(() => miraVentana(w), 60));
       try { vf.tic = w.setInterval(pintaVf, 400); } catch (_) {}
       pintaVf(); pintaFlotando();
     }
@@ -2566,6 +2579,16 @@
       try { if (era && era.tic) era.w.clearInterval(era.tic); } catch (_) {}
       pintaFlotando();
     }
+    // ¿Sigue la ventana? Cerrada (su ×, la vuelta a la pestaña de Chrome): fuera. Abierta pero vacía (la del programa, si su
+    // primera página se cambia al dársela al programa): se vuelve a llenar. Al irse su página y, por si acaso, cada segundo.
+    function miraVentana(w) {
+      if (!vf || (w && vf.w !== w)) return;
+      const era = vf;
+      if (era.w.closed) { vf = null; cierreVentana(era); return; }
+      let llena = false; try { llena = !!era.w.document.querySelector('.vf'); } catch (_) { llena = true; }
+      if (!llena) { vf = null; try { era.w.clearInterval(era.tic); } catch (_) {} try { montaVentana(era.w, era.sola); } catch (_) { cierreVentana(era); } }
+    }
+    setInterval(() => miraVentana(null), 1000);
     // Mientras la otra persona está en la ventana flotante, la llamada no se queda en negro con «Reproduciendo…» (dueño, 14:52: «la
     // pantalla se pone negra… es un error»): lo dice, y al tocar, la imagen vuelve aquí. Con «Ver el chat», la tarjeta pequeña se
     // aparta mientras la llamada está en la ventana (app.css, .en-ventana).
@@ -2613,7 +2636,11 @@
       try { if (MS.setCameraActive) MS.setCameraActive(camaraOn()); } catch (_) {}
     }
     document.addEventListener('visibilitychange', () => {
-      if (document.visibilityState !== 'visible') return;
+      if (document.visibilityState !== 'visible') {
+        // en el programa no está la acción automática de Chrome: la ventana se pide aquí, al dejar la pestaña de la llamada
+        if (VENTANA_PROGRAMA() && video && estado === 'hablando' && !ventanaAbierta()) abreVentana(true);
+        return;
+      }
       if (vf && vf.sola) cierraVentana();
       if (!flotaSola) return;
       flotaSola = false;
@@ -2679,7 +2706,7 @@
     $('#ll-camara').addEventListener('click', () => { if (!cam) return; const on = !camaraOn(); cam.getVideoTracks().forEach((x) => { x.enabled = on; }); o.manda({ acto: 'camara', id: idLlamada, on }); for (const L of patas) tmanda(L, { acto: 'camara', id: L.id, on }); pintaVideo(); });
     // «Ver el chat» en el ordenador (16 Nov 2026): la llamada pasa a la ventana flotante del sistema (abreVentana), que se lleva a
     // cualquier sitio de la pantalla y sigue encima de todo, y el chat queda libre; al cerrarla, la tarjeta pequeña de siempre.
-    $('#ll-mini').addEventListener('click', () => { pequena(true); if (DOC_PIP && video && estado === 'hablando' && finoAhora()) abreVentana(false); });
+    $('#ll-mini').addEventListener('click', () => { pequena(true); if ((DOC_PIP || VENTANA_PROGRAMA()) && video && estado === 'hablando' && finoAhora()) abreVentana(false); });
     { const b = $('#ll-completa'); if (b) {
       b.addEventListener('click', () => alternaCompleta());
       document.addEventListener('fullscreenchange', () => { b.setAttribute('aria-pressed', document.fullscreenElement ? 'true' : 'false'); });
@@ -2738,7 +2765,7 @@
       try { raiz.open(u.href, '_blank', 'noopener'); } catch (_) {}
     });
     addEventListener('beforeunload', (e) => { if (estado === 'hablando' || estado === 'conectando') { e.preventDefault(); e.returnValue = ''; } });
-    addEventListener('pagehide', () => { if (estado !== 'libre') { try { o.manda({ acto: 'colgar', id: idLlamada }); } catch (_) {} } });
+    addEventListener('pagehide', () => { cierraVentana(); if (estado !== 'libre') { try { o.manda({ acto: 'colgar', id: idLlamada }); } catch (_) {} } });
     pintaVoces(); pintaImagenes();
     // Zoom y ventanas pequeñas (dueño, 28 Oct 2026, 12:22–12:24: «que no se vuelva todo loco… que no cambien las cosas de
     // sitio»). En el ordenador la llamada nunca se dibuja en menos de 640 × 480: con menos sitio (un zoom del 300 %, una
