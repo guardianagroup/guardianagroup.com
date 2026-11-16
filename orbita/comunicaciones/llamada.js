@@ -2120,7 +2120,16 @@
         } else if (tr && tr.dtlsState === 'connected') s.huella = 'nd';
         let par = tr && tr.selectedCandidatePairId ? st.get(tr.selectedCandidatePairId) : null;
         if (!par) st.forEach((r) => { if (!par && r.type === 'candidate-pair' && r.nominated && r.state === 'succeeded') par = r; });
-        if (par) { const lc = st.get(par.localCandidateId), rc = st.get(par.remoteCandidateId); s.ruta = (lc && lc.candidateType === 'relay') || (rc && rc.candidateType === 'relay') ? ((lc && lc.candidateType === 'relay') ? 'mio' : 'servidor') : 'directa'; }
+        // la ruta: «directa» solo si los dos candidatos se conocen y son de los equipos (host, srflx, prflx) y la conexión
+        // no obliga a pasar por el relé; con cualquier duda, sin ruta (segunda voz, 15 Nov 2026: nunca «sin servidores»
+        // por no saber)
+        if (par) {
+          const lc = st.get(par.localCandidateId), rc = st.get(par.remoteCandidateId);
+          const tipo = (c) => (c && typeof c.candidateType === 'string' ? c.candidateType : ''), tl = tipo(lc), tr2 = tipo(rc);
+          const deEquipo = (x) => x === 'host' || x === 'srflx' || x === 'prflx';
+          let pol = ''; try { pol = String((pc.getConfiguration() || {}).iceTransportPolicy || ''); } catch (_) {}
+          s.ruta = tl === 'relay' ? 'mio' : tr2 === 'relay' ? 'servidor' : (deEquipo(tl) && deEquipo(tr2) && pol !== 'relay') ? 'directa' : '';
+        }
         // (15 Nov 2026) el recorrido de los datos: lo que mide el propio navegador en el par de candidatos elegido (ida y vuelta,
         // y el caudal como diferencia de bytes entre dos sondeos; si cambia el par, se empieza de nuevo)
         if (par) {
@@ -2152,6 +2161,8 @@
       const s = mon.stats || {}, r = s.ruta || '';
       if (el.dataset.ruta !== r) el.dataset.ruta = r;
       const ciudad = r === 'mio' && o.servidor ? String(o.servidor() || '') : '';
+      const nomServ = releGuardiana() ? t('Servidor de GUARDIANA') : t('Servidor'), ns = el.querySelector('.mr-pie-serv b');
+      if (ns && ns.textContent !== nomServ) ns.textContent = nomServ;
       const sv = $('#ll-mon-ruta-serv'); if (sv && sv.textContent !== ciudad) sv.textContent = ciudad;
       let ms = '—'; if (typeof s.rtt === 'number') { try { ms = new Intl.NumberFormat(monLoc()).format(s.rtt) + ' ms'; } catch (_) { ms = s.rtt + ' ms'; } }
       const dato = r ? t('Envío {v} · recepción {w} · ida y vuelta {ms}').replace('{v}', monTasa(s.envio)).replace('{w}', monTasa(s.recep)).replace('{ms}', ms) : t('Comprobando…');
@@ -2159,7 +2170,8 @@
       const nota = r === 'directa' ? t('Sin servidores en medio: los paquetes van encriptados de un equipo al otro.') : r ? t('El servidor solo reenvía paquetes encriptados: no tiene las claves para abrirlos.') : '';
       const n = $('#ll-mon-ruta-nota'); if (n && n.textContent !== nota) n.textContent = nota;
     }
-    function monRuta(r) { return r === 'directa' ? t('Directa entre los dos equipos') : t('Por un servidor de GUARDIANA') + (r === 'mio' && o.servidor && o.servidor() ? ' · ' + o.servidor() : ''); }
+    const releGuardiana = () => !(window.GuardianaRele && window.GuardianaRele.PROPIO);
+    function monRuta(r) { return r === 'directa' ? t('Directa entre los dos equipos') : !releGuardiana() ? t('Servidor') : t('Por un servidor de GUARDIANA') + (r === 'mio' && o.servidor && o.servidor() ? ' · ' + o.servidor() : ''); }
     function monFilas() {
       const f = [], s = mon.stats || {}, x = pc && pqDe.get(pc);
       let M = {}; try { M = (o.monitor && o.monitor()) || {}; } catch (_) {}
