@@ -2381,6 +2381,9 @@ body.modo-llevar{background:#06080C}
 .ll-en-flotante:focus-visible{outline:2px solid #9CC3E4;outline-offset:3px}
 .gc-llamada.mini .ll-en-flotante{top:50%;padding:10px 14px;font-size:14px}
 .gc-llamada.mini .ll-en-flotante span{display:none}
+/* la llamada en la ventana flotante del sistema (16 Nov 2026; llamada.js, abreVentana): con «Ver el chat», la tarjeta pequeña de la
+   página se aparta mientras la ventana está abierta, y vuelve al cerrarla */
+.gc-llamada.mini.en-ventana{display:none!important}
 /* El código de la llave, en grande, en rojo y en el centro (dueño, 2 Nov 2026, 14:43) */
 .ll-cod{position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);z-index:13;width:min(90vw,420px);box-sizing:border-box;display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px;padding:22px 22px 20px;border-radius:24px;border:1.5px solid rgba(255,90,82,.55);background:rgba(10,8,10,.97);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);box-shadow:0 30px 90px -30px rgba(0,0,0,.95),0 0 0 6px rgba(255,90,82,.08)}
 .ll-cod[hidden]{display:none!important}

@@ -1,5 +1,7 @@
 // La ventana flotante sola en el ordenador (dueño, 2 Nov 2026, 13:43–13:53; ronda 90). Hecha a partir de pantalla.js.
 // A y B (PC) en videollamada. El navegador de la prueba no abre ventanas flotantes de verdad: se anota lo que la página le pide.
+// Desde el 16 Nov 2026, donde existe la ventana del sistema (Document Picture-in-Picture), la llamada va entera en ella
+// (ventana-flotante.js); esta prueba es la de los navegadores que no la tienen: la flotante del vídeo, como antes.
 //   1. Durante la videollamada, la página le da al navegador las cuatro acciones: abrir la ventana flotante sola al cambiar de
 //      pestaña, y en esa ventana, micrófono, cámara y colgar.
 //   2. «Al cambiar de pestaña» (la acción del navegador): sale la otra persona en la ventana flotante.
@@ -21,6 +23,7 @@ async function equipo(browser, nombre) {
   const ctx = await browser.newContext({ viewport: { width: 1280, height: 800 }, userAgent: PC, locale: 'es-CO', permissions: ['microphone', 'camera'] });
   await ctx.addInitScript(() => {
     try { sessionStorage.setItem('gcom-sin-numero', '1'); } catch (_) {}
+    try { Object.defineProperty(window, 'documentPictureInPicture', { configurable: true, value: undefined }); } catch (_) {} // un navegador sin la ventana del sistema
     // lo que la página le pide al navegador: acciones de Media Session, estado del micrófono y la cámara, ventana flotante
     window.__acciones = {}; window.__mic = []; window.__cam = []; window.__pip = []; window.__pipFuera = 0; let enPip = null;
     const ms = navigator.mediaSession;

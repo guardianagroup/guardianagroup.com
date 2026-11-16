@@ -65,6 +65,33 @@
   // navegador la tiene y dice que no al instante, sin preguntar nada, el botón se quita en ese momento (ver comparte).
   const PANTALLA = !!(navigator.mediaDevices && typeof navigator.mediaDevices.getDisplayMedia === 'function') && !/Android/i.test(navigator.userAgent || '');
   const PIP = !!(document.pictureInPictureEnabled || (window.HTMLVideoElement && 'webkitSetPresentationMode' in HTMLVideoElement.prototype));
+  // la imagen procesada, fotograma a fotograma y sin reloj (Chrome, Edge y el programa; ver lienzoVivo)
+  const POR_FOTOGRAMA = typeof window.MediaStreamTrackProcessor === 'function' && typeof window.MediaStreamTrackGenerator === 'function' && typeof window.VideoFrame === 'function' && typeof window.OffscreenCanvas === 'function';
+  // la ventana flotante del sistema con la llamada (Chrome y Edge del ordenador; ver abreVentana)
+  const DOC_PIP = !!(window.documentPictureInPicture && typeof window.documentPictureInPicture.requestWindow === 'function');
+  // su aspecto: la otra persona a toda la ventana, tu imagen pequeña en la esquina, el tiempo arriba y los tres botones abajo, que
+  // con ratón salen al pasar por encima (los colores de GUARDIANA; el rojo de colgar, el coral de la casa)
+  const CSS_VF = "@font-face{font-family:'IBM Plex Sans';font-weight:100 700;font-display:swap;src:url(__ORIGEN__/fonts/IBMPlexSans-400-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}"
+    + "@font-face{font-family:'IBM Plex Mono';font-weight:500;font-display:swap;src:url(__ORIGEN__/fonts/IBMPlexMono-500-latin.woff2) format('woff2')}"
+    + ':root{color-scheme:dark}*{box-sizing:border-box}'
+    + "html,body{margin:0;height:100%;background:#06080C;color:#F4F6F8;font:500 13px/1.2 'IBM Plex Sans',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;overflow:hidden;-webkit-user-select:none;user-select:none}"
+    + '.vf{position:fixed;inset:0;background:#06080C}'
+    + '.vf [hidden]{display:none!important}'
+    + '.vf-rem{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#06080C}'
+    + ".vf-ini{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);width:76px;height:76px;border-radius:50%;display:grid;place-items:center;background:#0C1118;border:1px solid rgba(156,195,228,.35);color:#9CC3E4;font:600 32px/1 'IBM Plex Sans',system-ui,sans-serif}"
+    + '.vf-yo{position:absolute;inset-inline-end:10px;bottom:60px;width:27%;min-width:84px;max-width:180px;aspect-ratio:4/3;object-fit:cover;border-radius:10px;border:1px solid rgba(244,246,248,.3);box-shadow:0 6px 20px rgba(0,0,0,.5);background:#0C1118;transform:scaleX(-1)}'
+    + '.vf-yo.trasera{transform:none}'
+    + '.vf-arriba{position:absolute;inset:0 0 auto 0;padding:9px 12px 18px;background:linear-gradient(rgba(6,8,12,.7),rgba(6,8,12,0));pointer-events:none}'
+    + ".vf-tiempo{display:inline-flex;align-items:center;gap:7px;font:500 12px/1 'IBM Plex Mono',ui-monospace,monospace;letter-spacing:.03em;color:#F4F6F8}"
+    + ".vf-tiempo:not(:empty)::before{content:'';width:7px;height:7px;border-radius:50%;background:#5CC98A;box-shadow:0 0 0 3px rgba(92,201,138,.18)}"
+    + '.vf-barra{position:absolute;inset:auto 0 0 0;display:flex;justify-content:center;gap:12px;padding:16px 0 12px;background:linear-gradient(rgba(6,8,12,0),rgba(6,8,12,.8));transition:opacity .2s ease}'
+    + '.vf-b{appearance:none;width:40px;height:40px;padding:0;border-radius:50%;border:1px solid rgba(156,195,228,.28);background:rgba(16,22,30,.86);color:#F4F6F8;display:grid;place-items:center;cursor:pointer;transition:background-color .18s ease,color .18s ease,transform .1s ease}'
+    + '.vf-b:hover{background:rgba(30,40,52,.95)}.vf-b:active{transform:scale(.93)}.vf-b:focus-visible{outline:2px solid #9CC3E4;outline-offset:2px}'
+    + '.vf-b svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}.vf-b svg .relleno{fill:currentColor;stroke:none}'
+    + '.vf-mic .ic-raya{display:none}.vf-mic[aria-pressed="true"] .ic-raya{display:inline;stroke-width:2.2}'
+    + '.vf-b[aria-pressed="true"]{background:#F4F6F8;color:#0A0E14;border-color:#F4F6F8}'
+    + '.vf-colgar,.vf-colgar:hover{background:#E07A6C;border-color:#E07A6C;color:#06080C}'
+    + '@media (hover:hover){.vf .vf-barra{opacity:0}.vf:hover .vf-barra,.vf:focus-within .vf-barra{opacity:1}}';
   const reproduce = (v) => {
     try {
       const p = v.play();
@@ -1025,6 +1052,7 @@
       const crudo = cam.getVideoTracks()[0], s = crudo.getSettings ? crudo.getSettings() : {};
       const sw = s.width || 1280, sh = s.height || 720;
       const W = modo === 'protegida' ? SALIDA_W : Math.min(1280, sw), H = Math.round(W * sh / sw);
+      if (POR_FOTOGRAMA) { try { return lienzoVivo(modo, crudo, W, H); } catch (_) {} }
       const c = document.createElement('canvas'); c.width = W; c.height = H; const g = c.getContext('2d', { alpha: false });
       const p = document.createElement('canvas'), gp = p.getContext('2d', { alpha: false, willReadFrequently: true }); // (el mosaico lee sus bloques para meterles ruido)
       let vivo = true;
@@ -1048,6 +1076,58 @@
       try { salida.contentHint = 'motion'; } catch (_) {}
       r.track = salida; return r;
     }
+    // Fotograma a fotograma (16 Nov 2026; dueño, 09:44: «hemos ido los dos a ver los datos de la llamada en Órbita y no seguía y no
+    // nos veíamos»). El lienzo de arriba se pinta con un reloj de 30 veces por segundo, y con la pestaña de la llamada detrás (otra
+    // pestaña, Órbita, otra pestaña del programa) el navegador frena los relojes a una vez por segundo o menos: el mosaico que salía
+    // se quedaba congelado. Aquí cada fotograma de la cámara se trata en cuanto llega (MediaStreamTrackProcessor y
+    // MediaStreamTrackGenerator), sin reloj, y sigue igual con la pestaña detrás. Lee una copia de la cámara, que se suelta al parar
+    // (y con la cámara: sueltaCopia); con la cámara apagada sale negro, nunca la imagen.
+    function lienzoVivo(modo, crudo, W, H) {
+      const copia = crudo.clone();
+      let lector = null, gen = null, escritor = null;
+      try {
+        lector = new raiz.MediaStreamTrackProcessor({ track: copia }).readable.getReader();
+        gen = new raiz.MediaStreamTrackGenerator({ kind: 'video' }); escritor = gen.writable.getWriter();
+      } catch (e) { try { if (lector) lector.cancel().catch(() => {}); } catch (_) {} try { copia.stop(); } catch (_) {} throw e; }
+      const c = new raiz.OffscreenCanvas(W, H), g = c.getContext('2d', { alpha: false });
+      const p = new raiz.OffscreenCanvas(1, 1), gp = p.getContext('2d', { alpha: false, willReadFrequently: true });
+      let vivo = true;
+      const r = { modo, track: gen, listo: false, crudo, parar() {
+        if (!vivo) return; vivo = false;
+        try { lector.cancel().catch(() => {}); } catch (_) {} try { escritor.close().catch(() => {}); } catch (_) {}
+        try { gen.stop(); } catch (_) {} try { copia.stop(); } catch (_) {}
+      } };
+      const negro = () => { g.filter = 'none'; g.fillStyle = '#06080C'; g.fillRect(0, 0, W, H); };
+      const dibuja = (f) => {
+        if (!crudo.enabled || crudo.readyState !== 'live') { negro(); return; }
+        if (modo === 'protegida') {
+          const m = IMAGENES[imagen] || IMAGENES.mosaico, pw = m.w, ph = Math.max(1, Math.round(m.w * H / W));
+          if (p.width !== pw || p.height !== ph) { p.width = pw; p.height = ph; }
+          gp.filter = filtroLuz(); gp.imageSmoothingEnabled = true; gp.imageSmoothingQuality = 'high'; gp.drawImage(f, 0, 0, pw, ph); // aquí se pierde el detalle
+          if (m.ruido) { try { const im = gp.getImageData(0, 0, pw, ph), d = im.data, rz = crypto.getRandomValues(new Uint8Array(pw * ph)); for (let i = 0, j = 0; i < d.length; i += 4, j++) { const k = (rz[j] % (2 * m.ruido + 1)) - m.ruido; d[i] += k; d[i + 1] += k; d[i + 2] += k; } gp.putImageData(im, 0, 0); } catch (_) {} }
+          g.filter = 'none'; g.imageSmoothingEnabled = m.suave; g.imageSmoothingQuality = 'high'; g.drawImage(p, 0, 0, W, H);
+        } else {
+          g.filter = filtroLuz(); g.imageSmoothingEnabled = true; g.imageSmoothingQuality = 'high'; g.drawImage(f, 0, 0, W, H);
+        }
+        r.listo = true;
+      };
+      negro(); // hasta la primera imagen, negro: nunca la cámara tal cual
+      (async () => {
+        while (vivo) {
+          let x = null; try { x = await lector.read(); } catch (_) { break; }
+          if (!x || x.done) break;
+          const f = x.value; let sal = null;
+          if (!vivo) { try { f.close(); } catch (_) {} break; }
+          try { dibuja(f); sal = new raiz.VideoFrame(c, { timestamp: f.timestamp }); } catch (_) { sal = null; } finally { try { f.close(); } catch (_) {} }
+          if (!sal) continue;
+          try { await escritor.write(sal); } catch (_) { try { sal.close(); } catch (__) {} if (!vivo) break; }
+        }
+      })();
+      try { gen.contentHint = 'motion'; } catch (_) {}
+      return r;
+    }
+    // la copia de la cámara que lee el proceso por fotograma se suelta con la cámara (si no, el equipo la seguiría teniendo abierta)
+    function sueltaCopia(pista) { if (proc && proc.crudo && proc.crudo === pista) { const x = proc; proc = null; try { x.parar(); } catch (_) {} } }
     // la pista de imagen que sale: protegida («Tu imagen»), aclarada (poca luz) o la cámara tal cual
     const modoImagen = () => (!blindada() ? 'cruda' : imagen !== 'natural' ? 'protegida' : ganancia > 1.001 ? 'aclarada' : 'cruda');
     function pistaImagen() {
@@ -1055,7 +1135,7 @@
       if (!cam) return null;
       const m = modoImagen();
       if (m === 'cruda') return cam.getVideoTracks()[0] || null;
-      if (!proc || proc.modo !== m) { const viejo = proc; proc = lienzo(m); if (viejo) setTimeout(() => viejo.parar(), 400); }
+      if (!proc || proc.modo !== m || (proc.crudo && proc.crudo !== cam.getVideoTracks()[0])) { const viejo = proc; proc = lienzo(m); if (viejo) setTimeout(() => viejo.parar(), 400); }
       // la aclarada solo sale cuando ya tiene imágenes; hasta entonces, la cámara tal cual (nunca negro por un fallo)
       if (m === 'aclarada' && !proc.listo) return cam.getVideoTracks()[0] || null;
       return proc.track;
@@ -1977,6 +2057,7 @@
       codConfirmado = ''; codPlegado = false; codAbierto = false; codPendiente = ''; clearTimeout(codPendT); clearTimeout(codPlegarT);
       pqPor = ''; clearTimeout(pqAvisoT); segVisto = ''; segCambio = false;
       caja.classList.remove('yo-grande'); toqueGrande = null;
+      cierraVentana();
       try { if (document.pictureInPictureElement) document.exitPictureInPicture().catch(() => {}); const vr = $('#v-remoto'); if (vr && vr.webkitPresentationMode === 'picture-in-picture') vr.webkitSetPresentationMode('inline'); } catch (_) {}
       $('#a-remoto').srcObject = null; $('#v-remoto').srcObject = null; $('#v-local').srcObject = null; $('#v-local').classList.remove('trasera'); try { mirando = 'user'; } catch (_) {} remotoV = null; suCamara = true; video = false;
       const bc = $('#ll-camara'); if (bc) bc.setAttribute('aria-pressed', 'false');
@@ -2372,8 +2453,8 @@
       // teléfonos no dan la segunda cámara mientras la primera está abierta: entonces se para la actual y se vuelve a pedir.
       let s = null, cara = quiero;
       try { s = await pide(quiero); } catch (_) { s = null; }
-      if (!s) { try { if (viejo) viejo.stop(); } catch (_) {} try { s = await pide(quiero); } catch (_) { try { s = await pide(mirando); cara = mirando; } catch (e) { s = null; } } }
-      else { try { if (viejo) viejo.stop(); } catch (_) {} }
+      if (!s) { try { if (viejo) { sueltaCopia(viejo); viejo.stop(); } } catch (_) {} try { s = await pide(quiero); } catch (_) { try { s = await pide(mirando); cara = mirando; } catch (e) { s = null; } } }
+      else { try { if (viejo) { sueltaCopia(viejo); viejo.stop(); } } catch (_) {} }
       const nueva = s && s.getVideoTracks()[0];
       if (!nueva && estado !== 'libre' && viejo && viejo.readyState === 'ended') { o.aviso && o.aviso(t('No se pudo cambiar de cámara.')); o.manda({ acto: 'camara', id: idLlamada, on: false }); }
       if (nueva && estado !== 'libre') {
@@ -2408,16 +2489,94 @@
       // si el teléfono no la abre, se dice (dueño, 2 Nov 2026, 14:51: «en el móvil tampoco [funciona]»)
       setTimeout(() => { const v = $('#v-remoto'); if (estado === 'hablando' && document.visibilityState === 'visible' && !flotando(v)) o.aviso && o.aviso(t('Este teléfono no deja poner la llamada en una ventana flotante.')); }, 1800);
     }); }
+    // La ventana flotante con la llamada (16 Nov 2026; dueño, 09:44: «tenemos que poder movernos por toda la web… y el programa de
+    // GUARDIANA, y nos tenemos que seguir viendo en pantalla… el cuadradito… lo tenemos que poder mover… por toda la zona de la
+    // pantalla»). En Chrome y Edge del ordenador es una ventana del propio sistema (Document Picture-in-Picture): siempre encima de
+    // todo (otras pestañas, otros programas), se lleva por su barra a cualquier sitio de la pantalla y se agranda desde el borde.
+    // Dentro, la otra persona, tu imagen pequeña, el tiempo y los botones de micrófono, cámara y colgar (los mismos de la llamada).
+    // Se abre sola al pasar a otra pestaña y se cierra al volver; con «Ver el chat» se queda hasta cerrarla, y entonces vuelve la
+    // tarjeta pequeña de siempre. Donde no existe, como antes: la flotante del vídeo al cambiar de pestaña y la tarjeta pequeña.
+    var vf = null; // la ventana abierta: { w, sola, … } (var: «pinta» puede correr antes de llegar aquí)
+    function ventanaAbierta() { return !!(vf && vf.w && !vf.w.closed); }
+    function abreVentana(sola) {
+      if (!DOC_PIP || !video || estado !== 'hablando') return Promise.resolve(false);
+      if (ventanaAbierta()) { if (!sola) vf.sola = false; return Promise.resolve(true); }
+      let pide = null;
+      try { pide = raiz.documentPictureInPicture.requestWindow({ width: 400, height: 260 }); } catch (_) { return Promise.resolve(false); }
+      return Promise.resolve(pide).then((w) => {
+        if (!w) return false;
+        if (estado !== 'hablando' || !video || ventanaAbierta()) { try { w.close(); } catch (_) {} return ventanaAbierta(); }
+        try { montaVentana(w, sola); } catch (_) { try { w.close(); } catch (__) {} return false; }
+        return true;
+      }, () => false);
+    }
+    function montaVentana(w, sola) {
+      const d = w.document;
+      try { d.documentElement.lang = document.documentElement.lang || 'es'; d.documentElement.dir = document.documentElement.dir || 'ltr'; } catch (_) {}
+      d.title = 'GUARDIANA';
+      const st = d.createElement('style'); st.textContent = CSS_VF.replace(/__ORIGEN__/g, location.origin); d.head.append(st);
+      const el = (tag, cls) => { const x = d.createElement(tag); if (cls) x.className = cls; return x; };
+      const marco = el('div', 'vf'), rem = el('video', 'vf-rem'), yo = el('video', 'vf-yo'), ini = el('div', 'vf-ini');
+      for (const v of [rem, yo]) { v.muted = true; v.autoplay = true; v.playsInline = true; v.setAttribute('playsinline', ''); v.setAttribute('aria-hidden', 'true'); }
+      ini.setAttribute('aria-hidden', 'true');
+      const arriba = el('div', 'vf-arriba'), reloj = el('span', 'vf-tiempo'); arriba.append(reloj);
+      const barra = el('div', 'vf-barra');
+      const boton = (id, cls) => {
+        const b = el('button', 'vf-b ' + cls); b.type = 'button';
+        const svg = $('#' + id + ' svg'); if (svg) b.append(d.importNode(svg, true));
+        b.addEventListener('click', () => { const x = $('#' + id); if (x) x.click(); pintaVf(); });
+        return b;
+      };
+      const bMic = boton('ll-silenciar', 'vf-mic'), bCam = boton('ll-camara', 'vf-cam'), bColgar = boton('ll-colgar', 'vf-colgar');
+      barra.append(bMic, bCam, bColgar);
+      marco.append(rem, ini, yo, arriba, barra); d.body.append(marco);
+      vf = { w, sola: !!sola, rem, yo, ini, reloj, bMic, bCam, bColgar, tic: 0 };
+      w.addEventListener('pagehide', () => { if (vf && vf.w === w) { const era = vf; vf = null; cierreVentana(era); } });
+      try { vf.tic = w.setInterval(pintaVf, 400); } catch (_) {}
+      pintaVf(); pintaFlotando();
+    }
+    // lo de la ventana, al día con la llamada (con su propio reloj: la ventana se ve y no la frena el navegador)
+    function pintaVf() {
+      if (!vf) return;
+      if (estado !== 'hablando' || !video) { cierraVentana(); return; }
+      const { rem, yo, ini, reloj, bMic, bCam, bColgar } = vf;
+      const vr = $('#v-remoto'), vl = $('#v-local');
+      const suya = remotoV && suCamara && vr && vr.srcObject ? vr.srcObject : null;
+      if (rem.srcObject !== suya) rem.srcObject = suya;
+      if (suya && rem.paused) { try { const p = rem.play(); if (p && p.catch) p.catch(() => {}); } catch (_) {} }
+      rem.hidden = !suya; ini.hidden = !!suya; ini.textContent = o.inicial ? o.inicial() : '·';
+      const mia = camaraOn() && vl && vl.srcObject ? vl.srcObject : null;
+      if (yo.srcObject !== mia) yo.srcObject = mia;
+      if (mia && yo.paused) { try { const p = yo.play(); if (p && p.catch) p.catch(() => {}); } catch (_) {} }
+      yo.hidden = !mia; yo.classList.toggle('trasera', !!(vl && vl.classList.contains('trasera')) || !!compartiendo);
+      reloj.textContent = iniciada ? mmss(Date.now() - iniciada) : '';
+      const callado = $('#ll-silenciar').getAttribute('aria-pressed') === 'true';
+      bMic.setAttribute('aria-pressed', String(callado)); bMic.setAttribute('aria-label', t('Silenciar')); bMic.title = t('Silenciar');
+      const on = camaraOn(); bCam.hidden = !cam; bCam.setAttribute('aria-pressed', String(!on));
+      { const n = on ? t('Apagar la cámara') : t('Encender la cámara'); bCam.setAttribute('aria-label', n); bCam.title = n; }
+      bColgar.setAttribute('aria-label', t('Colgar')); bColgar.title = t('Colgar');
+    }
+    function cierraVentana() {
+      if (!vf) return;
+      const era = vf; vf = null;
+      try { era.w.close(); } catch (_) {}
+      cierreVentana(era);
+    }
+    function cierreVentana(era) {
+      try { if (era && era.tic) era.w.clearInterval(era.tic); } catch (_) {}
+      pintaFlotando();
+    }
     // Mientras la otra persona está en la ventana flotante, la llamada no se queda en negro con «Reproduciendo…» (dueño, 14:52: «la
-    // pantalla se pone negra… es un error»): lo dice, y al tocar, la imagen vuelve aquí.
+    // pantalla se pone negra… es un error»): lo dice, y al tocar, la imagen vuelve aquí. Con «Ver el chat», la tarjeta pequeña se
+    // aparta mientras la llamada está en la ventana (app.css, .en-ventana).
     function pintaFlotando() {
       const v = $('#v-remoto'), e = $('#ll-en-flotante'); if (!v || !e) return;
-      const si = estado === 'hablando' && flotando(v);
-      e.hidden = !si; caja.classList.toggle('flotando', si);
+      const fuera = ventanaAbierta(), si = estado === 'hablando' && (flotando(v) || fuera);
+      e.hidden = !si; caja.classList.toggle('flotando', si); caja.classList.toggle('en-ventana', fuera && estado === 'hablando');
     }
     { const v = $('#v-remoto'); if (v) for (const ev of ['enterpictureinpicture', 'leavepictureinpicture', 'webkitpresentationmodechanged']) v.addEventListener(ev, pintaFlotando); }
     { const e = $('#ll-en-flotante'); if (e) e.addEventListener('click', () => {
-      flotaSola = false;
+      flotaSola = false; cierraVentana();
       try { if (document.pictureInPictureElement) document.exitPictureInPicture().catch(() => {}); const v = $('#v-remoto'); if (v && v.webkitPresentationMode === 'picture-in-picture') v.webkitSetPresentationMode('inline'); } catch (_) {}
       setTimeout(pintaFlotando, 300);
     }); }
@@ -2425,7 +2584,8 @@
     // si mi amigo está visitando una página web normal»; ronda 90): en mitad de una videollamada, al cambiar de pestaña o de
     // programa, Chrome de escritorio (desde la 120) abre solo la ventana flotante con la otra persona, movible y por encima de todo
     // («enterpictureinpicture» de Media Session), con sus propios botones de micrófono, cámara y colgar (togglemicrophone,
-    // togglecamera, hangup). Al volver a la pestaña, si se abrió sola, se cierra. Donde el navegador no lo trae, no pasa nada.
+    // togglecamera, hangup). Desde el 16 Nov 2026, la ventana de la llamada entera (abreVentana) donde existe. Al volver a la
+    // pestaña, si se abrió sola, se cierra. Donde el navegador no lo trae, no pasa nada.
     function accion(a, f) { try { navigator.mediaSession.setActionHandler(a, f); } catch (_) {} }
     function sesionLlamada() {
       const MS = navigator.mediaSession; if (!MS) return;
@@ -2434,6 +2594,8 @@
         sesionOn = quiere;
         if (quiere) {
           accion('enterpictureinpicture', () => {
+            if (ventanaAbierta()) return;
+            if (DOC_PIP) { abreVentana(true); return; }
             const v = $('#v-remoto');
             if (!v || !v.srcObject || document.pictureInPictureElement || v.webkitPresentationMode === 'picture-in-picture') return;
             flotaSola = true; entraFlotante(v, () => { flotaSola = false; });
@@ -2451,7 +2613,9 @@
       try { if (MS.setCameraActive) MS.setCameraActive(camaraOn()); } catch (_) {}
     }
     document.addEventListener('visibilitychange', () => {
-      if (document.visibilityState !== 'visible' || !flotaSola) return;
+      if (document.visibilityState !== 'visible') return;
+      if (vf && vf.sola) cierraVentana();
+      if (!flotaSola) return;
       flotaSola = false;
       try { if (document.pictureInPictureElement) document.exitPictureInPicture().catch(() => {}); } catch (_) {}
     });
@@ -2513,7 +2677,9 @@
     addEventListener('pageshow', () => setTimeout(recuperaMedios, 300));
     { const b = $('#ll-vista-tel'); if (b) b.addEventListener('click', () => { if (caja.classList.contains('tres') || o.sencilla) return; alternaDividida(); pintaBotonTam(); }); }
     $('#ll-camara').addEventListener('click', () => { if (!cam) return; const on = !camaraOn(); cam.getVideoTracks().forEach((x) => { x.enabled = on; }); o.manda({ acto: 'camara', id: idLlamada, on }); for (const L of patas) tmanda(L, { acto: 'camara', id: L.id, on }); pintaVideo(); });
-    $('#ll-mini').addEventListener('click', () => pequena(true));
+    // «Ver el chat» en el ordenador (16 Nov 2026): la llamada pasa a la ventana flotante del sistema (abreVentana), que se lleva a
+    // cualquier sitio de la pantalla y sigue encima de todo, y el chat queda libre; al cerrarla, la tarjeta pequeña de siempre.
+    $('#ll-mini').addEventListener('click', () => { pequena(true); if (DOC_PIP && video && estado === 'hablando' && finoAhora()) abreVentana(false); });
     { const b = $('#ll-completa'); if (b) {
       b.addEventListener('click', () => alternaCompleta());
       document.addEventListener('fullscreenchange', () => { b.setAttribute('aria-pressed', document.fullscreenElement ? 'true' : 'false'); });
@@ -2557,7 +2723,22 @@
     };
     caja.addEventListener('pointerup', sueltaMini); caja.addEventListener('pointercancel', sueltaMini);
     addEventListener('resize', () => recolocaMini(), { passive: true });
-    addEventListener('beforeunload', () => { if (estado !== 'libre') { try { o.manda({ acto: 'colgar', id: idLlamada }); } catch (_) {} } });
+    // Por toda la web sin colgar (16 Nov 2026; dueño, 09:44: «tenemos que poder movernos por toda la web… y nos tenemos que seguir
+    // viendo»). Un enlace de esta página que la cambiaría («Inicio», «Multas»…) se abre, en mitad de una llamada, en otra pestaña: la
+    // llamada sigue aquí y, al pasar a esa pestaña, en la ventana flotante. Salir de la página o recargarla en mitad de una
+    // conversación lo pregunta antes el navegador, y el colgar sale solo al irse de verdad (antes salía ya al preguntar).
+    document.addEventListener('click', (e) => {
+      if (estado === 'libre' || estado === 'cerrando' || e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      const a = e.target && e.target.closest ? e.target.closest('a[href]') : null;
+      if (!a || a.hasAttribute('download') || (a.target && a.target.toLowerCase() !== '_self')) return;
+      let u = null; try { u = new URL(a.href, location.href); } catch (_) { return; }
+      if (u.protocol !== 'https:' && u.protocol !== 'http:') return;
+      if (u.origin === location.origin && u.pathname === location.pathname && u.search === location.search) return; // solo cambia el # de esta página
+      e.preventDefault();
+      try { raiz.open(u.href, '_blank', 'noopener'); } catch (_) {}
+    });
+    addEventListener('beforeunload', (e) => { if (estado === 'hablando' || estado === 'conectando') { e.preventDefault(); e.returnValue = ''; } });
+    addEventListener('pagehide', () => { if (estado !== 'libre') { try { o.manda({ acto: 'colgar', id: idLlamada }); } catch (_) {} } });
     pintaVoces(); pintaImagenes();
     // Zoom y ventanas pequeñas (dueño, 28 Oct 2026, 12:22–12:24: «que no se vuelva todo loco… que no cambien las cosas de
     // sitio»). En el ordenador la llamada nunca se dibuja en menos de 640 × 480: con menos sitio (un zoom del 300 %, una
