@@ -69,6 +69,9 @@
   const POR_FOTOGRAMA = typeof window.MediaStreamTrackProcessor === 'function' && typeof window.MediaStreamTrackGenerator === 'function' && typeof window.VideoFrame === 'function' && typeof window.OffscreenCanvas === 'function';
   // la ventana flotante del sistema con la llamada (Chrome y Edge del ordenador; ver abreVentana)
   const DOC_PIP = !!(window.documentPictureInPicture && typeof window.documentPictureInPicture.requestWindow === 'function');
+  // (16 Nov 2026) dentro del programa GUARDIANA (su motor es WebView2) la ventana flotante del sistema no es la de Chrome: allí la
+  // ventana de la llamada la hace el propio programa (VENTANA_PROGRAMA); sin ella, la tarjeta pequeña de siempre
+  const EN_WEBVIEW = (() => { try { const b = navigator.userAgentData && navigator.userAgentData.brands; return !!(b && b.some((x) => /WebView2/i.test(String(x.brand)))); } catch (_) { return false; } })();
   // En el programa GUARDIANA (desde la 1.0.60, que marca la página con data-ventana-llamada), la ventana la hace el propio programa
   // cuando esta página la pide con este nombre (sesion::VENTANA_LLAMADA): pequeña, siempre delante, fuera de capturas y movible por
   // toda la pantalla; esta página la llena igual que la de Chrome. Un programa anterior la abriría como pestaña: sin la marca, no.
@@ -76,6 +79,7 @@
   const VENTANA_PROGRAMA = () => !!(document.documentElement && document.documentElement.dataset.ventanaLlamada === '1');
   // dentro del programa GUARDIANA (su página marcada): Órbita y Comunicaciones son sus propias pestañas, sin barra
   const EN_PROGRAMA = () => !!(document.documentElement && document.documentElement.dataset.enPrograma === '1');
+  const docPip = () => DOC_PIP && !EN_WEBVIEW && !EN_PROGRAMA() && !VENTANA_PROGRAMA();
   // pedir al programa otro de sus productos (su guion coge el clic de un enlace con data-producto; fuera del programa no hace nada)
   function irAlProducto(p) {
     try { const a = document.createElement('a'); a.href = '#'; a.dataset.producto = p; a.hidden = true; document.body.append(a); a.click(); a.remove(); } catch (_) {}
@@ -2637,10 +2641,12 @@
         let w = null;
         try { w = raiz.open('', VENTANA_NOMBRE, 'popup=yes,width=400,height=260'); } catch (_) { w = null; }
         if (!w) return Promise.resolve(false);
-        try { montaVentana(w, sola); } catch (_) { try { w.close(); } catch (__) {} return Promise.resolve(false); }
+        // (el programa la hace a su tiempo: su página puede no estar lista aún, o cambiarse al dársela; miraVentana la llena entonces)
+        try { montaVentana(w, sola); } catch (_) { vf = { w, sola: !!sola, rem: null, tic: 0 }; }
+        for (const ms of [250, 700, 1500, 3000, 5000]) setTimeout(() => miraVentana(w), ms);
         return Promise.resolve(true);
       }
-      if (!DOC_PIP) return Promise.resolve(false);
+      if (!docPip()) return Promise.resolve(false);
       let pide = null;
       try { pide = raiz.documentPictureInPicture.requestWindow({ width: 400, height: 260 }); } catch (_) { return Promise.resolve(false); }
       return Promise.resolve(pide).then((w) => {
@@ -2686,6 +2692,7 @@
     function pintaVf() {
       if (!vf) return;
       if (estado !== 'hablando' || !video) { cierraVentana(); return; }
+      if (!vf.rem) return; // (aún sin llenar: miraVentana)
       const { rem, yo, ini, reloj, bMic, bCam, bColgar } = vf;
       const vr = $('#v-remoto'), vl = $('#v-local');
       const suya = remotoV && suCamara && vr && vr.srcObject ? vr.srcObject : null;
@@ -2720,14 +2727,29 @@
       try { if (era && era.tic) era.w.clearInterval(era.tic); } catch (_) {}
       pintaFlotando();
     }
-    // ¿Sigue la ventana? Cerrada (su ×, la vuelta a la pestaña de Chrome): fuera. Abierta pero vacía (la del programa, si su
-    // primera página se cambia al dársela al programa): se vuelve a llenar. Al irse su página y, por si acaso, cada segundo.
+    // ¿Sigue la ventana? Cerrada (su ×, la vuelta a la pestaña de Chrome): fuera. Abierta pero vacía (la del programa: al dársela al
+    // programa, su primera página se cambia por otra en blanco): se vuelve a llenar. Y si esa página en blanco nueva quedó como de
+    // otro origen, desde aquí no se puede llenar (16 Nov 2026; dueño, 12:20, con el programa: «yo a él no lo veía»; y 12:41: «le he
+    // dado a ir al chat y me abre el navegador»): la ventana es nuestra, así que se lleva a una página en blanco de aquí y se llena.
+    // Mientras su página no está lista, se espera. Al irse su página, en los primeros segundos y, por si acaso, cada segundo.
     function miraVentana(w) {
       if (!vf || (w && vf.w !== w)) return;
       const era = vf;
-      if (era.w.closed) { vf = null; cierreVentana(era); return; }
-      let llena = false; try { llena = !!era.w.document.querySelector('.vf'); } catch (_) { llena = true; }
-      if (!llena) { vf = null; try { era.w.clearInterval(era.tic); } catch (_) {} try { montaVentana(era.w, era.sola); } catch (_) { cierreVentana(era); } }
+      let cerrada = true; try { cerrada = !!era.w.closed; } catch (_) {}
+      if (cerrada) { vf = null; cierreVentana(era); return; }
+      let d = null; try { d = era.w.document; } catch (_) { d = null; }
+      if (!d) {
+        era.ajena = (era.ajena || 0) + 1;
+        if (era.ajena > 5) { cierraVentana(); return; }
+        try { era.w.location.replace('about:blank'); } catch (_) {}
+        return;
+      }
+      era.ajena = 0;
+      if (era.rem && era.rem.ownerDocument === d && era.rem.isConnected) return; // llena
+      if (!d.body || !d.head) return; // aún sin su página: al siguiente vistazo
+      try { if (era.tic) era.w.clearInterval(era.tic); } catch (_) {}
+      vf = null;
+      try { montaVentana(era.w, era.sola); } catch (_) { if (!vf) vf = Object.assign(era, { rem: null, tic: 0 }); }
     }
     setInterval(() => miraVentana(null), 1000);
     // Mientras la otra persona está en la ventana flotante, la llamada no se queda en negro con «Reproduciendo…» (dueño, 14:52: «la
@@ -2759,7 +2781,7 @@
         if (quiere) {
           accion('enterpictureinpicture', () => {
             if (ventanaAbierta()) return;
-            if (DOC_PIP) { abreVentana(true); return; }
+            if (docPip()) { abreVentana(true); return; }
             const v = $('#v-remoto');
             if (!v || !v.srcObject || document.pictureInPictureElement || v.webkitPresentationMode === 'picture-in-picture') return;
             flotaSola = true; entraFlotante(v, () => { flotaSola = false; });
@@ -2847,7 +2869,7 @@
     $('#ll-camara').addEventListener('click', () => { if (!cam) return; const on = !camaraOn(); cam.getVideoTracks().forEach((x) => { x.enabled = on; }); o.manda({ acto: 'camara', id: idLlamada, on }); for (const L of patas) tmanda(L, { acto: 'camara', id: L.id, on }); pintaVideo(); });
     // «Ver el chat» en el ordenador (16 Nov 2026): la llamada pasa a la ventana flotante del sistema (abreVentana), que se lleva a
     // cualquier sitio de la pantalla y sigue encima de todo, y el chat queda libre; al cerrarla, la tarjeta pequeña de siempre.
-    $('#ll-mini').addEventListener('click', () => { pequena(true); if ((DOC_PIP || VENTANA_PROGRAMA()) && video && estado === 'hablando' && finoAhora()) abreVentana(false); });
+    $('#ll-mini').addEventListener('click', () => { pequena(true); if ((docPip() || VENTANA_PROGRAMA()) && video && estado === 'hablando' && finoAhora()) abreVentana(false); });
     { const b = $('#ll-completa'); if (b) {
       b.addEventListener('click', () => alternaCompleta());
       document.addEventListener('fullscreenchange', () => { b.setAttribute('aria-pressed', document.fullscreenElement ? 'true' : 'false'); });

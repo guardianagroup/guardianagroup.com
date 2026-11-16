@@ -9,6 +9,10 @@
 //      tarjeta pequeña.
 //   4. Colgar desde la ventana: se termina para los dos y la ventana se cierra.
 //   5. Sin la marca (un programa anterior), la página no pide ninguna ventana: no saldría una pestaña de más.
+//   1b. (16 nov 2026; dueño, 12:20 y 12:41, con el programa: «yo a él no lo veía», «me abre el navegador») Al dársela al programa, su
+//      página se cambia por otra en blanco: vaciada, o como de otro origen. La página de la llamada la vuelve a llenar sola.
+//   6. Un programa anterior a la 1.0.60 (motor WebView2, con la marca enPrograma y sin la de la ventana): ni la ventana flotante del
+//      sistema ni ninguna otra; «Ver el chat» deja la tarjeta pequeña de siempre.
 'use strict';
 const { chromium } = require('playwright');
 const path = require('path');
@@ -25,16 +29,21 @@ async function equipo(browser, nombre, programa) {
   await ctx.addInitScript((programa) => {
     try { sessionStorage.setItem('gcom-sin-numero', '1'); } catch (_) {}
     if (window.top !== window || window.opener) return; // la ventana de la llamada no lleva nada de esto
-    try { Object.defineProperty(window, 'documentPictureInPicture', { configurable: true, value: undefined }); } catch (_) {} // como el programa
+    if (programa === 'webview') {
+      // el motor del programa (WebView2) se presenta así; la ventana del sistema existe, pero no es la de Chrome
+      try { Object.defineProperty(Navigator.prototype, 'userAgentData', { configurable: true, get: () => ({ brands: [{ brand: 'Microsoft Edge WebView2', version: '142' }, { brand: 'Chromium', version: '142' }], mobile: false, platform: 'Windows' }) }); } catch (_) {}
+    } else {
+      try { Object.defineProperty(window, 'documentPictureInPicture', { configurable: true, value: undefined }); } catch (_) {} // como el programa
+    }
     window.__vista = 'visible';
     Object.defineProperty(Document.prototype, 'visibilityState', { configurable: true, get: () => window.__vista });
     Object.defineProperty(Document.prototype, 'hidden', { configurable: true, get: () => window.__vista !== 'visible' });
     // la marca del programa (crates/zero/src/paginas.rs, 1.0.60), como la pone su guion al crearse la página
-    if (programa) new MutationObserver((_, o) => { if (document.documentElement) { document.documentElement.dataset.ventanaLlamada = '1'; o.disconnect(); } }).observe(document, { childList: true });
+    if (programa) new MutationObserver((_, o) => { if (document.documentElement) { if (programa === 'webview') document.documentElement.dataset.enPrograma = '1'; else document.documentElement.dataset.ventanaLlamada = '1'; o.disconnect(); } }).observe(document, { childList: true });
     window.__abiertas = [];
     const abre = window.open;
     window.open = function (u, n, f) { window.__abiertas.push(String(n || '')); return abre.call(window, u, n, f); };
-  }, !!programa);
+  }, programa === 'webview' ? 'webview' : !!programa);
   const p = await ctx.newPage(); p.on('pageerror', (e) => { console.log('[' + nombre + '] pageerror', String(e).slice(0, 300)); fallos.push('pageerror ' + nombre); });
   return { p, ctx };
 }
@@ -79,6 +88,23 @@ async function llamada(browser, programa) {
   const mic = await A.evaluate(() => document.querySelector('#ll-silenciar').getAttribute('aria-pressed'));
   comprueba(mic === 'true', '1. sus botones mandan en la llamada (micrófono)', mic);
   if (V) { await V.evaluate(() => document.querySelector('.vf-mic').click()); await espera(400); }
+  // 1b. su página, cambiada por otra en blanco
+  if (V) {
+    const llena = async () => { const x = await lee(V).catch(() => null); return !!(x && x.rem && x.remAncho > 0 && x.botones.length === 4); };
+    await V.evaluate(() => { document.open(); document.close(); }).catch(() => {});
+    comprueba(!(await llena()), '1b. (vaciada)');
+    comprueba(await hasta(llena, 5000), '1b. vaciada, se vuelve a llenar sola');
+    await V.goto('about:blank').catch(() => {});
+    const origen = await V.evaluate(() => String(window.origin)).catch(() => '?');
+    comprueba(origen === 'null', '1b. (cambiada por una en blanco de otro origen)', origen);
+    comprueba(await hasta(llena, 8000), '1b. de otro origen, la página la trae a una en blanco suya y la vuelve a llenar');
+    const origen2 = await V.evaluate(() => String(window.origin)).catch(() => '?');
+    comprueba(origen2 === 'http://127.0.0.1:8080' && (await estado(A)) === 'hablando', '1b. ya del mismo origen, y la llamada sigue', origen2);
+    if (V) { await V.evaluate(() => document.querySelector('.vf-mic').click()).catch(() => {}); await espera(500); }
+    const mic2 = await A.evaluate(() => document.querySelector('#ll-silenciar').getAttribute('aria-pressed'));
+    comprueba(mic2 === 'true', '1b. y sus botones vuelven a mandar en la llamada', mic2);
+    if (V) { await V.evaluate(() => document.querySelector('.vf-mic').click()).catch(() => {}); await espera(400); }
+  }
   // 2. vuelve
   await oculta(A, false); await espera(1500);
   comprueba(!V || V.isClosed(), '2. al volver a la pestaña, la ventana se cierra');
@@ -113,6 +139,16 @@ async function llamada(browser, programa) {
   await oculta(s.A, true); await espera(2500);
   const pedidas = await s.A.evaluate(() => window.__abiertas.slice());
   comprueba(!pedidas.includes('guardiana-flotante') && s.ctx.pages().length === 1, '5. sin la marca (un programa anterior), la página no pide ninguna ventana', { pedidas, paginas: s.ctx.pages().length });
+
+  // 6. un programa anterior a la 1.0.60: WebView2, con la marca enPrograma y sin la de la ventana
+  const w6 = await llamada(browser, 'webview');
+  comprueba(await w6.A.evaluate(() => document.documentElement.dataset.enPrograma === '1' && !document.documentElement.dataset.ventanaLlamada && !!window.documentPictureInPicture), '6. (como el programa 1.0.57: WebView2 con la marca enPrograma y la ventana del sistema a mano)');
+  await oculta(w6.A, true); await espera(2500); await oculta(w6.A, false); await espera(800);
+  await w6.A.evaluate(() => document.querySelector('#ll-mini').click()); await espera(2500);
+  const pag6 = w6.ctx.pages().length, pide6 = await w6.A.evaluate(() => window.__abiertas.slice());
+  const tarj6 = await w6.A.evaluate(() => { const e = document.querySelector('#llamada'); return { tarjeta: !!(e.getClientRects().length && getComputedStyle(e).display !== 'none'), mini: e.classList.contains('mini') }; });
+  comprueba(pag6 === 1 && !pide6.length, '6. ni al dejar la pestaña ni con «Ver el chat» se abre ninguna ventana', { paginas: pag6, pedidas: pide6 });
+  comprueba(tarj6.tarjeta && tarj6.mini, '6. «Ver el chat» deja la tarjeta pequeña de siempre', tarj6);
   await browser.close();
   console.log(fallos.length ? 'FALLOS: ' + fallos.length + '\n - ' + fallos.join('\n - ') : 'TODO BIEN');
   process.exit(fallos.length ? 1 : 0);
