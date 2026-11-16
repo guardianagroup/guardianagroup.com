@@ -4033,7 +4033,8 @@
 "Cada 5 minutos":"כל 5 דקות",
 "Cada 15 minutos":"כל 15 דקות",
 "Cada 30 minutos":"כל 30 דקות",
-"Cada hora":"כל שעה"
+"Cada hora":"כל שעה",
+"Agrandar":"הגדלה"
 },
 "p":{
 "intento":"ניסתה הכי הרבה היום: {1}, {2} {2?פעם|פעמים}.",

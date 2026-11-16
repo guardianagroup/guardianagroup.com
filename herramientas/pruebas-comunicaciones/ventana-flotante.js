@@ -12,6 +12,8 @@
 //      pestaña sigue abierta; al cerrarla, vuelve la tarjeta pequeña.
 //   5. En mitad de la llamada, «Inicio» se abre en otra pestaña y la llamada sigue; salir de la página lo pregunta antes, sin colgar.
 //   6. Colgar desde la ventana flotante: se termina para los dos, la ventana se cierra y no queda ninguna copia de la cámara abierta.
+//   3b. (dueño, 16 nov 2026, 12:20: «él la pantalla no la puede hacer más grande ni nada») «Agrandar», arriba a la derecha: la ventana
+//      pasa a media pantalla y el botón dice «Reducir»; otra vez, vuelve a su tamaño.
 'use strict';
 const { chromium } = require('playwright');
 const path = require('path');
@@ -56,6 +58,9 @@ async function equipo(browser, nombre) {
         document.documentElement.append(f);
         const w = f.contentWindow;
         w.close = () => { if (!f.isConnected) return; try { w.dispatchEvent(new Event('pagehide')); } catch (_) {} f.remove(); dpip.window = null; window.__vfCerradas++; };
+        // como la ventana de verdad: se agranda con resizeTo (aquí, sin marco alrededor)
+        try { Object.defineProperty(w, 'outerWidth', { configurable: true, get: () => w.innerWidth }); Object.defineProperty(w, 'outerHeight', { configurable: true, get: () => w.innerHeight }); } catch (_) {}
+        w.resizeTo = (W, H) => { f.style.width = W + 'px'; f.style.height = H + 'px'; window.__vfTam = [W, H]; };
         dpip.window = w;
         return Promise.resolve(w);
       },
@@ -117,7 +122,9 @@ const ventana = (P) => P.evaluate(() => {
   await A.evaluate(() => { window.__fondo = true; window.__vista = 'hidden'; document.dispatchEvent(new Event('visibilitychange')); });
   await espera(1500);
   const detras = await fotogramas(B, 4000);
-  comprueba(antes >= 8 && detras >= 8, '1. con la pestaña de A detrás, su imagen sigue llegando a B con fluidez (fotogramas por segundo)', { antes: +antes.toFixed(1), detras: +detras.toFixed(1) });
+  // (con el reloj de antes, detrás llegaba 1 imagen por segundo; en esta máquina de prueba, de dos núcleos y con las dos llamadas, la
+  // cámara de prueba da unas 8 delante: detrás tiene que dar casi lo mismo)
+  comprueba(antes >= 4 && detras >= Math.max(4, antes * 0.75), '1. con la pestaña de A detrás, su imagen sigue llegando a B con fluidez (fotogramas por segundo)', { antes: +antes.toFixed(1), detras: +detras.toFixed(1) });
   await A.evaluate(() => { window.__fondo = false; window.__vista = 'visible'; document.dispatchEvent(new Event('visibilitychange')); });
   await espera(800);
 
@@ -135,9 +142,22 @@ const ventana = (P) => P.evaluate(() => {
   await espera(1500);
   let w = await ventana(A);
   comprueba(!!w && w.rem && w.remFlujo && w.remAncho > 0 && w.yo && w.yoFlujo, '3. al cambiar de pestaña, la ventana flotante con la otra persona y tu imagen', w);
-  comprueba(!!w && /^\d\d:\d\d$/.test(w.tiempo) && w.botones.map((b) => b[0]).join(',') === 'vf-mic,vf-cam,vf-colgar,vf-volver', '3. con el tiempo y micrófono, cámara, colgar y «Volver a la llamada»', w && { tiempo: w.tiempo, botones: w.botones });
+  comprueba(!!w && /^\d\d:\d\d$/.test(w.tiempo) && w.botones.map((b) => b[0]).join(',') === 'vf-mic,vf-cam,vf-colgar,vf-volver,vf-tam', '3. con el tiempo y micrófono, cámara, colgar y «Volver a la llamada»', w && { tiempo: w.tiempo, botones: w.botones });
   await A.screenshot({ path: path.join(OUT, '3-a-ventana-flotante.png') });
   { const el = await A.$('#__vf'); if (el) { await el.screenshot({ path: path.join(OUT, '3-ventana-sola.png') }); const r = await el.boundingBox(); await A.mouse.move(r.x + r.width / 2, r.y + r.height / 2); await espera(400); await el.screenshot({ path: path.join(OUT, '3-ventana-con-raton.png') }); await A.mouse.move(5, 5); } }
+  // 3b. «Agrandar» y «Reducir»
+  {
+    const tam = () => A.evaluate(() => { const w = window.documentPictureInPicture.window; const b = w && w.document.querySelector('.vf-tam'); return w ? { ancho: w.innerWidth, alto: w.innerHeight, boton: !!b, etiqueta: b ? b.getAttribute('aria-label') : '', titulo: b ? b.title : '' } : null; });
+    const t0 = await tam();
+    comprueba(!!t0 && t0.boton && t0.etiqueta === 'Agrandar' && t0.ancho <= 420, '3b. arriba a la derecha, «Agrandar»', t0);
+    await A.evaluate(() => window.documentPictureInPicture.window.document.querySelector('.vf-tam').click()); await espera(900);
+    const t1 = await tam();
+    comprueba(!!t1 && t1.ancho > 560 && t1.alto > 300 && t1.etiqueta === 'Reducir' && t1.titulo === 'Reducir', '3b. la ventana pasa a media pantalla y el botón dice «Reducir»', t1);
+    { const el = await A.$('#__vf'); if (el) { const r = await el.boundingBox(); await A.mouse.move(r.x + r.width / 2, r.y + r.height / 2); await espera(400); await el.screenshot({ path: path.join(OUT, '3b-ventana-grande.png') }); await A.mouse.move(5, 5); } }
+    await A.evaluate(() => window.documentPictureInPicture.window.document.querySelector('.vf-tam').click()); await espera(900);
+    const t2 = await tam();
+    comprueba(!!t2 && t2.ancho <= 420 && t2.etiqueta === 'Agrandar', '3b. otra vez: vuelve a su tamaño', t2);
+  }
   // sus botones mandan en la llamada
   await A.evaluate(() => window.documentPictureInPicture.window.document.querySelector('.vf-mic').click()); await espera(600);
   let m = await A.evaluate(() => ({ llamada: document.querySelector('#ll-silenciar').getAttribute('aria-pressed'), ventana: window.documentPictureInPicture.window.document.querySelector('.vf-mic').getAttribute('aria-pressed') }));

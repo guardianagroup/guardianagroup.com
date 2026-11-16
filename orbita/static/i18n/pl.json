@@ -4033,7 +4033,8 @@
 "Cada 5 minutos":"Co 5 minut",
 "Cada 15 minutos":"Co 15 minut",
 "Cada 30 minutos":"Co 30 minut",
-"Cada hora":"Co godzinę"
+"Cada hora":"Co godzinę",
+"Agrandar":"Powiększ"
 },
 "p":{
 "intento":"Najwięcej prób dziś: {1}, {2} {2?raz|razy}.",

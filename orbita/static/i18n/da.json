@@ -4033,7 +4033,8 @@
 "Cada 5 minutos":"Hvert 5. minut",
 "Cada 15 minutos":"Hvert 15. minut",
 "Cada 30 minutos":"Hvert 30. minut",
-"Cada hora":"Hver time"
+"Cada hora":"Hver time",
+"Agrandar":"Forstør"
 },
 "p":{
 "intento":"Den, der prøvede mest i dag: {1}, {2} {2?gang|gange}.",

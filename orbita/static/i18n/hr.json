@@ -4033,7 +4033,8 @@
 "Cada 5 minutos":"Svakih 5 minuta",
 "Cada 15 minutos":"Svakih 15 minuta",
 "Cada 30 minutos":"Svakih 30 minuta",
-"Cada hora":"Svaki sat"
+"Cada hora":"Svaki sat",
+"Agrandar":"Povećaj"
 },
 "p":{
 "intento":"Najupornija danas: {1}, {2} {2?put|puta}.",

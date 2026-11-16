@@ -4033,7 +4033,8 @@
 "Cada 5 minutos":"Toutes les 5 minutes",
 "Cada 15 minutos":"Toutes les 15 minutes",
 "Cada 30 minutos":"Toutes les 30 minutes",
-"Cada hora":"Toutes les heures"
+"Cada hora":"Toutes les heures",
+"Agrandar":"Agrandir"
 },
 "p":{
 "intento":"Celle qui a le plus insisté aujourd'hui : {1}, {2} {2?fois|fois}.",

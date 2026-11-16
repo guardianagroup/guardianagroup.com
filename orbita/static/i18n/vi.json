@@ -4033,7 +4033,8 @@
 "Cada 5 minutos":"Mỗi 5 phút",
 "Cada 15 minutos":"Mỗi 15 phút",
 "Cada 30 minutos":"Mỗi 30 phút",
-"Cada hora":"Mỗi giờ"
+"Cada hora":"Mỗi giờ",
+"Agrandar":"Phóng to"
 },
 "p":{
 "intento":"Cố gắng nhiều nhất hôm nay: {1}, {2} {2?lần|lần}.",

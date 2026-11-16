@@ -4033,7 +4033,8 @@
 "Cada 5 minutos":"A cada 5 minutos",
 "Cada 15 minutos":"A cada 15 minutos",
 "Cada 30 minutos":"A cada 30 minutos",
-"Cada hora":"A cada hora"
+"Cada hora":"A cada hora",
+"Agrandar":"Ampliar"
 },
 "p":{
 "intento":"A que mais tentou hoje: {1}, {2} {2?vez|vezes}.",

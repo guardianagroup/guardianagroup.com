@@ -4033,7 +4033,8 @@
 "Cada 5 minutos":"Setiap 5 minit",
 "Cada 15 minutos":"Setiap 15 minit",
 "Cada 30 minutos":"Setiap 30 minit",
-"Cada hora":"Setiap jam"
+"Cada hora":"Setiap jam",
+"Agrandar":"Besarkan"
 },
 "p":{
 "intento":"Paling banyak mencuba hari ini: {1}, {2} {2?kali|kali}.",

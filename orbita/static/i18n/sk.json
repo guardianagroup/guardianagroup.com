@@ -4033,7 +4033,8 @@
 "Cada 5 minutos":"Každých 5 minút",
 "Cada 15 minutos":"Každých 15 minút",
 "Cada 30 minutos":"Každých 30 minút",
-"Cada hora":"Každú hodinu"
+"Cada hora":"Každú hodinu",
+"Agrandar":"Zväčšiť"
 },
 "p":{
 "intento":"Najviac sa dnes snažila: {1}, {2}{2?-krát|-krát}.",

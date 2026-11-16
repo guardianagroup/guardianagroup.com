@@ -4033,7 +4033,8 @@
 "Cada 5 minutos":"每 5 分鐘",
 "Cada 15 minutos":"每 15 分鐘",
 "Cada 30 minutos":"每 30 分鐘",
-"Cada hora":"每小時"
+"Cada hora":"每小時",
+"Agrandar":"放大"
 },
 "p":{
 "intento":"今天嘗試最多的：{1}，{2} {2?次|次}。",

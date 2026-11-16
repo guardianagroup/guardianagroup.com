@@ -4033,7 +4033,8 @@
 "Cada 5 minutos":"5 percenként",
 "Cada 15 minutos":"15 percenként",
 "Cada 30 minutos":"30 percenként",
-"Cada hora":"Óránként"
+"Cada hora":"Óránként",
+"Agrandar":"Nagyítás"
 },
 "p":{
 "intento":"Ma a legtöbbször próbálkozott: {1}, {2} {2?alkalommal|alkalommal}.",

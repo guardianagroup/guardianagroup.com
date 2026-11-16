@@ -4033,7 +4033,8 @@
 "Cada 5 minutos":"Á 5 mínútna fresti",
 "Cada 15 minutos":"Á 15 mínútna fresti",
 "Cada 30 minutos":"Á 30 mínútna fresti",
-"Cada hora":"Á klukkutíma fresti"
+"Cada hora":"Á klukkutíma fresti",
+"Agrandar":"Stækka"
 },
 "p":{
 "intento":"Sá sem reyndi mest í dag: {1}, {2} {2?sinni|sinnum}.",

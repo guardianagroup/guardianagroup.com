@@ -4033,7 +4033,8 @@
 "Cada 5 minutos":"Elke 5 minuten",
 "Cada 15 minutos":"Elke 15 minuten",
 "Cada 30 minutos":"Elke 30 minuten",
-"Cada hora":"Elk uur"
+"Cada hora":"Elk uur",
+"Agrandar":"Vergroten"
 },
 "p":{
 "intento":"Probeerde het vandaag het vaakst: {1}, {2} {2?keer|keer}.",

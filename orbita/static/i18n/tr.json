@@ -4033,7 +4033,8 @@
 "Cada 5 minutos":"5 dakikada bir",
 "Cada 15 minutos":"15 dakikada bir",
 "Cada 30 minutos":"30 dakikada bir",
-"Cada hora":"Saatte bir"
+"Cada hora":"Saatte bir",
+"Agrandar":"Büyüt"
 },
 "p":{
 "intento":"Bugün en çok deneyen: {1}, {2} {2?kez|kez}.",

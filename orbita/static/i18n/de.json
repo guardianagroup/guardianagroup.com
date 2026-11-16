@@ -4033,7 +4033,8 @@
 "Cada 5 minutos":"Alle 5 Minuten",
 "Cada 15 minutos":"Alle 15 Minuten",
 "Cada 30 minutos":"Alle 30 Minuten",
-"Cada hora":"Jede Stunde"
+"Cada hora":"Jede Stunde",
+"Agrandar":"Vergrößern"
 },
 "p":{
 "intento":"Hat es heute am häufigsten versucht: {1}, {2} {2?Mal|Mal}.",

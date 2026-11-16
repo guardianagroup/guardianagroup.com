@@ -4033,7 +4033,8 @@
 "Cada 5 minutos":"La fiecare 5 minute",
 "Cada 15 minutos":"La fiecare 15 minute",
 "Cada 30 minutos":"La fiecare 30 de minute",
-"Cada hora":"La fiecare oră"
+"Cada hora":"La fiecare oră",
+"Agrandar":"Mărește"
 },
 "p":{
 "intento":"Cea care a încercat cel mai mult azi: {1}, {2} {2?dată|ori}.",

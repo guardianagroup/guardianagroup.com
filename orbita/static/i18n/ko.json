@@ -4033,7 +4033,8 @@
 "Cada 5 minutos":"5분마다",
 "Cada 15 minutos":"15분마다",
 "Cada 30 minutos":"30분마다",
-"Cada hora":"1시간마다"
+"Cada hora":"1시간마다",
+"Agrandar":"확대"
 },
 "p":{
 "intento":"오늘 가장 많이 시도한 곳: {1}, {2}{2?회|회}.",

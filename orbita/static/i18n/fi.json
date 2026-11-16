@@ -4033,7 +4033,8 @@
 "Cada 5 minutos":"5 minuutin välein",
 "Cada 15 minutos":"15 minuutin välein",
 "Cada 30 minutos":"30 minuutin välein",
-"Cada hora":"Tunnin välein"
+"Cada hora":"Tunnin välein",
+"Agrandar":"Suurenna"
 },
 "p":{
 "intento":"Eniten yrittänyt tänään: {1}, {2} {2?kerta|kertaa}.",

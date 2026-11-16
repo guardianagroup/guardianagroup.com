@@ -106,7 +106,11 @@
     + '.vf-mic .ic-raya{display:none}.vf-mic[aria-pressed="true"] .ic-raya{display:inline;stroke-width:2.2}'
     + '.vf-b[aria-pressed="true"]{background:#F4F6F8;color:#0A0E14;border-color:#F4F6F8}'
     + '.vf-colgar,.vf-colgar:hover{background:#E07A6C;border-color:#E07A6C;color:#06080C}'
-    + '@media (hover:hover){.vf .vf-barra{opacity:0}.vf:hover .vf-barra,.vf:focus-within .vf-barra{opacity:1}}';
+    + '.vf-b.vf-tam{position:absolute;top:7px;inset-inline-end:8px;width:32px;height:32px;transition:opacity .2s ease,background-color .18s ease}.vf-b.vf-tam svg{width:16px;height:16px}'
+    + '@media (hover:hover){.vf .vf-barra,.vf .vf-tam{opacity:0}.vf:hover .vf-barra,.vf:focus-within .vf-barra,.vf:hover .vf-tam,.vf:focus-within .vf-tam{opacity:1}}';
+  // (esquinas, como «pantalla completa»: las flechas en diagonal ya son «Volver a la llamada»)
+  const SVG_VF_AGRANDAR = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></svg>';
+  const SVG_VF_REDUCIR = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4v5H4M20 9h-5V4M15 20v-5h5M4 15h5v5"/></svg>';
   const reproduce = (v) => {
     try {
       const p = v.play();
@@ -2642,7 +2646,7 @@
         try { w = raiz.open('', VENTANA_NOMBRE, 'popup=yes,width=400,height=260'); } catch (_) { w = null; }
         if (!w) return Promise.resolve(false);
         // (el programa la hace a su tiempo: su página puede no estar lista aún, o cambiarse al dársela; miraVentana la llena entonces)
-        try { montaVentana(w, sola); } catch (_) { vf = { w, sola: !!sola, rem: null, tic: 0 }; }
+        try { montaVentana(w, sola, false); } catch (_) { vf = { w, sola: !!sola, rem: null, tic: 0 }; }
         for (const ms of [250, 700, 1500, 3000, 5000]) setTimeout(() => miraVentana(w), ms);
         return Promise.resolve(true);
       }
@@ -2652,11 +2656,11 @@
       return Promise.resolve(pide).then((w) => {
         if (!w) return false;
         if (estado !== 'hablando' || !video || ventanaAbierta()) { try { w.close(); } catch (_) {} return ventanaAbierta(); }
-        try { montaVentana(w, sola); } catch (_) { try { w.close(); } catch (__) {} return false; }
+        try { montaVentana(w, sola, true); } catch (_) { try { w.close(); } catch (__) {} return false; }
         return true;
       }, () => false);
     }
-    function montaVentana(w, sola) {
+    function montaVentana(w, sola, pip) {
       const d = w.document;
       try { d.documentElement.lang = document.documentElement.lang || 'es'; d.documentElement.dir = document.documentElement.dir || 'ltr'; } catch (_) {}
       d.title = 'GUARDIANA';
@@ -2680,8 +2684,13 @@
       { const svg = $('#ll-volver svg'); if (svg) bVolver.append(d.importNode(svg, true)); }
       bVolver.addEventListener('click', () => volverALaLlamada());
       barra.append(bMic, bCam, bColgar, bVolver);
-      marco.append(rem, ini, yo, arriba, barra); d.body.append(marco);
-      vf = { w, sola: !!sola, rem, yo, ini, reloj, bMic, bCam, bColgar, bVolver, tic: 0 };
+      // «Agrandar» y «Reducir» (16 Nov 2026; dueño, 12:20: «él la pantalla no la puede hacer más grande ni nada»): arriba a la
+      // derecha, la ventana pasa de pequeña a grande (media pantalla) y vuelve; también se agranda desde su borde. Donde la página
+      // puede hacerlo: la ventana flotante del sistema, en Chrome y Edge.
+      let bTam = null;
+      if (pip) { bTam = el('button', 'vf-b vf-tam'); bTam.type = 'button'; bTam.addEventListener('click', () => tamVentana()); }
+      marco.append(rem, ini, yo, arriba, barra); if (bTam) marco.append(bTam); d.body.append(marco);
+      vf = { w, sola: !!sola, pip: !!pip, rem, yo, ini, reloj, bMic, bCam, bColgar, bVolver, bTam, tic: 0 };
       // un doble clic en la imagen, lo mismo
       rem.addEventListener('dblclick', () => volverALaLlamada()); ini.addEventListener('dblclick', () => volverALaLlamada());
       w.addEventListener('pagehide', () => setTimeout(() => miraVentana(w), 60));
@@ -2710,6 +2719,27 @@
       { const n = on ? t('Apagar la cámara') : t('Encender la cámara'); bCam.setAttribute('aria-label', n); bCam.title = n; }
       bColgar.setAttribute('aria-label', t('Colgar')); bColgar.title = t('Colgar');
       if (vf.bVolver) { vf.bVolver.setAttribute('aria-label', t('Volver a la llamada')); vf.bVolver.title = t('Volver a la llamada'); }
+      if (vf.bTam) {
+        const g = vfGrande(), n = g ? t('Reducir') : t('Agrandar'), m = g ? 'r' : 'a';
+        if (vf.bTam.dataset.m !== m) { vf.bTam.dataset.m = m; vf.bTam.innerHTML = g ? SVG_VF_REDUCIR : SVG_VF_AGRANDAR; }
+        if (vf.bTam.title !== n) { vf.bTam.setAttribute('aria-label', n); vf.bTam.title = n; }
+      }
+    }
+    // grande: más de 560 px de ancho por dentro (con el botón, o desde el borde); pequeña: la de siempre, 400 × 260
+    function vfGrande() { try { return !!vf && vf.w.innerWidth > 560; } catch (_) { return false; } }
+    function tamVentana() {
+      if (!vf) return;
+      const w = vf.w;
+      try {
+        const dw = Math.max(0, w.outerWidth - w.innerWidth), dh = Math.max(0, w.outerHeight - w.innerHeight);
+        let W = 400, H = 260;
+        if (!vfGrande()) {
+          const sc = w.screen || raiz.screen || {}, sw = sc.availWidth || 1280, sh = sc.availHeight || 800;
+          W = Math.round(Math.min(sw * 0.5, 960)); H = Math.round(Math.min(W * 0.62, sh * 0.7));
+        }
+        w.resizeTo(W + dw, H + dh);
+      } catch (_) {}
+      setTimeout(pintaVf, 150); setTimeout(pintaVf, 600);
     }
     function volverALaLlamada() {
       if (estado !== 'hablando') { cierraVentana(); return; }
@@ -2749,7 +2779,7 @@
       if (!d.body || !d.head) return; // aún sin su página: al siguiente vistazo
       try { if (era.tic) era.w.clearInterval(era.tic); } catch (_) {}
       vf = null;
-      try { montaVentana(era.w, era.sola); } catch (_) { if (!vf) vf = Object.assign(era, { rem: null, tic: 0 }); }
+      try { montaVentana(era.w, era.sola, era.pip); } catch (_) { if (!vf) vf = Object.assign(era, { rem: null, tic: 0 }); }
     }
     setInterval(() => miraVentana(null), 1000);
     // Mientras la otra persona está en la ventana flotante, la llamada no se queda en negro con «Reproduciendo…» (dueño, 14:52: «la

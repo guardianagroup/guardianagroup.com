@@ -4033,7 +4033,8 @@
 "Cada 5 minutos":"Var 5:e minut",
 "Cada 15 minutos":"Var 15:e minut",
 "Cada 30 minutos":"Var 30:e minut",
-"Cada hora":"Varje timme"
+"Cada hora":"Varje timme",
+"Agrandar":"Förstora"
 },
 "p":{
 "intento":"Den som försökte mest i dag: {1}, {2} {2?gång|gånger}.",

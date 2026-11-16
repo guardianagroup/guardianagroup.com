@@ -1598,6 +1598,7 @@
     "La página ha bloqueado un intento de cargar código ajeno.": ["The page blocked an attempt to load outside code.", "A página bloqueou uma tentativa de carregar código externo."],
     "La huella de la conexión no coincide con la que llegó encriptada.": ["The connection fingerprint does not match the one received encrypted.", "A impressão digital da conexão não coincide com a recebida criptografada."],
     "Alguien más ha entrado en la sala del relé.": ["Someone else has entered the relay room.", "Outra pessoa entrou na sala do relé."],
+    "Agrandar": ["Enlarge", "Ampliar"],
     "Volver a comprobar": ["Check again", "Verificar de novo"],
     "Solo al empezar": ["Only at the start", "Só no início"],
     "Cada 2 minutos": ["Every 2 minutes", "A cada 2 minutos"],

@@ -4033,7 +4033,8 @@
 "Cada 5 minutos":"5分ごと",
 "Cada 15 minutos":"15分ごと",
 "Cada 30 minutos":"30分ごと",
-"Cada hora":"1時間ごと"
+"Cada hora":"1時間ごと",
+"Agrandar":"拡大"
 },
 "p":{
 "intento":"今日最も多く試みたのは {1}、{2} {2?回|回}。",
