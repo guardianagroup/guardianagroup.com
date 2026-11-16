@@ -17,7 +17,9 @@ for h in nuevas.values():
     assert re.fullmatch(r'[0-9a-f]{64}', h), h
 mb = lambda b, coma: (('%.1f' % (int(b) / 1e6)).replace('.', ',') if coma else '%.1f' % (int(b) / 1e6))
 # 5 nov 2026: también ZERO en inglés y en portugués (seguían en la 1.0.50, con enlaces a instaladores que ya no estaban)
+# 16 nov 2026: también la portada en inglés y en portugués (sus datos para buscadores seguían en la 1.0.57)
 paginas = {'instalar.html': ('es', True), 'en/install.html': ('en', False), 'pt/instalar.html': ('pt', True), 'index.html': ('es', True),
+           'en/index.html': ('en', False), 'pt/index.html': ('pt', True),
            'zero.html': ('es', True), 'en/zero.html': ('en', False), 'pt/zero.html': ('pt', True)}
 ZERO = ('zero.html', 'en/zero.html', 'pt/zero.html')
 tam = {'es': bes, 'en': ben, 'pt': bpt}
