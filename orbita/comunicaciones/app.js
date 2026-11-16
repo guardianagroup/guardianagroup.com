@@ -1913,11 +1913,13 @@
       llevar: LLEVAR ? null : () => abreLlevar(), sencilla: !!LLEVAR, medios: llaveMedios,
       // «Enviar» en la llamada (foto, ubicación, archivo): solo en la llamada de dos que va por una sala efímera
       enviar: () => !!salaLlamada(),
-      alLlevar: (k, alPc) => alLlevar(k, alPc), llevarNo: () => llevarNo(), llevarVisto: () => llevarVisto(), llevarListo: () => llevarListo(),
-      blindada: () => { const c = convLl(); return !!(c && extrasB(c)); },
+      alLlevar: (k, alPc, u) => alLlevar(k, alPc, u), llevarNo: () => llevarNo(), llevarVisto: () => llevarVisto(), llevarListo: () => llevarListo(),
+      blindada: () => esUltraLl(convLl()),
       // el código grande y rojo de la llamada, solo en Ultra (dueño, 2 Nov 2026, 17:01: «Esto de los números… quiero que lo dejes para la
       // versión ultra»); en la Blindada, el código está en «Seguridad de esta llamada» (llamada.js, pintaSegCod)
-      ultra: () => { const c = convLl(); return !!(c && extrasB(c)); },
+      ultra: () => esUltraLl(convLl()),
+      // (15 Nov 2026) la llamada va por una sala efímera (pasada al teléfono): sin palabras de verificación; el código va atado a la llave del código QR
+      efimera: () => { const c = convLl(); return !!(c && c.efimera); },
       // el Monitor de seguridad de Ultra (llamada.js, 15 Nov 2026): cuántas conexiones hay en la sala del relé (los miembros que da el
       // relé son los demás; +1, este equipo), si la otra persona está, las entradas con otra identidad que el chat rechazó y, con el
       // Vigía del programa encendido en el ordenador, lo que dice
@@ -5344,11 +5346,13 @@
   // borra al colgar o al cerrar la pestaña. Mientras la pestaña siga abierta, una llamada cortada se recupera con «Volver a llamar».
   const LLEVAR = (() => {
     try {
-      const m = location.hash.match(/#llevar=([A-Za-z0-9_-]{43})(?:\.([A-Za-z0-9_-]{43}))?/);
+      const m = location.hash.match(/#llevar=([A-Za-z0-9_-]{43})(?:\.([A-Za-z0-9_-]{43}))?(\.u)?/);
       if (m) {
         sessionStorage.setItem('gcom-llevar', m[1]);
         // «Volver al PC» (2 Nov 2026): el secreto que solo tienen el PC y este teléfono, y la sala donde el PC espera
         if (m[2]) { sessionStorage.setItem('gcom-llevar-v', m[2]); sessionStorage.setItem('gcom-llevar-pc', m[1]); } else { sessionStorage.removeItem('gcom-llevar-v'); sessionStorage.removeItem('gcom-llevar-pc'); }
+        // (15 Nov 2026) la llamada que se pasa es Ultra: en el teléfono sigue siendo Ultra (voz cambiada, mosaico, código, monitor)
+        if (m[3]) sessionStorage.setItem('gcom-llevar-u', '1'); else sessionStorage.removeItem('gcom-llevar-u');
         history.replaceState(null, '', location.pathname); return m[1];
       }
       const s = sessionStorage.getItem('gcom-llevar');
@@ -5356,6 +5360,7 @@
     } catch (_) { return null; }
   })();
   const LLEVAR_V = (() => { try { const v = sessionStorage.getItem('gcom-llevar-v'); return LLEVAR && /^[A-Za-z0-9_-]{43}$/.test(v || '') ? v : null; } catch (_) { return null; } })();
+  const LLEVAR_U = (() => { try { return !!LLEVAR && sessionStorage.getItem('gcom-llevar-u') === '1'; } catch (_) { return false; } })();
   const EFI = new Map(); // sala efímera → { id, efimera, k, yo, suId, miembros, nombre, cola }
   // «Volver al PC» (dueño, 2 Nov 2026, 13:27: «Desde el móvil, volver a la llamada al PC»). El código QR lleva, además de la llave de
   // la sala, un secreto que solo tienen el PC y el teléfono (la otra persona no lo recibe). De él salen los nombres de los dos en la
@@ -5373,12 +5378,12 @@
     let raw; try { raw = C.deB64u(k64); } catch (_) { return null; }
     if (!raw || raw.length !== 32) return null;
     const sala = C.hex(await C.sha256(C.cat(C.te.encode('GUARDIANA llevar sala\n'), raw)));
-    if (EFI.has(sala)) return EFI.get(sala);
+    if (EFI.has(sala)) { const ya = EFI.get(sala); if (opc && opc.ultra) ya.ultra = true; return ya; }
     const kb = await C.sha256(C.cat(C.te.encode('GUARDIANA llevar clave\n'), raw));
     const k = await crypto.subtle.importKey('raw', kb, 'AES-GCM', false, ['encrypt', 'decrypt']);
     const yo = (opc && /^[0-9a-f]{16}$/.test(opc.yo || '')) ? opc.yo : C.hex(C.azar(8));
     const medios = await C.sha256(C.cat(C.te.encode('GUARDIANA llevar medios\n'), raw));
-    const c = { id: sala, efimera: true, k, k64, medios, yo, suId: null, miembros: new Set(), nombre: (opc && opc.nombre) || '', alias: '', cola: [], mensajes: [] };
+    const c = { id: sala, efimera: true, ultra: !!(opc && opc.ultra), k, k64, medios, yo, suId: null, miembros: new Set(), nombre: (opc && opc.nombre) || '', alias: '', cola: [], mensajes: [] };
     EFI.set(sala, c); R.entra(sala, yo);
     return c;
   }
@@ -5435,16 +5440,22 @@
     R.on('trama', (sala, de, b) => { const c = EFI.get(sala); if (!c) return; c.proc = (c.proc || Promise.resolve()).then(() => recibeEfimera(c, de, b)).catch((e) => console.warn('efímera', e)); });
   }
   // ----- en el PC que pasa la llamada: el código y la espera -----
-  let llevarK = null, llevarV = null, volviendo = null;
+  let llevarK = null, llevarV = null, llevarU = false, volviendo = null;
+  // ¿es Ultra la llamada de esta conversación? La conversación Ultra o, en una sala efímera, la que viene de una llamada Ultra
+  const esUltraLl = (c) => !!(c && (extrasB(c) || (BLINDADO_ACTIVO && c.efimera && c.ultra)));
   function abreLlevar() {
     if (!LL || LL.estado !== 'hablando' || !window.qrSvg) return;
     const c = convLl(); if (!c) return;
     llevarK = C.b64u(C.azar(32)); llevarV = C.b64u(C.azar(32));
+    // (dueño, 15 Nov 2026, 21:42: «en el modo ultra, cuando la persona pasa la conversación al móvil y se cuelga, tiene que poder
+    // volver a llamar, al igual que en la sesión blindada… En ambas»): una llamada Ultra también se pasa al teléfono, y allí sigue
+    // siendo Ultra; «.u» al final del código lo dice (no es secreto) y a la otra persona, «u» por el canal cifrado de la llamada
+    const u = esUltraLl(c); llevarU = u;
     // (el secreto de «Volver al PC», después de un punto: solo lo tienen este PC y el teléfono que lea el código)
-    const url = location.origin + location.pathname.replace(/[^/]*$/, '') + '#llevar=' + llevarK + '.' + llevarV;
+    const url = location.origin + location.pathname.replace(/[^/]*$/, '') + '#llevar=' + llevarK + '.' + llevarV + (u ? '.u' : '');
     const q = $('#llevar-qr'); q.innerHTML = window.qrSvg(url); q.dataset.url = url;
     $('#llevar-estado').textContent = T('Esperando al teléfono…'); $('#llevar-estado').className = 'llevar-estado';
-    enviaControl(c, { tipo: 'llamada', acto: 'llevar', k: llevarK });
+    enviaControl(c, { tipo: 'llamada', acto: 'llevar', k: llevarK, u: u ? 1 : undefined });
     abreHoja('h-llevar');
   }
   function cancelaLlevar() {
@@ -5459,15 +5470,15 @@
     if (LLEVAR) { llevarK = null; if (volviendo) { volviendo.listo = true; clearTimeout(volviendo.espera); } setTimeout(() => { if (LL && LL.estado !== 'libre') LL.colgar(); }, 500); return; }
     const k = llevarK, v = llevarV, de = convLl(), nombre = de ? (de.efimera ? de.nombre : nombreConv(de, true)) : '';
     llevarK = null; llevarV = null;
-    if (k && v) escuchaVuelta(k, v, nombre);
+    if (k && v) escuchaVuelta(k, v, nombre, llevarU);
     $('#llevar-estado').textContent = T('El teléfono ya tiene la llamada.'); $('#llevar-estado').className = 'llevar-estado listo';
     setTimeout(() => { cierraHoja('h-llevar'); const q = $('#llevar-qr'); if (q) { q.textContent = ''; delete q.dataset.url; } if (LL && LL.estado !== 'libre') LL.colgar(); aviso(T('La llamada continúa en tu teléfono.')); }, 900);
   }
   // ----- en el equipo de la otra persona: la llave llega por el canal cifrado de la llamada; el teléfono se añade en cuanto entra -----
-  async function alLlevar(k, alPc) {
+  async function alLlevar(k, alPc, u) {
     if (!LL || LL.estado !== 'hablando') return;
     const de = convLl(); if (!de) return;
-    const c = await salaEfimera(k, { nombre: de.efimera ? de.nombre : nombreConv(de, true) });
+    const c = await salaEfimera(k, { nombre: de.efimera ? de.nombre : nombreConv(de, true), ultra: !!u || esUltraLl(de) });
     if (!c) return;
     c.de = de.id; c.alPc = !!alPc;
     c.alLlegar = () => {
@@ -5482,13 +5493,13 @@
   // ----- «Volver al PC» (ver idsVuelta) -----
   // en el PC, después de pasar la llamada: se queda en la sala del código, atento solo a su teléfono (también tras recargar)
   let escuchaPc = null;
-  async function escuchaVuelta(k64, v64, nombre) {
+  async function escuchaVuelta(k64, v64, nombre, u) {
     const ids = await idsVuelta(v64); if (!ids) return;
     if (escuchaPc && EFI.get(escuchaPc.id) === escuchaPc) sueltaEfimera(escuchaPc);
     const c = await salaEfimera(k64, { yo: ids.pc, nombre });
     if (!c) return;
-    c.vuelta = { v: v64, tel: ids.tel, nombre }; c.suId = ids.tel; escuchaPc = c;
-    try { sessionStorage.setItem('gcom-vuelta', JSON.stringify({ k: k64, v: v64, nombre: String(nombre || '').slice(0, 60), hasta: Date.now() + 6 * 3600 * 1000 })); } catch (_) {}
+    c.vuelta = { v: v64, tel: ids.tel, nombre, u: !!u }; c.suId = ids.tel; escuchaPc = c;
+    try { sessionStorage.setItem('gcom-vuelta', JSON.stringify({ k: k64, v: v64, nombre: String(nombre || '').slice(0, 60), u: u ? 1 : undefined, hasta: Date.now() + 6 * 3600 * 1000 })); } catch (_) {}
   }
   // el teléfono pide la llamada: con el secreto (una sola vez) y la llave de la sala donde esperar la llamada de la otra persona
   async function aceptaVuelta(c, j) {
@@ -5499,7 +5510,7 @@
     if (LL && LL.ocupado && LL.estado !== 'cerrando') return; // este ordenador ya está en otra llamada: el teléfono lo dirá
     v.usada = true; v.k = j.k;
     try { sessionStorage.removeItem('gcom-vuelta'); } catch (_) {}
-    const n = await salaEfimera(j.k, { nombre: v.nombre });
+    const n = await salaEfimera(j.k, { nombre: v.nombre, ultra: !!(v.u || j.u === 1) });
     if (!n) return;
     n.vueltaPC = true; n.principal = true;
     await mandaEfimeraA(c, v.tel, { tipo: 'volver-ok' });
@@ -5531,7 +5542,7 @@
     const pide = async () => {
       if (!volviendo || volviendo.ok || volviendo.k !== k) return;
       volviendo.intentos++;
-      await mandaEfimeraA(sv, sv.pcId, { tipo: 'volver-pc', v: LLEVAR_V, k });
+      await mandaEfimeraA(sv, sv.pcId, { tipo: 'volver-pc', v: LLEVAR_V, k, u: LLEVAR_U ? 1 : undefined });
       if (volviendo && !volviendo.ok && volviendo.k === k && volviendo.intentos < 6) volviendo.repite = setTimeout(pide, 2500);
     };
     await pide();
@@ -5543,7 +5554,7 @@
     if (!volviendo || volviendo.ok) return;
     volviendo.ok = true; clearTimeout(volviendo.espera); clearTimeout(volviendo.repite);
     const c = convLl(); if (!c) { volviendo = null; llevarK = null; pintaVolverPc(); return; }
-    enviaControl(c, { tipo: 'llamada', acto: 'llevar', k: volviendo.k, pc: 1 });
+    enviaControl(c, { tipo: 'llamada', acto: 'llevar', k: volviendo.k, pc: 1, u: esUltraLl(c) ? 1 : undefined });
     volviendo.espera = setTimeout(() => { if (volviendo && !volviendo.listo) { volviendo = null; llevarK = null; pintaVolverPc(); aviso(T('No se pudo pasar la llamada al ordenador: sigue aquí.')); } }, 30000);
   }
   // ----- el final de una llamada por la sala efímera (en el teléfono o en el equipo de la otra persona) -----
@@ -5643,7 +5654,7 @@
   { const b = $('#aj-vigia'); if (b) b.addEventListener('click', () => { try { localStorage.setItem('gcom-vigia', vigiaOn() ? '0' : '1'); } catch (_) {} pintaVigia(true); }); }
   // ----- el teléfono: una sola pantalla, sin guardar nada -----
   function borraLlevar(c) {
-    try { for (const k of ['gcom-llevar', 'gcom-llevar-yo', 'gcom-llevar-v', 'gcom-llevar-pc']) sessionStorage.removeItem(k); } catch (_) {}
+    try { for (const k of ['gcom-llevar', 'gcom-llevar-yo', 'gcom-llevar-v', 'gcom-llevar-pc', 'gcom-llevar-u']) sessionStorage.removeItem(k); } catch (_) {}
     if (c) { mandaEfimera(c, { tipo: 'llevar-fin' }); setTimeout(() => sueltaEfimera(c), 600); }
   }
   function contestaSolo() { let n = 0; const intenta = () => { const b = $('#ll-contestar'); if (b && !b.closest('[hidden]')) b.click(); else if (++n < 20) setTimeout(intenta, 100); }; setTimeout(intenta, 60); }
@@ -5689,7 +5700,7 @@
     const ids = LLEVAR_V ? await idsVuelta(LLEVAR_V) : null;
     let kPc = null; try { kPc = sessionStorage.getItem('gcom-llevar-pc'); } catch (_) {}
     if (ids && kPc === LLEVAR) yo = ids.tel;
-    const c = await salaEfimera(LLEVAR, { yo });
+    const c = await salaEfimera(LLEVAR, { yo, ultra: LLEVAR_U });
     if (!c) { pintaLlevar('invalida'); borraLlevar(null); return; }
     try { sessionStorage.setItem('gcom-llevar-yo', c.yo); } catch (_) {}
     c.telefono = true; llevarConv = c;

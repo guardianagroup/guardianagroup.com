@@ -166,6 +166,9 @@
     const TARJETA_CODIGO = true;
     const ULTRA_PRUEBA = (() => { try { return LOCAL && sessionStorage.getItem('gcom-ultra') === '1'; } catch (_) { return false; } })();
     const ultra = () => !!(o.ultra && o.ultra());
+    // (15 Nov 2026) una llamada por una sala efímera (pasada al teléfono) no lleva palabras de verificación: el código va atado a la llave
+    // del código QR, que nunca viajó por la red; en Ultra no se exige el compromiso de las palabras
+    const efimeraLl = () => !!(o.efimera && o.efimera());
     // Por qué una llamada de dos va sin la capa postcuántica (dueño, 2 Nov 2026, 18:31: un teléfono la admite y el otro no): este
     // navegador no la admite, el de la otra persona no la anuncia («pqc» en su oferta o en su respuesta) o se puso y no pudo mantenerse
     // (pqVigila). Se dice en «Seguridad de esta llamada» y, un momento, en la pantalla (avisaPq). Sin motivo claro (por ejemplo, una
@@ -418,8 +421,8 @@
       // en el ordenador, partir la pantalla o dejarte en pequeño se hace con un botón con su nombre, abajo con los demás
       { const v = $('#ll-vista-caja'), fino = !!(raiz.matchMedia && raiz.matchMedia('(hover: hover) and (pointer: fine)').matches); if (v) v.hidden = !(fino && video && cam && estado === 'hablando' && (caja.classList.contains('tres') || (remotoV && suCamara))); }
       // «Pasar al teléfono» (dueño, 30 Oct 2026, 12:56): en el ordenador, en una videollamada de dos, si el otro equipo lo entiende
-      // (no en Ultra: la página del teléfono no es una conversación Ultra y la llamada perdería el mosaico, la voz cambiada y el resto)
-      { const v = $('#ll-llevar-caja'), fino = !!(raiz.matchMedia && raiz.matchMedia('(hover: hover) and (pointer: fine)').matches); if (v) v.hidden = !(o.llevar && fino && video && estado === 'hablando' && suLlevar && !patas.length && !enGrupo() && !caja.classList.contains('mini') && !ultra()); }
+      // (15 Nov 2026, dueño, 21:42: también en Ultra; en el teléfono la llamada sigue siendo Ultra: voz cambiada, mosaico, código y monitor)
+      { const v = $('#ll-llevar-caja'), fino = !!(raiz.matchMedia && raiz.matchMedia('(hover: hover) and (pointer: fine)').matches); if (v) v.hidden = !(o.llevar && fino && video && estado === 'hablando' && suLlevar && !patas.length && !enGrupo() && !caja.classList.contains('mini')); }
       // «Enviar» (dueño, 2 Nov 2026, 16:37: «incluye también lo de enviar la foto, la ubicación y archivos en la llamada del móvil»): una
       // foto, la ubicación o un archivo, sin colgar. Solo en una llamada de dos que va por la sala encriptada de la llamada (la del teléfono
       // al que se pasó, en el teléfono y en el equipo de la otra persona); lo hace app.js, que dice si se puede (o.enviar)
@@ -1373,7 +1376,7 @@
     // no revele, como haría quien está en medio.
     let sasPlazo = 0, sasPlegadaYa = false;
     const sinRevelaPrueba = () => { try { return LOCAL && sessionStorage.getItem('gcom-prueba-sin-revela') === '1'; } catch (_) { return false; } };
-    function sasPlazoUltra() { clearTimeout(sasPlazo); if (!ultra() || inicioYo || !sas) return; sasPlazo = setTimeout(() => { if (estado === 'hablando' && ultra() && !inicioYo && sas && !sas.numero) sasFalla('sin-palabras'); }, 10000); }
+    function sasPlazoUltra() { clearTimeout(sasPlazo); if (!ultra() || efimeraLl() || inicioYo || !sas) return; sasPlazo = setTimeout(() => { if (estado === 'hablando' && ultra() && !efimeraLl() && !inicioYo && sas && !sas.numero) sasFalla('sin-palabras'); }, 10000); }
     function sasFalla(por) { if (!ultra() || estado === 'libre') return; clearTimeout(sasPlazo); const f = o.sasMal; colgar(); if (f) { try { f(por); } catch (_) {} } }
     function sasNoCoinciden() { if (!sas || sas.estado !== 'pendiente') return; sas.estado = 'no'; pintaSas(); const f = o.sasMal; colgar(); if (f) { try { f(); } catch (_) {} } }
     async function llamar(conVideo) {
@@ -1436,7 +1439,7 @@
         sas = null; await sasNuevo(); if (sas) { try { sas.suCompromiso = typeof m.sas === 'string' && m.sas.length < 64 ? deB64u(m.sas) : null; } catch (_) { sas.suCompromiso = null; } if (!sas.suCompromiso || sas.suCompromiso.length !== 32) sas = null; }
         // Ultra (revisión independiente, 3 nov 2026): una oferta sin el compromiso de las palabras dejaría la llamada sin palabras que
         // comparar (alguien en medio podría quitarlo): como un número roto, no se contesta
-        if (ultra() && !sas) { o.manda({ acto: 'colgar', id: idLlamada, por: 'sin-palabras' }); estado = 'libre'; idLlamada = ''; ofertaEntrante = null; if (o.aviso) o.aviso(t('Llamada Ultra rechazada: llegó sin el compromiso de las palabras de verificación. Alguien podría estar en medio.')); pinta(); return; }
+        if (ultra() && !sas && !efimeraLl()) { o.manda({ acto: 'colgar', id: idLlamada, por: 'sin-palabras' }); estado = 'libre'; idLlamada = ''; ofertaEntrante = null; if (o.aviso) o.aviso(t('Llamada Ultra rechazada: llegó sin el compromiso de las palabras de verificación. Alguien podría estar en medio.')); pinta(); return; }
         video = m.video === 1 || /\nm=video /.test(m.sdp); suCamara = true; remotoV = null;
         di(video ? t('Videollamada entrante') : t('Llamada entrante')); pinta(); tono('entrante'); esperaRespuesta(false);
         o.manda({ acto: 'sonando', id: idLlamada }); // a quien llama: «Sonando…» (ya ha llegado a este teléfono), como Telegram y WhatsApp
@@ -1458,7 +1461,7 @@
       if (m.acto === 'pausa') { di(m.on ? t('La otra persona ha puesto la llamada en pausa.') : ''); return; }
       // pasar la llamada al teléfono: la otra persona me da la llave de la sala de su teléfono (yo añado el teléfono), me dice que
       // lo deja (cancelar), o yo le digo que su teléfono ya está dentro / ya habla (ella cuelga)
-      if (m.acto === 'llevar' && typeof m.k === 'string' && /^[A-Za-z0-9_-]{43}$/.test(m.k)) { if (estado === 'hablando' && o.alLlevar && !ultra()) o.alLlevar(m.k, m.pc === 1); return; } // (en Ultra, no: ver pinta)
+      if (m.acto === 'llevar' && typeof m.k === 'string' && /^[A-Za-z0-9_-]{43}$/.test(m.k)) { if (estado === 'hablando' && o.alLlevar) o.alLlevar(m.k, m.pc === 1, ultra() || m.u === 1); return; } // (en Ultra, también: la sala sigue siendo Ultra)
       if (m.acto === 'llevar-no') { for (const L of patas.slice()) if (L.llevar && L.estado !== 'hablando') { tmanda(L, { acto: 'colgar', id: L.id }); quitaPata(L, 'yo'); } if (o.llevarNo) o.llevarNo(); return; }
       if (m.acto === 'llevar-visto') { if (o.llevarVisto) o.llevarVisto(); return; }
       if (m.acto === 'llevar-listo') { if (o.llevarListo) o.llevarListo(); return; }
@@ -1752,7 +1755,9 @@
     // ---- añadir a alguien (cualquiera de la llamada): un tramo nuevo con esa persona ----
     async function anade(sala, d) {
       d = d || {};
-      if (!puedeAnadir() || !sala || patas.some((L) => L.sala === String(sala))) return false;
+      // (15 Nov 2026) el teléfono al que se pasa la llamada también en Ultra, donde no hay llamada en grupo (puedeAnadir)
+      const puede = d.llevar ? (estado === 'hablando' && !!pc && !patas.some((L) => L.estado === 'saliente')) : puedeAnadir();
+      if (!puede || !sala || patas.some((L) => L.sala === String(sala))) return false;
       const ice = o.ice() || [];
       if (!ice.length && !LOCAL) { o.aviso && o.aviso(t('El servicio de llamadas no está disponible ahora mismo.')); return false; }
       // (2 Nov 2026) el teléfono al que se pasa la llamada sustituye a la misma persona: no hace falta mezclar voces, va mi voz tal

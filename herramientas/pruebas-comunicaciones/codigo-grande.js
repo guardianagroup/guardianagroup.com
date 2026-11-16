@@ -15,7 +15,7 @@
 //      conversación Ultra se borra en los dos equipos.
 //   3. Pasada al teléfono. Blindada: ni el teléfono ni el PC de la otra persona enseñan la tarjeta; en el teléfono no hay cápsula
 //      arriba, así que el título abre «Seguridad de esta llamada», debajo de él, con el mismo código que el PC. Ultra: «Pasar al
-//      teléfono» no se ofrece (la llamada perdería el mosaico, la voz cambiada y el ritmo constante).
+//      teléfono» se ofrece y allí sigue siendo Ultra (15 nov 2026; llevar-ultra.js).
 //   4. Un lado con otra llave (como un navegador que no cuadra): a los pocos segundos, los dos vuelven al encriptado de siempre, se ven y
 //      se oyen, el título no dice «postcuántica» y no sale ningún código; la pantalla y el panel dicen que la capa no pudo mantenerse.
 //   5. Un lado sin la capa (navegador sin la función; dueño, 18:31: un teléfono la admite y el otro no), llamando cada uno una vez: ese
@@ -168,13 +168,13 @@ const hablan = (A, B, ms) => hasta(async () => (await estado(A)) === 'hablando' 
     await A.context().close(); await B.context().close();
   }
   // 3. pasada al teléfono: en la Blindada, sin tarjeta y con el código en el panel, que en el teléfono abre el título (allí no hay
-  //    cápsula); en Ultra no se ofrece
+  //    cápsula); en Ultra, desde el 15 nov 2026, también se ofrece (y allí sigue siendo Ultra: llevar-ultra.js)
   {
     const { A, B } = await pcpcUltra(browser);
     comprueba(await hablan(A, B), '3. Ultra: A y B en videollamada');
     await espera(2500);
     await A.evaluate(() => document.querySelector('#llamada').dispatchEvent(new PointerEvent('pointermove'))); await espera(200);
-    comprueba(!(await visible(A, '#ll-llevar')) && !(await visible(B, '#ll-llevar')), '3. Ultra: «Pasar al teléfono» no se ofrece en ninguno de los dos');
+    comprueba(await visible(A, '#ll-llevar') && await visible(B, '#ll-llevar'), '3. Ultra: «Pasar al teléfono» se ofrece en los dos (dueño, 15 nov 2026, 21:42)');
     await A.context().close(); await B.context().close();
   }
   {

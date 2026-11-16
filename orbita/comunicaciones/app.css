@@ -2382,7 +2382,7 @@ body.modo-llevar{background:#06080C}
 .gc-llamada.mini .ll-en-flotante{top:50%;padding:10px 14px;font-size:14px}
 .gc-llamada.mini .ll-en-flotante span{display:none}
 /* El código de la llave, en grande, en rojo y en el centro (dueño, 2 Nov 2026, 14:43) */
-.ll-cod{position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);z-index:13;width:min(90vw,420px);box-sizing:border-box;display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px;padding:22px 22px 20px;border-radius:24px;border:1.5px solid rgba(255,90,82,.55);background:rgba(10,8,10,.9);box-shadow:0 30px 90px -30px rgba(0,0,0,.95),0 0 0 6px rgba(255,90,82,.08)}
+.ll-cod{position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);z-index:13;width:min(90vw,420px);box-sizing:border-box;display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px;padding:22px 22px 20px;border-radius:24px;border:1.5px solid rgba(255,90,82,.55);background:rgba(10,8,10,.97);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);box-shadow:0 30px 90px -30px rgba(0,0,0,.95),0 0 0 6px rgba(255,90,82,.08)}
 .ll-cod[hidden]{display:none!important}
 .ll-cod-t{font:600 12px/1 var(--texto);letter-spacing:.12em;text-transform:uppercase;color:#FFB3AD}
 .ll-cod-num{display:block;font:700 clamp(52px,14vw,76px)/1 var(--mono);letter-spacing:.06em;color:#FF4D45;font-variant-numeric:tabular-nums;white-space:nowrap;margin:2px 0;text-shadow:0 0 36px rgba(255,77,69,.35)}
@@ -2697,3 +2697,11 @@ html.con-teclado .fe-pie{padding-bottom:10px}
 /* con «Voz cambiada» y «Mosaico» a la vista, la píldora plegada del código va encima de ellas */
 .gc-llamada.con-efectos .ll-cod-chip{bottom:calc(192px + env(safe-area-inset-bottom))}
 @media (max-width:520px){.gc-llamada.con-efectos .ll-cod-chip{bottom:calc(206px + env(safe-area-inset-bottom))}}
+/* en el teléfono al que se pasó la llamada, el título va arriba en grande: el monitor, justo debajo */
+body.modo-llevar .ll-mon{top:calc(130px + env(safe-area-inset-top))}
+/* (15 Nov 2026) con «Voz cambiada» y «Mosaico» a la vista, la imagen propia y las notas del teléfono suben por encima de ellos:
+   abajo, a la altura de los botones de los efectos, los tapaban; en el teléfono, la imagen propia, también por encima del
+   código plegado */
+.gc-llamada.con-efectos:not(.mini):not(.movida):not(.dividida):not(.yo-grande):not(.tres) .videos #v-local{bottom:calc(262px + env(safe-area-inset-bottom))}
+@media (hover:hover) and (pointer:fine),(min-width:761px){.gc-llamada.con-efectos:not(.mini):not(.movida):not(.dividida):not(.yo-grande):not(.tres) .videos #v-local{bottom:214px}}
+#llamada.con-efectos~.llevar-avisos{bottom:calc(212px + env(safe-area-inset-bottom))}

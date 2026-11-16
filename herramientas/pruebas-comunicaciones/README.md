@@ -12,7 +12,8 @@ comprobaciones sí pasan, las del teléfono no): descargar, numero, ruta y web.
 
 `llevar.js` se pasa con `B_PC=1` (B en un PC; sin eso, B es un iPhone y acaba en /solo-pc/): `B_PC=1 node llevar.js`.
 
-La batería que vale hoy, en el PC: ultra, ultra-codigo, blindado, tipos, codigo-grande, rota, llevar (con `B_PC=1`), enviar-llamada, voz-ultra,
+La batería que vale hoy, en el PC: ultra, ultra-codigo, blindado, tipos, codigo-grande, rota, llevar (con `B_PC=1`), llevar-ultra, monitor-ultra,
+enviar-llamada, voz-ultra,
 vigia, recupera, flotante-sola, portada, volver-pc y pantalla (compartir pantalla en el PC; su último paso, con un Android, sigue
 pasando), llevar-orden y volver-ut (estas dos, pasar la llamada a teléfonos con cuatro navegadores: con la máquina muy cargada
 pueden agotar el tiempo o tirar Chromium; repetidas con menos carga, el 5 nov, 10/10 y 8/8).
@@ -46,6 +47,10 @@ Después, desde esta carpeta:
   pantallas al empezar y al cambiar la llave, con las 4 palabras plegadas arriba; el Monitor de seguridad siempre a la vista (abierto en el PC,
   plegado en una línea en el teléfono) con sus filas reales: encriptado, capa postcuántica, clave y cuándo cambia, código, huella de la conexión,
   sala del relé, fragmentos verificados y rechazados, ruta y código de la página; sin avisos falsos al empezar. Capturas en `monitor-ultra/`.
+- `node llevar-ultra.js` — «Pasar al teléfono» en Ultra (15 nov 2026, dueño, 21:42): A (PC) pasa la videollamada Ultra a su teléfono T
+  (código QR con «.u» al final); en T y en B siguen la voz cambiada, el mosaico, la capa postcuántica (con la llave del QR), la tarjeta
+  roja con el mismo código y el Monitor de seguridad. T cuelga: «Volver a llamar» en los dos, durante 15 minutos, y la llamada vuelve a
+  ser Ultra; «Cerrar» borra de la pestaña la llave y la marca de Ultra. `DEP=1` saca la consola de cada navegador. Capturas en `llevar-ultra/`.
 - `node inicio-modos.js` — el inicio en el PC (15 nov 2026): primero el tipo de conversación, Blindado o Ultra (radio, también con las flechas); debajo, «Tengo un código» y «Crear un código», que hablan del código de ese tipo; «Crear un código» da el de 9 cifras o el Ultra de 16 caracteres; en inglés, traducido; en el teléfono, el inicio de siempre. 10 comprobaciones.
 - `node voz-ultra.js` — la voz cambiada de Ultra medida en Node (formantes, tono y paso banda), sin navegador.
 - `node contactos.js` — guardar contactos, volver, llamar desde la lista, recargas.

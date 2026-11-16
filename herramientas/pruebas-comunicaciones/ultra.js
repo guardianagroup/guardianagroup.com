@@ -313,7 +313,9 @@ const mp3Path = path.join(tmp, 'grabacion de mi nombre.mp3');
   const secciones = await A.evaluate(() => { const pc = GuardianaCom.llamada.pcPrueba; return [pc.localDescription.sdp, pc.remoteDescription.sdp].map((d) => d.split(/\r\n(?=m=)/).filter((x) => /^m=audio /.test(x)).map((x) => ({ fmtp: (x.match(/a=fmtp:111 [^\r\n]*/) || [''])[0], nivel: /ssrc-audio-level/.test(x) }))); });
   const todas = secciones.flat();
   comprueba(todas.length >= 4 && todas.every((x) => /cbr=1/.test(x.fmtp) && /usedtx=0/.test(x.fmtp) && !x.nivel), '11. Opus con cbr=1 y usedtx=0 en cada sección de audio (voz y pista muda), sin «ssrc-audio-level»', todas);
-  comprueba(!(await visible(A, '#ll-llevar')) && !(await visible(B, '#ll-llevar')), '11. en Ultra no se ofrece «Pasar al teléfono»');
+  // (15 nov 2026, dueño, 21:42) en Ultra también se pasa al teléfono, y allí sigue siendo Ultra (llevar-ultra.js)
+  await A.evaluate(() => document.querySelector('#llamada').dispatchEvent(new PointerEvent('pointermove'))); await espera(200);
+  comprueba(await visible(A, '#ll-llevar'), '11. en Ultra también se ofrece «Pasar al teléfono»');
   // el tamaño de los paquetes de la voz que salen: el mismo en cada ventana de 2 s
   const muestras = [];
   for (let i = 0; i < 4; i++) { muestras.push(await A.evaluate(async () => { const pc = GuardianaCom.llamada.pcPrueba; const s = pc.getSenders().find((x) => x.track && x.track.kind === 'audio' && x.track.enabled); if (!s) return null; const st = await s.getStats(); let r = null; st.forEach((x) => { if (x.type === 'outbound-rtp' && x.kind === 'audio') r = { b: x.bytesSent, p: x.packetsSent }; }); return r; })); await espera(2000); }
