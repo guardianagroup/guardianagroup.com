@@ -23,8 +23,9 @@ invitación con `creaInvitacionB(null, { porCodigo: true })` y, en el mismo paso
   semilla. N sobres de una semilla bajo N códigos de 80 bits: a quien los guarde todos le basta acertar uno (log2 N bits menos).
   Revisión independiente del 15 nov: el relé es justo quien guarda los sobres y puede cortar a propósito, así que la renovación sola
   tiene tope: como mucho 2 por invitación y nunca dos en menos de 60 s (`c.ucodAuto`, `c.ucodAutoEn`); pasado el tope, «Se cortó la
-  conexión con el relé: crea uno nuevo.» y «Nuevo código» a mano. Con el tope, una invitación deja como mucho 3 sobres solos (1,6 bits
-  menos en el peor caso). El código renovado lo dice: «Se cortó la conexión con el relé: este es un código nuevo.»
+  conexión con el relé: crea uno nuevo.» y «Nuevo código» a mano. Con el tope, y como la renovación sola lo intenta una vez (la primera
+  publicación y «Nuevo código», hasta 3 si el relé dice «repetido»), una invitación deja como mucho 5 sobres sin que nadie pulse nada
+  (unos 2,3 bits menos en el peor caso, con un relé que mienta con «repetido»); cada «Nuevo código» a mano, hasta 3 más. El código renovado lo dice: «Se cortó la conexión con el relé: este es un código nuevo.»
 - Más de la revisión del 15 nov: sin relé, las peticiones «invita» y «busca» pendientes se contestan al momento (rele.js, onclose);
   una respuesta solo vale para su buzón (`invitaEnCola`), y sin respuesta el sobre se retira por si el relé llegó a guardarlo; con
   el código, el enlace de 256 bits y el QR no se ponen en la página; en una ventana estrecha la invitación por código sigue a la

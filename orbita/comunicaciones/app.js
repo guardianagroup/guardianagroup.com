@@ -292,7 +292,10 @@
     if (!R.abierto) { aviso(T('Sin conexión: espera un momento.')); return false; }
     c.ucodPidiendo = true; c.ucodFallo = false; pintaCodigoU(c);
     try {
-      for (let intento = 0; intento < 3; intento++) {
+      // (revisión independiente, 15 nov 2026: un relé que conteste «repetido» sin serlo se quedaría con un sobre por intento; la
+      // renovación sola lo intenta una vez, y así una invitación deja como mucho 3 + 1 + 1 sobres sin que nadie pulse nada)
+      const intentos = c.ucodRenovado ? 1 : 3;
+      for (let intento = 0; intento < intentos; intento++) {
         const codigo = C.nuevoCodigoU(), t0 = Date.now();
         const x = await C.cierraSobreU(codigo, c.semilla);
         const r = await invitaEnCola(x.buzon, x.sobre, x.sal);
@@ -303,7 +306,7 @@
         if (!r || r.por !== 'repetido') break; // (otro buzón igual en el relé: otro código)
       }
     } finally { c.ucodPidiendo = false; pintaCodigoU(c); }
-    c.ucodFallo = true; pintaCodigoU(c);
+    c.ucodFallo = true; c.ucodRenovado = false; pintaCodigoU(c);
     aviso(T('No se pudo crear el código: inténtalo otra vez.')); return false;
   }
   // fuera del relé (si aún lo tiene) y de la pantalla
