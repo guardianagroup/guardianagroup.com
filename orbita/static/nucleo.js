@@ -17,7 +17,7 @@
   const sinTildes = (s) => String(s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/\s+/g, ' ').trim();
   const pon = (tpl, ...xs) => xs.reduce((s, x, i) => s.split('{' + (i + 1) + '}').join(x), T(tpl));
   const q = new URLSearchParams(location.search);
-  const PUERTA_EN_URL = /^#(zero|radiografias|comunicaciones|mi-conexion|escaner|vpn)$/.test(location.hash); // 31 Oct 2026: y el Antivirus; 1 nov: y la VPN
+  const PUERTA_EN_URL = /^#(zero|radiografias|comunicaciones|mi-conexion|escaner|vpn|llamada)$/.test(location.hash); // 31 Oct 2026: y el Antivirus; 1 nov: y la VPN; 15 nov: y la llamada en Órbita
   const red = (lienzo, op) => (window.RedNucleo ? window.RedNucleo(lienzo, op) : { habla() {}, para() {} });
   // dueño, 10:53: «todas las páginas que se abren tienen que tener un botón de volver a donde estás»: se recuerda de dónde se
   // salió (la portada o la sección de NÚCLEO) y los botones de volver lo dicen («Inicio» o «Regresar a NÚCLEO»).

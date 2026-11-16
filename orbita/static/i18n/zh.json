@@ -4014,7 +4014,17 @@
 "Su ubicación no se muestra":"不显示位置",
 "Envío {v} · recepción {w} · ida y vuelta {ms}":"发送 {v} · 接收 {w} · 往返 {ms}",
 "Sin servidores en medio: los paquetes van encriptados de un equipo al otro.":"中间没有服务器：数据包加密后从一台设备直接传到另一台。",
-"El servidor solo reenvía paquetes encriptados: no tiene las claves para abrirlos.":"服务器只转发加密的数据包：它没有打开数据包的密钥。"
+"El servidor solo reenvía paquetes encriptados: no tiene las claves para abrirlos.":"服务器只转发加密的数据包：它没有打开数据包的密钥。",
+"Ver en Órbita":"在轨道中查看",
+"Llamada Ultra":"Ultra 通话",
+"Tu llamada en Órbita":"你在轨道中的通话",
+"{p}, aproximado":"{p}（大致）",
+"Ida y vuelta":"往返",
+"La línea une tu dispositivo con el servidor que reenvía la llamada; no es el camino exacto de los cables.":"这条线连接你的设备与转发通话的服务器；不是线缆的实际路径。",
+"De la otra persona nunca se muestra dónde está.":"绝不显示对方的位置。",
+"Esperando los datos de la llamada…":"正在等待通话数据…",
+"La llamada ha terminado.":"通话已结束。",
+"Sin datos de la llamada desde hace {s} s":"已有 {s} 秒没有通话数据"
 },
 "p":{
 "intento":"今天尝试最多的：{1}，{2} {2?次|次}。",

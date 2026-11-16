@@ -2756,3 +2756,9 @@ body.modo-llevar .ll-mon{top:calc(130px + env(safe-area-inset-top))}
 @media (max-width:760px){.mr-yo .mr-pc{display:none}.mr-yo .mr-tel{display:block}}
 /* en un teléfono bajo, el recorrido más compacto: las filas del monitor no quedan por debajo (segunda voz, 15 Nov 2026) */
 @media (max-width:760px) and (max-height:760px){.ll-mon-ruta{padding:8px 14px 9px}.ll-mon-ruta-t{margin-bottom:8px}.mr-nodo{width:28px;height:28px}.mr-nodo svg{width:15px;height:15px}.mr-tramo{height:22px}.ll-mon-ruta-pies{margin-top:6px}.ll-mon-ruta-dato{margin-top:7px}.ll-mon-ruta-nota{display:none}}
+/* «Ver en Órbita» (15 Nov 2026): la llamada sobre el planeta, en otra pestaña; solo en el PC (en el teléfono no hay Órbita) */
+.ll-mon-orbita{display:inline-flex;align-items:center;gap:8px;margin:12px 0 0;min-height:34px;padding:0 14px 0 11px;border-radius:999px;border:1px solid rgba(156,195,228,.32);background:rgba(156,195,228,.08);color:#F4F6F8;font:500 12px/1 var(--texto);cursor:pointer}
+.ll-mon-orbita:hover,.ll-mon-orbita:focus-visible{background:rgba(156,195,228,.16);border-color:rgba(156,195,228,.5)}
+.ll-mon-orbita svg{width:15px;height:15px;fill:none;stroke:#9CC3E4;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+@media (max-width:760px){.ll-mon-orbita{display:none}}
+body.modo-llevar .ll-mon-orbita{display:none}

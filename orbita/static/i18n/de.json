@@ -4014,7 +4014,17 @@
 "Su ubicación no se muestra":"Standort wird nicht angezeigt",
 "Envío {v} · recepción {w} · ida y vuelta {ms}":"Senden {v} · Empfangen {w} · Hin und zurück {ms}",
 "Sin servidores en medio: los paquetes van encriptados de un equipo al otro.":"Keine Server dazwischen: Die Pakete gehen verschlüsselt von einem Gerät zum anderen.",
-"El servidor solo reenvía paquetes encriptados: no tiene las claves para abrirlos.":"Der Server leitet nur verschlüsselte Pakete weiter: Er hat nicht die Schlüssel, um sie zu öffnen."
+"El servidor solo reenvía paquetes encriptados: no tiene las claves para abrirlos.":"Der Server leitet nur verschlüsselte Pakete weiter: Er hat nicht die Schlüssel, um sie zu öffnen.",
+"Ver en Órbita":"In Orbit ansehen",
+"Llamada Ultra":"Ultra-Anruf",
+"Tu llamada en Órbita":"Ihr Anruf in Orbit",
+"{p}, aproximado":"{p}, ungefähr",
+"Ida y vuelta":"Hin und zurück",
+"La línea une tu dispositivo con el servidor que reenvía la llamada; no es el camino exacto de los cables.":"Die Linie verbindet Ihr Gerät mit dem Server, der den Anruf weiterleitet; sie ist nicht der genaue Weg der Kabel.",
+"De la otra persona nunca se muestra dónde está.":"Wo die andere Person ist, wird nie angezeigt.",
+"Esperando los datos de la llamada…":"Warten auf die Daten des Anrufs…",
+"La llamada ha terminado.":"Der Anruf ist beendet.",
+"Sin datos de la llamada desde hace {s} s":"Seit {s} s keine Daten vom Anruf"
 },
 "p":{
 "intento":"Hat es heute am häufigsten versucht: {1}, {2} {2?Mal|Mal}.",

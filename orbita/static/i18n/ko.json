@@ -4014,7 +4014,17 @@
 "Su ubicación no se muestra":"위치는 표시되지 않음",
 "Envío {v} · recepción {w} · ida y vuelta {ms}":"송신 {v} · 수신 {w} · 왕복 {ms}",
 "Sin servidores en medio: los paquetes van encriptados de un equipo al otro.":"중간에 서버가 없습니다. 패킷은 암호화된 채로 한 기기에서 다른 기기로 갑니다.",
-"El servidor solo reenvía paquetes encriptados: no tiene las claves para abrirlos.":"서버는 암호화된 패킷을 전달만 하며, 이를 열 키가 없습니다."
+"El servidor solo reenvía paquetes encriptados: no tiene las claves para abrirlos.":"서버는 암호화된 패킷을 전달만 하며, 이를 열 키가 없습니다.",
+"Ver en Órbita":"궤도에서 보기",
+"Llamada Ultra":"Ultra 통화",
+"Tu llamada en Órbita":"궤도에서 보는 내 통화",
+"{p}, aproximado":"{p}, 대략",
+"Ida y vuelta":"왕복",
+"La línea une tu dispositivo con el servidor que reenvía la llamada; no es el camino exacto de los cables.":"선은 내 기기와 통화를 전달하는 서버를 잇습니다. 케이블의 정확한 경로는 아닙니다.",
+"De la otra persona nunca se muestra dónde está.":"상대방의 위치는 절대 표시되지 않습니다.",
+"Esperando los datos de la llamada…":"통화 데이터를 기다리는 중…",
+"La llamada ha terminado.":"통화가 종료되었습니다.",
+"Sin datos de la llamada desde hace {s} s":"{s}초 동안 통화 데이터 없음"
 },
 "p":{
 "intento":"오늘 가장 많이 시도한 곳: {1}, {2}{2?회|회}.",

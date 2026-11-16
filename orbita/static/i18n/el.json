@@ -4014,7 +4014,17 @@
 "Su ubicación no se muestra":"Η τοποθεσία δεν εμφανίζεται",
 "Envío {v} · recepción {w} · ida y vuelta {ms}":"Αποστολή {v} · λήψη {w} · μετ’ επιστροφής {ms}",
 "Sin servidores en medio: los paquetes van encriptados de un equipo al otro.":"Χωρίς διακομιστές στη μέση: τα πακέτα ταξιδεύουν κρυπτογραφημένα από τη μία συσκευή στην άλλη.",
-"El servidor solo reenvía paquetes encriptados: no tiene las claves para abrirlos.":"Ο διακομιστής απλώς προωθεί κρυπτογραφημένα πακέτα: δεν έχει τα κλειδιά για να τα ανοίξει."
+"El servidor solo reenvía paquetes encriptados: no tiene las claves para abrirlos.":"Ο διακομιστής απλώς προωθεί κρυπτογραφημένα πακέτα: δεν έχει τα κλειδιά για να τα ανοίξει.",
+"Ver en Órbita":"Προβολή στην Τροχιά",
+"Llamada Ultra":"Κλήση Ultra",
+"Tu llamada en Órbita":"Η κλήση σας στην Τροχιά",
+"{p}, aproximado":"{p}, κατά προσέγγιση",
+"Ida y vuelta":"Μετ’ επιστροφής",
+"La línea une tu dispositivo con el servidor que reenvía la llamada; no es el camino exacto de los cables.":"Η γραμμή ενώνει τη συσκευή σας με τον διακομιστή που προωθεί την κλήση· δεν είναι η ακριβής διαδρομή των καλωδίων.",
+"De la otra persona nunca se muestra dónde está.":"Πού βρίσκεται το άλλο άτομο δεν εμφανίζεται ποτέ.",
+"Esperando los datos de la llamada…":"Αναμονή για τα δεδομένα της κλήσης…",
+"La llamada ha terminado.":"Η κλήση τελείωσε.",
+"Sin datos de la llamada desde hace {s} s":"Χωρίς δεδομένα κλήσης εδώ και {s} s"
 },
 "p":{
 "intento":"Η πιο επίμονη σήμερα: {1}, {2} {2?φορά|φορές}.",

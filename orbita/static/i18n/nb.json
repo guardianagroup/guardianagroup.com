@@ -4014,7 +4014,17 @@
 "Su ubicación no se muestra":"Posisjon vises ikke",
 "Envío {v} · recepción {w} · ida y vuelta {ms}":"Sender {v} · mottar {w} · tur-retur {ms}",
 "Sin servidores en medio: los paquetes van encriptados de un equipo al otro.":"Ingen servere imellom: pakkene går kryptert fra den ene enheten til den andre.",
-"El servidor solo reenvía paquetes encriptados: no tiene las claves para abrirlos.":"Serveren videresender bare krypterte pakker: den har ikke nøklene til å åpne dem."
+"El servidor solo reenvía paquetes encriptados: no tiene las claves para abrirlos.":"Serveren videresender bare krypterte pakker: den har ikke nøklene til å åpne dem.",
+"Ver en Órbita":"Vis i Bane",
+"Llamada Ultra":"Ultra-samtale",
+"Tu llamada en Órbita":"Samtalen din i Bane",
+"{p}, aproximado":"{p}, omtrentlig",
+"Ida y vuelta":"Tur-retur",
+"La línea une tu dispositivo con el servidor que reenvía la llamada; no es el camino exacto de los cables.":"Linjen forbinder enheten din med serveren som videresender samtalen; det er ikke kablenes nøyaktige vei.",
+"De la otra persona nunca se muestra dónde está.":"Hvor den andre personen er, vises aldri.",
+"Esperando los datos de la llamada…":"Venter på data fra samtalen…",
+"La llamada ha terminado.":"Samtalen er avsluttet.",
+"Sin datos de la llamada desde hace {s} s":"Ingen data fra samtalen på {s} s"
 },
 "p":{
 "intento":"Den som prøvde mest i dag: {1}, {2} {2?gang|ganger}.",

@@ -4014,7 +4014,17 @@
 "Su ubicación no se muestra":"Sijaintia ei näytetä",
 "Envío {v} · recepción {w} · ida y vuelta {ms}":"Lähetys {v} · vastaanotto {w} · edestakainen viive {ms}",
 "Sin servidores en medio: los paquetes van encriptados de un equipo al otro.":"Ei palvelimia välissä: paketit kulkevat salattuina laitteelta toiselle.",
-"El servidor solo reenvía paquetes encriptados: no tiene las claves para abrirlos.":"Palvelin vain välittää salattuja paketteja: sillä ei ole avaimia niiden avaamiseen."
+"El servidor solo reenvía paquetes encriptados: no tiene las claves para abrirlos.":"Palvelin vain välittää salattuja paketteja: sillä ei ole avaimia niiden avaamiseen.",
+"Ver en Órbita":"Näytä Kiertoradalla",
+"Llamada Ultra":"Ultra-puhelu",
+"Tu llamada en Órbita":"Puhelusi Kiertoradalla",
+"{p}, aproximado":"{p}, likimääräinen",
+"Ida y vuelta":"Edestakainen viive",
+"La línea une tu dispositivo con el servidor que reenvía la llamada; no es el camino exacto de los cables.":"Viiva yhdistää laitteesi palvelimeen, joka välittää puhelun; se ei ole kaapelien tarkka reitti.",
+"De la otra persona nunca se muestra dónde está.":"Toisen henkilön sijaintia ei koskaan näytetä.",
+"Esperando los datos de la llamada…":"Odotetaan puhelun tietoja…",
+"La llamada ha terminado.":"Puhelu on päättynyt.",
+"Sin datos de la llamada desde hace {s} s":"Ei puhelun tietoja {s} s:iin"
 },
 "p":{
 "intento":"Eniten yrittänyt tänään: {1}, {2} {2?kerta|kertaa}.",

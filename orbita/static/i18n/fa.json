@@ -4014,7 +4014,17 @@
 "Su ubicación no se muestra":"مکان نمایش داده نمی‌شود",
 "Envío {v} · recepción {w} · ida y vuelta {ms}":"ارسال {v} · دریافت {w} · رفت و برگشت {ms}",
 "Sin servidores en medio: los paquetes van encriptados de un equipo al otro.":"بدون سرور در میانه: بسته‌ها رمزگذاری‌شده از یک دستگاه به دستگاه دیگر می‌روند.",
-"El servidor solo reenvía paquetes encriptados: no tiene las claves para abrirlos.":"سرور فقط بسته‌های رمزگذاری‌شده را جابه‌جا می‌کند: کلیدی برای باز کردن آن‌ها ندارد."
+"El servidor solo reenvía paquetes encriptados: no tiene las claves para abrirlos.":"سرور فقط بسته‌های رمزگذاری‌شده را جابه‌جا می‌کند: کلیدی برای باز کردن آن‌ها ندارد.",
+"Ver en Órbita":"دیدن در مدار",
+"Llamada Ultra":"تماس Ultra",
+"Tu llamada en Órbita":"تماس شما در مدار",
+"{p}, aproximado":"{p}، تقریبی",
+"Ida y vuelta":"رفت و برگشت",
+"La línea une tu dispositivo con el servidor que reenvía la llamada; no es el camino exacto de los cables.":"این خط دستگاه شما را به سروری که تماس را جابه‌جا می‌کند وصل می‌کند؛ مسیر دقیق کابل‌ها نیست.",
+"De la otra persona nunca se muestra dónde está.":"محل طرف مقابل هرگز نمایش داده نمی‌شود.",
+"Esperando los datos de la llamada…":"در انتظار داده‌های تماس…",
+"La llamada ha terminado.":"تماس پایان یافت.",
+"Sin datos de la llamada desde hace {s} s":"{s} ثانیه است داده‌ای از تماس نرسیده"
 },
 "p":{
 "intento":"بیشترین تلاش امروز: {1}، {2} {2?بار|بار}.",

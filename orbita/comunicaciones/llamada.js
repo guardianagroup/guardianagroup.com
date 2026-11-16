@@ -2086,6 +2086,7 @@
     function monLoc() { return (raiz.GuardianaIdioma && raiz.GuardianaIdioma.locale) || 'es'; }
     function monNum(n) { try { return Number(n).toLocaleString(monLoc()); } catch (_) { return String(n); } }
     function monLimpia() {
+      if (mon.empezo) monDifunde(true);
       clearInterval(mon.tic);
       Object.assign(mon, { stats: null, t: 0, eventos: [], abierto: null, tic: null, vueltas: 0, empezo: 0, ruta: '', huella: '', mal: 0, malT: 0, extra: 0, intrusos: -1, pqSeq: 0, base: null, ultima: null, bytes: null });
       const el = $('#ll-mon'); if (el) el.hidden = true; caja.classList.remove('con-monitor');
@@ -2098,7 +2099,7 @@
       const vivo = monVivo();
       if (vivo && !mon.tic) {
         if (!mon.empezo) { mon.empezo = Date.now(); monEvento(t('Monitor en marcha')); }
-        mon.tic = setInterval(() => { if (!monVivo()) { monRitmo(); return; } if (++mon.vueltas % 2 === 1) monSondea(); pintaMon(); }, 1000);
+        mon.tic = setInterval(() => { if (!monVivo()) { monRitmo(); return; } if (++mon.vueltas % 2 === 1) monSondea(); pintaMon(); monDifunde(); }, 1000);
         monSondea();
       } else if (!vivo && mon.tic) { clearInterval(mon.tic); mon.tic = null; }
       pintaMon();
@@ -2171,6 +2172,32 @@
       const n = $('#ll-mon-ruta-nota'); if (n && n.textContent !== nota) n.textContent = nota;
     }
     const releGuardiana = () => !(window.GuardianaRele && window.GuardianaRele.PROPIO);
+    // «Tu llamada en Órbita» (15 Nov 2026; dueño, 22:57 y 23:23): el monitor, una vez por segundo, a la pestaña de Órbita que se
+    // abre con «Ver en Órbita» (BroadcastChannel: mismo origen, no sale del navegador). Las filas van ya en su idioma. Al
+    // terminar, «fin». Órbita pide el estado al abrirse («pide»).
+    let canalOrb = null;
+    function canalOrbita() {
+      if (canalOrb === null) {
+        try { canalOrb = new BroadcastChannel('guardiana-llamada'); canalOrb.onmessage = (e) => { if (e && e.data && e.data.tipo === 'pide' && monVivo()) monDifunde(); }; } catch (_) { canalOrb = false; }
+      }
+      return canalOrb || null;
+    }
+    function monDifunde(fin) {
+      const c = canalOrb === null && fin ? null : canalOrbita(); if (!c) return;
+      if (fin) { try { c.postMessage({ v: 1, tipo: 'fin' }); } catch (_) {} return; }
+      if (!monVivo()) return;
+      const filas = monFilas(), s = mon.stats || {}, r = s.ruta || '';
+      const nivel = filas.some((x) => x[1] === 'alerta') ? 'alerta' : filas.some((x) => x[1] === 'aviso') ? 'aviso' : 'ok';
+      let ms = '—'; if (typeof s.rtt === 'number') { try { ms = new Intl.NumberFormat(monLoc()).format(s.rtt) + ' ms'; } catch (_) { ms = s.rtt + ' ms'; } }
+      const nuestro = releGuardiana(), clave = nuestro && r === 'mio' && o.servidorClave ? String(o.servidorClave() || '') : '';
+      try {
+        c.postMessage({ v: 1, tipo: 'estado', nivel, estado: nivel === 'alerta' ? t('Alerta: revisa el monitor') : nivel === 'aviso' ? t('Hay avisos') : t('Todo en orden'),
+          hace: mon.t ? Math.max(0, Math.round((Date.now() - mon.t) / 1000)) : null, filas: filas.map((x) => [String(x[0]), String(x[1]), String(x[2]), String(x[3])]),
+          ruta: r, servidor: clave === 'eu' || clave === 'am' ? clave : '', ciudad: nuestro && r === 'mio' && o.servidor ? String(o.servidor() || '') : '', guardiana: nuestro,
+          envio: monTasa(s.envio), recep: monTasa(s.recep), ida: ms });
+      } catch (_) {}
+    }
+    { const b = $('#ll-mon-orbita'); if (b) b.addEventListener('click', (e) => { e.stopPropagation(); try { window.open('/orbita/#llamada', 'guardiana-orbita-llamada'); } catch (_) {} canalOrbita(); setTimeout(() => monDifunde(), 900); }); }
     function monRuta(r) { return r === 'directa' ? t('Directa entre los dos equipos') : !releGuardiana() ? t('Servidor') : t('Por un servidor de GUARDIANA') + (r === 'mio' && o.servidor && o.servidor() ? ' · ' + o.servidor() : ''); }
     function monFilas() {
       const f = [], s = mon.stats || {}, x = pc && pqDe.get(pc);

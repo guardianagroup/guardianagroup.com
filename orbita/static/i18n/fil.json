@@ -4014,7 +4014,17 @@
 "Su ubicación no se muestra":"Hindi ipinapakita ang lokasyon",
 "Envío {v} · recepción {w} · ida y vuelta {ms}":"Pagpapadala {v} · pagtanggap {w} · balikan {ms}",
 "Sin servidores en medio: los paquetes van encriptados de un equipo al otro.":"Walang server sa gitna: naka-encrypt na dumadaan ang mga packet mula sa isang device papunta sa isa pa.",
-"El servidor solo reenvía paquetes encriptados: no tiene las claves para abrirlos.":"Ipinapasa lang ng server ang mga naka-encrypt na packet: wala itong mga susi para buksan ang mga ito."
+"El servidor solo reenvía paquetes encriptados: no tiene las claves para abrirlos.":"Ipinapasa lang ng server ang mga naka-encrypt na packet: wala itong mga susi para buksan ang mga ito.",
+"Ver en Órbita":"Tingnan sa Orbit",
+"Llamada Ultra":"Ultra na tawag",
+"Tu llamada en Órbita":"Ang tawag mo sa Orbit",
+"{p}, aproximado":"{p}, tinatayang",
+"Ida y vuelta":"Balikan",
+"La línea une tu dispositivo con el servidor que reenvía la llamada; no es el camino exacto de los cables.":"Iniuugnay ng linya ang device mo sa server na nagpapasa ng tawag; hindi ito ang eksaktong daan ng mga kable.",
+"De la otra persona nunca se muestra dónde está.":"Hindi kailanman ipinapakita kung nasaan ang kausap mo.",
+"Esperando los datos de la llamada…":"Hinihintay ang data ng tawag…",
+"La llamada ha terminado.":"Natapos na ang tawag.",
+"Sin datos de la llamada desde hace {s} s":"Walang data ng tawag sa loob ng {s} s"
 },
 "p":{
 "intento":"Pinakamadalas sumubok ngayon: {1}, {2} {2?beses|beses}.",

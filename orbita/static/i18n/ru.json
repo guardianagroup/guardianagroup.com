@@ -4014,7 +4014,17 @@
 "Su ubicación no se muestra":"Местоположение не показывается",
 "Envío {v} · recepción {w} · ida y vuelta {ms}":"Отправка {v} · приём {w} · туда и обратно {ms}",
 "Sin servidores en medio: los paquetes van encriptados de un equipo al otro.":"Без серверов посередине: пакеты идут зашифрованными с одного устройства на другое.",
-"El servidor solo reenvía paquetes encriptados: no tiene las claves para abrirlos.":"Сервер лишь пересылает зашифрованные пакеты: у него нет ключей, чтобы их открыть."
+"El servidor solo reenvía paquetes encriptados: no tiene las claves para abrirlos.":"Сервер лишь пересылает зашифрованные пакеты: у него нет ключей, чтобы их открыть.",
+"Ver en Órbita":"Смотреть в Орбите",
+"Llamada Ultra":"Звонок Ultra",
+"Tu llamada en Órbita":"Ваш звонок в Орбите",
+"{p}, aproximado":"{p}, приблизительно",
+"Ida y vuelta":"Туда и обратно",
+"La línea une tu dispositivo con el servidor que reenvía la llamada; no es el camino exacto de los cables.":"Линия соединяет ваше устройство с сервером, который пересылает звонок; это не точный путь кабелей.",
+"De la otra persona nunca se muestra dónde está.":"Где находится собеседник, никогда не показывается.",
+"Esperando los datos de la llamada…":"Ожидание данных звонка…",
+"La llamada ha terminado.":"Звонок завершён.",
+"Sin datos de la llamada desde hace {s} s":"Нет данных звонка уже {s} с"
 },
 "p":{
 "intento":"Настойчивее всех сегодня: {1}, {2} {2?раз|раз}.",

@@ -4014,7 +4014,17 @@
 "Su ubicación no se muestra":"Poloha se nezobrazuje",
 "Envío {v} · recepción {w} · ida y vuelta {ms}":"Odesílání {v} · příjem {w} · odezva {ms}",
 "Sin servidores en medio: los paquetes van encriptados de un equipo al otro.":"Bez serverů mezi vámi: pakety putují šifrované z jednoho zařízení do druhého.",
-"El servidor solo reenvía paquetes encriptados: no tiene las claves para abrirlos.":"Server jen přeposílá šifrované pakety: nemá klíče, aby je otevřel."
+"El servidor solo reenvía paquetes encriptados: no tiene las claves para abrirlos.":"Server jen přeposílá šifrované pakety: nemá klíče, aby je otevřel.",
+"Ver en Órbita":"Zobrazit v Orbitě",
+"Llamada Ultra":"Hovor Ultra",
+"Tu llamada en Órbita":"Váš hovor v Orbitě",
+"{p}, aproximado":"{p}, přibližně",
+"Ida y vuelta":"Odezva",
+"La línea une tu dispositivo con el servidor que reenvía la llamada; no es el camino exacto de los cables.":"Čára spojuje vaše zařízení se serverem, který hovor přeposílá; není to přesná cesta kabelů.",
+"De la otra persona nunca se muestra dónde está.":"Kde je druhá osoba, se nikdy nezobrazuje.",
+"Esperando los datos de la llamada…":"Čeká se na data hovoru…",
+"La llamada ha terminado.":"Hovor skončil.",
+"Sin datos de la llamada desde hace {s} s":"Žádná data hovoru už {s} s"
 },
 "p":{
 "intento":"Nejvíc se dnes snažila: {1}, {2}{2?krát|krát}.",

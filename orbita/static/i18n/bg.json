@@ -4014,7 +4014,17 @@
 "Su ubicación no se muestra":"Местоположението не се показва",
 "Envío {v} · recepción {w} · ida y vuelta {ms}":"Изпращане {v} · получаване {w} · отиване и връщане {ms}",
 "Sin servidores en medio: los paquetes van encriptados de un equipo al otro.":"Без сървъри по средата: пакетите пътуват шифровани от едното устройство до другото.",
-"El servidor solo reenvía paquetes encriptados: no tiene las claves para abrirlos.":"Сървърът само препраща шифровани пакети: няма ключовете, за да ги отвори."
+"El servidor solo reenvía paquetes encriptados: no tiene las claves para abrirlos.":"Сървърът само препраща шифровани пакети: няма ключовете, за да ги отвори.",
+"Ver en Órbita":"Виж в Орбита",
+"Llamada Ultra":"Разговор Ultra",
+"Tu llamada en Órbita":"Вашият разговор в Орбита",
+"{p}, aproximado":"{p}, приблизително",
+"Ida y vuelta":"Отиване и връщане",
+"La línea une tu dispositivo con el servidor que reenvía la llamada; no es el camino exacto de los cables.":"Линията свързва устройството ви със сървъра, който препраща разговора; това не е точният път на кабелите.",
+"De la otra persona nunca se muestra dónde está.":"Къде е другият човек никога не се показва.",
+"Esperando los datos de la llamada…":"Изчакване на данните от разговора…",
+"La llamada ha terminado.":"Разговорът приключи.",
+"Sin datos de la llamada desde hace {s} s":"Няма данни от разговора от {s} s"
 },
 "p":{
 "intento":"Най-настойчивата днес: {1}, {2} {2?път|пъти}.",

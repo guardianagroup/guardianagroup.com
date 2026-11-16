@@ -4014,7 +4014,17 @@
 "Su ubicación no se muestra":"స్థానం చూపబడదు",
 "Envío {v} · recepción {w} · ida y vuelta {ms}":"పంపడం {v} · స్వీకరణ {w} · రాకపోకలు {ms}",
 "Sin servidores en medio: los paquetes van encriptados de un equipo al otro.":"మధ్యలో సర్వర్లు లేవు: ప్యాకెట్లు ఎన్‌క్రిప్ట్ అయి ఒక పరికరం నుంచి మరో పరికరానికి వెళ్తాయి.",
-"El servidor solo reenvía paquetes encriptados: no tiene las claves para abrirlos.":"సర్వర్ ఎన్‌క్రిప్ట్ చేసిన ప్యాకెట్లను ముందుకు పంపుతుంది మాత్రమే: వాటిని తెరిచే కీలు దాని దగ్గర లేవు."
+"El servidor solo reenvía paquetes encriptados: no tiene las claves para abrirlos.":"సర్వర్ ఎన్‌క్రిప్ట్ చేసిన ప్యాకెట్లను ముందుకు పంపుతుంది మాత్రమే: వాటిని తెరిచే కీలు దాని దగ్గర లేవు.",
+"Ver en Órbita":"ఆర్బిట్‌లో చూడండి",
+"Llamada Ultra":"Ultra కాల్",
+"Tu llamada en Órbita":"ఆర్బిట్‌లో మీ కాల్",
+"{p}, aproximado":"{p}, సుమారు",
+"Ida y vuelta":"రాకపోకలు",
+"La línea une tu dispositivo con el servidor que reenvía la llamada; no es el camino exacto de los cables.":"ఈ గీత మీ పరికరాన్ని కాల్‌ను ముందుకు పంపే సర్వర్‌తో కలుపుతుంది; ఇది కేబుళ్ల ఖచ్చితమైన మార్గం కాదు.",
+"De la otra persona nunca se muestra dónde está.":"అవతలి వ్యక్తి ఎక్కడ ఉన్నారో ఎప్పుడూ చూపబడదు.",
+"Esperando los datos de la llamada…":"కాల్ డేటా కోసం వేచి ఉంది…",
+"La llamada ha terminado.":"కాల్ ముగిసింది.",
+"Sin datos de la llamada desde hace {s} s":"{s} సెకన్లుగా కాల్ డేటా లేదు"
 },
 "p":{
 "intento":"ఈరోజు ఎక్కువగా ప్రయత్నించింది: {1}, {2} {2?సారి|సార్లు}.",

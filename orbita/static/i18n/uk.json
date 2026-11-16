@@ -4014,7 +4014,17 @@
 "Su ubicación no se muestra":"Місцезнаходження не показується",
 "Envío {v} · recepción {w} · ida y vuelta {ms}":"Надсилання {v} · отримання {w} · туди й назад {ms}",
 "Sin servidores en medio: los paquetes van encriptados de un equipo al otro.":"Без серверів посередині: пакети йдуть зашифрованими з одного пристрою на інший.",
-"El servidor solo reenvía paquetes encriptados: no tiene las claves para abrirlos.":"Сервер лише пересилає зашифровані пакети: у нього немає ключів, щоб їх відкрити."
+"El servidor solo reenvía paquetes encriptados: no tiene las claves para abrirlos.":"Сервер лише пересилає зашифровані пакети: у нього немає ключів, щоб їх відкрити.",
+"Ver en Órbita":"Переглянути в Орбіті",
+"Llamada Ultra":"Дзвінок Ultra",
+"Tu llamada en Órbita":"Ваш дзвінок в Орбіті",
+"{p}, aproximado":"{p}, приблизно",
+"Ida y vuelta":"Туди й назад",
+"La línea une tu dispositivo con el servidor que reenvía la llamada; no es el camino exacto de los cables.":"Лінія з’єднує ваш пристрій із сервером, який пересилає дзвінок; це не точний шлях кабелів.",
+"De la otra persona nunca se muestra dónde está.":"Де перебуває співрозмовник, ніколи не показується.",
+"Esperando los datos de la llamada…":"Очікування даних дзвінка…",
+"La llamada ha terminado.":"Дзвінок завершено.",
+"Sin datos de la llamada desde hace {s} s":"Немає даних дзвінка вже {s} с"
 },
 "p":{
 "intento":"Найнаполегливіша сьогодні: {1}, {2} {2?раз|разів}.",

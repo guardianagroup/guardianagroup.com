@@ -4014,7 +4014,17 @@
 "Su ubicación no se muestra":"الموقع غير معروض",
 "Envío {v} · recepción {w} · ida y vuelta {ms}":"الإرسال {v} · الاستقبال {w} · ذهابًا وإيابًا {ms}",
 "Sin servidores en medio: los paquetes van encriptados de un equipo al otro.":"لا خوادم في المنتصف: تنتقل الحزم مشفّرة من جهاز إلى الآخر.",
-"El servidor solo reenvía paquetes encriptados: no tiene las claves para abrirlos.":"الخادم يعيد توجيه الحزم المشفّرة فقط: لا يملك المفاتيح لفتحها."
+"El servidor solo reenvía paquetes encriptados: no tiene las claves para abrirlos.":"الخادم يعيد توجيه الحزم المشفّرة فقط: لا يملك المفاتيح لفتحها.",
+"Ver en Órbita":"عرض في المدار",
+"Llamada Ultra":"مكالمة Ultra",
+"Tu llamada en Órbita":"مكالمتك في المدار",
+"{p}, aproximado":"{p}، تقريبي",
+"Ida y vuelta":"ذهابًا وإيابًا",
+"La línea une tu dispositivo con el servidor que reenvía la llamada; no es el camino exacto de los cables.":"يربط الخط جهازك بالخادم الذي يعيد توجيه المكالمة؛ وليس المسار الدقيق للكابلات.",
+"De la otra persona nunca se muestra dónde está.":"لا يُعرض أبدًا مكان الطرف الآخر.",
+"Esperando los datos de la llamada…":"في انتظار بيانات المكالمة…",
+"La llamada ha terminado.":"انتهت المكالمة.",
+"Sin datos de la llamada desde hace {s} s":"لا بيانات من المكالمة منذ {s} ث"
 },
 "p":{
 "intento":"الأكثر محاولةً اليوم: {1}، {2} {2?مرة|مرات}.",

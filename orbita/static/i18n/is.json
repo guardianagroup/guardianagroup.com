@@ -4014,7 +4014,17 @@
 "Su ubicación no se muestra":"Staðsetning er ekki sýnd",
 "Envío {v} · recepción {w} · ida y vuelta {ms}":"Sent {v} · móttekið {w} · fram og til baka {ms}",
 "Sin servidores en medio: los paquetes van encriptados de un equipo al otro.":"Engir þjónar á milli: pakkarnir fara dulkóðaðir frá einu tæki til annars.",
-"El servidor solo reenvía paquetes encriptados: no tiene las claves para abrirlos.":"Þjónninn áframsendir aðeins dulkóðaða pakka: hann hefur ekki lyklana til að opna þá."
+"El servidor solo reenvía paquetes encriptados: no tiene las claves para abrirlos.":"Þjónninn áframsendir aðeins dulkóðaða pakka: hann hefur ekki lyklana til að opna þá.",
+"Ver en Órbita":"Skoða í Sporbraut",
+"Llamada Ultra":"Ultra-símtal",
+"Tu llamada en Órbita":"Símtalið þitt í Sporbraut",
+"{p}, aproximado":"{p}, áætlað",
+"Ida y vuelta":"Fram og til baka",
+"La línea une tu dispositivo con el servidor que reenvía la llamada; no es el camino exacto de los cables.":"Línan tengir tækið þitt við þjóninn sem áframsendir símtalið; þetta er ekki nákvæm leið strengjanna.",
+"De la otra persona nunca se muestra dónde está.":"Hvar hinn aðilinn er birtist aldrei.",
+"Esperando los datos de la llamada…":"Bíð eftir gögnum símtalsins…",
+"La llamada ha terminado.":"Símtalinu er lokið.",
+"Sin datos de la llamada desde hace {s} s":"Engin gögn frá símtalinu í {s} s"
 },
 "p":{
 "intento":"Sá sem reyndi mest í dag: {1}, {2} {2?sinni|sinnum}.",

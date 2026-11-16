@@ -4014,7 +4014,17 @@
 "Su ubicación no se muestra":"Mahali hapaonyeshwi",
 "Envío {v} · recepción {w} · ida y vuelta {ms}":"Kutuma {v} · kupokea {w} · kwenda na kurudi {ms}",
 "Sin servidores en medio: los paquetes van encriptados de un equipo al otro.":"Hakuna seva katikati: pakiti husafiri zikiwa zimesimbwa kutoka kifaa kimoja hadi kingine.",
-"El servidor solo reenvía paquetes encriptados: no tiene las claves para abrirlos.":"Seva inapitisha tu pakiti zilizosimbwa: haina funguo za kuzifungua."
+"El servidor solo reenvía paquetes encriptados: no tiene las claves para abrirlos.":"Seva inapitisha tu pakiti zilizosimbwa: haina funguo za kuzifungua.",
+"Ver en Órbita":"Tazama kwenye Obiti",
+"Llamada Ultra":"Simu ya Ultra",
+"Tu llamada en Órbita":"Simu yako kwenye Obiti",
+"{p}, aproximado":"{p}, takriban",
+"Ida y vuelta":"Kwenda na kurudi",
+"La línea une tu dispositivo con el servidor que reenvía la llamada; no es el camino exacto de los cables.":"Mstari unaunganisha kifaa chako na seva inayopitisha simu; si njia kamili ya nyaya.",
+"De la otra persona nunca se muestra dónde está.":"Mahali alipo mtu mwingine hapaonyeshwi kamwe.",
+"Esperando los datos de la llamada…":"Inasubiri data ya simu…",
+"La llamada ha terminado.":"Simu imekwisha.",
+"Sin datos de la llamada desde hace {s} s":"Hakuna data ya simu kwa sekunde {s}"
 },
 "p":{
 "intento":"Iliyojaribu zaidi leo: {1}, {2?mara|mara} {2}.",

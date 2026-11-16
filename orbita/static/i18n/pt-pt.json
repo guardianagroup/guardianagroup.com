@@ -4014,7 +4014,17 @@
 "Su ubicación no se muestra":"Localização não mostrada",
 "Envío {v} · recepción {w} · ida y vuelta {ms}":"Envio {v} · receção {w} · ida e volta {ms}",
 "Sin servidores en medio: los paquetes van encriptados de un equipo al otro.":"Sem servidores pelo meio: os pacotes seguem encriptados de um dispositivo para o outro.",
-"El servidor solo reenvía paquetes encriptados: no tiene las claves para abrirlos.":"O servidor só reencaminha pacotes encriptados: não tem as chaves para os abrir."
+"El servidor solo reenvía paquetes encriptados: no tiene las claves para abrirlos.":"O servidor só reencaminha pacotes encriptados: não tem as chaves para os abrir.",
+"Ver en Órbita":"Ver na Órbita",
+"Llamada Ultra":"Chamada Ultra",
+"Tu llamada en Órbita":"A sua chamada na Órbita",
+"{p}, aproximado":"{p}, aproximado",
+"Ida y vuelta":"Ida e volta",
+"La línea une tu dispositivo con el servidor que reenvía la llamada; no es el camino exacto de los cables.":"A linha liga o seu dispositivo ao servidor que reencaminha a chamada; não é o caminho exato dos cabos.",
+"De la otra persona nunca se muestra dónde está.":"Nunca se mostra onde está a outra pessoa.",
+"Esperando los datos de la llamada…":"A aguardar os dados da chamada…",
+"La llamada ha terminado.":"A chamada terminou.",
+"Sin datos de la llamada desde hace {s} s":"Sem dados da chamada há {s} s"
 },
 "p":{
 "intento":"A que mais tentou hoje: {1}, {2} {2?vez|vezes}.",

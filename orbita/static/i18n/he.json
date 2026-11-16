@@ -4014,7 +4014,17 @@
 "Su ubicación no se muestra":"המיקום לא מוצג",
 "Envío {v} · recepción {w} · ida y vuelta {ms}":"שליחה {v} · קבלה {w} · הלוך ושוב {ms}",
 "Sin servidores en medio: los paquetes van encriptados de un equipo al otro.":"אין שרתים באמצע: החבילות עוברות מוצפנות ממכשיר אחד לשני.",
-"El servidor solo reenvía paquetes encriptados: no tiene las claves para abrirlos.":"השרת רק מעביר חבילות מוצפנות: אין לו את המפתחות כדי לפתוח אותן."
+"El servidor solo reenvía paquetes encriptados: no tiene las claves para abrirlos.":"השרת רק מעביר חבילות מוצפנות: אין לו את המפתחות כדי לפתוח אותן.",
+"Ver en Órbita":"הצג במסלול",
+"Llamada Ultra":"שיחת Ultra",
+"Tu llamada en Órbita":"השיחה שלך במסלול",
+"{p}, aproximado":"{p}, משוער",
+"Ida y vuelta":"הלוך ושוב",
+"La línea une tu dispositivo con el servidor que reenvía la llamada; no es el camino exacto de los cables.":"הקו מחבר את המכשיר שלך לשרת שמעביר את השיחה; זה אינו המסלול המדויק של הכבלים.",
+"De la otra persona nunca se muestra dónde está.":"המיקום של הצד השני לעולם אינו מוצג.",
+"Esperando los datos de la llamada…":"ממתין לנתוני השיחה…",
+"La llamada ha terminado.":"השיחה הסתיימה.",
+"Sin datos de la llamada desde hace {s} s":"אין נתוני שיחה כבר {s} שניות"
 },
 "p":{
 "intento":"ניסתה הכי הרבה היום: {1}, {2} {2?פעם|פעמים}.",

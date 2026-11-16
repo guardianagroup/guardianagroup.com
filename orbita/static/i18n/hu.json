@@ -4014,7 +4014,17 @@
 "Su ubicación no se muestra":"A hely nem látható",
 "Envío {v} · recepción {w} · ida y vuelta {ms}":"Küldés {v} · fogadás {w} · oda-vissza {ms}",
 "Sin servidores en medio: los paquetes van encriptados de un equipo al otro.":"Nincs szerver közöttük: a csomagok titkosítva mennek egyik eszközről a másikra.",
-"El servidor solo reenvía paquetes encriptados: no tiene las claves para abrirlos.":"A szerver csak továbbítja a titkosított csomagokat: nincsenek meg a kulcsai a megnyitásukhoz."
+"El servidor solo reenvía paquetes encriptados: no tiene las claves para abrirlos.":"A szerver csak továbbítja a titkosított csomagokat: nincsenek meg a kulcsai a megnyitásukhoz.",
+"Ver en Órbita":"Megnézem a Pályán",
+"Llamada Ultra":"Ultra hívás",
+"Tu llamada en Órbita":"A hívása a Pályán",
+"{p}, aproximado":"{p}, hozzávetőleg",
+"Ida y vuelta":"Oda-vissza",
+"La línea une tu dispositivo con el servidor que reenvía la llamada; no es el camino exacto de los cables.":"A vonal az eszközét köti össze a hívást továbbító szerverrel; nem a kábelek pontos útja.",
+"De la otra persona nunca se muestra dónde está.":"A másik fél helye soha nem látható.",
+"Esperando los datos de la llamada…":"Várakozás a hívás adataira…",
+"La llamada ha terminado.":"A hívás véget ért.",
+"Sin datos de la llamada desde hace {s} s":"{s} másodperce nincs adat a hívásról"
 },
 "p":{
 "intento":"Ma a legtöbbször próbálkozott: {1}, {2} {2?alkalommal|alkalommal}.",

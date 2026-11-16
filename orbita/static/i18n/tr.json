@@ -4014,7 +4014,17 @@
 "Su ubicación no se muestra":"Konum gösterilmez",
 "Envío {v} · recepción {w} · ida y vuelta {ms}":"Gönderim {v} · alım {w} · gidiş-dönüş {ms}",
 "Sin servidores en medio: los paquetes van encriptados de un equipo al otro.":"Arada sunucu yok: paketler bir cihazdan diğerine şifreli gider.",
-"El servidor solo reenvía paquetes encriptados: no tiene las claves para abrirlos.":"Sunucu yalnızca şifreli paketleri iletir: onları açacak anahtarlara sahip değildir."
+"El servidor solo reenvía paquetes encriptados: no tiene las claves para abrirlos.":"Sunucu yalnızca şifreli paketleri iletir: onları açacak anahtarlara sahip değildir.",
+"Ver en Órbita":"Yörünge’de gör",
+"Llamada Ultra":"Ultra arama",
+"Tu llamada en Órbita":"Yörünge’de aramanız",
+"{p}, aproximado":"{p}, yaklaşık",
+"Ida y vuelta":"Gidiş-dönüş",
+"La línea une tu dispositivo con el servidor que reenvía la llamada; no es el camino exacto de los cables.":"Çizgi cihazınızı aramayı ileten sunucuya bağlar; kabloların tam yolu değildir.",
+"De la otra persona nunca se muestra dónde está.":"Karşı tarafın nerede olduğu asla gösterilmez.",
+"Esperando los datos de la llamada…":"Arama verileri bekleniyor…",
+"La llamada ha terminado.":"Arama sona erdi.",
+"Sin datos de la llamada desde hace {s} s":"{s} sn’dir arama verisi yok"
 },
 "p":{
 "intento":"Bugün en çok deneyen: {1}, {2} {2?kez|kez}.",

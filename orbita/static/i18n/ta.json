@@ -4014,7 +4014,17 @@
 "Su ubicación no se muestra":"இருப்பிடம் காட்டப்படாது",
 "Envío {v} · recepción {w} · ida y vuelta {ms}":"அனுப்புதல் {v} · பெறுதல் {w} · சென்று திரும்ப {ms}",
 "Sin servidores en medio: los paquetes van encriptados de un equipo al otro.":"இடையில் சேவையகங்கள் இல்லை: பொதிகள் குறியாக்கப்பட்டு ஒரு சாதனத்திலிருந்து மற்றொன்றுக்குச் செல்கின்றன.",
-"El servidor solo reenvía paquetes encriptados: no tiene las claves para abrirlos.":"சேவையகம் குறியாக்கப்பட்ட பொதிகளை மட்டுமே அனுப்புகிறது: அவற்றைத் திறக்கும் சாவிகள் அதனிடம் இல்லை."
+"El servidor solo reenvía paquetes encriptados: no tiene las claves para abrirlos.":"சேவையகம் குறியாக்கப்பட்ட பொதிகளை மட்டுமே அனுப்புகிறது: அவற்றைத் திறக்கும் சாவிகள் அதனிடம் இல்லை.",
+"Ver en Órbita":"ஆர்பிட்டில் பார்க்க",
+"Llamada Ultra":"Ultra அழைப்பு",
+"Tu llamada en Órbita":"ஆர்பிட்டில் உங்கள் அழைப்பு",
+"{p}, aproximado":"{p}, தோராயமாக",
+"Ida y vuelta":"சென்று திரும்ப",
+"La línea une tu dispositivo con el servidor que reenvía la llamada; no es el camino exacto de los cables.":"கோடு உங்கள் சாதனத்தை அழைப்பை அனுப்பும் சேவையகத்துடன் இணைக்கிறது; இது கேபிள்களின் சரியான பாதை அல்ல.",
+"De la otra persona nunca se muestra dónde está.":"மற்றவர் எங்கே இருக்கிறார் என்பது ஒருபோதும் காட்டப்படாது.",
+"Esperando los datos de la llamada…":"அழைப்பின் தரவுக்காகக் காத்திருக்கிறது…",
+"La llamada ha terminado.":"அழைப்பு முடிந்தது.",
+"Sin datos de la llamada desde hace {s} s":"{s} வினாடிகளாக அழைப்புத் தரவு இல்லை"
 },
 "p":{
 "intento":"இன்று அதிகம் முயன்றது: {1}, {2} {2?முறை|முறை}.",

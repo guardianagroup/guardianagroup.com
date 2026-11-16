@@ -4014,7 +4014,17 @@
 "Su ubicación no se muestra":"位置は表示されません",
 "Envío {v} · recepción {w} · ida y vuelta {ms}":"送信 {v} · 受信 {w} · 往復 {ms}",
 "Sin servidores en medio: los paquetes van encriptados de un equipo al otro.":"間にサーバーはありません。パケットは暗号化されたまま端末から端末へ届きます。",
-"El servidor solo reenvía paquetes encriptados: no tiene las claves para abrirlos.":"サーバーは暗号化されたパケットを中継するだけで、開くための鍵を持っていません。"
+"El servidor solo reenvía paquetes encriptados: no tiene las claves para abrirlos.":"サーバーは暗号化されたパケットを中継するだけで、開くための鍵を持っていません。",
+"Ver en Órbita":"軌道で見る",
+"Llamada Ultra":"Ultra 通話",
+"Tu llamada en Órbita":"軌道で見るあなたの通話",
+"{p}, aproximado":"{p}（おおよそ）",
+"Ida y vuelta":"往復",
+"La línea une tu dispositivo con el servidor que reenvía la llamada; no es el camino exacto de los cables.":"線はあなたの端末と通話を中継するサーバーを結んだものです。ケーブルの正確な経路ではありません。",
+"De la otra persona nunca se muestra dónde está.":"相手の居場所は決して表示されません。",
+"Esperando los datos de la llamada…":"通話のデータを待っています…",
+"La llamada ha terminado.":"通話は終了しました。",
+"Sin datos de la llamada desde hace {s} s":"{s} 秒間、通話のデータがありません"
 },
 "p":{
 "intento":"今日最も多く試みたのは {1}、{2} {2?回|回}。",

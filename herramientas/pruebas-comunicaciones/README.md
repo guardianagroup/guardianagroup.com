@@ -47,6 +47,10 @@ Después, desde esta carpeta:
   pantallas al empezar y al cambiar la llave, con las 4 palabras plegadas arriba; el Monitor de seguridad siempre a la vista (abierto en el PC,
   plegado en una línea en el teléfono) con sus filas reales: encriptado, capa postcuántica, clave y cuándo cambia, código, huella de la conexión,
   sala del relé, fragmentos verificados y rechazados, ruta y código de la página; sin avisos falsos al empezar. Capturas en `monitor-ultra/`.
+- `node orbita-llamada.js` — «Tu llamada en Órbita» (15 nov 2026): en una videollamada Ultra entre dos PC, «Ver en Órbita» del
+  monitor abre Órbita en otra pestaña con #llamada, sin la portada; el planeta solo con la llamada y el panel con el monitor en
+  directo (le llega de la pestaña de la llamada por BroadcastChannel cada segundo); al colgar, «La llamada ha terminado.»; a
+  tamaño de teléfono el botón no sale. Capturas en `orbita-llamada/`.
 - `node llevar-ultra.js` — «Pasar al teléfono» en Ultra (15 nov 2026, dueño, 21:42): A (PC) pasa la videollamada Ultra a su teléfono T
   (código QR con «.u» al final); en T y en B siguen la voz cambiada, el mosaico, la capa postcuántica (con la llave del QR), la tarjeta
   roja con el mismo código y el Monitor de seguridad. T cuelga: «Volver a llamar» en los dos, durante 15 minutos, y la llamada vuelve a

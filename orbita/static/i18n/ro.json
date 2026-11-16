@@ -4014,7 +4014,17 @@
 "Su ubicación no se muestra":"Locația nu este afișată",
 "Envío {v} · recepción {w} · ida y vuelta {ms}":"Trimitere {v} · primire {w} · dus-întors {ms}",
 "Sin servidores en medio: los paquetes van encriptados de un equipo al otro.":"Fără servere la mijloc: pachetele circulă criptate de la un dispozitiv la celălalt.",
-"El servidor solo reenvía paquetes encriptados: no tiene las claves para abrirlos.":"Serverul doar redirecționează pachete criptate: nu are cheile pentru a le deschide."
+"El servidor solo reenvía paquetes encriptados: no tiene las claves para abrirlos.":"Serverul doar redirecționează pachete criptate: nu are cheile pentru a le deschide.",
+"Ver en Órbita":"Vezi în Orbita",
+"Llamada Ultra":"Apel Ultra",
+"Tu llamada en Órbita":"Apelul dvs. în Orbita",
+"{p}, aproximado":"{p}, aproximativ",
+"Ida y vuelta":"Dus-întors",
+"La línea une tu dispositivo con el servidor que reenvía la llamada; no es el camino exacto de los cables.":"Linia leagă dispozitivul dvs. de serverul care redirecționează apelul; nu este traseul exact al cablurilor.",
+"De la otra persona nunca se muestra dónde está.":"Locul în care se află cealaltă persoană nu este afișat niciodată.",
+"Esperando los datos de la llamada…":"Se așteaptă datele apelului…",
+"La llamada ha terminado.":"Apelul s-a încheiat.",
+"Sin datos de la llamada desde hace {s} s":"Fără date de la apel de {s} s"
 },
 "p":{
 "intento":"Cea care a încercat cel mai mult azi: {1}, {2} {2?dată|ori}.",

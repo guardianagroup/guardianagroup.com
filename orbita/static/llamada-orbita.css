@@ -1,0 +1,57 @@
+/* «Tu llamada en Órbita» (15 Nov 2026): el panel de la llamada sobre el planeta, en la misma familia que «Ver mi PC en directo» */
+body.en-llamada-orbita #directo, body.en-llamada-orbita #puertas, body.en-llamada-orbita #capas, body.en-llamada-orbita #sat-vista,
+body.en-llamada-orbita #sat-fase, body.en-llamada-orbita #capa-nota, body.en-llamada-orbita #ficha, body.en-llamada-orbita .sat-ficha,
+body.en-llamada-orbita .ficha-panel, body.en-llamada-orbita .altura, body.en-llamada-orbita .empezar, body.en-llamada-orbita .cinta { opacity: 0 !important; pointer-events: none !important; transition: opacity .4s; }
+body.en-llamada-orbita #estado { opacity: .35; }
+.llorb-hud { position: fixed; z-index: 25; left: calc(40px + env(safe-area-inset-left, 0px)); top: max(104px, calc(50% - 330px)); width: 336px; box-sizing: border-box; max-height: calc(100vh - max(104px, 50vh - 330px) - 28px); overflow: hidden; display: flex; flex-direction: column; gap: 12px; padding: 16px 18px 16px; border-radius: 18px; border: 1px solid rgba(156,195,228,.2); background: rgba(9,13,19,.82); backdrop-filter: blur(14px) saturate(1.1); -webkit-backdrop-filter: blur(14px) saturate(1.1); box-shadow: 0 24px 60px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.03); color: var(--fg); animation: radio-entra .55s cubic-bezier(.2,.7,.2,1); scrollbar-width: thin; scrollbar-color: rgba(156,195,228,.25) transparent; }
+.llorb-hud .cab { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: -2px -4px -2px 0; }
+.llorb-hud .k { margin: 0; display: flex; align-items: center; gap: 8px; min-width: 0; font: 500 10px/1 var(--mono); letter-spacing: .16em; text-transform: uppercase; color: #8A95A2; }
+.llorb-hud .k .sep { color: #4A5664; }
+.llorb-hud .vivo { flex: none; width: 8px; height: 8px; border-radius: 50%; background: #5CC98A; box-shadow: 0 0 0 3px rgba(92,201,138,.18), 0 0 12px rgba(92,201,138,.9); animation: tupc-late 2.4s ease-in-out infinite; }
+.llorb-x { all: unset; cursor: pointer; display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; color: #8A95A2; }
+.llorb-x:hover, .llorb-x:focus-visible { color: #F4F6F8; background: rgba(156,195,228,.1); }
+.llorb-hud .t { outline: none; margin: 0; font: 300 26px/1.08 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; letter-spacing: -.015em; color: var(--fg); }
+.llorb-est { margin: -4px 0 0; font: 400 13px/1.5 var(--texto); color: #B4BEC9; }
+.llorb-est b { color: #B4BEC9; font-weight: 600; }
+.llorb-est b.ok { color: #5CC98A; }
+.llorb-est b.aviso { color: #F0C77F; }
+.llorb-est b.alerta { color: #E07A6C; }
+.llorb-hud.mudo .vivo { background: #4A5664; box-shadow: none; animation: none; }
+/* la ruta: tres puntos unidos por una línea, como en el planeta */
+.llorb-ruta { list-style: none; margin: 0; padding: 10px 12px; border-radius: 12px; border: 1px solid rgba(156,195,228,.14); background: rgba(156,195,228,.05); display: flex; flex-direction: column; gap: 9px; }
+.llorb-ruta li { position: relative; display: grid; grid-template-columns: 12px 1fr; column-gap: 11px; align-items: center; }
+.llorb-ruta li i { width: 9px; height: 9px; border-radius: 50%; background: #9CC3E4; box-shadow: 0 0 8px rgba(156,195,228,.8); grid-row: 1 / span 2; justify-self: center; align-self: start; margin-top: 4px; }
+.llorb-ruta li.serv i { background: #5CC98A; box-shadow: 0 0 8px rgba(92,201,138,.8); }
+.llorb-ruta li.otro i { background: transparent; border: 1.5px dashed #9CC3E4; box-shadow: none; width: 8px; height: 8px; }
+.llorb-ruta li:not(:last-child)::after { content: ""; position: absolute; left: 5.5px; top: 15px; bottom: -8px; width: 1.5px; background: linear-gradient(180deg, rgba(156,195,228,.6), rgba(156,195,228,.2)); }
+.llorb-ruta li b { font: 500 12.5px/1.3 var(--texto); color: #F4F6F8; }
+.llorb-ruta li span { grid-column: 2; font: 400 11px/1.3 var(--texto); color: rgba(244,246,248,.58); }
+.llorb-ruta li span:empty { display: none; }
+.llorb-cifras { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; padding: 12px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.llorb-cifras div { display: flex; flex-direction: column; gap: 7px; min-width: 0; }
+.llorb-cifras b { font: 600 19px/1 var(--texto); font-variant-numeric: tabular-nums; letter-spacing: -.01em; color: var(--fg); white-space: nowrap; }
+.llorb-cifras span { font: 500 8.5px/1.3 var(--mono); letter-spacing: .06em; text-transform: uppercase; color: #8A95A2; }
+/* las comprobaciones: lo que se desplaza si no cabe; el botón de volver siempre a la vista */
+.llorb-l { list-style: none; margin: 0 -8px; padding: 0 8px 8px; display: flex; flex-direction: column; gap: 7px; flex: 1 1 auto; min-height: 64px; overflow: auto; scrollbar-width: thin; scrollbar-color: rgba(156,195,228,.25) transparent; -webkit-mask-image: linear-gradient(180deg, #000 calc(100% - 18px), transparent); mask-image: linear-gradient(180deg, #000 calc(100% - 18px), transparent); }
+.llorb-hud > :not(.llorb-l) { flex: none; }
+.llorb-notas p[hidden] { display: none; }
+.llorb-l li { display: grid; grid-template-columns: 8px 1fr; column-gap: 11px; row-gap: 1px; align-items: center; }
+.llorb-l li i { width: 7px; height: 7px; border-radius: 50%; background: #5CC98A; grid-row: 1 / span 2; align-self: start; margin-top: 5px; }
+.llorb-l[hidden], .llorb-cifras[hidden] { display: none; }
+.llorb-l li.llorb-aviso i { background: #F0C77F; }
+.llorb-l li.llorb-alerta i { background: #E07A6C; box-shadow: 0 0 0 3px rgba(224,122,108,.25); }
+.llorb-l li.llorb-neutro i { background: rgba(156,195,228,.45); }
+.llorb-l li.llorb-aviso span { color: #F0C77F; }
+.llorb-l li.llorb-alerta span { color: #E07A6C; }
+.llorb-l li b { font: 500 12.5px/1.3 var(--texto); color: #F4F6F8; }
+.llorb-l li span { grid-column: 2; font: 400 11.5px/1.35 var(--texto); color: rgba(244,246,248,.6); font-variant-numeric: tabular-nums; }
+.llorb-notas { display: flex; flex-direction: column; gap: 5px; padding-top: 10px; border-top: 1px solid var(--line); }
+.llorb-notas p { margin: 0; font: 400 10px/1.5 var(--mono); color: #7C8794; }
+.llorb-volver { align-self: stretch; min-height: 42px; border-radius: 999px; border: 1px solid rgba(156,195,228,.35); background: rgba(156,195,228,.1); color: #F4F6F8; font: 500 13.5px/1 var(--texto); cursor: pointer; }
+.llorb-volver:hover, .llorb-volver:focus-visible { background: rgba(156,195,228,.18); }
+@media (max-width: 760px) {
+  .llorb-hud { left: 12px; right: 12px; top: auto; bottom: calc(12px + env(safe-area-inset-bottom, 0px)); width: auto; max-height: 52vh; padding: 14px 16px; gap: 10px; }
+  .llorb-hud .t { font-size: 21px; }
+  .llorb-l { display: none; }
+}
+@media (prefers-reduced-motion: reduce) { .llorb-hud .vivo { animation: none; } }

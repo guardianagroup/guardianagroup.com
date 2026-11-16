@@ -4014,7 +4014,17 @@
 "Su ubicación no se muestra":"Lokasi tidak dipaparkan",
 "Envío {v} · recepción {w} · ida y vuelta {ms}":"Hantar {v} · terima {w} · pergi-balik {ms}",
 "Sin servidores en medio: los paquetes van encriptados de un equipo al otro.":"Tiada pelayan di tengah: paket bergerak tersulit dari satu peranti ke peranti lain.",
-"El servidor solo reenvía paquetes encriptados: no tiene las claves para abrirlos.":"Pelayan hanya memajukan paket tersulit: ia tiada kunci untuk membukanya."
+"El servidor solo reenvía paquetes encriptados: no tiene las claves para abrirlos.":"Pelayan hanya memajukan paket tersulit: ia tiada kunci untuk membukanya.",
+"Ver en Órbita":"Lihat dalam Orbit",
+"Llamada Ultra":"Panggilan Ultra",
+"Tu llamada en Órbita":"Panggilan anda dalam Orbit",
+"{p}, aproximado":"{p}, anggaran",
+"Ida y vuelta":"Pergi-balik",
+"La línea une tu dispositivo con el servidor que reenvía la llamada; no es el camino exacto de los cables.":"Garisan menghubungkan peranti anda dengan pelayan yang memajukan panggilan; ia bukan laluan kabel yang tepat.",
+"De la otra persona nunca se muestra dónde está.":"Lokasi orang lain tidak pernah dipaparkan.",
+"Esperando los datos de la llamada…":"Menunggu data panggilan…",
+"La llamada ha terminado.":"Panggilan telah tamat.",
+"Sin datos de la llamada desde hace {s} s":"Tiada data panggilan sejak {s} s"
 },
 "p":{
 "intento":"Paling banyak mencuba hari ini: {1}, {2} {2?kali|kali}.",

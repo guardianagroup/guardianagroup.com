@@ -1906,7 +1906,7 @@
     if (!window.GuardianaLlamada || !window.RTCPeerConnection) { for (const id of ['#llamar', '#videollamar']) { const b = $(id); if (b) b.hidden = true; } return; }
     if (!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia)) { const b = $('#videollamar'); if (b) b.hidden = true; }
     LL = GuardianaLlamada.crea({
-      ice: iceCercano, servidor: servidorLlamada, puede: puedeLlamar, t: T, aviso, suena: LLEVAR ? () => {} : avisaSonido, fin: anotaLlamada, estado: avisaLlamada,
+      ice: iceCercano, servidor: servidorLlamada, servidorClave: () => iceUsado, puede: puedeLlamar, t: T, aviso, suena: LLEVAR ? () => {} : avisaSonido, fin: anotaLlamada, estado: avisaLlamada,
       // la llamada se ha cortado (2 Nov 2026, wifi y datos): ¿sigue viva la conexión con el relé? Si no contesta en 3 s, se abre otra
       red: () => { try { if (R && R.despierta) R.despierta(); } catch (_) {} },
       // pasar la llamada al teléfono: el botón (en el PC), la llave que llega de la otra persona, y lo que avisa la otra parte

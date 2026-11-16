@@ -4014,7 +4014,17 @@
 "Su ubicación no se muestra":"مقام نہیں دکھایا جاتا",
 "Envío {v} · recepción {w} · ida y vuelta {ms}":"بھیجنا {v} · وصول {w} · آنا جانا {ms}",
 "Sin servidores en medio: los paquetes van encriptados de un equipo al otro.":"درمیان میں کوئی سرور نہیں: پیکٹ انکرپٹ ہو کر ایک آلے سے دوسرے تک جاتے ہیں۔",
-"El servidor solo reenvía paquetes encriptados: no tiene las claves para abrirlos.":"سرور صرف انکرپٹ شدہ پیکٹ آگے بھیجتا ہے: اس کے پاس انہیں کھولنے کی چابیاں نہیں ہیں۔"
+"El servidor solo reenvía paquetes encriptados: no tiene las claves para abrirlos.":"سرور صرف انکرپٹ شدہ پیکٹ آگے بھیجتا ہے: اس کے پاس انہیں کھولنے کی چابیاں نہیں ہیں۔",
+"Ver en Órbita":"آربٹ میں دیکھیں",
+"Llamada Ultra":"Ultra کال",
+"Tu llamada en Órbita":"آربٹ میں آپ کی کال",
+"{p}, aproximado":"{p}، تخمینی",
+"Ida y vuelta":"آنا جانا",
+"La línea une tu dispositivo con el servidor que reenvía la llamada; no es el camino exacto de los cables.":"یہ لکیر آپ کے آلے کو اس سرور سے جوڑتی ہے جو کال آگے بھیجتا ہے؛ یہ کیبلوں کا عین راستہ نہیں۔",
+"De la otra persona nunca se muestra dónde está.":"دوسرا شخص کہاں ہے، یہ کبھی نہیں دکھایا جاتا۔",
+"Esperando los datos de la llamada…":"کال کے ڈیٹا کا انتظار…",
+"La llamada ha terminado.":"کال ختم ہو گئی ہے۔",
+"Sin datos de la llamada desde hace {s} s":"{s} سیکنڈ سے کال کا کوئی ڈیٹا نہیں"
 },
 "p":{
 "intento":"آج سب سے زیادہ کوشش: {1}، {2} {2?بار|بار}۔",
