@@ -74,6 +74,12 @@
   // toda la pantalla; esta página la llena igual que la de Chrome. Un programa anterior la abriría como pestaña: sin la marca, no.
   const VENTANA_NOMBRE = 'guardiana-flotante';
   const VENTANA_PROGRAMA = () => !!(document.documentElement && document.documentElement.dataset.ventanaLlamada === '1');
+  // dentro del programa GUARDIANA (su página marcada): Órbita y Comunicaciones son sus propias pestañas, sin barra
+  const EN_PROGRAMA = () => !!(document.documentElement && document.documentElement.dataset.enPrograma === '1');
+  // pedir al programa otro de sus productos (su guion coge el clic de un enlace con data-producto; fuera del programa no hace nada)
+  function irAlProducto(p) {
+    try { const a = document.createElement('a'); a.href = '#'; a.dataset.producto = p; a.hidden = true; document.body.append(a); a.click(); a.remove(); } catch (_) {}
+  }
   // su aspecto: la otra persona a toda la ventana, tu imagen pequeña en la esquina, el tiempo arriba y los tres botones abajo, que
   // con ratón salen al pasar por encima (los colores de GUARDIANA; el rojo de colgar, el coral de la casa)
   const CSS_VF = "@font-face{font-family:'IBM Plex Sans';font-weight:100 700;font-display:swap;src:url(__ORIGEN__/fonts/IBMPlexSans-400-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}"
@@ -2326,7 +2332,18 @@
       } catch (_) {}
     }
     // sin opener: la pestaña de Órbita no alcanza esta ventana ni copia su sessionStorage (segunda voz, C2)
-    { const b = $('#ll-mon-orbita'); if (b) b.addEventListener('click', (e) => { e.stopPropagation(); try { window.open('/orbita/#llamada', '_blank', 'noopener'); } catch (_) {} canalOrbita(); setTimeout(() => monDifunde(), 900); }); }
+    // En el programa (16 Nov 2026; dueño, 12:20: «nos hemos ido a Órbita… no podemos volver a la llamada, ninguno de los dos»): no una
+    // pestaña nueva (en el programa, las de la web de GUARDIANA van sin barra, y desde ella no había forma de volver a la llamada), sino
+    // la pestaña de Órbita del propio programa, a la que se le pide abrir la vista de la llamada; se vuelve con «Comunicaciones».
+    { const b = $('#ll-mon-orbita'); if (b) b.addEventListener('click', (e) => {
+      e.stopPropagation(); canalOrbita();
+      if (EN_PROGRAMA()) {
+        irAlProducto('orbita');
+        for (const ms of [500, 1500, 3000, 6000]) setTimeout(() => { monDifunde(); try { if (canalOrb) canalOrb.postMessage({ v: 1, tipo: 'abre' }); } catch (_) {} }, ms);
+        return;
+      }
+      try { window.open('/orbita/#llamada', '_blank', 'noopener'); } catch (_) {} setTimeout(() => monDifunde(), 900);
+    }); }
     function monRuta(r) { return r === 'directa' ? t('Directa entre los dos equipos') : !releGuardiana() ? t('Servidor') : t('Por un servidor de GUARDIANA') + (r === 'mio' && o.servidor && o.servidor() ? ' · ' + o.servidor() : ''); }
     function monFilas() {
       const f = [], s = mon.stats || {}, x = pc && pqDe.get(pc);
@@ -2581,9 +2598,16 @@
         return b;
       };
       const bMic = boton('ll-silenciar', 'vf-mic'), bCam = boton('ll-camara', 'vf-cam'), bColgar = boton('ll-colgar', 'vf-colgar');
-      barra.append(bMic, bCam, bColgar);
+      // «Volver a la llamada» (16 Nov 2026; dueño, 12:20: «la pantalla no la puede hacer más grande… no podemos volver a la llamada»):
+      // la llamada en grande, en su pestaña (en el programa, la pestaña de Comunicaciones), y la ventana se cierra
+      const bVolver = el('button', 'vf-b vf-volver'); bVolver.type = 'button';
+      { const svg = $('#ll-volver svg'); if (svg) bVolver.append(d.importNode(svg, true)); }
+      bVolver.addEventListener('click', () => volverALaLlamada());
+      barra.append(bMic, bCam, bColgar, bVolver);
       marco.append(rem, ini, yo, arriba, barra); d.body.append(marco);
-      vf = { w, sola: !!sola, rem, yo, ini, reloj, bMic, bCam, bColgar, tic: 0 };
+      vf = { w, sola: !!sola, rem, yo, ini, reloj, bMic, bCam, bColgar, bVolver, tic: 0 };
+      // un doble clic en la imagen, lo mismo
+      rem.addEventListener('dblclick', () => volverALaLlamada()); ini.addEventListener('dblclick', () => volverALaLlamada());
       w.addEventListener('pagehide', () => setTimeout(() => miraVentana(w), 60));
       try { vf.tic = w.setInterval(pintaVf, 400); } catch (_) {}
       pintaVf(); pintaFlotando();
@@ -2608,6 +2632,13 @@
       const on = camaraOn(); bCam.hidden = !cam; bCam.setAttribute('aria-pressed', String(!on));
       { const n = on ? t('Apagar la cámara') : t('Encender la cámara'); bCam.setAttribute('aria-label', n); bCam.title = n; }
       bColgar.setAttribute('aria-label', t('Colgar')); bColgar.title = t('Colgar');
+      if (vf.bVolver) { vf.bVolver.setAttribute('aria-label', t('Volver a la llamada')); vf.bVolver.title = t('Volver a la llamada'); }
+    }
+    function volverALaLlamada() {
+      if (estado !== 'hablando') { cierraVentana(); return; }
+      pequena(false);
+      if (EN_PROGRAMA()) irAlProducto('secure'); else { try { raiz.focus(); } catch (_) {} }
+      cierraVentana();
     }
     function cierraVentana() {
       if (!vf) return;
@@ -2802,6 +2833,7 @@
       if (u.protocol !== 'https:' && u.protocol !== 'http:') return;
       if (u.origin === location.origin && u.pathname === location.pathname && u.search === location.search) return; // solo cambia el # de esta página
       e.preventDefault();
+      if (EN_PROGRAMA() && u.origin === location.origin && u.pathname.startsWith('/orbita/')) { irAlProducto('orbita'); return; }
       try { raiz.open(u.href, '_blank', 'noopener'); } catch (_) {}
     });
     addEventListener('beforeunload', (e) => { if (estado === 'hablando' || estado === 'conectando') { e.preventDefault(); e.returnValue = ''; } });

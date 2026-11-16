@@ -135,7 +135,7 @@ const ventana = (P) => P.evaluate(() => {
   await espera(1500);
   let w = await ventana(A);
   comprueba(!!w && w.rem && w.remFlujo && w.remAncho > 0 && w.yo && w.yoFlujo, '3. al cambiar de pestaña, la ventana flotante con la otra persona y tu imagen', w);
-  comprueba(!!w && /^\d\d:\d\d$/.test(w.tiempo) && w.botones.map((b) => b[0]).join(',') === 'vf-mic,vf-cam,vf-colgar', '3. con el tiempo y micrófono, cámara y colgar', w && { tiempo: w.tiempo, botones: w.botones });
+  comprueba(!!w && /^\d\d:\d\d$/.test(w.tiempo) && w.botones.map((b) => b[0]).join(',') === 'vf-mic,vf-cam,vf-colgar,vf-volver', '3. con el tiempo y micrófono, cámara, colgar y «Volver a la llamada»', w && { tiempo: w.tiempo, botones: w.botones });
   await A.screenshot({ path: path.join(OUT, '3-a-ventana-flotante.png') });
   { const el = await A.$('#__vf'); if (el) { await el.screenshot({ path: path.join(OUT, '3-ventana-sola.png') }); const r = await el.boundingBox(); await A.mouse.move(r.x + r.width / 2, r.y + r.height / 2); await espera(400); await el.screenshot({ path: path.join(OUT, '3-ventana-con-raton.png') }); await A.mouse.move(5, 5); } }
   // sus botones mandan en la llamada

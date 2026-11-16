@@ -73,7 +73,7 @@ async function llamada(browser, programa) {
   let v = V ? await lee(V) : null;
   comprueba(!!v && v.nombre === 'guardiana-flotante', '1. al dejar la pestaña, la página pide la ventana de la llamada por su nombre', v && v.nombre);
   comprueba(!!v && v.rem && v.remAncho > 0 && v.yo && v.yoAncho > 0, '1. con la otra persona y tu imagen, en movimiento', v);
-  comprueba(!!v && /^\d\d:\d\d$/.test(v.tiempo) && v.botones.join(',') === 'vf-mic,vf-cam,vf-colgar', '1. con el tiempo y micrófono, cámara y colgar', v && { tiempo: v.tiempo, botones: v.botones });
+  comprueba(!!v && /^\d\d:\d\d$/.test(v.tiempo) && v.botones.join(',') === 'vf-mic,vf-cam,vf-colgar,vf-volver', '1. con el tiempo y micrófono, cámara, colgar y «Volver a la llamada»', v && { tiempo: v.tiempo, botones: v.botones });
   if (V) { await V.setViewportSize({ width: 400, height: 260 }).catch(() => {}); await espera(400); await V.mouse.move(200, 130); await espera(400); await V.screenshot({ path: path.join(OUT, '1-ventana-de-la-llamada.png') }); }
   if (V) { await V.evaluate(() => document.querySelector('.vf-mic').click()); await espera(500); }
   const mic = await A.evaluate(() => document.querySelector('#ll-silenciar').getAttribute('aria-pressed'));

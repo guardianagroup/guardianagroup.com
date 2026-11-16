@@ -280,8 +280,12 @@
     document.body.classList.remove('en-llamada-orbita');
     if (window.OrbitaCapas) window.OrbitaCapas.soloTu(false);
     if (location.hash === '#llamada') { try { history.replaceState(null, '', location.pathname + location.search); } catch (_) {} }
-    // abierta desde la llamada: se cierra esta pestaña y queda la de la llamada
-    if (volver) { try { window.close(); } catch (_) {} }
+    // abierta desde la llamada: se cierra esta pestaña y queda la de la llamada. En el programa GUARDIANA (16 Nov 2026), Órbita es su
+    // propia pestaña: se vuelve a la de Comunicaciones, la de la llamada (su guion coge el clic de un enlace con data-producto)
+    if (volver) {
+      if (document.documentElement.dataset.enPrograma === '1') { try { const a = document.createElement('a'); a.href = '#'; a.dataset.producto = 'secure'; a.hidden = true; document.body.append(a); a.click(); a.remove(); } catch (_) {} return; }
+      try { window.close(); } catch (_) {}
+    }
   }
   try {
     canal = new BroadcastChannel('guardiana-llamada');
@@ -289,6 +293,8 @@
       const m = e && e.data; if (!m || m.v !== 1) return;
       if (m.tipo === 'fin') { if (L) { L.fin = m.motivo === 'telefono' ? 'telefono' : true; pintaHud(); } return; }
       if (m.tipo === 'estado') { const d = limpia(m); if (d) recibe(d); }
+      // (16 Nov 2026) en el programa, «Ver en Órbita» pasa a esta pestaña y lo pide por aquí (no hay #llamada que llegue)
+      if (m.tipo === 'abre') { if (!L) { let n = 0; const intenta = () => { if (abre()) return; if (++n < 60) setTimeout(intenta, 250); }; intenta(); } }
     };
   } catch (_) { canal = null; }
   // con #llamada (lo abre «Ver en Órbita»): en cuanto el planeta está, la vista; si el hash llega después, también
