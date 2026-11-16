@@ -3965,7 +3965,10 @@
 "Escribir, dibujar o tapar partes de la foto":"Écrire, dessiner ou masquer des parties de la photo",
 "editada":"modifiée",
 "Nadie ha entrado con ese código: crea uno nuevo.":"Personne n’est entré avec ce code : créez-en un nouveau.",
-"Se cortó la conexión con el relé: este es un código nuevo.":"La connexion au relais a été coupée : voici un nouveau code."
+"Se cortó la conexión con el relé: este es un código nuevo.":"La connexion au relais a été coupée : voici un nouveau code.",
+"Chat privado: cuando los dos salgan y no quede nada sin ver, el chat se borrará en los dos equipos.":"Discussion privée : quand vous serez sortis tous les deux et qu’il ne restera rien de non lu, la discussion sera supprimée sur les deux appareils.",
+"Los dos han salido: la conversación con {n} se ha borrado.":"Vous êtes sortis tous les deux : la conversation avec {n} a été supprimée.",
+"Los dos han salido: el chat con {n} se ha borrado.":"Vous êtes sortis tous les deux : la discussion avec {n} a été supprimée."
 },
 "p":{
 "intento":"Celle qui a le plus insisté aujourd'hui : {1}, {2} {2?fois|fois}.",

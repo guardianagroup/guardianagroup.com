@@ -3965,7 +3965,10 @@
 "Escribir, dibujar o tapar partes de la foto":"Skriv, tegn eller dekk til deler av bildet",
 "editada":"redigert",
 "Nadie ha entrado con ese código: crea uno nuevo.":"Ingen har kommet inn med den koden: lag en ny.",
-"Se cortó la conexión con el relé: este es un código nuevo.":"Forbindelsen med reléet ble brutt: dette er en ny kode."
+"Se cortó la conexión con el relé: este es un código nuevo.":"Forbindelsen med reléet ble brutt: dette er en ny kode.",
+"Chat privado: cuando los dos salgan y no quede nada sin ver, el chat se borrará en los dos equipos.":"Privat chat: når dere begge har gått ut og ingenting er usett, slettes chatten på begge enhetene.",
+"Los dos han salido: la conversación con {n} se ha borrado.":"Dere har begge gått ut: samtalen med {n} er slettet.",
+"Los dos han salido: el chat con {n} se ha borrado.":"Dere har begge gått ut: chatten med {n} er slettet."
 },
 "p":{
 "intento":"Den som prøvde mest i dag: {1}, {2} {2?gang|ganger}.",

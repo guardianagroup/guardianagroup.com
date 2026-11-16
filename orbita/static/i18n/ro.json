@@ -3965,7 +3965,10 @@
 "Escribir, dibujar o tapar partes de la foto":"Scrie, desenează sau acoperă părți din fotografie",
 "editada":"editată",
 "Nadie ha entrado con ese código: crea uno nuevo.":"Nimeni nu a intrat cu acest cod: creează unul nou.",
-"Se cortó la conexión con el relé: este es un código nuevo.":"Conexiunea cu releul s-a întrerupt: acesta este un cod nou."
+"Se cortó la conexión con el relé: este es un código nuevo.":"Conexiunea cu releul s-a întrerupt: acesta este un cod nou.",
+"Chat privado: cuando los dos salgan y no quede nada sin ver, el chat se borrará en los dos equipos.":"Chat privat: după ce ieșiți amândoi și nu mai rămâne nimic nevăzut, chatul va fi șters de pe ambele dispozitive.",
+"Los dos han salido: la conversación con {n} se ha borrado.":"Ați ieșit amândoi: conversația cu {n} a fost ștearsă.",
+"Los dos han salido: el chat con {n} se ha borrado.":"Ați ieșit amândoi: chatul cu {n} a fost șters."
 },
 "p":{
 "intento":"Cea care a încercat cel mai mult azi: {1}, {2} {2?dată|ori}.",

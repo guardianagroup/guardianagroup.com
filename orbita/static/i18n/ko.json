@@ -3965,7 +3965,10 @@
 "Escribir, dibujar o tapar partes de la foto":"사진에 쓰기, 그리기, 일부 가리기",
 "editada":"편집됨",
 "Nadie ha entrado con ese código: crea uno nuevo.":"그 코드로 들어온 사람이 없어요. 새 코드를 만들어 주세요.",
-"Se cortó la conexión con el relé: este es un código nuevo.":"릴레이 연결이 끊겼어요. 이것은 새 코드예요."
+"Se cortó la conexión con el relé: este es un código nuevo.":"릴레이 연결이 끊겼어요. 이것은 새 코드예요.",
+"Chat privado: cuando los dos salgan y no quede nada sin ver, el chat se borrará en los dos equipos.":"비공개 채팅: 두 분 모두 나가고 확인하지 않은 내용이 없으면 채팅이 두 기기에서 모두 삭제됩니다.",
+"Los dos han salido: la conversación con {n} se ha borrado.":"두 분 모두 나갔습니다: {n}와(과)의 대화가 삭제되었습니다.",
+"Los dos han salido: el chat con {n} se ha borrado.":"두 분 모두 나갔습니다: {n}와(과)의 채팅이 삭제되었습니다."
 },
 "p":{
 "intento":"오늘 가장 많이 시도한 곳: {1}, {2}{2?회|회}.",

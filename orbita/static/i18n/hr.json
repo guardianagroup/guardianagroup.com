@@ -3965,7 +3965,10 @@
 "Escribir, dibujar o tapar partes de la foto":"Piši, crtaj ili prekrij dijelove fotografije",
 "editada":"uređena",
 "Nadie ha entrado con ese código: crea uno nuevo.":"Nitko nije ušao s tim kodom: izradite novi.",
-"Se cortó la conexión con el relé: este es un código nuevo.":"Veza s relejem je prekinuta: ovo je novi kod."
+"Se cortó la conexión con el relé: este es un código nuevo.":"Veza s relejem je prekinuta: ovo je novi kod.",
+"Chat privado: cuando los dos salgan y no quede nada sin ver, el chat se borrará en los dos equipos.":"Privatni chat: kad oboje izađete i ništa ne ostane nepročitano, chat će se izbrisati na oba uređaja.",
+"Los dos han salido: la conversación con {n} se ha borrado.":"Oboje ste izašli: razgovor s {n} je izbrisan.",
+"Los dos han salido: el chat con {n} se ha borrado.":"Oboje ste izašli: chat s {n} je izbrisan."
 },
 "p":{
 "intento":"Najupornija danas: {1}, {2} {2?put|puta}.",

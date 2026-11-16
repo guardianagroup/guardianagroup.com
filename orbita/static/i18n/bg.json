@@ -3965,7 +3965,10 @@
 "Escribir, dibujar o tapar partes de la foto":"Писане, рисуване или закриване на части от снимката",
 "editada":"редактирана",
 "Nadie ha entrado con ese código: crea uno nuevo.":"Никой не е влязъл с този код: създай нов.",
-"Se cortó la conexión con el relé: este es un código nuevo.":"Връзката с релето прекъсна: това е нов код."
+"Se cortó la conexión con el relé: este es un código nuevo.":"Връзката с релето прекъсна: това е нов код.",
+"Chat privado: cuando los dos salgan y no quede nada sin ver, el chat se borrará en los dos equipos.":"Личен чат: когато и двамата излезете и не остане нищо непрочетено, чатът ще бъде изтрит и на двете устройства.",
+"Los dos han salido: la conversación con {n} se ha borrado.":"И двамата излязохте: разговорът с {n} е изтрит.",
+"Los dos han salido: el chat con {n} se ha borrado.":"И двамата излязохте: чатът с {n} е изтрит."
 },
 "p":{
 "intento":"Най-настойчивата днес: {1}, {2} {2?път|пъти}.",

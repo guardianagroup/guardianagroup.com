@@ -3965,7 +3965,10 @@
 "Escribir, dibujar o tapar partes de la foto":"الكتابة أو الرسم أو تغطية أجزاء من الصورة",
 "editada":"معدّلة",
 "Nadie ha entrado con ese código: crea uno nuevo.":"لم يدخل أحد بهذا الرمز: أنشئ رمزًا جديدًا.",
-"Se cortó la conexión con el relé: este es un código nuevo.":"انقطع الاتصال بالمُرحِّل: هذا رمز جديد."
+"Se cortó la conexión con el relé: este es un código nuevo.":"انقطع الاتصال بالمُرحِّل: هذا رمز جديد.",
+"Chat privado: cuando los dos salgan y no quede nada sin ver, el chat se borrará en los dos equipos.":"دردشة خاصة: عندما يغادر كلاكما ولا يبقى شيء لم يُشاهَد، ستُحذف الدردشة من الجهازين.",
+"Los dos han salido: la conversación con {n} se ha borrado.":"غادر كلاكما: حُذفت المحادثة مع {n}.",
+"Los dos han salido: el chat con {n} se ha borrado.":"غادر كلاكما: حُذفت الدردشة مع {n}."
 },
 "p":{
 "intento":"الأكثر محاولةً اليوم: {1}، {2} {2?مرة|مرات}.",

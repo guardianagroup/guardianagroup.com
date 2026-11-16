@@ -3965,7 +3965,10 @@
 "Escribir, dibujar o tapar partes de la foto":"Schrijven, tekenen of delen van de foto afdekken",
 "editada":"bewerkt",
 "Nadie ha entrado con ese código: crea uno nuevo.":"Niemand is met die code binnengekomen: maak een nieuwe aan.",
-"Se cortó la conexión con el relé: este es un código nuevo.":"De verbinding met de relay is verbroken: dit is een nieuwe code."
+"Se cortó la conexión con el relé: este es un código nuevo.":"De verbinding met de relay is verbroken: dit is een nieuwe code.",
+"Chat privado: cuando los dos salgan y no quede nada sin ver, el chat se borrará en los dos equipos.":"Privéchat: zodra jullie allebei weg zijn en er niets ongelezen meer is, wordt de chat op beide apparaten verwijderd.",
+"Los dos han salido: la conversación con {n} se ha borrado.":"Jullie zijn allebei weg: het gesprek met {n} is verwijderd.",
+"Los dos han salido: el chat con {n} se ha borrado.":"Jullie zijn allebei weg: de chat met {n} is verwijderd."
 },
 "p":{
 "intento":"Probeerde het vandaag het vaakst: {1}, {2} {2?keer|keer}.",

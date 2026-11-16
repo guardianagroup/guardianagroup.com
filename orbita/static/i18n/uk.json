@@ -3965,7 +3965,10 @@
 "Escribir, dibujar o tapar partes de la foto":"Писати, малювати або закрити частини фото",
 "editada":"змінено",
 "Nadie ha entrado con ese código: crea uno nuevo.":"Ніхто не ввійшов із цим кодом: створіть новий.",
-"Se cortó la conexión con el relé: este es un código nuevo.":"З’єднання з реле перервалося: це новий код."
+"Se cortó la conexión con el relé: este es un código nuevo.":"З’єднання з реле перервалося: це новий код.",
+"Chat privado: cuando los dos salgan y no quede nada sin ver, el chat se borrará en los dos equipos.":"Приватний чат: коли ви обоє вийдете й не залишиться нічого непрочитаного, чат буде видалено на обох пристроях.",
+"Los dos han salido: la conversación con {n} se ha borrado.":"Ви обоє вийшли: розмову з {n} видалено.",
+"Los dos han salido: el chat con {n} se ha borrado.":"Ви обоє вийшли: чат з {n} видалено."
 },
 "p":{
 "intento":"Найнаполегливіша сьогодні: {1}, {2} {2?раз|разів}.",

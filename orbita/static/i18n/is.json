@@ -3965,7 +3965,10 @@
 "Escribir, dibujar o tapar partes de la foto":"Skrifa, teikna eða hylja hluta myndarinnar",
 "editada":"breytt",
 "Nadie ha entrado con ese código: crea uno nuevo.":"Enginn hefur komið inn með þessum kóða: búðu til nýjan.",
-"Se cortó la conexión con el relé: este es un código nuevo.":"Tengingin við endurvarpann rofnaði: þetta er nýr kóði."
+"Se cortó la conexión con el relé: este es un código nuevo.":"Tengingin við endurvarpann rofnaði: þetta er nýr kóði.",
+"Chat privado: cuando los dos salgan y no quede nada sin ver, el chat se borrará en los dos equipos.":"Einkaspjall: þegar þið hafið bæði farið út og ekkert er óséð verður spjallinu eytt á báðum tækjum.",
+"Los dos han salido: la conversación con {n} se ha borrado.":"Þið hafið bæði farið út: samtalinu við {n} hefur verið eytt.",
+"Los dos han salido: el chat con {n} se ha borrado.":"Þið hafið bæði farið út: spjallinu við {n} hefur verið eytt."
 },
 "p":{
 "intento":"Sá sem reyndi mest í dag: {1}, {2} {2?sinni|sinnum}.",

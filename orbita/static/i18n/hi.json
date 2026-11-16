@@ -3965,7 +3965,10 @@
 "Escribir, dibujar o tapar partes de la foto":"लिखें, चित्र बनाएँ या फ़ोटो के हिस्से ढकें",
 "editada":"संपादित",
 "Nadie ha entrado con ese código: crea uno nuevo.":"उस कोड से कोई नहीं जुड़ा: नया कोड बनाएँ।",
-"Se cortó la conexión con el relé: este es un código nuevo.":"रिले से कनेक्शन टूट गया था: यह नया कोड है।"
+"Se cortó la conexión con el relé: este es un código nuevo.":"रिले से कनेक्शन टूट गया था: यह नया कोड है।",
+"Chat privado: cuando los dos salgan y no quede nada sin ver, el chat se borrará en los dos equipos.":"निजी चैट: जब आप दोनों बाहर निकल जाएँगे और कुछ भी बिना देखे नहीं बचेगा, तो चैट दोनों डिवाइस से मिट जाएगी।",
+"Los dos han salido: la conversación con {n} se ha borrado.":"आप दोनों बाहर निकल गए: {n} के साथ बातचीत मिटा दी गई है।",
+"Los dos han salido: el chat con {n} se ha borrado.":"आप दोनों बाहर निकल गए: {n} के साथ चैट मिटा दी गई है।"
 },
 "p":{
 "intento":"आज सबसे ज़्यादा कोशिश: {1}, {2} {2?बार|बार}।",

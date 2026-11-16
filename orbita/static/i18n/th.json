@@ -3965,7 +3965,10 @@
 "Escribir, dibujar o tapar partes de la foto":"เขียน วาด หรือปิดบังบางส่วนของภาพ",
 "editada":"แก้ไขแล้ว",
 "Nadie ha entrado con ese código: crea uno nuevo.":"ไม่มีใครเข้ามาด้วยรหัสนั้น: โปรดสร้างรหัสใหม่",
-"Se cortó la conexión con el relé: este es un código nuevo.":"การเชื่อมต่อกับรีเลย์ขาดหาย: นี่คือรหัสใหม่"
+"Se cortó la conexión con el relé: este es un código nuevo.":"การเชื่อมต่อกับรีเลย์ขาดหาย: นี่คือรหัสใหม่",
+"Chat privado: cuando los dos salgan y no quede nada sin ver, el chat se borrará en los dos equipos.":"แชทส่วนตัว: เมื่อทั้งสองคนออกไปแล้วและไม่มีอะไรที่ยังไม่ได้ดู แชทจะถูกลบในอุปกรณ์ทั้งสองเครื่อง",
+"Los dos han salido: la conversación con {n} se ha borrado.":"ทั้งสองคนออกไปแล้ว: ลบการสนทนากับ {n} แล้ว",
+"Los dos han salido: el chat con {n} se ha borrado.":"ทั้งสองคนออกไปแล้ว: ลบแชทกับ {n} แล้ว"
 },
 "p":{
 "intento":"พยายามมากที่สุดวันนี้: {1}, {2} {2?ครั้ง|ครั้ง}",

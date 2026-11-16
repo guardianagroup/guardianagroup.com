@@ -3965,7 +3965,10 @@
 "Escribir, dibujar o tapar partes de la foto":"Написать, нарисовать или скрыть части фото",
 "editada":"изменено",
 "Nadie ha entrado con ese código: crea uno nuevo.":"По этому коду никто не вошёл: создайте новый.",
-"Se cortó la conexión con el relé: este es un código nuevo.":"Соединение с реле прервалось: это новый код."
+"Se cortó la conexión con el relé: este es un código nuevo.":"Соединение с реле прервалось: это новый код.",
+"Chat privado: cuando los dos salgan y no quede nada sin ver, el chat se borrará en los dos equipos.":"Личный чат: когда вы оба выйдете и не останется ничего непрочитанного, чат будет удалён на обоих устройствах.",
+"Los dos han salido: la conversación con {n} se ha borrado.":"Вы оба вышли: разговор с {n} удалён.",
+"Los dos han salido: el chat con {n} se ha borrado.":"Вы оба вышли: чат с {n} удалён."
 },
 "p":{
 "intento":"Настойчивее всех сегодня: {1}, {2} {2?раз|раз}.",

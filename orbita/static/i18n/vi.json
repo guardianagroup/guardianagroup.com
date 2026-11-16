@@ -3965,7 +3965,10 @@
 "Escribir, dibujar o tapar partes de la foto":"Viết, vẽ hoặc che một phần ảnh",
 "editada":"đã chỉnh sửa",
 "Nadie ha entrado con ese código: crea uno nuevo.":"Không ai vào bằng mã đó: hãy tạo mã mới.",
-"Se cortó la conexión con el relé: este es un código nuevo.":"Kết nối với relay đã bị ngắt: đây là mã mới."
+"Se cortó la conexión con el relé: este es un código nuevo.":"Kết nối với relay đã bị ngắt: đây là mã mới.",
+"Chat privado: cuando los dos salgan y no quede nada sin ver, el chat se borrará en los dos equipos.":"Trò chuyện riêng: khi cả hai đã thoát ra và không còn gì chưa xem, cuộc trò chuyện sẽ bị xóa trên cả hai thiết bị.",
+"Los dos han salido: la conversación con {n} se ha borrado.":"Cả hai đã thoát ra: cuộc trò chuyện với {n} đã bị xóa.",
+"Los dos han salido: el chat con {n} se ha borrado.":"Cả hai đã thoát ra: cuộc trò chuyện với {n} đã bị xóa."
 },
 "p":{
 "intento":"Cố gắng nhiều nhất hôm nay: {1}, {2} {2?lần|lần}.",

@@ -3965,7 +3965,10 @@
 "Escribir, dibujar o tapar partes de la foto":"எழுது, வரை அல்லது படத்தின் பகுதிகளை மறை",
 "editada":"திருத்தப்பட்டது",
 "Nadie ha entrado con ese código: crea uno nuevo.":"அந்தக் குறியீட்டைக் கொண்டு யாரும் சேரவில்லை: புதிய குறியீட்டை உருவாக்குங்கள்.",
-"Se cortó la conexión con el relé: este es un código nuevo.":"ரிலேயுடனான இணைப்பு துண்டிக்கப்பட்டது: இது புதிய குறியீடு."
+"Se cortó la conexión con el relé: este es un código nuevo.":"ரிலேயுடனான இணைப்பு துண்டிக்கப்பட்டது: இது புதிய குறியீடு.",
+"Chat privado: cuando los dos salgan y no quede nada sin ver, el chat se borrará en los dos equipos.":"தனிப்பட்ட அரட்டை: நீங்கள் இருவரும் வெளியேறி, பார்க்காதது எதுவும் இல்லாதபோது, அரட்டை இரு சாதனங்களிலிருந்தும் நீக்கப்படும்.",
+"Los dos han salido: la conversación con {n} se ha borrado.":"நீங்கள் இருவரும் வெளியேறிவிட்டீர்கள்: {n} உடனான உரையாடல் நீக்கப்பட்டது.",
+"Los dos han salido: el chat con {n} se ha borrado.":"நீங்கள் இருவரும் வெளியேறிவிட்டீர்கள்: {n} உடனான அரட்டை நீக்கப்பட்டது."
 },
 "p":{
 "intento":"இன்று அதிகம் முயன்றது: {1}, {2} {2?முறை|முறை}.",

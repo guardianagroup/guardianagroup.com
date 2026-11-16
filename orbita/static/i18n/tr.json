@@ -3965,7 +3965,10 @@
 "Escribir, dibujar o tapar partes de la foto":"Yaz, çiz veya fotoğrafın bazı kısımlarını gizle",
 "editada":"düzenlendi",
 "Nadie ha entrado con ese código: crea uno nuevo.":"Bu kodla kimse katılmadı: yeni bir tane oluşturun.",
-"Se cortó la conexión con el relé: este es un código nuevo.":"Aktarıcıyla bağlantı kesildi: bu yeni bir kod."
+"Se cortó la conexión con el relé: este es un código nuevo.":"Aktarıcıyla bağlantı kesildi: bu yeni bir kod.",
+"Chat privado: cuando los dos salgan y no quede nada sin ver, el chat se borrará en los dos equipos.":"Özel sohbet: ikiniz de çıktığınızda ve görülmemiş bir şey kalmadığında sohbet iki cihazdan da silinir.",
+"Los dos han salido: la conversación con {n} se ha borrado.":"İkiniz de çıktınız: {n} ile konuşma silindi.",
+"Los dos han salido: el chat con {n} se ha borrado.":"İkiniz de çıktınız: {n} ile sohbet silindi."
 },
 "p":{
 "intento":"Bugün en çok deneyen: {1}, {2} {2?kez|kez}.",

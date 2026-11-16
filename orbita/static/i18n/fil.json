@@ -3965,7 +3965,10 @@
 "Escribir, dibujar o tapar partes de la foto":"Sumulat, gumuhit o takpan ang mga bahagi ng larawan",
 "editada":"na-edit",
 "Nadie ha entrado con ese código: crea uno nuevo.":"Walang pumasok gamit ang code na iyon: gumawa ng bago.",
-"Se cortó la conexión con el relé: este es un código nuevo.":"Naputol ang koneksyon sa relay: ito ay bagong code."
+"Se cortó la conexión con el relé: este es un código nuevo.":"Naputol ang koneksyon sa relay: ito ay bagong code.",
+"Chat privado: cuando los dos salgan y no quede nada sin ver, el chat se borrará en los dos equipos.":"Pribadong chat: kapag pareho na kayong lumabas at wala nang hindi pa nakikita, buburahin ang chat sa dalawang device.",
+"Los dos han salido: la conversación con {n} se ha borrado.":"Pareho na kayong lumabas: nabura na ang usapan kay {n}.",
+"Los dos han salido: el chat con {n} se ha borrado.":"Pareho na kayong lumabas: nabura na ang chat kay {n}."
 },
 "p":{
 "intento":"Pinakamadalas sumubok ngayon: {1}, {2} {2?beses|beses}.",

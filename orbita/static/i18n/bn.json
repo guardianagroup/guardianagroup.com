@@ -3965,7 +3965,10 @@
 "Escribir, dibujar o tapar partes de la foto":"লিখুন, আঁকুন বা ছবির অংশ ঢেকে দিন",
 "editada":"সম্পাদিত",
 "Nadie ha entrado con ese código: crea uno nuevo.":"ওই কোড দিয়ে কেউ যোগ দেয়নি: নতুন একটি তৈরি করুন।",
-"Se cortó la conexión con el relé: este es un código nuevo.":"রিলের সাথে সংযোগ বিচ্ছিন্ন হয়েছিল: এটি একটি নতুন কোড।"
+"Se cortó la conexión con el relé: este es un código nuevo.":"রিলের সাথে সংযোগ বিচ্ছিন্ন হয়েছিল: এটি একটি নতুন কোড।",
+"Chat privado: cuando los dos salgan y no quede nada sin ver, el chat se borrará en los dos equipos.":"ব্যক্তিগত চ্যাট: আপনারা দুজনেই বেরিয়ে গেলে এবং না-দেখা কিছু বাকি না থাকলে চ্যাটটি দুটি ডিভাইস থেকেই মুছে যাবে।",
+"Los dos han salido: la conversación con {n} se ha borrado.":"আপনারা দুজনেই বেরিয়ে গেছেন: {n}-এর সঙ্গে কথোপকথনটি মুছে ফেলা হয়েছে।",
+"Los dos han salido: el chat con {n} se ha borrado.":"আপনারা দুজনেই বেরিয়ে গেছেন: {n}-এর সঙ্গে চ্যাটটি মুছে ফেলা হয়েছে।"
 },
 "p":{
 "intento":"আজ সবচেয়ে বেশি চেষ্টা: {1}, {2} {2?বার|বার}।",

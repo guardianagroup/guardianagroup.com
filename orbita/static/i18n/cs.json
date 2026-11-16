@@ -3965,7 +3965,10 @@
 "Escribir, dibujar o tapar partes de la foto":"Psát, kreslit nebo zakrýt části fotky",
 "editada":"upraveno",
 "Nadie ha entrado con ese código: crea uno nuevo.":"S tímto kódem se nikdo nepřipojil: vytvořte nový.",
-"Se cortó la conexión con el relé: este es un código nuevo.":"Spojení s relé se přerušilo: toto je nový kód."
+"Se cortó la conexión con el relé: este es un código nuevo.":"Spojení s relé se přerušilo: toto je nový kód.",
+"Chat privado: cuando los dos salgan y no quede nada sin ver, el chat se borrará en los dos equipos.":"Soukromý chat: až oba odejdete a nic nezůstane nepřečtené, chat se smaže na obou zařízeních.",
+"Los dos han salido: la conversación con {n} se ha borrado.":"Oba jste odešli: konverzace s {n} byla smazána.",
+"Los dos han salido: el chat con {n} se ha borrado.":"Oba jste odešli: chat s {n} byl smazán."
 },
 "p":{
 "intento":"Nejvíc se dnes snažila: {1}, {2}{2?krát|krát}.",

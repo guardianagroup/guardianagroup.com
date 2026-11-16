@@ -3965,7 +3965,10 @@
 "Escribir, dibujar o tapar partes de la foto":"Kirjoita, piirrä tai peitä kuvan osia",
 "editada":"muokattu",
 "Nadie ha entrado con ese código: crea uno nuevo.":"Kukaan ei liittynyt tällä koodilla: luo uusi.",
-"Se cortó la conexión con el relé: este es un código nuevo.":"Yhteys välityspalvelimeen katkesi: tämä on uusi koodi."
+"Se cortó la conexión con el relé: este es un código nuevo.":"Yhteys välityspalvelimeen katkesi: tämä on uusi koodi.",
+"Chat privado: cuando los dos salgan y no quede nada sin ver, el chat se borrará en los dos equipos.":"Yksityinen keskustelu: kun olette molemmat poistuneet eikä mitään ole jäänyt näkemättä, keskustelu poistetaan molemmista laitteista.",
+"Los dos han salido: la conversación con {n} se ha borrado.":"Olette molemmat poistuneet: keskustelu henkilön {n} kanssa on poistettu.",
+"Los dos han salido: el chat con {n} se ha borrado.":"Olette molemmat poistuneet: chat henkilön {n} kanssa on poistettu."
 },
 "p":{
 "intento":"Eniten yrittänyt tänään: {1}, {2} {2?kerta|kertaa}.",

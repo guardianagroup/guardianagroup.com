@@ -3965,7 +3965,10 @@
 "Escribir, dibujar o tapar partes de la foto":"כתיבה, ציור או כיסוי חלקים מהתמונה",
 "editada":"ערוכה",
 "Nadie ha entrado con ese código: crea uno nuevo.":"אף אחד לא נכנס עם הקוד הזה: צרו קוד חדש.",
-"Se cortó la conexión con el relé: este es un código nuevo.":"החיבור לממסר נותק: זה קוד חדש."
+"Se cortó la conexión con el relé: este es un código nuevo.":"החיבור לממסר נותק: זה קוד חדש.",
+"Chat privado: cuando los dos salgan y no quede nada sin ver, el chat se borrará en los dos equipos.":"צ׳אט פרטי: כששניכם תצאו ולא יישאר שום דבר שלא נראה, הצ׳אט יימחק בשני המכשירים.",
+"Los dos han salido: la conversación con {n} se ha borrado.":"שניכם יצאתם: השיחה עם {n} נמחקה.",
+"Los dos han salido: el chat con {n} se ha borrado.":"שניכם יצאתם: הצ׳אט עם {n} נמחק."
 },
 "p":{
 "intento":"ניסתה הכי הרבה היום: {1}, {2} {2?פעם|פעמים}.",

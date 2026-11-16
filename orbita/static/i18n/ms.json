@@ -3965,7 +3965,10 @@
 "Escribir, dibujar o tapar partes de la foto":"Tulis, lukis atau tutupi bahagian foto",
 "editada":"disunting",
 "Nadie ha entrado con ese código: crea uno nuevo.":"Tiada sesiapa masuk dengan kod itu: buat kod baharu.",
-"Se cortó la conexión con el relé: este es un código nuevo.":"Sambungan ke relay terputus: ini kod baharu."
+"Se cortó la conexión con el relé: este es un código nuevo.":"Sambungan ke relay terputus: ini kod baharu.",
+"Chat privado: cuando los dos salgan y no quede nada sin ver, el chat se borrará en los dos equipos.":"Sembang peribadi: apabila anda berdua telah keluar dan tiada apa-apa yang belum dilihat, sembang akan dipadam pada kedua-dua peranti.",
+"Los dos han salido: la conversación con {n} se ha borrado.":"Anda berdua telah keluar: perbualan dengan {n} telah dipadam.",
+"Los dos han salido: el chat con {n} se ha borrado.":"Anda berdua telah keluar: sembang dengan {n} telah dipadam."
 },
 "p":{
 "intento":"Paling banyak mencuba hari ini: {1}, {2} {2?kali|kali}.",

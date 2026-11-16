@@ -3965,7 +3965,10 @@
 "Escribir, dibujar o tapar partes de la foto":"在照片上写字、绘图或遮盖部分区域",
 "editada":"已编辑",
 "Nadie ha entrado con ese código: crea uno nuevo.":"没有人用这个代码加入：请新建一个。",
-"Se cortó la conexión con el relé: este es un código nuevo.":"与中继的连接曾中断：这是一个新代码。"
+"Se cortó la conexión con el relé: este es un código nuevo.":"与中继的连接曾中断：这是一个新代码。",
+"Chat privado: cuando los dos salgan y no quede nada sin ver, el chat se borrará en los dos equipos.":"私密聊天：当你们两人都离开且没有未读内容时，聊天会在两台设备上删除。",
+"Los dos han salido: la conversación con {n} se ha borrado.":"你们两人都已离开：与 {n} 的对话已删除。",
+"Los dos han salido: el chat con {n} se ha borrado.":"你们两人都已离开：与 {n} 的聊天已删除。"
 },
 "p":{
 "intento":"今天尝试最多的：{1}，{2} {2?次|次}。",

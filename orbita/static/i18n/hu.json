@@ -3965,7 +3965,10 @@
 "Escribir, dibujar o tapar partes de la foto":"Írás, rajzolás vagy a fénykép részeinek kitakarása",
 "editada":"szerkesztve",
 "Nadie ha entrado con ese código: crea uno nuevo.":"Ezzel a kóddal senki sem lépett be: hozz létre újat.",
-"Se cortó la conexión con el relé: este es un código nuevo.":"Megszakadt a kapcsolat a relével: ez egy új kód."
+"Se cortó la conexión con el relé: este es un código nuevo.":"Megszakadt a kapcsolat a relével: ez egy új kód.",
+"Chat privado: cuando los dos salgan y no quede nada sin ver, el chat se borrará en los dos equipos.":"Privát csevegés: ha mindketten kiléptetek, és nem maradt semmi olvasatlan, a csevegés mindkét eszközről törlődik.",
+"Los dos han salido: la conversación con {n} se ha borrado.":"Mindketten kiléptetek: törlődött a beszélgetés ezzel a partnerrel: {n}.",
+"Los dos han salido: el chat con {n} se ha borrado.":"Mindketten kiléptetek: törlődött a csevegés ezzel a partnerrel: {n}."
 },
 "p":{
 "intento":"Ma a legtöbbször próbálkozott: {1}, {2} {2?alkalommal|alkalommal}.",

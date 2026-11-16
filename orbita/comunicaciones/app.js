@@ -201,7 +201,7 @@
   function convNueva(sala, semilla, rol, modo) {
     return { id: sala, semilla, rol, modo: modo === 'blindada' ? 'blindada' : 'normal', suVerificada: false, estado: 'invitacion', nombre: '', firmaPub: null, acuerdoPub: null, huella: null, verificada: false, creado: Date.now(), ultimo: Date.now(), ultimoTexto: null, noLeidos: 0, temporal: enTemporal() || undefined };
   }
-  const guardable = (c) => ({ id: c.id, tumba: c.tumba, vaciarPendiente: c.vaciarPendiente || undefined, borrarPendientes: c.borrarPendientes && c.borrarPendientes.length ? c.borrarPendientes : undefined, semilla: c.semilla, rol: c.rol, estado: c.estado, nombre: c.nombre, firmaPub: c.firmaPub, acuerdoPub: c.acuerdoPub, huella: c.huella, verificada: c.verificada, creado: c.creado, ultimo: c.ultimo, ultimoTexto: c.ultimoTexto, noLeidos: c.noLeidos, enlace: !!c.enlace || undefined, pqVisto: !!c.pqVisto, clasicaAceptada: !!c.clasicaAceptada, modo: c.modo || 'normal', suVerificada: !!c.suVerificada, dsaPub: c.dsaPub || null, idB: c.idB || null, alias: c.alias || '', num: c.num || 0, contacto: !!c.contacto, sinContacto: !!c.sinContacto, traspasoDe: c.traspasoDe || undefined, traspasoApp: !!c.traspasoApp || undefined, temporal: !!c.temporal || undefined, dijeTemporal: !!c.dijeTemporal || undefined, suTemporal: c.suTemporal || undefined, numero: c.numero || undefined, huellaEsperada: c.huellaEsperada || undefined, buzon: c.buzon || undefined });
+  const guardable = (c) => ({ id: c.id, tumba: c.tumba, dijePrivado: c.dijePrivado || undefined, suVisto: c.suVisto || undefined, ordenes: c.ordenes && c.ordenes.length ? c.ordenes.slice(-30) : undefined, vaciarPendiente: c.vaciarPendiente || undefined, borrarPendientes: c.borrarPendientes && c.borrarPendientes.length ? c.borrarPendientes : undefined, semilla: c.semilla, rol: c.rol, estado: c.estado, nombre: c.nombre, firmaPub: c.firmaPub, acuerdoPub: c.acuerdoPub, huella: c.huella, verificada: c.verificada, creado: c.creado, ultimo: c.ultimo, ultimoTexto: c.ultimoTexto, noLeidos: c.noLeidos, enlace: !!c.enlace || undefined, pqVisto: !!c.pqVisto, clasicaAceptada: !!c.clasicaAceptada, modo: c.modo || 'normal', suVerificada: !!c.suVerificada, dsaPub: c.dsaPub || null, idB: c.idB || null, alias: c.alias || '', num: c.num || 0, contacto: !!c.contacto, sinContacto: !!c.sinContacto, traspasoDe: c.traspasoDe || undefined, traspasoApp: !!c.traspasoApp || undefined, temporal: !!c.temporal || undefined, dijeTemporal: !!c.dijeTemporal || undefined, suTemporal: c.suTemporal || undefined, numero: c.numero || undefined, huellaEsperada: c.huellaEsperada || undefined, buzon: c.buzon || undefined });
   // Ultra no guarda nada en este navegador (ronda 93: «solo en memoria… al cerrar, desaparece»): ni la conversación, ni los
   // mensajes, ni los archivos. Todo vive en la memoria de esta pestaña mientras esté abierta; los archivos recibidos, en MEM.
   const guardaConv = (c) => (esB(c) ? Promise.resolve() : BD.pon('conv', guardable(c)));
@@ -230,8 +230,11 @@
       if (x.estado === 'destruida_pendiente' && Date.now() - (x.tumba || x.creado || 0) > 24 * 3600 * 1000) { await BD.borra('conv', x.id); continue; }
       if (x.estado !== 'destruida_pendiente' && !x.huella && !x.numero && !(x.rol === 'invita' && (x.modo === 'blindada' || x.enlace))) { await BD.borraConv('msg', x.id); await BD.borraConv('arch', x.id); await BD.borra('conv', x.id); continue; }
       if (!x.num && x.estado !== 'destruida_pendiente') { x.num = ++n; await BD.pon('conv', x); }
+      // lo que pudo quedar para borrarse (los dos fuera) no se enseña mientras se comprueba: oculto desde antes de entrar en la lista
+      if (x.estado === 'activa' && x.huella) x.pendienteSalida = true;
       await preparaConv(x);
       if (x.estado !== 'destruida_pendiente') await cargaMensajes(x);
+      if (x.pendienteSalida && (conTraspaso(x) || !todoVisto(x))) x.pendienteSalida = false;
     }
     pintaLista();
   }
@@ -1123,7 +1126,7 @@
     try { const k = await ses.recibo.para(n); j = JSON.parse(C.td.decode(await C.abre(k, n, b.subarray(13), C.cat(b.subarray(0, 13), ses.hash)))); } catch (e) { if (!/repetido|saltados/.test(e.message)) { c.incidencias = (c.incidencias || 0) + 1; await anotaSistema(c, 'Un mensaje no superó la comprobación de integridad y se ha descartado.'); vigila(c, T('Un mensaje no superó la autenticación: descartado.'), 'mal'); pintaRadio(c); await alarmaSiToca(c); } return; }
     if (c.suId !== de) return;
     c.ultimaVerificacion = Date.now();
-    if (!ses.confirmada) { ses.confirmada = true; if (esB(c)) plazoPalabras(c); if (c.sesion === ses) { pintaCabecera(c); mandaLlaveBuzon(c); } vigila(c, T('Confirmación de clave recibida: la otra persona tiene la misma clave.'), 'bien'); } // la otra persona tiene la misma clave: sesión confirmada
+    if (!ses.confirmada) { ses.confirmada = true; if (esB(c)) plazoPalabras(c); if (c.sesion === ses) { pintaCabecera(c); mandaLlaveBuzon(c); estadoAlConectar(c); } vigila(c, T('Confirmación de clave recibida: la otra persona tiene la misma clave.'), 'bien'); } // la otra persona tiene la misma clave: sesión confirmada
     return trataCarga(c, j, ses);
   }
   // lo que dice cada mensaje, venga por la sesión o por el buzón cifrado (porBuzon: solo textos, fotos y notas de voz, acuses y «leído»)
@@ -1147,7 +1150,15 @@
   }
   async function trataCarga(c, j, ses, porBuzon) {
     if (!j || typeof j !== 'object') return;
-    if (porBuzon && !['texto', 'archivo-buzon', 'ack', 'leido'].includes(j.tipo)) return;
+    if (porBuzon && !['texto', 'archivo-buzon', 'ack', 'leido', 'destruir', 'vaciar'].includes(j.tipo)) return;
+    // (15 nov 2026) «terminar» y «borrado al salir los dos» también llegan por el buzón, firmados por la otra persona: cada orden una
+    // sola vez (su id) y nunca de antes de esta conversación (su hora), por si alguien guardara un sobre y lo repitiera
+    if (porBuzon && (j.tipo === 'destruir' || j.tipo === 'vaciar')) {
+      const tt = +j.t || 0, oid = String(j.id || '').slice(0, 64);
+      if (!oid || !tt || tt < (c.creado || 0) - 120000 || tt > Date.now() + 300000) return;
+      c.ordenes = c.ordenes || []; if (c.ordenes.includes(oid)) return; c.ordenes.push(oid); if (c.ordenes.length > 30) c.ordenes.splice(0, c.ordenes.length - 30);
+      await guardaConv(c);
+    }
     if (j.tipo === 'texto' || j.tipo === 'archivo' || j.tipo === 'archivo-buzon' || j.tipo === 'llamada') { marcaUso(true); c.suVistoT = Date.now(); } // el chat temporal se está usando
     switch (j.tipo) {
       case 'parte': return recibeParte(c, j, ses);
@@ -1195,8 +1206,10 @@
       // llamadas (dueño, 27 Oct 2026, 23:05). Con varias conversaciones: una llamada de otra conversación también suena; si ya
       // hay una llamada en curso con otra, se le dice «ocupado» sin decir nada más (agencia, ronda 74, bloque J)
       case 'llamada': return llegaLlamada(c, j);
-      case 'vaciar': return vaciaLocal(c, true);
-      case 'destruir': { if (c.suTemporal) { const n = nombreConv(c, true); await destruyeLocal(c, true, true); aviso(T('El chat temporal con {n} ha terminado y se ha borrado.').replace('{n}', n)); return; } return destruyeLocal(c, true); }
+      case 'vaciar': { if (j.salida) { await vaciaLocal(c, false, +j.t || 0); muestraYa(c); aviso(T('Los dos han salido: el chat con {n} se ha borrado.').replace('{n}', nombreConv(c, true))); return; } return vaciaLocal(c, true, porBuzon ? +j.t || 0 : 0); }
+      case 'salgo': { c.suSalio = true; if (typeof j.visto === 'string' && c.mensajes.some((m) => m.dir === 'mia' && m.id === j.visto)) { c.suVisto = j.visto.slice(0, 64); if (!esB(c)) guardaConv(c); } if (!dentro(c)) setTimeout(() => revisaSalida(c), 800); else muestraYa(c); return; }
+      case 'vuelvo': { c.suSalio = false; muestraYa(c); return; }
+      case 'destruir': { if (j.salida) { const n = nombreConv(c, true); await destruyeLocal(c, true, true); aviso(T('Los dos han salido: la conversación con {n} se ha borrado.').replace('{n}', n)); return; } if (c.suTemporal) { const n = nombreConv(c, true); await destruyeLocal(c, true, true); aviso(T('El chat temporal con {n} ha terminado y se ha borrado.').replace('{n}', n)); return; } return destruyeLocal(c, true); }
       // blindado (dueño, 29 Oct 2026, 10:08–10:14): lo que llega se muestra solo si la persona quiere; fotos y documentos con
       // tiempo; «borrar en los dos»; alarma de ataque; y la pieza final del paquete «todo o nada» de un archivo
       case 'descartado': { const m = c.mensajes.find((x) => x.id === j.id && x.dir === 'mia'); if (m) { m.estado = 'descartado'; await guardaMensaje(c, m); pintaEstado(m); if (m.tipo === 'archivo') pintaMensaje(c, m, true); } return; }
@@ -1216,7 +1229,13 @@
     const s = await guardaSellado(cuerpo);
     await BD.pon('msg', { id: m.id, conv: c.id, t: m.t, dir: m.dir, estado: m.estado, iv: s.iv, datos: s.datos });
   }
-  async function cargaMensajes(c) {
+  // una sola carga a la vez por conversación (la lista al abrir, un sobre del buzón y la comprobación de salida pueden pedirla juntas)
+  function cargaMensajes(c) {
+    if (c.cargados) return Promise.resolve();
+    if (!c.cargandoP) c.cargandoP = cargaMensajes0(c).finally(() => { c.cargandoP = null; });
+    return c.cargandoP;
+  }
+  async function cargaMensajes0(c) {
     if (c.cargados) return;
     if (esB(c)) { c.cargados = true; return; } // Ultra: lo que hay es lo que está en memoria
     const xs = (await BD.porConv('msg', c.id)).sort((a, b) => a.t - b.t);
@@ -1960,8 +1979,13 @@
   // otra persona sin conectar, se borra aquí y la orden sale en cuanto se conecte (como «Terminar»).
   // los reproductores de las notas de voz de una conversación, sueltos (pausar, liberar el blob y olvidar): si no, crecían hasta recargar
   function sueltaVoces(c) { for (const m of (c && c.mensajes) || []) { const el = VOZ_CACHE.get(m.id); if (!el) continue; try { const au = el.querySelector('audio'); if (au) { au.pause(); URL.revokeObjectURL(au.src); } } catch (_) {} VOZ_CACHE.delete(m.id); } }
-  async function vaciaLocal(c, porElla) {
+  async function vaciaLocal(c, porElla, hasta) {
     sueltaVoces(c);
+    if (hasta) { // solo lo de antes de la orden (llegó por el buzón: lo escrito después se queda)
+      for (const m of [...(c.mensajes || [])]) if ((m.t || 0) <= hasta) await borraLocal(c, m.id, false);
+      if (porElla) aviso(T('La otra persona ha borrado el chat: se ha borrado también aquí.'));
+      pintaLista(); return;
+    }
     for (const m of c.mensajes || []) { try { VIAJES.delete(m.id); } catch (_) {} }
     c.mensajes = []; c.cola = []; c.ultimoTexto = null; c.noLeidos = 0; c.perdida = false;
     await BD.borraConv('msg', c.id); await archBorraConv(c); await guardaConv(c);
@@ -2251,10 +2275,91 @@
     if (c.codigo) R.retira(c.codigo);
     if (enLinea(c)) { enviaControl(c, { tipo: 'destruir' }); await new Promise((r) => setTimeout(r, 250)); await destruyeLocal(c, false, silencio); return; }
     if (!c.huella) { await destruyeLocal(c, false, true); return; }
+    if (await ordenPorBuzon(c, 'destruir')) { await destruyeLocal(c, false, true); if (!silencio) aviso(T('Conversación terminada y borrada aquí; en el otro equipo, en cuanto esa persona entre.')); return; }
     c.estado = 'destruida_pendiente'; c.tumba = Date.now(); c.mensajes = []; c.cola = []; c.ultimoTexto = null; c.noLeidos = 0;
     await BD.borraConv('msg', c.id); await archBorraConv(c); await guardaConv(c);
     if (ACTUAL === c.id) cierraConv();
     pintaLista(); aviso(T('Conversación terminada y borrada aquí; en el otro equipo, en cuanto esa persona entre.'));
+  }
+
+  // ---------- Chat privado: al salir los dos, se borra (dueño, 15 nov 2026, 17:19: «cada vez que salgo en un chat y vuelvo a entrar,
+  // el chat vuelve a aparecer… Piensa que esto es un chat privado… se tiene que borrar todo automático, cuando los dos salen») ----------
+  // «Dentro» es tener la conversación abierta en pantalla. Cada uno le dice al otro cuándo sale («salgo») y cuándo vuelve («vuelvo»), y
+  // al conectarse, cómo está. Cuando ninguno de los dos está dentro y no queda nada sin ver en ningún lado (lo que la otra persona aún no
+  // ha visto nunca se borra antes de que lo vea), el chat se borra en los dos equipos: con un contacto del Número GUARDIANA, los mensajes
+  // (el contacto se queda); con una invitación, la conversación entera. Si la otra persona no está conectada, la orden le espera firmada
+  // en el buzón y se cumple en cuanto abra GUARDIANA. Al abrir GUARDIANA, lo que estaba para borrarse no se enseña mientras se comprueba.
+  const dentro = (c) => !!c && ACTUAL === c.id;
+  const otraDentro = (c) => enLinea(c) && !c.suSalio;
+  const conTraspaso = (c) => !!c.traspasoDe || [...CONVS.values()].some((x) => x !== c && x.traspasoDe === c.id);
+  const sinVerAqui = (c) => c.noLeidos > 0 || !!c.perdida || (c.mensajes || []).some((m) => m.dir === 'suya' && m.tipo !== 'llamada' && (m.estado === 'recibido' || m.estado === 'recibiendo'));
+  // nada pendiente en ningún lado: lo suyo, visto aquí; lo mío, enviado y visto allí (por el «leído» o por lo que dijo al salir)
+  function todoVisto(c) {
+    if ((c.cola || []).length || sinVerAqui(c)) return false;
+    const ms = (c.mensajes || []).filter((m) => m.dir === 'mia' && m.tipo !== 'llamada');
+    const hasta = c.suVisto ? ms.findIndex((m) => m.id === c.suVisto) : -1;
+    return !ms.some((m, i) => ['pendiente', 'enviado', 'entregado'].includes(m.estado) && i > hasta);
+  }
+  // lo que se le dice a la otra persona: dentro o fuera y, si está fuera y no le queda nada sin ver, hasta qué mensaje suyo ha visto
+  function miEstado(c) {
+    if (dentro(c)) return { tipo: 'vuelvo' };
+    if (sinVerAqui(c)) return { tipo: 'salgo' };
+    const u = (c.mensajes || []).filter((m) => m.dir === 'suya' && m.tipo !== 'llamada').pop();
+    return { tipo: 'salgo', visto: u ? u.id : '' };
+  }
+  function estadoAlConectar(c) { // en cada sesión confirmada
+    if (!c || !c.huella) return;
+    enviaControl(c, miEstado(c));
+    if (!c.dijePrivado) { c.dijePrivado = true; if (!esB(c)) guardaConv(c); anotaSistema(c, 'Chat privado: cuando los dos salgan y no quede nada sin ver, el chat se borrará en los dos equipos.'); }
+  }
+  async function ordenPorBuzon(c, tipo, extra) {
+    if (!puedeBuzon(c)) return false;
+    const id = uuid(), carga = Object.assign({ tipo, id, t: Date.now() }, extra || {});
+    try { const r = await R.buzonDeja(c.id, c.suId, await idBuzon(id), await cierraBuzon(c, carga), false); return !!(r && r.ok); } catch (_) { return false; }
+  }
+  function muestraYa(c) { if (c && c.pendienteSalida) { c.pendienteSalida = false; clearTimeout(c.pendienteT); pintaLista(); } }
+  async function revisaSalida(c) {
+    if (!c || !CONVS.has(c.id) || c.estado !== 'activa' || !c.huella || c.borrandoSalida || c.esperaBuzon || !R || !R.abierto) return;
+    if (!c.cargados) { await cargaMensajes(c); if (!CONVS.has(c.id) || c.estado !== 'activa') return; }
+    if (dentro(c) || otraDentro(c) || !todoVisto(c) || conTraspaso(c) || (LL && LL.ocupado && (LLAMADA_CONV || ACTUAL) === c.id)) { muestraYa(c); return; }
+    c.borrandoSalida = true;
+    try {
+      const n = nombreConv(c, true), orden = c.contacto ? 'vaciar' : 'destruir';
+      const avisada = enLinea(c) ? enviaControl(c, { tipo: orden, salida: 1, t: Date.now() }) : await ordenPorBuzon(c, orden, { salida: 1 });
+      if (c.contacto) {
+        if (!avisada) c.vaciarPendiente = true;
+        await vaciaLocal(c, false); muestraYa(c);
+        aviso(T('Los dos han salido: el chat con {n} se ha borrado.').replace('{n}', n));
+      } else {
+        if (avisada) await new Promise((r) => setTimeout(r, 250));
+        if (avisada || esB(c)) await destruyeLocal(c, false, true); else await destruye(c, true); // sin buzón: la lápida, como «Terminar»
+        aviso(T('Los dos han salido: la conversación con {n} se ha borrado.').replace('{n}', n));
+      }
+    } catch (e) { console.warn('salida', e); muestraYa(c); } finally { c.borrandoSalida = false; }
+  }
+  // al salir de una conversación (al inicio, a otra o al terminar): «salgo» y, si la otra persona tampoco está, se borra
+  function saleDe(id) {
+    const c = id && CONVS.get(id); if (!c || !c.huella || c.estado !== 'activa') return;
+    enviaControl(c, miEstado(c));
+    setTimeout(() => revisaSalida(c), 1200);
+  }
+  // al conectar con el relé, los sobres del buzón llegan justo detrás de «sala» y antes que la respuesta a un «ping» enviado después:
+  // con ese «pong», ya ha llegado todo lo que esperaba en el buzón (mensajes y órdenes) y se puede decidir sin perder nada
+  function trasElBuzon(c) {
+    c.esperaBuzon = true;
+    if (R) R.mide();
+  }
+  function alPong() {
+    for (const c of CONVS.values()) {
+      if (!c.esperaBuzon) continue;
+      c.esperaBuzon = false;
+      const sola = !(c.suId && c.miembros.has(c.suId));
+      c.proc = (c.proc || Promise.resolve()).then(() => {
+        if (sola) return revisaSalida(c);
+        // la otra persona está conectada: su «salgo» o «vuelvo» llega tras la presentación; si no llega (otra versión), se enseña
+        if (c.pendienteSalida) { clearTimeout(c.pendienteT); c.pendienteT = setTimeout(() => muestraYa(c), 12000); }
+      }).catch((e) => console.warn('salida', e));
+    }
   }
 
   // ---------- relé ----------
@@ -2290,12 +2395,12 @@
     R.on('cerrado', () => { quietoTodas(4000); pintaBarra(); for (const c of CONVS.values()) { c.miembros.clear(); c.tic = []; c.sesion = null; c.salaSabida = false; c.suFuera = false; for (const [id, a] of c.archivos || []) { if (a && a.envio) { const m = c.mensajes.find((x) => x.id === id); if (m && m.estado !== 'pendiente') pierde(c, m, a, T('Se perdió la conexión.')); } } if (c.archivos) { for (const [id, a] of [...c.archivos]) if (!(a && a.envio)) c.archivos.delete(id); } pintaCabecera(c); } pintaLista(); });
     setInterval(() => { if (R.abierto && R.caduca && R.caduca * 1000 - Date.now() < 2 * 3600 * 1000) R.pideIce(); }, 10 * 60 * 1000);
     // con la otra persona en la sala, el tiempo de acordar las claves, quieta; sin ella (y si no se acaba de ir), «No conectado» ya
-    R.on('sala', (sala, miembros) => { const c = CONVS.get(sala); if (!c) return; c.miembros = new Set(miembros); c.sesion = null; c.salaSabida = true; c.suFuera = false; if (c.suId && miembros.includes(c.suId)) quietoConv(c, 6000); if (miembros.length && (!c.suId || miembros.includes(c.suId))) enCola(c, () => presentaX(c, null, true)); else setTimeout(() => depositaCola(c), 300); pintaCabecera(c); pintaLista(); pintaContactos(); }); // sin la otra persona en la sala, lo pendiente, al buzón
+    R.on('sala', (sala, miembros) => { const c = CONVS.get(sala); if (!c) return; c.miembros = new Set(miembros); c.sesion = null; c.salaSabida = true; c.suFuera = false; if (c.huella) trasElBuzon(c); if (c.suId && miembros.includes(c.suId)) quietoConv(c, 6000); if (miembros.length && (!c.suId || miembros.includes(c.suId))) enCola(c, () => presentaX(c, null, true)); else setTimeout(() => depositaCola(c), 300); pintaCabecera(c); pintaLista(); pintaContactos(); }); // sin la otra persona en la sala, lo pendiente, al buzón
     R.on('llega', (sala, quien) => { const c = CONVS.get(sala); if (!c) return; c.miembros.add(quien); if (!c.suId || c.suId === quien) c.suFuera = false; if (!c.suId || c.suId === quien) { c.sesion = null; if (c.huella) quietoConv(c, 6000); enCola(c, () => presentaX(c, null, true)); } pintaCabecera(c); pintaLista();
       // la invitación que salió por WhatsApp: el chat se abre cuando la otra persona entra, si no se está en otra conversación
       if (c.compartido && !c.huella && c.rol === 'invita' && (!ACTUAL || !CONVS.has(ACTUAL)) && !document.body.classList.contains('en-llamada')) abreConv(c.id); });
     // si la otra persona se va, puede que solo esté recargando: unos segundos sin cambiar nada
-    R.on('sale', (sala, quien) => { const c = CONVS.get(sala); if (!c) return; c.miembros.delete(quien); if (c.suId === quien) c.suFuera = false; if (c.suId === quien) { c.sesion = null; quietoConv(c, 6000); vigila(c, T('La otra persona se ha desconectado.'), 'info'); if (LL && LL.ocupado && (LLAMADA_CONV || ACTUAL) === c.id) LL.seFue(); setTimeout(() => depositaCola(c), 300); } pintaCabecera(c); pintaLista(); }); // ya no cuelga: ver seFue (llamada.js). Al irse la otra persona, lo pendiente, al buzón
+    R.on('sale', (sala, quien) => { const c = CONVS.get(sala); if (!c) return; c.miembros.delete(quien); if (c.suId === quien) c.suFuera = false; if (c.suId === quien) { c.sesion = null; quietoConv(c, 6000); setTimeout(() => { if (!c.miembros.has(quien)) revisaSalida(c); }, 9000); vigila(c, T('La otra persona se ha desconectado.'), 'info'); if (LL && LL.ocupado && (LLAMADA_CONV || ACTUAL) === c.id) LL.seFue(); setTimeout(() => depositaCola(c), 300); } pintaCabecera(c); pintaLista(); }); // ya no cuelga: ver seFue (llamada.js). Al irse la otra persona, lo pendiente, al buzón
     R.on('sustituido', (sala) => { const c = CONVS.get(sala); if (c) { c.miembros.clear(); c.sesion = null; } aviso(T('Este chat se ha abierto en otro sitio (otra pestaña o la app): sigue allí.')); });
     // Las tramas de una conversación se procesan en orden (una detrás de otra): así un trozo de archivo nunca
     // adelanta al anuncio del archivo, ni un mensaje a la presentación que abre su sesión.
@@ -2319,6 +2424,7 @@
       if (m.t === 'lento') aviso(T('El relé está limitando la velocidad: el envío sigue más despacio.'));
       if (m.t === 'lento' || m.t === 'atasco') for (const v of VIAJES.values()) if (v.estado === 'viaje' && !v['inc_' + m.t]) { v['inc_' + m.t] = true; const que = m.t === 'lento' ? 'El relé limitó la velocidad del envío.' : 'El relé retuvo fragmentos por saturación del destinatario.'; v.incidencias.push({ t: new Date().toISOString(), que: m.t === 'lento' ? 'rele_lento' : 'rele_atasco', lado: v.rol === 'envia' ? 'emisor' : 'receptor' }); evento(v, T(que), 'info'); }
     });
+    R.on('pong', alPong);
     R.on('pong', (ms) => { if (!Number.isFinite(ms)) return; for (const v of VIAJES.values()) if (v.estado === 'viaje' || v.estado === 'espera') { v.latMia.push(ms); if (v.latMia.length > 1000) v.latMia.shift(); } });
     // sin relé, un envío en curso no sigue (no hay reanudación): queda como no completado en los dos lados
     R.on('cerrado', () => { for (const v of VIAJES.values()) if (v.estado === 'viaje') { v.estado = 'fallo'; v.tFin = Date.now(); v.enCamino = 0; evento(v, T('Se perdió la conexión con el relé: el envío no se ha completado.'), 'mal'); } });
@@ -2359,7 +2465,7 @@
   }
   async function pintaLista() {
     sincronizaAvisos(); pintaInsignia();
-    const xs = vivas().sort((a, b) => (b.ultimo || b.creado || 0) - (a.ultimo || a.creado || 0));
+    const xs = vivas().filter((x) => !(x.pendienteSalida && !x.contacto)).sort((a, b) => (b.ultimo || b.creado || 0) - (a.ultimo || a.creado || 0));
     const app = $('#app'), lista = $('#lista'), ul = $('#lista-filas');
     app.classList.toggle('con-lista', xs.length > 0); if (lista) lista.hidden = !xs.length;
     const vl = $('#volver-lista'); if (vl) vl.hidden = !xs.length;
@@ -2386,7 +2492,7 @@
     // con contactos guardados, el teléfono se queda en el inicio (los contactos) en vez de entrar solo en una conversación
     // en el teléfono, una invitación que aún nadie ha abierto no se abre sola: se queda en el inicio (dueño, 28 Oct 2026, 19:17:
     // «abre otra segunda pantalla… es mejor solo una pantalla»); el chat se abre cuando la otra persona entra
-    const abrible = xs.find((x) => !invitacionPendienteMovil(x));
+    const abrible = xs.find((x) => !invitacionPendienteMovil(x) && !x.pendienteSalida);
     if ((!ACTUAL || !CONVS.has(ACTUAL)) && !quiereNueva && !hayContactos() && abrible) abriendo = abreConv(abrible.id);
   }
   function invitacionPendienteMovil(x) { return esMovil() && x.estado === 'invitacion' && x.rol === 'invita' && !x.huella && porEnlace(x); }
@@ -2840,9 +2946,11 @@
     retiraAvisos(id); avisosCuandoToque();
     const c = CONVS.get(id); if (!c) return;
     if (ACTUAL && ACTUAL !== id) { paraEscribe(); guardaBorrador(); }
-    const cambia = ACTUAL !== id;
+    const cambia = ACTUAL !== id, deja = cambia ? ACTUAL : null;
     quiereNueva = false; document.body.classList.remove('ver-lista');
     ACTUAL = id; await cargaMensajes(c);
+    if (deja) saleDe(deja); // (al salir los dos, se borra: ver revisaSalida)
+    if (cambia && c.huella) enviaControl(c, { tipo: 'vuelvo' });
     if (cambia) { ponBorrador(c); quitaResponde(); cierraMenuMsg(); }
     if (c.perdida) { c.perdida = false; }
     const inv = c.estado === 'invitacion' && c.rol === 'invita' && !c.huella && !esperaEnChat(c);
@@ -2866,7 +2974,7 @@
     if (matchMedia('(min-width: 761px)').matches) $('#texto').focus();
     pintaPestanas();
   }
-  function cierraConv() { $('#inicio').classList.remove('con-invitacion'); document.body.classList.remove('esperando-enlace'); ACTUAL = null; if (window.pintaBarra) pintaBarra(); $('#conv').hidden = true; $('#inicio').hidden = false; $('#app').classList.remove('en-conv'); document.body.classList.remove('en-conv'); $('#paso-inicio').hidden = false; $('#paso-codigo').hidden = true; $('#paso-entrar').hidden = true; $('#paso-enlace').hidden = true;  pintaPestanas(); }
+  function cierraConv() { const deja = ACTUAL; $('#inicio').classList.remove('con-invitacion'); document.body.classList.remove('esperando-enlace'); ACTUAL = null; if (window.pintaBarra) pintaBarra(); $('#conv').hidden = true; $('#inicio').hidden = false; $('#app').classList.remove('en-conv'); document.body.classList.remove('en-conv'); $('#paso-inicio').hidden = false; $('#paso-codigo').hidden = true; $('#paso-entrar').hidden = true; $('#paso-enlace').hidden = true;  pintaPestanas(); if (deja) saleDe(deja); }
   function pintaCabecera(c) {
     pintaEspera(c);
     if (window.pintaBarra) pintaBarra();
