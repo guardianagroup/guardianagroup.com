@@ -2634,3 +2634,66 @@ html.con-teclado .fe-pie{padding-bottom:10px}
 }
 @media (min-width:761px) and (prefers-reduced-motion:reduce){.modo{transition:none}}
 @media (min-width:761px){#paso-inicio #unir,#paso-inicio #nueva{align-content:center}}
+
+/* Ultra · la voz cambiada y el mosaico a la vista, encima de la barra (dueño, 15 Nov 2026, 20:32): verde, puesto; gris, quitado */
+.ll-efectos{position:relative;z-index:31;display:flex;justify-content:center;flex-wrap:wrap;gap:10px;margin:0 auto 6px;max-width:100%}
+.ll-efectos[hidden]{display:none}
+.ll-ef{display:inline-flex;align-items:center;gap:9px;min-height:44px;padding:6px 16px 6px 12px;border-radius:999px;border:1px solid rgba(156,195,228,.32);background:rgba(6,8,12,.74);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);color:#F4F6F8;font:500 13px/1.15 var(--texto);text-align:left;transition:background .15s,border-color .15s,transform .12s}
+.ll-ef[hidden]{display:none}
+.ll-ef svg{width:19px;height:19px;flex:none;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;color:#9CC3E4}
+.ll-ef span{display:flex;flex-direction:column;align-items:flex-start;gap:1px}
+.ll-ef b{font-weight:600}
+.ll-ef i{font-style:normal;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:rgba(244,246,248,.58)}
+.ll-ef[aria-pressed="true"]{border-color:rgba(92,201,138,.75);background:rgba(14,34,25,.8)}
+.ll-ef[aria-pressed="true"] svg,.ll-ef[aria-pressed="true"] i{color:#5CC98A}
+.ll-ef:hover{border-color:rgba(156,195,228,.6)}
+.ll-ef[aria-pressed="true"]:hover{border-color:#5CC98A}
+.ll-ef:active{transform:scale(.96)}
+.ll-ef:focus-visible{outline:2px solid #9CC3E4;outline-offset:2px}
+.gc-llamada.mini .ll-efectos,.gc-llamada.mini .ll-mon{display:none}
+/* Ultra · Monitor de seguridad (dueño, 15 Nov 2026, 20:33): siempre a la vista; una línea que barre arriba y un punto que late dicen
+   que está comprobando; verde, todo en orden; ámbar, avisos; coral, alerta */
+.ll-mon{position:absolute;z-index:10;left:max(16px,env(safe-area-inset-left));top:calc(118px + env(safe-area-inset-top));width:min(340px,calc(100% - 32px));box-sizing:border-box;border-radius:16px;border:1px solid rgba(156,195,228,.22);background:rgba(6,8,12,.86);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);color:#F4F6F8;text-align:left;box-shadow:0 18px 50px rgba(0,0,0,.45);overflow:hidden;--mon:#5CC98A}
+.ll-mon[hidden]{display:none}
+.ll-mon[data-nivel="aviso"]{--mon:#F0C77F}
+.ll-mon[data-nivel="alerta"]{--mon:#E07A6C;border-color:rgba(224,122,108,.75);box-shadow:0 0 0 3px rgba(224,122,108,.18),0 18px 50px rgba(0,0,0,.45)}
+.ll-mon::before{content:"";position:absolute;left:0;top:0;height:2px;width:38%;background:linear-gradient(90deg,transparent,var(--mon),transparent);animation:llMonBarre 2.6s linear infinite}
+@keyframes llMonBarre{from{transform:translateX(-100%)}to{transform:translateX(265%)}}
+.ll-mon-cab{display:flex;align-items:center;gap:11px;width:100%;margin:0;padding:12px 14px 2px;border:0;background:none;color:inherit;font:inherit;text-align:left;cursor:pointer}
+.ll-mon-cab:focus-visible{outline:2px solid #9CC3E4;outline-offset:-3px;border-radius:14px}
+.ll-mon-pulso{position:relative;width:10px;height:10px;flex:none;border-radius:50%;background:var(--mon)}
+.ll-mon-pulso::after{content:"";position:absolute;inset:-5px;border-radius:50%;border:2px solid var(--mon);opacity:0;animation:llMonPulso 1.8s ease-out infinite}
+@keyframes llMonPulso{from{transform:scale(.5);opacity:.9}to{transform:scale(1.6);opacity:0}}
+.ll-mon-tit{display:flex;flex-direction:column;gap:1px;flex:1;min-width:0}
+.ll-mon-tit b{font:600 14px/1.2 var(--texto);letter-spacing:.01em}
+.ll-mon-vivo{font:600 10px/1.3 var(--texto);letter-spacing:.14em;text-transform:uppercase;color:var(--mon)}
+.ll-mon-flecha{width:18px;height:18px;flex:none;fill:none;stroke:#9CC3E4;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;transition:transform .2s}
+.ll-mon.plegado .ll-mon-flecha{transform:rotate(-90deg)}
+.ll-mon-estado{margin:0;padding:3px 14px 11px 35px;font:400 12px/1.35 var(--texto);color:rgba(244,246,248,.72);font-variant-numeric:tabular-nums}
+.ll-mon-estado #ll-mon-nivel{color:var(--mon);font-weight:600}
+.ll-mon-cuerpo{border-top:1px solid rgba(156,195,228,.12);padding:6px 0 10px;max-height:calc(100vh - 330px);overflow:auto}
+.ll-mon.plegado .ll-mon-cuerpo{display:none}
+.ll-mon-l{list-style:none;margin:0;padding:0}
+.ll-mon-l li{display:grid;grid-template-columns:8px 1fr;column-gap:12px;row-gap:1px;padding:4px 14px;align-items:center}
+.ll-mon-l li i{width:8px;height:8px;border-radius:50%;background:#5CC98A;grid-row:1/span 2;align-self:start;margin-top:5px}
+.ll-mon-l li.mon-aviso i{background:#F0C77F}
+.ll-mon-l li.mon-alerta i{background:#E07A6C;box-shadow:0 0 0 3px rgba(224,122,108,.25)}
+.ll-mon-l li.mon-neutro i{background:rgba(156,195,228,.45)}
+.ll-mon-l li b{font:500 12.5px/1.3 var(--texto);color:#F4F6F8}
+.ll-mon-l li span{grid-column:2;font:400 12px/1.35 var(--texto);color:rgba(244,246,248,.64);font-variant-numeric:tabular-nums}
+.ll-mon-l li.mon-aviso span{color:#F0C77F}
+.ll-mon-l li.mon-alerta span{color:#E07A6C}
+.ll-mon-ev{list-style:none;margin:6px 14px 0;padding:8px 0 0;border-top:1px dashed rgba(156,195,228,.16);font:400 11px/1.5 var(--mono);color:rgba(244,246,248,.56)}
+.ll-mon-ev:empty{display:none}
+.ll-mon-ev li{display:flex;gap:8px;position:static;margin:0;padding:0;background:none;border:0;box-shadow:none;font:inherit;color:inherit}
+.ll-mon-ev time{color:#9CC3E4;flex:none}
+.ll-mon-ev li.mon-aviso span{color:#F0C77F}
+.ll-mon-ev li.mon-alerta span{color:#E07A6C}
+/* en el PC, debajo del título, las palabras y el nivel (que van en el centro); con la ventana muy ancha, a su altura, sin taparlos */
+@media (min-width:761px){.ll-mon{top:calc(184px + env(safe-area-inset-top))}.ll-mon-cuerpo{max-height:calc(100vh - 400px)}}
+@media (min-width:1300px){.ll-mon{top:calc(114px + env(safe-area-inset-top))}.ll-mon-cuerpo{max-height:calc(100vh - 330px)}}
+@media (max-width:760px){.ll-mon-cuerpo{max-height:calc(100vh - 450px)}}
+@media (prefers-reduced-motion:reduce){.ll-mon::before,.ll-mon-pulso::after{animation:none}.ll-mon::before{width:100%;opacity:.5}}
+/* con «Voz cambiada» y «Mosaico» a la vista, la píldora plegada del código va encima de ellas */
+.gc-llamada.con-efectos .ll-cod-chip{bottom:calc(192px + env(safe-area-inset-bottom))}
+@media (max-width:520px){.gc-llamada.con-efectos .ll-cod-chip{bottom:calc(206px + env(safe-area-inset-bottom))}}

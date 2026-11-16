@@ -45,7 +45,8 @@ async function invita(A, blindado) {
   return A.evaluate(() => window.__compartidos[window.__compartidos.length - 1]);
 }
 // lo que la llamada ofrece: en la barra o, desde la ronda 83, dentro del menú «Más» (⋯); el menú se abre para mirarlo
-const ofrece = (P) => P.evaluate(() => { const si = (s) => { const e = document.querySelector(s); return !!(e && !e.hidden); }; return { grave: si('#ll-grave-caja'), mosaico: si('#ll-mosaico-caja'), ajustes: si('#ll-ajustes-caja'), pildora: si('#ll-voz-pill') }; });
+// (15 nov 2026) en Ultra, «Voz cambiada» y «Mosaico» van a la vista, en dos píldoras encima de la barra (#ll-efectos), no en «Más»
+const ofrece = (P) => P.evaluate(() => { const si = (s) => { const e = document.querySelector(s); return !!(e && !e.hidden && !e.closest('[hidden]')); }; return { grave: si('#ll-grave-caja') || si('#ll-ef-voz'), mosaico: si('#ll-mosaico-caja') || si('#ll-ef-mosaico'), enMas: si('#ll-grave-caja') || si('#ll-mosaico-caja'), aLaVista: si('#ll-ef-voz') && si('#ll-ef-mosaico'), ajustes: si('#ll-ajustes-caja'), pildora: si('#ll-voz-pill') }; });
 async function videollamada(A, B) {
   await A.evaluate(() => document.querySelector('#videollamar').click()); await espera(2200);
   const sonando = await ofrece(A);
@@ -53,7 +54,6 @@ async function videollamada(A, B) {
   await espera(5000);
   await A.touchscreen.tap(196, 200).catch(() => {}); await espera(400); // los botones, a la vista
   const hablando = await ofrece(A);
-  if (hablando.grave || hablando.mosaico) { await A.evaluate(() => { const b = document.querySelector('#ll-mas'); if (b) b.click(); }); await espera(400); hablando.enMenu = await visible(A, '#ll-grave') && await visible(A, '#ll-mosaico'); }
   return { sonando, hablando };
 }
 (async () => {
@@ -68,6 +68,10 @@ async function videollamada(A, B) {
     return { abierta: document.querySelector('#h-invitar').classList.contains('gc-abierta'), blindado: t('#tipo-normal b') + ' · ' + t('#tipo-normal small'), ultra: t('#tipo-blindado b') + ' · ' + t('#tipo-blindado small'), elegido: document.querySelector('#tipo-normal').getAttribute('aria-checked'), apagado: document.querySelector('#tipo-blindado').getAttribute('aria-disabled') };
   });
   comprueba(hoja.abierta && hoja.blindado === 'Chat blindado · Gratis' && hoja.elegido === 'true', '0. la hoja: «Chat blindado · Gratis», elegido de entrada', hoja);
+  // (15 nov 2026) mientras Ultra está abierta a todos (app.js, ULTRA_ABIERTA), la parte de «fuera del programa» no aplica: se salta
+  const ultraAbierta = /Con la suscripción Plus/.test(hoja.ultra);
+  if (ultraAbierta) console.log('     (Ultra abierta a todos por ahora: se salta «fuera del programa»)');
+  else {
   comprueba(hoja.ultra === 'Ultra · Solo desde el programa GUARDIANA, con Plus' && hoja.apagado === 'true', '0. y «Ultra · Solo desde el programa GUARDIANA, con Plus», sin poder elegirla', hoja.ultra);
   await A.screenshot({ path: path.join(OUT, '0-hoja.png') });
   // (aria-disabled: Playwright no lo pulsa; el toque de la persona sí llega, y la app responde con el motivo)
@@ -83,6 +87,7 @@ async function videollamada(A, B) {
   comprueba(av2 === FUERA && (await P.evaluate(() => window.gcomPrueba.cuantas())) === 0, '0. y, al tocarlo, el motivo, sin crear nada', av2);
   await P.screenshot({ path: path.join(OUT, '0-pc-boton.png') });
   await P.context().close();
+  }
 
   // 1. con «?plan=plus» (en local, el programa con Plus): Ultra se puede elegir y un toque la elige
   await A.goto(URL0 + '?plan=plus'); await espera(1500);
@@ -131,12 +136,11 @@ async function videollamada(A, B) {
   await C.evaluate(() => { Object.defineProperty(document, 'visibilityState', { configurable: true, get: () => 'visible' }); });
   const vb = await videollamada(C, D);
   comprueba(!vb.sonando.grave && !vb.sonando.mosaico, 'Ultra: mientras suena, sin los botones', vb.sonando);
-  comprueba(vb.hablando.grave && vb.hablando.mosaico && vb.hablando.enMenu && !vb.hablando.ajustes && !vb.hablando.pildora, 'Ultra: con la llamada en marcha, «Voz cambiada» y «Mosaico» en el menú «Más» (y nada más)', vb.hablando);
+  comprueba(vb.hablando.aLaVista && !vb.hablando.enMas && !vb.hablando.ajustes && !vb.hablando.pildora, 'Ultra: con la llamada en marcha, «Voz cambiada» y «Mosaico» a la vista encima de la barra, no en «Más» (y nada más)', vb.hablando);
   await C.screenshot({ path: path.join(OUT, '6-video-ultra-mas.png') });
-  await C.evaluate(() => { const b = document.querySelector('#ll-mas'); if (b && b.getAttribute('aria-expanded') === 'true') b.click(); }); await espera(300);
   // desde el 29 Oct 2026 (dueño, 09:23) la llamada blindada empieza con los dos puestos; un toque los quita
   comprueba(await C.evaluate(() => document.querySelector('#ll-grave').getAttribute('aria-pressed') === 'true' && document.querySelector('#ll-mosaico').getAttribute('aria-pressed') === 'true'), 'Ultra: empieza con «Voz cambiada» y «Mosaico» puestos');
-  await C.evaluate(() => { document.querySelector('#ll-grave').click(); document.querySelector('#ll-mosaico').click(); }); await espera(1500);
+  await C.evaluate(() => { document.querySelector('#ll-ef-voz').click(); document.querySelector('#ll-ef-mosaico').click(); }); await espera(1500);
   comprueba(await C.evaluate(() => document.querySelector('#ll-grave').getAttribute('aria-pressed') === 'false' && document.querySelector('#ll-mosaico').getAttribute('aria-pressed') === 'false'), 'Ultra: los dos se quitan con un toque');
   await C.touchscreen.tap(196, 200).catch(() => {}); await espera(300);
   await C.screenshot({ path: path.join(OUT, '6-video-ultra.png') });

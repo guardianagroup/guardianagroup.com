@@ -137,6 +137,10 @@
     const WEBKIT = !CHROMIUM && /AppleWebKit\//.test(navigator.userAgent || '') && !/Gecko\/\d/.test(navigator.userAgent || '');
     const PQM = (CHROMIUM || WEBKIT) && typeof raiz.RTCRtpScriptTransform === 'function' && typeof raiz.Worker === 'function';
     let obrero = null, pqCuenta = null, pqOferta = null;
+    // el Monitor de seguridad de Ultra («Monitor de seguridad», más abajo): su estado y lo que la política de la página (CSP) bloqueó
+    let cspBloqueos = 0;
+    const mon = { stats: null, t: 0, eventos: [], abierto: null, tic: null, vueltas: 0, empezo: 0, ruta: '', huella: '', mal: 0, malT: 0, extra: 0, intrusos: -1, seq: 0, pqSeq: 0, base: null, ultima: null };
+    document.addEventListener('securitypolicyviolation', () => { cspBloqueos++; if (monVivo()) monEvento(t('La página ha bloqueado un intento de cargar código ajeno.'), 'aviso'); });
     const pqDe = new WeakMap(); // conexión → { tx, rx, puestos, confirmada, visto }
     const pqPorRx = new Map(); // id de la llave de recibir → su contexto (para el aviso «visto» del obrero)
     const pqPorCod = new Map(); // id de la llave de la que sale el código → su contexto
@@ -145,7 +149,9 @@
     // de antes no lo dicen y cambian cada minuto
     // (3 Nov 2026, ronda 93) en Ultra, cada minuto; en la Blindada, cada 2 minutos. En pruebas locales, lo que diga «gcom-rota-ms».
     const ROTA_PRUEBA = (() => { try { const v = LOCAL && Number(sessionStorage.getItem('gcom-rota-ms')); return v >= 2000 ? v : 0; } catch (_) { return 0; } })();
-    const rotaMs = () => ROTA_PRUEBA || (ultra() ? 60000 : 120000);
+    // (15 Nov 2026, dueño, 20:32: «en el modo ultra… al empezar la llamada, aparezca un código en rojo en el medio de la pantalla…
+    // y quiero que eso pase cada 2 minutos») Ultra también cada 2 minutos.
+    const rotaMs = () => ROTA_PRUEBA || 120000;
     const pqCada = (m) => { const v = Number(m && m.pqc); return v >= 2 && v <= 600 ? v * 1000 : 60000; };
     // Dos versiones (dueño, 2 Nov 2026, 17:01: «Esto de los números… quiero que lo dejes para la versión ultra. En la versión…
     // blindada… no quiero que esté ese servicio»): el código grande y rojo que cambia con la llave sale solo en Ultra (app.js, ULTRA,
@@ -154,7 +160,10 @@
     // (3 Nov 2026, ronda 93) Ultra es la conversación Ultra de verdad (app.js, o.ultra). La tarjeta roja del código ya no sale en Ultra:
     // allí se leen las 4 palabras (pintaSas) y el código de la clave está en «Seguridad de esta llamada». TARJETA_CODIGO la vuelve a
     // encender; en pruebas locales, «gcom-ultra» la enseña sin tocar nada más de la llamada (rota.js la usa para comparar el código).
-    const TARJETA_CODIGO = false;
+    // (15 Nov 2026, dueño, 20:32) la tarjeta roja vuelve a Ultra: al empezar y cada vez que cambia la llave (cada 2 minutos), en el
+    // centro, con «Léelo en voz alta…». Las 4 palabras siguen saliendo del acuerdo de la llamada y quedan plegadas en la píldora de
+    // arriba (tocándola se abren): el código sale del mismo «lazo», así que si el código coincide, las palabras también.
+    const TARJETA_CODIGO = true;
     const ULTRA_PRUEBA = (() => { try { return LOCAL && sessionStorage.getItem('gcom-ultra') === '1'; } catch (_) { return false; } })();
     const ultra = () => !!(o.ultra && o.ultra());
     // Por qué una llamada de dos va sin la capa postcuántica (dueño, 2 Nov 2026, 18:31: un teléfono la admite y el otro no): este
@@ -165,11 +174,12 @@
     let pqPor = '';
     function obreroPq() {
       if (!obrero) {
-        obrero = new Worker('medios-pq.js?v=20261105-ultra2');
+        obrero = new Worker('medios-pq.js?v=20261115-monitor1');
         obrero.onmessage = (e) => {
           const m = e.data || {}; if (m.cuenta) pqCuenta = m.cuenta;
+          if (m.tipo === 'cuenta' && m.n) { mon.ultima = Object.assign({}, m.cuenta); if (!mon.base && mon.pqSeq && m.n >= mon.pqSeq) mon.base = Object.assign({}, m.cuenta); }
           if (m.tipo === 'visto') { const x = pqPorRx.get(m.id); if (x) { x.visto = true; pinta(); } }
-          if (m.tipo === 'codigo') { const x = pqPorCod.get(m.id); if (x && /^\d{6}$/.test(m.codigo)) { x.codigo = m.codigo; x.llaveN = m.n | 0; pintaCodigo(true); } }
+          if (m.tipo === 'codigo') { const x = pqPorCod.get(m.id); if (x && /^\d{6}$/.test(m.codigo)) { const n = m.n | 0, nueva = !x.codigoT || x.llaveN !== n; x.codigo = m.codigo; x.llaveN = n; if (nueva) { x.codigoT = Date.now(); if (monVivo()) monEvento(t('Clave nº {n} activa').replace('{n}', String(n + 1))); } pintaCodigo(true); } }
           if (m.tipo === 'fallo' && estado === 'hablando' && m.cuenta && m.cuenta.seguidos > 40) di(t('No se puede desencriptar el sonido o la imagen de la otra persona.'), true);
         };
       }
@@ -338,7 +348,7 @@
     }
     function codCoincide() {
       const c = ($('#ll-cod') || {}).dataset ? $('#ll-cod').dataset.cod : ''; if (!c || c !== codigoAhora()) return;
-      codConfirmado = c; codPlegado = false; codAbierto = false; clearTimeout(codPlegarT);
+      codConfirmado = c; codPlegado = false; codAbierto = false; clearTimeout(codPlegarT); if (monVivo()) monEvento(t('Los números coinciden.'));
       // atado al número de seguridad: si el código coincide, el número también (en el blindado, la conversación queda verificada)
       if (sas && sas.estado === 'pendiente' && sas.numero) sasCoinciden();
       muestraCod(false); di(t('Los números coinciden.')); setTimeout(() => { if (paso.textContent === t('Los números coinciden.')) di(''); }, 3000);
@@ -420,8 +430,14 @@
       // sin «Voz e imagen» ni la píldora «Tu voz»; en el blindado, «Voz grave» y, con imagen, «Mosaico», solo con la llamada en marcha
       $('#ll-ajustes-caja').hidden = true; ajustes = false;
       const efectos = blindada() && estado === 'hablando';
-      $('#ll-grave-caja').hidden = !efectos;
-      $('#ll-mosaico-caja').hidden = !(efectos && video && !!cam);
+      // (15 Nov 2026, dueño, 20:32: «en la llamada ultra quiero que vengan las opciones en pantalla de distorsión de voz y… mosaico…
+      // configurado de serie, nada más entrar aparezca así y que luego haya un botón para que se pueda quitar o poner»): a la vista,
+      // encima de la barra, y no dentro de «Más»; dos píldoras que dicen su estado y se tocan para quitarlo o ponerlo
+      const pildoras = $('#ll-efectos');
+      if (pildoras) { pildoras.hidden = !efectos; const pm = $('#ll-ef-mosaico'); if (pm) pm.hidden = !(efectos && video && !!cam); }
+      caja.classList.toggle('con-efectos', !!pildoras && efectos);
+      $('#ll-grave-caja').hidden = !efectos || !!pildoras;
+      $('#ll-mosaico-caja').hidden = !(efectos && video && !!cam) || !!pildoras;
       $('#ll-grave').setAttribute('aria-pressed', String(voz !== 'natural'));
       $('#ll-mosaico').setAttribute('aria-pressed', String(imagen === 'mosaico'));
       // cada botón dice en qué estado está y qué hace el toque (dueño, 29 Oct 2026, 09:23: «súper fácil de utilizar en pantalla»)
@@ -431,6 +447,13 @@
         sp.innerHTML = ''; const b1 = document.createElement('b'); b1.textContent = nombre; const b2 = document.createElement('i'); b2.textContent = est; sp.append(b1, b2);
         $('#ll-' + id).setAttribute('aria-label', nombre + ': ' + est + ' · ' + (on ? t('tocar para quitarlo') : t('tocar para ponerlo')));
       }
+      for (const [id, on, nombre] of [['voz', voz !== 'natural', t('Voz cambiada')], ['mosaico', imagen === 'mosaico', t('Mosaico')]]) {
+        const b = $('#ll-ef-' + id); if (!b) continue;
+        const est = on ? t('activado') : t('desactivado');
+        b.setAttribute('aria-pressed', String(on)); b.querySelector('b').textContent = nombre; b.querySelector('i').textContent = est;
+        b.setAttribute('aria-label', nombre + ': ' + est + ' · ' + (on ? t('tocar para quitarlo') : t('tocar para ponerlo')));
+      }
+      monRitmo();
       const etq = blindada() ? t('Voz e imagen') : t('Tu voz');
       $('#ll-ajustes-b').setAttribute('aria-label', etq); const se = $('#ll-ajustes-caja span'); if (se) se.textContent = etq;
       caja.classList.toggle('ajustes', ajustes);
@@ -1062,6 +1085,7 @@
     // blindado ya por defecto quiero que salga con la opción de mosaico y la voz cambiada, que luego la persona la pueda cambiar»):
     // la cara y la voz se protegen desde el primer fotograma, antes de que salga nada del equipo. Se quitan con sus dos botones.
     function efectosPorDefecto() {
+      try { if (obrero) obrero.postMessage({ tipo: 'cero' }); } catch (_) {}
       if (!blindada()) { voz = 'natural'; imagen = 'natural'; return; }
       // Ultra: la voz cambiada de verdad (formantes, tono al azar y paso banda) y, con imagen, el mosaico; parámetros nuevos en cada llamada
       vozUltra = sorteaVozUltra();
@@ -1323,6 +1347,8 @@
       const xq = pc && pqDe.get(pc), conCodigo = !!(xq && xq.confirmada && xq.codId) && totalGrupo() <= 2;
       const pal = ultra() && sas && sas.estado !== 'roto' ? palabrasLlamada() : null;
       const hay = !!(sas && (sas.numero || sas.estado === 'roto') && estado === 'hablando' && (!o.sas || o.sas())) && (!!pal || !(conCodigo && sas.estado !== 'roto'));
+      // (15 Nov 2026) en Ultra, con la tarjeta roja del código en el centro, las palabras empiezan plegadas en la píldora de arriba
+      if (hay && TARJETA_CODIGO && ultra() && !sasPlegadaYa) { sasPlegadaYa = true; caja.classList.add('sas-plegado'); }
       const grande = hay && sas.estado === 'pendiente' && !caja.classList.contains('sas-plegado');
       caja2.hidden = !grande; mini.hidden = !(hay && !grande); caja.classList.toggle('sas-grande', grande);
       caja2.classList.toggle('palabras', !!pal); mini.classList.toggle('palabras', !!pal);
@@ -1345,7 +1371,7 @@
     // palabras; si no llega a los 10 s de «hablando», o si no cuadra con el compromiso de la oferta, la llamada se cuelga con la
     // alarma, como en el chat (la conversación se borra en los dos equipos). En local, «gcom-prueba-sin-revela» hace que quien llama
     // no revele, como haría quien está en medio.
-    let sasPlazo = 0;
+    let sasPlazo = 0, sasPlegadaYa = false;
     const sinRevelaPrueba = () => { try { return LOCAL && sessionStorage.getItem('gcom-prueba-sin-revela') === '1'; } catch (_) { return false; } };
     function sasPlazoUltra() { clearTimeout(sasPlazo); if (!ultra() || inicioYo || !sas) return; sasPlazo = setTimeout(() => { if (estado === 'hablando' && ultra() && !inicioYo && sas && !sas.numero) sasFalla('sin-palabras'); }, 10000); }
     function sasFalla(por) { if (!ultra() || estado === 'libre') return; clearTimeout(sasPlazo); const f = o.sasMal; colgar(); if (f) { try { f(por); } catch (_) {} } }
@@ -1948,7 +1974,7 @@
       $('#a-remoto').srcObject = null; $('#v-remoto').srcObject = null; $('#v-local').srcObject = null; $('#v-local').classList.remove('trasera'); try { mirando = 'user'; } catch (_) {} remotoV = null; suCamara = true; video = false;
       const bc = $('#ll-camara'); if (bc) bc.setAttribute('aria-pressed', 'false');
       pendientes = []; ofertaEntrante = null; iniciada = 0; partidaPorDefecto = true;
-      sas = null; caja.classList.remove('sas-plegado', 'sas-grande'); clearTimeout(sasPlegadoT); pintaSas();
+      sas = null; sasPlegadaYa = false; caja.classList.remove('sas-plegado', 'sas-grande'); clearTimeout(sasPlegadoT); pintaSas(); monLimpia();
       voz = 'natural'; imagen = 'natural'; // la próxima llamada empieza con la voz y la imagen naturales
       mudasRemotas = [];
       const silencio = $('#ll-silenciar'); if (silencio) silencio.setAttribute('aria-pressed', 'false');
@@ -2005,6 +2031,9 @@
     $('#ll-luz').addEventListener('click', eligeLuz);
     $('#ll-grave').addEventListener('click', () => { eligeVoz(voz !== 'natural' ? 'natural' : 'ultra'); pinta(); });
     $('#ll-mosaico').addEventListener('click', () => { eligeImagen(imagen === 'mosaico' ? 'natural' : 'mosaico'); pinta(); });
+    { const v = $('#ll-ef-voz'), m = $('#ll-ef-mosaico');
+      if (v) v.addEventListener('click', (e) => { e.stopPropagation(); if (estado !== 'hablando') return; eligeVoz(voz !== 'natural' ? 'natural' : 'ultra'); pinta(); });
+      if (m) m.addEventListener('click', (e) => { e.stopPropagation(); if (estado !== 'hablando') return; eligeImagen(imagen === 'mosaico' ? 'natural' : 'mosaico'); pinta(); }); }
     $('#ll-ajustes-b').addEventListener('click', () => { ajustes = !ajustes; pinta(); });
     // cerrar «Voz e imagen»: con «Atrás», con el mismo botón o tocando la imagen fuera del panel
     const cierraAjustes = () => { ajustes = false; caja.classList.remove('voz-abierta'); pinta(); };
@@ -2030,6 +2059,145 @@
       pintaSegCod();
     }
     function repintaSeg() { const s = $('#ll-seg'); if (s && !s.hidden) pintaSeg(); }
+
+    // ===== Monitor de seguridad de Ultra (dueño, 15 Nov 2026, 20:33: «como esa versión ultra será de un pago aparte, quiero que vaya
+    // monitoreada… que se vea todo el rato el monitoreo… que se esté todo el rato verificando que está todo bien, intentando detectar
+    // si hay algo… que está intentando meterse en la conversación y espiar… Que la persona que ha pagado note el alto nivel de
+    // seguridad y el monitoreo en todo momento»). Siempre a la vista en una llamada Ultra: en el PC, a la izquierda (plegado si la
+    // ventana es estrecha); en el teléfono, una línea arriba que se abre al tocarla (también la cápsula de arriba lo abre y lo cierra).
+    // Solo enseña lo que se comprueba de verdad en este equipo, cada segundo o cada dos, y nada de esto sale de aquí:
+    //   · el encriptado de la llamada: la conexión DTLS-SRTP conectada y su cifrado (estadísticas del navegador);
+    //   · la capa postcuántica (sesión Ultra con ML-KEM-1024 → AES-256-GCM en cada fragmento) y su clave: número y cuándo cambia;
+    //   · el código de seguridad: comprobado o no en esta pantalla;
+    //   · la huella de la conexión: el certificado con el que el navegador cerró de verdad la conexión es el mismo que la otra persona
+    //     mandó por el canal encriptado del chat (la oferta o la respuesta). Alguien en medio tendría que presentar otro;
+    //   · la sala del relé: solo los dos; otra conexión, alerta; y las entradas con otra identidad que el chat rechazó;
+    //   · los fragmentos de voz e imagen descifrados y autenticados en esta llamada, y los rechazados (se tiran, no se reproducen);
+    //   · la ruta: directa entre los dos equipos o por un servidor de GUARDIANA (y cuál, si es el mío);
+    //   · el código de la página: lo que la política de seguridad de la página (CSP) bloqueó al intentar cargarse o ejecutarse;
+    //   · con el Vigía del programa para Windows encendido, si otro programa usa el micrófono, la cámara o la pantalla.
+    function monVivo() { return !!(ultra() && estado === 'hablando'); }
+    function monEvento(txt, nivel) { mon.eventos.unshift({ t: Date.now(), txt, nivel: nivel || 'ok' }); if (mon.eventos.length > 3) mon.eventos.length = 3; }
+    function monLoc() { return (raiz.GuardianaIdioma && raiz.GuardianaIdioma.locale) || 'es'; }
+    function monNum(n) { try { return Number(n).toLocaleString(monLoc()); } catch (_) { return String(n); } }
+    function monLimpia() {
+      clearInterval(mon.tic);
+      Object.assign(mon, { stats: null, t: 0, eventos: [], abierto: null, tic: null, vueltas: 0, empezo: 0, ruta: '', huella: '', mal: 0, malT: 0, extra: 0, intrusos: -1, pqSeq: 0, base: null, ultima: null });
+      const el = $('#ll-mon'); if (el) el.hidden = true; caja.classList.remove('con-monitor');
+    }
+    // abierto de entrada en un PC con sitio; plegado en el teléfono y en ventanas estrechas (la tarjeta roja va en el centro)
+    function monPorDefecto() { return !!(raiz.matchMedia && raiz.matchMedia('(min-width: 1100px)').matches); }
+    function monAbierto() { return mon.abierto == null ? monPorDefecto() : mon.abierto; }
+    function monAbre(on) { mon.abierto = !!on; pintaMon(); }
+    function monRitmo() {
+      const vivo = monVivo();
+      if (vivo && !mon.tic) {
+        if (!mon.empezo) { mon.empezo = Date.now(); monEvento(t('Monitor en marcha')); }
+        mon.tic = setInterval(() => { if (!monVivo()) { monRitmo(); return; } if (++mon.vueltas % 2 === 1) monSondea(); pintaMon(); }, 1000);
+        monSondea();
+      } else if (!vivo && mon.tic) { clearInterval(mon.tic); mon.tic = null; }
+      pintaMon();
+    }
+    // cada 2 s: las estadísticas de la conexión (huella, cifrado, ruta) y la cuenta de fragmentos del obrero de la capa postcuántica
+    async function monSondea() {
+      try { if (obrero && monVivo()) obrero.postMessage({ tipo: 'cuenta', n: ++mon.seq }); } catch (_) {}
+      if (!monVivo() || !pc) return;
+      try {
+        const st = await pc.getStats(); let tr = null;
+        st.forEach((r) => { if (r.type === 'transport' && (!tr || r.dtlsState === 'connected')) tr = r; });
+        const s = { dtls: tr ? String(tr.dtlsState || '') : '', srtp: tr ? String(tr.srtpCipher || '') : '', huella: '', ruta: '' };
+        const cert = tr && tr.remoteCertificateId ? st.get(tr.remoteCertificateId) : null;
+        const sdp = (pc.remoteDescription && pc.remoteDescription.sdp) || '';
+        const enSdp = [...sdp.matchAll(/a=fingerprint:([\w-]+) ([0-9A-Fa-f:]+)/g)].map((m) => [m[1].toLowerCase(), m[2].toUpperCase()]);
+        if (cert && cert.fingerprint && enSdp.length) {
+          const alg = String(cert.fingerprintAlgorithm || 'sha-256').toLowerCase(), f = String(cert.fingerprint).toUpperCase();
+          s.huella = enSdp.some(([a, x]) => a === alg && x === f) ? 'ok' : 'mal';
+        } else if (tr && tr.dtlsState === 'connected') s.huella = 'nd';
+        let par = tr && tr.selectedCandidatePairId ? st.get(tr.selectedCandidatePairId) : null;
+        if (!par) st.forEach((r) => { if (!par && r.type === 'candidate-pair' && r.nominated && r.state === 'succeeded') par = r; });
+        if (par) { const lc = st.get(par.localCandidateId), rc = st.get(par.remoteCandidateId); s.ruta = (lc && lc.candidateType === 'relay') || (rc && rc.candidateType === 'relay') ? ((lc && lc.candidateType === 'relay') ? 'mio' : 'servidor') : 'directa'; }
+        if (!monVivo()) return;
+        if (s.ruta && mon.ruta && s.ruta !== mon.ruta) monEvento(t('Ruta') + ': ' + monRuta(s.ruta));
+        if (s.ruta) mon.ruta = s.ruta;
+        if (s.huella === 'mal' && mon.huella !== 'mal') monEvento(t('La huella de la conexión no coincide con la que llegó encriptada.'), 'alerta');
+        if (s.huella) mon.huella = s.huella;
+        mon.stats = s; mon.t = Date.now();
+      } catch (_) {}
+    }
+    function monRuta(r) { return r === 'directa' ? t('Directa entre los dos equipos') : t('Por un servidor de GUARDIANA') + (r === 'mio' && o.servidor && o.servidor() ? ' · ' + o.servidor() : ''); }
+    function monFilas() {
+      const f = [], s = mon.stats || {}, x = pc && pqDe.get(pc);
+      let M = {}; try { M = (o.monitor && o.monitor()) || {}; } catch (_) {}
+      const COMP = t('Comprobando…');
+      const conectada = !!(pc && pc.connectionState === 'connected');
+      f.push(['cifrado', conectada && s.dtls !== 'failed' ? 'ok' : 'neutro', t('Encriptado de extremo a extremo'), conectada ? t('Activo') + (s.dtls === 'connected' ? ' · DTLS-SRTP' : '') : t('Conectando…')]);
+      const pq = pqActiva();
+      f.push(['pq', pq ? 'ok' : 'neutro', t('Capa postcuántica'), pq ? 'ML-KEM-1024 · AES-256-GCM' : COMP]);
+      if (x && x.codigo) {
+        const cada = x.cada || rotaMs(), falta = Math.max(0, Math.round(((x.codigoT || Date.now()) + cada - Date.now()) / 1000));
+        f.push(['llave', 'ok', t('Clave de la llamada'), t('nº {n} · cambia en {t}').replace('{n}', String((x.llaveN | 0) + 1)).replace('{t}', Math.floor(falta / 60) + ':' + String(falta % 60).padStart(2, '0'))]);
+      }
+      { const c = codigoAhora(), card = $('#ll-cod'), visto = card && card.dataset ? card.dataset.cod || '' : '';
+        const bien = !!c && c === codConfirmado;
+        f.push(['codigo', bien ? 'ok' : 'neutro', t('Código de seguridad'), bien ? t('Comprobado') : c && visto === c ? t('Sin comprobar: léelo en voz alta') : COMP]); }
+      f.push(['huella', s.huella === 'ok' ? 'ok' : s.huella === 'mal' ? 'alerta' : 'neutro', t('Huella de la conexión'), s.huella === 'ok' ? t('Coincide con la que llegó encriptada') : s.huella === 'mal' ? t('No coincide: cuelga y vuelve a llamar') : s.huella === 'nd' ? t('Este navegador no la muestra') : COMP]);
+      if (M.conexiones != null) {
+        const extra = Math.max(0, (M.conexiones | 0) - 2), intr = M.intrusos | 0;
+        if (extra > mon.extra) monEvento(t('Alguien más ha entrado en la sala del relé.'), 'alerta');
+        mon.extra = extra;
+        if (mon.intrusos >= 0 && intr > mon.intrusos) monEvento(t('{n} intentos de entrar rechazados').replace('{n}', monNum(intr)), 'aviso');
+        mon.intrusos = intr;
+        f.push(['sala', extra ? 'alerta' : (M.suya === false || intr) ? 'aviso' : 'ok', t('Sala del relé'), extra ? t('Hay {n} conexiones de más').replace('{n}', monNum(extra)) : M.suya === false ? t('La otra persona se ha desconectado.') : intr ? t('{n} intentos de entrar rechazados').replace('{n}', monNum(intr)) : t('Solo los dos')]);
+      }
+      // (lo que llega antes de que la capa esté puesta en los dos lados no cuenta: en Ultra se tira desde el primer momento, y al
+      // empezar puede llegar algún fragmento antes que la clave. Se cuenta desde la primera cuenta pedida con la capa ya activa)
+      if (pq && !mon.pqSeq) mon.pqSeq = mon.seq + 1;
+      if (mon.base && mon.ultima) {
+        const ok = Math.max(0, (mon.ultima.descifrados | 0) - (mon.base.descifrados | 0)), mal = Math.max(0, (mon.ultima.fallos | 0) - (mon.base.fallos | 0)), txt = t('Fragmentos: {n} · rechazados: {m}').replace('{n}', monNum(ok)).replace('{m}', monNum(mal));
+        if (mal > mon.mal && Date.now() - mon.malT > 10000) { mon.malT = Date.now(); monEvento(t('Voz e imagen verificadas') + ' · ' + txt, 'aviso'); }
+        mon.mal = mal;
+        f.push(['frag', mal ? 'aviso' : 'ok', t('Voz e imagen verificadas'), txt]);
+      }
+      if (s.ruta) f.push(['ruta', 'ok', t('Ruta'), monRuta(s.ruta)]);
+      f.push(['pagina', cspBloqueos ? 'aviso' : 'ok', t('Código de la página'), cspBloqueos ? t('{n} intentos bloqueados').replace('{n}', monNum(cspBloqueos)) : t('Solo el de GUARDIANA')]);
+      if (M.vigia) f.push(['vigia', M.vigia === 'limpio' ? 'ok' : M.vigia === 'alerta' ? 'alerta' : 'neutro', t('Vigía de este ordenador'), M.vigia === 'limpio' ? t('Ningún otro programa usa el micrófono, la cámara ni la pantalla') : M.vigia === 'alerta' ? t('Otro programa usa el micrófono, la cámara o la pantalla') : COMP]);
+      return f;
+    }
+    function pintaMon() {
+      const el = $('#ll-mon'); if (!el) return;
+      const ver = monVivo();
+      el.hidden = !ver; caja.classList.toggle('con-monitor', ver);
+      if (!ver) return;
+      const filas = monFilas(), peor = filas.some((r) => r[1] === 'alerta') ? 'alerta' : filas.some((r) => r[1] === 'aviso') ? 'aviso' : 'ok';
+      if (el.dataset.nivel !== peor) el.dataset.nivel = peor;
+      const abierto = monAbierto(); el.classList.toggle('plegado', !abierto);
+      const cab = $('#ll-mon-cab'); if (cab) cab.setAttribute('aria-expanded', String(abierto));
+      const nv = $('#ll-mon-nivel'), tx = peor === 'alerta' ? t('Alerta: revisa el monitor') : peor === 'aviso' ? t('Hay avisos') : t('Todo en orden');
+      if (nv && nv.textContent !== tx) nv.textContent = tx;
+      const ha = $('#ll-mon-hace'), hace = mon.t ? Math.max(0, Math.round((Date.now() - mon.t) / 1000)) : null;
+      if (ha) { const h = hace == null ? '' : ' · ' + t('comprobado hace {s} s').replace('{s}', String(hace)); if (ha.textContent !== h) ha.textContent = h; }
+      const ul = $('#ll-mon-l'); if (!ul) return;
+      const vistos = new Set();
+      for (const [k, nivel, et, val] of filas) {
+        let li = ul.querySelector('li[data-k="' + k + '"]');
+        if (!li) { li = document.createElement('li'); li.dataset.k = k; const i = document.createElement('i'); i.setAttribute('aria-hidden', 'true'); li.append(i, document.createElement('b'), document.createElement('span')); }
+        if (li.parentNode !== ul || ul.children[vistos.size] !== li) ul.insertBefore(li, ul.children[vistos.size] || null);
+        if (li.className !== 'mon-' + nivel) li.className = 'mon-' + nivel;
+        if (li.children[1].textContent !== et) li.children[1].textContent = et;
+        if (li.children[2].textContent !== val) li.children[2].textContent = val;
+        vistos.add(k);
+      }
+      for (const li of [...ul.children]) if (!vistos.has(li.dataset.k)) li.remove();
+      const ev = $('#ll-mon-ev');
+      if (ev) {
+        const firma = mon.eventos.map((e) => e.t + e.txt).join('|');
+        if (ev.dataset.firma !== firma) {
+          ev.dataset.firma = firma; ev.textContent = '';
+          for (const e of mon.eventos) { const li = document.createElement('li'); li.className = 'mon-' + e.nivel; const tm = document.createElement('time'); try { tm.textContent = new Date(e.t).toLocaleTimeString(monLoc(), { hour: '2-digit', minute: '2-digit', second: '2-digit' }); } catch (_) { tm.textContent = ''; } const sp = document.createElement('span'); sp.textContent = e.txt; li.append(tm, sp); ev.appendChild(li); }
+        }
+      }
+    }
+    { const cab = $('#ll-mon-cab'); if (cab) cab.addEventListener('click', (e) => { e.stopPropagation(); monAbre(!monAbierto()); }); }
     // El código para comparar, dentro del panel (dueño, 2 Nov 2026, 17:01: en la Blindada, ni la tarjeta roja ni números en la
     // pantalla; ronda 92: la comprobación, discreta, aquí). Es el de la llave de ahora cuando ya está igual en las dos pantallas
     // (pintaCod lo espera 1,5 s tras cada cambio) o, sin la capa postcuántica, el número de seguridad de la llamada. «Coinciden» y
@@ -2079,7 +2247,7 @@
       const ce = $('#ll-centro');
       if (tituloAbre() && ce && ce.getClientRects().length) { const r = ce.getBoundingClientRect(), c = caja.getBoundingClientRect(); s.style.top = Math.round(r.bottom - c.top + 8) + 'px'; } else s.style.top = '';
     }
-    { const ci = document.querySelector('#gc-llamada .gc-llamada-cifrado') || document.querySelector('.gc-llamada-cifrado'); if (ci) { ci.setAttribute('role', 'button'); ci.setAttribute('tabindex', '0'); ci.setAttribute('aria-controls', 'll-seg'); ci.addEventListener('click', (e) => { e.stopPropagation(); const s = $('#ll-seg'); abreSeg(!!(s && s.hidden)); }); ci.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); ci.click(); } }); } }
+    { const ci = document.querySelector('#gc-llamada .gc-llamada-cifrado') || document.querySelector('.gc-llamada-cifrado'); if (ci) { ci.setAttribute('role', 'button'); ci.setAttribute('tabindex', '0'); ci.setAttribute('aria-controls', 'll-seg'); ci.addEventListener('click', (e) => { e.stopPropagation(); if (monVivo()) { monAbre(!monAbierto()); return; } const s = $('#ll-seg'); abreSeg(!!(s && s.hidden)); }); ci.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); ci.click(); } }); } }
     // En el teléfono al que se pasó la llamada no hay cápsula (un solo título arriba; 30 Oct 2026, 14:54): allí el título abre el
     // panel, para que el código de la Blindada también se pueda comparar desde el teléfono (antes salía la tarjeta roja)
     function tituloAbre() { return document.body.classList.contains('modo-llevar'); }

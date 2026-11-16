@@ -1918,6 +1918,10 @@
       // el código grande y rojo de la llamada, solo en Ultra (dueño, 2 Nov 2026, 17:01: «Esto de los números… quiero que lo dejes para la
       // versión ultra»); en la Blindada, el código está en «Seguridad de esta llamada» (llamada.js, pintaSegCod)
       ultra: () => { const c = convLl(); return !!(c && extrasB(c)); },
+      // el Monitor de seguridad de Ultra (llamada.js, 15 Nov 2026): cuántas conexiones hay en la sala del relé (los miembros que da el
+      // relé son los demás; +1, este equipo), si la otra persona está, las entradas con otra identidad que el chat rechazó y, con el
+      // Vigía del programa encendido en el ordenador, lo que dice
+      monitor: () => { const c = convLl(); if (!c || c.efimera || !c.miembros) return null; return { conexiones: c.miembros.size + 1, suya: !!(c.suId && c.miembros.has(c.suId)), intrusos: c.intrusos || 0, vigia: vigiaOn() && !esMovil() ? (vigiaEstado || 'comprobando') : '' }; },
       // Ultra (ronda 93): las 4 palabras de la llamada salen de su propio acuerdo (llamada.js); el nivel de cada lado, de la conversación
       nivel: () => { const c = convLl(); return c && !c.efimera ? { mio: nombreNivel(miNivel()), suyo: c.suNivel ? nombreNivel(c.suNivel) : T('aún sin decir') } : null; },
       // sin rebaja: una llamada Ultra que no puede llevar la capa postcuántica no empieza; aquí se explica y se ofrece la Blindada

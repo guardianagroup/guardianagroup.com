@@ -41,7 +41,7 @@
 <link rel="canonical" href="https://guardianagroup.com/orbita/comunicaciones/">
 <link rel="icon" href="/favicon.ico">
 <link rel="stylesheet" href="componentes.css?v=20261028m">
-<link rel="stylesheet" href="app.css?v=20261115-modos1">
+<link rel="stylesheet" href="app.css?v=20261115-monitor1">
 <link rel="stylesheet" href="diseno.css?v=20261031a">
 <link rel="stylesheet" href="viaje.css?v=20261029b">
 <!-- antes de pintar: como app desde el primer fotograma y, al volver a un chat tras recargar, sin enseñar el inicio entretanto -->
@@ -1086,6 +1086,11 @@
   </div>
   <audio id="a-remoto" autoplay></audio>
   <audio id="a-tercero" autoplay></audio>
+  <!-- Ultra (dueño, 15 Nov 2026, 20:32): la voz cambiada y el mosaico, puestos de serie y a la vista; un toque los quita o los pone -->
+  <div class="ll-efectos" id="ll-efectos" role="group" aria-label="Voz e imagen" hidden>
+    <button type="button" class="ll-ef" id="ll-ef-voz" aria-pressed="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h1.5M6.5 8.5v7M10 6v12M13.5 9v6M17 10.5v3"/><path d="M19.5 15.5l1.5 1.5 1.5-1.5M21 9.5V17"/></svg><span><b>Voz cambiada</b><i>activado</i></span></button>
+    <button type="button" class="ll-ef" id="ll-ef-mosaico" aria-pressed="true"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2.5"/><path d="M9.3 4v16M14.7 4v16M4 9.3h16M4 14.7h16"/></svg><span><b>Mosaico</b><i>activado</i></span></button>
+  </div>
   <div class="gc-llamada-botones" id="ll-botones">
     <!-- Altavoz o auricular (dueño, 28 Oct 2026, 17:26): solo en el teléfono, donde el navegador deja elegir la salida -->
     <div class="gc-llamada-boton" id="ll-altavoz-caja" hidden><button type="button" id="ll-altavoz" aria-pressed="false" aria-label="Poner el altavoz"><svg viewBox="0 0 24 24"><path class="relleno" d="M4.2 9h3.1l4.3-3.7c.5-.4 1.2 0 1.2.6v12.2c0 .6-.7 1-1.2.6L7.3 15H4.2a1.2 1.2 0 0 1-1.2-1.2v-3.6A1.2 1.2 0 0 1 4.2 9z"/><path d="M16 9.3a4 4 0 0 1 0 5.4M18.6 6.7a7.7 7.7 0 0 1 0 10.6"/></svg></button><span>Altavoz</span></div>
@@ -1134,6 +1139,20 @@
     <div class="ll-ver-cuerpo"><img id="ll-ver-img" alt="Foto recibida"></div>
     <div class="ll-ver-pie"><button type="button" class="ll-env-b principal" id="ll-ver-guardar">Guardar</button><small>Lo recibido se borra de este equipo al terminar la llamada, salvo lo que guardes.</small></div>
   </div>
+  <!-- Monitor de seguridad de Ultra (dueño, 15 Nov 2026, 20:33: «que se vea todo el rato el monitoreo… verificando que está todo bien,
+       intentando detectar si hay algo… que está intentando meterse en la conversación y espiar»): solo comprobaciones reales, cada segundo -->
+  <section class="ll-mon" id="ll-mon" aria-labelledby="ll-mon-t" hidden>
+    <button type="button" class="ll-mon-cab" id="ll-mon-cab" aria-expanded="true" aria-controls="ll-mon-cuerpo">
+      <span class="ll-mon-pulso" aria-hidden="true"></span>
+      <span class="ll-mon-tit"><b id="ll-mon-t">Monitor de seguridad</b><small class="ll-mon-vivo">En directo</small></span>
+      <svg class="ll-mon-flecha" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+    </button>
+    <p class="ll-mon-estado"><span id="ll-mon-nivel" role="status"></span><span id="ll-mon-hace"></span></p>
+    <div class="ll-mon-cuerpo" id="ll-mon-cuerpo">
+      <ul class="ll-mon-l" id="ll-mon-l"></ul>
+      <ol class="ll-mon-ev" id="ll-mon-ev"></ol>
+    </div>
+  </section>
   <!-- la seguridad de esta llamada, al tocar la cápsula de arriba (ronda 83: como Teams y Meet, el detalle real de esa llamada) -->
   <div class="ll-seg" id="ll-seg" role="dialog" aria-labelledby="ll-seg-t" hidden><b class="ll-seg-t" id="ll-seg-t">Seguridad de esta llamada</b><ul class="ll-seg-l" id="ll-seg-l"></ul>
     <!-- el código para comparar (dueño, 2 Nov 2026, 17:01; ronda 92): en la Blindada no sale en la pantalla, está aquí; en Ultra, además, en grande -->
@@ -1327,7 +1346,7 @@
 <!-- En el ordenador, en el chat blindado: la pantalla se tapa con la tecla de captura o si la ventana pierde el foco (29 Oct 2026, 08:02) -->
 <!-- y, en Ultra, al pasar la app a segundo plano o perder el foco (3 Nov 2026, ronda 93): la miniatura de la multitarea sale tapada -->
 <div class="captura-velo" id="captura-velo" role="alert" hidden><div><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><b>Modo Ultra</b><span class="cv-captura">Captura detectada: se vació el portapapeles; una web no puede impedir capturas</span><span class="cv-fuera">Pantalla tapada mientras la app está en segundo plano</span></div></div>
-<script src="/orbita/static/idioma.js?v=20261115-foto1"></script>
+<script src="/orbita/static/idioma.js?v=20261115-monitor1"></script>
 <script src="pq-mlkem.js?v=20261027a"></script>
 <script src="pq-cnsa.js?v=20261027a"></script>
 <script src="qrhaz.js?v=20261027a"></script>
@@ -1338,8 +1357,8 @@
 <script src="sha256.js?v=20261027a"></script>
 <script src="viaje-datos.js?v=20261031a"></script>
 <script src="viaje.js?v=20261105-ultra2"></script>
-<script src="llamada.js?v=20261105-ultra2"></script>
+<script src="llamada.js?v=20261115-monitor1"></script>
 <script src="editor-foto.js?v=20261115-foto1"></script>
-<script src="app.js?v=20261115-modos1"></script>
+<script src="app.js?v=20261115-monitor1"></script>
 </body>
 </html>

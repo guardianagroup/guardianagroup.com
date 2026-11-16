@@ -128,7 +128,10 @@ const mp3Path = path.join(tmp, 'grabacion de mi nombre.mp3');
   fs.writeFileSync(fotoPath, await jpegConExif(browser));
 
   // ---- 1. la puerta ----
-  { const F = await equipo(browser, 'fuera');
+  // (15 nov 2026) mientras Ultra está abierta a todos (app.js, ULTRA_ABIERTA), la puerta no aplica: se salta y se dice
+  const abiertaATodos = await (async () => { const X = await equipo(browser, 'abierta', { movil: true }); await X.evaluate(() => document.querySelector('#nueva-blindada').click()); await espera(900); const t = await X.evaluate(() => { const e = document.querySelector('#tipo-blindado small'); return e ? e.textContent : ''; }); await X.context().close(); return /Con la suscripción Plus/.test(t); })();
+  if (abiertaATodos) console.log('     (Ultra abierta a todos por ahora: se salta la puerta)');
+  if (!abiertaATodos) { const F = await equipo(browser, 'fuera');
     await F.evaluate(() => document.querySelector('#nueva-blindada').click()); await espera(700);
     const av = await aviso(F);
     comprueba(/desde el programa GUARDIANA/.test(av) && (await F.evaluate(() => window.gcomPrueba.cuantas())) === 0, '1. fuera del programa: el botón Ultra lo explica en una línea y no crea nada', av);
@@ -154,7 +157,7 @@ const mp3Path = path.join(tmp, 'grabacion de mi nombre.mp3');
   const A = await equipo(browser, 'A', { programa: 'plus', latido: 2, rota: 8000, revela: 4000 }), B = await equipo(browser, 'B', { latido: 2, rota: 8000, revela: 4000 });
   const enlace = await invitaUltra(A);
   comprueba(/\/chat\/#b=[A-Za-z0-9_-]{43}$/.test(enlace), '2. la invitación Ultra: solo el fragmento «#b=» con 256 bits', enlace.slice(-50));
-  comprueba(await A.evaluate(() => (window.__pedidos || []).includes('/api/plan')), '1. para crearla, el programa contestó GET /api/plan con «plus»');
+  if (!abiertaATodos) comprueba(await A.evaluate(() => (window.__pedidos || []).includes('/api/plan')), '1. para crearla, el programa contestó GET /api/plan con «plus»');
   await foto(A, '02-pc-invitacion');
   const secreto = enlace.split('#b=')[1];
   // el código Ultra que enseña la invitación (15 nov 2026: sale ya al crearla); al relé solo puede ir su buzón de 9 cifras
@@ -299,12 +302,13 @@ const mp3Path = path.join(tmp, 'grabacion de mi nombre.mp3');
   // ---- 11. la llamada: palabras iguales, nivel, ritmo constante, clave cada minuto ----
   await llama(A, B, true);
   comprueba((await estadoLl(A)) === 'hablando' && (await estadoLl(B)) === 'hablando', '11. videollamada Ultra en marcha');
-  const palLl = (P) => P.evaluate(() => ({ num: (document.querySelector('#ll-sas-num') || {}).textContent, vis: !document.querySelector('#ll-sas').hidden, t: document.querySelector('#ll-sas-t').textContent, nivel: document.querySelector('#ll-nivel').textContent, nivelVis: !document.querySelector('#ll-nivel').hidden, nivelTarjeta: (document.querySelector('#ll-sas-nivel') || {}).textContent || '', voz: GuardianaCom.llamada.voz, cambio: GuardianaCom.llamada.cambioActivo, imagen: GuardianaCom.llamada.imagen, pq: GuardianaCom.llamada.pq, cod: !document.querySelector('#ll-cod').hidden }));
+  const palLl = (P) => P.evaluate(() => ({ num: (document.querySelector('#ll-sas-num') || {}).textContent, vis: !document.querySelector('#ll-sas').hidden, mini: (document.querySelector('#ll-sas-mini') || {}).textContent || '', miniVis: !document.querySelector('#ll-sas-mini').hidden, t: document.querySelector('#ll-sas-t').textContent, nivel: document.querySelector('#ll-nivel').textContent, nivelVis: !document.querySelector('#ll-nivel').hidden, nivelTarjeta: (document.querySelector('#ll-sas-nivel') || {}).textContent || '', voz: GuardianaCom.llamada.voz, cambio: GuardianaCom.llamada.cambioActivo, imagen: GuardianaCom.llamada.imagen, pq: GuardianaCom.llamada.pq, cod: !document.querySelector('#ll-cod').hidden }));
   const la = await palLl(A), lb = await palLl(B);
-  comprueba(la.vis && la.num === lb.num && la.num.split(' · ').length === 4 && la.t === 'Palabras de verificación', '3. en la llamada, las cuatro palabras iguales en las dos pantallas', [la.num, lb.num]);
+  // (15 nov 2026, dueño, 20:32) en el centro, la tarjeta roja del código; las 4 palabras, plegadas en la píldora de arriba
+  comprueba(!la.vis && la.miniVis && lb.miniVis && la.mini === lb.mini && la.mini.split(' · ').length === 4 && la.num === la.mini, '3. en la llamada, las cuatro palabras iguales en las dos pantallas, plegadas arriba', [la.mini, lb.mini]);
   comprueba(la.nivelVis && /PC con GUARDIANA/.test(la.nivel) && /navegador del PC/.test(la.nivel), '3. y el nivel de cada lado', la.nivel);
   comprueba(/^Tu lado: PC con GUARDIANA\nOtro lado: navegador del PC\n\(cada uno, según su programa\)$/.test(la.nivelTarjeta) && /^Tu lado: navegador del PC\nOtro lado: PC con GUARDIANA\n\(cada uno, según su programa\)$/.test(lb.nivelTarjeta), '3. y también dentro de la tarjeta de las palabras, que tapa el de arriba (R8: según el programa de cada uno)', [la.nivelTarjeta, lb.nivelTarjeta]);
-  comprueba(la.voz === 'ultra' && la.cambio && la.imagen === 'mosaico' && la.pq && !la.cod && lb.voz === 'ultra' && lb.cambio, '11. voz cambiada y mosaico puestos, capa postcuántica activa, sin la tarjeta del código', la);
+  comprueba(la.voz === 'ultra' && la.cambio && la.imagen === 'mosaico' && la.pq && lb.voz === 'ultra' && lb.cambio, '11. voz cambiada y mosaico puestos, capa postcuántica activa', la);
   // cada sección de audio de las dos descripciones: cbr=1 y usedtx=0 en la de Opus; ninguna con la extensión del nivel de audio
   const secciones = await A.evaluate(() => { const pc = GuardianaCom.llamada.pcPrueba; return [pc.localDescription.sdp, pc.remoteDescription.sdp].map((d) => d.split(/\r\n(?=m=)/).filter((x) => /^m=audio /.test(x)).map((x) => ({ fmtp: (x.match(/a=fmtp:111 [^\r\n]*/) || [''])[0], nivel: /ssrc-audio-level/.test(x) }))); });
   const todas = secciones.flat();
@@ -315,9 +319,9 @@ const mp3Path = path.join(tmp, 'grabacion de mi nombre.mp3');
   for (let i = 0; i < 4; i++) { muestras.push(await A.evaluate(async () => { const pc = GuardianaCom.llamada.pcPrueba; const s = pc.getSenders().find((x) => x.track && x.track.kind === 'audio' && x.track.enabled); if (!s) return null; const st = await s.getStats(); let r = null; st.forEach((x) => { if (x.type === 'outbound-rtp' && x.kind === 'audio') r = { b: x.bytesSent, p: x.packetsSent }; }); return r; })); await espera(2000); }
   const porPaquete = []; for (let i = 1; i < muestras.length; i++) if (muestras[i] && muestras[i - 1] && muestras[i].p > muestras[i - 1].p) porPaquete.push((muestras[i].b - muestras[i - 1].b) / (muestras[i].p - muestras[i - 1].p));
   comprueba(porPaquete.length >= 2 && Math.max(...porPaquete) - Math.min(...porPaquete) < 2, '11. los paquetes de audio que salen miden lo mismo (ritmo constante)', porPaquete.map((x) => +x.toFixed(1)));
-  await A.evaluate(() => document.querySelector('.gc-llamada-cifrado').click()); await espera(600);
-  const seg = await A.evaluate(() => document.querySelector('#ll-seg-l').textContent);
-  comprueba(/cambia cada minuto/.test(seg), '11. «Seguridad de esta llamada»: la clave cambia cada minuto', seg.slice(0, 200));
+  // (15 nov 2026) en Ultra, la clave cambia cada 2 minutos y el Monitor de seguridad lo enseña siempre (la cápsula lo pliega y lo abre)
+  const llave = await A.evaluate(() => { const l = document.querySelector('#ll-mon-l li[data-k="llave"] span'); return l ? l.textContent : ''; });
+  comprueba(/^nº \d+ · cambia en [0-2]:\d\d$/.test(llave) && !(await A.evaluate(() => document.querySelector('#ll-mon').hidden)), '11. el Monitor de seguridad, a la vista: la clave y cuándo cambia (cada 2 minutos)', llave);
   await A.mouse.move(683, 400); await espera(300);
   await foto(A, '08-pc-llamada');
   await A.evaluate(() => document.querySelector('#ll-sas-si').click()); await espera(800);

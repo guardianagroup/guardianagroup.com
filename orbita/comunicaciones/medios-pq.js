@@ -84,7 +84,9 @@ onmessage = (e) => {
   else if (m.tipo === 'modo') { if (!(modos.get(m.id) === 'estricto' && m.modo === 'auto')) modos.set(m.id, m.modo); }
   else if (m.tipo === 'codecs') { codecs.set(m.id, m.mapa || {}); if (m.defecto) defectos.set(m.id, String(m.defecto)); }
   else if (m.tipo === 'olvida') { suelta(m.id); codecs.delete(m.id); defectos.delete(m.id); modos.delete(m.id); }
-  else if (m.tipo === 'cuenta') postMessage({ tipo: 'cuenta', cuenta });
+  else if (m.tipo === 'cuenta') postMessage({ tipo: 'cuenta', cuenta, n: m.n });
+  // (15 Nov 2026) cada llamada cuenta desde cero: el Monitor de seguridad de Ultra enseña los fragmentos de esta llamada
+  else if (m.tipo === 'cero') { cuenta.cifrados = 0; cuenta.descifrados = 0; cuenta.fallos = 0; cuenta.seguidos = 0; cuenta.claros = 0; }
 };
 
 // el códec de un fragmento de imagen: el que dice el navegador o, si no lo dice, el de su tipo de carga en la negociación

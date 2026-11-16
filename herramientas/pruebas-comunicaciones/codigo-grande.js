@@ -10,9 +10,8 @@
 //      a extremo», «Seguridad de esta llamada» enseña el mismo código en las dos pantallas con «Coinciden» / «No coinciden». «Coinciden»
 //      dice arriba «Los números coinciden.» y lo marca; al cambiar la llave el panel enseña el nuevo, el mismo en los dos, y la tarjeta
 //      sigue sin salir. «No coinciden» cuelga a los dos y lo explica.
-//   2. Ultra, PC ↔ PC: en las dos pantallas, en el centro, las mismas 4 palabras («Palabras de verificación»); la tarjeta roja del
-//      código no sale. «Sí, coinciden» las pliega con ✓. En «Seguridad de esta llamada», el código de la llave, el mismo en los dos;
-//      al cambiar la llave, otro, y las palabras no cambian (salen del acuerdo de la llamada). «No coinciden» cuelga a los dos y la
+//   2. Ultra, PC ↔ PC (15 nov 2026): la tarjeta roja del código en el centro de las dos pantallas, al empezar y cada vez que cambia
+//      la llave; las 4 palabras, plegadas en la píldora de arriba. «Coinciden» la pliega con ✓; «No coinciden» cuelga a los dos y la
 //      conversación Ultra se borra en los dos equipos.
 //   3. Pasada al teléfono. Blindada: ni el teléfono ni el PC de la otra persona enseñan la tarjeta; en el teléfono no hay cápsula
 //      arriba, así que el título abre «Seguridad de esta llamada», debajo de él, con el mismo código que el PC. Ultra: «Pasar al
@@ -140,29 +139,28 @@ const hablan = (A, B, ms) => hasta(async () => (await estado(A)) === 'hablando' 
     comprueba(fin && /no coincid/.test(av), '1. «No coinciden» en el panel: se cuelga a los dos y lo explica', { av });
     await A.context().close(); await B.context().close();
   }
-  // 2. Ultra, PC ↔ PC
+  // 2. Ultra, PC ↔ PC (desde el 15 nov 2026; dueño, 20:32: «en el modo ultra… al empezar la llamada, aparezca un código en rojo en el
+  //    medio de la pantalla para mí y para la otra persona… y quiero que eso pase cada 2 minutos»): la tarjeta roja del código en el
+  //    centro de las dos pantallas, al empezar y cada vez que cambia la llave; las 4 palabras, plegadas en la píldora de arriba, las
+  //    mismas en los dos. «Coinciden» pliega la tarjeta con ✓ y deja las palabras comprobadas; «No coinciden» cuelga a los dos y la
+  //    conversación Ultra se borra en los dos equipos.
   {
     const { A, B } = await pcpcUltra(browser);
     comprueba(await hablan(A, B), '2. Ultra: A y B en videollamada');
-    let pa = {}, pb = {}; await hasta(async () => { pa = await palabras(A); pb = await palabras(B); return pa.caja && pb.caja && pa.num.split(' · ').length === 4 && pa.num === pb.num; }, 15000);
-    comprueba(pa.caja && pb.caja && pa.t === 'Palabras de verificación' && pa.num.split(' · ').length === 4 && pa.num === pb.num, '2. en el centro, las mismas 4 palabras en las dos pantallas', { A: pa.num, B: pb.num });
-    await espera(2500); // más que lo que esperaba la tarjeta (1,5 s) antes de salir
-    const a = await vista(A), b = await vista(B);
-    comprueba(/^\d{6}$/.test(a.codigo) && a.codigo === b.codigo && !a.tarjeta && !b.tarjeta && !a.pildora && !b.pildora && !a.arriba && !b.arriba, '2. con la capa y su código, la tarjeta roja del código no sale', { A: [a.codigo, a.tarjeta, a.pildora], B: [b.codigo, b.tarjeta, b.pildora] });
-    await A.screenshot({ path: path.join(OUT, '2-a-palabras.png') });
-    await A.click('#ll-sas-si'); await espera(500);
-    const a2 = await palabras(A), b2 = await palabras(B);
-    comprueba(!a2.caja && /^✓/.test(a2.mini) && b2.caja, '2. «Sí, coinciden» en A: las pliega con ✓ (en B siguen)', { A: a2.mini, B: b2.caja });
+    let a = {}, b = {}; await hasta(async () => { a = await vista(A); b = await vista(B); return a.tarjeta && b.tarjeta && /^\d{6}$/.test(a.num) && a.num === b.num; }, 15000);
+    comprueba(a.tarjeta && b.tarjeta && /^\d{6}$/.test(a.num) && a.num === b.num && /^Léelo en voz alta/.test(a.texto), '2. la tarjeta roja, en el centro de las dos pantallas, con el mismo código', { A: a.num, B: b.num });
+    let pa = await palabras(A), pb = await palabras(B);
+    comprueba(!pa.caja && !pb.caja && !!pa.mini && pa.mini === pb.mini && pa.mini.split(' · ').length === 4, '2. las 4 palabras, plegadas arriba, las mismas en las dos pantallas', { A: pa.mini, B: pb.mini });
+    await A.screenshot({ path: path.join(OUT, '2-a-tarjeta.png') });
+    await A.click('#ll-cod-si'); await espera(600);
+    pa = await palabras(A); a = await vista(A);
+    comprueba(!a.tarjeta && /^✓/.test(a.pildora) && /^✓/.test(pa.mini), '2. «Coinciden» en A: la tarjeta se pliega en su píldora con ✓ y las palabras quedan comprobadas', { pildora: a.pildora, palabras: pa.mini });
     await A.screenshot({ path: path.join(OUT, '2-a-coinciden.png') });
-    // el código de la llave, en «Seguridad de esta llamada»: el mismo en los dos; al cambiar la llave, otro, y las palabras siguen
-    await abrePanel(A); await abrePanel(B);
-    let qa = {}, qb = {}, c0 = ''; await hasta(async () => { qa = await panel(A); qb = await panel(B); c0 = (await vista(A)).codigo; return qa.caja && qb.caja && qa.num === c0 && qb.num === c0; }, 6000);
-    comprueba(qa.caja && qb.caja && /^\d{6}$/.test(c0) && qa.num === c0 && qb.num === c0 && qa.filas.some((x) => /^La clave de la capa postcuántica cambia cada minuto/.test(x)), '2. en «Seguridad de esta llamada», el código de la llave, el mismo en los dos, y que cambia cada minuto', { A: qa.num, B: qb.num, c0, filas: qa.filas });
-    const ok = await hasta(async () => { const x = await panel(A), y = await panel(B); return /^\d{6}$/.test(x.num) && x.num !== c0 && x.num === y.num; }, 16000);
-    const pb3 = await palabras(B);
-    comprueba(ok && pb3.num === pb.num, '2. al cambiar la llave: otro código en el panel, el mismo en los dos; las palabras no cambian', { panel: (await panel(A)).num, antes: c0, palabras: pb3.num });
-    await B.keyboard.press('Escape'); await espera(300);
-    await B.click('#ll-sas-no');
+    const c0 = a.codigo;
+    const ok = await hasta(async () => { const x = await vista(A), y = await vista(B); return x.tarjeta && y.tarjeta && /^\d{6}$/.test(x.num) && x.num !== c0 && x.num === y.num; }, 16000);
+    const a3 = await vista(A), pb3 = await palabras(B);
+    comprueba(ok && a3.titulo === 'El código ha cambiado' && pb3.mini.replace(/^✓ /, '') === pb.mini.replace(/^✓ /, ''), '2. al cambiar la llave, la tarjeta vuelve en los dos con otro código, el mismo; las palabras no cambian', { antes: c0, ahora: a3.num, titulo: a3.titulo });
+    await B.click('#ll-cod-no');
     const fin = await hasta(async () => (await estado(A)) !== 'hablando' && (await estado(B)) !== 'hablando', 8000);
     const borrada = await hasta(async () => (await A.evaluate(() => window.gcomPrueba.cuantas())) === 0 && (await B.evaluate(() => window.gcomPrueba.cuantas())) === 0, 10000);
     comprueba(fin && borrada, '2. «No coinciden»: se cuelga a los dos y la conversación Ultra se borra en los dos equipos', { fin, borrada });

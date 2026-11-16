@@ -125,15 +125,18 @@ const crypto = require('crypto'); const shaGrande = crypto.createHash('sha256').
   await A.evaluate(() => { const b = [...document.querySelectorAll('.gc-mia .gc-archivo .boton')].find((x) => x.textContent === 'Borrar en los dos'); if (b) b.click(); }); await espera(1200);
   comprueba(await hasta(B, () => ![...document.querySelectorAll('.gc-archivo b')].some((b) => b.textContent === 'documento-1.bin') && /borrado un archivo/.test(document.body.textContent), 15000), 'B: «Borrar en los dos» lo quita también en B'); // (a ritmo fijo: la orden sale en su tic, detrás de lo que espere)
 
-  // 5) la llamada: las 4 palabras de verificación, iguales en las dos pantallas; «Sí, coinciden» verifica
+  // 5) la llamada (desde el 15 nov 2026): la tarjeta roja del código en el centro de las dos pantallas y las 4 palabras plegadas arriba,
+  //    las mismas en los dos; «Coinciden» en la tarjeta verifica (el código va atado a las palabras)
   await A.evaluate(() => document.querySelector('#llamar').click()); await espera(2500);
   if (await B.$('#ll-contestar:visible')) await B.click('#ll-contestar');
-  comprueba(await hasta(A, () => !document.querySelector('#ll-sas').hidden, 12000) && await hasta(B, () => !document.querySelector('#ll-sas').hidden, 12000), 'llamada: las palabras aparecen en los dos');
-  const nA = await A.evaluate(() => document.querySelector('#ll-sas-num').textContent), nB = await B.evaluate(() => document.querySelector('#ll-sas-num').textContent);
+  const ve = (P, s) => P.evaluate((s) => { const e = document.querySelector(s); return !!(e && !e.hidden && e.getClientRects().length); }, s);
+  comprueba(await hasta(A, () => !document.querySelector('#ll-sas-mini').hidden, 12000) && await hasta(B, () => !document.querySelector('#ll-sas-mini').hidden, 12000), 'llamada: las palabras aparecen en los dos, plegadas arriba');
+  const nA = await A.evaluate(() => document.querySelector('#ll-sas-mini').textContent), nB = await B.evaluate(() => document.querySelector('#ll-sas-mini').textContent);
   comprueba(nA.split(' · ').length === 4 && nA === nB, 'llamada: las mismas 4 palabras en las dos pantallas (' + nA + ' | ' + nB + ')');
+  comprueba(await hasta(A, () => !document.querySelector('#ll-cod').hidden, 12000) && await hasta(B, () => !document.querySelector('#ll-cod').hidden, 12000) && (await A.evaluate(() => document.querySelector('#ll-cod-num').textContent)) === (await B.evaluate(() => document.querySelector('#ll-cod-num').textContent)), 'llamada: la tarjeta roja del código, la misma en las dos pantallas');
   await foto(A, '27-A-numero'); await foto(B, '27-B-numero');
-  await A.click('#ll-sas-si'); await B.click('#ll-sas-si'); await espera(1000);
-  comprueba(await A.evaluate(() => document.querySelector('#ll-sas').hidden && !document.querySelector('#ll-sas-mini').hidden && /✓/.test(document.querySelector('#ll-sas-mini').textContent)), 'llamada: con «Coinciden», la píldora ✓ arriba');
+  await A.click('#ll-cod-si'); await B.click('#ll-cod-si'); await espera(1000);
+  comprueba(!(await ve(A, '#ll-sas')) && await A.evaluate(() => !document.querySelector('#ll-sas-mini').hidden && /✓/.test(document.querySelector('#ll-sas-mini').textContent)), 'llamada: con «Coinciden», la píldora ✓ arriba');
   await foto(A, '28-A-coinciden');
   await A.click('#ll-colgar'); await espera(2000);
   comprueba(await hasta(A, () => { const c = window.gcomPrueba.conv(); return !!(c && c.verificada && c.suVerificada); }, 6000) && await hasta(B, () => { const c = window.gcomPrueba.conv(); return !!(c && c.verificada && c.suVerificada); }, 6000), 'chat: queda verificada por los dos, sin mandar ninguna palabra');
