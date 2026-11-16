@@ -2705,3 +2705,8 @@ body.modo-llevar .ll-mon{top:calc(130px + env(safe-area-inset-top))}
 .gc-llamada.con-efectos:not(.mini):not(.movida):not(.dividida):not(.yo-grande):not(.tres) .videos #v-local{bottom:calc(262px + env(safe-area-inset-bottom))}
 @media (hover:hover) and (pointer:fine),(min-width:761px){.gc-llamada.con-efectos:not(.mini):not(.movida):not(.dividida):not(.yo-grande):not(.tres) .videos #v-local{bottom:214px}}
 #llamada.con-efectos~.llevar-avisos{bottom:calc(212px + env(safe-area-inset-bottom))}
+/* (15 Nov 2026) en una llamada de voz, el título grande del centro se aparta mientras la tarjeta del código está encima (y, en
+   el teléfono, también con el monitor abierto): asomaba por los dos lados */
+.gc-llamada:not(.mini):not(.con-video) .gc-llamada-centro{transition:opacity .2s ease}
+.gc-llamada:not(.mini):not(.con-video):has(#ll-cod:not([hidden])) .gc-llamada-centro{opacity:0}
+@media (max-width:760px){.gc-llamada:not(.mini):not(.con-video):has(#ll-mon:not([hidden]):not(.plegado)) .gc-llamada-centro{opacity:0}}
