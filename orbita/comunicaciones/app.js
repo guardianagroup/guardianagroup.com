@@ -4820,7 +4820,14 @@
       const ordenador = !!(matchMedia('(hover: hover) and (pointer: fine)').matches);
       if (tapa) {
         addEventListener('keyup', (e) => { if (e.key !== 'PrintScreen' || !enBlindado()) return; tapa.hidden = false; clearTimeout(capT); capT = setTimeout(() => { tapa.hidden = true; }, 3000); const dice = (vacio) => { const s = tapa.querySelector('.cv-captura'); if (s) s.textContent = vacio ? T('Captura detectada: se vació el portapapeles; una web no puede impedir capturas') : T('Captura detectada: una web no puede impedir capturas'); }; dice(false); try { navigator.clipboard.writeText(T('Modo Ultra: se vació el portapapeles tras una captura.')).then(() => dice(true), () => dice(false)); } catch (_) { dice(false); } });
-        if (ordenador) { addEventListener('blur', () => { if (enBlindado()) { clearTimeout(capT); tapa.hidden = false; } }); addEventListener('focus', () => { tapa.hidden = true; }); }
+        // (16 Nov 2026; dueño, 10:32: «le damos a ver mis datos en Órbita… volvemos al chat y ya no nos vemos») en mitad de una llamada
+        // no se tapa: la llamada se tiene que seguir viendo con el foco en otro sitio (la ventana flotante, otro programa); y al volver
+        // a la pestaña se destapa aunque no llegue el foco (en el programa GUARDIANA, la vista no lo recibe hasta que se toca).
+        if (ordenador) {
+          addEventListener('blur', () => { if (enBlindado() && !(LL && LL.ocupado)) { clearTimeout(capT); tapa.hidden = false; } });
+          addEventListener('focus', () => { tapa.hidden = true; });
+          document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible' && !tapa.classList.contains('fuera')) tapa.hidden = true; });
+        }
       } }
     $('#velo-pista').addEventListener('keydown', (e) => { if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); descubre(e); } });
     $('#velo-pista').addEventListener('keyup', cubre);
