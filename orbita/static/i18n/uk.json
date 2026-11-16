@@ -3968,7 +3968,13 @@
 "Se cortó la conexión con el relé: este es un código nuevo.":"З’єднання з реле перервалося: це новий код.",
 "Chat privado: cuando los dos salgan y no quede nada sin ver, el chat se borrará en los dos equipos.":"Приватний чат: коли ви обоє вийдете й не залишиться нічого непрочитаного, чат буде видалено на обох пристроях.",
 "Los dos han salido: la conversación con {n} se ha borrado.":"Ви обоє вийшли: розмову з {n} видалено.",
-"Los dos han salido: el chat con {n} se ha borrado.":"Ви обоє вийшли: чат з {n} видалено."
+"Los dos han salido: el chat con {n} se ha borrado.":"Ви обоє вийшли: чат з {n} видалено.",
+"Tipo de conversación":"Тип розмови",
+"Gratis · código de 9 cifras":"Безкоштовно · 9-значний код",
+"Con la suscripción Plus · código de 16 caracteres":"З підпискою Plus · 16-символьний код",
+"Escribe los 16 caracteres que te han dado":"Введіть 16 символів, які вам дали",
+"Crear un código":"Створити код",
+"Te sale un código Ultra de 16 caracteres para dárselo a la otra persona":"Ви отримаєте 16-символьний код Ultra, який треба передати іншій людині"
 },
 "p":{
 "intento":"Найнаполегливіша сьогодні: {1}, {2} {2?раз|разів}.",

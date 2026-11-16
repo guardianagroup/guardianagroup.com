@@ -3968,7 +3968,13 @@
 "Se cortó la conexión con el relé: este es un código nuevo.":"การเชื่อมต่อกับรีเลย์ขาดหาย: นี่คือรหัสใหม่",
 "Chat privado: cuando los dos salgan y no quede nada sin ver, el chat se borrará en los dos equipos.":"แชทส่วนตัว: เมื่อทั้งสองคนออกไปแล้วและไม่มีอะไรที่ยังไม่ได้ดู แชทจะถูกลบในอุปกรณ์ทั้งสองเครื่อง",
 "Los dos han salido: la conversación con {n} se ha borrado.":"ทั้งสองคนออกไปแล้ว: ลบการสนทนากับ {n} แล้ว",
-"Los dos han salido: el chat con {n} se ha borrado.":"ทั้งสองคนออกไปแล้ว: ลบแชทกับ {n} แล้ว"
+"Los dos han salido: el chat con {n} se ha borrado.":"ทั้งสองคนออกไปแล้ว: ลบแชทกับ {n} แล้ว",
+"Tipo de conversación":"ประเภทการสนทนา",
+"Gratis · código de 9 cifras":"ฟรี · รหัส 9 หลัก",
+"Con la suscripción Plus · código de 16 caracteres":"พร้อมการสมัครสมาชิก Plus · รหัส 16 ตัวอักษร",
+"Escribe los 16 caracteres que te han dado":"ป้อน 16 ตัวอักษรที่ได้รับ",
+"Crear un código":"สร้างรหัส",
+"Te sale un código Ultra de 16 caracteres para dárselo a la otra persona":"คุณจะได้รับรหัส Ultra 16 ตัวอักษรเพื่อส่งให้อีกฝ่าย"
 },
 "p":{
 "intento":"พยายามมากที่สุดวันนี้: {1}, {2} {2?ครั้ง|ครั้ง}",

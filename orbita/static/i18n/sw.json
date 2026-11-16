@@ -3968,7 +3968,13 @@
 "Se cortó la conexión con el relé: este es un código nuevo.":"Muunganisho na relay ulikatika: huu ni msimbo mpya.",
 "Chat privado: cuando los dos salgan y no quede nada sin ver, el chat se borrará en los dos equipos.":"Gumzo la faragha: mtakapotoka wote wawili na hakuna kilichobaki bila kuonekana, gumzo litafutwa kwenye vifaa vyote viwili.",
 "Los dos han salido: la conversación con {n} se ha borrado.":"Mmetoka wote wawili: mazungumzo na {n} yamefutwa.",
-"Los dos han salido: el chat con {n} se ha borrado.":"Mmetoka wote wawili: gumzo na {n} limefutwa."
+"Los dos han salido: el chat con {n} se ha borrado.":"Mmetoka wote wawili: gumzo na {n} limefutwa.",
+"Tipo de conversación":"Aina ya mazungumzo",
+"Gratis · código de 9 cifras":"Bure · msimbo wa tarakimu 9",
+"Con la suscripción Plus · código de 16 caracteres":"Kwa usajili wa Plus · msimbo wa herufi 16",
+"Escribe los 16 caracteres que te han dado":"Andika herufi 16 ulizopewa",
+"Crear un código":"Unda msimbo",
+"Te sale un código Ultra de 16 caracteres para dárselo a la otra persona":"Utapata msimbo wa Ultra wa herufi 16 wa kumpa mtu mwingine"
 },
 "p":{
 "intento":"Iliyojaribu zaidi leo: {1}, {2?mara|mara} {2}.",

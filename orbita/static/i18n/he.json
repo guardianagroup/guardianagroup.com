@@ -3968,7 +3968,13 @@
 "Se cortó la conexión con el relé: este es un código nuevo.":"החיבור לממסר נותק: זה קוד חדש.",
 "Chat privado: cuando los dos salgan y no quede nada sin ver, el chat se borrará en los dos equipos.":"צ׳אט פרטי: כששניכם תצאו ולא יישאר שום דבר שלא נראה, הצ׳אט יימחק בשני המכשירים.",
 "Los dos han salido: la conversación con {n} se ha borrado.":"שניכם יצאתם: השיחה עם {n} נמחקה.",
-"Los dos han salido: el chat con {n} se ha borrado.":"שניכם יצאתם: הצ׳אט עם {n} נמחק."
+"Los dos han salido: el chat con {n} se ha borrado.":"שניכם יצאתם: הצ׳אט עם {n} נמחק.",
+"Tipo de conversación":"סוג השיחה",
+"Gratis · código de 9 cifras":"בחינם · קוד בן 9 ספרות",
+"Con la suscripción Plus · código de 16 caracteres":"עם מינוי Plus · קוד בן 16 תווים",
+"Escribe los 16 caracteres que te han dado":"הקלידו את 16 התווים שקיבלתם",
+"Crear un código":"יצירת קוד",
+"Te sale un código Ultra de 16 caracteres para dárselo a la otra persona":"מקבלים קוד Ultra בן 16 תווים שצריך למסור לאדם השני"
 },
 "p":{
 "intento":"ניסתה הכי הרבה היום: {1}, {2} {2?פעם|פעמים}.",

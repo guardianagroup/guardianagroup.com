@@ -3968,7 +3968,13 @@
 "Se cortó la conexión con el relé: este es un código nuevo.":"La connessione con il relay si è interrotta: questo è un nuovo codice.",
 "Chat privado: cuando los dos salgan y no quede nada sin ver, el chat se borrará en los dos equipos.":"Chat privata: quando sarete usciti entrambi e non resterà nulla da vedere, la chat verrà eliminata su entrambi i dispositivi.",
 "Los dos han salido: la conversación con {n} se ha borrado.":"Siete usciti entrambi: la conversazione con {n} è stata eliminata.",
-"Los dos han salido: el chat con {n} se ha borrado.":"Siete usciti entrambi: la chat con {n} è stata eliminata."
+"Los dos han salido: el chat con {n} se ha borrado.":"Siete usciti entrambi: la chat con {n} è stata eliminata.",
+"Tipo de conversación":"Tipo di conversazione",
+"Gratis · código de 9 cifras":"Gratis · codice di 9 cifre",
+"Con la suscripción Plus · código de 16 caracteres":"Con l’abbonamento Plus · codice di 16 caratteri",
+"Escribe los 16 caracteres que te han dado":"Inserisci i 16 caratteri che ti hanno dato",
+"Crear un código":"Crea un codice",
+"Te sale un código Ultra de 16 caracteres para dárselo a la otra persona":"Ricevi un codice Ultra di 16 caratteri da dare all’altra persona"
 },
 "p":{
 "intento":"Quella che ci ha provato di più oggi: {1}, {2} {2?volta|volte}.",

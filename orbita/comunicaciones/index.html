@@ -41,7 +41,7 @@
 <link rel="canonical" href="https://guardianagroup.com/orbita/comunicaciones/">
 <link rel="icon" href="/favicon.ico">
 <link rel="stylesheet" href="componentes.css?v=20261028m">
-<link rel="stylesheet" href="app.css?v=20261115-foto1">
+<link rel="stylesheet" href="app.css?v=20261115-modos1">
 <link rel="stylesheet" href="diseno.css?v=20261031a">
 <link rel="stylesheet" href="viaje.css?v=20261029b">
 <!-- antes de pintar: como app desde el primer fotograma y, al volver a un chat tras recargar, sin enseñar el inicio entretanto -->
@@ -323,8 +323,15 @@
           <button type="button" class="mi-numero-compartir" id="num-compartir"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12"/><path d="M8 7l4-4 4 4"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></svg><span>Compartir mi número</span></button>
         </div>
       </div>
-      <button type="button" class="grande principal" id="nueva"><b>Crear invitación</b><small>Te sale un código de 9 cifras para dárselo a la otra persona</small></button>
-      <button type="button" class="grande" id="unir"><b>Tengo un código</b><small>9 cifras, o el código Ultra de 16 caracteres</small></button>
+      <!-- dueño, 15 nov 2026: en el PC, primero el tipo de conversación (Blindado o Ultra) y después «Tengo un código» o «Crear un código».
+           En el teléfono no se ve: allí siguen sus botones de siempre -->
+      <div class="modos" id="modos" role="radiogroup" aria-label="Tipo de conversación">
+        <button type="button" class="modo elegido" id="modo-blindado" role="radio" aria-checked="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6z"/></svg><b>Blindado</b><small>Gratis · código de 9 cifras</small><i class="modo-marca" aria-hidden="true"></i></button>
+        <button type="button" class="modo" id="modo-ultra" role="radio" aria-checked="false" tabindex="-1"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg><b>Ultra</b><small>Con la suscripción Plus · código de 16 caracteres</small><i class="modo-marca" aria-hidden="true"></i></button>
+      </div>
+      <button type="button" class="grande" id="unir"><b>Tengo un código</b><small id="unir-t">Escribe las 9 cifras que te han dado</small></button>
+      <button type="button" class="grande principal" id="nueva"><b>Crear un código</b><small id="nueva-t">Te sale un código de 9 cifras para dárselo a la otra persona</small></button>
+      <p class="modo-nota" id="modo-nota" hidden></p>
       <!-- dueño, 27 Oct 2026, 22:01–23:12: la sesión de ML-KEM-1024 y ML-DSA-87, «de la máxima»; 29 Oct 2026, 12:55–12:59: «próximamente»,
            y en el ordenador el botón queda como aviso. 2 Nov 2026, 17:01 («Solo hay dos modelos, el blindado y el ultra»): esa sesión
            es la de Ultra, con la suscripción Plus; la gratuita, la de hoy, es la Blindada (el id y el modo guardado, «blindada», siguen) -->
@@ -586,7 +593,7 @@
             <li><b>Clínicas y consultas</b><span>Informes y pruebas de imagen para tus pacientes por un canal encriptado, tras comprobar el número de seguridad por teléfono.</span></li>
             <li><b>Asesorías, RR. HH. y empresas</b><span>Nóminas, contratos laborales, auditorías y documentación interna, en conversaciones que borras al terminar.</span></li>
           </ul>
-          <button type="button" class="boton principal pro-empezar" id="pro-empezar"><span class="solo-pc">Crear invitación</span><span class="solo-movil">Invitar a chat</span></button>
+          <button type="button" class="boton principal pro-empezar" id="pro-empezar"><span class="solo-pc">Crear un código</span><span class="solo-movil">Invitar a chat</span></button>
         </div>
       </div>
 
@@ -1333,6 +1340,6 @@
 <script src="viaje.js?v=20261105-ultra2"></script>
 <script src="llamada.js?v=20261105-ultra2"></script>
 <script src="editor-foto.js?v=20261115-foto1"></script>
-<script src="app.js?v=20261115-salir1"></script>
+<script src="app.js?v=20261115-modos1"></script>
 </body>
 </html>

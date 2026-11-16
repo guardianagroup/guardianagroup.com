@@ -3968,7 +3968,13 @@
 "Se cortó la conexión con el relé: este es un código nuevo.":"Forbindelsen med reléet ble brutt: dette er en ny kode.",
 "Chat privado: cuando los dos salgan y no quede nada sin ver, el chat se borrará en los dos equipos.":"Privat chat: når dere begge har gått ut og ingenting er usett, slettes chatten på begge enhetene.",
 "Los dos han salido: la conversación con {n} se ha borrado.":"Dere har begge gått ut: samtalen med {n} er slettet.",
-"Los dos han salido: el chat con {n} se ha borrado.":"Dere har begge gått ut: chatten med {n} er slettet."
+"Los dos han salido: el chat con {n} se ha borrado.":"Dere har begge gått ut: chatten med {n} er slettet.",
+"Tipo de conversación":"Samtaletype",
+"Gratis · código de 9 cifras":"Gratis · 9-sifret kode",
+"Con la suscripción Plus · código de 16 caracteres":"Med Plus-abonnementet · kode på 16 tegn",
+"Escribe los 16 caracteres que te han dado":"Skriv inn de 16 tegnene du har fått",
+"Crear un código":"Lag en kode",
+"Te sale un código Ultra de 16 caracteres para dárselo a la otra persona":"Du får en Ultra-kode på 16 tegn som du gir til den andre personen"
 },
 "p":{
 "intento":"Den som prøvde mest i dag: {1}, {2} {2?gang|ganger}.",

@@ -3968,7 +3968,13 @@
 "Se cortó la conexión con el relé: este es un código nuevo.":"Koneksi ke relay terputus: ini kode baru.",
 "Chat privado: cuando los dos salgan y no quede nada sin ver, el chat se borrará en los dos equipos.":"Obrolan pribadi: setelah kalian berdua keluar dan tidak ada yang belum dilihat, obrolan akan dihapus di kedua perangkat.",
 "Los dos han salido: la conversación con {n} se ha borrado.":"Kalian berdua sudah keluar: percakapan dengan {n} telah dihapus.",
-"Los dos han salido: el chat con {n} se ha borrado.":"Kalian berdua sudah keluar: obrolan dengan {n} telah dihapus."
+"Los dos han salido: el chat con {n} se ha borrado.":"Kalian berdua sudah keluar: obrolan dengan {n} telah dihapus.",
+"Tipo de conversación":"Jenis percakapan",
+"Gratis · código de 9 cifras":"Gratis · kode 9 digit",
+"Con la suscripción Plus · código de 16 caracteres":"Dengan langganan Plus · kode 16 karakter",
+"Escribe los 16 caracteres que te han dado":"Masukkan 16 karakter yang Anda terima",
+"Crear un código":"Buat kode",
+"Te sale un código Ultra de 16 caracteres para dárselo a la otra persona":"Anda mendapat kode Ultra 16 karakter untuk diberikan kepada lawan bicara"
 },
 "p":{
 "intento":"Paling gigih mencoba hari ini: {1}, {2} {2?kali|kali}.",

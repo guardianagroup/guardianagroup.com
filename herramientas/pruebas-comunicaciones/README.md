@@ -41,6 +41,7 @@ Después, desde esta carpeta:
   deshacer, comentario), la foto llega editada (JPEG) con el comentario debajo; sin «Responder» en las fotos; «Editar» en el visor; «Documento»
   directo; varias fotos con su comentario cada una; y el modo «Listo» de la hoja del blindado, con «Tapar».
 - `node salir-los-dos.js` — el chat privado (15 nov 2026): al salir los dos (al inicio, a otra conversación o cerrando la pestaña) y sin nada por ver, el chat se borra en los dos equipos, en memoria y en el disco; con un mensaje sin ver no se borra; con la otra persona fuera de línea, la orden espera firmada en su buzón y, al volver a abrir GUARDIANA, el chat no llega a verse ni un momento; si la otra persona sigue dentro, una recarga no lo borra; y un mensaje que espera en el buzón se enseña al volver y no se borra hasta verse. 21 comprobaciones.
+- `node inicio-modos.js` — el inicio en el PC (15 nov 2026): primero el tipo de conversación, Blindado o Ultra (radio, también con las flechas); debajo, «Tengo un código» y «Crear un código», que hablan del código de ese tipo; «Crear un código» da el de 9 cifras o el Ultra de 16 caracteres; en inglés, traducido; en el teléfono, el inicio de siempre. 10 comprobaciones.
 - `node voz-ultra.js` — la voz cambiada de Ultra medida en Node (formantes, tono y paso banda), sin navegador.
 - `node contactos.js` — guardar contactos, volver, llamar desde la lista, recargas.
 - `node tirar.js` — tirar para actualizar (solo el ✓, sin palabra).

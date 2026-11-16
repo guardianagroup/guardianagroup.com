@@ -3968,7 +3968,13 @@
 "Se cortó la conexión con el relé: este es un código nuevo.":"Tengingin við endurvarpann rofnaði: þetta er nýr kóði.",
 "Chat privado: cuando los dos salgan y no quede nada sin ver, el chat se borrará en los dos equipos.":"Einkaspjall: þegar þið hafið bæði farið út og ekkert er óséð verður spjallinu eytt á báðum tækjum.",
 "Los dos han salido: la conversación con {n} se ha borrado.":"Þið hafið bæði farið út: samtalinu við {n} hefur verið eytt.",
-"Los dos han salido: el chat con {n} se ha borrado.":"Þið hafið bæði farið út: spjallinu við {n} hefur verið eytt."
+"Los dos han salido: el chat con {n} se ha borrado.":"Þið hafið bæði farið út: spjallinu við {n} hefur verið eytt.",
+"Tipo de conversación":"Tegund samtals",
+"Gratis · código de 9 cifras":"Ókeypis · 9 stafa kóði",
+"Con la suscripción Plus · código de 16 caracteres":"Með Plus-áskriftinni · kóði með 16 stöfum",
+"Escribe los 16 caracteres que te han dado":"Sláðu inn stafina 16 sem þú fékkst",
+"Crear un código":"Búa til kóða",
+"Te sale un código Ultra de 16 caracteres para dárselo a la otra persona":"Þú færð Ultra-kóða með 16 stöfum til að gefa hinum aðilanum"
 },
 "p":{
 "intento":"Sá sem reyndi mest í dag: {1}, {2} {2?sinni|sinnum}.",

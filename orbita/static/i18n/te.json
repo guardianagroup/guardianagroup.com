@@ -3968,7 +3968,13 @@
 "Se cortó la conexión con el relé: este es un código nuevo.":"రిలేతో కనెక్షన్ తెగిపోయింది: ఇది కొత్త కోడ్.",
 "Chat privado: cuando los dos salgan y no quede nada sin ver, el chat se borrará en los dos equipos.":"ప్రైవేట్ చాట్: మీరిద్దరూ బయటకు వెళ్లి, చూడనిది ఏదీ మిగలనప్పుడు, చాట్ రెండు పరికరాల నుండి తొలగించబడుతుంది.",
 "Los dos han salido: la conversación con {n} se ha borrado.":"మీరిద్దరూ బయటకు వెళ్లారు: {n}తో సంభాషణ తొలగించబడింది.",
-"Los dos han salido: el chat con {n} se ha borrado.":"మీరిద్దరూ బయటకు వెళ్లారు: {n}తో చాట్ తొలగించబడింది."
+"Los dos han salido: el chat con {n} se ha borrado.":"మీరిద్దరూ బయటకు వెళ్లారు: {n}తో చాట్ తొలగించబడింది.",
+"Tipo de conversación":"సంభాషణ రకం",
+"Gratis · código de 9 cifras":"ఉచితం · 9 అంకెల కోడ్",
+"Con la suscripción Plus · código de 16 caracteres":"Plus సబ్‌స్క్రిప్షన్‌తో · 16 అక్షరాల కోడ్",
+"Escribe los 16 caracteres que te han dado":"మీకు ఇచ్చిన 16 అక్షరాలను నమోదు చేయండి",
+"Crear un código":"కోడ్ సృష్టించండి",
+"Te sale un código Ultra de 16 caracteres para dárselo a la otra persona":"అవతలి వ్యక్తికి ఇవ్వడానికి మీకు 16 అక్షరాల Ultra కోడ్ వస్తుంది"
 },
 "p":{
 "intento":"ఈరోజు ఎక్కువగా ప్రయత్నించింది: {1}, {2} {2?సారి|సార్లు}.",

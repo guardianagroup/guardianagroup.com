@@ -3968,7 +3968,13 @@
 "Se cortó la conexión con el relé: este es un código nuevo.":"與中繼的連線曾中斷：這是一組新的代碼。",
 "Chat privado: cuando los dos salgan y no quede nada sin ver, el chat se borrará en los dos equipos.":"私密聊天：當你們兩人都離開且沒有未讀內容時，聊天會在兩部裝置上刪除。",
 "Los dos han salido: la conversación con {n} se ha borrado.":"你們兩人都已離開：與 {n} 的對話已刪除。",
-"Los dos han salido: el chat con {n} se ha borrado.":"你們兩人都已離開：與 {n} 的聊天已刪除。"
+"Los dos han salido: el chat con {n} se ha borrado.":"你們兩人都已離開：與 {n} 的聊天已刪除。",
+"Tipo de conversación":"對話類型",
+"Gratis · código de 9 cifras":"免費 · 9 位數代碼",
+"Con la suscripción Plus · código de 16 caracteres":"透過 Plus 訂閱 · 16 個字元的代碼",
+"Escribe los 16 caracteres que te han dado":"輸入對方給你的 16 個字元",
+"Crear un código":"建立代碼",
+"Te sale un código Ultra de 16 caracteres para dárselo a la otra persona":"你會取得一組 16 個字元的 Ultra 代碼，交給對方"
 },
 "p":{
 "intento":"今天嘗試最多的：{1}，{2} {2?次|次}。",

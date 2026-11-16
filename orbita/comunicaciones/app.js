@@ -4546,7 +4546,26 @@
     try { new MutationObserver(() => { const c = CONVS.get(ACTUAL); if (c) setTimeout(() => marcaLeidos(c), 80); }).observe($('#llamada'), { attributes: true, attributeFilter: ['class'] }); } catch (_) {}
     // al girar el teléfono o cambiar el tamaño, la cabecera elige su versión corta o larga
     try { matchMedia('(max-width: 760px)').addEventListener('change', () => { const c = CONVS.get(ACTUAL); if (c) pintaCabecera(c); }); } catch (_) {}
-    $('#nueva').addEventListener('click', creaInvitacion);
+    // el inicio en el PC (dueño, 15 nov 2026): primero el tipo, Blindado o Ultra; «Tengo un código» y «Crear un código» dicen el código
+    // de ese tipo, y «Crear un código» con Ultra elegido hace lo de siempre del botón Ultra (en el programa con Plus; si no, el motivo)
+    let modoInicio = 'blindado';
+    const pintaModoInicio = () => {
+      const u = modoInicio === 'ultra';
+      for (const [id, si] of [['#modo-blindado', !u], ['#modo-ultra', u]]) { const b = $(id); if (b) { b.classList.toggle('elegido', si); b.setAttribute('aria-checked', String(si)); b.tabIndex = si ? 0 : -1; } }
+      const nt = $('#nueva-t'), ut = $('#unir-t'), nota = $('#modo-nota');
+      if (nt) nt.textContent = T(u ? 'Te sale un código Ultra de 16 caracteres para dárselo a la otra persona' : 'Te sale un código de 9 cifras para dárselo a la otra persona');
+      if (ut) ut.textContent = T(u ? 'Escribe los 16 caracteres que te han dado' : 'Escribe las 9 cifras que te han dado');
+      if (nota) { const x = $('#nueva-blindada-t'); nota.textContent = x ? x.textContent : ''; nota.hidden = !u; }
+    };
+    const eligeModo = (m, foco) => { modoInicio = m; pintaModoInicio(); if (foco) { const b = $(m === 'ultra' ? '#modo-ultra' : '#modo-blindado'); if (b) b.focus(); } };
+    { const mb = $('#modo-blindado'), mu = $('#modo-ultra');
+      if (mb && mu) {
+        mb.addEventListener('click', () => eligeModo('blindado'));
+        mu.addEventListener('click', () => eligeModo('ultra'));
+        for (const b of [mb, mu]) b.addEventListener('keydown', (e) => { if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(e.key)) { e.preventDefault(); eligeModo(modoInicio === 'ultra' ? 'blindado' : 'ultra', true); } });
+        addEventListener('guardiana-idioma', pintaModoInicio);
+      } }
+    $('#nueva').addEventListener('click', () => { if (!esMovil() && modoInicio === 'ultra') { $('#nueva-blindada').click(); return; } creaInvitacion(); });
     // «Crear invitación» al final del bloque para profesionales: sube al principio y hace lo mismo que el botón grande.
     const proEmpezar = $('#pro-empezar');
     // en el móvil, la misma invitación que el botón de arriba (con el enlace y el menú de compartir), nunca la del código de 9 cifras

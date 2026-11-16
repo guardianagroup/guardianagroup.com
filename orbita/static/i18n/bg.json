@@ -3968,7 +3968,13 @@
 "Se cortó la conexión con el relé: este es un código nuevo.":"Връзката с релето прекъсна: това е нов код.",
 "Chat privado: cuando los dos salgan y no quede nada sin ver, el chat se borrará en los dos equipos.":"Личен чат: когато и двамата излезете и не остане нищо непрочетено, чатът ще бъде изтрит и на двете устройства.",
 "Los dos han salido: la conversación con {n} se ha borrado.":"И двамата излязохте: разговорът с {n} е изтрит.",
-"Los dos han salido: el chat con {n} se ha borrado.":"И двамата излязохте: чатът с {n} е изтрит."
+"Los dos han salido: el chat con {n} se ha borrado.":"И двамата излязохте: чатът с {n} е изтрит.",
+"Tipo de conversación":"Вид разговор",
+"Gratis · código de 9 cifras":"Безплатно · 9-цифрен код",
+"Con la suscripción Plus · código de 16 caracteres":"С абонамента Plus · код от 16 знака",
+"Escribe los 16 caracteres que te han dado":"Въведете 16-те знака, които са ви дали",
+"Crear un código":"Създаване на код",
+"Te sale un código Ultra de 16 caracteres para dárselo a la otra persona":"Получавате код Ultra от 16 знака, който да дадете на другия човек"
 },
 "p":{
 "intento":"Най-настойчивата днес: {1}, {2} {2?път|пъти}.",

@@ -3968,7 +3968,13 @@
 "Se cortó la conexión con el relé: este es un código nuevo.":"Η σύνδεση με τον αναμεταδότη διακόπηκε: αυτός είναι νέος κωδικός.",
 "Chat privado: cuando los dos salgan y no quede nada sin ver, el chat se borrará en los dos equipos.":"Ιδιωτική συνομιλία: όταν βγείτε και οι δύο και δεν μείνει τίποτα αδιάβαστο, η συνομιλία θα διαγραφεί και από τις δύο συσκευές.",
 "Los dos han salido: la conversación con {n} se ha borrado.":"Βγήκατε και οι δύο: η συνομιλία με {n} διαγράφηκε.",
-"Los dos han salido: el chat con {n} se ha borrado.":"Βγήκατε και οι δύο: η συνομιλία με {n} διαγράφηκε."
+"Los dos han salido: el chat con {n} se ha borrado.":"Βγήκατε και οι δύο: η συνομιλία με {n} διαγράφηκε.",
+"Tipo de conversación":"Τύπος συνομιλίας",
+"Gratis · código de 9 cifras":"Δωρεάν · 9ψήφιος κωδικός",
+"Con la suscripción Plus · código de 16 caracteres":"Με τη συνδρομή Plus · κωδικός 16 χαρακτήρων",
+"Escribe los 16 caracteres que te han dado":"Πληκτρολογήστε τους 16 χαρακτήρες που σας έδωσαν",
+"Crear un código":"Δημιουργία κωδικού",
+"Te sale un código Ultra de 16 caracteres para dárselo a la otra persona":"Λαμβάνετε έναν κωδικό Ultra 16 χαρακτήρων για να τον δώσετε στο άλλο άτομο"
 },
 "p":{
 "intento":"Η πιο επίμονη σήμερα: {1}, {2} {2?φορά|φορές}.",

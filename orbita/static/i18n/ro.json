@@ -3968,7 +3968,13 @@
 "Se cortó la conexión con el relé: este es un código nuevo.":"Conexiunea cu releul s-a întrerupt: acesta este un cod nou.",
 "Chat privado: cuando los dos salgan y no quede nada sin ver, el chat se borrará en los dos equipos.":"Chat privat: după ce ieșiți amândoi și nu mai rămâne nimic nevăzut, chatul va fi șters de pe ambele dispozitive.",
 "Los dos han salido: la conversación con {n} se ha borrado.":"Ați ieșit amândoi: conversația cu {n} a fost ștearsă.",
-"Los dos han salido: el chat con {n} se ha borrado.":"Ați ieșit amândoi: chatul cu {n} a fost șters."
+"Los dos han salido: el chat con {n} se ha borrado.":"Ați ieșit amândoi: chatul cu {n} a fost șters.",
+"Tipo de conversación":"Tipul conversației",
+"Gratis · código de 9 cifras":"Gratuit · cod de 9 cifre",
+"Con la suscripción Plus · código de 16 caracteres":"Cu abonamentul Plus · cod de 16 caractere",
+"Escribe los 16 caracteres que te han dado":"Scrie cele 16 caractere pe care le-ai primit",
+"Crear un código":"Creează un cod",
+"Te sale un código Ultra de 16 caracteres para dárselo a la otra persona":"Primești un cod Ultra de 16 caractere pe care să-l dai celeilalte persoane"
 },
 "p":{
 "intento":"Cea care a încercat cel mai mult azi: {1}, {2} {2?dată|ori}.",

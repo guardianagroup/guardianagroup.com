@@ -3968,7 +3968,13 @@
 "Se cortó la conexión con el relé: este es un código nuevo.":"ریلے سے کنکشن ٹوٹ گیا تھا: یہ نیا کوڈ ہے۔",
 "Chat privado: cuando los dos salgan y no quede nada sin ver, el chat se borrará en los dos equipos.":"نجی چیٹ: جب آپ دونوں باہر نکل جائیں گے اور کچھ بھی ان دیکھا نہیں رہے گا تو چیٹ دونوں آلات سے مٹ جائے گی۔",
 "Los dos han salido: la conversación con {n} se ha borrado.":"آپ دونوں باہر نکل گئے: {n} کے ساتھ گفتگو حذف کر دی گئی ہے۔",
-"Los dos han salido: el chat con {n} se ha borrado.":"آپ دونوں باہر نکل گئے: {n} کے ساتھ چیٹ حذف کر دی گئی ہے۔"
+"Los dos han salido: el chat con {n} se ha borrado.":"آپ دونوں باہر نکل گئے: {n} کے ساتھ چیٹ حذف کر دی گئی ہے۔",
+"Tipo de conversación":"گفتگو کی قسم",
+"Gratis · código de 9 cifras":"مفت · 9 ہندسوں کا کوڈ",
+"Con la suscripción Plus · código de 16 caracteres":"Plus سبسکرپشن کے ساتھ · 16 حروف کا کوڈ",
+"Escribe los 16 caracteres que te han dado":"آپ کو دیے گئے 16 حروف لکھیں",
+"Crear un código":"کوڈ بنائیں",
+"Te sale un código Ultra de 16 caracteres para dárselo a la otra persona":"آپ کو دوسرے شخص کو دینے کے لیے 16 حروف کا ایک Ultra کوڈ ملے گا"
 },
 "p":{
 "intento":"آج سب سے زیادہ کوشش: {1}، {2} {2?بار|بار}۔",

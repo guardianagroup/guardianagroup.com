@@ -3968,7 +3968,13 @@
 "Se cortó la conexión con el relé: este es un código nuevo.":"Megszakadt a kapcsolat a relével: ez egy új kód.",
 "Chat privado: cuando los dos salgan y no quede nada sin ver, el chat se borrará en los dos equipos.":"Privát csevegés: ha mindketten kiléptetek, és nem maradt semmi olvasatlan, a csevegés mindkét eszközről törlődik.",
 "Los dos han salido: la conversación con {n} se ha borrado.":"Mindketten kiléptetek: törlődött a beszélgetés ezzel a partnerrel: {n}.",
-"Los dos han salido: el chat con {n} se ha borrado.":"Mindketten kiléptetek: törlődött a csevegés ezzel a partnerrel: {n}."
+"Los dos han salido: el chat con {n} se ha borrado.":"Mindketten kiléptetek: törlődött a csevegés ezzel a partnerrel: {n}.",
+"Tipo de conversación":"Beszélgetés típusa",
+"Gratis · código de 9 cifras":"Ingyenes · 9 számjegyű kód",
+"Con la suscripción Plus · código de 16 caracteres":"Plus-előfizetéssel · 16 karakteres kód",
+"Escribe los 16 caracteres que te han dado":"Írd be a kapott 16 karaktert",
+"Crear un código":"Kód létrehozása",
+"Te sale un código Ultra de 16 caracteres para dárselo a la otra persona":"Kapsz egy 16 karakteres Ultra-kódot, amelyet átadhatsz a másik félnek"
 },
 "p":{
 "intento":"Ma a legtöbbször próbálkozott: {1}, {2} {2?alkalommal|alkalommal}.",

@@ -3968,7 +3968,13 @@
 "Se cortó la conexión con el relé: este es un código nuevo.":"De verbinding met de relay is verbroken: dit is een nieuwe code.",
 "Chat privado: cuando los dos salgan y no quede nada sin ver, el chat se borrará en los dos equipos.":"Privéchat: zodra jullie allebei weg zijn en er niets ongelezen meer is, wordt de chat op beide apparaten verwijderd.",
 "Los dos han salido: la conversación con {n} se ha borrado.":"Jullie zijn allebei weg: het gesprek met {n} is verwijderd.",
-"Los dos han salido: el chat con {n} se ha borrado.":"Jullie zijn allebei weg: de chat met {n} is verwijderd."
+"Los dos han salido: el chat con {n} se ha borrado.":"Jullie zijn allebei weg: de chat met {n} is verwijderd.",
+"Tipo de conversación":"Soort gesprek",
+"Gratis · código de 9 cifras":"Gratis · code van 9 cijfers",
+"Con la suscripción Plus · código de 16 caracteres":"Met het Plus-abonnement · code van 16 tekens",
+"Escribe los 16 caracteres que te han dado":"Voer de 16 tekens in die je hebt gekregen",
+"Crear un código":"Code maken",
+"Te sale un código Ultra de 16 caracteres para dárselo a la otra persona":"Je krijgt een Ultra-code van 16 tekens om aan de andere persoon te geven"
 },
 "p":{
 "intento":"Probeerde het vandaag het vaakst: {1}, {2} {2?keer|keer}.",

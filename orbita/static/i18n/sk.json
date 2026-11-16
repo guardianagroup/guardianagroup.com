@@ -3968,7 +3968,13 @@
 "Se cortó la conexión con el relé: este es un código nuevo.":"Spojenie s relé sa prerušilo: toto je nový kód.",
 "Chat privado: cuando los dos salgan y no quede nada sin ver, el chat se borrará en los dos equipos.":"Súkromný chat: keď obaja odídete a nič nezostane neprečítané, chat sa vymaže na oboch zariadeniach.",
 "Los dos han salido: la conversación con {n} se ha borrado.":"Obaja ste odišli: konverzácia s {n} bola vymazaná.",
-"Los dos han salido: el chat con {n} se ha borrado.":"Obaja ste odišli: chat s {n} bol vymazaný."
+"Los dos han salido: el chat con {n} se ha borrado.":"Obaja ste odišli: chat s {n} bol vymazaný.",
+"Tipo de conversación":"Typ konverzácie",
+"Gratis · código de 9 cifras":"Zadarmo · 9-miestny kód",
+"Con la suscripción Plus · código de 16 caracteres":"S predplatným Plus · kód so 16 znakmi",
+"Escribe los 16 caracteres que te han dado":"Zadajte 16 znakov, ktoré ste dostali",
+"Crear un código":"Vytvoriť kód",
+"Te sale un código Ultra de 16 caracteres para dárselo a la otra persona":"Dostanete kód Ultra so 16 znakmi, ktorý odovzdáte druhej osobe"
 },
 "p":{
 "intento":"Najviac sa dnes snažila: {1}, {2}{2?-krát|-krát}.",

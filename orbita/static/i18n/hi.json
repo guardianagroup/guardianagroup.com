@@ -3968,7 +3968,13 @@
 "Se cortó la conexión con el relé: este es un código nuevo.":"रिले से कनेक्शन टूट गया था: यह नया कोड है।",
 "Chat privado: cuando los dos salgan y no quede nada sin ver, el chat se borrará en los dos equipos.":"निजी चैट: जब आप दोनों बाहर निकल जाएँगे और कुछ भी बिना देखे नहीं बचेगा, तो चैट दोनों डिवाइस से मिट जाएगी।",
 "Los dos han salido: la conversación con {n} se ha borrado.":"आप दोनों बाहर निकल गए: {n} के साथ बातचीत मिटा दी गई है।",
-"Los dos han salido: el chat con {n} se ha borrado.":"आप दोनों बाहर निकल गए: {n} के साथ चैट मिटा दी गई है।"
+"Los dos han salido: el chat con {n} se ha borrado.":"आप दोनों बाहर निकल गए: {n} के साथ चैट मिटा दी गई है।",
+"Tipo de conversación":"बातचीत का प्रकार",
+"Gratis · código de 9 cifras":"मुफ़्त · 9 अंकों का कोड",
+"Con la suscripción Plus · código de 16 caracteres":"Plus सदस्यता के साथ · 16 अक्षरों का कोड",
+"Escribe los 16 caracteres que te han dado":"आपको दिए गए 16 अक्षर लिखें",
+"Crear un código":"कोड बनाएँ",
+"Te sale un código Ultra de 16 caracteres para dárselo a la otra persona":"आपको दूसरे व्यक्ति को देने के लिए 16 अक्षरों का एक Ultra कोड मिलेगा"
 },
 "p":{
 "intento":"आज सबसे ज़्यादा कोशिश: {1}, {2} {2?बार|बार}।",

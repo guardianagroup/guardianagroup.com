@@ -3968,7 +3968,13 @@
 "Se cortó la conexión con el relé: este es un código nuevo.":"ரிலேயுடனான இணைப்பு துண்டிக்கப்பட்டது: இது புதிய குறியீடு.",
 "Chat privado: cuando los dos salgan y no quede nada sin ver, el chat se borrará en los dos equipos.":"தனிப்பட்ட அரட்டை: நீங்கள் இருவரும் வெளியேறி, பார்க்காதது எதுவும் இல்லாதபோது, அரட்டை இரு சாதனங்களிலிருந்தும் நீக்கப்படும்.",
 "Los dos han salido: la conversación con {n} se ha borrado.":"நீங்கள் இருவரும் வெளியேறிவிட்டீர்கள்: {n} உடனான உரையாடல் நீக்கப்பட்டது.",
-"Los dos han salido: el chat con {n} se ha borrado.":"நீங்கள் இருவரும் வெளியேறிவிட்டீர்கள்: {n} உடனான அரட்டை நீக்கப்பட்டது."
+"Los dos han salido: el chat con {n} se ha borrado.":"நீங்கள் இருவரும் வெளியேறிவிட்டீர்கள்: {n} உடனான அரட்டை நீக்கப்பட்டது.",
+"Tipo de conversación":"உரையாடல் வகை",
+"Gratis · código de 9 cifras":"இலவசம் · 9 இலக்கக் குறியீடு",
+"Con la suscripción Plus · código de 16 caracteres":"Plus சந்தாவுடன் · 16 எழுத்துக் குறியீடு",
+"Escribe los 16 caracteres que te han dado":"உங்களுக்குக் கொடுக்கப்பட்ட 16 எழுத்துகளை உள்ளிடுங்கள்",
+"Crear un código":"குறியீட்டை உருவாக்கு",
+"Te sale un código Ultra de 16 caracteres para dárselo a la otra persona":"மற்றவருக்குக் கொடுப்பதற்காக 16 எழுத்து Ultra குறியீடு உங்களுக்குக் கிடைக்கும்"
 },
 "p":{
 "intento":"இன்று அதிகம் முயன்றது: {1}, {2} {2?முறை|முறை}.",

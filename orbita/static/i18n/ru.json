@@ -3968,7 +3968,13 @@
 "Se cortó la conexión con el relé: este es un código nuevo.":"Соединение с реле прервалось: это новый код.",
 "Chat privado: cuando los dos salgan y no quede nada sin ver, el chat se borrará en los dos equipos.":"Личный чат: когда вы оба выйдете и не останется ничего непрочитанного, чат будет удалён на обоих устройствах.",
 "Los dos han salido: la conversación con {n} se ha borrado.":"Вы оба вышли: разговор с {n} удалён.",
-"Los dos han salido: el chat con {n} se ha borrado.":"Вы оба вышли: чат с {n} удалён."
+"Los dos han salido: el chat con {n} se ha borrado.":"Вы оба вышли: чат с {n} удалён.",
+"Tipo de conversación":"Тип разговора",
+"Gratis · código de 9 cifras":"Бесплатно · 9-значный код",
+"Con la suscripción Plus · código de 16 caracteres":"С подпиской Plus · 16-символьный код",
+"Escribe los 16 caracteres que te han dado":"Введите 16 символов, которые вам дали",
+"Crear un código":"Создать код",
+"Te sale un código Ultra de 16 caracteres para dárselo a la otra persona":"Вы получите 16-символьный код Ultra, который нужно передать собеседнику"
 },
 "p":{
 "intento":"Настойчивее всех сегодня: {1}, {2} {2?раз|раз}.",

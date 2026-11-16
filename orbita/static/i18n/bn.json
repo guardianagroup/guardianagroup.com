@@ -3968,7 +3968,13 @@
 "Se cortó la conexión con el relé: este es un código nuevo.":"রিলের সাথে সংযোগ বিচ্ছিন্ন হয়েছিল: এটি একটি নতুন কোড।",
 "Chat privado: cuando los dos salgan y no quede nada sin ver, el chat se borrará en los dos equipos.":"ব্যক্তিগত চ্যাট: আপনারা দুজনেই বেরিয়ে গেলে এবং না-দেখা কিছু বাকি না থাকলে চ্যাটটি দুটি ডিভাইস থেকেই মুছে যাবে।",
 "Los dos han salido: la conversación con {n} se ha borrado.":"আপনারা দুজনেই বেরিয়ে গেছেন: {n}-এর সঙ্গে কথোপকথনটি মুছে ফেলা হয়েছে।",
-"Los dos han salido: el chat con {n} se ha borrado.":"আপনারা দুজনেই বেরিয়ে গেছেন: {n}-এর সঙ্গে চ্যাটটি মুছে ফেলা হয়েছে।"
+"Los dos han salido: el chat con {n} se ha borrado.":"আপনারা দুজনেই বেরিয়ে গেছেন: {n}-এর সঙ্গে চ্যাটটি মুছে ফেলা হয়েছে।",
+"Tipo de conversación":"কথোপকথনের ধরন",
+"Gratis · código de 9 cifras":"বিনামূল্যে · 9 অঙ্কের কোড",
+"Con la suscripción Plus · código de 16 caracteres":"Plus সাবস্ক্রিপশনের সঙ্গে · 16 অক্ষরের কোড",
+"Escribe los 16 caracteres que te han dado":"আপনাকে দেওয়া 16টি অক্ষর লিখুন",
+"Crear un código":"একটি কোড তৈরি করুন",
+"Te sale un código Ultra de 16 caracteres para dárselo a la otra persona":"অন্য ব্যক্তিকে দেওয়ার জন্য আপনি 16 অক্ষরের একটি Ultra কোড পাবেন"
 },
 "p":{
 "intento":"আজ সবচেয়ে বেশি চেষ্টা: {1}, {2} {2?বার|বার}।",

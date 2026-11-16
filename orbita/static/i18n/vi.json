@@ -3968,7 +3968,13 @@
 "Se cortó la conexión con el relé: este es un código nuevo.":"Kết nối với relay đã bị ngắt: đây là mã mới.",
 "Chat privado: cuando los dos salgan y no quede nada sin ver, el chat se borrará en los dos equipos.":"Trò chuyện riêng: khi cả hai đã thoát ra và không còn gì chưa xem, cuộc trò chuyện sẽ bị xóa trên cả hai thiết bị.",
 "Los dos han salido: la conversación con {n} se ha borrado.":"Cả hai đã thoát ra: cuộc trò chuyện với {n} đã bị xóa.",
-"Los dos han salido: el chat con {n} se ha borrado.":"Cả hai đã thoát ra: cuộc trò chuyện với {n} đã bị xóa."
+"Los dos han salido: el chat con {n} se ha borrado.":"Cả hai đã thoát ra: cuộc trò chuyện với {n} đã bị xóa.",
+"Tipo de conversación":"Loại cuộc trò chuyện",
+"Gratis · código de 9 cifras":"Miễn phí · mã 9 chữ số",
+"Con la suscripción Plus · código de 16 caracteres":"Với gói đăng ký Plus · mã 16 ký tự",
+"Escribe los 16 caracteres que te han dado":"Nhập 16 ký tự bạn được cung cấp",
+"Crear un código":"Tạo mã",
+"Te sale un código Ultra de 16 caracteres para dárselo a la otra persona":"Bạn nhận được một mã Ultra 16 ký tự để đưa cho người kia"
 },
 "p":{
 "intento":"Cố gắng nhiều nhất hôm nay: {1}, {2} {2?lần|lần}.",

@@ -3968,7 +3968,13 @@
 "Se cortó la conexión con el relé: este es un código nuevo.":"اتصال به رله قطع شد: این یک کد جدید است.",
 "Chat privado: cuando los dos salgan y no quede nada sin ver, el chat se borrará en los dos equipos.":"گفت‌وگوی خصوصی: وقتی هر دو بیرون بروید و چیزی دیده‌نشده باقی نماند، گفت‌وگو از هر دو دستگاه پاک می‌شود.",
 "Los dos han salido: la conversación con {n} se ha borrado.":"هر دو بیرون رفتید: گفت‌وگو با {n} پاک شد.",
-"Los dos han salido: el chat con {n} se ha borrado.":"هر دو بیرون رفتید: گپ با {n} پاک شد."
+"Los dos han salido: el chat con {n} se ha borrado.":"هر دو بیرون رفتید: گپ با {n} پاک شد.",
+"Tipo de conversación":"نوع گفت‌وگو",
+"Gratis · código de 9 cifras":"رایگان · کد ۹ رقمی",
+"Con la suscripción Plus · código de 16 caracteres":"با اشتراک Plus · کد ۱۶ نویسه‌ای",
+"Escribe los 16 caracteres que te han dado":"۱۶ نویسه‌ای را که به شما داده‌اند وارد کنید",
+"Crear un código":"ساختن کد",
+"Te sale un código Ultra de 16 caracteres para dárselo a la otra persona":"یک کد Ultra با ۱۶ نویسه دریافت می‌کنید تا به طرف مقابل بدهید"
 },
 "p":{
 "intento":"بیشترین تلاش امروز: {1}، {2} {2?بار|بار}.",

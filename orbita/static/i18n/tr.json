@@ -3968,7 +3968,13 @@
 "Se cortó la conexión con el relé: este es un código nuevo.":"Aktarıcıyla bağlantı kesildi: bu yeni bir kod.",
 "Chat privado: cuando los dos salgan y no quede nada sin ver, el chat se borrará en los dos equipos.":"Özel sohbet: ikiniz de çıktığınızda ve görülmemiş bir şey kalmadığında sohbet iki cihazdan da silinir.",
 "Los dos han salido: la conversación con {n} se ha borrado.":"İkiniz de çıktınız: {n} ile konuşma silindi.",
-"Los dos han salido: el chat con {n} se ha borrado.":"İkiniz de çıktınız: {n} ile sohbet silindi."
+"Los dos han salido: el chat con {n} se ha borrado.":"İkiniz de çıktınız: {n} ile sohbet silindi.",
+"Tipo de conversación":"Konuşma türü",
+"Gratis · código de 9 cifras":"Ücretsiz · 9 haneli kod",
+"Con la suscripción Plus · código de 16 caracteres":"Plus aboneliğiyle · 16 karakterlik kod",
+"Escribe los 16 caracteres que te han dado":"Size verilen 16 karakteri yazın",
+"Crear un código":"Kod oluştur",
+"Te sale un código Ultra de 16 caracteres para dárselo a la otra persona":"Karşı tarafa vermeniz için 16 karakterlik bir Ultra kodu alırsınız"
 },
 "p":{
 "intento":"Bugün en çok deneyen: {1}, {2} {2?kez|kez}.",

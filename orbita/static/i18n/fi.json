@@ -3968,7 +3968,13 @@
 "Se cortó la conexión con el relé: este es un código nuevo.":"Yhteys välityspalvelimeen katkesi: tämä on uusi koodi.",
 "Chat privado: cuando los dos salgan y no quede nada sin ver, el chat se borrará en los dos equipos.":"Yksityinen keskustelu: kun olette molemmat poistuneet eikä mitään ole jäänyt näkemättä, keskustelu poistetaan molemmista laitteista.",
 "Los dos han salido: la conversación con {n} se ha borrado.":"Olette molemmat poistuneet: keskustelu henkilön {n} kanssa on poistettu.",
-"Los dos han salido: el chat con {n} se ha borrado.":"Olette molemmat poistuneet: chat henkilön {n} kanssa on poistettu."
+"Los dos han salido: el chat con {n} se ha borrado.":"Olette molemmat poistuneet: chat henkilön {n} kanssa on poistettu.",
+"Tipo de conversación":"Keskustelun tyyppi",
+"Gratis · código de 9 cifras":"Ilmainen · 9-numeroinen koodi",
+"Con la suscripción Plus · código de 16 caracteres":"Plus-tilauksella · 16 merkin koodi",
+"Escribe los 16 caracteres que te han dado":"Kirjoita saamasi 16 merkkiä",
+"Crear un código":"Luo koodi",
+"Te sale un código Ultra de 16 caracteres para dárselo a la otra persona":"Saat 16 merkin Ultra-koodin, jonka annat toiselle henkilölle"
 },
 "p":{
 "intento":"Eniten yrittänyt tänään: {1}, {2} {2?kerta|kertaa}.",

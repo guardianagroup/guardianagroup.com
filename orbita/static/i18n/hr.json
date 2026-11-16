@@ -3968,7 +3968,13 @@
 "Se cortó la conexión con el relé: este es un código nuevo.":"Veza s relejem je prekinuta: ovo je novi kod.",
 "Chat privado: cuando los dos salgan y no quede nada sin ver, el chat se borrará en los dos equipos.":"Privatni chat: kad oboje izađete i ništa ne ostane nepročitano, chat će se izbrisati na oba uređaja.",
 "Los dos han salido: la conversación con {n} se ha borrado.":"Oboje ste izašli: razgovor s {n} je izbrisan.",
-"Los dos han salido: el chat con {n} se ha borrado.":"Oboje ste izašli: chat s {n} je izbrisan."
+"Los dos han salido: el chat con {n} se ha borrado.":"Oboje ste izašli: chat s {n} je izbrisan.",
+"Tipo de conversación":"Vrsta razgovora",
+"Gratis · código de 9 cifras":"Besplatno · 9-znamenkasti kod",
+"Con la suscripción Plus · código de 16 caracteres":"S pretplatom Plus · kod od 16 znakova",
+"Escribe los 16 caracteres que te han dado":"Upišite 16 znakova koje ste dobili",
+"Crear un código":"Stvori kod",
+"Te sale un código Ultra de 16 caracteres para dárselo a la otra persona":"Dobit ćete Ultra kod od 16 znakova koji trebate dati drugoj osobi"
 },
 "p":{
 "intento":"Najupornija danas: {1}, {2} {2?put|puta}.",
