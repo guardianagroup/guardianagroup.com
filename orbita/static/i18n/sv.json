@@ -4040,7 +4040,14 @@
 "Al terminar, se borra en los dos equipos":"Efteråt raderas samtalet på båda enheterna",
 "Activar mi clave":"Aktivera min nyckel",
 "Pulsa una parte para revisar solo esa.":"Välj en del för att bara kontrollera den.",
-"Elegir otra parte":"Välj en annan del"
+"Elegir otra parte":"Välj en annan del",
+"Antivirus":"Antivirus",
+"Tu antivirus":"Ditt antivirus",
+"Vigilar":"Bevaka",
+"Ver todo el PC":"Visa hela datorn",
+"Con quién habla tu antivirus":"Vem ditt antivirus pratar med",
+"Tu antivirus no se ha conectado en este rato.":"Ditt antivirus har inte anslutit någonstans under den här tiden.",
+"Con quién habla tu PC":"Vem din dator pratar med"
 },
 "p":{
 "intento":"Den som försökte mest i dag: {1}, {2} {2?gång|gånger}.",

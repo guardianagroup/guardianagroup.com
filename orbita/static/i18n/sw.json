@@ -4040,7 +4040,14 @@
 "Al terminar, se borra en los dos equipos":"Mkimaliza, mazungumzo hufutwa kwenye vifaa vyote viwili",
 "Activar mi clave":"Washa ufunguo wangu",
 "Pulsa una parte para revisar solo esa.":"Chagua sehemu moja ili ikaguliwe hiyo tu.",
-"Elegir otra parte":"Chagua sehemu nyingine"
+"Elegir otra parte":"Chagua sehemu nyingine",
+"Antivirus":"Kingavirusi",
+"Tu antivirus":"Kingavirusi yako",
+"Vigilar":"Fuatilia",
+"Ver todo el PC":"Onyesha kompyuta nzima",
+"Con quién habla tu antivirus":"Kingavirusi yako inazungumza na nani",
+"Tu antivirus no se ha conectado en este rato.":"Kingavirusi yako haijaunganishwa popote katika kipindi hiki.",
+"Con quién habla tu PC":"Kompyuta yako inazungumza na nani"
 },
 "p":{
 "intento":"Iliyojaribu zaidi leo: {1}, {2?mara|mara} {2}.",

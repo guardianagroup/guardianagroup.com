@@ -4040,7 +4040,14 @@
 "Al terminar, se borra en los dos equipos":"ख़त्म होने पर बातचीत दोनों डिवाइस से मिट जाती है",
 "Activar mi clave":"मेरी कुंजी सक्रिय करें",
 "Pulsa una parte para revisar solo esa.":"सिर्फ़ एक हिस्सा जाँचने के लिए उसे चुनें।",
-"Elegir otra parte":"दूसरा हिस्सा चुनें"
+"Elegir otra parte":"दूसरा हिस्सा चुनें",
+"Antivirus":"एंटीवायरस",
+"Tu antivirus":"आपका एंटीवायरस",
+"Vigilar":"नज़र रखें",
+"Ver todo el PC":"पूरा पीसी देखें",
+"Con quién habla tu antivirus":"आपका एंटीवायरस किससे बात करता है",
+"Tu antivirus no se ha conectado en este rato.":"इस दौरान आपके एंटीवायरस ने कहीं कनेक्ट नहीं किया।",
+"Con quién habla tu PC":"आपका पीसी किससे बात करता है"
 },
 "p":{
 "intento":"आज सबसे ज़्यादा कोशिश: {1}, {2} {2?बार|बार}।",

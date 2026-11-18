@@ -4040,7 +4040,14 @@
 "Al terminar, se borra en los dos equipos":"Til slutt slettes samtalen på begge enhetene",
 "Activar mi clave":"Aktiver nøkkelen min",
 "Pulsa una parte para revisar solo esa.":"Velg en del for å sjekke bare den.",
-"Elegir otra parte":"Velg en annen del"
+"Elegir otra parte":"Velg en annen del",
+"Antivirus":"Antivirus",
+"Tu antivirus":"Antivirusprogrammet ditt",
+"Vigilar":"Overvåk",
+"Ver todo el PC":"Vis hele PC-en",
+"Con quién habla tu antivirus":"Hvem antivirusprogrammet ditt snakker med",
+"Tu antivirus no se ha conectado en este rato.":"Antivirusprogrammet ditt har ikke koblet seg til noe i denne perioden.",
+"Con quién habla tu PC":"Hvem PC-en din snakker med"
 },
 "p":{
 "intento":"Den som prøvde mest i dag: {1}, {2} {2?gang|ganger}.",

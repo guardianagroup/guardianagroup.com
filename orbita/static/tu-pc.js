@@ -59,15 +59,16 @@
   const mayor = (m) => { let k = '', v = -1; for (const [a, b] of m) if (b > v) { k = a; v = b; } return k; };
   // the counts, by company and by place: the server's coordinates, or the middle of its country; with neither, it counts
   // in the totals and is not drawn
-  function resume(lista) {
+  function resume(lista, avs) {
     const C = (P() && P().centros) || {};
     const r = { total: lista.length, conexiones: 0, cortadas: 0, empresas: new Map(), sinEmpresa: null, paises: new Set(), lugares: new Map(), sinLugar: 0 };
     for (const d of lista) {
       r.conexiones += d.n; if (d.x) r.cortadas += d.n;
       if (d.p) r.paises.add(d.p);
       let em = d.e ? r.empresas.get(d.e) : r.sinEmpresa;
-      if (!em) { em = { nombre: d.e, n: 0, corta: 0, queda: 0, paises: new Map(), progs: new Map() }; if (d.e) r.empresas.set(d.e, em); else r.sinEmpresa = em; }
+      if (!em) { em = { nombre: d.e, n: 0, corta: 0, queda: 0, av: 0, paises: new Map(), progs: new Map() }; if (d.e) r.empresas.set(d.e, em); else r.sinEmpresa = em; }
       em.n += d.n; if (d.x) em.corta += d.n; else em.queda += d.n;
+      if (d.g && avs && avs.has(d.g)) em.av += d.n;
       if (d.p) em.paises.set(d.p, (em.paises.get(d.p) || 0) + d.n);
       if (d.g) em.progs.set(d.g, (em.progs.get(d.g) || 0) + d.n);
       let lon, lat, key, porPais = false;
@@ -323,6 +324,18 @@
     cab.append(k, x);
     const t = crea('h2', 't', 'Con quién habla tu PC'); t.id = 'tupc-t'; t.tabIndex = -1;
     const estado = crea('p', 'estado'); estado.setAttribute('role', 'status'); estado.setAttribute('aria-live', 'polite');
+    // «Tu antivirus» (17 nov 2026; el dueño, 21:56: «también quiero que aparezca el antivirus… exactamente con quién habla
+    // el antivirus», y 21:57: «vigilar con algún botón… al antivirus instalado, con el que convivimos»): the program says
+    // which of its programs are an antivirus (`av`, from the 1.0.62); their companies carry a mark in the list, and the
+    // button leaves on the planet and in the list only what the antivirus talks to
+    const avb = crea('div', 'av-pc'); avb.hidden = true;
+    const avt = crea('div', 'av-t'), avn = crea('span', 'av-n'); avn.setAttribute('translate', 'no');
+    avt.append(crea('span', 'av-k', 'Tu antivirus'), avn);
+    const avx = document.createElement('button'); avx.type = 'button'; avx.className = 'av-ver'; avx.setAttribute('aria-pressed', 'false'); avx.append(crea('span'));
+    avx.addEventListener('click', () => { if (!E) return; E.soloAv = !E.soloAv; E.enfocado = false; E.movido = false; aplica(); });
+    const avf = crea('div', 'av-fila'); avf.append(avt, avx);
+    const avnada = crea('p', 'av-nada', 'Tu antivirus no se ha conectado en este rato.'); avnada.hidden = true;
+    avb.append(avf, avnada);
     const cifras = crea('div', 'cifras'); cifras.hidden = true;
     for (const [s, c] of [['conexiones', 'c1'], ['empresas', 'c2'], ['países', 'c3'], ['cortadas', 'c4 rojo']]) {
       const d = crea('div', c), b = crea('b'); b.setAttribute('translate', 'no'); d.append(b, crea('span', '', s)); cifras.append(d);
@@ -342,7 +355,7 @@
     vj.append(crea('div', 'k2', 'El viaje de tus datos'), crea('p', 'vj-t', 'Un vuelo en 3D desde tu ciudad hasta los centros de datos de cada continente, con tus tiempos reales.'), vf, va);
     vb.addEventListener('click', () => { const C = window.OrbitaConexion; if (!C || !C.viaje) return; const e = C.viajeEstado; if (e.midiendo) return; esperaViaje = true; if (e.hecho) cierra(); C.viaje(); pintaViaje(); });
     vp.addEventListener('click', () => { const C = window.OrbitaConexion; if (C && C.informe) C.informe(); });
-    hud.append(cab, t, estado, cifras, emp, vj, notas);
+    hud.append(cab, t, estado, avb, cifras, emp, vj, notas);
     document.body.append(hud);
     return hud;
   }
@@ -389,9 +402,11 @@
   }
   function rellena(li, em, nueva) {
     if (nueva) {
-      li.innerHTML = '<div class="fila"><b></b><em hidden></em><span class="v" translate="no"></span></div><small><span class="tp-pais" translate="no"></span><span class="tp-prog" translate="no"></span></small>';
+      li.innerHTML = '<div class="fila"><b></b><i class="tp-av" hidden></i><em hidden></em><span class="v" translate="no"></span></div><small><span class="tp-pais" translate="no"></span><span class="tp-prog" translate="no"></span></small>';
     }
-    const b = li.querySelector('b'), marca = li.querySelector('em'), v = li.querySelector('.v');
+    const b = li.querySelector('b'), marca = li.querySelector('em'), v = li.querySelector('.v'), av = li.querySelector('.tp-av');
+    av.hidden = !(em.av > 0) || !!(E && E.soloAv); if (!av.hidden) pon(av, 'Antivirus');
+    li.classList.toggle('de-av', em.av > 0);
     if (em.nombre) { b.setAttribute('translate', 'no'); if (b.textContent !== em.nombre) { delete b.dataset.es; b.textContent = em.nombre; } }
     else { b.removeAttribute('translate'); pon(b, 'Sin empresa identificada'); }
     const todo = em.corta > 0 && em.queda === 0, parte = em.corta > 0 && em.queda > 0;
@@ -434,8 +449,20 @@
       requestAnimationFrame(() => requestAnimationFrame(() => { li.style.transition = 'transform .5s cubic-bezier(.2,.7,.2,1)'; li.style.transform = ''; }));
     }
   }
+  function pintaAv() {
+    const b = hud.querySelector('.av-pc'), ids = E.av || [], x = b.querySelector('.av-ver');
+    b.hidden = !ids.length;
+    pon(hud.querySelector('.t'), E.soloAv ? 'Con quién habla tu antivirus' : 'Con quién habla tu PC');
+    x.setAttribute('aria-pressed', E.soloAv ? 'true' : 'false');
+    pon(x.querySelector('span'), E.soloAv ? 'Ver todo el PC' : 'Vigilar');
+    b.classList.toggle('activo', !!E.soloAv);
+    b.querySelector('.av-nada').hidden = !(E.soloAv && E.res && !E.res.total);
+    const n = b.querySelector('.av-n'), nom = ids.join(' · ');
+    if (n.textContent !== nom) n.textContent = nom;
+  }
   function pintaHud() {
     if (!hud || !E) return;
+    pintaAv();
     const r = E.res, hay = !!(r && r.total);
     hud.querySelector('.cifras').hidden = !hay; hud.querySelector('.empresas').hidden = !hay;
     if (hay) {
@@ -466,10 +493,16 @@
     if (!j || typeof j !== 'object' || Array.isArray(j) || !Array.isArray(j.destinos)) return;
     const lista = j.destinos.slice(0, 400).map(limpia).filter(Boolean);
     E.ultima = Date.now();
-    aplica(lista);
+    // null when the program does not say (before the 1.0.62): then there is no block «Tu antivirus»
+    E.av = Array.isArray(j.av) ? [...new Set(j.av.slice(0, 8).map((a) => texto(a && typeof a === 'object' ? a.id : a, 60)).filter(Boolean))] : null;
+    E.todos = lista;
+    if (E.soloAv && !(E.av && E.av.length)) E.soloAv = false; // no antivirus any more: the whole PC again, at once
+    aplica();
   }
-  function aplica(lista) {
-    const res = resume(lista), ahora = performance.now(), vistos = new Set();
+  // the take on the planet and in the panel: all of it, or only what the antivirus talks to
+  function aplica() {
+    const avs = new Set(E.av || []), lista = E.soloAv ? (E.todos || []).filter((d) => d.g && avs.has(d.g)) : (E.todos || []);
+    const res = resume(lista, avs), ahora = performance.now(), vistos = new Set();
     E.res = res;
     for (const nl of res.lugares.values()) {
       vistos.add(nl.key);
@@ -520,7 +553,7 @@
     // Radiografías leaves through its own close (it also tidies the address of its «#radiografias»)
     if (window.OrbitaRadiografias && window.OrbitaRadiografias.abierto) { try { const x = document.querySelector('#radiografias .cerrar'); if (x) x.click(); else window.OrbitaRadiografias.cierra(); } catch (_) {} }
     const ahora = Date.now();
-    E = { t0: ahora, visible: ahora, pedido: 0, ultima: 0, res: null, lugares: new Map(), lk: '', enfocado: false, movido: false, antes: document.activeElement, reloj: 0, tPrev: 0, lista: false, aRing: 0, caja: null };
+    E = { t0: ahora, visible: ahora, pedido: 0, ultima: 0, res: null, lugares: new Map(), lk: '', enfocado: false, movido: false, antes: document.activeElement, reloj: 0, tPrev: 0, lista: false, aRing: 0, caja: null, av: null, todos: null, soloAv: false };
     montaHud(); hud.hidden = false; hud.classList.remove('sale');
     const est = hud.querySelector('.estado'); est.dataset.clave = '';
     for (const b of hud.querySelectorAll('.cifras b')) { b.dataset.v = 0; b.textContent = ''; }

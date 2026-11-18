@@ -265,12 +265,8 @@
       h('div', { class: 'esc-hecho' }, h('b', null, 'Encriptado hasta el servidor'), h('span', null, 'Lo que sale de tus programas de Windows viaja encriptado con WireGuard hasta el servidor de GUARDIANA; las webs ven la dirección del servidor, no la tuya.')),
       h('div', { class: 'esc-hecho' }, h('b', null, 'Corte en el propio Windows'), h('span', null, 'De tus programas de Windows no sale nada fuera del túnel, salvo los paquetes encriptados hacia el servidor y lo imprescindible de la red local, como DHCP o el Modo Hogar de tu casa. Lo corta Windows (Filtering Platform). WSL y las máquinas virtuales van aparte.')),
       h('div', { class: 'esc-hecho' }, h('b', null, 'Clave postcuántica'), h('span', null, 'Además de la clave clásica de WireGuard, una clave compartida acordada con ML-KEM-768, nueva en cada conexión.')));
-    const limites = h('div', { class: 'vpn-limites' }, h('h2', { class: 'esc-rot' }, 'Lo que no hace'),
-      h('p', null, 'No oculta quién eres ante las webs donde inicias sesión, ni frena el phishing ni a quien entrega su contraseña.'),
-      h('p', null, 'El servidor de GUARDIANA ve adónde va tu tráfico, como en cualquier VPN. Qué guarda y qué no se publicará con su código, dentro del sello; hasta entonces no se promete nada.'),
-      h('p', null, 'Incluida en la licencia de GUARDIANA, sin cuenta aparte. La biblioteca de WireGuardNT va firmada por WireGuard LLC, tal cual la publica, y el programa comprueba su huella antes de cargarla.'));
     const demo = DEMO ? h('p', { class: 'vpn-demo' }, h('span', { class: 'esc-marca fuerte' }, 'Demostración local'), ' ', h('span', null, 'Datos de ejemplo, no del programa.')) : null;
-    const hoja = h('div', { class: 'esc-hoja vpn-hoja' }, demo, V.tarjeta, V.web, hechos, limites);
+    const hoja = h('div', { class: 'esc-hoja vpn-hoja' }, demo, V.tarjeta, V.web, hechos);
     raiz.append(h('div', { class: 'esc-fondo', 'aria-hidden': 'true' }), barra, h('div', { class: 'esc-cuerpo', tabindex: '-1' }, hoja));
     document.body.appendChild(raiz);
     pinta();

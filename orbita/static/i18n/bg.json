@@ -4040,7 +4040,14 @@
 "Al terminar, se borra en los dos equipos":"Накрая разговорът се изтрива и от двете устройства",
 "Activar mi clave":"Активиране на моя ключ",
 "Pulsa una parte para revisar solo esa.":"Изберете част, за да проверите само нея.",
-"Elegir otra parte":"Избор на друга част"
+"Elegir otra parte":"Избор на друга част",
+"Antivirus":"Антивирус",
+"Tu antivirus":"Вашата антивирусна програма",
+"Vigilar":"Наблюдение",
+"Ver todo el PC":"Покажи целия компютър",
+"Con quién habla tu antivirus":"С кого говори антивирусната ви програма",
+"Tu antivirus no se ha conectado en este rato.":"Антивирусната ви програма не се е свързвала през този период.",
+"Con quién habla tu PC":"С кого говори компютърът ви"
 },
 "p":{
 "intento":"Най-настойчивата днес: {1}, {2} {2?път|пъти}.",

@@ -4040,7 +4040,14 @@
 "Al terminar, se borra en los dos equipos":"Na afloop wordt het gesprek op beide apparaten gewist",
 "Activar mi clave":"Mijn sleutel activeren",
 "Pulsa una parte para revisar solo esa.":"Kies een onderdeel om alleen dat te controleren.",
-"Elegir otra parte":"Ander onderdeel kiezen"
+"Elegir otra parte":"Ander onderdeel kiezen",
+"Antivirus":"Antivirus",
+"Tu antivirus":"Uw antivirus",
+"Vigilar":"Volgen",
+"Ver todo el PC":"Hele pc tonen",
+"Con quién habla tu antivirus":"Met wie uw antivirus praat",
+"Tu antivirus no se ha conectado en este rato.":"Uw antivirus heeft in deze periode geen verbinding gemaakt.",
+"Con quién habla tu PC":"Met wie uw pc praat"
 },
 "p":{
 "intento":"Probeerde het vandaag het vaakst: {1}, {2} {2?keer|keer}.",

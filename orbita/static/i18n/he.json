@@ -4040,7 +4040,14 @@
 "Al terminar, se borra en los dos equipos":"בסיום השיחה נמחקת בשני המכשירים",
 "Activar mi clave":"הפעלת המפתח שלי",
 "Pulsa una parte para revisar solo esa.":"בחרו חלק כדי לבדוק רק אותו.",
-"Elegir otra parte":"בחירת חלק אחר"
+"Elegir otra parte":"בחירת חלק אחר",
+"Antivirus":"אנטי-וירוס",
+"Tu antivirus":"האנטי-וירוס שלך",
+"Vigilar":"מעקב",
+"Ver todo el PC":"הצגת כל המחשב",
+"Con quién habla tu antivirus":"עם מי האנטי-וירוס שלך מדבר",
+"Tu antivirus no se ha conectado en este rato.":"האנטי-וירוס שלך לא התחבר לשום מקום בפרק הזמן הזה.",
+"Con quién habla tu PC":"עם מי המחשב שלך מדבר"
 },
 "p":{
 "intento":"ניסתה הכי הרבה היום: {1}, {2} {2?פעם|פעמים}.",

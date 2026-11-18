@@ -4040,7 +4040,14 @@
 "Al terminar, se borra en los dos equipos":"முடிந்ததும் உரையாடல் இரண்டு சாதனங்களிலும் அழிக்கப்படும்",
 "Activar mi clave":"என் விசையைச் செயல்படுத்து",
 "Pulsa una parte para revisar solo esa.":"ஒரு பகுதியை மட்டும் சரிபார்க்க அதைத் தேர்ந்தெடுக்கவும்.",
-"Elegir otra parte":"வேறு பகுதியைத் தேர்ந்தெடு"
+"Elegir otra parte":"வேறு பகுதியைத் தேர்ந்தெடு",
+"Antivirus":"வைரஸ் தடுப்பு",
+"Tu antivirus":"உங்கள் வைரஸ் தடுப்பு",
+"Vigilar":"கண்காணி",
+"Ver todo el PC":"முழு கணினியையும் காட்டு",
+"Con quién habla tu antivirus":"உங்கள் வைரஸ் தடுப்பு யாருடன் பேசுகிறது",
+"Tu antivirus no se ha conectado en este rato.":"இந்த நேரத்தில் உங்கள் வைரஸ் தடுப்பு எங்கும் இணையவில்லை.",
+"Con quién habla tu PC":"உங்கள் கணினி யாருடன் பேசுகிறது"
 },
 "p":{
 "intento":"இன்று அதிகம் முயன்றது: {1}, {2} {2?முறை|முறை}.",

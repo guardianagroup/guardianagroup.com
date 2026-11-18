@@ -4040,7 +4040,14 @@
 "Al terminar, se borra en los dos equipos":"No fim, a conversa é apagada nos dois equipamentos",
 "Activar mi clave":"Ativar a minha chave",
 "Pulsa una parte para revisar solo esa.":"Carregue numa parte para verificar só essa.",
-"Elegir otra parte":"Escolher outra parte"
+"Elegir otra parte":"Escolher outra parte",
+"Antivirus":"Antivírus",
+"Tu antivirus":"O seu antivírus",
+"Vigilar":"Vigiar",
+"Ver todo el PC":"Ver todo o PC",
+"Con quién habla tu antivirus":"Com quem fala o seu antivírus",
+"Tu antivirus no se ha conectado en este rato.":"O seu antivírus não se ligou a nada neste período.",
+"Con quién habla tu PC":"Com quem fala o seu PC"
 },
 "p":{
 "intento":"A que mais tentou hoje: {1}, {2} {2?vez|vezes}.",

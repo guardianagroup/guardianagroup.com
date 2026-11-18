@@ -4040,7 +4040,14 @@
 "Al terminar, se borra en los dos equipos":"Bitince sohbet iki cihazdan da silinir",
 "Activar mi clave":"Anahtarımı etkinleştir",
 "Pulsa una parte para revisar solo esa.":"Yalnızca bir bölümü incelemek için onu seçin.",
-"Elegir otra parte":"Başka bir bölüm seç"
+"Elegir otra parte":"Başka bir bölüm seç",
+"Antivirus":"Antivirüs",
+"Tu antivirus":"Antivirüsünüz",
+"Vigilar":"İzle",
+"Ver todo el PC":"Tüm bilgisayarı göster",
+"Con quién habla tu antivirus":"Antivirüsünüz kimlerle konuşuyor",
+"Tu antivirus no se ha conectado en este rato.":"Antivirüsünüz bu süre içinde hiçbir yere bağlanmadı.",
+"Con quién habla tu PC":"Bilgisayarınız kimlerle konuşuyor"
 },
 "p":{
 "intento":"Bugün en çok deneyen: {1}, {2} {2?kez|kez}.",

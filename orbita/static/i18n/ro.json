@@ -4040,7 +4040,14 @@
 "Al terminar, se borra en los dos equipos":"La final, conversația se șterge de pe ambele dispozitive",
 "Activar mi clave":"Activează cheia mea",
 "Pulsa una parte para revisar solo esa.":"Alege o parte pentru a o verifica doar pe aceea.",
-"Elegir otra parte":"Alege altă parte"
+"Elegir otra parte":"Alege altă parte",
+"Antivirus":"Antivirus",
+"Tu antivirus":"Antivirusul tău",
+"Vigilar":"Urmărește",
+"Ver todo el PC":"Arată tot PC-ul",
+"Con quién habla tu antivirus":"Cu cine vorbește antivirusul tău",
+"Tu antivirus no se ha conectado en este rato.":"Antivirusul tău nu s-a conectat nicăieri în acest interval.",
+"Con quién habla tu PC":"Cu cine vorbește PC-ul tău"
 },
 "p":{
 "intento":"Cea care a încercat cel mai mult azi: {1}, {2} {2?dată|ori}.",

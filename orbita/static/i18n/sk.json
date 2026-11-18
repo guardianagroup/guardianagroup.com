@@ -4040,7 +4040,14 @@
 "Al terminar, se borra en los dos equipos":"Na konci sa konverzácia vymaže na oboch zariadeniach",
 "Activar mi clave":"Aktivovať môj kľúč",
 "Pulsa una parte para revisar solo esa.":"Vyberte časť a skontroluje sa len tá.",
-"Elegir otra parte":"Vybrať inú časť"
+"Elegir otra parte":"Vybrať inú časť",
+"Antivirus":"Antivírus",
+"Tu antivirus":"Váš antivírus",
+"Vigilar":"Sledovať",
+"Ver todo el PC":"Zobraziť celý počítač",
+"Con quién habla tu antivirus":"S kým komunikuje váš antivírus",
+"Tu antivirus no se ha conectado en este rato.":"Váš antivírus sa v tomto období nikam nepripojil.",
+"Con quién habla tu PC":"S kým komunikuje váš počítač"
 },
 "p":{
 "intento":"Najviac sa dnes snažila: {1}, {2}{2?-krát|-krát}.",

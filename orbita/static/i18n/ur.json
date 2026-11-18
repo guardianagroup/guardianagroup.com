@@ -4040,7 +4040,14 @@
 "Al terminar, se borra en los dos equipos":"ختم ہونے پر بات چیت دونوں ڈیوائسز سے مٹ جاتی ہے",
 "Activar mi clave":"میری کلید فعال کریں",
 "Pulsa una parte para revisar solo esa.":"صرف ایک حصہ جانچنے کے لیے اسے منتخب کریں۔",
-"Elegir otra parte":"دوسرا حصہ منتخب کریں"
+"Elegir otra parte":"دوسرا حصہ منتخب کریں",
+"Antivirus":"اینٹی وائرس",
+"Tu antivirus":"آپ کا اینٹی وائرس",
+"Vigilar":"نظر رکھیں",
+"Ver todo el PC":"پورا پی سی دکھائیں",
+"Con quién habla tu antivirus":"آپ کا اینٹی وائرس کس سے بات کرتا ہے",
+"Tu antivirus no se ha conectado en este rato.":"اس دوران آپ کا اینٹی وائرس کہیں منسلک نہیں ہوا۔",
+"Con quién habla tu PC":"آپ کا پی سی کس سے بات کرتا ہے"
 },
 "p":{
 "intento":"آج سب سے زیادہ کوشش: {1}، {2} {2?بار|بار}۔",

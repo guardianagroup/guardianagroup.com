@@ -4040,7 +4040,14 @@
 "Al terminar, se borra en los dos equipos":"Στο τέλος η συνομιλία διαγράφεται και από τις δύο συσκευές",
 "Activar mi clave":"Ενεργοποίηση του κλειδιού μου",
 "Pulsa una parte para revisar solo esa.":"Επιλέξτε ένα μέρος για να ελεγχθεί μόνο αυτό.",
-"Elegir otra parte":"Επιλογή άλλου μέρους"
+"Elegir otra parte":"Επιλογή άλλου μέρους",
+"Antivirus":"Αντιικό",
+"Tu antivirus":"Το αντιικό σας",
+"Vigilar":"Παρακολούθηση",
+"Ver todo el PC":"Προβολή όλου του υπολογιστή",
+"Con quién habla tu antivirus":"Με ποιους μιλά το αντιικό σας",
+"Tu antivirus no se ha conectado en este rato.":"Το αντιικό σας δεν έχει συνδεθεί πουθενά αυτό το διάστημα.",
+"Con quién habla tu PC":"Με ποιους μιλά ο υπολογιστής σας"
 },
 "p":{
 "intento":"Η πιο επίμονη σήμερα: {1}, {2} {2?φορά|φορές}.",

@@ -4040,7 +4040,14 @@
 "Al terminar, se borra en los dos equipos":"结束后，对话会从两台设备上删除",
 "Activar mi clave":"激活我的密钥",
 "Pulsa una parte para revisar solo esa.":"选择一个部分，只检查该部分。",
-"Elegir otra parte":"选择其他部分"
+"Elegir otra parte":"选择其他部分",
+"Antivirus":"杀毒软件",
+"Tu antivirus":"您的杀毒软件",
+"Vigilar":"监视",
+"Ver todo el PC":"查看整台电脑",
+"Con quién habla tu antivirus":"您的杀毒软件在和谁通信",
+"Tu antivirus no se ha conectado en este rato.":"这段时间您的杀毒软件没有连接任何地方。",
+"Con quién habla tu PC":"您的电脑在和谁通信"
 },
 "p":{
 "intento":"今天尝试最多的：{1}，{2} {2?次|次}。",

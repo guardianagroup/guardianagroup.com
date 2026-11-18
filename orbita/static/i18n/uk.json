@@ -4040,7 +4040,14 @@
 "Al terminar, se borra en los dos equipos":"Наприкінці розмова видаляється на обох пристроях",
 "Activar mi clave":"Активувати мій ключ",
 "Pulsa una parte para revisar solo esa.":"Виберіть частину, щоб перевірити лише її.",
-"Elegir otra parte":"Вибрати іншу частину"
+"Elegir otra parte":"Вибрати іншу частину",
+"Antivirus":"Антивірус",
+"Tu antivirus":"Ваш антивірус",
+"Vigilar":"Стежити",
+"Ver todo el PC":"Показати весь ПК",
+"Con quién habla tu antivirus":"З ким спілкується ваш антивірус",
+"Tu antivirus no se ha conectado en este rato.":"За цей час ваш антивірус нікуди не підключався.",
+"Con quién habla tu PC":"З ким спілкується ваш ПК"
 },
 "p":{
 "intento":"Найнаполегливіша сьогодні: {1}, {2} {2?раз|разів}.",

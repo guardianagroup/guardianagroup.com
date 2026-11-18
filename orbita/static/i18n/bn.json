@@ -4040,7 +4040,14 @@
 "Al terminar, se borra en los dos equipos":"শেষ হলে কথোপকথন দুই ডিভাইস থেকেই মুছে যায়",
 "Activar mi clave":"আমার কী সক্রিয় করুন",
 "Pulsa una parte para revisar solo esa.":"শুধু একটি অংশ পরীক্ষা করতে সেটি বেছে নিন।",
-"Elegir otra parte":"অন্য অংশ বেছে নিন"
+"Elegir otra parte":"অন্য অংশ বেছে নিন",
+"Antivirus":"অ্যান্টিভাইরাস",
+"Tu antivirus":"আপনার অ্যান্টিভাইরাস",
+"Vigilar":"নজর রাখুন",
+"Ver todo el PC":"পুরো পিসি দেখুন",
+"Con quién habla tu antivirus":"আপনার অ্যান্টিভাইরাস কার সঙ্গে কথা বলে",
+"Tu antivirus no se ha conectado en este rato.":"এই সময়ে আপনার অ্যান্টিভাইরাস কোথাও সংযোগ করেনি।",
+"Con quién habla tu PC":"আপনার পিসি কার সঙ্গে কথা বলে"
 },
 "p":{
 "intento":"আজ সবচেয়ে বেশি চেষ্টা: {1}, {2} {2?বার|বার}।",

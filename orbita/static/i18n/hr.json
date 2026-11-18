@@ -4040,7 +4040,14 @@
 "Al terminar, se borra en los dos equipos":"Na kraju se razgovor briše na oba uređaja",
 "Activar mi clave":"Aktiviraj moj ključ",
 "Pulsa una parte para revisar solo esa.":"Odaberite dio da se provjeri samo on.",
-"Elegir otra parte":"Odaberi drugi dio"
+"Elegir otra parte":"Odaberi drugi dio",
+"Antivirus":"Antivirus",
+"Tu antivirus":"Vaš antivirus",
+"Vigilar":"Prati",
+"Ver todo el PC":"Prikaži cijelo računalo",
+"Con quién habla tu antivirus":"S kim razgovara vaš antivirus",
+"Tu antivirus no se ha conectado en este rato.":"Vaš se antivirus u ovom razdoblju nije nikamo spojio.",
+"Con quién habla tu PC":"S kim razgovara vaše računalo"
 },
 "p":{
 "intento":"Najupornija danas: {1}, {2} {2?put|puta}.",

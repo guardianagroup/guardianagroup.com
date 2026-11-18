@@ -4040,7 +4040,14 @@
 "Al terminar, se borra en los dos equipos":"Setelah selesai, percakapan dihapus di kedua perangkat",
 "Activar mi clave":"Aktifkan kunci saya",
 "Pulsa una parte para revisar solo esa.":"Pilih satu bagian untuk memeriksa bagian itu saja.",
-"Elegir otra parte":"Pilih bagian lain"
+"Elegir otra parte":"Pilih bagian lain",
+"Antivirus":"Antivirus",
+"Tu antivirus":"Antivirus Anda",
+"Vigilar":"Pantau",
+"Ver todo el PC":"Tampilkan seluruh PC",
+"Con quién habla tu antivirus":"Dengan siapa antivirus Anda berbicara",
+"Tu antivirus no se ha conectado en este rato.":"Antivirus Anda tidak terhubung ke mana pun dalam periode ini.",
+"Con quién habla tu PC":"Dengan siapa PC Anda berbicara"
 },
 "p":{
 "intento":"Paling gigih mencoba hari ini: {1}, {2} {2?kali|kali}.",

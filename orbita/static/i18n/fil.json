@@ -4040,7 +4040,14 @@
 "Al terminar, se borra en los dos equipos":"Pagkatapos, binubura ang usapan sa dalawang device",
 "Activar mi clave":"I-activate ang aking key",
 "Pulsa una parte para revisar solo esa.":"Pumili ng isang bahagi para iyon lang ang suriin.",
-"Elegir otra parte":"Pumili ng ibang bahagi"
+"Elegir otra parte":"Pumili ng ibang bahagi",
+"Antivirus":"Antivirus",
+"Tu antivirus":"Ang iyong antivirus",
+"Vigilar":"Bantayan",
+"Ver todo el PC":"Ipakita ang buong PC",
+"Con quién habla tu antivirus":"Kanino nakikipag-usap ang iyong antivirus",
+"Tu antivirus no se ha conectado en este rato.":"Hindi kumonekta kahit saan ang iyong antivirus sa panahong ito.",
+"Con quién habla tu PC":"Kanino nakikipag-usap ang iyong PC"
 },
 "p":{
 "intento":"Pinakamadalas sumubok ngayon: {1}, {2} {2?beses|beses}.",

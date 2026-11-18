@@ -4040,7 +4040,14 @@
 "Al terminar, se borra en los dos equipos":"Að lokum er samtalinu eytt á báðum tækjum",
 "Activar mi clave":"Virkja lykilinn minn",
 "Pulsa una parte para revisar solo esa.":"Veldu hluta til að skoða aðeins hann.",
-"Elegir otra parte":"Velja annan hluta"
+"Elegir otra parte":"Velja annan hluta",
+"Antivirus":"Vírusvörn",
+"Tu antivirus":"Vírusvörnin þín",
+"Vigilar":"Fylgjast með",
+"Ver todo el PC":"Sýna alla tölvuna",
+"Con quién habla tu antivirus":"Við hverja vírusvörnin þín talar",
+"Tu antivirus no se ha conectado en este rato.":"Vírusvörnin þín hefur ekki tengst neinu á þessum tíma.",
+"Con quién habla tu PC":"Við hverja tölvan þín talar"
 },
 "p":{
 "intento":"Sá sem reyndi mest í dag: {1}, {2} {2?sinni|sinnum}.",

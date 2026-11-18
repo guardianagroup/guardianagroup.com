@@ -4040,7 +4040,14 @@
 "Al terminar, se borra en los dos equipos":"Lopuksi keskustelu poistetaan molemmilta laitteilta",
 "Activar mi clave":"Aktivoi avaimeni",
 "Pulsa una parte para revisar solo esa.":"Valitse osa, niin vain se tarkistetaan.",
-"Elegir otra parte":"Valitse toinen osa"
+"Elegir otra parte":"Valitse toinen osa",
+"Antivirus":"Virustorjunta",
+"Tu antivirus":"Virustorjuntasi",
+"Vigilar":"Seuraa",
+"Ver todo el PC":"Näytä koko tietokone",
+"Con quién habla tu antivirus":"Kenen kanssa virustorjuntasi puhuu",
+"Tu antivirus no se ha conectado en este rato.":"Virustorjuntasi ei ole muodostanut yhteyksiä tänä aikana.",
+"Con quién habla tu PC":"Kenen kanssa tietokoneesi puhuu"
 },
 "p":{
 "intento":"Eniten yrittänyt tänään: {1}, {2} {2?kerta|kertaa}.",

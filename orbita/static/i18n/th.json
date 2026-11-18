@@ -4040,7 +4040,14 @@
 "Al terminar, se borra en los dos equipos":"เมื่อจบ บทสนทนาจะถูกลบจากทั้งสองเครื่อง",
 "Activar mi clave":"เปิดใช้งานคีย์ของฉัน",
 "Pulsa una parte para revisar solo esa.":"เลือกส่วนที่ต้องการเพื่อตรวจเฉพาะส่วนนั้น",
-"Elegir otra parte":"เลือกส่วนอื่น"
+"Elegir otra parte":"เลือกส่วนอื่น",
+"Antivirus":"แอนติไวรัส",
+"Tu antivirus":"แอนติไวรัสของคุณ",
+"Vigilar":"เฝ้าดู",
+"Ver todo el PC":"แสดงทั้งเครื่อง",
+"Con quién habla tu antivirus":"แอนติไวรัสของคุณคุยกับใคร",
+"Tu antivirus no se ha conectado en este rato.":"ช่วงนี้แอนติไวรัสของคุณยังไม่ได้เชื่อมต่อไปที่ใด",
+"Con quién habla tu PC":"พีซีของคุณคุยกับใคร"
 },
 "p":{
 "intento":"พยายามมากที่สุดวันนี้: {1}, {2} {2?ครั้ง|ครั้ง}",

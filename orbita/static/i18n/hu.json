@@ -4040,7 +4040,14 @@
 "Al terminar, se borra en los dos equipos":"A végén a beszélgetés mindkét eszközről törlődik",
 "Activar mi clave":"Kulcsom aktiválása",
 "Pulsa una parte para revisar solo esa.":"Válasszon egy részt, ha csak azt szeretné ellenőrizni.",
-"Elegir otra parte":"Másik rész választása"
+"Elegir otra parte":"Másik rész választása",
+"Antivirus":"Víruskereső",
+"Tu antivirus":"Az Ön víruskeresője",
+"Vigilar":"Figyelés",
+"Ver todo el PC":"A teljes gép mutatása",
+"Con quién habla tu antivirus":"Kivel beszél a víruskeresője",
+"Tu antivirus no se ha conectado en este rato.":"A víruskeresője ebben az időszakban nem kapcsolódott sehova.",
+"Con quién habla tu PC":"Kivel beszél a számítógépe"
 },
 "p":{
 "intento":"Ma a legtöbbször próbálkozott: {1}, {2} {2?alkalommal|alkalommal}.",

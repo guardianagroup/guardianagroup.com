@@ -4040,7 +4040,14 @@
 "Al terminar, se borra en los dos equipos":"終了すると、会話は両方の端末から削除されます",
 "Activar mi clave":"キーを有効にする",
 "Pulsa una parte para revisar solo esa.":"一部だけを調べるには、その項目を選んでください。",
-"Elegir otra parte":"別の項目を選ぶ"
+"Elegir otra parte":"別の項目を選ぶ",
+"Antivirus":"ウイルス対策",
+"Tu antivirus":"お使いのウイルス対策ソフト",
+"Vigilar":"見守る",
+"Ver todo el PC":"PC 全体を表示",
+"Con quién habla tu antivirus":"ウイルス対策ソフトの通信先",
+"Tu antivirus no se ha conectado en este rato.":"この間、ウイルス対策ソフトはどこにも接続していません。",
+"Con quién habla tu PC":"PC の通信先"
 },
 "p":{
 "intento":"今日最も多く試みたのは {1}、{2} {2?回|回}。",

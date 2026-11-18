@@ -4040,7 +4040,14 @@
 "Al terminar, se borra en los dos equipos":"Khi kết thúc, cuộc trò chuyện bị xóa trên cả hai thiết bị",
 "Activar mi clave":"Kích hoạt khóa của tôi",
 "Pulsa una parte para revisar solo esa.":"Chọn một phần để chỉ kiểm tra phần đó.",
-"Elegir otra parte":"Chọn phần khác"
+"Elegir otra parte":"Chọn phần khác",
+"Antivirus":"Diệt virus",
+"Tu antivirus":"Phần mềm diệt virus của bạn",
+"Vigilar":"Theo dõi",
+"Ver todo el PC":"Xem toàn bộ máy",
+"Con quién habla tu antivirus":"Phần mềm diệt virus của bạn liên lạc với ai",
+"Tu antivirus no se ha conectado en este rato.":"Trong khoảng thời gian này, phần mềm diệt virus của bạn chưa kết nối đến đâu.",
+"Con quién habla tu PC":"PC của bạn liên lạc với ai"
 },
 "p":{
 "intento":"Cố gắng nhiều nhất hôm nay: {1}, {2} {2?lần|lần}.",

@@ -4040,7 +4040,14 @@
 "Al terminar, se borra en los dos equipos":"در پایان، گفتگو از هر دو دستگاه پاک می‌شود",
 "Activar mi clave":"فعال‌سازی کلید من",
 "Pulsa una parte para revisar solo esa.":"برای بررسی فقط یک بخش، همان را انتخاب کنید.",
-"Elegir otra parte":"انتخاب بخش دیگر"
+"Elegir otra parte":"انتخاب بخش دیگر",
+"Antivirus":"آنتی‌ویروس",
+"Tu antivirus":"آنتی‌ویروس شما",
+"Vigilar":"زیر نظر بگیر",
+"Ver todo el PC":"نمایش کل رایانه",
+"Con quién habla tu antivirus":"آنتی‌ویروس شما با چه کسی ارتباط دارد",
+"Tu antivirus no se ha conectado en este rato.":"آنتی‌ویروس شما در این مدت به جایی وصل نشده است.",
+"Con quién habla tu PC":"رایانهٔ شما با چه کسی ارتباط دارد"
 },
 "p":{
 "intento":"بیشترین تلاش امروز: {1}، {2} {2?بار|بار}.",

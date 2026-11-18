@@ -4040,7 +4040,14 @@
 "Al terminar, se borra en los dos equipos":"끝나면 대화가 두 기기에서 모두 삭제됨",
 "Activar mi clave":"내 키 활성화",
 "Pulsa una parte para revisar solo esa.":"한 부분만 검사하려면 해당 항목을 선택하세요.",
-"Elegir otra parte":"다른 부분 선택"
+"Elegir otra parte":"다른 부분 선택",
+"Antivirus":"백신",
+"Tu antivirus":"사용 중인 백신",
+"Vigilar":"지켜보기",
+"Ver todo el PC":"PC 전체 보기",
+"Con quién habla tu antivirus":"백신이 통신하는 상대",
+"Tu antivirus no se ha conectado en este rato.":"이 시간 동안 백신은 어디에도 연결하지 않았습니다.",
+"Con quién habla tu PC":"PC가 통신하는 상대"
 },
 "p":{
 "intento":"오늘 가장 많이 시도한 곳: {1}, {2}{2?회|회}.",
