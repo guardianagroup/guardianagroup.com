@@ -4644,7 +4644,19 @@
     // dueño, 10:10: la explicación, en un desplegable bajo los dos botones
     const como = $('#como-btn');
     // «Cómo funciona», arriba (dueño, 17 nov 2026, 21:33: «está muy escondido»): abre la explicación del inicio y la lleva a la vista
-    { const ca = $('#como-arriba'); if (ca) ca.addEventListener('click', () => { const pro = $('#pro'); if (!pro) return; if (pro.hidden) { pro.hidden = false; if (como) como.setAttribute('aria-expanded', 'true'); } setTimeout(() => pro.scrollIntoView({ behavior: 'smooth', block: 'start' }), 30); }); }
+    // 21:49: «cuando le das otra vez a cómo funciona, vuelva a la página como estaba»: el mismo botón la cierra y sube al principio
+    { const ca = $('#como-arriba'); if (ca) {
+      const pone = () => { const pro = $('#pro'); ca.setAttribute('aria-expanded', String(!!pro && !pro.hidden)); };
+      ca.addEventListener('click', () => {
+        const pro = $('#pro'), ini = $('#inicio'); if (!pro) return;
+        const suave = matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+        if (pro.hidden) { pro.hidden = false; if (como) como.setAttribute('aria-expanded', 'true'); setTimeout(() => pro.scrollIntoView({ behavior: suave, block: 'start' }), 30); }
+        else { pro.hidden = true; if (como) como.setAttribute('aria-expanded', 'false'); if (ini) ini.scrollTo({ top: 0, behavior: 'auto' }); }
+        pone();
+      });
+      if (como) como.addEventListener('click', () => setTimeout(pone, 0));
+      pone();
+    } }
     if (como) como.addEventListener('click', () => { const pro = $('#pro'); if (!pro) return; const abre = pro.hidden; pro.hidden = !abre; como.setAttribute('aria-expanded', String(abre)); if (abre) setTimeout(() => pro.scrollIntoView({ behavior: 'smooth', block: 'start' }), 30); });
     $('#unir').addEventListener('click', () => { $('#unir-mal').hidden = true; $('#unir-espera').hidden = true; $('#unir-codigo').value = ''; $('#paso-inicio').hidden = true; $('#paso-entrar').hidden = false; setTimeout(() => $('#unir-codigo').focus(), 50); });
     $('#unir-cerrar').addEventListener('click', () => { $('#paso-entrar').hidden = true; $('#paso-inicio').hidden = false; });

@@ -2831,3 +2831,4 @@ html.como-app .barra .barra-web{display:none}
   .barra .como-arriba{min-height:38px}
 }
 @media (min-width:761px) and (prefers-reduced-motion:reduce){.barra{transition:none}}
+.barra .como-arriba[aria-expanded="true"]{border-color:#9CC3E4;background:rgba(156,195,228,.26);color:#F4F8FB}
