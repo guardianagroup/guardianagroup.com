@@ -947,6 +947,7 @@
   async function cargaPaises() { if (PAISES || cargando.paises) return; cargando.paises = true; try { PAISES = (await cargaJSON('datos/paises.json')).paises || {}; } catch (_) { PAISES = {}; } cargando.paises = false; }
   function pintaPaises(cx, p, G) {
     PAIS_CAJAS = [];
+    if (!FORMAS && esLimpio()) pideFormas();
     const z = G.R / (G.R0 || G.R); if (z < 2.2 || z > 400 || !p.centros) return;
     const L = esLimpio(), ocupado = [];
     if (!L) return; // 22 Oct 2026, 21:54 (owner): no country names while the planet is in colour; they come with the grey, «limpio» planet
@@ -973,6 +974,34 @@
     }
     if ('letterSpacing' in cx) cx.letterSpacing = '0px';
     cx.restore();
+  }
+  // 17 Nov 2026 (owner, 21:42: «cuando toco me aparecen los países y cuando clico encima del país no hace nada»): the card
+  // opened only on the country's NAME. Each country's outline (datos/paises-forma.json: Natural Earth 1:50m, public domain,
+  // built by herramientas/fronteras.py --forma) tells which country is under a click on its land. Loaded once, when the clean
+  // map first shows; where two outlines hold the point (Lesotho inside South Africa), the smaller one is the country.
+  let FORMAS = null, cargaFormas = null;
+  function pideFormas() {
+    return cargaFormas || (cargaFormas = cargaJSON('datos/paises-forma.json').then((d) => {
+      const out = [];
+      for (const cc of Object.keys(d.paises || {})) for (const r of d.paises[cc]) {
+        let x0 = 180, x1 = -180, y0 = 90, y1 = -90, a = 0; const n = r.length;
+        for (let i = 0; i < n; i += 2) { const x = r[i], y = r[i + 1], j = (i + 2) % n; if (x < x0) x0 = x; if (x > x1) x1 = x; if (y < y0) y0 = y; if (y > y1) y1 = y; a += x * r[j + 1] - r[j] * y; }
+        out.push({ cc, r, x0, x1, y0, y1, a: Math.abs(a) / 2 });
+      }
+      out.sort((p, q) => p.a - q.a); FORMAS = out; return out;
+    }).catch(() => { FORMAS = []; return FORMAS; }));
+  }
+  function paisEn(x, y) {
+    const p = P(); if (!FORMAS) { pideFormas(); return null; } if (!p || typeof p.geoDe !== 'function') return null;
+    const g = p.geoDe(x, y); if (!g) return null;
+    const lon = g.lon, lat = g.lat;
+    for (const f of FORMAS) { // from the smallest: the first that holds the point
+      if (lon < f.x0 || lon > f.x1 || lat < f.y0 || lat > f.y1) continue;
+      const r = f.r, n = r.length; let dentro = false;
+      for (let i = 0, j = n - 2; i < n; j = i, i += 2) { const xi = r[i], yi = r[i + 1], xj = r[j], yj = r[j + 1]; if ((yi > lat) !== (yj > lat) && lon < (xj - xi) * (lat - yi) / (yj - yi) + xi) dentro = !dentro; }
+      if (dentro) return f.cc;
+    }
+    return null;
   }
   let paisMarcado = null;
   function buscaPais(x, y) { for (const b of PAIS_CAJAS) if (x >= b[0] && x <= b[0] + b[2] && y >= b[1] && y <= b[1] + b[3]) return b[4]; return null; }
@@ -2220,7 +2249,7 @@
   }
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && lista) cierraLista(); });
   let estacionMarcada = -1, previstoMarcado = -1;
-  function mira(x, y, clic) {
+  function mira(x, y, clic, toque) {
     if ((lista || fichaFija) && !clic) return; // the list is open, or a card was chosen from it: hovering changes nothing
     clicActual = !!clic;
     // the flower of crowded data centres (see abreFlor): it stays while the pointer is inside it
@@ -2275,12 +2304,20 @@
     const rd = buscaRadio(x, y);
     if (rd >= 0) { if (rd !== radioMarcado || clic) { radioMarcado = rd; fichaRadio(rd, x, y); } else colocaFicha(x, y); if (clic) fichaFija = true; return; }
     radioMarcado = -1;
+    // on the clean map, a click on a country's land (with nothing else under it, and not the end of a drag) opens its card
+    if (clic && toque && esLimpio()) {
+      const abrePais = () => { const cc = paisEn(x, y); if (cc) { paisMarcado = cc; fichaPais(cc, x, y); fichaFija = true; } return !!cc; };
+      if (FORMAS) { if (abrePais()) return; } else pideFormas().then(abrePais); // the outlines are on their way: the card opens when they land
+    }
     const f = ficha(); if (f && !f.hidden) f.hidden = true;
     if (clic && panelModelo) cierraPanel(); // a click on nothing closes the full card
   }
   // the interface on top of the planet (layer buttons, satellite filter, gauges…) never reaches the map underneath (owner, 22 Oct 2026, 18:03)
   const UI_ENCIMA = 'header, .capa-vista, #puertas, #radiografias, #directo, #lugar, #seccion, .zoom, .conexion, .lista-cerca, #sat-ficha, #ficha-panel, #capas, #sat-vista, #sat-fase, #capa-nota, .altura, #dato, #viaje, #informe, button, a, select, input, label';
-  addEventListener('click', (e) => { if (!soloTu && !e.target.closest(UI_ENCIMA)) { recogeTarjetas(); mira(e.clientX, e.clientY, true); } });
+  // where the pointer went down: a click that ends a drag of the planet (more than 6 px away) is not a click on a country
+  let bajada = null;
+  addEventListener('pointerdown', (e) => { bajada = { x: e.clientX, y: e.clientY }; }, { capture: true, passive: true });
+  addEventListener('click', (e) => { if (!soloTu && !e.target.closest(UI_ENCIMA)) { recogeTarjetas(); mira(e.clientX, e.clientY, true, !bajada || Math.hypot(e.clientX - bajada.x, e.clientY - bajada.y) <= 6); } });
   // 23 Oct 2026, 09:06 (owner): «cuando una persona clique en la pantalla… desaparezca cualquier cuadro de los de arriba…
   // que no se anule, que se quede como estaba». A click on the planet only folds the open layer card; the layer and its
   // switches stay exactly as they were, and the layer button opens the card again.

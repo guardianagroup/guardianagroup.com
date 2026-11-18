@@ -11,6 +11,12 @@ Output: orbita/datos/fronteras.json
   regiones  the same for states and provinces, simplified to about 0.02°
   nombres   [lon, lat, name, country code, rank] for every region (rank 2 = the big ones first), for the page to write
 Usage: python3 herramientas/fronteras.py [folder with the three GeoJSON files]   (without it, clones the mirror)
+
+Owner, 17 Nov 2026 (21:42): «cuando clico encima del país no hace nada»: the card opened only on the country's name.
+A second output, orbita/datos/paises-forma.json, carries each country's outline (the 1:50m countries, public domain),
+so a click anywhere inside a country finds it:
+  paises    { "CO": [[lon0, lat0, lon1, lat1, …], …] }   the outer rings of its land, simplified to about 0.05°
+Usage: python3 herramientas/fronteras.py --forma [folder with ne_50m_admin_0_countries.geojson]
 """
 import json, os, subprocess, sys, tempfile
 
@@ -40,7 +46,48 @@ def lineas(geo, tol):
             if len(l) >= 2: out.append([[x, y] for x, y in l])
     return out
 
+FORMA = 'ne_50m_admin_0_countries'
+
+def area(r):
+    return abs(sum(r[i][0] * r[(i + 1) % len(r)][1] - r[(i + 1) % len(r)][0] * r[i][1] for i in range(len(r)))) / 2
+
+def forma(carpeta):
+    """Each country's outer rings, for the page's «which country is under this point»."""
+    if not carpeta:
+        carpeta = tempfile.mkdtemp()
+        subprocess.run(['git', 'clone', '-q', '--depth', '1', '--filter=blob:none', '--sparse', 'https://github.com/nvkelso/natural-earth-vector', carpeta], check=True)
+        subprocess.run(['git', '-C', carpeta, 'sparse-checkout', 'set', '--no-cone', '/geojson/%s.geojson' % FORMA], check=True)
+        carpeta = os.path.join(carpeta, 'geojson')
+    geo = json.load(open(os.path.join(carpeta, FORMA + '.geojson'), encoding='utf-8'))
+    # the codes the page uses (two letters); Natural Earth leaves some at -99 and gives them in ISO_A2_EH
+    PROPIOS = {'KOS': 'XK', 'CYN': None, 'SOL': None, 'KAS': None, 'SAH': 'EH', 'PSX': 'PS'}
+    paises, puntos = {}, 0
+    for f in geo['features']:
+        p = f.get('properties') or {}; g = f.get('geometry') or {}
+        cc = p.get('ISO_A2_EH') or p.get('ISO_A2') or ''
+        if not (len(cc) == 2 and cc.isalpha()): cc = PROPIOS.get(p.get('ADM0_A3') or '', None) or ''
+        if not (len(cc) == 2 and cc.isalpha()): continue
+        polis = [g['coordinates']] if g.get('type') == 'Polygon' else g.get('coordinates', []) if g.get('type') == 'MultiPolygon' else []
+        anillos = []
+        for poli in polis:
+            if not poli: continue
+            r = simplifica([(round(x, 2), round(y, 2)) for x, y in poli[0]], 0.05)
+            if len(r) >= 4: anillos.append(r)
+        if not anillos: continue
+        anillos.sort(key=area, reverse=True)
+        # the main land always; the rest (islands) from about 400 km² up, so the file stays small
+        quedan = [anillos[0]] + [r for r in anillos[1:] if area(r) >= 0.04]
+        paises.setdefault(cc.upper(), []).extend([[v for xy in r for v in xy] for r in quedan])
+        puntos += sum(len(r) for r in quedan)
+    out = {'fuente': 'Natural Earth (dominio público): países 1:50m.', 'paises': paises}
+    destino = os.path.join(RAIZ, 'paises-forma.json')
+    with open(destino, 'w', encoding='utf-8') as f:
+        json.dump(out, f, ensure_ascii=False, separators=(',', ':'))
+    print('forma de los países:', len(paises), 'países,', puntos, 'puntos;', os.path.getsize(destino) // 1024, 'KB')
+
 def main():
+    if len(sys.argv) > 1 and sys.argv[1] == '--forma':
+        return forma(sys.argv[2] if len(sys.argv) > 2 else None)
     carpeta = sys.argv[1] if len(sys.argv) > 1 else None
     if not carpeta:
         carpeta = tempfile.mkdtemp()

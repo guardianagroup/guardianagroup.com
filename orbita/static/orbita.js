@@ -421,6 +421,8 @@
     // first, so the planet is already there in the first frame of the fade (2 Nov 2026, owner, 17:14: «más fluido»)
     pintaYa() { if (document.hidden || !G) return; const t = (performance.now() - t0) / 1000; pintaTierra(t, dentro ? 0.9 : 1); pintaRutas(t, 0); },
     get centros() { return centros; }, // country centroids for the country labels and cards (22 Oct 2026)
+    // 17 Nov 2026: the place under a screen point (null off the globe), for «which country is under this click» (capas.js)
+    geoDe: (x, y) => geoDe(x, y),
     get pais() { return (LUGAR && LUGAR.pais) || CASA || null; },
     // 22 Oct 2026: used by the automated checks (Playwright) to look at a place at a given zoom.
     ir(lon, lat, z) { vista.lon = lon; vista.lat = Math.max(-89.5, Math.min(89.5, lat)); vista.vlon = vista.vlat = 0; meta = null; foco = null; ZOOM.zt = Math.max(1, Math.min(ZOOM.MAX, z || 1)); quietoHasta = performance.now() + 60000; manual = true; pintaZoom(); },
