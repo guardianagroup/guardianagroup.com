@@ -401,7 +401,7 @@ ${doc.secciones.map(tabla).join('')}<p class="nota">${esc(doc.final)}</p></body>
     d.innerHTML = '<canvas class="nuc-lienzo" aria-hidden="true"></canvas>'
       + '<p class="nuc-k nuc-paso" translate="no">GUARDIANA</p>'
       + '<h1 class="nuc-paso" id="nuc-saludo">Toma el control de tus datos</h1>' // dueño, 09:42 y 09:49
-      + '<p class="nuc-sub nuc-paso" id="nuc-sub"><b>¿Qué deseas hacer?</b></p>'
+      // 17 nov 2026, 21:59 (dueño): sin la pregunta «¿Qué deseas hacer?»; las cinco tarjetas van justo debajo del título
       + '<div class="nuc-ops nuc-paso" id="nuc-ops" role="group" aria-label="Qué deseas hacer">'
       // 2 Nov 2026 (owner, 10:39: «que se vea más… el título tiene que ser más grande y abajo la explicación»): each section
       // says what it is in a big title, and how it works under it
