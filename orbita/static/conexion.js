@@ -42,6 +42,9 @@
   const kmEntre = (a, b) => { const dl = (b.lon - a.lon) * RAD, f1 = a.lat * RAD, f2 = b.lat * RAD; const h = Math.sin((f2 - f1) / 2) ** 2 + Math.cos(f1) * Math.cos(f2) * Math.sin(dl / 2) ** 2; return 2 * 6371 * Math.asin(Math.sqrt(h)); };
   const minimoMs = (km) => 2 * km / 200; // light inside glass fibre: about 200 km per millisecond, there and back
   let rutas = null, midiendo = false, rutaReal = null;
+  // 17 Nov 2026 (owner, 21:51: «ponlo dentro de ver mi PC en directo»): whoever shows the journey's button outside this panel
+  // hears every change of the measurement (how many are done, finished, the journey about to start)
+  const avisa = () => { try { document.dispatchEvent(new Event('orbita-conexion')); } catch (_) {} };
   async function sonda(url, veces, limite) {
     // warm-up opens the connection (DNS, TCP, TLS); the timed probes then ride the same connection: ≈ one round trip
     const pide = async () => { const ctl = new AbortController(); const tm = setTimeout(() => ctl.abort(), limite || 5000); try { await fetch(url + (url.includes('?') ? '&' : '?') + 'g=' + Math.random().toString(36).slice(2), { mode: 'no-cors', cache: 'no-store', credentials: 'omit', signal: ctl.signal }); } finally { clearTimeout(tm); } };
@@ -65,10 +68,10 @@
     rutas.hechas++; pinta();
     // the cloud regions, four at a time so one slow probe does not hold the rest
     const cola = NUBES.slice();
-    const obrero = async () => { while (cola.length) { const n = cola.shift(); const ms = await sonda(URL_NUBE(n[0]), 3, 5000); const km = kmEntre(L, { lat: n[3], lon: n[4] }); if (ms != null) rutas.nubes.push({ region: n[0], nombre: n[1], cc: n[2], lat: n[3], lon: n[4], ms, km, minimo: minimoMs(km), t0: turnoLinea() }); rutas.hechas++; if (abierto) pinta(); } };
+    const obrero = async () => { while (cola.length) { const n = cola.shift(); const ms = await sonda(URL_NUBE(n[0]), 3, 5000); const km = kmEntre(L, { lat: n[3], lon: n[4] }); if (ms != null) rutas.nubes.push({ region: n[0], nombre: n[1], cc: n[2], lat: n[3], lon: n[4], ms, km, minimo: minimoMs(km), t0: turnoLinea() }); rutas.hechas++; if (abierto) pinta(); else avisa(); } };
     await Promise.all([obrero(), obrero(), obrero(), obrero()]);
     rutas.nubes.sort((a, b) => a.ms - b.ms); rutas.fin = Date.now(); midiendo = false; pinta();
-    if (quiereViaje && rutas.nubes.length && window.OrbitaViaje) { quiereViaje = false; window.OrbitaViaje.empieza(rutas); return; }
+    if (quiereViaje && rutas.nubes.length && window.OrbitaViaje) { quiereViaje = false; avisa(); window.OrbitaViaje.empieza(rutas); return; }
     quiereViaje = false;
     if (P && P.ir) P.ir(L.lon, L.lat, 1); // the whole planet, you in the middle: every arc in view
   }
@@ -235,6 +238,7 @@
     return s;
   }
   function pinta() {
+    avisa();
     if (!panel) return;
     // the panel is redrawn on every measurement: it keeps the reader's place instead of jumping to the top
     const y = panel.scrollTop;
@@ -490,5 +494,8 @@
     window.addEventListener('guardiana-idioma', () => { boton.querySelector('span').textContent = T('Ver mi conexión'); panel.querySelector('.titulo > span:not(:empty)').textContent = T('Mi conexión'); panel.querySelector('.volver-m span').textContent = T('Volver'); { const x = panel.querySelector('.cerrar'); x.setAttribute('aria-label', T('Cerrar')); x.title = T('Cerrar'); } panel.querySelector('.pie').textContent = T('Son tus datos y de nadie más. Nada se guarda fuera de este equipo.'); if (abierto) pinta(); });
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', monta); else monta();
-  window.OrbitaConexion = { abre, ruta, medirRutas: mideRutas, trayecto, porSatelite, get datos() { return { local: filasLocales(), fuera: fuera, ping, rutas, rutaReal }; } };
+  window.OrbitaConexion = { abre, ruta, medirRutas: mideRutas, trayecto, porSatelite, get datos() { return { local: filasLocales(), fuera: fuera, ping, rutas, rutaReal }; },
+    // the journey from outside this panel: `viaje()` measures first when needed and then flies; `informe()` saves its PDF
+    viaje: vuela, informe: () => { if (rutas && rutas.nubes && rutas.nubes.length && window.OrbitaViaje) window.OrbitaViaje.informe(rutas, { pdf: true }); },
+    get viajeEstado() { return { midiendo, hechas: (rutas && rutas.hechas) || 0, total: (rutas && rutas.total) || 0, hecho: !!(rutas && rutas.nubes && rutas.nubes.length && !midiendo), sinLugar: !!(rutas && rutas.sinLugar), quiere: quiereViaje }; } };
 })();

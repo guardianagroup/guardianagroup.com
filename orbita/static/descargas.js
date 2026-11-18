@@ -38,23 +38,28 @@
   // «Guardar como», opening on the desktop the first time and, after that, in the folder the person last chose. Cancelling it
   // saves nothing. In any other browser, and if the dialog cannot be shown, the usual download.
   const enPrograma = () => { try { const d = document.documentElement.dataset; return d.enPrograma === '1' || d.enZero === '1'; } catch (_) { return false; } };
-  const TIPOS = { pdf: ['application/pdf', 'PDF'], csv: ['text/csv', 'CSV'], json: ['application/json', 'JSON'] };
-  async function baja(blob, archivo) {
+  const TIPOS = { pdf: ['application/pdf', 'PDF'], csv: ['text/csv', 'CSV'], json: ['application/json', 'JSON'], mp4: ['video/mp4', 'MP4'], webm: ['video/webm', 'WebM'] };
+  function enlace(blob, archivo) {
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob); a.download = archivo; a.rel = 'noopener';
+    document.body.append(a); a.click();
+    setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 60000);
+  }
+  // Where a file goes. Asked for at the person's click (the dialog needs their gesture) and written when the file is ready,
+  // so a report that takes a while to make (the journey's PDF) still gets its «Guardar como». null: the person cancelled.
+  async function destino(archivo) {
     if (enPrograma() && typeof window.showSaveFilePicker === 'function') {
       try {
         const ext = archivo.slice(archivo.lastIndexOf('.') + 1).toLowerCase(), tp = TIPOS[ext];
         const op = { id: 'guardiana-informes', startIn: 'desktop', suggestedName: archivo };
         if (tp) op.types = [{ description: tp[1], accept: { [tp[0]]: ['.' + ext] } }];
         const h = await window.showSaveFilePicker(op);
-        const w = await h.createWritable(); await w.write(blob); await w.close();
-        return;
-      } catch (e) { if (e && e.name === 'AbortError') return; }
+        return { escribe: async (blob) => { const w = await h.createWritable(); await w.write(blob); await w.close(); } };
+      } catch (e) { if (e && e.name === 'AbortError') return null; }
     }
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob); a.download = archivo; a.rel = 'noopener';
-    document.body.append(a); a.click();
-    setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 60000);
+    return { escribe: async (blob) => enlace(blob, archivo) };
   }
+  async function baja(blob, archivo) { const d = await destino(archivo); if (d) await d.escribe(blob); }
 
   // ---------- CSV and JSON ----------
   function aCSV(doc, h, s) {
@@ -219,5 +224,5 @@
     return b;
   }
   addEventListener('guardiana-idioma', () => document.querySelectorAll('.descargar span[data-es]').forEach((s) => { s.textContent = T(s.dataset.es); }));
-  window.GuardianaDescargas = { boton, descarga, cierraMenu };
+  window.GuardianaDescargas = { boton, descarga, cierraMenu, destino, guarda: baja };
 })();

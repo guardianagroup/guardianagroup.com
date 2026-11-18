@@ -97,7 +97,10 @@
     } catch (_) { REC.on = false; return false; }
   }
   function paraGrabacion() { try { if (REC.rec && REC.rec.state !== 'inactive') REC.rec.stop(); } catch (_) {} }
-  function descargaVideo() { if (!REC.blob) return; const a = document.createElement('a'); a.href = URL.createObjectURL(REC.blob); a.download = (T('El viaje de tus datos') + ' · GUARDIANA').replace(/[^\w\s·-]/g, '').trim() + (REC.mime.startsWith('video/mp4') ? '.mp4' : '.webm'); document.body.append(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 4000); }
+  function descargaVideo() { if (!REC.blob) return; const nombreV = (T('El viaje de tus datos') + ' · GUARDIANA').replace(/[^\w\s·-]/g, '').trim() + (REC.mime.startsWith('video/mp4') ? '.mp4' : '.webm');
+    // inside the program, Windows' «Guardar como» (descargas.js); elsewhere, the usual download
+    const GD = window.GuardianaDescargas; if (GD && GD.guarda) { GD.guarda(REC.blob, nombreV); return; }
+    const a = document.createElement('a'); a.href = URL.createObjectURL(REC.blob); a.download = nombreV; document.body.append(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 4000); }
   function cuadroGrabado() {
     if (!REC.on || !V) return; const p = P(); if (!p) return; const l = p.lienzos, c = REC.lienzo, cx = REC.cx; if (!l || !c) return;
     cx.fillStyle = '#06080C'; cx.fillRect(0, 0, c.width, c.height);
@@ -1015,6 +1018,11 @@
   }
   async function pdfInforme(a, boton) {
     if (!a || !a.isConnected || pdfInforme.ocupado) return; pdfInforme.ocupado = true;
+    // where it goes is asked first, at the person's click (inside the program, Windows' «Guardar como»: descargas.js); the PDF
+    // takes a few seconds to make and the dialog would no longer open afterwards. Cancelled: nothing is made.
+    const nombrePdf = 'GUARDIANA-' + T('El viaje de tus datos').normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^\w]+/g, '-').replace(/^-|-$/g, '') + '-' + new Date().toISOString().slice(0, 10) + '.pdf';
+    let destino = null; const GD = window.GuardianaDescargas;
+    if (GD && GD.destino) { try { destino = await GD.destino(nombrePdf); } catch (_) { destino = null; } if (!destino) { pdfInforme.ocupado = false; return; } }
     const antes = boton.textContent; boton.disabled = true; boton.textContent = T('Preparando el PDF…');
     try {
       if (a.__listo) await a.__listo; // the figures are drawn first (the faces and the planet's texture take a moment)
@@ -1035,9 +1043,9 @@
         paginas.push({ w: PW, h: PH, bytes: await jpeg(pg) });
         y = fin;
       }
-      const blob = pdfDeImagenes(paginas), enl = document.createElement('a');
-      enl.href = URL.createObjectURL(blob); enl.download = 'GUARDIANA-' + T('El viaje de tus datos').normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^\w]+/g, '-').replace(/^-|-$/g, '') + '-' + new Date().toISOString().slice(0, 10) + '.pdf';
-      document.body.append(enl); enl.click(); setTimeout(() => { URL.revokeObjectURL(enl.href); enl.remove(); }, 60000);
+      const blob = pdfDeImagenes(paginas);
+      if (destino) await destino.escribe(blob);
+      else { const enl = document.createElement('a'); enl.href = URL.createObjectURL(blob); enl.download = nombrePdf; document.body.append(enl); enl.click(); setTimeout(() => { URL.revokeObjectURL(enl.href); enl.remove(); }, 60000); }
       boton.textContent = antes;
     } catch (e) {
       boton.textContent = T('No se pudo crear el PDF');

@@ -1190,6 +1190,19 @@ body.en-tupc #estado { opacity: .35; }
 .tupc-hud li.nueva { animation: tupc-fila .55s cubic-bezier(.2,.7,.2,1); }
 @keyframes tupc-fila { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: none; } }
 .tupc-hud .notas { display: flex; flex-direction: column; gap: 6px; padding-top: 10px; border-top: 1px solid var(--line); }
+.tupc-hud .viaje-pc { flex: none; display: flex; flex-direction: column; gap: 7px; padding-top: 10px; border-top: 1px solid var(--line); }
+.tupc-hud .viaje-pc[hidden], .tupc-hud .viaje-pc [hidden] { display: none; }
+.tupc-hud .viaje-pc .k2 { font: 500 9.5px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: #8A95A2; }
+.tupc-hud .viaje-pc .vj-t { margin: 0; font: 400 11.5px/1.45 var(--texto); color: #9AA6B2; }
+.tupc-hud .viaje-pc .vj-fila { display: flex; gap: 8px; }
+.tupc-hud .viaje-pc button { all: unset; box-sizing: border-box; cursor: pointer; flex: 1 1 0; min-width: 0; min-height: 34px; padding: 0 12px; display: inline-flex; align-items: center; justify-content: center; text-align: center; border-radius: 999px; border: 1px solid rgba(156,195,228,.34); color: #DCEAF6; font: 600 12px/1.2 var(--texto); transition: background-color .15s, border-color .15s, color .15s; }
+.tupc-hud .viaje-pc .vj-ver { background: #9CC3E4; border-color: #9CC3E4; color: #06080C; }
+.tupc-hud .viaje-pc .vj-ver:hover { background: #B4D3EC; border-color: #B4D3EC; }
+.tupc-hud .viaje-pc .vj-ver.midiendo { background: rgba(156,195,228,.14); border-color: rgba(156,195,228,.3); color: #B9D6EE; cursor: default; font-variant-numeric: tabular-nums; }
+.tupc-hud .viaje-pc .vj-pdf:hover { background: rgba(156,195,228,.12); border-color: rgba(156,195,228,.6); color: #F4F6F8; }
+.tupc-hud .viaje-pc button:focus-visible { outline: 2px solid #F4F6F8; outline-offset: 2px; }
+.tupc-hud .viaje-pc .vj-aviso { margin: 0; font: 400 11px/1.45 var(--texto); color: var(--aviso); }
+@media (max-height: 820px) and (min-width: 761px) { .tupc-hud .viaje-pc { gap: 6px; padding-top: 8px; } .tupc-hud .viaje-pc .vj-t { display: none; } }
 .tupc-hud .notas p { margin: 0; font: 400 10px/1.5 var(--mono); color: #7C8794; }
 /* short windows: a smaller title and tighter notes, so the list keeps its room */
 @media (max-height: 820px) and (min-width: 761px) { .tupc-hud { gap: 10px; } .tupc-hud .t { font-size: 22px; } .tupc-hud .cifras { padding: 10px 0; } .tupc-hud .notas { gap: 4px; padding-top: 8px; } .tupc-hud .notas p { font-size: 9.5px; line-height: 1.45; } }

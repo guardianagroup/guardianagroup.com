@@ -330,10 +330,36 @@
     emp.append(crea('div', 'k2', 'Empresas'), ol);
     const notas = crea('div', 'notas'), sin = crea('p', 'sin-lugar', NOTA_SIN); sin.hidden = true;
     notas.append(sin, crea('p', '', NOTA_CABLE), crea('p', '', NOTA_LUGAR), crea('p', '', NOTA_AQUI));
-    hud.append(cab, t, estado, cifras, emp, notas);
+    // «El viaje de tus datos» (17 nov 2026; el dueño, 21:51: «el botón ese que quitamos el día 2 de noviembre… ponlo dentro de ver mi
+    // PC en directo»): el vuelo en 3D con los tiempos medidos ahora, su vídeo y su informe en PDF (viaje.js, conexion.js)
+    const vj = crea('div', 'viaje-pc'); vj.hidden = true;
+    const vb = document.createElement('button'); vb.type = 'button'; vb.className = 'vj-ver'; vb.append(crea('span'));
+    const vp = document.createElement('button'); vp.type = 'button'; vp.className = 'vj-pdf'; vp.hidden = true; vp.append(crea('span', '', 'Guardar el viaje (PDF)'));
+    const va = crea('p', 'vj-aviso', 'Hace falta tu ubicación para dibujarlo: pulsa «Precisar ubicación» arriba y vuelve a intentarlo.'); va.hidden = true;
+    const vf = crea('div', 'vj-fila'); vf.append(vb, vp);
+    vj.append(crea('div', 'k2', 'El viaje de tus datos'), crea('p', 'vj-t', 'Un vuelo en 3D desde tu ciudad hasta los centros de datos de cada continente, con tus tiempos reales.'), vf, va);
+    vb.addEventListener('click', () => { const C = window.OrbitaConexion; if (!C || !C.viaje) return; const e = C.viajeEstado; if (e.midiendo) return; esperaViaje = true; if (e.hecho) cierra(); C.viaje(); pintaViaje(); });
+    vp.addEventListener('click', () => { const C = window.OrbitaConexion; if (C && C.informe) C.informe(); });
+    hud.append(cab, t, estado, cifras, emp, vj, notas);
     document.body.append(hud);
     return hud;
   }
+  // the journey's block: what its button says follows the measurement («Midiendo… 12 / 34»); when the measurement that the
+  // button asked for ends, this view steps aside a moment before the journey takes the planet
+  let esperaViaje = false;
+  function pintaViaje() {
+    if (!hud) return; const vj = hud.querySelector('.viaje-pc'); if (!vj) return;
+    const C = window.OrbitaConexion, hay = !!(C && C.viaje && window.OrbitaViaje);
+    vj.hidden = !hay; if (!hay) return;
+    const e = C.viajeEstado, b = vj.querySelector('.vj-ver'), sp = b.querySelector('span');
+    b.disabled = e.midiendo; b.classList.toggle('midiendo', e.midiendo);
+    if (e.midiendo) { sp.dataset.es = ''; sp.textContent = T('Midiendo…') + ' ' + e.hechas + ' / ' + e.total; } else pon(sp, 'Ver el viaje en 3D');
+    vj.querySelector('.vj-pdf').hidden = !e.hecho;
+    vj.querySelector('.vj-aviso').hidden = !e.sinLugar;
+    if (esperaViaje && E && !e.midiendo && (e.hecho || e.sinLugar)) { if (e.sinLugar) esperaViaje = false; else if (e.quiere) { esperaViaje = false; cierra(); } }
+    if (!e.midiendo && !e.quiere) esperaViaje = false;
+  }
+  document.addEventListener('orbita-conexion', pintaViaje);
   // the counters glide to their new value
   function cuenta(el, a) {
     const de = Number(el.dataset.v || 0); el.dataset.v = a; const t0 = performance.now();
@@ -497,7 +523,7 @@
     const est = hud.querySelector('.estado'); est.dataset.clave = '';
     for (const b of hud.querySelectorAll('.cifras b')) { b.dataset.v = 0; b.textContent = ''; }
     hud.querySelector('.empresas ol').textContent = '';
-    pintaHud();
+    pintaHud(); pintaViaje();
     document.body.classList.add('en-tupc');
     if (boton) boton.setAttribute('aria-pressed', 'true');
     if (window.OrbitaCapas) window.OrbitaCapas.soloTu(true, pinta);
