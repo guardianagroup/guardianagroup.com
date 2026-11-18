@@ -4034,7 +4034,10 @@
 "Cada 15 minutos":"每 15 分鐘",
 "Cada 30 minutos":"每 30 分鐘",
 "Cada hora":"每小時",
-"Agrandar":"放大"
+"Agrandar":"放大",
+"Sin cuentas ni teléfono":"無需帳號，也無需電話號碼",
+"Nuestro servidor no puede leerlo":"我們的伺服器也無法讀取",
+"Al terminar, se borra en los dos equipos":"結束後，對話會從兩台裝置上刪除"
 },
 "p":{
 "intento":"今天嘗試最多的：{1}，{2} {2?次|次}。",

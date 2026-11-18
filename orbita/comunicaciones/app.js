@@ -4210,8 +4210,12 @@
     // «Por qué» (dueño, 29 Oct 2026, 09:25): encima de todo, se cierra con «‹», con Esc o con el atrás del navegador
     { const pq = $('#porque'), pb = $('#porque-btn');
       const abrePorque = () => { if (!pq || !pq.hidden) return; pq.hidden = false; pq.scrollTop = 0; try { history.pushState(Object.assign({}, history.state || {}, { porque: 1 }), ''); } catch (_) {} setTimeout(() => { try { pq.focus({ preventScroll: true }); } catch (_) {} }, 30); };
-      const cierraPorque = (desdeHistoria) => { if (!pq || pq.hidden) return; pq.hidden = true; if (pb) pb.focus({ preventScroll: true }); if (!desdeHistoria && history.state && history.state.porque) { try { history.back(); } catch (_) {} } };
+      // abierta desde la portada del programa (?porque=1): al cerrarla se vuelve a la portada, de donde vino
+      let desdePortada = false; try { desdePortada = /[?&]porque=1(&|$)/.test(location.search); } catch (_) {}
+      const cierraPorque = (desdeHistoria) => { if (!pq || pq.hidden) return; if (desdePortada) { location.replace('/orbita/'); return; } pq.hidden = true; if (pb) pb.focus({ preventScroll: true }); if (!desdeHistoria && history.state && history.state.porque) { try { history.back(); } catch (_) {} } };
       if (pb) pb.addEventListener('click', abrePorque);
+      // desde la portada del programa («¿Por qué?», 17 nov 2026): /orbita/comunicaciones/?porque=1
+      if (desdePortada && pq) { pq.hidden = false; pq.scrollTop = 0; setTimeout(() => { try { pq.focus({ preventScroll: true }); } catch (_) {} }, 30); }
       const cp = $('#como-porque'); if (cp) cp.addEventListener('click', abrePorque);
       const pa = $('#porque-atras'); if (pa) pa.addEventListener('click', () => cierraPorque(false));
       addEventListener('popstate', () => { if (pq && !pq.hidden && !(history.state && history.state.porque)) cierraPorque(true); });
@@ -4554,21 +4558,46 @@
     try { matchMedia('(max-width: 760px)').addEventListener('change', () => { const c = CONVS.get(ACTUAL); if (c) pintaCabecera(c); }); } catch (_) {}
     // el inicio en el PC (dueño, 15 nov 2026): primero el tipo, Blindado o Ultra; «Tengo un código» y «Crear un código» dicen el código
     // de ese tipo, y «Crear un código» con Ultra elegido hace lo de siempre del botón Ultra (en el programa con Plus; si no, el motivo)
-    let modoInicio = 'blindado';
+    // 17 nov 2026, 21:22 (dueño: «cuando la persona decide y clica en blindado o en ultra, entonces sí les aparece la opción de tengo un
+    // código o la opción de crear un código»): al abrir, ninguno elegido y sin esos dos botones; al elegir uno, aparecen debajo, a la vista
+    let modoInicio = null;
     const pintaModoInicio = () => {
-      const u = modoInicio === 'ultra';
-      for (const [id, si] of [['#modo-blindado', !u], ['#modo-ultra', u]]) { const b = $(id); if (b) { b.classList.toggle('elegido', si); b.setAttribute('aria-checked', String(si)); b.tabIndex = si ? 0 : -1; } }
+      const u = modoInicio === 'ultra', paso = $('#paso-inicio');
+      for (const [id, si] of [['#modo-blindado', modoInicio === 'blindado'], ['#modo-ultra', u]]) { const b = $(id); if (b) { b.classList.toggle('elegido', si); b.setAttribute('aria-checked', String(si)); b.tabIndex = si || (!modoInicio && id === '#modo-blindado') ? 0 : -1; } }
+      if (paso) paso.classList.toggle('sin-modo', !modoInicio);
       const nt = $('#nueva-t'), ut = $('#unir-t'), nota = $('#modo-nota');
       if (nt) nt.textContent = T(u ? 'Te sale un código Ultra de 16 caracteres para dárselo a la otra persona' : 'Te sale un código de 9 cifras para dárselo a la otra persona');
       if (ut) ut.textContent = T(u ? 'Escribe los 16 caracteres que te han dado' : 'Escribe las 9 cifras que te han dado');
       if (nota) { const x = $('#nueva-blindada-t'); nota.textContent = x ? x.textContent : ''; nota.hidden = !u; }
     };
-    const eligeModo = (m, foco) => { modoInicio = m; pintaModoInicio(); if (foco) { const b = $(m === 'ultra' ? '#modo-ultra' : '#modo-blindado'); if (b) b.focus(); } };
+    const eligeModo = (m, foco) => {
+      const primero = !modoInicio; modoInicio = m; pintaModoInicio();
+      if (foco) { const b = $(m === 'ultra' ? '#modo-ultra' : '#modo-blindado'); if (b) b.focus(); }
+      if (!primero || esMovil()) return;
+      const paso = $('#paso-inicio'); if (!paso) return;
+      paso.classList.remove('aparece'); void paso.offsetWidth; paso.classList.add('aparece');
+      // si no caben en la ventana, la página baja lo justo para que se vean enteros (con la nota de Ultra, si sale)
+      requestAnimationFrame(() => {
+        const ini = $('#inicio'), nota = $('#modo-nota'); if (!ini) return;
+        const fondo = Math.max(...['#unir', '#nueva'].map((s) => { const e = $(s); return e ? e.getBoundingClientRect().bottom : 0; }), nota && !nota.hidden ? nota.getBoundingClientRect().bottom : 0);
+        const falta = fondo + 20 - ini.getBoundingClientRect().bottom;
+        if (falta > 0) ini.scrollBy({ top: falta, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+      });
+    };
+    // los tres datos de debajo del título, en una línea; si en ese idioma o ese ancho no caben, uno debajo de otro (sin el punto suelto
+    // al empezar una línea)
+    { const lema = $('#inicio>.lema-corta'), ini = $('#inicio');
+      if (lema && ini) {
+        const ajusta = () => { lema.classList.remove('columna'); const ss = [...lema.children]; if (ss.length && ss.some((x) => x.offsetTop !== ss[0].offsetTop)) lema.classList.add('columna'); };
+        try { new ResizeObserver(() => ajusta()).observe(ini); } catch (_) { addEventListener('resize', ajusta); }
+        addEventListener('guardiana-idioma', () => requestAnimationFrame(ajusta)); ajusta();
+      } }
     { const mb = $('#modo-blindado'), mu = $('#modo-ultra');
       if (mb && mu) {
+        pintaModoInicio();
         mb.addEventListener('click', () => eligeModo('blindado'));
         mu.addEventListener('click', () => eligeModo('ultra'));
-        for (const b of [mb, mu]) b.addEventListener('keydown', (e) => { if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(e.key)) { e.preventDefault(); eligeModo(modoInicio === 'ultra' ? 'blindado' : 'ultra', true); } });
+        for (const b of [mb, mu]) b.addEventListener('keydown', (e) => { if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(e.key)) { e.preventDefault(); eligeModo(b === mu ? 'blindado' : 'ultra', true); } });
         addEventListener('guardiana-idioma', pintaModoInicio);
       } }
     $('#nueva').addEventListener('click', () => { if (!esMovil() && modoInicio === 'ultra') { $('#nueva-blindada').click(); return; } creaInvitacion(); });
@@ -4614,6 +4643,8 @@
     try { const l = $('.inicio .red-nucleo'); if (l && window.RedNucleo) window.RedNucleo(l, { nace: false }); } catch (_) {}
     // dueño, 10:10: la explicación, en un desplegable bajo los dos botones
     const como = $('#como-btn');
+    // «Cómo funciona», arriba (dueño, 17 nov 2026, 21:33: «está muy escondido»): abre la explicación del inicio y la lleva a la vista
+    { const ca = $('#como-arriba'); if (ca) ca.addEventListener('click', () => { const pro = $('#pro'); if (!pro) return; if (pro.hidden) { pro.hidden = false; if (como) como.setAttribute('aria-expanded', 'true'); } setTimeout(() => pro.scrollIntoView({ behavior: 'smooth', block: 'start' }), 30); }); }
     if (como) como.addEventListener('click', () => { const pro = $('#pro'); if (!pro) return; const abre = pro.hidden; pro.hidden = !abre; como.setAttribute('aria-expanded', String(abre)); if (abre) setTimeout(() => pro.scrollIntoView({ behavior: 'smooth', block: 'start' }), 30); });
     $('#unir').addEventListener('click', () => { $('#unir-mal').hidden = true; $('#unir-espera').hidden = true; $('#unir-codigo').value = ''; $('#paso-inicio').hidden = true; $('#paso-entrar').hidden = false; setTimeout(() => $('#unir-codigo').focus(), 50); });
     $('#unir-cerrar').addEventListener('click', () => { $('#paso-entrar').hidden = true; $('#paso-inicio').hidden = false; });

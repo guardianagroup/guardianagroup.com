@@ -49,11 +49,12 @@ const sale = (p) => p.click('#lista-nueva');
 async function aInicio(p) { if (await visible(p, '#lista-nueva')) { await p.click('#lista-nueva'); await espera(400); } }
 // B crea la invitación (9 cifras) y A las escribe en «Tengo un código»; los dos dentro, un mensaje cada uno y los dos vistos
 async function conversacion(A, B, n) {
-  await aInicio(B); await B.click('#nueva');
+  await aInicio(B); await B.click('#modo-blindado'); await B.click('#nueva');
   await hasta(async () => /\d{3}/.test(await B.textContent('#codigo')), 10000);
   const cod = (await B.textContent('#codigo')).replace(/\D/g, '');
   await aInicio(A);
-  if (!(await visible(A, '#paso-entrar'))) { if (!(await visible(A, '#unir'))) await A.screenshot({ path: path.join(OUT, 'sin-unir-' + n + '.png') }); await A.click('#unir', { timeout: 8000 }); await hasta(() => visible(A, '#paso-entrar'), 4000); }
+  if (!(await visible(A, '#paso-entrar'))) { if (!(await visible(A, '#unir')) && (await visible(A, '#modo-blindado'))) await A.click('#modo-blindado');
+    if (!(await visible(A, '#unir'))) await A.screenshot({ path: path.join(OUT, 'sin-unir-' + n + '.png') }); await A.click('#unir', { timeout: 8000 }); await hasta(() => visible(A, '#paso-entrar'), 4000); }
   await A.fill('#unir-codigo', ''); await A.focus('#unir-codigo'); await A.keyboard.type(cod, { delay: 25 });
   const lista = async (P) => P.evaluate(() => { const c = [...GuardianaCom.convs.values()].filter((x) => x.huella && x.estado === 'activa').sort((a, b) => b.creado - a.creado)[0]; return c && c.sesion && c.sesion.confirmada ? c.id : null; });
   const abierta = await hasta(async () => (await visible(A, '#conv')) && (await visible(B, '#conv')) && !!(await lista(A)) && (await lista(A)) === (await lista(B)), 20000);

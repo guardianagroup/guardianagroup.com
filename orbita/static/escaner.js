@@ -253,6 +253,7 @@
 
   // Not async on purpose: the two orders leave inside the person's own click (the program only lets them through within
   // 3 s of a real click or key), before anything else is asked.
+  function arriba() { try { if (cuerpo) cuerpo.scrollTop = 0; } catch (_) {} }
   function escanea() {
     if (!enPrograma() || (S && !S.fin)) return;
     S = nuevo(); const g = S.g;
@@ -261,6 +262,9 @@
     const pVigA = lee(g, 'vigAhora');
     S.vig.tPedido = Date.now();
     pintaTodo(); arrancaReloj();
+    // 17 nov 2026, 21:12 (dueño: «no aparece desde arriba del todo, sale como cortada»): el escaneo empieza arriba del todo. El botón
+    // está a media portada: sin esto, la vista nueva se quedaba a esa misma altura, con la cabeza del escaneo fuera de la pantalla.
+    arriba(); requestAnimationFrame(arriba);
     setTimeout(() => { if (vigente(g) && !S.informe) { S.informe = true; pintaTodo(); } }, 60000);
     // the quick readings, then the rest; the queue keeps four on their way at most
     const pTextos = lee(g, 'textos').then((r) => { if (r && r.ok && r.json && r.json.panel && typeof r.json.panel === 'object') { TX = r.json.panel; LANGP = idiomaDe(TX); informeLuego(true); } });

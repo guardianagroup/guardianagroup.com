@@ -4034,7 +4034,10 @@
 "Cada 15 minutos":"כל 15 דקות",
 "Cada 30 minutos":"כל 30 דקות",
 "Cada hora":"כל שעה",
-"Agrandar":"הגדלה"
+"Agrandar":"הגדלה",
+"Sin cuentas ni teléfono":"בלי חשבונות ובלי מספר טלפון",
+"Nuestro servidor no puede leerlo":"השרת שלנו לא יכול לקרוא את זה",
+"Al terminar, se borra en los dos equipos":"בסיום השיחה נמחקת בשני המכשירים"
 },
 "p":{
 "intento":"ניסתה הכי הרבה היום: {1}, {2} {2?פעם|פעמים}.",

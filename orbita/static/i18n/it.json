@@ -4034,7 +4034,10 @@
 "Cada 15 minutos":"Ogni 15 minuti",
 "Cada 30 minutos":"Ogni 30 minuti",
 "Cada hora":"Ogni ora",
-"Agrandar":"Ingrandisci"
+"Agrandar":"Ingrandisci",
+"Sin cuentas ni teléfono":"Niente account né numero di telefono",
+"Nuestro servidor no puede leerlo":"Il nostro server non può leggerlo",
+"Al terminar, se borra en los dos equipos":"Alla fine, la conversazione viene cancellata su entrambi i dispositivi"
 },
 "p":{
 "intento":"Quella che ci ha provato di più oggi: {1}, {2} {2?volta|volte}.",

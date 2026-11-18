@@ -4034,7 +4034,10 @@
 "Cada 15 minutos":"15 minuutin välein",
 "Cada 30 minutos":"30 minuutin välein",
 "Cada hora":"Tunnin välein",
-"Agrandar":"Suurenna"
+"Agrandar":"Suurenna",
+"Sin cuentas ni teléfono":"Ei tilejä eikä puhelinnumeroa",
+"Nuestro servidor no puede leerlo":"Palvelimemme ei voi lukea sitä",
+"Al terminar, se borra en los dos equipos":"Lopuksi keskustelu poistetaan molemmilta laitteilta"
 },
 "p":{
 "intento":"Eniten yrittänyt tänään: {1}, {2} {2?kerta|kertaa}.",

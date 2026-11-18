@@ -4034,7 +4034,10 @@
 "Cada 15 minutos":"كل 15 دقيقة",
 "Cada 30 minutos":"كل 30 دقيقة",
 "Cada hora":"كل ساعة",
-"Agrandar":"تكبير"
+"Agrandar":"تكبير",
+"Sin cuentas ni teléfono":"بلا حسابات ولا رقم هاتف",
+"Nuestro servidor no puede leerlo":"خادمنا لا يستطيع قراءته",
+"Al terminar, se borra en los dos equipos":"عند الانتهاء، تُحذف المحادثة من الجهازين"
 },
 "p":{
 "intento":"الأكثر محاولةً اليوم: {1}، {2} {2?مرة|مرات}.",

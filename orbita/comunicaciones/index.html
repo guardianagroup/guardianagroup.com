@@ -41,7 +41,7 @@
 <link rel="canonical" href="https://guardianagroup.com/orbita/comunicaciones/">
 <link rel="icon" href="/favicon.ico">
 <link rel="stylesheet" href="componentes.css?v=20261028m">
-<link rel="stylesheet" href="app.css?v=20261116-mon1">
+<link rel="stylesheet" href="app.css?v=20261117-port1">
 <link rel="stylesheet" href="diseno.css?v=20261031a">
 <link rel="stylesheet" href="viaje.css?v=20261029b">
 <!-- antes de pintar: como app desde el primer fotograma y, al volver a un chat tras recargar, sin enseñar el inicio entretanto -->
@@ -58,9 +58,11 @@
   <a class="marca" href="/orbita/" id="volver" aria-label="Volver al inicio"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg><span>Inicio</span></a>
   <!-- en la web, «Comunicaciones»; instalada, el candado y «GUARDIANA» desde el primer fotograma (antes se cambiaba con JavaScript y
        arriba se veía un salto; dueño, 29 Oct 2026, 08:38) -->
-  <b class="barra-t"><span class="barra-web">Comunicaciones</span><span class="barra-app"><svg class="barra-logo" viewBox="0 0 100 100" aria-hidden="true"><defs><mask id="barra-logo-g"><rect width="100" height="100" fill="#fff"/><path d="M63 58.29 V55.07 Q63 54 58.71 54 H44.15 Q37 54 37 61.15 V72.85 Q37 80 44.15 80 H58.71 Q63 80 63 75.71 V67 H51" fill="none" stroke="#000" stroke-width="7.5"/></mask></defs><path d="M31 44 V31 A19 19 0 0 1 69 31 V44" fill="none" stroke="#E8ECF1" stroke-width="9"/><rect x="17" y="42" width="66" height="50" rx="13" fill="#9CC3E4" mask="url(#barra-logo-g)"/></svg><span class="barra-nombre"><span translate="no">GUARDIANA</span><small>Tus datos, bajo tu control</small></span></span></b>
+  <b class="barra-t"><span class="barra-web"><span class="cab-g" translate="no">GUARDIANA</span><span class="cab-sep" aria-hidden="true" translate="no">/</span><span class="cab-sub">Comunicaciones</span></span><span class="barra-app"><svg class="barra-logo" viewBox="0 0 100 100" aria-hidden="true"><defs><mask id="barra-logo-g"><rect width="100" height="100" fill="#fff"/><path d="M63 58.29 V55.07 Q63 54 58.71 54 H44.15 Q37 54 37 61.15 V72.85 Q37 80 44.15 80 H58.71 Q63 80 63 75.71 V67 H51" fill="none" stroke="#000" stroke-width="7.5"/></mask></defs><path d="M31 44 V31 A19 19 0 0 1 69 31 V44" fill="none" stroke="#E8ECF1" stroke-width="9"/><rect x="17" y="42" width="66" height="50" rx="13" fill="#9CC3E4" mask="url(#barra-logo-g)"/></svg><span class="barra-nombre"><span translate="no">GUARDIANA</span><small>Tus datos, bajo tu control</small></span></span></b>
   <!-- oculto hasta que hay una conversación que vigilar: en la página recién cargada salía «Desconectado» un momento -->
   <span class="rele" id="rele" hidden><i></i><span id="reletxt"></span></span>
+  <!-- dueño, 17 nov 2026, 21:33: «Cómo funciona», arriba y a la vista; «Multas» y «¿Por qué?», solo en la portada de las cinco tarjetas -->
+  <button type="button" class="porque-b como-arriba" id="como-arriba" aria-controls="pro"><span>¿Cómo funciona?</span></button>
   <a class="multas-b" href="/orbita/multas/?desde=comunicaciones">Multas</a><!-- dueño, 14:02: arriba a la derecha, su propia página -->
   <!-- «Por qué» (dueño, 29 Oct 2026, 09:25): a la izquierda del idioma, la explicación de por qué GUARDIANA es así, con los datos -->
   <!-- dueño, 10:04: en el teléfono se quedaba en un «?» que se leía como «ayuda»; ahora la palabra, siempre visible -->
@@ -165,8 +167,9 @@
          algoritmos se dicen por su nombre (ML-KEM, ML-DSA, AES-256, P-384); nunca «conforme» ni «certificada» -->
     <!-- dueño, 29 Oct 2026, 10:09–10:12: sin «en tu navegador» (confunde con ZERO); «mensajes, llamadas y archivos» -->
     <h1>Mensajes, llamadas y archivos encriptados de extremo a extremo</h1>
-    <p class="lema">Mensajes y archivos con encriptación postcuántica híbrida. Sin cuentas ni números de teléfono. Nuestro servidor no puede leer lo que escribes.</p>
-    <p class="t">Para particulares y profesionales: chatea y envía datos y documentación sensible, encriptados de extremo a extremo. Al terminar, la conversación se borra en los dos equipos.</p>
+    <!-- dueño, 17 nov 2026, 21:22: «de esas 5 frases… minimizarlo… más pequeño, decirme las cosas»: lo postcuántico ya lo dice el
+         antetítulo y para quién es, las tres etiquetas de debajo; aquí quedan tres datos cortos en una línea -->
+    <p class="lema lema-corta"><span>Sin cuentas ni teléfono</span><span>Nuestro servidor no puede leerlo</span><span>Al terminar, se borra en los dos equipos</span></p>
     <!-- dueño, 27 Oct 2026, 21:01: dejar claro, a la vista, para quién es: particulares, profesionales con clientes y documentación sensible -->
     <ul class="para">
       <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.6"/><path d="M5 20c.8-3.6 3.6-5.6 7-5.6s6.2 2 7 5.6"/></svg><span>Particulares</span></li>
@@ -298,7 +301,7 @@
       </div>
     </section>
     <p class="movil-app-nota" id="movil-app-nota">Tu Número GUARDIANA y «Llamar» están en la app: añádela a tu pantalla de inicio y ábrela desde su icono.</p>
-    <div class="grandes" id="paso-inicio">
+    <div class="grandes sin-modo" id="paso-inicio">
       <!-- Número GUARDIANA (dueño, 29 Oct 2026, 20:56–21:55; agencia, ronda 73): en la app del teléfono, tu número y «Llamar», que
            abre un teclado (21:42: «ya no pondrá invitar al chat… llamar»). Saber tu número no basta para escribirte: solo hablan
            los que se han añadido los dos. El número se crea aquí; al servidor solo le llega una huella -->
@@ -324,9 +327,10 @@
         </div>
       </div>
       <!-- dueño, 15 nov 2026: en el PC, primero el tipo de conversación (Blindado o Ultra) y después «Tengo un código» o «Crear un código».
-           En el teléfono no se ve: allí siguen sus botones de siempre -->
+           En el teléfono no se ve: allí siguen sus botones de siempre. 17 nov 2026, 21:22: ninguno elegido al abrir; «Tengo un código» y
+           «Crear un código» aparecen cuando la persona elige uno (#paso-inicio.sin-modo, app.js) -->
       <div class="modos" id="modos" role="radiogroup" aria-label="Tipo de conversación">
-        <button type="button" class="modo elegido" id="modo-blindado" role="radio" aria-checked="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6z"/></svg><b>Blindado</b><small>Gratis · código de 9 cifras</small><i class="modo-marca" aria-hidden="true"></i></button>
+        <button type="button" class="modo" id="modo-blindado" role="radio" aria-checked="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6z"/></svg><b>Blindado</b><small>Gratis · código de 9 cifras</small><i class="modo-marca" aria-hidden="true"></i></button>
         <button type="button" class="modo" id="modo-ultra" role="radio" aria-checked="false" tabindex="-1"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg><b>Ultra</b><small>Con la suscripción Plus · código de 16 caracteres</small><i class="modo-marca" aria-hidden="true"></i></button>
       </div>
       <button type="button" class="grande" id="unir"><b>Tengo un código</b><small id="unir-t">Escribe las 9 cifras que te han dado</small></button>
@@ -1370,19 +1374,19 @@
 <!-- En el ordenador, en el chat blindado: la pantalla se tapa con la tecla de captura o si la ventana pierde el foco (29 Oct 2026, 08:02) -->
 <!-- y, en Ultra, al pasar la app a segundo plano o perder el foco (3 Nov 2026, ronda 93): la miniatura de la multitarea sale tapada -->
 <div class="captura-velo" id="captura-velo" role="alert" hidden><div><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><b>Modo Ultra</b><span class="cv-captura">Captura detectada: se vació el portapapeles; una web no puede impedir capturas</span><span class="cv-fuera">Pantalla tapada mientras la app está en segundo plano</span></div></div>
-<script src="/orbita/static/idioma.js?v=20261116-tam1"></script>
+<script src="/orbita/static/idioma.js?v=20261117-port1"></script>
 <script src="pq-mlkem.js?v=20261027a"></script>
 <script src="pq-cnsa.js?v=20261027a"></script>
 <script src="qrhaz.js?v=20261027a"></script>
 <script src="palabras.js?v=20261105-ultra2-pal"></script>
 <script src="cripto.js?v=20261106-ucod2"></script>
-<script src="/orbita/static/red-nucleo.js?v=20261105-ultra2"></script>
+<script src="/orbita/static/red-nucleo.js?v=20261117-cab3"></script>
 <script src="rele.js?v=20261115-ucod4"></script>
 <script src="sha256.js?v=20261027a"></script>
 <script src="viaje-datos.js?v=20261031a"></script>
 <script src="viaje.js?v=20261105-ultra2"></script>
 <script src="llamada.js?v=20261116-ord1"></script>
 <script src="editor-foto.js?v=20261115-foto1"></script>
-<script src="app.js?v=20261116-vu1"></script>
+<script src="app.js?v=20261117-port1"></script>
 </body>
 </html>

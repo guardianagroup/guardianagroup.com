@@ -4034,7 +4034,10 @@
 "Cada 15 minutos":"На всеки 15 минути",
 "Cada 30 minutos":"На всеки 30 минути",
 "Cada hora":"На всеки час",
-"Agrandar":"Уголемяване"
+"Agrandar":"Уголемяване",
+"Sin cuentas ni teléfono":"Без акаунти и без телефонен номер",
+"Nuestro servidor no puede leerlo":"Нашият сървър не може да го прочете",
+"Al terminar, se borra en los dos equipos":"Накрая разговорът се изтрива и от двете устройства"
 },
 "p":{
 "intento":"Най-настойчивата днес: {1}, {2} {2?път|пъти}.",

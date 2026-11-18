@@ -4034,7 +4034,10 @@
 "Cada 15 minutos":"Bawat 15 minuto",
 "Cada 30 minutos":"Bawat 30 minuto",
 "Cada hora":"Bawat oras",
-"Agrandar":"Palakihin"
+"Agrandar":"Palakihin",
+"Sin cuentas ni teléfono":"Walang account o numero ng telepono",
+"Nuestro servidor no puede leerlo":"Hindi ito mababasa ng aming server",
+"Al terminar, se borra en los dos equipos":"Pagkatapos, binubura ang usapan sa dalawang device"
 },
 "p":{
 "intento":"Pinakamadalas sumubok ngayon: {1}, {2} {2?beses|beses}.",

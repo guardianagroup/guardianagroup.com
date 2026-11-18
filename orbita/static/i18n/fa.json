@@ -4034,7 +4034,10 @@
 "Cada 15 minutos":"هر ۱۵ دقیقه",
 "Cada 30 minutos":"هر ۳۰ دقیقه",
 "Cada hora":"هر ساعت",
-"Agrandar":"بزرگ کردن"
+"Agrandar":"بزرگ کردن",
+"Sin cuentas ni teléfono":"بدون حساب کاربری و شماره تلفن",
+"Nuestro servidor no puede leerlo":"سرور ما نمی‌تواند آن را بخواند",
+"Al terminar, se borra en los dos equipos":"در پایان، گفتگو از هر دو دستگاه پاک می‌شود"
 },
 "p":{
 "intento":"بیشترین تلاش امروز: {1}، {2} {2?بار|بار}.",

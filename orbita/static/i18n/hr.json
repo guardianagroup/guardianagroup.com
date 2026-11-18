@@ -4034,7 +4034,10 @@
 "Cada 15 minutos":"Svakih 15 minuta",
 "Cada 30 minutos":"Svakih 30 minuta",
 "Cada hora":"Svaki sat",
-"Agrandar":"Povećaj"
+"Agrandar":"Povećaj",
+"Sin cuentas ni teléfono":"Bez računa i bez broja telefona",
+"Nuestro servidor no puede leerlo":"Naš poslužitelj to ne može pročitati",
+"Al terminar, se borra en los dos equipos":"Na kraju se razgovor briše na oba uređaja"
 },
 "p":{
 "intento":"Najupornija danas: {1}, {2} {2?put|puta}.",

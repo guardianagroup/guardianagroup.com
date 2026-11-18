@@ -4034,7 +4034,10 @@
 "Cada 15 minutos":"ప్రతి 15 నిమిషాలకు",
 "Cada 30 minutos":"ప్రతి 30 నిమిషాలకు",
 "Cada hora":"ప్రతి గంటకు",
-"Agrandar":"పెద్దది చేయి"
+"Agrandar":"పెద్దది చేయి",
+"Sin cuentas ni teléfono":"ఖాతా గానీ ఫోన్ నంబర్ గానీ అవసరం లేదు",
+"Nuestro servidor no puede leerlo":"మా సర్వర్ దాన్ని చదవలేదు",
+"Al terminar, se borra en los dos equipos":"ముగిశాక సంభాషణ రెండు పరికరాల నుంచీ తొలగిపోతుంది"
 },
 "p":{
 "intento":"ఈరోజు ఎక్కువగా ప్రయత్నించింది: {1}, {2} {2?సారి|సార్లు}.",

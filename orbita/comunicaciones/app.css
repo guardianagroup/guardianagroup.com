@@ -2641,6 +2641,21 @@ html.con-teclado .fe-pie{padding-bottom:10px}
   .modo-nota[hidden]{display:none}
 }
 @media (min-width:761px) and (prefers-reduced-motion:reduce){.modo{transition:none}}
+/* 17 nov 2026, 21:22 (dueño): al abrir, ningún tipo elegido; «Tengo un código» y «Crear un código» aparecen al elegir uno. Las cinco
+   frases de debajo del título, en tres datos cortos en una línea. */
+@media (min-width:761px){
+  #paso-inicio.sin-modo>#unir,#paso-inicio.sin-modo>#nueva,#paso-inicio.sin-modo>#modo-nota{display:none}
+  #paso-inicio.aparece>#unir,#paso-inicio.aparece>#nueva,#paso-inicio.aparece>#modo-nota{animation:modo-aparece .34s cubic-bezier(.2,.75,.25,1) backwards}
+  #paso-inicio.aparece>#nueva{animation-delay:.05s}
+  #paso-inicio.aparece>#modo-nota{animation-delay:.1s}
+}
+@keyframes modo-aparece{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){#paso-inicio.aparece>*{animation:none!important}}
+#inicio>.lema.lema-corta{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;row-gap:4px;margin:-2px 0 4px;max-width:none;font:400 13.5px/1.45 var(--texto);letter-spacing:.005em;color:#A9B8C6}
+#inicio>.lema.lema-corta span{white-space:nowrap}
+#inicio>.lema.lema-corta span+span::before{content:'';display:inline-block;width:3px;height:3px;margin:0 12px;border-radius:50%;background:rgba(156,195,228,.6);vertical-align:middle;transform:translateY(-1px)}
+#inicio>.lema.lema-corta.columna{flex-direction:column;row-gap:1px}#inicio>.lema.lema-corta.columna span{white-space:normal}#inicio>.lema.lema-corta.columna span+span::before{display:none}
+@media (max-width:760px){#inicio>.lema.lema-corta{flex-direction:column;row-gap:2px;margin:0 0 16px;font-size:14.5px;line-height:1.5;color:#B4C4D1}#inicio>.lema.lema-corta span{white-space:normal}#inicio>.lema.lema-corta span+span::before{display:none}}
 @media (min-width:761px){#paso-inicio #unir,#paso-inicio #nueva{align-content:center}}
 
 /* Ultra · la voz cambiada y el mosaico a la vista, encima de la barra (dueño, 15 Nov 2026, 20:32): verde, puesto; gris, quitado */
@@ -2780,3 +2795,39 @@ body.modo-llevar .ll-mon{top:calc(130px + env(safe-area-inset-top))}
 .ll-mon-orbita svg{width:15px;height:15px;fill:none;stroke:#9CC3E4;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
 @media (max-width:760px){.ll-mon-orbita{display:none}}
 body.modo-llevar .ll-mon-orbita{display:none}
+/* En una ventana baja (dueño, 17 nov 2026, 21:22: «tengo que girarla con el botón»): con el tipo elegido y sus dos botones, todo el
+   inicio cabe sin bajar; menos aire entre bloques, la esfera igual. */
+@media (min-width:761px) and (max-height:820px){
+  .inicio{padding-top:14px;padding-bottom:14px;gap:10px}
+  .inicio::before{margin-bottom:-10px}.inicio::after{margin-top:-10px}
+  #paso-inicio{gap:12px;margin-top:4px}
+  .modo,#paso-inicio #unir,#paso-inicio #nueva{padding-top:15px;padding-bottom:15px}
+  .modo-marca{top:15px}
+  .inicio .como{margin-top:6px}
+}
+/* La cabecera, igual en todo el programa (dueño, 17 nov 2026, 21:30–21:34): «Inicio», el símbolo de GUARDIANA a color, GUARDIANA / la
+   sección. «Cómo funciona», arriba; «Multas» y «¿Por qué?», solo en la portada; sin la tuerca de ajustes en el ordenador. */
+.barra .multas-b,.barra #porque-btn{display:none!important}
+.barra .barra-web{display:inline-flex;align-items:center;gap:10px;font:600 13px/1 'IBM Plex Mono',ui-monospace,monospace;letter-spacing:.32em;color:#F4F6F8;white-space:nowrap}
+.barra .barra-web::before{content:'';flex:none;width:24px;height:24px;margin-right:2px;background:url(/marca/guardiana-simbolo.svg) center/contain no-repeat}
+.barra .barra-web .cab-sep,.barra .barra-web .cab-sub{color:#8A95A2;font-weight:400}
+.barra .barra-web .cab-sub{letter-spacing:.26em}
+html.como-app .barra .barra-web{display:none}
+.barra .como-arriba{display:none}
+@media (min-width:761px){
+  .barra #ajustes-btn{display:none!important}
+  .barra .como-arriba{display:inline-flex;margin-left:auto}
+  body.en-conv .barra .como-arriba,body.modo-invitado .barra .como-arriba{display:none}
+  .barra .rele:not([hidden])+.como-arriba{margin-left:0}
+  #inicio>#como-btn{display:none!important}
+}
+/* La barra, con las medidas de las demás secciones del programa (Antivirus, VPN y el planeta): 40 px a los lados, «Inicio» de 38 px;
+   alta en el inicio y recogida dentro de una conversación, como hacen ellas al bajar. */
+@media (min-width:761px){
+  .barra{height:84px;padding:0 40px;gap:18px;background:#06080C;border-bottom-color:transparent;transition:height .28s cubic-bezier(.2,.7,.2,1),border-color .25s ease}
+  body.en-conv .barra{height:56px;border-bottom-color:rgba(156,195,228,.14)}
+  .barra .marca{height:38px;padding:0 16px 0 12px;border-color:rgba(156,195,228,.3);background:rgba(12,17,24,.6);color:#F4F6F8;font:600 14px/1 'IBM Plex Sans',system-ui,sans-serif}
+  body.en-conv .barra .marca{height:34px}
+  .barra .como-arriba{min-height:38px}
+}
+@media (min-width:761px) and (prefers-reduced-motion:reduce){.barra{transition:none}}

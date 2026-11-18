@@ -4034,7 +4034,10 @@
 "Cada 15 minutos":"Mỗi 15 phút",
 "Cada 30 minutos":"Mỗi 30 phút",
 "Cada hora":"Mỗi giờ",
-"Agrandar":"Phóng to"
+"Agrandar":"Phóng to",
+"Sin cuentas ni teléfono":"Không cần tài khoản hay số điện thoại",
+"Nuestro servidor no puede leerlo":"Máy chủ của chúng tôi không thể đọc được",
+"Al terminar, se borra en los dos equipos":"Khi kết thúc, cuộc trò chuyện bị xóa trên cả hai thiết bị"
 },
 "p":{
 "intento":"Cố gắng nhiều nhất hôm nay: {1}, {2} {2?lần|lần}.",

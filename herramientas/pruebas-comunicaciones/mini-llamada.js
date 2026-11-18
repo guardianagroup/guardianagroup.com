@@ -39,7 +39,7 @@ const bien = (m, margen) => !!m && m.botones.length >= 4 && m.botones.every((b) 
     for (const ancho of [1280, 1024]) {
       const A = await equipo(browser, 'A', ancho), B = await equipo(browser, 'B', ancho);
       await B.goto(URL0); await espera(1500);
-      await B.click('#nueva'); await espera(2500);
+      await B.click('#modo-blindado'); await B.click('#nueva'); await espera(2500);
       const url = String(await B.evaluate(() => window.gcomPrueba.enlaceI())).replace('https://guardianagroup.com', 'http://127.0.0.1:8080');
       await A.goto(url); await espera(1500); if (await A.$('#aceptar-si:visible')) await A.click('#aceptar-si'); await espera(5000);
       await A.evaluate(() => document.querySelector('#videollamar').click()); await espera(2500);

@@ -4034,7 +4034,10 @@
 "Cada 15 minutos":"15분마다",
 "Cada 30 minutos":"30분마다",
 "Cada hora":"1시간마다",
-"Agrandar":"확대"
+"Agrandar":"확대",
+"Sin cuentas ni teléfono":"계정도 전화번호도 필요 없음",
+"Nuestro servidor no puede leerlo":"저희 서버도 읽을 수 없음",
+"Al terminar, se borra en los dos equipos":"끝나면 대화가 두 기기에서 모두 삭제됨"
 },
 "p":{
 "intento":"오늘 가장 많이 시도한 곳: {1}, {2}{2?회|회}.",

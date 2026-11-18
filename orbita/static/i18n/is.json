@@ -4034,7 +4034,10 @@
 "Cada 15 minutos":"Á 15 mínútna fresti",
 "Cada 30 minutos":"Á 30 mínútna fresti",
 "Cada hora":"Á klukkutíma fresti",
-"Agrandar":"Stækka"
+"Agrandar":"Stækka",
+"Sin cuentas ni teléfono":"Engir aðgangar, ekkert símanúmer",
+"Nuestro servidor no puede leerlo":"Netþjónninn okkar getur ekki lesið það",
+"Al terminar, se borra en los dos equipos":"Að lokum er samtalinu eytt á báðum tækjum"
 },
 "p":{
 "intento":"Sá sem reyndi mest í dag: {1}, {2} {2?sinni|sinnum}.",

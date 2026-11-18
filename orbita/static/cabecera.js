@@ -41,6 +41,7 @@
     const volver = ini.querySelector('.nuc-volver'), multas = ini.querySelector('.nuc-multas-b');
     if (volver) izq.append(volver);
     izq.append(marca, titulo);
+    const porque = ini.querySelector('.nuc-porque-b'); if (porque) der.append(porque);
     if (multas) der.append(multas);
     barra.append(izq, der);
     const cuerpo = document.createElement('div'); cuerpo.className = 'cab-cuerpo';

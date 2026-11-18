@@ -4034,7 +4034,10 @@
 "Cada 15 minutos":"Кожні 15 хвилин",
 "Cada 30 minutos":"Кожні 30 хвилин",
 "Cada hora":"Щогодини",
-"Agrandar":"Збільшити"
+"Agrandar":"Збільшити",
+"Sin cuentas ni teléfono":"Без облікових записів і номера телефону",
+"Nuestro servidor no puede leerlo":"Наш сервер не може це прочитати",
+"Al terminar, se borra en los dos equipos":"Наприкінці розмова видаляється на обох пристроях"
 },
 "p":{
 "intento":"Найнаполегливіша сьогодні: {1}, {2} {2?раз|разів}.",

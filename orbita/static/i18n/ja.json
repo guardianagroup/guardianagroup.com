@@ -4034,7 +4034,10 @@
 "Cada 15 minutos":"15分ごと",
 "Cada 30 minutos":"30分ごと",
 "Cada hora":"1時間ごと",
-"Agrandar":"拡大"
+"Agrandar":"拡大",
+"Sin cuentas ni teléfono":"アカウントも電話番号も不要",
+"Nuestro servidor no puede leerlo":"当社のサーバーでも読めません",
+"Al terminar, se borra en los dos equipos":"終了すると、会話は両方の端末から削除されます"
 },
 "p":{
 "intento":"今日最も多く試みたのは {1}、{2} {2?回|回}。",

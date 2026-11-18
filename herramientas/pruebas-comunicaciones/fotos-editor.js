@@ -42,7 +42,7 @@ async function traza(p, sel, puntos) {
   try {
     const A = await equipo(browser, 'A'), B = await equipo(browser, 'B');
     await B.goto(URL0); await espera(1500);
-    await B.click('#nueva'); await espera(2500);
+    await B.click('#modo-blindado'); await B.click('#nueva'); await espera(2500);
     const url = String(await B.evaluate(() => window.gcomPrueba.enlaceI())).replace('https://guardianagroup.com', 'http://127.0.0.1:8080');
     await A.goto(url); await espera(1500); if (await A.$('#aceptar-si:visible')) await A.click('#aceptar-si'); await espera(5000);
     comprueba(await visible(A, '#conv') && await visible(B, '#conv'), 'se añaden los dos: el chat se abre');

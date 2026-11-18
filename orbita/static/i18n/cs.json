@@ -4034,7 +4034,10 @@
 "Cada 15 minutos":"Každých 15 minut",
 "Cada 30 minutos":"Každých 30 minut",
 "Cada hora":"Každou hodinu",
-"Agrandar":"Zvětšit"
+"Agrandar":"Zvětšit",
+"Sin cuentas ni teléfono":"Bez účtů a bez telefonního čísla",
+"Nuestro servidor no puede leerlo":"Náš server to nedokáže přečíst",
+"Al terminar, se borra en los dos equipos":"Na konci se konverzace smaže na obou zařízeních"
 },
 "p":{
 "intento":"Nejvíc se dnes snažila: {1}, {2}{2?krát|krát}.",

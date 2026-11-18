@@ -4034,7 +4034,10 @@
 "Cada 15 minutos":"প্রতি ১৫ মিনিটে",
 "Cada 30 minutos":"প্রতি ৩০ মিনিটে",
 "Cada hora":"প্রতি ঘণ্টায়",
-"Agrandar":"বড় করুন"
+"Agrandar":"বড় করুন",
+"Sin cuentas ni teléfono":"অ্যাকাউন্ট বা ফোন নম্বর লাগে না",
+"Nuestro servidor no puede leerlo":"আমাদের সার্ভার এটি পড়তে পারে না",
+"Al terminar, se borra en los dos equipos":"শেষ হলে কথোপকথন দুই ডিভাইস থেকেই মুছে যায়"
 },
 "p":{
 "intento":"আজ সবচেয়ে বেশি চেষ্টা: {1}, {2} {2?বার|বার}।",

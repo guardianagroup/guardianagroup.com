@@ -4034,7 +4034,10 @@
 "Cada 15 minutos":"ہر 15 منٹ بعد",
 "Cada 30 minutos":"ہر 30 منٹ بعد",
 "Cada hora":"ہر گھنٹے",
-"Agrandar":"بڑا کریں"
+"Agrandar":"بڑا کریں",
+"Sin cuentas ni teléfono":"نہ اکاؤنٹ، نہ فون نمبر",
+"Nuestro servidor no puede leerlo":"ہمارا سرور اسے نہیں پڑھ سکتا",
+"Al terminar, se borra en los dos equipos":"ختم ہونے پر بات چیت دونوں ڈیوائسز سے مٹ جاتی ہے"
 },
 "p":{
 "intento":"آج سب سے زیادہ کوشش: {1}، {2} {2?بار|بار}۔",

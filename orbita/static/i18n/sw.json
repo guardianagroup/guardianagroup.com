@@ -4034,7 +4034,10 @@
 "Cada 15 minutos":"Kila dakika 15",
 "Cada 30 minutos":"Kila dakika 30",
 "Cada hora":"Kila saa",
-"Agrandar":"Kuza"
+"Agrandar":"Kuza",
+"Sin cuentas ni teléfono":"Bila akaunti wala namba ya simu",
+"Nuestro servidor no puede leerlo":"Seva yetu haiwezi kuisoma",
+"Al terminar, se borra en los dos equipos":"Mkimaliza, mazungumzo hufutwa kwenye vifaa vyote viwili"
 },
 "p":{
 "intento":"Iliyojaribu zaidi leo: {1}, {2?mara|mara} {2}.",

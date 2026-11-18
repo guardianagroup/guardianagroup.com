@@ -417,6 +417,7 @@ ${doc.secciones.map(tabla).join('')}<p class="nota">${esc(doc.final)}</p></body>
       // Arriba a la izquierda, «Volver» a esa portada (dueño, 10:53: «tienes que poder ir y volver»).
       + '<a class="nuc-volver nuc-paso" id="nuc-volver" href="/"><span aria-hidden="true">←</span> Volver</a>'
       // dueño, 13:30: arriba a la derecha, «Multas» en rojo: las multas a las grandes empresas por usar nuestros datos
+      + '<a class="nuc-porque-b nuc-paso" id="nuc-porque-b" href="/orbita/comunicaciones/?porque=1">¿Por qué?</a>' // 17 nov 2026, 21:33: solo aquí
       + '<a class="nuc-multas-b nuc-paso" id="nuc-multas-b" href="/orbita/multas/?desde=nucleo">Multas</a>'; // 14:02: su propia página
     document.body.append(d);
     d.querySelectorAll('.nuc-op').forEach((b) => b.addEventListener('click', () => entra(b.dataset.n)));

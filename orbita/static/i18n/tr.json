@@ -4034,7 +4034,10 @@
 "Cada 15 minutos":"15 dakikada bir",
 "Cada 30 minutos":"30 dakikada bir",
 "Cada hora":"Saatte bir",
-"Agrandar":"Büyüt"
+"Agrandar":"Büyüt",
+"Sin cuentas ni teléfono":"Hesap da telefon numarası da yok",
+"Nuestro servidor no puede leerlo":"Sunucumuz okuyamaz",
+"Al terminar, se borra en los dos equipos":"Bitince sohbet iki cihazdan da silinir"
 },
 "p":{
 "intento":"Bugün en çok deneyen: {1}, {2} {2?kez|kez}.",

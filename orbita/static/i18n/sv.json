@@ -4034,7 +4034,10 @@
 "Cada 15 minutos":"Var 15:e minut",
 "Cada 30 minutos":"Var 30:e minut",
 "Cada hora":"Varje timme",
-"Agrandar":"Förstora"
+"Agrandar":"Förstora",
+"Sin cuentas ni teléfono":"Inga konton, inget telefonnummer",
+"Nuestro servidor no puede leerlo":"Vår server kan inte läsa det",
+"Al terminar, se borra en los dos equipos":"Efteråt raderas samtalet på båda enheterna"
 },
 "p":{
 "intento":"Den som försökte mest i dag: {1}, {2} {2?gång|gånger}.",

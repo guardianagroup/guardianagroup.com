@@ -4034,7 +4034,10 @@
 "Cada 15 minutos":"15 percenként",
 "Cada 30 minutos":"30 percenként",
 "Cada hora":"Óránként",
-"Agrandar":"Nagyítás"
+"Agrandar":"Nagyítás",
+"Sin cuentas ni teléfono":"Nincs fiók, nincs telefonszám",
+"Nuestro servidor no puede leerlo":"A szerverünk nem tudja elolvasni",
+"Al terminar, se borra en los dos equipos":"A végén a beszélgetés mindkét eszközről törlődik"
 },
 "p":{
 "intento":"Ma a legtöbbször próbálkozott: {1}, {2} {2?alkalommal|alkalommal}.",

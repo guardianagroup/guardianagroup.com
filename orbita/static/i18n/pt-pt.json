@@ -4034,7 +4034,10 @@
 "Cada 15 minutos":"A cada 15 minutos",
 "Cada 30 minutos":"A cada 30 minutos",
 "Cada hora":"A cada hora",
-"Agrandar":"Ampliar"
+"Agrandar":"Ampliar",
+"Sin cuentas ni teléfono":"Sem contas nem telefone",
+"Nuestro servidor no puede leerlo":"O nosso servidor não o consegue ler",
+"Al terminar, se borra en los dos equipos":"No fim, a conversa é apagada nos dois equipamentos"
 },
 "p":{
 "intento":"A que mais tentou hoje: {1}, {2} {2?vez|vezes}.",

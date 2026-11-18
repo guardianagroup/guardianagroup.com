@@ -4034,7 +4034,10 @@
 "Cada 15 minutos":"Co 15 minut",
 "Cada 30 minutos":"Co 30 minut",
 "Cada hora":"Co godzinę",
-"Agrandar":"Powiększ"
+"Agrandar":"Powiększ",
+"Sin cuentas ni teléfono":"Bez kont i numeru telefonu",
+"Nuestro servidor no puede leerlo":"Nasz serwer nie może tego odczytać",
+"Al terminar, se borra en los dos equipos":"Na koniec rozmowa znika z obu urządzeń"
 },
 "p":{
 "intento":"Najwięcej prób dziś: {1}, {2} {2?raz|razy}.",

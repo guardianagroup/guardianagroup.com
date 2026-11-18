@@ -4034,7 +4034,10 @@
 "Cada 15 minutos":"ทุก 15 นาที",
 "Cada 30 minutos":"ทุก 30 นาที",
 "Cada hora":"ทุกชั่วโมง",
-"Agrandar":"ขยาย"
+"Agrandar":"ขยาย",
+"Sin cuentas ni teléfono":"ไม่ต้องมีบัญชีหรือเบอร์โทรศัพท์",
+"Nuestro servidor no puede leerlo":"เซิร์ฟเวอร์ของเราอ่านไม่ได้",
+"Al terminar, se borra en los dos equipos":"เมื่อจบ บทสนทนาจะถูกลบจากทั้งสองเครื่อง"
 },
 "p":{
 "intento":"พยายามมากที่สุดวันนี้: {1}, {2} {2?ครั้ง|ครั้ง}",
