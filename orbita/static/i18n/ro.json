@@ -4055,7 +4055,21 @@
 "Pérdida de paquetes":"Pierderea de pachete",
 "Pruebas de M-Lab":"Teste M-Lab",
 "Conectividad medida":"Conectivitate măsurată",
-"Pruebas de velocidad de M-Lab (dominio público) y datos de la UIT publicados por el Banco Mundial (CC BY 4.0). Miden a quien hace la prueba, no a todo el país.":"Teste de viteză M-Lab (domeniu public) și date ale UIT publicate de Banca Mondială (CC BY 4.0). Măsoară pe cine face testul, nu toată țara."
+"Pruebas de velocidad de M-Lab (dominio público) y datos de la UIT publicados por el Banco Mundial (CC BY 4.0). Miden a quien hace la prueba, no a todo el país.":"Teste de viteză M-Lab (domeniu public) și date ale UIT publicate de Banca Mondială (CC BY 4.0). Măsoară pe cine face testul, nu toată țara.",
+"Cada conexión de este equipo, en directo: con qué empresa habla, dónde está su servidor y si GUARDIANA la ha cortado. Solo lo ve el programa instalado.":"Fiecare conexiune a acestui computer, în direct: cu ce companie vorbește, unde este serverul ei și dacă GUARDIANA a tăiat-o. Doar programul instalat o poate vedea.",
+"Cada conexión se dibuja por los cables submarinos y la fibra terrestre del mapa, por el camino más corto: es ilustrativo, porque el cable exacto no se conoce desde fuera de la red. Donde el mapa no tiene cable, va a ras de suelo y en discontinua.":"Fiecare conexiune este desenată pe cablurile submarine și fibra terestră ale hărții, pe drumul cel mai scurt: este ilustrativ, pentru că cablul exact nu se poate cunoaște din afara rețelei. Unde harta nu are cablu, merge pe la sol, cu linie întreruptă.",
+"El lugar es el del servidor según una base de datos de direcciones; si se cortó antes de salir, el país de la sede de la empresa. No es la ruta exacta que siguen los datos.":"Locul este cel al serverului, după o bază de date de adrese; dacă a fost tăiată înainte să iasă, țara sediului companiei. Nu este traseul exact al datelor.",
+"Esperando al programa…":"Se așteaptă programul…",
+"Estos datos los entrega el programa a esta página dentro de tu equipo; la página no los envía a ningún sitio.":"Aceste date le predă programul acestei pagini în interiorul computerului tău; pagina nu le trimite nicăieri.",
+"Instalar GUARDIANA":"Instalează GUARDIANA",
+"Las conexiones sin lugar conocido cuentan en el total, pero no se dibujan.":"Conexiunile fără loc cunoscut se numără în total, dar nu sunt desenate.",
+"Lo que hace tu PC ahora mismo":"Ce face PC-ul tău chiar acum",
+"Sin empresa identificada":"Fără companie identificată",
+"Sin respuesta del programa desde las":"Niciun răspuns de la program de la",
+"Todavía no ha respondido; se vuelve a preguntar cada 5 segundos.":"Încă nu a răspuns; se întreabă din nou la fiecare 5 secunde.",
+"Todavía no hay conexiones que mostrar en este momento.":"Deocamdată nu există conexiuni de afișat.",
+"Tu PC":"PC-ul tău",
+"Ver mi PC en directo":"Vezi PC-ul meu în direct"
 },
 "p":{
 "intento":"Cea care a încercat cel mai mult azi: {1}, {2} {2?dată|ori}.",

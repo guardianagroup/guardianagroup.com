@@ -4055,7 +4055,21 @@
 "Pérdida de paquetes":"패킷 손실",
 "Pruebas de M-Lab":"M-Lab 측정",
 "Conectividad medida":"측정된 연결 품질",
-"Pruebas de velocidad de M-Lab (dominio público) y datos de la UIT publicados por el Banco Mundial (CC BY 4.0). Miden a quien hace la prueba, no a todo el país.":"M-Lab 속도 측정(퍼블릭 도메인)과 세계은행이 공개한 ITU 데이터(CC BY 4.0)입니다. 측정한 사람의 회선을 잰 것이며 나라 전체가 아닙니다."
+"Pruebas de velocidad de M-Lab (dominio público) y datos de la UIT publicados por el Banco Mundial (CC BY 4.0). Miden a quien hace la prueba, no a todo el país.":"M-Lab 속도 측정(퍼블릭 도메인)과 세계은행이 공개한 ITU 데이터(CC BY 4.0)입니다. 측정한 사람의 회선을 잰 것이며 나라 전체가 아닙니다.",
+"Cada conexión de este equipo, en directo: con qué empresa habla, dónde está su servidor y si GUARDIANA la ha cortado. Solo lo ve el programa instalado.":"이 컴퓨터의 모든 연결을 실시간으로 보여 줍니다. 어느 기업과 통신하는지, 그 서버가 어디에 있는지, GUARDIANA가 차단했는지. 설치된 프로그램만 볼 수 있습니다.",
+"Cada conexión se dibuja por los cables submarinos y la fibra terrestre del mapa, por el camino más corto: es ilustrativo, porque el cable exacto no se conoce desde fuera de la red. Donde el mapa no tiene cable, va a ras de suelo y en discontinua.":"각 연결은 지도의 해저 케이블과 육상 광섬유를 따라 최단 경로로 그려집니다. 정확한 케이블은 네트워크 밖에서는 알 수 없으므로 참고용입니다. 지도에 케이블이 없는 곳은 지면을 따라 점선으로 그려집니다.",
+"El lugar es el del servidor según una base de datos de direcciones; si se cortó antes de salir, el país de la sede de la empresa. No es la ruta exacta que siguen los datos.":"위치는 주소 데이터베이스에 따른 서버의 위치이며, 나가기 전에 차단된 경우에는 기업 본사가 있는 나라입니다. 데이터가 지나는 정확한 경로는 아닙니다.",
+"Esperando al programa…":"프로그램을 기다리는 중…",
+"Estos datos los entrega el programa a esta página dentro de tu equipo; la página no los envía a ningún sitio.":"이 데이터는 프로그램이 컴퓨터 안에서 이 페이지에 전달합니다. 페이지는 이를 어디에도 보내지 않습니다.",
+"Instalar GUARDIANA":"GUARDIANA 설치",
+"Las conexiones sin lugar conocido cuentan en el total, pero no se dibujan.":"위치를 알 수 없는 연결은 합계에는 포함되지만 그려지지 않습니다.",
+"Lo que hace tu PC ahora mismo":"지금 PC가 하고 있는 일",
+"Sin empresa identificada":"확인되지 않은 기업",
+"Sin respuesta del programa desde las":"다음 시각부터 프로그램 응답 없음:",
+"Todavía no ha respondido; se vuelve a preguntar cada 5 segundos.":"아직 응답이 없습니다. 5초마다 다시 묻습니다.",
+"Todavía no hay conexiones que mostrar en este momento.":"지금은 아직 표시할 연결이 없습니다.",
+"Tu PC":"내 PC",
+"Ver mi PC en directo":"내 PC 실시간 보기"
 },
 "p":{
 "intento":"오늘 가장 많이 시도한 곳: {1}, {2}{2?회|회}.",

@@ -4055,7 +4055,21 @@
 "Pérdida de paquetes":"パケット損失",
 "Pruebas de M-Lab":"M-Lab のテスト",
 "Conectividad medida":"測定された接続状況",
-"Pruebas de velocidad de M-Lab (dominio público) y datos de la UIT publicados por el Banco Mundial (CC BY 4.0). Miden a quien hace la prueba, no a todo el país.":"M-Lab の速度テスト（パブリックドメイン）と、世界銀行が公開する ITU のデータ（CC BY 4.0）。測っているのはテストをした人の回線で、国全体ではありません。"
+"Pruebas de velocidad de M-Lab (dominio público) y datos de la UIT publicados por el Banco Mundial (CC BY 4.0). Miden a quien hace la prueba, no a todo el país.":"M-Lab の速度テスト（パブリックドメイン）と、世界銀行が公開する ITU のデータ（CC BY 4.0）。測っているのはテストをした人の回線で、国全体ではありません。",
+"Cada conexión de este equipo, en directo: con qué empresa habla, dónde está su servidor y si GUARDIANA la ha cortado. Solo lo ve el programa instalado.":"このパソコンのすべての接続をリアルタイムで表示します。どの企業と通信しているか、そのサーバーがどこにあるか、GUARDIANA が遮断したかどうか。インストールしたプログラムだけが見られます。",
+"Cada conexión se dibuja por los cables submarinos y la fibra terrestre del mapa, por el camino más corto: es ilustrativo, porque el cable exacto no se conoce desde fuera de la red. Donde el mapa no tiene cable, va a ras de suelo y en discontinua.":"各接続は、地図上の海底ケーブルと陸上の光ファイバーに沿って最短経路で描かれます。実際のケーブルはネットワークの外からは分からないため、これはイメージです。地図にケーブルがない区間は、地表に沿って破線で描かれます。",
+"El lugar es el del servidor según una base de datos de direcciones; si se cortó antes de salir, el país de la sede de la empresa. No es la ruta exacta que siguen los datos.":"場所はアドレスのデータベースによるサーバーの所在地です。送信前に遮断された場合は、企業の本社がある国です。データが通る正確な経路ではありません。",
+"Esperando al programa…":"プログラムを待っています…",
+"Estos datos los entrega el programa a esta página dentro de tu equipo; la página no los envía a ningún sitio.":"このデータは、プログラムがパソコン内でこのページに渡すものです。ページはそれをどこにも送りません。",
+"Instalar GUARDIANA":"GUARDIANA をインストール",
+"Las conexiones sin lugar conocido cuentan en el total, pero no se dibujan.":"場所が分からない接続は合計には数えますが、地図には描きません。",
+"Lo que hace tu PC ahora mismo":"あなたの PC がいま行っていること",
+"Sin empresa identificada":"特定できない企業",
+"Sin respuesta del programa desde las":"次の時刻からプログラムの応答がありません:",
+"Todavía no ha respondido; se vuelve a preguntar cada 5 segundos.":"まだ応答がありません。5 秒ごとに問い合わせます。",
+"Todavía no hay conexiones que mostrar en este momento.":"現時点で表示できる接続はまだありません。",
+"Tu PC":"あなたの PC",
+"Ver mi PC en directo":"自分の PC をライブで見る"
 },
 "p":{
 "intento":"今日最も多く試みたのは {1}、{2} {2?回|回}。",

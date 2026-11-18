@@ -4055,7 +4055,21 @@
 "Pérdida de paquetes":"ప్యాకెట్ నష్టం",
 "Pruebas de M-Lab":"M-Lab పరీక్షలు",
 "Conectividad medida":"కొలిచిన కనెక్టివిటీ",
-"Pruebas de velocidad de M-Lab (dominio público) y datos de la UIT publicados por el Banco Mundial (CC BY 4.0). Miden a quien hace la prueba, no a todo el país.":"M-Lab వేగ పరీక్షలు (పబ్లిక్ డొమైన్), ప్రపంచ బ్యాంకు ప్రచురించిన ITU డేటా (CC BY 4.0). ఇవి పరీక్ష చేసినవారిని కొలుస్తాయి, మొత్తం దేశాన్ని కాదు."
+"Pruebas de velocidad de M-Lab (dominio público) y datos de la UIT publicados por el Banco Mundial (CC BY 4.0). Miden a quien hace la prueba, no a todo el país.":"M-Lab వేగ పరీక్షలు (పబ్లిక్ డొమైన్), ప్రపంచ బ్యాంకు ప్రచురించిన ITU డేటా (CC BY 4.0). ఇవి పరీక్ష చేసినవారిని కొలుస్తాయి, మొత్తం దేశాన్ని కాదు.",
+"Cada conexión de este equipo, en directo: con qué empresa habla, dónde está su servidor y si GUARDIANA la ha cortado. Solo lo ve el programa instalado.":"ఈ కంప్యూటర్‌లోని ప్రతి కనెక్షన్, ప్రత్యక్షంగా: ఏ కంపెనీతో మాట్లాడుతుంది, దాని సర్వర్ ఎక్కడ ఉంది, GUARDIANA దాన్ని కట్ చేసిందా. ఇన్‌స్టాల్ చేసిన ప్రోగ్రామ్ మాత్రమే దీన్ని చూడగలదు.",
+"Cada conexión se dibuja por los cables submarinos y la fibra terrestre del mapa, por el camino más corto: es ilustrativo, porque el cable exacto no se conoce desde fuera de la red. Donde el mapa no tiene cable, va a ras de suelo y en discontinua.":"ప్రతి కనెక్షన్‌ను మ్యాప్‌లోని సముద్రగర్భ కేబుళ్లు, భూమిపై ఫైబర్ వెంట అతి తక్కువ మార్గంలో గీస్తాం: ఇది ఉదాహరణ మాత్రమే, ఎందుకంటే నెట్‌వర్క్ బయటి నుంచి ఖచ్చితమైన కేబుల్ తెలియదు. మ్యాప్‌లో కేబుల్ లేని చోట, గీత నేలను అనుసరిస్తూ చుక్కల గీతగా వెళ్తుంది.",
+"El lugar es el del servidor según una base de datos de direcciones; si se cortó antes de salir, el país de la sede de la empresa. No es la ruta exacta que siguen los datos.":"స్థలం అనేది చిరునామాల డేటాబేస్ ప్రకారం సర్వర్ ఉన్న చోటు; బయటకు వెళ్లే ముందే కట్ చేస్తే, కంపెనీ ప్రధాన కార్యాలయం ఉన్న దేశం. ఇది డేటా వెళ్లే ఖచ్చితమైన మార్గం కాదు.",
+"Esperando al programa…":"ప్రోగ్రామ్ కోసం వేచి ఉంది…",
+"Estos datos los entrega el programa a esta página dentro de tu equipo; la página no los envía a ningún sitio.":"ఈ డేటాను ప్రోగ్రామ్ మీ కంప్యూటర్‌లోనే ఈ పేజీకి ఇస్తుంది; పేజీ దీన్ని ఎక్కడికీ పంపదు.",
+"Instalar GUARDIANA":"GUARDIANAను ఇన్‌స్టాల్ చేయండి",
+"Las conexiones sin lugar conocido cuentan en el total, pero no se dibujan.":"స్థలం తెలియని కనెక్షన్లు మొత్తంలో లెక్కించబడతాయి, కానీ గీయబడవు.",
+"Lo que hace tu PC ahora mismo":"మీ పీసీ ఇప్పుడు ఏం చేస్తోంది",
+"Sin empresa identificada":"కంపెనీ గుర్తించబడలేదు",
+"Sin respuesta del programa desde las":"ఈ సమయం నుండి ప్రోగ్రామ్ నుండి సమాధానం లేదు:",
+"Todavía no ha respondido; se vuelve a preguntar cada 5 segundos.":"ఇంకా సమాధానం రాలేదు; ప్రతి 5 సెకన్లకు మళ్లీ అడుగుతాం.",
+"Todavía no hay conexiones que mostrar en este momento.":"ప్రస్తుతం చూపించడానికి ఇంకా కనెక్షన్లు లేవు.",
+"Tu PC":"మీ పీసీ",
+"Ver mi PC en directo":"నా పీసీని ప్రత్యక్షంగా చూడండి"
 },
 "p":{
 "intento":"ఈరోజు ఎక్కువగా ప్రయత్నించింది: {1}, {2} {2?సారి|సార్లు}.",

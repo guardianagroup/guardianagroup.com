@@ -4055,7 +4055,21 @@
 "Pérdida de paquetes":"丢包率",
 "Pruebas de M-Lab":"M-Lab 测试",
 "Conectividad medida":"实测连接情况",
-"Pruebas de velocidad de M-Lab (dominio público) y datos de la UIT publicados por el Banco Mundial (CC BY 4.0). Miden a quien hace la prueba, no a todo el país.":"M-Lab 测速数据（公有领域）和世界银行发布的国际电联数据（CC BY 4.0）。测量的是进行测试的人，而不是整个国家。"
+"Pruebas de velocidad de M-Lab (dominio público) y datos de la UIT publicados por el Banco Mundial (CC BY 4.0). Miden a quien hace la prueba, no a todo el país.":"M-Lab 测速数据（公有领域）和世界银行发布的国际电联数据（CC BY 4.0）。测量的是进行测试的人，而不是整个国家。",
+"Cada conexión de este equipo, en directo: con qué empresa habla, dónde está su servidor y si GUARDIANA la ha cortado. Solo lo ve el programa instalado.":"实时显示这台电脑的每个连接：它与哪家公司通信、服务器在哪里，以及 GUARDIANA 是否已将其切断。只有已安装的程序才能看到。",
+"Cada conexión se dibuja por los cables submarinos y la fibra terrestre del mapa, por el camino más corto: es ilustrativo, porque el cable exacto no se conoce desde fuera de la red. Donde el mapa no tiene cable, va a ras de suelo y en discontinua.":"每条连接都沿地图上的海底光缆和陆地光纤按最短路径绘制：这只是示意，因为从网络外部无法得知确切的线缆。地图上没有线缆的地方，线条贴地以虚线表示。",
+"El lugar es el del servidor según una base de datos de direcciones; si se cortó antes de salir, el país de la sede de la empresa. No es la ruta exacta que siguen los datos.":"位置是根据地址数据库得出的服务器所在地；如果在发出前已被切断，则为公司总部所在国。这不是数据经过的确切路线。",
+"Esperando al programa…":"正在等待程序…",
+"Estos datos los entrega el programa a esta página dentro de tu equipo; la página no los envía a ningún sitio.":"这些数据由程序在您的电脑内部交给本页面；页面不会把它们发送到任何地方。",
+"Instalar GUARDIANA":"安装 GUARDIANA",
+"Las conexiones sin lugar conocido cuentan en el total, pero no se dibujan.":"位置不明的连接计入总数，但不会绘制。",
+"Lo que hace tu PC ahora mismo":"您的电脑此刻在做什么",
+"Sin empresa identificada":"未识别出公司",
+"Sin respuesta del programa desde las":"自以下时间起程序未回应：",
+"Todavía no ha respondido; se vuelve a preguntar cada 5 segundos.":"尚未回应；每 5 秒重新询问一次。",
+"Todavía no hay conexiones que mostrar en este momento.":"目前还没有可显示的连接。",
+"Tu PC":"您的电脑",
+"Ver mi PC en directo":"实时查看我的电脑"
 },
 "p":{
 "intento":"今天尝试最多的：{1}，{2} {2?次|次}。",

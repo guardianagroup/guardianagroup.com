@@ -4055,7 +4055,21 @@
 "Pérdida de paquetes":"Pakkatap",
 "Pruebas de M-Lab":"M-Lab prófanir",
 "Conectividad medida":"Mæld tenging",
-"Pruebas de velocidad de M-Lab (dominio público) y datos de la UIT publicados por el Banco Mundial (CC BY 4.0). Miden a quien hace la prueba, no a todo el país.":"Hraðaprófanir M-Lab (almenningseign) og gögn ITU sem Alþjóðabankinn birtir (CC BY 4.0). Þær mæla þann sem prófar, ekki allt landið."
+"Pruebas de velocidad de M-Lab (dominio público) y datos de la UIT publicados por el Banco Mundial (CC BY 4.0). Miden a quien hace la prueba, no a todo el país.":"Hraðaprófanir M-Lab (almenningseign) og gögn ITU sem Alþjóðabankinn birtir (CC BY 4.0). Þær mæla þann sem prófar, ekki allt landið.",
+"Cada conexión de este equipo, en directo: con qué empresa habla, dónde está su servidor y si GUARDIANA la ha cortado. Solo lo ve el programa instalado.":"Hver tenging þessarar tölvu í beinni: við hvaða fyrirtæki hún talar, hvar netþjónn þess er og hvort GUARDIANA hafi rofið hana. Aðeins uppsetta forritið sér það.",
+"Cada conexión se dibuja por los cables submarinos y la fibra terrestre del mapa, por el camino más corto: es ilustrativo, porque el cable exacto no se conoce desde fuera de la red. Donde el mapa no tiene cable, va a ras de suelo y en discontinua.":"Hver tenging er teiknuð eftir sæstrengjum og ljósleiðurum á landi á kortinu, stystu leið: þetta er til skýringar, því nákvæmur strengur verður ekki þekktur utan netsins. Þar sem kortið hefur engan streng liggur línan við jörðu og er brotin.",
+"El lugar es el del servidor según una base de datos de direcciones; si se cortó antes de salir, el país de la sede de la empresa. No es la ruta exacta que siguen los datos.":"Staðurinn er staður netþjónsins samkvæmt vistfangagagnagrunni; ef tengingin var rofin áður en hún fór út, land höfuðstöðva fyrirtækisins. Þetta er ekki nákvæm leið gagnanna.",
+"Esperando al programa…":"Beðið eftir forritinu…",
+"Estos datos los entrega el programa a esta página dentro de tu equipo; la página no los envía a ningún sitio.":"Forritið afhendir þessari síðu gögnin inni í tölvunni þinni; síðan sendir þau hvergi.",
+"Instalar GUARDIANA":"Setja upp GUARDIANA",
+"Las conexiones sin lugar conocido cuentan en el total, pero no se dibujan.":"Tengingar án þekkts staðar teljast með í heildinni en eru ekki teiknaðar.",
+"Lo que hace tu PC ahora mismo":"Hvað tölvan þín gerir núna",
+"Sin empresa identificada":"Ekkert fyrirtæki greint",
+"Sin respuesta del programa desde las":"Ekkert svar frá forritinu síðan",
+"Todavía no ha respondido; se vuelve a preguntar cada 5 segundos.":"Hefur ekki svarað enn; spurt er aftur á 5 sekúndna fresti.",
+"Todavía no hay conexiones que mostrar en este momento.":"Engar tengingar eru enn til að sýna í augnablikinu.",
+"Tu PC":"Tölvan þín",
+"Ver mi PC en directo":"Sjá tölvuna mína í beinni"
 },
 "p":{
 "intento":"Sá sem reyndi mest í dag: {1}, {2} {2?sinni|sinnum}.",

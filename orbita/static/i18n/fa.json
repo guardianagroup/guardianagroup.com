@@ -4055,7 +4055,21 @@
 "Pérdida de paquetes":"از دست رفتن بسته‌ها",
 "Pruebas de M-Lab":"آزمون‌های M-Lab",
 "Conectividad medida":"اتصال اندازه‌گیری‌شده",
-"Pruebas de velocidad de M-Lab (dominio público) y datos de la UIT publicados por el Banco Mundial (CC BY 4.0). Miden a quien hace la prueba, no a todo el país.":"آزمون‌های سرعت M-Lab (مالکیت عمومی) و داده‌های ITU که بانک جهانی منتشر کرده است (CC BY 4.0). این‌ها کسی را می‌سنجند که آزمون را انجام می‌دهد، نه کل کشور را."
+"Pruebas de velocidad de M-Lab (dominio público) y datos de la UIT publicados por el Banco Mundial (CC BY 4.0). Miden a quien hace la prueba, no a todo el país.":"آزمون‌های سرعت M-Lab (مالکیت عمومی) و داده‌های ITU که بانک جهانی منتشر کرده است (CC BY 4.0). این‌ها کسی را می‌سنجند که آزمون را انجام می‌دهد، نه کل کشور را.",
+"Cada conexión de este equipo, en directo: con qué empresa habla, dónde está su servidor y si GUARDIANA la ha cortado. Solo lo ve el programa instalado.":"هر اتصال این رایانه، به‌صورت زنده: با کدام شرکت حرف می‌زند، سرورش کجاست و آیا GUARDIANA آن را قطع کرده است. فقط برنامهٔ نصب‌شده آن را می‌بیند.",
+"Cada conexión se dibuja por los cables submarinos y la fibra terrestre del mapa, por el camino más corto: es ilustrativo, porque el cable exacto no se conoce desde fuera de la red. Donde el mapa no tiene cable, va a ras de suelo y en discontinua.":"هر اتصال روی کابل‌های زیردریایی و فیبرهای زمینی نقشه و از کوتاه‌ترین مسیر کشیده می‌شود: این نمایشی است، چون کابل دقیق از بیرون شبکه معلوم نیست. جایی که نقشه کابلی ندارد، خط در امتداد زمین و به‌صورت خط‌چین می‌رود.",
+"El lugar es el del servidor según una base de datos de direcciones; si se cortó antes de salir, el país de la sede de la empresa. No es la ruta exacta que siguen los datos.":"مکان، محل سرور بر اساس یک پایگاه دادهٔ نشانی‌هاست؛ اگر پیش از خروج قطع شده باشد، کشور مقر شرکت. این مسیر دقیق داده‌ها نیست.",
+"Esperando al programa…":"در انتظار برنامه…",
+"Estos datos los entrega el programa a esta página dentro de tu equipo; la página no los envía a ningún sitio.":"این داده‌ها را برنامه در داخل رایانهٔ شما به این صفحه می‌دهد؛ صفحه آن‌ها را به هیچ جا نمی‌فرستد.",
+"Instalar GUARDIANA":"نصب GUARDIANA",
+"Las conexiones sin lugar conocido cuentan en el total, pero no se dibujan.":"اتصال‌هایی که مکانشان معلوم نیست در مجموع شمرده می‌شوند، اما کشیده نمی‌شوند.",
+"Lo que hace tu PC ahora mismo":"رایانهٔ شما همین حالا چه می‌کند",
+"Sin empresa identificada":"بدون شرکت شناسایی‌شده",
+"Sin respuesta del programa desde las":"بدون پاسخ از برنامه از ساعت",
+"Todavía no ha respondido; se vuelve a preguntar cada 5 segundos.":"هنوز پاسخ نداده است؛ هر ۵ ثانیه دوباره پرسیده می‌شود.",
+"Todavía no hay conexiones que mostrar en este momento.":"فعلاً هنوز اتصالی برای نمایش نیست.",
+"Tu PC":"رایانهٔ شما",
+"Ver mi PC en directo":"دیدن زندهٔ رایانه‌ام"
 },
 "p":{
 "intento":"بیشترین تلاش امروز: {1}، {2} {2?بار|بار}.",

@@ -4055,7 +4055,21 @@
 "Pérdida de paquetes":"Mất gói",
 "Pruebas de M-Lab":"Bài kiểm tra M-Lab",
 "Conectividad medida":"Kết nối đo được",
-"Pruebas de velocidad de M-Lab (dominio público) y datos de la UIT publicados por el Banco Mundial (CC BY 4.0). Miden a quien hace la prueba, no a todo el país.":"Kết quả đo tốc độ của M-Lab (phạm vi công cộng) và dữ liệu ITU do Ngân hàng Thế giới công bố (CC BY 4.0). Chúng đo người làm bài kiểm tra, không phải cả nước."
+"Pruebas de velocidad de M-Lab (dominio público) y datos de la UIT publicados por el Banco Mundial (CC BY 4.0). Miden a quien hace la prueba, no a todo el país.":"Kết quả đo tốc độ của M-Lab (phạm vi công cộng) và dữ liệu ITU do Ngân hàng Thế giới công bố (CC BY 4.0). Chúng đo người làm bài kiểm tra, không phải cả nước.",
+"Cada conexión de este equipo, en directo: con qué empresa habla, dónde está su servidor y si GUARDIANA la ha cortado. Solo lo ve el programa instalado.":"Mọi kết nối của máy tính này, trực tiếp: nó liên lạc với công ty nào, máy chủ ở đâu và GUARDIANA đã cắt nó hay chưa. Chỉ chương trình đã cài đặt mới thấy được.",
+"Cada conexión se dibuja por los cables submarinos y la fibra terrestre del mapa, por el camino más corto: es ilustrativo, porque el cable exacto no se conoce desde fuera de la red. Donde el mapa no tiene cable, va a ras de suelo y en discontinua.":"Mỗi kết nối được vẽ theo cáp biển và cáp quang trên đất liền của bản đồ, theo đường ngắn nhất: đây chỉ là minh họa, vì không thể biết chính xác sợi cáp từ bên ngoài mạng. Nơi bản đồ không có cáp, đường vẽ chạy sát mặt đất và đứt nét.",
+"El lugar es el del servidor según una base de datos de direcciones; si se cortó antes de salir, el país de la sede de la empresa. No es la ruta exacta que siguen los datos.":"Vị trí là nơi đặt máy chủ theo một cơ sở dữ liệu địa chỉ; nếu bị cắt trước khi ra ngoài, đó là quốc gia đặt trụ sở công ty. Đây không phải đường đi chính xác của dữ liệu.",
+"Esperando al programa…":"Đang chờ chương trình…",
+"Estos datos los entrega el programa a esta página dentro de tu equipo; la página no los envía a ningún sitio.":"Chương trình chuyển dữ liệu này cho trang này ngay trong máy tính của bạn; trang không gửi chúng đi đâu cả.",
+"Instalar GUARDIANA":"Cài đặt GUARDIANA",
+"Las conexiones sin lugar conocido cuentan en el total, pero no se dibujan.":"Các kết nối không rõ vị trí vẫn được tính vào tổng nhưng không được vẽ.",
+"Lo que hace tu PC ahora mismo":"Máy tính của bạn đang làm gì lúc này",
+"Sin empresa identificada":"Chưa xác định được công ty",
+"Sin respuesta del programa desde las":"Không có phản hồi từ chương trình kể từ",
+"Todavía no ha respondido; se vuelve a preguntar cada 5 segundos.":"Chưa phản hồi; sẽ hỏi lại mỗi 5 giây.",
+"Todavía no hay conexiones que mostrar en este momento.":"Hiện chưa có kết nối nào để hiển thị.",
+"Tu PC":"PC của bạn",
+"Ver mi PC en directo":"Xem PC của tôi trực tiếp"
 },
 "p":{
 "intento":"Cố gắng nhiều nhất hôm nay: {1}, {2} {2?lần|lần}.",

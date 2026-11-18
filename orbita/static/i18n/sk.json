@@ -4055,7 +4055,21 @@
 "Pérdida de paquetes":"Strata paketov",
 "Pruebas de M-Lab":"Testy M-Lab",
 "Conectividad medida":"Nameraná konektivita",
-"Pruebas de velocidad de M-Lab (dominio público) y datos de la UIT publicados por el Banco Mundial (CC BY 4.0). Miden a quien hace la prueba, no a todo el país.":"Testy rýchlosti M-Lab (voľné dielo) a údaje ITU zverejnené Svetovou bankou (CC BY 4.0). Merajú toho, kto test spustí, nie celú krajinu."
+"Pruebas de velocidad de M-Lab (dominio público) y datos de la UIT publicados por el Banco Mundial (CC BY 4.0). Miden a quien hace la prueba, no a todo el país.":"Testy rýchlosti M-Lab (voľné dielo) a údaje ITU zverejnené Svetovou bankou (CC BY 4.0). Merajú toho, kto test spustí, nie celú krajinu.",
+"Cada conexión de este equipo, en directo: con qué empresa habla, dónde está su servidor y si GUARDIANA la ha cortado. Solo lo ve el programa instalado.":"Každé pripojenie tohto počítača naživo: s akou firmou komunikuje, kde je jej server a či ho GUARDIANA prerušila. Vidí to len nainštalovaný program.",
+"Cada conexión se dibuja por los cables submarinos y la fibra terrestre del mapa, por el camino más corto: es ilustrativo, porque el cable exacto no se conoce desde fuera de la red. Donde el mapa no tiene cable, va a ras de suelo y en discontinua.":"Každé pripojenie sa kreslí po podmorských kábloch a pozemných optických trasách mapy najkratšou cestou: je to ilustratívne, pretože presný kábel sa zvonku siete nedá zistiť. Kde mapa kábel nemá, vedie pri zemi prerušovanou čiarou.",
+"El lugar es el del servidor según una base de datos de direcciones; si se cortó antes de salir, el país de la sede de la empresa. No es la ruta exacta que siguen los datos.":"Miesto je miestom servera podľa databázy adries; ak bolo pripojenie prerušené pred odchodom, ide o krajinu sídla firmy. Nie je to presná trasa, ktorou idú údaje.",
+"Esperando al programa…":"Čakáme na program…",
+"Estos datos los entrega el programa a esta página dentro de tu equipo; la página no los envía a ningún sitio.":"Tieto údaje odovzdáva program tejto stránke vo vašom počítači; stránka ich nikam neposiela.",
+"Instalar GUARDIANA":"Nainštalovať GUARDIANA",
+"Las conexiones sin lugar conocido cuentan en el total, pero no se dibujan.":"Pripojenia bez známeho miesta sa započítavajú do súčtu, ale nekreslia sa.",
+"Lo que hace tu PC ahora mismo":"Čo váš počítač práve robí",
+"Sin empresa identificada":"Bez identifikovanej firmy",
+"Sin respuesta del programa desde las":"Program neodpovedá od",
+"Todavía no ha respondido; se vuelve a preguntar cada 5 segundos.":"Zatiaľ neodpovedal; pýtame sa znova každých 5 sekúnd.",
+"Todavía no hay conexiones que mostrar en este momento.":"Momentálne zatiaľ nie sú žiadne pripojenia na zobrazenie.",
+"Tu PC":"Váš počítač",
+"Ver mi PC en directo":"Zobraziť môj počítač naživo"
 },
 "p":{
 "intento":"Najviac sa dnes snažila: {1}, {2}{2?-krát|-krát}.",

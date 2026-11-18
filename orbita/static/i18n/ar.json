@@ -4055,7 +4055,21 @@
 "Pérdida de paquetes":"فقدان الحزم",
 "Pruebas de M-Lab":"اختبارات M-Lab",
 "Conectividad medida":"الاتصال المُقاس",
-"Pruebas de velocidad de M-Lab (dominio público) y datos de la UIT publicados por el Banco Mundial (CC BY 4.0). Miden a quien hace la prueba, no a todo el país.":"اختبارات سرعة M-Lab (ملكية عامة) وبيانات الاتحاد الدولي للاتصالات التي ينشرها البنك الدولي (CC BY 4.0). تقيس من يُجري الاختبار، لا البلد بأكمله."
+"Pruebas de velocidad de M-Lab (dominio público) y datos de la UIT publicados por el Banco Mundial (CC BY 4.0). Miden a quien hace la prueba, no a todo el país.":"اختبارات سرعة M-Lab (ملكية عامة) وبيانات الاتحاد الدولي للاتصالات التي ينشرها البنك الدولي (CC BY 4.0). تقيس من يُجري الاختبار، لا البلد بأكمله.",
+"Cada conexión de este equipo, en directo: con qué empresa habla, dónde está su servidor y si GUARDIANA la ha cortado. Solo lo ve el programa instalado.":"كل اتصال من هذا الحاسوب مباشرةً: مع أي شركة يتواصل، وأين خادمها، وهل قطعه GUARDIANA. لا يراه إلا البرنامج المثبّت.",
+"Cada conexión se dibuja por los cables submarinos y la fibra terrestre del mapa, por el camino más corto: es ilustrativo, porque el cable exacto no se conoce desde fuera de la red. Donde el mapa no tiene cable, va a ras de suelo y en discontinua.":"يُرسم كل اتصال عبر الكابلات البحرية والألياف البرية في الخريطة بأقصر طريق: وهو توضيحي، لأن الكابل الفعلي لا يُعرف من خارج الشبكة. وحيث لا يوجد كابل في الخريطة، يُرسم بمحاذاة الأرض وبخط متقطع.",
+"El lugar es el del servidor según una base de datos de direcciones; si se cortó antes de salir, el país de la sede de la empresa. No es la ruta exacta que siguen los datos.":"المكان هو مكان الخادم بحسب قاعدة بيانات للعناوين؛ وإن قُطع الاتصال قبل خروجه، فهو بلد مقر الشركة. وليس المسار الدقيق الذي تسلكه البيانات.",
+"Esperando al programa…":"في انتظار البرنامج…",
+"Estos datos los entrega el programa a esta página dentro de tu equipo; la página no los envía a ningún sitio.":"يسلّم البرنامج هذه البيانات إلى هذه الصفحة داخل حاسوبك؛ ولا ترسلها الصفحة إلى أي مكان.",
+"Instalar GUARDIANA":"تثبيت GUARDIANA",
+"Las conexiones sin lugar conocido cuentan en el total, pero no se dibujan.":"الاتصالات التي لا يُعرف مكانها تُحسب في المجموع لكنها لا تُرسم.",
+"Lo que hace tu PC ahora mismo":"ما يفعله حاسوبك الآن",
+"Sin empresa identificada":"لا توجد شركة محددة",
+"Sin respuesta del programa desde las":"لا رد من البرنامج منذ",
+"Todavía no ha respondido; se vuelve a preguntar cada 5 segundos.":"لم يرد بعد؛ يُعاد السؤال كل 5 ثوانٍ.",
+"Todavía no hay conexiones que mostrar en este momento.":"لا توجد اتصالات لعرضها في هذه اللحظة بعد.",
+"Tu PC":"حاسوبك",
+"Ver mi PC en directo":"عرض حاسوبي مباشرةً"
 },
 "p":{
 "intento":"الأكثر محاولةً اليوم: {1}، {2} {2?مرة|مرات}.",
