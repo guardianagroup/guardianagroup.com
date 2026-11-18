@@ -4037,7 +4037,8 @@
 "Agrandar":"Увеличить",
 "Sin cuentas ni teléfono":"Без аккаунтов и номера телефона",
 "Nuestro servidor no puede leerlo":"Наш сервер не может это прочитать",
-"Al terminar, se borra en los dos equipos":"В конце разговор удаляется на обоих устройствах"
+"Al terminar, se borra en los dos equipos":"В конце разговор удаляется на обоих устройствах",
+"Activar mi clave":"Активировать мой ключ"
 },
 "p":{
 "intento":"Настойчивее всех сегодня: {1}, {2} {2?раз|раз}.",

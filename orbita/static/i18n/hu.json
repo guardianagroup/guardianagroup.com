@@ -4037,7 +4037,8 @@
 "Agrandar":"Nagyítás",
 "Sin cuentas ni teléfono":"Nincs fiók, nincs telefonszám",
 "Nuestro servidor no puede leerlo":"A szerverünk nem tudja elolvasni",
-"Al terminar, se borra en los dos equipos":"A végén a beszélgetés mindkét eszközről törlődik"
+"Al terminar, se borra en los dos equipos":"A végén a beszélgetés mindkét eszközről törlődik",
+"Activar mi clave":"Kulcsom aktiválása"
 },
 "p":{
 "intento":"Ma a legtöbbször próbálkozott: {1}, {2} {2?alkalommal|alkalommal}.",

@@ -4037,7 +4037,8 @@
 "Agrandar":"Zvětšit",
 "Sin cuentas ni teléfono":"Bez účtů a bez telefonního čísla",
 "Nuestro servidor no puede leerlo":"Náš server to nedokáže přečíst",
-"Al terminar, se borra en los dos equipos":"Na konci se konverzace smaže na obou zařízeních"
+"Al terminar, se borra en los dos equipos":"Na konci se konverzace smaže na obou zařízeních",
+"Activar mi clave":"Aktivovat můj klíč"
 },
 "p":{
 "intento":"Nejvíc se dnes snažila: {1}, {2}{2?krát|krát}.",

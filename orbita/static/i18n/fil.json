@@ -4037,7 +4037,8 @@
 "Agrandar":"Palakihin",
 "Sin cuentas ni teléfono":"Walang account o numero ng telepono",
 "Nuestro servidor no puede leerlo":"Hindi ito mababasa ng aming server",
-"Al terminar, se borra en los dos equipos":"Pagkatapos, binubura ang usapan sa dalawang device"
+"Al terminar, se borra en los dos equipos":"Pagkatapos, binubura ang usapan sa dalawang device",
+"Activar mi clave":"I-activate ang aking key"
 },
 "p":{
 "intento":"Pinakamadalas sumubok ngayon: {1}, {2} {2?beses|beses}.",

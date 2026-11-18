@@ -4037,7 +4037,8 @@
 "Agrandar":"Μεγέθυνση",
 "Sin cuentas ni teléfono":"Χωρίς λογαριασμούς ή αριθμό τηλεφώνου",
 "Nuestro servidor no puede leerlo":"Ο διακομιστής μας δεν μπορεί να το διαβάσει",
-"Al terminar, se borra en los dos equipos":"Στο τέλος η συνομιλία διαγράφεται και από τις δύο συσκευές"
+"Al terminar, se borra en los dos equipos":"Στο τέλος η συνομιλία διαγράφεται και από τις δύο συσκευές",
+"Activar mi clave":"Ενεργοποίηση του κλειδιού μου"
 },
 "p":{
 "intento":"Η πιο επίμονη σήμερα: {1}, {2} {2?φορά|φορές}.",

@@ -4037,7 +4037,8 @@
 "Agrandar":"Vergroten",
 "Sin cuentas ni teléfono":"Geen accounts, geen telefoonnummer",
 "Nuestro servidor no puede leerlo":"Onze server kan het niet lezen",
-"Al terminar, se borra en los dos equipos":"Na afloop wordt het gesprek op beide apparaten gewist"
+"Al terminar, se borra en los dos equipos":"Na afloop wordt het gesprek op beide apparaten gewist",
+"Activar mi clave":"Mijn sleutel activeren"
 },
 "p":{
 "intento":"Probeerde het vandaag het vaakst: {1}, {2} {2?keer|keer}.",

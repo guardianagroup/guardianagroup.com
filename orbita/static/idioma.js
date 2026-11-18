@@ -1598,6 +1598,7 @@
     "La página ha bloqueado un intento de cargar código ajeno.": ["The page blocked an attempt to load outside code.", "A página bloqueou uma tentativa de carregar código externo."],
     "La huella de la conexión no coincide con la que llegó encriptada.": ["The connection fingerprint does not match the one received encrypted.", "A impressão digital da conexão não coincide com a recebida criptografada."],
     "Alguien más ha entrado en la sala del relé.": ["Someone else has entered the relay room.", "Outra pessoa entrou na sala do relé."],
+    "Activar mi clave": ["Activate my key", "Ativar minha chave"],
     "Sin cuentas ni teléfono": ["No accounts, no phone number", "Sem contas nem telefone"],
     "Nuestro servidor no puede leerlo": ["Our server cannot read it", "Nosso servidor não pode lê-lo"],
     "Al terminar, se borra en los dos equipos": ["When you finish, it is deleted on both devices", "Ao terminar, a conversa é apagada nos dois aparelhos"],

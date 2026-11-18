@@ -4037,7 +4037,8 @@
 "Agrandar":"बड़ा करें",
 "Sin cuentas ni teléfono":"न खाता, न फ़ोन नंबर",
 "Nuestro servidor no puede leerlo":"हमारा सर्वर इसे पढ़ नहीं सकता",
-"Al terminar, se borra en los dos equipos":"ख़त्म होने पर बातचीत दोनों डिवाइस से मिट जाती है"
+"Al terminar, se borra en los dos equipos":"ख़त्म होने पर बातचीत दोनों डिवाइस से मिट जाती है",
+"Activar mi clave":"मेरी कुंजी सक्रिय करें"
 },
 "p":{
 "intento":"आज सबसे ज़्यादा कोशिश: {1}, {2} {2?बार|बार}।",

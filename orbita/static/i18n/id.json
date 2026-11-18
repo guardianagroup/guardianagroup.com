@@ -4037,7 +4037,8 @@
 "Agrandar":"Perbesar",
 "Sin cuentas ni teléfono":"Tanpa akun, tanpa nomor telepon",
 "Nuestro servidor no puede leerlo":"Server kami tidak bisa membacanya",
-"Al terminar, se borra en los dos equipos":"Setelah selesai, percakapan dihapus di kedua perangkat"
+"Al terminar, se borra en los dos equipos":"Setelah selesai, percakapan dihapus di kedua perangkat",
+"Activar mi clave":"Aktifkan kunci saya"
 },
 "p":{
 "intento":"Paling gigih mencoba hari ini: {1}, {2} {2?kali|kali}.",

@@ -4037,7 +4037,8 @@
 "Agrandar":"Ingrandisci",
 "Sin cuentas ni teléfono":"Niente account né numero di telefono",
 "Nuestro servidor no puede leerlo":"Il nostro server non può leggerlo",
-"Al terminar, se borra en los dos equipos":"Alla fine, la conversazione viene cancellata su entrambi i dispositivi"
+"Al terminar, se borra en los dos equipos":"Alla fine, la conversazione viene cancellata su entrambi i dispositivi",
+"Activar mi clave":"Attiva la mia chiave"
 },
 "p":{
 "intento":"Quella che ci ha provato di più oggi: {1}, {2} {2?volta|volte}.",

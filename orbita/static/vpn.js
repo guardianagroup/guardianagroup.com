@@ -483,7 +483,10 @@
     const firmaAviso = aviso ? JSON.stringify(aviso) : '';
     if (V.aviso.dataset.firma !== firmaAviso) {
       V.aviso.dataset.firma = firmaAviso; V.aviso.textContent = '';
-      if (aviso) { if (aviso.t) V.aviso.append(h('span', null, aviso.t)); if (aviso.m) V.aviso.append(' ', h('span', { class: 'm', translate: aviso.propio ? 'no' : null }, aviso.m)); }
+      if (aviso) { if (aviso.t) V.aviso.append(h('span', null, aviso.t)); if (aviso.m) V.aviso.append(' ', h('span', { class: 'm', translate: aviso.propio ? 'no' : null }, aviso.m));
+        // 17 nov 2026 (dueño, 21:19: «me dice esto forma parte de Plus»): el camino a la vista. El botón abre el panel del programa
+        // (data-producto, que atiende el propio programa), donde está «Licencia» para activar la clave
+        if (aviso.plus) V.aviso.append(' ', h('button', { type: 'button', class: 'vpn-activar', 'data-producto': 'guardiana' }, h('span', null, 'Activar mi clave'))); }
       V.aviso.hidden = !aviso;
     }
   }
@@ -615,7 +618,7 @@
     if (r && r.ok && j && j.ok === true) aviso = null;
     else if (r && r.estado === 428) aviso = { t: 'El programa solo acepta la orden justo después de pulsar: vuelve a pulsar.' };
     // 1.0.55: connecting is Plus once the trial ends; the program sends its own line, already in the person's language
-    else if (r && r.estado === 402 && j && typeof j.texto === 'string' && texto(j.texto, 300)) aviso = { t: '', m: texto(j.texto, 300), propio: true };
+    else if (r && r.estado === 402 && j && typeof j.texto === 'string' && texto(j.texto, 300)) aviso = { t: '', m: texto(j.texto, 300), propio: true, plus: true };
     else aviso = { t: 'No se pudo.', m: j && typeof j.motivo === 'string' && texto(j.motivo, 200) ? texto(j.motivo, 200) : r && r.motivo === 'tiempo' ? 'El programa no respondió a tiempo.' : 'El programa no lo permitió.' };
   }
   async function orden(o) {

@@ -4037,7 +4037,8 @@
 "Agrandar":"הגדלה",
 "Sin cuentas ni teléfono":"בלי חשבונות ובלי מספר טלפון",
 "Nuestro servidor no puede leerlo":"השרת שלנו לא יכול לקרוא את זה",
-"Al terminar, se borra en los dos equipos":"בסיום השיחה נמחקת בשני המכשירים"
+"Al terminar, se borra en los dos equipos":"בסיום השיחה נמחקת בשני המכשירים",
+"Activar mi clave":"הפעלת המפתח שלי"
 },
 "p":{
 "intento":"ניסתה הכי הרבה היום: {1}, {2} {2?פעם|פעמים}.",

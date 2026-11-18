@@ -4037,7 +4037,8 @@
 "Agrandar":"放大",
 "Sin cuentas ni teléfono":"无需账号，也无需电话号码",
 "Nuestro servidor no puede leerlo":"我们的服务器也无法读取",
-"Al terminar, se borra en los dos equipos":"结束后，对话会从两台设备上删除"
+"Al terminar, se borra en los dos equipos":"结束后，对话会从两台设备上删除",
+"Activar mi clave":"激活我的密钥"
 },
 "p":{
 "intento":"今天尝试最多的：{1}，{2} {2?次|次}。",

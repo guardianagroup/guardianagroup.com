@@ -4037,7 +4037,8 @@
 "Agrandar":"Suurenna",
 "Sin cuentas ni teléfono":"Ei tilejä eikä puhelinnumeroa",
 "Nuestro servidor no puede leerlo":"Palvelimemme ei voi lukea sitä",
-"Al terminar, se borra en los dos equipos":"Lopuksi keskustelu poistetaan molemmilta laitteilta"
+"Al terminar, se borra en los dos equipos":"Lopuksi keskustelu poistetaan molemmilta laitteilta",
+"Activar mi clave":"Aktivoi avaimeni"
 },
 "p":{
 "intento":"Eniten yrittänyt tänään: {1}, {2} {2?kerta|kertaa}.",

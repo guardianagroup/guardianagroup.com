@@ -4037,7 +4037,8 @@
 "Agrandar":"বড় করুন",
 "Sin cuentas ni teléfono":"অ্যাকাউন্ট বা ফোন নম্বর লাগে না",
 "Nuestro servidor no puede leerlo":"আমাদের সার্ভার এটি পড়তে পারে না",
-"Al terminar, se borra en los dos equipos":"শেষ হলে কথোপকথন দুই ডিভাইস থেকেই মুছে যায়"
+"Al terminar, se borra en los dos equipos":"শেষ হলে কথোপকথন দুই ডিভাইস থেকেই মুছে যায়",
+"Activar mi clave":"আমার কী সক্রিয় করুন"
 },
 "p":{
 "intento":"আজ সবচেয়ে বেশি চেষ্টা: {1}, {2} {2?বার|বার}।",

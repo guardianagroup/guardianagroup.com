@@ -152,6 +152,9 @@
 .vpn-boton2:disabled { cursor: progress; opacity: .6; }
 .vpn-aviso { margin: 14px 0 0; font-size: 13.5px; line-height: 1.5; color: #C9DFF2; text-align: end; }
 .vpn-aviso .m { color: #E8ECF1; }
+.vpn-aviso .vpn-activar { all: unset; box-sizing: border-box; cursor: pointer; display: inline-flex; align-items: center; min-height: 32px; margin-inline-start: 6px; padding: 0 14px; border-radius: 999px; border: 1px solid #9CC3E4; background: #9CC3E4; color: #06080C; font: 600 13px/1 'IBM Plex Sans', system-ui, sans-serif; white-space: nowrap; vertical-align: middle; }
+.vpn-aviso .vpn-activar:hover { background: #B4D3EC; border-color: #B4D3EC; }
+.vpn-aviso .vpn-activar:focus-visible { outline: 2px solid #F4F6F8; outline-offset: 2px; }
 
 /* ---------- lo que una web verá ---------- */
 .vpn-web { width: min(960px, 100%); margin: 34px auto 0; }

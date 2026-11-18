@@ -4037,7 +4037,8 @@
 "Agrandar":"Forstørr",
 "Sin cuentas ni teléfono":"Ingen kontoer, ikke noe telefonnummer",
 "Nuestro servidor no puede leerlo":"Serveren vår kan ikke lese det",
-"Al terminar, se borra en los dos equipos":"Til slutt slettes samtalen på begge enhetene"
+"Al terminar, se borra en los dos equipos":"Til slutt slettes samtalen på begge enhetene",
+"Activar mi clave":"Aktiver nøkkelen min"
 },
 "p":{
 "intento":"Den som prøvde mest i dag: {1}, {2} {2?gang|ganger}.",

@@ -4037,7 +4037,8 @@
 "Agrandar":"Büyüt",
 "Sin cuentas ni teléfono":"Hesap da telefon numarası da yok",
 "Nuestro servidor no puede leerlo":"Sunucumuz okuyamaz",
-"Al terminar, se borra en los dos equipos":"Bitince sohbet iki cihazdan da silinir"
+"Al terminar, se borra en los dos equipos":"Bitince sohbet iki cihazdan da silinir",
+"Activar mi clave":"Anahtarımı etkinleştir"
 },
 "p":{
 "intento":"Bugün en çok deneyen: {1}, {2} {2?kez|kez}.",

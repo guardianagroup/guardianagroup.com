@@ -4037,7 +4037,8 @@
 "Agrandar":"Agrandir",
 "Sin cuentas ni teléfono":"Ni compte ni numéro de téléphone",
 "Nuestro servidor no puede leerlo":"Notre serveur ne peut pas le lire",
-"Al terminar, se borra en los dos equipos":"À la fin, la conversation est effacée des deux appareils"
+"Al terminar, se borra en los dos equipos":"À la fin, la conversation est effacée des deux appareils",
+"Activar mi clave":"Activer ma clé"
 },
 "p":{
 "intento":"Celle qui a le plus insisté aujourd'hui : {1}, {2} {2?fois|fois}.",

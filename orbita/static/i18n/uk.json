@@ -4037,7 +4037,8 @@
 "Agrandar":"Збільшити",
 "Sin cuentas ni teléfono":"Без облікових записів і номера телефону",
 "Nuestro servidor no puede leerlo":"Наш сервер не може це прочитати",
-"Al terminar, se borra en los dos equipos":"Наприкінці розмова видаляється на обох пристроях"
+"Al terminar, se borra en los dos equipos":"Наприкінці розмова видаляється на обох пристроях",
+"Activar mi clave":"Активувати мій ключ"
 },
 "p":{
 "intento":"Найнаполегливіша сьогодні: {1}, {2} {2?раз|разів}.",

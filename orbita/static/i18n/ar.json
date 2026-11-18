@@ -4037,7 +4037,8 @@
 "Agrandar":"تكبير",
 "Sin cuentas ni teléfono":"بلا حسابات ولا رقم هاتف",
 "Nuestro servidor no puede leerlo":"خادمنا لا يستطيع قراءته",
-"Al terminar, se borra en los dos equipos":"عند الانتهاء، تُحذف المحادثة من الجهازين"
+"Al terminar, se borra en los dos equipos":"عند الانتهاء، تُحذف المحادثة من الجهازين",
+"Activar mi clave":"تفعيل مفتاحي"
 },
 "p":{
 "intento":"الأكثر محاولةً اليوم: {1}، {2} {2?مرة|مرات}.",

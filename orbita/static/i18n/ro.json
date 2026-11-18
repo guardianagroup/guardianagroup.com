@@ -4037,7 +4037,8 @@
 "Agrandar":"Mărește",
 "Sin cuentas ni teléfono":"Fără conturi și fără număr de telefon",
 "Nuestro servidor no puede leerlo":"Serverul nostru nu îl poate citi",
-"Al terminar, se borra en los dos equipos":"La final, conversația se șterge de pe ambele dispozitive"
+"Al terminar, se borra en los dos equipos":"La final, conversația se șterge de pe ambele dispozitive",
+"Activar mi clave":"Activează cheia mea"
 },
 "p":{
 "intento":"Cea care a încercat cel mai mult azi: {1}, {2} {2?dată|ori}.",

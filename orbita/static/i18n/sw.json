@@ -4037,7 +4037,8 @@
 "Agrandar":"Kuza",
 "Sin cuentas ni teléfono":"Bila akaunti wala namba ya simu",
 "Nuestro servidor no puede leerlo":"Seva yetu haiwezi kuisoma",
-"Al terminar, se borra en los dos equipos":"Mkimaliza, mazungumzo hufutwa kwenye vifaa vyote viwili"
+"Al terminar, se borra en los dos equipos":"Mkimaliza, mazungumzo hufutwa kwenye vifaa vyote viwili",
+"Activar mi clave":"Washa ufunguo wangu"
 },
 "p":{
 "intento":"Iliyojaribu zaidi leo: {1}, {2?mara|mara} {2}.",
