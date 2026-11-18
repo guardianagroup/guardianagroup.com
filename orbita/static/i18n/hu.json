@@ -4047,7 +4047,15 @@
 "Ver todo el PC":"A teljes gép mutatása",
 "Con quién habla tu antivirus":"Kivel beszél a víruskeresője",
 "Tu antivirus no se ha conectado en este rato.":"A víruskeresője ebben az időszakban nem kapcsolódott sehova.",
-"Con quién habla tu PC":"Kivel beszél a számítógépe"
+"Con quién habla tu PC":"Kivel beszél a számítógépe",
+"Personas que usan internet":"Internetet használók",
+"Banco Mundial · UIT":"Világbank · ITU",
+"Velocidad mediana":"Medián sebesség",
+"Latencia mediana":"Medián késleltetés",
+"Pérdida de paquetes":"Csomagvesztés",
+"Pruebas de M-Lab":"M-Lab-mérések",
+"Conectividad medida":"Mért kapcsolat",
+"Pruebas de velocidad de M-Lab (dominio público) y datos de la UIT publicados por el Banco Mundial (CC BY 4.0). Miden a quien hace la prueba, no a todo el país.":"Az M-Lab sebességmérései (közkincs) és a Világbank által közzétett ITU-adatok (CC BY 4.0). Azt mérik, aki a tesztet futtatja, nem az egész országot."
 },
 "p":{
 "intento":"Ma a legtöbbször próbálkozott: {1}, {2} {2?alkalommal|alkalommal}.",

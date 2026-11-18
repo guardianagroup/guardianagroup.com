@@ -4047,7 +4047,15 @@
 "Ver todo el PC":"عرض الحاسوب كله",
 "Con quién habla tu antivirus":"مع مَن يتواصل برنامج مكافحة الفيروسات لديك",
 "Tu antivirus no se ha conectado en este rato.":"لم يتصل برنامج مكافحة الفيروسات لديك بأي جهة خلال هذه الفترة.",
-"Con quién habla tu PC":"مع مَن يتواصل حاسوبك"
+"Con quién habla tu PC":"مع مَن يتواصل حاسوبك",
+"Personas que usan internet":"الأشخاص الذين يستخدمون الإنترنت",
+"Banco Mundial · UIT":"البنك الدولي · الاتحاد الدولي للاتصالات",
+"Velocidad mediana":"السرعة الوسيطة",
+"Latencia mediana":"زمن الاستجابة الوسيط",
+"Pérdida de paquetes":"فقدان الحزم",
+"Pruebas de M-Lab":"اختبارات M-Lab",
+"Conectividad medida":"الاتصال المُقاس",
+"Pruebas de velocidad de M-Lab (dominio público) y datos de la UIT publicados por el Banco Mundial (CC BY 4.0). Miden a quien hace la prueba, no a todo el país.":"اختبارات سرعة M-Lab (ملكية عامة) وبيانات الاتحاد الدولي للاتصالات التي ينشرها البنك الدولي (CC BY 4.0). تقيس من يُجري الاختبار، لا البلد بأكمله."
 },
 "p":{
 "intento":"الأكثر محاولةً اليوم: {1}، {2} {2?مرة|مرات}.",

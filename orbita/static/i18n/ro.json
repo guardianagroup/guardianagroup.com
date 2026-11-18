@@ -4047,7 +4047,15 @@
 "Ver todo el PC":"Arată tot PC-ul",
 "Con quién habla tu antivirus":"Cu cine vorbește antivirusul tău",
 "Tu antivirus no se ha conectado en este rato.":"Antivirusul tău nu s-a conectat nicăieri în acest interval.",
-"Con quién habla tu PC":"Cu cine vorbește PC-ul tău"
+"Con quién habla tu PC":"Cu cine vorbește PC-ul tău",
+"Personas que usan internet":"Persoane care folosesc internetul",
+"Banco Mundial · UIT":"Banca Mondială · UIT",
+"Velocidad mediana":"Viteza mediană",
+"Latencia mediana":"Latența mediană",
+"Pérdida de paquetes":"Pierderea de pachete",
+"Pruebas de M-Lab":"Teste M-Lab",
+"Conectividad medida":"Conectivitate măsurată",
+"Pruebas de velocidad de M-Lab (dominio público) y datos de la UIT publicados por el Banco Mundial (CC BY 4.0). Miden a quien hace la prueba, no a todo el país.":"Teste de viteză M-Lab (domeniu public) și date ale UIT publicate de Banca Mondială (CC BY 4.0). Măsoară pe cine face testul, nu toată țara."
 },
 "p":{
 "intento":"Cea care a încercat cel mai mult azi: {1}, {2} {2?dată|ori}.",

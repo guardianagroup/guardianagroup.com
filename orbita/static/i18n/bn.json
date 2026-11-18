@@ -4047,7 +4047,15 @@
 "Ver todo el PC":"পুরো পিসি দেখুন",
 "Con quién habla tu antivirus":"আপনার অ্যান্টিভাইরাস কার সঙ্গে কথা বলে",
 "Tu antivirus no se ha conectado en este rato.":"এই সময়ে আপনার অ্যান্টিভাইরাস কোথাও সংযোগ করেনি।",
-"Con quién habla tu PC":"আপনার পিসি কার সঙ্গে কথা বলে"
+"Con quién habla tu PC":"আপনার পিসি কার সঙ্গে কথা বলে",
+"Personas que usan internet":"ইন্টারনেট ব্যবহারকারী মানুষ",
+"Banco Mundial · UIT":"বিশ্বব্যাংক · আইটিইউ",
+"Velocidad mediana":"মধ্যমা গতি",
+"Latencia mediana":"মধ্যমা ল্যাটেন্সি",
+"Pérdida de paquetes":"প্যাকেট হারানো",
+"Pruebas de M-Lab":"M-Lab-এর পরীক্ষা",
+"Conectividad medida":"পরিমাপ করা সংযোগ",
+"Pruebas de velocidad de M-Lab (dominio público) y datos de la UIT publicados por el Banco Mundial (CC BY 4.0). Miden a quien hace la prueba, no a todo el país.":"M-Lab-এর গতি পরীক্ষা (পাবলিক ডোমেইন) এবং বিশ্বব্যাংকের প্রকাশিত আইটিইউ-র তথ্য (CC BY 4.0)। এগুলো পরীক্ষাকারীকে মাপে, পুরো দেশকে নয়।"
 },
 "p":{
 "intento":"আজ সবচেয়ে বেশি চেষ্টা: {1}, {2} {2?বার|বার}।",

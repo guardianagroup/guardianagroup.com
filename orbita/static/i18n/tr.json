@@ -4047,7 +4047,15 @@
 "Ver todo el PC":"Tüm bilgisayarı göster",
 "Con quién habla tu antivirus":"Antivirüsünüz kimlerle konuşuyor",
 "Tu antivirus no se ha conectado en este rato.":"Antivirüsünüz bu süre içinde hiçbir yere bağlanmadı.",
-"Con quién habla tu PC":"Bilgisayarınız kimlerle konuşuyor"
+"Con quién habla tu PC":"Bilgisayarınız kimlerle konuşuyor",
+"Personas que usan internet":"İnternet kullanan kişiler",
+"Banco Mundial · UIT":"Dünya Bankası · ITU",
+"Velocidad mediana":"Medyan hız",
+"Latencia mediana":"Medyan gecikme",
+"Pérdida de paquetes":"Paket kaybı",
+"Pruebas de M-Lab":"M-Lab testleri",
+"Conectividad medida":"Ölçülen bağlantı",
+"Pruebas de velocidad de M-Lab (dominio público) y datos de la UIT publicados por el Banco Mundial (CC BY 4.0). Miden a quien hace la prueba, no a todo el país.":"M-Lab hız testleri (kamu malı) ve Dünya Bankası’nın yayımladığı ITU verileri (CC BY 4.0). Testi yapanı ölçerler, tüm ülkeyi değil."
 },
 "p":{
 "intento":"Bugün en çok deneyen: {1}, {2} {2?kez|kez}.",

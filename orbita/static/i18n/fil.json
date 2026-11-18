@@ -4047,7 +4047,15 @@
 "Ver todo el PC":"Ipakita ang buong PC",
 "Con quién habla tu antivirus":"Kanino nakikipag-usap ang iyong antivirus",
 "Tu antivirus no se ha conectado en este rato.":"Hindi kumonekta kahit saan ang iyong antivirus sa panahong ito.",
-"Con quién habla tu PC":"Kanino nakikipag-usap ang iyong PC"
+"Con quién habla tu PC":"Kanino nakikipag-usap ang iyong PC",
+"Personas que usan internet":"Mga taong gumagamit ng internet",
+"Banco Mundial · UIT":"World Bank · ITU",
+"Velocidad mediana":"Median na bilis",
+"Latencia mediana":"Median na latency",
+"Pérdida de paquetes":"Nawawalang packet",
+"Pruebas de M-Lab":"Mga test ng M-Lab",
+"Conectividad medida":"Nasukat na koneksyon",
+"Pruebas de velocidad de M-Lab (dominio público) y datos de la UIT publicados por el Banco Mundial (CC BY 4.0). Miden a quien hace la prueba, no a todo el país.":"Mga speed test ng M-Lab (public domain) at datos ng ITU na inilathala ng World Bank (CC BY 4.0). Sinusukat nila ang gumagawa ng test, hindi ang buong bansa."
 },
 "p":{
 "intento":"Pinakamadalas sumubok ngayon: {1}, {2} {2?beses|beses}.",

@@ -4047,7 +4047,15 @@
 "Ver todo el PC":"Zobrazit celý počítač",
 "Con quién habla tu antivirus":"S kým mluví váš antivir",
 "Tu antivirus no se ha conectado en este rato.":"Váš antivir se v tomto období nikam nepřipojil.",
-"Con quién habla tu PC":"S kým mluví váš počítač"
+"Con quién habla tu PC":"S kým mluví váš počítač",
+"Personas que usan internet":"Lidé používající internet",
+"Banco Mundial · UIT":"Světová banka · ITU",
+"Velocidad mediana":"Medián rychlosti",
+"Latencia mediana":"Medián latence",
+"Pérdida de paquetes":"Ztráta paketů",
+"Pruebas de M-Lab":"Testy M-Lab",
+"Conectividad medida":"Naměřená konektivita",
+"Pruebas de velocidad de M-Lab (dominio público) y datos de la UIT publicados por el Banco Mundial (CC BY 4.0). Miden a quien hace la prueba, no a todo el país.":"Testy rychlosti M-Lab (volné dílo) a data ITU zveřejněná Světovou bankou (CC BY 4.0). Měří toho, kdo test spustí, ne celou zemi."
 },
 "p":{
 "intento":"Nejvíc se dnes snažila: {1}, {2}{2?krát|krát}.",

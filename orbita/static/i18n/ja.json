@@ -4047,7 +4047,15 @@
 "Ver todo el PC":"PC 全体を表示",
 "Con quién habla tu antivirus":"ウイルス対策ソフトの通信先",
 "Tu antivirus no se ha conectado en este rato.":"この間、ウイルス対策ソフトはどこにも接続していません。",
-"Con quién habla tu PC":"PC の通信先"
+"Con quién habla tu PC":"PC の通信先",
+"Personas que usan internet":"インターネット利用者の割合",
+"Banco Mundial · UIT":"世界銀行・ITU",
+"Velocidad mediana":"速度の中央値",
+"Latencia mediana":"遅延の中央値",
+"Pérdida de paquetes":"パケット損失",
+"Pruebas de M-Lab":"M-Lab のテスト",
+"Conectividad medida":"測定された接続状況",
+"Pruebas de velocidad de M-Lab (dominio público) y datos de la UIT publicados por el Banco Mundial (CC BY 4.0). Miden a quien hace la prueba, no a todo el país.":"M-Lab の速度テスト（パブリックドメイン）と、世界銀行が公開する ITU のデータ（CC BY 4.0）。測っているのはテストをした人の回線で、国全体ではありません。"
 },
 "p":{
 "intento":"今日最も多く試みたのは {1}、{2} {2?回|回}。",

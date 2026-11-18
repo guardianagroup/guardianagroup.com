@@ -4047,7 +4047,15 @@
 "Ver todo el PC":"Ganzen PC anzeigen",
 "Con quién habla tu antivirus":"Mit wem Ihr Virenschutz spricht",
 "Tu antivirus no se ha conectado en este rato.":"Ihr Virenschutz hat in diesem Zeitraum keine Verbindung aufgebaut.",
-"Con quién habla tu PC":"Mit wem Ihr PC spricht"
+"Con quién habla tu PC":"Mit wem Ihr PC spricht",
+"Personas que usan internet":"Menschen, die das Internet nutzen",
+"Banco Mundial · UIT":"Weltbank · ITU",
+"Velocidad mediana":"Mediangeschwindigkeit",
+"Latencia mediana":"Medianlatenz",
+"Pérdida de paquetes":"Paketverlust",
+"Pruebas de M-Lab":"M-Lab-Tests",
+"Conectividad medida":"Gemessene Konnektivität",
+"Pruebas de velocidad de M-Lab (dominio público) y datos de la UIT publicados por el Banco Mundial (CC BY 4.0). Miden a quien hace la prueba, no a todo el país.":"Geschwindigkeitstests von M-Lab (gemeinfrei) und ITU-Daten, veröffentlicht von der Weltbank (CC BY 4.0). Sie messen, wer den Test macht, nicht das ganze Land."
 },
 "p":{
 "intento":"Hat es heute am häufigsten versucht: {1}, {2} {2?Mal|Mal}.",

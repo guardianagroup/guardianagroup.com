@@ -4047,7 +4047,15 @@
 "Ver todo el PC":"Tampilkan seluruh PC",
 "Con quién habla tu antivirus":"Dengan siapa antivirus Anda berbicara",
 "Tu antivirus no se ha conectado en este rato.":"Antivirus Anda tidak terhubung ke mana pun dalam periode ini.",
-"Con quién habla tu PC":"Dengan siapa PC Anda berbicara"
+"Con quién habla tu PC":"Dengan siapa PC Anda berbicara",
+"Personas que usan internet":"Orang yang menggunakan internet",
+"Banco Mundial · UIT":"Bank Dunia · ITU",
+"Velocidad mediana":"Kecepatan median",
+"Latencia mediana":"Latensi median",
+"Pérdida de paquetes":"Kehilangan paket",
+"Pruebas de M-Lab":"Tes M-Lab",
+"Conectividad medida":"Konektivitas terukur",
+"Pruebas de velocidad de M-Lab (dominio público) y datos de la UIT publicados por el Banco Mundial (CC BY 4.0). Miden a quien hace la prueba, no a todo el país.":"Tes kecepatan M-Lab (domain publik) dan data ITU yang diterbitkan Bank Dunia (CC BY 4.0). Mengukur orang yang menjalankan tes, bukan seluruh negara."
 },
 "p":{
 "intento":"Paling gigih mencoba hari ini: {1}, {2} {2?kali|kali}.",

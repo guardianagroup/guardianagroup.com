@@ -4047,7 +4047,15 @@
 "Ver todo el PC":"پورا پی سی دکھائیں",
 "Con quién habla tu antivirus":"آپ کا اینٹی وائرس کس سے بات کرتا ہے",
 "Tu antivirus no se ha conectado en este rato.":"اس دوران آپ کا اینٹی وائرس کہیں منسلک نہیں ہوا۔",
-"Con quién habla tu PC":"آپ کا پی سی کس سے بات کرتا ہے"
+"Con quién habla tu PC":"آپ کا پی سی کس سے بات کرتا ہے",
+"Personas que usan internet":"انٹرنیٹ استعمال کرنے والے لوگ",
+"Banco Mundial · UIT":"عالمی بینک · ITU",
+"Velocidad mediana":"درمیانی رفتار",
+"Latencia mediana":"درمیانی تاخیر",
+"Pérdida de paquetes":"پیکٹ کا ضیاع",
+"Pruebas de M-Lab":"M-Lab ٹیسٹ",
+"Conectividad medida":"ناپی گئی کنیکٹیویٹی",
+"Pruebas de velocidad de M-Lab (dominio público) y datos de la UIT publicados por el Banco Mundial (CC BY 4.0). Miden a quien hace la prueba, no a todo el país.":"M-Lab کے اسپیڈ ٹیسٹ (پبلک ڈومین) اور عالمی بینک کا شائع کردہ ITU ڈیٹا (CC BY 4.0)۔ یہ ٹیسٹ کرنے والے کو ناپتے ہیں، پورے ملک کو نہیں۔"
 },
 "p":{
 "intento":"آج سب سے زیادہ کوشش: {1}، {2} {2?بار|بار}۔",

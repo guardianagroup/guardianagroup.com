@@ -1006,8 +1006,29 @@
   try { (window.requestIdleCallback || ((f) => setTimeout(f, 2500)))(() => pideFormas(), { timeout: 4000 }); } catch (_) { setTimeout(pideFormas, 2500); }
   let paisMarcado = null;
   function buscaPais(x, y) { for (const b of PAIS_CAJAS) if (x >= b[0] && x <= b[0] + b[2] && y >= b[1] && y <= b[1] + b[3]) return b[4]; return null; }
+  // ---------- 18 Nov 2026 (agency round 94; the owner, 22:44: «ok»): measured connectivity in the country card, from two
+  //            sources whose licence was read on their own page: the share of people using the internet (World Bank, from
+  //            the ITU, CC BY 4.0) and the month's medians of M-Lab's tests (CC0), copied to our site every week
+  //            (herramientas/conectividad.py). M-Lab measures whoever runs its test, not the whole country: said under them. ----------
+  let CONEC = null, cargaConec = null;
+  const pideConec = () => cargaConec || (cargaConec = cargaJSON('datos/conectividad.json').then((d) => { CONEC = d || {}; return CONEC; }).catch(() => { CONEC = {}; return CONEC; }));
+  try { (window.requestIdleCallback || ((f) => setTimeout(f, 3000)))(() => pideConec(), { timeout: 5000 }); } catch (_) { setTimeout(pideConec, 3000); }
+  const decimal = (v, d) => Number(v).toLocaleString((window.GuardianaIdioma && window.GuardianaIdioma.locale) || 'es-ES', { maximumFractionDigits: d, minimumFractionDigits: 0 });
+  const mesDe = (m) => { const r = /^(\d{4})-(\d{2})$/.exec(String(m || '')); if (!r) return ''; try { return new Date(Date.UTC(+r[1], +r[2] - 1, 15)).toLocaleDateString((window.GuardianaIdioma && window.GuardianaIdioma.locale) || 'es-ES', { month: 'long', year: 'numeric', timeZone: 'UTC' }); } catch (_) { return m; } };
+  function filasConectividad(cc) {
+    const C = CONEC || {}, out = [], inet = C.internet && C.internet[cc], v = C.velocidad && C.velocidad[cc];
+    if (Array.isArray(inet) && Number.isFinite(inet[0])) out.push([T('Personas que usan internet'), decimal(inet[0], 1) + ' % (' + inet[1] + ') · ' + T('Banco Mundial · UIT')]);
+    if (v && Number.isFinite(v.bajada)) {
+      out.push([T('Velocidad mediana'), '↓ ' + decimal(v.bajada, 1) + ' Mb/s' + (Number.isFinite(v.subida) ? ' · ↑ ' + decimal(v.subida, 1) + ' Mb/s' : '')]);
+      if (Number.isFinite(v.latencia)) out.push([T('Latencia mediana'), decimal(v.latencia, 0) + ' ms']);
+      if (Number.isFinite(v.perdida)) out.push([T('Pérdida de paquetes'), decimal(v.perdida, 2) + ' %']);
+      if (Number.isFinite(v.pruebas)) out.push([T('Pruebas de M-Lab'), [mesDe(C.mlab_mes), num(v.pruebas)].filter(Boolean).join(' · ')]);
+    }
+    return out;
+  }
   function fichaPais(cc, x, y) {
     if (!PAISES) cargaPaises();
+    if (!CONEC) pideConec();
     const filas = [], D = (PAISES && PAISES[cc]) || null;
     // what the map itself knows about the country
     if (LUG && LUG.grupos) {
@@ -1026,10 +1047,14 @@
       if (D.intercambio) filas.push([T('Intercambio de internet'), D.intercambio]);
       if (D.novedades) filas.push([T('Novedades'), D.novedades]);
     }
+    const conec = filasConectividad(cc); filas.push(...conec);
     abreModelo(modelo(T('País'), paisNombre(cc), filas, D && D.confirmado ? T('Datos verificados') : T('Datos en verificación'), {
-      resumen: [T('Cables submarinos'), T('Centros de datos'), T('Red móvil')],
+      resumen: [T('Personas que usan internet'), T('Cables submarinos'), T('Centros de datos'), T('Red móvil')],
       para: T('El tráfico internacional de este país sale por los cables y las troncales que recoge esta ficha. Las redes móvil y fija son el primer tramo de ese recorrido.'), // 22 Oct 2026, 22:23 (owner): «la frase… a lo más profesional»
-      secciones: [{ t: T('Red móvil y fija'), claves: [T('Red móvil'), T('Operadores'), T('Fibra al hogar'), '10G'], abierta: true }, { t: T('Por dónde entra internet'), claves: [T('Troncales'), T('Cables submarinos'), T('Intercambio de internet')] }, { t: T('Novedades'), claves: [T('Novedades')] }],
+      secciones: [{ t: T('Red móvil y fija'), claves: [T('Red móvil'), T('Operadores'), T('Fibra al hogar'), '10G'], abierta: true }, { t: T('Por dónde entra internet'), claves: [T('Troncales'), T('Cables submarinos'), T('Intercambio de internet')] },
+        ...(conec.length ? [{ t: T('Conectividad medida'), claves: [T('Velocidad mediana'), T('Latencia mediana'), T('Pérdida de paquetes'), T('Pruebas de M-Lab')], abierta: true,
+          texto: T('Pruebas de velocidad de M-Lab (dominio público) y datos de la UIT publicados por el Banco Mundial (CC BY 4.0). Miden a quien hace la prueba, no a todo el país.') }] : []),
+        { t: T('Novedades'), claves: [T('Novedades')] }],
     }), x, y);
   }
 

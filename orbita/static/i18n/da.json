@@ -4047,7 +4047,15 @@
 "Ver todo el PC":"Vis hele pc’en",
 "Con quién habla tu antivirus":"Hvem dit antivirus taler med",
 "Tu antivirus no se ha conectado en este rato.":"Dit antivirus har ikke oprettet forbindelse i denne periode.",
-"Con quién habla tu PC":"Hvem din pc taler med"
+"Con quién habla tu PC":"Hvem din pc taler med",
+"Personas que usan internet":"Personer, der bruger internettet",
+"Banco Mundial · UIT":"Verdensbanken · ITU",
+"Velocidad mediana":"Median hastighed",
+"Latencia mediana":"Median latens",
+"Pérdida de paquetes":"Pakketab",
+"Pruebas de M-Lab":"M-Lab-tests",
+"Conectividad medida":"Målt forbindelse",
+"Pruebas de velocidad de M-Lab (dominio público) y datos de la UIT publicados por el Banco Mundial (CC BY 4.0). Miden a quien hace la prueba, no a todo el país.":"Hastighedstests fra M-Lab (offentligt domæne) og ITU-data offentliggjort af Verdensbanken (CC BY 4.0). De måler den, der tager testen, ikke hele landet."
 },
 "p":{
 "intento":"Den, der prøvede mest i dag: {1}, {2} {2?gang|gange}.",

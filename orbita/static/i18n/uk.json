@@ -4047,7 +4047,15 @@
 "Ver todo el PC":"Показати весь ПК",
 "Con quién habla tu antivirus":"З ким спілкується ваш антивірус",
 "Tu antivirus no se ha conectado en este rato.":"За цей час ваш антивірус нікуди не підключався.",
-"Con quién habla tu PC":"З ким спілкується ваш ПК"
+"Con quién habla tu PC":"З ким спілкується ваш ПК",
+"Personas que usan internet":"Люди, які користуються інтернетом",
+"Banco Mundial · UIT":"Світовий банк · МСЕ",
+"Velocidad mediana":"Медіанна швидкість",
+"Latencia mediana":"Медіанна затримка",
+"Pérdida de paquetes":"Втрата пакетів",
+"Pruebas de M-Lab":"Тести M-Lab",
+"Conectividad medida":"Виміряна зв’язність",
+"Pruebas de velocidad de M-Lab (dominio público) y datos de la UIT publicados por el Banco Mundial (CC BY 4.0). Miden a quien hace la prueba, no a todo el país.":"Тести швидкості M-Lab (суспільне надбання) і дані МСЕ, опубліковані Світовим банком (CC BY 4.0). Вони вимірюють того, хто проходить тест, а не всю країну."
 },
 "p":{
 "intento":"Найнаполегливіша сьогодні: {1}, {2} {2?раз|разів}.",

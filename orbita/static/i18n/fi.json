@@ -4047,7 +4047,15 @@
 "Ver todo el PC":"Näytä koko tietokone",
 "Con quién habla tu antivirus":"Kenen kanssa virustorjuntasi puhuu",
 "Tu antivirus no se ha conectado en este rato.":"Virustorjuntasi ei ole muodostanut yhteyksiä tänä aikana.",
-"Con quién habla tu PC":"Kenen kanssa tietokoneesi puhuu"
+"Con quién habla tu PC":"Kenen kanssa tietokoneesi puhuu",
+"Personas que usan internet":"Internetiä käyttävät ihmiset",
+"Banco Mundial · UIT":"Maailmanpankki · ITU",
+"Velocidad mediana":"Mediaaninopeus",
+"Latencia mediana":"Mediaaniviive",
+"Pérdida de paquetes":"Pakettihävikki",
+"Pruebas de M-Lab":"M-Labin testit",
+"Conectividad medida":"Mitattu yhteys",
+"Pruebas de velocidad de M-Lab (dominio público) y datos de la UIT publicados por el Banco Mundial (CC BY 4.0). Miden a quien hace la prueba, no a todo el país.":"M-Labin nopeustestit (vapaasti käytettävissä) ja Maailmanpankin julkaisemat ITU:n tiedot (CC BY 4.0). Ne mittaavat testin tekijää, eivät koko maata."
 },
 "p":{
 "intento":"Eniten yrittänyt tänään: {1}, {2} {2?kerta|kertaa}.",

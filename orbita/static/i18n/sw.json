@@ -4047,7 +4047,15 @@
 "Ver todo el PC":"Onyesha kompyuta nzima",
 "Con quién habla tu antivirus":"Kingavirusi yako inazungumza na nani",
 "Tu antivirus no se ha conectado en este rato.":"Kingavirusi yako haijaunganishwa popote katika kipindi hiki.",
-"Con quién habla tu PC":"Kompyuta yako inazungumza na nani"
+"Con quién habla tu PC":"Kompyuta yako inazungumza na nani",
+"Personas que usan internet":"Watu wanaotumia intaneti",
+"Banco Mundial · UIT":"Benki ya Dunia · ITU",
+"Velocidad mediana":"Kasi ya wastani wa kati",
+"Latencia mediana":"Ucheleweshaji wa wastani wa kati",
+"Pérdida de paquetes":"Upotevu wa pakiti",
+"Pruebas de M-Lab":"Majaribio ya M-Lab",
+"Conectividad medida":"Muunganisho uliopimwa",
+"Pruebas de velocidad de M-Lab (dominio público) y datos de la UIT publicados por el Banco Mundial (CC BY 4.0). Miden a quien hace la prueba, no a todo el país.":"Majaribio ya kasi ya M-Lab (mali ya umma) na data ya ITU iliyochapishwa na Benki ya Dunia (CC BY 4.0). Yanapima anayefanya jaribio, si nchi nzima."
 },
 "p":{
 "intento":"Iliyojaribu zaidi leo: {1}, {2?mara|mara} {2}.",

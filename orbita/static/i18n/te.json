@@ -4047,7 +4047,15 @@
 "Ver todo el PC":"మొత్తం పీసీని చూపించు",
 "Con quién habla tu antivirus":"మీ యాంటీవైరస్ ఎవరితో మాట్లాడుతుంది",
 "Tu antivirus no se ha conectado en este rato.":"ఈ సమయంలో మీ యాంటీవైరస్ ఎక్కడికీ కనెక్ట్ కాలేదు.",
-"Con quién habla tu PC":"మీ పీసీ ఎవరితో మాట్లాడుతుంది"
+"Con quién habla tu PC":"మీ పీసీ ఎవరితో మాట్లాడుతుంది",
+"Personas que usan internet":"ఇంటర్నెట్ ఉపయోగించే ప్రజలు",
+"Banco Mundial · UIT":"ప్రపంచ బ్యాంకు · ITU",
+"Velocidad mediana":"మధ్యస్థ వేగం",
+"Latencia mediana":"మధ్యస్థ లేటెన్సీ",
+"Pérdida de paquetes":"ప్యాకెట్ నష్టం",
+"Pruebas de M-Lab":"M-Lab పరీక్షలు",
+"Conectividad medida":"కొలిచిన కనెక్టివిటీ",
+"Pruebas de velocidad de M-Lab (dominio público) y datos de la UIT publicados por el Banco Mundial (CC BY 4.0). Miden a quien hace la prueba, no a todo el país.":"M-Lab వేగ పరీక్షలు (పబ్లిక్ డొమైన్), ప్రపంచ బ్యాంకు ప్రచురించిన ITU డేటా (CC BY 4.0). ఇవి పరీక్ష చేసినవారిని కొలుస్తాయి, మొత్తం దేశాన్ని కాదు."
 },
 "p":{
 "intento":"ఈరోజు ఎక్కువగా ప్రయత్నించింది: {1}, {2} {2?సారి|సార్లు}.",

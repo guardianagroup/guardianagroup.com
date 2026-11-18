@@ -4047,7 +4047,15 @@
 "Ver todo el PC":"Prikaži cijelo računalo",
 "Con quién habla tu antivirus":"S kim razgovara vaš antivirus",
 "Tu antivirus no se ha conectado en este rato.":"Vaš se antivirus u ovom razdoblju nije nikamo spojio.",
-"Con quién habla tu PC":"S kim razgovara vaše računalo"
+"Con quién habla tu PC":"S kim razgovara vaše računalo",
+"Personas que usan internet":"Osobe koje koriste internet",
+"Banco Mundial · UIT":"Svjetska banka · ITU",
+"Velocidad mediana":"Medijan brzine",
+"Latencia mediana":"Medijan latencije",
+"Pérdida de paquetes":"Gubitak paketa",
+"Pruebas de M-Lab":"M-Lab testovi",
+"Conectividad medida":"Izmjerena povezanost",
+"Pruebas de velocidad de M-Lab (dominio público) y datos de la UIT publicados por el Banco Mundial (CC BY 4.0). Miden a quien hace la prueba, no a todo el país.":"Testovi brzine M-Laba (javno dobro) i podaci ITU-a koje objavljuje Svjetska banka (CC BY 4.0). Mjere onoga tko radi test, ne cijelu zemlju."
 },
 "p":{
 "intento":"Najupornija danas: {1}, {2} {2?put|puta}.",

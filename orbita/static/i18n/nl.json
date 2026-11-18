@@ -4047,7 +4047,15 @@
 "Ver todo el PC":"Hele pc tonen",
 "Con quién habla tu antivirus":"Met wie uw antivirus praat",
 "Tu antivirus no se ha conectado en este rato.":"Uw antivirus heeft in deze periode geen verbinding gemaakt.",
-"Con quién habla tu PC":"Met wie uw pc praat"
+"Con quién habla tu PC":"Met wie uw pc praat",
+"Personas que usan internet":"Mensen die internet gebruiken",
+"Banco Mundial · UIT":"Wereldbank · ITU",
+"Velocidad mediana":"Mediane snelheid",
+"Latencia mediana":"Mediane latentie",
+"Pérdida de paquetes":"Pakketverlies",
+"Pruebas de M-Lab":"M-Lab-tests",
+"Conectividad medida":"Gemeten connectiviteit",
+"Pruebas de velocidad de M-Lab (dominio público) y datos de la UIT publicados por el Banco Mundial (CC BY 4.0). Miden a quien hace la prueba, no a todo el país.":"Snelheidstests van M-Lab (publiek domein) en ITU-gegevens, gepubliceerd door de Wereldbank (CC BY 4.0). Ze meten wie de test doet, niet het hele land."
 },
 "p":{
 "intento":"Probeerde het vandaag het vaakst: {1}, {2} {2?keer|keer}.",

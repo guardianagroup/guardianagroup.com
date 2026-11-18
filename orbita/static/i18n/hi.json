@@ -4047,7 +4047,15 @@
 "Ver todo el PC":"पूरा पीसी देखें",
 "Con quién habla tu antivirus":"आपका एंटीवायरस किससे बात करता है",
 "Tu antivirus no se ha conectado en este rato.":"इस दौरान आपके एंटीवायरस ने कहीं कनेक्ट नहीं किया।",
-"Con quién habla tu PC":"आपका पीसी किससे बात करता है"
+"Con quién habla tu PC":"आपका पीसी किससे बात करता है",
+"Personas que usan internet":"इंटरनेट इस्तेमाल करने वाले लोग",
+"Banco Mundial · UIT":"विश्व बैंक · आईटीयू",
+"Velocidad mediana":"माध्यिका गति",
+"Latencia mediana":"माध्यिका लेटेंसी",
+"Pérdida de paquetes":"पैकेट हानि",
+"Pruebas de M-Lab":"M-Lab परीक्षण",
+"Conectividad medida":"मापी गई कनेक्टिविटी",
+"Pruebas de velocidad de M-Lab (dominio público) y datos de la UIT publicados por el Banco Mundial (CC BY 4.0). Miden a quien hace la prueba, no a todo el país.":"M-Lab के स्पीड टेस्ट (सार्वजनिक डोमेन) और विश्व बैंक द्वारा प्रकाशित आईटीयू डेटा (CC BY 4.0)। ये टेस्ट करने वाले को मापते हैं, पूरे देश को नहीं।"
 },
 "p":{
 "intento":"आज सबसे ज़्यादा कोशिश: {1}, {2} {2?बार|बार}।",

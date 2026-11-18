@@ -4047,7 +4047,15 @@
 "Ver todo el PC":"查看整台电脑",
 "Con quién habla tu antivirus":"您的杀毒软件在和谁通信",
 "Tu antivirus no se ha conectado en este rato.":"这段时间您的杀毒软件没有连接任何地方。",
-"Con quién habla tu PC":"您的电脑在和谁通信"
+"Con quién habla tu PC":"您的电脑在和谁通信",
+"Personas que usan internet":"使用互联网的人口",
+"Banco Mundial · UIT":"世界银行 · 国际电联",
+"Velocidad mediana":"速度中位数",
+"Latencia mediana":"延迟中位数",
+"Pérdida de paquetes":"丢包率",
+"Pruebas de M-Lab":"M-Lab 测试",
+"Conectividad medida":"实测连接情况",
+"Pruebas de velocidad de M-Lab (dominio público) y datos de la UIT publicados por el Banco Mundial (CC BY 4.0). Miden a quien hace la prueba, no a todo el país.":"M-Lab 测速数据（公有领域）和世界银行发布的国际电联数据（CC BY 4.0）。测量的是进行测试的人，而不是整个国家。"
 },
 "p":{
 "intento":"今天尝试最多的：{1}，{2} {2?次|次}。",

@@ -4047,7 +4047,15 @@
 "Ver todo el PC":"முழு கணினியையும் காட்டு",
 "Con quién habla tu antivirus":"உங்கள் வைரஸ் தடுப்பு யாருடன் பேசுகிறது",
 "Tu antivirus no se ha conectado en este rato.":"இந்த நேரத்தில் உங்கள் வைரஸ் தடுப்பு எங்கும் இணையவில்லை.",
-"Con quién habla tu PC":"உங்கள் கணினி யாருடன் பேசுகிறது"
+"Con quién habla tu PC":"உங்கள் கணினி யாருடன் பேசுகிறது",
+"Personas que usan internet":"இணையத்தைப் பயன்படுத்தும் மக்கள்",
+"Banco Mundial · UIT":"உலக வங்கி · ITU",
+"Velocidad mediana":"இடைநிலை வேகம்",
+"Latencia mediana":"இடைநிலைத் தாமதம்",
+"Pérdida de paquetes":"பொதி இழப்பு",
+"Pruebas de M-Lab":"M-Lab சோதனைகள்",
+"Conectividad medida":"அளவிடப்பட்ட இணைப்பு",
+"Pruebas de velocidad de M-Lab (dominio público) y datos de la UIT publicados por el Banco Mundial (CC BY 4.0). Miden a quien hace la prueba, no a todo el país.":"M-Lab வேகச் சோதனைகள் (பொதுக் களம்) மற்றும் உலக வங்கி வெளியிடும் ITU தரவு (CC BY 4.0). இவை சோதனை செய்பவரை அளக்கின்றன, முழு நாட்டையும் அல்ல."
 },
 "p":{
 "intento":"இன்று அதிகம் முயன்றது: {1}, {2} {2?முறை|முறை}.",

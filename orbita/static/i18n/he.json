@@ -4047,7 +4047,15 @@
 "Ver todo el PC":"הצגת כל המחשב",
 "Con quién habla tu antivirus":"עם מי האנטי-וירוס שלך מדבר",
 "Tu antivirus no se ha conectado en este rato.":"האנטי-וירוס שלך לא התחבר לשום מקום בפרק הזמן הזה.",
-"Con quién habla tu PC":"עם מי המחשב שלך מדבר"
+"Con quién habla tu PC":"עם מי המחשב שלך מדבר",
+"Personas que usan internet":"אנשים שמשתמשים באינטרנט",
+"Banco Mundial · UIT":"הבנק העולמי · ITU",
+"Velocidad mediana":"מהירות חציונית",
+"Latencia mediana":"זמן השהיה חציוני",
+"Pérdida de paquetes":"אובדן חבילות",
+"Pruebas de M-Lab":"בדיקות M-Lab",
+"Conectividad medida":"קישוריות שנמדדה",
+"Pruebas de velocidad de M-Lab (dominio público) y datos de la UIT publicados por el Banco Mundial (CC BY 4.0). Miden a quien hace la prueba, no a todo el país.":"בדיקות מהירות של M-Lab (נחלת הכלל) ונתוני ITU שמפרסם הבנק העולמי (CC BY 4.0). הן מודדות את מי שמריץ את הבדיקה, לא את המדינה כולה."
 },
 "p":{
 "intento":"ניסתה הכי הרבה היום: {1}, {2} {2?פעם|פעמים}.",

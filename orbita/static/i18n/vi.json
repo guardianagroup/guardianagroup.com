@@ -4047,7 +4047,15 @@
 "Ver todo el PC":"Xem toàn bộ máy",
 "Con quién habla tu antivirus":"Phần mềm diệt virus của bạn liên lạc với ai",
 "Tu antivirus no se ha conectado en este rato.":"Trong khoảng thời gian này, phần mềm diệt virus của bạn chưa kết nối đến đâu.",
-"Con quién habla tu PC":"PC của bạn liên lạc với ai"
+"Con quién habla tu PC":"PC của bạn liên lạc với ai",
+"Personas que usan internet":"Người dùng internet",
+"Banco Mundial · UIT":"Ngân hàng Thế giới · ITU",
+"Velocidad mediana":"Tốc độ trung vị",
+"Latencia mediana":"Độ trễ trung vị",
+"Pérdida de paquetes":"Mất gói",
+"Pruebas de M-Lab":"Bài kiểm tra M-Lab",
+"Conectividad medida":"Kết nối đo được",
+"Pruebas de velocidad de M-Lab (dominio público) y datos de la UIT publicados por el Banco Mundial (CC BY 4.0). Miden a quien hace la prueba, no a todo el país.":"Kết quả đo tốc độ của M-Lab (phạm vi công cộng) và dữ liệu ITU do Ngân hàng Thế giới công bố (CC BY 4.0). Chúng đo người làm bài kiểm tra, không phải cả nước."
 },
 "p":{
 "intento":"Cố gắng nhiều nhất hôm nay: {1}, {2} {2?lần|lần}.",

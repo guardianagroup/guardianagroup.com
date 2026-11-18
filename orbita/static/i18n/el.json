@@ -4047,7 +4047,15 @@
 "Ver todo el PC":"Προβολή όλου του υπολογιστή",
 "Con quién habla tu antivirus":"Με ποιους μιλά το αντιικό σας",
 "Tu antivirus no se ha conectado en este rato.":"Το αντιικό σας δεν έχει συνδεθεί πουθενά αυτό το διάστημα.",
-"Con quién habla tu PC":"Με ποιους μιλά ο υπολογιστής σας"
+"Con quién habla tu PC":"Με ποιους μιλά ο υπολογιστής σας",
+"Personas que usan internet":"Άτομα που χρησιμοποιούν το διαδίκτυο",
+"Banco Mundial · UIT":"Παγκόσμια Τράπεζα · ITU",
+"Velocidad mediana":"Διάμεση ταχύτητα",
+"Latencia mediana":"Διάμεση καθυστέρηση",
+"Pérdida de paquetes":"Απώλεια πακέτων",
+"Pruebas de M-Lab":"Δοκιμές M-Lab",
+"Conectividad medida":"Μετρημένη συνδεσιμότητα",
+"Pruebas de velocidad de M-Lab (dominio público) y datos de la UIT publicados por el Banco Mundial (CC BY 4.0). Miden a quien hace la prueba, no a todo el país.":"Δοκιμές ταχύτητας του M-Lab (κοινό κτήμα) και δεδομένα της ITU που δημοσιεύει η Παγκόσμια Τράπεζα (CC BY 4.0). Μετρούν όποιον κάνει τη δοκιμή, όχι όλη τη χώρα."
 },
 "p":{
 "intento":"Η πιο επίμονη σήμερα: {1}, {2} {2?φορά|φορές}.",

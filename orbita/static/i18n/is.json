@@ -4047,7 +4047,15 @@
 "Ver todo el PC":"Sýna alla tölvuna",
 "Con quién habla tu antivirus":"Við hverja vírusvörnin þín talar",
 "Tu antivirus no se ha conectado en este rato.":"Vírusvörnin þín hefur ekki tengst neinu á þessum tíma.",
-"Con quién habla tu PC":"Við hverja tölvan þín talar"
+"Con quién habla tu PC":"Við hverja tölvan þín talar",
+"Personas que usan internet":"Fólk sem notar netið",
+"Banco Mundial · UIT":"Alþjóðabankinn · ITU",
+"Velocidad mediana":"Miðgildi hraða",
+"Latencia mediana":"Miðgildi biðtíma",
+"Pérdida de paquetes":"Pakkatap",
+"Pruebas de M-Lab":"M-Lab prófanir",
+"Conectividad medida":"Mæld tenging",
+"Pruebas de velocidad de M-Lab (dominio público) y datos de la UIT publicados por el Banco Mundial (CC BY 4.0). Miden a quien hace la prueba, no a todo el país.":"Hraðaprófanir M-Lab (almenningseign) og gögn ITU sem Alþjóðabankinn birtir (CC BY 4.0). Þær mæla þann sem prófar, ekki allt landið."
 },
 "p":{
 "intento":"Sá sem reyndi mest í dag: {1}, {2} {2?sinni|sinnum}.",

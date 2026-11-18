@@ -4047,7 +4047,15 @@
 "Ver todo el PC":"แสดงทั้งเครื่อง",
 "Con quién habla tu antivirus":"แอนติไวรัสของคุณคุยกับใคร",
 "Tu antivirus no se ha conectado en este rato.":"ช่วงนี้แอนติไวรัสของคุณยังไม่ได้เชื่อมต่อไปที่ใด",
-"Con quién habla tu PC":"พีซีของคุณคุยกับใคร"
+"Con quién habla tu PC":"พีซีของคุณคุยกับใคร",
+"Personas que usan internet":"ผู้ใช้อินเทอร์เน็ต",
+"Banco Mundial · UIT":"ธนาคารโลก · ITU",
+"Velocidad mediana":"ความเร็วมัธยฐาน",
+"Latencia mediana":"ความหน่วงมัธยฐาน",
+"Pérdida de paquetes":"การสูญหายของแพ็กเก็ต",
+"Pruebas de M-Lab":"การทดสอบของ M-Lab",
+"Conectividad medida":"การเชื่อมต่อที่วัดได้",
+"Pruebas de velocidad de M-Lab (dominio público) y datos de la UIT publicados por el Banco Mundial (CC BY 4.0). Miden a quien hace la prueba, no a todo el país.":"ผลทดสอบความเร็วของ M-Lab (สาธารณสมบัติ) และข้อมูลของ ITU ที่ธนาคารโลกเผยแพร่ (CC BY 4.0) วัดจากผู้ที่ทดสอบ ไม่ใช่ทั้งประเทศ"
 },
 "p":{
 "intento":"พยายามมากที่สุดวันนี้: {1}, {2} {2?ครั้ง|ครั้ง}",

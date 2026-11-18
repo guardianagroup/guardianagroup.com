@@ -4047,7 +4047,15 @@
 "Ver todo el PC":"PC 전체 보기",
 "Con quién habla tu antivirus":"백신이 통신하는 상대",
 "Tu antivirus no se ha conectado en este rato.":"이 시간 동안 백신은 어디에도 연결하지 않았습니다.",
-"Con quién habla tu PC":"PC가 통신하는 상대"
+"Con quién habla tu PC":"PC가 통신하는 상대",
+"Personas que usan internet":"인터넷 이용자 비율",
+"Banco Mundial · UIT":"세계은행 · ITU",
+"Velocidad mediana":"속도 중앙값",
+"Latencia mediana":"지연 시간 중앙값",
+"Pérdida de paquetes":"패킷 손실",
+"Pruebas de M-Lab":"M-Lab 측정",
+"Conectividad medida":"측정된 연결 품질",
+"Pruebas de velocidad de M-Lab (dominio público) y datos de la UIT publicados por el Banco Mundial (CC BY 4.0). Miden a quien hace la prueba, no a todo el país.":"M-Lab 속도 측정(퍼블릭 도메인)과 세계은행이 공개한 ITU 데이터(CC BY 4.0)입니다. 측정한 사람의 회선을 잰 것이며 나라 전체가 아닙니다."
 },
 "p":{
 "intento":"오늘 가장 많이 시도한 곳: {1}, {2}{2?회|회}.",

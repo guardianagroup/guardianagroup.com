@@ -4047,7 +4047,15 @@
 "Ver todo el PC":"Покажи целия компютър",
 "Con quién habla tu antivirus":"С кого говори антивирусната ви програма",
 "Tu antivirus no se ha conectado en este rato.":"Антивирусната ви програма не се е свързвала през този период.",
-"Con quién habla tu PC":"С кого говори компютърът ви"
+"Con quién habla tu PC":"С кого говори компютърът ви",
+"Personas que usan internet":"Хора, които ползват интернет",
+"Banco Mundial · UIT":"Световна банка · МСЕ",
+"Velocidad mediana":"Медианна скорост",
+"Latencia mediana":"Медианна латентност",
+"Pérdida de paquetes":"Загуба на пакети",
+"Pruebas de M-Lab":"Тестове на M-Lab",
+"Conectividad medida":"Измерена свързаност",
+"Pruebas de velocidad de M-Lab (dominio público) y datos de la UIT publicados por el Banco Mundial (CC BY 4.0). Miden a quien hace la prueba, no a todo el país.":"Тестове за скорост на M-Lab (обществено достояние) и данни на МСЕ, публикувани от Световната банка (CC BY 4.0). Те измерват този, който прави теста, а не цялата страна."
 },
 "p":{
 "intento":"Най-настойчивата днес: {1}, {2} {2?път|пъти}.",
