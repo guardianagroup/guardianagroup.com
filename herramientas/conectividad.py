@@ -15,8 +15,10 @@ dato. Corre en GitHub (.github/workflows/conectividad.yml); el navegador del vis
 import datetime
 import io
 import json
+import math
 import os
 import sys
+import urllib.error
 import urllib.request
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -26,7 +28,7 @@ CABECERAS = {'User-Agent': 'GUARDIANA-datos/1.0 (+https://guardianagroup.com)'}
 MIN_PRUEBAS = 300
 
 BM_URL = 'https://api.worldbank.org/v2/country/all/indicator/IT.NET.USER.ZS?format=json&per_page=20000&mrnev=1'
-MLAB_MANIFIESTO = 'https://measurementlab.net/data/iqb/manifest.json'
+MLAB_BASE = 'https://storage.googleapis.com/mlab-sandbox-iqb-us-central1/cache/v1'
 
 
 def baja(url, tiempo=90):
@@ -52,39 +54,37 @@ def banco_mundial(validos):
     return out
 
 
-def _mes_de(ini, fin):
-    """«2026-09» si [ini, fin) es un mes natural exacto (cache/v1/AAAAMMDDTHHMMSSZ/…), si no None."""
-    try:
-        a = datetime.datetime.strptime(ini, '%Y%m%dT%H%M%SZ')
-        b = datetime.datetime.strptime(fin, '%Y%m%dT%H%M%SZ')
-    except ValueError:
-        return None
-    sig = datetime.datetime(a.year + (a.month == 12), a.month % 12 + 1, 1)
-    if a.day != 1 or a.hour or b != sig:
-        return None
-    return f'{a.year:04d}-{a.month:02d}'
-
-
 def mlab(validos):
-    """(mes, {CC: {bajada, subida, latencia, perdida, pruebas}}) del mes cerrado más reciente con los dos archivos."""
+    """(mes, {CC: {bajada, subida, latencia, perdida, pruebas}}) del mes cerrado más reciente con los dos archivos.
+
+    Los archivos están donde los enlaza la página de M-Lab (https://measurementlab.net/data/stats):
+    MLAB_BASE/{inicio}/{fin}/{downloads|uploads}_by_country/data.parquet, un mes natural cada uno. M-Lab va de 4 a 8
+    semanas por detrás: se prueban los cinco meses anteriores al actual, del más reciente al más antiguo.
+    """
     import pandas as pd  # solo en GitHub (pip install pandas pyarrow)
 
-    manifiesto = json.loads(baja(MLAB_MANIFIESTO))
-    archivos = manifiesto.get('files') or {}
-    meses = {}
-    for ruta, d in archivos.items():
-        partes = ruta.split('/')
-        if len(partes) < 6 or partes[0] != 'cache' or not isinstance(d, dict) or not d.get('url'):
-            continue
-        mes = _mes_de(partes[2], partes[3])
-        if mes and partes[4] in ('downloads_by_country', 'uploads_by_country'):
-            meses.setdefault(mes, {})[partes[4]] = d['url']
-    completos = sorted(m for m, v in meses.items() if len(v) == 2)
-    if not completos:
-        raise RuntimeError('M-Lab: el manifiesto no tiene ningún mes con los dos archivos por país')
-    mes = completos[-1]
-    bajada = pd.read_parquet(io.BytesIO(baja(meses[mes]['downloads_by_country'], 180)))
-    subida = pd.read_parquet(io.BytesIO(baja(meses[mes]['uploads_by_country'], 180)))
+    hoy = datetime.date.today()
+    mes = crudo_b = crudo_s = None
+    for atras in range(1, 6):
+        y, m = hoy.year, hoy.month - atras
+        while m <= 0:
+            m += 12
+            y -= 1
+        ini = f'{y:04d}{m:02d}01T000000Z'
+        fin = f'{y + (m == 12):04d}{m % 12 + 1:02d}01T000000Z'
+        try:
+            crudo_b = baja(f'{MLAB_BASE}/{ini}/{fin}/downloads_by_country/data.parquet', 180)
+            crudo_s = baja(f'{MLAB_BASE}/{ini}/{fin}/uploads_by_country/data.parquet', 180)
+        except urllib.error.HTTPError as e:
+            if e.code in (403, 404):
+                continue
+            raise
+        mes = f'{y:04d}-{m:02d}'
+        break
+    if not mes:
+        raise RuntimeError('M-Lab: ninguno de los últimos cinco meses tiene los dos archivos por país')
+    bajada = pd.read_parquet(io.BytesIO(crudo_b))
+    subida = pd.read_parquet(io.BytesIO(crudo_s))
     for col in ('country_code', 'download_p50', 'latency_p50', 'loss_p50', 'sample_count'):
         if col not in bajada.columns:
             raise RuntimeError(f'M-Lab: falta la columna {col} en la bajada')
@@ -97,13 +97,15 @@ def mlab(validos):
         cc = str(r.country_code).upper()
         if cc not in validos or int(r.sample_count) < MIN_PRUEBAS:
             continue
+        if not all(math.isfinite(float(x)) for x in (r.download_p50, r.latency_p50, r.loss_p50)):
+            continue
         fila = {
             'bajada': round(float(r.download_p50), 1),
             'latencia': round(float(r.latency_p50)),
             'perdida': round(float(r.loss_p50) * 100, 2),
             'pruebas': int(r.sample_count),
         }
-        if cc in sube and sube[cc][1] >= MIN_PRUEBAS:
+        if cc in sube and sube[cc][1] >= MIN_PRUEBAS and math.isfinite(sube[cc][0]):
             fila['subida'] = round(sube[cc][0], 1)
         out[cc] = fila
     if len(out) < 50:
