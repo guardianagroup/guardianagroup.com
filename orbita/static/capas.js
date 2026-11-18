@@ -947,7 +947,6 @@
   async function cargaPaises() { if (PAISES || cargando.paises) return; cargando.paises = true; try { PAISES = (await cargaJSON('datos/paises.json')).paises || {}; } catch (_) { PAISES = {}; } cargando.paises = false; }
   function pintaPaises(cx, p, G) {
     PAIS_CAJAS = [];
-    if (!FORMAS && esLimpio()) pideFormas();
     const z = G.R / (G.R0 || G.R); if (z < 2.2 || z > 400 || !p.centros) return;
     const L = esLimpio(), ocupado = [];
     if (!L) return; // 22 Oct 2026, 21:54 (owner): no country names while the planet is in colour; they come with the grey, «limpio» planet
@@ -1003,6 +1002,8 @@
     }
     return null;
   }
+  // in both maps (22:20): the outlines come a moment after the planet, so the first click on a country already finds them
+  try { (window.requestIdleCallback || ((f) => setTimeout(f, 2500)))(() => pideFormas(), { timeout: 4000 }); } catch (_) { setTimeout(pideFormas, 2500); }
   let paisMarcado = null;
   function buscaPais(x, y) { for (const b of PAIS_CAJAS) if (x >= b[0] && x <= b[0] + b[2] && y >= b[1] && y <= b[1] + b[3]) return b[4]; return null; }
   function fichaPais(cc, x, y) {
@@ -2304,8 +2305,9 @@
     const rd = buscaRadio(x, y);
     if (rd >= 0) { if (rd !== radioMarcado || clic) { radioMarcado = rd; fichaRadio(rd, x, y); } else colocaFicha(x, y); if (clic) fichaFija = true; return; }
     radioMarcado = -1;
-    // on the clean map, a click on a country's land (with nothing else under it, and not the end of a drag) opens its card
-    if (clic && toque && esLimpio()) {
+    // a click on a country's land (with nothing else under it, and not the end of a drag) opens its card; 22:20 (owner): «en el
+    // mapa gris y también en el otro mapa, en los dos mapas»
+    if (clic && toque) {
       const abrePais = () => { const cc = paisEn(x, y); if (cc) { paisMarcado = cc; fichaPais(cc, x, y); fichaFija = true; } return !!cc; };
       if (FORMAS) { if (abrePais()) return; } else pideFormas().then(abrePais); // the outlines are on their way: the card opens when they land
     }
