@@ -4038,7 +4038,9 @@
 "Sin cuentas ni teléfono":"கணக்கும் தொலைபேசி எண்ணும் தேவையில்லை",
 "Nuestro servidor no puede leerlo":"எங்கள் சர்வரால் அதைப் படிக்க முடியாது",
 "Al terminar, se borra en los dos equipos":"முடிந்ததும் உரையாடல் இரண்டு சாதனங்களிலும் அழிக்கப்படும்",
-"Activar mi clave":"என் விசையைச் செயல்படுத்து"
+"Activar mi clave":"என் விசையைச் செயல்படுத்து",
+"Pulsa una parte para revisar solo esa.":"ஒரு பகுதியை மட்டும் சரிபார்க்க அதைத் தேர்ந்தெடுக்கவும்.",
+"Elegir otra parte":"வேறு பகுதியைத் தேர்ந்தெடு"
 },
 "p":{
 "intento":"இன்று அதிகம் முயன்றது: {1}, {2} {2?முறை|முறை}.",

@@ -4038,7 +4038,9 @@
 "Sin cuentas ni teléfono":"Bez účtov a bez telefónneho čísla",
 "Nuestro servidor no puede leerlo":"Náš server to nedokáže prečítať",
 "Al terminar, se borra en los dos equipos":"Na konci sa konverzácia vymaže na oboch zariadeniach",
-"Activar mi clave":"Aktivovať môj kľúč"
+"Activar mi clave":"Aktivovať môj kľúč",
+"Pulsa una parte para revisar solo esa.":"Vyberte časť a skontroluje sa len tá.",
+"Elegir otra parte":"Vybrať inú časť"
 },
 "p":{
 "intento":"Najviac sa dnes snažila: {1}, {2}{2?-krát|-krát}.",

@@ -4038,7 +4038,9 @@
 "Sin cuentas ni teléfono":"بلا حسابات ولا رقم هاتف",
 "Nuestro servidor no puede leerlo":"خادمنا لا يستطيع قراءته",
 "Al terminar, se borra en los dos equipos":"عند الانتهاء، تُحذف المحادثة من الجهازين",
-"Activar mi clave":"تفعيل مفتاحي"
+"Activar mi clave":"تفعيل مفتاحي",
+"Pulsa una parte para revisar solo esa.":"اختر جزءًا لفحصه وحده.",
+"Elegir otra parte":"اختيار جزء آخر"
 },
 "p":{
 "intento":"الأكثر محاولةً اليوم: {1}، {2} {2?مرة|مرات}.",

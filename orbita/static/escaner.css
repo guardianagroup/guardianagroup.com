@@ -63,6 +63,26 @@ body.en-escaner .descargar-menu { z-index: 320; }
 .esc-examina li .n { grid-row: span 2; font: 500 10.5px/1.6 'IBM Plex Mono', ui-monospace, monospace; color: #6F7B88; }
 .esc-examina li b { font: 600 13.5px/1.35 'IBM Plex Sans', system-ui, sans-serif; color: #E8ECF1; }
 .esc-examina li small { font-size: 12px; line-height: 1.45; color: #8A95A2; }
+/* por partes (17 nov 2026): dentro del programa, cada apartado es un botón que revisa solo esa parte */
+.esc-examina.por-partes { margin-top: 34px; }
+.esc-examina.por-partes + .esc-hechos { margin-top: 28px; }
+.esc-partes-nota { margin: -6px 0 12px; font-size: 13.5px; line-height: 1.5; color: #A9B3BE; }
+.esc-examina.por-partes li.parte { display: block; padding: 0; border: 0; background: none; }
+.esc-examina.por-partes li.parte button { all: unset; box-sizing: border-box; cursor: pointer; position: relative; display: grid; grid-template-columns: auto 1fr; gap: 2px 10px; align-content: start; width: 100%; height: 100%; padding: 12px 34px 12px 14px; border-radius: 12px; border: 1px solid rgba(156,195,228,.2); background: rgba(12,17,24,.6); transition: border-color .15s, background-color .15s, transform .15s; }
+.esc-examina.por-partes li.parte button::after { content: ''; position: absolute; top: 16px; inset-inline-end: 14px; width: 7px; height: 7px; border-top: 1.6px solid #9CC3E4; border-inline-end: 1.6px solid #9CC3E4; transform: rotate(45deg); opacity: .55; transition: opacity .15s, transform .15s; }
+[dir="rtl"] .esc-examina.por-partes li.parte button::after { transform: rotate(-45deg); }
+.esc-examina.por-partes li.parte button:hover { border-color: rgba(156,195,228,.62); background: rgba(20,32,46,.86); transform: translateY(-1px); }
+.esc-examina.por-partes li.parte button:hover::after { opacity: 1; }
+.esc-examina.por-partes li.parte button:hover b { color: #F4F6F8; }
+.esc-examina.por-partes li.parte button:focus-visible { outline: 2px solid #F4F6F8; outline-offset: 2px; }
+.esc-examina.por-partes li.parte button .n { color: #9CC3E4; }
+@media (prefers-reduced-motion: reduce) { .esc-examina.por-partes li.parte button { transition: none; } .esc-examina.por-partes li.parte button:hover { transform: none; } }
+.esc-k .esc-k-parte::before { content: '·'; margin: 0 .7em; color: #5E6A78; }
+.esc-k .esc-k-parte { color: #F4F6F8; }
+.esc-k .esc-k-parte[hidden] { display: none; }
+.esc-cabeza-acc { display: flex; flex-wrap: wrap; justify-content: flex-end; align-items: center; gap: 8px; }
+.esc-otra.suave { border-color: rgba(156,195,228,.24); background: none; color: #C9D3DD; font-weight: 500; }
+.esc-otra.suave:hover { border-color: rgba(156,195,228,.6); background: rgba(156,195,228,.1); color: #F4F6F8; }
 
 /* ---------- la cabeza del informe: escaneando / informe ---------- */
 .esc-cabeza { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 20px; }

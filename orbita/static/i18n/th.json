@@ -4038,7 +4038,9 @@
 "Sin cuentas ni teléfono":"ไม่ต้องมีบัญชีหรือเบอร์โทรศัพท์",
 "Nuestro servidor no puede leerlo":"เซิร์ฟเวอร์ของเราอ่านไม่ได้",
 "Al terminar, se borra en los dos equipos":"เมื่อจบ บทสนทนาจะถูกลบจากทั้งสองเครื่อง",
-"Activar mi clave":"เปิดใช้งานคีย์ของฉัน"
+"Activar mi clave":"เปิดใช้งานคีย์ของฉัน",
+"Pulsa una parte para revisar solo esa.":"เลือกส่วนที่ต้องการเพื่อตรวจเฉพาะส่วนนั้น",
+"Elegir otra parte":"เลือกส่วนอื่น"
 },
 "p":{
 "intento":"พยายามมากที่สุดวันนี้: {1}, {2} {2?ครั้ง|ครั้ง}",

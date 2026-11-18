@@ -4038,7 +4038,9 @@
 "Sin cuentas ni teléfono":"Ei tilejä eikä puhelinnumeroa",
 "Nuestro servidor no puede leerlo":"Palvelimemme ei voi lukea sitä",
 "Al terminar, se borra en los dos equipos":"Lopuksi keskustelu poistetaan molemmilta laitteilta",
-"Activar mi clave":"Aktivoi avaimeni"
+"Activar mi clave":"Aktivoi avaimeni",
+"Pulsa una parte para revisar solo esa.":"Valitse osa, niin vain se tarkistetaan.",
+"Elegir otra parte":"Valitse toinen osa"
 },
 "p":{
 "intento":"Eniten yrittänyt tänään: {1}, {2} {2?kerta|kertaa}.",

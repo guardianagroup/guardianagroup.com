@@ -4038,7 +4038,9 @@
 "Sin cuentas ni teléfono":"Không cần tài khoản hay số điện thoại",
 "Nuestro servidor no puede leerlo":"Máy chủ của chúng tôi không thể đọc được",
 "Al terminar, se borra en los dos equipos":"Khi kết thúc, cuộc trò chuyện bị xóa trên cả hai thiết bị",
-"Activar mi clave":"Kích hoạt khóa của tôi"
+"Activar mi clave":"Kích hoạt khóa của tôi",
+"Pulsa una parte para revisar solo esa.":"Chọn một phần để chỉ kiểm tra phần đó.",
+"Elegir otra parte":"Chọn phần khác"
 },
 "p":{
 "intento":"Cố gắng nhiều nhất hôm nay: {1}, {2} {2?lần|lần}.",

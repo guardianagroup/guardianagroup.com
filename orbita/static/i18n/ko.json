@@ -4038,7 +4038,9 @@
 "Sin cuentas ni teléfono":"계정도 전화번호도 필요 없음",
 "Nuestro servidor no puede leerlo":"저희 서버도 읽을 수 없음",
 "Al terminar, se borra en los dos equipos":"끝나면 대화가 두 기기에서 모두 삭제됨",
-"Activar mi clave":"내 키 활성화"
+"Activar mi clave":"내 키 활성화",
+"Pulsa una parte para revisar solo esa.":"한 부분만 검사하려면 해당 항목을 선택하세요.",
+"Elegir otra parte":"다른 부분 선택"
 },
 "p":{
 "intento":"오늘 가장 많이 시도한 곳: {1}, {2}{2?회|회}.",

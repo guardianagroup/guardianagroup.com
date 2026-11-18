@@ -1598,6 +1598,8 @@
     "La página ha bloqueado un intento de cargar código ajeno.": ["The page blocked an attempt to load outside code.", "A página bloqueou uma tentativa de carregar código externo."],
     "La huella de la conexión no coincide con la que llegó encriptada.": ["The connection fingerprint does not match the one received encrypted.", "A impressão digital da conexão não coincide com a recebida criptografada."],
     "Alguien más ha entrado en la sala del relé.": ["Someone else has entered the relay room.", "Outra pessoa entrou na sala do relé."],
+    "Pulsa una parte para revisar solo esa.": ["Pick a part to check only that one.", "Toque em uma parte para verificar só essa."],
+    "Elegir otra parte": ["Choose another part", "Escolher outra parte"],
     "Activar mi clave": ["Activate my key", "Ativar minha chave"],
     "Sin cuentas ni teléfono": ["No accounts, no phone number", "Sem contas nem telefone"],
     "Nuestro servidor no puede leerlo": ["Our server cannot read it", "Nosso servidor não pode lê-lo"],

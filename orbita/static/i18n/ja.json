@@ -4038,7 +4038,9 @@
 "Sin cuentas ni teléfono":"アカウントも電話番号も不要",
 "Nuestro servidor no puede leerlo":"当社のサーバーでも読めません",
 "Al terminar, se borra en los dos equipos":"終了すると、会話は両方の端末から削除されます",
-"Activar mi clave":"キーを有効にする"
+"Activar mi clave":"キーを有効にする",
+"Pulsa una parte para revisar solo esa.":"一部だけを調べるには、その項目を選んでください。",
+"Elegir otra parte":"別の項目を選ぶ"
 },
 "p":{
 "intento":"今日最も多く試みたのは {1}、{2} {2?回|回}。",

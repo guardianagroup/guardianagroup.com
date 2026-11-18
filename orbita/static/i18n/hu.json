@@ -4038,7 +4038,9 @@
 "Sin cuentas ni teléfono":"Nincs fiók, nincs telefonszám",
 "Nuestro servidor no puede leerlo":"A szerverünk nem tudja elolvasni",
 "Al terminar, se borra en los dos equipos":"A végén a beszélgetés mindkét eszközről törlődik",
-"Activar mi clave":"Kulcsom aktiválása"
+"Activar mi clave":"Kulcsom aktiválása",
+"Pulsa una parte para revisar solo esa.":"Válasszon egy részt, ha csak azt szeretné ellenőrizni.",
+"Elegir otra parte":"Másik rész választása"
 },
 "p":{
 "intento":"Ma a legtöbbször próbálkozott: {1}, {2} {2?alkalommal|alkalommal}.",

@@ -4038,7 +4038,9 @@
 "Sin cuentas ni teléfono":"無需帳號，也無需電話號碼",
 "Nuestro servidor no puede leerlo":"我們的伺服器也無法讀取",
 "Al terminar, se borra en los dos equipos":"結束後，對話會從兩台裝置上刪除",
-"Activar mi clave":"啟用我的金鑰"
+"Activar mi clave":"啟用我的金鑰",
+"Pulsa una parte para revisar solo esa.":"選擇一個部分，只檢查該部分。",
+"Elegir otra parte":"選擇其他部分"
 },
 "p":{
 "intento":"今天嘗試最多的：{1}，{2} {2?次|次}。",

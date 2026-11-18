@@ -4038,7 +4038,9 @@
 "Sin cuentas ni teléfono":"न खाता, न फ़ोन नंबर",
 "Nuestro servidor no puede leerlo":"हमारा सर्वर इसे पढ़ नहीं सकता",
 "Al terminar, se borra en los dos equipos":"ख़त्म होने पर बातचीत दोनों डिवाइस से मिट जाती है",
-"Activar mi clave":"मेरी कुंजी सक्रिय करें"
+"Activar mi clave":"मेरी कुंजी सक्रिय करें",
+"Pulsa una parte para revisar solo esa.":"सिर्फ़ एक हिस्सा जाँचने के लिए उसे चुनें।",
+"Elegir otra parte":"दूसरा हिस्सा चुनें"
 },
 "p":{
 "intento":"आज सबसे ज़्यादा कोशिश: {1}, {2} {2?बार|बार}।",

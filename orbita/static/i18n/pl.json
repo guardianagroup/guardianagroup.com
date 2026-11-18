@@ -4038,7 +4038,9 @@
 "Sin cuentas ni teléfono":"Bez kont i numeru telefonu",
 "Nuestro servidor no puede leerlo":"Nasz serwer nie może tego odczytać",
 "Al terminar, se borra en los dos equipos":"Na koniec rozmowa znika z obu urządzeń",
-"Activar mi clave":"Aktywuj mój klucz"
+"Activar mi clave":"Aktywuj mój klucz",
+"Pulsa una parte para revisar solo esa.":"Wybierz część, aby sprawdzić tylko ją.",
+"Elegir otra parte":"Wybierz inną część"
 },
 "p":{
 "intento":"Najwięcej prób dziś: {1}, {2} {2?raz|razy}.",

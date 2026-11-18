@@ -4038,7 +4038,9 @@
 "Sin cuentas ni teléfono":"Ingen kontoer, ikke noe telefonnummer",
 "Nuestro servidor no puede leerlo":"Serveren vår kan ikke lese det",
 "Al terminar, se borra en los dos equipos":"Til slutt slettes samtalen på begge enhetene",
-"Activar mi clave":"Aktiver nøkkelen min"
+"Activar mi clave":"Aktiver nøkkelen min",
+"Pulsa una parte para revisar solo esa.":"Velg en del for å sjekke bare den.",
+"Elegir otra parte":"Velg en annen del"
 },
 "p":{
 "intento":"Den som prøvde mest i dag: {1}, {2} {2?gang|ganger}.",

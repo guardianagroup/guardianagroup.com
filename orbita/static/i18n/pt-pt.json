@@ -4038,7 +4038,9 @@
 "Sin cuentas ni teléfono":"Sem contas nem telefone",
 "Nuestro servidor no puede leerlo":"O nosso servidor não o consegue ler",
 "Al terminar, se borra en los dos equipos":"No fim, a conversa é apagada nos dois equipamentos",
-"Activar mi clave":"Ativar a minha chave"
+"Activar mi clave":"Ativar a minha chave",
+"Pulsa una parte para revisar solo esa.":"Carregue numa parte para verificar só essa.",
+"Elegir otra parte":"Escolher outra parte"
 },
 "p":{
 "intento":"A que mais tentou hoje: {1}, {2} {2?vez|vezes}.",

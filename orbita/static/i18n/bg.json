@@ -4038,7 +4038,9 @@
 "Sin cuentas ni teléfono":"Без акаунти и без телефонен номер",
 "Nuestro servidor no puede leerlo":"Нашият сървър не може да го прочете",
 "Al terminar, se borra en los dos equipos":"Накрая разговорът се изтрива и от двете устройства",
-"Activar mi clave":"Активиране на моя ключ"
+"Activar mi clave":"Активиране на моя ключ",
+"Pulsa una parte para revisar solo esa.":"Изберете част, за да проверите само нея.",
+"Elegir otra parte":"Избор на друга част"
 },
 "p":{
 "intento":"Най-настойчивата днес: {1}, {2} {2?път|пъти}.",

@@ -4038,7 +4038,9 @@
 "Sin cuentas ni teléfono":"Engir aðgangar, ekkert símanúmer",
 "Nuestro servidor no puede leerlo":"Netþjónninn okkar getur ekki lesið það",
 "Al terminar, se borra en los dos equipos":"Að lokum er samtalinu eytt á báðum tækjum",
-"Activar mi clave":"Virkja lykilinn minn"
+"Activar mi clave":"Virkja lykilinn minn",
+"Pulsa una parte para revisar solo esa.":"Veldu hluta til að skoða aðeins hann.",
+"Elegir otra parte":"Velja annan hluta"
 },
 "p":{
 "intento":"Sá sem reyndi mest í dag: {1}, {2} {2?sinni|sinnum}.",

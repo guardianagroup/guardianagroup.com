@@ -4038,7 +4038,9 @@
 "Sin cuentas ni teléfono":"בלי חשבונות ובלי מספר טלפון",
 "Nuestro servidor no puede leerlo":"השרת שלנו לא יכול לקרוא את זה",
 "Al terminar, se borra en los dos equipos":"בסיום השיחה נמחקת בשני המכשירים",
-"Activar mi clave":"הפעלת המפתח שלי"
+"Activar mi clave":"הפעלת המפתח שלי",
+"Pulsa una parte para revisar solo esa.":"בחרו חלק כדי לבדוק רק אותו.",
+"Elegir otra parte":"בחירת חלק אחר"
 },
 "p":{
 "intento":"ניסתה הכי הרבה היום: {1}, {2} {2?פעם|פעמים}.",

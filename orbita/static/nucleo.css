@@ -365,3 +365,7 @@ html.con-portada:not(.portada-lista)::after{content:"";position:fixed;inset:0;z-
   .nuc-ini .nuc-op b{font-size:18px}
   .nuc-ini .nuc-op small{font-size:13.5px;line-height:1.42}
 }
+/* 17 nov 2026, 22:01 (dueño: «estás demasiado cerca… dale un poco más de espacio»): sin la pregunta, el título respira antes de las
+   cinco tarjetas; el aire crece con el alto de la ventana */
+.nuc-ini .nuc-ops{margin-top:clamp(34px,6vh,60px)}
+.nuc-ini h1{margin-top:16px}

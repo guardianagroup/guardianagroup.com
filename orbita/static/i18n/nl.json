@@ -4038,7 +4038,9 @@
 "Sin cuentas ni teléfono":"Geen accounts, geen telefoonnummer",
 "Nuestro servidor no puede leerlo":"Onze server kan het niet lezen",
 "Al terminar, se borra en los dos equipos":"Na afloop wordt het gesprek op beide apparaten gewist",
-"Activar mi clave":"Mijn sleutel activeren"
+"Activar mi clave":"Mijn sleutel activeren",
+"Pulsa una parte para revisar solo esa.":"Kies een onderdeel om alleen dat te controleren.",
+"Elegir otra parte":"Ander onderdeel kiezen"
 },
 "p":{
 "intento":"Probeerde het vandaag het vaakst: {1}, {2} {2?keer|keer}.",

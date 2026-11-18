@@ -290,7 +290,9 @@
     const p = P(); if (!p || !E || !E.res || typeof p.ir !== 'function') return; const L = p.lugar; if (!L) return;
     let s = [0, 0, 0], peso = 0;
     for (const l of E.res.lugares.values()) { const v = vec(l.lon, l.lat), k = Math.sqrt(l.n); peso += k; s = s.map((x, i) => x + v[i] * k); }
-    const c = vec(L.lon, L.lat), kc = Math.max(1, peso * 0.7); s = s.map((x, i) => x + c[i] * kc); // your PC weighs as much as most of the rest: it stays in view
+    // 17 Nov 2026 (the owner, 22:02: «que se vaya y detecte la zona donde yo estoy para que me muestre»): your PC weighs twice the
+    // rest, so the view stays over your part of the world and only leans towards where the data goes
+    const c = vec(L.lon, L.lat), kc = Math.max(1, peso * 2); s = s.map((x, i) => x + c[i] * kc);
     const n = Math.hypot(s[0], s[1], s[2]) || 1, lon = Math.atan2(s[0], s[2]) / RAD;
     // on a phone the panel is a sheet from the bottom: the view looks a little further south, so the places stay above it
     const lat = Math.asin(s[1] / n) / RAD - (innerWidth <= 760 ? 16 : 0);
@@ -528,6 +530,10 @@
     if (boton) boton.setAttribute('aria-pressed', 'true');
     if (window.OrbitaCapas) window.OrbitaCapas.soloTu(true, pinta);
     if (window.OrbitaRed && !window.OrbitaRed.lista) window.OrbitaRed.prepara().then((si) => { if (si && E) for (const l of E.lugares.values()) l.ruta = null; });
+    // the planet turns to the person's place at once, wherever it was left (22:02: «si el globo lo tengo girado…»); when the
+    // connections arrive, the view settles between that place and where the data goes (encuadra)
+    { const p0 = P(), L0 = p0 && p0.lugar;
+      if (L0 && typeof p0.ir === 'function') { const d = p0.vista || { lon: L0.lon, lat: L0.lat }; cam = { lon0: d.lon, lat0: d.lat, lon: L0.lon, lat: Math.max(-35, Math.min(45, L0.lat)), t0: performance.now(), dur: reducido() ? 1 : 1200 }; requestAnimationFrame(mueve); } }
     arrancaReloj(); pide();
     requestAnimationFrame(midePanel);
     setTimeout(() => { if (E && hud && !hud.hidden) { const h = hud.querySelector('.t'); (h && getComputedStyle(h).display !== 'none' ? h : hud).focus({ preventScroll: true }); } }, 450);

@@ -4038,7 +4038,9 @@
 "Sin cuentas ni teléfono":"Bila akaunti wala namba ya simu",
 "Nuestro servidor no puede leerlo":"Seva yetu haiwezi kuisoma",
 "Al terminar, se borra en los dos equipos":"Mkimaliza, mazungumzo hufutwa kwenye vifaa vyote viwili",
-"Activar mi clave":"Washa ufunguo wangu"
+"Activar mi clave":"Washa ufunguo wangu",
+"Pulsa una parte para revisar solo esa.":"Chagua sehemu moja ili ikaguliwe hiyo tu.",
+"Elegir otra parte":"Chagua sehemu nyingine"
 },
 "p":{
 "intento":"Iliyojaribu zaidi leo: {1}, {2?mara|mara} {2}.",

@@ -4038,7 +4038,9 @@
 "Sin cuentas ni teléfono":"Tanpa akaun, tanpa nombor telefon",
 "Nuestro servidor no puede leerlo":"Pelayan kami tidak boleh membacanya",
 "Al terminar, se borra en los dos equipos":"Selepas selesai, perbualan dipadam pada kedua-dua peranti",
-"Activar mi clave":"Aktifkan kunci saya"
+"Activar mi clave":"Aktifkan kunci saya",
+"Pulsa una parte para revisar solo esa.":"Pilih satu bahagian untuk memeriksa bahagian itu sahaja.",
+"Elegir otra parte":"Pilih bahagian lain"
 },
 "p":{
 "intento":"Paling banyak mencuba hari ini: {1}, {2} {2?kali|kali}.",

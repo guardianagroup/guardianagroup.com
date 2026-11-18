@@ -254,12 +254,17 @@
   // Not async on purpose: the two orders leave inside the person's own click (the program only lets them through within
   // 3 s of a real click or key), before anything else is asked.
   function arriba() { try { if (cuerpo) cuerpo.scrollTop = 0; } catch (_) {} }
-  function escanea() {
+  function escanea(parte) {
     if (!enPrograma() || (S && !S.fin)) return;
     S = nuevo(); const g = S.g;
+    S.parte = parteDe(parte);
+    // por partes: lo que la parte no necesita no se pide (queda «omitido», como una lectura que no hace falta)
+    const q = S.parte ? lecturasDe(S.parte) : null, quiere = (k) => !q || q.has(k);
+    if (q) for (const [k] of L) if (!q.has(k)) { S.l[k].e = 'omitido'; S.l[k].motivo = 'parte'; S.l[k].t = Date.now(); }
+    const leeSi = (k) => (quiere(k) ? lee(g, k) : Promise.resolve(null));
     if (C.dLog) { C.dLog.textContent = ''; C.dLog.append(h('li', { class: 'vacio' }, 'Los pasos de la revisión de Windows aparecen aquí según los da.')); C.dAhora.textContent = ''; C.pct = 0; C.dPct.textContent = '0'; C.ultimo = null; }
-    const pRevA = lee(g, 'revAhora');
-    const pVigA = lee(g, 'vigAhora');
+    const pRevA = leeSi('revAhora');
+    const pVigA = leeSi('vigAhora');
     S.vig.tPedido = Date.now();
     pintaTodo(); arrancaReloj();
     // 17 nov 2026, 21:12 (dueño: «no aparece desde arriba del todo, sale como cortada»): el escaneo empieza arriba del todo. El botón
@@ -268,17 +273,20 @@
     setTimeout(() => { if (vigente(g) && !S.informe) { S.informe = true; pintaTodo(); } }, 60000);
     // the quick readings, then the rest; the queue keeps four on their way at most
     const pTextos = lee(g, 'textos').then((r) => { if (r && r.ok && r.json && r.json.panel && typeof r.json.panel === 'object') { TX = r.json.panel; LANGP = idiomaDe(TX); informeLuego(true); } });
-    const pEstado = lee(g, 'estado');
-    const pVigia = lee(g, 'vigia');
-    const pPd1 = lee(g, 'pd1').then(() => { if (S && S.g === g) S.tPd1 = Date.now(); });
-    const pRev = pRevA.then((r) => (vigente(g) ? revision(g, r) : null));
-    const pVig = pVigA.then((r) => (vigente(g) ? vigilancia(g, r) : null));
-    const g3 = ['detectar', 'antivirus', 'escudo', 'identificacion', 'ia', 'qv'].map((k) => lee(g, k));
+    const pEstado = leeSi('estado');
+    const pVigia = leeSi('vigia');
+    const pPd1 = leeSi('pd1').then(() => { if (S && S.g === g) S.tPd1 = Date.now(); });
+    // sin la revisión de Windows o sin la vigilancia continua (la parte no sale de ellas), se dan por hechas sin pedirlas
+    if (!quiere('revision')) { S.rev.fin = true; S.rev.e = 'omitido'; }
+    if (!quiere('vigilancia')) S.vig.e = 'sin_orden';
+    const pRev = quiere('revision') ? pRevA.then((r) => (vigente(g) ? revision(g, r) : null)) : Promise.resolve(null);
+    const pVig = quiere('vigilancia') ? pVigA.then((r) => (vigente(g) ? vigilancia(g, r) : null)) : Promise.resolve(null);
+    const g3 = ['detectar', 'antivirus', 'escudo', 'identificacion', 'ia', 'qv'].map((k) => leeSi(k));
     // a second take of the connections (the VPNs and the processor's rates need it), at least 8 s after the first
     const pPd2 = Promise.all([pPd1, ...g3]).then(async () => {
-      if (!vigente(g)) return;
+      if (!vigente(g) || !quiere('pd2')) return;
       const w = (S.tPd1 || Date.now()) + 8000 - Date.now(); if (w > 0) await espera(w);
-      if (vigente(g)) await lee(g, 'pd2');
+      if (vigente(g) && quiere('pd2')) await lee(g, 'pd2');
     });
     Promise.all([pTextos, pEstado, pVigia, pRev, pVig, pPd2, ...g3]).then(() => {
       if (!vigente(g)) return;
@@ -505,14 +513,23 @@
       h('div', { class: 'esc-hecho' }, h('b', null, 'Lee; aparta solo si tú lo pides'), h('span', null, 'No cambia ningún ajuste ni instala nada. Lo único que hace, y solo cuando pulsas el botón, es poner en cuarentena un archivo que el escudo señaló; siempre se puede devolver.')),
       h('div', { class: 'esc-hecho' }, h('b', null, 'En este equipo'), h('span', null, 'El informe vive en esta página: no se envía a GUARDIANA ni a nadie.')),
       h('div', { class: 'esc-hecho' }, h('b', null, 'Sin cifras inventadas'), h('span', null, 'Cada dato dice de dónde sale. Lo que no se pudo medir se dice, con su motivo.')));
-    const examina = h('div', { class: 'esc-examina' }, h('h2', { class: 'esc-rot' }, 'Qué examina'),
-      h('ol', null, SECC.map(([, t, d], i) => h('li', null, dato(nn(i), 'n'), h('b', null, t), h('small', null, d)))));
+    // dentro del programa, cada apartado es un botón: revisa solo esa parte (el primero, «Estado del equipo», es el escaneo completo)
+    const examina = h('div', { class: 'esc-examina' + (prog ? ' por-partes' : '') }, h('h2', { class: 'esc-rot' }, 'Qué examina'),
+      prog ? h('p', { class: 'esc-partes-nota' }, 'Pulsa una parte para revisar solo esa.') : null,
+      h('ol', null, SECC.map(([id, t, d], i) => {
+        const dentro = [dato(nn(i), 'n'), h('b', null, t), h('small', null, d)];
+        if (!prog) return h('li', null, dentro);
+        const bp = h('button', { type: 'button', 'data-parte': id }, dentro);
+        bp.addEventListener('click', () => escanea(id));
+        return h('li', { class: 'parte' }, bp);
+      })));
     if (prog) {
       const b = h('button', { type: 'button', class: 'esc-boton', html: I_ESCANER }); b.append(h('span', null, 'Escanear este equipo'));
       b.addEventListener('click', () => escanea());
       portada.append(lienzo, h('p', { class: 'esc-k' }, 'Inspección de este equipo'), h('h1', { id: 'esc-titulo' }, 'Examen completo de este equipo'),
         h('p', { class: 'esc-lead' }, 'Protección y antivirus, cámara, micrófono y pantalla, control remoto, lo que arranca solo y lo que vino de fábrica, telemetría y todo lo que este equipo envía fuera. Una sola lectura, con las mediciones del programa GUARDIANA instalado aquí.'),
-        b, h('p', { class: 'esc-nota-boton' }, 'La revisión de Windows puede tardar unos minutos; el resto aparece en cuanto llega.'), hechos, examina);
+        // por partes: los botones de cada parte, justo debajo del escaneo completo (antes iban al final, tras los tres avisos)
+        b, h('p', { class: 'esc-nota-boton' }, 'La revisión de Windows puede tardar unos minutos; el resto aparece en cuanto llega.'), examina, hechos);
       pintaEscudoPortada();
     } else {
       const a = h('a', { class: 'esc-boton web', href: DESCARGA, html: I_BAJA }); a.append(h('span', null, 'Descargar GUARDIANA para Windows'));
@@ -530,8 +547,14 @@
     C.transR = h('span'); C.lectR = h('span', null, 'Lecturas');
     C.linea = h('p', { class: 'esc-linea' }, C.vivo, h('span', null, h('span', null, 'Empezó'), ' ', C.ini), h('span', null, C.transR, ' ', C.trans), h('span', null, C.lectR, ' ', C.lect));
     C.otra = h('button', { type: 'button', class: 'esc-otra', hidden: true, html: I_OTRA }); C.otra.append(h('span', null, 'Volver a escanear'));
-    C.otra.addEventListener('click', () => { if (S && S.fin) { cuerpo.scrollTo({ top: 0, behavior: reducido() ? 'auto' : 'smooth' }); escanea(); } });
-    cabeza.append(h('div', { class: 'esc-red-caja' }), h('div', null, h('p', { class: 'esc-k' }, 'Antivirus'), C.cabT, C.linea), C.otra);
+    C.otra.addEventListener('click', () => { if (S && S.fin) { cuerpo.scrollTo({ top: 0, behavior: reducido() ? 'auto' : 'smooth' }); escanea(S.parte ? S.parte.id : null); } });
+    // por partes: «Elegir otra parte» vuelve a la portada; «Escanear este equipo», al escaneo completo
+    C.otraParte = h('button', { type: 'button', class: 'esc-otra suave', hidden: true }, h('span', null, 'Elegir otra parte'));
+    C.otraParte.addEventListener('click', () => { if (S && S.fin) { S = null; GEN++; arriba(); pintaTodo(); } });
+    C.todo = h('button', { type: 'button', class: 'esc-otra suave', hidden: true }, h('span', null, 'Escanear este equipo'));
+    C.todo.addEventListener('click', () => { if (S && S.fin) { arriba(); escanea(); } });
+    C.parteT = h('span', { class: 'esc-k-parte', hidden: true });
+    cabeza.append(h('div', { class: 'esc-red-caja' }), h('div', null, h('p', { class: 'esc-k' }, h('span', null, 'Antivirus'), C.parteT), C.cabT, C.linea), h('div', { class: 'esc-cabeza-acc' }, C.otraParte, C.todo, C.otra));
   }
   function pintaCabeza() {
     if (!S) return;
@@ -540,10 +563,14 @@
     const fin = S.fin;
     pon(C.transR, fin ? 'Duración' : 'Tiempo transcurrido');
     C.trans.textContent = fin ? segundos(S.tFin - S.t0) : reloj(Date.now() - S.t0);
-    const k = L.filter(([x]) => /medido|omitido/.test(S.l[x].e)).length;
-    C.lect.textContent = k + ' / ' + L.length;
+    // por partes, se cuentan las lecturas de esa parte (las que no hacen falta no se pidieron)
+    const pedidas = L.filter(([x]) => !(S.parte && S.l[x].motivo === 'parte'));
+    C.lect.textContent = pedidas.filter(([x]) => /medido|omitido/.test(S.l[x].e)).length + ' / ' + pedidas.length;
     C.vivo.classList.toggle('quieto', fin);
     C.otra.hidden = !fin;
+    const parte = S.parte, sec = parte && SECC.find(([x]) => x === parte.id);
+    C.parteT.hidden = !sec; if (sec) pon(C.parteT, sec[1]);
+    C.otraParte.hidden = C.todo.hidden = !fin || !parte;
   }
 
   // ---------- el avance ----------
@@ -1366,6 +1393,21 @@
           h('p', { class: 'esc-texto' }, 'Nombres, no rutas: las rutas de archivo, los identificadores internos de las cuentas de Windows y las direcciones no se muestran aquí.'),
           h('a', { class: 'esc-enlace-panel', href: PANEL, 'data-producto': 'guardiana' }, h('span', null, 'Detalle completo en el panel del programa'), h('span', { html: I_SALTO })))] };
   }
+  // ---------- por partes (17 nov 2026; el dueño, 21:17 y 21:57: «él escanea todo, pero también que podamos escanear por partes… un
+  // botón que escanee la cámara y el micrófono, otro los programas, otro los preinstalados… y al antivirus que tenga el PC, porque
+  // nosotros convivimos con otro») ----------
+  // Una parte es un apartado del informe (el del antivirus lleva también lo que anotó); solo se piden las lecturas de las que sale
+  // y solo se compone ese apartado. La revisión de Windows es una sola (el programa no la hace por trozos): si la parte sale de ella,
+  // se espera entera. «Estado del equipo» (el veredicto de todo) y los límites de la lectura son del escaneo completo: sus botones lo hacen.
+  const PARTE_SECS = { antivirus: ['antivirus', 'defender'] };
+  const LECTURAS_DE = { revision: ['revAhora', 'revision'], vigilancia: ['vigAhora', 'resumen', 'vigilancia'], pd: ['pd1', 'pd2'] };
+  const parteDe = (id) => (typeof id === 'string' && id !== 'estado' && id !== 'limites' && SECC.some(([x]) => x === id) ? { id, secs: PARTE_SECS[id] || [id] } : null);
+  function lecturasDe(parte) {
+    const q = new Set(['textos', 'estado']);
+    for (const sec of parte.secs) for (const f of FUENTES[sec] || []) for (const k of LECTURAS_DE[f] || [f]) q.add(k);
+    return q;
+  }
+  const enParte = (id) => !S || !S.parte || S.parte.secs.includes(id);
   const PINTA = { estado: secEstado, proteccion: secProteccion, antivirus: secAntivirus, sensores: secSensores, acceso: secAcceso, arranque: secArranque, fabrica: secFabrica, telemetria: secTelemetria, salida: secSalida, certificados: secCertificados, ia: secIA, extensiones: secExtensiones, identidad: secIdentidad, defender: secDefender, equipo: secEquipo, limites: secLimites };
   const DEPENDE_REV = new Set(['estado', 'proteccion', 'antivirus', 'sensores', 'acceso', 'arranque', 'fabrica', 'telemetria', 'salida', 'certificados', 'ia', 'defender', 'equipo']);
 
@@ -1381,9 +1423,12 @@
   }
   function pintaInforme() {
     if (!S || !abierto || informe.hidden) return;
+    const claveParte = S.parte ? S.parte.id : '';
+    if (secciones.dataset.parte !== claveParte) { secciones.dataset.parte = claveParte; secciones.textContent = ''; }
     if (!secciones.childElementCount) {
       indice.textContent = ''; const ol = h('ol');
       SECC.forEach(([id, t], i) => {
+        if (!enParte(id)) return;
         secciones.append(h('section', { class: 'esc-sec', id: 'esc-s-' + id, 'aria-labelledby': 'esc-h-' + id }));
         const b = h('button', { type: 'button', 'data-s': id }, h('i', { class: 'esc-p esperando' }), dato(nn(i), 'n'), h('span', null, t));
         b.addEventListener('click', () => { const s = document.getElementById('esc-s-' + id); if (s) { cuerpo.scrollTo({ top: s.offsetTop - 8, behavior: reducido() ? 'auto' : 'smooth' }); s.setAttribute('tabindex', '-1'); s.focus({ preventScroll: true }); } });
@@ -1392,6 +1437,7 @@
       indice.append(ol);
     }
     SECC.forEach(([id, t], i) => {
+      if (!enParte(id)) return;
       const sec = document.getElementById('esc-s-' + id); if (!sec) return;
       const f = firma(id); if (sec.dataset.firma === f) return;
       sec.dataset.firma = f;
@@ -1428,7 +1474,7 @@
     const filas = [], datos = { escaner_pc: 1, empezo: iso(S.t0), termino: S.fin ? iso(S.tFin) : null, duracion_ms: (S.fin ? S.tFin : Date.now()) - S.t0, idioma_del_panel: LANGP || null, lecturas: {}, comprobaciones: [], ahora: [] };
     for (const [k] of L) { const st = S.l[k]; datos.lecturas[k] = { ruta: LD[k].m + ' ' + LD[k].r, resultado: st.e, motivo: st.motivo || null, ms: st.ms == null ? null : st.ms }; }
     if (S.rev.e === 'medido') {
-      for (const [id, t] of SECC) for (const c of checksDe(id)) {
+      for (const [id, t] of SECC) if (enParte(id)) for (const c of checksDe(id)) {
         const titulo = tp('rv_t_' + c.id) || humano(c.id), base = typeof c.frase === 'string' ? tp(c.frase) : null, f = base ? rellena(base, c.datos) : '';
         const items = lista(c.lista).map((it) => ({ t: limpia(it && it.t, 140), d: it && typeof it.d === 'string' && HUELLA.test(it.d.trim()) ? '' : limpia(it && it.d, 200), marcas: lista(it && it.marcas).filter((m) => typeof m === 'string'), cuando: it && esHora(it.cuando) ? iso(it.cuando) : null }));
         filas.push([T(t), titulo, T(CHIP[NIVEL[c.estado] ? c.estado : 'info']), [f, ...items.slice(0, 12).map((x) => x.t + (x.d ? ' (' + x.d + ')' : ''))].filter(Boolean).join(' · ')]);
@@ -1439,7 +1485,9 @@
     const rs = S.d.revision && S.d.revision.resumen;
     const totales = rs && S.rev.e === 'medido' ? [[T('Para arreglar'), num(rs.alerta || 0)], [T('Para revisar'), num(rs.aviso || 0)], [T('Correcto'), num(rs.ok || 0)], [T('Para saber'), num(rs.info || 0)]] : [];
     const noMed = L.filter(([k]) => S.l[k].e === 'no_medido').map(([k]) => T(LD[k].n) + ': ' + T(MOTIVO[S.l[k].motivo] || MOTIVO.error));
-    return { archivo: 'GUARDIANA-escaner-pc', titulo: T('Antivirus') + ' · ' + T('Informe de este equipo'), subtitulo: fechaLarga(S.t0),
+    const secParte = S.parte && SECC.find(([x]) => x === S.parte.id);
+    if (S.parte) datos.parte = S.parte.id;
+    return { archivo: 'GUARDIANA-escaner-pc' + (S.parte ? '-' + S.parte.id : ''), titulo: T('Antivirus') + ' · ' + (secParte ? T(secParte[1]) : T('Informe de este equipo')), subtitulo: fechaLarga(S.t0),
       lineas: [T('Duración del escaneo') + ': ' + segundos(datos.duracion_ms), ...vigiaDe(null).map((x) => T(TIPO_VIGIA[x.tipo] || 'Aviso') + ': ' + x.texto)],
       totales, columnas: [T('Apartado'), T('Comprobación'), T('Estado'), T('Detalle')], filas: filas.length ? filas : [[T('Revisión de Windows'), '', T(S.rev.e === 'no_medido' ? 'No medido' : 'En curso'), '']],
       notas: [...(noMed.length ? [T('No medido') + ': ' + noMed.join(' · ')] : []), T('Nombres, no rutas: las rutas de archivo, los identificadores internos de las cuentas de Windows y las direcciones no se muestran aquí.'), 'IP Geolocation by DB-IP (https://db-ip.com)'], datos };

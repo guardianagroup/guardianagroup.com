@@ -4038,7 +4038,9 @@
 "Sin cuentas ni teléfono":"Keine Konten, keine Telefonnummer",
 "Nuestro servidor no puede leerlo":"Unser Server kann nicht mitlesen",
 "Al terminar, se borra en los dos equipos":"Am Ende wird das Gespräch auf beiden Geräten gelöscht",
-"Activar mi clave":"Meinen Schlüssel aktivieren"
+"Activar mi clave":"Meinen Schlüssel aktivieren",
+"Pulsa una parte para revisar solo esa.":"Wählen Sie einen Teil, um nur diesen zu prüfen.",
+"Elegir otra parte":"Anderen Teil wählen"
 },
 "p":{
 "intento":"Hat es heute am häufigsten versucht: {1}, {2} {2?Mal|Mal}.",
