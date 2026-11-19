@@ -32,6 +32,10 @@ const CLAVE_SESION = crypto.randomBytes(32); // efímera: con ella se sella el c
 // de burbujas vivas; una burbuja que nadie mira se cierra sola; ningún mensaje puede ser enorme; en la burbuja solo se abren
 // direcciones http(s).
 const ORIGENES = (process.env.ZERO_ORIGENES || 'https://guardianagroup.com,https://www.guardianagroup.com,http://127.0.0.1,http://localhost').split(',').map((x) => x.trim().replace(/\/$/, '')).filter(Boolean);
+// Elixir (dueño, 19 nov 2026: «en ese dominio… una cosa nueva… solamente el chat»): la web de www.house1718.com usa este
+// mismo relé de chat (/com), y solo el relé: no puede abrir celdas de ZERO (/sesion) ni la caja de Google. Van aquí, fijas,
+// porque /etc/guardiana/zero.env ya trae su ZERO_ORIGENES y la actualización automática no lo toca; ZERO_ORIGENES_COM añade más.
+const ORIGENES_COM = ORIGENES.concat(['https://www.house1718.com', 'https://house1718.com'], String(process.env.ZERO_ORIGENES_COM || '').split(',').map((x) => x.trim().replace(/\/$/, '')).filter(Boolean));
 const MAX_SESIONES = +process.env.ZERO_MAX_SESIONES || 8;
 const TOR_PROXY = process.env.ZERO_TOR_PROXY || ''; // p. ej. socks5://127.0.0.1:9050 en el servidor con Tor; sin él, ULTRA no se ofrece
 // Burbuja sellada hacia dentro y ULTRA capado (26 Oct 2026, dueño; ronda 50b): cada burbuja sale por su propio filtro SOCKS
@@ -53,11 +57,14 @@ const PUBLICO = String(process.env.ZERO_PUBLICO || '').replace(/\/$/, '') || ('h
 // Comunicaciones (26 Oct 2026): el relé de chat, llamadas y archivos vive en este mismo proceso, en /com. No guarda nada.
 const RELE = new Rele({ turnHost: process.env.TURN_HOST || (() => { try { return new URL(PUBLICO).hostname; } catch (_) { return ''; } })(), turnSecreto: process.env.TURN_SECRETO || '', turnPuerto: +(process.env.TURN_PUERTO || 3478), region: process.env.ZERO_REGION || '' });
 const VIVAS = new Set();
-function origenPermitido(req) {
+function origenEn(lista, req) {
   const o = String(req.headers.origin || '').replace(/\/$/, '');
   if (!o) return false;
-  return ORIGENES.some((p) => o === p || (p.startsWith('http://127.0.0.1') && /^http:\/\/127\.0\.0\.1(:\d+)?$/.test(o)) || (p.startsWith('http://localhost') && /^http:\/\/localhost(:\d+)?$/.test(o)));
+  return lista.some((p) => o === p || (p.startsWith('http://127.0.0.1') && /^http:\/\/127\.0\.0\.1(:\d+)?$/.test(o)) || (p.startsWith('http://localhost') && /^http:\/\/localhost(:\d+)?$/.test(o)));
 }
+const origenPermitido = (req) => origenEn(ORIGENES, req);
+// el relé de chat y su prueba de la ruta: las páginas de GUARDIANA y la de Elixir
+const origenCom = (req) => origenEn(ORIGENES_COM, req);
 
 const cortes = new Cortes();
 const nListas = cortes.cargaCarpeta(path.join(__dirname, 'listas'));
@@ -1174,7 +1181,7 @@ async function main() {
       // prueba de la ruta (agencia, ronda 77): 64 KB al azar (no se comprimen por el camino) para que la app vea si su red deja
       // pasar una transferencia sostenida; las redes que estrangulan cortan a unos 16 KB. No guarda nada.
       const cab = { 'content-type': 'application/octet-stream', 'cache-control': 'no-store', 'content-length': 65536 };
-      if (origenPermitido(req)) { cab['access-control-allow-origin'] = String(req.headers.origin).replace(/\/$/, ''); cab.vary = 'Origin'; }
+      if (origenCom(req)) { cab['access-control-allow-origin'] = String(req.headers.origin).replace(/\/$/, ''); cab.vary = 'Origin'; }
       res.writeHead(200, cab); return res.end(crypto.randomBytes(65536));
     }
     if (req.url === '/salud') {
@@ -1187,7 +1194,7 @@ async function main() {
   });
   srv.on('upgrade', (req, socket) => {
     if (req.url.startsWith('/com')) {
-      if (!origenPermitido(req)) { console.log('relé: origen rechazado', req.headers.origin || '(ninguno)'); return socket.destroy(); }
+      if (!origenCom(req)) { console.log('relé: origen rechazado', req.headers.origin || '(ninguno)'); return socket.destroy(); }
       const ws = WS.acepta(req, socket);
       // la dirección real la pone el proxy TLS; el relé solo la usa, resumida y en memoria, para los límites del número
       if (ws) RELE.acepta(ws, String(req.headers['x-forwarded-for'] || '').split(',')[0].trim() || req.socket.remoteAddress || '');
