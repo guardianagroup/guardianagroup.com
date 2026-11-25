@@ -20,6 +20,7 @@ const { Empresas, baseDominio } = require('./empresas');
 const SENSORES = require('./sensores');
 const { Senuelos } = require('./senuelos');
 const { Rele } = require('./comunicaciones');
+const { Tiempo } = require('./tiempo');
 const { FiltroRed, onionVetada, esOnion, ipProhibida, nombreLocal } = require('./filtro-red');
 
 const RAIZ = path.join(__dirname, '..');
@@ -55,7 +56,11 @@ const MAX_HORAS = +process.env.ZERO_MAX_HORAS || 12; // vida máxima de una burb
 // alcanzable desde fuera para que una visita al enlace llegue al colector /s/<token>. Sin ella, el propio puerto local.
 const PUBLICO = String(process.env.ZERO_PUBLICO || '').replace(/\/$/, '') || ('http://127.0.0.1:' + PUERTO);
 // Comunicaciones (26 Oct 2026): el relé de chat, llamadas y archivos vive en este mismo proceso, en /com. No guarda nada.
-const RELE = new Rele({ turnHost: process.env.TURN_HOST || (() => { try { return new URL(PUBLICO).hostname; } catch (_) { return ''; } })(), turnSecreto: process.env.TURN_SECRETO || '', turnPuerto: +(process.env.TURN_PUERTO || 3478), region: process.env.ZERO_REGION || '' });
+// 1718 (25 nov 2026): en las páginas de house1718.com el tiempo de conversación se cuenta aquí (cortesía de 2 minutos y, después,
+// códigos de compra de Dodo; ver tiempo.js). Las de GUARDIANA, igual que siempre. COM_TIEMPO=0 lo apaga; COM_TIEMPO_ORIGENES añade más.
+const ORIGENES_1718 = ['https://www.house1718.com', 'https://house1718.com'].concat(String(process.env.COM_TIEMPO_ORIGENES || '').split(',').map((x) => x.trim().replace(/\/$/, '')).filter(Boolean));
+const TIEMPO = process.env.COM_TIEMPO === '0' ? null : new Tiempo({});
+const RELE = new Rele({ turnHost: process.env.TURN_HOST || (() => { try { return new URL(PUBLICO).hostname; } catch (_) { return ''; } })(), turnSecreto: process.env.TURN_SECRETO || '', turnPuerto: +(process.env.TURN_PUERTO || 3478), region: process.env.ZERO_REGION || '', tiempo: TIEMPO, esPago: (o) => ORIGENES_1718.includes(o) });
 const VIVAS = new Set();
 function origenEn(lista, req) {
   const o = String(req.headers.origin || '').replace(/\/$/, '');
@@ -1197,7 +1202,7 @@ async function main() {
       if (!origenCom(req)) { console.log('relé: origen rechazado', req.headers.origin || '(ninguno)'); return socket.destroy(); }
       const ws = WS.acepta(req, socket);
       // la dirección real la pone el proxy TLS; el relé solo la usa, resumida y en memoria, para los límites del número
-      if (ws) RELE.acepta(ws, String(req.headers['x-forwarded-for'] || '').split(',')[0].trim() || req.socket.remoteAddress || '');
+      if (ws) RELE.acepta(ws, String(req.headers['x-forwarded-for'] || '').split(',')[0].trim() || req.socket.remoteAddress || '', req.headers.origin);
       return;
     }
     if (!req.url.startsWith('/sesion')) return socket.destroy();

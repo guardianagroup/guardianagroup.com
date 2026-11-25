@@ -17,6 +17,8 @@
 //   {t:'buzon-borra', sala, ids} cuando el destinatario lo ha recogido; respuesta {t:'buzon-ok', sala, id, ok}.
 //   Número GUARDIANA (29 Oct 2026, ver numeros.js): {t:'num', idn, f, a, sig, alta} · {t:'cita', T, s} · {t:'citas', ts} ·
 //   {t:'cita-fin', T, cancela}; con «q», la respuesta lleva la misma «q». Aviso del relé: {t:'cita-lista', T, otros}.
+//   1718 (house1718.com, 25 nov 2026, ver tiempo.js): {t:'codigos', codigos} → {t:'codigos', validos, minutos, estados} ·
+//   {t:'ice', sala} → credenciales solo con tiempo · aviso del relé {t:'tiempo', sala, de, hasta, resto, agotado}.
 'use strict';
 const crypto = require('crypto');
 const { Avisos } = require('./avisos');
@@ -65,6 +67,15 @@ class Rele {
     this.numeros = o.numeros === null ? null : (o.numeros || new Numeros({ dir: o.numerosDir }));
     // el buzón cifrado (30 Oct 2026): sobres cerrados para quien no está conectado, hasta que los recoge (7 días como mucho); ver buzones.js
     this.buzones = o.buzones === null ? null : (o.buzones || new Buzones({ dir: o.buzonesDir }));
+    // 1718 (25 nov 2026): el tiempo de conversación, solo para las páginas de su origen (ver tiempo.js); sin «tiempo», todo como antes
+    this.tiempo = o.tiempo || null;
+    this.esPago = typeof o.esPago === 'function' ? o.esPago : () => false;
+    if (this.tiempo) {
+      this.tiempo.alAgotar = (id) => this.avisaTiempo(id);
+      this.tiempo.alCubrir = (id) => this.avisaTiempo(id);
+      this.reloj = setInterval(() => this.vigilaTiempo(), Math.min(2000, Math.max(200, this.tiempo.minutoMs / 8)));
+      if (this.reloj.unref) this.reloj.unref();
+    }
     if (this.turnHost && this.turnSecreto) { this.compruebaCoturn(); const t = setInterval(() => this.compruebaCoturn(), 60 * 1000); if (t.unref) t.unref(); }
     this.vigila = setInterval(() => this.barre(), 30 * 1000);
     if (this.vigila.unref) this.vigila.unref();
@@ -73,7 +84,7 @@ class Rele {
   // Hay llamadas solo si hay secreto y coturn está de verdad activo en este servidor (se comprueba cada minuto)
   get llamadas() { return !!(this.turnHost && this.turnSecreto && this.coturn.activo); }
 
-  estado() { let b = 0; for (const x of this.conexiones) if (x.blindada) b++; return { buzon: this.buzones ? this.buzones.cuantos : null, salas: this.salas.size, conexiones: this.conexiones.size, blindadas: b, codigos: this.codigos.size, llamadas: this.llamadas, coturn: this.coturn, avisos: this.avisos ? this.avisos.estado() : null, numeros: this.numeros ? this.numeros.estado() : null }; }
+  estado() { let b = 0; for (const x of this.conexiones) if (x.blindada) b++; return { buzon: this.buzones ? this.buzones.cuantos : null, salas: this.salas.size, conexiones: this.conexiones.size, blindadas: b, codigos: this.codigos.size, llamadas: this.llamadas, coturn: this.coturn, avisos: this.avisos ? this.avisos.estado() : null, numeros: this.numeros ? this.numeros.estado() : null, tiempo: this.tiempo ? this.tiempo.estado() : null }; }
 
   compruebaCoturn() {
     const { execFile } = require('child_process');
@@ -94,9 +105,9 @@ class Rele {
   }
 
   // Credenciales TURN de vida corta (RFC 8489 + «TURN REST API»: usuario «caducidad:etiqueta», clave HMAC-SHA1 del secreto)
-  ice() {
+  ice(hasta) {
     if (!this.llamadas) return { ice: [], caduca: 0 };
-    const caduca = Math.floor(Date.now() / 1000) + TURN_HORAS * 3600;
+    const caduca = hasta || Math.floor(Date.now() / 1000) + TURN_HORAS * 3600;
     const username = caduca + ':' + crypto.randomBytes(4).toString('hex');
     const credential = crypto.createHmac('sha1', this.turnSecreto).update(username).digest('base64');
     const h = this.turnHost + ':' + this.turnPuerto;
@@ -109,9 +120,11 @@ class Rele {
   }
 
   // ip: solo para los límites de abuso del número, resumida con una clave de este arranque (numeros.js); no se guarda
-  acepta(ws, ip) {
+  acepta(ws, ip, origen) {
     if (this.conexiones.size >= MAX_CONEXIONES) { ws.cierra(); return; }
     const c = { ws, salas: new Set(), yo: new Map(), cupo: RAFAGA, ultimo: Date.now(), vivo: Date.now(), bytes: 0, reto: crypto.randomBytes(16).toString('hex'), ipk: this.numeros ? this.numeros.resumeIp(ip) : '' };
+    // 1718: su tiempo se cuenta aquí (la dirección, resumida con una clave de este arranque, solo para la cortesía; ver tiempo.js)
+    if (this.tiempo && this.esPago(String(origen || '').replace(/\/$/, ''))) { c.pago = true; c.ipc = this.tiempo.clave(ip); c.codigos = []; }
     this.conexiones.add(c);
     ws.on('message', (m, bin) => { c.vivo = Date.now(); if (bin) this.trama(c, m); else this.texto(c, m); });
     ws.on('close', () => this.despide(c));
@@ -128,11 +141,14 @@ class Rele {
         // «marca»: este relé entiende las tramas marcadas (0x11, las que merecen aviso). Sin esto, la página no las usa: un relé
         // anterior las descartaría y el mensaje se perdería mientras los servidores se actualizan (29 Oct 2026)
         // «reto»: lo que firma la app al presentar su Número GUARDIANA en esta conexión (una firma vieja no sirve en otra)
+        // 1718: las credenciales de llamada, solo con tiempo y para una conversación ({t:'ice', sala}); aquí, ninguna
+        if (c.pago) { c.ws.json({ t: 'hola', v: 1, marca: 1, region: this.region, llamadas: this.llamadas, ice: [], caduca: 0, tiempo: 1, cortesia: this.tiempo.cortesiaMin, minutos: this.tiempo.minutos, minuto: this.tiempo.minutoMs, avisos: this.avisos ? this.avisos.clavePublica : '', reto: c.reto, num: this.numeros ? 1 : 0, buzon: this.buzones ? 1 : 0 }); return; }
         c.ws.json({ t: 'hola', v: 1, marca: 1, region: this.region, llamadas: this.llamadas, ice: t.ice, caduca: t.caduca, avisos: this.avisos ? this.avisos.clavePublica : '', reto: c.reto, num: this.numeros ? 1 : 0, buzon: this.buzones ? 1 : 0 });
         return;
       }
-      case 'ice': { const t = this.ice(); c.ws.json({ t: 'ice', ice: t.ice, caduca: t.caduca }); return; }
-      case 'entra': return this.entra(c, m.sala, m.yo, m.b === 1);
+      case 'ice': { const t = c.pago ? this.iceSala(c, String(m.sala || '')) : this.ice(); c.ws.json({ t: 'ice', sala: c.pago ? String(m.sala || '') : undefined, ice: t.ice, caduca: t.caduca, por: t.por }); return; }
+      case 'codigos': return this.ponCodigos(c, m);
+      case 'entra': return this.entra(c, m.sala, m.yo, m.b === 1, m.par === 1);
       case 'sale': return this.sale(c, m.sala, true);
       case 'ping': c.ws.json({ t: 'pong' }); return;
       case 'invita': return this.invita(c, m);
@@ -154,7 +170,7 @@ class Rele {
     }
   }
 
-  entra(c, sala, yo, blindada) {
+  entra(c, sala, yo, blindada, par) {
     if (!esHex(sala, 64) || !esHex(yo, 16)) return c.ws.json({ t: 'error', sala, por: 'formato' });
     if (blindada && !c.blindada) { let n = 0; for (const x of this.conexiones) if (x.blindada) n++; if (n < MAX_BLINDADAS) { c.blindada = true; c.cupo = RAFAGA_B; } }
     if (c.salas.has(sala)) return c.ws.json({ t: 'sala', sala, miembros: this.otros(sala, yo) });
@@ -171,6 +187,13 @@ class Rele {
     } else if (s.size >= MAX_MIEMBROS) return c.ws.json({ t: 'error', sala, por: 'sala llena' });
     s.set(yo, c); c.salas.add(sala); c.yo.set(sala, yo);
     c.ws.json({ t: 'sala', sala, miembros: this.otros(sala, yo) });
+    // 1718: la sala de «Pasar al teléfono» (los dos aparatos de una misma persona) no cuenta tiempo, pero solo vale 2 minutos y 16 MB;
+    // el resto empieza a contar en cuanto hay dos personas
+    if (c.pago) {
+      if (par && !this.tiempo.salas.has(sala)) this.tiempo.sala(sala).par = true;
+      if (s.size >= 2) { const t = this.tiempo.salas.get(sala); if (t && t.agotado && c.codigos.length) this.tiempo.reintenta(sala, [...s.values()]); else this.tiempo.vigila(sala, [...s.values()]); }
+      this.mandaTiempo(c, sala);
+    }
     if (this.buzones) for (const x of this.buzones.para(sala, yo)) this.mandaSobre(c, sala, x.de, x.id, x.datos);
     for (const [id, otro] of s) if (id !== yo && otro !== c) { try { otro.ws.json({ t: 'llega', sala, quien: yo }); } catch (_) {} }
     // la presencia «fuera» (app en segundo plano), en los dos sentidos: quien entra la sabe de los demás y los demás, la suya
@@ -300,6 +323,7 @@ class Rele {
     if (!c.salas.has(sala)) return c.ws.json({ t: 'error', sala, por: 'no estás en la sala' });
     if (!this.cabe(c, b.length)) return c.ws.json({ t: 'lento', sala });
     const s = this.salas.get(sala); if (!s) return;
+    if (this.tiempo && this.tiempo.salas.has(sala) && !this.pasaTiempo(c, sala, s, b.length)) return;
     const yo = c.yo.get(sala);
     const para = b.subarray(33, 41);
     const todos = para.every((x) => x === 0);
@@ -324,6 +348,8 @@ class Rele {
     const sala = b.subarray(1, 33).toString('hex'), para = b.subarray(33, 41).toString('hex'), id = b.subarray(41, 57).toString('hex');
     const parte = b[57], total = b[58], avisa = b[59] === 1;
     if (!c.salas.has(sala)) return c.ws.json({ t: 'buzon-ok', sala, id, ok: false, por: 'no estás en la sala' });
+    // 1718: el buzón (mensajes para quien no está) solo con la conversación cubierta; si no, sería un chat gratis
+    if (c.pago && !this.tiempo.cubierta(sala)) return c.ws.json({ t: 'buzon-ok', sala, id, ok: false, por: 'sin tiempo' });
     if (!this.cabe(c, b.length)) return c.ws.json({ t: 'buzon-ok', sala, id, ok: false, por: 'lento' });
     const de = c.yo.get(sala);
     const r = this.buzones.deja(sala, de, para, id, parte, total, b.subarray(60), avisa);
@@ -355,6 +381,56 @@ class Rele {
     // haya vuelto a presentar la suya.
     if ((avisa || !de.marca) && this.avisos && (a.fuera || Date.now() - a.vivo > 25 * 1000)) { try { this.avisos.avisa(sala, de.avisoId || null, 'mensaje'); } catch (_) {} }
   }
+  // ---------- 1718: el tiempo (ver tiempo.js) ----------
+  miembros(sala) { const s = this.salas.get(sala); return s ? [...s.values()] : []; }
+  iceSala(c, sala) {
+    if (!this.llamadas) return { ice: [], caduca: 0 };
+    if (!esHex(sala, 64) || !c.salas.has(sala)) return { ice: [], caduca: 0, por: 'sala' };
+    const t = this.tiempo.salas.get(sala), ahora = Date.now();
+    if (!t || t.par || ahora >= t.hasta) return { ice: [], caduca: 0, por: 'sin-tiempo' };
+    // caducan cuando se acabaría el tiempo de esta conversación con lo que hay (con medio minuto de margen; como mucho, 12 horas)
+    const resto = Math.min(this.tiempo.resto(sala, this.miembros(sala)), TURN_HORAS * 3600 * 1000);
+    return this.ice(Math.floor((ahora + resto) / 1000) + 30);
+  }
+  async ponCodigos(c, m) {
+    if (!c.pago) return;
+    if (c.poniendo) { c.otrosCodigos = m.codigos; return; }
+    c.poniendo = true;
+    try {
+      const r = await this.tiempo.ponCodigos(c, m.codigos);
+      if (!this.conexiones.has(c)) return;
+      c.ws.json(Object.assign({ t: 'codigos' }, r));
+      for (const sala of c.salas) { const s = this.salas.get(sala); if (s && s.size >= 2) this.tiempo.reintenta(sala, [...s.values()]); }
+    } finally {
+      c.poniendo = false;
+      if (c.otrosCodigos) { const x = c.otrosCodigos; c.otrosCodigos = null; this.ponCodigos(c, { codigos: x }); }
+    }
+  }
+  datosTiempo(sala) {
+    const t = this.tiempo.salas.get(sala); if (!t) return null;
+    const ahora = Date.now(), resto = this.tiempo.resto(sala, this.miembros(sala));
+    return { t: 'tiempo', sala, de: t.de, hasta: t.hasta, resto, ahora, par: t.par ? 1 : 0, agotado: t.agotado && ahora >= t.hasta ? 1 : 0, cortesia: this.tiempo.cortesiaMin, minuto: this.tiempo.minutoMs };
+  }
+  mandaTiempo(c, sala) { const d = this.datosTiempo(sala); if (d) { try { c.ws.json(d); } catch (_) {} } }
+  avisaTiempo(sala) { const d = this.datosTiempo(sala); if (!d) return; for (const c of this.miembros(sala)) { try { c.ws.json(d); } catch (_) {} } }
+  vigilaTiempo() {
+    for (const [sala, s] of this.salas) {
+      if (s.size < 2) continue;
+      let pago = false; for (const c of s.values()) if (c.pago) { pago = true; break; }
+      if (pago) this.tiempo.vigila(sala, [...s.values()]);
+    }
+  }
+  // ¿pasa esta trama? Con una sola persona, sí (no hay a quién dársela salvo el buzón, que se mira aparte); sin tiempo, no, y se avisa
+  pasaTiempo(c, sala, s, n) {
+    const t = this.tiempo.salas.get(sala);
+    if (t.par) { t.bytes += n; }
+    if (s.size < 2 && !t.par) return true;
+    if (this.tiempo.cubierta(sala)) return true;
+    const ahora = Date.now();
+    if (!c.avisoTiempo || ahora - c.avisoTiempo > 2000) { c.avisoTiempo = ahora; this.mandaTiempo(c, sala); }
+    return false;
+  }
+
   presencia(c, m) {
     const fuera = m.fuera === 1;
     if (c.fuera === fuera) return;
@@ -368,6 +444,7 @@ class Rele {
 
   barre() {
     const ahora = Date.now();
+    if (this.tiempo) this.tiempo.barre(new Set(this.salas.keys()));
     for (const [k, r] of this.codigos) if (ahora - r.creado > CODIGO_MIN * 60 * 1000) this.codigos.delete(k);
     for (const c of this.conexiones) if (ahora - c.vivo > SIN_VIDA_MS) { try { c.ws.cierra(); } catch (_) {} this.despide(c); }
     if (this.buzones) this.buzones.barre();
