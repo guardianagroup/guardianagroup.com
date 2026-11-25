@@ -26,7 +26,11 @@ const path = require('path');
 
 // (en las pruebas, COM_TIEMPO_MINUTO_MS acorta «el minuto» para no esperar minutos de verdad)
 const MIN_MS = +process.env.COM_TIEMPO_MINUTO_MS || 60 * 1000;
-const CORTESIA_MIN = +process.env.COM_TIEMPO_CORTESIA_MIN || 2;   // 2 minutos (dueño, 25 nov 2026, 08:33)
+const CORTESIA_MIN = +process.env.COM_TIEMPO_CORTESIA_MIN || 2;   // 2 minutos (dueño, 25 nov 2026, 08:33), por aparato (12:16)
+// (dueño, 25 nov 12:16: «2 minutos gratis por dispositivo y después de pago»): los minutos gratis van por aparato (la clave de su
+// navegador). Para que borrar los datos o abrir una ventana privada no dé minutos sin fin, cada conexión a internet tiene un tope
+// de minutos gratis al día (de sobra para una casa u oficina con varios aparatos)
+const TOPE_IP_MIN = +process.env.COM_TIEMPO_TOPE_IP || 30;
 const MINUTOS_CODIGO = +process.env.COM_TIEMPO_MINUTOS || 60;    // cada código, 1 hora
 const DIA_MS = 24 * 3600 * 1000;
 const ANTES_MS = Math.min(8000, MIN_MS / 4);   // el minuto siguiente se cobra 8 s antes de que se acabe el que corre
@@ -47,7 +51,8 @@ class Tiempo {
     this.minutos = o.minutos || MINUTOS_CODIGO;
     this.dir = o.dir || process.env.COM_TIEMPO_DIR || path.join(__dirname, '..', '..', 'datos-com', 'tiempo');
     this.salt = crypto.randomBytes(32);                 // de este arranque: las direcciones no se pueden reconstruir
-    this.ips = new Map();                               // dirección resumida → { usado (s), desde }
+    this.ips = new Map();                               // aparato (o dirección, en páginas viejas) → { usado, desde }
+    this.topes = new Map();                             // dirección resumida → { usado, desde }: el tope de minutos gratis por conexión
     this.codigos = new Map();                           // código → { h, estado: '?'|'ok'|'mal', u (minutos usados), fin, visto }
     this.usos = new Map();                              // resumen → { u, f } (lo que hay en disco)
     this.salas = new Map();                             // sala → { hasta, provisional, de, cobrando, agotado, avisado, gracia, par, creada, bytes }
@@ -75,6 +80,13 @@ class Tiempo {
     let x = this.ips.get(k); if (!x || Date.now() - x.desde > DIA_MS) { x = { usado: 0, desde: Date.now() }; this.ips.set(k, x); }
     x.usado += 1;
   }
+  // de quién son los minutos gratis de una conexión: de su aparato (la primera clave de su navegador) o, si la página es vieja y no
+  // la manda, de su dirección
+  cortesiaDe(c) { return c && c.ls && c.ls[0] ? 'd' + c.ls[0] : (c && c.ipc) || ''; }
+  topeResto(ip) { const x = this.topes.get(ip); if (!x || Date.now() - x.desde > DIA_MS) return TOPE_IP_MIN; return Math.max(0, TOPE_IP_MIN - x.usado); }
+  gastaTope(ip) { let x = this.topes.get(ip); if (!x || Date.now() - x.desde > DIA_MS) { x = { usado: 0, desde: Date.now() }; this.topes.set(ip, x); } x.usado += 1; }
+  // minutos gratis que le quedan hoy a esta conexión: los de su aparato, sin pasar del tope de su conexión a internet
+  gratisDe(c) { if (!c) return 0; const k = this.cortesiaDe(c); if (!k) return 0; return Math.min(this.cortesiaResto(k), c.ipc ? this.topeResto(c.ipc) : this.cortesiaMin); }
 
   // ---------- los códigos ----------
   h(k) { return crypto.createHash('sha256').update(k).digest('hex'); }
@@ -144,7 +156,7 @@ class Tiempo {
       buenos.push(k);
     }
     c.codigos = buenos;
-    const r = this.saldo(c); Object.assign(r.estados, otros); return r;
+    const r = this.saldo(c); Object.assign(r.estados, otros); r.gratis = this.gratisDe(c); return r;
   }
   saldo(c) {
     let min = 0, validos = 0; const estados = {};
@@ -165,7 +177,7 @@ class Tiempo {
     const t = this.salas.get(id); if (!t) return 0;
     const ahora = Date.now(), cubierto = Math.max(0, t.hasta - ahora);
     if (t.de === 'codigo') { let m = 0; const vistos = new Set(); for (const c of this.pagadores(id, miembros)) for (const k of c.codigos || []) { if (vistos.has(k)) continue; vistos.add(k); m += this.restoCodigo(this.codigos.get(k)); } return cubierto + m * MIN_MS; }
-    if (t.de === 'cortesia') { let m = Infinity; for (const k of new Set(miembros.map((c) => c.ipc).filter(Boolean))) m = Math.min(m, this.cortesiaResto(k)); return cubierto + (m === Infinity ? 0 : m) * MIN_MS; }
+    if (t.de === 'cortesia') { const p = this.pagadores(id, miembros)[0]; return cubierto + (p ? this.gratisDe(p) : 0) * MIN_MS; }
     return cubierto;
   }
 
@@ -211,10 +223,10 @@ class Tiempo {
       // está aún comprobando sus códigos con Dodo (acaba de entrar), no se gasta la cortesía de nadie: se espera mientras la
       // conversación siga cubierta (al empezar, el margen provisional de 15 s) y se vuelve a intentar en cuanto acabe la comprobación
       if (pag.some((c) => c.poniendo) && Date.now() < Math.max(t.hasta, t.provisional || 0)) return;
-      // 2) la cortesía: la de todas las direcciones que están en la conversación
-      const ks = [...new Set(miembros.map((c) => c.ipc).filter(Boolean))];
-      if (ks.length && ks.every((k) => this.cortesiaResto(k) >= 1)) {
-        for (const k of ks) this.gastaCortesia(k);
+      // 2) los minutos gratis: los del aparato de quien invita (la persona invitada no gasta los suyos), con el tope de su conexión
+      const quien = pag[0];
+      if (quien && this.gratisDe(quien) >= 1) {
+        this.gastaCortesia(this.cortesiaDe(quien)); if (quien.ipc) this.gastaTope(quien.ipc);
         t.hasta = desde() + MIN_MS; t.de = 'cortesia'; t.agotado = false; t.avisado = false;
         return this.cubre(id);
       }
@@ -239,6 +251,7 @@ class Tiempo {
     const ahora = Date.now();
     for (const [id, t] of this.salas) if (!vivas.has(id) && ahora - Math.max(t.hasta, t.creada) > 10 * MIN_MS) this.salas.delete(id);
     for (const [k, x] of this.ips) if (ahora - x.desde > DIA_MS) this.ips.delete(k);
+    for (const [k, x] of this.topes) if (ahora - x.desde > DIA_MS) this.topes.delete(k);
     // los códigos en memoria: solo mientras alguna conexión los tenga (la clave en claro no se guarda en ningún sitio)
     if (this.codigos.size > 5000) for (const [k, e] of this.codigos) if (ahora - e.visto > 60 * MIN_MS) this.codigos.delete(k);
   }
