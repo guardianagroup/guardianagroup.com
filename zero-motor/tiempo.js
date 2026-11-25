@@ -14,6 +14,9 @@
 //    da otros 2 minutos como mucho, y la llamada se vuelve a cortar.
 //  · Sin tiempo, el relé no pasa nada de esa conversación (ni chat, ni llamada, ni archivos) y no da credenciales de llamada (TURN);
 //    las que dio caducan cuando se acaba lo cubierto, y coturn deja de renovar la llamada.
+//  · Cada código es de quien lo usa primero (dueño, 25 nov 2026, 10:07: «solamente para el que tiene el dinero pagado»): queda unido
+//    a una clave al azar de ese navegador (la página la manda con los códigos; aquí solo se guarda su SHA-256). Desde otro navegador
+//    no paga. Al pasar la conversación al móvil, la página le pasa también esa clave.
 //  · No guarda quién es nadie: en disco, solo un resumen (SHA-256) de cada código con sus minutos usados (para enseñar el saldo); la
 //    cortesía vive en memoria, con la dirección resumida con una clave de este arranque, y se olvida a las 24 horas.
 'use strict';
@@ -50,7 +53,7 @@ class Tiempo {
     this.salas = new Map();                             // sala → { hasta, provisional, de, cobrando, agotado, avisado, gracia, par, creada, bytes }
     this.alAgotar = null; this.alCubrir = null;         // los pone el relé (avisar a la conversación)
     try { fs.mkdirSync(this.dir, { recursive: true, mode: 0o700 }); } catch (e) { console.error('tiempo: sin carpeta', this.dir, e.message); }
-    try { const j = JSON.parse(fs.readFileSync(path.join(this.dir, 'codigos.json'), 'utf8')); for (const [h, x] of Object.entries(j || {})) if (/^[0-9a-f]{64}$/.test(h)) this.usos.set(h, { u: Math.max(0, +x.u || 0), f: x.f ? 1 : 0 }); } catch (_) {}
+    try { const j = JSON.parse(fs.readFileSync(path.join(this.dir, 'codigos.json'), 'utf8')); for (const [h, x] of Object.entries(j || {})) if (/^[0-9a-f]{64}$/.test(h)) this.usos.set(h, { u: Math.max(0, +x.u || 0), f: x.f ? 1 : 0, d: /^[0-9a-f]{64}$/.test(String(x.d || '')) ? x.d : '' }); } catch (_) {}
   }
 
   // ---------- quién es «la misma dirección» ----------
@@ -93,7 +96,7 @@ class Tiempo {
       });
     }, 500);
   }
-  apunta(e) { this.usos.set(e.h, { u: e.u, f: e.fin ? 1 : 0 }); this.guarda(); }
+  apunta(e) { const v = this.usos.get(e.h); this.usos.set(e.h, { u: e.u, f: e.fin ? 1 : 0, d: (v && v.d) || '' }); this.guarda(); }
 
   async pide(ruta, cuerpo) {
     const r = await fetch(this.api + ruta, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(cuerpo), signal: AbortSignal.timeout(8000) });
@@ -120,8 +123,10 @@ class Tiempo {
   }
 
   // la página dice qué códigos tiene en este aparato; se comprueban (con un tope) y se apuntan a la conexión
-  async ponCodigos(c, lista) {
+  async ponCodigos(c, lista, llaves) {
     const ahora = Date.now();
+    // las claves de este navegador (la suya, la primera, y las de sus otros aparatos), resumidas
+    const ls = [...new Set((Array.isArray(llaves) ? llaves : []).map(String).filter((l) => /^[0-9a-f]{64}$/.test(l)))].slice(0, 6).map((l) => this.h(l));
     if (!c.validaciones || ahora - c.validaciones.desde > MIN_MS) c.validaciones = { desde: ahora, n: 0 };
     const nuevos = [...new Set((Array.isArray(lista) ? lista : []).map(String).filter(esCodigo))].slice(0, MAX_CODIGOS_CONEXION);
     // (los que no valen o no se han podido mirar no se apuntan, pero la respuesta lo dice: así la página avisa y los borra)
@@ -130,7 +135,12 @@ class Tiempo {
       const e = this.codigos.get(k);
       if (!e || e.estado === '?') { if (++c.validaciones.n > VALIDACIONES_MIN) { otros[k] = 'espera'; continue; } }
       const x = await this.valida(k);
-      if (x.estado !== 'mal') buenos.push(k); else otros[k] = 'mal';
+      if (x.estado === 'mal') { otros[k] = 'mal'; continue; }
+      // ¿de quién es? del primer navegador que lo usa; desde otro, no paga ('otro')
+      const u = this.usos.get(x.h) || { u: x.u, f: x.fin ? 1 : 0, d: '' };
+      if (!u.d) { if (!ls.length) { otros[k] = 'otro'; continue; } u.d = ls[0]; this.usos.set(x.h, u); this.guarda(); }
+      else if (!ls.includes(u.d)) { otros[k] = 'otro'; continue; }
+      buenos.push(k);
     }
     c.codigos = buenos;
     const r = this.saldo(c); Object.assign(r.estados, otros); return r;

@@ -17,7 +17,7 @@
 //   {t:'buzon-borra', sala, ids} cuando el destinatario lo ha recogido; respuesta {t:'buzon-ok', sala, id, ok}.
 //   Número GUARDIANA (29 Oct 2026, ver numeros.js): {t:'num', idn, f, a, sig, alta} · {t:'cita', T, s} · {t:'citas', ts} ·
 //   {t:'cita-fin', T, cancela}; con «q», la respuesta lleva la misma «q». Aviso del relé: {t:'cita-lista', T, otros}.
-//   1718 (house1718.com, 25 nov 2026, ver tiempo.js): {t:'codigos', codigos} → {t:'codigos', validos, minutos, estados} ·
+//   1718 (house1718.com, 25 nov 2026, ver tiempo.js): {t:'codigos', codigos, llaves} → {t:'codigos', validos, minutos, estados} ·
 //   {t:'ice', sala} → credenciales solo con tiempo · aviso del relé {t:'tiempo', sala, de, hasta, resto, agotado}.
 'use strict';
 const crypto = require('crypto');
@@ -394,16 +394,16 @@ class Rele {
   }
   async ponCodigos(c, m) {
     if (!c.pago) return;
-    if (c.poniendo) { c.otrosCodigos = m.codigos; return; }
+    if (c.poniendo) { c.otrosCodigos = m; return; }
     c.poniendo = true;
     try {
-      const r = await this.tiempo.ponCodigos(c, m.codigos);
+      const r = await this.tiempo.ponCodigos(c, m.codigos, m.llaves);
       if (!this.conexiones.has(c)) return;
       c.ws.json(Object.assign({ t: 'codigos' }, r));
       for (const sala of c.salas) { const s = this.salas.get(sala); if (s && s.size >= 2) this.tiempo.reintenta(sala, [...s.values()]); }
     } finally {
       c.poniendo = false;
-      if (c.otrosCodigos) { const x = c.otrosCodigos; c.otrosCodigos = null; this.ponCodigos(c, { codigos: x }); }
+      if (c.otrosCodigos) { const x = c.otrosCodigos; c.otrosCodigos = null; this.ponCodigos(c, x); }
     }
   }
   datosTiempo(sala) {
