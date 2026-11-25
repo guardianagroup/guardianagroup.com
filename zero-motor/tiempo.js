@@ -34,7 +34,7 @@ const PROVISIONAL_MS = 15000;       // mientras Dodo contesta el primer cobro, l
 const GRACIA_MAX = 3;               // si Dodo no contesta, como mucho tres minutos fiados seguidos
 const MAX_CODIGOS_CONEXION = 20;
 const VALIDACIONES_MIN = 8;         // códigos nuevos que una conexión puede pedir comprobar por minuto
-const PAR_MS = 120 * 1000;          // la sala de «Pasar al teléfono» (dos aparatos de la misma persona): 2 minutos y 16 MB, gratis
+const PAR_MS = +process.env.COM_TIEMPO_PAR_MS || 120 * 1000; // la sala de «Pasar al teléfono» (dos aparatos de la misma persona): 2 minutos y 16 MB, gratis, desde que están los dos
 const PAR_BYTES = 16 * 1024 * 1024;
 const esCodigo = (s) => typeof s === 'string' && s.length >= 8 && s.length <= 100 && /^[A-Za-z0-9_-]+$/.test(s);
 
@@ -127,6 +127,7 @@ class Tiempo {
     const ahora = Date.now();
     // las claves de este navegador (la suya, la primera, y las de sus otros aparatos), resumidas
     const ls = [...new Set((Array.isArray(llaves) ? llaves : []).map(String).filter((l) => /^[0-9a-f]{64}$/.test(l)))].slice(0, 6).map((l) => this.h(l));
+    c.ls = ls; // (para saber quién paga: quien invita y sus otros aparatos)
     if (!c.validaciones || ahora - c.validaciones.desde > MIN_MS) c.validaciones = { desde: ahora, n: 0 };
     const nuevos = [...new Set((Array.isArray(lista) ? lista : []).map(String).filter(esCodigo))].slice(0, MAX_CODIGOS_CONEXION);
     // (los que no valen o no se han podido mirar no se apuntan, pero la respuesta lo dice: así la página avisa y los borra)
@@ -163,10 +164,28 @@ class Tiempo {
   resto(id, miembros) {
     const t = this.salas.get(id); if (!t) return 0;
     const ahora = Date.now(), cubierto = Math.max(0, t.hasta - ahora);
-    if (t.de === 'codigo') { let m = 0; const vistos = new Set(); for (const c of miembros) for (const k of c.codigos || []) { if (vistos.has(k)) continue; vistos.add(k); m += this.restoCodigo(this.codigos.get(k)); } return cubierto + m * MIN_MS; }
+    if (t.de === 'codigo') { let m = 0; const vistos = new Set(); for (const c of this.pagadores(id, miembros)) for (const k of c.codigos || []) { if (vistos.has(k)) continue; vistos.add(k); m += this.restoCodigo(this.codigos.get(k)); } return cubierto + m * MIN_MS; }
     if (t.de === 'cortesia') { let m = Infinity; for (const k of new Set(miembros.map((c) => c.ipc).filter(Boolean))) m = Math.min(m, this.cortesiaResto(k)); return cubierto + (m === Infinity ? 0 : m) * MIN_MS; }
     return cubierto;
   }
+
+  // ¿Quién paga la conversación? (dueño, 25 nov 11:41: «el que paga tiene los minutos; el otro, el que no paga, no tiene
+  // minutos»): quien invita, con su tiempo; el de la persona invitada nunca se usa. Se fija la primera vez que hace falta: la
+  // conexión que dice que invitó (o, si la página es vieja y no lo dice, la que llegó primero), su identificador en la sala y las
+  // claves de su navegador; así, si se reconecta o pasa la conversación al móvil (que lleva su clave), sigue pagando con lo suyo.
+  pagadores(id, miembros) {
+    const t = this.sala(id);
+    if (!t.paga) {
+      const inv = miembros.find((c) => c.invita && c.invita.has(id)) || miembros[0];
+      if (!inv) return [];
+      t.paga = { c: inv, yo: inv.yo && inv.yo.get ? inv.yo.get(id) : '', ls: new Set(inv.ls || []) };
+    }
+    const p = t.paga, es = (c) => c === p.c || (p.yo && c.yo && c.yo.get && c.yo.get(id) === p.yo) || (c.ls || []).some((h) => p.ls.has(h));
+    const r = miembros.filter(es);
+    for (const c of r) for (const h of c.ls || []) p.ls.add(h); // (las claves que lleguen después, también)
+    return r;
+  }
+  esPagador(id, c, miembros) { return this.pagadores(id, miembros).includes(c); }
 
   // cobra el minuto siguiente (o el primero). miembros: las conexiones de la sala, por orden de llegada
   async cobra(id, miembros) {
@@ -175,9 +194,10 @@ class Tiempo {
     t.cobrando = true;
     try {
       const desde = () => Math.max(Date.now(), t.hasta);
-      // 1) los códigos, por orden de llegada
+      // 1) los códigos de quien paga (quien invitó y sus aparatos)
+      const pag = this.pagadores(id, miembros);
       const vistos = new Set();
-      for (const c of miembros) for (const k of c.codigos || []) {
+      for (const c of pag) for (const k of c.codigos || []) {
         if (vistos.has(k)) continue; vistos.add(k);
         const e = this.codigos.get(k); if (!e || e.estado === 'mal' || e.fin || this.restoCodigo(e) <= 0) continue;
         const r = await this.activa(k);
@@ -190,7 +210,7 @@ class Tiempo {
       // (dueño, 25 nov 11:25: «he pagado 1 hora… y me sale el contador de los 2 minutos gratis»): si alguien de la conversación
       // está aún comprobando sus códigos con Dodo (acaba de entrar), no se gasta la cortesía de nadie: se espera mientras la
       // conversación siga cubierta (al empezar, el margen provisional de 15 s) y se vuelve a intentar en cuanto acabe la comprobación
-      if (miembros.some((c) => c.poniendo) && Date.now() < Math.max(t.hasta, t.provisional || 0)) return;
+      if (pag.some((c) => c.poniendo) && Date.now() < Math.max(t.hasta, t.provisional || 0)) return;
       // 2) la cortesía: la de todas las direcciones que están en la conversación
       const ks = [...new Set(miembros.map((c) => c.ipc).filter(Boolean))];
       if (ks.length && ks.every((k) => this.cortesiaResto(k) >= 1)) {

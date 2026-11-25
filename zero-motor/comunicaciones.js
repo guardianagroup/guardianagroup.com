@@ -148,7 +148,7 @@ class Rele {
       }
       case 'ice': { const t = c.pago ? this.iceSala(c, String(m.sala || '')) : this.ice(); c.ws.json({ t: 'ice', sala: c.pago ? String(m.sala || '') : undefined, ice: t.ice, caduca: t.caduca, por: t.por }); return; }
       case 'codigos': return this.ponCodigos(c, m);
-      case 'entra': return this.entra(c, m.sala, m.yo, m.b === 1, m.par === 1);
+      case 'entra': return this.entra(c, m.sala, m.yo, m.b === 1, m.par === 1, m.inv === 1);
       case 'sale': return this.sale(c, m.sala, true);
       case 'ping': c.ws.json({ t: 'pong' }); return;
       case 'invita': return this.invita(c, m);
@@ -170,8 +170,10 @@ class Rele {
     }
   }
 
-  entra(c, sala, yo, blindada, par) {
+  entra(c, sala, yo, blindada, par, invita) {
     if (!esHex(sala, 64) || !esHex(yo, 16)) return c.ws.json({ t: 'error', sala, por: 'formato' });
+    // 1718: la página dice si esta persona es quien invitó (paga quien invita, dueño 25 nov 11:41)
+    if (invita && c.pago) (c.invita = c.invita || new Set()).add(sala);
     if (blindada && !c.blindada) { let n = 0; for (const x of this.conexiones) if (x.blindada) n++; if (n < MAX_BLINDADAS) { c.blindada = true; c.cupo = RAFAGA_B; } }
     if (c.salas.has(sala)) return c.ws.json({ t: 'sala', sala, miembros: this.otros(sala, yo) });
     if (c.salas.size >= MAX_SALAS_CONEXION) return c.ws.json({ t: 'error', sala, por: 'demasiadas salas' });
@@ -191,6 +193,9 @@ class Rele {
     // el resto empieza a contar en cuanto hay dos personas
     if (c.pago) {
       if (par && !this.tiempo.salas.has(sala)) this.tiempo.sala(sala).par = true;
+      // (dueño, 25 nov 11:50: «le doy a volver al PC y no vuelve»): el ordenador espera solo en esta sala todo lo que dure la llamada
+      // en el móvil; los 2 minutos para pasar la conversación empiezan cuando llega el otro aparato, no cuando empezó a esperar
+      if (par && s.size >= 2) { const tp = this.tiempo.salas.get(sala); if (tp && tp.par) tp.creada = Date.now(); }
       if (s.size >= 2) { const t = this.tiempo.salas.get(sala); if (t && t.agotado && c.codigos.length) this.tiempo.reintenta(sala, [...s.values()]); else this.tiempo.vigila(sala, [...s.values()]); }
       this.mandaTiempo(c, sala);
     }
@@ -411,8 +416,10 @@ class Rele {
     const ahora = Date.now(), resto = this.tiempo.resto(sala, this.miembros(sala));
     return { t: 'tiempo', sala, de: t.de, hasta: t.hasta, resto, ahora, par: t.par ? 1 : 0, agotado: t.agotado && ahora >= t.hasta ? 1 : 0, cortesia: this.tiempo.cortesiaMin, minuto: this.tiempo.minutoMs };
   }
-  mandaTiempo(c, sala) { const d = this.datosTiempo(sala); if (d) { try { c.ws.json(d); } catch (_) {} } }
-  avisaTiempo(sala) { const d = this.datosTiempo(sala); if (!d) return; for (const c of this.miembros(sala)) { try { c.ws.json(d); } catch (_) {} } }
+  // a cada persona, además, si es quien paga (paga: 1) o no (0): quien no paga no ve el saldo de quien invita
+  paraCada(d, c, sala) { if (!d) return d; const ms = this.miembros(sala); return Object.assign({}, d, { paga: ms.length < 2 || this.tiempo.esPagador(sala, c, ms) ? 1 : 0 }); }
+  mandaTiempo(c, sala) { const d = this.paraCada(this.datosTiempo(sala), c, sala); if (d) { try { c.ws.json(d); } catch (_) {} } }
+  avisaTiempo(sala) { const d = this.datosTiempo(sala); if (!d) return; for (const c of this.miembros(sala)) { try { c.ws.json(this.paraCada(d, c, sala)); } catch (_) {} } }
   vigilaTiempo() {
     for (const [sala, s] of this.salas) {
       if (s.size < 2) continue;
