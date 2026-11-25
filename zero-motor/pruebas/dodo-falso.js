@@ -16,7 +16,8 @@ http.createServer((req, res) => {
     const k = String(j.license_key || ''); llamadas.push({ ruta: req.url, k: k.slice(0, 20), t: Date.now() });
     if (caido) { res.destroy(); return; }
     const lim = /^prueba-devuelto-/.test(k) ? -1 : limite(k);
-    if (req.url === '/licenses/validate') return fin(200, { valid: lim !== null && lim >= 0 });
+    // «prueba-60-lento…»: Dodo tarda 2,5 s en contestar la comprobación (como en la vida real, a veces)
+    if (req.url === '/licenses/validate') { const r = () => fin(200, { valid: lim !== null && lim >= 0 }); return /-lento/.test(k) ? setTimeout(r, 2500) : r(); }
     if (req.url === '/licenses/activate') {
       if (lim === null) return fin(404, { message: 'not found' });
       if (lim < 0) return fin(403, { message: 'not active' });

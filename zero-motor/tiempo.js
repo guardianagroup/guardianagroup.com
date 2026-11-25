@@ -187,6 +187,10 @@ class Tiempo {
         // Dodo no contesta: el minuto se fía (como mucho tres seguidos); si sigue sin contestar, se corta
         if (t.gracia < GRACIA_MAX) { t.gracia++; t.hasta = desde() + MIN_MS; t.de = 'codigo'; t.agotado = false; t.avisado = false; return this.cubre(id); }
       }
+      // (dueño, 25 nov 11:25: «he pagado 1 hora… y me sale el contador de los 2 minutos gratis»): si alguien de la conversación
+      // está aún comprobando sus códigos con Dodo (acaba de entrar), no se gasta la cortesía de nadie: se espera mientras la
+      // conversación siga cubierta (al empezar, el margen provisional de 15 s) y se vuelve a intentar en cuanto acabe la comprobación
+      if (miembros.some((c) => c.poniendo) && Date.now() < Math.max(t.hasta, t.provisional || 0)) return;
       // 2) la cortesía: la de todas las direcciones que están en la conversación
       const ks = [...new Set(miembros.map((c) => c.ipc).filter(Boolean))];
       if (ks.length && ks.every((k) => this.cortesiaResto(k) >= 1)) {
