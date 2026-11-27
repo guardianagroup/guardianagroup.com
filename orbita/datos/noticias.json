@@ -2,6 +2,61 @@
  "nota": "Noticias sobre cables, centros de datos, datos personales y GUARDIANA, cada una confirmada por al menos dos fuentes públicas (las URL quedan aquí; en pantalla solo se dice «Noticia verificada»). Las añade la agencia; la tarea programada «Noticias Órbita» las renueva.",
  "noticias": [
   {
+   "fecha": "2026-11-26",
+   "tema": "cables",
+   "es": "Viettel y Singtel, con AIS (Tailandia), VNPT y FPT, pusieron en marcha el 26 de noviembre en Ciudad Ho Chi Minh el cable submarino Vietnam–Tailandia–Singapur (VTS), el primero liderado por una empresa vietnamita: unos 2.500 km en total (1.200 km en el tramo Vietnam–Singapur), 600 Tbit/s de capacidad de diseño (240 Tbit/s en ese tramo), ida y vuelta de unos 12 ms, fabricado por NEC e instalado por ASEAN Cableship, y previsto para el cuarto trimestre de 2030.",
+   "en": "Viettel and Singtel, with AIS (Thailand), VNPT and FPT, launched on 26 November in Ho Chi Minh City the Vietnam–Thailand–Singapore (VTS) submarine cable, the first led by a Vietnamese company: about 2,500 km in total (1,200 km on the Vietnam–Singapore section), 600 Tbit/s of design capacity (240 Tbit/s on that section), a round trip of about 12 ms, built by NEC and installed by ASEAN Cableship, and due in the fourth quarter of 2030.",
+   "pt": "a Viettel e a Singtel, com a AIS (Tailândia), a VNPT e a FPT, lançaram a 26 de novembro em Ho Chi Minh o cabo submarino Vietname–Tailândia–Singapura (VTS), o primeiro liderado por uma empresa vietnamita: cerca de 2.500 km no total (1.200 km no troço Vietname–Singapura), 600 Tbit/s de capacidade de projeto (240 Tbit/s nesse troço), ida e volta de cerca de 12 ms, fabricado pela NEC e instalado pela ASEAN Cableship, e previsto para o quarto trimestre de 2030.",
+   "fuentes": [
+    "https://technode.global/2026/11/26/vietnams-viettel-singapores-singtel-break-ground-on-600-tbps-international-subsea-cable/",
+    "https://e.vnexpress.net/news/tech/vietnam-innovation/construction-begins-on-first-vietnamese-led-undersea-internet-cable-5149275.html"
+   ]
+  },
+  {
+   "fecha": "2026-11-26",
+   "tema": "datos",
+   "es": "el investigador Jeremiah Fowler encontró una base de datos pública, sin contraseña ni cifrado, con unos 2.000 millones de registros de credenciales en texto plano repartidos en 8.471 carpetas: usuarios, correos y contraseñas, además de cookies, tokens de sesión y datos de dispositivos, con origen en programas que roban credenciales; no se identificó al dueño, y el propio Fowler avisa de que la cifra no equivale a 2.000 millones de víctimas porque hay duplicados y contraseñas ya caducadas.",
+   "en": "researcher Jeremiah Fowler found a public database, with no password or encryption, holding about 2 billion credential records in plain text across 8,471 folders: usernames, emails and passwords, plus cookies, session tokens and device data, originating from credential-stealing malware; the owner was not identified, and Fowler himself warns that the figure does not mean 2 billion victims because of duplicates and expired passwords.",
+   "pt": "o investigador Jeremiah Fowler encontrou uma base de dados pública, sem palavra-passe nem cifragem, com cerca de 2.000 milhões de registos de credenciais em texto simples repartidos por 8.471 pastas: utilizadores, e-mails e palavras-passe, além de cookies, tokens de sessão e dados de dispositivos, com origem em programas que roubam credenciais; o dono não foi identificado, e o próprio Fowler avisa que o número não equivale a 2.000 milhões de vítimas por haver duplicados e palavras-passe já caducadas.",
+   "fuentes": [
+    "https://www.infobae.com/america/agencias/2026/11/26/descubren-una-base-de-datos-sin-proteger-con-2000-millones-de-credenciales/",
+    "https://www.neowin.net/news/dataset-containing-2-billion-records-gets-exposed-online/"
+   ]
+  },
+  {
+   "fecha": "2026-11-25",
+   "tema": "centros",
+   "es": "la Comisión Federal de Comunicaciones de EE. UU. (FCC) autorizó el 25 de noviembre a SpaceX a desplegar 1.000.000 de «módulos de cómputo orbitales», centros de datos en el espacio para procesar datos que se usarían en la Tierra; la FCC lo presentó como la primera autorización de este tipo en su historia, su presidente Brendan Carr habló de «una nueva frontera», y los expertos avisan de que la aprobación no significa que vaya a ocurrir pronto: el frío, la radiación y la imposibilidad de cambiar chips en órbita siguen sin resolverse.",
+   "en": "the US Federal Communications Commission (FCC) authorised SpaceX on 25 November to deploy 1,000,000 \"orbital compute modules\", data centres in space to process data for use on Earth; the FCC presented it as the first authorisation of its kind in its history, its chairman Brendan Carr spoke of \"a bold new frontier\", and experts warn that the approval does not mean it will happen soon: cold, radiation and the impossibility of swapping chips in orbit remain unsolved.",
+   "pt": "a Comissão Federal de Comunicações dos EUA (FCC) autorizou a 25 de novembro a SpaceX a implantar 1.000.000 de «módulos de computação orbitais», centros de dados no espaço para processar dados que seriam usados na Terra; a FCC apresentou-o como a primeira autorização deste tipo na sua história, o seu presidente Brendan Carr falou de «uma nova fronteira», e os especialistas avisam que a aprovação não significa que vá acontecer em breve: o frio, a radiação e a impossibilidade de trocar chips em órbita continuam por resolver.",
+   "fuentes": [
+    "https://www.aljazeera.com/news/2026/11/25/us-grants-spacex-approval-for-1-million-space-data-centres",
+    "https://www.thenationalnews.com/future/2026/11/26/space-data-center-spacex-fcc/"
+   ]
+  },
+  {
+   "fecha": "2026-11-23",
+   "tema": "datos",
+   "es": "Tower Records Japan reconoció que un ciberataque detectado el jueves 19 de noviembre, que obligó a cerrar su tienda en línea, pudo exponer los datos de unos 11 millones de clientes: los datos de acceso (correo, número de socio y contraseña cifrada) de 10.214.652 personas, los datos de socio (nombre, apodo, fecha de nacimiento, sexo y código postal) de 2.784.514 y las direcciones de entrega con teléfono de 776.953; según la empresa no se filtraron datos de tarjetas, los envíos se reanudaban el lunes y la tienda seguía cerrada sin fecha de reapertura.",
+   "en": "Tower Records Japan acknowledged that a cyberattack detected on Thursday 19 November, which forced it to shut its online store, may have exposed the data of about 11 million customers: the login details (email, member ID and hashed password) of 10,214,652 people, the member details (name, nickname, date of birth, gender and postcode) of 2,784,514 and the delivery addresses with phone numbers of 776,953; according to the company no card data was leaked, shipping was to resume on Monday and the store remained closed with no reopening date.",
+   "pt": "a Tower Records Japan reconheceu que um ciberataque detetado na quinta-feira 19 de novembro, que a obrigou a fechar a loja em linha, pode ter exposto os dados de cerca de 11 milhões de clientes: os dados de acesso (e-mail, número de sócio e palavra-passe cifrada) de 10.214.652 pessoas, os dados de sócio (nome, alcunha, data de nascimento, sexo e código postal) de 2.784.514 e as moradas de entrega com telefone de 776.953; segundo a empresa não houve fuga de dados de cartões, os envios eram retomados na segunda-feira e a loja continuava fechada sem data de reabertura.",
+   "fuentes": [
+    "https://thenextweb.com/news/tower-records-japan-data-breach-11-million-records",
+    "https://www.silicon.co.uk/cybersecurity/tower-records-japan-breach-632470"
+   ]
+  },
+  {
+   "fecha": "2026-11-21",
+   "tema": "cables",
+   "es": "el operador paquistaní Transworld Associates informó el 21 de noviembre de que la reparación de la avería del cable submarino SEA-ME-WE 5 (SMW5), a unos 11 km de la costa de Pakistán, tiene como fecha prevista de fin el 6 de diciembre, y de que hasta entonces los usuarios pueden notar internet más lento en horas punta; el regulador PTA había avisado de cortes intermitentes y de una caída de la calidad del servicio, y ese mismo cable ya sufrió otra avería del 1 al 3 de julio de este año.",
+   "en": "Pakistani operator Transworld Associates reported on 21 November that the repair of the fault on the SEA-ME-WE 5 (SMW5) submarine cable, about 11 km off Pakistan's coast, has a tentative completion date of 6 December, and that until then users may notice slower internet at peak hours; the regulator PTA had warned of intermittent outages and a drop in service quality, and that same cable already suffered another fault on 1–3 July this year.",
+   "pt": "o operador paquistanês Transworld Associates informou a 21 de novembro que a reparação da avaria do cabo submarino SEA-ME-WE 5 (SMW5), a cerca de 11 km da costa do Paquistão, tem como data prevista de conclusão 6 de dezembro, e que até lá os utilizadores podem notar a internet mais lenta nas horas de ponta; o regulador PTA tinha avisado de cortes intermitentes e de uma queda da qualidade do serviço, e esse mesmo cabo já sofreu outra avaria de 1 a 3 de julho deste ano.",
+   "fuentes": [
+    "https://www.dawn.com/news/2046093",
+    "https://www.techjuice.pk/transworld-expects-submarine-cable-repairs-to-finish-by-dec-6/"
+   ]
+  },
+  {
    "fecha": "2026-10-22",
    "tema": "cables",
    "es": "Korda Networks (la antigua Farice) confirmó el 21 de octubre las llegadas de Auður, su nuevo cable entre Islandia y Escocia: Meðalland, en la costa sur islandesa, e Irvine Bay, en el fiordo de Clyde al oeste de Glasgow; tendrá unos 1.300 km y entre 16 y 24 pares de fibra, el estudio del fondo marino se hará en el verano de 2027 y la entrada en servicio se prevé entre finales de 2029 y principios de 2030.",
