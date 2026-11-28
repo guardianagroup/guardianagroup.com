@@ -2,6 +2,39 @@
  "nota": "Noticias sobre cables, centros de datos, datos personales y GUARDIANA, cada una confirmada por al menos dos fuentes públicas (las URL quedan aquí; en pantalla solo se dice «Noticia verificada»). Las añade la agencia; la tarea programada «Noticias Órbita» las renueva.",
  "noticias": [
   {
+   "fecha": "2026-11-28",
+   "tema": "cables",
+   "es": "la Autoridad de Telecomunicaciones de Pakistán (PTA) confirmó el sábado 28 de noviembre que la avería del cable submarino SEA-ME-WE 5 (SMW5), a unos 11 km de la costa paquistaní, ya está reparada y que internet volvió a la normalidad en todo el país, ocho días antes del 6 de diciembre que Transworld Associates había dado como fecha prevista; la reparación la hicieron Transworld y el consorcio internacional del SMW5, un sistema de unos 20.000 km entre Singapur y Francia, mientras el tráfico se desviaba por otros enlaces internacionales; es la segunda avería de ese cable este año, tras la de julio.",
+   "en": "the Pakistan Telecommunication Authority (PTA) confirmed on Saturday 28 November that the fault on the SEA-ME-WE 5 (SMW5) submarine cable, about 11 km off Pakistan's coast, has been repaired and that internet across the country is back to normal, eight days before the 6 December date Transworld Associates had given as its target; the repair was carried out by Transworld and the international SMW5 consortium, a system of about 20,000 km between Singapore and France, while traffic was rerouted over other international links; it is the cable's second fault this year, after July's.",
+   "pt": "a Autoridade de Telecomunicações do Paquistão (PTA) confirmou no sábado 28 de novembro que a avaria do cabo submarino SEA-ME-WE 5 (SMW5), a cerca de 11 km da costa paquistanesa, já está reparada e que a internet voltou ao normal em todo o país, oito dias antes do 6 de dezembro que a Transworld Associates tinha dado como data prevista; a reparação foi feita pela Transworld e pelo consórcio internacional do SMW5, um sistema de cerca de 20.000 km entre Singapura e França, enquanto o tráfego era desviado por outras ligações internacionais; é a segunda avaria desse cabo este ano, depois da de julho.",
+   "fuentes": [
+    "https://www.app.com.pk/national/pta-confirms-full-restoration-of-smw5-submarine-cable-internet-services-return-to-normal-across-pakistan/",
+    "https://www.techjuice.pk/pta-confirms-restoration-of-the-smw5-submarine-cable-internet-back-to-normal/"
+   ]
+  },
+  {
+   "fecha": "2026-11-27",
+   "tema": "centros",
+   "es": "la Administración de Información Energética de EE. UU. (EIA) publicó el 27 de noviembre en el Registro Federal la propuesta de su primera encuesta obligatoria sobre el consumo de energía de los centros de datos (formulario EIA-872): deberán responder cada año las instalaciones con al menos 1 MW de capacidad informática (unas 1.400 empresas y operadores, contando como una sola unidad los campus que comparten energía o refrigeración), la primera recogida sería en 2027 con los datos de 2026, los resultados solo se publicarían agregados y hay plazo para comentarios hasta el 26 de enero de 2027.",
+   "en": "the US Energy Information Administration (EIA) published on 27 November in the Federal Register its proposal for the first mandatory survey of data centre energy use (Form EIA-872): facilities with at least 1 MW of IT capacity would have to respond every year (about 1,400 companies and operators, with campuses that share power or cooling counted as one unit), the first collection would take place in 2027 covering 2026 data, results would be published only in aggregate, and comments are open until 26 January 2027.",
+   "pt": "a Administração de Informação Energética dos EUA (EIA) publicou a 27 de novembro no Registo Federal a proposta do seu primeiro inquérito obrigatório sobre o consumo de energia dos centros de dados (formulário EIA-872): terão de responder todos os anos as instalações com pelo menos 1 MW de capacidade informática (cerca de 1.400 empresas e operadores, contando como uma só unidade os campus que partilham energia ou refrigeração), a primeira recolha seria em 2027 com os dados de 2026, os resultados só se publicariam agregados e há prazo para comentários até 26 de janeiro de 2027.",
+   "fuentes": [
+    "https://www.federalregister.gov/documents/2026/11/27/2026-24077/agency-information-collection-proposed-new-survey",
+    "https://casrai.org/news/doe-eia-energy-information-collection-surveys-omb-review-notice-2026-24077"
+   ]
+  },
+  {
+   "fecha": "2026-11-26",
+   "tema": "redes",
+   "es": "Subtel y Claro inauguraron el 26 de noviembre la primera conexión 5G de Liucura, localidad cordillerana de la comuna de Lonquimay (La Araucanía, Chile) a unos 17 km del paso fronterizo Pino Hachado: una nueva estación base recibida sin observaciones técnicas, con pruebas de hasta 200 Mbps en una videollamada con el biministro Louis de Grange, 17 tabletas con conectividad gratuita para agricultores, ganaderos, artesanos y comerciantes elegidos por INDAP y el municipio, y equipos para la escuela; Claro dice que va meses adelantada a su plazo de 2027 y que está en la tercera y última etapa de sus compromisos 5G con el Estado.",
+   "en": "Subtel and Claro inaugurated on 26 November the first 5G connection in Liucura, a mountain village in the comuna of Lonquimay (La Araucanía, Chile) about 17 km from the Pino Hachado border crossing: a new base station accepted without technical observations, tested at up to 200 Mbps on a video call with bi-minister Louis de Grange, 17 tablets with free connectivity for farmers, ranchers, artisans and traders chosen by INDAP and the municipality, and devices for the school; Claro says it is months ahead of its 2027 deadline and in the third and final stage of its 5G commitments to the State.",
+   "pt": "a Subtel e a Claro inauguraram a 26 de novembro a primeira ligação 5G de Liucura, localidade de montanha da comuna de Lonquimay (La Araucanía, Chile) a cerca de 17 km da passagem fronteiriça de Pino Hachado: uma nova estação base recebida sem observações técnicas, com testes até 200 Mbps numa videochamada com o biministro Louis de Grange, 17 tablets com conectividade gratuita para agricultores, criadores de gado, artesãos e comerciantes escolhidos pelo INDAP e pelo município, e equipamentos para a escola; a Claro diz que está meses adiantada face ao prazo de 2027 e na terceira e última etapa dos seus compromissos 5G com o Estado.",
+   "fuentes": [
+    "https://www.subtel.gob.cl/la-araucania-subtel-y-claro-inauguran-primera-conexion-5g-en-la-localidad-cordillerana-de-liucura/",
+    "https://mobiletime.la/noticias/27/11/2026/claro-chile-5g-en-liucura/"
+   ]
+  },
+  {
    "fecha": "2026-11-26",
    "tema": "cables",
    "es": "Viettel y Singtel, con AIS (Tailandia), VNPT y FPT, pusieron en marcha el 26 de noviembre en Ciudad Ho Chi Minh el cable submarino Vietnam–Tailandia–Singapur (VTS), el primero liderado por una empresa vietnamita: unos 2.500 km en total (1.200 km en el tramo Vietnam–Singapur), 600 Tbit/s de capacidad de diseño (240 Tbit/s en ese tramo), ida y vuelta de unos 12 ms, fabricado por NEC e instalado por ASEAN Cableship, y previsto para el cuarto trimestre de 2030.",
@@ -21,6 +54,28 @@
    "fuentes": [
     "https://www.infobae.com/america/agencias/2026/11/26/descubren-una-base-de-datos-sin-proteger-con-2000-millones-de-credenciales/",
     "https://www.neowin.net/news/dataset-containing-2-billion-records-gets-exposed-online/"
+   ]
+  },
+  {
+   "fecha": "2026-11-25",
+   "tema": "centros",
+   "es": "la jueza de sucesiones del condado de Coweta (Georgia, EE. UU.), Carrie Markham, validó esta semana la petición vecinal contra el centro de datos Project Sail, de unos 17.000 millones de dólares, nueve edificios y 829 acres (unas 336 hectáreas), y convocó una elección especial para el 12 de enero de 2027: la directora electoral verificó 11.065 firmas, por encima de las 10.971 exigidas (el 10 % del censo), la objeción de la promotora Atlas Development fue desestimada y, si gana el sí, se anulará la recalificación aprobada en abril por 3 votos a 2 y se prohibirán los centros de datos y la minería de criptomonedas en todo el condado.",
+   "en": "Coweta County (Georgia, USA) Probate Judge Carrie Markham validated this week the residents' petition against the Project Sail data centre, a roughly 17-billion-dollar campus of nine buildings on 829 acres (about 336 hectares), and called a special election for 12 January 2027: the elections director verified 11,065 signatures, above the 10,971 required (10% of registered voters), developer Atlas Development's objection was dismissed and, if the measure passes, the rezoning approved in April by 3 votes to 2 will be repealed and data centres and cryptocurrency mining will be banned countywide.",
+   "pt": "a juíza do tribunal de sucessões do condado de Coweta (Geórgia, EUA), Carrie Markham, validou esta semana a petição dos moradores contra o centro de dados Project Sail, de cerca de 17 mil milhões de dólares, nove edifícios e 829 acres (cerca de 336 hectares), e convocou uma eleição especial para 12 de janeiro de 2027: a diretora eleitoral verificou 11.065 assinaturas, acima das 10.971 exigidas (10 % dos eleitores), a objeção da promotora Atlas Development foi rejeitada e, se o sim ganhar, a requalificação aprovada em abril por 3 votos contra 2 será anulada e os centros de dados e a mineração de criptomoedas ficarão proibidos em todo o condado.",
+   "fuentes": [
+    "https://www.cbsnews.com/atlanta/news/coweta-county-data-center-referendum-petition-moves-to-special-election-after-judges-ruling/",
+    "https://www.wsbtv.com/news/local/coweta-county/judge-allows-voters-decide-fate-17-billion-data-center-metro-atlanta-county/BQWVJUPJX5EFHO4JQRPWNUQFMQ/"
+   ]
+  },
+  {
+   "fecha": "2026-11-25",
+   "tema": "centros",
+   "es": "tras una revelación de Mediapart, se confirmó el 25 de noviembre que Google estudió un segundo centro de datos de 1.200 MW en Villedieu-sur-Indre (Indre, Francia), un «sitio espejo» de su proyecto principal de Ozans (Étrechet), junto a Châteauroux: su filial Tricolore Computing presentó a RTE una solicitud de conexión a la red, el alcalde Xavier Elbaz confirmó contactos con Google desde hace meses y que el plan está en espera mientras la empresa da prioridad a Ozans, el dueño del terreno se opone a vender, y Google dice que explora continuamente suelo y red sin haber tomado una decisión definitiva sobre Ozans ni sobre ningún otro sitio.",
+   "en": "following a Mediapart revelation, it was confirmed on 25 November that Google studied a second 1,200 MW data centre at Villedieu-sur-Indre (Indre, France), a \"mirror site\" for its main Ozans project (Étrechet), next to Châteauroux: its subsidiary Tricolore Computing filed a grid connection request with RTE, mayor Xavier Elbaz confirmed contacts with Google for months and that the plan is on hold while the company gives priority to Ozans, the landowner opposes selling, and Google says it continuously explores land and grid opportunities and has made no final decision on Ozans or any other site.",
+   "pt": "após uma revelação do Mediapart, confirmou-se a 25 de novembro que a Google estudou um segundo centro de dados de 1.200 MW em Villedieu-sur-Indre (Indre, França), um «sítio espelho» do seu projeto principal de Ozans (Étrechet), junto a Châteauroux: a sua filial Tricolore Computing apresentou à RTE um pedido de ligação à rede, o presidente da câmara Xavier Elbaz confirmou contactos com a Google há meses e que o plano está em espera enquanto a empresa dá prioridade a Ozans, o dono do terreno opõe-se a vender, e a Google diz que explora continuamente terrenos e rede sem ter tomado uma decisão definitiva sobre Ozans nem sobre qualquer outro sítio.",
+   "fuentes": [
+    "https://dcmag.fr/google-a-etudie-un-projet-de-data-center-a-villedieu-sur-indre/",
+    "https://bebeez.eu/2026/11/25/google-planning-1-2gw-data-center-near-chateauroux-france-report/"
    ]
   },
   {
